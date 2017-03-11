@@ -1,0 +1,33 @@
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<html lang="ja">
+
+Find kanji by RTK elements:
+<form method = "post"   action = "/cgi-bin/cgirun.pl">
+Enter parts of kanji: <BR>
+<input name="p1"><BR>
+<input name="p2"><BR>
+<input name="p3"><BR>
+<input name="p4"><BR>
+<input name="p5"><BR>
+<input name="p6"><BR>
+<input type="submit">
+</form>
+
+<hr>
+
+<form method = "get"   action = "/cgi-bin/by_text.pl">
+Enter string to search in kanji list (like "hea"): <BR>
+<input name="substring"><BR>
+<input type="submit">
+</form>
+
+<hr>
+
+Enter kanji to search in kanji list: <BR>
+
+<form method = "GET"   action = "/cgi-bin/by_char.pl" accept-charset="ja">
+<input name="char"><BR>
+<input type="submit">
+</form>
+
+</html>
