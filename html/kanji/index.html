@@ -1,33 +1,51 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <html lang="ja">
 
-Find kanji by RTK elements:
-<form method = "post"   action = "/cgi-bin/cgirun.pl">
-Enter parts of kanji: <BR>
-<input name="p1"><BR>
+        <title> RTK search </title>
+        <h1> <center> RTK search  </center> </h1>
+<br>
+
+        <center> [<a href=about.html>About</a>] 
+        [<a href=howto.html>How to use</a>] 
+        </center>
+<hr>
+
+<big>
+        Find kanji by RTK elements/parts of kanji (example: <i>"thread" </i>) :
+        </big>
+<form method = "post"   action = "/cgirun.pl">
+ <input name="p1"><BR>
 <input name="p2"><BR>
 <input name="p3"><BR>
+<!--
 <input name="p4"><BR>
 <input name="p5"><BR>
 <input name="p6"><BR>
+-->
 <input type="submit">
 </form>
 
 <hr>
 
-<form method = "get"   action = "/cgi-bin/by_text.pl">
-Enter string to search in kanji list (like "hea"): <BR>
+<form method = "get"   action = "/by_text.pl">
+        <big>Enter string to search in kanji list (example: <i> "hea"</i>):</big> <BR>
 <input name="substring"><BR>
 <input type="submit">
 </form>
 
 <hr>
 
-Enter kanji to search in kanji list: <BR>
 
-<form method = "GET"   action = "/cgi-bin/by_char.pl" accept-charset="ja">
+<!--
+Enter kanji(like 終) to search in kanji list: <BR>
+
+<form method = "POST"   action = "/by_char.pl" enctype="text/plain">
 <input name="char"><BR>
 <input type="submit">
 </form>
+-->
+
+please email <a href="mailto:vitaly.kroivets@gmail.com?Subject=Kanji site"> Vitaly </a> for bug reports
 
 </html>
+

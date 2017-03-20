@@ -17,17 +17,25 @@ print "<html lang=\"ja\">\n";
 
 my(%form);
 
-foreach my $p (param()) {
-    my $v = param($p);
-    $v =  decode_entities($v);
-    $form{$p} = $v;    
+
+
+my $data = $q->param('POSTDATA');
+print "PD:$data" . " <hr> ";
+if ($data=~ /char=(.*)/) {
+    $data = $1;
+} else {
+    print "invalid form submitted\n";
+    exit (0);
 }
+
+#    $v =  decode_entities($v);
+
 
 ###########
 
 setup_tables();
 
-my $n = $form{char};
+my $n = decode_entities($data);
 
 die "undef param char!\n" if (!defined $n) ;
 
