@@ -1,0 +1,397 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #0f0f13;
+  --surface: #1a1a24;
+  --surface2: #23232f;
+  --border: #2e2e3e;
+  --text: #e0e0f0;
+  --text-muted: #8888aa;
+  --accent: #7c6ef0;
+  --accent-hover: #9d92f5;
+  --accent-light: #2a2550;
+  --kanji-color: #f0c060;
+  --radius: 10px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  min-height: 100vh;
+}
+
+.app {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px 60px;
+}
+
+/* Header */
+.app-header {
+  text-align: center;
+  padding: 48px 0 32px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 32px;
+}
+
+.app-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--text);
+}
+
+.subtitle {
+  margin-top: 8px;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 4px;
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 4px;
+  margin-bottom: 24px;
+}
+
+.tab {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.tab:hover {
+  background: var(--surface2);
+  color: var(--text);
+}
+
+.tab-active {
+  background: var(--accent-light);
+  color: var(--accent-hover);
+  font-weight: 600;
+}
+
+/* Search panel */
+.search-panel {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 24px;
+  border: 1px solid var(--border);
+  margin-bottom: 28px;
+}
+
+.search-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.search-hint {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.search-hint em {
+  color: var(--kanji-color);
+  font-style: normal;
+}
+
+.fallback-msg {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-style: italic;
+  margin: 0.5rem 0 0.25rem;
+}
+
+.parts-inputs {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.parts-inputs .input {
+  flex: 1;
+  min-width: 120px;
+}
+
+.input {
+  padding: 10px 14px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  color: var(--text);
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.15s;
+  width: 100%;
+}
+
+.input:focus {
+  border-color: var(--accent);
+}
+
+.input-large {
+  font-size: 1.8rem;
+  text-align: center;
+  letter-spacing: 4px;
+}
+
+.btn-primary {
+  padding: 11px 28px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: background 0.15s;
+}
+
+.btn-primary:hover {
+  background: var(--accent-hover);
+}
+
+/* Results */
+.results-count {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-bottom: 16px;
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 12px;
+}
+
+.kanji-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+}
+
+.kanji-card:hover {
+  border-color: var(--accent);
+  background: var(--surface2);
+}
+
+.kanji-char {
+  font-size: 2rem;
+  color: var(--kanji-color);
+  line-height: 1;
+  font-family: "Noto Serif CJK JP", "Yu Mincho", serif;
+}
+
+.kanji-keyword {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.kanji-meta {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.meta-frame {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+}
+
+.meta-jlpt {
+  font-size: 0.65rem;
+  background: var(--accent-light);
+  color: var(--accent-hover);
+  border-radius: 3px;
+  padding: 1px 5px;
+}
+
+/* Status */
+.status {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 40px 0;
+}
+
+.status.error {
+  color: #f06060;
+}
+
+/* Detail panel */
+.detail-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+}
+
+.back-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  border-radius: 6px;
+  padding: 7px 14px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  margin-bottom: 24px;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.back-btn:hover {
+  color: var(--text);
+  border-color: var(--accent);
+}
+
+.detail-header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+.detail-char {
+  font-size: 4rem;
+  color: var(--kanji-color);
+  font-family: "Noto Serif CJK JP", "Yu Mincho", serif;
+  line-height: 1;
+}
+
+.detail-keyword {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.detail-badges {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.badge {
+  font-size: 0.72rem;
+  border-radius: 4px;
+  padding: 2px 8px;
+}
+
+.badge-frame {
+  background: var(--surface2);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+.badge-jlpt {
+  background: var(--accent-light);
+  color: var(--accent-hover);
+}
+
+.badge-strokes {
+  background: var(--surface2);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+.detail-id {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+
+.detail-section {
+  margin-bottom: 24px;
+}
+
+.detail-section h3 {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 4px 10px;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.parts-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.part-chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: border-color 0.15s;
+  color: var(--text);
+  font-size: 0.9rem;
+}
+
+.part-chip:hover:not(:disabled) {
+  border-color: var(--accent);
+}
+
+.part-chip:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.part-chip-char {
+  font-size: 1.4rem;
+  color: var(--kanji-color);
+  font-family: "Noto Serif CJK JP", "Yu Mincho", serif;
+  line-height: 1;
+}
+
+.part-chip-label {
+  font-size: 0.85rem;
+}
+
+.part-chip-frame {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-left: auto;
+}

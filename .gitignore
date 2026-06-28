@@ -1,0 +1,21 @@
+# Generated database — rebuilt automatically on first run
+backend/kanji.db
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Node
+frontend/node_modules/
+frontend/dist/
+
+# PDF books — large binaries, not versioned
+*.pdf
+
+# Misc
+preview?*
+*.DS_Store
+.env

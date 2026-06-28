@@ -1,0 +1,658 @@
+# Primitive decompositions extracted from RKVol1 4th ed. (Heisig)
+# Matched to 6th edition frame numbers via keyword lookup.
+# Format: id:character:keyword:part1,part2,...
+
+rtk6:六:six:top hat,animal legs
+rtk47:専:specialty:ten,rice fields,glue
+rtk81:左:left:side,craft
+rtk98:頂:place on the head:nail,head
+rtk106:貫:pierce:mother,oyster
+rtk117:名:name:evening,mouth
+rtk136:順:obey:head
+rtk159:湖:lake:water,old,flesh
+rtk183:魚:fish:bound up,rice field,cooking fire
+rtk243:葉:leaf:flower,generation,tree
+rtk264:洗:wash:water,before
+rtk282:栓:plug:tree,umbrella,ball
+rtk538:説:explanation:animal tracks,shakuhachi
+rtk548:染:dye:water,nine,tree
+rtk549:燃:burn:hearth,sort of thing
+rtk551:歳:year-end:stop,march,little
+rtk553:栃:horse chestnut:tree,cliff,ten thousand
+rtk557:蛍:lightning bug:insect,house,spoon
+rtk559:虹:rainbow:insect,generation,tree
+rtk561:独:single:wild dogs,insect
+rtk562:蚕:silkworm:heavens,insect
+rtk565:起:rouse:woman,snake
+rtk570:胞:placenta:water,wrap
+rtk574:電:electricity:weather,eel
+rtk575:竜:dragon:vase,eel
+rtk576:滝:waterfall:water,vase,eels
+rtk577:豚:pork:sows,road
+rtk580:家:house:house,sow
+rtk582:豪:overpowering:tall,crowned,sow
+rtk583:腸:intestines:flesh,piggy bank
+rtk588:洋:ocean:water,sheep
+rtk589:詳:detailed:fish,sheep
+rtk592:羨:envious:sheep,water
+rtk595:唯:solely:turkey,road
+rtk608:奪:rob:bernard dog,turkey,glue
+rtk611:許:permit:words,horse
+rtk618:曜:weekday:water,feathers,turkey
+rtk621:困:quandary:pent,trees
+rtk622:固:harden:old,pent
+rtk627:姻:matrimony:woman,cause
+rtk629:園:park:pent,lidded crock,scarf
+rtk632:店:store:cave,tree
+rtk637:麻:hemp:cave,grove
+rtk640:忘:forget:perish,heart
+rtk642:忍:endure:blade,heart
+rtk643:認:acknowledge:in the middle of a,heart
+rtk650:患:afflicted:brains,heart
+rtk652:恩:grace:cause,heart
+rtk653:応:apply:cave,heart
+rtk654:意:idea:sound,heart
+rtk656:想:concept:inter-,heart
+rtk657:息:breath:nose,heart
+rtk658:憩:recess:tongue,nose,heart
+rtk660:恐:fear:craft,mediocre,heart
+rtk661:惑:beguile:fiesta,mouth
+rtk662:感:emotion:mouths,marching,heart
+rtk670:怖:dreadful:state of mind,linen
+rtk671:慌:disconcerted:state of mind,laid waste
+rtk677:慎:humility:state of mind,truth
+rtk678:憾:remorse:state of mind,emotion
+rtk683:慕:pining:graveyard,valentine
+rtk684:添:annexed:water,heavens,valentine
+rtk688:看:watch over:hemp,hand
+rtk690:我:ego:hand,fiesta
+rtk691:義:righteousness:words,righteousness
+rtk693:犠:sacrifice:cow,righteousness
+rtk694:抹:rub:fingers,wrap
+rtk698:搭:board:finger,flowers
+rtk699:抄:extract:fingers,phrase
+rtk716:推:conjecture:finger,employee
+rtk720:拾:pick up:fingers,fit together
+rtk721:担:shouldering:fingers,nightbreak
+rtk722:拠:foothold:fingers,seedling
+rtk724:操:maneuver:fingers,ivy,magic wand
+rtk729:研:polish:two hands,fiesta
+rtk734:刑:punish:two hands,saber
+rtk735:型:mould:punish,soil
+rtk739:存:suppose:genie in the bottle,child
+rtk740:在:exist:genie in the bottle,soil
+rtk742:携:portable:fingers,turkey,fist
+rtk744:吸:suck:suck fl mouth,outstretched hands
+rtk749:更:grow late:ceiling,sun,tucked under the arm
+rtk750:硬:stiff:rocks,grow late
+rtk754:桑:mulberry:crotches everywhere,tree
+rtk755:隻:vessels:turkey,crotch
+rtk756:護:safeguard:words,flowers,vessels
+rtk757:獲:seize:ize fi a pack of wild dogs,flowers,vessels
+rtk758:奴:guy:side,crotch
+rtk761:抜:slip out:fingers,friend
+rtk762:投:throw:words,missile
+rtk766:撃:beat:samurai,superfluous,missile
+rtk768:支:branch:fingers,branch
+rtk770:枝:bough:tree,branch
+rtk771:肢:limb:part of the body,branch
+rtk772:茎:stalk:flower,spool
+rtk781:板:plank:money,anti-
+rtk790:奨:exhort:leader,st
+rtk792:採:pick:finger,vulture,tree
+rtk793:菜:vegetable:flower,vulture,tree
+rtk801:拡:broaden:fingers,wide
+rtk802:鉱:mineral:elbow,two hands
+rtk804:雄:male:craft,power
+rtk805:台:pedestal:part of the body,pedestal
+rtk811:窓:window:water,gone
+rtk814:会:meeting:meeting,wall
+rtk815:至:climax:wall,soil
+rtk816:室:room:climax,saber
+rtk821:育:bring up:infant,meat
+rtk822:撤:remove:rock,infant,flood
+rtk826:流:current:water,infant,flood
+rtk840:崎:promontory:mountain,strange
+rtk843:込:crowded:enter,road
+rtk844:分:part:part,head
+rtk847:公:public:come,elbows
+rtk848:松:pine tree:words,public
+rtk851:谷:valley:go,umbrella,mouth
+rtk852:浴:bathe:water,valley
+rtk854:溶:melt:water,contain
+rtk855:欲:longing:valley,yawn
+rtk858:沿:run alongside:water,gully
+rtk859:賞:prize:outhouse,shellfish
+rtk863:裳:skirt:outhouse,garment
+rtk864:掌:manipulate:outhouse,hand
+rtk871:残:remainder:bones,straightaway
+rtk875:列:file:bones,saber
+rtk876:裂:split:file,garment
+rtk877:烈:ardent:file,oven fire
+rtk878:死:death:bones,spoon
+rtk880:瞬:wink:eye,birdhouse,sunglasses
+rtk885:撮:snapshot:finger,utmost
+rtk886:恥:shame:ear,heart
+rtk887:職:post:ear,kazoo
+rtk888:聖:holy:ear,mouth,king
+rtk890:聴:listen:ear,needle,eye
+rtk892:慢:ridicule:eye,shellfish
+rtk898:濁:voiced:eye,bound up,insect
+rtk899:環:ring:jewel,eye,ceiling
+rtk900:還:send back:road,eye,ceiling
+rtk902:扶:aid:water,vulture,husband
+rtk904:規:standard:water,exchange
+rtk909:鉄:iron:to drop,road
+rtk912:姫:princess:flowers,parade,slaves
+rtk914:臓:entrails:slave,crotch,soil
+rtk919:覧:perusal:slaves,reclining,floor
+rtk931:励:encourage:cliff,ten thousand,power
+rtk932:加:add:muscles,mouth
+rtk933:賀:congratulations:add,shells
+rtk934:架:erect:add,trees
+rtk937:協:co-:needle,triceps
+rtk940:復:restore:column,nightbreak,glue
+rtk942:従:accompany:column,animal horns,mending
+rtk943:徒:junior:line,buddhist temple
+rtk945:往:journey:column,candlestick
+rtk946:征:subjugate:line,spool
+rtk948:彼:he:going,pelt
+rtk949:役:duty:going,missile
+rtk950:徳:benevolence:going,needle,eye
+rtk952:徴:indications:line,mountain,king
+rtk953:懲:penal:indications,heart
+rtk954:微:delicate:line,mountain,ceiling
+rtk957:衡:equilibrium:boulevard,bound up,brains
+rtk958:稿:draft:wheat,tall
+rtk959:稼:earnings:wheat,house
+rtk960:程:extent:wheat,display
+rtk965:秒:second:wheat,few
+rtk966:秋:autumn:autumn,heart
+rtk968:私:private:wheat,elbow
+rtk969:秩:regularity:cereal,invariably
+rtk971:称:appellation:wheat,reclining,little
+rtk972:利:profit:wheat,saber
+rtk973:梨:pear tree:profit,tree
+rtk974:穫:harvest:harvest fl wheat,flowers,vessels
+rtk976:稲:rice plant:wheat,vulture,olden times
+rtk977:香:incense:excel,road-way
+rtk982:誘:entice:words,excel
+rtk988:粉:flour:rice,vase
+rtk991:粧:cosmetics:rice,game of cricket
+rtk995:糧:provisions:flower,bound up,rice
+rtk997:奥:core:drop,pent,rice
+rtk998:数:number:tree,rice,woman
+rtk1000:類:sort:water,tree,umbrella
+rtk1005:球:ball:request,taskmaster
+rtk1008:笑:laugh:bamboo,generation
+rtk1012:筋:muscle:bamboo,part of the body,power
+rtk1013:箱:box:bamboo,inter-
+rtk1021:築:fabricate:bamboo,craft,mediocre
+rtk1024:佐:assistant:person,nightbreak
+rtk1027:住:dwell:person,walking stick,taskmaster
+rtk1032:件:affair:person,cow
+rtk1033:仕:attend:person,samurai
+rtk1036:伝:transmit:person,rising cloud
+rtk1038:休:rest:rest fi person,tree
+rtk1039:仮:provisional:person,white dove
+rtk1042:俗:vulgar:person,valley
+rtk1044:佳:excellent:person,ivy
+rtk1045:依:reliant:person,build
+rtk1049:側:side:person,rule
+rtk1050:侍:waiter:person,buddhist temple
+rtk1059:儀:ceremony:person,mountain
+rtk1062:催:sponsor:hermit,turkey
+rtk1064:侮:scorn:person,officer
+rtk1067:倍:double:person,muzzle
+rtk1069:伐:fell:person,fiesta
+rtk1070:宿:inn:person,mouth,tree
+rtk1073:褒:praise:person,sunglasses,tree
+rtk1075:付:adhere:person,glue
+rtk1076:符:token:person,arrow
+rtk1086:傾:lean:change,head
+rtk1088:荷:baggage:flowers,what
+rtk1089:俊:sagacious:person,license,walking legs
+rtk1090:傍:bystander:person,stand,crown
+rtk1094:囚:captured:person,pent
+rtk1096:丙:third class:eate an image from ceiling,person,belt
+rtk1097:柄:design:tree,third class
+rtk1099:腐:rot:borough,meat
+rtk1100:座:sit:cave,assembly line,soil
+rtk1102:卒:graduate:top hat,assembly line,needle
+rtk1103:傘:umbrella:umbrella,two assembly lines,needle
+rtk1104:匁:monme:bound up,arm
+rtk1106:似:similar:person,by means
+rtk1107:併:join:person,puzzle
+rtk1108:瓦:tile:ceiling,walking stick,fishhook
+rtk1111:営:occupation:schoolhouse,spine
+rtk1112:善:virtuous:sheep,horns,mouth
+rtk1115:夜:night:walking legs,drop
+rtk1117:塚:hillock:soil,crown,sow
+rtk1118:幣:cash:shredder,two hands
+rtk1122:換:interchange:fingers,four st
+rtk1123:融:dissolve:ceiling,mouth,hood
+rtk1124:施:alms:banner,scorpion
+rtk1125:旋:rotation:banner,zoo
+rtk1126:遊:play:banners,children,road
+rtk1127:旅:trip:banner,person,rag
+rtk1129:物:thing:sun,knot
+rtk1131:賜:grant:shells,easy
+rtk1132:尿:urine:flag,restore
+rtk1138:屋:roof:flag,climax
+rtk1139:握:grip:flag,old
+rtk1147:局:bureau:flag,phrase
+rtk1148:遅:slow:flag,towel,saber
+rtk1152:尽:exhaust:shakuhachi,ice
+rtk1161:炉:hearth:heart fire,door
+rtk1162:戻:re-:door,st
+rtk1163:涙:tears:water,re-
+rtk1164:雇:employ:door,turkey
+rtk1168:礼:salutation:altar,fishhook
+rtk1169:祥:auspicious:altar,wealth
+rtk1172:祉:welfare:altar,footprint
+rtk1173:社:company:altar,soil
+rtk1174:視:inspection:altar,see
+rtk1176:尉:military officer:military officer,heart
+rtk1178:款:goodwill:samurai,altar,yawning
+rtk1183:祭:ritual:flesh,crotch,altar
+rtk1184:察:guess:house,ritual
+rtk1185:擦:grate:fingers,guess
+rtk1187:抽:pluck:bamboo,sprout
+rtk1195:押:push:fingers,roots
+rtk1196:岬:headland:mountain,roots
+rtk1197:挿:insert:fingers,thousand,roots
+rtk1199:伸:expand:fingers,monkey,crotch
+rtk1210:近:near:ax,road
+rtk1211:折:fold:fingers,ax
+rtk1212:哲:philosophy:fold,mouth
+rtk1213:逝:departed:fold,road
+rtk1214:誓:vow:fold,words
+rtk1216:暫:temporarily:car,ax,days
+rtk1217:漸:steadily:words,reject
+rtk1222:昨:yesterday:day,saw
+rtk1223:詐:lie:words,saw
+rtk1226:録:record:metal,broom,rice
+rtk1228:尋:inquire:bound up,broom,heart
+rtk1230:穏:calm:wheat,vulture,broom
+rtk1231:侵:encroach:person,broom,crown
+rtk1232:浸:immersed:water,broom,crown
+rtk1233:寝:lie down:house,turtle,broom
+rtk1234:婦:lady:little,broom
+rtk1238:争:contend:water,contend
+rtk1240:事:matter:one,mouth,rake
+rtk1243:康:sane:cave,sieve
+rtk1244:逮:apprehend:sieve,road
+rtk1246:君:old boy:mop,mouth
+rtk1247:群:flock:old boys,sheep
+rtk1249:需:demand:rain,comb
+rtk1253:満:full:water,flowers,both
+rtk1254:画:brush-stroke:ceiling,sprout,shovel
+rtk1255:歯:tooth:footprint,rice,shovel
+rtk1257:曹:cadet:one,bend,sun
+rtk1258:遭:encounter:tree,cadet
+rtk1263:科:department:measuring cup,wheat
+rtk1264:図:map:pent,big dipper
+rtk1265:用:utilize:meat,walking stick
+rtk1266:庸:comfortable:cave,rake,screwdriver
+rtk1267:備:equip:person,flowers,cliff
+rtk1269:錯:confused:person,once upon a time
+rtk1271:惜:pity:state of mind,once upon a time
+rtk1272:措:set aside:fingers,once upon a time
+rtk1275:庶:commoner:caverns,towel
+rtk1278:度:degrees:caverns,crotch
+rtk1279:渡:transit:water,degrees
+rtk1281:噴:erupt:mouth,haystack,clams
+rtk1282:墳:tomb:soil,haystack,clams
+rtk1284:焼:bake:hearth,straw man
+rtk1285:暁:daybreak:sun,straw man
+rtk1287:伴:consort:person,half
+rtk1288:畔:paddy ridge:rice field,half
+rtk1291:券:ticket:quarter,dagger
+rtk1292:巻:scroll:quarter,snake
+rtk1293:圏:sphere:pent,scroll
+rtk1294:勝:victory:moon,quarter,muscle
+rtk1295:藤:wisteria:flower,moon,quarter
+rtk1296:謄:facsimilie:moon,quarter,words
+rtk1306:矯:rectify:dart,angel
+rtk1307:族:tribe:know,sun
+rtk1316:帰:homecoming:spear,broom,apron
+rtk1318:引:pull:bow,walking stick
+rtk1320:弘:vast:bow,elbow
+rtk1321:強:strong:vast,insect
+rtk1328:弟:younger brother:horns,dollar sign
+rtk1329:巧:adroit:mouth,snare
+rtk1331:朽:decay:tree,snare
+rtk1332:誇:boast:words,st
+rtk1334:汚:dirty:water,spike,snare
+rtk1335:与:bestow:slingshot,one
+rtk1336:写:copy:crown,bestow
+rtk1338:射:shoot:somebody,glued
+rtk1339:謝:apologize:words,shoot
+rtk1341:考:consider:old man,slingshot
+rtk1342:孝:filial piety:fingers,consider
+rtk1345:者:someone:old man,sun
+rtk1350:暑:sultry:sun,puppet
+rtk1351:諸:various:words,puppet
+rtk1352:猪:boar:pack of wild dogs,puppet
+rtk1353:渚:strand:water,puppet
+rtk1355:峡:gorge:pack of wild dogs,scissors
+rtk1357:挟:sandwiched:fingers,scissors
+rtk1359:追:chase:maestro,road
+rtk1364:棺:coffin:bamboo,official
+rtk1368:交:mingle:top hat,father
+rtk1369:効:merit:mingle,power
+rtk1370:較:contrast:tree,mingle
+rtk1372:足:leg:mouth,mending
+rtk1373:促:stimulate:wooden leg,each
+rtk1381:踏:step:wooden leg,water,sun
+rtk1384:滑:slippery:water,skeleton
+rtk1385:髄:marrow:skeleton,possess,road
+rtk1393:障:hinder:pinnacle,muzzle
+rtk1397:陽:sunshine:pinnacle,piggy bank
+rtk1398:陳:line up:pinnacle,adhere
+rtk1402:陣:camp:regiment,ground
+rtk1405:降:descend:pinnacle,walking legs
+rtk1406:階:story:pinnacle,all
+rtk1407:陛:highness:pinnacle,compare,ground
+rtk1408:隣:neighboring:pinnacle,rice,sunglasses
+rtk1409:隔:isolate:pinnacle,ceiling,mouth
+rtk1410:隠:conceal:pinnacle,vulture,broom
+rtk1411:堕:degenerate:pinnacle,possess,ground
+rtk1412:陥:collapse:house,eight
+rtk1414:空:empty:hole,craft
+rtk1421:窪:depression:hole,water,ivy
+rtk1422:搾:squeeze:hole,sheep,oven fire
+rtk1424:窮:hard up:hole,somebody,bow
+rtk1425:探:grope:water,paper punch,tree
+rtk1429:兵:soldier:hill,animal legs
+rtk1434:縮:shrink:thread,east
+rtk1444:緒:thong:thread,puppet
+rtk1445:続:continue:thread,aerosol can
+rtk1452:終:end:thread,inside
+rtk1457:紡:spinning:thread,compass
+rtk1458:紛:distract:thread,seduce
+rtk1462:約:promise:thread,ladle
+rtk1463:細:dainty:thread,brains
+rtk1464:累:accumulate:rice field,threads
+rtk1465:索:cord:needle,crown,thread
+rtk1466:総:general:thread,public,heart
+rtk1474:緊:tense:slave,crotch,thread
+rtk1475:紫:purple:thread,eels
+rtk1478:幼:infancy:line,cocoon,walking legs
+rtk1480:幽:faint:faint ffl two cocoons,mountain
+rtk1482:機:mechanism:bow,mysterious
+rtk1488:擁:hug:fingers,mysterious,turkey
+rtk1489:滋:nourishing:fingers,double-mysterious
+rtk1490:慈:mercy:stone,double-mysterious
+rtk1493:係:person in charge:child,yarn
+rtk1495:懸:suspend:prefecture,yarn,heart
+rtk1497:却:instead:gone,stamp
+rtk1498:脚:shins:part of the body,instead
+rtk1500:御:honorable:line,wholesale
+rtk1501:服:clothing:flesh,stamp,crotch
+rtk1503:令:orders:rain,orders
+rtk1505:齢:age:teeth,orders
+rtk1506:冷:cool:chop-seal,male
+rtk1511:通:traffic:chop-seal,utilize,road
+rtk1516:範:pattern:cliff,fingerprint
+rtk1520:危:dangerous:mailbox,heart
+rtk1526:卵:egg:receipt,stamp
+rtk1527:留:detain:receipt,dagger,rice field
+rtk1529:貿:trade:receipt,dagger,shells
+rtk1530:印:stamp:staples,stamp
+rtk1536:酌:bartending:whiskey bottle,ladle
+rtk1542:酢:vinegar:whiskey bottle,saw
+rtk1546:猶:waver:wild dogs,animal horns,whiskey bottle
+rtk1547:尊:revered:animal horns,whiskey bottle,glue
+rtk1549:頭:head:table,head
+rtk1550:短:short:dart,table
+rtk1551:豊:bountiful:bend,table
+rtk1553:喜:rejoice:trees,drum,glue
+rtk1557:盆:basin:bright,dish
+rtk1567:盛:boom:turn,dish
+rtk1568:塩:salt:ground,reclining,mouth
+rtk1570:恨:resentment:state of mind,silver
+rtk1571:根:root:vulture,eye,silver
+rtk1574:節:node:drop,silver
+rtk1579:朗:melodious:woman,halo
+rtk1583:飯:meal:food,reclining,towel
+rtk1591:養:foster:sheep,food
+rtk1592:飽:sated:eat,wrap
+rtk1593:既:previously:silver,waitress
+rtk1594:概:outline:roots,waitress
+rtk1597:呼:call:mouth,water lily
+rtk1598:坪:two-mat area:ground,water lily
+rtk1599:評:evaluate:words,water lily
+rtk1600:刈:reap:sheaf,shovel
+rtk1604:胸:bosom:part of the body,bound up,villain
+rtk1605:離:detach:top hat,villain,belt
+rtk1607:殺:kill:metal,earthworm
+rtk1613:辞:resign:house,spicy
+rtk1616:壁:wall:red pepper,ax
+rtk1623:執:tenacious:happiness,fat man
+rtk1626:叫:shout:mouth,cornucopia
+rtk1627:糾:twist:thread,cornucopia
+rtk1628:収:income:cornucopia,crotch
+rtk1629:卑:lowly:drop,brains,cornucopia
+rtk1630:碑:tombstone:rock,lowly
+rtk1631:陸:land:pinnacle,rice seedlings,ground
+rtk1632:睦:intimate:eye,rice seedlings,ground
+rtk1634:熱:heat:rice seedlings,ground,fat man
+rtk1635:菱:diamond:flower,rice seedlings,walking legs
+rtk1636:陵:mausoleum:pinnacle,rice seedlings,walking legs
+rtk1638:核:nucleus:tree,acorn
+rtk1639:刻:engrave:acorn,muscle
+rtk1643:述:mention:boulevard,resin
+rtk1645:寒:cold:house,celery,animal legs
+rtk1647:醸:brew:words,grass skirt
+rtk1649:壌:lot:ground,grass skirt
+rtk1650:嬢:lass:woman,grass skirt
+rtk1651:毒:poison:grow up,moon
+rtk1657:情:feelings:state of mind,blue
+rtk1658:晴:clear up:sun,blue
+rtk1659:清:pure:water,blue
+rtk1660:静:quiet:blue,contend
+rtk1662:績:exploits:thread,blame
+rtk1663:積:volume:wheat,blame
+rtk1664:債:bond:person,blame
+rtk1665:漬:pickling:water,blame
+rtk1666:表:surface:grow up,rags
+rtk1667:俵:bag:person,surface
+rtk1668:潔:undefiled:water,grow up,dagger
+rtk1669:契:pledge:grow up,dagger,st
+rtk1672:轄:control:car,harm
+rtk1673:割:proportion:harm,saber
+rtk1674:憲:constitution:house,grow up,eyes
+rtk1676:星:star:sun,cell
+rtk1678:姓:surname:vase,cliff,cell
+rtk1682:隆:hump:pinnacle,walking legs,cell
+rtk1683:峰:summit:mountain,walking legs,bushes
+rtk1685:縫:sew:thread,walking legs,bushes
+rtk1686:拝:worship:fingers,bush,suspended from the ceiling
+rtk1687:寿:longevity:bushes,glue
+rtk1689:籍:enroll:bamboo,christmas tree,once upon a time
+rtk1690:春:springtime:house,bonsai
+rtk1695:奉:dedicate:bonsai,cornstalk
+rtk1696:俸:stipend:tree,observance
+rtk1702:嘆:sigh:scarecrow,turkey
+rtk1704:華:splendor:flower,silage,needle
+rtk1705:垂:droop:drop,silage,walking stick
+rtk1710:剰:surplus:ride,saber
+rtk1712:含:include:clock,mouth
+rtk1714:吟:versify:mouth,clock
+rtk1715:念:wish:pair of jewels,clock
+rtk1718:陰:shade:pinnacle,clock,rising cloud
+rtk1720:序:preface:beforehand,head
+rtk1722:野:plains:computer,beforehand
+rtk1724:嫌:dislike:woman,concurrently
+rtk1725:鎌:sickle:cave,concurrently
+rtk1729:価:value:person,old west
+rtk1730:要:need:west,st
+rtk1738:覆:capsize:west,restore
+rtk1739:煙:smoke:hearth,old west,ground
+rtk1740:南:south:belt,happiness
+rtk1741:楠:camphor tree:south,chihuahua
+rtk1744:問:question:gates,mouth
+rtk1745:閲:review:gates,devil
+rtk1746:閥:clique:gates,fell
+rtk1749:簡:simplicity:bamboo,interval
+rtk1750:開:open:gates,tree
+rtk1754:聞:hear:gates,ear
+rtk1755:潤:wet:tree,gates,east
+rtk1757:闘:fight:gates,table,glue
+rtk1759:創:genesis:godown,saber
+rtk1761:俳:haiku:person,jail cell
+rtk1762:排:repudiate:jail cell,heart
+rtk1764:罪:guilt:door,jail cell
+rtk1767:侯:marquis:person,key,dart
+rtk1770:決:decide:water,guillotine
+rtk1772:偉:admirable:thread,locket
+rtk1775:衛:defense:boulevard,locket
+rtk1778:肝:liver:part of the body,dry
+rtk1781:軒:flats:is made up of cars,dry
+rtk1783:幹:tree trunk:mist,umbrella,dry
+rtk1784:芋:potato:flowers,potato
+rtk1785:宇:eaves:house,potato
+rtk1786:余:too much:umbrella,potato,little
+rtk1787:除:exclude:line,scale
+rtk1790:途:route:scale,measuring cup
+rtk1794:頼:trust:water,bundle,head
+rtk1797:疎:alienate:zoo,bundle
+rtk1799:速:quick:bundle,road
+rtk1800:整:organize:bundle,taskmaster,correct
+rtk1801:剣:saber:awl,saber
+rtk1802:険:precipitous:person,awl
+rtk1805:重:heavy:thousand,ri
+rtk1806:動:move:heavy,muscle
+rtk1808:勲:meritorious deed:move,oven fire
+rtk1809:働:work:person,move
+rtk1811:衝:collide:boulevard,heavy
+rtk1813:病:ill:sickness,correct
+rtk1821:痢:diarrhea:sickness,chop-seal,utilize
+rtk1827:匿:hide:box,human legs
+rtk1831:区:ward:box,sheaves
+rtk1832:枢:hinge:ward,missile
+rtk1835:抑:repress:fingers,box,stamps
+rtk1836:仰:faceup:person,box,stamps
+rtk1837:迎:welcome:box,stamps,road
+rtk1838:登:ascend:teepee,table
+rtk1840:発:discharge:teepee,two,human legs
+rtk1842:僚:colleague:person,pup tent
+rtk1847:形:shape:tree,shape
+rtk1850:彩:coloring:fledgling,shape
+rtk1851:彰:patent:badge,shape
+rtk1852:彦:lad:lad,head
+rtk1854:須:ought:shape,head
+rtk1855:膨:swell:part of the body,drum,shape
+rtk1856:参:visit:elbow,st
+rtk1858:修:discipline:person,walking stick,taskmaster
+rtk1859:珍:rare:jewel,umbrella,shape
+rtk1860:診:checkup:words,umbrella,shape
+rtk1866:斉:adjusted:plaid,fenceposts,two
+rtk1867:剤:dose:adjust,saber
+rtk1868:済:finish:water,adjust
+rtk1869:斎:purification:plaid,fenceposts,altar
+rtk1871:塁:bases:field,sparkler,ground
+rtk1872:楽:music:flowers,music
+rtk1874:率:ratio:mysterious,sparkler,ten
+rtk1875:渋:astringent:water,footprint,sparkler
+rtk1876:摂:vicarious:fingers,ear,sparkler
+rtk1879:映:reflect:sun,center
+rtk1880:赤:red:ground,dagger,little
+rtk1889:把:grasp:flesh,mosaic
+rtk1895:紺:navy blue:thread,wicker basket
+rtk1896:某:so-and-so:wicker basket,tree
+rtk1897:謀:conspire:words,so-and-so
+rtk1899:欺:deceit:banner,bushel basket
+rtk1902:期:period:bushel basket,month
+rtk1904:基:fundamentals:bushel basket,soil
+rtk1905:甚:tremendously:bushel basket,equal
+rtk1906:勘:intuition:soil,tremendously
+rtk1908:貴:precious:purse,shells
+rtk1909:遺:bequeath:precious,road
+rtk1914:組:association:altar,shelf
+rtk1919:阻:thwart:tree,shelf
+rtk1921:助:help:shelf,power
+rtk1922:宜:best regards:house,shelf
+rtk1923:畳:tatami mat:rice field,crown,shelf
+rtk1925:普:universal:thread,thanksgiving,row
+rtk1930:霊:spirits:rain,two,row
+rtk1932:撲:slap:fingers,upside down in a row,husbands
+rtk1933:僕:me:person,husbands,in a row upside down
+rtk1934:共:together:salad,animal legs
+rtk1935:供:submit:person,strung together
+rtk1941:暴:outburst:sun,strung together,rice grains
+rtk1942:爆:bomb:two snakes,strung together,road
+rtk1948:囲:surround:christmas tree,well
+rtk1951:悪:bad:asia,heart
+rtk1952:円:circle:glass canopy,walking stick,one
+rtk1953:角:angle:bound up,glass canopy,walking stick
+rtk1954:触:contact:angle,insect
+rtk1955:解:unravel:angle,dagger,cow
+rtk1956:再:again:jewel,with a belt hung on it
+rtk1958:購:subscription:shells,funnel
+rtk1959:構:posture:water,funnel
+rtk1961:論:argument:words,meeting,scrapbook
+rtk1962:倫:ethics:person,door,scrapbook
+rtk1965:遍:everywhere:door,scrapbook,road
+rtk1966:編:compilation:thread,door,scrapbook
+rtk1970:氏:family name:long drop,fishhook
+rtk1971:紙:paper:thread,family name
+rtk1972:婚:marriage:woman,family name,day
+rtk1978:捕:catch:flowers,bay
+rtk1982:舗:shop:cottage,dog tag
+rtk1983:補:supplement:cloth,dog tag
+rtk1984:邸:residence:bushes,city walls
+rtk1997:盾:shield:line,shield
+rtk1999:派:faction:water,drag,rag
+rtk2000:脈:vein:blood,drag,rag
+rtk2002:逓:parcel post:drag,cornstalk,belt
+rtk2006:幻:phantasm:clothes hanger,one,mouth
+rtk2008:伺:pay respects:person,director
+rtk2009:詞:parts of speech:words,directors
+rtk2010:飼:domesticate:eat,director
+rtk2011:嗣:heir:mouth,scrapbook,director
+rtk2014:航:navigate:boat,missile
+rtk2017:盤:tray:boat,courts
+rtk2023:弧:arc:child,melon
+rtk2030:気:spirit:reclining,floor,fishhook
+rtk2035:妻:wife:ten,rakes,woman
+rtk2042:靴:shoes:leather,change
+rtk2043:覇:hegemony:old west,leather,moon
+rtk2047:娯:recreation:words,give
+rtk2054:芽:bud:drop,rice
+rtk2058:番:turn:animal tracks,rice field
+rtk2059:審:hearing:house,dice
+rtk2060:翻:flip:flowers,water,dice
+rtk2063:耗:decrease:flag,fur
+rtk2065:宅:home:words,lock of hair
+rtk2068:偽:falsehood:person,do
+rtk2071:張:lengthen:flesh,long
+rtk2074:髪:hair of the head:hair,shape,friend
+rtk2077:巣:nest:owl,fruit
+rtk2078:単:simple:owl,brain,needle
+rtk2082:桜:cherry tree:tree,owl,woman
+rtk2083:獣:animal:owl,rice field,one
+rtk2084:脳:brain:part of the body,owl,villain
+rtk2087:鎖:chain:metal,little,shells
+rtk2088:挙:raise:pack of wild dogs,owl,wind
+rtk2091:鳥:bird:dove,one,tail feathers
+rtk2092:鳴:chirp:mouth,bird
+rtk2093:鶴:crane:turkey house,bird
+rtk2095:蔦:vine:vulture,husband,bird
+rtk2099:暖:warmth:sun,migrating ducks
+rtk2100:媛:beautiful woman:woman,migrating ducks
+rtk2110:塑:model:mountain goat,moon,soil
+rtk2113:鋼:steel:mount,saber
+rtk2117:陶:pottery:vulture,king,mountain
+rtk2118:揺:swing:words,condor
+rtk2124:墾:groundbreaking:skunk,silver,soil
+rtk2127:逸:elude:sun,rabbit
+rtk2129:勉:exertion:rabbit,muscle
+rtk2131:像:statue:person,elephant
+rtk2133:駒:pony:team of horses,phrase
+rtk2134:験:verification:team of horses,shakuhachi
+rtk2139:騒:boisterous:team of horses,crotch,insect
+rtk2140:駄:burdensome:team of horses,fat
+rtk2141:驚:wonder:meat,quarter,team of horses
+rtk2156:薦:recommend:flowers,deer,slingshot
