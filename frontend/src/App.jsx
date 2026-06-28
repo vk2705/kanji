@@ -17,18 +17,27 @@ export default function App() {
   const [charQuery, setCharQuery] = useState("");
   const [fallbackMsg, setFallbackMsg] = useState("");
 
-  async function handlePartsSearch(e) {
-    e.preventDefault();
-    const filled = parts.filter((p) => p.trim());
-    if (!filled.length) return;
+  async function runSearch(fn) {
     setLoading(true);
     setResults(null);
     setSelectedId(null);
     setFallbackMsg("");
     try {
+      await fn();
+    } catch {
+      setResults([]);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function handlePartsSearch(e) {
+    e.preventDefault();
+    const filled = parts.filter((p) => p.trim());
+    if (!filled.length) return;
+    runSearch(async () => {
       const data = await searchByParts(filled);
       if (data.results.length === 0 && filled.length === 1) {
-        // Nothing found as a primitive — try keyword search
         const text = await searchByText(filled[0]);
         setResults(text.results);
         if (text.results.length > 0) {
@@ -37,45 +46,25 @@ export default function App() {
       } else {
         setResults(data.results);
       }
-    } catch {
-      setResults([]);
-    } finally {
-      setLoading(false);
-    }
+    });
   }
 
   async function handleTextSearch(e) {
     e.preventDefault();
     if (!textQuery.trim()) return;
-    setLoading(true);
-    setResults(null);
-    setSelectedId(null);
-    setFallbackMsg("");
-    try {
+    runSearch(async () => {
       const data = await searchByText(textQuery);
       setResults(data.results);
-    } catch {
-      setResults([]);
-    } finally {
-      setLoading(false);
-    }
+    });
   }
 
   async function handleCharSearch(e) {
     e.preventDefault();
     if (!charQuery.trim()) return;
-    setLoading(true);
-    setResults(null);
-    setSelectedId(null);
-    setFallbackMsg("");
-    try {
+    runSearch(async () => {
       const data = await searchByChar(charQuery);
       setResults(data ? [data] : []);
-    } catch {
-      setResults([]);
-    } finally {
-      setLoading(false);
-    }
+    });
   }
 
   function handleTabChange(i) {

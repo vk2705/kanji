@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getKanji } from "../api";
+import { displayChar } from "../utils";
 
 export default function KanjiDetail({ kanjiId, onSelectPart, onBack }) {
   const [kanji, setKanji] = useState(null);
@@ -19,15 +20,12 @@ export default function KanjiDetail({ kanjiId, onSelectPart, onBack }) {
   if (error) return <div className="status error">Error: {error}</div>;
   if (!kanji) return null;
 
-  const char = kanji.character && !["?", "??", ""].includes(kanji.character)
-    ? kanji.character : null;
-
   return (
     <div className="detail-panel">
       <button className="back-btn" onClick={onBack}>← Back</button>
 
       <div className="detail-header">
-        <span className="detail-char">{char ?? "·"}</span>
+        <span className="detail-char">{displayChar(kanji.character) ?? "·"}</span>
         <div className="detail-meta">
           <div className="detail-keyword">{kanji.keyword || kanji.id}</div>
           <div className="detail-badges">
@@ -54,22 +52,18 @@ export default function KanjiDetail({ kanjiId, onSelectPart, onBack }) {
         <section className="detail-section">
           <h3>Made from</h3>
           <div className="parts-list">
-            {kanji.parts_detail.map((part, i) => {
-              const pChar = part.character && !["?", "??", ""].includes(part.character)
-                ? part.character : null;
-              return (
-                <button
-                  key={i}
-                  className="part-chip"
-                  onClick={() => part.id && onSelectPart(part.id)}
-                  disabled={!part.id}
-                >
-                  <span className="part-chip-char">{pChar ?? "·"}</span>
-                  <span className="part-chip-label">{part.keyword || part.id}</span>
-                  {part.frame && <span className="part-chip-frame">#{part.frame}</span>}
-                </button>
-              );
-            })}
+            {kanji.parts_detail.map((part, i) => (
+              <button
+                key={i}
+                className="part-chip"
+                onClick={() => part.id && onSelectPart(part.id)}
+                disabled={!part.id}
+              >
+                <span className="part-chip-char">{displayChar(part.character) ?? "·"}</span>
+                <span className="part-chip-label">{part.keyword || part.id}</span>
+                {part.frame && <span className="part-chip-frame">#{part.frame}</span>}
+              </button>
+            ))}
           </div>
         </section>
       )}

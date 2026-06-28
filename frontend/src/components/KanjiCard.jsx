@@ -1,11 +1,9 @@
-export default function KanjiCard({ kanji, onSelect }) {
-  const char = kanji.character && !["?", "??", ""].includes(kanji.character)
-    ? kanji.character
-    : null;
+import { displayChar } from "../utils";
 
+export default function KanjiCard({ kanji, onSelect }) {
   return (
     <div className="kanji-card" onClick={() => onSelect(kanji.id)}>
-      <div className="kanji-char">{char ?? "·"}</div>
+      <div className="kanji-char">{displayChar(kanji.character) ?? "·"}</div>
       <div className="kanji-keyword">{kanji.keyword || kanji.id}</div>
       <div className="kanji-meta">
         {kanji.frame && <span className="meta-frame">#{kanji.frame}</span>}

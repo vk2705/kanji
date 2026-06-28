@@ -53,12 +53,12 @@ def search_parts(conn, terms):
     for s in sets[1:]:
         result_ids &= s
 
-    rows = []
-    for kid in sorted(result_ids, key=lambda x: int(x[3:]) if x.startswith("rtk") and x[3:].isdigit() else 9999):
-        row = conn.execute("SELECT * FROM kanji WHERE id = ?", (kid,)).fetchone()
-        if row:
-            rows.append(row)
-    return rows
+    if not result_ids:
+        return []
+    ph = ",".join("?" * len(result_ids))
+    id_list = sorted(result_ids, key=lambda x: int(x[3:]) if x.startswith("rtk") and x[3:].isdigit() else 9999)
+    row_map = {r["id"]: r for r in conn.execute(f"SELECT * FROM kanji WHERE id IN ({ph})", list(result_ids)).fetchall()}
+    return [row_map[kid] for kid in id_list if kid in row_map]
 
 
 def search_text(conn, q):

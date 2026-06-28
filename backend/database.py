@@ -31,7 +31,8 @@ def init_db():
         CREATE TABLE IF NOT EXISTS aliases (
             id          INTEGER PRIMARY KEY AUTOINCREMENT,
             kanji_id    TEXT NOT NULL REFERENCES kanji(id),
-            alias       TEXT NOT NULL
+            alias       TEXT NOT NULL,
+            UNIQUE(kanji_id, alias)
         );
         CREATE INDEX IF NOT EXISTS idx_aliases_alias  ON aliases(alias);
         CREATE INDEX IF NOT EXISTS idx_aliases_kanji  ON aliases(kanji_id);
@@ -47,6 +48,28 @@ def init_db():
     """)
     conn.commit()
     conn.close()
+
+
+def _load_parts_file(path: Path) -> dict[str, list[str]]:
+    """Load {id: [part_terms]} from a data file. ASCII parts are lowercased; kanji chars kept as-is."""
+    result: dict[str, list[str]] = {}
+    if not path.exists():
+        return result
+    with open(path, encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith("#"):
+                continue
+            cols = line.split(":")
+            pid = cols[0].strip().lower()
+            parts_str = cols[3].strip() if len(cols) > 3 else ""
+            if not pid or not parts_str:
+                continue
+            raw = [p.strip() for p in parts_str.replace(";", ",").split(",") if p.strip()]
+            normalised = [p.lower() if p.isascii() else p for p in raw]
+            if normalised:
+                result[pid] = normalised
+    return result
 
 
 def import_data():
@@ -65,12 +88,8 @@ def import_data():
     """)
 
     # ── 1. Load primitives AND overrides from data.txt ────────────────────────
-    # Entries with a parts field (col 3) are treated as decomposition overrides:
-    # they replace the CSV components for that kanji.
-    # Parts may be English names ("water", "mouth") or kanji chars ("口", "氵").
     prim_aliases:  dict[str, list[str]] = {}   # id -> [alias, ...]
     prim_chars:    dict[str, str]       = {}   # id -> character
-    parts_override: dict[str, list[str]] = {}  # id -> [part_term, ...]
 
     if PRIM_PATH.exists():
         with open(PRIM_PATH, encoding="utf-8") as f:
@@ -84,40 +103,13 @@ def import_data():
                     continue
                 char = cols[1].strip() if len(cols) > 1 else ""
                 alias_str = cols[2].strip() if len(cols) > 2 else ""
-                parts_str = cols[3].strip() if len(cols) > 3 else ""
                 aliases = [a.strip().lower() for a in alias_str.split(",") if a.strip()]
                 prim_aliases[pid] = aliases
                 if char and char not in ("?", "??", ""):
                     prim_chars[pid] = char
-                # Store parts override if present
-                if parts_str:
-                    raw_parts = [p.strip() for p in parts_str.replace(";", ",").split(",") if p.strip()]
-                    # Normalise: lowercase English names, keep kanji chars as-is
-                    normalised = []
-                    for p in raw_parts:
-                        if all(ord(c) < 128 for c in p):
-                            normalised.append(p.lower())   # ASCII → lowercase
-                        else:
-                            normalised.append(p)            # kanji char → keep
-                    parts_override[pid] = normalised
 
-    # ── 1b. Load parts from data_from_pdf.txt (lower priority than data.txt) ───
-    # Entries here override CSV components but are themselves overridden by data.txt.
-    pdf_parts: dict[str, list[str]] = {}  # id -> [part_term, ...]
-
-    if PDF_PATH.exists():
-        with open(PDF_PATH, encoding="utf-8") as f:
-            for line in f:
-                line = line.strip()
-                if not line or line.startswith("#"):
-                    continue
-                cols = line.split(":")
-                pid = cols[0].strip().lower()
-                parts_str = cols[3].strip() if len(cols) > 3 else ""
-                if pid and parts_str:
-                    raw = [p.strip().lower() for p in parts_str.split(",") if p.strip()]
-                    if raw:
-                        pdf_parts[pid] = raw
+    parts_override = _load_parts_file(PRIM_PATH)
+    pdf_parts      = _load_parts_file(PDF_PATH)
 
     # Merge: data.txt overrides take priority; PDF fills in where data.txt is silent
     merged_parts_override: dict[str, list[str]] = {**pdf_parts, **parts_override}
@@ -149,7 +141,6 @@ def import_data():
             strokes  = row.get("stroke_count", "").strip()
             jlpt     = row.get("jlpt", "").strip()
 
-            # component terms: "sun; day; moon; flesh" etc.
             comp_terms = [t.strip().lower() for t in comp_str.split(";") if t.strip()] if comp_str else []
 
             entry_id = f"rtk{frame}"
@@ -163,7 +154,6 @@ def import_data():
                 "comp_terms": comp_terms,
             })
 
-    # Insert kanji rows
     conn.executemany(
         "INSERT OR IGNORE INTO kanji (id, character, keyword, frame, stroke_count, jlpt) "
         "VALUES (?, ?, ?, ?, ?, ?)",
@@ -171,15 +161,12 @@ def import_data():
          for r in rows_to_insert]
     )
 
-    # Insert aliases (keyword as first alias)
     for r in rows_to_insert:
         _insert_alias(conn, r["id"], r["keyword"])
-        # Also alias by frame number string and character
         _insert_alias(conn, r["id"], str(r["frame"]))
         if r["char"]:
             _insert_alias(conn, r["id"], r["char"])
 
-    # Insert parts from CSV
     for r in rows_to_insert:
         for pos, term in enumerate(r["comp_terms"]):
             conn.execute(
@@ -188,104 +175,90 @@ def import_data():
             )
 
     # ── 4. Insert primitive entries from data.txt ─────────────────────────────
-    # If the primitive has a real character that's already in the database as
-    # an rtk entry, merge aliases into that entry instead of creating a duplicate.
+    # Pre-build lookup dicts to avoid per-primitive DB queries in the loop.
+    char_to_id:   dict[str, str] = {}
+    existing_ids: set[str]       = set()
+    for r in conn.execute("SELECT id, character FROM kanji").fetchall():
+        existing_ids.add(r["id"])
+        if r["character"] and r["character"] not in ("?", "??", ""):
+            char_to_id[r["character"]] = r["id"]
+
     for pid, aliases in prim_aliases.items():
-        char = prim_chars.get(pid, "?")
+        char    = prim_chars.get(pid, "?")
         keyword = aliases[0] if aliases else pid
 
-        # Find the canonical id: prefer an existing rtk entry by character OR by alias
         canonical = pid
         if char and char not in ("?", "??"):
-            row = conn.execute("SELECT id FROM kanji WHERE character = ?", (char,)).fetchone()
-            if row:
-                canonical = row["id"]
+            canonical = char_to_id.get(char, pid)
         if canonical == pid:
-            # Check if any alias in this primitive's list is itself an existing kanji id
             for a in aliases:
-                row = conn.execute("SELECT id FROM kanji WHERE id = ?", (a,)).fetchone()
-                if row:
-                    canonical = row["id"]
+                if a in existing_ids:
+                    canonical = a
                     break
 
-        # Create the primitive entry only if it has no real character (pure primitive)
-        if canonical == pid:
-            existing = conn.execute("SELECT id FROM kanji WHERE id = ?", (pid,)).fetchone()
-            if not existing:
-                conn.execute(
-                    "INSERT OR IGNORE INTO kanji (id, character, keyword) VALUES (?, ?, ?)",
-                    (pid, char, keyword)
-                )
+        if canonical == pid and pid not in existing_ids:
+            conn.execute(
+                "INSERT OR IGNORE INTO kanji (id, character, keyword) VALUES (?, ?, ?)",
+                (pid, char, keyword)
+            )
+            existing_ids.add(pid)
 
-        # Add all aliases (including the rad id itself as an alias) to canonical
         for a in aliases:
             _insert_alias(conn, canonical, a)
-        _insert_alias(conn, canonical, pid)   # rad id is an alias too
+        _insert_alias(conn, canonical, pid)
         if char and char not in ("?", "??"):
             _insert_alias(conn, canonical, char)
 
-    # ── 5. Apply parts overrides from data.txt ────────────────────────────────
-    # For any entry with a parts field in data.txt, replace the CSV-derived parts.
-    # Also build a char→id map from what's now in the DB, so kanji chars in
-    # parts fields (like 口, 氵) resolve to their canonical ids.
+    # ── 5. Apply parts overrides ───────────────────────────────────────────────
     char_to_db_id: dict[str, str] = {}
-    for row in conn.execute("SELECT id, character FROM kanji WHERE character IS NOT NULL AND character != ''").fetchall():
-        if row["character"] not in ("?", "??"):
-            char_to_db_id[row["character"]] = row["id"]
+    for r in conn.execute("SELECT id, character FROM kanji WHERE character IS NOT NULL AND character != ''").fetchall():
+        if r["character"] not in ("?", "??"):
+            char_to_db_id[r["character"]] = r["id"]
+
+    # Pre-build id→keyword to avoid a SELECT per kanji-char part in the loop.
+    id_to_keyword: dict[str, str] = {
+        r["id"]: r["keyword"]
+        for r in conn.execute("SELECT id, keyword FROM kanji WHERE keyword IS NOT NULL").fetchall()
+    }
 
     overrides_applied = 0
     for pid, parts in merged_parts_override.items():
-        # Resolve the entry id: pid may be an rtk id or a rad id
         canonical = resolve_alias(conn, pid)
-        if not canonical:
-            continue
-        if not parts:
+        if not canonical or not parts:
             continue
 
-        # Expand each part term: English name or kanji char → canonical alias
         expanded_terms = []
         for term in parts:
             if term in char_to_db_id:
-                # It's a kanji character — add both the char and its keyword
                 db_id = char_to_db_id[term]
-                kw_row = conn.execute("SELECT keyword FROM kanji WHERE id=?", (db_id,)).fetchone()
-                expanded_terms.append(term)             # kanji char itself
-                if kw_row and kw_row["keyword"]:
-                    expanded_terms.append(kw_row["keyword"])  # English keyword too
+                expanded_terms.append(term)
+                kw = id_to_keyword.get(db_id)
+                if kw:
+                    expanded_terms.append(kw)
             else:
                 expanded_terms.append(term)
 
-        # Delete existing CSV parts and replace with override
         conn.execute("DELETE FROM parts WHERE kanji_id = ?", (canonical,))
-        for pos, term in enumerate(expanded_terms):
-            conn.execute(
-                "INSERT INTO parts (kanji_id, part_term, position) VALUES (?, ?, ?)",
-                (canonical, term, pos)
-            )
+        conn.executemany(
+            "INSERT INTO parts (kanji_id, part_term, position) VALUES (?, ?, ?)",
+            [(canonical, term, pos) for pos, term in enumerate(expanded_terms)]
+        )
         overrides_applied += 1
 
     conn.commit()
     conn.close()
     print(f"Import complete: {len(rows_to_insert)} kanji rows, {overrides_applied} parts overrides applied "
-          f"({len(pdf_parts)} from PDF, {len(parts_override)} from data.txt, {len(pdf_parts) - len(set(pdf_parts) - set(parts_override))} PDF entries superseded by data.txt).")
+          f"({len(pdf_parts)} from PDF, {len(parts_override)} from data.txt, "
+          f"{len(pdf_parts) - len(set(pdf_parts) - set(parts_override))} PDF entries superseded by data.txt).")
 
 
 def _insert_alias(conn, kanji_id: str, alias: str):
     alias = alias.strip().lower()
-    if not alias:
-        return
-    existing = conn.execute(
-        "SELECT 1 FROM aliases WHERE kanji_id = ? AND alias = ?",
-        (kanji_id, alias)
-    ).fetchone()
-    if not existing:
-        try:
-            conn.execute(
-                "INSERT INTO aliases (kanji_id, alias) VALUES (?, ?)",
-                (kanji_id, alias)
-            )
-        except Exception:
-            pass
+    if alias:
+        conn.execute(
+            "INSERT OR IGNORE INTO aliases (kanji_id, alias) VALUES (?, ?)",
+            (kanji_id, alias)
+        )
 
 
 # ── Query helpers ─────────────────────────────────────────────────────────────
@@ -303,39 +276,24 @@ def resolve_alias(conn, term: str) -> str | None:
 
 
 def get_all_aliases_for_term(conn, term: str) -> set[str]:
-    """
-    Given a search term, return the full set of aliases for that primitive
-    (so we can match any of them in the parts table).
-    """
+    """Return the full alias set for a primitive (for parts-table matching)."""
     term = term.strip().lower()
     cid = resolve_alias(conn, term)
     if not cid:
         return {term}
-    rows = conn.execute(
-        "SELECT alias FROM aliases WHERE kanji_id = ?", (cid,)
-    ).fetchall()
-    result = {r["alias"] for r in rows} | {term, cid}
-    return result
+    rows = conn.execute("SELECT alias FROM aliases WHERE kanji_id = ?", (cid,)).fetchall()
+    return {r["alias"] for r in rows} | {term, cid}
 
 
 def search_by_parts(conn, part_names: list[str]) -> list[dict]:
-    """
-    Find kanji containing ALL given primitives.
-    Since component terms in the parts table are already recursively expanded,
-    this is a flat set-intersection: find kanji_id that has at least one alias
-    of EACH search term in its parts.
-    """
+    """Find kanji containing ALL given primitives (flat set-intersection)."""
     terms = [p.strip().lower() for p in part_names if p.strip()]
     if not terms:
         return []
 
-    # For each search term, expand to all aliases of that primitive
     alias_sets = [get_all_aliases_for_term(conn, t) for t in terms]
 
-    # Build SQL: for each alias set, the kanji must have at least one matching part
-    # We use EXISTS subqueries for each condition
-    conditions = []
-    params = []
+    conditions, params = [], []
     for aliases in alias_sets:
         placeholders = ",".join("?" * len(aliases))
         conditions.append(
@@ -343,9 +301,12 @@ def search_by_parts(conn, part_names: list[str]) -> list[dict]:
         )
         params.extend(aliases)
 
-    sql = f"SELECT id, character, keyword, frame, stroke_count, jlpt FROM kanji k WHERE {' AND '.join(conditions)} ORDER BY frame NULLS LAST"
+    sql = (
+        f"SELECT id, character, keyword, frame, stroke_count, jlpt FROM kanji k "
+        f"WHERE {' AND '.join(conditions)} ORDER BY frame NULLS LAST"
+    )
     rows = conn.execute(sql, params).fetchall()
-    return [_row_to_dict(conn, r) for r in rows]
+    return _rows_to_dicts(conn, rows)
 
 
 def search_by_substring(conn, substring: str) -> list[dict]:
@@ -365,7 +326,7 @@ def search_by_substring(conn, substring: str) -> list[dict]:
         """,
         (f"%{sub}%", f"%{sub}%", f"%{sub}%")
     ).fetchall()
-    return [_row_to_dict(conn, r) for r in rows]
+    return _rows_to_dicts(conn, rows)
 
 
 def search_by_char(conn, character: str) -> dict | None:
@@ -374,9 +335,7 @@ def search_by_char(conn, character: str) -> dict | None:
         "SELECT id, character, keyword, frame, stroke_count, jlpt FROM kanji WHERE character = ?",
         (character,)
     ).fetchone()
-    if not row:
-        return None
-    return _row_to_dict(conn, row)
+    return _rows_to_dicts(conn, [row])[0] if row else None
 
 
 def get_kanji_detail(conn, kanji_id: str) -> dict | None:
@@ -390,24 +349,40 @@ def get_kanji_detail(conn, kanji_id: str) -> dict | None:
     ).fetchone()
     if not row:
         return None
-    entry = _row_to_dict(conn, row)
+    entry = _rows_to_dicts(conn, [row])[0]
 
-    # Resolve each part term to a kanji entry
-    part_rows = conn.execute(
-        "SELECT part_term FROM parts WHERE kanji_id = ? ORDER BY position",
-        (cid,)
-    ).fetchall()
+    part_terms = entry["parts"]
+    if not part_terms:
+        entry["parts_detail"] = []
+        return entry
 
+    # Batch-resolve all part terms in two queries instead of N*3.
+    ph = ",".join("?" * len(part_terms))
+    term_to_id: dict[str, str] = {}
+    for r in conn.execute(f"SELECT id FROM kanji WHERE id IN ({ph})", part_terms).fetchall():
+        term_to_id[r["id"]] = r["id"]
+    for r in conn.execute(f"SELECT alias, kanji_id FROM aliases WHERE alias IN ({ph})", part_terms).fetchall():
+        term_to_id.setdefault(r["alias"], r["kanji_id"])
+
+    resolved_ids = list({term_to_id[t] for t in part_terms if t in term_to_id and term_to_id[t] != cid})
+    if not resolved_ids:
+        entry["parts_detail"] = []
+        return entry
+
+    ph2 = ",".join("?" * len(resolved_ids))
+    prow_map = {
+        r["id"]: r for r in conn.execute(
+            f"SELECT id, character, keyword, frame FROM kanji WHERE id IN ({ph2})", resolved_ids
+        ).fetchall()
+    }
+
+    seen_ids: set[str] = set()
     resolved = []
-    seen_ids = set()
-    for pr in part_rows:
-        term = pr["part_term"]
-        pid = resolve_alias(conn, term)
+    for term in part_terms:
+        pid = term_to_id.get(term)
         if pid and pid != cid and pid not in seen_ids:
             seen_ids.add(pid)
-            prow = conn.execute(
-                "SELECT id, character, keyword, frame FROM kanji WHERE id = ?", (pid,)
-            ).fetchone()
+            prow = prow_map.get(pid)
             if prow:
                 resolved.append({
                     "id": prow["id"],
@@ -416,29 +391,48 @@ def get_kanji_detail(conn, kanji_id: str) -> dict | None:
                     "frame": prow["frame"],
                     "term": term,
                 })
+
     entry["parts_detail"] = resolved
     return entry
 
 
 def _row_to_dict(conn, row) -> dict:
-    kid = row["id"]
-    aliases = [
-        r["alias"] for r in conn.execute(
-            "SELECT alias FROM aliases WHERE kanji_id = ? ORDER BY id LIMIT 20", (kid,)
-        ).fetchall()
+    return _rows_to_dicts(conn, [row])[0]
+
+
+def _rows_to_dicts(conn, rows) -> list[dict]:
+    """Convert a list of kanji rows to dicts, batching alias and parts lookups."""
+    if not rows:
+        return []
+    kids = [r["id"] for r in rows]
+    ph = ",".join("?" * len(kids))
+
+    alias_map: dict[str, list[str]] = {k: [] for k in kids}
+    for r in conn.execute(
+        f"SELECT kanji_id, alias FROM aliases WHERE kanji_id IN ({ph}) ORDER BY id", kids
+    ).fetchall():
+        alias_map[r["kanji_id"]].append(r["alias"])
+
+    parts_map: dict[str, list[str]] = {k: [] for k in kids}
+    seen: dict[str, set[str]] = {k: set() for k in kids}
+    for r in conn.execute(
+        f"SELECT kanji_id, part_term FROM parts WHERE kanji_id IN ({ph}) ORDER BY position", kids
+    ).fetchall():
+        kid, term = r["kanji_id"], r["part_term"]
+        if term not in seen[kid]:
+            seen[kid].add(term)
+            parts_map[kid].append(term)
+
+    return [
+        {
+            "id": r["id"],
+            "character": r["character"],
+            "keyword": r["keyword"],
+            "frame": r["frame"],
+            "stroke_count": r["stroke_count"],
+            "jlpt": r["jlpt"],
+            "aliases": alias_map[r["id"]],
+            "parts": parts_map[r["id"]],
+        }
+        for r in rows
     ]
-    raw_parts = [
-        r["part_term"] for r in conn.execute(
-            "SELECT DISTINCT part_term FROM parts WHERE kanji_id = ? ORDER BY position", (kid,)
-        ).fetchall()
-    ]
-    return {
-        "id": kid,
-        "character": row["character"],
-        "keyword": row["keyword"],
-        "frame": row["frame"] if "frame" in row.keys() else None,
-        "stroke_count": row["stroke_count"] if "stroke_count" in row.keys() else None,
-        "jlpt": row["jlpt"] if "jlpt" in row.keys() else None,
-        "aliases": aliases,
-        "parts": raw_parts,
-    }
