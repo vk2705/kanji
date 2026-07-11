@@ -1,5 +1,8 @@
-# Generated database — rebuilt automatically on first run
+# Live database — the source of truth for all kanji/user data, NOT a rebuildable
+# cache. Excluded from git only because it's a binary blob; back it up separately
+# (see the kanji-db-backup systemd timer) before ever touching it by hand.
 backend/kanji.db
+backend/backups/
 
 # Python
 __pycache__/

@@ -1,7 +1,8 @@
-import { useState } from "react";
-import { searchByParts, searchByText, searchByChar } from "./api";
+import { useEffect, useState } from "react";
+import { searchByParts, searchByText, searchByChar, getMe } from "./api";
 import ResultsGrid from "./components/ResultsGrid";
 import KanjiDetail from "./components/KanjiDetail";
+import AuthBar from "./components/AuthBar";
 import "./App.css";
 
 const TABS = ["By Parts", "By Text", "By Character"];
@@ -11,6 +12,13 @@ export default function App() {
   const [results, setResults] = useState(null);
   const [loading, setLoading] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    getMe()
+      .then((me) => setUser(me.authenticated ? me : null))
+      .catch(() => setUser(null));
+  }, []);
 
   const [parts, setParts] = useState(["", "", ""]);
   const [textQuery, setTextQuery] = useState("");
@@ -77,6 +85,7 @@ export default function App() {
   return (
     <div className="app">
       <header className="app-header">
+        <AuthBar user={user} setUser={setUser} />
         <h1>RTK Kanji Search</h1>
         <p className="subtitle">Search kanji by their primitive elements</p>
       </header>

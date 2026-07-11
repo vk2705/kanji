@@ -42,17 +42,17 @@ export default function KanjiDetail({ kanjiId, onSelectPart, onBack }) {
           <h3>Aliases / names</h3>
           <div className="tag-list">
             {kanji.aliases.map((a) => (
-              <span key={a} className="tag">{a}</span>
+              <span key={a.alias} className="tag">{a.alias}</span>
             ))}
           </div>
         </section>
       )}
 
-      {kanji.parts_detail && kanji.parts_detail.length > 0 && (
+      {kanji.decompositions?.[0]?.parts_detail?.length > 0 && (
         <section className="detail-section">
           <h3>Made from</h3>
           <div className="parts-list">
-            {kanji.parts_detail.map((part, i) => (
+            {kanji.decompositions[0].parts_detail.map((part, i) => (
               <button
                 key={i}
                 className="part-chip"
