@@ -9,27 +9,31 @@ async function extractError(res) {
   }
 }
 
-export async function searchByParts(parts) {
+export async function searchByParts(parts, script = null) {
   const res = await fetch(`${BASE}/search/parts`, {
     method: "POST",
     credentials: "include",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ parts }),
+    body: JSON.stringify({ parts, script }),
   });
   if (!res.ok) throw new Error(await extractError(res));
   return res.json();
 }
 
-export async function searchByText(q) {
-  const res = await fetch(`${BASE}/search/text?q=${encodeURIComponent(q)}`, {
+export async function searchByText(q, script = null) {
+  const params = new URLSearchParams({ q });
+  if (script) params.set("script", script);
+  const res = await fetch(`${BASE}/search/text?${params}`, {
     credentials: "include",
   });
   if (!res.ok) throw new Error(await extractError(res));
   return res.json();
 }
 
-export async function searchByChar(c) {
-  const res = await fetch(`${BASE}/search/char?c=${encodeURIComponent(c)}`, {
+export async function searchByChar(c, script = null) {
+  const params = new URLSearchParams({ c });
+  if (script) params.set("script", script);
+  const res = await fetch(`${BASE}/search/char?${params}`, {
     credentials: "include",
   });
   if (!res.ok) throw new Error(await extractError(res));
@@ -44,12 +48,12 @@ export async function getKanji(id) {
   return res.json();
 }
 
-export async function register(username, password) {
+export async function register(username, password, prefs = {}) {
   const res = await fetch(`${BASE}/auth/register`, {
     method: "POST",
     credentials: "include",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username, password }),
+    body: JSON.stringify({ username, password, ...prefs }),
   });
   if (!res.ok) throw new Error(await extractError(res));
   return res.json();
@@ -77,6 +81,39 @@ export async function logout() {
 
 export async function getMe() {
   const res = await fetch(`${BASE}/auth/me`, { credentials: "include" });
+  if (!res.ok) throw new Error(await extractError(res));
+  return res.json();
+}
+
+export async function updatePreferences(prefs) {
+  const res = await fetch(`${BASE}/auth/preferences`, {
+    method: "PATCH",
+    credentials: "include",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(prefs),
+  });
+  if (!res.ok) throw new Error(await extractError(res));
+  return res.json();
+}
+
+export async function addAlias(kanjiId, alias, visibility = "private") {
+  const res = await fetch(`${BASE}/aliases`, {
+    method: "POST",
+    credentials: "include",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ kanji_id: kanjiId, alias, visibility }),
+  });
+  if (!res.ok) throw new Error(await extractError(res));
+  return res.json();
+}
+
+export async function addStory(kanjiId, story, visibility = "private") {
+  const res = await fetch(`${BASE}/stories`, {
+    method: "POST",
+    credentials: "include",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ kanji_id: kanjiId, story, visibility }),
+  });
   if (!res.ok) throw new Error(await extractError(res));
   return res.json();
 }

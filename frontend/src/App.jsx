@@ -1,11 +1,33 @@
 import { useEffect, useState } from "react";
-import { searchByParts, searchByText, searchByChar, getMe } from "./api";
+import { searchByParts, searchByText, searchByChar, getMe, updatePreferences } from "./api";
 import ResultsGrid from "./components/ResultsGrid";
 import KanjiDetail from "./components/KanjiDetail";
 import AuthBar from "./components/AuthBar";
+import { t } from "./i18n";
 import "./App.css";
 
-const TABS = ["By Parts", "By Text", "By Character"];
+const STUDY_SCRIPTS = [
+  { value: "", labelKey: "studyAll" },
+  { value: "ja-kanji", labelKey: "studyJapanese" },
+  { value: "zh-Hans", labelKey: "studyChineseSimplified" },
+  { value: "zh-Hant", labelKey: "studyChineseTraditional" },
+];
+
+function readLocal(key, fallback) {
+  try {
+    return localStorage.getItem(key) || fallback;
+  } catch {
+    return fallback;
+  }
+}
+
+function writeLocal(key, value) {
+  try {
+    localStorage.setItem(key, value);
+  } catch {
+    // ignore (private browsing / storage disabled)
+  }
+}
 
 export default function App() {
   const [tab, setTab] = useState(0);
@@ -13,12 +35,38 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
   const [user, setUser] = useState(null);
+  const [uiLang, setUiLang] = useState(() => readLocal("ui_language", "en"));
+  const [studyScript, setStudyScript] = useState(() => readLocal("study_script", ""));
+
+  const tt = (key, ...args) => t(uiLang, key, ...args);
 
   useEffect(() => {
     getMe()
-      .then((me) => setUser(me.authenticated ? me : null))
+      .then((me) => {
+        if (me.authenticated) {
+          setUser(me);
+          // Account is the source of truth once logged in; falls back to whatever
+          // was already showing (this device's localStorage value) if unset.
+          if (me.ui_language) setUiLang(me.ui_language);
+          setStudyScript(me.study_script || "");
+        } else {
+          setUser(null);
+        }
+      })
       .catch(() => setUser(null));
   }, []);
+
+  function changeUiLang(lang) {
+    setUiLang(lang);
+    writeLocal("ui_language", lang);
+    if (user) updatePreferences({ ui_language: lang }).catch(() => {});
+  }
+
+  function changeStudyScript(script) {
+    setStudyScript(script);
+    writeLocal("study_script", script);
+    if (user) updatePreferences({ study_script: script || null }).catch(() => {});
+  }
 
   const [parts, setParts] = useState(["", "", ""]);
   const [textQuery, setTextQuery] = useState("");
@@ -44,12 +92,12 @@ export default function App() {
     const filled = parts.filter((p) => p.trim());
     if (!filled.length) return;
     runSearch(async () => {
-      const data = await searchByParts(filled);
+      const data = await searchByParts(filled, studyScript || null);
       if (data.results.length === 0 && filled.length === 1) {
-        const text = await searchByText(filled[0]);
+        const text = await searchByText(filled[0], studyScript || null);
         setResults(text.results);
         if (text.results.length > 0) {
-          setFallbackMsg(`No kanji use "${filled[0]}" as a primitive. Showing keyword matches instead:`);
+          setFallbackMsg(tt("fallbackMsg", filled[0]));
         }
       } else {
         setResults(data.results);
@@ -61,7 +109,7 @@ export default function App() {
     e.preventDefault();
     if (!textQuery.trim()) return;
     runSearch(async () => {
-      const data = await searchByText(textQuery);
+      const data = await searchByText(textQuery, studyScript || null);
       setResults(data.results);
     });
   }
@@ -70,7 +118,7 @@ export default function App() {
     e.preventDefault();
     if (!charQuery.trim()) return;
     runSearch(async () => {
-      const data = await searchByChar(charQuery);
+      const data = await searchByChar(charQuery, studyScript || null);
       setResults(data ? [data] : []);
     });
   }
@@ -82,12 +130,33 @@ export default function App() {
     setFallbackMsg("");
   }
 
+  const TABS = [tt("tabParts"), tt("tabText"), tt("tabChar")];
+
   return (
     <div className="app">
       <header className="app-header">
-        <AuthBar user={user} setUser={setUser} />
-        <h1>RTK Kanji Search</h1>
-        <p className="subtitle">Search kanji by their primitive elements</p>
+        <div className="header-controls">
+          <div className="lang-toggle">
+            {["en", "ru"].map((l) => (
+              <button
+                key={l}
+                className={`lang-btn ${uiLang === l ? "lang-btn-active" : ""}`}
+                onClick={() => changeUiLang(l)}
+              >
+                {l.toUpperCase()}
+              </button>
+            ))}
+          </div>
+          <AuthBar
+            user={user}
+            setUser={setUser}
+            lang={uiLang}
+            uiLang={uiLang}
+            studyScript={studyScript || null}
+          />
+        </div>
+        <h1>{tt("appTitle")}</h1>
+        <p className="subtitle">{tt("appSubtitle")}</p>
       </header>
 
       <main className="app-main">
@@ -96,17 +165,33 @@ export default function App() {
             kanjiId={selectedId}
             onSelectPart={setSelectedId}
             onBack={() => setSelectedId(null)}
+            user={user}
+            lang={uiLang}
           />
         ) : (
           <>
+            <div className="study-language">
+              <label htmlFor="study-script-select">{tt("studyLanguageLabel")}</label>
+              <select
+                id="study-script-select"
+                className="input"
+                value={studyScript}
+                onChange={(e) => changeStudyScript(e.target.value)}
+              >
+                {STUDY_SCRIPTS.map((s) => (
+                  <option key={s.value} value={s.value}>{tt(s.labelKey)}</option>
+                ))}
+              </select>
+            </div>
+
             <div className="tabs">
-              {TABS.map((t, i) => (
+              {TABS.map((label, i) => (
                 <button
-                  key={t}
+                  key={label}
                   className={`tab ${tab === i ? "tab-active" : ""}`}
                   onClick={() => handleTabChange(i)}
                 >
-                  {t}
+                  {label}
                 </button>
               ))}
             </div>
@@ -114,15 +199,13 @@ export default function App() {
             <div className="search-panel">
               {tab === 0 && (
                 <form onSubmit={handlePartsSearch} className="search-form">
-                  <p className="search-hint">
-                    Enter 1–3 RTK primitive names (e.g. <em>sun</em>, <em>mouth</em>, <em>needle</em>)
-                  </p>
+                  <p className="search-hint">{tt("partsHint")}</p>
                   <div className="parts-inputs">
                     {parts.map((p, i) => (
                       <input
                         key={i}
                         className="input"
-                        placeholder={`Primitive ${i + 1}`}
+                        placeholder={tt("partsPlaceholder", i + 1)}
                         value={p}
                         onChange={(e) => {
                           const next = [...parts];
@@ -132,38 +215,34 @@ export default function App() {
                       />
                     ))}
                   </div>
-                  <button className="btn-primary" type="submit">Search</button>
+                  <button className="btn-primary" type="submit">{tt("searchBtn")}</button>
                 </form>
               )}
 
               {tab === 1 && (
                 <form onSubmit={handleTextSearch} className="search-form">
-                  <p className="search-hint">
-                    Search by any part of a kanji keyword or alias (e.g. <em>brig</em> → bright)
-                  </p>
+                  <p className="search-hint">{tt("textHint")}</p>
                   <input
                     className="input"
-                    placeholder="Type to search…"
+                    placeholder={tt("textPlaceholder")}
                     value={textQuery}
                     onChange={(e) => setTextQuery(e.target.value)}
                   />
-                  <button className="btn-primary" type="submit">Search</button>
+                  <button className="btn-primary" type="submit">{tt("searchBtn")}</button>
                 </form>
               )}
 
               {tab === 2 && (
                 <form onSubmit={handleCharSearch} className="search-form">
-                  <p className="search-hint">
-                    Paste a kanji character to look it up (e.g. <em>明</em>)
-                  </p>
+                  <p className="search-hint">{tt("charHint")}</p>
                   <input
                     className="input input-large"
-                    placeholder="paste kanji here…"
+                    placeholder={tt("charPlaceholder")}
                     value={charQuery}
                     onChange={(e) => setCharQuery(e.target.value)}
                     maxLength={2}
                   />
-                  <button className="btn-primary" type="submit">Search</button>
+                  <button className="btn-primary" type="submit">{tt("searchBtn")}</button>
                 </form>
               )}
             </div>
@@ -175,6 +254,7 @@ export default function App() {
               results={results}
               onSelect={setSelectedId}
               loading={loading}
+              lang={uiLang}
             />
           </>
         )}

@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { login, register, logout } from "../api";
+import { t } from "../i18n";
 
-export default function AuthBar({ user, setUser }) {
+export default function AuthBar({ user, setUser, lang = "en", uiLang, studyScript }) {
   const [open, setOpen] = useState(false);
   const [mode, setMode] = useState("login"); // "login" | "register"
   const [username, setUsername] = useState("");
@@ -20,8 +21,12 @@ export default function AuthBar({ user, setUser }) {
     setBusy(true);
     setError("");
     try {
-      const fn = mode === "login" ? login : register;
-      const me = await fn(username.trim(), password);
+      const me = mode === "login"
+        ? await login(username.trim(), password)
+        // Seed the new account with whatever language/study-script this (possibly
+        // anonymous) session already had set locally, so registering doesn't
+        // silently reset a choice the user already made.
+        : await register(username.trim(), password, { ui_language: uiLang, study_script: studyScript });
       setUser(me);
       setOpen(false);
       resetForm();
@@ -47,7 +52,7 @@ export default function AuthBar({ user, setUser }) {
       <div className="auth-bar">
         <span className="auth-username">{user.username}</span>
         <button className="auth-link-btn" onClick={handleLogout} disabled={busy}>
-          Log out
+          {t(lang, "logoutBtn")}
         </button>
       </div>
     );
@@ -57,7 +62,7 @@ export default function AuthBar({ user, setUser }) {
     <div className="auth-bar">
       {!open ? (
         <button className="auth-link-btn" onClick={() => setOpen(true)}>
-          Log in / Register
+          {t(lang, "loginRegisterBtn")}
         </button>
       ) : (
         <div className="auth-popover">
@@ -67,20 +72,20 @@ export default function AuthBar({ user, setUser }) {
               onClick={() => { setMode("login"); setError(""); }}
               type="button"
             >
-              Log in
+              {t(lang, "loginTab")}
             </button>
             <button
               className={`auth-tab ${mode === "register" ? "auth-tab-active" : ""}`}
               onClick={() => { setMode("register"); setError(""); }}
               type="button"
             >
-              Register
+              {t(lang, "registerTab")}
             </button>
           </div>
           <form className="auth-form" onSubmit={handleSubmit}>
             <input
               className="input"
-              placeholder="Username"
+              placeholder={t(lang, "usernamePlaceholder")}
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               autoComplete="username"
@@ -89,7 +94,7 @@ export default function AuthBar({ user, setUser }) {
             <input
               className="input"
               type="password"
-              placeholder={mode === "register" ? "Password (min 8 chars)" : "Password"}
+              placeholder={mode === "register" ? t(lang, "passwordPlaceholderRegister") : t(lang, "passwordPlaceholder")}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               autoComplete={mode === "login" ? "current-password" : "new-password"}
@@ -99,14 +104,14 @@ export default function AuthBar({ user, setUser }) {
             {error && <div className="auth-error">{error}</div>}
             <div className="auth-form-actions">
               <button className="btn-primary" type="submit" disabled={busy}>
-                {mode === "login" ? "Log in" : "Create account"}
+                {mode === "login" ? t(lang, "loginSubmit") : t(lang, "registerSubmit")}
               </button>
               <button
                 className="auth-link-btn"
                 type="button"
                 onClick={() => { setOpen(false); resetForm(); }}
               >
-                Cancel
+                {t(lang, "cancelBtn")}
               </button>
             </div>
           </form>

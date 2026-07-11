@@ -61,15 +61,31 @@ def db_conn():
 
 def migrate_schema(conn):
     """
-    One-time upgrade from "DB is a disposable cache" to "DB is the source of truth":
-    adds users/sessions/decompositions/stories tables and owner_id/visibility/script/
-    variant_of columns on kanji/aliases/parts. Idempotent via PRAGMA user_version — safe
-    to call on every startup, on both a fresh DB and an existing populated one.
+    Idempotent schema upgrades gated by PRAGMA user_version — safe to call on every
+    startup, on both a fresh DB and an existing populated one. Each version's body is
+    guarded by its own `if version < N` so re-running against a DB already past that
+    version never re-issues a non-idempotent statement (e.g. a bare ALTER TABLE ADD
+    COLUMN, which errors on a second run unlike CREATE TABLE IF NOT EXISTS).
     """
     version = conn.execute("PRAGMA user_version").fetchone()[0]
-    if version >= 1:
-        return
 
+    if version < 1:
+        _migrate_v1(conn)
+        conn.execute("PRAGMA user_version = 1")
+        conn.commit()
+        version = 1
+
+    if version < 2:
+        _migrate_v2(conn)
+        conn.execute("PRAGMA user_version = 2")
+        conn.commit()
+        version = 2
+
+
+def _migrate_v1(conn):
+    """"DB is a disposable cache" -> "DB is the source of truth": adds
+    users/sessions/decompositions/stories tables and owner_id/visibility/script/
+    variant_of columns on kanji/aliases/parts."""
     conn.executescript("""
         CREATE TABLE IF NOT EXISTS users (
             id                INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -158,8 +174,13 @@ def migrate_schema(conn):
 
     _backfill_decompositions(conn)
 
-    conn.execute("PRAGMA user_version = 1")
-    conn.commit()
+
+def _migrate_v2(conn):
+    """Adds per-account UI language and study-language (script) preferences."""
+    conn.executescript("""
+        ALTER TABLE users ADD COLUMN ui_language  TEXT NOT NULL DEFAULT 'en' CHECK(ui_language IN ('en','ru'));
+        ALTER TABLE users ADD COLUMN study_script TEXT CHECK(study_script IN ('ja-kanji','zh-Hans','zh-Hant'));
+    """)
 
 
 def _backfill_decompositions(conn):
@@ -436,9 +457,36 @@ def _insert_alias(conn, kanji_id: str, alias: str, owner_id: int = 1, visibility
 # when viewer_id is None, `owner_id = NULL` is never true in SQL, so this correctly
 # collapses to "public only" with no special-casing needed.
 
-def resolve_alias(conn, term: str, viewer_id: int | None = None) -> str | None:
+# Most ja-kanji rows share their glyph with a separate zh-* row (e.g. '一' exists as
+# both rtk1 and hanzi-4e00, each with their own '一' alias). SCRIPT_VISIBILITY maps a
+# study-language filter to the set of `kanji.script` values it should match — picking
+# a Chinese variant also includes the script-neutral zh-Hani rows (no
+# simplified/traditional distinction). Used to scope search results.
+SCRIPT_VISIBILITY: dict[str, tuple[str, ...]] = {
+    "ja-kanji": ("ja-kanji",),
+    "zh-Hans": ("zh-Hans", "zh-Hani"),
+    "zh-Hant": ("zh-Hant", "zh-Hani"),
+}
+
+
+def _script_group(script: str | None) -> str | None:
+    """Coarse ja/zh grouping (ignoring Simplified/Traditional/neutral) used to
+    disambiguate a shared-glyph term against the script of the kanji it's part of,
+    independent of the viewer's own study-language filter."""
+    if script == "ja-kanji":
+        return "ja"
+    if script in ("zh-Hans", "zh-Hant", "zh-Hani"):
+        return "zh"
+    return None
+
+
+def resolve_alias(conn, term: str, viewer_id: int | None = None,
+                   script_scope: tuple[str, ...] | None = None) -> str | None:
     """Return canonical kanji id for a term (alias or id), visible to viewer_id.
-    Prefers a public/system match over the viewer's own private one when both exist."""
+    When script_scope is given and the term is ambiguous across scripts (e.g. '一'
+    matching both an rtk row and a hanzi row), prefers a match whose kanji.script is
+    in script_scope; otherwise (or if nothing matches script_scope) prefers a
+    public/system match over the viewer's own private one, as before."""
     term = term.strip().lower()
     row = conn.execute(
         "SELECT id FROM kanji WHERE id = ? AND (visibility = 'public' OR owner_id = ?)",
@@ -447,22 +495,28 @@ def resolve_alias(conn, term: str, viewer_id: int | None = None) -> str | None:
     if row:
         return row["id"]
     rows = conn.execute(
-        "SELECT kanji_id, visibility FROM aliases "
-        "WHERE alias = ? AND (visibility = 'public' OR owner_id = ?)",
+        "SELECT a.kanji_id, a.visibility, k.script FROM aliases a "
+        "JOIN kanji k ON k.id = a.kanji_id "
+        "WHERE a.alias = ? AND (a.visibility = 'public' OR a.owner_id = ?)",
         (term, viewer_id)
     ).fetchall()
     if not rows:
         return None
+    if script_scope:
+        scoped = [r for r in rows if r["script"] in script_scope]
+        if scoped:
+            rows = scoped
     for r in rows:
         if r["visibility"] == "public":
             return r["kanji_id"]
     return rows[0]["kanji_id"]
 
 
-def get_all_aliases_for_term(conn, term: str, viewer_id: int | None = None) -> set[str]:
+def get_all_aliases_for_term(conn, term: str, viewer_id: int | None = None,
+                              script_scope: tuple[str, ...] | None = None) -> set[str]:
     """Return the full visible alias set for a primitive (for parts-table matching)."""
     term = term.strip().lower()
-    cid = resolve_alias(conn, term, viewer_id)
+    cid = resolve_alias(conn, term, viewer_id, script_scope)
     if not cid:
         return {term}
     rows = conn.execute(
@@ -472,18 +526,25 @@ def get_all_aliases_for_term(conn, term: str, viewer_id: int | None = None) -> s
     return {r["alias"] for r in rows} | {term, cid}
 
 
-def search_by_parts(conn, part_names: list[str], viewer_id: int | None = None) -> list[dict]:
+def search_by_parts(conn, part_names: list[str], viewer_id: int | None = None,
+                     script: str | None = None) -> list[dict]:
     """Find kanji containing ALL given primitives (flat set-intersection). A primitive
     counts as present if it appears in ANY decomposition visible to the viewer, not just
-    the system one — once a user adds their own decomposition it participates in search too."""
+    the system one — once a user adds their own decomposition it participates in search too.
+    script (one of SCRIPT_VISIBILITY's keys) scopes both which kanji are returned and,
+    for terms ambiguous across scripts, which alias set they expand to."""
     terms = [p.strip().lower() for p in part_names if p.strip()]
     if not terms:
         return []
 
-    alias_sets = [get_all_aliases_for_term(conn, t, viewer_id) for t in terms]
+    script_scope = SCRIPT_VISIBILITY.get(script) if script else None
+    alias_sets = [get_all_aliases_for_term(conn, t, viewer_id, script_scope) for t in terms]
 
     conditions = ["(k.visibility = 'public' OR k.owner_id = ?)"]
     params = [viewer_id]
+    if script_scope:
+        conditions.append(f"k.script IN ({','.join('?' * len(script_scope))})")
+        params.extend(script_scope)
     for aliases in alias_sets:
         placeholders = ",".join("?" * len(aliases))
         conditions.append(
@@ -502,34 +563,49 @@ def search_by_parts(conn, part_names: list[str], viewer_id: int | None = None) -
     return _rows_to_dicts(conn, rows, viewer_id)
 
 
-def search_by_substring(conn, substring: str, viewer_id: int | None = None) -> list[dict]:
+def search_by_substring(conn, substring: str, viewer_id: int | None = None,
+                         script: str | None = None) -> list[dict]:
     """Find kanji whose id, keyword, or any visible alias contains the substring."""
     sub = substring.strip().lower()
+    script_scope = SCRIPT_VISIBILITY.get(script) if script else None
+    script_cond = ""
+    script_params: list[str] = []
+    if script_scope:
+        script_cond = f" AND k.script IN ({','.join('?' * len(script_scope))})"
+        script_params = list(script_scope)
     rows = conn.execute(
-        """
+        f"""
         SELECT DISTINCT k.id, k.character, k.keyword, k.frame, k.stroke_count, k.jlpt
         FROM kanji k
-        WHERE (k.id LIKE ? OR k.keyword LIKE ?) AND (k.visibility = 'public' OR k.owner_id = ?)
+        WHERE (k.id LIKE ? OR k.keyword LIKE ?) AND (k.visibility = 'public' OR k.owner_id = ?){script_cond}
         UNION
         SELECT DISTINCT k.id, k.character, k.keyword, k.frame, k.stroke_count, k.jlpt
         FROM kanji k
         JOIN aliases a ON a.kanji_id = k.id
         WHERE a.alias LIKE ? AND (a.visibility = 'public' OR a.owner_id = ?)
-              AND (k.visibility = 'public' OR k.owner_id = ?)
+              AND (k.visibility = 'public' OR k.owner_id = ?){script_cond}
         ORDER BY frame NULLS LAST
         """,
-        (f"%{sub}%", f"%{sub}%", viewer_id, f"%{sub}%", viewer_id, viewer_id)
+        (f"%{sub}%", f"%{sub}%", viewer_id, *script_params,
+         f"%{sub}%", viewer_id, viewer_id, *script_params)
     ).fetchall()
     return _rows_to_dicts(conn, rows, viewer_id)
 
 
-def search_by_char(conn, character: str, viewer_id: int | None = None) -> dict | None:
+def search_by_char(conn, character: str, viewer_id: int | None = None,
+                    script: str | None = None) -> dict | None:
     """Find a kanji by its character glyph. A user's own private duplicate of an
     existing public glyph (if any) takes precedence over the public one for that user."""
+    script_scope = SCRIPT_VISIBILITY.get(script) if script else None
+    script_cond = ""
+    params: list = [character, viewer_id]
+    if script_scope:
+        script_cond = f" AND script IN ({','.join('?' * len(script_scope))})"
+        params.extend(script_scope)
     rows = conn.execute(
         "SELECT id, character, keyword, frame, stroke_count, jlpt, owner_id FROM kanji "
-        "WHERE character = ? AND (visibility = 'public' OR owner_id = ?)",
-        (character, viewer_id)
+        f"WHERE character = ? AND (visibility = 'public' OR owner_id = ?){script_cond}",
+        params
     ).fetchall()
     if not rows:
         return None
@@ -565,12 +641,12 @@ def get_kanji_detail(conn, kanji_id: str, viewer_id: int | None = None) -> dict 
 
     entry["aliases"] = [
         {
-            "alias": r["alias"], "owner": r["username"],
+            "id": r["id"], "alias": r["alias"], "owner": r["username"],
             "is_mine": viewer_id is not None and r["owner_id"] == viewer_id,
             "visibility": r["visibility"],
         }
         for r in conn.execute(
-            "SELECT a.alias, a.owner_id, a.visibility, u.username FROM aliases a "
+            "SELECT a.id, a.alias, a.owner_id, a.visibility, u.username FROM aliases a "
             "JOIN users u ON u.id = a.owner_id "
             "WHERE a.kanji_id = ? AND (a.visibility = 'public' OR a.owner_id = ?) "
             "ORDER BY (a.owner_id = 1) DESC, a.id",
@@ -614,7 +690,10 @@ def get_kanji_detail(conn, kanji_id: str, viewer_id: int | None = None) -> dict 
 
 
 def _resolve_parts_detail(conn, cid: str, decomposition_id: int) -> list[dict]:
-    """Resolve one decomposition's part terms to their kanji rows (batched, not N*3)."""
+    """Resolve one decomposition's part terms to their kanji rows (batched, not N*3).
+    A part term shared across scripts (e.g. '一' as both an rtk row and a hanzi row)
+    is resolved within the same script group as the kanji it's a part of (cid), not
+    an arbitrary one — see _script_group / SCRIPT_VISIBILITY."""
     part_terms = [
         r["part_term"] for r in conn.execute(
             "SELECT part_term FROM parts WHERE decomposition_id = ? ORDER BY position",
@@ -624,12 +703,28 @@ def _resolve_parts_detail(conn, cid: str, decomposition_id: int) -> list[dict]:
     if not part_terms:
         return []
 
+    parent = conn.execute("SELECT script FROM kanji WHERE id = ?", (cid,)).fetchone()
+    parent_group = _script_group(parent["script"]) if parent else None
+
     ph = ",".join("?" * len(part_terms))
     term_to_id: dict[str, str] = {}
     for r in conn.execute(f"SELECT id FROM kanji WHERE id IN ({ph})", part_terms).fetchall():
         term_to_id[r["id"]] = r["id"]
-    for r in conn.execute(f"SELECT alias, kanji_id FROM aliases WHERE alias IN ({ph})", part_terms).fetchall():
-        term_to_id.setdefault(r["alias"], r["kanji_id"])
+
+    alias_candidates: dict[str, list[tuple[str, str]]] = {}
+    for r in conn.execute(
+        f"SELECT a.alias, a.kanji_id, k.script FROM aliases a "
+        f"JOIN kanji k ON k.id = a.kanji_id WHERE a.alias IN ({ph})", part_terms
+    ).fetchall():
+        alias_candidates.setdefault(r["alias"], []).append((r["kanji_id"], r["script"]))
+
+    for term, candidates in alias_candidates.items():
+        if term in term_to_id:
+            continue
+        preferred = None
+        if parent_group:
+            preferred = next((kid for kid, script in candidates if _script_group(script) == parent_group), None)
+        term_to_id[term] = preferred or candidates[0][0]
 
     resolved_ids = list({term_to_id[t] for t in part_terms if t in term_to_id and term_to_id[t] != cid})
     if not resolved_ids:
