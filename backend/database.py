@@ -531,6 +531,9 @@ def search_by_parts(conn, part_names: list[str], viewer_id: int | None = None,
     """Find kanji containing ALL given primitives (flat set-intersection). A primitive
     counts as present if it appears in ANY decomposition visible to the viewer, not just
     the system one — once a user adds their own decomposition it participates in search too.
+    A term is also trivially satisfied by self-identity: a kanji "is made of" itself, so
+    e.g. searching ["weep", "water"] must still return 'weep' even though 'weep' doesn't
+    literally list itself as one of its own parts — only 'water' (+ something else) does.
     script (one of SCRIPT_VISIBILITY's keys) scopes both which kanji are returned and,
     for terms ambiguous across scripts, which alias set they expand to."""
     terms = [p.strip().lower() for p in part_names if p.strip()]
@@ -548,10 +551,12 @@ def search_by_parts(conn, part_names: list[str], viewer_id: int | None = None,
     for aliases in alias_sets:
         placeholders = ",".join("?" * len(aliases))
         conditions.append(
+            f"(k.id IN ({placeholders}) OR "
             "EXISTS (SELECT 1 FROM parts p JOIN decompositions d ON d.id = p.decomposition_id "
             f"WHERE p.kanji_id = k.id AND p.part_term IN ({placeholders}) "
-            "AND (d.visibility = 'public' OR d.owner_id = ?))"
+            "AND (d.visibility = 'public' OR d.owner_id = ?)))"
         )
+        params.extend(aliases)
         params.extend(aliases)
         params.append(viewer_id)
 
