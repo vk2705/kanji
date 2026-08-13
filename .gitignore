@@ -26,3 +26,7 @@ frontend/dist/
 preview?*
 *.DS_Store
 .env
+
+# audit_decomposition.py working files — LLM audit cache + generated report
+audit_results.jsonl
+audit_report.md
