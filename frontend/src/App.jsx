@@ -3,6 +3,8 @@ import { searchByParts, searchByText, searchByChar, getMe, updatePreferences } f
 import ResultsGrid from "./components/ResultsGrid";
 import KanjiDetail from "./components/KanjiDetail";
 import AuthBar from "./components/AuthBar";
+import CreateKanji from "./components/CreateKanji";
+import MyContributions from "./components/MyContributions";
 import { t } from "./i18n";
 import "./App.css";
 
@@ -31,6 +33,7 @@ function writeLocal(key, value) {
 
 export default function App() {
   const [tab, setTab] = useState(0);
+  const [view, setView] = useState("search"); // "search" | "create" | "contributions"
   const [results, setResults] = useState(null);
   const [loading, setLoading] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
@@ -130,6 +133,16 @@ export default function App() {
     setFallbackMsg("");
   }
 
+  function selectKanji(id) {
+    setSelectedId(id);
+    setView("search");
+  }
+
+  function openView(v) {
+    setView(v);
+    setSelectedId(null);
+  }
+
   const TABS = [tt("tabParts"), tt("tabText"), tt("tabChar")];
 
   return (
@@ -147,6 +160,16 @@ export default function App() {
               </button>
             ))}
           </div>
+          {user && (
+            <>
+              <button className="header-nav-btn" onClick={() => openView("create")}>
+                {tt("newKanjiBtn")}
+              </button>
+              <button className="header-nav-btn" onClick={() => openView("contributions")}>
+                {tt("myContributionsBtn")}
+              </button>
+            </>
+          )}
           <AuthBar
             user={user}
             setUser={setUser}
@@ -163,11 +186,15 @@ export default function App() {
         {selectedId ? (
           <KanjiDetail
             kanjiId={selectedId}
-            onSelectPart={setSelectedId}
+            onSelectPart={selectKanji}
             onBack={() => setSelectedId(null)}
             user={user}
             lang={uiLang}
           />
+        ) : view === "create" ? (
+          <CreateKanji lang={uiLang} onDone={selectKanji} />
+        ) : view === "contributions" ? (
+          <MyContributions lang={uiLang} onSelectKanji={selectKanji} />
         ) : (
           <>
             <div className="study-language">
@@ -252,7 +279,7 @@ export default function App() {
             )}
             <ResultsGrid
               results={results}
-              onSelect={setSelectedId}
+              onSelect={selectKanji}
               loading={loading}
               lang={uiLang}
             />

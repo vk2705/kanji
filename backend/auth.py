@@ -1,8 +1,11 @@
+import os
 import secrets
 from datetime import datetime, timedelta, timezone
 
 import bcrypt
 from fastapi import APIRouter, Cookie, Depends, HTTPException, Response
+from google.auth.transport import requests as google_requests
+from google.oauth2 import id_token as google_id_token
 from pydantic import BaseModel
 
 from database import db_conn
@@ -11,6 +14,15 @@ SESSION_COOKIE = "kanji_session"
 SESSION_TTL_DAYS = 30
 ALLOWED_UI_LANGUAGES = {"en", "ru"}
 ALLOWED_STUDY_SCRIPTS = {"ja-kanji", "zh-Hans", "zh-Hant"}
+
+# Set in the environment (not committed) for both local dev and the systemd service —
+# see CLAUDE.md "Google SSO" for how to obtain this from Google Cloud Console. It's a
+# public identifier, not a secret; the frontend embeds the same value at build time.
+GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID")
+
+# Reused across requests per Google's guidance — it caches Google's signing-key fetch
+# internally instead of hitting the network on every login.
+_google_request = google_requests.Request()
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
@@ -100,6 +112,69 @@ def register(body: RegisterBody, response: Response, conn=Depends(db_conn)):
     token = create_session(conn, user_id)
     _set_session_cookie(response, token)
     return {"id": user_id, "username": username, "ui_language": body.ui_language, "study_script": body.study_script}
+
+
+class GoogleLoginBody(BaseModel):
+    # The ID token (a signed JWT) returned client-side by Google Identity Services —
+    # verified here, never trusted as-is. Same ui_language/study_script carry-over
+    # rationale as RegisterBody.
+    credential: str
+    ui_language: str = "en"
+    study_script: str | None = None
+
+
+def _unique_username(conn, base: str) -> str:
+    """First-come username derived from the Google account (email local-part or a
+    google<sub> fallback); suffixed with an incrementing number on collision. Doesn't
+    coordinate with local (password) accounts beyond the shared UNIQUE constraint —
+    a Google sign-in never merges into an existing local account with a matching
+    username, it just picks the next free one."""
+    username = base
+    suffix = 1
+    while conn.execute("SELECT 1 FROM users WHERE username = ?", (username,)).fetchone():
+        suffix += 1
+        username = f"{base}{suffix}"
+    return username
+
+
+@router.post("/google")
+def google_login(body: GoogleLoginBody, response: Response, conn=Depends(db_conn)):
+    if not GOOGLE_CLIENT_ID:
+        raise HTTPException(status_code=500, detail="Google sign-in is not configured on this server")
+    if body.ui_language not in ALLOWED_UI_LANGUAGES:
+        raise HTTPException(status_code=400, detail="Invalid ui_language")
+    if body.study_script is not None and body.study_script not in ALLOWED_STUDY_SCRIPTS:
+        raise HTTPException(status_code=400, detail="Invalid study_script")
+
+    try:
+        idinfo = google_id_token.verify_oauth2_token(body.credential, _google_request, GOOGLE_CLIENT_ID)
+    except ValueError:
+        raise HTTPException(status_code=401, detail="Invalid Google credential")
+
+    provider_user_id = idinfo["sub"]
+    row = conn.execute(
+        "SELECT id, username, ui_language, study_script FROM users WHERE auth_provider = 'google' AND provider_user_id = ?",
+        (provider_user_id,),
+    ).fetchone()
+
+    if row:
+        user_id = row["id"]
+    else:
+        email = idinfo.get("email")
+        base_username = (email.split("@")[0] if email else f"google{provider_user_id}").strip().lower() or f"google{provider_user_id}"
+        username = _unique_username(conn, base_username)
+        cur = conn.execute(
+            "INSERT INTO users (username, password_hash, auth_provider, provider_user_id, display_name, ui_language, study_script) "
+            "VALUES (?, NULL, 'google', ?, ?, ?, ?)",
+            (username, provider_user_id, idinfo.get("name") or username, body.ui_language, body.study_script),
+        )
+        conn.commit()
+        user_id = cur.lastrowid
+
+    token = create_session(conn, user_id)
+    _set_session_cookie(response, token)
+    row = conn.execute("SELECT id, username, ui_language, study_script FROM users WHERE id = ?", (user_id,)).fetchone()
+    return dict(row)
 
 
 @router.post("/login")

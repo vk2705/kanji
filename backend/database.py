@@ -81,6 +81,12 @@ def migrate_schema(conn):
         conn.commit()
         version = 2
 
+    if version < 3:
+        _migrate_v3(conn)
+        conn.execute("PRAGMA user_version = 3")
+        conn.commit()
+        version = 3
+
 
 def _migrate_v1(conn):
     """"DB is a disposable cache" -> "DB is the source of truth": adds
@@ -180,6 +186,14 @@ def _migrate_v2(conn):
     conn.executescript("""
         ALTER TABLE users ADD COLUMN ui_language  TEXT NOT NULL DEFAULT 'en' CHECK(ui_language IN ('en','ru'));
         ALTER TABLE users ADD COLUMN study_script TEXT CHECK(study_script IN ('ja-kanji','zh-Hans','zh-Hant'));
+    """)
+
+
+def _migrate_v3(conn):
+    """Adds kanji.image_url for user-invented primitives with no real Unicode glyph
+    (an uploaded picture stands in for a `character`)."""
+    conn.executescript("""
+        ALTER TABLE kanji ADD COLUMN image_url TEXT;
     """)
 
 
@@ -561,7 +575,7 @@ def search_by_parts(conn, part_names: list[str], viewer_id: int | None = None,
         params.append(viewer_id)
 
     sql = (
-        f"SELECT id, character, keyword, frame, stroke_count, jlpt FROM kanji k "
+        f"SELECT id, character, keyword, frame, stroke_count, jlpt, image_url FROM kanji k "
         f"WHERE {' AND '.join(conditions)} ORDER BY frame NULLS LAST"
     )
     rows = conn.execute(sql, params).fetchall()
@@ -570,29 +584,38 @@ def search_by_parts(conn, part_names: list[str], viewer_id: int | None = None,
 
 def search_by_substring(conn, substring: str, viewer_id: int | None = None,
                          script: str | None = None) -> list[dict]:
-    """Find kanji whose id, keyword, or any visible alias contains the substring."""
+    """Find kanji whose id, keyword, or any visible alias contains the term as a whole
+    word — not an arbitrary substring ("hat" matches "hat"/"hat trick"/"bright hat" but
+    not "chatter", "what", or "hate"). Keywords/aliases can be comma-separated synonym
+    lists (e.g. "hate, detest, abhor"), so commas are normalised to spaces before the
+    word-boundary check, alongside the string's own start/end."""
     sub = substring.strip().lower()
+    word = f"% {sub} %"
     script_scope = SCRIPT_VISIBILITY.get(script) if script else None
     script_cond = ""
     script_params: list[str] = []
     if script_scope:
         script_cond = f" AND k.script IN ({','.join('?' * len(script_scope))})"
         script_params = list(script_scope)
+    id_bounded = "(' ' || k.id || ' ')"
+    keyword_bounded = "(' ' || REPLACE(k.keyword, ',', ' ') || ' ')"
+    alias_bounded = "(' ' || REPLACE(a.alias, ',', ' ') || ' ')"
     rows = conn.execute(
         f"""
-        SELECT DISTINCT k.id, k.character, k.keyword, k.frame, k.stroke_count, k.jlpt
+        SELECT DISTINCT k.id, k.character, k.keyword, k.frame, k.stroke_count, k.jlpt, k.image_url
         FROM kanji k
-        WHERE (k.id LIKE ? OR k.keyword LIKE ?) AND (k.visibility = 'public' OR k.owner_id = ?){script_cond}
+        WHERE ({id_bounded} LIKE ? OR {keyword_bounded} LIKE ?)
+              AND (k.visibility = 'public' OR k.owner_id = ?){script_cond}
         UNION
-        SELECT DISTINCT k.id, k.character, k.keyword, k.frame, k.stroke_count, k.jlpt
+        SELECT DISTINCT k.id, k.character, k.keyword, k.frame, k.stroke_count, k.jlpt, k.image_url
         FROM kanji k
         JOIN aliases a ON a.kanji_id = k.id
-        WHERE a.alias LIKE ? AND (a.visibility = 'public' OR a.owner_id = ?)
+        WHERE {alias_bounded} LIKE ? AND (a.visibility = 'public' OR a.owner_id = ?)
               AND (k.visibility = 'public' OR k.owner_id = ?){script_cond}
         ORDER BY frame NULLS LAST
         """,
-        (f"%{sub}%", f"%{sub}%", viewer_id, *script_params,
-         f"%{sub}%", viewer_id, viewer_id, *script_params)
+        (word, word, viewer_id, *script_params,
+         word, viewer_id, viewer_id, *script_params)
     ).fetchall()
     return _rows_to_dicts(conn, rows, viewer_id)
 
@@ -608,7 +631,7 @@ def search_by_char(conn, character: str, viewer_id: int | None = None,
         script_cond = f" AND script IN ({','.join('?' * len(script_scope))})"
         params.extend(script_scope)
     rows = conn.execute(
-        "SELECT id, character, keyword, frame, stroke_count, jlpt, owner_id FROM kanji "
+        "SELECT id, character, keyword, frame, stroke_count, jlpt, image_url, owner_id FROM kanji "
         f"WHERE character = ? AND (visibility = 'public' OR owner_id = ?){script_cond}",
         params
     ).fetchall()
@@ -629,7 +652,7 @@ def get_kanji_detail(conn, kanji_id: str, viewer_id: int | None = None) -> dict 
     if not cid:
         return None
     row = conn.execute(
-        "SELECT id, character, keyword, frame, stroke_count, jlpt, script, variant_of, owner_id "
+        "SELECT id, character, keyword, frame, stroke_count, jlpt, image_url, script, variant_of, owner_id "
         "FROM kanji WHERE id = ? AND (visibility = 'public' OR owner_id = ?)",
         (cid, viewer_id)
     ).fetchone()
@@ -639,6 +662,7 @@ def get_kanji_detail(conn, kanji_id: str, viewer_id: int | None = None) -> dict 
     entry = {
         "id": row["id"], "character": row["character"], "keyword": row["keyword"],
         "frame": row["frame"], "stroke_count": row["stroke_count"], "jlpt": row["jlpt"],
+        "image_url": row["image_url"],
         "script": row["script"], "variant_of": row["variant_of"],
         "is_system": row["owner_id"] == 1,
         "is_mine": viewer_id is not None and row["owner_id"] == viewer_id,
@@ -738,7 +762,7 @@ def _resolve_parts_detail(conn, cid: str, decomposition_id: int) -> list[dict]:
     ph2 = ",".join("?" * len(resolved_ids))
     prow_map = {
         r["id"]: r for r in conn.execute(
-            f"SELECT id, character, keyword, frame FROM kanji WHERE id IN ({ph2})", resolved_ids
+            f"SELECT id, character, keyword, frame, image_url FROM kanji WHERE id IN ({ph2})", resolved_ids
         ).fetchall()
     }
 
@@ -755,6 +779,7 @@ def _resolve_parts_detail(conn, cid: str, decomposition_id: int) -> list[dict]:
                     "character": prow["character"],
                     "keyword": prow["keyword"],
                     "frame": prow["frame"],
+                    "image_url": prow["image_url"],
                     "term": term,
                 })
     return resolved
@@ -798,6 +823,7 @@ def _rows_to_dicts(conn, rows, viewer_id: int | None = None) -> list[dict]:
             "frame": r["frame"],
             "stroke_count": r["stroke_count"],
             "jlpt": r["jlpt"],
+            "image_url": r["image_url"],
             "aliases": alias_map[r["id"]],
             "parts": parts_map[r["id"]],
         }
@@ -880,6 +906,17 @@ def set_visibility(conn, table: str, row_id: int | str, owner_id: int, visibilit
     cur = conn.execute(
         f"UPDATE {table} SET visibility = ? WHERE id = ? AND owner_id = ? AND owner_id != 1",
         (visibility, row_id, owner_id)
+    )
+    conn.commit()
+    return cur.rowcount > 0
+
+
+def set_kanji_image(conn, kanji_id: str, owner_id: int, image_url: str) -> bool:
+    """Owner-only image attach/replace for a kanji with no real Unicode glyph. Same
+    owner_id != 1 guard as set_visibility — system rows are immutable to normal users."""
+    cur = conn.execute(
+        "UPDATE kanji SET image_url = ? WHERE id = ? AND owner_id = ? AND owner_id != 1",
+        (image_url, kanji_id, owner_id)
     )
     conn.commit()
     return cur.rowcount > 0

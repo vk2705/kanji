@@ -1,6 +1,26 @@
-import { useState } from "react";
-import { login, register, logout } from "../api";
+import { useEffect, useRef, useState } from "react";
+import { login, register, logout, googleLogin } from "../api";
 import { t } from "../i18n";
+
+// Public identifier, safe to embed in the built bundle — see CLAUDE.md "Google SSO".
+const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+
+let googleScriptPromise = null;
+function loadGoogleScript() {
+  if (window.google?.accounts?.id) return Promise.resolve();
+  if (!googleScriptPromise) {
+    googleScriptPromise = new Promise((resolve, reject) => {
+      const script = document.createElement("script");
+      script.src = "https://accounts.google.com/gsi/client";
+      script.async = true;
+      script.defer = true;
+      script.onload = resolve;
+      script.onerror = () => { googleScriptPromise = null; reject(new Error("Failed to load Google sign-in")); };
+      document.head.appendChild(script);
+    });
+  }
+  return googleScriptPromise;
+}
 
 export default function AuthBar({ user, setUser, lang = "en", uiLang, studyScript }) {
   const [open, setOpen] = useState(false);
@@ -9,12 +29,51 @@ export default function AuthBar({ user, setUser, lang = "en", uiLang, studyScrip
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
+  const googleBtnRef = useRef(null);
+  // "Latest ref" so the Google callback (registered once per popover-open, not
+  // per keystroke) always reads current prefs without re-initializing the button.
+  const prefsRef = useRef({ uiLang, studyScript });
+  prefsRef.current = { uiLang, studyScript };
 
   function resetForm() {
     setUsername("");
     setPassword("");
     setError("");
   }
+
+  useEffect(() => {
+    if (!open || user || !GOOGLE_CLIENT_ID) return;
+    let cancelled = false;
+    loadGoogleScript()
+      .then(() => {
+        if (cancelled || !googleBtnRef.current) return;
+        window.google.accounts.id.initialize({
+          client_id: GOOGLE_CLIENT_ID,
+          callback: async ({ credential }) => {
+            setBusy(true);
+            setError("");
+            try {
+              const me = await googleLogin(credential, {
+                ui_language: prefsRef.current.uiLang,
+                study_script: prefsRef.current.studyScript,
+              });
+              setUser(me);
+              setOpen(false);
+              resetForm();
+            } catch (err) {
+              setError(err.message);
+            } finally {
+              setBusy(false);
+            }
+          },
+        });
+        googleBtnRef.current.innerHTML = "";
+        window.google.accounts.id.renderButton(googleBtnRef.current, { theme: "outline", size: "large", width: 240 });
+      })
+      .catch((err) => { if (!cancelled) setError(err.message); });
+    return () => { cancelled = true; };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open, user]);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -101,7 +160,6 @@ export default function AuthBar({ user, setUser, lang = "en", uiLang, studyScrip
               minLength={mode === "register" ? 8 : undefined}
               required
             />
-            {error && <div className="auth-error">{error}</div>}
             <div className="auth-form-actions">
               <button className="btn-primary" type="submit" disabled={busy}>
                 {mode === "login" ? t(lang, "loginSubmit") : t(lang, "registerSubmit")}
@@ -115,6 +173,13 @@ export default function AuthBar({ user, setUser, lang = "en", uiLang, studyScrip
               </button>
             </div>
           </form>
+          {GOOGLE_CLIENT_ID && (
+            <div className="auth-google">
+              <div className="auth-divider">{t(lang, "authDividerOr")}</div>
+              <div ref={googleBtnRef} />
+            </div>
+          )}
+          {error && <div className="auth-error">{error}</div>}
         </div>
       )}
     </div>

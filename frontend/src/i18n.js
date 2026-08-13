@@ -17,7 +17,7 @@ export const translations = {
 
     partsHint: "Enter 1–3 RTK primitive names (e.g. sun, mouth, needle)",
     partsPlaceholder: (n) => `Primitive ${n}`,
-    textHint: "Search by any part of a kanji keyword or alias (e.g. brig → bright)",
+    textHint: "Search by a whole word in a kanji keyword or alias (e.g. hat, bright)",
     textPlaceholder: "Type to search…",
     charHint: "Paste a kanji character to look it up (e.g. 明)",
     charPlaceholder: "paste kanji here…",
@@ -52,6 +52,7 @@ export const translations = {
     registerSubmit: "Create account",
     cancelBtn: "Cancel",
     logoutBtn: "Log out",
+    authDividerOr: "or",
 
     yourStoryHeading: "Your mnemonic story",
     yourStoryPlaceholder: "Write your own mnemonic for this kanji…",
@@ -59,8 +60,39 @@ export const translations = {
     makePublicLabel: "Make public",
     saveBtn: "Save",
     addNamePlaceholder: "Add your name for this part…",
+    addKanjiNamePlaceholder: "Add your own name for this kanji…",
     addBtn: "Add",
     loginHintContribute: "Log in to add your own names and stories.",
+
+    newKanjiBtn: "+ New kanji",
+    myContributionsBtn: "My contributions",
+
+    createKanjiHeading: "Create a new kanji / hanzi",
+    keywordPlaceholder: "Keyword (e.g. bright)",
+    characterPlaceholder: "Character (leave blank if none)",
+    scriptLabel: "Script",
+    makePrivateCheckbox: "Keep private",
+    createSubmit: "Create",
+    createdKanjiNote: "Created. Add a picture and/or a decomposition below, or you're done.",
+    doneBtn: "Done",
+
+    uploadImageHeading: "Picture (for primitives with no real character)",
+    uploadImageHint: "GIF, PNG, JPEG, or WebP, up to 2MB.",
+    uploadBtn: "Upload",
+
+    addDecompositionHeading: "Add alternate decomposition",
+    decompositionPartsPlaceholder: "Parts, comma-separated (e.g. sun, moon)",
+    decompositionLabelPlaceholder: "Label (optional)",
+    addDecompositionSubmit: "Add decomposition",
+
+    myContributionsHeading: "My contributions",
+    contribKanjiHeading: "Kanji you created",
+    contribDecompositionsHeading: "Decompositions you added",
+    contribAliasesHeading: "Names you added",
+    contribStoriesHeading: "Stories you wrote",
+    noContributions: "You haven't contributed anything yet.",
+    visibilityPublicLabel: "Public",
+    visibilityPrivateLabel: "Private",
   },
 
   ru: {
@@ -73,7 +105,7 @@ export const translations = {
 
     partsHint: "Введите 1–3 названия примитивов RTK (например: sun, mouth, needle)",
     partsPlaceholder: (n) => `Примитив ${n}`,
-    textHint: "Поиск по любой части ключевого слова или псевдонима кандзи (например: brig → bright)",
+    textHint: "Поиск по целому слову в ключевом слове или псевдониме кандзи (например: hat, bright)",
     textPlaceholder: "Введите текст для поиска…",
     charHint: "Вставьте символ кандзи, чтобы найти его (например: 明)",
     charPlaceholder: "вставьте кандзи сюда…",
@@ -108,6 +140,7 @@ export const translations = {
     registerSubmit: "Создать аккаунт",
     cancelBtn: "Отмена",
     logoutBtn: "Выйти",
+    authDividerOr: "или",
 
     yourStoryHeading: "Ваша мнемоническая история",
     yourStoryPlaceholder: "Напишите свою мнемонику для этого кандзи…",
@@ -115,8 +148,39 @@ export const translations = {
     makePublicLabel: "Сделать публичной",
     saveBtn: "Сохранить",
     addNamePlaceholder: "Добавьте своё название для этой части…",
+    addKanjiNamePlaceholder: "Добавьте своё название для этого кандзи…",
     addBtn: "Добавить",
     loginHintContribute: "Войдите, чтобы добавлять свои названия и истории.",
+
+    newKanjiBtn: "+ Новый кандзи",
+    myContributionsBtn: "Мой вклад",
+
+    createKanjiHeading: "Создать новый кандзи / ханьцзы",
+    keywordPlaceholder: "Ключевое слово (например: bright)",
+    characterPlaceholder: "Символ (оставьте пустым, если его нет)",
+    scriptLabel: "Письменность",
+    makePrivateCheckbox: "Оставить приватным",
+    createSubmit: "Создать",
+    createdKanjiNote: "Создано. Добавьте картинку и/или разбор ниже, либо завершите.",
+    doneBtn: "Готово",
+
+    uploadImageHeading: "Картинка (для примитивов без настоящего символа)",
+    uploadImageHint: "GIF, PNG, JPEG или WebP, до 2 МБ.",
+    uploadBtn: "Загрузить",
+
+    addDecompositionHeading: "Добавить альтернативный разбор",
+    decompositionPartsPlaceholder: "Части через запятую (например: sun, moon)",
+    decompositionLabelPlaceholder: "Метка (необязательно)",
+    addDecompositionSubmit: "Добавить разбор",
+
+    myContributionsHeading: "Мой вклад",
+    contribKanjiHeading: "Созданные вами кандзи",
+    contribDecompositionsHeading: "Добавленные вами разборы",
+    contribAliasesHeading: "Добавленные вами названия",
+    contribStoriesHeading: "Написанные вами истории",
+    noContributions: "Вы пока ничего не добавили.",
+    visibilityPublicLabel: "Публично",
+    visibilityPrivateLabel: "Приватно",
   },
 };
 

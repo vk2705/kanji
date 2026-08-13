@@ -74,6 +74,22 @@ body {
   color: var(--accent-hover);
 }
 
+.header-nav-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  border-radius: 6px;
+  padding: 5px 12px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.header-nav-btn:hover {
+  color: var(--text);
+  border-color: var(--accent);
+}
+
 /* Auth */
 .auth-bar {
   position: relative;
@@ -167,6 +183,32 @@ body {
 .auth-form-actions .btn-primary {
   padding: 7px 16px;
   font-size: 0.85rem;
+}
+
+.auth-google {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.auth-divider {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 8px;
+  font-size: 0.75rem;
+  color: #888;
+  text-transform: uppercase;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #444;
 }
 
 .app-header h1 {
@@ -355,6 +397,24 @@ body {
   color: var(--kanji-color);
   line-height: 1;
   font-family: "Noto Serif CJK JP", "Yu Mincho", serif;
+}
+
+.kanji-char-img {
+  max-width: 2rem;
+  max-height: 2rem;
+  object-fit: contain;
+}
+
+.detail-char-img {
+  max-width: 4rem;
+  max-height: 4rem;
+  object-fit: contain;
+}
+
+.part-chip-img {
+  max-width: 1.4rem;
+  max-height: 1.4rem;
+  object-fit: contain;
 }
 
 .kanji-keyword {
@@ -652,4 +712,96 @@ body {
   font-size: 0.88rem;
   color: var(--text);
   white-space: pre-wrap;
+}
+
+/* Image upload (glyph-less primitives) */
+.image-upload {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.image-upload-hint {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+/* Create-kanji / My-contributions views */
+.form-view {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.form-view h2 {
+  font-size: 1.3rem;
+  margin-bottom: 18px;
+}
+
+.form-view .story-form {
+  margin-bottom: 24px;
+}
+
+.form-field-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.contrib-section {
+  margin-bottom: 28px;
+}
+
+.contrib-section h3 {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+
+.contrib-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin-bottom: 6px;
+}
+
+.contrib-row-link {
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-size: 0.88rem;
+  cursor: pointer;
+  text-align: left;
+}
+
+.contrib-row-link:hover {
+  color: var(--accent-hover);
+}
+
+.visibility-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  border-radius: 5px;
+  padding: 3px 10px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.visibility-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent-hover);
+}
+
+.visibility-btn.is-public {
+  color: var(--accent-hover);
+  border-color: var(--accent-light);
 }

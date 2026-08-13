@@ -63,15 +63,16 @@ def search_parts(conn, terms):
 
 def search_text(conn, q):
     q = q.strip().lower()
-    pattern = f"%{q}%"
+    word = f"% {q} %"
     rows = conn.execute(
         """
         SELECT DISTINCT k.* FROM kanji k
         LEFT JOIN aliases a ON a.kanji_id = k.id
-        WHERE k.id LIKE ? OR a.alias LIKE ?
+        WHERE (' ' || k.id || ' ') LIKE ?
+           OR (' ' || REPLACE(a.alias, ',', ' ') || ' ') LIKE ?
         ORDER BY k.frame
         """,
-        (pattern, pattern),
+        (word, word),
     ).fetchall()
     return rows
 

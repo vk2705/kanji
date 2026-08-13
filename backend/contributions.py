@@ -1,12 +1,13 @@
+from pathlib import Path
 from typing import Literal
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, File, HTTPException, UploadFile
 from pydantic import BaseModel, Field
 
 from database import (
     db_conn, resolve_alias,
     create_kanji_entry, create_decomposition, create_alias, upsert_story,
-    set_visibility, get_my_contributions,
+    set_visibility, set_kanji_image, get_my_contributions,
 )
 from auth import require_user
 
@@ -14,6 +15,15 @@ router = APIRouter(tags=["contributions"])
 
 Visibility = Literal["public", "private"]
 Script = Literal["ja-kanji", "zh-Hans", "zh-Hant", "zh-Hani"]
+
+UPLOAD_DIR = Path(__file__).parent / "uploads"
+MAX_IMAGE_BYTES = 2 * 1024 * 1024
+IMAGE_EXTENSIONS = {
+    "image/gif": "gif",
+    "image/png": "png",
+    "image/jpeg": "jpg",
+    "image/webp": "webp",
+}
 
 
 def _visible_kanji_id(conn, kanji_id: str, viewer_id: int) -> str:
@@ -40,6 +50,36 @@ def add_kanji(body: NewKanji, conn=Depends(db_conn), user=Depends(require_user))
         conn, user["id"], body.keyword, body.character, body.script, body.visibility
     )
     return {"id": new_id}
+
+
+@router.post("/kanji/{kanji_id}/image")
+def upload_kanji_image(kanji_id: str, file: UploadFile = File(...),
+                        conn=Depends(db_conn), user=Depends(require_user)):
+    """Attach/replace a picture for a kanji you own — for user-invented primitives with
+    no real Unicode glyph. Filename is always derived from the DB-resolved canonical id
+    plus a whitelisted extension, never from client-supplied input.
+
+    Sync (not async) so FastAPI runs dependency resolution and the handler body on the
+    same threadpool thread — the sqlite3 connection from db_conn() is thread-affine
+    (check_same_thread=True) and errors ("SQLite objects created in a thread can only
+    be used in that same thread") if an async def here lets the handler body run on
+    the event loop while conn was created on a worker thread."""
+    cid = _visible_kanji_id(conn, kanji_id, user["id"])
+    ext = IMAGE_EXTENSIONS.get(file.content_type)
+    if not ext:
+        raise HTTPException(status_code=400, detail="Unsupported image type; use gif, png, jpeg, or webp")
+    data = file.file.read(MAX_IMAGE_BYTES + 1)
+    if len(data) > MAX_IMAGE_BYTES:
+        raise HTTPException(status_code=400, detail="Image too large (max 2MB)")
+    image_url = f"/uploads/{cid}.{ext}"
+    if not set_kanji_image(conn, cid, user["id"], image_url):
+        raise HTTPException(status_code=403, detail="Not found or not owned by you")
+    for other_ext in IMAGE_EXTENSIONS.values():
+        old = UPLOAD_DIR / f"{cid}.{other_ext}"
+        if other_ext != ext and old.exists():
+            old.unlink()
+    (UPLOAD_DIR / f"{cid}.{ext}").write_bytes(data)
+    return {"image_url": image_url}
 
 
 class NewDecomposition(BaseModel):

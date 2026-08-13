@@ -1,6 +1,9 @@
 from contextlib import asynccontextmanager
+from pathlib import Path
+
 from fastapi import FastAPI, HTTPException, Query, Depends
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from database import (
     init_db, import_data, get_db, db_conn, migrate_schema,
@@ -9,6 +12,8 @@ from database import (
 )
 from auth import router as auth_router, current_user
 from contributions import router as contributions_router
+
+UPLOAD_DIR = Path(__file__).parent / "uploads"
 
 
 @asynccontextmanager
@@ -40,6 +45,11 @@ app.add_middleware(
 
 app.include_router(auth_router)
 app.include_router(contributions_router)
+
+# Created eagerly (not deferred to the lifespan handler) because StaticFiles needs the
+# directory to exist at mount time, which happens at import — before lifespan runs.
+UPLOAD_DIR.mkdir(exist_ok=True)
+app.mount("/uploads", StaticFiles(directory=UPLOAD_DIR), name="uploads")
 
 
 def _validate_script(script: str | None) -> str | None:

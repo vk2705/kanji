@@ -4,6 +4,10 @@
 backend/kanji.db
 backend/backups/
 
+# User-uploaded images (glyph-less primitives) — not currently covered by
+# backup_db.py, which only backs up kanji.db.
+backend/uploads/
+
 # Python
 __pycache__/
 *.pyc
