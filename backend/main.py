@@ -8,7 +8,7 @@ from pydantic import BaseModel
 from database import (
     init_db, import_data, get_db, db_conn, migrate_schema,
     search_by_parts, search_by_substring, search_by_char,
-    get_kanji_detail, SCRIPT_VISIBILITY
+    get_kanji_detail, SCRIPT_VISIBILITY, SOURCE_SCOPES
 )
 from auth import router as auth_router, current_user
 from contributions import router as contributions_router
@@ -58,9 +58,19 @@ def _validate_script(script: str | None) -> str | None:
     return script
 
 
+def _validate_sources(sources: list[str] | None) -> set[str] | None:
+    if sources is None:
+        return None
+    invalid = set(sources) - set(SOURCE_SCOPES)
+    if invalid:
+        raise HTTPException(status_code=400, detail=f"Invalid sources {sorted(invalid)}; must be a subset of {list(SOURCE_SCOPES)}")
+    return set(sources)
+
+
 class PartsSearchRequest(BaseModel):
     parts: list[str]
     script: str | None = None
+    sources: list[str] | None = None
 
 
 @app.post("/search/parts")
@@ -69,31 +79,38 @@ def search_parts(req: PartsSearchRequest, conn=Depends(db_conn), user=Depends(cu
     if not parts:
         raise HTTPException(status_code=400, detail="Provide at least one part name")
     script = _validate_script(req.script)
-    results = search_by_parts(conn, parts, user["id"] if user else None, script)
+    sources = _validate_sources(req.sources)
+    results = search_by_parts(conn, parts, user["id"] if user else None, script, sources)
     return {"results": results, "count": len(results)}
 
 
 @app.get("/search/text")
 def search_text(q: str = Query(..., min_length=1), script: str | None = Query(None),
+                sources: list[str] | None = Query(None),
                 conn=Depends(db_conn), user=Depends(current_user)):
     script = _validate_script(script)
-    results = search_by_substring(conn, q, user["id"] if user else None, script)
+    sources = _validate_sources(sources)
+    results = search_by_substring(conn, q, user["id"] if user else None, script, sources)
     return {"results": results, "count": len(results)}
 
 
 @app.get("/search/char")
 def search_char(c: str = Query(..., min_length=1, max_length=2), script: str | None = Query(None),
+                sources: list[str] | None = Query(None),
                 conn=Depends(db_conn), user=Depends(current_user)):
     script = _validate_script(script)
-    result = search_by_char(conn, c, user["id"] if user else None, script)
+    sources = _validate_sources(sources)
+    result = search_by_char(conn, c, user["id"] if user else None, script, sources)
     if not result:
         raise HTTPException(status_code=404, detail="Character not found")
     return result
 
 
 @app.get("/kanji/{kanji_id}")
-def kanji_detail(kanji_id: str, conn=Depends(db_conn), user=Depends(current_user)):
-    result = get_kanji_detail(conn, kanji_id, user["id"] if user else None)
+def kanji_detail(kanji_id: str, sources: list[str] | None = Query(None),
+                  conn=Depends(db_conn), user=Depends(current_user)):
+    sources = _validate_sources(sources)
+    result = get_kanji_detail(conn, kanji_id, user["id"] if user else None, sources)
     if not result:
         raise HTTPException(status_code=404, detail="Kanji not found")
     return result

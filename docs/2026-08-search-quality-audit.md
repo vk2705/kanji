@@ -316,6 +316,66 @@ judgment calls and why. Read it first before starting new work.
   fixes are queued up behind it. Not yet decided which order is better;
   whoever picks this up next should make that call and record it here.
 
+### 2026-08-13 — session 2
+
+- Prompted by the owner googling "rtk1495 kanji" and finding Heisig's book
+  groups it as prefecture(県) + thread(糸) + heart(心), while our data had
+  flattened it to raw strokes (`ノ,糸,幺,小,心,目`, from a `data.txt`
+  override — see the file, this predates both sessions). Fixed by hand as a
+  worked example, not a scripted pass:
+  - `backend/data.txt` rtk1495 line and the live local `kanji.db`
+    (`decomposition_id=547`) now both list `県,prefecture,糸,thread,心,heart`.
+  - Along the way, found that `expand_part_terms`'s char→keyword
+    auto-lookup (`_build_char_lookup`) is **not script-scoped**: for a
+    glyph that exists as both an `ja-kanji` row and a `zh-*` row (~2,628 of
+    them, see `CLAUDE.md`), it can silently resolve to the Chinese keyword
+    instead of the Heisig one, non-deterministically (dict-insertion-order
+    dependent). Worked around it for rtk1495 by writing terms explicitly
+    instead of relying on auto-expansion; **not fixed at the source**.
+  - Added a pseudo-user account `ai-mnemonics` (id 9 in the local DB, no
+    password/`auth_provider='ai'`, can never log in) and wrote one
+    original (not book-derived) mnemonic story for rtk1495 under it,
+    public. Deliberately not `owner_id=1` — system/Heisig-sourced data and
+    AI-generated content should stay visibly distinct, same reasoning as
+    Finding 1's copyright note above. This is a new precedent, not yet
+    applied anywhere else.
+  - Owner also asked, separately, for decomposition *display* to stop
+    flattening to only atomic primitives — e.g. show "prefecture" as a
+    chip on 懸's decomposition, but also let the user drill into
+    prefecture's own parts (目 eye + ...), rather than only ever showing
+    the fully-flattened `県,prefecture,糸,thread,心,heart` list. This is
+    exactly the "hierarchy resolved at query time, not flattened at
+    import time" item in the architecture decision above — it's no longer
+    just a nice-to-have, it's a concrete product requirement, which
+    answers session 1's open "which order is better" question: the
+    recursive-resolution piece of the migration needs to happen for this,
+    specifically (doesn't require the full source-pseudo-owner piece too,
+    but the two were designed together).
+
+**Queued for a future session (not started)**:
+1. **Hierarchical decomposition display** (now the priority — concrete
+   owner ask, see above). Needs: parts resolved recursively at query/detail
+   time instead of only ever reading the pre-flattened list (backend,
+   `get_kanji_detail` / a new endpoint), plus a `KanjiDetail.jsx` UI that
+   shows a part chip and lets the user expand it into its own sub-parts
+   (frontend). Both "prefecture" and "eye + ..." need to render
+   simultaneously, not replace one another.
+2. **Script-scope bug in `expand_part_terms`/`_build_char_lookup`**
+   (found this session, see above) — make the char→keyword lookup
+   script-aware like `resolve_alias`/`_resolve_parts_detail` already are,
+   so a shared glyph doesn't silently resolve to the wrong script's
+   keyword. Small, self-contained fix; do before any bulk decomposition
+   pass so the pass doesn't inherit the bug.
+3. **Bulk decomposition audit** — extend the rtk1495 fix (flattened
+   strokes → book-style primitive grouping) across the dataset instead of
+   one kanji at a time. `audit_decomposition.py` (LLM-based, needs
+   `OPENAI_API_KEY`) is built for exactly this but has never been run
+   against the real API; running it is the natural first step.
+4. **Bulk original-mnemonic generation** under the `ai-mnemonics` pseudo
+   account for kanji that have no story yet — same "one kanji at a time,
+   by hand" caveat as #3; needs a scoping decision (all ~2,900? JLPT
+   levels first? something else) before running it at scale.
+
 ## Tooling produced this session
 
 - `backend/audit_decomposition.py` — committed to `master`. Rebuilds a

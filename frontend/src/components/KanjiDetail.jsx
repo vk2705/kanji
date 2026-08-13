@@ -135,7 +135,52 @@ export function DecompositionForm({ kanjiId, lang, onAdded }) {
   );
 }
 
-export default function KanjiDetail({ kanjiId, onSelectPart, onBack, user, lang = "en" }) {
+function PartChip({ part, lang, user, onSelectPart }) {
+  const [expanded, setExpanded] = useState(false);
+  const partChar = displayChar(part.character);
+  const hasSubParts = part.sub_parts && part.sub_parts.length > 0;
+
+  return (
+    <div className="part-chip-wrap">
+      <div className="part-chip-row">
+        {hasSubParts && (
+          <button
+            type="button"
+            className="part-chip-expand"
+            onClick={() => setExpanded((e) => !e)}
+            aria-label={t(lang, expanded ? "collapsePart" : "expandPart")}
+            title={t(lang, expanded ? "collapsePart" : "expandPart")}
+          >
+            {expanded ? "▾" : "▸"}
+          </button>
+        )}
+        <button
+          className="part-chip"
+          onClick={() => part.id && onSelectPart(part.id)}
+          disabled={!part.id}
+        >
+          <span className="part-chip-char">
+            {partChar ?? (part.image_url
+              ? <img className="part-chip-img" src={resolveImageUrl(part.image_url)} alt={part.keyword || part.id} />
+              : "·")}
+          </span>
+          <span className="part-chip-label">{part.keyword || part.id}</span>
+          {part.frame && <span className="part-chip-frame">#{part.frame}</span>}
+        </button>
+        {user && part.id && <AliasAdder targetId={part.id} lang={lang} />}
+      </div>
+      {hasSubParts && expanded && (
+        <div className="parts-list sub-parts">
+          {part.sub_parts.map((sub, i) => (
+            <PartChip key={i} part={sub} lang={lang} user={user} onSelectPart={onSelectPart} />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default function KanjiDetail({ kanjiId, onSelectPart, onBack, user, lang = "en", sources = null }) {
   const [kanji, setKanji] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -147,7 +192,7 @@ export default function KanjiDetail({ kanjiId, onSelectPart, onBack, user, lang 
   function load(keepDecompIdx = false) {
     setLoading(true);
     setError(null);
-    getKanji(kanjiId)
+    getKanji(kanjiId, sources)
       .then((k) => {
         setKanji(k);
         const mine = k.stories?.find((s) => s.is_mine);
@@ -159,7 +204,10 @@ export default function KanjiDetail({ kanjiId, onSelectPart, onBack, user, lang 
       .finally(() => setLoading(false));
   }
 
-  useEffect(() => load(false), [kanjiId]);
+  // sources is a freshly-built array/null each App render, so key on its sorted
+  // contents rather than identity to avoid refetching on unrelated re-renders.
+  const sourcesKey = sources ? [...sources].sort().join(",") : "";
+  useEffect(() => load(false), [kanjiId, sourcesKey]);
 
   async function handleSaveStory(e) {
     e.preventDefault();
@@ -245,27 +293,9 @@ export default function KanjiDetail({ kanjiId, onSelectPart, onBack, user, lang 
           )}
 
           <div className="parts-list">
-            {activeDecomp?.parts_detail?.map((part, i) => {
-              const partChar = displayChar(part.character);
-              return (
-                <div key={i} className="part-chip-wrap">
-                  <button
-                    className="part-chip"
-                    onClick={() => part.id && onSelectPart(part.id)}
-                    disabled={!part.id}
-                  >
-                    <span className="part-chip-char">
-                      {partChar ?? (part.image_url
-                        ? <img className="part-chip-img" src={resolveImageUrl(part.image_url)} alt={part.keyword || part.id} />
-                        : "·")}
-                    </span>
-                    <span className="part-chip-label">{part.keyword || part.id}</span>
-                    {part.frame && <span className="part-chip-frame">#{part.frame}</span>}
-                  </button>
-                  {user && part.id && <AliasAdder targetId={part.id} lang={lang} />}
-                </div>
-              );
-            })}
+            {activeDecomp?.parts_detail?.map((part, i) => (
+              <PartChip key={i} part={part} lang={lang} user={user} onSelectPart={onSelectPart} />
+            ))}
           </div>
 
           {user && (

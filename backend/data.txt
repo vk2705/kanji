@@ -1763,7 +1763,7 @@ rtk1491:磁:magnet:一,口,石,并,幺
 rtk1492:系:lineage:ノ,糸,幺,小
 rtk1493:係:person in charge:ノ,化,糸,幺,小
 rtk1494:孫:grandchild:ノ,子,糸,幺,小
-rtk1495:懸:state of suspension:ノ,糸,幺,小,心,目
+rtk1495:懸:state of suspension:県,prefecture,糸,thread,心,heart
 rtk1496:遜:humble:ノ,込,子,糸,幺,小
 rtk1497:却:instead:土,卩,厶
 rtk1498:脚:skids:月,土,卩,厶

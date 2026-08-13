@@ -15,6 +15,15 @@ const STUDY_SCRIPTS = [
   { value: "zh-Hant", labelKey: "studyChineseTraditional" },
 ];
 
+// Mirrors backend SOURCE_SCOPES (database.py) — which contributors' data to search
+// within. "mine" only makes sense while logged in; it's dropped from the active set
+// (see the effect below) rather than left selectable-but-inert when logged out.
+const SOURCE_SCOPES = [
+  { value: "system", labelKey: "sourceSystem" },
+  { value: "community", labelKey: "sourceCommunity" },
+  { value: "mine", labelKey: "sourceMine" },
+];
+
 function readLocal(key, fallback) {
   try {
     return localStorage.getItem(key) || fallback;
@@ -40,6 +49,7 @@ export default function App() {
   const [user, setUser] = useState(null);
   const [uiLang, setUiLang] = useState(() => readLocal("ui_language", "en"));
   const [studyScript, setStudyScript] = useState(() => readLocal("study_script", ""));
+  const [sources, setSources] = useState(() => new Set(SOURCE_SCOPES.map((s) => s.value)));
 
   const tt = (key, ...args) => t(uiLang, key, ...args);
 
@@ -71,6 +81,35 @@ export default function App() {
     if (user) updatePreferences({ study_script: script || null }).catch(() => {});
   }
 
+  // Session-only preference (not persisted to the account, unlike ui_language/study_script).
+  function toggleSource(value) {
+    setSources((prev) => {
+      const next = new Set(prev);
+      if (next.has(value)) {
+        next.delete(value);
+      } else {
+        next.add(value);
+      }
+      return next;
+    });
+  }
+
+  // "mine" is meaningless while logged out; drop it so an anonymous session never
+  // silently searches an empty scope after a logged-in tab logs out mid-session.
+  useEffect(() => {
+    if (user) return;
+    setSources((prev) => {
+      if (!prev.has("mine")) return prev;
+      const next = new Set(prev);
+      next.delete("mine");
+      return next.size ? next : new Set(SOURCE_SCOPES.map((s) => s.value));
+    });
+  }, [user]);
+
+  // null (not an explicit full list) when every scope is active, so the API call
+  // matches its own "no restriction" default instead of sending a redundant filter.
+  const activeSources = sources.size >= SOURCE_SCOPES.length ? null : [...sources];
+
   const [parts, setParts] = useState(["", "", ""]);
   const [textQuery, setTextQuery] = useState("");
   const [charQuery, setCharQuery] = useState("");
@@ -95,9 +134,9 @@ export default function App() {
     const filled = parts.filter((p) => p.trim());
     if (!filled.length) return;
     runSearch(async () => {
-      const data = await searchByParts(filled, studyScript || null);
+      const data = await searchByParts(filled, studyScript || null, activeSources);
       if (data.results.length === 0 && filled.length === 1) {
-        const text = await searchByText(filled[0], studyScript || null);
+        const text = await searchByText(filled[0], studyScript || null, activeSources);
         setResults(text.results);
         if (text.results.length > 0) {
           setFallbackMsg(tt("fallbackMsg", filled[0]));
@@ -112,7 +151,7 @@ export default function App() {
     e.preventDefault();
     if (!textQuery.trim()) return;
     runSearch(async () => {
-      const data = await searchByText(textQuery, studyScript || null);
+      const data = await searchByText(textQuery, studyScript || null, activeSources);
       setResults(data.results);
     });
   }
@@ -121,7 +160,7 @@ export default function App() {
     e.preventDefault();
     if (!charQuery.trim()) return;
     runSearch(async () => {
-      const data = await searchByChar(charQuery, studyScript || null);
+      const data = await searchByChar(charQuery, studyScript || null, activeSources);
       setResults(data ? [data] : []);
     });
   }
@@ -190,6 +229,7 @@ export default function App() {
             onBack={() => setSelectedId(null)}
             user={user}
             lang={uiLang}
+            sources={activeSources}
           />
         ) : view === "create" ? (
           <CreateKanji lang={uiLang} onDone={selectKanji} />
@@ -210,6 +250,20 @@ export default function App() {
                 ))}
               </select>
             </div>
+
+            <fieldset className="source-filter">
+              <legend>{tt("sourcesLabel")}</legend>
+              {SOURCE_SCOPES.filter((s) => user || s.value !== "mine").map((s) => (
+                <label key={s.value} className="source-filter-option">
+                  <input
+                    type="checkbox"
+                    checked={sources.has(s.value)}
+                    onChange={() => toggleSource(s.value)}
+                  />
+                  {tt(s.labelKey)}
+                </label>
+              ))}
+            </fieldset>
 
             <div className="tabs">
               {TABS.map((label, i) => (

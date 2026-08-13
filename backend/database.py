@@ -218,7 +218,13 @@ def _backfill_decompositions(conn):
 
 
 def _load_parts_file(path: Path) -> dict[str, list[str]]:
-    """Load {id: [part_terms]} from a data file. ASCII parts are lowercased; kanji chars kept as-is."""
+    """Load {id: [part_terms]} from a data file. ASCII parts are lowercased; kanji chars kept
+    as-is. A line with a present-but-empty parts field (e.g. `rtk639:心:heart:`) is an explicit
+    "this primitive is atomic" override and is kept as `id: []` — distinct from a line that
+    omits the parts column entirely (fewer than 4 `:`-fields), which means "no opinion" and is
+    skipped so the other source file's value (if any) isn't clobbered. import_data()'s merge/
+    override loop relies on this distinction to actually apply an empty override instead of
+    silently falling back to data_from_pdf.txt / the CSV."""
     result: dict[str, list[str]] = {}
     if not path.exists():
         return result
@@ -229,13 +235,12 @@ def _load_parts_file(path: Path) -> dict[str, list[str]]:
                 continue
             cols = line.split(":")
             pid = cols[0].strip().lower()
-            parts_str = cols[3].strip() if len(cols) > 3 else ""
-            if not pid or not parts_str:
+            if not pid or len(cols) < 4:
                 continue
+            parts_str = cols[3].strip()
             raw = [p.strip() for p in parts_str.replace(";", ",").split(",") if p.strip()]
             normalised = [p.lower() if p.isascii() else p for p in raw]
-            if normalised:
-                result[pid] = normalised
+            result[pid] = normalised
     return result
 
 
@@ -432,16 +437,20 @@ def import_data():
     overrides_applied = 0
     for pid, parts in merged_parts_override.items():
         canonical = resolve_alias(conn, pid)
-        if not canonical or not parts:
+        if not canonical:
             continue
 
-        expanded_terms = expand_part_terms(conn, parts, char_lookup)
+        # parts may legitimately be [] here — an explicit "this is atomic" override
+        # (see _load_parts_file) — in which case we still clear any fallback parts,
+        # just insert nothing.
+        expanded_terms = expand_part_terms(conn, parts, char_lookup) if parts else []
 
         conn.execute("DELETE FROM parts WHERE kanji_id = ?", (canonical,))
-        conn.executemany(
-            "INSERT INTO parts (kanji_id, part_term, position) VALUES (?, ?, ?)",
-            [(canonical, term, pos) for pos, term in enumerate(expanded_terms)]
-        )
+        if expanded_terms:
+            conn.executemany(
+                "INSERT INTO parts (kanji_id, part_term, position) VALUES (?, ?, ?)",
+                [(canonical, term, pos) for pos, term in enumerate(expanded_terms)]
+            )
         overrides_applied += 1
 
     _backfill_decompositions(conn)
@@ -481,6 +490,33 @@ SCRIPT_VISIBILITY: dict[str, tuple[str, ...]] = {
     "zh-Hans": ("zh-Hans", "zh-Hani"),
     "zh-Hant": ("zh-Hant", "zh-Hani"),
 }
+
+
+SOURCE_SCOPES = ("system", "community", "mine")
+
+
+def _source_scope_sql(prefix: str, sources: set[str] | None, viewer_id: int | None) -> tuple[str, list]:
+    """Build a SQL fragment restricting `{prefix}owner_id`/`{prefix}visibility` to the
+    selected content sources — 'system' (owner_id=1), 'community' (any other owner's
+    public rows), 'mine' (the viewer's own rows, regardless of visibility). `sources`
+    of None (or all three) means no restriction — every visible row passes, same as
+    before this filter existed. An empty set means nothing matches (all sources
+    deselected), returned as the literal '0' so it composes into an AND'd WHERE clause.
+    `prefix` is the table alias plus '.', e.g. "k." — pass "" for an unaliased table."""
+    if sources is None or set(sources) >= set(SOURCE_SCOPES):
+        return "", []
+    owner_col, vis_col = f"{prefix}owner_id", f"{prefix}visibility"
+    clauses, params = [], []
+    if "system" in sources:
+        clauses.append(f"{owner_col} = 1")
+    if "community" in sources:
+        clauses.append(f"({owner_col} != 1 AND {vis_col} = 'public')")
+    if "mine" in sources:
+        clauses.append(f"{owner_col} = ?")
+        params.append(viewer_id)
+    if not clauses:
+        return "0", []
+    return f"({' OR '.join(clauses)})", params
 
 
 def _script_group(script: str | None) -> str | None:
@@ -541,7 +577,7 @@ def get_all_aliases_for_term(conn, term: str, viewer_id: int | None = None,
 
 
 def search_by_parts(conn, part_names: list[str], viewer_id: int | None = None,
-                     script: str | None = None) -> list[dict]:
+                     script: str | None = None, sources: set[str] | None = None) -> list[dict]:
     """Find kanji containing ALL given primitives (flat set-intersection). A primitive
     counts as present if it appears in ANY decomposition visible to the viewer, not just
     the system one — once a user adds their own decomposition it participates in search too.
@@ -549,7 +585,12 @@ def search_by_parts(conn, part_names: list[str], viewer_id: int | None = None,
     e.g. searching ["weep", "water"] must still return 'weep' even though 'weep' doesn't
     literally list itself as one of its own parts — only 'water' (+ something else) does.
     script (one of SCRIPT_VISIBILITY's keys) scopes both which kanji are returned and,
-    for terms ambiguous across scripts, which alias set they expand to."""
+    for terms ambiguous across scripts, which alias set they expand to. sources (a subset
+    of SOURCE_SCOPES) restricts both which kanji can be returned and which decompositions
+    are consulted for matching to the selected contributor scope(s) — it does NOT restrict
+    which alias terms resolve (get_all_aliases_for_term is source-agnostic), so a primitive
+    name contributed by an excluded source can still be typed to search, it just won't
+    match via a decomposition from that source."""
     terms = [p.strip().lower() for p in part_names if p.strip()]
     if not terms:
         return []
@@ -557,22 +598,30 @@ def search_by_parts(conn, part_names: list[str], viewer_id: int | None = None,
     script_scope = SCRIPT_VISIBILITY.get(script) if script else None
     alias_sets = [get_all_aliases_for_term(conn, t, viewer_id, script_scope) for t in terms]
 
+    kanji_source_sql, kanji_source_params = _source_scope_sql("k.", sources, viewer_id)
+    decomp_source_sql, decomp_source_params = _source_scope_sql("d.", sources, viewer_id)
+
     conditions = ["(k.visibility = 'public' OR k.owner_id = ?)"]
     params = [viewer_id]
+    if kanji_source_sql:
+        conditions.append(kanji_source_sql)
+        params.extend(kanji_source_params)
     if script_scope:
         conditions.append(f"k.script IN ({','.join('?' * len(script_scope))})")
         params.extend(script_scope)
     for aliases in alias_sets:
         placeholders = ",".join("?" * len(aliases))
+        decomp_extra = f" AND {decomp_source_sql}" if decomp_source_sql else ""
         conditions.append(
             f"(k.id IN ({placeholders}) OR "
             "EXISTS (SELECT 1 FROM parts p JOIN decompositions d ON d.id = p.decomposition_id "
             f"WHERE p.kanji_id = k.id AND p.part_term IN ({placeholders}) "
-            "AND (d.visibility = 'public' OR d.owner_id = ?)))"
+            f"AND (d.visibility = 'public' OR d.owner_id = ?){decomp_extra}))"
         )
         params.extend(aliases)
         params.extend(aliases)
         params.append(viewer_id)
+        params.extend(decomp_source_params)
 
     sql = (
         f"SELECT id, character, keyword, frame, stroke_count, jlpt, image_url FROM kanji k "
@@ -583,12 +632,15 @@ def search_by_parts(conn, part_names: list[str], viewer_id: int | None = None,
 
 
 def search_by_substring(conn, substring: str, viewer_id: int | None = None,
-                         script: str | None = None) -> list[dict]:
+                         script: str | None = None, sources: set[str] | None = None) -> list[dict]:
     """Find kanji whose id, keyword, or any visible alias contains the term as a whole
     word — not an arbitrary substring ("hat" matches "hat"/"hat trick"/"bright hat" but
     not "chatter", "what", or "hate"). Keywords/aliases can be comma-separated synonym
     lists (e.g. "hate, detest, abhor"), so commas are normalised to spaces before the
-    word-boundary check, alongside the string's own start/end."""
+    word-boundary check, alongside the string's own start/end. sources (a subset of
+    SOURCE_SCOPES) restricts results to kanji owned within the selected contributor
+    scope(s), regardless of whether the match itself came from the id/keyword or an
+    alias — the alias's own owner isn't considered separately."""
     sub = substring.strip().lower()
     word = f"% {sub} %"
     script_scope = SCRIPT_VISIBILITY.get(script) if script else None
@@ -597,6 +649,8 @@ def search_by_substring(conn, substring: str, viewer_id: int | None = None,
     if script_scope:
         script_cond = f" AND k.script IN ({','.join('?' * len(script_scope))})"
         script_params = list(script_scope)
+    source_sql, source_params = _source_scope_sql("k.", sources, viewer_id)
+    source_cond = f" AND {source_sql}" if source_sql else ""
     id_bounded = "(' ' || k.id || ' ')"
     keyword_bounded = "(' ' || REPLACE(k.keyword, ',', ' ') || ' ')"
     alias_bounded = "(' ' || REPLACE(a.alias, ',', ' ') || ' ')"
@@ -605,34 +659,39 @@ def search_by_substring(conn, substring: str, viewer_id: int | None = None,
         SELECT DISTINCT k.id, k.character, k.keyword, k.frame, k.stroke_count, k.jlpt, k.image_url
         FROM kanji k
         WHERE ({id_bounded} LIKE ? OR {keyword_bounded} LIKE ?)
-              AND (k.visibility = 'public' OR k.owner_id = ?){script_cond}
+              AND (k.visibility = 'public' OR k.owner_id = ?){script_cond}{source_cond}
         UNION
         SELECT DISTINCT k.id, k.character, k.keyword, k.frame, k.stroke_count, k.jlpt, k.image_url
         FROM kanji k
         JOIN aliases a ON a.kanji_id = k.id
         WHERE {alias_bounded} LIKE ? AND (a.visibility = 'public' OR a.owner_id = ?)
-              AND (k.visibility = 'public' OR k.owner_id = ?){script_cond}
+              AND (k.visibility = 'public' OR k.owner_id = ?){script_cond}{source_cond}
         ORDER BY frame NULLS LAST
         """,
-        (word, word, viewer_id, *script_params,
-         word, viewer_id, viewer_id, *script_params)
+        (word, word, viewer_id, *script_params, *source_params,
+         word, viewer_id, viewer_id, *script_params, *source_params)
     ).fetchall()
     return _rows_to_dicts(conn, rows, viewer_id)
 
 
 def search_by_char(conn, character: str, viewer_id: int | None = None,
-                    script: str | None = None) -> dict | None:
+                    script: str | None = None, sources: set[str] | None = None) -> dict | None:
     """Find a kanji by its character glyph. A user's own private duplicate of an
-    existing public glyph (if any) takes precedence over the public one for that user."""
+    existing public glyph (if any) takes precedence over the public one for that user.
+    sources (a subset of SOURCE_SCOPES) restricts matches to the selected contributor
+    scope(s), same semantics as search_by_substring."""
     script_scope = SCRIPT_VISIBILITY.get(script) if script else None
     script_cond = ""
     params: list = [character, viewer_id]
     if script_scope:
         script_cond = f" AND script IN ({','.join('?' * len(script_scope))})"
         params.extend(script_scope)
+    source_sql, source_params = _source_scope_sql("", sources, viewer_id)
+    source_cond = f" AND {source_sql}" if source_sql else ""
+    params.extend(source_params)
     rows = conn.execute(
         "SELECT id, character, keyword, frame, stroke_count, jlpt, image_url, owner_id FROM kanji "
-        f"WHERE character = ? AND (visibility = 'public' OR owner_id = ?){script_cond}",
+        f"WHERE character = ? AND (visibility = 'public' OR owner_id = ?){script_cond}{source_cond}",
         params
     ).fetchall()
     if not rows:
@@ -641,12 +700,19 @@ def search_by_char(conn, character: str, viewer_id: int | None = None,
     return _rows_to_dicts(conn, [row], viewer_id)[0]
 
 
-def get_kanji_detail(conn, kanji_id: str, viewer_id: int | None = None) -> dict | None:
+def get_kanji_detail(conn, kanji_id: str, viewer_id: int | None = None,
+                      sources: set[str] | None = None) -> dict | None:
     """
     Return full detail for one kanji: the canonical entry plus every decomposition,
     alias, and story visible to the viewer (system + public + the viewer's own private),
     each tagged with its owner. A kanji can have contributions from multiple owners, so
     this is owner-grouped rather than the old flat single-decomposition shape.
+
+    `sources` (a subset of SOURCE_SCOPES, e.g. {"system", "mine"}) restricts which
+    decompositions are offered as tabs, and which decomposition is used at every level
+    of the recursive part breakdown (see _resolve_parts_detail) — same semantics as
+    search's `sources` filter. None means no restriction. Aliases/stories are source-
+    agnostic, same as search.
     """
     cid = resolve_alias(conn, kanji_id, viewer_id)
     if not cid:
@@ -683,19 +749,21 @@ def get_kanji_detail(conn, kanji_id: str, viewer_id: int | None = None) -> dict 
         ).fetchall()
     ]
 
+    decomp_source_sql, decomp_source_params = _source_scope_sql("d.", sources, viewer_id)
+    decomp_extra = f" AND {decomp_source_sql}" if decomp_source_sql else ""
     decomp_rows = conn.execute(
         "SELECT d.id, d.owner_id, d.visibility, d.label, u.username FROM decompositions d "
         "JOIN users u ON u.id = d.owner_id "
-        "WHERE d.kanji_id = ? AND (d.visibility = 'public' OR d.owner_id = ?) "
+        f"WHERE d.kanji_id = ? AND (d.visibility = 'public' OR d.owner_id = ?){decomp_extra} "
         "ORDER BY (d.owner_id = 1) DESC, d.id",
-        (cid, viewer_id)
+        [cid, viewer_id] + decomp_source_params
     ).fetchall()
     entry["decompositions"] = [
         {
             "id": d["id"], "owner": d["username"],
             "is_mine": viewer_id is not None and d["owner_id"] == viewer_id,
             "visibility": d["visibility"], "label": d["label"],
-            "parts_detail": _resolve_parts_detail(conn, cid, d["id"]),
+            "parts_detail": _resolve_parts_detail(conn, cid, d["id"], viewer_id, sources, frozenset({cid})),
         }
         for d in decomp_rows
     ]
@@ -718,11 +786,44 @@ def get_kanji_detail(conn, kanji_id: str, viewer_id: int | None = None) -> dict 
     return entry
 
 
-def _resolve_parts_detail(conn, cid: str, decomposition_id: int) -> list[dict]:
+MAX_DECOMPOSITION_DEPTH = 5
+
+
+def _pick_decomposition(conn, kanji_id: str, viewer_id: int | None, sources: set[str] | None):
+    """Pick the one decomposition to recurse into for a resolved part — preferring a
+    system (Heisig-derived) decomposition, then whichever else is visible and allowed
+    by `sources`, same ordering get_kanji_detail uses for its top-level tabs. Returns
+    None if the part has no decomposition within scope (i.e. it's atomic, or its
+    decomposition(s) were filtered out by `sources`)."""
+    source_sql, source_params = _source_scope_sql("", sources, viewer_id)
+    conditions = ["kanji_id = ?", "(visibility = 'public' OR owner_id = ?)"]
+    params = [kanji_id, viewer_id]
+    if source_sql:
+        conditions.append(source_sql)
+        params.extend(source_params)
+    return conn.execute(
+        f"SELECT id FROM decompositions WHERE {' AND '.join(conditions)} "
+        f"ORDER BY (owner_id = 1) DESC, id LIMIT 1",
+        params
+    ).fetchone()
+
+
+def _resolve_parts_detail(conn, cid: str, decomposition_id: int, viewer_id: int | None = None,
+                           sources: set[str] | None = None, _ancestors: frozenset = frozenset(),
+                           _depth: int = 0) -> list[dict]:
     """Resolve one decomposition's part terms to their kanji rows (batched, not N*3).
     A part term shared across scripts (e.g. '一' as both an rtk row and a hanzi row)
     is resolved within the same script group as the kanji it's a part of (cid), not
-    an arbitrary one — see _script_group / SCRIPT_VISIBILITY."""
+    an arbitrary one — see _script_group / SCRIPT_VISIBILITY.
+
+    Recurses into each resolved part's own decomposition (query-time hierarchy, not
+    flattened at import), so e.g. 懸's "prefecture" part also carries prefecture's own
+    "eye + little" breakdown as `sub_parts`, rather than only ever showing the fully
+    flattened primitive list. `sources` scopes which decomposition is used at every
+    level (not just the top), same semantics as search's SOURCE_SCOPES. Bounded by
+    MAX_DECOMPOSITION_DEPTH and an ancestor-chain cycle guard (`_ancestors`) — a part
+    whose own decomposition would revisit a kanji already on the path from the root is
+    left atomic (`sub_parts: []`) rather than recursing forever."""
     part_terms = [
         r["part_term"] for r in conn.execute(
             "SELECT part_term FROM parts WHERE decomposition_id = ? ORDER BY position",
@@ -774,6 +875,14 @@ def _resolve_parts_detail(conn, cid: str, decomposition_id: int) -> list[dict]:
             seen_ids.add(pid)
             prow = prow_map.get(pid)
             if prow:
+                sub_parts = []
+                if _depth < MAX_DECOMPOSITION_DEPTH and pid not in _ancestors:
+                    sub_decomp = _pick_decomposition(conn, pid, viewer_id, sources)
+                    if sub_decomp:
+                        sub_parts = _resolve_parts_detail(
+                            conn, pid, sub_decomp["id"], viewer_id, sources,
+                            _ancestors | {cid}, _depth + 1
+                        )
                 resolved.append({
                     "id": prow["id"],
                     "character": prow["character"],
@@ -781,6 +890,7 @@ def _resolve_parts_detail(conn, cid: str, decomposition_id: int) -> list[dict]:
                     "frame": prow["frame"],
                     "image_url": prow["image_url"],
                     "term": term,
+                    "sub_parts": sub_parts,
                 })
     return resolved
 

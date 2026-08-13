@@ -35,12 +35,19 @@ export const translations = {
     strokesLabel: (n) => `${n} strokes`,
     aliasesHeading: "Aliases / names",
     madeFromHeading: "Made from",
+    expandPart: "Show this part's own breakdown",
+    collapsePart: "Hide this part's own breakdown",
 
     studyLanguageLabel: "Study language",
     studyAll: "All",
     studyJapanese: "Japanese (Kanji)",
     studyChineseSimplified: "Chinese (Simplified)",
     studyChineseTraditional: "Chinese (Traditional)",
+
+    sourcesLabel: "Sources",
+    sourceSystem: "Official (Heisig / system)",
+    sourceCommunity: "Community contributions",
+    sourceMine: "My own",
 
     loginRegisterBtn: "Log in / Register",
     loginTab: "Log in",
@@ -123,12 +130,19 @@ export const translations = {
     strokesLabel: (n) => `${ruPlural(n, "черта", "черты", "черт")}: ${n}`,
     aliasesHeading: "Псевдонимы / названия",
     madeFromHeading: "Состоит из",
+    expandPart: "Показать разбор этой части",
+    collapsePart: "Скрыть разбор этой части",
 
     studyLanguageLabel: "Изучаемый язык",
     studyAll: "Все",
     studyJapanese: "Японский (кандзи)",
     studyChineseSimplified: "Китайский (упрощённый)",
     studyChineseTraditional: "Китайский (традиционный)",
+
+    sourcesLabel: "Источники",
+    sourceSystem: "Официальные (Хайсиг / система)",
+    sourceCommunity: "Вклад сообщества",
+    sourceMine: "Мои собственные",
 
     loginRegisterBtn: "Войти / Зарегистрироваться",
     loginTab: "Вход",
