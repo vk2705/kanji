@@ -180,6 +180,142 @@ primitive exists to redirect to)
 (some aliases are clearly personal jokes, e.g. `"obama,data, Mister T."`) so
 Phase 1 needs actual review, not a blind bulk-fill.
 
+## Architecture decision (agreed after this doc was written, 2026-08-13)
+
+Not yet executed when this doc was first written; recorded here as soon as
+the decision was made so it survives context resets. Owner + agent agreed
+the fix plan below should be implemented on top of a redesigned storage
+model, not by continuing to patch the flat `data.txt` → single
+`owner_id=1` decomposition pipeline as-is:
+
+1. **Sources become multiple decomposition/alias owners, not one flat
+   `owner_id=1`.** The `decompositions`/`aliases` tables already support
+   multiple owners per kanji (built for user contributions). Reuse that
+   machinery for system data too: introduce source pseudo-owners (e.g.
+   `heisig4`, `heisig6`, `official-radicals`, `krad`) instead of collapsing
+   every source into one system decomposition at import time. This directly
+   fixes the *class* of bug Finding 2 describes (a decomposition silently
+   flattening another entry's parts into itself), not just the specific
+   instances found so far — once each source is its own decomposition
+   owner, "flattening 苗's parts into 猫's own list" isn't something import
+   would ever do.
+2. **Hierarchy is resolved at query time, not flattened at import time.** A
+   decomposition stores one level of parts; if a part itself has its own
+   decomposition, search/detail code resolves it recursively at query time.
+   This is a deliberate departure from current `import_data()` behavior
+   (CSV components arrive pre-expanded). Performance is a non-issue at this
+   dataset's scale (single user, ~3000 rows) — correctness and
+   maintainability win over the micro-optimization the old pre-expansion
+   was never actually needed for.
+3. **User control over source scope**: search endpoints get a `sources`
+   filter analogous to the existing `script` filter, so a user can restrict
+   matching to e.g. "Heisig only" or "official radicals only".
+4. **Personal/user-invented primitives are unaffected** — they're just
+   another value on the same source axis (owned by a real user id, not a
+   source pseudo-owner), already fully supported by the existing
+   contributions API. This redesign must compose with that flow, not route
+   around it.
+5. **Copyright is explicitly not a concern** for Heisig-derived primitive
+   names, per the owner. Do not self-censor on that basis anywhere in this
+   fix (including radical/primitive naming below).
+
+This is a bigger structural change than either Finding's original fix plan
+assumed (both were written against the old flat-import model). It has not
+been executed yet as of this entry — see the progress log below for what's
+actually been done vs. still pending. Treat the "Fix plan" section above as
+superseded in *mechanism* (system data will end up multi-owner, not more
+`data.txt` overrides) even though the *content* work it describes (name the
+66 radicals, fix the 5 proxy characters) is still exactly the right content
+work to do — it's the storage that changes, not which radicals need names.
+
+## Progress log
+
+Update this section every working session: what got done, what's next, any
+judgment calls and why. Read it first before starting new work.
+
+### 2026-08-13 — session 1
+
+- Recorded the architecture decision above (agreed in conversation, not
+  written down until now).
+- **Finding 1, Phase 1 (partial)**: wrote `backend/audit_radicals.py` — a
+  deterministic (no API key), committed version of the "undefined part
+  term" check used to produce this doc's Finding 1 numbers. Re-running it
+  found **69** single-glyph undefined terms (not 66 — small drift from
+  whatever ad hoc query produced the original number; not investigated
+  further, the discrepancy doesn't change the shape of the problem).
+  - Reconciled **16** of those 69 against existing `data.txt` `radN.M`
+    ghost entries with confident, non-joke semantic matches: fixed their
+    `character` field from the `?` placeholder to the real glyph (`rad1.2`
+    → `｜` fullwidth, fixing the exact U+007C/U+FF5C bug flagged above;
+    `rad1.3`→丶, `rad2.6`→儿, `rad2.12`→冫, `rad2.22`→卜, `rad2.23`→卩,
+    `rad2.24`→厂, `rad2.25`→ヨ, `rad3.6`→夂, `rad3.15`→尢, `rad3.17`→屮,
+    `rad3.20`→巛, `rad3.27`→廾, `rad3.31`→彑, `rad4.32`→爿, `rad4.45`→毋).
+    Kept each entry's existing legacy aliases (including jokes like
+    `rad3.15`'s "chihuahua with one human leg" — harmless once the entry
+    also resolves, and it's genuinely funny) and added an official/plain
+    name alongside where the legacy alias alone wasn't a search-friendly
+    term.
+  - Added **42 new** `rad{n}` entries (ids `rad1001`–`rad1042`, a plain
+    integer scheme per `CLAUDE.md`'s documented `rad{n}` format — the
+    legacy `radN.M` dotted scheme was the *old Perl app's* convention, not
+    this project's) for glyphs with no usable existing ghost entry. Named
+    them with the standard, public-domain Kangxi radical English name
+    (亠 lid, 冂 border, 冖 cover, 亅 hook, 尸 corpse, 戈 spear, 禾 grain, 隹
+    short-tailed bird, 攵 rap, 广 dotted cliff, 几 table, 凵 container, 彳
+    step, 囗 enclosure, 艮 stopping, 彡 bristle, 殳 weapon, 匚 box, 豕 pig,
+    歹 death, 弋 stake, 廴 long stride, 虍 tiger, 癶 footsteps, 釆
+    distinguish, 隶 reach, 聿 brush, 舛 oppose, 韋 tanned leather, 耒 plow,
+    豸 badger, 爻 trigrams, 韭 leek, 鬲 cauldron, 气 steam, 髟 long hair, 鬯
+    sacrificial wine, 黽 frog, 幺 tiny, 宀 roof), plus two non-Kangxi-radical
+    real characters that were legitimate primitive parts with no registered
+    name at all: 艾 "mugwort" (the exact one from this doc's own 猫/苗
+    example — it was never itself resolvable even though it's a correct
+    part) and 厶 "cocoon" (well-established informal primitive name, not a
+    top-level Kangxi radical but a common decomposition component).
+  - **Result**: single-glyph undefined terms dropped 69 → **11**
+    (`ノ ハ 并 扎 杰 个 阡 疔 マ 禹 ユ`), and kanji with ≥1 unresolved part
+    dropped **2,262 → 1,043** (rebuilt DB, recount via the same query
+    Finding 1 used).
+  - **Deliberately deferred, not fixed** — the remaining 11: `ノ ハ ヨ`-style
+    katakana primitives (`ノ` slash, `ハ`, `マ`, `ユ`) are primitives Heisig's
+    book does name explicitly, but I don't have high enough confidence in
+    the exact book terminology to assign names without risking new
+    Finding-2/3-style bugs (a wrong name is worse than no name — it looks
+    resolved but misleads). `并 扎 杰 个 阡 疔 禹` are all real CJK
+    characters (阡="path between fields", 疔="boil/carbuncle", 禹="Yu, the
+    mythical emperor", etc.) that read as visual-proxy misuse similar to
+    Finding 2, not straightforward unnamed radicals — each needs the same
+    "what is this actually standing in for" investigation Finding 2's fix
+    plan already calls for, so deferring them there rather than guessing.
+    **Open question for the owner**: if you have the RTK book (or PDF)
+    handy, the katakana primitives' exact Heisig names would resolve 4 of
+    these 11 immediately and safely.
+  - Verified: rebuilt `kanji.db` from scratch, `python3 rtk.py detail
+    rtk259/rtk2359/rtk897` still show the exact Finding 2 symptoms
+    described above (untouched, as expected — Finding 2 not started yet),
+    `rtk.py parts cliff/roof/lid/mugwort` all return results now (0 before),
+    `audit_radicals.py` count matches the 69→11 drop.
+- **Not started**: Finding 1 Phase (image reconciliation against
+  `html/kanji/pics/`, deferred — needs the copyright-flavor judgment call
+  noted in Finding 1 above, plus it's lower value than the name gap itself
+  which is now mostly closed), Finding 2 (proxy character fix — explicitly
+  gated on Finding 1 being far enough along that a correctly-named target
+  exists to redirect to, which is now true for 4 of 5 proxies: 乞/化/刈/犯
+  all have named replacements available or need the same "what does this
+  stand in for" pass; 買 already resolves as itself, same as before), and
+  the full multi-owner-decomposition/query-time-resolution architecture
+  migration described above (this session's fix stayed inside the existing
+  flat `data.txt` → `owner_id=1` pipeline since that's what Finding 1's
+  concrete task needed; the architecture migration is a separate, larger
+  piece of work for a future session).
+- **Next session should**: either (a) start the actual architecture
+  migration (source pseudo-owners + query-time recursive resolution +
+  `sources` filter — this is the big one, budget multiple sessions), or
+  (b) continue content work first (Finding 2's proxy-character fixes, now
+  partially unblocked) and defer the storage migration until more content
+  fixes are queued up behind it. Not yet decided which order is better;
+  whoever picks this up next should make that call and record it here.
+
 ## Tooling produced this session
 
 - `backend/audit_decomposition.py` — committed to `master`. Rebuilds a
@@ -191,3 +327,9 @@ Phase 1 needs actual review, not a blind bulk-fill.
 - The deterministic "undefined glyph" / "proxy frequency" checks used for
   Findings 1–2 were run ad hoc, not folded into the committed script. Worth
   revisiting whether they belong there as a free, no-API-key mode.
+- `backend/audit_radicals.py` — committed 2026-08-13. The no-API-key half
+  of the above: rebuilds the same throwaway DB and reports every part_term
+  in an rtk* decomposition that resolves to no kanji row or alias, split
+  into single-glyph vs. multi-char terms. This is now the authoritative way
+  to recheck the Finding 1 radical count (`python3 audit_radicals.py`); the
+  proxy-frequency check from Finding 2 is still ad hoc, not yet scripted.

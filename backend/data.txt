@@ -1,6 +1,6 @@
 rad1.1:?:one,floor,ceiling,minus
-rad1.2:|:pipe, walking stick, cane, prim28.1
-rad1.3:?:dot,tick,drop
+rad1.2:｜:pipe, walking stick, cane, line, prim28.1
+rad1.3:丶:dot,tick,drop
 rad1.4:?:drop2,no
 rad1.5:?:fishguts, fih guts,second,rtk71,fishhook
 rad1.6:?:feathered stick, barb radical
@@ -9,13 +9,13 @@ rad2.2:?:top tah
 rad2.3:?:person
 rad2.4:?:obama,data, Mister T.
 rad2.5:??:pagoda-roof--vk,hito
-rad2.6:?:human legs
+rad2.6:儿:human legs,legs
 rad2.7:?:enter,go in, put in
 rad2.8:?:animal legs
 rad2.9:?:horns
 rad2.10:?:hood
 rad2.11:?:crown
-rad2.12:?:ice
+rad2.12:冫:ice
 rad2.13:?:wind
 rad2.14:?:shovel
 rad2.15:?:sword,dagger,sabre
@@ -25,10 +25,10 @@ rad2.18:勹:bound up
 rad2.19:?:spoon, sitting on the ground
 rad2.20:?:box
 rad2.21:?:ten,needle,rtk10,10
-rad2.22:?:divining rod,augury,rtk2103,prim33.1
-rad2.23:?:stamp
-rad2.24:?:cliff
-rad2.25:?:elbow
+rad2.22:卜:divining rod,augury,divination,rtk2103,prim33.1
+rad2.23:卩:stamp,seal
+rad2.24:厂:cliff
+rad2.25:ヨ:elbow
 rad2.26:?:again,crotch
 rad2.27:?:stamp2?,ma
 rad2.28:?:power2,muscle2,nine,9,rtk9,baseball,baseball team:
@@ -40,7 +40,7 @@ rad3.2:?:mouth,rtk11
 rad3.3:?:pent in
 rad3.4:?:soil,dirt,land
 rad3.5:?:gentleman,samurai
-rad3.6:?:walking legs
+rad3.6:夂:walking legs,go slowly
 rad3.7:?:evening,rtk109
 rad3.8:?:large,rtk107,large dog, St. Bernard dog
 rad3.9:?:woman
@@ -49,23 +49,23 @@ rad3.11:?:house
 rad3.12:?:measurement, glue
 rad3.13:?:little,small
 rad3.14:?:?????????????????????????????
-rad3.15:?:chihuahua with one human leg
+rad3.15:尢:chihuahua with one human leg,lame
 rad3.16:?:flag
-rad3.17:?:mountain goat with horns missing,sprout,Radical 45
+rad3.17:屮:mountain goat with horns missing,sprout,Radical 45
 rad3.18:?:mountain
 rad3.19:?:stream
-rad3.20:?:curving river,Radical 47,flood
+rad3.20:巛:curving river,Radical 47,flood,river
 rad3.21:?:craft
 rad3.22:?:towel
 rad3.23:?:dry,clothesline
 rad3.24:?::cocoon
 rad3.25:?:cave
 rad3.26:?:stretch
-rad3.27:?:two hands
+rad3.27:廾:two hands
 rad3.28:?:arrow
 rad3.29:?:bow
 rad3.30:?:broom,exists
-rad3.31:?:pig's head,Radical 58,pig snout,mutual difficulties,two walls
+rad3.31:彑:pig's head,Radical 58,pig snout,mutual difficulties,two walls
 rad3.32:?:shape
 rad3.33:?:column,going,line
 rad3.34:?:state of mind
@@ -110,7 +110,7 @@ rad4.28:?:fire2,caterpillar steps(VK)
 rad4.29:?:claw, vulture
 rad4.30:?:father
 rad4.31:?:two sheaves
-rad4.32:?:Radical 90,half of a tree trunk,split wood 
+rad4.32:爿:Radical 90,half of a tree trunk,split wood
 rad4.33:?:one-sided
 rad4.34:?:tusk
 rad4.35:?:dog, chihuahua, pack of wild dogs
@@ -123,7 +123,7 @@ rad4.41:?:superb,outstanding,understandably,rtk2087:chihuahua with one human leg
 rad4.42:?:5,five,rtk5
 rad4.43:?:ton
 rad4.44:?:huge comma design,tomoe
-rad4.45:?:mother,do not
+rad4.45:毋:mother,do not
 
 rad5.1:?
 rad5.2:?
@@ -3268,3 +3268,50 @@ rtk2997:躊:hesitate:口,工,士,寸,足,止
 rtk2998:饅:bean-jam dumpling:食,日,買,又
 rtk2999:嘔:vomit:口,匚,品
 rtk3000:鼈:snapping turtle:小,尚,冂,攵,黽,乞
+
+# Official Kangxi-radical entries added to fill previously-unnamed primitives
+# (Finding 1, 2026-08 search-quality audit). Names are the standard public-domain
+# Kangxi radical English names (or, for 艾/厶, the established primitive meaning);
+# not Heisig book text.
+rad1001:亠:lid
+rad1002:冂:border,down box
+rad1003:冖:cover,cloth cover
+rad1004:亅:hook
+rad1005:尸:corpse
+rad1006:戈:spear,halberd
+rad1007:禾:grain
+rad1008:隹:short-tailed bird
+rad1009:攵:rap,knock
+rad1010:广:dotted cliff
+rad1011:几:table,stool
+rad1012:凵:container,open box
+rad1013:彳:step,go
+rad1014:囗:enclosure
+rad1015:艮:stopping,retracing
+rad1016:彡:bristle,hair strands
+rad1017:殳:weapon,lance
+rad1018:匚:box,receptacle
+rad1019:豕:pig
+rad1020:歹:death,bad
+rad1021:弋:stake,shoot
+rad1022:廴:long stride
+rad1023:虍:tiger
+rad1024:癶:footsteps,back-to-back feet
+rad1025:釆:distinguish,claw print
+rad1026:隶:reach,slave
+rad1027:聿:brush
+rad1028:舛:oppose,dance
+rad1029:韋:tanned leather
+rad1030:耒:plow
+rad1031:豸:badger,legless insect
+rad1032:爻:trigrams,diagram
+rad1033:韭:leek
+rad1034:鬲:cauldron
+rad1035:气:steam,air
+rad1036:髟:long hair
+rad1037:鬯:sacrificial wine
+rad1038:黽:frog,toad
+rad1039:艾:mugwort
+rad1040:幺:tiny,short thread
+rad1041:宀:roof
+rad1042:厶:cocoon
