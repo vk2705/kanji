@@ -622,6 +622,87 @@ add this as a second check mode.
   from this log should still spot-check the original reported symptom
   directly, not just trust that the linked fix closed it.
 
+### 2026-08-14 — session 6
+
+- Owner asked how a `data.txt` fix actually reaches the *live* server, and
+  separately whether the KRADFILE-radical fix had "disappeared" (it hadn't —
+  confirmed by rebuilding and re-checking, see reply in conversation). That
+  surfaced a real gap worth recording here, not just answering once in chat:
+  - `import_data()` only ever seeds once (no-op the moment any owner_id=1
+    row exists); there's deliberately no `/admin/reimport` (see
+    "Architecture" in `CLAUDE.md`). So on a live server, `git pull` +
+    restart does **not** pick up a `data.txt` edit — only the idempotent
+    schema migration re-runs, not a reseed.
+  - Deleting `kanji.db` to force a reseed is not a safe workaround: the
+    same file holds every real user's account and contributions, so
+    deleting it destroys those along with the stale system data.
+  - Also flagged for the owner directly: this agent runs in an isolated
+    cloud container with no SSH access to the real deployed box
+    (`srv.alteon.help`). Session 4's "verified live against the running
+    production API" almost certainly meant its own container's local
+    `kanji.db`, not the real server — worth the owner double-checking
+    the real server's state independently rather than trusting that claim.
+- **Built `backend/sync_system_data.py`** to close the gap: a script meant
+  to be run after every `git pull` on the actual server, that reconciles an
+  already-seeded live `kanji.db`'s system rows (`owner_id=1`,
+  `script='ja-kanji'`) with whatever `heisig-kanjis.csv` /
+  `data_from_pdf.txt` / `data.txt` currently say — without wiping user data.
+  - Design: build a disposable shadow DB via the real import pipeline
+    (`build_shadow_db()`, same helper the audit scripts use — so the merge/
+    override logic is never duplicated, this script only diffs against it),
+    then diff+apply against the live DB's kanji/aliases/decompositions+parts,
+    strictly scoped to `owner_id=1 AND script='ja-kanji'` throughout.
+  - Deliberately does **not** just call `import_data()` with its guard
+    removed: that function's `DELETE FROM parts WHERE kanji_id IN (system
+    kanji)` deletes every parts row for a system kanji_id regardless of
+    which decomposition owns it — it would also delete a real user's own
+    alternate decomposition on a system kanji, since `parts` rows aren't
+    scoped to decomposition-owner at that granularity. Only safe against an
+    empty DB, which is the only case it's actually guarded to run against.
+  - Decompositions/parts are reconciled per-kanji against specifically the
+    `owner_id=1` decomposition row (create if the source now wants one and
+    there was none, replace its parts if they differ, delete it if the
+    source now wants none — same "atomic primitive" convention as e.g.
+    rtk1743 門) — a user's alternate decomposition on the same kanji_id is
+    a different `decompositions.id` and is never touched.
+  - Takes a timestamped backup of `--db` before writing (skippable), runs
+    everything in one transaction (rolled back on any error), supports
+    `--dry-run`, and is idempotent — a second run reports all-zero changes.
+  - **Supersedes `fix_kradfile_proxies.py`** for ongoing use (that script
+    now points to this one in its own docstring) — this generically
+    reproduces that exact fix, plus every other `data.txt` content change
+    made since, including this session's own test of it (see below).
+  - **Tested end-to-end**, not just read: built a "stale live" DB from the
+    pre-session-4 `data.txt`/`data_from_pdf.txt`/`heisig-kanjis.csv`
+    (checked out from commit `294e27b`, the last commit before any of
+    session 4/5's content fixes), seeded a fake user (id 42) with their own
+    alias and their own alternate decomposition on `rtk355` (the same kanji
+    session 5's `古` fix touched) to make sure user data survives, then ran
+    `sync_system_data.py` against it pointed at the *current* source files.
+    Result: 11 kanji inserted (session 4's 11 named radicals), 33 aliases
+    added, 1292 decompositions replaced (large number is real and expected
+    — once those 11 radicals became resolvable kanji rows,
+    `expand_part_terms`'s char→keyword auto-expansion now fires for every
+    decomposition that uses one of them as a part, e.g. `ノ` used 320 times;
+    spot-checked one such kanji to confirm before/after matches that
+    explanation, not a bug), 1 decomposition removed (an entry that's now
+    fully atomic post-fix). Confirmed after applying: the fake user's alias
+    and decomposition on `rtk355` were both untouched; `rtk355`'s *system*
+    decomposition now correctly reads `古,old,攵,rap`; `犯` no longer
+    appears in any host besides itself. Ran the script a second time against
+    the same now-synced DB and got an all-zero diff, confirming idempotency.
+    Also ran it (no-op, as expected) against this session's own freshly
+    rebuilt `kanji.db`, which was already current.
+- **What the owner should actually do**: `git pull && python3
+  backend/sync_system_data.py` on the real server after every pull that
+  touches `data.txt` et al. (a `--dry-run` first pass if nervous). The
+  owner separately mentioned periodically committing a flat anonymized
+  export of the live DB to the repo as a disaster-recovery copy —
+  `backend/export_backup.py` (from an earlier, not-yet-logged-here session)
+  already does exactly that (`BACKUP_ANON_SECRET`-keyed pseudonymous JSONL
+  dump, safe to commit); this session didn't touch it, just confirmed it
+  exists and fits the workflow the owner described.
+
 ## Tooling produced this session
 
 - `backend/audit_decomposition.py` — committed to `master`. Rebuilds a
@@ -639,10 +720,28 @@ add this as a second check mode.
   into single-glyph vs. multi-char terms. This is now the authoritative way
   to recheck the Finding 1 radical count (`python3 audit_radicals.py`); the
   proxy-frequency check from Finding 2 is still ad hoc, not yet scripted.
-- `backend/fix_kradfile_proxies.py` — added 2026-08-14 (session 4), **not yet
-  committed**. One-off direct-DB patch, not a reusable audit tool: deletes the
-  5 confirmed KRADFILE-proxy glyphs (乞/化/刈/買/犯) and their auto-expanded
-  keyword rows from `owner_id=1`/`ja-kanji` decompositions in an already-seeded
-  `kanji.db`. Already run against the live DB (see session 4 above) — rerunning
-  it is a safe no-op (dry-run reports 0 rows) unless the proxy list grows from
-  the open follow-up above.
+- `backend/fix_kradfile_proxies.py` — added 2026-08-14 (session 4), committed
+  in a later session (this doc's session-4 note that it was still uncommitted
+  is stale — see session 3's note above about logs written before the
+  closing commit). One-off direct-DB patch, not a reusable audit tool:
+  deletes the 5 confirmed KRADFILE-proxy glyphs (乞/化/刈/買/犯) and their
+  auto-expanded keyword rows from `owner_id=1`/`ja-kanji` decompositions in
+  an already-seeded `kanji.db`. Superseded for ongoing use by
+  `sync_system_data.py` below (still kept as the original record of this
+  specific fix).
+- `backend/export_backup.py` — added in an earlier session not otherwise
+  logged in this doc. Anonymized flat-file (JSONL) export of `kanji.db`
+  (every kanji/alias/decomposition/part/story, public and private, with
+  every non-system `owner_id` replaced by an HMAC-keyed pseudonym instead of
+  the real username) meant to be committed to git periodically as a
+  disaster-recovery copy — the owner's own stated plan (session 6). Never
+  reads `password_hash` or `sessions`, so it can't leak credentials.
+- `backend/sync_system_data.py` — added 2026-08-14 (session 6). The answer
+  to "how do `data.txt` fixes reach the live server without wiping user
+  data": diffs a live, already-seeded `kanji.db`'s `owner_id=1`/`ja-kanji`
+  rows against a freshly-built shadow DB (same source files, real import
+  pipeline) and applies only the difference, never touching another
+  owner's rows even on a shared `kanji_id`. Meant to be run after every
+  `git pull` on the real server. See session 6 above for the full design
+  rationale and the end-to-end test (fake user + stale pre-session-4 DB)
+  that verified it.

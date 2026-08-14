@@ -2,6 +2,12 @@
 """
 fix_kradfile_proxies.py — remove KRADFILE JIS-substitute glyphs from system decompositions.
 
+Superseded by sync_system_data.py for ongoing use: that script diffs a live DB
+against data.txt generically (so it also applies this exact fix, plus every
+other data.txt content change, in one recurring step). Kept here as the
+original one-off record of this specific fix; no need to run it separately
+if sync_system_data.py has already been run since data.txt was corrected.
+
 Background (see docs/2026-08-search-quality-audit.md "Finding 2"): five characters
 (乞 化 刈 買 犯) were flagged as "real kanji misused as unaliased visual proxies" —
 part terms that resolve only because they coincidentally match an unrelated, fully-
