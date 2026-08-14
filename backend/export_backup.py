@@ -22,6 +22,8 @@ Usage:
     export BACKUP_ANON_SECRET=...   # pick once, keep it, never commit it
     python3 export_backup.py [--db kanji.db] [--out kanji_export.jsonl] [--limit N]
 """
+from __future__ import annotations
+
 import argparse
 import hashlib
 import hmac
