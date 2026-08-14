@@ -3315,3 +3315,26 @@ rad1039:艾:mugwort
 rad1040:幺:tiny,short thread
 rad1041:宀:roof
 rad1042:厶:cocoon
+
+# Remaining Finding-1 single-glyph terms (session 4, 2026-08-14). Two groups:
+# - rad1043-1046: KRADFILE JIS-substitute glyphs, same mechanism as the 5 proxies
+#   fixed this session (乞/化/刈/買/犯) — KRADFILE's own header maps each to a real
+#   Unicode CJK Radical Supplement / Kangxi Radical codepoint (verified via the
+#   downloaded kradfile's documented substitution table, not guessed). Named after
+#   that codepoint's official radical identity, not the proxy glyph's own meaning.
+# - rad1047-1050: katakana-shaped forms KRADFILE uses directly (not in its
+#   substitution table, so presumably intentional shape-index use, not a
+#   substitution artifact) — named literally by their katakana identity rather
+#   than guessing a Heisig-specific meaning; the owner will attach the book's
+#   actual primitive name as a personal alias on top of these.
+rad1043:个:person radical
+rad1044:并:eight radical
+rad1045:扎:hand radical
+rad1046:阡:mound radical
+rad1047:杰:fire radical
+rad1048:疔:sickness radical
+rad1049:禹:track radical
+rad1050:ノ:katakana no
+rad1051:ハ:katakana ha
+rad1052:マ:katakana ma
+rad1053:ユ:katakana yu

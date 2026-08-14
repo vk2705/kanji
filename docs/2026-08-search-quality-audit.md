@@ -499,6 +499,48 @@ five proxy-character fixes (乞/化/刈/買/犯, now largely unblocked by sessio
   right call for *preventing this class of bug*, just wasn't required to *fix this
   instance* of it.
 
+- **Named the remaining 11 Finding-1 single-glyph terms** (`ノ ハ 并 扎 杰 个 阡 疔 マ 禹 ユ`),
+  closing out Finding 1's deliberately-deferred list from session 1. Split into two
+  groups by the same KRADFILE-header investigation used for the proxy fix above:
+  - **7 are KRADFILE JIS-substitutes** (并 扎 杰 个 阡 疔 禹) — found in the *same*
+    documented substitution table used above, which also cross-references each
+    substitute glyph to its real Unicode CJK Radical Supplement / Kangxi Radical
+    codepoint. This incidentally cross-validated the proxy fix: 犯→"CJK RADICAL DOG"
+    (⺨) matches the doc's original 猫/dog-radical example exactly; 化→"CJK RADICAL
+    PERSON" (⺅), 刈→"CJK RADICAL KNIFE TWO" (⺉), 買→"CJK RADICAL NET TWO" (⺲) all
+    match their hosts' visual structure. Named these 7 after their verified radical
+    identity (`rad1043`-`rad1049`: "person radical", "eight radical", "hand
+    radical", "mound radical", "fire radical", "sickness radical", "track
+    radical") rather than deleting them like the first 5, since — unlike those 5 —
+    none of them collided with an existing unrelated kanji's own keyword, so there
+    was no accidental-search-hit problem to fix by removal; they just needed a name.
+  - **4 are katakana-shaped glyphs** (ノ ハ マ ユ) *not* in KRADFILE's substitution
+    table — i.e. used directly, not as a stand-in for a missing JIS element,
+    matching session 1's note that these are primitives Heisig's book names
+    explicitly. Named literally by katakana identity (`rad1050`-`rad1053`:
+    "katakana no/ha/ma/yu") rather than guessing the Heisig term, per owner's
+    explicit request: decomposition should show the glyph (so it's visible and
+    clickable) and resolve to *some* honest, verifiable name; the owner will attach
+    the actual book primitive name as their own alias on top via the contributions
+    flow, rather than have an agent guess it and risk a wrong-name repeat of the
+    original Finding-2 mistake.
+  - Inserted directly into the live `kanji.db` (`kanji` + `aliases` rows,
+    `owner_id=1`, `script='ja-kanji'`, public) — no `parts` table changes needed,
+    since the raw glyph terms were already present in every host's decomposition
+    and only lacked a resolvable name. Added the same 11 lines to `data.txt` for
+    future-reseed parity. Verified via `audit_radicals.py`: single-glyph undefined
+    count is now **0** (was 11); confirmed live via the actual detail API (not just
+    `rtk.py`, which reads raw `parts` text and doesn't reflect alias-table
+    resolution) that e.g. `rtk1311` 矛 (halberd) now resolves マ → "katakana ma"
+    (`rad1052`), clickable.
+- **Owner asked, separately**: should the future `sources` filter (architecture
+  decision item 3) include KRADFILE as a selectable checkbox alongside Heisig/
+  official-radicals? Yes — this was already the plan (item 1 names `krad` as one of
+  the proposed source pseudo-owners) and this session is a concrete argument for
+  prioritizing it: every fix this session existed only because KRADFILE's
+  mechanical, lookup-oriented decomposition got merged into the same undifferentiated
+  `owner_id=1` bucket as Heisig's actual taught primitives.
+
 **Open follow-up for a future session**: the same "KRADFILE JIS-substitution"
 mechanism that produced these 5 confirmed proxies almost certainly produced others
 that just haven't been pattern-reviewed yet — worth writing a deterministic check
