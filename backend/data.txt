@@ -379,7 +379,7 @@ rtk105:母:mother:毋
 rtk106:貫:pierce:貝,目,ハ,母,毋
 rtk107:兄:elder brother:口,儿
 rtk108:呪:spell:口,儿
-rtk109:克:overcome:口,十,儿
+rtk109:克:overcome:古,儿
 rtk110:小:little:
 rtk111:少:few:ノ,小
 rtk112:大:large:
@@ -429,7 +429,7 @@ rtk155:消:extinguish:月,水,尚
 rtk156:況:condition:口,水,儿
 rtk157:河:river:口,水,亅,一
 rtk158:泊:overnight stay:水,白
-rtk159:湖:lake:月,口,十,水
+rtk159:湖:lake:水,胡
 rtk160:測:fathom:貝,目,ハ,水
 rtk161:土:soil:
 rtk162:吐:spit:口,土
@@ -487,7 +487,7 @@ rtk215:杏:apricot:口,木
 rtk216:桐:paulownia:口,木,冂,一
 rtk217:植:plant:十,木,目
 rtk218:椅:chair:口,大,木,一,亅
-rtk219:枯:wither:口,十,木
+rtk219:枯:wither:古,木
 rtk220:朴:crude:卜,木
 rtk221:村:village:寸,木
 rtk222:相:inter-:木,目
@@ -507,7 +507,7 @@ rtk235:朱:vermilion:｜,ノ,牛,二,ハ,木
 rtk236:株:stocks:牛,木
 rtk237:若:young:ノ,一,口,艾
 rtk238:草:grass:十,日,艾
-rtk239:苦:suffering:口,十,艾
+rtk239:苦:suffering:艾,古
 rtk240:苛:torment:一,口,亅,艾
 rtk241:寛:tolerant:見,宀,艾
 rtk242:薄:dilute:十,水,寸,田,丶,艾
@@ -623,7 +623,7 @@ rtk351:牧:breed:牛,攵
 rtk352:攻:aggression:工,攵
 rtk353:敗:failure:貝,目,ハ,攵
 rtk354:枚:sheet of...:木,攵
-rtk355:故:happenstance:口,十,攵
+rtk355:故:happenstance:古,攵
 rtk356:敬:awe:口,勹,攵,艾
 rtk357:言:say:
 rtk358:警:admonish:言,口,勹,夂,艾,攵
@@ -890,8 +890,8 @@ rtk618:曜:weekday:ヨ,日,隹
 rtk619:濯:laundry:ヨ,水,隹
 rtk620:曰:say:
 rtk621:困:quandary:木,囗
-rtk622:固:harden:口,十,囗
-rtk623:錮:confinement:金,口,十,囗
+rtk622:固:harden:古,囗
+rtk623:錮:confinement:金,固
 rtk624:国:country:王,囗,丶
 rtk625:団:group:寸,囗
 rtk626:因:cause:大,囗
@@ -1315,7 +1315,7 @@ rtk1043:信:faith:言
 rtk1044:佳:excellent:土
 rtk1045:依:reliant:衣,亠
 rtk1046:例:example:歹
-rtk1047:個:individual:口,十,囗
+rtk1047:個:individual:人,固
 rtk1048:健:healthy:廴,聿
 rtk1049:側:side:貝,目,ハ
 rtk1050:侍:waiter:寸,土
@@ -1411,9 +1411,9 @@ rtk1139:握:grip:至,土,厶,尸,扎
 rtk1140:屈:yield:｜,山,尸,凵
 rtk1141:掘:dig:｜,山,尸,扎,凵
 rtk1142:堀:ditch:｜,山,土,尸,凵
-rtk1143:居:reside:口,十,尸
-rtk1144:据:set:口,十,尸,扎
-rtk1145:裾:cuff:口,十,初,尸
+rtk1143:居:reside:尸,古
+rtk1144:据:set:扎,居
+rtk1145:裾:cuff:初,居
 rtk1146:層:stratum:田,日,并,尸
 rtk1147:局:bureau:口,尸
 rtk1148:遅:slow:王,込,并,羊,尸
@@ -2453,7 +2453,7 @@ rtk2181:襲:attack:衣,月,立,亠
 rtk2182:嚇:menacing:口,赤,土
 rtk2183:朕:majestic plural:月,人,大,一,并
 rtk2184:雰:atmosphere:雨,刀,ハ
-rtk2185:箇:counter for articles:口,十,竹,囗
+rtk2185:箇:counter for articles:竹,固
 rtk2186:錬:tempering:｜,一,金,日,木,田,并,ハ
 rtk2187:遵:abide by:込,寸,酉,并
 rtk2188:罷:quit:月,匕,厶
@@ -2528,7 +2528,7 @@ rtk2256:偲:recollect:心,田
 rtk2257:侭:as it is:尸,丶
 rtk2258:脩:dried meat:月,攵,｜
 rtk2259:倅:son:十,人,亠
-rtk2260:做:make:口,十,攵
+rtk2260:做:make:人,故
 rtk2261:冴:be clear:牙,冫
 rtk2262:凋:wither:口,土,冂,冫
 rtk2263:凌:endure:土,儿,冫,夂
@@ -2585,7 +2585,7 @@ rtk2313:娃:beautiful:女,土
 rtk2314:姪:niece:至,女,土,厶
 rtk2315:嬬:mistress:雨,而,女
 rtk2316:姥:old woman:女,老,匕
-rtk2317:姑:mother-in-law:口,十,女
+rtk2317:姑:mother-in-law:女,古
 rtk2318:姐:elder sister:女,目
 rtk2319:嬉:glad:口,士,女,豆,并
 rtk2320:孕:become pregnant:乃,子,ノ
@@ -2805,7 +2805,7 @@ rtk2533:脆:brittle:月,厂,勹,卩
 rtk2534:肋:rib:月,力
 rtk2535:腔:body cavity:穴,月,工,儿,宀
 rtk2536:肱:ability:ノ,一,月,厶
-rtk2537:胡:barbarian:月,口,十
+rtk2537:胡:barbarian:古,月
 rtk2538:楓:maple:風,木,几,虫,ノ
 rtk2539:楊:willow:一,日,木,勿
 rtk2540:椋:type of deciduous tree:口,小,木,亠
@@ -2883,7 +2883,7 @@ rtk2611:琉:precious stone:王,川,亠,厶
 rtk2612:瑳:polish:ノ,王,工,并,羊
 rtk2613:琢:polish:王,豕
 rtk2614:珊:coral:｜,一,王,亅,冂,冊,廾
-rtk2615:瑚:ancestral offering receptacle:王,月,口,十
+rtk2615:瑚:ancestral offering receptacle:王,胡
 rtk2616:瑞:congratulations:王,山,而
 rtk2617:玖:beautiful black jewel:久,王
 rtk2618:瑛:sparkle of jewelry:ノ,王,艾,大,冖
@@ -2959,7 +2959,7 @@ rtk2688:筈:notch of an arrow:口,舌,竹
 rtk2689:簸:winnow:甘,竹,皮,又
 rtk2690:粕:scrap:白,米
 rtk2691:糟:dregs:｜,一,日,米
-rtk2692:糊:paste:月,口,十,米
+rtk2692:糊:paste:米,胡
 rtk2693:籾:unhulled rice:刀,米,丶
 rtk2694:糠:rice bran:ヨ,水,米,广,隶
 rtk2695:糞:shit:｜,一,田,二,并,米,井
@@ -3043,13 +3043,13 @@ rtk2772:跨:be:口,足,大,二,勹,止
 rtk2773:跪:kneel:口,足,卩,厂,勹,止
 rtk2774:醤:a kind of miso:寸,爪,酉,爿
 rtk2775:醍:whey:酉,日,疋
-rtk2776:醐:boiled butter:月,口,十,酉
+rtk2776:醐:boiled butter:酉,胡
 rtk2777:醇:pure sake:口,子,酉,亠
 rtk2778:麹:malt:土,麦,米,亠,勹,夂,二
 rtk2779:釦:button:金,口
 rtk2780:銚:sake bottle:金,儿,冫
 rtk2781:鋤:spade up:金,目,力
-rtk2782:鋸:saw (cuts wood):金,口,十,尸
+rtk2782:鋸:saw (cuts wood):金,居
 rtk2783:錐:auger:金,隹
 rtk2784:鍬:hoe with long blade at acute angle:火,禾,金
 rtk2785:鋲:rivet:斤,金,并,ハ

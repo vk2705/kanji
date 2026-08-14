@@ -550,6 +550,78 @@ unrelated) rather than waiting for more one-off user reports like this session's
 "old"/happenstance question. `backend/audit_radicals.py` is the natural place to
 add this as a second check mode.
 
+### 2026-08-14 — session 5
+
+- Owner asked the *exact same* "old"/happenstance question again. Turned out
+  session 4 hadn't actually closed it: it found and fixed a real bug in
+  故's decomposition (the unaliased 乞 proxy) but that wasn't the bug behind
+  the reported symptom. Confirmed by rebuilding `kanji.db` fresh from
+  current `data.txt` (the on-disk DB left over in this container was stale
+  — still showed 乞 — a reminder to always rebuild from source before
+  trusting a query against whatever `kanji.db` happens to be sitting on
+  disk, in this sandbox "production" claims from past sessions notwithstanding)
+  and running the actual search: `古` alone matched "old", `故` didn't.
+- **Root cause, this time correctly identified**: `rtk355`'s override was
+  `古,十,攵`... no — `口,十,攵`. `古` ("old") is itself `rtk16`, already
+  correctly named and searchable, decomposed as 十(ten)+口(mouth). Whoever
+  wrote `故`'s override flattened `古`'s own two sub-parts directly into
+  `故`'s list instead of referencing `古`/"old" — **the exact same flattening
+  bug class as this doc's opening 猫/苗 example**, just a different glyph.
+  Grepped `data.txt` for every other line listing `口` immediately followed
+  by `十` (40 hits) and checked each by hand against the real kanji
+  structure (not a blind find/replace — several are coincidental: e.g.
+  `rtk1281` 噴, `rtk1979` 哺, and `rtk2291` 叶 all legitimately contain a
+  real, separate 口 "mouth" radical that has nothing to do with 古, and
+  several others — the `辟`-based cluster in 壁/璧/癖/譬, the `啇`-based
+  cluster in 嫡/滴/敵/摘 — are a *different* flattening bug worth its own
+  pass later, not this one). **19 lines confirmed as genuine `古` flattening
+  and fixed**: `rtk109` 克, `rtk159` 湖, `rtk219` 枯, `rtk239` 苦, `rtk355`
+  故, `rtk622` 固, `rtk623` 錮, `rtk1047` 個, `rtk1143` 居, `rtk1144` 据,
+  `rtk1145` 裾, `rtk2185` 箇, `rtk2260` 做, `rtk2317` 姑, `rtk2537` 胡,
+  `rtk2615` 瑚, `rtk2692` 糊, `rtk2776` 醐, `rtk2782` 鋸.
+  - Where the correct grouping was actually a *deeper* existing kanji
+    rather than `古` directly — `固`(=囗+古), `胡`(=古+月), `居`(=尸+古),
+    `故`(=古+攵) are each themselves the parent of further compounds — the
+    fix references that kanji instead of re-flattening to `古` a second
+    time (e.g. `錮`→`金,固` not `金,古,囗`; `瑚`→`王,胡` not `王,古,月`;
+    `做`→`人,故` not `人,古,攵`). This leans on the recursive
+    query-time resolution session 2/3 built: `錮`'s detail view now shows
+    `固` as an expandable chip that opens into `古`+`囗`, verified directly
+    against `get_kanji_detail()`'s output, not just the flat `parts` list.
+  - Two of the 19 (`rtk1047` 個, `rtk2260` 做) were also missing their
+    person radical (亻) entirely, unrelated to the `古` bug — added it while
+    fixing the `古` flattening since both fixes touched the same line
+    anyway; left `rtk1145` 裾's separately-suspect `初` term alone (probably
+    should be `衣`/clothing, but that's a different question and this
+    session was scoped to the `古`-adjacency pattern specifically).
+  - **Not fixed, flagged for a future session**: the `辟` cluster (壁 wall,
+    璧 sphere, 癖 mannerism, 譬 illustrate — all list `尸,口,辛` where the
+    real structure is `尸+口+辛` with `口` genuinely real, not `古`-related,
+    but the cluster still reads as under-resolved / possibly redundant with
+    a `辟` primitive that doesn't exist as its own entry) and the `啇`
+    cluster (嫡 legitimate wife, 滴 drip, 敵 enemy, 摘 pinch, 括 fasten — all
+    carry a `并,立,亠,冂` fragment that looks like the same "flatten instead
+    of reference" pattern applied to some `商`/`啇`-shaped primitive that
+    was never given its own entry). Neither is the `古` bug; both are
+    plausible instances of the *general* flattening-bug class and worth a
+    dedicated pass, same shape as this session's fix.
+- Verified: rebuilt `kanji.db` from scratch, `search_by_parts(['old'])` now
+  returns 9 kanji (`古 克 枯 苦 故 固 姑 胡 居`, up from 1); `search_by_parts
+  (['crime'])` still returns only `犯` itself (session 4's fix intact, not
+  regressed); `audit_radicals.py` still reports 0 unresolved single-glyph
+  terms (unaffected — this fix didn't touch Finding 1's territory, it's
+  a decomposition-quality fix, closer to Finding 2/3's territory);
+  spot-checked `get_kanji_detail()` output directly (not just `rtk.py`'s
+  flat view) for `rtk355`/`rtk1047`/`rtk623`/`rtk1144` to confirm the
+  recursive sub_parts render correctly through the new reference chains.
+- **This is the same lesson as session 3's stale-log correction, from a
+  different angle**: a "fixed" note in this log isn't enough on its own —
+  session 4's fix was real and correctly scoped to what it found, but
+  didn't fully resolve the symptom that triggered it, and nothing caught
+  that until the owner re-asked. Future sessions inheriting a "done" item
+  from this log should still spot-check the original reported symptom
+  directly, not just trust that the linked fix closed it.
+
 ## Tooling produced this session
 
 - `backend/audit_decomposition.py` — committed to `master`. Rebuilds a
