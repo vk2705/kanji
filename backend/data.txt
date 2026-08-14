@@ -86,7 +86,6 @@ rad4.3:?:fiesta
 rad4.4:?:door
 rad4.5:?:hand,fingers
 rad4.6:?:branch
-rad4.7:?:taskmaster
 rad4.8:?:sentence,plaid
 rad4.9:?:big dipper,measuring cup
 rad4.10:?:axe
@@ -579,7 +578,7 @@ rtk307:輸:transport:月,車,个,一
 rtk308:喩:metaphor:月,口,个,一
 rtk309:前:in front:一,月,并
 rtk310:煎:broil:一,月,并,杰
-rtk311:各:each:口,夂,攵
+rtk311:各:each:口,夂
 rtk312:格:status:口,木,夂
 rtk313:賂:bribe:貝,目,ハ,口,夂
 rtk314:略:abbreviation:口,田,夂
@@ -3281,7 +3280,7 @@ rad1005:尸:corpse
 rad1006:戈:spear,halberd
 rad1007:禾:grain
 rad1008:隹:short-tailed bird
-rad1009:攵:rap,knock
+rad1009:攵:rap,knock,taskmaster
 rad1010:广:dotted cliff
 rad1011:几:table,stool
 rad1012:凵:container,open box

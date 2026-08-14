@@ -703,6 +703,49 @@ add this as a second check mode.
   dump, safe to commit); this session didn't touch it, just confirmed it
   exists and fits the workflow the owner described.
 
+### 2026-08-14 — session 7
+
+- Deployed session 6's work to the live server (`srv.alteon.help`) for the
+  first time: `git pull`, `sync_system_data.py --dry-run` then for real (42
+  kanji inserted, 15 updated, 171 aliases added/1 removed, 2272
+  decompositions replaced — large "replaced" count expected per the
+  now-documented `DEPLOY_README.md`, not itself a red flag), backend
+  restart, spot-checked `rtk355` live to confirm the `古`-flattening fix
+  (session 5) actually reached production.
+- Owner then asked whether the hanzi (`zh-Hans`/`zh-Hant`/`zh-Hani`) side of
+  the data has the same class of problems. Answered from this doc's own
+  findings rather than guessing, plus one live check:
+  - The specific `古`-style flattening bug (sessions 2/5) is structurally
+    `data.txt`-only — hanzi decompositions come from `import_hanzi.py`
+    (cjkvi-ids IDS data), a different, non-hand-typed source. That exact
+    bug class doesn't apply there.
+  - But two *other*, hanzi-relevant issues are already on record and not
+    yet fully closed out:
+    1. The cross-script keyword-resolution bug in
+       `expand_part_terms`/`_build_char_lookup` (found session 2, fixed
+       session 3) — fixed in code but per session 3's own note, **"not yet
+       verified against a real, fully-seeded hanzi DB."** Spot-checked live
+       this session: `漢` as `ja-kanji` (rtk1701) resolves to
+       water/mugwort/mouth/one/large/two; the same glyph as `zh-Hant`
+       (hanzi-6f22) resolves to water/twenty/mouth/man — correctly
+       separated, no keyword bleed-through observed. Only a single spot
+       check, not a systematic pass across the ~2,628 dual-script glyphs.
+    2. Session 4's KRADFILE-proxy fix noted in passing that the same
+       keyword strings it was cleaning up in `ja-kanji` (e.g. "change")
+       also show up messily across ~24 unrelated `zh-*` decompositions —
+       evidence the `cjkvi-ids` source has its own noise, unaudited so far.
+- **Queued, explicitly non-urgent (owner's framing)**: a dedicated
+  decomposition-quality audit pass over the `zh-*` rows, parallel to the
+  one this doc's sessions 1–6 already did for `ja-kanji`. Likely a
+  different bug shape (IDS-parsing noise, not hand-typed flattening) —
+  nobody has looked yet. Natural first steps whenever picked up: (a)
+  broaden the session-7 spot check into a systematic sweep of the ~2,628
+  dual-script glyphs to confirm the cross-script fix holds generally, not
+  just for `漢`; (b) decide whether `audit_decomposition.py`/
+  `audit_radicals.py` should gain a `zh-*`-scoped mode or a hanzi audit
+  needs its own tooling, given the source data (IDS) is structurally
+  different from `data.txt`.
+
 ## Tooling produced this session
 
 - `backend/audit_decomposition.py` — committed to `master`. Rebuilds a
