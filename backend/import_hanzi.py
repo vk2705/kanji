@@ -258,7 +258,7 @@ def main():
         if ch not in char_script:
             continue
         cid = f"hanzi-{ord(ch):x}"
-        expanded_terms = expand_part_terms(conn, components, char_lookup)
+        expanded_terms = expand_part_terms(conn, components, char_lookup, script_group="zh")
         cur = conn.execute(
             "INSERT INTO decompositions (kanji_id, owner_id, visibility, label) VALUES (?, 1, 'public', 'ids')",
             (cid,)

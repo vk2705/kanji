@@ -352,29 +352,83 @@ judgment calls and why. Read it first before starting new work.
     specifically (doesn't require the full source-pseudo-owner piece too,
     but the two were designed together).
 
-**Queued for a future session (not started)**:
-1. **Hierarchical decomposition display** (now the priority — concrete
-   owner ask, see above). Needs: parts resolved recursively at query/detail
-   time instead of only ever reading the pre-flattened list (backend,
-   `get_kanji_detail` / a new endpoint), plus a `KanjiDetail.jsx` UI that
-   shows a part chip and lets the user expand it into its own sub-parts
-   (frontend). Both "prefecture" and "eye + ..." need to render
-   simultaneously, not replace one another.
-2. **Script-scope bug in `expand_part_terms`/`_build_char_lookup`**
-   (found this session, see above) — make the char→keyword lookup
-   script-aware like `resolve_alias`/`_resolve_parts_detail` already are,
-   so a shared glyph doesn't silently resolve to the wrong script's
-   keyword. Small, self-contained fix; do before any bulk decomposition
-   pass so the pass doesn't inherit the bug.
+**Queued for a future session (not started, as of end of session 2)**:
+1. ~~Hierarchical decomposition display~~ — **done, same session**: this
+   list was written slightly ahead of the commit that closed it out
+   (`6cdf7b9`, same day) and never got updated to say so. Correcting the
+   record here rather than editing session 2's text above: `database.py`'s
+   `_resolve_parts_detail` (recursive, depth-capped, cycle-guarded) plus
+   `main.py`'s detail endpoint and `KanjiDetail.jsx`'s `PartChip` all
+   shipped in that commit. Verified as actually present by reading the
+   current code at the start of session 3, not just trusting this log —
+   worth remembering that a log entry can be stale even within the same
+   day if written before the commit that finishes the work.
+2. ~~Script-scope bug in `expand_part_terms`/`_build_char_lookup`~~ —
+   **done, session 3** (see below).
 3. **Bulk decomposition audit** — extend the rtk1495 fix (flattened
    strokes → book-style primitive grouping) across the dataset instead of
    one kanji at a time. `audit_decomposition.py` (LLM-based, needs
    `OPENAI_API_KEY`) is built for exactly this but has never been run
-   against the real API; running it is the natural first step.
+   against the real API; running it is the natural first step. Now
+   unblocked (item 2 was the correctness prerequisite for this).
 4. **Bulk original-mnemonic generation** under the `ai-mnemonics` pseudo
    account for kanji that have no story yet — same "one kanji at a time,
    by hand" caveat as #3; needs a scoping decision (all ~2,900? JLPT
    levels first? something else) before running it at scale.
+
+### 2026-08-14 — session 3
+
+- Pulled latest, found session 2's log listed item 1 above as "not started"
+  when the code (and that session's own commit message) showed it was
+  actually shipped — see the strikethrough correction above. Lesson for
+  future sessions: trust the code over the log when they disagree, and
+  write the log entry *after* the commit that does the work, not before.
+- **Fixed the script-scope bug in `expand_part_terms`/`_build_char_lookup`**
+  (queued item 2, found in session 2): `_build_char_lookup` now returns
+  `character -> [(kanji_id, script), ...]` (a list of candidates) instead
+  of collapsing straight to a single winning id, and `expand_part_terms`
+  takes a new optional `script_group` ("ja"/"zh"/`None`, same values as
+  `_script_group()`) to pick the candidate matching the decomposition's
+  own script when a glyph is ambiguous — falling back to the first
+  candidate when `script_group` is unset or matches nothing, same
+  disambiguation `_resolve_parts_detail` already does at read time. Threaded
+  through all three call sites: `import_data()` now passes
+  `script_group="ja"` (it only ever writes ja-kanji rows), `import_hanzi.py`
+  now passes `script_group="zh"`, and `create_decomposition()` (the
+  contributions-API write path) derives it from the target kanji's own
+  `script` column, same pattern `_resolve_parts_detail` uses for
+  `parent_group`.
+  - **Verification caveat**: this sandbox can't run `import_hanzi.py`
+    end-to-end (it downloads `Unihan.zip` + `cjkvi-ids` from
+    unicode.org/GitHub — not attempted, would be slow and this session
+    didn't need real hanzi data to verify the fix). Verified instead with a
+    synthetic repro: inserted a fake `zh-Hans` row sharing 一's glyph with a
+    different keyword into the rebuilt shadow DB, confirmed
+    `expand_part_terms(term, script_group="ja")` picks rtk1's "one" and
+    `script_group="zh"` picks the fake Chinese keyword — both fail without
+    the fix (old code always picked whichever the dict-building query
+    returned last). Also rebuilt `kanji.db` from scratch and re-ran
+    `rtk.py detail rtk259/rtk1495` and `audit_radicals.py` to confirm no
+    regression on the ja-kanji-only path (identical output to session 2's
+    numbers: 11 single-glyph undefined terms, same rtk1495 grouping).
+    **Not yet verified against a real, fully-seeded hanzi DB** — whoever
+    next runs `import_hanzi.py` for real (or has one already seeded, e.g.
+    the live production DB) should spot-check a handful of the ~2,628
+    dual-script glyphs' decompositions to confirm the fix holds outside the
+    synthetic repro.
+- Did not start the bulk decomposition audit (item 3) or bulk mnemonic
+  generation (item 4) this session — the script-scope fix was the whole
+  chunk for this wake-up, per the brief's "steady incremental progress,
+  not everything in one sitting."
+
+**Next session**: item 3 (bulk decomposition audit via
+`audit_decomposition.py`) is the natural next step — needs `OPENAI_API_KEY`
+set in the environment, which hasn't been available in any session so far;
+check whether it's set before assuming this is blocked again. If still
+unavailable, the deterministic Finding 1 leftovers (11 single-glyph terms:
+`ノ ハ 并 扎 杰 个 阡 疔 マ 禹 ユ`, see session 1's notes above) or Finding 2's
+five proxy-character fixes (乞/化/刈/買/犯, now largely unblocked by session
+1's radical naming) are good API-key-free alternatives.
 
 ## Tooling produced this session
 

@@ -244,20 +244,26 @@ def _load_parts_file(path: Path) -> dict[str, list[str]]:
     return result
 
 
-def _build_char_lookup(conn) -> tuple[dict[str, str], dict[str, str]]:
-    """Build (character -> kanji_id, kanji_id -> keyword) lookups for expand_part_terms."""
-    char_to_db_id: dict[str, str] = {}
-    for r in conn.execute("SELECT id, character FROM kanji WHERE character IS NOT NULL AND character != ''").fetchall():
+def _build_char_lookup(conn) -> tuple[dict[str, list[tuple[str, str]]], dict[str, str]]:
+    """Build (character -> [(kanji_id, script), ...] candidates, kanji_id -> keyword)
+    lookups for expand_part_terms. A glyph can have more than one candidate when it
+    exists as both a ja-kanji row and a separate zh-* row (~2,628 of them, see
+    CLAUDE.md's script-aware resolution section) — expand_part_terms disambiguates
+    using script_group, the same _script_group() pattern _resolve_parts_detail already
+    uses at read time."""
+    char_to_candidates: dict[str, list[tuple[str, str]]] = {}
+    for r in conn.execute("SELECT id, character, script FROM kanji WHERE character IS NOT NULL AND character != ''").fetchall():
         if r["character"] not in ("?", "??"):
-            char_to_db_id[r["character"]] = r["id"]
+            char_to_candidates.setdefault(r["character"], []).append((r["id"], r["script"]))
     id_to_keyword: dict[str, str] = {
         r["id"]: r["keyword"]
         for r in conn.execute("SELECT id, keyword FROM kanji WHERE keyword IS NOT NULL").fetchall()
     }
-    return char_to_db_id, id_to_keyword
+    return char_to_candidates, id_to_keyword
 
 
-def expand_part_terms(conn, terms: list[str], char_lookup: tuple[dict, dict] | None = None) -> list[str]:
+def expand_part_terms(conn, terms: list[str], char_lookup: tuple[dict, dict] | None = None,
+                       script_group: str | None = None) -> list[str]:
     """
     If a part term is itself a kanji CHARACTER (rather than a primitive name), also
     include that character's keyword right after it, so keyword-based search matches
@@ -265,13 +271,29 @@ def expand_part_terms(conn, terms: list[str], char_lookup: tuple[dict, dict] | N
     _build_char_lookup) to avoid rebuilding it on every call in a bulk loop like
     import_data()'s; for a single one-off submission it's built fresh here, which is
     cheap at that scale.
+
+    script_group (a _script_group() value, "ja"/"zh"/None) picks which candidate's
+    keyword to use when the glyph is ambiguous across scripts, preferring a match to
+    the decomposition's own script and falling back to the first candidate otherwise.
+    Before this parameter existed, the "first" candidate was really whichever row a
+    fresh, unordered dict-building query happened to return last — non-deterministic
+    in practice, and a real bug (found 2026-08-13, see docs/2026-08-search-quality-
+    audit.md): a shared glyph could silently pull in the wrong script's keyword.
     """
-    char_to_db_id, id_to_keyword = char_lookup if char_lookup else _build_char_lookup(conn)
+    char_to_candidates, id_to_keyword = char_lookup if char_lookup else _build_char_lookup(conn)
     expanded = []
     for term in terms:
-        if term in char_to_db_id:
+        candidates = char_to_candidates.get(term)
+        if candidates:
             expanded.append(term)
-            kw = id_to_keyword.get(char_to_db_id[term])
+            chosen_id = None
+            if script_group:
+                chosen_id = next(
+                    (kid for kid, script in candidates if _script_group(script) == script_group), None
+                )
+            if chosen_id is None:
+                chosen_id = candidates[0][0]
+            kw = id_to_keyword.get(chosen_id)
             if kw:
                 expanded.append(kw)
         else:
@@ -443,7 +465,7 @@ def import_data():
         # parts may legitimately be [] here — an explicit "this is atomic" override
         # (see _load_parts_file) — in which case we still clear any fallback parts,
         # just insert nothing.
-        expanded_terms = expand_part_terms(conn, parts, char_lookup) if parts else []
+        expanded_terms = expand_part_terms(conn, parts, char_lookup, script_group="ja") if parts else []
 
         conn.execute("DELETE FROM parts WHERE kanji_id = ?", (canonical,))
         if expanded_terms:
@@ -969,7 +991,9 @@ def create_kanji_entry(conn, owner_id: int, keyword: str, character: str | None,
 def create_decomposition(conn, kanji_id: str, owner_id: int, parts: list[str],
                           label: str | None, visibility: str) -> int:
     terms = [p.strip().lower() for p in parts if p.strip()]
-    expanded_terms = expand_part_terms(conn, terms)
+    parent = conn.execute("SELECT script FROM kanji WHERE id = ?", (kanji_id,)).fetchone()
+    script_group = _script_group(parent["script"]) if parent else None
+    expanded_terms = expand_part_terms(conn, terms, script_group=script_group)
     cur = conn.execute(
         "INSERT INTO decompositions (kanji_id, owner_id, visibility, label) VALUES (?, ?, ?, ?)",
         (kanji_id, owner_id, visibility, label)
