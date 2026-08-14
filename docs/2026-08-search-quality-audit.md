@@ -430,6 +430,84 @@ unavailable, the deterministic Finding 1 leftovers (11 single-glyph terms:
 five proxy-character fixes (乞/化/刈/買/犯, now largely unblocked by session
 1's radical naming) are good API-key-free alternatives.
 
+### 2026-08-14 — session 4
+
+- Triggered by the owner asking why searching "old" doesn't find 故 (happenstance,
+  `rtk355`) — tracing it surfaced 乞 ("beg") sitting unaliased in 故's parts list,
+  i.e. Finding 2 in the wild. Went to actually root-cause Finding 2 rather than
+  continue treating it as "needs case-by-case investigation, uniform assumption
+  rejected" as the original doc text said.
+- **Root cause of all 5 confirmed proxies (乞/化/刈/買/犯), confirmed empirically**:
+  fetched the real upstream KRADFILE (`ftp.edrdg.org/pub/Nihongo/kradfile.gz`) and
+  checked it directly, rather than continuing to guess from symptoms. Its own header
+  comment: "the elements used have been drawn from JIS X 0208 — where the element
+  alone is not in JIS X 0208, a kanji which contains the element is used instead."
+  All 5 are exactly this — KRADFILE's own stand-in glyphs for stroke shapes with no
+  JIS X 0208 codepoint, not an error `import_rtk.py`/`data.txt` introduced. This
+  reverses the original doc's "not a clean 1:1 substitution" framing: it's not that
+  each proxy needs a different real primitive identified per host, it's that none of
+  them ever stood for one consistent thing — they're a generic "no exact glyph
+  available" placeholder in the source data itself, used across whatever unrelated
+  kanji happened to need it. `犯`'s own KRADFILE entry even lists itself as one of
+  its own components, confirming it's an index artifact, not a decomposition.
+- **Second-order bug found while fixing**: `expand_part_terms` auto-expands each raw
+  proxy glyph into an *additional* sibling row holding the glyph's own (irrelevant)
+  keyword at import time — e.g. every 犯 row was paired with a stored "crime" row.
+  Deleting only the glyph rows would have left "crime"/"beg"/"change"/"reap"/"buy"
+  behind as orphaned search hits. Verified (on the pre-fix DB) that within
+  `owner_id=1` + `ja-kanji` scope, every occurrence of these 5 keyword strings
+  paired exactly 1:1 with the glyph's own occurrences (167/137/54/31/27, matching
+  each proxy's known host count) — safe to delete both together in that scope.
+  Outside that scope (unscoped, including `zh-*` hanzi rows) the pairing did *not*
+  hold cleanly (e.g. "change" appeared in 24 hanzi decompositions with no 化 glyph
+  present) — a reminder that this fix must stay scoped to `ja-kanji`, not generalized
+  by pattern-matching the keyword string alone.
+- **Fix executed**, not just diagnosed:
+  - `backend/data.txt`: stripped the 5 glyphs from all 397 affected lines (scripted,
+    not hand-edited — see git diff). One line (`rtk1007` 竹 "bamboo") lost its only
+    listed part and now correctly shows no decomposition, same pattern as the
+    already-documented `rtk1743` 門 case (atomic Heisig primitive, not a bug).
+  - New script `backend/fix_kradfile_proxies.py`: deletes both the glyph rows and
+    their paired auto-expanded keyword rows directly from an already-seeded
+    `kanji.db`, scoped to `owner_id=1 AND k.script='ja-kanji'` — deliberately leaves
+    user contributions alone (real editorial choice, not this artifact) and leaves
+    `zh-*` hanzi rows alone (`import_hanzi.py` sources decompositions from cjkvi-ids
+    IDS data, a different and stricter source where these same 5 characters can be
+    genuine drawn components, not a JIS-substitution artifact).
+  - Ran it for real: 416 glyph rows + 416 paired keyword rows removed (832 total),
+    matching the original doc's "~416 occurrences across the 5 confirmed proxies"
+    estimate exactly.
+  - **Discovered mid-task that this box has no separate dev/prod database** —
+    `database.py`'s `DB_PATH` is always `Path(__file__).parent / "kanji.db"`, no env
+    override, and `kanji-backend.service`'s `WorkingDirectory` is the same
+    `backend/` folder. What was being verified as "local" was already production.
+    Backed up (`cp kanji.db kanji.db.bak-<timestamp>`) before patching regardless.
+  - Verified live against the running production API after the fact: `GET
+    /kanji/rtk259` (猫 cat) no longer lists 犯/crime in its decomposition; `POST
+    /search/parts {"parts":["crime"]}` now returns only 犯 itself, not the 27
+    unrelated former hosts. Also spot-checked via `rtk.py`: "beg"/"buy" parts
+    searches now return only hanzi entries (untouched, different valid source) plus
+    乞/買 themselves.
+- **Not done this session**: `data.txt`'s fix and `fix_kradfile_proxies.py` are
+  uncommitted as of this entry — ask before committing/pushing next session if not
+  already done. The full multi-owner-decomposition architecture migration
+  (source pseudo-owners + `sources` filter, items 1/3/4 from the architecture
+  decision above) is still not started; this session's fix stayed inside the
+  existing flat `data.txt` → `owner_id=1` pipeline, same as session 1, because the
+  concrete bug (Finding 2) turned out to have a clean, well-evidenced answer that
+  didn't need the bigger migration to fix correctly — the migration is still the
+  right call for *preventing this class of bug*, just wasn't required to *fix this
+  instance* of it.
+
+**Open follow-up for a future session**: the same "KRADFILE JIS-substitution"
+mechanism that produced these 5 confirmed proxies almost certainly produced others
+that just haven't been pattern-reviewed yet — worth writing a deterministic check
+(cross-reference every `rtk*` decomposition's part terms against a downloaded
+KRADFILE, flag any part glyph whose KRADFILE host list is large/visually
+unrelated) rather than waiting for more one-off user reports like this session's
+"old"/happenstance question. `backend/audit_radicals.py` is the natural place to
+add this as a second check mode.
+
 ## Tooling produced this session
 
 - `backend/audit_decomposition.py` — committed to `master`. Rebuilds a
@@ -447,3 +525,10 @@ five proxy-character fixes (乞/化/刈/買/犯, now largely unblocked by sessio
   into single-glyph vs. multi-char terms. This is now the authoritative way
   to recheck the Finding 1 radical count (`python3 audit_radicals.py`); the
   proxy-frequency check from Finding 2 is still ad hoc, not yet scripted.
+- `backend/fix_kradfile_proxies.py` — added 2026-08-14 (session 4), **not yet
+  committed**. One-off direct-DB patch, not a reusable audit tool: deletes the
+  5 confirmed KRADFILE-proxy glyphs (乞/化/刈/買/犯) and their auto-expanded
+  keyword rows from `owner_id=1`/`ja-kanji` decompositions in an already-seeded
+  `kanji.db`. Already run against the live DB (see session 4 above) — rerunning
+  it is a safe no-op (dry-run reports 0 rows) unless the proxy list grows from
+  the open follow-up above.
