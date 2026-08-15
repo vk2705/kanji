@@ -746,6 +746,47 @@ add this as a second check mode.
   needs its own tooling, given the source data (IDS) is structurally
   different from `data.txt`.
 
+### 2026-08-14 — session 8
+
+- Continued the backlog item session 7 flagged while fixing `rtk311` 各
+  ("each"): 9 other kanji also listed both `夂` (walking legs/go-slowly)
+  and `攵` (rap/knock) as parts, same shape as 各's bug (one of the two is
+  always a spurious extra, not something the character actually contains).
+  Session 7 explicitly deferred these, noting each needs its own structural
+  check rather than a uniform assumption — same caution this doc has used
+  since Finding 2's original "乞 isn't a clean 1:1 proxy" lesson.
+- Checked each of the 9 against the character's real composition (not
+  pattern-matched):
+  - **`夂` is real, `攵` is the spurious extra** in `rtk318` 処 (dispose,
+    = 夂+几, no rap element anywhere), `rtk319` 条 (article, = 夂+木), and
+    `rtk456` 冬 (winter, = 夂+two dots/ice) — none of these three visually
+    contain the 4-stroke "rap" radical at all.
+  - **`攵` is real, `夂` is the spurious extra** in `rtk358` 警 and
+    `rtk2141` 驚 (both built on 敬, whose own right side is genuinely 攵 —
+    敬/警/驚 all share it, a very standard combination), `rtk998` 数 and
+    `rtk2483` 薮 (both built on the rice+woman+攵 "count/number" primitive
+    — 薮 = 艹+数), `rtk1031` 悠 (built on 攸 = 亻+丨+攵), and `rtk2369` 撒
+    (built on 散, whose own right side is also 攵) — none of these six
+    visually contain the 3-stroke "go slowly" radical.
+  - Net: 3 kanji lost their spurious `攵`, 6 lost their spurious `夂`.
+- Verified: rebuilt `kanji.db` from scratch, confirmed both directions —
+  `search_by_parts(['walking legs'])` no longer includes the 6 that
+  shouldn't have it and still includes the 3 (plus `rtk311` 各 from session
+  7) that should; `search_by_parts(['rap'])` no longer includes the 3 that
+  shouldn't have it and still includes the 6. `audit_radicals.py` and the
+  `古`/`crime` spot-checks from sessions 4/5 are unaffected (0 single-glyph
+  undefined terms, same result sets as before).
+- **Not yet synced to the live server** — this is a `data.txt`-only change;
+  per `DEPLOY_README.md`, whoever next has access to `srv.alteon.help` needs
+  to `git pull && python3 backend/sync_system_data.py` there before this
+  reaches real users (same as every session since 6's script existed — the
+  fix lives in the repo the moment it's pushed, but the live DB needs the
+  sync step run separately, on the actual server).
+- This closes out session 7's specific backlog item. The `辟`/`啇` clusters
+  flagged in session 5 (壁/璧/癖/譬 and 嫡/滴/敵/摘/括) are a similar shape of
+  "under-resolved or duplicated primitive" question and remain open —
+  natural next candidate for the same treatment.
+
 ## Tooling produced this session
 
 - `backend/audit_decomposition.py` — committed to `master`. Rebuilds a

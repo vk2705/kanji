@@ -585,8 +585,8 @@ rtk314:略:abbreviation:口,田,夂
 rtk315:客:guest:口,夂,宀
 rtk316:額:forehead:貝,目,ハ,口,頁,夂,宀
 rtk317:夏:summer:一,自,夂,目
-rtk318:処:dispose:几,夂,攵
-rtk319:条:article:木,夂,攵
+rtk318:処:dispose:几,夂
+rtk319:条:article:木,夂
 rtk320:落:fall:口,水,夂,艾
 rtk321:冗:superfluous:冖,几
 rtk322:冥:dark:日,ハ,亠,冖
@@ -625,7 +625,7 @@ rtk354:枚:sheet of...:木,攵
 rtk355:故:happenstance:古,攵
 rtk356:敬:awe:口,勹,攵,艾
 rtk357:言:say:
-rtk358:警:admonish:言,口,勹,夂,艾,攵
+rtk358:警:admonish:言,口,勹,艾,攵
 rtk359:計:plot:言,十
 rtk360:詮:discussion:王,言,个,ハ
 rtk361:獄:prison:言,犬
@@ -723,7 +723,7 @@ rtk452:雲:cloud:一,雨,二,厶
 rtk453:曇:cloudy weather:雨,二,日,厶
 rtk454:雷:thunder:雨,田
 rtk455:霜:frost:雨,木,目
-rtk456:冬:winter:夂,丶,攵
+rtk456:冬:winter:夂,丶
 rtk457:天:heavens:一,大,二
 rtk458:妖:attractive:ノ,女,大
 rtk459:沃:fertility:ノ,水,大
@@ -1265,7 +1265,7 @@ rtk994:謎:riddle:言,込,米
 rtk995:糧:provisions:一,日,米,里
 rtk996:菊:chrysanthemum:米,勹,艾
 rtk997:奥:heart:大,米,冂
-rtk998:数:number:女,米,攵,夂
+rtk998:数:number:女,米,攵
 rtk999:楼:watchtower:女,米,木
 rtk1000:類:sort:貝,目,ハ,大,米,頁
 rtk1001:漆:lacquer:水,木,个
@@ -1298,7 +1298,7 @@ rtk1027:住:dwell:王,丶
 rtk1028:位:rank:立
 rtk1029:仲:go-between:｜,口
 rtk1030:体:body:木,一
-rtk1031:悠:permanence:｜,心,夂,攵
+rtk1031:悠:permanence:｜,心,攵
 rtk1032:件:affair:牛
 rtk1033:仕:attend:士
 rtk1034:他:other:也
@@ -2408,7 +2408,7 @@ rtk2137:駆:drive:馬,匚,丶,ノ,杰
 rtk2138:駅:station:馬,尸,杰,丶
 rtk2139:騒:boisterous:虫,馬,又,杰
 rtk2140:駄:burdensome:大,馬,丶,杰
-rtk2141:驚:wonder:口,馬,勹,夂,艾,攵,杰
+rtk2141:驚:wonder:口,馬,勹,艾,攵,杰
 rtk2142:篤:fervent:竹,杰,馬
 rtk2143:罵:abuse:馬,杰
 rtk2144:騰:leaping up:月,馬,并,一,人,大,二,杰
@@ -2636,7 +2636,7 @@ rtk2365:撚:twist:犬,夕,扎,杰
 rtk2366:挺:bravely volunteer:王,廴,扎
 rtk2367:擾:disturb:一,心,白,冖,夂,扎,自
 rtk2368:撫:stroke:｜,ノ,一,扎,杰,無
-rtk2369:撒:scatter:｜,月,夂,扎,攵,廾,二
+rtk2369:撒:scatter:｜,月,扎,攵,廾,二
 rtk2370:擢:excel in:ヨ,扎,隹
 rtk2371:摺:rub:羽,白,冫,扎
 rtk2372:捷:victory:疋,扎,ヨ
@@ -2750,7 +2750,7 @@ rtk2479:蒼:blue:ノ,口,个,艾,一
 rtk2480:藁:straw:口,高,木,亠,冂,艾
 rtk2481:蕪:turnip:｜,ノ,一,杰,艾,無
 rtk2482:藷:potato:言,日,老,艾
-rtk2483:薮:thicket:女,米,夂,艾,攵
+rtk2483:薮:thicket:女,米,艾,攵
 rtk2484:蒜:garlic:示,二,小,艾
 rtk2485:蕨:bracken:欠,并,厂,屮,艾
 rtk2486:蔚:dense growth:示,二,小,寸,尸,艾
