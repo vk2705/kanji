@@ -787,6 +787,60 @@ add this as a second check mode.
   "under-resolved or duplicated primitive" question and remain open —
   natural next candidate for the same treatment.
 
+### 2026-08-15 — session 9
+
+- Picked up session 5's `辟`/`啇` cluster backlog item. First correction:
+  `括` (rtk714, "fasten") doesn't actually belong to the `啇` cluster —
+  checked its current parts (`ノ,口,十,舌,扎`) and there's no
+  `并,立,亠,冂` fragment; its real structure is 扌+舌 (hand+tongue), a
+  different primitive entirely. Session 5's list of 5 was off by one;
+  the real `啇` cluster is 4 kanji (嫡/滴/敵/摘).
+- **`辟` cluster (壁/璧/癖/譬)** — resolved with high confidence, derived
+  from already-verified data rather than guessed: all 4 hosts' flattened
+  fragment (`口,十,辛,立,尸`, plus one host-specific extra each) is exactly
+  `尸 + 口 + 辛`, where `辛`'s own decomposition (`rtk1612`, already
+  correct) is `十,立` — the "extra" `十,立` in each host is `辛` flattened
+  a second time, same pattern as session 5's `古`/`固`/`胡`/`居` fix.
+  Created `辟` as a new primitive (`rad1054`, alias `heki` — its modern
+  on'yomi, matching `癖`'s own `heki` reading) with parts `尸,口,辛`, then
+  pointed all 4 hosts at it: `壁`→`辟,土`, `璧`→`王,辟`, `癖`→`疔,辟`
+  (`疔` = "sickness radical" per session 4), `譬`→`言,辟`.
+- **`啇` cluster (嫡/滴/敵/摘)** — same flattening shape, but *not* fully
+  derivable from already-verified data (unlike `辟`, nothing in the repo
+  already independently confirms `啇`'s own internal structure), so
+  handled more conservatively: created `啇` as a new primitive
+  (`rad1055`, alias `teki`) but left it **atomic — no sub-parts
+  recorded**, rather than guess one. The naming evidence is still solid
+  (3 of its 4 hosts — 敵/滴/摘 — share the on'yomi "teki"; its hosts'
+  flattened fragment `口,并,立,亠,冂` is near-identical to `商`/`rtk471`'s
+  own already-correct `口,并,立,亠,儿,冂`, missing only `儿`), just not
+  strong enough to also assert what `啇` itself is made of. Fixed the 4
+  hosts to reference it: `嫡`→`女,啇`, `滴`→`水,啇`, `敵`→`啇,攵`,
+  `摘`→`扎,啇` — also dropped a separate, unrelated bug found along the
+  way: `嫡`/`敵`/`摘`'s old flattened lists each nonsensically included
+  `滴` itself as one of their own parts (a different character listed as
+  a sub-component, not a flattening artifact — no idea how that got
+  there, just removed it since none of the three actually contain 滴).
+- Verified: rebuilt `kanji.db` from scratch. `search_by_parts(['heki'])`
+  and `search_by_parts(['teki'])` each cleanly group their primitive with
+  exactly its 4 real hosts. `get_kanji_detail('rtk1616')` (壁) confirmed
+  the full recursive chain renders: 辟 → {尸 (→ its own corpse/death
+  sub-parts), 口, 辛 (→ 十, 立)}. `search_by_parts(['spicy'])` no longer
+  over-matches the 4 former 辟-hosts (they no longer literally list 辛 in
+  their own flat parts — available one click down via the recursive UI
+  instead, not lost). `audit_radicals.py` still 0 undefined single-glyph
+  terms; all of sessions 4/5/8's spot-checks (`old`, `crime`, `walking
+  legs`, `rap`) unchanged.
+- **Not yet synced to the live server** — same as session 8's fix, needs
+  `sync_system_data.py` run on `srv.alteon.help` per `DEPLOY_README.md`.
+- No more flagged-but-unresolved decomposition clusters remain from
+  Findings 1/2's original list as of this entry. Next open items: the
+  queued `zh-*` hanzi audit (session 7, explicitly non-urgent), the full
+  multi-owner/query-time-resolution architecture migration (still not
+  started since the architecture decision was recorded in session 1), or
+  running `audit_decomposition.py`'s LLM pass if `OPENAI_API_KEY` is ever
+  available in a session (checked again this session — still not set).
+
 ## Tooling produced this session
 
 - `backend/audit_decomposition.py` — committed to `master`. Rebuilds a

@@ -739,10 +739,10 @@ rtk468:童:juvenile:里,立
 rtk469:瞳:pupil (of eye):目,里,立
 rtk470:鐘:bell:金,里,立
 rtk471:商:make a deal:口,并,立,亠,儿,冂
-rtk472:嫡:legitimate wife:口,十,女,并,立,亠,冂,滴
+rtk472:嫡:legitimate wife:女,啇
 rtk473:適:suitable:口,込,十,并,立,亠,冂,滴
-rtk474:滴:drip:口,十,水,并,立,亠,冂
-rtk475:敵:enemy:口,十,并,立,亠,冂,攵,滴
+rtk474:滴:drip:水,啇
+rtk475:敵:enemy:啇,攵
 rtk476:匕:spoon:
 rtk477:叱:scold:口,匕
 rtk478:匂:fragrant:勹,匕
@@ -976,7 +976,7 @@ rtk705:打:strike:亅,扎
 rtk706:拘:arrest:口,勹,扎
 rtk707:捨:discard:口,土,个,扎
 rtk708:拐:kidnap:口,刀,扎
-rtk709:摘:pinch:口,十,并,立,亠,冂,扎,滴
+rtk709:摘:pinch:扎,啇
 rtk710:挑:challenge:儿,冫,扎
 rtk711:指:finger:日,匕,扎
 rtk712:持:hold:寸,土,扎
@@ -1883,8 +1883,8 @@ rtk1612:辛:spicy:十,立
 rtk1613:辞:resign:口,十,辛,舌,立
 rtk1614:梓:catalpa tree:十,辛,木,立
 rtk1615:宰:superintend:十,辛,立,宀
-rtk1616:壁:wall:口,十,辛,土,立,尸
-rtk1617:璧:sphere:王,口,十,辛,立,尸
+rtk1616:壁:wall:辟,土
+rtk1617:璧:sphere:王,辟
 rtk1618:避:evade:口,込,十,辛,立,尸
 rtk1619:新:new:斤,辛,并,木,立,亠
 rtk1620:薪:fuel:斤,辛,并,木,立,艾,亠
@@ -2093,7 +2093,7 @@ rtk1822:痕:mark:艮,疔
 rtk1823:疲:exhausted:皮,又,疔
 rtk1824:疫:epidemic:殳,疔,几,又
 rtk1825:痛:pain:用,疔,マ
-rtk1826:癖:mannerism:口,十,辛,立,尸,疔
+rtk1826:癖:mannerism:疔,辟
 rtk1827:匿:hide:ノ,口,匚,艾
 rtk1828:匠:artisan:斤,匚
 rtk1829:医:doctor:矢,匚
@@ -3025,7 +3025,7 @@ rtk2755:誹:ridicule:言,非
 rtk2756:謂:reason:月,言,田
 rtk2757:諜:spy out:言,木,世
 rtk2758:註:notes:王,言,丶
-rtk2759:譬:illustrate:言,口,十,辛,立,尸
+rtk2759:譬:illustrate:言,辟
 rtk2760:轟:roar:車
 rtk2761:輔:help:車,十,用,丶
 rtk2762:輻:spoke (wheel):口,車,田
@@ -3337,3 +3337,16 @@ rad1050:ノ:katakana no
 rad1051:ハ:katakana ha
 rad1052:マ:katakana ma
 rad1053:ユ:katakana yu
+
+# 辟/啇 clusters flagged session 5 (docs/2026-08-search-quality-audit.md),
+# resolved session 9: both were flattened into every host's own decomposition
+# instead of being named as their own primitive. 辟's parts (尸,口,辛) are
+# derived directly from already-verified data (辛 = rtk1612's own existing
+# "十,立" decomposition, exactly matching the flattened fragment shared by
+# all 4 辟-hosts). 啇 is left atomic (no verified sub-decomposition) rather
+# than guess one; its 4 hosts' near-identical flattened fragment closely
+# mirrors 商/rtk471's own (口,并,立,亠,冂 vs 商's 口,并,立,亠,儿,冂), and 3 of
+# its 4 hosts (敵/滴/摘) share the on'yomi "teki", both used as corroborating
+# evidence for naming it, not as evidence for its internal structure.
+rad1054:辟:heki:尸,口,辛
+rad1055:啇:teki
