@@ -887,6 +887,46 @@ add this as a second check mode.
 - Not yet synced to the live server — needs `sync_system_data.py` run on
   `srv.alteon.help` per `DEPLOY_README.md`, same as sessions 8/9.
 
+### 2026-08-15 — session 11
+
+- Two more owner-reported flattening bugs, same shape as session 10's
+  `報`/`幸` fix — both confirmed against `heisig-kanjis.csv`'s own baseline
+  before touching anything, not just taken on the owner's word alone
+  (though both turned out exactly right):
+  - **`告`** (revelation, `rtk262`): CSV baseline is `cow; mouth` — a
+    `data.txt` override replaced it with `ノ,口,土`, losing `牛`/"cow"
+    entirely and adding two terms (`ノ`, `土`) that don't belong. Fixed to
+    `牛,口`.
+  - **`産`** (products, `rtk1681`): CSV baseline is `stand up; cliff;
+    life; ...` (plus several duplicate/redundant terms from the CSV's own
+    pre-expansion, not relevant here). The `data.txt` override was
+    *closer* than 告's case — already had `生,立,厂` (life/stand/cliff)
+    right, but padded with three extra terms (`ノ,并,亠`) that don't
+    belong. Fixed to `立,厂,生`.
+- Verified: rebuilt `kanji.db` from scratch. `get_kanji_detail` for both
+  now shows exactly the expected parts (告 → 牛,口; 産 → 立,厂,生, no
+  more, no less). `search_by_parts(['cow'])` and `search_by_parts(['stand
+  up'])` both include their respective kanji correctly.
+  `audit_radicals.py` and prior spot-checks (`old`, `happiness`, `heki`)
+  unaffected.
+- **Pattern worth naming explicitly for whoever continues this**: sessions
+  10 and 11 both found the exact same failure mode — `heisig-kanjis.csv`'s
+  own baseline `components` field is already correct, and a hand-written
+  `data.txt` override silently discarded it in favor of something worse.
+  This is a different discovery path than most of this doc's earlier
+  fixes (which mostly came from reasoning about a character's real visual
+  structure from scratch); here the correct answer was sitting in the
+  repo's own baseline source the whole time. **Worth a dedicated pass**:
+  script a comparison of every `data.txt`-overridden `rtk*` entry against
+  its own CSV baseline component list, and flag any override that looks
+  like a regression (drops a CSV term without a clear reason) rather than
+  a genuine improvement (CSV terms are known to need expansion/aliasing
+  work sometimes — not every override is bad, e.g. correcting CSV's own
+  duplicate-component bugs). Nobody has done this systematically yet;
+  sessions 10/11 only found these because the owner happened to spot them.
+- Not yet synced to the live server — needs `sync_system_data.py` run on
+  `srv.alteon.help` per `DEPLOY_README.md`.
+
 ## Tooling produced this session
 
 - `backend/audit_decomposition.py` — committed to `master`. Rebuilds a

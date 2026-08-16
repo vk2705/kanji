@@ -529,7 +529,7 @@ rtk258:狩:hunt:寸,宀
 rtk259:猫:cat:田,艾
 rtk260:牛:cow:
 rtk261:特:special:牛,寸,土
-rtk262:告:revelation:ノ,口,土
+rtk262:告:revelation:牛,口
 rtk263:先:before:ノ,土,儿
 rtk264:洗:wash:ノ,水,土,儿
 rtk265:介:jammed in:ハ,个
@@ -1948,7 +1948,7 @@ rtk1677:醒:awake:生,酉,日
 rtk1678:姓:surname:女,生
 rtk1679:性:sex:生,忙
 rtk1680:牲:animal sacrifice:牛,生
-rtk1681:産:products:ノ,生,并,立,亠,厂
+rtk1681:産:products:立,厂,生
 rtk1682:隆:hump:生,夂,阡
 rtk1683:峰:summit:｜,一,山,夂
 rtk1684:蜂:bee:｜,一,虫,夂
