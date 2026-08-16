@@ -927,6 +927,109 @@ add this as a second check mode.
 - Not yet synced to the live server — needs `sync_system_data.py` run on
   `srv.alteon.help` per `DEPLOY_README.md`.
 
+### 2026-08-15 — session 12
+
+- **Owner-reported: `广` shouldn't be named "dotted cliff".** Checked
+  before renaming — "dotted cliff" was the official Kangxi radical name I
+  used when naming it in session 1, but `data_from_pdf.txt` (the actual
+  4th-edition PDF extraction, sitting unused in the repo) consistently
+  calls this shape **"cave"** across every kanji that uses it (店, 座, 康,
+  度, 麻, 応, 庸, 鎌, ...) — the real curriculum term. Made "cave" the
+  primary alias on `rad1010` (so it becomes the keyword), kept "dotted
+  cliff" as a secondary alias. Found and left alone a harmless dormant
+  duplicate: `rad3.25`, one of the 250 never-resolved legacy `radN.M`
+  ghost entries, already had alias "cave" but `character` still `?`
+  (inert, same "leave it, not worth the churn" call as session 7's
+  "taskmaster").
+- **Owner-reported, individually, before the systematic pass below**:
+  `告` (revelation) should be cow+mouth, `産` (products) should be
+  stand+cliff+life. Both confirmed against `heisig-kanjis.csv`'s own
+  baseline (which was right) before fixing — same failure mode as
+  session 10's `報`/`幸` find: a `data.txt` override had discarded the
+  CSV's already-correct grouping. `告` → `牛,口` (was `ノ,口,土`,
+  losing `牛`/cow entirely); `産` → `立,厂,生` (was already mostly right,
+  `生,立,厂`, just padded with three terms that don't belong).
+- **Built the systematic pass sessions 10/11 flagged as queued but
+  undone**: `backend/audit_csv_regressions.py`, a deterministic (no API
+  key) script comparing every `data.txt`/`data_from_pdf.txt`-overridden
+  `rtk*` entry against `heisig-kanjis.csv`'s own baseline `components`
+  field, flagging any CSV concept the override lost.
+  - **A naive version was almost useless**: comparing flat term-sets
+    directly flagged **1729 of 3000 kanji** — because CSV's baseline is
+    *itself* already fully recursively pre-expanded (documented in
+    `CLAUDE.md`), so it always lists both a compound primitive and that
+    primitive's own sub-pieces side by side. A modern override correctly
+    referencing just the compound and relying on query-time recursion
+    (the whole point of session 2/3's architecture work) looks like a
+    "regression" to a naive diff even when it's strictly better.
+  - **Fix**: only count a CSV concept as genuinely dropped if it's
+    unreachable from the override even after following recursive
+    decomposition (same transitive-closure logic `_resolve_parts_detail`
+    already uses for the UI's expandable chips, reimplemented against the
+    shadow DB). This barely moved the raw count (1723) on its own —
+    the real noise source turned out to be CSV's own habit of listing
+    multiple historical/synonym-layer names for what's ultimately the
+    same one or two visual atoms (e.g. 貝's CSV baseline separately lists
+    "clam", "oyster", "animal legs", AND "eight" for what's really just
+    eye+legs). Filtering to kanji where every dropped concept is *rare*
+    across the whole flagged set (appears as a drop reason in ≤3 other
+    entries — common ones like "eight"/"drop"/"animal legs"/"person" are
+    almost always this synonym-layer noise, not a per-kanji bug) cut it to
+    **98**, then requiring the dropped concept resolve to a real
+    (non-`?`) character cut it to **90** — a genuinely reviewable list.
+  - Read all 90 by hand rather than batch-applying anything (per this
+    doc's standing rule). Most are a real but *debatable* editorial
+    question — CSV's compound term vs. the override's already-present
+    flattened sub-pieces (e.g. 原's CSV baseline has "spring", the
+    override has "white"+"little" instead — plausibly Heisig's own
+    deliberate simplification, not a bug, and not touched). Narrowed
+    further to the subset where the dropped concept's own sub-pieces
+    *aren't* present in the override *either* (no flattened trace of it
+    at all — the character is just missing a real visual chunk, same
+    unambiguous shape as 告/report's bugs): **13 candidates**, of which
+    **7 verified and fixed** (6 skipped after individual review — see
+    below):
+    - `rtk118` 石 (stone): missing `厂`/cliff entirely → `厂,口`.
+    - `rtk214` 棚 (shelf) and `rtk836` 崩 (crumble): both only had one
+      `月` where they needed `朋` ("companion", literally two 月 side by
+      side) → `木,朋` / `山,朋`. (Along the way: found "companion" is
+      itself an ambiguous alias, shared by `rtk19` 朋 and `rtk1025` 侶 —
+      used the literal `朋` character in the fix to sidestep it rather
+      than fix the ambiguity itself, which is out of scope here and
+      flagged below.)
+    - `rtk618` 曜, `rtk619` 濯, `rtk1379` 躍: all three share the
+      phonetic 翟 (=羽+隹) and were all missing `羽`/"feathers" while
+      keeping `隹` — added `羽` to all three.
+    - `rtk931` 励 (encourage): had `斤`/"ax" where `万`/"ten thousand"
+      belongs (CSV-confirmed, and 斤 doesn't visually appear in 励 at
+      all) → replaced `斤` with `万`.
+  - **Skipped, lower confidence, left for a future pass**: `rtk371` 語
+    (whether "i"/吾 should replace its already-present flattened
+    five+mouth), `rtk1509`/`rtk1510`/`rtk2146` (男/"male" — its own parts,
+    rice-field+power, are already substantially present, so likely CSV
+    synonym-layer noise rather than a real drop), `rtk1608` 爽 (whether
+    "large"/大 should replace its plausible one+person flatten),
+    `rtk2041`/`rtk2043` (CSV says 革/leather contains "car"/車, which
+    doesn't match 革's known structure at all — likely a CSV bug, not a
+    `data.txt` regression, so out of this script's stated scope).
+- Verified: rebuilt `kanji.db` from scratch after every batch this
+  session. All 7 fixes confirmed via `get_kanji_detail` (exact expected
+  parts, no more no less) and forward search (`cliff` now includes 石,
+  `feathers`/`ten thousand` searches return the right sets).
+  `audit_radicals.py` and every prior session's spot-checks (`old`,
+  `crime`, `happiness`, `heki`, `teki`, `cow`, `cave`) unaffected.
+- **Open items for a future session**: (1) the "companion" alias
+  ambiguity (`朋`/rtk19 and `侶`/rtk1025 both claim it — `resolve_alias`-
+  style lookups currently pick one non-deterministically, same shape as
+  the script-scope bug fixed in session 3, just same-script this time);
+  (2) the remaining 6 skipped candidates above, and the ~77 kanji in the
+  broader 90-entry list not reviewed in this pass at all (the "compound
+  vs. already-flattened" cases, which need real editorial judgement, not
+  a mechanical check); (3) whether `heisig-kanjis.csv` itself has a bug
+  at 革/rtk2041 ("car" doesn't belong).
+- Not yet synced to the live server — needs `sync_system_data.py` run on
+  `srv.alteon.help` per `DEPLOY_README.md`.
+
 ## Tooling produced this session
 
 - `backend/audit_decomposition.py` — committed to `master`. Rebuilds a
@@ -969,3 +1072,14 @@ add this as a second check mode.
   `git pull` on the real server. See session 6 above for the full design
   rationale and the end-to-end test (fake user + stale pre-session-4 DB)
   that verified it.
+- `backend/audit_csv_regressions.py` — added 2026-08-15 (session 12). The
+  systematic pass sessions 10/11 flagged as queued: diffs every `data.txt`/
+  `data_from_pdf.txt` override against `heisig-kanjis.csv`'s own baseline
+  `components`, flagging concepts the override lost. Not a "run it and
+  trust the output" tool — the raw flagged count is large (1723/3000) and
+  mostly noise from CSV's own pre-expansion redundancy; session 12's entry
+  above documents the manual filtering (rarity of the dropped term across
+  the whole run, then "no trace of it at all vs. present but flattened")
+  that got from that raw list down to 7 confirmed, fixed bugs. Rerunning it
+  cold will reproduce the same large noisy list — read the session 12 notes
+  before trusting anything from it without that filtering.

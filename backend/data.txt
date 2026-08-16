@@ -387,7 +387,7 @@ rtk114:夕:evening:
 rtk115:汐:eventide:水,夕
 rtk116:外:outside:卜,夕
 rtk117:名:name:口,夕
-rtk118:石:stone:口
+rtk118:石:stone:厂,口
 rtk119:肖:resemblance:月,尚
 rtk120:硝:nitrate:月,口,尚,石
 rtk121:砕:smash:ノ,口,十,石,九
@@ -481,7 +481,7 @@ rtk209:森:forest:木
 rtk210:桂:japanese judas-tree:土,木
 rtk211:柏:oak:白,木
 rtk213:梢:treetops:月,尚,木
-rtk214:棚:shelf:月,木
+rtk214:棚:shelf:木,朋
 rtk215:杏:apricot:口,木
 rtk216:桐:paulownia:口,木,冂,一
 rtk217:植:plant:十,木,目
@@ -885,8 +885,8 @@ rtk614:観:outlook:見,隹,矢
 rtk615:羽:feathers:冫
 rtk616:習:learn:羽,白,冫
 rtk617:翌:the following:羽,立,冫
-rtk618:曜:weekday:ヨ,日,隹
-rtk619:濯:laundry:ヨ,水,隹
+rtk618:曜:weekday:ヨ,日,羽,隹
+rtk619:濯:laundry:ヨ,水,羽,隹
 rtk620:曰:say:
 rtk621:困:quandary:木,囗
 rtk622:固:harden:古,囗
@@ -1103,7 +1103,7 @@ rtk832:岩:boulder:口,山,石
 rtk833:炭:charcoal:火,山,厂
 rtk834:岐:branch off:山,支,又,十
 rtk835:峠:mountain peak:｜,一,山,卜
-rtk836:崩:crumble:月,山
+rtk836:崩:crumble:山,朋
 rtk837:密:secrecy:ノ,山,心,丶,宀
 rtk838:蜜:honey:ノ,心,虫,丶,宀
 rtk839:嵐:storm:山,風
@@ -1198,7 +1198,7 @@ rtk927:功:achievement:工,力
 rtk928:勧:persuade:ノ,力,隹,矢
 rtk929:努:toil:女,又,力
 rtk930:勃:suddenness:子,十,力,冖
-rtk931:励:encourage:斤,力,厂
+rtk931:励:encourage:力,厂,万
 rtk932:加:add:口,力
 rtk933:賀:congratulations:貝,目,ハ,口,力
 rtk934:架:erect:口,木,力
@@ -1646,7 +1646,7 @@ rtk1375:距:long-distance:口,足,匚,巨,止
 rtk1376:路:path:口,足,夂,止
 rtk1377:露:dew:雨,口,足,夂,止
 rtk1378:跳:hop:口,足,儿,冫,止
-rtk1379:躍:leap:ヨ,口,足,隹,止
+rtk1379:躍:leap:ヨ,口,足,羽,隹,止
 rtk1380:践:tread:口,足,戈,二,止
 rtk1381:踏:step:口,水,足,日,止
 rtk1382:踪:remains:口,示,二,小,足,宀,止
