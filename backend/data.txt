@@ -1892,7 +1892,7 @@ rtk1621:親:parent:見,辛,并,木,立,亠
 rtk1622:幸:happiness:十,辛,立,亠
 rtk1623:執:tenacious:ノ,九,十,辛,土,立,丶,亠
 rtk1624:摯:gift:ノ,九,手,十,辛,立,丶
-rtk1625:報:report:十,辛,土,又,立,亠,卩
+rtk1625:報:report:幸,卩,又
 rtk1626:叫:shout:｜,口,十
 rtk1627:糾:twist:｜,糸,幺,小,十
 rtk1628:収:income:｜,又

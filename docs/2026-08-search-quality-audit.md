@@ -841,6 +841,52 @@ add this as a second check mode.
   running `audit_decomposition.py`'s LLM pass if `OPENAI_API_KEY` is ever
   available in a session (checked again this session — still not set).
 
+### 2026-08-15 — session 10
+
+- Owner-reported: `報` (report, `rtk1625`) should decompose to include
+  `幸` ("happiness") as a named component, not flatten it. Investigated
+  rather than just patching the one line, since the shape looked familiar:
+  - `heisig-kanjis.csv`'s own baseline `components` field for **both**
+    `執` (`rtk1623`) and `報` already lists `happiness` as a first-class
+    component — the CSV got this right from the start. `data.txt`
+    overrides for both entries **discarded** that correct CSV grouping
+    and replaced it with a raw flattened stroke list (`報`'s override had
+    `十,辛,土,又,立,亠,卩` — exactly `幸`'s own flattened parts plus a
+    spurious `土` and the genuine extras `又,卩`). Same bug class as every
+    other fix in this doc, just newly found on a different pair.
+  - Fixed `rtk1625` 報 → `幸,卩,又` (`卩`+`又` = the traditional "subdue"
+    component on report's right side; dropped the spurious `土`, which
+    doesn't appear anywhere in 報's real structure).
+  - **Found but deliberately not fixed this session**: `執` (`rtk1623`,
+    "tenacious") and `熱` (`rtk1634`, "heat") have the *identical* bug —
+    both `data.txt` overrides flatten away a PDF-sourced grouping that
+    names a primitive called **"fat man"** (`data_from_pdf.txt` already
+    has the correct, unflattened `執`→`happiness,fat man` and `熱`→`rice
+    seedlings,ground,fat man`, both currently shadowed by worse `data.txt`
+    overrides). Unlike `辟`/`啇` last session, I don't have a confident
+    glyph to assign to "fat man" — it's not obviously any single
+    already-resolvable character in this dataset, and guessing wrong here
+    would recreate exactly the kind of error this doc exists to fix.
+    Flagged for a future session, ideally one with access to the actual
+    RTK book/PDF to confirm what "fat man" refers to before naming it
+    (mirrors session 5's "open question for the owner" about the katakana
+    primitives, resolved by session 4 once the owner could check).
+- Verified: rebuilt `kanji.db` from scratch, `search_by_parts(['happiness'])`
+  now correctly returns both `幸` and `報`; `get_kanji_detail('rtk1625')`
+  shows the full recursive chain (幸 → its own — still redundant, see
+  below — parts; 卩 → stamp → …; 又). `audit_radicals.py` and all prior
+  spot-checks (`old`, `crime`, `heki`, `teki`) unaffected.
+- **Adjacent quality issue noticed, not fixed**: `幸` (`rtk1622`) itself
+  lists `十,辛,立,亠` as its own parts — but `辛` (`rtk1612`) already
+  independently decomposes to exactly `十,立`, so `幸`'s list redundantly
+  includes both `辛` *and* `辛`'s own already-expanded pieces side by
+  side. Lower priority than the flattening bugs this doc tracks (it's a
+  redundancy, not a wrong or missing match — recursive display still
+  renders correctly, see the `get_kanji_detail` output above), but worth
+  cleaning up if someone's already in this area.
+- Not yet synced to the live server — needs `sync_system_data.py` run on
+  `srv.alteon.help` per `DEPLOY_README.md`, same as sessions 8/9.
+
 ## Tooling produced this session
 
 - `backend/audit_decomposition.py` — committed to `master`. Rebuilds a
