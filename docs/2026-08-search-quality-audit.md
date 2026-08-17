@@ -1143,6 +1143,73 @@ add this as a second check mode.
   attempted this session and would be a large, slow undertaking for
   likely-thin per-kanji signal on most of them.
 
+### 2026-08-15 — session 15
+
+- Continued straight from session 14's `ハ` finding. Owner proposed a
+  concrete resolution: `ハ`'s canonical meaning should be "eight", with
+  "katakana ha" demoted to a secondary alias, plus possibly "animal legs"
+  as a third. Investigated before applying it, since session 14 already
+  flagged this as the single highest-impact open item (~237 kanji) and a
+  wrong bulk move here would be a large regression, not a small one.
+- **Found the real reason ~100 of 237 hosts didn't confirm "eight" in
+  CSV**: it wasn't that `ハ` means something else for them — **103 hosts
+  (a much larger, separate group, overlapping the original 237) were
+  redundantly re-flattening `貝` (shellfish) right alongside listing `貝`
+  itself**, since `貝`'s own already-correct decomposition is exactly
+  `目,ハ`. Textbook instance of the same "compound plus its own already-
+  expanded pieces, both present" duplication this whole doc keeps finding
+  (古/幸/辟/啇/敬/朋 sessions 5-13) — just not visible as a `data.txt`-vs-
+  CSV diff, since these hosts' CSV baselines are blank (post-RTK-6th-
+  edition-scope kanji session 12's script can't check at all). Fixed
+  mechanically and safely: for every host listing `貝` **and** `目` **and**
+  `ハ` together, dropped the redundant `目,ハ` (kept `貝`, which still
+  correctly expands to them on demand via recursion). **103 kanji fixed**
+  in one pass — no per-character judgment needed, since presence of the
+  parent compound made the redundancy unambiguous.
+- That cleanup alone dropped the `ハ`-host count from 237 to 134. Re-ran
+  the CSV cross-check on what remained and found a second, smaller family:
+  `未`/`末` (rtk229/230, "not yet"/"end") and **9 compounds built on
+  them** (昧/沫/味/妹/朱/珠/抹/殊/魅) were all flattening `未`/`末`/`朱`
+  down to raw strokes (`｜,二,ハ,木,亠` etc.) instead of referencing the
+  base character — same shape again, this time verified per-kanji against
+  CSV rather than mechanically (each compound's real makeup, e.g. 昧=日+未,
+  妹=女+未, checked individually; `魅`'s extra `田,儿,匕,厶` turned out to
+  be the *same* redundant-compound pattern again — `鬼`/rtk2175's own
+  parts are exactly `田,儿,匕,厶`, so `魅` simplifies to `鬼,未`). **11 more
+  kanji fixed.**
+- **Net for this session: 114 kanji cleaned up**, and the `ハ`-host count
+  is down to **123** (from the original 237). Of those 123, CSV now
+  confirms "eight"/"animal legs" for 63; the other **60 are still
+  unresolved** and split into identifiable but not-yet-fixed sub-groups:
+  a `兼`-family (兼/嫌/鎌/謙/廉, 5 kanji, CSV says "animal horns" not
+  "animal legs" or "eight" — genuinely might be a third, distinct meaning,
+  not just noise), a family built around `个`/`王` ("umbrella" — 全/金/
+  詮/途/塗/余 and others, CSV mentions neither eight nor legs), ~30 hosts
+  with **no CSV baseline at all** (frames beyond `heisig-kanjis.csv`'s
+  6th-edition scope, unverifiable by the script, need one-by-one manual
+  or web-search-based checking), and a handful of scattered singletons.
+  **Given 60/123 (still just under half) don't confirm "eight" — did
+  NOT rename `ハ`'s canonical alias / merge into `八` this session.**
+  Doing so now would still misfire for a large fraction of remaining
+  hosts, i.e. would recreate the exact class of bug this whole effort
+  exists to remove. This is the natural next step once the remaining 60
+  are individually resolved (or confirmed as a genuinely separate
+  primitive that needs its own name, e.g. if `兼`'s "animal horns" turns
+  out real and distinct).
+- Verified: rebuilt `kanji.db` from scratch after both batches (103, then
+  11). Spot-checked several rewritten entries via `get_kanji_detail`
+  (`貝` correctly still expands to `目,ハ` on demand; `未`-family shows
+  the right compound relationships). `search_by_parts(['shellfish'])`,
+  `(['not yet'])` and the full standing spot-check set (`old`, `awe`,
+  `heki`, `teki`, `round`, `happiness`, `crime`, `cave`) all correct, no
+  regressions. `audit_radicals.py` still 0 undefined single-glyph terms.
+- Not yet synced to the live server — needs `sync_system_data.py` run on
+  `srv.alteon.help` per `DEPLOY_README.md`. This is the largest batch of
+  content changes queued for a live sync since session 4's original
+  KRADFILE-proxy fix (114 kanji here vs. that session's 397 lines) —
+  worth prioritizing the next live sync sooner rather than letting it
+  queue up further.
+
 ## Tooling produced this session
 
 - `backend/audit_decomposition.py` — committed to `master`. Rebuilds a
