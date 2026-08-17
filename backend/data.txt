@@ -625,7 +625,7 @@ rtk354:枚:sheet of...:木,攵
 rtk355:故:happenstance:古,攵
 rtk356:敬:awe:口,勹,攵,艾
 rtk357:言:say:
-rtk358:警:admonish:言,口,勹,艾,攵
+rtk358:警:admonish:敬,言
 rtk359:計:plot:言,十
 rtk360:詮:discussion:王,言,个,ハ
 rtk361:獄:prison:言,犬
@@ -2408,7 +2408,7 @@ rtk2137:駆:drive:馬,匚,丶,ノ,杰
 rtk2138:駅:station:馬,尸,杰,丶
 rtk2139:騒:boisterous:虫,馬,又,杰
 rtk2140:駄:burdensome:大,馬,丶,杰
-rtk2141:驚:wonder:口,馬,勹,艾,攵,杰
+rtk2141:驚:wonder:敬,馬
 rtk2142:篤:fervent:竹,杰,馬
 rtk2143:罵:abuse:馬,杰
 rtk2144:騰:leaping up:月,馬,并,一,人,大,二,杰

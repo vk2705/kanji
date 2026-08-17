@@ -1030,6 +1030,45 @@ add this as a second check mode.
 - Not yet synced to the live server — needs `sync_system_data.py` run on
   `srv.alteon.help` per `DEPLOY_README.md`.
 
+### 2026-08-15 — session 13
+
+- Owner-reported: `警` should decompose to `敬` (respect/awe) + `言`
+  (say/words), not the flattened `言,口,勹,艾,攵` it had. Confirmed
+  against `heisig-kanjis.csv` first: baseline for `警` literally starts
+  with "awe" (敬's own keyword, `rtk356`) followed by *its* own flattened
+  sub-pieces, then "say;words;...". Exact same session 10-13 pattern —
+  `data.txt` discarded a real CSV-correct compound reference. Fixed
+  `rtk358` 警 → `敬,言`.
+  - Checked `驚` (`rtk2141`, wonder) too, since it shares 敬 as its left
+    component (敬+馬) and had the identical bug (`口,馬,勹,艾,攵,杰` →
+    should be `敬,馬`). `馬`/`rtk2132` already independently decomposes
+    to `杰` (the fire-radical-shaped bottom strokes), so the `杰` in
+    驚's old flattened list was the same "compound and its own already-
+    expanded piece both present" redundancy this doc keeps finding —
+    dropped, since `馬` alone already carries it via recursion. Fixed to
+    `敬,馬`.
+- Verified: rebuilt `kanji.db` from scratch. `get_kanji_detail` for both
+  shows the exact expected two-part decomposition, with `敬` correctly
+  expanding to its own `口,勹,攵,艾` on demand and `馬` to `杰`.
+  `search_by_parts(['awe'])` now correctly returns `敬,警,驚` grouped
+  together. Noted, not a regression: session 8's flat `search_by_parts
+  (['rap'])` no longer includes `rtk358`/`rtk2141` directly (攵 is now one
+  level deeper, inside 敬, same as every other recursive-reference fix in
+  this doc — `故`/old lost the same flat "mouth"/"ten" matches for the
+  identical reason). `audit_radicals.py` and the full spot-check set
+  (`heki`, `teki`, `old`, `cave`, `feathers`) unaffected.
+- This is now the fourth session in a row (10, 11, 12, 13) finding the
+  same bug shape one owner-report at a time, on top of session 12's
+  systematic pass already turning up 90 more candidates from the same
+  root cause. Worth a future session revisiting whether it's worth
+  extending `audit_csv_regressions.py`'s "rare dropped term" filter to
+  also catch cases like 警 (where the dropped term, "awe", would likely
+  have been common enough — it recurs across 警/驚's whole family — to
+  get filtered out as "probably CSV noise" under session 12's current
+  threshold; worth checking directly next time rather than assuming).
+- Not yet synced to the live server — needs `sync_system_data.py` run on
+  `srv.alteon.help` per `DEPLOY_README.md`.
+
 ## Tooling produced this session
 
 - `backend/audit_decomposition.py` — committed to `master`. Rebuilds a
