@@ -1307,6 +1307,77 @@ add this as a second check mode.
   change, not a `data.txt` content change — needs an actual deploy of
   both, not just `sync_system_data.py`).
 
+### 2026-08-17 — session 17
+
+- **Built the coverage tracker session 16 flagged as needed before more
+  content work**: `backend/coverage_status.py`, regenerating
+  `docs/kanji_review_coverage.tsv` (id, character, keyword, frame,
+  reviewed yes/no for all ~3000 `rtk*` kanji). "Reviewed" is defined
+  honestly and narrowly: a kanji's `data.txt` line was added or edited by
+  a content-fix commit *after* the audit began (commit `0a46e3d`, the
+  first Finding-1 fix) — not "has ever been in a git diff" (the whole
+  file was bulk-written once at the very start, which would make
+  everything trivially "reviewed" and defeat the point). This is a proxy,
+  not a perfect record (an edit for an unrelated reason would count), but
+  it errs toward under- rather than over-counting, and it's the only
+  signal derivable without hand-maintaining a separate log. Current
+  count: **548/3000 (18.3%)** reviewed as of this session's commits.
+- **Used it immediately**: filtered to the lowest, most foundational
+  frame numbers (1-100) — the kanji with the largest downstream blast
+  radius, since so many other kanji reference them as compounds — and
+  found a real cluster still unfixed:
+  - `可`(rtk97)/`町`(rtk96)/`頂`(rtk98) all flattened `丁` (rtk95,
+    "street" = `一,亅`) instead of referencing it directly; `頂` also
+    redundantly listed `貝` alongside `頁` (which already contains it).
+    Fixed to `丁,口` / `田,丁` / `丁,頁`.
+  - `卓`(rtk52)/`朝`(rtk53) did the same to `早` (rtk26, "early" =
+    `十,日`); `嘲`(rtk54) flattened `朝` once that was fixed. Fixed to
+    `卜,早` / `早,月` / `口,朝`.
+  - Finally fixed the **original Finding-3 bug** from the very first
+    audit session (`rtk91` 昭, parts literally `?, ?, pipe, minus` —
+    the unresolved-glyph placeholder listed twice) — it had survived
+    every session since because nothing ever specifically went looking
+    for it again. Real structure is `日,召` (`召`/rtk90 already correct).
+    Its `data.txt` line also carried an unrelated leftover alias
+    ("street" — apparently contamination from editing `rtk95` nearby at
+    some point) which had nothing to do with 昭's actual meaning
+    ("shining"); cleared it.
+- **Also closed out session 12's 6 skipped candidates** (had been open
+  since 2026-08-15): re-verified exact CSV frame numbers first (caught
+  and corrected a mismatch from session 12 — `吾`/"I" is `rtk17`, not
+  `rtk1091`, which is a different "I" kanji, `俺`). `語`(rtk371) → `言,吾`;
+  `勇`(rtk1509) → `男,マ`, `湧`(rtk1510) → `水,勇`, `虜`(rtk2146) →
+  `男,卜,匕,厂,虍` (all three were flattening `男`/rtk923, "man" = `田,力`,
+  instead of referencing it). `爽`(rtk1608) and `革`/`覇`(rtk2041/2043)
+  stay unfixed — genuinely still uncertain (see the commit message for
+  why), not just left out of laziness.
+  - **Found a real alias collision while fixing `男`**: both `男`
+    (rtk923) and `牡` (rtk2609, "male animal") had the bare alias
+    "male" — same shape as the "companion" ambiguity flagged session 12.
+    Removed `牡`'s redundant copy (kept its own more specific "male
+    animal", already sufficient). A residual 2-way ambiguity remains
+    between `男` and `雄` (rtk804 — CSV's own `keyword_6th_ed` for it is
+    literally "male", not something `data.txt` introduced), not resolved
+    this session — flagged for whoever next has bandwidth for a proper
+    "which kanji should canonically own this English word" pass across
+    the whole alias table, since "companion" and "male" are unlikely to
+    be the only two instances of this shape.
+- Verified: rebuilt `kanji.db` from scratch after each batch.
+  `audit_radicals.py`'s multi-char undefined-term count dropped 6 → 5
+  (the `?` placeholder gone); full standing spot-check suite (`old`,
+  `crime`, `heki`, `awe`, `round`, `beforehand`, `cave`, `shellfish`,
+  `happiness`, plus this session's new terms `street`/`shining`/`early`/
+  `seduce`/`courage`) all resolve correctly to exactly their real hosts.
+- Not yet synced to the live server — needs `sync_system_data.py` run on
+  `srv.alteon.help` per `DEPLOY_README.md` (content changes) **and** an
+  actual code deploy for session 16's search/detail architecture change,
+  which is still queued too.
+- **Next session**: keep working frame-ordered (or by whatever grouping
+  turns out efficient) through `docs/kanji_review_coverage.tsv`'s
+  unreviewed rows — re-run `python3 backend/coverage_status.py` first to
+  get the current count before picking a batch, since it'll drift as
+  fixes land. 2452/3000 still unreviewed as of this session.
+
 ## Tooling produced this session
 
 - `backend/audit_decomposition.py` — committed to `master`. Rebuilds a
@@ -1360,3 +1431,11 @@ add this as a second check mode.
   that got from that raw list down to 7 confirmed, fixed bugs. Rerunning it
   cold will reproduce the same large noisy list — read the session 12 notes
   before trusting anything from it without that filtering.
+- `backend/coverage_status.py` — added 2026-08-17 (session 17). Regenerates
+  `docs/kanji_review_coverage.tsv`, tracking which of the ~3000 `rtk*`
+  kanji have actually been individually reviewed (data.txt line touched by
+  a content-fix commit since the audit began) vs. never checked at all —
+  the infrastructure for the "check all kanji" standing mandate from
+  session 16. Run it after any content-fix commit lands so the persisted
+  count stays current; see session 17 above for exactly what "reviewed"
+  does and doesn't mean.
