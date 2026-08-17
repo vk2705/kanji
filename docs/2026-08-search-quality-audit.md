@@ -1069,6 +1069,80 @@ add this as a second check mode.
 - Not yet synced to the live server — needs `sync_system_data.py` run on
   `srv.alteon.help` per `DEPLOY_README.md`.
 
+### 2026-08-15 — session 14
+
+- Owner asked for a different verification method going forward: web
+  search each kanji (e.g. "執 heisig") and read what's out there about its
+  real decomposition, rather than relying only on this repo's own CSV
+  baseline as the source of truth (sessions 10-13 all leaned on
+  `heisig-kanjis.csv` alone). Tried it on the session-10 backlog item
+  first: `執`/`熱`'s undefined "fat man" primitive.
+  - `hochanh.github.io/rtk/` (a per-kanji RTK community reference site)
+    confirmed `執` = "happiness" + "fat man" independently of our own CSV,
+    and separately confirmed `丸` (`rtk44`, keyword "round") is informally
+    nicknamed "fat man"/"rotund"/"Laughing Buddha" in RTK community
+    material — corroborated by a second, unrelated web search result
+    making the same "round"/"rotund figure" association for `丸`. `丸`'s
+    own already-correct parts (`九,丶`) also match `執`'s old flattened
+    list verbatim (which literally contained `九` and `丶` among its raw
+    strokes) — three independent signals converging on the same answer.
+    Fixed `rtk1623` 執 → `幸,丸` (was `ノ,九,十,辛,土,立,丶,亠`).
+  - `熱`'s case turned out less clean on the same sources — different
+    community references show genuinely different primitive groupings
+    for it ("rice-seedlings+ground+fat man" vs. "artistry(埶)+divot+
+    round"), i.e. real disagreement between sources, not just one
+    unverified guess. Left unfixed rather than pick one arbitrarily;
+    "rice seedlings" also still isn't a named primitive in this dataset
+    either way. Still open.
+  - Also found and fixed `矛` (halberd, `rtk1311`): its own override was
+    just the bare `マ` glyph, but `heisig-kanjis.csv`'s baseline says
+    `矛` = "beforehand" — and `予` (`rtk1719`, "beforehand") already
+    exists with its own correct parts `マ,一,亅`. Same flatten-instead-
+    of-reference shape as every other fix this week, just caught by
+    re-reading the CSV baseline for the specific kanji involved (this one
+    didn't come up in session 12's systematic pass because `矛`'s override
+    has only one term, so nothing was "dropped" in that script's sense —
+    a reminder that script's blind spot is single-term overrides, not
+    just multi-term ones). Fixed to `予`.
+  - **Bigger finding, not acted on**: chasing `マ` down to `予` prompted
+    checking `ハ` the same way. `heisig-kanjis.csv`'s own baseline calls
+    the `ハ` shape "eight" for **137 of the 237** kanji currently using
+    literal `ハ` in their decomposition (confirmed programmatically, not
+    sampled) — meaning at least those 137 should likely reference `八`
+    (`rtk8`, already a real, correctly-resolving kanji) instead of the
+    separate "katakana ha" primitive (`rad1051`) session 4 invented when
+    no confident Heisig term was available at the time. **But the other
+    100 hosts' CSV baseline does *not* say "eight"** (e.g. `rtk229`/230/
+    231's baseline is "tree; wood; one", no "eight" anywhere) — meaning
+    `ハ` as a literal decomposition string is doing double (or more) duty
+    for at least two visually-similar-but-conceptually-different things,
+    and a blind merge into `八` would be wrong for a large fraction of its
+    237 uses. **Not fixed this session** — needs someone to work out what
+    the other ~100 non-"eight" uses of `ハ` actually represent before any
+    merge is safe (possibly more than one further split is needed, not
+    just a two-way one). Flagged here rather than guessed at under time
+    pressure, same standing rule as everywhere else in this doc. This is
+    likely the single highest-impact open item in the whole audit if
+    someone resolves it correctly — `ハ` alone touches ~237 kanji, more
+    than any single fix so far.
+- Verified: rebuilt `kanji.db` from scratch after each fix. `search_by_parts`
+  confirms `round`/`beforehand`/`awe` groupings are correct;
+  `audit_radicals.py` and the full spot-check set unaffected.
+- Not yet synced to the live server — needs `sync_system_data.py` run on
+  `srv.alteon.help` per `DEPLOY_README.md`.
+- **Note on methodology for next time**: web search is a genuinely useful
+  *additional* evidence source (it caught the `丸`/"fat man" identity,
+  which our own CSV alone couldn't — CSV just says "fat man" without
+  saying what glyph that is) but isn't a free substitute for the CSV-
+  baseline-first approach sessions 10-13 used — most web results for a
+  specific kanji + "heisig" are thin or generic (see the `執`/`敬`
+  searches above), and community sites can disagree with each other (see
+  `熱`). Treat it as corroboration to raise or lower confidence on a
+  specific, already-suspected case, not as a search-every-kanji-cold
+  strategy — doing that literally for all ~3000 rtk kanji was not
+  attempted this session and would be a large, slow undertaking for
+  likely-thin per-kanji signal on most of them.
+
 ## Tooling produced this session
 
 - `backend/audit_decomposition.py` — committed to `master`. Rebuilds a

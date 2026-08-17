@@ -1578,7 +1578,7 @@ rtk1307:族:tribe:方,矢
 rtk1308:知:know:口,矢
 rtk1309:智:wisdom:口,日,矢
 rtk1310:挨:approach:矢,厶,扎
-rtk1311:矛:halberd:マ
+rtk1311:矛:halberd:予
 rtk1312:柔:tender:矛,木,マ
 rtk1313:務:task:矛,力,攵
 rtk1314:霧:fog:雨,矛,力,攵
@@ -1890,7 +1890,7 @@ rtk1619:新:new:斤,辛,并,木,立,亠
 rtk1620:薪:fuel:斤,辛,并,木,立,艾,亠
 rtk1621:親:parent:見,辛,并,木,立,亠
 rtk1622:幸:happiness:十,辛,立,亠
-rtk1623:執:tenacious:ノ,九,十,辛,土,立,丶,亠
+rtk1623:執:tenacious:幸,丸
 rtk1624:摯:gift:ノ,九,手,十,辛,立,丶
 rtk1625:報:report:幸,卩,又
 rtk1626:叫:shout:｜,口,十
