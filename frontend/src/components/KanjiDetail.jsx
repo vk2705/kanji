@@ -138,7 +138,12 @@ export function DecompositionForm({ kanjiId, lang, onAdded }) {
 function PartChip({ part, lang, user, onSelectPart }) {
   const [expanded, setExpanded] = useState(false);
   const partChar = displayChar(part.character);
-  const hasSubParts = part.sub_parts && part.sub_parts.length > 0;
+  // sub_decompositions is a list of alternative decompositions of THIS part (e.g. a
+  // system breakdown and a user's own) — usually just one, but every alternative
+  // renders as its own line when expanded, same idea as the top-level decompositions
+  // list in KanjiDetail below, all the way down the tree.
+  const subDecompositions = (part.sub_decompositions ?? []).filter((sd) => sd.parts.length > 0);
+  const hasSubParts = subDecompositions.length > 0;
 
   return (
     <div className="part-chip-wrap">
@@ -170,9 +175,18 @@ function PartChip({ part, lang, user, onSelectPart }) {
         {user && part.id && <AliasAdder targetId={part.id} lang={lang} />}
       </div>
       {hasSubParts && expanded && (
-        <div className="parts-list sub-parts">
-          {part.sub_parts.map((sub, i) => (
-            <PartChip key={i} part={sub} lang={lang} user={user} onSelectPart={onSelectPart} />
+        <div className="sub-decompositions">
+          {subDecompositions.map((sd, i) => (
+            <div key={sd.id} className="sub-decomposition">
+              {subDecompositions.length > 1 && (
+                <div className="sub-decomposition-label">{sd.label || sd.owner || `#${i + 1}`}</div>
+              )}
+              <div className="parts-list sub-parts">
+                {sd.parts.map((sub, j) => (
+                  <PartChip key={j} part={sub} lang={lang} user={user} onSelectPart={onSelectPart} />
+                ))}
+              </div>
+            </div>
           ))}
         </div>
       )}
@@ -187,9 +201,8 @@ export default function KanjiDetail({ kanjiId, onSelectPart, onBack, user, lang 
   const [storyText, setStoryText] = useState("");
   const [storyPublic, setStoryPublic] = useState(false);
   const [savingStory, setSavingStory] = useState(false);
-  const [decompIdx, setDecompIdx] = useState(0);
 
-  function load(keepDecompIdx = false) {
+  function load() {
     setLoading(true);
     setError(null);
     getKanji(kanjiId, sources)
@@ -198,7 +211,6 @@ export default function KanjiDetail({ kanjiId, onSelectPart, onBack, user, lang 
         const mine = k.stories?.find((s) => s.is_mine);
         setStoryText(mine?.story ?? "");
         setStoryPublic(mine?.visibility === "public");
-        if (!keepDecompIdx) setDecompIdx(0);
       })
       .catch((e) => setError(e.message))
       .finally(() => setLoading(false));
@@ -207,7 +219,7 @@ export default function KanjiDetail({ kanjiId, onSelectPart, onBack, user, lang 
   // sources is a freshly-built array/null each App render, so key on its sorted
   // contents rather than identity to avoid refetching on unrelated re-renders.
   const sourcesKey = sources ? [...sources].sort().join(",") : "";
-  useEffect(() => load(false), [kanjiId, sourcesKey]);
+  useEffect(() => load(), [kanjiId, sourcesKey]);
 
   async function handleSaveStory(e) {
     e.preventDefault();
@@ -215,7 +227,7 @@ export default function KanjiDetail({ kanjiId, onSelectPart, onBack, user, lang 
     setSavingStory(true);
     try {
       await addStory(kanji.id, storyText.trim(), storyPublic ? "public" : "private");
-      load(true);
+      load();
     } catch (err) {
       setError(err.message);
     } finally {
@@ -229,7 +241,7 @@ export default function KanjiDetail({ kanjiId, onSelectPart, onBack, user, lang 
 
   const otherStories = kanji.stories?.filter((s) => !s.is_mine) ?? [];
   const decompositions = kanji.decompositions ?? [];
-  const activeDecomp = decompositions[decompIdx] ?? decompositions[0];
+  const nonEmptyDecompositions = decompositions.filter((d) => d.parts_detail.length > 0);
   const char = displayChar(kanji.character);
 
   return (
@@ -259,7 +271,7 @@ export default function KanjiDetail({ kanjiId, onSelectPart, onBack, user, lang 
       {user && kanji.is_mine && !char && (
         <section className="detail-section">
           <h3>{t(lang, "uploadImageHeading")}</h3>
-          <ImageUpload kanjiId={kanji.id} lang={lang} onUploaded={() => load(true)} />
+          <ImageUpload kanjiId={kanji.id} lang={lang} onUploaded={() => load()} />
         </section>
       )}
 
@@ -274,36 +286,32 @@ export default function KanjiDetail({ kanjiId, onSelectPart, onBack, user, lang 
         </section>
       )}
 
-      {(activeDecomp?.parts_detail?.length > 0 || decompositions.length > 1) && (
+      {(nonEmptyDecompositions.length > 0 || user) && (
         <section className="detail-section">
           <h3>{t(lang, "madeFromHeading")}</h3>
 
-          {decompositions.length > 1 && (
-            <div className="tabs">
-              {decompositions.map((d, i) => (
-                <button
-                  key={d.id}
-                  className={`tab ${i === decompIdx ? "tab-active" : ""}`}
-                  onClick={() => setDecompIdx(i)}
-                >
-                  {d.label || d.owner || `#${i + 1}`}
-                </button>
-              ))}
+          {/* Every visible decomposition renders as its own line — a kanji taught two
+              different ways (e.g. the system breakdown and a user's own alternate)
+              shows both at once, not behind a tab you have to click to see. */}
+          {nonEmptyDecompositions.map((d, i) => (
+            <div key={d.id} className="decomposition-block">
+              {nonEmptyDecompositions.length > 1 && (
+                <div className="decomposition-label">{d.label || d.owner || `#${i + 1}`}</div>
+              )}
+              <div className="parts-list">
+                {d.parts_detail.map((part, j) => (
+                  <PartChip key={j} part={part} lang={lang} user={user} onSelectPart={onSelectPart} />
+                ))}
+              </div>
             </div>
-          )}
-
-          <div className="parts-list">
-            {activeDecomp?.parts_detail?.map((part, i) => (
-              <PartChip key={i} part={part} lang={lang} user={user} onSelectPart={onSelectPart} />
-            ))}
-          </div>
+          ))}
 
           {user && (
             <details style={{ marginTop: 14 }}>
               <summary className="login-hint" style={{ cursor: "pointer" }}>
                 {t(lang, "addDecompositionHeading")}
               </summary>
-              <DecompositionForm kanjiId={kanji.id} lang={lang} onAdded={() => load(false)} />
+              <DecompositionForm kanjiId={kanji.id} lang={lang} onAdded={() => load()} />
             </details>
           )}
         </section>

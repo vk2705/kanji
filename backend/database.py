@@ -516,6 +516,11 @@ SCRIPT_VISIBILITY: dict[str, tuple[str, ...]] = {
 
 SOURCE_SCOPES = ("system", "community", "mine")
 
+# Shared depth cap for anything that walks the decomposition tree recursively (query-time
+# hierarchy resolution for the detail view, and recursive search below) — bounds both
+# runaway recursion and the cost of a very common primitive's reachability search.
+MAX_DECOMPOSITION_DEPTH = 5
+
 
 def _source_scope_sql(prefix: str, sources: set[str] | None, viewer_id: int | None) -> tuple[str, list]:
     """Build a SQL fragment restricting `{prefix}owner_id`/`{prefix}visibility` to the
@@ -598,31 +603,112 @@ def get_all_aliases_for_term(conn, term: str, viewer_id: int | None = None,
     return {r["alias"] for r in rows} | {term, cid}
 
 
+def _kanji_with_part_terms(conn, terms: set[str], viewer_id: int | None,
+                            sources: set[str] | None) -> set[str]:
+    """kanji ids that directly list any of `terms` as a part_term, in ANY decomposition
+    visible to the viewer (not just one picked one) — one layer of the reverse
+    decomposition graph used by _reachable_kanji_for_term below."""
+    if not terms:
+        return set()
+    decomp_source_sql, decomp_source_params = _source_scope_sql("d.", sources, viewer_id)
+    decomp_extra = f" AND {decomp_source_sql}" if decomp_source_sql else ""
+    ph = ",".join("?" * len(terms))
+    rows = conn.execute(
+        f"SELECT DISTINCT p.kanji_id FROM parts p JOIN decompositions d ON d.id = p.decomposition_id "
+        f"WHERE p.part_term IN ({ph}) AND (d.visibility = 'public' OR d.owner_id = ?){decomp_extra}",
+        [*terms, viewer_id, *decomp_source_params]
+    ).fetchall()
+    return {r["kanji_id"] for r in rows}
+
+
+def _terms_for_kanji_ids(conn, kanji_ids: set[str], viewer_id: int | None) -> set[str]:
+    """Every alias string, id, and character for the given kanji ids (public, or the
+    viewer's own) — i.e. every literal part_term string that could name one of these
+    kanji as a part, feeding the next BFS layer of _reachable_kanji_for_term."""
+    if not kanji_ids:
+        return set()
+    ph = ",".join("?" * len(kanji_ids))
+    result = set(kanji_ids)
+    for r in conn.execute(
+        f"SELECT alias FROM aliases WHERE kanji_id IN ({ph}) AND (visibility = 'public' OR owner_id = ?)",
+        [*kanji_ids, viewer_id]
+    ).fetchall():
+        result.add(r["alias"])
+    for r in conn.execute(f"SELECT character FROM kanji WHERE id IN ({ph})", list(kanji_ids)).fetchall():
+        if r["character"]:
+            result.add(r["character"])
+    return result
+
+
+def _reachable_kanji_for_term(conn, term: str, viewer_id: int | None,
+                               script_scope: tuple[str, ...] | None,
+                               sources: set[str] | None, max_depth: int) -> set[str]:
+    """All kanji ids where `term` is present anywhere in the decomposition tree —
+    directly, or nested inside any alternative decomposition of any part, up to
+    `max_depth` levels deep (same cycle-safety as the detail view's recursive
+    resolution: each BFS layer only ever adds kanji not already found, so a cycle just
+    stops contributing new terms rather than looping). `max_depth=1` is a direct match
+    only (the term must appear literally in a decomposition of the kanji itself) —
+    every depth beyond that also matches a part's part, recursively. Considers *every*
+    visible decomposition at each level, not just one picked one — a kanji reachable
+    via any alternative decomposition of any ancestor counts. Self-identity (a kanji
+    "is made of" itself) is included via the term's own canonical id, independent of
+    max_depth."""
+    canonical = resolve_alias(conn, term, viewer_id, script_scope)
+    matched = {canonical} if canonical else set()
+
+    frontier_terms = get_all_aliases_for_term(conn, term, viewer_id, script_scope)
+    found_kanji: set[str] = set()
+    depth = 0
+    while frontier_terms and depth < max_depth:
+        new_kanji = _kanji_with_part_terms(conn, frontier_terms, viewer_id, sources) - found_kanji
+        if not new_kanji:
+            break
+        found_kanji |= new_kanji
+        frontier_terms = _terms_for_kanji_ids(conn, new_kanji, viewer_id)
+        depth += 1
+    return matched | found_kanji
+
+
 def search_by_parts(conn, part_names: list[str], viewer_id: int | None = None,
-                     script: str | None = None, sources: set[str] | None = None) -> list[dict]:
-    """Find kanji containing ALL given primitives (flat set-intersection). A primitive
-    counts as present if it appears in ANY decomposition visible to the viewer, not just
-    the system one — once a user adds their own decomposition it participates in search too.
-    A term is also trivially satisfied by self-identity: a kanji "is made of" itself, so
-    e.g. searching ["weep", "water"] must still return 'weep' even though 'weep' doesn't
-    literally list itself as one of its own parts — only 'water' (+ something else) does.
+                     script: str | None = None, sources: set[str] | None = None,
+                     depth: int = 1) -> list[dict]:
+    """Find kanji containing ALL given primitives. A primitive counts as present if it's
+    reachable within `depth` levels of a kanji's decomposition tree — directly (depth=1,
+    the historical/default behavior: the term must appear in a decomposition of the
+    kanji itself, in any alternative decomposition — a kanji taught two different ways
+    matches via either), or, for depth > 1, nested inside any alternative decomposition
+    of any of its parts, recursively (so e.g. at depth=3, searching "corpse" also finds
+    壁, because 壁 -> 辟 -> 尸/corpse, even though 壁's own parts list never literally says
+    "corpse") — see _reachable_kanji_for_term. This is a real, deliberate trade-off, not
+    a bug: a very common primitive's reachable set can grow to a large fraction of the
+    whole dataset at high depth (e.g. "mouth" reaches ~65% of rtk kanji at depth=5) — the
+    caller (UI) is expected to expose depth as a user choice rather than silently
+    defaulting to the broadest setting. A term is also trivially satisfied by self-
+    identity: a kanji "is made of" itself, so e.g. searching ["weep", "water"] must
+    still return 'weep' even though 'weep' doesn't literally list itself as one of its
+    own parts — only 'water' (+ something else) does, independent of depth.
     script (one of SCRIPT_VISIBILITY's keys) scopes both which kanji are returned and,
     for terms ambiguous across scripts, which alias set they expand to. sources (a subset
     of SOURCE_SCOPES) restricts both which kanji can be returned and which decompositions
-    are consulted for matching to the selected contributor scope(s) — it does NOT restrict
-    which alias terms resolve (get_all_aliases_for_term is source-agnostic), so a primitive
-    name contributed by an excluded source can still be typed to search, it just won't
-    match via a decomposition from that source."""
+    are consulted for matching (at every depth) to the selected contributor scope(s) — it
+    does NOT restrict which alias terms resolve (get_all_aliases_for_term is source-
+    agnostic), so a primitive name contributed by an excluded source can still be typed
+    to search, it just won't match via a decomposition from that source."""
     terms = [p.strip().lower() for p in part_names if p.strip()]
     if not terms:
         return []
 
+    depth = max(1, min(depth, MAX_DECOMPOSITION_DEPTH))
     script_scope = SCRIPT_VISIBILITY.get(script) if script else None
-    alias_sets = [get_all_aliases_for_term(conn, t, viewer_id, script_scope) for t in terms]
+    matched_sets = [
+        _reachable_kanji_for_term(conn, t, viewer_id, script_scope, sources, depth) for t in terms
+    ]
+    candidate_ids = set.intersection(*matched_sets) if matched_sets else set()
+    if not candidate_ids:
+        return []
 
     kanji_source_sql, kanji_source_params = _source_scope_sql("k.", sources, viewer_id)
-    decomp_source_sql, decomp_source_params = _source_scope_sql("d.", sources, viewer_id)
-
     conditions = ["(k.visibility = 'public' OR k.owner_id = ?)"]
     params = [viewer_id]
     if kanji_source_sql:
@@ -631,25 +717,16 @@ def search_by_parts(conn, part_names: list[str], viewer_id: int | None = None,
     if script_scope:
         conditions.append(f"k.script IN ({','.join('?' * len(script_scope))})")
         params.extend(script_scope)
-    for aliases in alias_sets:
-        placeholders = ",".join("?" * len(aliases))
-        decomp_extra = f" AND {decomp_source_sql}" if decomp_source_sql else ""
-        conditions.append(
-            f"(k.id IN ({placeholders}) OR "
-            "EXISTS (SELECT 1 FROM parts p JOIN decompositions d ON d.id = p.decomposition_id "
-            f"WHERE p.kanji_id = k.id AND p.part_term IN ({placeholders}) "
-            f"AND (d.visibility = 'public' OR d.owner_id = ?){decomp_extra}))"
-        )
-        params.extend(aliases)
-        params.extend(aliases)
-        params.append(viewer_id)
-        params.extend(decomp_source_params)
 
+    # Filtered in Python against candidate_ids rather than a SQL "id IN (...)" clause —
+    # a very common primitive's reachable set can run into the thousands now that search
+    # walks the full decomposition tree, and SQLite's bound-parameter limit is a real risk
+    # at that size. A full table scan of ~23k kanji rows is still cheap at this scale.
     sql = (
         f"SELECT id, character, keyword, frame, stroke_count, jlpt, image_url FROM kanji k "
         f"WHERE {' AND '.join(conditions)} ORDER BY frame NULLS LAST"
     )
-    rows = conn.execute(sql, params).fetchall()
+    rows = [r for r in conn.execute(sql, params).fetchall() if r["id"] in candidate_ids]
     return _rows_to_dicts(conn, rows, viewer_id)
 
 
@@ -771,15 +848,7 @@ def get_kanji_detail(conn, kanji_id: str, viewer_id: int | None = None,
         ).fetchall()
     ]
 
-    decomp_source_sql, decomp_source_params = _source_scope_sql("d.", sources, viewer_id)
-    decomp_extra = f" AND {decomp_source_sql}" if decomp_source_sql else ""
-    decomp_rows = conn.execute(
-        "SELECT d.id, d.owner_id, d.visibility, d.label, u.username FROM decompositions d "
-        "JOIN users u ON u.id = d.owner_id "
-        f"WHERE d.kanji_id = ? AND (d.visibility = 'public' OR d.owner_id = ?){decomp_extra} "
-        "ORDER BY (d.owner_id = 1) DESC, d.id",
-        [cid, viewer_id] + decomp_source_params
-    ).fetchall()
+    decomp_rows = _list_decompositions(conn, cid, viewer_id, sources)
     entry["decompositions"] = [
         {
             "id": d["id"], "owner": d["username"],
@@ -808,26 +877,21 @@ def get_kanji_detail(conn, kanji_id: str, viewer_id: int | None = None,
     return entry
 
 
-MAX_DECOMPOSITION_DEPTH = 5
-
-
-def _pick_decomposition(conn, kanji_id: str, viewer_id: int | None, sources: set[str] | None):
-    """Pick the one decomposition to recurse into for a resolved part — preferring a
-    system (Heisig-derived) decomposition, then whichever else is visible and allowed
-    by `sources`, same ordering get_kanji_detail uses for its top-level tabs. Returns
-    None if the part has no decomposition within scope (i.e. it's atomic, or its
-    decomposition(s) were filtered out by `sources`)."""
-    source_sql, source_params = _source_scope_sql("", sources, viewer_id)
-    conditions = ["kanji_id = ?", "(visibility = 'public' OR owner_id = ?)"]
-    params = [kanji_id, viewer_id]
-    if source_sql:
-        conditions.append(source_sql)
-        params.extend(source_params)
+def _list_decompositions(conn, kanji_id: str, viewer_id: int | None, sources: set[str] | None):
+    """Every decomposition visible for kanji_id (system decomposition first, then by id),
+    scoped by `sources` same as everywhere else. Shared by get_kanji_detail (top level)
+    and _resolve_parts_detail (nested parts) so both show *all* alternative
+    decompositions, not just one picked one — a kanji taught two different ways (e.g. a
+    system decomposition plus a user's own) shows both, all the way down the tree."""
+    source_sql, source_params = _source_scope_sql("d.", sources, viewer_id)
+    decomp_extra = f" AND {source_sql}" if source_sql else ""
     return conn.execute(
-        f"SELECT id FROM decompositions WHERE {' AND '.join(conditions)} "
-        f"ORDER BY (owner_id = 1) DESC, id LIMIT 1",
-        params
-    ).fetchone()
+        "SELECT d.id, d.owner_id, d.visibility, d.label, u.username FROM decompositions d "
+        "JOIN users u ON u.id = d.owner_id "
+        f"WHERE d.kanji_id = ? AND (d.visibility = 'public' OR d.owner_id = ?){decomp_extra} "
+        "ORDER BY (d.owner_id = 1) DESC, d.id",
+        [kanji_id, viewer_id] + source_params
+    ).fetchall()
 
 
 def _resolve_parts_detail(conn, cid: str, decomposition_id: int, viewer_id: int | None = None,
@@ -838,14 +902,18 @@ def _resolve_parts_detail(conn, cid: str, decomposition_id: int, viewer_id: int 
     is resolved within the same script group as the kanji it's a part of (cid), not
     an arbitrary one — see _script_group / SCRIPT_VISIBILITY.
 
-    Recurses into each resolved part's own decomposition (query-time hierarchy, not
+    Recurses into each resolved part's own decomposition(s) (query-time hierarchy, not
     flattened at import), so e.g. 懸's "prefecture" part also carries prefecture's own
-    "eye + little" breakdown as `sub_parts`, rather than only ever showing the fully
-    flattened primitive list. `sources` scopes which decomposition is used at every
-    level (not just the top), same semantics as search's SOURCE_SCOPES. Bounded by
-    MAX_DECOMPOSITION_DEPTH and an ancestor-chain cycle guard (`_ancestors`) — a part
-    whose own decomposition would revisit a kanji already on the path from the root is
-    left atomic (`sub_parts: []`) rather than recursing forever."""
+    "eye + little" breakdown as `sub_decompositions`, rather than only ever showing the
+    fully flattened primitive list. A part with more than one visible decomposition
+    (e.g. a system one and a user's own alternate) carries *all* of them, each resolved
+    the same way — not just one picked one, all the way down the tree; the UI renders
+    each as its own line, same as the top-level decompositions list in get_kanji_detail.
+    `sources` scopes which decompositions are visible at every level (not just the
+    top), same semantics as search's SOURCE_SCOPES. Bounded by MAX_DECOMPOSITION_DEPTH
+    and an ancestor-chain cycle guard (`_ancestors`) — a part whose own decomposition
+    would revisit a kanji already on the path from the root is left atomic
+    (`sub_decompositions: []`) rather than recursing forever."""
     part_terms = [
         r["part_term"] for r in conn.execute(
             "SELECT part_term FROM parts WHERE decomposition_id = ? ORDER BY position",
@@ -897,14 +965,16 @@ def _resolve_parts_detail(conn, cid: str, decomposition_id: int, viewer_id: int 
             seen_ids.add(pid)
             prow = prow_map.get(pid)
             if prow:
-                sub_parts = []
+                sub_decompositions = []
                 if _depth < MAX_DECOMPOSITION_DEPTH and pid not in _ancestors:
-                    sub_decomp = _pick_decomposition(conn, pid, viewer_id, sources)
-                    if sub_decomp:
-                        sub_parts = _resolve_parts_detail(
-                            conn, pid, sub_decomp["id"], viewer_id, sources,
-                            _ancestors | {cid}, _depth + 1
-                        )
+                    for sd in _list_decompositions(conn, pid, viewer_id, sources):
+                        sub_decompositions.append({
+                            "id": sd["id"], "label": sd["label"], "owner": sd["username"],
+                            "parts": _resolve_parts_detail(
+                                conn, pid, sd["id"], viewer_id, sources,
+                                _ancestors | {cid}, _depth + 1
+                            ),
+                        })
                 resolved.append({
                     "id": prow["id"],
                     "character": prow["character"],
@@ -912,7 +982,7 @@ def _resolve_parts_detail(conn, cid: str, decomposition_id: int, viewer_id: int 
                     "frame": prow["frame"],
                     "image_url": prow["image_url"],
                     "term": term,
-                    "sub_parts": sub_parts,
+                    "sub_decompositions": sub_decompositions,
                 })
     return resolved
 

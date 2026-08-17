@@ -49,6 +49,14 @@ export const translations = {
     sourceCommunity: "Community contributions",
     sourceMine: "My own",
 
+    searchDepthLabel: "Search depth",
+    searchDepthHint: "How deep to look inside each primitive's own components. Higher settings find more, less obvious matches, but common primitives (e.g. \"mouth\", \"one\") can match most of the dataset at depth 5.",
+    searchDepth1: "1 — direct parts only (default)",
+    searchDepth2: "2 — one level deeper",
+    searchDepth3: "3",
+    searchDepth4: "4",
+    searchDepth5: "5 — full depth",
+
     loginRegisterBtn: "Log in / Register",
     loginTab: "Log in",
     registerTab: "Register",
@@ -143,6 +151,14 @@ export const translations = {
     sourceSystem: "Официальные (Хайсиг / система)",
     sourceCommunity: "Вклад сообщества",
     sourceMine: "Мои собственные",
+
+    searchDepthLabel: "Глубина поиска",
+    searchDepthHint: "Насколько глубоко искать внутри собственных компонентов каждого примитива. Чем выше значение, тем больше неочевидных совпадений находится, но частые примитивы (например, «mouth», «one») на глубине 5 могут совпасть с большей частью базы.",
+    searchDepth1: "1 — только прямые части (по умолчанию)",
+    searchDepth2: "2 — на один уровень глубже",
+    searchDepth3: "3",
+    searchDepth4: "4",
+    searchDepth5: "5 — полная глубина",
 
     loginRegisterBtn: "Войти / Зарегистрироваться",
     loginTab: "Вход",

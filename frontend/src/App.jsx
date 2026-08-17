@@ -114,6 +114,11 @@ export default function App() {
   const [textQuery, setTextQuery] = useState("");
   const [charQuery, setCharQuery] = useState("");
   const [fallbackMsg, setFallbackMsg] = useState("");
+  // How many decomposition levels parts-search recurses through — 1 (direct match
+  // only) is the historical default; the backend can go deeper but a common primitive
+  // matches a large fraction of the dataset at high depth, so this stays an explicit
+  // user choice rather than a fixed default (see search_by_parts's docstring).
+  const [searchDepth, setSearchDepth] = useState(1);
 
   async function runSearch(fn) {
     setLoading(true);
@@ -134,7 +139,7 @@ export default function App() {
     const filled = parts.filter((p) => p.trim());
     if (!filled.length) return;
     runSearch(async () => {
-      const data = await searchByParts(filled, studyScript || null, activeSources);
+      const data = await searchByParts(filled, studyScript || null, activeSources, searchDepth);
       if (data.results.length === 0 && filled.length === 1) {
         const text = await searchByText(filled[0], studyScript || null, activeSources);
         setResults(text.results);
@@ -295,6 +300,20 @@ export default function App() {
                         }}
                       />
                     ))}
+                  </div>
+                  <div className="search-depth">
+                    <label htmlFor="search-depth-select">{tt("searchDepthLabel")}</label>
+                    <select
+                      id="search-depth-select"
+                      className="input"
+                      value={searchDepth}
+                      onChange={(e) => setSearchDepth(Number(e.target.value))}
+                    >
+                      {[1, 2, 3, 4, 5].map((d) => (
+                        <option key={d} value={d}>{tt(`searchDepth${d}`)}</option>
+                      ))}
+                    </select>
+                    <p className="search-depth-hint">{tt("searchDepthHint")}</p>
                   </div>
                   <button className="btn-primary" type="submit">{tt("searchBtn")}</button>
                 </form>

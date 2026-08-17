@@ -272,6 +272,35 @@ body {
   cursor: pointer;
 }
 
+/* Search depth (parts search only) */
+.search-depth {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  margin: 4px 0 0;
+}
+
+.search-depth label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.search-depth select {
+  width: auto;
+  flex: none;
+  padding: 8px 10px;
+  font-size: 0.85rem;
+}
+
+.search-depth-hint {
+  flex-basis: 100%;
+  margin: 2px 0 0;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
 /* Tabs */
 .tabs {
   display: flex;
@@ -667,6 +696,28 @@ body {
   margin-top: 4px;
   padding-left: 12px;
   border-left: 1px dashed var(--border);
+}
+
+/* Multiple alternative decompositions, each on its own line/block instead of tabs */
+.decomposition-block + .decomposition-block {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+
+.decomposition-label,
+.sub-decomposition-label {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-bottom: 6px;
+}
+
+.sub-decompositions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .part-add-btn {

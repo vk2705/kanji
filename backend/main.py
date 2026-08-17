@@ -8,7 +8,7 @@ from pydantic import BaseModel
 from database import (
     init_db, import_data, get_db, db_conn, migrate_schema,
     search_by_parts, search_by_substring, search_by_char,
-    get_kanji_detail, SCRIPT_VISIBILITY, SOURCE_SCOPES
+    get_kanji_detail, SCRIPT_VISIBILITY, SOURCE_SCOPES, MAX_DECOMPOSITION_DEPTH
 )
 from auth import router as auth_router, current_user
 from contributions import router as contributions_router
@@ -71,6 +71,12 @@ class PartsSearchRequest(BaseModel):
     parts: list[str]
     script: str | None = None
     sources: list[str] | None = None
+    # How many decomposition levels to search through: 1 (default) is a direct match
+    # only, matching every session before this feature existed; higher values also
+    # match a part's part, recursively, through every alternative decomposition at each
+    # level — see search_by_parts's docstring for why this is a UI-exposed choice
+    # rather than a fixed default (a common primitive's reachable set grows fast).
+    depth: int = 1
 
 
 @app.post("/search/parts")
@@ -80,7 +86,12 @@ def search_parts(req: PartsSearchRequest, conn=Depends(db_conn), user=Depends(cu
         raise HTTPException(status_code=400, detail="Provide at least one part name")
     script = _validate_script(req.script)
     sources = _validate_sources(req.sources)
-    results = search_by_parts(conn, parts, user["id"] if user else None, script, sources)
+    if not 1 <= req.depth <= MAX_DECOMPOSITION_DEPTH:
+        raise HTTPException(
+            status_code=400,
+            detail=f"depth must be between 1 and {MAX_DECOMPOSITION_DEPTH}"
+        )
+    results = search_by_parts(conn, parts, user["id"] if user else None, script, sources, req.depth)
     return {"results": results, "count": len(results)}
 
 

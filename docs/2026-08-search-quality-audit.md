@@ -1210,6 +1210,103 @@ add this as a second check mode.
   worth prioritizing the next live sync sooner rather than letting it
   queue up further.
 
+### 2026-08-15 — session 16
+
+- **Standing scope change from the owner: check all ~3000 kanji, not just
+  ones a report or script flags.** Recorded here explicitly, same as the
+  architecture decision in session 1 — this changes the shape of ongoing
+  work from "wait for a report or a systematic script to surface a
+  candidate" to "cover the dataset methodically." Not attempted as a
+  single-session task (that's neither realistic nor a good use of one
+  turn), but future sessions should treat steady, tracked coverage of the
+  full `rtk*` set as the default posture, not a one-off ask. No coverage-
+  tracking mechanism exists yet (e.g. a persisted "kanji IDs checked so
+  far" list) — worth building before the next content-focused session, so
+  progress toward "all 3000" is actually measurable across wake-ups
+  instead of restarting the question each time.
+- **Second, larger owner request implemented this session: alternative
+  decompositions, end to end.** Two parts — (1) search should consider
+  *all* alternative decompositions of a kanji and of its parts,
+  recursively, not just one; (2) the detail view should show each
+  alternative decomposition on its own line, not behind a tab.
+  - **Detail view (backend + frontend)**: `get_kanji_detail` already
+    returned every top-level decomposition as a list (built for user
+    contributions, mostly unused in the UI until now) — the gap was
+    `_resolve_parts_detail`'s recursion, which picked exactly one
+    sub-decomposition per part via `_pick_decomposition` (removed).
+    Replaced with a shared `_list_decompositions` helper (also now used
+    by `get_kanji_detail`, de-duplicating what used to be two near-
+    identical queries) and changed each resolved part to carry
+    `sub_decompositions: [{id, label, owner, parts: [...]}, ...]` —
+    *every* visible alternative, each recursively resolved the same way,
+    all the way down the tree (bounded by the existing
+    `MAX_DECOMPOSITION_DEPTH`/ancestor-cycle-guard, unchanged). Verified
+    with a synthetic multi-decomposition test (added a second, user-
+    owned decomposition partway down a real recursion chain — `辛`
+    nested inside `辟` inside `壁` — confirmed both alternatives render
+    at the correct nested position, then rolled back). `KanjiDetail.jsx`
+    changed from a tab strip (`decompIdx` state, one `activeDecomp`
+    shown) to rendering every non-empty decomposition as its own
+    `.decomposition-block`, and `PartChip` from a flat `sub_parts` list
+    to iterating `sub_decompositions` the same way, nested. Verified
+    live in a real browser (Playwright against `vite dev` + `uvicorn`,
+    not just a description of expected behavior) — screenshotted the
+    壁 detail page, expanded `辟`, confirmed the nested chips render.
+  - **Search (bigger, riskier change)**: `search_by_parts` was a flat
+    SQL `EXISTS` check (a term must appear directly in *some* visible
+    decomposition — already "all alternatives" at one level, but no
+    recursion into parts' own parts). Rewrote as a BFS,
+    `_reachable_kanji_for_term`: layer 0 is the direct match (unchanged
+    semantics), each further layer asks "which kanji use *any* kanji
+    found in the previous layer as a part, in any visible decomposition"
+    (`_kanji_with_part_terms` + `_terms_for_kanji_ids`), building the
+    full transitive closure up to a depth cap. Confirmed the motivating
+    case: searching "corpse" now finds 壁 (壁→辟→尸/corpse) at depth ≥ 2,
+    which no flat search could ever do.
+  - **Measured the real impact before shipping it blind**: at full depth
+    (5), "mouth" jumps from ~527 direct hits to 1954 (65% of all rtk
+    kanji), "one" to 1892 (63%), "old" from 9 to 643. Flagged this to the
+    owner rather than assuming it was fine — the answer was to make depth
+    a **user-facing choice**, not a fixed default. Implemented: `depth`
+    param on `search_by_parts`/`_reachable_kanji_for_term` (default `1`,
+    exactly the pre-existing flat behavior — confirmed byte-for-byte
+    identical result counts on the whole standing spot-check set before
+    touching anything else), threaded through `POST /search/parts`
+    (validated to `1..MAX_DECOMPOSITION_DEPTH`, 400s outside that range)
+    and a new "Search depth" `<select>` on the parts-search form
+    (`App.jsx`/`i18n.js`, EN+RU), defaulting to 1 so nobody's search
+    experience changes unless they opt in.
+  - Also moved `MAX_DECOMPOSITION_DEPTH` earlier in `database.py` (was
+    defined after its first use as a default-parameter value in the new
+    BFS helpers — Python evaluates defaults at function-definition time,
+    so the old position would have thrown `NameError` at import).
+  - **Verified thoroughly, not just unit-level**: full backend spot-check
+    suite (`old`, `crime`, `heki`, `teki`, `awe`, `round`, `beforehand`,
+    `cave`, `shellfish`, `not yet`, multi-term AND) all unchanged at the
+    default `depth=1`; `audit_radicals.py` still 0 undefined terms;
+    `npm run build` and `npm run lint` both clean; installed real
+    dependencies (`fastapi`/`uvicorn`/a `venv` to dodge a system
+    `cryptography` conflict) and ran the *actual* FastAPI + Vite dev
+    servers, hit `POST /search/parts` directly with `depth=1/3/9` (9
+    correctly 400s), and drove the real UI with Playwright — screenshots
+    confirmed the depth selector, a parts search, and the expandable
+    nested-decomposition detail view all work as built, not just as
+    described. This is the first session to actually launch the app and
+    click through it rather than testing only through `database.py`
+    calls or `rtk.py` — worth doing again for future UI-touching changes,
+    per `CLAUDE.md`'s own standing instruction to test UI changes in a
+    browser before calling them done.
+  - Noted, not fixed: expanding `辟` in the live detail view showed both
+    `尸` ("corpse") and a second, separate kanji `屍` (also "corpse") as
+    siblings — this is pre-existing `expand_part_terms` auto-keyword-
+    expansion behavior (a part term that's itself a kanji character gets
+    its own keyword appended as a second term at import time), not
+    something this session's changes introduced or need to fix; flagging
+    only so a future session doesn't mistake it for a new bug.
+- Not yet synced to the live server (this is a backend + frontend code
+  change, not a `data.txt` content change — needs an actual deploy of
+  both, not just `sync_system_data.py`).
+
 ## Tooling produced this session
 
 - `backend/audit_decomposition.py` — committed to `master`. Rebuilds a

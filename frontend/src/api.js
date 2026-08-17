@@ -15,12 +15,12 @@ async function extractError(res) {
   }
 }
 
-export async function searchByParts(parts, script = null, sources = null) {
+export async function searchByParts(parts, script = null, sources = null, depth = 1) {
   const res = await fetch(`${BASE}/search/parts`, {
     method: "POST",
     credentials: "include",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ parts, script, sources }),
+    body: JSON.stringify({ parts, script, sources, depth }),
   });
   if (!res.ok) throw new Error(await extractError(res));
   return res.json();
