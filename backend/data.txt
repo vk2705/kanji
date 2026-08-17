@@ -277,7 +277,7 @@ rtk20:?:bright:sun,moon
 rtk21:?:chant:mouth,tongue wagging in mouth
 
 
-rtk91:?:street:?,?;pipe,minus
+rtk91:?::日,召
 rtk200:枠:frame:wood 90 9 10 , 十九 木
 
 rtk2636:?:arrow shaft:bamboo,in front 
@@ -322,9 +322,9 @@ rtk48:博:dr.:十,寸,田,丶
 rtk49:占:fortune-telling:口,卜
 rtk50:上:above:一,卜
 rtk51:下:below:｜,一,卜
-rtk52:卓:eminent:十,日,卜
-rtk53:朝:morning:月,十,日
-rtk54:嘲:ridicule:月,口,十,日
+rtk52:卓:eminent:卜,早
+rtk53:朝:morning:早,月
+rtk54:嘲:ridicule:口,朝
 rtk55:只:only:口,ハ
 rtk56:貝:shellfish:目,ハ
 rtk57:唄:song:貝,口
@@ -365,9 +365,9 @@ rtk92:則:rule:貝
 rtk93:副:vice-:一,口,田
 rtk94:別:separate:口,力,勹
 rtk95:丁:street:一,亅
-rtk96:町:town:一,田,亅
-rtk97:可:can:一,口,亅
-rtk98:頂:place on the head:一,貝,頁,亅
+rtk96:町:town:田,丁
+rtk97:可:can:丁,口
+rtk98:頂:place on the head:丁,頁
 rtk99:子:child:
 rtk100:孔:cavity:乙,子
 rtk101:了:complete:一,亅
@@ -638,7 +638,7 @@ rtk367:詰:packed:言,口,士
 rtk368:話:tale:言,口,舌
 rtk369:詠:recitation:言,水,丶
 rtk370:詩:poem:言,寸,土
-rtk371:語:word:言,口,五
+rtk371:語:word:言,吾
 rtk372:読:read:言,士,儿,冖
 rtk373:調:tune:言,口,土,冂
 rtk374:談:discuss:火,言
@@ -1776,8 +1776,8 @@ rtk1505:齢:age:止,歯,米,个,凵,卩,一
 rtk1506:冷:cool:个,冫,卩,一
 rtk1507:領:jurisdiction:貝,頁,个,卩,一
 rtk1508:鈴:small bell:金,个,卩,一
-rtk1509:勇:courage:田,力,マ
-rtk1510:湧:boil:水,田,力,マ
+rtk1509:勇:courage:男,マ
+rtk1510:湧:boil:水,勇
 rtk1511:通:traffic:込,用,マ
 rtk1512:踊:jump:口,足,用,マ,止
 rtk1513:疑:doubt:疋,矢,匕,マ
@@ -2413,7 +2413,7 @@ rtk2142:篤:fervent:竹,杰,馬
 rtk2143:罵:abuse:馬,杰
 rtk2144:騰:leaping up:月,馬,并,一,人,大,二,杰
 rtk2145:虎:tiger:卜,儿,匕,厂,虍
-rtk2146:虜:captive:田,卜,力,匕,厂,虍
+rtk2146:虜:captive:男,卜,匕,厂,虍
 rtk2147:膚:skin:月,田,卜,匕,厂,虍
 rtk2148:虚:void:一,卜,匕,厂,虍
 rtk2149:戯:frolic:卜,匕,厂,戈,虍
@@ -2876,7 +2876,7 @@ rtk2605:焔:flame:｜,火,日,勹
 rtk2606:烹:boil:口,亅,亠,杰
 rtk2607:牽:pull:亠,冖,厶,牛
 rtk2608:牝:female:牛,匕
-rtk2609:牡:male:牛,土
+rtk2609:牡::牛,土
 rtk2610:琳:jewel:王,木
 rtk2611:琉:precious stone:王,川,亠,厶
 rtk2612:瑳:polish:ノ,王,工,并,羊
