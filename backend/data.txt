@@ -278,7 +278,6 @@ rtk21:?:chant:mouth,tongue wagging in mouth
 
 
 rtk91:?::日,召
-rtk200:枠:frame:wood 90 9 10 , 十九 木
 
 rtk2636:?:arrow shaft:bamboo,in front 
 # --- Imported from kanjidic2 + KRADFILE ---
@@ -446,30 +445,30 @@ rtk173:火:fire:
 rtk174:炎:inflammation:火
 rtk175:煩:anxiety:火,頁
 rtk176:淡:thin:火,水
-rtk177:灯:lamp:一,火,亅
+rtk177:灯:lamp:火,丁
 rtk178:畑:farm:火,田
 rtk179:災:disaster:火,巛
 rtk180:灰:ashes:火,厂
-rtk181:点:spot:口,卜,杰
-rtk182:照:illuminate:口,刀,日,杰
+rtk181:点:spot:占,杰
+rtk182:照:illuminate:昭,杰
 rtk183:魚:fish:田,杰
-rtk184:漁:fishing:魚,水,田,杰
+rtk184:漁:fishing:水,魚
 rtk185:里:ri:
 rtk186:黒:black:里,杰
-rtk187:墨:black ink:黒,土,里,杰
-rtk188:鯉:carp:魚,田,里,杰
-rtk189:量:quantity:一,日,里
+rtk187:墨:black ink:土,黒
+rtk188:鯉:carp:魚,里
+rtk189:量:quantity:旦,里
 rtk190:厘:rin:里,厂
 rtk191:埋:bury:土,里
 rtk192:同:same:口,冂,一
-rtk193:洞:den:口,水,冂,一
-rtk194:胴:trunk:月,口,冂,一
+rtk193:洞:den:水,同
+rtk194:胴:trunk:月,同
 rtk195:向:yonder:口,冂
 rtk196:尚:esteem:口,冂
 rtk197:字:character:子,宀
 rtk198:守:guard:寸,宀
-rtk199:完:perfect:二,儿,宀,元
-rtk201:宵:wee hours:月,尚,宀
+rtk199:完:perfect:宀,元
+rtk201:宵:wee hours:宀,肖
 rtk202:安:relax:女,宀
 rtk203:宴:banquet:女,日,宀
 rtk204:寄:draw near:一,口,大,亅,宀
@@ -483,7 +482,7 @@ rtk211:柏:oak:白,木
 rtk213:梢:treetops:月,尚,木
 rtk214:棚:shelf:木,朋
 rtk215:杏:apricot:口,木
-rtk216:桐:paulownia:口,木,冂,一
+rtk216:桐:paulownia:木,同
 rtk217:植:plant:十,木,目
 rtk218:椅:chair:口,大,木,一,亅
 rtk219:枯:wither:古,木
