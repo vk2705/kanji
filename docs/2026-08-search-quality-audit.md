@@ -1378,6 +1378,75 @@ add this as a second check mode.
   get the current count before picking a batch, since it'll drift as
   fixes land. 2452/3000 still unreviewed as of this session.
 
+### 2026-08-18 — session 18
+
+- **Continued the frame-ordered review, picking up frames 101-250** where
+  session 17 left off (frames 1-100). Two batches, two commits:
+  - First batch (frames 101-175, commit `74c7641`): 9 more instances of
+    the same flattening pattern in the 石/頁/原 clusters — `貫`(母,貝),
+    `硝`(石,肖), `砂`(石,少), `妬`(女,石), `順`(川,頁), `願`(原,頁),
+    `源`(水,原), `測`(水,則), `煩`(火,頁) — each was re-flattening a
+    compound (貝/石/頁/原/則) that was already correctly named elsewhere,
+    instead of referencing it.
+  - Second batch (frames 176-250, commit `c1deffb`): 13 more fixes —
+    `灯`(火,丁), `点`(占,杰), `照`(昭,杰), `漁`(水,魚), `墨`(土,黒),
+    `鯉`(魚,里), `量`(旦,里), `洞`(水,同), `胴`(月,同), `桐`(木,同),
+    `完`(宀,元), `宵`(宀,肖) — same pattern, plus one genuinely different
+    bug at `rtk200`:
+    - **`rtk200` was assigned the wrong kanji entirely.** The override
+      read `rtk200:枠:frame:wood 90 9 10 , 十九 木` — both a frame
+      mismatch and garbled parts text. Checking `heisig-kanjis.csv`
+      directly: `id_6th_ed=200` is actually `宣` (proclaim), not `枠`.
+      `枠`'s real 6th-edition frame is **212** — its *5th*-edition frame
+      was 200, so whoever wrote this override years ago used the wrong
+      edition's frame number, the same class of mistake as the original
+      `rtk91` Finding-3 bug session 17 closed out. `rtk212` had no
+      override at all, so it had been silently showing `枠`'s correct
+      CSV baseline (`tree,wood,ninety,nine,baseball,ten,needle`) the
+      whole time — meanwhile `rtk200`/`宣` was being overwritten with a
+      wrong character and garbage parts on every import. Fix: deleted
+      the `rtk200` line outright; `宣` now correctly falls back to its
+      own (already-correct) CSV baseline, and `rtk212`/`枠` needed no
+      change.
+- **New finding, not fixed this session**: while spot-checking `完`
+  (rtk199, now `宀,元`), its rendered parts showed **three** chips
+  (`roof, roof, beginning`) instead of two. Root cause: `宀` (rad1041)
+  and `屋`/`rtk1138` (frame 1138) are *both* officially keyworded "roof"
+  in the 6th-edition CSV itself — a genuine Heisig naming collision, not
+  a data-entry error. `expand_part_terms`'s existing behavior of
+  auto-appending a literal character term's own keyword as a second
+  synthetic lookup term (documented pre-existing behavior, e.g. the
+  benign 尸/屍 double-chip case) turns this collision into an actively
+  wrong result: resolving the synthetic "roof" term picks `屋` — a
+  completely different kanji that `完`, `字`(rtk197), `守`(rtk198),
+  `宵`(rtk201), and `安`(rtk202) do not actually contain. Confirmed via
+  `search_by_parts(['roof','beginning'])`, which over-matches `rtk1401`
+  and `rtk2488` alongside the correct `rtk199`. This is a resolution-
+  logic bug, not a data bug — the right fix is probably having
+  `expand_part_terms` skip the synthetic-keyword expansion when the part
+  term is already a literal, unambiguous character reference, but that
+  needs actual design thought (risk of breaking the legitimate cases the
+  synthetic expansion exists for) rather than a quick edit. Deferred to a
+  future session; flagged here so it isn't lost.
+- Verified: rebuilt `kanji.db` from scratch after each batch.
+  `audit_radicals.py`'s multi-char undefined-term count dropped 5 → 3
+  (the two dropped were `rtk200`'s garbage text, now gone with the line
+  deletion). `get_kanji_detail` spot-checks on all 14 touched ids
+  (including confirming `rtk200`→`宣`/proclaim and `rtk212`→`枠`/frame
+  are now both correct) plus the full standing regression suite
+  (`old`/`crime`/`heki`/`awe`/`round`/`cave`/`shellfish`/`street`/
+  `shining`/`early`/`courage`/`happiness`) — no regressions from either
+  batch.
+- Coverage: **564/3000 (18.8%)** reviewed as of this session's commits
+  (`docs/kanji_review_coverage.tsv` regenerated).
+- Not yet synced to the live server — same standing gap as every prior
+  session (`sync_system_data.py` for content, a real code deploy for the
+  session 16 alternative-decompositions architecture change).
+- **Next session**: continue frame-ordered through the unreviewed rows
+  (2436/3000 remain); consider picking up the `roof`/`屋` collision fix
+  above if there's bandwidth, since it's a concrete, well-understood bug
+  now rather than a vague "some aliases collide" note.
+
 ## Tooling produced this session
 
 - `backend/audit_decomposition.py` — committed to `master`. Rebuilds a

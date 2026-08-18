@@ -118,10 +118,10 @@ rtk116	外	outside	116	no
 rtk117	名	name	117	no
 rtk118	石	stone	118	yes
 rtk119	肖	resemblance	119	no
-rtk120	硝	nitrate	120	no
+rtk120	硝	nitrate	120	yes
 rtk121	砕	smash	121	no
-rtk122	砂	sand	122	no
-rtk123	妬	jealous	123	no
+rtk122	砂	sand	122	yes
+rtk123	妬	jealous	123	yes
 rtk124	削	plane	124	yes
 rtk125	光	ray	125	no
 rtk126	太	plump	126	no
@@ -151,7 +151,7 @@ rtk149	汰	cleanse	149	no
 rtk150	汁	soup	150	no
 rtk151	沙	grains of sand	151	no
 rtk152	潮	tide	152	no
-rtk153	源	source	153	no
+rtk153	源	source	153	yes
 rtk154	活	lively	154	no
 rtk155	消	extinguish	155	no
 rtk156	況	but of course	156	no
@@ -175,31 +175,31 @@ rtk173	火	fire	173	no
 rtk174	炎	inflammation	174	no
 rtk175	煩	anxiety	175	yes
 rtk176	淡	thin	176	no
-rtk177	灯	lamp	177	no
+rtk177	灯	lamp	177	yes
 rtk178	畑	farm	178	no
 rtk179	災	disaster	179	no
 rtk180	灰	ashes	180	no
-rtk181	点	spot	181	no
-rtk182	照	illuminate	182	no
+rtk181	点	spot	181	yes
+rtk182	照	illuminate	182	yes
 rtk183	魚	fish	183	no
-rtk184	漁	fishing	184	no
+rtk184	漁	fishing	184	yes
 rtk185	里	ri	185	no
 rtk186	黒	black	186	no
-rtk187	墨	black ink	187	no
-rtk188	鯉	carp	188	no
-rtk189	量	quantity	189	no
+rtk187	墨	black ink	187	yes
+rtk188	鯉	carp	188	yes
+rtk189	量	quantity	189	yes
 rtk190	厘	rin	190	no
 rtk191	埋	bury	191	no
 rtk192	同	same	192	no
-rtk193	洞	den	193	no
-rtk194	胴	trunk	194	no
+rtk193	洞	den	193	yes
+rtk194	胴	trunk	194	yes
 rtk195	向	yonder	195	no
 rtk196	尚	esteem	196	no
 rtk197	字	character	197	no
 rtk198	守	guard	198	no
-rtk199	完	perfect	199	no
+rtk199	完	perfect	199	yes
 rtk200	宣	proclaim	200	no
-rtk201	宵	wee hours	201	no
+rtk201	宵	wee hours	201	yes
 rtk202	安	relax	202	no
 rtk203	宴	banquet	203	no
 rtk204	寄	draw near	204	no
@@ -214,7 +214,7 @@ rtk212	枠	frame	212	no
 rtk213	梢	treetops	213	no
 rtk214	棚	shelf	214	yes
 rtk215	杏	apricot	215	no
-rtk216	桐	paulownia	216	no
+rtk216	桐	paulownia	216	yes
 rtk217	植	plant	217	no
 rtk218	椅	chair	218	no
 rtk219	枯	wither	219	yes
