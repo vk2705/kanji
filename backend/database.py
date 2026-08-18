@@ -926,6 +926,36 @@ def _resolve_parts_detail(conn, cid: str, decomposition_id: int, viewer_id: int 
     parent = conn.execute("SELECT script FROM kanji WHERE id = ?", (cid,)).fetchone()
     parent_group = _script_group(parent["script"]) if parent else None
 
+    # A literal-character part term (e.g. '宀') was stored alongside a synthetic
+    # second row for that character's own keyword ('roof') by expand_part_terms at
+    # import time, so search can match on either. For *display*, showing both as
+    # separate chips is at best redundant (same kanji twice) and at worst actively
+    # wrong: if that keyword happens to collide with a different kanji's own alias
+    # (e.g. 屋/rtk1138 is *also* officially keyworded "roof" in the 6th-ed CSV — a
+    # genuine Heisig naming collision, not a data bug), the synthetic term resolves
+    # to that unrelated kanji instead, injecting a bogus extra chip (see
+    # docs/2026-08-search-quality-audit.md, session 18). Recompute exactly which
+    # positions expand_part_terms would have synthesized, using the same char/
+    # keyword lookup and script_group preference, and drop them here — search
+    # (_kanji_with_part_terms etc.) reads the same stored rows independently and is
+    # unaffected.
+    char_to_candidates, id_to_keyword = _build_char_lookup(conn)
+    synthetic_positions: set[int] = set()
+    for i, term in enumerate(part_terms[:-1]):
+        candidates = char_to_candidates.get(term)
+        if not candidates:
+            continue
+        chosen_id = None
+        if parent_group:
+            chosen_id = next((kid for kid, script in candidates if _script_group(script) == parent_group), None)
+        if chosen_id is None:
+            chosen_id = candidates[0][0]
+        kw = id_to_keyword.get(chosen_id)
+        if kw and part_terms[i + 1] == kw:
+            synthetic_positions.add(i + 1)
+    if synthetic_positions:
+        part_terms = [t for i, t in enumerate(part_terms) if i not in synthetic_positions]
+
     ph = ",".join("?" * len(part_terms))
     term_to_id: dict[str, str] = {}
     for r in conn.execute(f"SELECT id FROM kanji WHERE id IN ({ph})", part_terms).fetchall():
