@@ -375,7 +375,7 @@ rtk102:女:woman:
 rtk103:好:fond:子,女
 rtk104:如:likeness:口,女
 rtk105:母:mother:毋
-rtk106:貫:pierce:貝,母,毋
+rtk106:貫:pierce:母,貝
 rtk107:兄:elder brother:口,儿
 rtk108:呪:spell:口,儿
 rtk109:克:overcome:古,儿
@@ -389,10 +389,10 @@ rtk116:外:outside:卜,夕
 rtk117:名:name:口,夕
 rtk118:石:stone:厂,口
 rtk119:肖:resemblance:月,尚
-rtk120:硝:nitrate:月,口,尚,石
+rtk120:硝:nitrate:石,肖
 rtk121:砕:smash:ノ,口,十,石,九
-rtk122:砂:sand:ノ,口,小,石
-rtk123:妬:jealous:口,女,石
+rtk122:砂:sand:石,少
+rtk123:妬:jealous:女,石
 rtk124:削:plane:月,尚
 rtk125:光:ray:一,尚,儿
 rtk126:太:plump:大,丶
@@ -405,14 +405,14 @@ rtk132:厚:thick:子,日,厂
 rtk133:奇:strange:一,口,大,亅
 rtk134:川:stream:
 rtk135:州:state:｜,川,丶
-rtk136:順:obey:貝,川,頁
+rtk136:順:obey:川,頁
 rtk137:水:water:
 rtk138:氷:icicle:水,丶
 rtk139:永:eternity:水,丶
 rtk140:泉:spring:水,白
 rtk141:腺:gland:月,水,白
 rtk142:原:meadow:小,白,厂
-rtk143:願:petition:貝,小,白,頁,厂
+rtk143:願:petition:原,頁
 rtk144:泳:swim:水,丶
 rtk145:沼:marsh:口,水,刀
 rtk146:沖:open sea:｜,水,口
@@ -422,14 +422,14 @@ rtk149:汰:washing:水,大,丶
 rtk150:汁:soup:十
 rtk151:沙:sand:ノ,水,小
 rtk152:潮:tide:月,十,水,日
-rtk153:源:source:水,小,白,厂
+rtk153:源:source:水,原
 rtk154:活:lively:ノ,口,十,水,舌
 rtk155:消:extinguish:月,水,尚
 rtk156:況:condition:口,水,儿
 rtk157:河:river:口,水,亅,一
 rtk158:泊:overnight stay:水,白
 rtk159:湖:lake:水,胡
-rtk160:測:fathom:貝,水
+rtk160:測:fathom:水,則
 rtk161:土:soil:
 rtk162:吐:spit:口,土
 rtk163:圧:pressure:土,厂
@@ -444,7 +444,7 @@ rtk171:時:time:寸,土,日
 rtk172:均:level:土,冫,勹,二
 rtk173:火:fire:
 rtk174:炎:inflammation:火
-rtk175:煩:anxiety:火,貝,頁
+rtk175:煩:anxiety:火,頁
 rtk176:淡:thin:火,水
 rtk177:灯:lamp:一,火,亅
 rtk178:畑:farm:火,田
