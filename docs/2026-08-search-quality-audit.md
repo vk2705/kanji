@@ -1447,6 +1447,67 @@ add this as a second check mode.
   above if there's bandwidth, since it's a concrete, well-understood bug
   now rather than a vague "some aliases collide" note.
 
+### 2026-08-18 — session 19
+
+- **Fixed the `roof`/`屋` collision flagged at the end of session 18**,
+  prompted by the owner asking how to handle keyword collisions like this
+  in a user-friendly, tolerant way generally (not just for this one
+  case). Answer applied here: split the two behaviors that were sharing
+  one mechanism. `expand_part_terms` (import time) still stores a
+  literal-character part term's own keyword as a second synonym row
+  alongside it — that's genuinely useful for **search** (matching a
+  decomposition on either the character or its keyword) and stays
+  untouched. But **display** (`_resolve_parts_detail`, `KanjiDetail.jsx`)
+  has no business showing two chips for what the contributor entered as
+  one part. Fix: at read time, recompute exactly which part_term rows
+  `expand_part_terms` would have synthesized (same char→keyword lookup,
+  same `script_group` preference used at import) and drop only those
+  rows before resolving chips — the literal character's own row still
+  resolves normally. This is display-only and reversible per-request; it
+  doesn't touch stored data or search.
+  - Fixes the `完`/`字`/`守`/`宵`/`安` bogus-`屋` case exactly as
+    diagnosed in session 18.
+  - Turned out to also fix the previously-documented "尸/屍 double-chip
+    quirk" (session-notes elsewhere had called this benign/not-a-bug) —
+    it was the identical mechanism, just landing on a same-*meaning*
+    kanji instead of an unrelated one, so it read as merely confusing
+    rather than wrong. Confirmed `rtk1132`/`rtk1133` (尿/尼, both list 尸)
+    now show a single `corpse` chip instead of two.
+- **On the broader "how to handle collisions tolerantly" question**: for
+  cases where a *search term a user actually types* is genuinely
+  ambiguous across kanji (e.g. free-text "roof" still matches both `宀`
+  and `屋` — confirmed still true after this fix, `search_by_substring`
+  correctly returns both), the right posture is to keep returning every
+  match rather than silently picking one canonical owner — same
+  philosophy the app already applies to multiple decompositions (show
+  every alternative, let the user pick). The `男`/`雄`/`牡` "male" and
+  `朋`/`侶` "companion" alias collisions noted in sessions 12/17 are a
+  different shape (two kanji fighting over which one alias-resolution
+  picks for search-by-parts term matching, not a display bug) and are
+  still open — this session's fix doesn't touch that class, only the
+  display-time duplicate-chip mechanism.
+- Verified: full rebuild from scratch; `audit_radicals.py` unchanged (3
+  multi-char undefined terms, same as session 18 — this was a query-time
+  fix, not a data fix, so the undefined-term count is unaffected);
+  `get_kanji_detail` spot-checks on `rtk199`/`197`/`198`/`201`/`202`
+  (roof case) and `rtk1132`/`1133` (corpse case) all show the correct
+  chip count now; `search_by_parts(['roof','beginning'])` and
+  `search_by_substring('roof')` return identical results to before the
+  change (search untouched, as intended); `search_by_char('屋')` still
+  resolves; a 15-kanji random sample across the dataset all resolve
+  without error; full standing regression suite
+  (`old`/`crime`/`heki`/`awe`/`round`/`cave`/`shellfish`/`street`/
+  `shining`/`early`/`courage`/`happiness`) — no regressions.
+- Not yet synced to the live server — same standing gap as every prior
+  session.
+- **Next session**: continue the frame-ordered `data.txt` review
+  (2436/3000 unreviewed as of session 18); the `男`/`雄`/`牡` and
+  `朋`/`侶` search-side alias collisions are still open and are a
+  different fix shape from this session's display fix — worth a session
+  of their own once there's bandwidth for the "which kanji canonically
+  owns this English word" pass across the whole alias table that
+  sessions 12/17 flagged.
+
 ## Tooling produced this session
 
 - `backend/audit_decomposition.py` — committed to `master`. Rebuilds a
