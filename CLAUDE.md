@@ -48,13 +48,14 @@ python3 rtk.py detail rtk145     # full detail: aliases + parts
 ```
 `rtk.py` predates the multi-user schema and queries `kanji`/`aliases`/`parts` directly with no `visibility`/`owner_id` filtering — it will surface private user contributions indiscriminately. Treat it as a dev/debug tool, not a user-facing surface.
 
-**One-off data/maintenance scripts** (`backend/`, not part of the app's runtime):
+**One-off data/maintenance scripts** (`backend/`, not part of the app's runtime). These `import database` (`X | None` syntax, Python 3.10+), so they need the venv's Python — the box's system `python3` is 3.9.25 and `TypeError`s on import. Use the venv's interpreter explicitly, or `source venv/bin/activate` first:
 ```bash
-python3 import_rtk.py            # append new rtk{frame} entries to data.txt from kanjidic2 + KRADFILE
-python3 import_hanzi.py          # one-time: seed Chinese hanzi (CJK Unified block) from Unihan.zip + cjkvi-ids
-python3 backup_db.py             # online backup of kanji.db to backups/, prunes backups older than 14 days
+./venv/bin/python3 import_rtk.py            # append new rtk{frame} entries to data.txt from kanjidic2 + KRADFILE
+./venv/bin/python3 import_hanzi.py          # one-time: seed Chinese hanzi (CJK Unified block) from Unihan.zip + cjkvi-ids
+./venv/bin/python3 backup_db.py             # online backup of kanji.db to backups/, prunes backups older than 14 days
+./venv/bin/python3 sync_system_data.py --dry-run   # reconcile live system rows with data.txt/CSV without wiping user data
 ```
-`import_hanzi.py` refuses to run if any non-`ja-kanji` rows already exist (not safe to resume mid-run). `backup_db.py` is meant to run on a schedule (see Deployment).
+`import_hanzi.py` refuses to run if any non-`ja-kanji` rows already exist (not safe to resume mid-run). `backup_db.py` is meant to run on a schedule (see Deployment). `backup_db.py`, `export_public_data.py`, `fix_kradfile_proxies.py`, and `sync_system_data.py` also have a shebang pointing straight at `venv/bin/python3`, so `./script.py` works directly without the `./venv/bin/python3` prefix.
 
 There is no test suite in this repo currently.
 

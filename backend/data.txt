@@ -1475,7 +1475,7 @@ rtk1205:裸:naked:初,田,木
 rtk1206:斤:axe:
 rtk1207:析:chop:斤,木
 rtk1208:所:place:斤,戸,一,尸
-rtk1209:祈:pray:斤,礼
+rtk1209:祈:pray:斤,altar
 rtk1210:近:near:斤,込
 rtk1211:折:fold:斤,扎
 rtk1212:哲:philosophy:斤,口,扎
@@ -2280,7 +2280,7 @@ rtk2010:飼:domesticate:口,艮,亅,个,食
 rtk2011:嗣:heir:｜,一,口,亅,冂
 rtk2012:舟:boat:
 rtk2013:舶:liner:舟,白
-rtk2014:航:navigate:舟,亠,几
+rtk2014:航:navigate:舟,亠,primitive_lid,几
 rtk2015:舷:gunwale:玄,舟,亠,幺
 rtk2016:般:carrier:舟,殳,几,又
 rtk2017:盤:tray:皿,舟,殳,几,又
@@ -3271,7 +3271,7 @@ rtk3000:鼈:snapping turtle:小,尚,冂,攵,黽
 # (Finding 1, 2026-08 search-quality audit). Names are the standard public-domain
 # Kangxi radical English names (or, for 艾/厶, the established primitive meaning);
 # not Heisig book text.
-rad1001:亠:lid
+rad1001:亠:lid,primitive_lid
 rad1002:冂:border,down box
 rad1003:冖:cover,cloth cover
 rad1004:亅:hook

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/home/ec2-user/apps/kanji/backend/venv/bin/python3
 """Nightly backup of kanji.db via SQLite's online backup API. Keeps 14 days."""
 import sqlite3
 import sys

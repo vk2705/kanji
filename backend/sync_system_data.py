@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/home/ec2-user/apps/kanji/backend/venv/bin/python3
 """
 sync_system_data.py — reconcile a live, already-seeded kanji.db's system rows
 (owner_id=1, script='ja-kanji') with the current heisig-kanjis.csv /

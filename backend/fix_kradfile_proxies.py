@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/home/ec2-user/apps/kanji/backend/venv/bin/python3
 """
 fix_kradfile_proxies.py — remove KRADFILE JIS-substitute glyphs from system decompositions.
 

@@ -589,6 +589,34 @@ def resolve_alias(conn, term: str, viewer_id: int | None = None,
     return rows[0]["kanji_id"]
 
 
+def _self_identity_kanji_ids(conn, term: str, viewer_id: int | None,
+                              script_scope: tuple[str, ...] | None) -> set[str]:
+    """Every kanji id that `term` itself names — by id or by alias — visible to
+    viewer_id. Unlike resolve_alias (which collapses an ambiguous term to a single
+    canonical id, e.g. for decomposition-graph expansion), this returns *all* matches:
+    a term ambiguous across scripts (like '族', matching both rtk1307 and hanzi-65cf)
+    must self-identity-match every one of them, not just whichever one resolve_alias
+    happened to pick, or an unfiltered ('All scripts') search silently drops half."""
+    term = term.strip().lower()
+    row = conn.execute(
+        "SELECT id FROM kanji WHERE id = ? AND (visibility = 'public' OR owner_id = ?)",
+        (term, viewer_id)
+    ).fetchone()
+    if row:
+        return {row["id"]}
+    rows = conn.execute(
+        "SELECT a.kanji_id, k.script FROM aliases a "
+        "JOIN kanji k ON k.id = a.kanji_id "
+        "WHERE a.alias = ? AND (a.visibility = 'public' OR a.owner_id = ?)",
+        (term, viewer_id)
+    ).fetchall()
+    if script_scope:
+        scoped = [r for r in rows if r["script"] in script_scope]
+        if scoped:
+            rows = scoped
+    return {r["kanji_id"] for r in rows}
+
+
 def get_all_aliases_for_term(conn, term: str, viewer_id: int | None = None,
                               script_scope: tuple[str, ...] | None = None) -> set[str]:
     """Return the full visible alias set for a primitive (for parts-table matching)."""
@@ -652,10 +680,11 @@ def _reachable_kanji_for_term(conn, term: str, viewer_id: int | None,
     every depth beyond that also matches a part's part, recursively. Considers *every*
     visible decomposition at each level, not just one picked one — a kanji reachable
     via any alternative decomposition of any ancestor counts. Self-identity (a kanji
-    "is made of" itself) is included via the term's own canonical id, independent of
-    max_depth."""
-    canonical = resolve_alias(conn, term, viewer_id, script_scope)
-    matched = {canonical} if canonical else set()
+    "is made of" itself) is included via every kanji the term itself names — not just
+    resolve_alias's single canonical pick, so a term ambiguous across scripts (e.g.
+    '族', matching both an rtk row and a hanzi row) self-matches all of them — and is
+    independent of max_depth."""
+    matched = _self_identity_kanji_ids(conn, term, viewer_id, script_scope)
 
     frontier_terms = get_all_aliases_for_term(conn, term, viewer_id, script_scope)
     found_kanji: set[str] = set()
