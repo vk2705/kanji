@@ -318,7 +318,7 @@ rtk316	額	forehead	316	yes
 rtk317	夏	summer	317	no
 rtk318	処	dispose	318	yes
 rtk319	条	twig	319	yes
-rtk320	落	fall	320	no
+rtk320	落	fall	320	yes
 rtk321	冗	superfluous	321	no
 rtk322	冥	hades	322	no
 rtk323	軍	army	323	no
@@ -333,16 +333,16 @@ rtk331	塾	cram school	331	no
 rtk332	熟	mellow	332	no
 rtk333	亭	pavilion	333	no
 rtk334	京	capital	334	no
-rtk335	涼	refreshing	335	no
+rtk335	涼	refreshing	335	yes
 rtk336	景	scenery	336	no
-rtk337	鯨	whale	337	no
+rtk337	鯨	whale	337	yes
 rtk338	舎	cottage	338	no
 rtk339	周	circumference	339	no
 rtk340	週	week	340	no
 rtk341	士	gentleman	341	no
 rtk342	吉	good luck	342	no
 rtk343	壮	robust	343	no
-rtk344	荘	villa	344	no
+rtk344	荘	villa	344	yes
 rtk345	売	sell	345	no
 rtk346	学	study	346	no
 rtk347	覚	memorize	347	no
@@ -360,35 +360,35 @@ rtk358	警	admonish	358	yes
 rtk359	計	plot	359	no
 rtk360	詮	elucidate	360	no
 rtk361	獄	prison	361	yes
-rtk362	訂	revise	362	no
+rtk362	訂	revise	362	yes
 rtk363	訃	obituary	363	no
 rtk364	討	chastise	364	no
 rtk365	訓	instruction	365	no
 rtk366	詔	imperial edict	366	no
-rtk367	詰	packed	367	no
+rtk367	詰	packed	367	yes
 rtk368	話	tale	368	no
 rtk369	詠	recitation	369	no
 rtk370	詩	poem	370	no
 rtk371	語	word	371	yes
-rtk372	読	read	372	no
+rtk372	読	read	372	yes
 rtk373	調	tune	373	no
 rtk374	談	discuss	374	no
 rtk375	諾	consent	375	no
 rtk376	諭	rebuke	376	yes
 rtk377	式	style	377	no
-rtk378	試	test	378	no
+rtk378	試	test	378	yes
 rtk379	弐	ii (two)	379	no
 rtk380	域	range	380	no
 rtk381	賊	burglar	381	yes
 rtk382	栽	plantation	382	no
 rtk383	載	load	383	no
-rtk384	茂	overgrown	384	no
-rtk385	戚	relatives	385	no
+rtk384	茂	overgrown	384	yes
+rtk385	戚	relatives	385	yes
 rtk386	成	turn into	386	no
-rtk387	城	castle	387	no
-rtk388	誠	sincerity	388	no
-rtk389	威	intimidate	389	no
-rtk390	滅	destroy	390	no
+rtk387	城	castle	387	yes
+rtk388	誠	sincerity	388	yes
+rtk389	威	intimidate	389	yes
+rtk390	滅	destroy	390	yes
 rtk391	減	dwindle	391	no
 rtk392	蔑	revile	392	yes
 rtk393	桟	scaffold	393	no

@@ -1508,8 +1508,83 @@ add this as a second check mode.
   owns this English word" pass across the whole alias table that
   sessions 12/17 flagged.
 
+### 2026-08-18 — session 20
+
+- **Built `backend/audit_flattening.py`**, a deterministic detector for
+  this audit's dominant bug pattern (a kanji's override re-flattens
+  another compound's own already-correct parts instead of referencing
+  it): finds every pair (K, M) of system rtk kanji where M's full
+  resolved parts-set is a proper subset of K's. Raw output is noisy —
+  lots of coincidental overlap from tiny common primitives, the same
+  problem `audit_csv_regressions.py` hit in session 12 — so, same as
+  every prior session, results were manually filtered to high-confidence
+  single-candidate matches before touching any data.
+- **Continued the frame-ordered review into 251-400** (picking up after
+  session 18's 101-250) using the new tool, and fixed 15 more:
+  - **`成` cluster (7 kanji)**: `城`, `誠`, `茂`, `戚`, `威`, `滅`, `蔑`
+    were all listing 成's (rtk386, "turn into" = `ノ,戈`) raw strokes
+    directly instead of referencing it — the largest single cluster
+    found in one pass so far. Fixed to `土,成` / `言,成` / `艾,成` /
+    `小,卜,成` / `女,厂,成` / `火,水,成` / `艾,成` respectively.
+  - `涼`, `鯨` were flattening `京` (rtk334, "capital" = `口,小,亠`);
+    `鯨` had a second, independent bug stacked on top — it also
+    re-flattened `魚` (rtk183) into its own `田,杰`, the identical
+    pattern to the `漁`/`墨`/`鯉` fixes from session 18's second batch.
+    Fixed `涼`→`水,京`, `鯨`→`魚,京`.
+  - `荘`→`艾,壮` (was flattening 壮/rtk343); `読`→`言,売` (was
+    flattening 売/rtk345); `試`→`言,式` (was flattening 式/rtk377);
+    `訂`→`言,丁` (was flattening 丁/rtk95); `詰`→`言,吉` (was
+    flattening 吉/rtk342); `落`→`艾,洛` (was flattening both 各's parts
+    and, more completely, 洛's full parts — 洛/rtk2396 already
+    correctly encapsulates 各+水, so collapsed to the deeper reference
+    rather than the shallower one).
+  - **Noted, not investigated further**: `茂` and `蔑`'s pre-fix raw
+    overrides were byte-for-byte identical (`ノ,戈,艾`) despite being
+    unrelated kanji ("overgrown" vs. "revile"). The mechanical fix
+    preserves the coincidence (both are now `艾,成`) rather than
+    resolving it — worth a closer look with real source material
+    (kanjidic2/a dictionary) to see if one was copy-paste contamination
+    from the other, or if they're a legitimate convergent pair.
+  - **Left open, lower confidence / multi-candidate ambiguity**: the
+    detector also flagged a `高`/`向`/`尚`/`周`/`週`/`調` cluster and a
+    `言`-radical cluster (`詩`, `詔`, `詠`, `諾`, `諭`, `域`, `詮`) where
+    more than one compound's parts-set matched as a subset — resolving
+    which one is the *intended* reference needs the same real-source
+    verification the confident fixes above got, not just structural
+    subset-matching. Also `栽`/`弐` (multi-candidate, likely
+    coincidental) and the pre-existing observation that `rtk3`
+    (三/"three")'s override literally lists the English words
+    `one,two` instead of the characters `一,二` — flagged, not fixed,
+    since it's unclear whether that's deliberate (matching search on the
+    English word) or an old data-entry slip.
+- Verified: full rebuild from scratch, `get_kanji_detail` spot-checks on
+  all 15 touched ids confirming exactly the expected 2-3 chip
+  decomposition, `audit_radicals.py` unchanged (3 multi-char undefined
+  terms), full standing regression suite
+  (`old`/`crime`/`heki`/`awe`/`round`/`cave`/`shellfish`/`street`/
+  `shining`/`early`/`courage`/`happiness`) — no regressions.
+- Coverage: **578/3000 (19.3%)** reviewed as of this session's commit
+  (`docs/kanji_review_coverage.tsv` regenerated).
+- Not yet synced to the live server — same standing gap as every prior
+  session.
+- **Next session**: run `audit_flattening.py --min-frame 401 --max-frame
+  550` (or wherever `coverage_status.py` shows the next unreviewed block
+  starting) to keep the frame-ordered sweep going; consider following up
+  on the deferred multi-candidate clusters above once there's a good way
+  to verify the *intended* compound (real dictionary/PDF source, not
+  just structural subset matching) rather than guessing among ties.
+
 ## Tooling produced this session
 
+- `backend/audit_flattening.py` — added 2026-08-18 (session 20). Finds
+  every (K, M) pair of system rtk kanji where M's own full resolved
+  parts-set is a proper subset of K's — the structural signature of the
+  "redundant flattening" bug that's been the majority of this audit's
+  content fixes since session 9. `python3 audit_flattening.py
+  [--min-frame N] [--max-frame N]`. Like `audit_csv_regressions.py`, raw
+  output is noisy (small common primitives coincidentally overlap a lot)
+  — read session 20's notes above before trusting a candidate without
+  manually checking it resolves to a single, high-confidence match.
 - `backend/audit_decomposition.py` — committed to `master`. Rebuilds a
   throwaway DB via the real import pipeline, batches kanji to an LLM
   (OpenAI) for a plausibility verdict, caches results in a gitignored
