@@ -670,19 +670,19 @@ rtk400:肯:agreement:月,止
 rtk401:企:undertake:止,个
 rtk402:歴:curriculum:止,麻,木,厂,广
 rtk403:武:warrior:止,弋
-rtk404:賦:levy:貝,止,弋
+rtk404:賦:levy:貝,武
 rtk405:正:correct:一,止
 rtk406:証:evidence:一,言,止
-rtk407:政:politics:一,止,攵
+rtk407:政:politics:攵,正
 rtk408:定:determine:疋,宀
-rtk409:錠:lock:金,疋,宀
+rtk409:錠:lock:金,定
 rtk410:走:run:土
 rtk411:超:transcend:口,走,土,刀
 rtk412:赴:proceed:走,土,卜
 rtk413:越:surpass:走,土,戈
 rtk414:是:just so:日,疋
-rtk415:題:topic:貝,日,疋,頁
-rtk416:堤:dike:土,日,疋
+rtk415:題:topic:貝,頁,是
+rtk416:堤:dike:土,是
 rtk417:建:build:廴,聿
 rtk418:鍵:key:金,廴,聿
 rtk419:延:prolong:一,止,廴
@@ -700,9 +700,9 @@ rtk430:猿:monkey:衣,口,土
 rtk431:初:first time:刀
 rtk432:巾:towel:冂,｜
 rtk433:布:linen:ノ,一,巾
-rtk434:帆:sail:巾,丶,几
+rtk434:帆:sail:巾,凡
 rtk435:幅:hanging scroll:一,巾,口,田
-rtk436:帽:cap:巾,日,目
+rtk436:帽:cap:巾,冒
 rtk437:幕:curtain:巾,大,日,艾
 rtk438:幌:canopy:巾,尚,日,儿
 rtk439:錦:brocade:巾,金,白
@@ -721,7 +721,7 @@ rtk451:雨:rain:
 rtk452:雲:cloud:一,雨,二,厶
 rtk453:曇:cloudy weather:雨,二,日,厶
 rtk454:雷:thunder:雨,田
-rtk455:霜:frost:雨,木,目
+rtk455:霜:frost:雨,相
 rtk456:冬:winter:夂,丶
 rtk457:天:heavens:一,大,二
 rtk458:妖:attractive:ノ,女,大
@@ -730,13 +730,13 @@ rtk460:橋:bridge:ノ,口,木,冂
 rtk461:嬌:attractive:ノ,口,女,大,冂
 rtk462:立:stand up:
 rtk463:泣:cry:水,立
-rtk464:章:badge:音,十,日,立
+rtk464:章:badge:音,立,早
 rtk465:競:emulate:口,立,儿
 rtk466:帝:sovereign:巾,并,立,亠,冖
 rtk467:諦:truth:巾,言,并,立,亠,冖
 rtk468:童:juvenile:里,立
-rtk469:瞳:pupil (of eye):目,里,立
-rtk470:鐘:bell:金,里,立
+rtk469:瞳:pupil (of eye):目,童
+rtk470:鐘:bell:金,童
 rtk471:商:make a deal:口,并,立,亠,儿,冂
 rtk472:嫡:legitimate wife:女,啇
 rtk473:適:suitable:口,込,十,并,立,亠,冂,滴
@@ -747,21 +747,21 @@ rtk477:叱:scold:口,匕
 rtk478:匂:fragrant:勹,匕
 rtk479:頃:time:貝,頁,匕
 rtk480:北:north:匕,爿
-rtk481:背:stature:月,匕,爿
+rtk481:背:stature:月,北
 rtk482:比:compare:
 rtk483:昆:descendants:日,比
 rtk484:皆:all:白,比
 rtk485:楷:square character style:白,比,木
-rtk486:諧:harmony:言,白,比
-rtk487:混:mix:水,日,比
+rtk486:諧:harmony:言,皆
+rtk487:混:mix:水,昆
 rtk488:渇:thirst:水,日,勹,匕
 rtk489:謁:audience:言,日,勹,匕
 rtk490:褐:brown:初,日,勹,匕
 rtk491:喝:hoarse:口,日,勹,匕
 rtk492:葛:arrowroot:日,勹,匕,艾
 rtk493:旨:delicious:日,匕
-rtk494:脂:fat:月,日,匕
-rtk495:詣:visit a temple:言,日,匕
+rtk494:脂:fat:月,旨
+rtk495:詣:visit a temple:言,旨
 rtk496:壱:one (in documents):士,冖,匕
 rtk497:毎:every:母,毋
 rtk498:敏:cleverness:母,攵,毋
@@ -777,8 +777,8 @@ rtk507:炊:cook:火,欠
 rtk508:歌:song:一,欠,口,亅
 rtk509:軟:soft:欠,車
 rtk510:次:next:欠,冫
-rtk511:茨:briar:欠,冫,艾
-rtk512:資:assets:貝,欠,冫
+rtk511:茨:briar:艾,次
+rtk512:資:assets:貝,次
 rtk513:姿:figure:欠,女,冫
 rtk514:諮:consult with:欠,言,口,冫
 rtk515:賠:compensation:貝,口,立
@@ -815,7 +815,7 @@ rtk545:凍:frozen:｜,一,日,木,冫,田
 rtk546:妊:pregnancy:ノ,王,士,女
 rtk547:廷:courts:王,廴,士
 rtk548:染:dye:九,水,木
-rtk549:燃:burn:火,犬,夕,杰
+rtk549:燃:burn:火,然
 rtk550:賓:v.i.p.:ノ,貝,小,宀,一
 rtk551:歳:year-end:ノ,止,小,戈
 rtk552:県:prefecture:小,目
