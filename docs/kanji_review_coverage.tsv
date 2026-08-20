@@ -407,14 +407,14 @@ rtk405	正	correct	405	no
 rtk406	証	evidence	406	no
 rtk407	政	politics	407	yes
 rtk408	定	determine	408	no
-rtk409	錠	lock	409	no
+rtk409	錠	lock	409	yes
 rtk410	走	run	410	no
 rtk411	超	transcend	411	no
 rtk412	赴	proceed	412	no
 rtk413	越	surpass	413	no
 rtk414	是	just so	414	no
 rtk415	題	topic	415	yes
-rtk416	堤	dike	416	no
+rtk416	堤	dike	416	yes
 rtk417	建	build	417	no
 rtk418	鍵	key	418	no
 rtk419	延	prolong	419	no
@@ -432,9 +432,9 @@ rtk430	猿	monkey	430	yes
 rtk431	初	first time	431	no
 rtk432	巾	towel	432	no
 rtk433	布	linen	433	no
-rtk434	帆	sail	434	no
+rtk434	帆	sail	434	yes
 rtk435	幅	hanging scroll	435	no
-rtk436	帽	cap	436	no
+rtk436	帽	cap	436	yes
 rtk437	幕	curtain	437	no
 rtk438	幌	canopy	438	no
 rtk439	錦	brocade	439	no
@@ -453,7 +453,7 @@ rtk451	雨	rain	451	no
 rtk452	雲	cloud	452	no
 rtk453	曇	cloudy weather	453	no
 rtk454	雷	thunder	454	no
-rtk455	霜	frost	455	no
+rtk455	霜	frost	455	yes
 rtk456	冬	winter	456	yes
 rtk457	天	heavens	457	no
 rtk458	妖	bewitched	458	no
@@ -462,13 +462,13 @@ rtk460	橋	bridge	460	no
 rtk461	嬌	attractive	461	no
 rtk462	立	stand up	462	no
 rtk463	泣	cry	463	no
-rtk464	章	badge	464	no
+rtk464	章	badge	464	yes
 rtk465	競	vie	465	no
 rtk466	帝	sovereign	466	no
 rtk467	諦	renunciation	467	no
 rtk468	童	juvenile	468	no
-rtk469	瞳	pupil	469	no
-rtk470	鐘	bell	470	no
+rtk469	瞳	pupil	469	yes
+rtk470	鐘	bell	470	yes
 rtk471	商	make a deal	471	no
 rtk472	嫡	legitimate wife	472	yes
 rtk473	適	suitable	473	no
@@ -479,21 +479,21 @@ rtk477	叱	scold	477	no
 rtk478	匂	aroma	478	no
 rtk479	頃	about that time	479	yes
 rtk480	北	north	480	no
-rtk481	背	stature	481	no
+rtk481	背	stature	481	yes
 rtk482	比	compare	482	no
 rtk483	昆	descendants	483	no
 rtk484	皆	all	484	no
 rtk485	楷	block letters	485	no
-rtk486	諧	orderliness	486	no
-rtk487	混	mix	487	no
+rtk486	諧	orderliness	486	yes
+rtk487	混	mix	487	yes
 rtk488	渇	thirst	488	no
 rtk489	謁	audience	489	no
 rtk490	褐	brown	490	no
 rtk491	喝	hoarse	491	no
 rtk492	葛	kudzu	492	no
 rtk493	旨	delicious	493	no
-rtk494	脂	fat	494	no
-rtk495	詣	visit a shrine	495	no
+rtk494	脂	fat	494	yes
+rtk495	詣	visit a shrine	495	yes
 rtk496	壱	i (one)	496	no
 rtk497	毎	every	497	yes
 rtk498	敏	cleverness	498	yes
@@ -509,7 +509,7 @@ rtk507	炊	cook	507	no
 rtk508	歌	song	508	no
 rtk509	軟	soft	509	no
 rtk510	次	next	510	no
-rtk511	茨	briar	511	no
+rtk511	茨	briar	511	yes
 rtk512	資	assets	512	yes
 rtk513	姿	figure	513	no
 rtk514	諮	consult with	514	no
@@ -547,7 +547,7 @@ rtk545	凍	frozen	545	no
 rtk546	妊	pregnancy	546	no
 rtk547	廷	courts	547	no
 rtk548	染	dye	548	no
-rtk549	燃	burn	549	no
+rtk549	燃	burn	549	yes
 rtk550	賓	v.i.p.	550	yes
 rtk551	歳	year-end	551	no
 rtk552	県	prefecture	552	no
@@ -1207,7 +1207,7 @@ rtk1205	裸	naked	1205	no
 rtk1206	斤	ax	1206	no
 rtk1207	析	chop	1207	no
 rtk1208	所	place	1208	no
-rtk1209	祈	pray	1209	no
+rtk1209	祈	pray	1209	yes
 rtk1210	近	near	1210	no
 rtk1211	折	fold	1211	no
 rtk1212	哲	philosophy	1212	no
@@ -2012,7 +2012,7 @@ rtk2010	飼	domesticate	2010	no
 rtk2011	嗣	heir	2011	no
 rtk2012	舟	boat	2012	no
 rtk2013	舶	liner	2013	no
-rtk2014	航	navigate	2014	no
+rtk2014	航	navigate	2014	yes
 rtk2015	舷	gunwale	2015	no
 rtk2016	般	carrier	2016	no
 rtk2017	盤	tray	2017	no

@@ -1574,17 +1574,116 @@ add this as a second check mode.
   to verify the *intended* compound (real dictionary/PDF source, not
   just structural subset matching) rather than guessing among ties.
 
+### 2026-08-19 — session 21
+
+- **Noted an out-of-band commit found on pull**: `7d4af32`, authored
+  directly on the deployment box ("EC2 Default User"), not by any prior
+  session in this doc. Fixed a self-identity search bug
+  (`_reachable_kanji_for_term` used `resolve_alias`'s single arbitrary
+  pick instead of crediting every kanji a script-ambiguous term names —
+  new `_self_identity_kanji_ids()` helper), a `祈`/CSV-contradiction fix
+  (was `礼,斤`, should be `altar,axe` per the 6th-ed CSV), and a `亠`/`蓋`
+  "lid" alias-collision fix on `航` (same general shape as session 19's
+  `roof`/`屋` fix, but resolved with an added disambiguating alias rather
+  than the display-layer skip mechanism). Verified it rebuilds cleanly
+  and doesn't regress the standing suite before building on top of it —
+  per this repo's standard practice, out-of-band changes found on pull
+  are taken as current state, not reverted, unless they look wrong.
+- **Tightened `audit_flattening.py`** before reusing it: the frame
+  401-550 sweep with the old subset-based detector was swamped by
+  coincidental overlap (`東`/`棟`/`凍` alone produced 20+ spurious
+  candidates from generic 2-stroke primitives like `一`/`亅`/`厶`).
+  Changed the match from "M's parts are a subset of K's parts" to "M's
+  parts appear as a contiguous, order-preserving run inside K's parts" —
+  matches the actual bug shape (someone pasted a compound's raw parts in
+  place) far more precisely than plain set containment.
+- **Added a second, harder filter this session that the tool itself
+  can't automate**: even a single unambiguous contiguous-run match can
+  still be coincidental — two unrelated kanji can happen to share a
+  2-stroke run without one being "derived" from the other. Cross-checked
+  every remaining candidate against `heisig-kanjis.csv`'s own baseline
+  `components` column. This caught real near-misses that would have
+  shipped wrong fixes without it:
+  - `延` (prolong)'s CSV components are "drop;stop;footprint;stretch" —
+    no mention of "correct" (正), even though `正`'s exact 2-part
+    signature (`一,止`) appears contiguously in `延`'s current override.
+    Left alone.
+  - `歌` (song)'s CSV components mention "street;nail;spike" (→ 丁) but
+    never "blow" (吹's keyword), even though `吹`'s signature (`欠,口`)
+    matches contiguously. Left alone.
+  - `妊` (pregnancy)'s CSV components are "woman;porter;drop;samurai" —
+    four *separate* atomic terms, not "responsibility" (任) as a unit,
+    even though `任`'s 3-part signature matches as a contiguous prefix.
+    Left alone.
+  - Chasing `転`/`芸`/`雲` (all matched `伝`'s `二,厶` signature)
+    surfaced a deeper, separate suspicion: `伝`'s *own* current override
+    is just `二,厶`, but `data_from_pdf.txt` describes it as "person,
+    rising cloud" and a genuine primitive `云` ("rising cloud",
+    `rtk2241`) already exists in the system distinct from `伝`. CSV's
+    components for all three K's say "...rising cloud;two;elbow;wall",
+    consistent with them referencing the *primitive* `云`-shape directly
+    rather than the *kanji* `伝` — the two just happen to share a raw
+    stroke signature. Left all three alone rather than guess which
+    reading is right; `伝`'s own decomposition may itself need fixing
+    first, in a future session, before anything built on top of it can
+    be trusted.
+  - Same shape of caution applied to `装`/`製` (both touch `衣`/rtk423,
+    whose own override — bare `亠` — doesn't match its CSV components
+    "top hat;scarf" either, another foundation-level suspect) and `猿`
+    (CSV components include "pack of wild dogs" — an entire missing
+    animal radical, not just a flattening issue).
+  - `培`/`商`/`帯`/`脱`/`説`/`541`(増) were also contiguous matches whose
+    CSV components didn't support the matched compound — left alone for
+    the same reason.
+- **Fixed 19 confirmed** (CSV directly names the matched compound's own
+  keyword or meaning): `賦`→`貝,武` ("warrior" in CSV); `政`→`攵,正`
+  ("correct"); `錠`→`金,定` ("determine"); `題`→`貝,頁,是` ("just so");
+  `堤`→`土,是`; `帆`→`巾,凡` ("mediocre"); `帽`→`巾,冒` ("risk");
+  `霜`→`雨,相` ("inter"); `章`→`音,立,早` ("early"); `瞳`→`目,童`
+  ("juvenile"); `鐘`→`金,童`; `背`→`月,北` ("north"); `諧`→`言,皆` (CSV
+  has no components listed for this one — applied on structural signal
+  alone, lower confidence, flagged here rather than silently treated as
+  equally certain); `混`→`水,昆` ("descendants"); `脂`→`月,旨`
+  ("delicious"); `詣`→`言,旨`; `茨`→`艾,次` ("next"); `資`→`貝,次`;
+  `燃`→`火,然` ("sort of thing" — this is literally Heisig's own
+  canonical worked example in the book).
+- Verified: full rebuild from scratch, `get_kanji_detail` spot-checks on
+  all 19 touched ids, `audit_radicals.py` unchanged (3 multi-char
+  undefined terms), full standing regression suite
+  (`old`/`crime`/`heki`/`awe`/`round`/`cave`/`shellfish`/`street`/
+  `shining`/`early`/`courage`/`happiness`) — no regressions.
+- Coverage: **595/3000 (19.8%)** reviewed as of this session's commit
+  (`docs/kanji_review_coverage.tsv` regenerated).
+- Not yet synced to the live server — same standing gap. Note the
+  out-of-band commit at the top of this entry suggests someone *does*
+  have direct access to the live box and has been making changes there
+  directly rather than through `sync_system_data.py` — worth clarifying
+  with the owner at some point whether that's the intended deploy path
+  going forward, since parallel direct-edit and audit-sourced-fix paths
+  could conflict if they ever touch the same kanji differently.
+- **Next session**: continue frame-ordered past 550 (2405/3000 still
+  unreviewed); the `伝`/`衣` foundation-level suspicions raised this
+  session are worth a dedicated look before the `転`/`芸`/`雲`/`装`/
+  `製`/`猿` cluster can be fixed with confidence — start there if there's
+  appetite for real (PDF/dictionary) source verification rather than
+  more structural-only passes.
+
 ## Tooling produced this session
 
-- `backend/audit_flattening.py` — added 2026-08-18 (session 20). Finds
-  every (K, M) pair of system rtk kanji where M's own full resolved
-  parts-set is a proper subset of K's — the structural signature of the
+- `backend/audit_flattening.py` — added 2026-08-18 (session 20), tightened
+  2026-08-19 (session 21). Finds every (K, M) pair of system rtk kanji
+  where M's own full resolved part-id sequence appears as a contiguous,
+  order-preserving run inside K's — the structural signature of the
   "redundant flattening" bug that's been the majority of this audit's
   content fixes since session 9. `python3 audit_flattening.py
-  [--min-frame N] [--max-frame N]`. Like `audit_csv_regressions.py`, raw
-  output is noisy (small common primitives coincidentally overlap a lot)
-  — read session 20's notes above before trusting a candidate without
-  manually checking it resolves to a single, high-confidence match.
+  [--min-frame N] [--max-frame N]`. Session 20's version used plain subset
+  containment and was swamped by coincidental overlap; session 21 switched
+  to a contiguous-run requirement, which cut the noise a lot but not to
+  zero — even a single unambiguous match can be coincidental. **Always
+  cross-check a candidate against `heisig-kanjis.csv`'s own `components`
+  column before applying it** (does CSV's baseline actually mention the
+  matched compound's meaning?) — session 21's notes above document
+  several real near-misses this caught.
 - `backend/audit_decomposition.py` — committed to `master`. Rebuilds a
   throwaway DB via the real import pipeline, batches kanji to an LLM
   (OpenAI) for a plausibility verdict, caches results in a gitignored
