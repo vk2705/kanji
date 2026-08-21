@@ -681,12 +681,12 @@ rtk419:延:prolong:一,止,廴
 rtk420:誕:nativity:ノ,言,止,廴
 rtk421:礎:cornerstone:口,石,疋,木
 rtk422:婿:bridegroom:月,女,疋
-rtk423:衣:garment:亠
+rtk423:衣:garment:
 rtk424:裁:tailor:土,亠,厶,戈,衣
-rtk425:装:attire:衣,士,爿,亠
-rtk426:裏:back:衣,里,亠
-rtk427:壊:demolition:衣,十,土,亠
-rtk428:哀:pathetic:衣,口,亠
+rtk425:装:attire:衣,壮
+rtk426:裏:back:衣,里
+rtk427:壊:demolition:衣,十,土
+rtk428:哀:pathetic:衣,口
 rtk429:遠:distant:衣,口,込,土
 rtk430:猿:monkey:衣,口,土
 rtk431:初:first time:刀
@@ -706,7 +706,7 @@ rtk444:帯:sash:｜,一,巾,冖
 rtk445:滞:stagnate:巾,水,冖
 rtk446:刺:thorn:巾,ハ,木,亅,冂
 rtk447:制:system:ノ,牛,巾,二
-rtk448:製:made in...:衣,牛,巾,亠
+rtk448:製:made in...:衣,牛,巾
 rtk449:転:revolve:車,二,厶
 rtk450:芸:technique:二,厶,艾
 rtk451:雨:rain:
@@ -1303,7 +1303,7 @@ rtk1041:伯:chief:白
 rtk1042:俗:vulgar:口,谷,ハ,个
 rtk1043:信:faith:言
 rtk1044:佳:excellent:土
-rtk1045:依:reliant:衣,亠
+rtk1045:依:reliant:人,衣
 rtk1046:例:example:歹
 rtk1047:個:individual:人,固
 rtk1048:健:healthy:廴,聿
