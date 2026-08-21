@@ -1763,6 +1763,72 @@ add this as a second check mode.
   somewhere more trustworthy. Otherwise continue the frame-ordered sweep
   past 550 (2405/3000 unreviewed).
 
+### 2026-08-21 — session 23
+
+- **Resolved the `衣`/rtk423 foundation suspicion.** Its override was
+  just `亠` (lid) — a single stroke for a 6-stroke character, and
+  inconsistent with how every *other* kanji in the system already uses
+  `衣`: as an atomic leaf primitive referenced directly, never expected
+  to expand further (hundreds of kanji reference it this way). CSV's own
+  components for `衣` ("top hat; scarf; cloth; clothes; clothing" — the
+  last three are keyword-synonym noise) confirm "top hat"+"scarf" as its
+  real sub-shapes, but neither needs to be a separately surfaced live
+  primitive. Made `衣` explicitly atomic (empty override, the documented
+  "this primitive is atomic" convention).
+- That one wrong value (`亠` instead of atomic) had been silently
+  propagating: every kanji that both referenced `衣` directly *and* also
+  listed `亠` as a separate remainder part was double-counting the same
+  visual area — the identical "flattening" pattern this whole audit
+  targets, just one level removed (a compound plus its own already-
+  included sub-stroke, both listed). Fixed the whole dependent cluster,
+  cross-checking each against CSV before touching it:
+  - `依` (reliant): CSV = "person; cloth" — override was `衣,亠`,
+    missing "person" entirely. Fixed to `人,衣`.
+  - `装` (attire): CSV = "turtle; samurai; top hat; scarf; ..." —
+    confirms `士,爿` (= `壮`/rtk343's own exact parts) plus `衣`'s
+    redundant top-hat/scarf. Fixed to `衣,壮` — this closes out
+    session 20's original deferred hypothesis for `装`, which was right
+    all along but got blocked on exactly this `衣`/`亠` ambiguity at the
+    time.
+  - `裏` (back): CSV = "top hat; scarf; computer" ("computer" = `里`'s
+    keyword variant). Fixed to `衣,里`.
+  - `哀` (pathetic): CSV = "top hat; scarf; mouth". Fixed to `衣,口`.
+  - `壊` (demolition), `製` (made in...): CSV components are messier
+    here and hint at possibly-missing pieces beyond just the `亠`
+    redundancy (`製` in particular may be missing a "system"/`制` or
+    "sword" component CSV mentions). Only dropped the confirmed-
+    redundant `亠` for both (`壊`→`衣,十,土`; `製`→`衣,牛,巾`) — left the
+    rest open rather than guess at pieces CSV's noisy list doesn't
+    clearly resolve.
+- **Re-checked `転`/`芸`/`雲` against `audit_flattening.py`** now that
+  `伝` itself is fixed — none of the three appear as candidates anymore,
+  confirming they were coincidental matches against `伝`'s old *wrong*
+  decomposition, not a real bug of their own. Left them as-is (still
+  valid raw-stroke usage `二,厶`, not contradicted by CSV, just not
+  maximally using the `云` primitive `伝` now references — a style
+  choice, not a confirmed bug, not worth guessing at further).
+- Verified: full rebuild from scratch, `get_kanji_detail` spot-checks on
+  all 7 touched ids, `audit_radicals.py` unchanged (1 remaining
+  undefined term, `'ninety'`, pre-existing documented CSV noise), full
+  standing regression suite (`old`/`crime`/`heki`/`awe`/`round`/`cave`/
+  `shellfish`/`street`/`shining`/`early`/`courage`/`happiness`) — no
+  regressions.
+- Coverage: **599/3000 (20.0%)** reviewed (`docs/kanji_review_coverage.tsv`
+  regenerated) — the audit has now individually reviewed/fixed one in
+  five rtk kanji since it began.
+- Not yet synced to the live server — same standing gap. Between this
+  session and session 22, a meaningful cluster of high-value fixes has
+  accumulated (`動`'s corruption fix especially) that would benefit real
+  users soon.
+- **Next session**: no more flagged foundation-level suspicions remain
+  open (both `伝` and `衣` are resolved) — clear to resume the plain
+  frame-ordered sweep past 550 using `audit_flattening.py` +
+  `coverage_status.py`, same workflow as sessions 20-21. `壊`/`製`'s
+  possibly-missing CSV-flagged pieces and `猿`'s missing animal-radical
+  bug (session 21) remain open as lower-priority, harder-to-verify
+  items if there's ever a session with appetite for deeper per-kanji
+  research beyond structural matching.
+
 ## Tooling produced this session
 
 - `backend/audit_flattening.py` — added 2026-08-18 (session 20), tightened

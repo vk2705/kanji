@@ -421,12 +421,12 @@ rtk419	延	prolong	419	no
 rtk420	誕	nativity	420	no
 rtk421	礎	cornerstone	421	no
 rtk422	婿	bridegroom	422	no
-rtk423	衣	garment	423	no
+rtk423	衣	garment	423	yes
 rtk424	裁	tailor	424	no
-rtk425	装	attire	425	no
-rtk426	裏	back	426	no
+rtk425	装	attire	425	yes
+rtk426	裏	back	426	yes
 rtk427	壊	demolition	427	yes
-rtk428	哀	pathetic	428	no
+rtk428	哀	pathetic	428	yes
 rtk429	遠	distant	429	no
 rtk430	猿	monkey	430	yes
 rtk431	初	first time	431	no
