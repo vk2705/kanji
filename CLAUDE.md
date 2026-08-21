@@ -17,6 +17,7 @@ It's grown beyond a personal RTK lookup tool into a community-editable reference
 | CLI | Plain Python 3 (stdlib only), reads `backend/kanji.db` directly — no server needed |
 | Data | `heisig-kanjis.csv` + flat text overlays → SQLite (one-time seed); user contributions written directly to SQLite thereafter |
 | Auth | Cookie-based sessions, `bcrypt` password hashing — no external identity provider |
+| Android | Kotlin, WebView shell around `frontend/` — see `android/README.md` |
 
 `cgi-bin/` (Perl) and `html/` are the original legacy app — reference only, not part of the active stack.
 
@@ -47,6 +48,13 @@ python3 rtk.py char 明           # exact character lookup
 python3 rtk.py detail rtk145     # full detail: aliases + parts
 ```
 `rtk.py` predates the multi-user schema and queries `kanji`/`aliases`/`parts` directly with no `visibility`/`owner_id` filtering — it will surface private user contributions indiscriminately. Treat it as a dev/debug tool, not a user-facing surface.
+
+**Android** (WebView shell, no backend changes needed — see `android/README.md`):
+```bash
+cd android
+./gradlew :app:assembleDebug    # points at a local dev server (10.0.2.2:5173)
+./gradlew :app:assembleRelease  # points at the live deployed site, unsigned APK
+```
 
 **One-off data/maintenance scripts** (`backend/`, not part of the app's runtime). These `import database` (`X | None` syntax, Python 3.10+), so they need the venv's Python — the box's system `python3` is 3.9.25 and `TypeError`s on import. Use the venv's interpreter explicitly, or `source venv/bin/activate` first:
 ```bash
@@ -207,7 +215,7 @@ Google SSO needs `GOOGLE_CLIENT_ID=<the OAuth client id>` set in `kanji-backend.
 - No moderation/review step for public user-submitted content.
 - ~2,628 characters intentionally have both an `ja-kanji` row and a separate `zh-*` row for the same glyph (e.g. `rtk1701` and `hanzi-6f22` are both 漢) — this is a deliberate design choice (distinguish by `script`, don't dedupe), not a bug; see the script-aware resolution section above for how ambiguity is handled.
 - The Heisig mnemonic story text from the book is still **not** stored (copyright); user-authored stories are a separate, non-copyrighted addition. Frame numbers link to the book.
-- Android app is planned; the FastAPI backend is designed as a REST API to serve it. Current auth is cookie-session based, which needs a persistent `CookieJar` on the native HTTP client (or a switch to token-based auth) to work from a non-WebView app.
+- `android/` has a first-pass Android app: a WebView shell around the deployed `frontend/` (see `android/README.md`), not the from-scratch native REST client this section used to anticipate — cookie-session auth just works as-is since it's still a WebView under the hood. A true native client (own UI, talking to the FastAPI backend directly) is still a bigger future step if ever needed, and would need the persistent-`CookieJar`-or-token-auth switch this line originally flagged.
 - No `PRAGMA busy_timeout` set — concurrent writes can surface as `"database is locked"` errors under contention rather than corrupting data (SQLite WAL mode already protects against actual corruption); cheap fix if it comes up.
 - `expand_part_terms`/`_build_char_lookup` (`backend/database.py`) resolve a character part to its keyword without regard to `script`, so a glyph shared between an `ja-kanji` row and a `zh-*` row (see above) can silently pick the wrong one — unlike `resolve_alias`, which already is script-scoped. Found while fixing rtk1495's decomposition; not yet fixed. See `docs/2026-08-search-quality-audit.md` (session 2) for details.
 - Decomposition display/data is fully flattened to atomic primitives (e.g. 懸 shows `県,prefecture,糸,thread,心,heart`, not "prefecture" as a single expandable chip). The owner wants intermediate pieces shown too, with their own sub-decomposition available on demand — this needs the query-time recursive resolution described as an agreed-but-unexecuted architecture decision in `docs/2026-08-search-quality-audit.md`. Tracked there as the top-priority queued item.

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Sun + moon, echoing CLAUDE.md's own example search ("sun" + "moon" finds 明,
+     "bright") rather than attempting to hand-draw kanji strokes as vector paths. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- sun -->
+    <path
+        android:fillColor="#F2F2F5"
+        android:pathData="M40,54 m-16,0 a16,16 0 1,1 32,0 a16,16 0 1,1 -32,0" />
+
+    <!-- crescent moon: large light disc minus an offset dark disc -->
+    <path
+        android:fillColor="#F2F2F5"
+        android:pathData="M68,54 m-17,0 a17,17 0 1,0 34,0 a17,17 0 1,0 -34,0" />
+    <path
+        android:fillColor="#7C6EF0"
+        android:pathData="M74,54 m-15,0 a15,15 0 1,0 30,0 a15,15 0 1,0 -30,0" />
+</vector>

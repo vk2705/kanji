@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Merged only into debug builds — lets the debug BuildConfig.APP_URL
+     (http://10.0.2.2:5173, the emulator's loopback alias to the host's
+     `npm run dev` server) load without HTTPS. The release manifest has
+     usesCleartextTraffic="false" and is untouched by this. -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <application
+        android:usesCleartextTraffic="true"
+        tools:replace="android:usesCleartextTraffic" />
+</manifest>

@@ -1,0 +1,14 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Theme.RtkKanji" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="android:windowBackground">@color/app_background</item>
+        <item name="android:statusBarColor">@color/app_background</item>
+        <item name="android:navigationBarColor">@color/app_background</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="23">false</item>
+    </style>
+
+    <!-- Shown for the instant between process start and the first WebView frame —
+         same background color, no visible flash/handoff. -->
+    <style name="Theme.RtkKanji.Splash">
+        <item name="android:windowBackground">@color/app_background</item>
+    </style>
+</resources>

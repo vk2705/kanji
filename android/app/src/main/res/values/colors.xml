@@ -1,0 +1,9 @@
+<resources>
+    <!-- Matches frontend/src/App.css's dark theme CSS variables so the native
+         splash/status bar/loading bar doesn't flash a mismatched color before the
+         WebView content paints. -->
+    <color name="app_background">#0F0F13</color>
+    <color name="app_surface">#1A1A22</color>
+    <color name="app_accent">#7C6EF0</color>
+    <color name="app_text">#F2F2F5</color>
+</resources>

@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">RTK Kanji</string>
+    <string name="offline_message">Can\'t reach the server. Check your connection and try again.</string>
+    <string name="retry">Retry</string>
+</resources>
