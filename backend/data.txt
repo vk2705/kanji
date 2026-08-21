@@ -76,9 +76,6 @@ rad3.38:?:flower-radical
 rad3.39:?:rightside beta,pinnacle
 rad3.40:?:leftside befa,city walls
 rad3.41:?:scorpion,est,rtk2094
-rad3.42:?:deceased,rtk485:top hat,hook
-rad3.43:?:reach out,rtk688,outstretched hands:fist
-rad3.44:?:long time,rtk1016:bound up,person
 
 rad4.1:?:old man primitive
 rad4.2:?:heart,valentine,state of mind
@@ -114,11 +111,6 @@ rad4.33:?:one-sided
 rad4.34:?:tusk
 rad4.35:?:dog, chihuahua, pack of wild dogs
 rad4.36:?:leftside altar,altar
-rad4.37:?:king,rtk255:one,soil;craft,one
-rad4.38:?:rtk59,beginning:human legs,two
-rad4.39:?:rtk1806,well:two,fence posts
-rad4.40:?:rtk1049,not:bound up
-rad4.41:?:superb,outstanding,understandably,rtk2087:chihuahua with one human leg
 rad4.42:?:5,five,rtk5
 rad4.43:?:ton
 rad4.44:?:huge comma design,tomoe
@@ -1302,7 +1294,7 @@ rtk1032:件:affair:牛
 rtk1033:仕:attend:士
 rtk1034:他:other:也
 rtk1035:伏:prostrated:犬
-rtk1036:伝:transmit:二,厶
+rtk1036:伝:transmit:人,云
 rtk1037:仏:buddha:厶
 rtk1038:休:rest:木
 rtk1039:仮:sham:又,厂
@@ -3271,7 +3263,7 @@ rtk3000:鼈:snapping turtle:小,尚,冂,攵,黽
 # (Finding 1, 2026-08 search-quality audit). Names are the standard public-domain
 # Kangxi radical English names (or, for 艾/厶, the established primitive meaning);
 # not Heisig book text.
-rad1001:亠:lid,primitive_lid
+rad1001:亠:lid,primitive_lid,top hat
 rad1002:冂:border,down box
 rad1003:冖:cover,cloth cover
 rad1004:亅:hook
