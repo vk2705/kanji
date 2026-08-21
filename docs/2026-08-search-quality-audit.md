@@ -1668,6 +1668,101 @@ add this as a second check mode.
   appetite for real (PDF/dictionary) source verification rather than
   more structural-only passes.
 
+### 2026-08-21 — session 22
+
+- **Picked up the `伝` investigation session 21 flagged**, and it led to
+  a much bigger find than expected. `伝`'s own override (`二,厶`) really
+  was wrong — both `heisig-kanjis.csv` ("person; rising cloud; ...") and
+  `data_from_pdf.txt` ("person,rising cloud") agree it should include
+  `人` (person), which had been dropped entirely at some point. Fixed to
+  `人,云` (referencing the existing `云`/rtk2241 primitive for the
+  "rising cloud" shape) — this was the actual blocker session 21
+  flagged; the `転`/`芸`/`雲`/`装`/`製` cluster's coincidental-looking
+  matches were downstream of this, not a separate problem.
+- **While tracing how `伝` got broken, found the real root cause, and it
+  turned out to be much bigger and completely unrelated to flattening**:
+  `import_data()`'s canonical-resolution step (database.py, "Insert
+  primitive entries from data.txt") reassigns a primitive's canonical
+  target to any of its own listed aliases that happens to already match
+  an *existing kanji id string*. This is intentional and safe when it's
+  used to consolidate an old KRADFILE-style radical-numbering id onto
+  the one real kanji it represents (15 such lines exist in the `rad*.X`
+  block, e.g. `rad2.1` merging onto `rtk2`/二 — all confirmed harmless,
+  since their own parts override is empty, a pure no-op consolidation).
+  But **8 more `rad*.X` lines had a literal `rtkNNNN` token mixed into
+  their alias list *and* their own non-empty, unrelated parts list** —
+  each one a scratch/orphaned entry (their other aliases — "deceased",
+  "reach out", "long time", "king", "beginning", "not", "superb",
+  "outstanding", "understandably" — all already correctly belonged to a
+  completely different, distinct real kanji elsewhere in the file, e.g.
+  "deceased" is really `亡`/rtk524, not whatever `rad3.42` was scribbling
+  down). Depending on data.txt's line-processing order, **4 of these 8
+  collisions were live, active corruption** — a real, commonly-referenced
+  kanji's correct decomposition silently overwritten by the orphaned
+  entry's unrelated leftover parts:
+  - `看` (rtk688, "watch over") showed only `['fist']` instead of its
+    real `ノ,一,手,二,目`.
+  - `動` (rtk1806, "move") — a very high-frequency kanji, not some
+    obscure corner case — showed only `['two', 'fence posts']`, with
+    "fence posts" not even resolving to anything, instead of its real
+    `｜,一,日,力,里,ノ`. This was the exact bug `audit_radicals.py`'s
+    'fence posts' undefined-term flag (present every session since it
+    started reporting undefined terms) was pointing at, and nobody had
+    traced it back to its actual cause until now.
+  - `側` (rtk1049, "side") showed only `['bound up']` instead of `貝`.
+  - `鎖` (rtk2087, "chain") showed only `['chihuahua with one human
+    leg']` instead of `貝,金,尚`.
+  - The other 4 (`楷`/rtk485, `等`/rtk1016, `黙`/rtk255, `員`/rtk59)
+    happened to escape damage purely by processing-order luck, not by
+    design — same latent bug, just not (yet) triggered.
+- Fixed by **deleting all 8 orphaned lines outright**, not just trimming
+  the dangerous `rtkNNNN` token — keeping a trimmed version would have
+  kept the duplicate alias (e.g. a *second*, wrong "deceased" entry),
+  creating a fresh alias-collision ambiguity of exactly the shape
+  session 19's `roof`/`屋` fix addressed, rather than actually fixing
+  anything.
+- **Also fixed, same investigation**: named the previously-undefined
+  "top hat" primitive (used literally in `六`'s own CSV baseline,
+  "top hat;animal legs", and flagged by `audit_radicals.py` every
+  session) as a new alias on `亠`/rad1001 ("lid") — same shape as the
+  existing `primitive_lid` disambiguating alias from the out-of-band
+  commit. `六`'s decomposition was silently showing only "eight" before
+  (the "top hat" term was simply undefined, so it dropped out).
+- `audit_radicals.py`'s multi-char undefined-term count: **3 → 1** (only
+  `'ninety'` remains — confirmed pure CSV pre-expansion noise for
+  `枠`/rtk212, not a data.txt bug; see session 18's notes on why that one
+  is intentionally left as-is).
+- **Swept the whole file for the same id-as-alias pattern** beyond the
+  `rad*.X` block that happened to contain all 8+15 instances found — no
+  other occurrences exist elsewhere in `data.txt`. The pattern is fully
+  contained to the old KRADFILE-import block from early in this
+  project's history.
+- Verified: full rebuild from scratch, `get_kanji_detail` spot-checks on
+  all 6 directly-touched ids (`看`/`動`/`側`/`鎖`/`伝`/`六`) confirming
+  correct real decompositions, `audit_flattening.py` re-run over the
+  whole dataset (no new candidates introduced), full standing regression
+  suite (`old`/`crime`/`heki`/`awe`/`round`/`cave`/`shellfish`/`street`/
+  `shining`/`early`/`courage`/`happiness`) — no regressions.
+- Coverage: 595/3000 (19.8%, unchanged from session 21's count — this
+  session's fixes mostly worked by *deleting* unrelated orphaned lines
+  rather than editing the affected kanji's own lines, so most of them
+  don't register under `coverage_status.py`'s "was this kanji's own line
+  touched" proxy even though they're now demonstrably correct; a known
+  limitation of that proxy, documented in its own module docstring, not
+  a sign the fixes didn't happen — `動`/`看`/`側`/`鎖`/`六` are all
+  verified fixed above regardless of what the tracker shows).
+- Not yet synced to the live server — same standing gap. This session's
+  fix in particular (`動`'s decomposition alone) is high-value to
+  deploy soon given how common that kanji is.
+- **Next session**: the `衣`/rtk423 suspicion from session 21 is now the
+  clearer of the two remaining foundation-level issues (CSV components
+  "top hat;scarf" vs. the current bare `亠` override) — worth resolving
+  before revisiting the `装`/`製` pair; `転`/`芸`/`雲` should be
+  re-checked against `audit_flattening.py` now that `伝` itself is fixed,
+  since the contiguous-match signal that flagged them may now point
+  somewhere more trustworthy. Otherwise continue the frame-ordered sweep
+  past 550 (2405/3000 unreviewed).
+
 ## Tooling produced this session
 
 - `backend/audit_flattening.py` — added 2026-08-18 (session 20), tightened
