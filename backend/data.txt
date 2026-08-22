@@ -828,9 +828,9 @@ rtk566:妃:queen:女,已
 rtk567:改:reformation:已,攵
 rtk568:記:scribe:言,已
 rtk569:包:wrap:勹,已
-rtk570:胞:placenta:月,勹,已
-rtk571:砲:cannon:口,石,勹,已
-rtk572:泡:bubbles:水,勹,已
+rtk570:胞:placenta:月,包
+rtk571:砲:cannon:石,包
+rtk572:泡:bubbles:水,包
 rtk573:亀:tortoise:田,勹,乙
 rtk574:電:electricity:雨,田,乙
 rtk575:竜:dragon:立,田,乙
@@ -858,12 +858,12 @@ rtk596:堆:piled high:土,隹
 rtk597:椎:chinquapin:木,隹
 rtk598:誰:who:言,隹
 rtk599:焦:char:杰,隹
-rtk600:礁:reef:口,石,杰,隹
+rtk600:礁:reef:石,焦
 rtk601:集:gather:木,隹
 rtk602:准:quasi-:冫,隹
 rtk603:進:advance:込,隹
 rtk604:雑:miscellaneous:木,隹,九
-rtk605:雌:feminine:止,匕,隹
+rtk605:雌:feminine:此,隹
 rtk606:準:semi-:十,水,隹
 rtk607:奮:stirred up:大,田,隹
 rtk608:奪:rob:寸,大,隹
@@ -885,12 +885,12 @@ rtk623:錮:confinement:金,固
 rtk624:国:country:王,囗,丶
 rtk625:団:group:寸,囗
 rtk626:因:cause:大,囗
-rtk627:姻:matrimony:女,大,囗
+rtk627:姻:matrimony:女,因
 rtk628:咽:throat:口,大,囗
 rtk629:園:park:衣,口,土,囗
 rtk630:回:-times:口,囗
 rtk631:壇:podium:一,口,土,日,亠,囗
-rtk632:店:store:口,卜,广
+rtk632:店:store:占,广
 rtk633:庫:warehouse:車,广
 rtk634:庭:courtyard:王,广,廴
 rtk635:庁:government office:一,亅,广
@@ -900,47 +900,47 @@ rtk638:磨:grind:口,石,木,广,麻
 rtk639:心:heart:
 rtk640:忘:forget:心,亡,亠
 rtk641:恣:selfish:欠,心,冫
-rtk642:忍:endure:心,刀,丶
+rtk642:忍:endure:心,刃
 rtk643:認:acknowledge:言,心,刀,丶
 rtk644:忌:mourning:心,已
 rtk645:志:intention:士,心
-rtk646:誌:document:言,士,心
+rtk646:誌:document:言,志
 rtk647:芯:wick:心,艾
 rtk648:忠:loyalty:｜,口,心
 rtk649:串:spit:｜,口
 rtk650:患:afflicted:｜,口,心
 rtk651:思:think:心,田
-rtk652:恩:grace:心,大,囗
+rtk652:恩:grace:心,因
 rtk653:応:apply:心,广
 rtk654:意:idea:音,心,日,立
 rtk655:臆:timidity:音,月,心,日,立
-rtk656:想:idea:心,木,目
+rtk656:想:idea:心,相
 rtk657:息:breath:自,心,目
 rtk658:憩:recess:口,自,心,舌,目
 rtk659:恵:favor:一,心,田
-rtk660:恐:fear:工,心,丶,几
+rtk660:恐:fear:工,心,凡
 rtk661:惑:beguile:口,心,戈
 rtk662:感:emotion:ノ,口,心,戈
 rtk663:憂:melancholy:一,自,心,冖,夂,白
 rtk664:寡:widow:一,自,刀,ハ,宀
 rtk665:忙:busy:亡,亠
-rtk666:悦:ecstasy:口,并,忙,儿
-rtk667:恒:constancy:一,日,忙
-rtk668:悼:lament:十,日,忙,卜
-rtk669:悟:enlightenment:口,忙,五
-rtk670:怖:dreadful:ノ,一,巾,忙
-rtk671:慌:disconcerted:川,忙,艾,亡
-rtk672:悔:repent:母,忙,毋,ノ,一,人
-rtk673:憎:hate:田,日,并,忙
-rtk674:慣:accustomed:貝,母,忙,毋
-rtk675:愉:pleasure:月,忙,个,一
-rtk676:惰:lazy:ノ,一,月,工,忙
-rtk677:慎:humility:一,十,ハ,忙,目
-rtk678:憾:remorse:ノ,口,心,忙,戈
-rtk679:憶:recollection:音,心,日,忙,立
-rtk680:惧:fear:ハ,忙,目
-rtk681:憧:yearn after:忙,里,立
-rtk682:憬:yearn for:口,小,日,忙,亠
+rtk666:悦:ecstasy:口,并,state of mind,儿
+rtk667:恒:constancy:一,日,state of mind
+rtk668:悼:lament:十,日,state of mind,卜
+rtk669:悟:enlightenment:口,state of mind,五
+rtk670:怖:dreadful:ノ,一,巾,state of mind
+rtk671:慌:disconcerted:川,state of mind,艾,亡
+rtk672:悔:repent:母,state of mind,毋,ノ,一,人
+rtk673:憎:hate:田,日,并,state of mind
+rtk674:慣:accustomed:貝,母,state of mind,毋
+rtk675:愉:pleasure:月,state of mind,个,一
+rtk676:惰:lazy:ノ,一,月,工,state of mind
+rtk677:慎:humility:一,十,ハ,state of mind,目
+rtk678:憾:remorse:ノ,口,心,state of mind,戈
+rtk679:憶:recollection:音,心,日,state of mind,立
+rtk680:惧:fear:ハ,state of mind,目
+rtk681:憧:yearn after:state of mind,童
+rtk682:憬:yearn for:口,小,日,state of mind,亠
 rtk683:慕:pining:心,大,日,艾
 rtk684:添:annexed:ノ,水,心,大,一,二
 rtk685:必:invariably:ノ,心
@@ -1031,7 +1031,7 @@ rtk769:技:skill:支,扎,又,十
 rtk770:枝:bough:支,木,十,又
 rtk771:肢:limb:月,支,十,又
 rtk772:茎:stalk:土,又,艾
-rtk773:怪:suspicious:土,忙,又
+rtk773:怪:suspicious:土,state of mind,又
 rtk774:軽:lightly:車,土,又
 rtk775:叔:uncle:小,卜,又
 rtk776:督:coach:小,卜,又,目
@@ -1149,8 +1149,8 @@ rtk887:職:post:音,耳,日,立,戈
 rtk888:聖:holy:王,口,耳
 rtk889:敢:daring:耳,攵
 rtk890:聴:listen:耳,十,心
-rtk891:懐:feelings:衣,十,忙,亠
-rtk892:慢:ridicule:日,忙,又
+rtk891:懐:feelings:衣,十,state of mind,亠
+rtk892:慢:ridicule:日,state of mind,又
 rtk893:漫:cartoon:水,日,又
 rtk894:買:buy:貝
 rtk895:置:placement:十,目,一,｜
@@ -1529,7 +1529,7 @@ rtk1267:備:equip:用,厂,艾
 rtk1268:昔:once upon a time:｜,一,二,日
 rtk1269:錯:confused:金,日,廾,二
 rtk1270:借:borrow:日,廾,二
-rtk1271:惜:pity:｜,一,二,日,忙
+rtk1271:惜:pity:｜,一,二,日,state of mind
 rtk1272:措:set aside:｜,一,二,日,扎
 rtk1273:散:scatter:月,攵,廾,二
 rtk1274:廿:twenty:｜,一,凵
@@ -1541,7 +1541,7 @@ rtk1279:渡:transit:水,又,广
 rtk1280:奔:run:ノ,一,十,大,廾
 rtk1281:噴:erupt:貝,口,十,艾
 rtk1282:墳:tomb:貝,十,土,艾
-rtk1283:憤:aroused:貝,十,忙,艾
+rtk1283:憤:aroused:貝,十,state of mind,艾
 rtk1284:焼:bake:火,十,儿
 rtk1285:暁:daybreak:十,日,儿,廾
 rtk1286:半:half:｜,二,并,十
@@ -1828,7 +1828,7 @@ rtk1566:猛:fierce:皿,子
 rtk1567:盛:boom:ノ,皿,戈
 rtk1568:塩:salt:口,皿,土,ノ,一,人
 rtk1569:銀:silver:金,艮
-rtk1570:恨:regret:艮,忙
+rtk1570:恨:regret:艮,state of mind
 rtk1571:根:root:艮,木
 rtk1572:即:instant:艮,卩
 rtk1573:爵:baron:艮,寸,爪
@@ -1853,7 +1853,7 @@ rtk1591:養:foster:王,食,并,羊
 rtk1592:飽:sated:食,勹,已
 rtk1593:既:previously:牙,艮
 rtk1594:概:outline:牙,艮,木
-rtk1595:慨:rue:牙,艮,忙
+rtk1595:慨:rue:牙,艮,state of mind
 rtk1596:平:even:干,并
 rtk1597:呼:call:ノ,口,并,亅
 rtk1598:坪:two-mat area:干,土,并
@@ -1915,7 +1915,7 @@ rtk1653:麦:barley:夂,土,二,亠
 rtk1654:青:blue:月,土,二,亠
 rtk1655:精:refined:月,青,土,二,米,亠
 rtk1656:請:solicit:月,言,青,土,二,亠
-rtk1657:情:feelings:月,青,土,二,忙,亠
+rtk1657:情:feelings:月,青,土,二,state of mind,亠
 rtk1658:晴:clear up:月,青,土,二,日,亠
 rtk1659:清:pure:月,水,青,土,二,亠
 rtk1660:静:quiet:月,青,土,亅,亠,勹,ヨ,二
@@ -1937,7 +1937,7 @@ rtk1675:生:life:
 rtk1676:星:star:生,日
 rtk1677:醒:awake:生,酉,日
 rtk1678:姓:surname:女,生
-rtk1679:性:sex:生,忙
+rtk1679:性:sex:生,state of mind
 rtk1680:牲:animal sacrifice:牛,生
 rtk1681:産:products:立,厂,生
 rtk1682:隆:hump:生,夂,阡
@@ -1994,7 +1994,7 @@ rtk1732:票:ballot:示,二,小,西
 rtk1733:漂:drift:示,二,小,水,西
 rtk1734:標:signpost:示,二,小,西,木
 rtk1735:栗:chestnut:西,木
-rtk1736:慄:fear:西,忙,木
+rtk1736:慄:fear:西,state of mind,木
 rtk1737:遷:transition:込,西,大,已
 rtk1738:覆:capsize:西,日,夂,彳
 rtk1739:煙:smoke:火,西,土
@@ -2029,7 +2029,7 @@ rtk1767:侯:marquis:矢,ユ
 rtk1768:喉:throat:口,矢
 rtk1769:候:climate:｜,矢,ユ
 rtk1770:決:decide:水,人,大,二,ユ
-rtk1771:快:cheerful:人,大,二,忙,ユ
+rtk1771:快:cheerful:人,大,二,state of mind,ユ
 rtk1772:偉:admirable:口,韋
 rtk1773:違:difference:口,込,韋
 rtk1774:緯:horizontal:口,糸,幺,小,韋
@@ -2115,7 +2115,7 @@ rtk1853:顔:face:貝,頁,立,亠,厂,彡
 rtk1854:須:ought:貝,頁,彡
 rtk1855:膨:swell:月,口,十,土,豆,并,彡
 rtk1856:参:nonplussed:一,厶,彡
-rtk1857:惨:wretched:一,忙,厶,彡
+rtk1857:惨:wretched:一,state of mind,厶,彡
 rtk1858:修:discipline:｜,彡,攵
 rtk1859:珍:rare:王,个,彡
 rtk1860:診:checkup:言,个,彡
@@ -2343,7 +2343,7 @@ rtk2081:弾:bullet:弓,十,尚,田
 rtk2082:桜:cherry:女,尚,木
 rtk2083:獣:animal:犬,口,尚,田
 rtk2084:脳:brain:月,尚,凵
-rtk2085:悩:trouble:尚,忙,凵
+rtk2085:悩:trouble:尚,state of mind,凵
 rtk2086:厳:stern:耳,尚,厂,攵
 rtk2087:鎖:chain:貝,金,尚
 rtk2088:挙:raise:手,尚,ハ
@@ -2466,14 +2466,14 @@ rtk2204:砦:fort:口,止,石,匕
 rtk2205:髭:beard:止,長,匕,彡,髟
 rtk2206:禽:bird:个,亠,冂,凵,厶,禹,丶,ノ
 rtk2207:檎:apple:木,个,亠,冂,厶,禹
-rtk2208:憐:pity:舛,米,忙,夕
+rtk2208:憐:pity:舛,米,state of mind,夕
 rtk2209:燐:phosphorus:火,舛,米,夕
 rtk2210:麟:chinese unicorn:鹿,舛,比,米,夕,广
 rtk2211:鱗:scales (fish):魚,舛,田,米,夕,杰
 rtk2212:奄:cover:乙,大,日
 rtk2213:庵:hermitage:田,广,大
 rtk2214:掩:cover:乙,大,日,扎,奄
-rtk2215:悛:amend:忙,儿,厶,夂
+rtk2215:悛:amend:state of mind,儿,厶,夂
 rtk2216:駿:a good horse:馬,儿,厶,夂,杰
 rtk2217:峻:high:山,儿,厶,夂
 rtk2218:竣:end:立,儿,厶,夂
@@ -2486,7 +2486,7 @@ rtk2224:凱:victory song:口,山,豆,并,几
 rtk2225:呑:drink:ノ,口,大
 rtk2226:韮:leek:韭,艾
 rtk2227:籤:lottery:竹,戈,韭,人
-rtk2228:懺:regret:人,忙,戈,韭
+rtk2228:懺:regret:人,state of mind,戈,韭
 rtk2229:芻:grass cutting:勹,屮,艾
 rtk2230:雛:chick:勹,屮,隹
 rtk2231:趨:run:走,土,勹,屮
@@ -2632,14 +2632,14 @@ rtk2370:擢:excel in:ヨ,扎,隹
 rtk2371:摺:rub:羽,白,冫,扎
 rtk2372:捷:victory:疋,扎,ヨ
 rtk2373:抉:gouge:人,大,二,扎,ユ
-rtk2374:怯:cowardice:土,忙,厶
-rtk2375:惟:consider:忙,隹
-rtk2376:惚:fall in love with:心,忙,勿
-rtk2377:怜:wise:忙,个,卩,一
-rtk2378:惇:sincere:口,子,忙,亠
-rtk2379:恰:just as:口,忙,个,一
-rtk2380:恢:wide:火,厂,忙
-rtk2381:悌:serving our elders:｜,ノ,弓,并,忙
+rtk2374:怯:cowardice:土,state of mind,厶
+rtk2375:惟:consider:state of mind,隹
+rtk2376:惚:fall in love with:心,state of mind,勿
+rtk2377:怜:wise:state of mind,个,卩,一
+rtk2378:惇:sincere:口,子,state of mind,亠
+rtk2379:恰:just as:口,state of mind,个,一
+rtk2380:恢:wide:火,厂,state of mind
+rtk2381:悌:serving our elders:｜,ノ,弓,并,state of mind
 rtk2382:澪:water route:雨,水,个,卩,一
 rtk2383:洸:sparkling water:水,尚,儿
 rtk2384:滉:deep and broad (water):水,尚,日,儿
