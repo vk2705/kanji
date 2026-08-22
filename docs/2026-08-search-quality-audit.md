@@ -1901,6 +1901,26 @@ around the deployed frontend. Not part of this audit's scope; see
   has a dedicated entry — check nothing similarly substitutes a full
   kanji for it) before assuming this was a one-off.
 
+### 2026-08-22 — owner report between sessions
+
+- **"looked for 'head', got critters. why?"** — `rtk2238` (疋, official
+  6th-ed CSV keyword "critters") had a hand-added `head` alias present
+  since this repo's very first commit, predating the whole audit. It
+  doesn't match the kanji's real meaning at all and made both text and
+  parts search for "head" incorrectly include it via self-identity
+  matching, alongside the genuine head-related kanji (`rtk1549` head,
+  `rtk98` place-on-the-head, `rtk2074` hair-of-the-head, `rad3.31` pig's
+  head). `疋` is used as a literal-character component in many other
+  kanji (`定`, `礎`, `提`, `従`, `旋`, `縦`, `綻`, `疑`, `擬`, `捷`, `淀`,
+  `碇`) — confirmed none reference it via the *word* "head" (only the
+  literal character), so deleting the alias doesn't touch any of them;
+  CSV's own components for this frame are empty too, so it's a pure
+  no-op for `疋`'s own decomposition. Commit `88006dd`.
+- Verified: full rebuild, search for "head" now returns only genuine
+  head-related kanji, spot-checked `定`/`礎`/`従` still resolve `疋`
+  correctly by character, `audit_radicals.py` and the standing regression
+  suite unchanged.
+
 ## Tooling produced this session
 
 - `backend/audit_flattening.py` — added 2026-08-18 (session 20), tightened
