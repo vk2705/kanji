@@ -1921,6 +1921,91 @@ around the deployed frontend. Not part of this audit's scope; see
   correctly by character, `audit_radicals.py` and the standing regression
   suite unchanged.
 
+### 2026-08-22 — session 25 (review of out-of-band work)
+
+- **Two more out-of-band commits landed directly on `master`** since the
+  last entry (`8d88a20`, `20140a6`), same pattern as session 21/22's
+  discovery — someone with direct server access working in parallel with
+  this audit. Asked to review and verify them rather than just noting
+  their existence this time. Real, valuable fixes: `遺` restored to
+  `貴,辶` (was flattened, dragging in a misleading `込`/"crowded"
+  fragment); `辶`/`阝`/`扌` all got their real glyphs linked to their
+  primitive entries for the first time (`rad3.1`, `rad3.40`, `rad3.34`);
+  `働`→`亻,動`; `降`→`阝,夂,㐄` (new primitive, replacing a `十`
+  approximation of a rare shape) and `換`→`扌,𠂊,央`, both verified
+  against `cjkvi-ids`; a Unihan self-reference parsing bug that had
+  silently skipped 429 CJK Unified characters during hanzi import, fixed
+  with a new `backfill_missing_hanzi.py`; two more KRADFILE
+  JIS-substitution proxy bugs in the same class as `fix_kradfile_proxies.py`
+  (`扎`→`扌` across 114 kanji, `阡`→`阝` across 40); `七`'s self-referencing
+  bogus "diced" alias removed; and a more thorough version of session 22's
+  orphaned-primitive cleanup — 23 lines removed instead of my 8, since the
+  other 15 were ones I'd judged "currently harmless" at the time (their
+  own parts were empty, so they weren't actively clobbering anything) and
+  deliberately left alone.
+- **That extra thoroughness introduced a real regression**, though: some
+  of those 15 "harmless" lines carried *aliases* other kanji depend on by
+  word, not just the dangerous id-references I was focused on. Removing
+  the whole line silently broke every word-based reference, not just the
+  dangerous part — something I didn't fully think through in session 22
+  either (I judged them safe because their *parts* were empty, without
+  checking whether their *aliases* were load-bearing elsewhere). Caught by
+  rebuilding from scratch and re-running `audit_radicals.py`: undefined
+  terms jumped from 1 to 7 (50 occurrences). Worst case: **`rtk20` (明,
+  "bright") — this project's own flagship search example, literally the
+  one in `CLAUDE.md`'s first paragraph ("sun" + "moon" finds 明) —
+  silently lost its entire decomposition display.** `get_kanji_detail`
+  returned an empty `parts_detail` list, because neither "sun" nor "moon"
+  resolved to any kanji anymore (they used to via `rad4.13`/`rad4.15`'s
+  now-removed consolidator aliases). `search_by_parts` kept "working" only
+  because it does looser text matching than the exact-resolution path
+  `get_kanji_detail` uses — easy to miss if you only test search and not
+  the detail view. Same mechanism broke "flesh" (`rtk19`/朋), "tongue
+  wagging in mouth" (`rtk21`/唱), "baseball" (already-noisy `rtk212`), and
+  — worse — `卜` lost its *only character mapping in the entire database*
+  (`search_by_char('卜')` returned nothing), breaking all 42 kanji that
+  use it as a literal part.
+- Fixed by restoring exactly the missing resolvability, nothing more: a
+  clean `rad2.22` entry for `卜` (dropping the original dangerous
+  id-alias tokens, keeping its real "divining rod/augury/divination"
+  aliases), and the 5 lost words added back as plain aliases on their
+  correct real targets (`rtk9`/九 gets "baseball" back, `rtk12`/日 gets
+  "sun"/"tongue wagging in mouth" back, `rtk13`/月 gets "moon"/"flesh"
+  back). Not a revert of the out-of-band cleanup — the dangerous
+  id-references stay gone, only the legitimately-needed aliases came
+  back. Commit `ccf9fd2`.
+- Verified: full rebuild from scratch, `audit_radicals.py` back to 1
+  (only `'ninety'`, the pre-existing documented CSV noise), 明's
+  decomposition renders `['day','month']` again, `search_by_char('卜')`
+  resolves again, ran the two new scripts the out-of-band commits added —
+  `audit_self_reference.py` (0 found) and `test_regression_fixes.py` (5
+  failures, all explained: every one needs a hanzi-populated `kanji.db`
+  via `import_hanzi.py`, which this audit's rebuild methodology —
+  `rm kanji.db` + `import_data()` only — has never run in any prior
+  session across the whole audit; not a regression from this fix, just a
+  scope mismatch between how the out-of-band session tested and how this
+  audit always has) — full standing regression suite, and a 45-kanji
+  spot-check spanning every session's prior fixes (17 through 24)
+  confirming none were silently reverted by the out-of-band commits.
+- Coverage: **881/3000 (29.4%)** — a big jump, since the out-of-band
+  commits' 550+ line changes to `data.txt` all register as "reviewed" by
+  `coverage_status.py`'s proxy (`docs/kanji_review_coverage.tsv`
+  regenerated).
+- **Lesson for future sessions**: when judging a batch of similar-looking
+  entries "safe to leave because nothing currently breaks," also check
+  whether their *aliases* (not just their *parts*) are load-bearing
+  elsewhere — an alias with zero live consumers today can still be the
+  only path some future removal needs to not go through. Also: test the
+  detail-view rendering path (`get_kanji_detail`), not just search — this
+  session's regression was invisible to `search_by_parts` alone.
+- Not yet synced to the live server — same standing gap, now spanning
+  work from both this audit and whoever has direct server access.
+- **Next session**: continue frame-ordered past 700 if picking up the
+  plain sweep again (per session 24), though given how much ground the
+  out-of-band commits covered, re-running `coverage_status.py` first to
+  see what's actually still unreviewed is worth it before picking a
+  frame range.
+
 ## Tooling produced this session
 
 - `backend/audit_flattening.py` — added 2026-08-18 (session 20), tightened
