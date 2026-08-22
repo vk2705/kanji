@@ -91,8 +91,14 @@ def parse_unihan_variants(path: Path, scope: set[int]) -> dict[str, dict]:
             if cp not in scope:
                 continue
             char = chr(cp)
-            # A field can list multiple space-separated targets; take the first.
-            target_char = chr(int(value.split()[0][2:], 16))
+            # A field can list multiple space-separated targets, and Unihan sometimes
+            # lists the character itself as one of them (typically first, e.g. 万's
+            # kTraditionalVariant is "U+4E07 U+842C" -- itself, then the real target
+            # 萬) as a way of saying "no traditional-only distinction beyond this."
+            # Take the first target that isn't the character itself; if every listed
+            # target IS the character itself, there's no genuine cross-reference.
+            targets = [chr(int(v[2:], 16)) for v in value.split()]
+            target_char = next((t for t in targets if t != char), None)
             entry = result.setdefault(char, {"simplified": None, "traditional": None})
             if field == "kSimplifiedVariant":
                 entry["simplified"] = target_char
@@ -194,7 +200,15 @@ def main():
     ambiguous = 0
     for ch in all_chars:
         v = variants.get(ch, {})
-        has_simp, has_trad = v.get("simplified") is not None, v.get("traditional") is not None
+        # A self-referencing kSimplifiedVariant/kTraditionalVariant (target == ch) is
+        # Unihan's way of saying "this char already IS that form" (e.g. 报's
+        # kSimplifiedVariant points to 报 itself) — not a second, genuine variant
+        # direction. Counting it toward has_simp/has_trad falsely flagged 430 CJK
+        # Unified characters as both-directions-ambiguous and skipped them entirely
+        # (found 2026-08-22 chasing a report that 報's simplified form 报 couldn't be
+        # found at all). Only a target that actually differs from ch counts.
+        has_simp = v.get("simplified") is not None and v.get("simplified") != ch
+        has_trad = v.get("traditional") is not None and v.get("traditional") != ch
         if has_simp and has_trad:
             ambiguous += 1
             continue
@@ -240,7 +254,12 @@ def main():
     for ch, v in variants.items():
         if ch not in char_script:
             continue
-        target = v.get("simplified") or v.get("traditional")
+        # Same self-reference caveat as the has_simp/has_trad check above: a target
+        # equal to ch itself isn't a real cross-reference, so it must lose to whichever
+        # field (if any) points at the genuine opposite-form character.
+        simp = v.get("simplified") if v.get("simplified") != ch else None
+        trad = v.get("traditional") if v.get("traditional") != ch else None
+        target = simp or trad
         if target and target in char_script:
             conn.execute(
                 "UPDATE kanji SET variant_of = ? WHERE id = ?",
