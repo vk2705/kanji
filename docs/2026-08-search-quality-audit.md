@@ -2006,6 +2006,197 @@ around the deployed frontend. Not part of this audit's scope; see
   see what's actually still unreviewed is worth it before picking a
   frame range.
 
+### 2026-08-19 to 2026-08-22 — session 26 (fuller detail behind session 25's out-of-band work)
+
+Written from the other side of session 25's review: this is the Claude Code
+session the owner was directing in parallel, working chat-turn-by-chat-turn
+on owner-reported "X looks wrong" spot checks rather than a frame-ordered
+sweep. Kept as its own entry (renumbered from a duplicate "session 25" to
+avoid colliding with the entry above) because it has finer-grained reasoning
+behind several fixes the review entry only summarizes — including exactly
+how the alias-clobbering regression happened, useful alongside that entry's
+"lesson for future sessions" note. Grouped by finding, not chronologically:
+
+Ran as a series of owner-reported "X looks wrong" spot checks rather than a
+frame-ordered sweep, but several turned into systemic bugs affecting many
+kanji at once. Grouped by finding, not chronologically:
+
+- **Self-identity search bug**: `search_by_parts` credited self-identity
+  (a kanji "is made of" itself) to only one kanji when a term is ambiguous
+  across scripts — e.g. searching `族` alone found `rtk1307` (ja-kanji) but
+  silently dropped `hanzi-65cf` (zh-Hani), since `resolve_alias` collapses
+  ambiguity to one arbitrary pick. Added `_self_identity_kanji_ids()` to
+  credit every matching kanji, not just one.
+- **`亠`/`蓋` "lid" collision**: `航ロード`'s decomposition used the bare
+  keyword "lid" for its `亠` component, ambiguous with `蓋`/rtk1561 (also
+  keyworded "lid") under an unscoped search — `_resolve_parts_detail`'s
+  script-based tie-break can't disambiguate two candidates of the *same*
+  script. Added a `primitive_lid` alias to `亠`/rad1001 and included it
+  alongside the existing `亠` token in 航's decomposition (kept the literal
+  character too — dropping it broke plain `亠`/`lid` search, since literal-
+  presence matching is what protects search from the tie-break's own
+  non-determinism).
+- **`亠` itself cross-script ambiguous**: separately from the above, `亠`
+  is *also* shared between `rad1001` (ja "lid") and `hanzi-4ea0` (zh "head/
+  tou") — unscoped search for bare `亠` or `lid` can non-deterministically
+  resolve to the wrong one. Not fixed, flagged as a latent gap.
+- **`祈` (pray) wrong primitive**: decomposed to `礼`/salutation (a whole,
+  visually-unrelated kanji) + `斤`/ax instead of the CSV baseline's
+  `altar; axe`. Fixed to `斤,altar`.
+- **`六` (six) "top hat" silently dropped**: `data_from_pdf.txt`'s own
+  "top hat,animal legs" used Heisig's alternate name for `亠` with no
+  alias linking it to `亠`'s entity, so the chip vanished entirely from
+  display (not just resolved wrong). Added `top hat` as another alias of
+  `亠`/rad1001.
+- **`宀`/"roof" vs `家` "house" collision (the big one)**: searching parts
+  for `家` returned `宣` (`rtk200`) as a false positive, and `宣`'s own
+  detail view falsely showed `家` as one of its own parts. Root cause:
+  `宣`'s decomposition (CSV-only, no `data.txt`/PDF override) uses the
+  orphaned Heisig primitive name "house" for its own roof-shaped top —
+  Heisig's alternate name for `宀`, same pattern as `六`'s "top hat" — but
+  "house" is *also* `家`'s real keyword, so it wrongly resolved to `家`
+  itself both ways. Fixed `宣` to use the literal `宀` character (same
+  proven-safe mechanism `家` itself already used correctly). Given the
+  scale of `宀` usage, added a `primitive_roof` alias to `宀`/rad1041 and
+  bulk-applied it alongside the existing `宀` token across **all 220**
+  kanji using it (109 ja-kanji via `data.txt`, 111 zh-Hani/Hant/Hans
+  inserted directly into `parts` since hanzi decompositions aren't sourced
+  from `data.txt`).
+- **"family name" collision, `rad4.23`**: a fully orphaned duplicate
+  primitive (`character='?'`, keyword "family name") never used as a part
+  anywhere and never actually inserted as its own kanji — self-identity
+  search for "family name" surfaced it as a bare, unlabeled `?` glyph
+  alongside the real primitive (`rtk1970`/氏). Deleted outright (confirmed
+  zero references first).
+- **`働`/`動` and the systemic orphaned-alias-clobbering bug**: `働`
+  (work) didn't decompose to `動` (move) at all — flattened radical soup
+  instead. Tracing why led to a much bigger bug: 23 leftover scratch
+  primitive entries in `data.txt`, dating to the repo's first commit
+  (`rad1.5`, `rad2.1`, `rad3.42`, `rad4.39`, etc.), had alias fields that
+  accidentally contained real kanji IDs as notes-to-self (e.g.
+  `rad4.39:?:rtk1806,well:two,fence posts`). `import_data()`'s "if an
+  alias matches an existing kanji ID, treat that as canonical" fallback
+  silently redirected identity to that kanji, and where a 4th (parts)
+  field was present, **overwrote that kanji's real decomposition**. Live-
+  broken for 4 kanji: `看`/rtk688 → just "fist", `側`/rtk1049 → just
+  "bound up", `鎖`/rtk2087 → just "chihuahua with one human leg", `動`
+  itself → "two, fence posts". All 23 entries were confirmed dead weight
+  (never their own kanji, never used as a part) — removed all of them,
+  which restored the 4 corrupted decompositions as a side effect and
+  stripped 67 bogus aliases leaked onto unrelated kanji. Then fixed `働`
+  itself to `亻,動` (matching `data_from_pdf.txt`'s "person,move" and the
+  already-correct zh-Hant hanzi row).
+- **`遺` (bequeath) wrong primitive + unidentified `辶`**: decomposed to a
+  flattened `一,貝,込,口,｜` (dragging in a misleading "crowded" fragment)
+  instead of `貴`+`辶`(road), per `data_from_pdf.txt`'s "precious,road".
+  The "road" primitive (`辶`, used in `込`/`近`/`通`/`速`/`追`/`遍`/dozens
+  more) already existed as `rad3.1` but had never been linked to its real
+  glyph (`character='?'`) even though `辶` already existed as a separate
+  zh-Hani row (`hanzi-8fb6`). Linked it, fixed `遺`.
+- **`夜` (night) incomplete + unidentified `亻`**: decomposed to only
+  `夕,亠` (evening, lid) — missing `亻`(person) and `夂`(walking legs)
+  entirely, per owner's own breakdown (亠+亻+夂+夕). Fixed to all 4. While
+  fixing it, found `亻` had the same unidentified-glyph problem as `辶`:
+  an ja-kanji placeholder (`rad2.3`, keyword "person") existed separately
+  from the real `亻` character, which only existed as a poorly-named
+  zh-Hani row (`hanzi-4ebb`, "radical number 9") — meaning **every** ja-
+  kanji decomposition using literal `亻` (618 total, including `働` from
+  earlier this session) was silently showing "radical number 9" instead
+  of "person". Linked `rad2.3` to `亻`, fixing both `夜` and `働` in one
+  sync without disturbing the zh-Hani side (verified via a zh sanity
+  check that it still correctly shows "radical number 9" there — script-
+  scoped resolution kept both contexts distinct).
+- **`換` (interchange) wrong primitive + a 114-kanji KRADFILE proxy bug**:
+  decomposed to a flattened `大,儿,冂,勹,扎` instead of `扌,𠂊,央` per
+  owner's breakdown. The `扎` token turned out to be the same class of bug
+  `fix_kradfile_proxies.py` already fixed for five other characters
+  (乞化刈買犯): a real, unrelated kanji (`扎`, "pull up") standing in for
+  the `扌` hand radical, because `扌` alone has no JIS X 0208 codepoint —
+  used this way across **114** kanji. An unidentified placeholder already
+  existed for the real primitive (`rad3.34`, keyword "finger", matching
+  Heisig's actual name) but had never been linked to `扌`. Linked it,
+  bulk-replaced all 114 occurrences of `扎`→`扌`. Also found and removed a
+  duplicate `rad3.34` line (a dead, shadowed "state of mind" definition —
+  flagged but not fixed in session 24, fixed here) and added the missing
+  `𠂊` primitive ("bound up").
+- **`降` (descend) wrong primitives + a second, 40-kanji KRADFILE proxy
+  bug**: same pattern as `扎`/`扌` — `阡` (a real, unrelated kanji
+  "footpaths between fields") standing in for the left-side mound/hill
+  radical `阝`, across **40** kanji (`降`,`陽`,`防`,`陸`,`険`,`阜`, etc.).
+  An unidentified placeholder existed (`rad3.40`) with a typo'd keyword
+  ("leftside **befa**" instead of "beta") plus a mislabeled `rad3.39`
+  ("rightside beta") that had "pinnacle" backwards — `rad3.39` turned out
+  to be completely unused (zero references), while "pinnacle" per the
+  owner's own Heisig reference belongs to the *left* side. Linked
+  `rad3.40`→`阝`, fixed the typo, moved "pinnacle" to the correct entry,
+  added a plain "beta" alias. Verified against `cjkvi-ids`'s authoritative
+  IDS data that `降` = `阝`(left) + `夅`(right), and `夅` = `夂`(walking
+  legs) + `㐄` (U+3404, a rare shape previously approximated as `十`/
+  "ten") — added `㐄` as a new primitive ("winter cow", per owner's
+  mnemonic) and corrected `降` to `阝,夂,㐄`.
+- **`頭` (head) redundant flattening + `豆` wrong primitive**: `頭`'s own
+  decomposition directly listed `貝,口,豆,并,頁` — redundant, since `豆`
+  already contains `口`+`并` and `頁` already contains `貝` one level down
+  via their own sub-decompositions. Collapsed to the clean `豆,頁`. While
+  verifying, the owner correctly challenged whether `豆`'s own `口,并`
+  breakdown was right in the first place — it wasn't: the CSV baseline
+  says `豆`'s real components are "table; one; mouth" (`几,一,口`), not
+  `并`("eight radical") at all, and cjkvi-ids doesn't record any
+  structural decomposition for `豆` (treats it as atomic), so there was no
+  independent source supporting `并`. Fixed `豆` to `几,一,口`.
+- **Unihan self-reference hanzi-import bug — 429 missing Chinese
+  characters**: unrelated to decomposition quality, found chasing "报
+  (report) doesn't find anything." `import_hanzi.py`'s ambiguity check
+  treated a self-referencing `kSimplifiedVariant`/`kTraditionalVariant`
+  (Unihan's way of saying "this char already IS that form", e.g. `报`'s
+  own `kSimplifiedVariant` points at `报` itself) as genuine both-
+  directions ambiguity, and separately, a multi-value variant field
+  listing the char itself *first* (e.g. `万`'s `kTraditionalVariant`
+  "U+4E07 U+842C") only ever read the first value. Together these
+  silently skipped **429** CJK Unified characters during the one-time
+  hanzi import — 270 missing outright, ~160 more missing their own
+  Chinese-script row despite having an unrelated Japanese one (e.g. `万`
+  existed as `rtk68` but not as its own `zh-Hans` row). Fixed both
+  parsing bugs in `import_hanzi.py`; `backend/backfill_missing_hanzi.py`
+  (new) backfills the missing rows + `variant_of` links directly into a
+  live, already-seeded `kanji.db` without re-running the full import.
+- **"kanji as part of itself" — general audit, owner-mandated**: wrote
+  `backend/audit_self_reference.py` to check for both `variant_of`
+  self-loops and a decomposition resolving one of its own parts back to
+  itself. First version was too naive (a per-term `resolve_alias` check
+  flagged 23 false positives — radicals sharing a keyword with an
+  unrelated whole kanji built from them, e.g. `虍`/"tiger" the radical vs
+  `虎`/"tiger" the kanji, which the app's real synthetic char+keyword-pair
+  dropping already handles safely); rewrote it to replicate the app's
+  exact resolution logic. Found and fixed one genuine case: `七` (seven)
+  had picked up "diced" as a bogus self-alias from a stray `data.txt`
+  line (`rtk7:?:diced,seven` — colliding with the real `rtk7` id), causing
+  it to list itself as its own decomposition part. Full-database rerun
+  after the fix: 0 self-references of either kind.
+- **Standing regression coverage, owner-mandated**: `七` bugs like these
+  (and the whole "orphaned entry clobbers a real kanji" class) don't get
+  caught until someone happens to look at the exact affected kanji.
+  `backend/test_regression_fixes.py` pins every individually-verified fix
+  above to its exact expected decomposition, spot-checks the hanzi
+  backfill, and asserts the two systemic invariants (no KRADFILE proxy
+  characters, no self-references) as a fast, always-run smoke test.
+  Verified it actually catches regressions (not just trivially passing)
+  by running it against a pre-fix backup, where it correctly failed all
+  18 originally-pinned checks.
+- Also merged 10 upstream commits (`git pull --rebase`) partway through —
+  4 conflicts in `data.txt`, all from a parallel session's own fixes to
+  similar bugs (its own 8-entry orphaned-alias cleanup, `政`/`定`/`錠`/
+  `燃` restructured to use proper intermediate kanji). Resolved by taking
+  the better structure from each side rather than picking one wholesale.
+- Every fix in this session was applied to the live server: `data.txt`
+  edited → `sync_system_data.py --dry-run` to confirm scope → applied →
+  spot-verified via `get_kanji_detail`/`search_by_parts` → `kanji-backend.
+  service` restarted. `backup_db.py` run before every write.
+- **New standing rule (owner-mandated, this session)**: every fix/commit
+  from now on gets a doc entry here (or a new dated section) explaining
+  what was done and why — not just a commit message — so a `git pull`
+  can be understood by reading these files, not just `git log`.
+
 ## Tooling produced this session
 
 - `backend/audit_flattening.py` — added 2026-08-18 (session 20), tightened
@@ -2081,3 +2272,32 @@ around the deployed frontend. Not part of this audit's scope; see
   session 16. Run it after any content-fix commit lands so the persisted
   count stays current; see session 17 above for exactly what "reviewed"
   does and doesn't mean.
+- `backend/backfill_missing_hanzi.py` — added 2026-08-22 (session 25).
+  One-off patch for the Unihan self-referencing-variant bug in
+  `import_hanzi.py` (see session 25 above): re-parses the same Unihan/ids
+  sources with the now-fixed ambiguity logic and inserts only the rows
+  genuinely missing from a live, already-seeded `kanji.db` (kanji rows,
+  aliases, `variant_of` links in both directions, IDS decompositions) —
+  not a full reimport. Safe to rerun; every step checks the row doesn't
+  already exist first.
+- `backend/audit_self_reference.py` — added 2026-08-22 (session 25), owner-
+  mandated general check for "kanji lists itself as its own part" and
+  `variant_of` self-loops. Checks the *live* DB directly (not a shadow
+  rebuild) since the variant_of bug is hanzi-only data, not reproducible
+  via `import_data()`'s rtk pipeline. Replicates the app's actual
+  synthetic char+keyword-pair resolution logic exactly (see session 25's
+  note on its first, too-naive version) — reusing a naive per-term
+  `resolve_alias` check here will reintroduce false positives on any
+  radical that happens to share a keyword with an unrelated whole kanji
+  built from it. `python3 audit_self_reference.py`; exits non-zero if
+  anything is found.
+- `backend/test_regression_fixes.py` — added 2026-08-22 (session 25),
+  owner-mandated. Pins every individually-verified kanji fix from session
+  25 to its exact expected decomposition (`get_kanji_detail`-level, i.e.
+  what the app actually renders), spot-checks the hanzi backfill, and
+  asserts the two systemic invariants found this session (no KRADFILE
+  proxy characters, no self-references) — a fast smoke test, not a
+  replacement for `audit_self_reference.py`'s full sweep. Run it after
+  any `sync_system_data.py` apply or `data.txt` edit; exits non-zero on
+  any failure. New fixes should add a pinned entry here in the same
+  commit, per the standing doc-per-commit rule below.

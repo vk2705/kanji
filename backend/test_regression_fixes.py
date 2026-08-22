@@ -88,6 +88,10 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk1", "rtk12", "rad3.40", "rtk1128"}},
     "rtk1360": {"character": "阜", "keyword": "large hill",
                 "expected_part_ids": {"rad3.40", "rtk10", "rtk11", "rad1.2"}},
+    "rtk1549": {"character": "頭", "keyword": "head",
+                "expected_part_ids": {"rtk1548", "rtk64"}},
+    "rtk1548": {"character": "豆", "keyword": "beans",
+                "expected_part_ids": {"rad1011", "rtk1", "rtk11"}},
 }
 
 # character -> hanzi id, spot-checking the 429-character Unihan self-reference backfill

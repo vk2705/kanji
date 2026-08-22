@@ -1793,8 +1793,8 @@ rtk1544:配:distribute:酉,已
 rtk1545:酸:acid:酉,儿,厶,夂
 rtk1546:猶:furthermore:酉,并
 rtk1547:尊:revered:寸,酉,并
-rtk1548:豆:beans:口,并
-rtk1549:頭:head:貝,口,豆,并,頁
+rtk1548:豆:beans:几,一,口
+rtk1549:頭:head:豆,頁
 rtk1550:短:short:口,豆,并,矢
 rtk1551:豊:bountiful:｜,一,口,豆,日,并
 rtk1552:鼓:drum:口,士,支,豆,并,又,十
