@@ -2496,7 +2496,6 @@ rtk2234:或:some:口,戈,一
 rtk2235:兎:rabbit:ノ,丶,儿,口,｜
 rtk2236:也:to be (classical):｜,乙,匕
 rtk2237:巴:comma-design:乙,已
-rtk2238:疋:head:
 rtk2239:菫:the violet:｜,一,口,土,二,艾
 rtk2240:曼:wide:日,又
 rtk2241:云:say:一,二,厶
