@@ -568,9 +568,9 @@ rtk566	妃	queen	566	no
 rtk567	改	reformation	567	yes
 rtk568	記	scribe	568	no
 rtk569	包	wrap	569	no
-rtk570	胞	placenta	570	no
-rtk571	砲	cannon	571	no
-rtk572	泡	bubble	572	no
+rtk570	胞	placenta	570	yes
+rtk571	砲	cannon	571	yes
+rtk572	泡	bubble	572	yes
 rtk573	亀	tortoise	573	no
 rtk574	電	electricity	574	no
 rtk575	竜	dragon	575	no
@@ -598,12 +598,12 @@ rtk596	堆	piled high	596	no
 rtk597	椎	sweet oak	597	no
 rtk598	誰	who?	598	no
 rtk599	焦	char	599	no
-rtk600	礁	reef	600	no
+rtk600	礁	reef	600	yes
 rtk601	集	gather	601	no
 rtk602	准	quasi-	602	no
 rtk603	進	advance	603	no
 rtk604	雑	miscellaneous	604	no
-rtk605	雌	female	605	no
+rtk605	雌	female	605	yes
 rtk606	準	semi-	606	no
 rtk607	奮	stirred up	607	no
 rtk608	奪	rob	608	no
@@ -625,12 +625,12 @@ rtk623	錮	weld	623	yes
 rtk624	国	country	624	no
 rtk625	団	group	625	no
 rtk626	因	cause	626	no
-rtk627	姻	matrimony	627	no
+rtk627	姻	matrimony	627	yes
 rtk628	咽	windpipe	628	no
 rtk629	園	park	629	no
 rtk630	回	-times	630	no
 rtk631	壇	podium	631	no
-rtk632	店	store	632	no
+rtk632	店	store	632	yes
 rtk633	庫	warehouse	633	no
 rtk634	庭	courtyard	634	no
 rtk635	庁	government office	635	no
@@ -640,47 +640,47 @@ rtk638	磨	grind	638	no
 rtk639	心	heart	639	no
 rtk640	忘	forget	640	no
 rtk641	恣	selfish	641	no
-rtk642	忍	endure	642	no
+rtk642	忍	endure	642	yes
 rtk643	認	acknowledge	643	no
 rtk644	忌	mourning	644	no
 rtk645	志	intention	645	no
-rtk646	誌	document	646	no
+rtk646	誌	document	646	yes
 rtk647	芯	wick	647	no
 rtk648	忠	loyalty	648	no
 rtk649	串	shish kebab	649	no
 rtk650	患	afflicted	650	no
 rtk651	思	think	651	no
-rtk652	恩	grace	652	no
+rtk652	恩	grace	652	yes
 rtk653	応	apply	653	no
 rtk654	意	idea	654	no
 rtk655	臆	cowardice	655	no
-rtk656	想	concept	656	no
+rtk656	想	concept	656	yes
 rtk657	息	breath	657	no
 rtk658	憩	recess	658	no
 rtk659	恵	favor	659	no
-rtk660	恐	fear	660	no
+rtk660	恐	fear	660	yes
 rtk661	惑	beguile	661	no
 rtk662	感	emotion	662	no
 rtk663	憂	melancholy	663	no
 rtk664	寡	widow	664	no
 rtk665	忙	busy	665	no
-rtk666	悦	ecstasy	666	no
-rtk667	恒	constancy	667	no
-rtk668	悼	lament	668	no
-rtk669	悟	enlightenment	669	no
-rtk670	怖	dreadful	670	no
-rtk671	慌	disconcerted	671	no
+rtk666	悦	ecstasy	666	yes
+rtk667	恒	constancy	667	yes
+rtk668	悼	lament	668	yes
+rtk669	悟	enlightenment	669	yes
+rtk670	怖	dreadful	670	yes
+rtk671	慌	disconcerted	671	yes
 rtk672	悔	repent	672	yes
-rtk673	憎	hate	673	no
+rtk673	憎	hate	673	yes
 rtk674	慣	accustomed	674	yes
 rtk675	愉	pleasure	675	yes
-rtk676	惰	lazy	676	no
-rtk677	慎	humility	677	no
-rtk678	憾	remorse	678	no
-rtk679	憶	recollection	679	no
-rtk680	惧	disquieting	680	no
-rtk681	憧	yearn	681	no
-rtk682	憬	hanker	682	no
+rtk676	惰	lazy	676	yes
+rtk677	慎	humility	677	yes
+rtk678	憾	remorse	678	yes
+rtk679	憶	recollection	679	yes
+rtk680	惧	disquieting	680	yes
+rtk681	憧	yearn	681	yes
+rtk682	憬	hanker	682	yes
 rtk683	慕	pining	683	no
 rtk684	添	annexed	684	no
 rtk685	必	invariably	685	no
@@ -771,7 +771,7 @@ rtk769	技	skill	769	no
 rtk770	枝	bough	770	no
 rtk771	肢	limb	771	no
 rtk772	茎	stalk	772	no
-rtk773	怪	suspicious	773	no
+rtk773	怪	suspicious	773	yes
 rtk774	軽	lightly	774	no
 rtk775	叔	uncle	775	no
 rtk776	督	coach	776	no
@@ -1269,7 +1269,7 @@ rtk1267	備	equip	1267	yes
 rtk1268	昔	once upon a time	1268	no
 rtk1269	錯	confused	1269	no
 rtk1270	借	borrow	1270	yes
-rtk1271	惜	pity	1271	no
+rtk1271	惜	pity	1271	yes
 rtk1272	措	set aside	1272	no
 rtk1273	散	scatter	1273	yes
 rtk1274	廿	twenty	1274	no
@@ -1568,7 +1568,7 @@ rtk1566	猛	fierce	1566	yes
 rtk1567	盛	boom	1567	no
 rtk1568	塩	salt	1568	yes
 rtk1569	銀	silver	1569	no
-rtk1570	恨	resentment	1570	no
+rtk1570	恨	resentment	1570	yes
 rtk1571	根	root	1571	no
 rtk1572	即	instant	1572	no
 rtk1573	爵	baron	1573	yes
@@ -1593,7 +1593,7 @@ rtk1591	養	foster	1591	no
 rtk1592	飽	sated	1592	no
 rtk1593	既	previously	1593	no
 rtk1594	概	outline	1594	no
-rtk1595	慨	rue	1595	no
+rtk1595	慨	rue	1595	yes
 rtk1596	平	even	1596	no
 rtk1597	呼	call	1597	no
 rtk1598	坪	two-mat area	1598	no
@@ -1655,7 +1655,7 @@ rtk1653	麦	barley	1653	no
 rtk1654	青	blue	1654	no
 rtk1655	精	refined	1655	no
 rtk1656	請	solicit	1656	no
-rtk1657	情	feelings	1657	no
+rtk1657	情	feelings	1657	yes
 rtk1658	晴	clear up	1658	no
 rtk1659	清	pure	1659	no
 rtk1660	静	quiet	1660	no
@@ -1677,7 +1677,7 @@ rtk1675	生	life	1675	no
 rtk1676	星	star	1676	no
 rtk1677	醒	awakening	1677	no
 rtk1678	姓	surname	1678	no
-rtk1679	性	sex	1679	no
+rtk1679	性	sex	1679	yes
 rtk1680	牲	animal sacrifice	1680	no
 rtk1681	産	products	1681	yes
 rtk1682	隆	hump	1682	no
@@ -1734,7 +1734,7 @@ rtk1732	票	ballot	1732	no
 rtk1733	漂	drift	1733	no
 rtk1734	標	signpost	1734	no
 rtk1735	栗	chestnut	1735	no
-rtk1736	慄	shudder	1736	no
+rtk1736	慄	shudder	1736	yes
 rtk1737	遷	transition	1737	no
 rtk1738	覆	capsize	1738	yes
 rtk1739	煙	smoke	1739	no
@@ -1769,7 +1769,7 @@ rtk1767	侯	marquis	1767	yes
 rtk1768	喉	throat	1768	yes
 rtk1769	候	climate	1769	yes
 rtk1770	決	decide	1770	no
-rtk1771	快	cheerful	1771	no
+rtk1771	快	cheerful	1771	yes
 rtk1772	偉	admirable	1772	yes
 rtk1773	違	difference	1773	no
 rtk1774	緯	horizontal	1774	no
@@ -1855,7 +1855,7 @@ rtk1853	顔	face	1853	yes
 rtk1854	須	ought	1854	yes
 rtk1855	膨	swell	1855	no
 rtk1856	参	visit	1856	no
-rtk1857	惨	wretched	1857	no
+rtk1857	惨	wretched	1857	yes
 rtk1858	修	discipline	1858	yes
 rtk1859	珍	rare	1859	no
 rtk1860	診	checkup	1860	no
@@ -2083,7 +2083,7 @@ rtk2081	弾	bullet	2081	no
 rtk2082	桜	cherry tree	2082	no
 rtk2083	獣	animal	2083	no
 rtk2084	脳	brain	2084	no
-rtk2085	悩	trouble	2085	no
+rtk2085	悩	trouble	2085	yes
 rtk2086	厳	stern	2086	yes
 rtk2087	鎖	chain	2087	yes
 rtk2088	挙	raise	2088	no
@@ -2206,14 +2206,14 @@ rtk2204	砦	fort	2204	no
 rtk2205	髭	beard	2205	no
 rtk2206	禽	fowl	2206	no
 rtk2207	檎	apple	2207	no
-rtk2208	憐	sympathize with	2208	no
+rtk2208	憐	sympathize with	2208	yes
 rtk2209	燐	phosphorus	2209	no
 rtk2210	麟	camelopard	2210	no
 rtk2211	鱗	scaled	2211	no
 rtk2212	奄	encompassing	2212	no
 rtk2213	庵	hermitage	2213	no
 rtk2214	掩	shrouded	2214	no
-rtk2215	悛	make amends	2215	no
+rtk2215	悛	make amends	2215	yes
 rtk2216	駿	steed	2216	no
 rtk2217	峻	steep	2217	no
 rtk2218	竣	complete a job	2218	no
@@ -2226,7 +2226,7 @@ rtk2224	凱	triumph	2224	no
 rtk2225	呑	quaff	2225	no
 rtk2226	韮	leek	2226	no
 rtk2227	籤	lottery	2227	yes
-rtk2228	懺	penitential	2228	no
+rtk2228	懺	penitential	2228	yes
 rtk2229	芻	hay	2229	no
 rtk2230	雛	chick	2230	no
 rtk2231	趨	scurry	2231	no
@@ -2372,14 +2372,14 @@ rtk2370	擢	outstanding	2370	no
 rtk2371	摺	rubbing	2371	no
 rtk2372	捷	spoils	2372	no
 rtk2373	抉	gouge out	2373	no
-rtk2374	怯	wince	2374	no
-rtk2375	惟	ponder	2375	no
-rtk2376	惚	infatuation	2376	no
-rtk2377	怜	quickwitted	2377	no
-rtk2378	惇	considerate	2378	no
-rtk2379	恰	as if	2379	no
-rtk2380	恢	enlarge	2380	no
-rtk2381	悌	respect for elders	2381	no
+rtk2374	怯	wince	2374	yes
+rtk2375	惟	ponder	2375	yes
+rtk2376	惚	infatuation	2376	yes
+rtk2377	怜	quickwitted	2377	yes
+rtk2378	惇	considerate	2378	yes
+rtk2379	恰	as if	2379	yes
+rtk2380	恢	enlarge	2380	yes
+rtk2381	悌	respect for elders	2381	yes
 rtk2382	澪	canal	2382	no
 rtk2383	洸	glistening	2383	no
 rtk2384	滉	bounding main	2384	no

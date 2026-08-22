@@ -1829,6 +1829,78 @@ add this as a second check mode.
   items if there's ever a session with appetite for deeper per-kanji
   research beyond structural matching.
 
+*(Note: between this entry and the next, an unrelated one-off request
+landed — commit `649576b` adds `android/`, a WebView-shell Android app
+around the deployed frontend. Not part of this audit's scope; see
+`android/README.md`.)*
+
+### 2026-08-22 — session 24
+
+- **Continued the frame-ordered sweep into 550-700**, and found something
+  bigger than the usual flattening pattern: `search_by_parts(['busy'])`
+  was returning **42** completely unrelated kanji — `慎`/humility,
+  `憾`/remorse, `恐`/fear, `寡`/widow, and 38 more — instead of just `忙`
+  itself.
+- **Root cause**: the 忄 radical (Heisig's own name for it is "Freud" —
+  our system calls it "state of mind") already has a working primitive
+  entry, `rad4.2`, and `search_by_parts(['state of mind'])` already
+  correctly returned 88 genuine 忄-radical kanji *before* this fix. But
+  **41 kanji had the literal character `忙`** (a real, distinct kanji
+  meaning "busy") in their override's part list instead of `state of
+  mind` — visually plausible, since `忙` is itself built from 忄, but
+  semantically wrong: referencing the *kanji* `忙` pulls in *its*
+  keyword/alias ("busy"), not the radical concept that was actually
+  intended.
+- Cross-checked against `data_from_pdf.txt` (the original 4th-edition PDF
+  extraction, lower merge priority than `data.txt` but independent of
+  whatever introduced this bug) for the 7 of the 41 it has entries for —
+  every single one correctly uses "state of mind" there. `data.txt`'s
+  override had replaced the correct term with `忙` at some point in this
+  project's history, for these and (going by the overwhelming pattern
+  consistency — all 心-radical "emotion" kanji, `忙` sitting exactly
+  where 忄 visually sits) presumably the other 34 by the same mechanism.
+  Fixed by replacing every literal `忙` token with `state of mind` across
+  all 41 (frames 666-682, 773, 891, 892, 1271, 1283, 1570, 1595, 1657,
+  1679, 1736, 1771, 1857, 2085, 2208, 2215, 2228, 2374-2381).
+- **Also found, while investigating**: a duplicate `rad3.34` line in
+  `data.txt` — one copy says `state of mind`, another says `finger`. Since
+  `data.txt`'s parser builds a plain dict keyed by id, the second
+  definition silently won, so `rad3.34`'s own "state of mind" alias was
+  never actually live (not that it mattered here, since `rad4.2`
+  independently covers "state of mind" correctly). `rad3.34`'s surviving
+  "finger" meaning is itself legitimately used elsewhere (the 指-family
+  kanji), so this wasn't touched — flagged for a future hygiene pass
+  rather than fixed now, since removing the dead line is a pure no-op
+  either way.
+- **Also applied 13 confirmed flattening fixes** found in the same frame
+  range, each cross-checked against `heisig-kanjis.csv` before applying
+  (several *candidates* in this range were left alone because CSV didn't
+  confirm them — see the commit message for the full list of both):
+  `胞`→`月,包`; `砲`→`石,包` (also dropped an extra `口` not present
+  anywhere in CSV's components — same for `礁` below); `泡`→`水,包`;
+  `礁`→`石,焦`; `雌`→`此,隹`; `姻`→`女,因`; `店`→`占,广`; `忍`→`心,刃`;
+  `誌`→`言,志`; `恩`→`心,因`; `想`→`心,相`; `恐`→`工,心,凡`;
+  `憧`→`state of mind,童`.
+- Verified: full rebuild from scratch. `search_by_parts(['busy'])` now
+  returns only `rtk665` itself (was 42); `search_by_parts(['state of
+  mind'])` now returns 125 (was 88); `get_kanji_detail` spot-checks
+  across a broad sample of the touched ids; `audit_radicals.py` unchanged
+  (1 remaining undefined term, `'ninety'`, pre-existing documented CSV
+  noise); full standing regression suite (`old`/`crime`/`heki`/`awe`/
+  `round`/`cave`/`shellfish`/`street`/`shining`/`early`/`courage`/
+  `happiness`) — no regressions.
+- Coverage: **646/3000 (21.5%)** reviewed (`docs/kanji_review_coverage.tsv`
+  regenerated).
+- Not yet synced to the live server — same standing gap. This session's
+  `busy`/`state of mind` fix is high-value to deploy given how many
+  kanji (41) it touches and how badly wrong the old search result was.
+- **Next session**: continue frame-ordered past 700 (2354/3000 still
+  unreviewed). Worth a quick scan for whether the same `忙`-style
+  "real kanji used as a radical stand-in" mistake shows up with *other*
+  radical-adjacent kanji (e.g. `个`/rad1043's "person radical" already
+  has a dedicated entry — check nothing similarly substitutes a full
+  kanji for it) before assuming this was a one-off.
+
 ## Tooling produced this session
 
 - `backend/audit_flattening.py` — added 2026-08-18 (session 20), tightened
