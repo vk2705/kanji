@@ -22,6 +22,7 @@ rad2.17:?:power,muscle
 rad2.18:勹:bound up
 rad2.19:?:spoon, sitting on the ground
 rad2.20:?:box
+rad2.22:卜:divining rod,augury,divination
 rad2.23:卩:stamp,seal
 rad2.24:厂:cliff
 rad2.25:ヨ:elbow
@@ -261,11 +262,11 @@ rtk2636:?:arrow shaft:bamboo,in front
 rtk1:一:one:
 rtk2:二:two:
 rtk5:五:five:
-rtk9:九:nine:
+rtk9:九:nine,baseball:
 rtk10:十:ten:
 rtk11:口:mouth:囗
-rtk12:日:day:
-rtk13:月:month:
+rtk12:日:day,sun,tongue wagging in mouth:
+rtk13:月:month,moon,flesh:
 rtk14:田:rice field:
 rtk15:目:eye:
 rtk22:晶:sparkle:日
