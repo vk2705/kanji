@@ -87,7 +87,7 @@ When editing kanji data pre-launch, prefer `data.txt` — it always wins the mer
 ```
 id:character:alias1,alias2,...:part1,part2,...;alt_decomp1,alt_decomp2
 ```
-- `id` — `rtk{n}` for kanji (6th-edition frame number) or `rad{n}` for pure primitives with no kanji form.
+- `id` — `rtk{n}` for kanji (6th-edition frame number, a real citable identifier — Heisig's book numbers kanji frames, just not primitives independently of them). For a pure primitive with no kanji frame of its own: `kangxi{n}` if its glyph is one of the 214 official Kangxi radicals (n = the official radical number, verified against Unicode's `CJKRadicals.txt` — not the legacy `rad{n}.{m}` KRADFILE-derived numbering, which turned out to be arbitrary import-order bookkeeping from the pre-rewrite Perl app, not a citable standard); otherwise `prim-{descriptive-slug}` (e.g. `prim-katakana-ha`, `prim-heki`) — Heisig's RTK has no official numbered index of non-Kangxi primitives independent of frame numbers (a third-party project's own primitive numbering explicitly calls itself a "fake Heisig number" in its source, confirming this), so a made-up number would look authoritative while actually being arbitrary — the same "resolved but misleads" anti-pattern this project's audit doc has repeatedly found and fixed. See `docs/2026-08-search-quality-audit.md`'s session on the `kangxi{n}`/`prim-{slug}` migration for the full reasoning and the id mapping.
 - `character` — UTF-8 glyph, or `?`/empty if not yet identified.
 - `aliases` — comma-separated names; the first becomes the keyword.
 - `parts` — comma-separated primitive names or kanji characters; alternate decompositions separated by `;`.
