@@ -2280,6 +2280,31 @@ kanji at once. Grouped by finding, not chronologically:
 - Verified: full rebuild, `get_kanji_detail` confirms `痴` now resolves to
   `['知:know', 'rad1048:sickness radical']`, `audit_radicals.py` and the
   standing regression suite unchanged.
+- **Follow-up owner question**: "почему 疔 ???? он не часть этого
+  иероглифа" (why 疔? it's not part of this character) — a fair
+  challenge, and it turned out to be properly fixable rather than just
+  an accepted limitation. `疔` (U+7594, "boil/carbuncle") was used as
+  `rad1048`'s glyph because `疒` (U+7592, the *actual* sickness radical)
+  had no codepoint in the 1978 JIS X 0208 standard KRADFILE (this
+  project's original radical-decomposition source, back before this
+  audit even started) was built against — documented in session 4 as a
+  limitation shared by 6 other primitives (`并`/`扎`/`杰`/`个`/`阡`/`禹`).
+  That JIS constraint doesn't apply to this Unicode-throughout app at
+  all, though, and `疒` itself was sitting completely unused. Changed
+  `rad1048`'s character from `疔` to `疒`, kept `疔` as a secondary alias
+  so all 22 existing kanji whose part_term is literally "疔" (病, 痛,
+  痴, 癖, ...) keep resolving with zero per-kanji edits —
+  `_resolve_parts_detail` renders a resolved part's own `character`
+  column, not the literal search term, so the displayed glyph flips
+  correctly everywhere automatically. Commit `eab66c2`.
+- Verified: full rebuild, `get_kanji_detail` on `痴`/`癖` now shows `疒`
+  (not `疔`) for the sickness-radical chip, `search_by_parts(['sickness
+  radical'])` still returns all 22 hosts + the primitive itself,
+  `audit_radicals.py`/`test_regression_fixes.py`/standing regression
+  suite unchanged. The other 6 documented JIS substitutes
+  (`并`/`扎`/`杰`/`个`/`阡`/`禹`) weren't touched — worth the same
+  treatment in a future session if their real Unicode radical forms are
+  similarly free to use.
 
 ## Tooling produced this session
 
