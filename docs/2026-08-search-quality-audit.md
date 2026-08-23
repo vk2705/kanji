@@ -2306,6 +2306,80 @@ kanji at once. Grouped by finding, not chronologically:
   treatment in a future session if their real Unicode radical forms are
   similarly free to use.
 
+### 2026-08-23 — primitive-id migration (owner-driven)
+
+- **The 疔 fix prompted a bigger, valid question**: "меня это беспокоит.
+  берем нумерацию откуда попало, не указывая источник... почему мы не
+  используем официальные таблицы там где возможно?" (this worries me —
+  we're taking numbering from wherever, without citing a source... why
+  don't we use official tables where possible?). Fair on both counts —
+  investigated properly before touching anything, since a wrong "official"
+  number would be worse than the honest-but-arbitrary status quo.
+  - The legacy `rad{N}.{M}` scheme (used throughout `data.txt` for
+    primitives with no kanji frame) turned out to be **the old Perl
+    app's own numbering**, inherited as-is into this project — not
+    derived from KRADFILE or any external standard, confirmed by
+    checking session-1-era notes above ("the legacy `radN.M` dotted
+    scheme was the *old Perl app's* convention, not this project's").
+    The newer `rad{N}` (1001+) scheme is just this project's own
+    sequential counter. Neither claims an external source, but neither
+    disclaims one either — exactly the "resolved but misleads" shape
+    this audit keeps finding.
+  - **Kangxi radicals are real and citable**: 214 of them, used
+    identically for Japanese and Chinese, with an authoritative
+    machine-readable source at Unicode's own `CJKRadicals.txt`
+    (radical-number -> ideograph mapping) plus positional-variant forms
+    (亻/扌/攵/辶/etc.) documented in `NamesList.txt`'s CJK Radicals
+    Supplement block. Verified every candidate against these files
+    directly, not from memory.
+  - **A separate numbered "primitive index" in RTK 6th edition does
+    NOT exist**, contrary to the initial assumption. The owner pointed
+    at github.com/cyphar/heisig-rtk-index (the most thorough third-party
+    RTK index project) to check; its own primitive-numbering generator
+    script (`scripts/index_primitives.py`) comments its own output
+    field `# A "fake" Heisig number for the primitive` — computed as
+    either `{parent_frame}.{child_index}` or a project-internal
+    processing-order counter, never anything Heisig's book itself
+    assigns. Heisig numbers *frames*, never primitives independently of
+    them. Inventing an `rtk6.N` scheme (the original idea) would have
+    manufactured exactly the same false-authority problem this whole
+    audit exists to catch — decided against it, used descriptive slugs
+    for non-Kangxi primitives instead (owner's own suggested
+    alternative, e.g. "user-комбинация-шляпа-вода2").
+  - **Migrated 78 primitive-only ids**: 61 confirmed Kangxi radicals ->
+    `kangxi{N}` (`rad1041` 宀 -> `kangxi40`, `rad3.34` 扌 -> `kangxi64`,
+    `rad2.22` 卜 -> `kangxi25`, ...); 17 genuine non-Kangxi primitives
+    (katakana-shaped ノハマユ, the still-active KRADFILE proxies 艾/个/并/
+    杰/禹, book-specific `heki`/`teki`) -> descriptive `prim-{slug}` ids
+    that don't claim numbered authority they don't have. Verified zero
+    other lines in `data.txt` reference any of the 78 old ids literally
+    before renaming (everything else references primitives by character
+    or keyword text, never by raw id string), so the diff is exactly 78
+    pure id-field renames — no other kanji's own content touched.
+    Updated `test_regression_fixes.py`'s pinned ids and `CLAUDE.md`'s
+    id-format documentation to match. Commit `5fb7d8e`.
+- Verified: full rebuild from scratch, `audit_radicals.py` unchanged (1
+  remaining undefined term, `'ninety'`), `test_regression_fixes.py` back
+  to only the 4 expected hanzi-scope-mismatch failures, full standing
+  regression suite plus fresh spot-checks on renamed primitives
+  (`search_by_parts` on `'roof'`/`'cliff'`/`'fire radical'`/`'katakana
+  ha'`/`'heki'` all still resolve correctly), grep confirms no frontend
+  or backend runtime code hardcodes any of the old ids.
+- **Not fixed here, flagged as a follow-up** — a different kind of
+  change (merging duplicate content, not renaming): 4 of the 17
+  `prim-{slug}` entries (个/并/杰/禹, ~392 kanji combined) are KRADFILE
+  JIS-substitution proxies that likely *duplicate* an
+  already-correctly-identified Kangxi radical elsewhere (e.g.
+  `prim-person-radical`/个 probably duplicates `kangxi9`/亻 — same shape
+  as this session's earlier `疔`->`疒` fix, but at consolidation scale
+  rather than a single character swap). `扎`/`阡` (hand/mound proxies)
+  were already consolidated by an out-of-band session and now sit at 0
+  live usages.
+- **Next session**: continue the plain frame-ordered sweep (re-run
+  `coverage_status.py` first, 2107/3000 rtk kanji still unreviewed);
+  the `个`/`并`/`杰`/`禹` duplicate-radical consolidation above is a good
+  candidate for a session with room for it.
+
 ## Tooling produced this session
 
 - `backend/audit_flattening.py` — added 2026-08-18 (session 20), tightened
