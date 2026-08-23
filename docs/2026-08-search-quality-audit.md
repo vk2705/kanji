@@ -2442,6 +2442,59 @@ kanji at once. Grouped by finding, not chronologically:
   per-cluster visual checks much faster than the original `ハ` session
   had available. Otherwise continue the frame-ordered sweep.
 
+### 2026-08-23 — owner report: `并` search returning wrong results
+
+- **"поиск 并 дал кучу неправильных ответов"** (search for 并 gave a
+  bunch of wrong answers) — turned the flagged-but-deferred `并`
+  investigation above into an actual fix, sooner than expected.
+  `search_by_parts(['eight radical'])` was returning 183 kanji, matching
+  exactly the false-positive count `并`'s 182 hosts implied.
+- Went back to the visual sample from the earlier flag (羊/首/帝/前/曽/
+  遂/従) and this time cross-checked *every one* of the 182 hosts against
+  `heisig-kanjis.csv`'s components column systematically (not just the
+  hand-picked sample) — confirmed the earlier suspicion properly: `并`
+  is genuinely polysemous, bundling at least 3-4 distinct real concepts
+  under one wrong character, not a single mislabeling like `个` turned
+  out to be:
+  - **54 hosts** whose CSV components explicitly say "horns" — a real,
+    distinct, CSV-confirmed Heisig primitive. There was already an
+    unlinked placeholder for exactly this sitting unused:
+    `rad2.9:?:horns`, character never set.
+  - The whole 羊-family (洋/詳/義/犠/儀/...) where `并` is really just
+    `羊`'s own top stroke, redundantly re-flattened *alongside* a
+    separate `羊` token already in the same line — a flattening bug,
+    not a mislabeling one; not fixed here (different fix shape).
+  - Several more distinct sub-clusters visible in the CSV data (a
+    帝-family "crown"-ish cluster, a 豆-family "beans" cluster, others)
+    not yet individually verified.
+- **Fixed only the CSV-confirmed "horns" cluster**, the one
+  highest-confidence, cleanly-separable piece: linked `rad2.9`'s real
+  glyph (丷, U+4E37 — confirmed by rendering it directly next to
+  羊/首/前's actual top stroke, they match exactly) and renamed it to
+  `kangxi12` (丷 is an official Kangxi radical 12/八 variant form per
+  `CJKRadicals.txt`'s own variant listing — but kept "horns" as the
+  keyword, since that's the genuinely distinct mnemonic name Heisig
+  gives this shape, not "eight"). Replaced the `并` token with `丷` in
+  exactly the 54 CSV-confirmed hosts' own lines — a contiguous
+  single-token swap, nothing else touched. `并` itself (`prim-eight-
+  radical`, still wrong, ~128 hosts left) was deliberately left alone —
+  the remaining clusters each need the same individual verification
+  before touching, not a second guess applied broadly. Commit `36227c6`.
+- Verified: full rebuild from scratch, `search_by_parts(['horns'])` now
+  returns exactly 55 (was 0 live before — the keyword existed but
+  nothing resolved to it), `search_by_parts(['eight radical'])` down
+  from 183 to 129, `get_kanji_detail` on 羊/首/前 all correctly show the
+  horns chip, `audit_radicals.py`/`test_regression_fixes.py`/standing
+  regression suite unchanged (same 4 expected hanzi-scope-mismatch
+  failures as every prior rebuild).
+- Coverage: **935/3000 (31.2%)** reviewed (`docs/kanji_review_coverage.tsv`
+  regenerated).
+- **Next session**: `并`'s remaining ~128 hosts still need per-cluster
+  sorting (羊-family flattening fix is probably the next cleanest piece —
+  structurally simple, just needs each host's redundant `王,...,并,...,羊`
+  pattern collapsed once `并`→`丷` is applied and `羊` already covers the
+  rest). Otherwise continue the frame-ordered sweep.
+
 ## Tooling produced this session
 
 - `backend/render_glyphs.py` — added 2026-08-23. Renders requested
