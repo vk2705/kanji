@@ -2380,8 +2380,79 @@ kanji at once. Grouped by finding, not chronologically:
   the `个`/`并`/`杰`/`禹` duplicate-radical consolidation above is a good
   candidate for a session with room for it.
 
+### 2026-08-23 — visual verification method + 个/umbrella fix
+
+- **Following up on the flagged `个`/`并`/`杰`/`禹` consolidation candidate
+  above turned into a methodology lesson.** Guessed `个` (kept in
+  `data.txt` as "person radical", 101 host kanji) duplicated `kangxi9`
+  (亻) — wrong. "Corrected" to guessing it was a proxy for `𠆢` (radical
+  9's top-position variant form) — also wrong, still reasoning from
+  Unicode variant tables rather than looking. Owner pushed back with a
+  specific, simple ask: render the actual glyphs and compare them as
+  images, not as codepoints. Doing that immediately settled it — `个`
+  has an extra vertical stroke through the middle that the real
+  top-of-会/谷/令 shape doesn't have (confirmed via
+  `backend/render_glyphs.py`, a new tool built for exactly this — see
+  Tooling below). Cross-checked against `heisig-kanjis.csv`'s own
+  components column: "umbrella" is literally listed for both `会` and
+  `谷`. The primitive has nothing to do with "person" at all, in either
+  Heisig's own naming or the actual drawn shape — the "person radical"
+  label had been wrong for as long as this line has existed (predates
+  the whole audit).
+- **This is now the standing verification method for primitive
+  identity, owner-mandated**: render and visually compare before
+  trusting a codepoint/keyword match, working toward eventually checking
+  every kanji this way. Documented in `CLAUDE.md` so it's visible
+  immediately in any future session, not buried in this doc alone.
+- **Used the new tool to check the other 3 remaining KRADFILE proxies**
+  before touching anything, rather than assuming they had the same bug:
+  - `杰` ("fire radical", 96 hosts) — **confirmed correct**: renders as
+    木 + 灬 (the 4-dot fire radical), visually matches its hosts
+    (魚/烈/熱/鳥/駒/...). Not touched.
+  - `禹` ("track radical", 13 hosts) — rendered side-by-side with its
+    actual hosts (属/嘱/偶/遇/愚/隅/寓/萬), all of which visibly share
+    the same bottom component `禹` renders as. Not clearly wrong: not
+    touched without stronger evidence than "looks roughly right."
+  - `并` ("eight radical", 182 hosts) — `并` itself renders as a
+    6-stroke character, visually nothing like the 2-stroke `丷`/`八`
+    shape its own keyword implies. But its 182 hosts span visibly
+    diverse, structurally unrelated contexts (羊-related: 義/犠/群/善;
+    and many unrelated: 従/弟/尊/喜/南/...) — the same multi-meaning-
+    single-glyph shape this audit already found for `ハ` (session ~14)
+    and deliberately did *not* blanket-fix. Flagged as found, explicitly
+    not fixed today — needs the same careful per-cluster investigation
+    `ハ` got (which kanji actually share which visual role), not a
+    single rename.
+- **Fixed the one confirmed case**: `prim-person-radical` (个) ->
+  `prim-umbrella`, keyword "person radical" -> "umbrella". Single line
+  change — every host kanji already references `个` by character, not
+  by id or keyword text, so nothing else needed touching. Commit
+  `73a64bd`.
+- Verified: full rebuild from scratch, `get_kanji_detail` on `会` now
+  shows the "umbrella" chip correctly, `search_by_parts(['umbrella'])`
+  returns 102 kanji, old text "person radical" no longer resolves to
+  anything, `audit_radicals.py`/`test_regression_fixes.py`/standing
+  regression suite unchanged (same 4 expected hanzi-scope-mismatch
+  failures as every prior rebuild).
+- **Next session**: `并`'s multi-meaning investigation (same shape as
+  `ハ`) is the natural next step if there's appetite for it — expect it
+  to be slow (182 hosts to sort into visual clusters) and to end with a
+  partial fix plus an explicitly-documented remainder, same as `ハ`
+  rather than a single clean answer. `render_glyphs.py` should make the
+  per-cluster visual checks much faster than the original `ハ` session
+  had available. Otherwise continue the frame-ordered sweep.
+
 ## Tooling produced this session
 
+- `backend/render_glyphs.py` — added 2026-08-23. Renders requested
+  characters large to a PNG via the pre-installed headless Chromium (no
+  `playwright` package needed) for actual visual comparison —
+  `python3 render_glyphs.py 个 会 谷 --out /tmp/compare.png`, then look
+  at it. The standing method (owner-mandated) for verifying a
+  primitive's real identity: render and compare glyphs, don't reason
+  from Unicode codepoint/variant tables or keyword text alone — see this
+  session's `个`/"umbrella" entry above for exactly the kind of mistake
+  that method catches and codepoint-reasoning alone didn't.
 - `backend/audit_flattening.py` — added 2026-08-18 (session 20), tightened
   2026-08-19 (session 21). Finds every (K, M) pair of system rtk kanji
   where M's own full resolved part-id sequence appears as a contiguous,

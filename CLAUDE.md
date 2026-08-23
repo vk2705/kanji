@@ -95,6 +95,8 @@ id:character:alias1,alias2,...:part1,part2,...;alt_decomp1,alt_decomp2
 
 `import_rtk.py` is a one-off generator that appends new `rtk{frame}` entries to `data.txt` from kanjidic2 + KRADFILE (downloads them if not given local paths). `import_hanzi.py` is a separate one-off that writes Chinese hanzi (script `zh-Hans`/`zh-Hant`/`zh-Hani`) directly into `kanji.db` as system-owned public rows, reusing `expand_part_terms` for its IDS-derived decompositions — see the module docstring for scope and re-run safety.
 
+**Verifying a primitive's real identity — render it, don't just reason about it.** `backend/render_glyphs.py` renders requested characters large to a PNG via the pre-installed headless Chromium (no `playwright` package needed) for visual comparison — `python3 render_glyphs.py 个 会 谷 --out /tmp/compare.png`, then look at the PNG. Standing method (owner-mandated, 2026-08-23) for verifying whether a primitive's assigned character/keyword actually matches what's drawn inside its host kanji: reasoning from Unicode codepoint tables or keyword text alone has been independently wrong more than once in this project's history (e.g. `个`, kept as a "person radical" stand-in for decades, turned out on actual rendering to have an extra stroke the real host shape doesn't have, and CSV confirms Heisig's real name for it is "umbrella" — nothing to do with "person"). Always cross-check the rendered glyph against real host kanji (and `heisig-kanjis.csv`'s components column) before trusting a primitive's identity, not just against other Unicode data tables.
+
 ### Database schema (SQLite, `backend/kanji.db` — generated, not committed)
 
 ```sql
