@@ -2197,6 +2197,75 @@ kanji at once. Grouped by finding, not chronologically:
   what was done and why — not just a commit message — so a `git pull`
   can be understood by reading these files, not just `git log`.
 
+### 2026-08-23 — session 26
+
+- **Reviewed and verified two more out-of-band commits** (`9568402`,
+  `5c6c575`) found on pull before starting new work, per this session's
+  standing practice: `頭`'s own decomposition was redundantly flattening
+  `貝,口,豆,并,頁` when `豆` already contains `口,并` and `頁` already
+  contains `貝` a level down — collapsed to `豆,頁`. While verifying that,
+  the owner directly challenged whether `豆`'s own existing `口,并`
+  breakdown was even right — it wasn't: CSV's real components are
+  "table; one; mouth" (`几,一,口`), not `并` ("eight radical"), and
+  `cjkvi-ids` records no structural decomposition for `豆` at all (treats
+  it atomic) — nothing supported `并`. Fixed to `几,一,口`. Also merged
+  the session-25 regression fix and, as a side effect of restoring
+  `rtk12`'s "sun" alias, fixed a second pre-existing bug: `宣`'s own "sun"
+  component used to resolve to an unrelated pinyin collision
+  (`hanzi-5b6b`/孫, "grandchild") since `rtk12` had no "sun" alias to
+  correctly win the script-scoped tie-break before. Verified via full
+  rebuild: `audit_radicals.py` back to 1 (only `'ninety'`),
+  `test_regression_fixes.py` down to the same 4 expected hanzi-scope-
+  mismatch failures as every prior rebuild this whole audit (this repo's
+  standard rebuild — `rm kanji.db` + `import_data()` only — has never run
+  `import_hanzi.py`, so any pin expecting a hanzi-* id will always show
+  "missing" here; not a real regression, see session 25's notes), 45-kanji
+  spot-check across sessions 17-24 clean, no reversions found.
+- **Continued the frame-ordered sweep**, picking frame 1443-1490 (one of
+  the largest remaining contiguous unreviewed blocks after the
+  out-of-band commits' extensive coverage elsewhere — re-ran
+  `coverage_status.py` first to find it, per session 24's own advice).
+  `audit_flattening.py` found a large, clean cluster: `絵`, `統`, `給`,
+  `絡`, `結`, `納`, `紛`, `約`, `総` — every one of these `糸`-radical
+  (thread) kanji redundantly listed the literal character `糸` *and* its
+  own already-flattened sub-parts (`幺,小`) side by side, on top of a
+  *second*, independent flattening bug layered underneath (another
+  compound's own parts spelled out raw instead of referenced). `終` (end)
+  had the identical `糸+幺+小` self-doubling with no second bug on top.
+  `蓄` and `擁` were separate, single-compound flattening bugs in the
+  same frame range, unrelated to the `糸` cluster.
+  - Cross-checked every candidate against CSV before applying. Where CSV
+    directly names the compound's own keyword, applied the full collapse:
+    `絵`→`糸,会` ("meeting"); `統`→`糸,充` ("allot"); `納`→`糸,内`
+    ("inside"); `紛`→`糸,分` ("part"); `約`→`糸,勺` ("ladle"); `総`→
+    `糸,心,公` ("public"); `蓄`→`艾,畜` ("livestock"). `擁`→`亠,幺,推`
+    applied on a clean, unambiguous structural match with no CSV
+    contradiction.
+  - Where CSV instead listed the matched compound's own sub-parts as
+    independent atomic terms rather than naming the compound itself
+    (`結`'s CSV says "samurai;mouth", not "good luck"; `絡`'s says "each;
+    walking legs;mouth", not "end"; `給`'s says "meeting", contradicting
+    the structural match to `今`/"now") — left the secondary collapse
+    alone and fixed only the confirmed `糸` redundancy: `給`→`口,糸,个,一`;
+    `絡`→`口,糸,夂`; `結`→`口,士,糸`. `終`→`糸,夂` (no secondary question,
+    a straightforward drop of the redundant `幺,小`).
+- Verified: full rebuild from scratch, `get_kanji_detail` spot-checks on
+  all 12 touched ids, `audit_radicals.py` unchanged (1 remaining
+  undefined term, `'ninety'`), `test_regression_fixes.py` unchanged (same
+  4 expected hanzi-scope-mismatch failures), full standing regression
+  suite (`old`/`crime`/`heki`/`awe`/`round`/`cave`/`shellfish`/`street`/
+  `shining`/`early`/`courage`/`happiness`/`busy`/`head`/`sun`/`moon`) —
+  no regressions.
+- Coverage: **893/3000 (29.8%)** reviewed (`docs/kanji_review_coverage.tsv`
+  regenerated).
+- Not yet synced to the live server from this session's own commits —
+  same standing gap for this audit's own fixes (the out-of-band session
+  has been syncing its own work directly, per its notes above).
+- **Next session**: continue frame-ordered — re-run `coverage_status.py`
+  first each time now, since the out-of-band commits' coverage is
+  scattered rather than contiguous and the next-largest unreviewed block
+  will keep shifting.
+
 ## Tooling produced this session
 
 - `backend/audit_flattening.py` — added 2026-08-18 (session 20), tightened
