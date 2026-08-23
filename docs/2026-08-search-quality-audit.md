@@ -2266,6 +2266,21 @@ kanji at once. Grouped by finding, not chronologically:
   scattered rather than contiguous and the next-largest unreviewed block
   will keep shifting.
 
+### 2026-08-23 — owner check between sessions
+
+- **"check 痴"** — same flattening pattern as the rest of this audit:
+  `痴` (stupid) listed `口,矢,疔` (mouth, dart, sickness-radical) instead
+  of referencing `知` (rtk1308, "know"), whose own decomposition is
+  already exactly `口,矢`. Collapsed to `知,疔`. Also confirmed `疔`
+  itself isn't a bug — it's an intentionally-named stand-in glyph for the
+  疒 (sickness) radical (`rad1048`, keyword "sickness radical"), not a
+  real RTK frame being clobbered like the genuine KRADFILE-proxy bugs
+  (`扎`/`阡`) fixed in earlier out-of-band commits — `heisig-kanjis.csv`
+  has no row for `疔` at all. Commit `f31b72b`.
+- Verified: full rebuild, `get_kanji_detail` confirms `痴` now resolves to
+  `['知:know', 'rad1048:sickness radical']`, `audit_radicals.py` and the
+  standing regression suite unchanged.
+
 ## Tooling produced this session
 
 - `backend/audit_flattening.py` — added 2026-08-18 (session 20), tightened
