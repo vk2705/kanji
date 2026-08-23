@@ -2059,7 +2059,7 @@ rtk1810:種:species:｜,禾,日,里,ノ
 rtk1811:衝:collide:｜,行,日,彳,里,ノ
 rtk1812:薫:send forth fragrance:｜,杰,艾,日,ノ,一
 rtk1813:病:ill:一,人,冂,疔
-rtk1814:痴:stupid:口,矢,疔
+rtk1814:痴:stupid:知,疔
 rtk1815:痘:pox:口,豆,并,疔
 rtk1816:症:symptoms:一,止,疔
 rtk1817:瘍:swelling:ノ,一,日,勹,疔,勿
