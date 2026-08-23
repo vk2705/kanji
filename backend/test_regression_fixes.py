@@ -54,8 +54,12 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk2012", "rad1001", "rad1011"}},
     "rtk580": {"character": "家", "keyword": "house",
                "expected_part_ids": {"rad1041", "rad1019"}},
+    # "sun" used to resolve to hanzi-5b6b (孫, grandchild) via an unrelated pinyin
+    # collision, since rtk12 (日) had no "sun" alias at all -- fixed as a side effect
+    # of session 25's alias restoration (rtk12 got "sun" back), so "sun" and "day"
+    # now both correctly resolve to rtk12 and collapse to one chip.
     "rtk200": {"character": "宣", "keyword": "proclaim",
-               "expected_part_ids": {"rad1041", "rtk32", "rtk1", "rad1.1", "hanzi-5b6b", "rtk12"}},
+               "expected_part_ids": {"rad1041", "rtk32", "rtk1", "rad1.1", "rtk12"}},
     "rtk1809": {"character": "働", "keyword": "work",
                 "expected_part_ids": {"rad2.3", "rtk1806"}},
     "rtk1806": {"character": "動", "keyword": "move",
