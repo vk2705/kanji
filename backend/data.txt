@@ -3308,7 +3308,7 @@ rad1044:并:eight radical
 rad1045:扎:hand radical
 rad1046:阡:mound radical
 rad1047:杰:fire radical
-rad1048:疔:sickness radical
+rad1048:疒:sickness radical,疔
 rad1049:禹:track radical
 rad1050:ノ:katakana no
 rad1051:ハ:katakana ha
