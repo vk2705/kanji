@@ -96,6 +96,21 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk1548", "rtk64"}},
     "rtk1548": {"character": "豆", "keyword": "beans",
                 "expected_part_ids": {"kangxi16", "rtk1", "rtk11"}},
+    # 羊-family redundant-flattening fix (2026-08-24): these used to list both
+    # 羊's own flattened parts (王,并) AND 羊 itself in the same line. rtk586
+    # (羊) already correctly resolves to {kangxi40's cousin kangxi12, rtk...}
+    # -- see its own line in data.txt (王,丷) -- so re-listing 王/并 here was
+    # pure redundancy, not a second distinct concept.
+    "rtk587": {"character": "美", "keyword": "beauty",
+               "expected_part_ids": {"rtk112", "rtk586"}},
+    "rtk588": {"character": "洋", "keyword": "ocean",
+               "expected_part_ids": {"rtk137", "rtk586"}},
+    "rtk691": {"character": "義", "keyword": "righteousness",
+               "expected_part_ids": {"rtk1", "rtk586", "kangxi6", "kangxi62", "rtk687"}},
+    "rtk1591": {"character": "養", "keyword": "foster",
+                "expected_part_ids": {"rtk1582", "rtk586"}},
+    "rtk2622": {"character": "痒", "keyword": "itch",
+                "expected_part_ids": {"rtk586", "kangxi104"}},
 }
 
 # character -> hanzi id, spot-checking the 429-character Unihan self-reference backfill

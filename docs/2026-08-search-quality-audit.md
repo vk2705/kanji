@@ -2495,6 +2495,67 @@ kanji at once. Grouped by finding, not chronologically:
   pattern collapsed once `并`→`丷` is applied and `羊` already covers the
   rest). Otherwise continue the frame-ordered sweep.
 
+### 2026-08-24 — `并`'s 羊-family cluster: redundant-flattening fix
+
+- Continuing the previous session's "next session" pointer: the 羊-family
+  (sheep) cluster of `并`'s remaining ~128 hosts, the piece flagged as
+  cleanest. `rtk586` (羊, sheep) already correctly decomposes to `王,丷`
+  (fixed earlier this audit). Many compounds built on top of 羊 were
+  listing **both** that flattened pair (`王,并`) *and* a separate `羊`
+  token in the same line — the same "flattening bug" pattern that has
+  been this whole audit's dominant bug class, just with 羊 as the
+  re-flattened compound this time instead of a kanji.
+- Cross-checked every candidate against `heisig-kanjis.csv`'s components
+  column first (per the audit's standing CSV-before-fix methodology):
+  587/588/589/590/591/592/593/594 (美/洋/詳/鮮/達/羨/差/着), 691/692/693
+  (義/議/犠), 1003/1059/1148/1169/1247/1423/1591 (様/儀/遅/祥/群/窯/養) all
+  have CSV `components` listing "sheep" as a single named item — never
+  "wool"/"eight" separately — confirming Heisig treats 羊 as one atomic
+  primitive here, so re-listing its own flattened parts alongside it is
+  pure redundancy.
+- Seven more candidates (羞/瑳/痒/蟻/叢/翔/躾, ids 2198/2612/2622/2726/
+  2904/2940/2949) fall outside the ~2200-kanji CSV's coverage, so used
+  the standing visual-verification method instead: rendered all seven via
+  `render_glyphs.py` and confirmed by eye that each one visibly contains
+  the same 羊 top-shape (see `uncovered_cluster.png` from this session) —
+  same fix applies.
+- **Explicitly did NOT touch** 業/撲/僕 (rtk1931/1932/1933), even though
+  their data.txt lines also list `王,并,羊` together, matching the same
+  surface pattern. CSV components for these three list no "sheep" at all
+  ("business; upside down in a row; not yet; tree; wood" for 業, etc.),
+  and rendering 業 next to 羊 shows a visibly different top shape (業's
+  top is three separate strokes/hooks, not 羊's clean two-horn-and-cross
+  shape) — so `羊` may itself be the wrong token in these three lines,
+  a different (and not yet diagnosed) bug, not this session's redundant-
+  flattening pattern. Left alone and flagged here rather than guessed at.
+- Applied: removed the redundant `王` and `并` tokens (both, when both
+  present) from exactly the 25 confirmed lines, keeping `羊` as the sole
+  representation of "sheep" in each. Single mechanical script, no other
+  tokens touched. Full list of ids: rtk587, rtk588, rtk589, rtk590,
+  rtk591, rtk592, rtk593, rtk594, rtk691, rtk692, rtk693, rtk1003,
+  rtk1059, rtk1148, rtk1169, rtk1247, rtk1423, rtk1591, rtk2198, rtk2612,
+  rtk2622, rtk2726, rtk2904, rtk2940, rtk2949.
+- Verified: full rebuild from scratch; `search_by_parts(['sheep'])` now
+  returns 32 kanji (was under-matching before, since many hosts only
+  found 羊 via the redundant flattened tokens rather than a clean `羊`
+  chip); `test_regression_fixes.py` — added 5 new pinned entries for this
+  fix (rtk587, rtk588, rtk691, rtk1591, rtk2622) — passes with the same 4
+  expected hanzi-scope-mismatch failures as every prior rebuild, nothing
+  else; full search-term regression checklist (old/crime/heki/awe/round/
+  cave/shellfish/street/shining/early/courage/happiness/busy/head/sun/
+  moon/umbrella/sheep/horns) unchanged/correct.
+- Coverage: **935/3000 (31.2%)** reviewed (unchanged — these ids had
+  already been touched by an earlier commit in this audit's window, so
+  they don't add newly-reviewed kanji to the counter; the fix itself is
+  still new and verified this session).
+- **Next session**: `并`'s remaining hosts: the 帝-family "crown"-ish
+  cluster, the 豆-family "beans" cluster, and the CSV-uncovered rare
+  kanji, per the previous session's clustering — none individually
+  verified yet. Separately, the 業/撲/僕 `羊` mismatch flagged above needs
+  its own investigation (render + trace what `并`/`羊` are actually meant
+  to represent there) before either is touched. Otherwise continue the
+  frame-ordered sweep.
+
 ## Tooling produced this session
 
 - `backend/render_glyphs.py` — added 2026-08-23. Renders requested
