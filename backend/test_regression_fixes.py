@@ -122,6 +122,18 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk14", "rtk1286"}},
     "rtk1289": {"character": "判", "keyword": "judgement",
                 "expected_part_ids": {"rtk1286", "rtk87"}},
+    # "quarter"-family missing-component fix (2026-08-25): data_from_pdf.txt's
+    # original entries for these two used "quarter" (now mislabeled
+    # prim-eight-radical, part of the still-unresolved 并 polysemy — see the
+    # audit doc) as one of their parts, matching heisig-kanjis.csv's own
+    # components list, but data.txt's override silently dropped it while
+    # keeping the sibling frames 1290-1294 (拳/券/巻/圏/勝) correct.
+    "rtk1295": {"character": "藤", "keyword": "wisteria",
+                "expected_part_ids": {"prim-pipe", "rtk1", "rtk13", "rtk137",
+                                       "prim-mugwort", "rtk2", "rtk112", "prim-eight-radical"}},
+    "rtk1296": {"character": "謄", "keyword": "mimeograph",
+                "expected_part_ids": {"prim-pipe", "rtk1", "rtk13", "rtk357",
+                                       "rtk2", "rtk112", "prim-eight-radical"}},
 }
 
 # character -> hanzi id, spot-checking the 429-character Unihan self-reference backfill

@@ -2708,6 +2708,57 @@ does, alongside pulling and reading the progress notes) now that real
 reviews can start accumulating; otherwise continue the `并` cluster sweep
 above.
 
+### 2026-08-25 — `并`'s "quarter" cluster: another missing-component bug
+
+- Continuing the `并` sweep (checked `review_queue.py` first per the
+  previous entry's "next session" note — empty, no reviews submitted
+  through the live site yet). Picked up the "quarter" cluster
+  (1290-1294: 拳/券/巻/圏/勝) flagged two sessions ago as CSV-confirmed
+  and clean.
+- `heisig-kanjis.csv` components list "quarter" as a distinct concept
+  across all five (e.g. 1290 "quarter; hand", 1291 "quarter; sword") —
+  never split into separate strokes. Cross-checking against
+  `data_from_pdf.txt` (the pre-`data.txt`-override source) confirmed the
+  same: `rtk1291:券:ticket:quarter,dagger`, etc. — "quarter" was
+  originally one atomic, unresolved term (no character assigned), same
+  shape as this whole audit's other `?`-glyph primitives before real
+  glyphs got attached.
+- The five 1290-1294 hosts already correctly include `并` (now
+  `prim-eight-radical`, the still-unresolved mislabeled home for
+  "quarter" — same open question as the 帝-family "vase" cluster, not
+  resolved this session either) among their flattened tokens — the
+  common subset across all five is `大,二,并`, confirmed by rendering all
+  five glyphs and visually checking they share the same top-left shape.
+  So no bug there.
+- But two *further* hosts sharing "quarter" per both `heisig-kanjis.csv`
+  and `data_from_pdf.txt` — `rtk1295:藤` (wisteria) and `rtk1296:謄`
+  (mimeograph, CSV's own keyword typo'd "facsimilie") — had `data.txt`
+  overrides that kept `一,二,大` but **silently dropped `并`**, the exact
+  same missing-component bug as last session's `伴`/`判` (半-family): not
+  redundant flattening, an outright lost part. Confirmed visually by
+  rendering 藤/謄 next to 拳 and checking they share the same "quarter"
+  top-shape (they do — 謄's structure above 言 and 藤's structure to the
+  right of 艹/水 both match). Checked all 6 `data_from_pdf.txt` "quarter"
+  references for the same bug (the 7th, `rtk2141:驚`, was already fixed to
+  a better decomposition — 敬,馬 — unrelated to this pattern, left alone);
+  only 1295/1296 were broken.
+- Applied: `rtk1295:藤:wisteria:｜,一,月,水,艾,二,大,并` and
+  `rtk1296:謄:mimeograph:｜,一,月,言,二,大,并` — added the missing `并`
+  token, nothing else changed.
+- Verified: full rebuild from scratch; `get_kanji_detail` on both now
+  includes `prim-eight-radical` alongside the other five siblings;
+  `test_regression_fixes.py` — added 2 new pinned entries — same 4
+  expected hanzi-scope failures as every prior rebuild, nothing else;
+  full search-term regression checklist unchanged/correct.
+- Coverage: **959/3000 (32.0%)** reviewed.
+- **Next session**: `并`'s remaining hosts — the 豆-family "beans" cluster
+  (largest remaining, ~17 hosts) is the next likely-clean candidate; the
+  帝-family "vase" cluster and the "quarter" cluster's own real identity
+  both still need a proper glyph-isolation pass before either can be
+  resolved (not just patched for missing/redundant tokens); the ~50 CSV-
+  uncovered rare kanji still need per-kanji visual verification. The
+  業/撲/僕 `羊` mismatch from two sessions ago is also still open.
+
 ## Tooling produced this session
 
 - `backend/render_glyphs.py` — added 2026-08-23. Renders requested

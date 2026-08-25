@@ -1540,8 +1540,8 @@ rtk1291:券:ticket:一,人,大,刀,二,并
 rtk1292:巻:scroll:大,二,并,已
 rtk1293:圏:sphere:一,人,大,二,并,囗,已
 rtk1294:勝:victory:月,人,大,二,并,力
-rtk1295:藤:wisteria:｜,一,月,水,艾,二,大
-rtk1296:謄:mimeograph:｜,一,月,言,二,大
+rtk1295:藤:wisteria:｜,一,月,水,艾,二,大,并
+rtk1296:謄:mimeograph:｜,一,月,言,二,大,并
 rtk1297:片:one-sided:
 rtk1298:版:printing block:片,又,厂
 rtk1299:之:of:乙,丶,亠,廴
