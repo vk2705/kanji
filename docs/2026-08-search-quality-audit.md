@@ -2759,6 +2759,73 @@ above.
   uncovered rare kanji still need per-kanji visual verification. The
   業/撲/僕 `羊` mismatch from two sessions ago is also still open.
 
+### 2026-08-25 — `并`'s 豆-family cluster (17 kanji): the same bug wearing a bigger coat
+
+- Picked up the 豆-family (beans) cluster flagged as "the next likely-clean
+  candidate." It looked simple at first glance (17 hosts all listing
+  `口,豆,并` together) but turned out to be the deepest single cluster
+  fixed so far — not just `并` mislabeling, but a chain of ordinary
+  redundant-flattening bugs stacked on top of each other, because several
+  of these kanji are themselves built from *other* already-taught kanji
+  in this same family (鼓 "drum", 登 "ascend", 豊 "bountiful", 喜
+  "rejoice") that were *also* flattened instead of referenced directly.
+- First checked whether `豆` (rtk1548, beans) itself contains `并` —
+  it doesn't (`几,一,口`), so `并`'s presence in these 17 lines isn't
+  redundant-flattening-of-豆 the way the 羊-family was redundant-
+  flattening-of-羊. Cross-checked `heisig-kanjis.csv` components for all
+  17 (via id_6th_ed) and `data_from_pdf.txt`'s pre-override originals
+  where available (6 of the 17: 1550/1551/1553/1757/1838/1855) — in every
+  single case, CSV/pdf corroborate every token *except* `并`, which
+  appears in none of them under any name ("dart", "table", "beans",
+  "drum", "bend", "glue", "gates", "part of the body", "shape" — no
+  concept anywhere maps to it). Unlike the sheep/quarter/horns families,
+  where `并` mapped to *something* real, here it's pure unexplained
+  noise — most likely introduced by whatever bulk edit corrupted this
+  whole cluster at once (uniform `口,...,并` pattern across all 17 points
+  at one bad pass, not 17 independent typos).
+- Also found, layered underneath: `鼓` (rtk1552, drum) — a taught kanji
+  frame five of these hosts build on — was itself corrupted the same way
+  (`口,士,支,豆,并,又,十` instead of its own real `士,豆,支`, i.e. it
+  redundantly re-flattened its own 支 into 又+十 too). Fixed it first
+  since 喜/樹/膨 depend on it. Similarly `登` (rtk1838, ascend, `癶,豆`)
+  turned out to already be a real building block for 澄/燈, and `豊`
+  (rtk1551, bountiful, `曲,豆` — "bend" = rtk1256/曲 = `｜,日`) for 艶,
+  and `喜` itself for 嬉.
+- The 6 kanji outside CSV's ~2200-frame coverage (2223/2224/2275/2319/
+  2502/2978) had no CSV or pdf backstop, so verified those by rendering
+  all 17 large (`dou_cluster1.png`/`dou_cluster2.png`) and confirming each
+  host's other tokens (山, 寸, 厂, 女, 込, 火, 几, etc.) visually match
+  what's actually drawn, same standing method as everywhere else in this
+  audit.
+- Applied (17 lines, each collapsed to reference the real already-taught
+  compound instead of a flattened+corrupted stand-in, `并` dropped
+  entirely): `rtk1550:短:矢,豆`, `rtk1551:豊:曲,豆`, `rtk1552:鼓:士,豆,支`,
+  `rtk1553:喜:鼓,口`, `rtk1554:樹:木,鼓,寸`, `rtk1757:闘:門,豆,寸`,
+  `rtk1815:痘:豆,疔`, `rtk1838:登:癶,豆`, `rtk1839:澄:水,登`,
+  `rtk1855:膨:月,鼓,彡`, `rtk1892:艶:豊,色,勹`, `rtk2223:鎧:金,山,豆`,
+  `rtk2224:凱:山,豆,几`, `rtk2275:厨:豆,寸,厂`, `rtk2319:嬉:女,喜`,
+  `rtk2502:逗:込,豆`, `rtk2978:燈:火,登`.
+- Verified: full rebuild from scratch; every one of the 17 resolves to
+  clean, sensible chips (spot-checked via `get_kanji_detail`, e.g.
+  `喜 → {鼓/drum, 口/mouth}`, `澄 → {水/water, 登/ascend}`); "eight
+  radical" search dropped from 129 to 86 remaining wrong hosts (a mix of
+  removals from this fix and the small `+2` from last session's 1295/1296
+  addition — net direction is down); "beans"/"drum"/"bend"/"ascend"
+  search all correct; `test_regression_fixes.py` — added 17 new pinned
+  entries — same 4 expected hanzi-scope failures as every prior rebuild,
+  nothing else; full search-term regression checklist unchanged/correct.
+- Coverage: **961/3000 (32.0%)** at commit time (will read higher once
+  `coverage_status.py` is regenerated against this commit — it reads git
+  history, not the working tree, so a same-session before/after count
+  isn't meaningful; ran it again after pushing and it landed correctly).
+- **Next session**: `并`'s remaining ~69 hosts (down from ~182 at the
+  start of this whole `并` investigation) — the 帝-family "vase" cluster
+  and the "quarter" cluster's own identity are the two biggest still-open
+  identity questions, both needing a slower glyph-isolation pass; smaller
+  scattered clusters (半-hint clusters, 弓-adjacent `梯`/`悌`/`鵜`/`剃`
+  group, `新`/`薪`/`親` "red pepper" group, others) haven't been triaged
+  individually yet. The 業/撲/僕 `羊` mismatch is also still open.
+
 ## Tooling produced this session
 
 - `backend/render_glyphs.py` — added 2026-08-23. Renders requested

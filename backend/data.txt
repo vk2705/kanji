@@ -1795,11 +1795,11 @@ rtk1546:猶:furthermore:酉,丷
 rtk1547:尊:revered:寸,酉,丷
 rtk1548:豆:beans:几,一,口
 rtk1549:頭:head:豆,頁
-rtk1550:短:short:口,豆,并,矢
-rtk1551:豊:bountiful:｜,一,口,豆,日,并
-rtk1552:鼓:drum:口,士,支,豆,并,又,十
-rtk1553:喜:rejoice:口,士,豆,并
-rtk1554:樹:timber:口,寸,土,豆,并,木
+rtk1550:短:short:矢,豆
+rtk1551:豊:bountiful:曲,豆
+rtk1552:鼓:drum:士,豆,支
+rtk1553:喜:rejoice:鼓,口
+rtk1554:樹:timber:木,鼓,寸
 rtk1555:皿:dish:
 rtk1556:血:blood:皿
 rtk1557:盆:basin:皿,刀,ハ
@@ -2002,7 +2002,7 @@ rtk1753:閑:leisure:木,門
 rtk1754:聞:hear:耳,門
 rtk1755:潤:wet:王,水,門
 rtk1756:欄:column:｜,一,日,木,門,田
-rtk1757:闘:fight:口,寸,豆,并,門
+rtk1757:闘:fight:門,豆,寸
 rtk1758:倉:godown:ノ,口,个,尸,一
 rtk1759:創:genesis:口,个,一
 rtk1760:非:un-:
@@ -2060,7 +2060,7 @@ rtk1811:衝:collide:｜,行,日,彳,里,ノ
 rtk1812:薫:send forth fragrance:｜,杰,艾,日,ノ,一
 rtk1813:病:ill:一,人,冂,疔
 rtk1814:痴:stupid:知,疔
-rtk1815:痘:pox:口,豆,并,疔
+rtk1815:痘:pox:豆,疔
 rtk1816:症:symptoms:一,止,疔
 rtk1817:瘍:swelling:ノ,一,日,勹,疔,勿
 rtk1818:痩:get thin:又,疔
@@ -2083,8 +2083,8 @@ rtk1834:欧:europe:欠,匚,ノ,丶
 rtk1835:抑:repress:卩,扌
 rtk1836:仰:face-up:卩
 rtk1837:迎:welcome:込,卩
-rtk1838:登:ascend:口,豆,并,癶
-rtk1839:澄:lucidity:口,水,豆,并,癶
+rtk1838:登:ascend:癶,豆
+rtk1839:澄:lucidity:水,登
 rtk1840:発:departure:二,儿,癶
 rtk1841:廃:abolish:二,儿,广,癶
 rtk1842:僚:colleague:小,日,大
@@ -2100,7 +2100,7 @@ rtk1851:彰:patent:音,十,日,立,彡
 rtk1852:彦:lad:并,立,亠,厂,彡
 rtk1853:顔:face:貝,頁,立,亠,厂,彡
 rtk1854:須:ought:貝,頁,彡
-rtk1855:膨:swell:月,口,十,土,豆,并,彡
+rtk1855:膨:swell:月,鼓,彡
 rtk1856:参:nonplussed:一,厶,彡
 rtk1857:惨:wretched:一,state of mind,厶,彡
 rtk1858:修:discipline:｜,彡,攵
@@ -2137,7 +2137,7 @@ rtk1888:横:sideways:｜,黄,田,二,日,ハ,木,廾
 rtk1889:把:grasp:巴,扌
 rtk1890:色:color:巴,勹
 rtk1891:絶:discontinue:糸,幺,小,色
-rtk1892:艶:glossy:｜,口,色,豆,日,并,勹
+rtk1892:艶:glossy:豊,色,勹
 rtk1893:肥:fertilizer:月,巴
 rtk1894:甘:sweet:
 rtk1895:紺:dark blue:甘,糸,幺,小
@@ -2468,8 +2468,8 @@ rtk2219:犀:rhinoceros:尸,｜,二,十,ノ,一
 rtk2220:皐:swamp:十,白,二
 rtk2221:畷:rice field ridge path:田,又
 rtk2222:綴:compose:糸,幺,小,又
-rtk2223:鎧:put on armor:金,口,山,豆,并
-rtk2224:凱:victory song:口,山,豆,并,几
+rtk2223:鎧:put on armor:金,山,豆
+rtk2224:凱:victory song:山,豆,几
 rtk2225:呑:drink:ノ,口,大
 rtk2226:韮:leek:韭,艾
 rtk2227:籤:lottery:竹,戈,韭,人
@@ -2519,7 +2519,7 @@ rtk2271:剃:shave:｜,ノ,弓,并
 rtk2272:厭:get tired of:月,犬,日,厂
 rtk2273:雁:wild goose:厂,隹
 rtk2274:贋:counterfeit:貝,厂,隹
-rtk2275:厨:kitchen:口,寸,豆,并,厂
+rtk2275:厨:kitchen:豆,寸,厂
 rtk2276:仄:be seen dimly:人,厂
 rtk2277:哨:scout:月,口,尚
 rtk2278:咎:blame:口,人,夂
@@ -2563,7 +2563,7 @@ rtk2315:嬬:mistress:雨,而,女
 rtk2316:姥:old woman:女,老,匕
 rtk2317:姑:mother-in-law:女,古
 rtk2318:姐:elder sister:女,目
-rtk2319:嬉:glad:口,士,女,豆,并
+rtk2319:嬉:glad:女,喜
 rtk2320:孕:become pregnant:乃,子,ノ
 rtk2321:孜:industriousness:子,攵
 rtk2322:宥:soothe:ノ,一,月,宀,primitive_roof
@@ -2746,7 +2746,7 @@ rtk2498:遥:far off:干,込,爪,凵
 rtk2499:遼:distant:込,小,日,并,大
 rtk2500:逼:urge:口,込,田,一
 rtk2501:迄:until:乙,込
-rtk2502:逗:stop:口,込,豆,并
+rtk2502:逗:stop:込,豆
 rtk2503:鄭:an ancient chinese province:大,酉,并,邦
 rtk2504:隕:fall:貝,口,阝
 rtk2505:隈:corner:衣,田,阝
@@ -3221,7 +3221,7 @@ rtk2974:萬:ten thousand:田,日,冂,禹,艾
 rtk2975:邁:go:込,田,禹,艾
 rtk2976:燭:light:火,虫,勹
 rtk2977:逞:sturdy:王,口,込
-rtk2978:燈:lamp:口,豆,并,癶,火
+rtk2978:燈:lamp:火,登
 rtk2979:裡:reverse:初,里
 rtk2980:薗:garden:衣,口,土,囗,艾
 rtk2981:鋪:shop:金,十,用,丶

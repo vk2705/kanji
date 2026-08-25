@@ -134,6 +134,46 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1296": {"character": "謄", "keyword": "mimeograph",
                 "expected_part_ids": {"prim-pipe", "rtk1", "rtk13", "rtk357",
                                        "rtk2", "rtk112", "prim-eight-radical"}},
+    # 豆-family fix (2026-08-25): 17 kanji re-flattened 豆 (and, for the
+    # drum/bend/ascend sub-cluster, 鼓/曲/登) into their own already-atomic
+    # parts alongside a stray, unexplained 并 token that no CSV or PDF
+    # source ever corroborated for this whole cluster (unlike the
+    # sheep/quarter/horns families, where 并 did map to something real).
+    # Collapsed each to reference the already-taught compound directly.
+    "rtk1550": {"character": "短", "keyword": "short",
+                "expected_part_ids": {"rtk1305", "rtk1548"}},
+    "rtk1551": {"character": "豊", "keyword": "bountiful",
+                "expected_part_ids": {"rtk1256", "rtk1548"}},
+    "rtk1552": {"character": "鼓", "keyword": "drum",
+                "expected_part_ids": {"rtk341", "rtk1548", "rtk768"}},
+    "rtk1553": {"character": "喜", "keyword": "rejoice",
+                "expected_part_ids": {"rtk1552", "rtk11"}},
+    "rtk1554": {"character": "樹", "keyword": "timber",
+                "expected_part_ids": {"rtk207", "rtk1552", "rtk45"}},
+    "rtk1757": {"character": "闘", "keyword": "fight",
+                "expected_part_ids": {"rtk1743", "rtk1548", "rtk45"}},
+    "rtk1815": {"character": "痘", "keyword": "pox",
+                "expected_part_ids": {"rtk1548", "kangxi104"}},
+    "rtk1838": {"character": "登", "keyword": "ascend",
+                "expected_part_ids": {"kangxi105", "rtk1548"}},
+    "rtk1839": {"character": "澄", "keyword": "lucidity",
+                "expected_part_ids": {"rtk137", "rtk1838"}},
+    "rtk1855": {"character": "膨", "keyword": "swell",
+                "expected_part_ids": {"rtk13", "rtk1552", "kangxi59"}},
+    "rtk1892": {"character": "艶", "keyword": "glossy",
+                "expected_part_ids": {"rtk1551", "rtk1890", "kangxi20"}},
+    "rtk2223": {"character": "鎧", "keyword": "put on armor",
+                "expected_part_ids": {"rtk287", "rtk830", "rtk1548"}},
+    "rtk2224": {"character": "凱", "keyword": "victory song",
+                "expected_part_ids": {"rtk830", "rtk1548", "kangxi16"}},
+    "rtk2275": {"character": "厨", "keyword": "kitchen",
+                "expected_part_ids": {"rtk1548", "rtk45", "kangxi27"}},
+    "rtk2319": {"character": "嬉", "keyword": "glad",
+                "expected_part_ids": {"rtk102", "rtk1553"}},
+    "rtk2502": {"character": "逗", "keyword": "stop",
+                "expected_part_ids": {"rtk843", "rtk1548"}},
+    "rtk2978": {"character": "燈", "keyword": "lamp",
+                "expected_part_ids": {"rtk173", "rtk1838"}},
 }
 
 # character -> hanzi id, spot-checking the 429-character Unihan self-reference backfill
