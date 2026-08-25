@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getKanji, addAlias, addStory, createDecomposition, uploadKanjiImage, resolveImageUrl } from "../api";
+import { getKanji, addAlias, addStory, createDecomposition, uploadKanjiImage, resolveImageUrl, reviewDecomposition } from "../api";
 import { displayChar } from "../utils";
 import { t } from "../i18n";
 
@@ -194,6 +194,51 @@ function PartChip({ part, lang, user, onSelectPart }) {
   );
 }
 
+// The audit's standing "actually render and look, don't just reason about it"
+// verification method, exposed as something any logged-in user can do straight
+// from the page: approve a decomposition as correct, or dispute it as wrong.
+// Approvals feed the regression-test pin list; disputes feed the investigation
+// queue — see backend/review_queue.py for how a maintainer works through both.
+function DecompositionReview({ decompositionId, myReview, lang, onReviewed }) {
+  const [busy, setBusy] = useState(false);
+
+  async function vote(verdict) {
+    if (busy || myReview === verdict) return;
+    setBusy(true);
+    try {
+      await reviewDecomposition(decompositionId, verdict);
+      onReviewed(decompositionId, verdict);
+    } catch {
+      // minor inline affordance, same pattern as AliasAdder — not worth a modal error
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  return (
+    <div className="decomposition-review">
+      <button
+        type="button"
+        className={`decomposition-review-btn decomposition-review-approve ${myReview === "approved" ? "decomposition-review-active" : ""}`}
+        onClick={() => vote("approved")}
+        disabled={busy}
+        title={t(lang, "reviewApproveHint")}
+      >
+        ✓ {t(lang, "reviewApproveBtn")}
+      </button>
+      <button
+        type="button"
+        className={`decomposition-review-btn decomposition-review-dispute ${myReview === "disputed" ? "decomposition-review-active" : ""}`}
+        onClick={() => vote("disputed")}
+        disabled={busy}
+        title={t(lang, "reviewDisputeHint")}
+      >
+        ✗ {t(lang, "reviewDisputeBtn")}
+      </button>
+    </div>
+  );
+}
+
 export default function KanjiDetail({ kanjiId, onSelectPart, onBack, user, lang = "en", sources = null }) {
   const [kanji, setKanji] = useState(null);
   const [error, setError] = useState(null);
@@ -243,6 +288,15 @@ export default function KanjiDetail({ kanjiId, onSelectPart, onBack, user, lang 
   const decompositions = kanji.decompositions ?? [];
   const nonEmptyDecompositions = decompositions.filter((d) => d.parts_detail.length > 0);
   const char = displayChar(kanji.character);
+
+  function handleReviewed(decompositionId, verdict) {
+    setKanji((k) => ({
+      ...k,
+      decompositions: k.decompositions.map((d) =>
+        d.id === decompositionId ? { ...d, my_review: verdict } : d
+      ),
+    }));
+  }
 
   return (
     <div className="detail-panel">
@@ -303,6 +357,14 @@ export default function KanjiDetail({ kanjiId, onSelectPart, onBack, user, lang 
                   <PartChip key={j} part={part} lang={lang} user={user} onSelectPart={onSelectPart} />
                 ))}
               </div>
+              {user && (
+                <DecompositionReview
+                  decompositionId={d.id}
+                  myReview={d.my_review}
+                  lang={lang}
+                  onReviewed={handleReviewed}
+                />
+              )}
             </div>
           ))}
 

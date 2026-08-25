@@ -37,6 +37,10 @@ export const translations = {
     madeFromHeading: "Made from",
     expandPart: "Show this part's own breakdown",
     collapsePart: "Hide this part's own breakdown",
+    reviewApproveBtn: "Approve",
+    reviewDisputeBtn: "Dispute",
+    reviewApproveHint: "This breakdown looks correct — mark it approved",
+    reviewDisputeHint: "This breakdown looks wrong — flag it for review",
 
     studyLanguageLabel: "Study language",
     studyAll: "All",
@@ -108,6 +112,15 @@ export const translations = {
     noContributions: "You haven't contributed anything yet.",
     visibilityPublicLabel: "Public",
     visibilityPrivateLabel: "Private",
+
+    aboutLinkBtn: "About",
+    aboutHeading: "About this project",
+    aboutIntro: "A web app for learners using Remembering the Kanji (RTK) by James W. Heisig. The method assigns each kanji a set of named visual \"primitives\" (building blocks) and a mnemonic story — this app lets you search kanji by those primitive names, e.g. type \"sun\" + \"moon\" to find 明 (bright). It has grown into a community-editable reference: registered users can add their own kanji/hanzi, decompositions, aliases, and mnemonic stories, and the database also covers Chinese hanzi (simplified + traditional) alongside Japanese kanji.",
+    aboutRepoHeading: "Source code",
+    aboutRepoLinkLabel: "github.com/vk2705/kanji",
+    aboutDownloadHeading: "Android app",
+    aboutDownloadLinkLabel: "Download the Android APK",
+    aboutDownloadNote: "Self-signed, not on the Play Store — you'll need to allow \"install from unknown sources\". See the android/ folder in the repo for build-from-source instructions.",
   },
 
   ru: {
@@ -140,6 +153,10 @@ export const translations = {
     madeFromHeading: "Состоит из",
     expandPart: "Показать разбор этой части",
     collapsePart: "Скрыть разбор этой части",
+    reviewApproveBtn: "Одобрить",
+    reviewDisputeBtn: "Оспорить",
+    reviewApproveHint: "Это разбиение выглядит верным — отметить как одобренное",
+    reviewDisputeHint: "Это разбиение выглядит неверным — отметить на проверку",
 
     studyLanguageLabel: "Изучаемый язык",
     studyAll: "Все",
@@ -211,6 +228,15 @@ export const translations = {
     noContributions: "Вы пока ничего не добавили.",
     visibilityPublicLabel: "Публично",
     visibilityPrivateLabel: "Приватно",
+
+    aboutLinkBtn: "О проекте",
+    aboutHeading: "О проекте",
+    aboutIntro: "Веб-приложение для изучающих кандзи по методу Remembering the Kanji (RTK) Джеймса Хайсига. Метод присваивает каждому кандзи набор именованных визуальных «примитивов» (составных частей) и мнемоническую историю — это приложение позволяет искать кандзи по названиям этих примитивов, например «солнце» + «луна» находит 明 (яркий). Проект вырос в редактируемый сообществом справочник: зарегистрированные пользователи могут добавлять свои кандзи/иероглифы, разборы, псевдонимы и мнемонические истории, а база данных также охватывает китайские иероглифы (упрощённые и традиционные) наряду с японскими кандзи.",
+    aboutRepoHeading: "Исходный код",
+    aboutRepoLinkLabel: "github.com/vk2705/kanji",
+    aboutDownloadHeading: "Приложение для Android",
+    aboutDownloadLinkLabel: "Скачать APK для Android",
+    aboutDownloadNote: "Самоподписанный APK, вне Google Play — потребуется разрешить «установку из неизвестных источников». Инструкции по сборке из исходников — в папке android/ в репозитории.",
   },
 };
 

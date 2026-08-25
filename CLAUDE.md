@@ -62,8 +62,9 @@ cd android
 ./venv/bin/python3 import_hanzi.py          # one-time: seed Chinese hanzi (CJK Unified block) from Unihan.zip + cjkvi-ids
 ./venv/bin/python3 backup_db.py             # online backup of kanji.db to backups/, prunes backups older than 14 days
 ./venv/bin/python3 sync_system_data.py --dry-run   # reconcile live system rows with data.txt/CSV without wiping user data
+./venv/bin/python3 review_queue.py          # list pending user-submitted decomposition approve/dispute votes
 ```
-`import_hanzi.py` refuses to run if any non-`ja-kanji` rows already exist (not safe to resume mid-run). `backup_db.py` is meant to run on a schedule (see Deployment). `backup_db.py`, `export_public_data.py`, `fix_kradfile_proxies.py`, and `sync_system_data.py` also have a shebang pointing straight at `venv/bin/python3`, so `./script.py` works directly without the `./venv/bin/python3` prefix.
+`import_hanzi.py` refuses to run if any non-`ja-kanji` rows already exist (not safe to resume mid-run). `backup_db.py` is meant to run on a schedule (see Deployment). `backup_db.py`, `export_public_data.py`, `fix_kradfile_proxies.py`, `sync_system_data.py`, and `review_queue.py` also have a shebang pointing straight at `venv/bin/python3`, so `./script.py` works directly without the `./venv/bin/python3` prefix.
 
 There is no test suite in this repo currently.
 
@@ -108,6 +109,9 @@ aliases(kanji_id → kanji.id, alias TEXT, owner_id INTEGER, visibility TEXT)  -
 parts(kanji_id → kanji.id, part_term TEXT, position INTEGER, decomposition_id → decompositions.id)
 decompositions(id PK, kanji_id → kanji.id, owner_id INTEGER, visibility TEXT, label TEXT)
 stories(id PK, kanji_id → kanji.id, owner_id INTEGER, visibility TEXT, story TEXT)  -- UNIQUE(kanji_id, owner_id)
+decomposition_reviews(id PK, decomposition_id → decompositions.id, kanji_id → kanji.id,
+      verdict TEXT CHECK(approved|disputed), reviewer_id → users.id, created_at TEXT,
+      processed_at TEXT)  -- UNIQUE(decomposition_id, reviewer_id)
 users(id PK, username TEXT UNIQUE, password_hash TEXT, auth_provider TEXT, display_name TEXT,
       ui_language TEXT CHECK(en|ru), study_script TEXT CHECK(ja-kanji|zh-Hans|zh-Hant))
 sessions(token PK, user_id → users.id, expires_at TEXT)
@@ -116,9 +120,9 @@ sessions(token PK, user_id → users.id, expires_at TEXT)
 `migrate_schema()` is versioned (`PRAGMA user_version`), each version's body in its own
 `_migrate_vN(conn)` function gated by `if version < N` — v1 added the multi-user tables
 above (minus the last two `users` columns), v2 added `users.ui_language`/`study_script`,
-v3 added `kanji.image_url`. Adding a v4 means adding a new `_migrate_v4` + `if version < 4`
-block, **not** touching the existing gated blocks (they must stay non-idempotent-safe, i.e.
-never re-run against an already-migrated DB).
+v3 added `kanji.image_url`, v4 added `decomposition_reviews`. Adding a v5 means adding a
+new `_migrate_v5` + `if version < 5` block, **not** touching the existing gated blocks
+(they must stay non-idempotent-safe, i.e. never re-run against an already-migrated DB).
 
 Key points:
 - `id=1` in `users` is a reserved **system** account that owns all Heisig-seeded and hanzi-seeded data; it's immutable to normal users by construction (`set_visibility` rejects `owner_id = 1`, and nothing in the write API lets a caller set `owner_id` to 1).
@@ -141,6 +145,8 @@ Session-cookie auth. `POST /auth/register` / `/auth/login` / `/auth/google` all 
 All endpoints require auth (`require_user`) and always write an explicit `owner_id` — never system. Lets a logged-in user add a new kanji/hanzi entry, add a decomposition (list of parts) to any kanji visible to them, add an alias, or add/update their own mnemonic story (one story per `(kanji, owner)`, upsert on resubmit). Visibility on any owned row (kanji/alias/decomposition/story) can be toggled public/private via `PATCH .../visibility`; `set_visibility()` doubles as the "system rows are immutable" guard since it filters `owner_id != 1`.
 
 **Frontend UI**: login/register, plus a "Sign in with Google" button when `VITE_GOOGLE_CLIENT_ID` is set (`AuthBar.jsx`); on the kanji detail page, adding a personal alias to the kanji itself or to a decomposition part, writing your own mnemonic story, uploading a picture for a glyph-less kanji, and adding an alternate decomposition (all private by default); a dedicated create-kanji flow (`CreateKanji.jsx`) and a contributions browser with per-row visibility toggles (`MyContributions.jsx`), both reachable from header nav buttons shown only when logged in.
+
+**Decomposition review queue** (`decomposition_reviews` table, added 2026-08-25): any logged-in user can mark a decomposition on the detail page "approved" or "disputed" (`POST /decompositions/{id}/review`, `KanjiDetail.jsx`'s two buttons under each decomposition block) — this is the search-quality audit's standing "render it, don't just reason about it" verification practice (see `render_glyphs.py` above) exposed as something anyone can do from the page itself, not only inside an audit session. One row per `(decomposition, reviewer)`, upserted on a changed vote (`set_decomposition_review`). `backend/review_queue.py` is the maintainer-facing other half: lists pending (`processed_at IS NULL`) reviews so a maintainer can turn approvals into pinned `test_regression_fixes.py` entries and investigate disputes, then clear each one with `--mark-processed <id>...` — rows are marked processed, never deleted, so there's still an audit trail of what was reviewed and by whom.
 
 ### Script-aware resolution (cross-script ambiguity)
 
@@ -173,10 +179,11 @@ frontend/src/
   components/
     KanjiCard.jsx        # Single result card (char/image + keyword + id)
     ResultsGrid.jsx      # Grid of KanjiCards with loading/empty state
-    KanjiDetail.jsx      # Detail panel: aliases, decomposition tabs + parts as clickable chips, image upload, add-decomposition/part-name/mnemonic-story forms — also exports ImageUpload and DecompositionForm for reuse in CreateKanji.jsx
+    KanjiDetail.jsx      # Detail panel: aliases, decomposition tabs + parts as clickable chips, image upload, add-decomposition/part-name/mnemonic-story forms, per-decomposition approve/dispute review buttons — also exports ImageUpload and DecompositionForm for reuse in CreateKanji.jsx
     CreateKanji.jsx      # Create a new kanji/hanzi entry, then optionally attach a picture and/or a decomposition inline
     MyContributions.jsx  # Browse everything you've contributed (kanji/decompositions/aliases/stories) with per-row public/private toggles
     AuthBar.jsx          # Login/register popover, logged-in state (username + logout)
+    AboutPage.jsx        # Static project description + links to the repo and the pre-built Android APK
 ```
 
 ## API endpoints
@@ -199,6 +206,7 @@ frontend/src/
 | `POST` | `/aliases` | Add an alias to a kanji (auth required) |
 | `POST` | `/stories` | Add/update your mnemonic story for a kanji (auth required) |
 | `PATCH` | `/kanji\|aliases\|decompositions\|stories/{id}/visibility` | Toggle public/private on a row you own |
+| `POST` | `/decompositions/{id}/review` | `{"verdict": "approved"\|"disputed"}` — record your own approve/dispute verdict on a decomposition (auth required); upserts on a changed vote |
 | `GET` | `/me/contributions` | Everything you've contributed, across all four tables |
 
 `script` (on the three search endpoints and `study_script`) is one of `ja-kanji`/`zh-Hans`/`zh-Hant` — an invalid value 400s. Search/detail endpoints all take the caller's session (if any) to determine which private rows are visible; there is no `/admin/reimport` anymore (see Architecture).

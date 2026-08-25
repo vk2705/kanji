@@ -87,6 +87,12 @@ def migrate_schema(conn):
         conn.commit()
         version = 3
 
+    if version < 4:
+        _migrate_v4(conn)
+        conn.execute("PRAGMA user_version = 4")
+        conn.commit()
+        version = 4
+
 
 def _migrate_v1(conn):
     """"DB is a disposable cache" -> "DB is the source of truth": adds
@@ -194,6 +200,37 @@ def _migrate_v3(conn):
     (an uploaded picture stands in for a `character`)."""
     conn.executescript("""
         ALTER TABLE kanji ADD COLUMN image_url TEXT;
+    """)
+
+
+def _migrate_v4(conn):
+    """
+    In-app decomposition review queue: a logged-in user can mark a decomposition
+    "approved" (correct as shown) or "disputed" (looks wrong) straight from the
+    detail page, instead of that judgement only ever happening in an out-of-band
+    audit session. One row per (decomposition, reviewer) — a reviewer can change
+    their mind, which upserts rather than piling up duplicate rows.
+
+    `processed_at` distinguishes "reviewed" from "acted on": approved rows get
+    turned into a pinned regression-test entry and disputed rows get individually
+    investigated, both by a maintainer working through review_queue.py — at which
+    point that row is marked processed so it drops out of the pending queue. This
+    is the "запомни этот метод" standing verification practice from the audit,
+    exposed as a UI affordance instead of only ever running from a rendered PNG.
+    """
+    conn.executescript("""
+        CREATE TABLE IF NOT EXISTS decomposition_reviews (
+            id               INTEGER PRIMARY KEY AUTOINCREMENT,
+            decomposition_id INTEGER NOT NULL REFERENCES decompositions(id),
+            kanji_id         TEXT NOT NULL REFERENCES kanji(id),
+            verdict          TEXT NOT NULL CHECK(verdict IN ('approved','disputed')),
+            reviewer_id      INTEGER NOT NULL REFERENCES users(id),
+            created_at       TEXT NOT NULL DEFAULT (datetime('now')),
+            processed_at     TEXT,
+            UNIQUE(decomposition_id, reviewer_id)
+        );
+        CREATE INDEX IF NOT EXISTS idx_reviews_verdict ON decomposition_reviews(verdict, processed_at);
+        CREATE INDEX IF NOT EXISTS idx_reviews_decomp   ON decomposition_reviews(decomposition_id);
     """)
 
 
@@ -878,12 +915,15 @@ def get_kanji_detail(conn, kanji_id: str, viewer_id: int | None = None,
     ]
 
     decomp_rows = _list_decompositions(conn, cid, viewer_id, sources)
+    decomp_ids = [d["id"] for d in decomp_rows]
+    my_reviews = _reviews_for_decompositions(conn, decomp_ids, viewer_id) if viewer_id else {}
     entry["decompositions"] = [
         {
             "id": d["id"], "owner": d["username"],
             "is_mine": viewer_id is not None and d["owner_id"] == viewer_id,
             "visibility": d["visibility"], "label": d["label"],
             "parts_detail": _resolve_parts_detail(conn, cid, d["id"], viewer_id, sources, frozenset({cid})),
+            "my_review": my_reviews.get(d["id"]),
         }
         for d in decomp_rows
     ]
@@ -904,6 +944,87 @@ def get_kanji_detail(conn, kanji_id: str, viewer_id: int | None = None,
     ]
 
     return entry
+
+
+def _reviews_for_decompositions(conn, decomposition_ids: list[int], reviewer_id: int) -> dict:
+    """decomposition_id -> this reviewer's own verdict ('approved'/'disputed'), for
+    however many of `decomposition_ids` they've already reviewed. Batched, not N+1."""
+    if not decomposition_ids:
+        return {}
+    placeholders = ",".join("?" for _ in decomposition_ids)
+    rows = conn.execute(
+        f"SELECT decomposition_id, verdict FROM decomposition_reviews "
+        f"WHERE reviewer_id = ? AND decomposition_id IN ({placeholders})",
+        [reviewer_id] + decomposition_ids
+    ).fetchall()
+    return {r["decomposition_id"]: r["verdict"] for r in rows}
+
+
+def set_decomposition_review(conn, decomposition_id: int, reviewer_id: int, verdict: str) -> dict:
+    """Record (or change) a reviewer's approve/dispute verdict on one decomposition —
+    the UI-facing counterpart to this audit's render-and-compare verification method.
+    One row per (decomposition, reviewer): re-clicking the other button updates the
+    existing row (and clears any prior processed_at, since a changed verdict needs
+    re-triage) rather than accumulating duplicates."""
+    if verdict not in ("approved", "disputed"):
+        raise ValueError(f"invalid verdict: {verdict!r}")
+    row = conn.execute(
+        "SELECT id, kanji_id FROM decompositions WHERE id = ? "
+        "AND (visibility = 'public' OR owner_id = ?)",
+        (decomposition_id, reviewer_id)
+    ).fetchone()
+    if not row:
+        raise ValueError(f"no such decomposition: {decomposition_id}")
+    conn.execute(
+        "INSERT INTO decomposition_reviews (decomposition_id, kanji_id, verdict, reviewer_id) "
+        "VALUES (?, ?, ?, ?) "
+        "ON CONFLICT(decomposition_id, reviewer_id) DO UPDATE SET "
+        "  verdict = excluded.verdict, created_at = datetime('now'), processed_at = NULL",
+        (decomposition_id, row["kanji_id"], verdict, reviewer_id)
+    )
+    conn.commit()
+    return {"decomposition_id": decomposition_id, "verdict": verdict}
+
+
+def get_review_queue(conn, verdict: str | None = None, only_unprocessed: bool = True) -> list[dict]:
+    """Every review row, for the maintainer-facing sweep (review_queue.py) that turns
+    approved reviews into pinned regression tests and disputed ones into investigation
+    items, then marks them processed. Not exposed to end users — no viewer-scoping,
+    this is audit tooling, not a search/detail endpoint."""
+    clauses, params = [], []
+    if verdict:
+        clauses.append("r.verdict = ?")
+        params.append(verdict)
+    if only_unprocessed:
+        clauses.append("r.processed_at IS NULL")
+    where = f"WHERE {' AND '.join(clauses)}" if clauses else ""
+    rows = conn.execute(
+        f"SELECT r.id, r.decomposition_id, r.kanji_id, r.verdict, r.created_at, "
+        f"       k.character, k.keyword, u.username AS reviewer "
+        f"FROM decomposition_reviews r "
+        f"JOIN kanji k ON k.id = r.kanji_id "
+        f"JOIN users u ON u.id = r.reviewer_id "
+        f"{where} ORDER BY r.created_at",
+        params
+    ).fetchall()
+    return [dict(r) for r in rows]
+
+
+def mark_reviews_processed(conn, review_ids: list[int]) -> None:
+    """Clear processed rows out of the pending queue after a maintainer has acted on
+    them (added a regression pin for an approval, investigated a dispute) — this is
+    the "после обработки этого список очистить" step. Keeps the row (with
+    processed_at set) rather than deleting, so there's still an audit trail of what
+    was reviewed and when."""
+    if not review_ids:
+        return
+    placeholders = ",".join("?" for _ in review_ids)
+    conn.execute(
+        f"UPDATE decomposition_reviews SET processed_at = datetime('now') "
+        f"WHERE id IN ({placeholders})",
+        review_ids
+    )
+    conn.commit()
 
 
 def _list_decompositions(conn, kanji_id: str, viewer_id: int | None, sources: set[str] | None):

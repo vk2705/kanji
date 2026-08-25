@@ -76,3 +76,24 @@ IP instead for that case.
   of public data), not just a service-worker-style asset cache.
 - Not published anywhere (no Play Store listing, no CI build pipeline) —
   this only builds locally / from source for now.
+
+## Pre-built APK
+
+`android/releases/rtk-kanji-latest.apk` is a **release**-variant build
+(points at `https://srv.alteon.help/kanji/`, the live production site),
+self-signed with a throwaway key generated just for this — not the app's
+"real" signing identity, since none exists yet (see the Building section
+above: no signing config is checked in, deliberately). This means:
+- It installs fine via sideloading ("install from unknown sources"), same
+  as any unsigned/self-signed APK.
+- A future release signed with a *different* key (e.g. once there's a real
+  keystore, or a Play Store listing) will be treated by Android as a
+  different app for update purposes — you'd need to uninstall this one
+  first, not upgrade over it.
+- No auto-update mechanism; re-download this file to get a newer build.
+  Rebuild it yourself with `./gradlew :app:assembleRelease` (see Building
+  above) any time the web app changes, sign it with your own key via
+  `apksigner`, and replace this file if you want the repo's copy to stay
+  current.
+- Direct download link (raw file, served via GitHub):
+  `https://github.com/vk2705/kanji/raw/master/android/releases/rtk-kanji-latest.apk`

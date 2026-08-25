@@ -519,14 +519,23 @@ body {
 }
 
 .back-btn {
-  background: transparent;
+  /* Pinned to the actual left edge of the browser window, not just the left
+     edge of the centered .app column — on a wide viewport a plain in-flow
+     button here reads as floating near screen-center, since the whole
+     content column it sits in is itself horizontally centered. Fixed
+     positioning also means it stays reachable while scrolled down a long
+     detail page. */
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 10;
+  background: var(--surface);
   border: 1px solid var(--border);
   color: var(--text-muted);
   border-radius: 6px;
   padding: 7px 14px;
   font-size: 0.85rem;
   cursor: pointer;
-  margin-bottom: 24px;
   transition: color 0.15s, border-color 0.15s;
 }
 
@@ -720,6 +729,42 @@ body {
   gap: 10px;
 }
 
+/* Decomposition review: approve/dispute, feeding the audit's regression-pin
+   and investigation queues (see backend/review_queue.py) */
+.decomposition-review {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.decomposition-review-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+
+.decomposition-review-btn:hover {
+  color: var(--text);
+  border-color: var(--accent);
+}
+
+.decomposition-review-approve.decomposition-review-active {
+  color: #6fd08c;
+  border-color: #6fd08c;
+  background: rgba(111, 208, 140, 0.1);
+}
+
+.decomposition-review-dispute.decomposition-review-active {
+  color: #f06060;
+  border-color: #f06060;
+  background: rgba(240, 96, 96, 0.1);
+}
+
 .part-add-btn {
   background: transparent;
   border: 1px dashed var(--border);
@@ -863,6 +908,25 @@ body {
   letter-spacing: 1px;
   color: var(--text-muted);
   margin-bottom: 10px;
+}
+
+.about-intro {
+  color: var(--text);
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+
+.about-link {
+  display: inline-block;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  margin-bottom: 6px;
+}
+
+.about-link:hover {
+  color: var(--accent-hover);
+  border-bottom-color: var(--accent-hover);
 }
 
 .contrib-row {

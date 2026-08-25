@@ -2615,6 +2615,99 @@ kanji at once. Grouped by finding, not chronologically:
   backstop). The 業/撲/僕 `羊` mismatch from the previous session is still
   open too. Otherwise continue the frame-ordered sweep.
 
+### 2026-08-25 — owner requests: in-app review queue, back-button placement, About page
+
+Three unrelated owner-driven requests in one session (verbatim, Russian):
+"добавь 2 кнопки в интерфейсе: одобрить разбиение или оспорить. оспоренные
+разбиения ты будешь потом проверять. а одобренные вносить в список тестов
+на предмет регресссии. после обработки этого список очистить. еще хочу
+чтобы кнопка back была слева а не в центре." and, mid-turn, "добавь на
+интерфейс линк about с описанием проекта и ссылкой на репо и скачивание
+приложения".
+
+**1. In-app decomposition review queue.** Turns this whole audit's standing
+"render it, don't just reason about it" verification method into something
+any logged-in user can do from the page, not only something that happens
+inside a Claude session. `decomposition_reviews` table (`_migrate_v4`,
+schema now at v4): one row per `(decomposition_id, reviewer_id)`, `verdict`
+`approved`/`disputed`, `processed_at` nullable. `POST
+/decompositions/{id}/review` upserts a reviewer's own vote (changing your
+mind updates the row, doesn't duplicate it, and clears `processed_at` so a
+changed vote gets re-triaged); gated the same way every other write in
+this app is (`visibility = 'public' OR owner_id = reviewer`), so a user
+can't vote on a decomposition private to someone else even by guessing
+its id — verified with a two-user test (owner can review their own
+private decomposition, a second user is correctly blocked with the same
+"not found" response `_visible_kanji_id` uses elsewhere for privacy,
+public/system decompositions are reviewable by anyone logged in).
+`KanjiDetail.jsx` shows two buttons under
+every decomposition block when logged in, highlighting whichever verdict
+(if any) the current viewer already cast. `backend/review_queue.py` is the
+maintainer-facing other half — lists pending (`processed_at IS NULL`)
+reviews grouped by verdict; a maintainer works through them (approved →
+pin a `test_regression_fixes.py` entry, disputed → investigate the same
+way any owner-reported bug in this audit gets investigated) then runs
+`--mark-processed <id>...`, which is the "после обработки этого список
+очистить" step — rows are marked processed, not deleted, so there's still
+an audit trail. Not wired into the standing daily-checkin loop yet; that's
+next.
+
+**2. Back button placement.** Root cause: `.back-btn` was never explicitly
+centered — it renders flush-left inside `.detail-panel`, but `.app` itself
+is a centered `max-width:900px` column (`margin:0 auto`), so on a wide
+viewport the button reads as floating near screen-center rather than
+pinned to an edge, since it's the only element near the top of that
+column with nothing beside it. Confirmed by rendering the actual
+`.back-btn` + `App.css` in headless Chromium before and after (same
+render-and-compare method as the primitive-identity work, applied to CSS
+layout instead of glyphs — `backbtn_before.png`/`backbtn_after.png`).
+Fixed by pinning it `position: fixed; top/left: 20px`, matching the
+existing symmetric pattern where `.header-controls` (lang toggle, auth)
+is already pinned to the app column's top-right corner — now the back
+button is genuinely anchored to the browser window's left edge, visible
+while scrolled too, not just left-aligned within a column that's itself
+centered on screen.
+
+**3. About page.** New `AboutPage.jsx` (`view === "about"`, reachable from
+a header nav button shown to everyone, not just logged-in users) with the
+project description (same framing as this file's own intro), a link to
+the GitHub repo, and a download link for the Android app. The APK wasn't
+published anywhere (`android/README.md`'s own "Known limitations" said so
+explicitly — no Play Store, no CI, no GitHub Release) — asked the owner
+how to source a download link rather than fabricate one; told to "publish
+it yourself. put it somewhere." Built `:app:assembleRelease` (points at
+the live `https://srv.alteon.help/kanji/`, unlike the debug variant which
+targets a local dev server), signed it with a fresh throwaway keystore
+(not committed — same "signing secret stays out of git" policy the README
+already states for a hypothetical future *real* signing key; sideloaded
+apps don't need Play-Store-grade key provenance), `zipalign` + `apksigner
+verify`d it, and committed the signed APK directly into the repo at
+`android/releases/rtk-kanji-latest.apk` (the GitHub MCP tools available in
+this session have no release-asset-upload capability, and their
+file-content tool assumes text content — base64/binary-safe via plain
+`git add`/`commit`/`push` instead, which is how this whole session's work
+already reaches GitHub). `android/README.md` documents the caveats: this
+signing key isn't the "real" one, no auto-update, rebuild-and-replace to
+update. About page links the raw GitHub URL for direct download.
+
+**Verified**: `npm run build` and `npm run lint` clean; `test_regression_fixes.py`
+same 4 expected hanzi-scope failures as every prior rebuild, nothing else;
+manually exercised the review-queue backend end-to-end via `database.py`
+directly (upsert, verdict change, queue read, mark-processed, invalid-verdict
+and invalid-decomposition-id rejection) and `review_queue.py`'s CLI, since
+this sandbox's FastAPI/uvicorn won't start (`google.auth` → `cryptography`
+Rust-bridge crash unrelated to this session's changes — same limitation as
+every prior session in this audit, which have never had a live server to
+test against either); `apksigner verify` confirmed the APK's signature.
+Coverage counter unaffected (this session touched app code and docs, not
+`data.txt`).
+
+**Next session**: wire `review_queue.py` into the standing daily-checkin
+routine (check the pending queue as one of the first things each session
+does, alongside pulling and reading the progress notes) now that real
+reviews can start accumulating; otherwise continue the `并` cluster sweep
+above.
+
 ## Tooling produced this session
 
 - `backend/render_glyphs.py` — added 2026-08-23. Renders requested
@@ -2728,3 +2821,19 @@ kanji at once. Grouped by finding, not chronologically:
   any `sync_system_data.py` apply or `data.txt` edit; exits non-zero on
   any failure. New fixes should add a pinned entry here in the same
   commit, per the standing doc-per-commit rule below.
+- `backend/render_glyphs.py` — added 2026-08-23, owner-mandated. Renders
+  requested characters/strings large to a PNG via the pre-installed
+  headless Chromium for visual comparison — the "actually look at it,
+  don't just reason about codepoints/keywords" standing verification
+  method (see CLAUDE.md's "Verifying a primitive's real identity"
+  section). `python3 render_glyphs.py 個 亻 人 会 谷 --out /tmp/compare.png`,
+  then Read the PNG.
+- `backend/review_queue.py` — added 2026-08-25, owner-mandated. Lists the
+  pending rows in the new `decomposition_reviews` table (any logged-in
+  user's approve/dispute vote on a kanji's decomposition, cast from the
+  detail page itself) and clears them with `--mark-processed <id>...`
+  once a maintainer has acted on each — approvals become pinned
+  `test_regression_fixes.py` entries, disputes get individually
+  investigated. `python3 review_queue.py` / `--verdict approved` /
+  `--verdict disputed` to list; see this session's log entry above for
+  the full design.

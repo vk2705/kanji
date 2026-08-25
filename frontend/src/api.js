@@ -140,6 +140,17 @@ export async function addStory(kanjiId, story, visibility = "private") {
   return res.json();
 }
 
+export async function reviewDecomposition(decompositionId, verdict) {
+  const res = await fetch(`${BASE}/decompositions/${decompositionId}/review`, {
+    method: "POST",
+    credentials: "include",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ verdict }),
+  });
+  if (!res.ok) throw new Error(await extractError(res));
+  return res.json();
+}
+
 export async function createKanji({ keyword, character = null, script = "ja-kanji", visibility = "private" }) {
   const res = await fetch(`${BASE}/kanji`, {
     method: "POST",

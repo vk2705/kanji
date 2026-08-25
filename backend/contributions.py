@@ -8,6 +8,7 @@ from database import (
     db_conn, resolve_alias,
     create_kanji_entry, create_decomposition, create_alias, upsert_story,
     set_visibility, set_kanji_image, get_my_contributions,
+    set_decomposition_review,
 )
 from auth import require_user
 
@@ -153,6 +154,19 @@ def patch_kanji_visibility(kanji_id: str, body: VisibilityUpdate, conn=Depends(d
     if not ok:
         raise HTTPException(status_code=403, detail="Not found or not owned by you")
     return {"status": "ok"}
+
+
+class DecompositionReview(BaseModel):
+    verdict: Literal["approved", "disputed"]
+
+
+@router.post("/decompositions/{decomposition_id}/review")
+def review_decomposition(decomposition_id: int, body: DecompositionReview,
+                          conn=Depends(db_conn), user=Depends(require_user)):
+    try:
+        return set_decomposition_review(conn, decomposition_id, user["id"], body.verdict)
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
 
 
 @router.get("/me/contributions")

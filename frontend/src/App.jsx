@@ -3,6 +3,7 @@ import { searchByParts, searchByText, searchByChar, getMe, updatePreferences } f
 import ResultsGrid from "./components/ResultsGrid";
 import KanjiDetail from "./components/KanjiDetail";
 import AuthBar from "./components/AuthBar";
+import AboutPage from "./components/AboutPage";
 import CreateKanji from "./components/CreateKanji";
 import MyContributions from "./components/MyContributions";
 import { t } from "./i18n";
@@ -42,7 +43,7 @@ function writeLocal(key, value) {
 
 export default function App() {
   const [tab, setTab] = useState(0);
-  const [view, setView] = useState("search"); // "search" | "create" | "contributions"
+  const [view, setView] = useState("search"); // "search" | "create" | "contributions" | "about"
   const [results, setResults] = useState(null);
   const [loading, setLoading] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
@@ -214,6 +215,9 @@ export default function App() {
               </button>
             </>
           )}
+          <button className="header-nav-btn" onClick={() => openView("about")}>
+            {tt("aboutLinkBtn")}
+          </button>
           <AuthBar
             user={user}
             setUser={setUser}
@@ -240,6 +244,8 @@ export default function App() {
           <CreateKanji lang={uiLang} onDone={selectKanji} />
         ) : view === "contributions" ? (
           <MyContributions lang={uiLang} onSelectKanji={selectKanji} />
+        ) : view === "about" ? (
+          <AboutPage lang={uiLang} />
         ) : (
           <>
             <div className="study-language">
