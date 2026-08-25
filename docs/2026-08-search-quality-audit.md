@@ -2556,6 +2556,65 @@ kanji at once. Grouped by finding, not chronologically:
   to represent there) before either is touched. Otherwise continue the
   frame-ordered sweep.
 
+### 2026-08-25 — `并`'s 半-family cluster: missing-component bug (worse than flattening)
+
+- Continuing the daily sweep of `并`'s remaining hosts (previous session's
+  "next session" pointer named 帝-family and 豆-family as the next
+  clusters). Ran the same CSV cross-check across all ~105 remaining
+  non-羊-family hosts first, to map out sub-clusters before touching
+  anything (`heisig-kanjis.csv` components for frames 287, 294, 466, 467,
+  471, 473, 857, 988, 1090, 1118-1120, 1286-1294, 1358, 1367, 1440,
+  1550-1554, 1596-1599, 1619-1621, 1740-1742, 1757, 1815, 1838-1839,
+  1843-1845, 1852, 1855, 1892, 1924-1926, 2067-2068, 2089, 2113-2115,
+  2144, 2186, and the ~50 kanji outside CSV's ~2200-frame coverage).
+- Found several genuine sub-clusters (帝-family "vase"+"stand up", a
+  "quarter" cluster at 1290-1294, the 半 "half" cluster, more) — same
+  polysemy pattern as the 羊-family and horns clusters, confirming `并`
+  really does bundle many distinct concepts. The 帝-family "vase" shape in
+  particular doesn't have an obvious clean standalone Unicode match on
+  inspection (帝/商/新/南's shared top structure is compact and the exact
+  stroke grouping isn't obvious from rendering alone) — deferred rather
+  than guessed at, per the standing "don't force a fix without full
+  render+CSV confidence" rule.
+- The 半 (half) cluster was clean and high-confidence, so fixed it this
+  session: `伴`/`畔`/`判` (rtk1287/1288/1289, "consort"/"paddy ridge"/
+  "judgement") were each listing `半`'s own already-flattened parts
+  (`｜,二,并,十`) instead of referencing `半` (rtk1286) directly — **and in
+  doing so silently dropped their own actually-distinguishing part
+  entirely**: `伴` had no "person" component at all despite 亻 being right
+  there in the glyph, `判` had no "sword"/刂 despite it being the entire
+  right half of the character. This is a step worse than the usual
+  redundant-flattening pattern (which just duplicates information) — this
+  one *lost* information a learner needs. Confirmed via
+  `heisig-kanjis.csv` ("person;half" / "paddy-ridge;rice field;brains;
+  half" / "judgement;half;sword") and by rendering all four glyphs side
+  by side (`ban_cluster.png`) — 伴/畔/判 visually and unambiguously show
+  半's exact right-hand shape plus their own distinct left/right part.
+- Applied: `rtk1287:伴:consort:亻,半`, `rtk1288:畔:paddy ridge:田,半`,
+  `rtk1289:判:judgement:半,刀` — referencing `半`/`田`/`刀`/`亻` as literal
+  character tokens (all four already resolve to existing entries:
+  rtk1286, rtk14, rtk87, kangxi9), not by resolving what `并` itself
+  means (left as `prim-eight-radical`, still wrong, orthogonal to this
+  fix — `半` itself wasn't touched).
+- Verified: full rebuild from scratch; `get_kanji_detail` on all four now
+  shows `rtk1287 → {kangxi9, rtk1286}`, `rtk1288 → {rtk14, rtk1286}`,
+  `rtk1289 → {rtk1286, rtk87}`; `search_by_parts(['half'])` now correctly
+  returns all 4 (rtk1286/1287/1288/1289), was previously missing all
+  three derived kanji; `test_regression_fixes.py` — added 3 new pinned
+  entries — passes with the same 4 expected hanzi-scope-mismatch
+  failures as every prior rebuild, nothing else; full search-term
+  regression checklist unchanged/correct.
+- Coverage: **958/3000 (31.9%)** reviewed.
+- **Next session**: `并`'s remaining hosts — the "quarter" cluster
+  (1290-1294: 拳/券/巻/圏/勝, CSV-confirmed, looks as clean as this
+  session's 半-family), the 豆-family "beans" cluster (largest remaining,
+  ~17 hosts), the 帝-family "vase" cluster (deferred — needs a slower,
+  more careful glyph-isolation pass, possibly cropping/zooming individual
+  strokes rather than whole-character rendering), and the ~50 CSV-
+  uncovered rare kanji (need per-kanji visual verification with no CSV
+  backstop). The 業/撲/僕 `羊` mismatch from the previous session is still
+  open too. Otherwise continue the frame-ordered sweep.
+
 ## Tooling produced this session
 
 - `backend/render_glyphs.py` — added 2026-08-23. Renders requested

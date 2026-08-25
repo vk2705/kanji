@@ -585,14 +585,14 @@ rtk583	腸	intestines	583	no
 rtk584	場	location	584	no
 rtk585	湯	hot water	585	no
 rtk586	羊	sheep	586	yes
-rtk587	美	beauty	587	no
-rtk588	洋	ocean	588	no
-rtk589	詳	detailed	589	no
-rtk590	鮮	fresh	590	no
-rtk591	達	accomplished	591	no
-rtk592	羨	envious	592	no
-rtk593	差	distinction	593	no
-rtk594	着	don	594	no
+rtk587	美	beauty	587	yes
+rtk588	洋	ocean	588	yes
+rtk589	詳	detailed	589	yes
+rtk590	鮮	fresh	590	yes
+rtk591	達	accomplished	591	yes
+rtk592	羨	envious	592	yes
+rtk593	差	distinction	593	yes
+rtk594	着	don	594	yes
 rtk595	唯	solely	595	no
 rtk596	堆	piled high	596	no
 rtk597	椎	sweet oak	597	no
@@ -689,9 +689,9 @@ rtk687	手	hand	687	no
 rtk688	看	watch over	688	no
 rtk689	摩	chafe	689	no
 rtk690	我	ego	690	no
-rtk691	義	righteousness	691	no
-rtk692	議	deliberation	692	no
-rtk693	犠	sacrifice	693	no
+rtk691	義	righteousness	691	yes
+rtk692	議	deliberation	692	yes
+rtk693	犠	sacrifice	693	yes
 rtk694	抹	rub	694	yes
 rtk695	拭	wipe	695	yes
 rtk696	拉	yank	696	yes
@@ -1001,7 +1001,7 @@ rtk999	楼	watchtower	999	no
 rtk1000	類	sort	1000	yes
 rtk1001	漆	lacquer	1001	no
 rtk1002	膝	knee	1002	no
-rtk1003	様	esq.	1003	no
+rtk1003	様	esq.	1003	yes
 rtk1004	求	request	1004	no
 rtk1005	球	ball	1005	no
 rtk1006	救	salvation	1006	yes
@@ -1146,7 +1146,7 @@ rtk1144	据	set	1144	yes
 rtk1145	裾	hem	1145	yes
 rtk1146	層	stratum	1146	yes
 rtk1147	局	bureau	1147	no
-rtk1148	遅	slow	1148	no
+rtk1148	遅	slow	1148	yes
 rtk1149	漏	leak	1149	no
 rtk1150	刷	printing	1150	yes
 rtk1151	尺	shaku	1151	no
@@ -1167,7 +1167,7 @@ rtk1165	顧	look back	1165	yes
 rtk1166	啓	disclose	1166	yes
 rtk1167	示	show	1167	no
 rtk1168	礼	salutation	1168	no
-rtk1169	祥	auspicious	1169	no
+rtk1169	祥	auspicious	1169	yes
 rtk1170	祝	celebrate	1170	no
 rtk1171	福	blessing	1171	no
 rtk1172	祉	welfare	1172	no
@@ -1245,7 +1245,7 @@ rtk1243	康	sane	1243	no
 rtk1244	逮	apprehend	1244	no
 rtk1245	伊	italy	1245	yes
 rtk1246	君	old boy	1246	no
-rtk1247	群	flock	1247	no
+rtk1247	群	flock	1247	yes
 rtk1248	耐	-proof	1248	no
 rtk1249	需	demand	1249	no
 rtk1250	儒	confucian	1250	yes
@@ -1589,7 +1589,7 @@ rtk1587	飾	decorate	1587	yes
 rtk1588	餌	feed	1588	no
 rtk1589	館	bldg.	1589	yes
 rtk1590	餅	mochi	1590	yes
-rtk1591	養	foster	1591	no
+rtk1591	養	foster	1591	yes
 rtk1592	飽	sated	1592	no
 rtk1593	既	previously	1593	no
 rtk1594	概	outline	1594	no
@@ -2196,7 +2196,7 @@ rtk2194	璽	imperial seal	2194	no
 rtk2195	潟	lagoon	2195	no
 rtk2196	丹	cinnabar	2196	no
 rtk2197	丑	sign of the cow	2197	no
-rtk2198	羞	humiliate	2198	no
+rtk2198	羞	humiliate	2198	yes
 rtk2199	卯	sign of the hare	2199	no
 rtk2200	巳	sign of the snake	2200	no
 rtk2201	此	this here	2201	no
@@ -2610,7 +2610,7 @@ rtk2608	牝	female animal	2608	no
 rtk2609	牡	male animal	2609	yes
 rtk2610	琳	chime	2610	no
 rtk2611	琉	lapis lazuli	2611	no
-rtk2612	瑳	burnish	2612	no
+rtk2612	瑳	burnish	2612	yes
 rtk2613	琢	hone	2613	no
 rtk2614	珊	coral	2614	no
 rtk2615	瑚	coral reef	2615	yes
@@ -2620,7 +2620,7 @@ rtk2618	瑛	crystal stone	2618	no
 rtk2619	玲	tinkling	2619	no
 rtk2620	畢	lastly	2620	no
 rtk2621	畦	paddy-field ridge	2621	no
-rtk2622	痒	itch	2622	no
+rtk2622	痒	itch	2622	yes
 rtk2623	痰	phlegm	2623	no
 rtk2624	疹	measles	2624	no
 rtk2625	痔	hemorrhoids	2625	no
@@ -2724,7 +2724,7 @@ rtk2722	蟹	crab	2722	no
 rtk2723	蛋	protein	2723	no
 rtk2724	蟄	hibernation	2724	no
 rtk2725	蝿	housefly	2725	no
-rtk2726	蟻	ant	2726	no
+rtk2726	蟻	ant	2726	yes
 rtk2727	蝋	wax	2727	no
 rtk2728	蝦	shrimp	2728	no
 rtk2729	蛸	octopus	2729	no
@@ -2902,7 +2902,7 @@ rtk2900	匙	wooden spoon	2900	no
 rtk2901	匡	set straight	2901	no
 rtk2902	肇	founding	2902	yes
 rtk2903	麿	utamaro	2903	no
-rtk2904	叢	conglomerate	2904	no
+rtk2904	叢	conglomerate	2904	yes
 rtk2905	肴	entreat	2905	no
 rtk2906	斐	symmetrically patterned	2906	no
 rtk2907	卿	magistrate	2907	no
@@ -2938,7 +2938,7 @@ rtk2936	睾	testicle	2936	yes
 rtk2937	巫	sorceress	2937	no
 rtk2938	敦	empathetic	2938	yes
 rtk2939	奎	andromeda	2939	no
-rtk2940	翔	soar	2940	no
+rtk2940	翔	soar	2940	yes
 rtk2941	皓	beaming	2941	no
 rtk2942	黎	tenebrous	2942	no
 rtk2943	赳	bold	2943	no
@@ -2947,7 +2947,7 @@ rtk2945	棘	thornbush	2945	no
 rtk2946	祟	haunt	2946	no
 rtk2947	甦	resuscitate	2947	no
 rtk2948	剪	pruning	2948	yes
-rtk2949	躾	upbringing	2949	no
+rtk2949	躾	upbringing	2949	yes
 rtk2950	夥	plentiful	2950	no
 rtk2951	鼾	snore	2951	no
 rtk2952	陀	steeply inclined	2952	yes

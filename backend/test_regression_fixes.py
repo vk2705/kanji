@@ -111,6 +111,17 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk1582", "rtk586"}},
     "rtk2622": {"character": "痒", "keyword": "itch",
                 "expected_part_ids": {"rtk586", "kangxi104"}},
+    # 半-family fix (2026-08-25): these three re-flattened 半's own parts
+    # instead of referencing 半 (rtk1286) directly, and in doing so silently
+    # dropped their own actually-distinguishing part entirely (伴 had no
+    # "person", 判 had no "sword") -- worse than the usual redundant-
+    # flattening pattern, this one lost information, not just duplicated it.
+    "rtk1287": {"character": "伴", "keyword": "consort",
+                "expected_part_ids": {"kangxi9", "rtk1286"}},
+    "rtk1288": {"character": "畔", "keyword": "paddy ridge",
+                "expected_part_ids": {"rtk14", "rtk1286"}},
+    "rtk1289": {"character": "判", "keyword": "judgement",
+                "expected_part_ids": {"rtk1286", "rtk87"}},
 }
 
 # character -> hanzi id, spot-checking the 429-character Unihan self-reference backfill
