@@ -1293,8 +1293,8 @@ rtk1291	券	ticket	1291	no
 rtk1292	巻	scroll	1292	no
 rtk1293	圏	sphere	1293	no
 rtk1294	勝	victory	1294	no
-rtk1295	藤	wisteria	1295	no
-rtk1296	謄	facsimilie	1296	no
+rtk1295	藤	wisteria	1295	yes
+rtk1296	謄	facsimilie	1296	yes
 rtk1297	片	one-sided	1297	no
 rtk1298	版	printing block	1298	no
 rtk1299	之	of	1299	no
@@ -1549,10 +1549,10 @@ rtk1547	尊	revered	1547	yes
 rtk1548	豆	beans	1548	yes
 rtk1549	頭	head	1549	yes
 rtk1550	短	short	1550	yes
-rtk1551	豊	bountiful	1551	no
-rtk1552	鼓	drum	1552	no
-rtk1553	喜	rejoice	1553	no
-rtk1554	樹	timber-trees	1554	no
+rtk1551	豊	bountiful	1551	yes
+rtk1552	鼓	drum	1552	yes
+rtk1553	喜	rejoice	1553	yes
+rtk1554	樹	timber-trees	1554	yes
 rtk1555	皿	dish	1555	no
 rtk1556	血	blood	1556	no
 rtk1557	盆	basin	1557	no
@@ -1755,7 +1755,7 @@ rtk1753	閑	leisure	1753	no
 rtk1754	聞	hear	1754	no
 rtk1755	潤	wet	1755	no
 rtk1756	欄	column	1756	no
-rtk1757	闘	fight	1757	no
+rtk1757	闘	fight	1757	yes
 rtk1758	倉	godown	1758	no
 rtk1759	創	genesis	1759	yes
 rtk1760	非	un-	1760	no
@@ -1813,7 +1813,7 @@ rtk1811	衝	collide	1811	no
 rtk1812	薫	fragrant	1812	no
 rtk1813	病	ill	1813	no
 rtk1814	痴	stupid	1814	yes
-rtk1815	痘	pox	1815	no
+rtk1815	痘	pox	1815	yes
 rtk1816	症	symptoms	1816	no
 rtk1817	瘍	carbuncle	1817	no
 rtk1818	痩	lose weight	1818	no
@@ -1836,8 +1836,8 @@ rtk1834	欧	europe	1834	no
 rtk1835	抑	repress	1835	yes
 rtk1836	仰	faceup	1836	yes
 rtk1837	迎	welcome	1837	no
-rtk1838	登	ascend	1838	no
-rtk1839	澄	lucidity	1839	no
+rtk1838	登	ascend	1838	yes
+rtk1839	澄	lucidity	1839	yes
 rtk1840	発	discharge	1840	no
 rtk1841	廃	abolish	1841	no
 rtk1842	僚	colleague	1842	yes
@@ -1853,7 +1853,7 @@ rtk1851	彰	patent	1851	no
 rtk1852	彦	lad	1852	no
 rtk1853	顔	face	1853	yes
 rtk1854	須	ought	1854	yes
-rtk1855	膨	swell	1855	no
+rtk1855	膨	swell	1855	yes
 rtk1856	参	visit	1856	no
 rtk1857	惨	wretched	1857	yes
 rtk1858	修	discipline	1858	yes
@@ -1890,7 +1890,7 @@ rtk1888	横	sideways	1888	no
 rtk1889	把	grasp	1889	yes
 rtk1890	色	color	1890	no
 rtk1891	絶	discontinue	1891	no
-rtk1892	艶	glossy	1892	no
+rtk1892	艶	glossy	1892	yes
 rtk1893	肥	fertilizer	1893	no
 rtk1894	甘	sweet	1894	no
 rtk1895	紺	navy blue	1895	no
@@ -2221,8 +2221,8 @@ rtk2219	犀	rhinoceros	2219	no
 rtk2220	皐	lunar month	2220	no
 rtk2221	畷	rice-field footpath	2221	no
 rtk2222	綴	mend	2222	no
-rtk2223	鎧	suit of armor	2223	no
-rtk2224	凱	triumph	2224	no
+rtk2223	鎧	suit of armor	2223	yes
+rtk2224	凱	triumph	2224	yes
 rtk2225	呑	quaff	2225	no
 rtk2226	韮	leek	2226	no
 rtk2227	籤	lottery	2227	yes
@@ -2273,7 +2273,7 @@ rtk2271	剃	shave	2271	yes
 rtk2272	厭	despondent	2272	no
 rtk2273	雁	wild goose	2273	yes
 rtk2274	贋	counterfeit	2274	yes
-rtk2275	厨	kitchen	2275	no
+rtk2275	厨	kitchen	2275	yes
 rtk2276	仄	insinuate	2276	no
 rtk2277	哨	scout	2277	no
 rtk2278	咎	reprehend	2278	no
@@ -2317,7 +2317,7 @@ rtk2315	嬬	mistress	2315	no
 rtk2316	姥	aged woman	2316	no
 rtk2317	姑	mother-in-law	2317	yes
 rtk2318	姐	young miss	2318	no
-rtk2319	嬉	overjoyed	2319	no
+rtk2319	嬉	overjoyed	2319	yes
 rtk2320	孕	expecting	2320	no
 rtk2321	孜	assiduous	2321	yes
 rtk2322	宥	soothe	2322	yes
@@ -2500,7 +2500,7 @@ rtk2498	遥	far off	2498	no
 rtk2499	遼	faraway	2499	no
 rtk2500	逼	pressing	2500	no
 rtk2501	迄	until	2501	yes
-rtk2502	逗	standstill	2502	no
+rtk2502	逗	standstill	2502	yes
 rtk2503	鄭	courtesy	2503	no
 rtk2504	隕	falling	2504	yes
 rtk2505	隈	nook	2505	yes
@@ -2976,7 +2976,7 @@ rtk2974	萬	ten thousand (old)	2974	no
 rtk2975	邁	pass through	2975	no
 rtk2976	燭	candlelight	2976	yes
 rtk2977	逞	tough	2977	no
-rtk2978	燈	lamp (old)	2978	no
+rtk2978	燈	lamp (old)	2978	yes
 rtk2979	裡	back (old)	2979	no
 rtk2980	薗	park (alternate)	2980	no
 rtk2981	鋪	shop (alternate)	2981	no

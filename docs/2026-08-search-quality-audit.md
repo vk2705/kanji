@@ -2814,10 +2814,9 @@ above.
   search all correct; `test_regression_fixes.py` — added 17 new pinned
   entries — same 4 expected hanzi-scope failures as every prior rebuild,
   nothing else; full search-term regression checklist unchanged/correct.
-- Coverage: **961/3000 (32.0%)** at commit time (will read higher once
-  `coverage_status.py` is regenerated against this commit — it reads git
-  history, not the working tree, so a same-session before/after count
-  isn't meaningful; ran it again after pushing and it landed correctly).
+- Coverage: **977/3000 (32.6%)** (regenerated after this commit —
+  `coverage_status.py` reads git history, not the working tree, so it has
+  to run post-commit to reflect a session's own fixes).
 - **Next session**: `并`'s remaining ~69 hosts (down from ~182 at the
   start of this whole `并` investigation) — the 帝-family "vase" cluster
   and the "quarter" cluster's own identity are the two biggest still-open
