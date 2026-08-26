@@ -2934,6 +2934,123 @@ above.
   "one/floor/ceiling" precedent found this session); the 業/撲/僕 `羊`
   mismatch is also still open.
 
+### 2026-08-26 — `并`'s real identity, resolved: it was `丷` all along
+
+- Picked up exactly where the last entry left off: the three grouped
+  small-stroke identity questions (帝-family "vase", "quarter", `平`'s
+  top stroke). Instead of guessing from renders alone, fetched
+  `cjkvi-ids`'s IDS (Ideographic Description Sequence) database — the
+  same authoritative structural-decomposition source `import_hanzi.py`
+  already uses for the hanzi import, just never previously turned on
+  this audit's own `并` investigation. It gives an actual documented
+  stroke-group breakdown per character, not a human-written word list
+  (CSV) or a single flat render — something in between, and it cracked
+  the whole thing open in one query: **`并` itself (U+5E76) decomposes
+  to `丷`+`开`.** Every one of this session's "vase"/"quarter"/`平`
+  mystery shapes turned out to be the plain 2-stroke `丷` (already
+  correctly identified and fixed as "horns" two sessions ago) — `帝`'s
+  own structure is `亠`+`丷`+`冖`+`巾`, `拳`'s "quarter" top (`龹`) is
+  `丷`+`夫`, `平`'s extra mark over `干` is `丷` in an overlap
+  composition. The `并` token wasn't standing in for several different
+  *new* primitives needing individual names — it was the same single
+  mislabeling (真 `丷` mistyped/OCR'd as the visually-similar but
+  extra-stroke `并`) recurring throughout, just harder to see by eye
+  once buried several structural layers deep (e.g. `撲`/`僕`'s `菐` =
+  `业`+`䒑`(`丷`+`一`)+`夫`).
+- Built a recursive IDS-expansion check, with two important
+  refinements learned the hard way mid-investigation (both would have
+  produced false positives otherwise):
+  1. **Stop recursing at `并` itself** the moment it's found as a
+     direct component — a host that genuinely contains the *full* `并`
+     glyph (with `开` below `丷`) needs no fix at all. Exactly one host,
+     `屏` (rtk2333, `⿸尸并`), turned out to be this case — its current
+     `并` token is already correct, left untouched.
+  2. **Stop recursing at any character already taught in this app's
+     own data** (e.g. `帝`, `半`, `南`, `並`, `巻`, `平`, `前`, `岡`,
+     `尊`, `酋`, `金`) rather than diving into *their* internal strokes
+     — a host built from one of these should *reference that compound
+     directly*, not re-derive `丷` by chasing the IDS tree all the way
+     down. Skipping this the first pass produced a false positive:
+     `噺`'s path went through `新`/`亲`/`立`/`丷`, but `立` (a
+     completely ordinary, already-correctly-taught primitive) happens
+     to itself decompose to `亠`+`丷`+`一` at the IDS database's
+     stroke-level granularity — which doesn't mean every kanji built
+     from `立` secretly needs a `丷` chip, any more than `平`'s `干`
+     containing a `丨` means every `干`-kanji needs a `丨` chip. Caught
+     this by noticing `新` (already fixed this session, confirmed via
+     render to be cleanly `立`+`木`+`斤` with nothing resembling `丷`)
+     showing up as a "hit" — a live self-check the migration two
+     sessions ago didn't have.
+  3. Even with both refinements, still rendered a representative
+     sample per sub-pattern before trusting anything (`帝`/`商`/`南`/
+     `彦`/`平`/`傍`/`締`/`龹`-family/`業`-family/`屏`, plus a 28-glyph
+     Tier-B compound-reference batch) — the IDS data narrows the
+     search enormously but doesn't replace the standing render-and-look
+     method, same lesson as the `个`/umbrella case that started all
+     this two sessions ago.
+- This surfaced two more of this audit's dominant bug patterns
+  layered on top of the mislabeling itself, now that the real
+  identity was clear:
+  - **Redundant flattening of an already-taught compound**, the same
+    pattern as the 半/豆/弟/平 fixes earlier this week: many hosts
+    (`締`, `諦`, `蹄`, `楠`, `献`, `圏`, `普`, `譜`, `鋼`, `綱`, `噂`,
+    `揃`, `溢`, `鄭`, `楢`, `樽`, `秤`, `箭`, `絆`, `諺`, `鱒`, `叛`,
+    `薩`, `噺`) had re-flattened `帝`/`南`/`半`/`並`/`巻`/`平`/`前`/
+    `岡`/`尊`/`酋`/`新` into raw strokes (plus the stray `并`) instead
+    of citing the compound directly, once that compound turned out to
+    already be correctly taught elsewhere in the app.
+  - **Missing component**, the 伴/判/剃 pattern: `剛` (sturdy) had
+    *no* sword/knife at all despite the 刂 being clearly visible on
+    its right side — fixed to `岡,刀` alongside the `并` cleanup.
+  - **Pure redundant noise with no structural role**: `鉛`/`鎮`/`錬`/
+    `鋲` already correctly referenced `金` as a compound *and*
+    separately carried a flattened `并` fragment that `金` (itself
+    fixed this session, `丷`-inclusive) already fully covers — just
+    dropped, no replacement needed.
+  - Two small pre-existing **wrong-character typos**, caught while
+    reading these hosts' real IDS structure and cross-checking against
+    render: `噂` (rumor) had `西` (west) where the glyph actually shows
+    `酉` (the wine-jar radical inside `尊`) — moot once fixed to
+    reference `尊` directly instead of the raw stroke; `鄭` had `邦`
+    (an unrelated whole kanji meaning "nation") where the glyph shows
+    `阝` (the mound/city radical) — fixed directly.
+- Applied 66 fixes total: a direct `并`→`丷` swap for hosts whose own
+  glyph shows the bare `丷` with nothing else already covering it
+  (`金`, `帝`, `商`, `適`'s `啇`-component notwithstanding, `傍`,
+  `幣`/`蔽`/`弊`, `半`, `拳`/`券`/`巻`/`勝`/`藤`/`謄`, `頬`, `釜`,
+  `平`, `南`, `瞭`/`寮`/`療`, `彦`, `並`, `騰`, `侠`/`倦`, `噌`, `渕`,
+  `蕨`, `遼`, `燎`, `鑿`, `朔`, `酋`, `瞥`) and a compound-reference
+  fix (dropping the flattened remnants, citing the real compound) for
+  the rest (see the full per-kanji list in this commit's diff). Full
+  list and reasoning too long to repeat here — this entry is already
+  the long version.
+- Verified: full rebuild from scratch; every fixed kanji spot-checked
+  via `get_kanji_detail` (all resolve to clean, sensible chips — no
+  leftover `?` or mismatched parts); `search_by_parts(['horns'])` now
+  returns 90 kanji (was 55 after the original two-sessions-ago fix);
+  `search_by_parts(['eight radical'])` (the mislabel's old name) is
+  down to **9 hosts** from ~182 at the very start of this whole `并`
+  investigation — `業`/`撲`/`僕` (deferred, `业`+`䒑`+`未`/`夫` doesn't
+  match their current `王`/`羊` tokens at all, needs its own
+  reconstruction pass, not a token swap), `為`/`偽`/`誉`/`糞`/`粉`
+  (never showed `丷` in the IDS trace, genuinely a different question),
+  and `屏` (correct as-is, see above); `test_regression_fixes.py` —
+  updated the two `藤`/`謄` pins from the "quarter" session
+  (`prim-eight-radical` → `kangxi12`, since it's now correctly linked)
+  and added 13 new representative pins, one per sub-pattern — same 4
+  expected hanzi-scope failures as every prior rebuild, nothing else;
+  full search-term regression checklist unchanged/correct, plus
+  "sovereign"/"south"/"mount"/"revered"/"front"/"chieftain" spot-checked.
+- Coverage: regenerated post-commit.
+- **Next session**: the remaining 9 `并`/"eight radical" hosts are a
+  small, cleanly-scoped scope for whenever someone wants to finish
+  this off — `業`/`撲`/`僕` need their decomposition rebuilt around
+  `业`+`丷`+`一`+`未`/`夫` (their current `王`/`羊` tokens don't match
+  their real IDS structure at all), and `為`/`偽`/`誉`/`糞`/`粉` need
+  fresh individual investigation from scratch (CSV + render), since
+  the `丷` lead doesn't apply to them. The uncharactered `rad4.*`
+  primitives census from the previous session is still open too.
+
 ## Tooling produced this session
 
 - `backend/render_glyphs.py` — added 2026-08-23. Renders requested
@@ -3063,3 +3180,20 @@ above.
   investigated. `python3 review_queue.py` / `--verdict approved` /
   `--verdict disputed` to list; see this session's log entry above for
   the full design.
+- **cjkvi-ids's `ids.txt`** (external data, not a script in this repo) —
+  used ad hoc 2026-08-26 to resolve `并`'s real identity; fetched via
+  `curl -sSL https://raw.githubusercontent.com/cjkvi/cjkvi-ids/master/ids.txt`
+  (the same source `import_hanzi.py` already depends on for the hanzi
+  import). TAB-separated `codepoint / character / IDS-decomposition`
+  per line, one or more decomposition variants per character
+  (region-tagged `[GTJV]`/`[G]`/`[T]`/`[K]` etc. for
+  Guobiao/Traditional/Japan/Vietnam/Korea glyph variants where they
+  differ). Worth remembering for future primitive-identity questions —
+  a structural stroke-group breakdown sits usefully between a CSV word
+  list (human-authored, can be noisy/redundant per session 12's
+  findings) and a single render (accurate but a dead end past what's
+  visually obvious) — but see this session's entry above for two real
+  false-positive traps it produces if you naively recurse the whole
+  tree (stop at the target character `并` itself when found, and stop
+  at any character your own app already treats as atomic/taught,
+  rather than decomposing indefinitely).

@@ -123,17 +123,18 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1289": {"character": "判", "keyword": "judgement",
                 "expected_part_ids": {"rtk1286", "rtk87"}},
     # "quarter"-family missing-component fix (2026-08-25): data_from_pdf.txt's
-    # original entries for these two used "quarter" (now mislabeled
-    # prim-eight-radical, part of the still-unresolved 并 polysemy — see the
-    # audit doc) as one of their parts, matching heisig-kanjis.csv's own
-    # components list, but data.txt's override silently dropped it while
-    # keeping the sibling frames 1290-1294 (拳/券/巻/圏/勝) correct.
+    # original entries for these two used "quarter" (now correctly kangxi12,
+    # the same 丷/horns primitive as everywhere else in this cluster — see
+    # the audit doc's IDS-based investigation) as one of their parts,
+    # matching heisig-kanjis.csv's own components list, but data.txt's
+    # override silently dropped it while keeping the sibling frames
+    # 1290-1294 (拳/券/巻/圏/勝) correct.
     "rtk1295": {"character": "藤", "keyword": "wisteria",
                 "expected_part_ids": {"prim-pipe", "rtk1", "rtk13", "rtk137",
-                                       "prim-mugwort", "rtk2", "rtk112", "prim-eight-radical"}},
+                                       "prim-mugwort", "rtk2", "rtk112", "kangxi12"}},
     "rtk1296": {"character": "謄", "keyword": "mimeograph",
                 "expected_part_ids": {"prim-pipe", "rtk1", "rtk13", "rtk357",
-                                       "rtk2", "rtk112", "prim-eight-radical"}},
+                                       "rtk2", "rtk112", "kangxi12"}},
     # 豆-family fix (2026-08-25): 17 kanji re-flattened 豆 (and, for the
     # drum/bend/ascend sub-cluster, 鼓/曲/登) into their own already-atomic
     # parts alongside a stray, unexplained 并 token that no CSV or PDF
@@ -210,6 +211,49 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk161", "rtk1596"}},
     "rtk1599": {"character": "評", "keyword": "evaluate",
                 "expected_part_ids": {"rtk357", "rtk1596"}},
+    # 并's real identity resolved (2026-08-26): fetched cjkvi-ids's IDS data
+    # (the same authoritative decomposition source import_hanzi.py already
+    # uses) for every remaining 并 host and found 并 itself decomposes to
+    # 丷+开 -- meaning almost every remaining host only ever showed the 丷
+    # top-part, never the full 并 glyph with 开 below it, so the token was
+    # wrong throughout: it's the same kangxi12/丷 primitive as the original
+    # horns-cluster fix, just several structural layers deeper (e.g. 拳's
+    # 龹 = 丷+夫, 帝's own shape = 亠+丷+冖+巾). Fixed ~66 kanji: a direct
+    # 并->丷 swap where the host's own glyph shows 丷 with nothing else
+    # already covering it, or a reference to an already-taught compound
+    # (帝/南/半/並/巻/平/前/岡/尊/酋) where that compound's own flattened
+    # parts were being redundantly (and, for 剛/伴/判-style cases,
+    # incompletely) repeated instead of just citing it. Only one host
+    # (屏, rtk2333) turned out to genuinely contain the full 并 character
+    # itself and was left untouched. 業/撲/僕/為/偽/誉/糞/粉 remain open —
+    # see docs/2026-08-search-quality-audit.md for the full breakdown and
+    # per-kanji reasoning. A representative sample, one per sub-pattern:
+    "rtk466": {"character": "帝", "keyword": "sovereign",
+               "expected_part_ids": {"rtk432", "kangxi12", "rtk462", "kangxi8", "kangxi14"}},
+    "rtk1286": {"character": "半", "keyword": "half",
+                "expected_part_ids": {"prim-pipe", "rtk2", "kangxi12", "rtk10"}},
+    "rtk1596": {"character": "平", "keyword": "even",
+                "expected_part_ids": {"rtk1777", "kangxi12"}},
+    "rtk287": {"character": "金", "keyword": "gold",
+               "expected_part_ids": {"rtk271", "prim-katakana-ha", "prim-umbrella", "kangxi12"}},
+    "rtk467": {"character": "諦", "keyword": "truth",
+               "expected_part_ids": {"rtk357", "rtk466"}},
+    "rtk1741": {"character": "楠", "keyword": "camphor tree",
+                "expected_part_ids": {"rtk207", "rtk1740"}},
+    "rtk1293": {"character": "圏", "keyword": "sphere",
+                "expected_part_ids": {"kangxi31", "rtk1292"}},
+    "rtk2113": {"character": "鋼", "keyword": "steel",
+                "expected_part_ids": {"rtk287", "rtk2112"}},
+    "rtk2115": {"character": "剛", "keyword": "sturdy",
+                "expected_part_ids": {"rtk2112", "rtk87"}},
+    "rtk2282": {"character": "噂", "keyword": "rumor",
+                "expected_part_ids": {"rtk11", "rtk1547"}},
+    "rtk2503": {"character": "鄭", "keyword": "an ancient chinese province",
+                "expected_part_ids": {"rtk2915", "rtk112", "kangxi170"}},
+    "rtk2911": {"character": "叛", "keyword": "disobey",
+                "expected_part_ids": {"rtk1286", "rtk779"}},
+    "rtk473": {"character": "適", "keyword": "suitable",
+               "expected_part_ids": {"rtk843", "prim-teki"}},
 }
 
 # character -> hanzi id, spot-checking the 429-character Unihan self-reference backfill
