@@ -3041,7 +3041,7 @@ above.
   expected hanzi-scope failures as every prior rebuild, nothing else;
   full search-term regression checklist unchanged/correct, plus
   "sovereign"/"south"/"mount"/"revered"/"front"/"chieftain" spot-checked.
-- Coverage: regenerated post-commit.
+- Coverage: **1034/3000 (34.5%)** — crossed the one-third mark.
 - **Next session**: the remaining 9 `并`/"eight radical" hosts are a
   small, cleanly-scoped scope for whenever someone wants to finish
   this off — `業`/`撲`/`僕` need their decomposition rebuilt around
