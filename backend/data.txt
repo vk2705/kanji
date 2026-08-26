@@ -1842,9 +1842,9 @@ rtk1593:既:previously:牙,艮
 rtk1594:概:outline:牙,艮,木
 rtk1595:慨:rue:牙,艮,state of mind
 rtk1596:平:even:干,并
-rtk1597:呼:call:ノ,口,并,亅
-rtk1598:坪:two-mat area:干,土,并
-rtk1599:評:evaluate:｜,一,言,二,并
+rtk1597:呼:call:口,平
+rtk1598:坪:two-mat area:土,平
+rtk1599:評:evaluate:言,平
 rtk1600:刈:reap:
 rtk1601:刹:temple:木,ノ,丶
 rtk1602:希:hope:ノ,一,巾

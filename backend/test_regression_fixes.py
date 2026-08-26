@@ -198,6 +198,18 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk207", "rtk1328"}},
     "rtk2847": {"character": "鵜", "keyword": "cormorant",
                 "expected_part_ids": {"rtk1328", "rtk2091"}},
+    # 平-family fix (2026-08-25): data_from_pdf.txt's originals for these
+    # three used "water lily" as a single reference to 平 (even) itself,
+    # matching this session's dominant pattern -- data.txt's override had
+    # re-flattened 平 into 干+并 (plus other stray fragments) instead.
+    # 平's own "干,并" -> "干,?" question (what "并" really is at the top
+    # of 平 itself) is left open, same bucket as vase/quarter.
+    "rtk1597": {"character": "呼", "keyword": "call",
+                "expected_part_ids": {"rtk11", "rtk1596"}},
+    "rtk1598": {"character": "坪", "keyword": "two-mat area",
+                "expected_part_ids": {"rtk161", "rtk1596"}},
+    "rtk1599": {"character": "評", "keyword": "evaluate",
+                "expected_part_ids": {"rtk357", "rtk1596"}},
 }
 
 # character -> hanzi id, spot-checking the 429-character Unihan self-reference backfill

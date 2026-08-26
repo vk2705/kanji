@@ -2888,6 +2888,52 @@ above.
   need a slower glyph-isolation pass; the 業/撲/僕 `羊` mismatch is still
   open too.
 
+### 2026-08-25 — census of uncharactered primitives, and `并`'s 平-family
+
+- Followed up on the `rad4.*` finding above with an actual census rather
+  than guessing at scope: **201** `rad{n}.{m}`-style rows still have
+  `character = '?'` (no real glyph), not the handful spotted by chance.
+  But cross-checking each one's alias keywords against every literal
+  part-term actually used anywhere in `data.txt` found only **3** are
+  presently reachable through any live decomposition — `rad1.1`
+  ("one"/"floor"/"ceiling"/"minus", used in `rtk200`/宣), `rad2.8`
+  ("animal legs", used in `rtk6`/六), and `rad4.36` ("altar", used in
+  `rtk1209`/祈). All three are already known and deliberately left alone
+  — the earlier kangxi/prim migration's own verification step explicitly
+  named these exact three as "intentionally untouched" (see that
+  session's entry above), because assigning them a real glyph risks
+  exactly the kind of same-shape-different-meaning mistake this audit
+  keeps having to correct (个/umbrella, and now 新-family and 平 below).
+  The other 198 are orphaned/unused — dead weight, not a live bug — so
+  left alone rather than a low-value 198-row cleanup pass.
+- Picked up the CSV-flagged "water-lily; lily pad" cluster (呼/坪/評,
+  1597-1599) while investigating this. Same story as 弟/鼓/登/豊 earlier
+  today: `data_from_pdf.txt`'s originals used "water lily" as a direct
+  reference to `平` (even, rtk1596) itself — `口,water lily` / `土,water
+  lily` / `言,water lily` — but `data.txt`'s override had re-flattened
+  it into `干,并` (plus stray fragments `ノ`/`亅`/`｜`/`一`/`二`)
+  instead of citing `平` directly. Rendering confirmed all three
+  visually contain 平's exact shape intact on their right/bottom side.
+  Fixed: `rtk1597:呼:口,平`, `rtk1598:坪:土,平`, `rtk1599:評:言,平`.
+  Left `rtk1596:平` itself alone — its own `干,并` breakdown is the same
+  kind of small-stroke identity question as `帝`'s "vase" and the
+  "quarter" cluster (what is the small extra mark above `干` really
+  called), not something to guess at without the same careful pass.
+- Verified: full rebuild from scratch; `呼`/`坪`/`評` all resolve to
+  `{mouth/soil/say, rtk1596}` cleanly; `test_regression_fixes.py` —
+  added 3 new pinned entries — same 4 expected hanzi-scope failures as
+  every prior rebuild, nothing else; full search-term regression
+  checklist unchanged/correct, plus "even"/"call" spot-checked.
+- Coverage: regenerated post-commit.
+- **Next session**: `并`'s remaining ~59 hosts — 帝-family "vase",
+  "quarter", and now `平`'s own top-stroke identity are the three
+  open small-stroke questions that all need the same careful
+  glyph-isolation pass (possibly worth doing together in one session,
+  since they may turn out to share an answer — Heisig does reuse tiny
+  strokes like this across multiple names, per the `rad1.1`
+  "one/floor/ceiling" precedent found this session); the 業/撲/僕 `羊`
+  mismatch is also still open.
+
 ## Tooling produced this session
 
 - `backend/render_glyphs.py` — added 2026-08-23. Renders requested
