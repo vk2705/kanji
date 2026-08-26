@@ -1617,9 +1617,9 @@ rtk1615	宰	superintend	1615	yes
 rtk1616	壁	wall	1616	yes
 rtk1617	璧	holed gem	1617	yes
 rtk1618	避	evade	1618	no
-rtk1619	新	new	1619	no
-rtk1620	薪	firewood	1620	no
-rtk1621	親	parent	1621	no
+rtk1619	新	new	1619	yes
+rtk1620	薪	firewood	1620	yes
+rtk1621	親	parent	1621	yes
 rtk1622	幸	happiness	1622	no
 rtk1623	執	tenacious	1623	yes
 rtk1624	摯	clasp	1624	no
@@ -2543,7 +2543,7 @@ rtk2541	榛	hazel	2541	no
 rtk2542	櫛	comb	2542	yes
 rtk2543	槌	wooden hammer	2543	no
 rtk2544	樵	mallet	2544	no
-rtk2545	梯	ladder	2545	no
+rtk2545	梯	ladder	2545	yes
 rtk2546	柑	citrus tree	2546	no
 rtk2547	杭	picket	2547	no
 rtk2548	柊	holly	2548	no
@@ -2845,7 +2845,7 @@ rtk2843	鴎	seagull	2843	no
 rtk2844	鵬	roc	2844	no
 rtk2845	鸚	parakeet	2845	yes
 rtk2846	鵡	parrot	2846	no
-rtk2847	鵜	cormorant	2847	no
+rtk2847	鵜	cormorant	2847	yes
 rtk2848	鷺	heron	2848	no
 rtk2849	鷲	eagle	2849	no
 rtk2850	鴨	wild duck	2850	no

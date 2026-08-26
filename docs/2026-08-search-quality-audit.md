@@ -2877,9 +2877,7 @@ above.
   pinned entries — same 4 expected hanzi-scope failures as every prior
   rebuild, nothing else; full search-term regression checklist
   unchanged/correct.
-- Coverage: regenerated post-commit (see commit history for the exact
-  count — same reasoning as last entry, `coverage_status.py` reads git
-  history not the working tree).
+- Coverage: **982/3000 (32.7%)**.
 - **Next session**: the leftover `rad4.*`/`rad3.*`-style uncharactered
   primitives found above (missile/compare/fur/spirit/water/fire/claw)
   are a fresh, previously-missed instance of this audit's very first
