@@ -174,6 +174,30 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk843", "rtk1548"}},
     "rtk2978": {"character": "燈", "keyword": "lamp",
                 "expected_part_ids": {"rtk173", "rtk1838"}},
+    # 新-family fix (2026-08-25): heisig-kanjis.csv wording ("red pepper;
+    # stand up; vase") looked like it belonged to the still-open 帝-family
+    # "vase" cluster, but rendering showed 新's left side is 立+木, not
+    # 辛(spicy)+并 -- CSV's wording was noise here, not a real shared
+    # concept; see docs/2026-08-search-quality-audit.md for the full story.
+    "rtk1619": {"character": "新", "keyword": "new",
+                "expected_part_ids": {"rtk462", "rtk207", "rtk1206"}},
+    "rtk1620": {"character": "薪", "keyword": "fuel",
+                "expected_part_ids": {"prim-mugwort", "rtk462", "rtk207", "rtk1206"}},
+    "rtk1621": {"character": "親", "keyword": "parent",
+                "expected_part_ids": {"rtk61", "rtk462", "rtk207"}},
+    # 弟-family fix (2026-08-25): all four re-flattened 弟 (younger brother,
+    # rtk1328) into its own raw strokes using the stale 并 token instead of
+    # referencing 弟 directly (which itself already correctly uses 丷, from
+    # the horns fix two sessions ago) -- 剃 additionally dropped its knife
+    # (刀) entirely, a missing-component bug like 伴/判 two sessions ago.
+    "rtk2271": {"character": "剃", "keyword": "shave",
+                "expected_part_ids": {"rtk1328", "rtk87"}},
+    "rtk2381": {"character": "悌", "keyword": "serving our elders",
+                "expected_part_ids": {"rtk1328", "kangxi61"}},
+    "rtk2545": {"character": "梯", "keyword": "ladder",
+                "expected_part_ids": {"rtk207", "rtk1328"}},
+    "rtk2847": {"character": "鵜", "keyword": "cormorant",
+                "expected_part_ids": {"rtk1328", "rtk2091"}},
 }
 
 # character -> hanzi id, spot-checking the 429-character Unihan self-reference backfill

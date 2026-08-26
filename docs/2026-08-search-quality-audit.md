@@ -2825,6 +2825,71 @@ above.
   group, `新`/`薪`/`親` "red pepper" group, others) haven't been triaged
   individually yet. The 業/撲/僕 `羊` mismatch is also still open.
 
+### 2026-08-25 — two more `并` clusters, and a CSV-wording false lead
+
+- Continuing straight on: picked up the `新`/`薪`/`親` "red pepper" group
+  (flagged above as untriaged) and the 弓-adjacent `剃`/`悌`/`梯`/`鵜`
+  group.
+- **`新`-family**: `heisig-kanjis.csv`'s components for 1619/1620/1621
+  ("red pepper; stand up; vase; tree; wood; axe") read exactly like the
+  帝-family "vase" cluster's own wording, so the working assumption
+  coming in was that these belonged to that same still-open cluster. But
+  rendering 新/薪/親 next to 辛 (spicy, rtk1612) showed the left side is
+  actually 立 directly over 木 — **not** 辛 (which is 立 over 十, a plain
+  cross, visibly different from 木's extra diagonal strokes). CSV's
+  "red pepper"/"vase" wording was noise for this specific case, not a
+  real shared concept — a useful reminder that CSV text matches are a
+  lead to check, never a fact to trust without rendering, even when they
+  look exactly like a pattern confirmed elsewhere. Fixed by dropping the
+  spurious `辛,并,亠` entirely and keeping just the real visible parts:
+  `rtk1619:新:立,木,斤`, `rtk1620:薪:艾,立,木,斤`, `rtk1621:親:見,立,木`.
+- **`弟`-family**: `弟` (younger brother, rtk1328) already correctly uses
+  `丷` (fixed two sessions ago in the horns cluster) — but `剃`/`悌`/
+  `梯`/`鵜` were all re-flattening 弟's raw strokes with the stale `并`
+  token instead of referencing `弟` directly, the same pattern as the
+  豆-family. `剃` (shave) additionally **dropped its knife (刀) entirely**
+  — another missing-component bug in the 伴/判 mold, not just redundant
+  flattening: the current `｜,ノ,弓,并` line had no representation at all
+  of the 刂 clearly visible on 剃's right side. `鵜` (cormorant) also had
+  a second bug stacked in: `杰` (fire radical) redundantly re-flattening
+  `鳥`'s own already-correct single sub-part, on top of the 弟 issue.
+  Fixed: `rtk2271:剃:弟,刀`, `rtk2381:悌:弟,state of mind`,
+  `rtk2545:梯:木,弟`, `rtk2847:鵜:弟,鳥`.
+- Along the way, fixing 悌 needed the "state of mind" primitive (heart
+  radical, 忄) to actually resolve to something — it was still sitting as
+  `rad4.2:?:heart,valentine,state of mind`, one of the original
+  never-migrated `rad4.*`/`rad3.*`-style entries with no real character,
+  missed by the 78-id kangxi/prim migration two sessions ago (that pass
+  clearly wasn't exhaustive — there's at least a `rad4.20` "missile",
+  `rad4.21` "compare", `rad4.22` "fur", `rad4.24` "spirit", `rad4.25`
+  "water", `rad4.27`/`rad4.28` "fire", `rad4.29` "claw, vulture" still
+  sitting the same way, none investigated this session). Fixed just this
+  one (needed for 悌): linked the real glyph `忄` (Kangxi radical 61's
+  left-side variant, same reasoning as `亻`/kangxi9) and renamed
+  `rad4.2` → `kangxi61`, distinct from `rtk639` (心, the standalone
+  "heart" kanji frame) same as person's variant/standalone split.
+- Verified: full rebuild from scratch; all 7 fixed kanji resolve to
+  clean chips (`get_kanji_detail` spot-checked); "eight radical" search
+  down from 86 to 79 remaining wrong hosts; "new"/"younger brother"/
+  "heart"/"state of mind" searches all correct (heart correctly splits
+  into `rtk639`/standalone and `kangxi61`/variant, matching the
+  person-radical precedent); `test_regression_fixes.py` — added 8 new
+  pinned entries — same 4 expected hanzi-scope failures as every prior
+  rebuild, nothing else; full search-term regression checklist
+  unchanged/correct.
+- Coverage: regenerated post-commit (see commit history for the exact
+  count — same reasoning as last entry, `coverage_status.py` reads git
+  history not the working tree).
+- **Next session**: the leftover `rad4.*`/`rad3.*`-style uncharactered
+  primitives found above (missile/compare/fur/spirit/water/fire/claw)
+  are a fresh, previously-missed instance of this audit's very first
+  Finding 1 ("radicals have no name anywhere in the system") — worth a
+  dedicated pass to find how many hosts each affects and give them real
+  glyphs, same treatment as `kangxi61` above. Otherwise `并`'s remaining
+  ~62 hosts: 帝-family "vase" and "quarter" cluster identities still
+  need a slower glyph-isolation pass; the 業/撲/僕 `羊` mismatch is still
+  open too.
+
 ## Tooling produced this session
 
 - `backend/render_glyphs.py` — added 2026-08-23. Renders requested

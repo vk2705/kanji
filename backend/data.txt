@@ -70,7 +70,7 @@ kangxi170:阝:leftside beta,beta,pinnacle,city walls
 prim-winter-cow:㐄:winter cow
 
 rad4.1:?:old man primitive
-rad4.2:?:heart,valentine,state of mind
+kangxi61:忄:heart,valentine,state of mind
 rad4.3:?:fiesta
 rad4.4:?:door
 rad4.5:?:hand,fingers
@@ -1864,9 +1864,9 @@ rtk1615:宰:superintend:十,辛,立,宀,primitive_roof
 rtk1616:壁:wall:辟,土
 rtk1617:璧:sphere:王,辟
 rtk1618:避:evade:口,込,十,辛,立,尸
-rtk1619:新:new:斤,辛,并,木,立,亠
-rtk1620:薪:fuel:斤,辛,并,木,立,艾,亠
-rtk1621:親:parent:見,辛,并,木,立,亠
+rtk1619:新:new:立,木,斤
+rtk1620:薪:fuel:艾,立,木,斤
+rtk1621:親:parent:見,立,木
 rtk1622:幸:happiness:十,辛,立,亠
 rtk1623:執:tenacious:幸,丸
 rtk1624:摯:gift:ノ,九,手,十,辛,立,丶
@@ -2515,7 +2515,7 @@ rtk2267:夙:bright and early:几,歹
 rtk2268:鳳:male mythical bird:鳥,几,杰
 rtk2269:剽:threat:示,二,小,西
 rtk2270:劉:weapon of war:金,厶
-rtk2271:剃:shave:｜,ノ,弓,并
+rtk2271:剃:shave:弟,刀
 rtk2272:厭:get tired of:月,犬,日,厂
 rtk2273:雁:wild goose:厂,隹
 rtk2274:贋:counterfeit:貝,厂,隹
@@ -2625,7 +2625,7 @@ rtk2377:怜:wise:state of mind,个,卩,一
 rtk2378:惇:sincere:口,子,state of mind,亠
 rtk2379:恰:just as:口,state of mind,个,一
 rtk2380:恢:wide:火,厂,state of mind
-rtk2381:悌:serving our elders:｜,ノ,弓,并,state of mind
+rtk2381:悌:serving our elders:弟,state of mind
 rtk2382:澪:water route:雨,水,个,卩,一
 rtk2383:洸:sparkling water:水,尚,儿
 rtk2384:滉:deep and broad (water):水,尚,日,儿
@@ -2789,7 +2789,7 @@ rtk2541:榛:hazelnut:一,禾,人,二,木
 rtk2542:櫛:comb:艮,竹,木,卩
 rtk2543:槌:hammer:｜,口,込,木
 rtk2544:樵:woodcutting:木,杰,隹
-rtk2545:梯:ladder:｜,ノ,弓,并,木
+rtk2545:梯:ladder:木,弟
 rtk2546:柑:citrus:日,木,甘
 rtk2547:杭:stake:木,亠,几
 rtk2548:柊:holly:木,夂,丶
@@ -3090,7 +3090,7 @@ rtk2843:鴎:seagull:鳥,匚,杰,ノ,丶
 rtk2844:鵬:phoenix:月,鳥,杰
 rtk2845:鸚:parrot:貝,女,鳥,杰
 rtk2846:鵡:cockatoo:止,鳥,弋,戈,杰
-rtk2847:鵜:cormorant:｜,ノ,弓,鳥,并,杰
+rtk2847:鵜:cormorant:弟,鳥
 rtk2848:鷺:heron:口,足,鳥,夂,杰,止
 rtk2849:鷲:eagle:口,小,鳥,丶,亠,尤,杰,尢
 rtk2850:鴨:wild duck:｜,鳥,日,杰,田
