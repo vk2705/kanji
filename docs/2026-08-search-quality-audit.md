@@ -2924,7 +2924,7 @@ above.
   added 3 new pinned entries — same 4 expected hanzi-scope failures as
   every prior rebuild, nothing else; full search-term regression
   checklist unchanged/correct, plus "even"/"call" spot-checked.
-- Coverage: regenerated post-commit.
+- Coverage: **985/3000 (32.8%)**.
 - **Next session**: `并`'s remaining ~59 hosts — 帝-family "vase",
   "quarter", and now `平`'s own top-stroke identity are the three
   open small-stroke questions that all need the same careful
