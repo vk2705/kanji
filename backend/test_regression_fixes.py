@@ -313,6 +313,13 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"kangxi94", "rtk1", "rtk15"}},
     "rtk2090": {"character": "猟", "keyword": "game-hunting",
                 "expected_part_ids": {"kangxi94", "rtk196", "rtk1265", "kangxi16"}},
+    # Owner-approved via the review queue (2026-08-27), confirmed correct
+    # against cjkvi-ids before pinning: 警 = ⿱敬言, 特 = ⿰牛寺 (寺 already
+    # flattened to 土,寸 elsewhere in data.txt).
+    "rtk358": {"character": "警", "keyword": "admonish",
+               "expected_part_ids": {"rtk356", "rtk357"}},
+    "rtk261": {"character": "特", "keyword": "special",
+               "expected_part_ids": {"rtk260", "rtk45", "rtk161"}},
 }
 
 # character -> hanzi id, spot-checking the 429-character Unihan self-reference backfill
