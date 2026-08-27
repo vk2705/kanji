@@ -3178,6 +3178,60 @@ above.
   urgent, but noted since `sync_system_data.py` will keep re-flagging
   them on every future dry run otherwise.
 
+### 2026-08-27 — first real use of the in-app review queue: `犭`-family missing-component bug
+
+- **Owner used the new review-queue UI** (shipped 2026-08-25, this was
+  its first real use) and disputed `猫`/cat's decomposition. Checking
+  `review_queue.py`'s pending list showed 3 rows: `猫` disputed, `聴`
+  (listen) disputed, `聞` (hear) approved.
+- **`聞` (approved) confirmed correct**: `⿵門耳` per `cjkvi-ids`, matches
+  the live `門,耳` exactly. No action needed beyond pinning it.
+- **`猫`'s dispute was right, and much bigger than one kanji.** Live
+  decomposition was `田,艾` (rice field + grass) — missing the `犭` "dog"
+  radical entirely, even though `heisig-kanjis.csv`'s own components
+  column says "pack of wild dogs; seedlings; flowers; rice field;
+  brains" and `cjkvi-ids` confirms `猫 = ⿰犭苗`. Checked whether this was
+  `猫`-specific or systemic by grepping CSV for every frame whose
+  components mention "pack of wild dogs": **all 15** (`荻`/`狩`/`猫`/
+  `狂`/`獄`/`猿`/`独`/`獲`/`猪`/`狭`/`犯`/`猶`/`猛`/`狙`/`猟`) were missing
+  `犭` from their live decomposition, confirmed one-by-one against
+  `cjkvi-ids`. Root cause: the placeholder primitive for this radical
+  (`rad4.35`, character still `?`) was skipped by the 2026-08-23 id
+  migration for exactly the reason it stayed unidentified — and even if
+  it had been identified, its own first alias was plain "dog", which
+  collides with `rtk253`/`犬`'s own "dog" keyword (same same-script
+  collision class as this session's earlier `个`/umbrella fix) — a
+  believable reason someone historically avoided wiring it in rather
+  than a random data-entry gap repeated 15 times. Linked it to the real
+  glyph `犭` as `kangxi94` (finishing the migration convention:
+  Kangxi radical 94, positional-variant glyph), keyword "pack of wild
+  dogs" (Heisig's own term, matches CSV, doesn't collide with `犬`'s
+  "dog"), and added it to all 15 hosts' decompositions — flattening
+  otherwise left untouched (only the missing radical was added; existing
+  sub-decompositions like `苗`→`田,艾` or `者`→`日,老` weren't
+  re-litigated here).
+- **`聴`'s dispute was also right, different bug**: live `耳,十,心` vs.
+  `cjkvi-ids`'s `聴 = ⿰耳⿳十罒心` — missing `罒` ("net", Kangxi radical
+  122). No existing `ja-kanji` primitive for `罒` at all (only a
+  `zh-Hani` hanzi row existed) — added `kangxi122:罒:net,eye
+  radical,cross-eyed` and fixed `聴` to `耳,十,罒,心`.
+- Verified: `sync_system_data.py --dry-run` matched expectations exactly
+  each time (15 decompositions for the `犭` batch, 1 for `聴`); every one
+  of the 15 plus `聴` spot-checked via `get_kanji_detail` and the live
+  API post-restart; `test_regression_fixes.py` — added 17 new pinned
+  entries (15 `犭`-family + `聴` + `聞`) — 99/99 passing;
+  `audit_self_reference.py` full sweep clean; confirmed no new same-
+  script keyword collision (`"dog"` → `rtk253` only, `"pack of wild
+  dogs"` → `kangxi94` only). Marked all 3 review-queue rows processed
+  (`review_queue.py --mark-processed 1 2 3`).
+- **Next session**: the review queue is now a real input source, not
+  just shipped code — check it early each session, same as reading this
+  file. Also worth a wider sweep for the same "unidentified `rad4.*`
+  placeholder never actually wired into any decomposition" pattern that
+  produced this bug (the open "uncharactered `rad4.*` primitives census"
+  item from 2026-08-25 is exactly this, just not yet cross-checked
+  against which ones are silently missing from real kanji).
+
 ## Tooling produced this session
 
 - `backend/render_glyphs.py` — added 2026-08-23. Renders requested

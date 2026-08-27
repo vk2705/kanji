@@ -96,9 +96,10 @@ rad4.29:?:claw, vulture
 rad4.30:?:father
 rad4.31:?:two sheaves
 kangxi90:爿:Radical 90,half of a tree trunk,split wood
+kangxi122:罒:net,eye radical,cross-eyed
 rad4.33:?:one-sided
 rad4.34:?:tusk
-rad4.35:?:dog, chihuahua, pack of wild dogs
+kangxi94:犭:pack of wild dogs,dog radical,chihuahua
 rad4.36:?:leftside altar,altar
 rad4.43:?:ton
 rad4.44:?:huge comma design,tomoe
@@ -502,9 +503,9 @@ rtk253:犬:dog:大,丶
 rtk254:状:status quo:犬,爿
 rtk255:黙:silence:犬,里,杰,黒
 rtk256:然:sort of thing:犬,夕,杰
-rtk257:荻:reed:火,艾
-rtk258:狩:hunt:寸,宀,primitive_roof
-rtk259:猫:cat:田,艾
+rtk257:荻:reed:艾,犭,火
+rtk258:狩:hunt:犭,寸,宀,primitive_roof
+rtk259:猫:cat:犭,田,艾
 rtk260:牛:cow:
 rtk261:特:special:牛,寸,土
 rtk262:告:revelation:牛,口
@@ -522,7 +523,7 @@ rtk273:宝:treasure:王,宀,primitive_roof,丶
 rtk274:珠:pearl:王,朱
 rtk275:現:present:王,見
 rtk276:玩:play:王,儿,二,元
-rtk277:狂:lunatic:王
+rtk277:狂:lunatic:犭,王
 rtk278:旺:flourishing:王,日
 rtk279:皇:emperor:王,白
 rtk280:呈:display:王,口
@@ -606,7 +607,7 @@ rtk357:言:say:
 rtk358:警:admonish:敬,言
 rtk359:計:plot:言,十
 rtk360:詮:discussion:王,言,个,ハ
-rtk361:獄:prison:言,犬
+rtk361:獄:prison:犭,言,犬
 rtk362:訂:revise:言,丁
 rtk363:訃:obituary:言,卜
 rtk364:討:chastise:言,寸
@@ -675,7 +676,7 @@ rtk426:裏:back:衣,里
 rtk427:壊:demolition:衣,十,土
 rtk428:哀:pathetic:衣,口
 rtk429:遠:distant:衣,口,込,土
-rtk430:猿:monkey:衣,口,土
+rtk430:猿:monkey:犭,衣,口,土
 rtk431:初:first time:刀
 rtk432:巾:towel:冂,｜
 rtk433:布:linen:ノ,一,巾
@@ -806,7 +807,7 @@ rtk557:蛍:lightning-bug:尚,虫,冖
 rtk558:蛇:snake:虫,匕,宀,primitive_roof
 rtk559:虹:rainbow:工,虫
 rtk560:蝶:butterfly:虫,木,世
-rtk561:独:single:虫
+rtk561:独:single:犭,虫
 rtk562:蚕:silkworm:一,大,虫,二
 rtk563:風:wind:几,虫,ノ
 rtk564:己:self:已
@@ -1002,7 +1003,7 @@ rtk753:双:pair:又,丶
 rtk754:桑:mulberry:又,木
 rtk755:隻:vessels:又,隹
 rtk756:護:safeguard:言,又,艾,隹
-rtk757:獲:seize:又,艾,隹
+rtk757:獲:seize:犭,又,艾,隹
 rtk758:奴:guy:女,又
 rtk759:怒:angry:女,心,又
 rtk760:友:friend:ノ,一,又
@@ -1135,7 +1136,7 @@ rtk886:恥:shame:耳,心
 rtk887:職:post:音,耳,日,立,戈
 rtk888:聖:holy:王,口,耳
 rtk889:敢:daring:耳,攵
-rtk890:聴:listen:耳,十,心
+rtk890:聴:listen:耳,十,罒,心
 rtk891:懐:feelings:衣,十,state of mind,亠
 rtk892:慢:ridicule:日,state of mind,又
 rtk893:漫:cartoon:水,日,又
@@ -1597,11 +1598,11 @@ rtk1348:箸:chopsticks:竹,日,老
 rtk1349:署:signature:日,老
 rtk1350:暑:sultry:日,老
 rtk1351:諸:various:言,日,老
-rtk1352:猪:boar:日,老
+rtk1352:猪:boar:犭,日,老
 rtk1353:渚:strand:水,日,老
 rtk1354:賭:gamble:貝,日,老
 rtk1355:峡:gorge:山,人,大,二,丷,亠
-rtk1356:狭:cramped:人,大,二,丷,丶,亠
+rtk1356:狭:cramped:犭,人,大,二,丷,丶,亠
 rtk1357:挟:pinch:人,大,二,丷,丶,亠,扌
 rtk1358:頬:cheeks:貝,人,頁,二,丷,大
 rtk1359:追:chase:｜,口,込
@@ -1762,7 +1763,7 @@ rtk1513:疑:doubt:疋,矢,匕,マ
 rtk1514:擬:mimic:疋,矢,匕,扌,マ
 rtk1515:凝:congeal:矢,冫,匕,マ,疋
 rtk1516:範:pattern:乙,車,竹,卩
-rtk1517:犯:crime:乙,卩
+rtk1517:犯:crime:犭,乙,卩
 rtk1518:氾:spread out:乙,水,卩
 rtk1519:厄:unlucky:卩,厂
 rtk1520:危:dangerous:勹,厂,卩
@@ -1791,7 +1792,7 @@ rtk1542:酢:vinegar:｜,ノ,酉
 rtk1543:酔:drunk:九,十,酉
 rtk1544:配:distribute:酉,已
 rtk1545:酸:acid:酉,儿,厶,夂
-rtk1546:猶:furthermore:酉,丷
+rtk1546:猶:furthermore:犭,酉,丷
 rtk1547:尊:revered:寸,酉,丷
 rtk1548:豆:beans:几,一,口
 rtk1549:頭:head:豆,頁
@@ -1811,7 +1812,7 @@ rtk1562:監:oversee:皿,臣,二
 rtk1563:濫:excessive:ノ,皿,水,臣,二
 rtk1564:鑑:specimen:金,皿,臣,二
 rtk1565:藍:indigo:ノ,皿,臣,二,艾
-rtk1566:猛:fierce:皿,子
+rtk1566:猛:fierce:犭,皿,子
 rtk1567:盛:boom:ノ,皿,戈
 rtk1568:塩:salt:口,皿,土,ノ,一,人
 rtk1569:銀:silver:金,艮
@@ -2162,7 +2163,7 @@ rtk1913:無:nothingness:｜,ノ,一,杰
 rtk1914:組:association:一,糸,幺,小,目
 rtk1915:粗:coarse:一,米,目
 rtk1916:租:tariff:一,禾,目
-rtk1917:狙:aim at:一,目
+rtk1917:狙:aim at:犭,一,目
 rtk1918:祖:ancestor:一,目,礼
 rtk1919:阻:thwart:一,目,阝
 rtk1920:査:investigate:一,木,目
@@ -2335,7 +2336,7 @@ rtk2086:厳:stern:耳,尚,厂,攵
 rtk2087:鎖:chain:貝,金,尚
 rtk2088:挙:raise:手,尚,ハ
 rtk2089:誉:reputation:一,言,尚,并
-rtk2090:猟:game-hunting:尚,用,几
+rtk2090:猟:game-hunting:犭,尚,用,几
 rtk2091:鳥:bird:杰
 rtk2092:鳴:chirp:口,鳥,杰
 rtk2093:鶴:crane:鳥,杰,隹,宀,primitive_roof,冖

@@ -268,6 +268,51 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"kangxi64", "prim-upside-down-row", "kangxi12", "rtk901"}},
     "rtk1933": {"character": "僕", "keyword": "me",
                 "expected_part_ids": {"kangxi9", "prim-upside-down-row", "kangxi12", "rtk901"}},
+    # "pack of wild dogs" (犭) family missing-component bug (2026-08-27):
+    # flagged by the owner disputing 猫's in-app review (rtk259 had no dog
+    # radical at all). Turned out all 15 CSV-confirmed hosts of "pack of
+    # wild dogs" were missing it, not just 猫 -- confirmed each against
+    # cjkvi-ids. Root cause: the placeholder primitive (character "?",
+    # skipped by the 2026-08-23 id migration for exactly that reason) had
+    # "dog" as its own first alias/keyword, colliding with rtk253/犬's own
+    # "dog" keyword -- same same-script collision class as the 个/umbrella
+    # bug fixed earlier this session. Linked it to the real glyph 犭 as
+    # kangxi94, keyword "pack of wild dogs" (Heisig's own term, matches
+    # CSV, no collision), and added it to all 15 hosts.
+    "rtk259": {"character": "猫", "keyword": "cat",
+               "expected_part_ids": {"kangxi94", "rtk14", "prim-mugwort"}},
+    "rtk890": {"character": "聴", "keyword": "listen",
+               "expected_part_ids": {"rtk881", "rtk10", "kangxi122", "rtk639"}},
+    "rtk1754": {"character": "聞", "keyword": "hear",
+                "expected_part_ids": {"rtk881", "rtk1743"}},
+    "rtk257": {"character": "荻", "keyword": "reed",
+               "expected_part_ids": {"prim-mugwort", "kangxi94", "rtk173"}},
+    "rtk258": {"character": "狩", "keyword": "hunt",
+               "expected_part_ids": {"kangxi94", "rtk45", "kangxi40"}},
+    "rtk277": {"character": "狂", "keyword": "lunatic",
+               "expected_part_ids": {"kangxi94", "rtk271"}},
+    "rtk361": {"character": "獄", "keyword": "prison",
+               "expected_part_ids": {"kangxi94", "rtk357", "rtk253"}},
+    "rtk430": {"character": "猿", "keyword": "monkey",
+               "expected_part_ids": {"kangxi94", "rtk423", "rtk11", "rtk161"}},
+    "rtk561": {"character": "独", "keyword": "single",
+               "expected_part_ids": {"kangxi94", "rtk556"}},
+    "rtk757": {"character": "獲", "keyword": "seize",
+               "expected_part_ids": {"kangxi94", "rtk752", "prim-mugwort", "kangxi172"}},
+    "rtk1352": {"character": "猪", "keyword": "boar",
+                "expected_part_ids": {"kangxi94", "rtk12", "rtk1340"}},
+    "rtk1356": {"character": "狭", "keyword": "cramped",
+                "expected_part_ids": {"kangxi94", "rtk1023", "rtk112", "rtk2", "kangxi12", "kangxi3", "kangxi8"}},
+    "rtk1517": {"character": "犯", "keyword": "crime",
+                "expected_part_ids": {"kangxi94", "rtk75", "kangxi26"}},
+    "rtk1546": {"character": "猶", "keyword": "furthermore",
+                "expected_part_ids": {"kangxi94", "rtk1534", "kangxi12"}},
+    "rtk1566": {"character": "猛", "keyword": "fierce",
+                "expected_part_ids": {"kangxi94", "rtk1555", "rtk99"}},
+    "rtk1917": {"character": "狙", "keyword": "aim at",
+                "expected_part_ids": {"kangxi94", "rtk1", "rtk15"}},
+    "rtk2090": {"character": "猟", "keyword": "game-hunting",
+                "expected_part_ids": {"kangxi94", "rtk196", "rtk1265", "kangxi16"}},
 }
 
 # character -> hanzi id, spot-checking the 429-character Unihan self-reference backfill
