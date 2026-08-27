@@ -254,6 +254,20 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk1286", "rtk779"}},
     "rtk473": {"character": "適", "keyword": "suitable",
                "expected_part_ids": {"rtk843", "prim-teki"}},
+    # 業/撲/僕 reconstruction (2026-08-27): flagged three sessions ago as
+    # needing more than a 并->丷 token swap -- their old 王/羊 tokens don't
+    # match either character's real IDS structure at all. Rebuilt around
+    # a new prim-upside-down-row (业, Heisig's own "upside down in a row",
+    # per heisig-kanjis.csv) + kangxi12 (丷, confirmed via IDS: 業's 𦍎 =
+    # 䒑(丷+一)+未, 撲/僕's 菐 = 业+䒑+夫) + already-taught 木/夫, confirmed
+    # via render that 撲/僕's bottom-right clearly matches 夫 (husband,
+    # rtk901), not 木.
+    "rtk1931": {"character": "業", "keyword": "business",
+                "expected_part_ids": {"prim-upside-down-row", "kangxi12", "rtk1", "rtk207"}},
+    "rtk1932": {"character": "撲", "keyword": "slap",
+                "expected_part_ids": {"kangxi64", "prim-upside-down-row", "kangxi12", "rtk901"}},
+    "rtk1933": {"character": "僕", "keyword": "me",
+                "expected_part_ids": {"kangxi9", "prim-upside-down-row", "kangxi12", "rtk901"}},
 }
 
 # character -> hanzi id, spot-checking the 429-character Unihan self-reference backfill

@@ -2176,9 +2176,9 @@ rtk1927:湿:damp:｜,水,日
 rtk1928:顕:appear:貝,日,頁
 rtk1929:繊:slender:糸,幺,小,土,戈,赤
 rtk1930:霊:spirits:｜,一,雨,二
-rtk1931:業:business:｜,一,王,并,木,羊,耒
-rtk1932:撲:slap:王,人,并,羊,扌,二,大
-rtk1933:僕:me:王,并,羊,大,二
+rtk1931:業:business:业,丷,一,木
+rtk1932:撲:slap:扌,业,丷,夫
+rtk1933:僕:me:亻,业,丷,夫
 rtk1934:共:together:ハ,｜,一,二
 rtk1935:供:submit:｜,一,二,ハ
 rtk1936:異:uncommon:一,田,ハ,井
@@ -3327,3 +3327,4 @@ prim-katakana-yu:ユ:katakana yu
 # evidence for naming it, not as evidence for its internal structure.
 prim-heki:辟:heki:尸,口,辛
 prim-teki:啇:teki
+prim-upside-down-row:业:upside down in a row

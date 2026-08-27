@@ -3051,6 +3051,54 @@ above.
   the `丷` lead doesn't apply to them. The uncharactered `rad4.*`
   primitives census from the previous session is still open too.
 
+### 2026-08-27 — `業`/`撲`/`僕` rebuilt: the last big `并` cluster closed out
+
+- Picked up exactly the item flagged above. Their old tokens (`王`,`羊`
+  in various combinations) never matched either character's real
+  structure at all — confirmed via the same IDS approach that resolved
+  the rest of `并`'s identity two sessions ago: `業` = `业` (a 4-stroke
+  block IDS can't decompose further, tagged only "④") + `𦍎`, and
+  `𦍎` = `䒑`(`丷`+`一`) + `未`; `撲`/`僕` share a right-hand component
+  `菐` = `业` + `䒑`(`丷`+`一`) + `夫` (husband) instead of `未`.
+- `heisig-kanjis.csv`'s own wording for 1931 independently names `业`
+  as "upside down in a row" (distinct from the "business" self-
+  reference-artifact CSV noise this audit has seen before, e.g. with
+  `業`/`豊`/`業` itself) — no existing entry anywhere in `data.txt` had
+  this name, so added a new primitive for it: `prim-upside-down-row:业`.
+  It's IDS-atomic (no further real decomposition available) and not
+  one of the 214 Kangxi radicals, matching the `prim-{slug}` half of
+  the id-migration convention from three sessions ago.
+- Rendered `業`/`撲`/`僕` next to `业`/`未`/`木`/`夫` to settle the one
+  remaining ambiguity IDS couldn't: whether `業`'s own bottom stroke is
+  `未` (not yet, rtk229, already taught) or plain `木` (tree) — visually
+  it reads as `木` (missing `未`'s distinguishing shorter top stroke),
+  matching both the *pre-existing* (if otherwise wrong) `data.txt` token
+  and `heisig-kanjis.csv`'s explicit "tree; wood" wording, so went with
+  `木`. `撲`/`僕`'s bottom-right, by contrast, unambiguously matches `夫`
+  (husband, rtk901) — not `木` — confirmed the same way.
+- Applied: `rtk1931:業:业,丷,一,木`, `rtk1932:撲:扌,业,丷,夫`,
+  `rtk1933:僕:亻,业,丷,夫`.
+- Verified: full rebuild from scratch; all three resolve cleanly
+  (`業 → {upside down in a row, horns, one, tree}`, `撲/僕 → {finger/
+  person, upside down in a row, horns, husband}`); `test_regression_
+  fixes.py` — added 3 new pinned entries — same 4 expected hanzi-scope
+  failures as every prior rebuild, nothing else; full search-term
+  regression checklist unchanged/correct, plus "husband"/"upside down
+  in a row" spot-checked; `search_by_parts(['eight radical'])` now
+  down to **6 hosts**: `為`/`偽`/`誉`/`糞`/`粉` (genuinely unrelated to
+  `丷`, need fresh individual investigation) plus `屏` (already
+  confirmed correct as-is, not a bug) — from ~182 at the very start of
+  this `并` investigation.
+- Coverage: regenerated post-commit.
+- **Next session**: `為`/`偽`/`誉`/`糞`/`粉` — the last 5 kanji of the
+  original `并` mislabeling report — need CSV + render investigation
+  from scratch, unrelated to the `丷`/horns thread that resolved
+  everything else. The uncharactered `rad4.*` primitives census is
+  still open too. Otherwise this multi-session `并` investigation is
+  essentially done — worth picking a fresh area of the dataset once
+  those last 5 are closed out (frame-ordered sweep, or another owner
+  report if one comes in).
+
 ## Tooling produced this session
 
 - `backend/render_glyphs.py` — added 2026-08-23. Renders requested
