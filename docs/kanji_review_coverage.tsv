@@ -442,7 +442,7 @@ rtk440	市	market	440	no
 rtk441	柿	persimmon	441	no
 rtk442	姉	elder sister	442	no
 rtk443	肺	lungs	443	no
-rtk444	帯	sash	444	no
+rtk444	帯	sash	444	yes
 rtk445	滞	stagnate	445	no
 rtk446	刺	thorn	446	yes
 rtk447	制	system	447	yes
@@ -1166,22 +1166,22 @@ rtk1164	雇	employ	1164	no
 rtk1165	顧	look back	1165	yes
 rtk1166	啓	disclose	1166	yes
 rtk1167	示	show	1167	no
-rtk1168	礼	salutation	1168	no
+rtk1168	礼	salutation	1168	yes
 rtk1169	祥	auspicious	1169	yes
-rtk1170	祝	celebrate	1170	no
-rtk1171	福	blessing	1171	no
-rtk1172	祉	welfare	1172	no
-rtk1173	社	company	1173	no
-rtk1174	視	inspection	1174	no
-rtk1175	奈	nara	1175	no
-rtk1176	尉	military officer	1176	no
-rtk1177	慰	consolation	1177	no
-rtk1178	款	goodwill	1178	no
-rtk1179	禁	prohibition	1179	no
-rtk1180	襟	collar	1180	no
+rtk1170	祝	celebrate	1170	yes
+rtk1171	福	blessing	1171	yes
+rtk1172	祉	welfare	1172	yes
+rtk1173	社	company	1173	yes
+rtk1174	視	inspection	1174	yes
+rtk1175	奈	nara	1175	yes
+rtk1176	尉	military officer	1176	yes
+rtk1177	慰	consolation	1177	yes
+rtk1178	款	goodwill	1178	yes
+rtk1179	禁	prohibition	1179	yes
+rtk1180	襟	collar	1180	yes
 rtk1181	宗	religion	1181	yes
 rtk1182	崇	adore	1182	yes
-rtk1183	祭	ritual	1183	no
+rtk1183	祭	ritual	1183	yes
 rtk1184	察	guess	1184	yes
 rtk1185	擦	grate	1185	yes
 rtk1186	由	wherefore	1186	no
@@ -1198,7 +1198,7 @@ rtk1196	岬	headland	1196	no
 rtk1197	挿	insert	1197	yes
 rtk1198	申	speaketh	1198	no
 rtk1199	伸	expand	1199	yes
-rtk1200	神	gods	1200	no
+rtk1200	神	gods	1200	yes
 rtk1201	捜	search	1201	yes
 rtk1202	果	fruit	1202	no
 rtk1203	菓	confectionary	1203	no
@@ -1384,7 +1384,7 @@ rtk1382	踪	trail	1382	yes
 rtk1383	骨	skeleton	1383	no
 rtk1384	滑	slippery	1384	no
 rtk1385	髄	marrow	1385	no
-rtk1386	禍	calamity	1386	no
+rtk1386	禍	calamity	1386	yes
 rtk1387	渦	whirlpool	1387	no
 rtk1388	鍋	pot	1388	no
 rtk1389	過	overdo	1389	no
@@ -1515,7 +1515,7 @@ rtk1513	疑	doubt	1513	yes
 rtk1514	擬	mimic	1514	yes
 rtk1515	凝	congeal	1515	yes
 rtk1516	範	pattern	1516	yes
-rtk1517	犯	crime	1517	no
+rtk1517	犯	crime	1517	yes
 rtk1518	氾	widespread	1518	no
 rtk1519	厄	unlucky	1519	no
 rtk1520	危	dangerous	1520	no
@@ -1730,9 +1730,9 @@ rtk1728	西	west	1728	no
 rtk1729	価	value	1729	yes
 rtk1730	要	need	1730	no
 rtk1731	腰	loins	1731	no
-rtk1732	票	ballot	1732	no
-rtk1733	漂	drift	1733	no
-rtk1734	標	signpost	1734	no
+rtk1732	票	ballot	1732	yes
+rtk1733	漂	drift	1733	yes
+rtk1734	標	signpost	1734	yes
 rtk1735	栗	chestnut	1735	no
 rtk1736	慄	shudder	1736	yes
 rtk1737	遷	transition	1737	no
@@ -1867,7 +1867,7 @@ rtk1865	斑	speckled	1865	no
 rtk1866	斉	adjusted	1866	no
 rtk1867	剤	dose	1867	yes
 rtk1868	済	finish	1868	no
-rtk1869	斎	purification	1869	no
+rtk1869	斎	purification	1869	yes
 rtk1870	粛	solemn	1870	no
 rtk1871	塁	bases	1871	no
 rtk1872	楽	music	1872	no
@@ -1916,7 +1916,7 @@ rtk1914	組	association	1914	no
 rtk1915	粗	coarse	1915	no
 rtk1916	租	tariff	1916	no
 rtk1917	狙	aim at	1917	yes
-rtk1918	祖	ancestor	1918	no
+rtk1918	祖	ancestor	1918	yes
 rtk1919	阻	thwart	1919	yes
 rtk1920	査	investigate	1920	no
 rtk1921	助	help	1921	no
@@ -2078,7 +2078,7 @@ rtk2076	喪	miss	2076	no
 rtk2077	巣	nest	2077	no
 rtk2078	単	simple	2078	no
 rtk2079	戦	war	2079	no
-rtk2080	禅	zen	2080	no
+rtk2080	禅	zen	2080	yes
 rtk2081	弾	bullet	2081	no
 rtk2082	桜	cherry tree	2082	no
 rtk2083	獣	animal	2083	no
@@ -2190,7 +2190,7 @@ rtk2188	罷	quit	2188	yes
 rtk2189	屯	barracks	2189	no
 rtk2190	且	moreover	2190	no
 rtk2191	藻	seaweed	2191	no
-rtk2192	隷	slave	2192	no
+rtk2192	隷	slave	2192	yes
 rtk2193	癒	healing	2193	yes
 rtk2194	璽	imperial seal	2194	no
 rtk2195	潟	lagoon	2195	no

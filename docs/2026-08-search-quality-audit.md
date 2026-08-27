@@ -3503,7 +3503,7 @@ above.
   access here); needs a `sync_system_data.py` run (data-only, no
   `database.py` change this time, so no backend restart required)
   whenever someone next runs the deploy procedure.
-- Coverage: regenerated post-commit.
+- Coverage: **1059/3000 (35.3%)**.
 - **Next session**: the 8 unverified census candidates above
   (`rad2.7`/`rad2.8`/`rad2.10`/`rad2.14`/`rad3.3`/`rad3.30`/`rad4.3`/
   `rad4.19`/`rad4.20`) are the natural next chunk — `rad2.8`/"animal
