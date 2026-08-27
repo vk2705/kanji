@@ -633,7 +633,14 @@ def _self_identity_kanji_ids(conn, term: str, viewer_id: int | None,
     canonical id, e.g. for decomposition-graph expansion), this returns *all* matches:
     a term ambiguous across scripts (like '族', matching both rtk1307 and hanzi-65cf)
     must self-identity-match every one of them, not just whichever one resolve_alias
-    happened to pick, or an unfiltered ('All scripts') search silently drops half."""
+    happened to pick, or an unfiltered ('All scripts') search silently drops half.
+
+    The alias lookup checks both the alias's own visibility and the joined kanji's —
+    an alias row can be public while the kanji it names is still private (e.g. a user
+    makes their own private kanji's name public without making the kanji itself
+    public), same class of gap as the _resolve_parts_detail leak found 2026-08-27;
+    found and closed here 2026-08-27 in the audit that followed it (see
+    docs/2026-08-search-quality-audit.md)."""
     term = term.strip().lower()
     row = conn.execute(
         "SELECT id FROM kanji WHERE id = ? AND (visibility = 'public' OR owner_id = ?)",
@@ -644,8 +651,9 @@ def _self_identity_kanji_ids(conn, term: str, viewer_id: int | None,
     rows = conn.execute(
         "SELECT a.kanji_id, k.script FROM aliases a "
         "JOIN kanji k ON k.id = a.kanji_id "
-        "WHERE a.alias = ? AND (a.visibility = 'public' OR a.owner_id = ?)",
-        (term, viewer_id)
+        "WHERE a.alias = ? AND (a.visibility = 'public' OR a.owner_id = ?) "
+        "AND (k.visibility = 'public' OR k.owner_id = ?)",
+        (term, viewer_id, viewer_id)
     ).fetchall()
     if script_scope:
         scoped = [r for r in rows if r["script"] in script_scope]
@@ -672,16 +680,22 @@ def _kanji_with_part_terms(conn, terms: set[str], viewer_id: int | None,
                             sources: set[str] | None) -> set[str]:
     """kanji ids that directly list any of `terms` as a part_term, in ANY decomposition
     visible to the viewer (not just one picked one) — one layer of the reverse
-    decomposition graph used by _reachable_kanji_for_term below."""
+    decomposition graph used by _reachable_kanji_for_term below. Also checks the
+    listing kanji's own visibility, not just the decomposition's — a decomposition
+    can be public while the kanji it belongs to is still private (found alongside
+    the _self_identity_kanji_ids gap, 2026-08-27)."""
     if not terms:
         return set()
     decomp_source_sql, decomp_source_params = _source_scope_sql("d.", sources, viewer_id)
     decomp_extra = f" AND {decomp_source_sql}" if decomp_source_sql else ""
     ph = ",".join("?" * len(terms))
     rows = conn.execute(
-        f"SELECT DISTINCT p.kanji_id FROM parts p JOIN decompositions d ON d.id = p.decomposition_id "
-        f"WHERE p.part_term IN ({ph}) AND (d.visibility = 'public' OR d.owner_id = ?){decomp_extra}",
-        [*terms, viewer_id, *decomp_source_params]
+        f"SELECT DISTINCT p.kanji_id FROM parts p "
+        f"JOIN decompositions d ON d.id = p.decomposition_id "
+        f"JOIN kanji k ON k.id = p.kanji_id "
+        f"WHERE p.part_term IN ({ph}) AND (d.visibility = 'public' OR d.owner_id = ?){decomp_extra} "
+        f"AND (k.visibility = 'public' OR k.owner_id = ?)",
+        [*terms, viewer_id, *decomp_source_params, viewer_id]
     ).fetchall()
     return {r["kanji_id"] for r in rows}
 
@@ -699,7 +713,10 @@ def _terms_for_kanji_ids(conn, kanji_ids: set[str], viewer_id: int | None) -> se
         [*kanji_ids, viewer_id]
     ).fetchall():
         result.add(r["alias"])
-    for r in conn.execute(f"SELECT character FROM kanji WHERE id IN ({ph})", list(kanji_ids)).fetchall():
+    for r in conn.execute(
+        f"SELECT character FROM kanji WHERE id IN ({ph}) AND (visibility = 'public' OR owner_id = ?)",
+        [*kanji_ids, viewer_id]
+    ).fetchall():
         if r["character"]:
             result.add(r["character"])
     return result

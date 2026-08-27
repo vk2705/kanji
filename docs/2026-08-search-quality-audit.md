@@ -3353,6 +3353,80 @@ above.
   in `database.py` skips the viewer_id-scoping pattern the same way,
   now that one real instance has turned up.
 
+### 2026-08-28 — follow-up privacy audit: three more unscoped queries closed
+
+- Read through every function in `database.py` that takes a `viewer_id`,
+  checking each query against the module's own documented invariant
+  (every read scoped to `visibility = 'public' OR owner_id = ?`) —
+  exactly the follow-up the previous entry asked for. Confirmed
+  `search_by_substring`, `search_by_char`, `search_by_parts`'s own final
+  result query, `_rows_to_dicts`, and `get_all_aliases_for_term` were
+  already correct (each properly scopes both the alias/decomposition
+  table *and* the joined kanji row). Found three more instances of the
+  exact same gap class as the `_resolve_parts_detail` leak, all in the
+  parts-search BFS graph (`search_by_parts` → `_reachable_kanji_for_term`
+  → these three):
+  - `_self_identity_kanji_ids` — its alias-lookup join checked the
+    alias's own visibility but never the joined kanji's. A kanji can be
+    private while a *separate* public alias exists on it (nothing stops
+    a user setting alias visibility independently of the kanji's own —
+    confirmed by reading `create_alias`/the `/aliases` endpoint, no
+    coupling enforced), so this let a term matching that alias treat the
+    private kanji as a self-identity match.
+  - `_kanji_with_part_terms` — checked the *decomposition's* visibility
+    but not the kanji it decomposes. Same story: a decomposition's
+    visibility is independently settable from its kanji's own, so a
+    private kanji with a public decomposition on it (again, nothing
+    prevents this combination) could surface via a literal part-term
+    match.
+  - `_terms_for_kanji_ids` — the alias half was already scoped, but the
+    plain `SELECT character FROM kanji WHERE id IN (...)` had **no
+    visibility check of any kind**, not even the basic pattern.
+  - **Severity note, to be precise about it**: unlike the original
+    `_resolve_parts_detail` bug, none of these three directly return a
+    private kanji's character/keyword to an API response —
+    `search_by_parts`'s own final query (line ~778) already re-filters
+    the candidate id set by `k.visibility`/`owner_id` before anything is
+    returned, so a private kanji injected into the BFS graph via one of
+    these gaps could never itself appear in search results. The real
+    exposure was indirect: a private kanji's aliases/character could
+    leak into the *next BFS layer's search frontier*, meaning an
+    unrelated, fully public kanji could spuriously match (or fail to
+    match) a query depending on whether it happened to share text with
+    someone else's private data — a subtler bug than "renders your
+    private data to a stranger," but still real cross-user leakage of
+    *which private terms exist*, and still a violation of this module's
+    own stated invariant. Fixed for consistency and defense-in-depth
+    regardless of the lower severity, matching the exact scoping
+    pattern `_resolve_parts_detail` already uses.
+- Verified with the same two-user methodology as the original fix:
+  created a throwaway "victim" user with a private kanji, a *public*
+  alias on it, and a *public* decomposition listing a private term —
+  confirmed each of the three functions returned nothing for a second
+  "attacker" viewer both before asserting (i.e. the test itself
+  correctly reproduced the leak pre-fix logic) and after the fix
+  correctly excluded the private data, while the victim's own view was
+  unaffected; rolled back the transaction, never persisted. Full rebuild
+  from scratch; `test_regression_fixes.py` — 103/103 passing, no pin
+  changes needed (data-layer fix, not a `data.txt` change); full
+  search-term regression checklist unchanged/correct, including a
+  `sun`+`moon` parts-search spot-check (14 results, unchanged).
+- Not deployed to the live server from this session (no production
+  access here — see the standing note on this in earlier entries);
+  whoever next runs the deploy procedure should restart
+  `kanji-backend.service` after pulling this (a `database.py` code
+  change, not just `data.txt`).
+- **Next session**: this closes out the privacy-audit follow-up
+  cleanly — no further unscoped queries found in a full read-through of
+  the file. Other still-open items from recent sessions: delete the 81
+  orphaned old-id `rad{N}` rows sitting live (data-only, needs live DB
+  access), `北`'s `爿` bug (needs the "identify or create a placeholder
+  primitive for an unencoded shape" treatment `犭`/`罒` got), the
+  uncharactered `rad4.*` primitives census cross-referenced against
+  which are silently missing from real decompositions (same pattern
+  that produced the `犭`/`罒` bugs), and the final 6 `并`/"eight radical"
+  hosts (`為`/`偽`/`誉`/`糞`/`粉`, plus `屏` which is already correct).
+
 ## Tooling produced this session
 
 - `backend/render_glyphs.py` — added 2026-08-23. Renders requested
