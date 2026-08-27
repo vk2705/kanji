@@ -3099,6 +3099,85 @@ above.
   those last 5 are closed out (frame-ordered sweep, or another owner
   report if one comes in).
 
+### 2026-08-27 — full deploy sync + `个`/`umbrella` collision bug
+
+- **Owner asked for a plain `git pull` + full redeploy** ("it will bring
+  changes in UI, database etc, so merge and restart everything"). This
+  session's own local checkout had already fast-forwarded through every
+  commit back to the 2026-08-23 primitive-id migration at some point
+  without a matching live sync in between (last live sync was still the
+  2026-08-23 baseline) — so this pull's own 2 new commits (`業`/`撲`/`僕`
+  rebuild) were small, but the *unsynced* backlog behind them was not:
+  `sync_system_data.py --dry-run` reported 81 kanji inserted (the
+  `rad{N}` → `kangxi{N}`/`prim-{slug}` id migration), 294 decompositions
+  replaced, 300 aliases added/294 removed. Applied after the usual
+  `backup_db.py` — matched the dry run exactly, no surprises. The old
+  `rad{N}` ids are flagged "exist live but not in source, NOT
+  auto-deleted" by the sync script's own safety design; left them alone
+  rather than unilaterally deleting kanji rows — worth a deliberate
+  cleanup pass later, not a side effect of a routine sync.
+- **Restart hit a real deploy hazard, not a code bug**: `systemctl
+  restart` crash-looped on `[Errno 98] address already in use` — a
+  stray, non-systemd `uvicorn` process (pid from Aug 26, started
+  manually, never a `kanji-backend.service` child) was still squatting
+  on port 8000, meaning production traffic since Aug 26 11:50 had been
+  served by an unmanaged process running whatever code was checked out
+  at the time — not this session's synced DB, not any commit merged
+  since. Killed it; `systemctl restart` then bound cleanly and
+  `migrate_schema()` applied `_migrate_v4` (the `decomposition_reviews`
+  table from the 2026-08-25 review-queue feature) for the first time on
+  this live DB. Worth checking `ss -ltnp | grep :8000` before any future
+  "restart isn't working" investigation — the systemd unit's own logs
+  don't mention a competing process unless you look.
+- **Frontend build needed the box's `/usr/bin/node-20` explicitly**
+  (system default is still node 18, which `vite build` now hard-rejects
+  with a `CustomEvent is not defined` crash rather than a version
+  warning) — symlinked it first in PATH rather than editing global
+  config. `npm run build` then succeeded; copied `dist/` over
+  `/usr/share/nginx/html/kanji/`.
+- **Found via the regression suite, not an owner report**: after the
+  sync, `test_regression_fixes.py` flagged `rtk287`/金 as having an
+  unexpected extra part (`rtk1103`). Traced it to the 2026-08-23
+  `个`→"umbrella" rename (the `个`/umbrella fix earlier in this file):
+  `个`'s own primary keyword "umbrella" is *also* `rtk1103`/傘's primary
+  keyword, both `ja-kanji` — same-script collision, so
+  `resolve_alias("umbrella", script_scope="ja")` is non-deterministic
+  between the two, and whenever it happens to pick `rtk1103` instead of
+  `prim-umbrella`, `_resolve_parts_detail`'s synthetic char+keyword-pair
+  dedup fails to recognize the pair (char term resolves to
+  `prim-umbrella`, keyword term resolves to `rtk1103` — they don't
+  match, so neither gets dropped) and both chips render. Not
+  `rtk287`-specific: confirmed live on `rtk814`/会 too before the fix,
+  and by extension every one of the ~101 kanji using `个` as a literal
+  part — a real, currently-live display bug on a lot of pages, just
+  never caught because `test_regression_fixes.py`'s existing `rtk287`
+  pin only started asserting an exact set (rather than "at least
+  these") once it was written 2026-08-26, and nothing had run the suite
+  against a freshly-synced DB since. Fixed the same way the `亠`/`宀`
+  lid/roof ambiguity was fixed originally: gave `prim-umbrella` a
+  distinguishing primary alias (`primitive_umbrella`, keyword) while
+  keeping `umbrella` as a secondary alias for text search — the
+  auto-synthesized keyword pair for any `个`-using decomposition now
+  resolves unambiguously to `prim-umbrella` alone. No `data.txt` line
+  anywhere references "umbrella" as literal decomposition text (checked
+  before applying), so nothing else needed touching.
+- Verified: `sync_system_data.py --dry-run` on the fix showed exactly
+  101 decompositions replaced (matching the known `个` host count);
+  applied; `rtk287`/金 and `rtk814`/会 both spot-checked back to their
+  correct 4-chip and 3-chip sets via `get_kanji_detail` and the live
+  API; `test_regression_fixes.py` — 82/82 passing (no expectation
+  changes needed, unlike the earlier 宣/sun case — this was a pure bug,
+  not an improvement to re-pin); `audit_self_reference.py` full sweep
+  clean; restarted `kanji-backend.service` again after the fix, live
+  API (`curl .../kanji/rtk814`) and the deployed frontend both
+  spot-checked.
+- **Next session**: a deliberate pass to delete the 81 orphaned old-id
+  `rad{N}`/`rad{N}.{M}` rows now sitting dead in the live DB (content
+  already migrated to their `kangxi{N}`/`prim-{slug}` replacements,
+  confirmed zero other lines reference them) would tidy this up — not
+  urgent, but noted since `sync_system_data.py` will keep re-flagging
+  them on every future dry run otherwise.
+
 ## Tooling produced this session
 
 - `backend/render_glyphs.py` — added 2026-08-23. Renders requested

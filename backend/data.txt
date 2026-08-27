@@ -3303,7 +3303,7 @@ kangxi28:厶:cocoon
 #   substitution artifact) — named literally by their katakana identity rather
 #   than guessing a Heisig-specific meaning; the owner will attach the book's
 #   actual primitive name as a personal alias on top of these.
-prim-umbrella:个:umbrella
+prim-umbrella:个:primitive_umbrella,umbrella
 prim-eight-radical:并:eight radical
 prim-hand-radical:扎:hand radical
 prim-mound-radical:阡:mound radical
