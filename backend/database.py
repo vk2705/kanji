@@ -1106,25 +1106,45 @@ def _resolve_parts_detail(conn, cid: str, decomposition_id: int, viewer_id: int 
     if synthetic_positions:
         part_terms = [t for i, t in enumerate(part_terms) if i not in synthetic_positions]
 
+    # Every candidate lookup below is scoped to (visible = public OR owned by viewer_id),
+    # matching the pattern every other read function in this module follows (see the
+    # module-level "Visibility model" note) -- these two queries used to be the one
+    # exception, unscoped by viewer_id entirely, so a decomposition part term could
+    # resolve through a *different* user's private alias/kanji and leak its character/
+    # keyword into a display anyone could see (found 2026-08-27 while wiring up a new
+    # primitive whose name collided with the viewer's own private one -- see
+    # docs/2026-08-search-quality-audit.md).
     ph = ",".join("?" * len(part_terms))
     term_to_id: dict[str, str] = {}
-    for r in conn.execute(f"SELECT id FROM kanji WHERE id IN ({ph})", part_terms).fetchall():
+    for r in conn.execute(
+        f"SELECT id FROM kanji WHERE id IN ({ph}) AND (visibility = 'public' OR owner_id = ?)",
+        part_terms + [viewer_id]
+    ).fetchall():
         term_to_id[r["id"]] = r["id"]
 
-    alias_candidates: dict[str, list[tuple[str, str]]] = {}
+    alias_candidates: dict[str, list[tuple[str, str, str]]] = {}
     for r in conn.execute(
-        f"SELECT a.alias, a.kanji_id, k.script FROM aliases a "
-        f"JOIN kanji k ON k.id = a.kanji_id WHERE a.alias IN ({ph})", part_terms
+        f"SELECT a.alias, a.kanji_id, a.visibility, k.script FROM aliases a "
+        f"JOIN kanji k ON k.id = a.kanji_id "
+        f"WHERE a.alias IN ({ph}) AND (a.visibility = 'public' OR a.owner_id = ?) "
+        f"AND (k.visibility = 'public' OR k.owner_id = ?)",
+        part_terms + [viewer_id, viewer_id]
     ).fetchall():
-        alias_candidates.setdefault(r["alias"], []).append((r["kanji_id"], r["script"]))
+        alias_candidates.setdefault(r["alias"], []).append((r["kanji_id"], r["visibility"], r["script"]))
 
     for term, candidates in alias_candidates.items():
         if term in term_to_id:
             continue
-        preferred = None
+        pool = candidates
         if parent_group:
-            preferred = next((kid for kid, script in candidates if _script_group(script) == parent_group), None)
-        term_to_id[term] = preferred or candidates[0][0]
+            scoped = [c for c in pool if _script_group(c[2]) == parent_group]
+            if scoped:
+                pool = scoped
+        # Prefer a public match over the viewer's own private one when both are still
+        # in the running, same tiebreak resolve_alias uses -- otherwise which one wins
+        # depends on arbitrary SQL row order.
+        preferred = next((kid for kid, visibility, _ in pool if visibility == "public"), None)
+        term_to_id[term] = preferred or pool[0][0]
 
     resolved_ids = list({term_to_id[t] for t in part_terms if t in term_to_id and term_to_id[t] != cid})
     if not resolved_ids:
@@ -1133,7 +1153,9 @@ def _resolve_parts_detail(conn, cid: str, decomposition_id: int, viewer_id: int 
     ph2 = ",".join("?" * len(resolved_ids))
     prow_map = {
         r["id"]: r for r in conn.execute(
-            f"SELECT id, character, keyword, frame, image_url FROM kanji WHERE id IN ({ph2})", resolved_ids
+            f"SELECT id, character, keyword, frame, image_url FROM kanji "
+            f"WHERE id IN ({ph2}) AND (visibility = 'public' OR owner_id = ?)",
+            resolved_ids + [viewer_id]
         ).fetchall()
     }
 
@@ -1229,11 +1251,13 @@ def next_user_entry_id(conn) -> str:
 def create_kanji_entry(conn, owner_id: int, keyword: str, character: str | None,
                         script: str, visibility: str) -> str:
     new_id = next_user_entry_id(conn)
+    keyword = keyword.strip().lower()
     conn.execute(
         "INSERT INTO kanji (id, character, keyword, owner_id, visibility, script) "
         "VALUES (?, ?, ?, ?, ?, ?)",
-        (new_id, character or None, keyword.strip().lower(), owner_id, visibility, script)
+        (new_id, character or None, keyword, owner_id, visibility, script)
     )
+    _insert_alias(conn, new_id, keyword, owner_id, visibility)
     conn.commit()
     return new_id
 

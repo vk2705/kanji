@@ -690,7 +690,7 @@ rtk440:市:market:巾,亠
 rtk441:柿:persimmon:｜,巾,木,亠,冂
 rtk442:姉:elder sister:巾,女,亠
 rtk443:肺:lungs:巾,月,亠
-rtk444:帯:sash:｜,一,巾,冖
+rtk444:帯:sash:丗,冖,巾
 rtk445:滞:stagnate:巾,水,冖
 rtk446:刺:thorn:巾,ハ,木,亅,冂
 rtk447:制:system:ノ,牛,巾,二
@@ -3289,6 +3289,7 @@ kangxi190:髟:long hair
 kangxi192:鬯:sacrificial wine
 kangxi205:黽:frog,toad
 prim-mugwort:艾:mugwort
+prim-thirty:丗:thirty,buckle,apron
 kangxi52:幺:tiny,short thread
 kangxi40:宀:roof,primitive_roof
 kangxi28:厶:cocoon

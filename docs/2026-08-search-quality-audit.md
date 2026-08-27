@@ -3282,6 +3282,77 @@ above.
   -- worth doing together, since the census is exactly how `北`'s
   mislabeled `爿` would surface on its own.
 
+### 2026-08-27 — owner tried adding `丗`/"thirty" themselves: found a real creation bug and a real privacy bug
+
+- **Owner tried to self-serve a fix**: created a new private `ja-kanji`
+  primitive `丗` named "thirty" via the app's own Create Kanji UI, then
+  tried to add a new decomposition of `帯` (sash) using "thirty" +
+  "apron" (per Heisig's real components for this kanji, which they'd
+  looked up externally). Reported it "did not show", and that searching
+  "apron" found nothing.
+- **Root cause #1, a real bug in kanji creation**: `create_kanji_entry`
+  (`database.py`) inserted the new kanji row with `keyword = "thirty"`
+  but never inserted a matching row into `aliases` -- and `resolve_alias`
+  only ever checks `kanji.id` or the `aliases` table, never
+  `kanji.keyword` directly (this is exactly what `import_data()` does
+  right, via its own explicit `_insert_alias(conn, r["id"], r["keyword"])`
+  call that `create_kanji_entry` was missing). So the new primitive was
+  created successfully but could never be *found* by its own name --
+  not by search, not by referencing it in a decomposition. Fixed by
+  adding the same `_insert_alias` call to `create_kanji_entry`; backfilled
+  the owner's existing `usr3` row directly (the code fix only helps
+  future creations).
+- **"apron" was never missing** -- it just isn't a term this DB has yet.
+  Checked `heisig-kanjis.csv`'s own components for `帯` (frame 444):
+  "buckle; apron; crown; towel" -- and `cjkvi-ids` confirms `帯 =
+  ⿳丗冖巾` (three parts: `丗`, `冖`, `巾`). "buckle"/"apron" are both CSV's
+  own alternate names for the same top shape the owner had already
+  correctly identified and named "thirty" -- not a fourth, separate
+  primitive. Since `丗` is a real, previously entirely-missing `ja-kanji`
+  primitive (it only existed as an unrelated `zh-Hani` hanzi row before
+  today), added it properly as a system primitive: `prim-thirty:丗:
+  thirty,buckle,apron` (checked for same-script collisions first --
+  none), and fixed `帯`'s own system decomposition from its old
+  `｜,一,巾,冖` flattening to `丗,冖,巾`, matching the real structure
+  directly instead of a deeper, less book-faithful stroke-level
+  flattening.
+- **Root cause #2, found while verifying the above, more serious**:
+  once both a public `prim-thirty` and the owner's own private `usr3`
+  existed with the same "thirty" alias, `帯`'s decomposition started
+  showing the *same* primitive as two separate chips for the owner's own
+  view. Traced to `_resolve_parts_detail`'s two lookup queries (the
+  direct-id match and the alias-candidate match) having **no
+  visibility/owner_id filtering at all** -- the one place in this whole
+  module that didn't follow the "every read function is scoped by
+  viewer_id" pattern documented at the top of this file. Concretely
+  verified this is a real cross-user privacy gap, not just a cosmetic
+  duplicate: inserted a throwaway private kanji owned by a different,
+  unrelated user id also named "thirty" (inside an uncommitted
+  transaction, rolled back after) and confirmed it appeared nowhere in
+  another viewer's resolved decomposition *before* the fix -- i.e. before
+  the fix, a decomposition's part term could silently resolve through a
+  different user's private alias or kanji row and surface that
+  stranger's character/keyword to any viewer, public or anonymous.
+  Fixed by scoping both queries to `(visibility = 'public' OR owner_id =
+  ?)` with `viewer_id` bound, same as every other read function, and
+  adding the same "prefer public over the viewer's own private
+  duplicate" tiebreak `resolve_alias` already uses, so a genuine
+  same-name collision resolves deterministically instead of by SQL row
+  order.
+- Verified: the throwaway-other-user test above (leak closed, both
+  before/after states checked in the same session); `get_kanji_detail`
+  on `帯` for the owner, an anonymous viewer, and after the throwaway
+  private-kanji test all spot-checked; `test_regression_fixes.py` --
+  added a `帯` pin, doubling as a regression guard for the visibility fix
+  itself -- 103/103 passing; `audit_self_reference.py` full sweep clean
+  (this touches the same resolution path); `kanji-backend.service`
+  restarted.
+- **Next session**: this privacy gap existed since `_resolve_parts_detail`
+  was written and had never been exercised by two genuinely conflicting
+  users before -- worth a quick audit of whether any *other* ad hoc query
+  in `database.py` skips the viewer_id-scoping pattern the same way,
+  now that one real instance has turned up.
+
 ## Tooling produced this session
 
 - `backend/render_glyphs.py` — added 2026-08-23. Renders requested

@@ -326,6 +326,15 @@ EXPECTED_DECOMPOSITIONS = {
     # its own resolved id, just its keyword.
     "rtk254": {"character": "状", "keyword": "status quo",
                "expected_part_ids": {"rtk253", "kangxi90"}},
+    # 帯 fixed from its old ｜,一,巾,冖 flattening to 丗,冖,巾 (2026-08-27),
+    # matching cjkvi-ids's 帯 = ⿳丗冖巾 directly -- new prim-thirty (丗)
+    # primitive added for this. Also the case that surfaced the
+    # _resolve_parts_detail visibility-scoping bug (see that function's
+    # own docstring) -- pinning this doubles as a regression guard for
+    # that fix, since the bug's symptom was exactly a duplicate/wrong
+    # chip on this kanji.
+    "rtk444": {"character": "帯", "keyword": "sash",
+               "expected_part_ids": {"prim-thirty", "kangxi14", "rtk432"}},
 }
 
 # character -> hanzi id, spot-checking the 429-character Unihan self-reference backfill
