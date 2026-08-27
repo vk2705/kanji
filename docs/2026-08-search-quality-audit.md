@@ -3232,6 +3232,56 @@ above.
   item from 2026-08-25 is exactly this, just not yet cross-checked
   against which ones are silently missing from real kanji).
 
+### 2026-08-27 — owner spot-check: `爿`'s keyword, plus `警`/`特` pinned, plus a `北` bug found in passing
+
+- **Owner asked to double-check `爿`'s glyph and whether it deserves its
+  own primitive name.** Couldn't do the full render-and-compare method
+  this time -- this production box has no headless Chromium and no CJK
+  fonts installed at all (`render_glyphs.py` needs the former; a
+  from-scratch PIL/font-based fallback would need the latter), so said
+  so plainly rather than skip the check silently. Confirmed instead via
+  codepoint: the DB's `爿` is `U+723F`, the correct standard Unicode
+  Kangxi radical 90 -- not a substitution artifact or lookalike.
+  `heisig-kanjis.csv` settles the naming question independently: its
+  components column says **"turtle"** for all 5 of `爿`'s CSV-covered
+  hosts (`状`/`壮`/`将`/`奨`/`寝`), consistently -- Heisig's own name for
+  it, just never entered into `data.txt`, which only had the dry
+  "radical 90" (plus the official Kangxi gloss "half of a tree
+  trunk"/"split wood" as secondary aliases). Checked for a same-script
+  collision first (the `个`/umbrella and `犭`/dog lesson from earlier
+  this session) -- clear, every other "turtle" alias in the DB is a
+  `zh-*` row (real turtle/tortoise hanzi like `亀`/`龜`). Renamed
+  `kangxi90`'s primary keyword `"radical 90"` -> `"turtle"`, kept
+  "radical 90"/"half of a tree trunk"/"split wood" as secondary aliases.
+- **Found a real bug while cross-checking `爿`'s host list**: `rtk480`/
+  `北` (north) currently lists `爿` as one of its own components, but
+  that's wrong -- `cjkvi-ids` gives `北 = ⿰③匕` (a mirrored/backward
+  `匕`-shaped 3-stroke element with no Unicode codepoint of its own,
+  `cjkvi-ids`'s own placeholder notation for that, not a specific named
+  IDS component) plus a real `匕`, and CSV agrees ("spoon; sitting on
+  the ground", never "turtle"). Not fixed here -- needs the same
+  "identify or create a placeholder primitive for an unencoded shape"
+  treatment as `犭`/`罒` got two sessions ago, not a simple swap, and
+  CSV's second term ("sitting on the ground") needs its own
+  investigation before committing to what that second component
+  actually is.
+- **Two more review-queue approvals surfaced separately** (`警`/admonish,
+  `特`/special) -- confirmed both correct against `cjkvi-ids` (`警 =
+  ⿱敬言`, `特 = ⿰牛寺` with `寺` already flattened to `土,寸` elsewhere)
+  and pinned, no `data.txt` change needed. Marked processed.
+- Verified: `sync_system_data.py --dry-run` for the `爿` rename matched
+  expectations (1 kanji updated, 11 decompositions replaced -- its
+  character-referencing hosts); `get_kanji_detail` on `状` confirms
+  `爿` now resolves with keyword "turtle", no ambiguity
+  (`resolve_alias("turtle", "ja-kanji")` -> `kangxi90` only);
+  `test_regression_fixes.py` -- 102/102 passing; `audit_self_reference.py`
+  full sweep clean; `kanji-backend.service` restarted, live API
+  spot-checked.
+- **Next session**: `北`'s bug (above) and the still-open
+  "uncharactered `rad4.*` primitives census" from 2026-08-25 are related
+  -- worth doing together, since the census is exactly how `北`'s
+  mislabeled `爿` would surface on its own.
+
 ## Tooling produced this session
 
 - `backend/render_glyphs.py` — added 2026-08-23. Renders requested

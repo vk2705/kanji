@@ -320,6 +320,12 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"rtk356", "rtk357"}},
     "rtk261": {"character": "特", "keyword": "special",
                "expected_part_ids": {"rtk260", "rtk45", "rtk161"}},
+    # kangxi90 (爿) renamed "radical 90" -> "turtle" (2026-08-27), Heisig's
+    # own name per heisig-kanjis.csv (consistent across all 5 CSV-covered
+    # hosts: 状/壮/将/奨/寝). Pinning 状 to confirm the rename didn't touch
+    # its own resolved id, just its keyword.
+    "rtk254": {"character": "状", "keyword": "status quo",
+               "expected_part_ids": {"rtk253", "kangxi90"}},
 }
 
 # character -> hanzi id, spot-checking the 429-character Unihan self-reference backfill

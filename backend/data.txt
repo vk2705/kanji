@@ -95,7 +95,7 @@ rad4.28:?:fire2,caterpillar steps(VK)
 rad4.29:?:claw, vulture
 rad4.30:?:father
 rad4.31:?:two sheaves
-kangxi90:爿:Radical 90,half of a tree trunk,split wood
+kangxi90:爿:turtle,radical 90,half of a tree trunk,split wood
 kangxi122:罒:net,eye radical,cross-eyed
 rad4.33:?:one-sided
 rad4.34:?:tusk
