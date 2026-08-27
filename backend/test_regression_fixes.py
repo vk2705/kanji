@@ -47,7 +47,7 @@ import database  # noqa: E402
 # parts_detail ids from get_kanji_detail's first (system) decomposition, order-independent.
 EXPECTED_DECOMPOSITIONS = {
     "rtk1209": {"character": "祈", "keyword": "pray",
-                "expected_part_ids": {"rtk1206", "rad4.36"}},
+                "expected_part_ids": {"rtk1206", "kangxi113"}},
     "rtk6": {"character": "六", "keyword": "six",
              "expected_part_ids": {"kangxi8", "rad2.8"}},
     "rtk2014": {"character": "航", "keyword": "navigate",
@@ -335,6 +335,33 @@ EXPECTED_DECOMPOSITIONS = {
     # chip on this kanji.
     "rtk444": {"character": "帯", "keyword": "sash",
                "expected_part_ids": {"prim-thirty", "kangxi14", "rtk432"}},
+    # kangxi113 (礻, altar radical) fix (2026-08-28): found via a systematic census
+    # cross-checking every uncharactered rad{N}.{M} primitive's CSV-confirmed hosts
+    # against what data.txt actually uses -- same method that surfaced 犭/罒 two
+    # sessions ago. Two distinct sub-bugs on the same missing radical: 礼/祥/祝/福/
+    # 祉/社/視/神/禍/祖/禅 used the whole kanji 礼 (rtk1168, "salute") as a wrong
+    # stand-in for just its own left radical (confirmed via render: none of these
+    # hosts show 礼's extra 乙 hook); 奈/尉/慰/款/禁/襟/宗/崇/祭/察/擦/際/票/漂/標/
+    # 斎/隷 had the *different*, already-taught standalone 示 (rtk1167, "show" --
+    # the same shape at full width, not the narrow 礻 form) redundantly re-flattened
+    # into its own 二/小 parts alongside the reference, plus 斎 had a second nested
+    # redundant flatten of 斉. A representative sample of each:
+    "rtk1168": {"character": "礼", "keyword": "salute",
+                "expected_part_ids": {"kangxi113", "rtk75"}},
+    "rtk1169": {"character": "祥", "keyword": "auspicious",
+                "expected_part_ids": {"kangxi113", "rtk586"}},
+    "rtk1200": {"character": "神", "keyword": "gods",
+                "expected_part_ids": {"kangxi113", "rtk1198"}},
+    "rtk1918": {"character": "祖", "keyword": "ancestor",
+                "expected_part_ids": {"kangxi113", "rtk2190"}},
+    "rtk1175": {"character": "奈", "keyword": "nara",
+                "expected_part_ids": {"rtk1167", "rtk112"}},
+    "rtk1179": {"character": "禁", "keyword": "prohibition",
+                "expected_part_ids": {"rtk207", "rtk1167"}},
+    "rtk1869": {"character": "斎", "keyword": "purification",
+                "expected_part_ids": {"rtk1866", "rtk1167"}},
+    "rtk1732": {"character": "票", "keyword": "ballot",
+                "expected_part_ids": {"rtk1167", "rtk1728"}},
 }
 
 # character -> hanzi id, spot-checking the 429-character Unihan self-reference backfill

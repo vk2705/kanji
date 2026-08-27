@@ -100,7 +100,7 @@ kangxi122:罒:net,eye radical,cross-eyed
 rad4.33:?:one-sided
 rad4.34:?:tusk
 kangxi94:犭:pack of wild dogs,dog radical,chihuahua
-rad4.36:?:leftside altar,altar
+kangxi113:礻:leftside altar,altar
 rad4.43:?:ton
 rad4.44:?:huge comma design,tomoe
 kangxi80:毋:mother,do not
@@ -1414,24 +1414,24 @@ rtk1164:雇:employ:戸,隹,一,尸
 rtk1165:顧:look back:貝,戸,頁,隹,一,尸
 rtk1166:啓:disclose:戸,口,攵,一,尸
 rtk1167:示:show:二,小
-rtk1168:礼:salute:乙
-rtk1169:祥:auspicious:羊,礼
-rtk1170:祝:celebrate:口,礼,儿
-rtk1171:福:blessing:一,口,田,礼
-rtk1172:祉:welfare:止,礼
-rtk1173:社:company:土,礼
-rtk1174:視:inspection:見,礼
-rtk1175:奈:nara:示,二,小,大
-rtk1176:尉:military officer:示,二,小,寸,尸
-rtk1177:慰:consolation:示,二,小,心,寸,尸
-rtk1178:款:goodwill:欠,士,示,二,小
-rtk1179:禁:prohibition:示,二,小,木
-rtk1180:襟:collar:示,二,小,初,木
-rtk1181:宗:religion:示,二,小,宀,primitive_roof
-rtk1182:崇:adore:山,示,二,小,宀,primitive_roof
-rtk1183:祭:ritual:示,二,小,个,癶
-rtk1184:察:guess:ノ,示,二,小,宀,primitive_roof,癶
-rtk1185:擦:grate:ノ,示,二,小,宀,primitive_roof,扌,癶
+rtk1168:礼:salute:礻,乙
+rtk1169:祥:auspicious:礻,羊
+rtk1170:祝:celebrate:礻,口,儿
+rtk1171:福:blessing:礻,一,口,田
+rtk1172:祉:welfare:礻,止
+rtk1173:社:company:礻,土
+rtk1174:視:inspection:礻,見
+rtk1175:奈:nara:示,大
+rtk1176:尉:military officer:示,寸,尸
+rtk1177:慰:consolation:示,心,寸,尸
+rtk1178:款:goodwill:欠,士,示
+rtk1179:禁:prohibition:木,示
+rtk1180:襟:collar:初,木,示
+rtk1181:宗:religion:示,宀,primitive_roof
+rtk1182:崇:adore:山,示,宀,primitive_roof
+rtk1183:祭:ritual:示,个,癶
+rtk1184:察:guess:ノ,示,宀,primitive_roof,癶
+rtk1185:擦:grate:ノ,示,宀,primitive_roof,扌,癶
 rtk1186:由:wherefore:｜,日,田
 rtk1187:抽:pluck:｜,日,扌,田
 rtk1188:油:oil:｜,水,日,田
@@ -1446,7 +1446,7 @@ rtk1196:岬:headland:｜,山,日,田,凵
 rtk1197:挿:insert:｜,ノ,十,日,扌,田
 rtk1198:申:have the honor to:｜,日,田
 rtk1199:伸:expand:｜,日,田
-rtk1200:神:gods:｜,日,礼,田
+rtk1200:神:gods:礻,申
 rtk1201:捜:search:｜,日,又,扌,田
 rtk1202:果:fruit:｜,田,木
 rtk1203:菓:candy:田,木,艾
@@ -1632,13 +1632,13 @@ rtk1382:踪:remains:口,示,二,小,足,宀,primitive_roof,止
 rtk1383:骨:skeleton:月,冖,冂
 rtk1384:滑:slippery:月,骨,水,冂,冖
 rtk1385:髄:marrow:ノ,一,月,込,冖,骨
-rtk1386:禍:calamity:口,礼,冂
+rtk1386:禍:calamity:礻,口,冂
 rtk1387:渦:whirlpool:｜,口,水,冂
 rtk1388:鍋:pot:金,口,冂
 rtk1389:過:overdo:口,込,冂
 rtk1390:阪:heights:又,厂,阝
 rtk1391:阿:africa:一,口,亅,阝
-rtk1392:際:occasion:ノ,示,二,小,癶,阝
+rtk1392:際:occasion:ノ,示,癶,阝
 rtk1393:障:hinder:音,十,日,立,阝
 rtk1394:隙:crevice:小,日,阝
 rtk1395:随:follow:ノ,一,月,込,阝
@@ -1978,9 +1978,9 @@ rtk1728:西:west:
 rtk1729:価:value:西
 rtk1730:要:need:女,西
 rtk1731:腰:loins:月,女,西
-rtk1732:票:ballot:示,二,小,西
-rtk1733:漂:drift:示,二,小,水,西
-rtk1734:標:signpost:示,二,小,西,木
+rtk1732:票:ballot:示,西
+rtk1733:漂:drift:水,示,西
+rtk1734:標:signpost:木,示,西
 rtk1735:栗:chestnut:西,木
 rtk1736:慄:fear:西,state of mind,木
 rtk1737:遷:transition:込,西,大,已
@@ -2115,7 +2115,7 @@ rtk1865:斑:spot:王,文
 rtk1866:斉:adjusted:｜,ノ,文,廾
 rtk1867:剤:dose:｜,ノ,文,廾,斉
 rtk1868:済:settle (debt  etc.):｜,ノ,水,文,廾,斉
-rtk1869:斎:purification:｜,ノ,文,廾,斉,示,二,小
+rtk1869:斎:purification:斉,示
 rtk1870:粛:solemn:｜,ノ,ヨ,米,隶
 rtk1871:塁:bases:田,土,冫
 rtk1872:楽:music:白,木,冫
@@ -2164,7 +2164,7 @@ rtk1914:組:association:一,糸,幺,小,目
 rtk1915:粗:coarse:一,米,目
 rtk1916:租:tariff:一,禾,目
 rtk1917:狙:aim at:犭,一,目
-rtk1918:祖:ancestor:一,目,礼
+rtk1918:祖:ancestor:礻,且
 rtk1919:阻:thwart:一,目,阝
 rtk1920:査:investigate:一,木,目
 rtk1921:助:help:目,力
@@ -2326,7 +2326,7 @@ rtk2076:喪:miss:｜,衣,一,口,亠
 rtk2077:巣:nest:尚,田,木
 rtk2078:単:simple:十,尚,田
 rtk2079:戦:war:十,尚,田,戈
-rtk2080:禅:zen:十,尚,田,礼
+rtk2080:禅:zen:礻,単
 rtk2081:弾:bullet:弓,十,尚,田
 rtk2082:桜:cherry:女,尚,木
 rtk2083:獣:animal:犬,口,尚,田
@@ -2438,7 +2438,7 @@ rtk2188:罷:quit:月,匕,厶
 rtk2189:屯:barracks:ノ,乙,凵
 rtk2190:且:moreover:一,目
 rtk2191:藻:seaweed:口,水,木,艾,品
-rtk2192:隷:slave:ヨ,士,小,水,二,隶,示
+rtk2192:隷:slave:ヨ,士,水,隶,示
 rtk2193:癒:healing:月,心,个,疔
 rtk2194:璽:emperor's seal:｜,一,王,ハ,冂,爻
 rtk2195:潟:lagoon:臼,水,勹,杰

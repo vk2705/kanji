@@ -3427,6 +3427,91 @@ above.
   that produced the `犭`/`罒` bugs), and the final 6 `并`/"eight radical"
   hosts (`為`/`偽`/`誉`/`糞`/`粉`, plus `屏` which is already correct).
 
+### 2026-08-28 — the `rad4.*` census, done properly: `礻` (altar) missing from 28 hosts
+
+- Picked up the queued "uncharactered `rad4.*` primitives census" item,
+  scripted this time rather than by-hand sampling: for each of the ~76
+  still-uncharactered `rad{N}.{M}` primitives with at least one alias,
+  searched every `heisig-kanjis.csv` frame whose `components` column
+  names that exact alias, then checked whether the frame's *current*
+  `data.txt` line already references it under any of its aliases. Naive
+  first pass returned 56 "hits" — almost all false positives, because
+  most of these old placeholders (one/water/fire/tree/woman/child/
+  house/small/soil/mountain/crotch/…) are simply **pre-migration
+  duplicate stubs of kanji frames that were already properly taught
+  under their own real character** (一/水/火/木/女/子/宀/小/土/山/又/…) —
+  the same "orphaned duplicate" class as `rad2.26`/"crotch" (=`又`,
+  found two sessions ago). Filtered those out by dropping any candidate
+  whose alias also matches an *already-charactered* primitive's own
+  keyword — down to 9 genuine candidates, structurally similar to
+  `犭`/`罒`: a real, distinct concept with no charactered home anywhere
+  in the system.
+- Verified the strongest one, `rad4.36` ("altar"/"leftside altar"),
+  first — it already had a live, owner-confirmed-correct pin (`祈`/
+  rtk1209, from two sessions ago), so any sibling gap here was very
+  likely the same real bug, not census noise. It was: **28 more hosts**
+  missing it, splitting into two distinct sub-bugs once rendered
+  side-by-side (`shi_cluster.png`):
+  - `礼`/`祥`/`祝`/`福`/`祉`/`社`/`視`/`神`/`禍`/`祖`/`禅` used the
+    *whole kanji* `礼` (salute, rtk1168) as a stand-in for just its own
+    left radical — confirmed wrong by rendering all of them together:
+    none show `礼`'s distinguishing `乙` hook, only the narrow altar
+    shape. `礼` itself was missing the radical too (its own line was
+    just `乙`, no altar at all) — the proxy and the thing it was
+    standing in for turned out to share the same root cause.
+  - `奈`/`尉`/`慰`/`款`/`禁`/`襟`/`宗`/`崇`/`祭`/`察`/`擦`/`際`/`票`/
+    `漂`/`標`/`斎`/`隷` instead redundantly re-flattened the
+    *different*, already-correctly-taught standalone `示` (show,
+    rtk1167 — same concept, full width, not compressed to a left
+    margin) into its own `二`+`小` parts alongside the reference —
+    confirmed the width difference is real by rendering `示` next to
+    the narrow-form hosts. `斎` had a second, independent
+    redundant-flatten of `斉` nested in the same line.
+  - Where an already-taught compound covered the rest of a host's
+    non-altar strokes exactly (`申`/rtk1198 for `神`, `且`/rtk2190 for
+    `祖`, `単`/rtk2078 for `禅`), referenced it directly instead of
+    guessing at a further flatten.
+  - Linked `rad4.36` to its real glyph `礻` (U+793B, confirmed via
+    render against the narrow-form hosts) and renamed it to
+    `kangxi113` (示/Kangxi radical 113's positional left-side variant —
+    same reasoning as `kangxi9`/`亻` and `kangxi61`/`忄`), distinct from
+    `rtk1167`'s own standalone `示`.
+  - The other 8 candidates from the census (`rad2.7`/"enter" 1 host,
+    `rad2.8`/"animal legs" 122, `rad2.10`/"hood" 39, `rad2.14`/"shovel"
+    18, `rad3.3`/"pent in" 23, `rad3.30`/"broom" 15, `rad4.3`/"fiesta"
+    29, `rad4.19`/"bones" 10, `rad4.20`/"missile" 18) are real too by
+    the same census logic, but **not verified or touched this
+    session** — each needs its own render-and-CSV pass the way `礻`
+    just got, not a blind bulk apply; flagging the counts here so a
+    future session doesn't have to re-derive them.
+- Applied: `rad4.36` → `kangxi113:礻:leftside altar,altar`; 28 host
+  fixes (11 `礻`+compound-reference swaps, 17 redundant-flatten
+  collapses). Full list in this commit's diff.
+- Verified: full rebuild from scratch; all 16 spot-checked kanji resolve
+  cleanly via `get_kanji_detail` (e.g. `神 → {altar, 申/rtk1198}`,
+  `奈 → {示/rtk1167, large}`); `search_by_parts(['altar'])` now returns
+  13 hosts (was silently 0 live, despite the keyword existing, before
+  today — same "named but never wired in" pattern as `犭`/`罒`);
+  `test_regression_fixes.py` — updated the `祈`/rtk1209 pin
+  (`rad4.36`→`kangxi113`) and added 8 new representative pins — same 4
+  expected hanzi-scope failures as every prior rebuild, nothing else;
+  full search-term regression checklist unchanged/correct, plus
+  "show"/"salute"/"altar" spot-checked; confirmed zero remaining
+  literal `rad4.36` references anywhere in `data.txt`,
+  `test_regression_fixes.py`, or `database.py`.
+- Not deployed to the live server from this session (no production
+  access here); needs a `sync_system_data.py` run (data-only, no
+  `database.py` change this time, so no backend restart required)
+  whenever someone next runs the deploy procedure.
+- Coverage: regenerated post-commit.
+- **Next session**: the 8 unverified census candidates above
+  (`rad2.7`/`rad2.8`/`rad2.10`/`rad2.14`/`rad3.3`/`rad3.30`/`rad4.3`/
+  `rad4.19`/`rad4.20`) are the natural next chunk — `rad2.8`/"animal
+  legs" (122 candidate hosts) and `rad4.20`/"missile" look like the
+  next-most load-bearing by host count, worth checking first. Otherwise
+  the standing list is unchanged: the 81 orphaned `rad{N}` rows on the
+  live DB, `北`'s `爿` bug, and the final 6 `并` hosts.
+
 ## Tooling produced this session
 
 - `backend/render_glyphs.py` — added 2026-08-23. Renders requested
