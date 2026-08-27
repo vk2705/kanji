@@ -3089,7 +3089,7 @@ above.
   `丷`, need fresh individual investigation) plus `屏` (already
   confirmed correct as-is, not a bug) — from ~182 at the very start of
   this `并` investigation.
-- Coverage: regenerated post-commit.
+- Coverage: **1035/3000 (34.5%)**.
 - **Next session**: `為`/`偽`/`誉`/`糞`/`粉` — the last 5 kanji of the
   original `并` mislabeling report — need CSV + render investigation
   from scratch, unrelated to the `丷`/horns thread that resolved
