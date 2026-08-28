@@ -362,6 +362,15 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk1866", "rtk1167"}},
     "rtk1732": {"character": "票", "keyword": "ballot",
                 "expected_part_ids": {"rtk1167", "rtk1728"}},
+    # 北/rtk480 fix (2026-08-28): 爿 (turtle, kangxi90) was wrong -- flagged by the
+    # owner while double-checking 爿's own identity the previous session. cjkvi-ids
+    # gives 北 = a mirrored/backward 匕-shaped element (no Unicode codepoint of its
+    # own) + a real 匕, and heisig-kanjis.csv agrees ("spoon; sitting on the
+    # ground", never "turtle"). New prim-sitting-on-the-ground added (same
+    # "name it even without a real glyph" convention as the many other
+    # uncharactered primitives already in data.txt) for the mirrored element.
+    "rtk480": {"character": "北", "keyword": "north",
+               "expected_part_ids": {"rtk476", "prim-sitting-on-the-ground"}},
 }
 
 # character -> hanzi id, spot-checking the 429-character Unihan self-reference backfill

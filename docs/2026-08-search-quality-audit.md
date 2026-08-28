@@ -3512,6 +3512,78 @@ above.
   the standing list is unchanged: the 81 orphaned `rad{N}` rows on the
   live DB, `北`'s `爿` bug, and the final 6 `并` hosts.
 
+### 2026-08-28 — the `rad4.*` census, closed for good; `北`'s `爿` bug fixed
+
+- Worked through the 8 remaining unverified census candidates
+  (`rad2.7`/`rad2.8`/`rad2.10`/`rad2.14`/`rad3.3`/`rad3.30`/`rad4.3`/
+  `rad4.19`/`rad4.20`) properly instead of leaving them queued. **All
+  8 turned out to be false positives**, same class as the 56 filtered
+  out before `kangxi113` was found, just one layer deeper: the census's
+  "already covered" check only looked for the primitive's own alias
+  *text* as a literal token, not for an *already-charactered* primitive
+  covering the same concept under a completely different name. Checked
+  each one's full host list by hand and every single host in every
+  group already carried a giveaway token: `rad2.8`/"animal legs"'s 122
+  "hits" all already contained `ハ` (katakana ha) directly, or a
+  compound (`貝`/`頁`/`則`/`貴`) that itself already contains `ハ` — not
+  a missing radical at all, just Heisig's own well-established practice
+  of reusing a katakana shape as a kanji-component mnemonic, already
+  correctly wired in everywhere. The other 7 resolved the same way,
+  each against its own already-taught duplicate: `rad4.20`/"missile" →
+  `殳`/kangxi79 ("weapon,lance"), `rad4.3`/"fiesta" → `戈`/kangxi62
+  ("spear,halberd"), `rad3.30`/"broom" → `ヨ`/prim-katakana-yo
+  ("elbow"), `rad4.19`/"bones" → `歹`/kangxi78 ("death,bad"),
+  `rad2.10`/"hood" → `冂`/kangxi13 ("border,down box"), `rad2.14`/
+  "shovel" → `凵`/kangxi17 ("container,open box"), `rad3.3`/"pent in" →
+  `囗`/kangxi31 ("enclosure"), `rad2.7`/"enter" → `入`/rtk842 ("enter",
+  an exact keyword match even). **Conclusion, stated plainly so a
+  future session doesn't re-derive it**: the entire multi-session
+  `rad4.*`/uncharactered-primitives investigation is done. Exactly one
+  real bug existed in this whole class (`kangxi113`/altar, previous
+  entry) — everything else checked (201 uncharactered rows total across
+  both sessions) is either genuinely unused dead weight or an orphaned
+  duplicate stub of a primitive that's already correctly taught under a
+  different name. No further census work is owed here.
+- Also chased down and closed a small false alarm from the same
+  investigation: `rtk6` (六, six) and `rtk8` (八, eight) both have
+  `character = '?'` in their own `data.txt` lines, which looked like
+  the same "basic kanji missing its glyph" bug class at first glance —
+  but `import_data()`'s merge logic doesn't let a blank/`?` override
+  blank out a real character already provided by a lower-priority
+  source (`data_from_pdf.txt` has `六`, the CSV baseline has `八`), so
+  both already resolve correctly live (checked directly against the
+  rebuilt DB). Not a bug, just a slightly misleading `data.txt` line;
+  left alone.
+- **`北`'s `爿` bug**, flagged by the owner two sessions ago while
+  double-checking `爿`'s own identity: fixed. `cjkvi-ids` gives `北` as
+  a mirrored/backward `匕`-shaped element (no Unicode codepoint of its
+  own — IDS's own placeholder notation for that) plus a real `匕`, and
+  CSV independently agrees ("spoon; sitting on the ground", never
+  "turtle"). Added `prim-sitting-on-the-ground:?:sitting on the
+  ground` for the unencoded mirrored element (same "name it, don't
+  guess a fake glyph" convention this whole `data.txt` already uses
+  for dozens of other primitives with no real Unicode codepoint) and
+  fixed `rtk480:北:north:匕,prim-sitting-on-the-ground`.
+- Verified: full rebuild from scratch; `北` resolves to
+  `{spoon/rtk476, sitting on the ground}`, no more `爿`;
+  `search_by_parts(['turtle'])` no longer includes `rtk480` (11 hosts,
+  all genuine); `test_regression_fixes.py` — added 1 new pinned entry
+  — same 4 expected hanzi-scope failures as every prior rebuild,
+  nothing else; full search-term regression checklist unchanged/
+  correct, plus "turtle"/"spoon"/"sitting on the ground"/"north" spot-
+  checked.
+- Not deployed to the live server from this session (no production
+  access here); data-only change, no backend restart needed on next
+  deploy.
+- Coverage: regenerated post-commit.
+- **Next session**: standing list is now just the 81 orphaned `rad{N}`
+  rows sitting on the live DB (data-only, needs live access to clean
+  up — `sync_system_data.py`'s own safety design won't delete them
+  automatically) and the final 6 `并`/"eight radical" hosts (`為`/
+  `偽`/`誉`/`糞`/`粉`, plus `屏` which is already correct). Both small,
+  well-scoped. Worth picking a fresh area of the dataset (frame-ordered
+  sweep, or another owner report) once those two are closed out.
+
 ## Tooling produced this session
 
 - `backend/render_glyphs.py` — added 2026-08-23. Renders requested

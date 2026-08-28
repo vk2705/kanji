@@ -726,7 +726,7 @@ rtk476:匕:spoon:
 rtk477:叱:scold:口,匕
 rtk478:匂:fragrant:勹,匕
 rtk479:頃:time:貝,頁,匕
-rtk480:北:north:匕,爿
+rtk480:北:north:匕,prim-sitting-on-the-ground
 rtk481:背:stature:月,北
 rtk482:比:compare:
 rtk483:昆:descendants:日,比
@@ -3329,4 +3329,5 @@ prim-katakana-yu:ユ:katakana yu
 # evidence for naming it, not as evidence for its internal structure.
 prim-heki:辟:heki:尸,口,辛
 prim-teki:啇:teki
+prim-sitting-on-the-ground:?:sitting on the ground
 prim-upside-down-row:业:upside down in a row
