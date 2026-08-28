@@ -3575,7 +3575,7 @@ above.
 - Not deployed to the live server from this session (no production
   access here); data-only change, no backend restart needed on next
   deploy.
-- Coverage: regenerated post-commit.
+- Coverage: **1060/3000 (35.3%)**.
 - **Next session**: standing list is now just the 81 orphaned `rad{N}`
   rows sitting on the live DB (data-only, needs live access to clean
   up — `sync_system_data.py`'s own safety design won't delete them
