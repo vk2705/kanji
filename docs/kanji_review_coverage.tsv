@@ -46,7 +46,7 @@ rtk44	丸	round	44	no
 rtk45	寸	measurement	45	no
 rtk46	肘	elbow	46	no
 rtk47	専	specialty	47	no
-rtk48	博	dr.	48	no
+rtk48	博	dr.	48	yes
 rtk49	占	fortune-telling	49	no
 rtk50	上	above	50	no
 rtk51	下	below	51	no
@@ -169,7 +169,7 @@ rtk167	圭	squared jewel	167	no
 rtk168	封	seal	168	no
 rtk169	涯	horizon	169	no
 rtk170	寺	buddhist temple	170	no
-rtk171	時	time	171	no
+rtk171	時	time	171	yes
 rtk172	均	level	172	no
 rtk173	火	fire	173	no
 rtk174	炎	inflammation	174	no
@@ -289,9 +289,9 @@ rtk287	金	gold	287	yes
 rtk288	銑	pig iron	288	no
 rtk289	鉢	bowl	289	no
 rtk290	銅	copper	290	no
-rtk291	釣	angling	291	no
+rtk291	釣	angling	291	yes
 rtk292	針	needle	292	no
-rtk293	銘	inscription	293	no
+rtk293	銘	inscription	293	yes
 rtk294	鎮	tranquillize	294	yes
 rtk295	道	road-way	295	yes
 rtk296	導	guidance	296	yes
@@ -364,14 +364,14 @@ rtk362	訂	revise	362	yes
 rtk363	訃	obituary	363	no
 rtk364	討	chastise	364	no
 rtk365	訓	instruction	365	no
-rtk366	詔	imperial edict	366	no
+rtk366	詔	imperial edict	366	yes
 rtk367	詰	packed	367	yes
 rtk368	話	tale	368	no
 rtk369	詠	recitation	369	no
-rtk370	詩	poem	370	no
+rtk370	詩	poem	370	yes
 rtk371	語	word	371	yes
 rtk372	読	read	372	yes
-rtk373	調	tune	373	no
+rtk373	調	tune	373	yes
 rtk374	談	discuss	374	no
 rtk375	諾	consent	375	no
 rtk376	諭	rebuke	376	yes
@@ -626,7 +626,7 @@ rtk624	国	country	624	no
 rtk625	団	group	625	no
 rtk626	因	cause	626	no
 rtk627	姻	matrimony	627	yes
-rtk628	咽	windpipe	628	no
+rtk628	咽	windpipe	628	yes
 rtk629	園	park	629	no
 rtk630	回	-times	630	no
 rtk631	壇	podium	631	no

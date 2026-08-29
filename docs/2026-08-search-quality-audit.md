@@ -3687,7 +3687,7 @@ above.
 - Not deployed to the live server from this session (no production
   access here); data-only change, no backend restart needed on next
   deploy.
-- Coverage: regenerated post-commit.
+- Coverage: **1072/3000 (35.7%)**.
 - **Next session**: **222 candidates remain** in the CSV-filtered
   `audit_flattening.py` list (231 minus this session's 9) — a real,
   trackable backlog for continuing the sweep. Re-run the same filter
