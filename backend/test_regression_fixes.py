@@ -371,6 +371,29 @@ EXPECTED_DECOMPOSITIONS = {
     # uncharactered primitives already in data.txt) for the mirrored element.
     "rtk480": {"character": "北", "keyword": "north",
                "expected_part_ids": {"rtk476", "prim-sitting-on-the-ground"}},
+    # Final 5 并 hosts (2026-08-29), closing out the multi-session 并 investigation:
+    # none of these five relate to 丷/horns at all (unlike everywhere else 并 turned
+    # out to be), each was its own distinct bug. 為/偽's 并 was pure unexplained
+    # noise, same as the 豆/弟-family pattern. 誉's 尚 was a wrong stand-in for its
+    # real top shape (matches 興's own 臼+ハ+一, confirmed by rendering next to 興).
+    # 糞 had 井(well) instead of 共(together) -- another wrong-character mix-up like
+    # 噂's 西/酉 and 鄭's 邦/阝 two sessions ago -- plus the same redundant-flattening
+    # pattern once corrected to reference 共 directly. 粉 simply re-flattened 分
+    # (part, rtk844) instead of referencing it. search_by_parts(['eight radical'])
+    # is down to exactly 1 host now: 屏 (rtk2333), confirmed genuinely correct via
+    # cjkvi-ids two sessions ago -- 并 the character really is present there.
+    "rtk988": {"character": "粉", "keyword": "flour",
+               "expected_part_ids": {"rtk987", "rtk844"}},
+    "rtk2067": {"character": "為", "keyword": "do",
+                "expected_part_ids": {"prim-katakana-no", "prim-fire-radical",
+                                       "prim-katakana-yu", "kangxi3", "kangxi20"}},
+    "rtk2068": {"character": "偽", "keyword": "falsehood",
+                "expected_part_ids": {"kangxi3", "prim-fire-radical",
+                                       "prim-katakana-yu", "prim-katakana-no", "kangxi20"}},
+    "rtk2089": {"character": "誉", "keyword": "reputation",
+                "expected_part_ids": {"rtk357", "rtk1531", "prim-katakana-ha", "rtk1"}},
+    "rtk2695": {"character": "糞", "keyword": "shit",
+                "expected_part_ids": {"rtk987", "rtk14", "rtk1934"}},
 }
 
 # character -> hanzi id, spot-checking the 429-character Unihan self-reference backfill

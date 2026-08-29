@@ -1234,7 +1234,7 @@ rtk984:穀:cereals:禾,士,冖,殳,几,又
 rtk985:菌:germ:禾,囗,艾
 rtk986:萎:wither:禾,女,艾
 rtk987:米:rice:
-rtk988:粉:flour:刀,并,米,ハ
+rtk988:粉:flour:米,分
 rtk989:粘:sticky:口,米,卜
 rtk990:粒:grains:米,立
 rtk991:粧:cosmetics:土,米,广
@@ -2313,8 +2313,8 @@ rtk2063:耗:decrease:｜,士,ハ,毛,木,耒,ノ
 rtk2064:尾:tail:毛,尸
 rtk2065:宅:home:ノ,一,乙,宀,primitive_roof
 rtk2066:託:consign:ノ,一,乙,言
-rtk2067:為:do:ノ,杰,ユ,丶,并,勹
-rtk2068:偽:falsehood:丶,杰,ユ,ノ,并,勹
+rtk2067:為:do:ノ,杰,ユ,丶,勹
+rtk2068:偽:falsehood:丶,杰,ユ,ノ,勹
 rtk2069:畏:fear:衣,一,田
 rtk2070:長:long:
 rtk2071:張:counter for bows & stringed instruments:弓,長
@@ -2335,7 +2335,7 @@ rtk2085:悩:trouble:尚,state of mind,凵
 rtk2086:厳:stern:耳,尚,厂,攵
 rtk2087:鎖:chain:貝,金,尚
 rtk2088:挙:raise:手,尚,ハ
-rtk2089:誉:reputation:一,言,尚,并
+rtk2089:誉:reputation:言,臼,ハ,一
 rtk2090:猟:game-hunting:犭,尚,用,几
 rtk2091:鳥:bird:杰
 rtk2092:鳴:chirp:口,鳥,杰
@@ -2939,7 +2939,7 @@ rtk2691:糟:dregs:｜,一,日,米
 rtk2692:糊:paste:米,胡
 rtk2693:籾:unhulled rice:刀,米,丶
 rtk2694:糠:rice bran:ヨ,水,米,广,隶
-rtk2695:糞:shit:｜,一,田,二,并,米,井
+rtk2695:糞:shit:米,田,共
 rtk2696:粟:millet:西,米
 rtk2697:繋:tie:糸,幺,小,車,殳,几,又
 rtk2698:綸:thread:｜,一,糸,幺,小,个,冊,廾

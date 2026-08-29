@@ -3584,6 +3584,66 @@ above.
   well-scoped. Worth picking a fresh area of the dataset (frame-ordered
   sweep, or another owner report) once those two are closed out.
 
+### 2026-08-29 — the `并` investigation, finally closed: last 5 hosts fixed
+
+- Picked up the last item on the standing list: `為`/`偽`/`誉`/`糞`/
+  `粉`, the 5 remaining `并` hosts confirmed unrelated to `丷`/horns
+  three sessions ago. Each turned out to be its own distinct, unrelated
+  bug — no shared root cause this time, unlike every other `并` cluster
+  this investigation has found:
+  - **`粉`** (flour): simple redundant flattening. `heisig-kanjis.csv`
+    lists "rice; part; eight; sword; dagger", and "part" (`分`,
+    already-taught `rtk844` = `刀,ハ`) exactly covers "eight; sword;
+    dagger" — `粉` was flattening `分` into its own raw strokes instead
+    of citing it, plus the stray `并`. Fixed to `米,分`.
+  - **`為`/`偽`** (do / falsehood): `并` was pure unexplained noise,
+    same as the `豆`-family and `弟`-family pattern from earlier this
+    week — CSV ("so; strange building; tail feathers") maps cleanly to
+    the other existing tokens (`杰`/fire radical, `ユ`/katakana yu,
+    `丶`/drop, `勹`/wrap) with nothing left over for `并` to represent,
+    and rendering both characters closely shows no separate mark
+    beyond what those four already cover. Dropped `并` from both,
+    touched nothing else.
+  - **`誉`** (reputation): `尚` was a wrong stand-in for `誉`'s real top
+    shape. Rendered `誉` directly above `興` (leaping; already correctly
+    `臼,口,ハ,冂,一`) and confirmed `誉`'s top is *exactly* `興`'s own
+    top portion (`臼`+`ハ`+`一`) with none of `興`'s bottom (`口`,`冂`)
+    — `尚` (which itself = `口,冂`) doesn't belong to this shape at
+    all. Fixed to `言,臼,ハ,一`, dropping `尚,并`.
+  - **`糞`** (excrement): had `井` (well) where the glyph actually shows
+    `共` (together, `rtk1934` = `ハ,｜,一,二`) — a wrong-character
+    mix-up in the same small family as `噂`'s `西`/`酉` and `鄭`'s
+    `邦`/`阝` typos found two sessions ago, compounded with the usual
+    redundant-flattening pattern once `共` is referenced properly.
+    Fixed to `米,田,共`.
+- Verified: full rebuild from scratch; all five spot-checked via
+  `get_kanji_detail` and resolve to clean chips (e.g. `誉 → {say,
+  mortar, katakana ha, one}`, `糞 → {rice, rice field, together}`);
+  `search_by_parts(['eight radical'])` now returns **exactly 1 host**
+  (`屏`/rtk2333, confirmed genuinely correct two sessions ago) — down
+  from ~182 at the very start of this whole investigation.
+  `test_regression_fixes.py` — added 5 new pinned entries — same 4
+  expected hanzi-scope failures as every prior rebuild, nothing else;
+  full search-term regression checklist unchanged/correct, plus
+  "flour"/"part"/"reputation"/"mortar"/"together" spot-checked.
+- Not deployed to the live server from this session (no production
+  access here); data-only change, no backend restart needed on next
+  deploy.
+- Coverage: regenerated post-commit.
+- **This closes the `并` investigation** that ran across roughly a
+  week of sessions: from ~182 wrong hosts down to 1 confirmed-correct
+  one, via the horns cluster, the sheep/half/quarter/豆/弟/平 families,
+  the IDS-based mass resolution (66 kanji in one pass), `業`/`撲`/`僕`'s
+  reconstruction, and finally these five unrelated stragglers. See the
+  full session-by-session history above for anyone auditing how a
+  single mislabeled character turned into this much investigation.
+- **Next session**: the only standing item left is the 81 orphaned
+  `rad{N}` rows sitting on the live DB (data-only, needs live access —
+  `sync_system_data.py` won't delete them automatically by its own
+  safety design). Otherwise this is a good point to pick a fresh area
+  of the dataset — a frame-ordered sweep, or wait for the next owner
+  report / review-queue dispute.
+
 ## Tooling produced this session
 
 - `backend/render_glyphs.py` — added 2026-08-23. Renders requested
