@@ -504,7 +504,7 @@ rtk254:状:status quo:犬,爿
 rtk255:黙:silence:犬,里,杰,黒
 rtk256:然:sort of thing:犬,夕,杰
 rtk257:荻:reed:艾,犭,火
-rtk258:狩:hunt:犭,寸,宀,primitive_roof
+rtk258:狩:hunt:犭,守
 rtk259:猫:cat:犭,田,艾
 rtk260:牛:cow:
 rtk261:特:special:牛,寸,土
@@ -889,7 +889,7 @@ rtk639:心:heart:
 rtk640:忘:forget:心,亡,亠
 rtk641:恣:selfish:欠,心,冫
 rtk642:忍:endure:心,刃
-rtk643:認:acknowledge:言,心,刃
+rtk643:認:acknowledge:言,忍
 rtk644:忌:mourning:心,已
 rtk645:志:intention:士,心
 rtk646:誌:document:言,志
@@ -957,7 +957,7 @@ rtk707:捨:discard:舎,扌
 rtk708:拐:kidnap:口,刀,扌
 rtk709:摘:pinch:扌,啇
 rtk710:挑:challenge:兆,扌
-rtk711:指:finger:日,匕,扌
+rtk711:指:finger:旨,扌
 rtk712:持:hold:寺,扌
 rtk713:拶:be imminent:巛,夕,扌
 rtk714:括:fasten:ノ,口,十,舌,扌
@@ -1598,7 +1598,7 @@ rtk1348:箸:chopsticks:竹,者
 rtk1349:署:signature:日,老
 rtk1350:暑:sultry:日,老
 rtk1351:諸:various:言,者
-rtk1352:猪:boar:犭,日,老
+rtk1352:猪:boar:犭,者
 rtk1353:渚:strand:水,者
 rtk1354:賭:gamble:貝,者
 rtk1355:峡:gorge:山,人,大,二,丷,亠
@@ -1792,7 +1792,7 @@ rtk1542:酢:vinegar:｜,ノ,酉
 rtk1543:酔:drunk:九,十,酉
 rtk1544:配:distribute:酉,已
 rtk1545:酸:acid:酉,儿,厶,夂
-rtk1546:猶:furthermore:犭,酉,丷
+rtk1546:猶:furthermore:犭,酋
 rtk1547:尊:revered:寸,酋
 rtk1548:豆:beans:几,一,口
 rtk1549:頭:head:豆,頁
@@ -1866,7 +1866,7 @@ rtk1616:壁:wall:辟,土
 rtk1617:璧:sphere:王,辟
 rtk1618:避:evade:口,込,十,辛,立,尸
 rtk1619:新:new:立,木,斤
-rtk1620:薪:fuel:艾,立,木,斤
+rtk1620:薪:fuel:艾,新
 rtk1621:親:parent:見,立,木
 rtk1622:幸:happiness:十,辛,立,亠
 rtk1623:執:tenacious:幸,丸
@@ -2059,7 +2059,7 @@ rtk1809:働:work:亻,動
 rtk1810:種:species:｜,禾,日,里,ノ
 rtk1811:衝:collide:｜,行,日,彳,里,ノ
 rtk1812:薫:send forth fragrance:｜,杰,艾,日,ノ,一
-rtk1813:病:ill:一,内,疒
+rtk1813:病:ill:丙,疒
 rtk1814:痴:stupid:知,疔
 rtk1815:痘:pox:豆,疔
 rtk1816:症:symptoms:正,疒

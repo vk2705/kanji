@@ -3818,12 +3818,62 @@ above.
 - Not deployed to the live server from this session; data-only change, no
   backend restart needed on next deploy.
 - Coverage: **1193/3000 (39.8%)**.
-- **Next session**: roughly 1000+ raw `audit_flattening.py` candidates
-  remain (most still noise pre-CSV-filter; expect ~150-200 CSV-confirmed
-  after filtering, similar to this batch's starting point) — keep using
-  the id-based contiguous-match approach from this session, not the
-  raw-text one. The 81 orphaned `rad{N}` rows on the live DB is still the
-  other standing item, needs production access.
+- **Immediate follow-up, same session**: re-ran `audit_flattening.py` +
+  the CSV filter right after this batch landed and got only **10**
+  CSV-confirmed candidates back (not the ~150-200 expected) — this batch
+  essentially cleared the queue rather than just dented it, because
+  fixing 187 frames removed most of the redundant structure earlier
+  fixes were themselves overlapping with. Worked through all 10:
+  - **3 were iterative-convergence catches** — a fix from this very
+    batch left a *new* redundant-flattening opportunity visible, because
+    the collapse only went one level deep. `認`(rtk643, fixed to
+    `言,心,刃` earlier in this batch) still had `心,刃` sitting there
+    matching `忍`(endure, rtk642)'s own parts exactly — collapsed
+    further to `言,忍`. `病`(rtk1813, fixed to `一,内,疒`) had `一,内`
+    matching `丙`(third class, rtk1096) — collapsed to `丙,疒`
+    (CSV confirms: "sickness; hospital; third class; one; ceiling;
+    inside"). Lesson: a single audit_flattening.py pass isn't a fixed
+    point — worth a quick re-run after any large batch.
+  - **4 were pre-existing pins nobody had circled back to for this
+    specific pattern**: `指`(rtk711, finger) had `日,匕` sitting next to
+    `扌` instead of referencing `旨`(delicious, rtk493) — collapsed to
+    `旨,扌`; `狩`(hunt, rtk258), `猪`(boar, rtk1352), `猶`(furthermore/
+    waver, rtk1546) all came from the earlier out-of-band `犭`(dog
+    radical)-missing fix, which only added the missing radical and left
+    each one's *remainder* flattened — `寸,宀`→`守`(guard, rtk198),
+    `日,老`→`者`(someone, rtk1345), `酉,丷`→`酋`(chieftain, rtk2915)
+    respectively. `薪`(firewood, rtk1620) had `立,木,斤` sitting next to
+    `艾` instead of referencing `新`(new, rtk1619) — collapsed to
+    `艾,新`. All 7 rendered and confirmed before applying.
+  - **3 were correctly left alone**, each with an explicit prior
+    decision on record: `特`(rtk261) and `義`(rtk691) were both
+    owner-reviewed/pinned in earlier sessions with comments explaining
+    the flattened form is deliberate, not a bug; `業`(rtk1931) looked
+    like it should collapse `一,木`→`未`(not yet, rtk229), but the
+    2026-08-27 entry already rendered `業` specifically to settle
+    whether its bottom stroke is `未` or plain `木` and confirmed `木` —
+    the resolved-id match here is coincidental (both `一,木` runs exist,
+    but `未`'s own compound shape genuinely isn't in `業`'s glyph). This
+    is exactly the "coincidental overlap" false-positive `audit_
+    flattening.py`'s own docstring warns about — checking for an
+    existing pin's reasoning before touching it caught it.
+  - Verified: rebuild from scratch; `test_regression_fixes.py` updated
+    (7 entries changed, 336 checks total, same 4 expected hanzi-scope
+    failures, nothing else); search-term regression checklist including
+    "guard"/"someone"/"chieftain"/"third class"/"endure"/"delicious"/
+    "hunt"/"boar"/"waver"/"firewood" all sane; re-running `audit_
+    flattening.py` afterward: 1284 raw candidates (was 1294).
+  - Coverage: pending — see follow-up commit.
+- **Next session**: the CSV-confirmed `audit_flattening.py` queue is
+  essentially empty for the first time this audit — re-run the filter
+  fresh rather than assuming a large backlog still exists. 1284 *raw*
+  (pre-CSV-filter) candidates remain, so there's likely real signal left
+  that the CSV-components heuristic simply can't confirm (CSV's own
+  components column is incomplete/noisy per session 12's findings) —
+  worth spot-sampling the raw list directly, render-first, rather than
+  trusting the CSV filter as the only gate from here. The 81 orphaned
+  `rad{N}` rows on the live DB is still the other standing item, needs
+  production access.
 
 ## Tooling produced this session
 

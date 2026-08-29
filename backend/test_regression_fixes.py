@@ -82,8 +82,12 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"kangxi8", "kangxi9", "kangxi34", "rtk114"}},
     "rtk1122": {"character": "換", "keyword": "interchange",
                 "expected_part_ids": {"kangxi64", "prim-hooked-hand", "rtk1877"}},
+    # Further-collapsed 2026-08-29 (sweep batch 3 follow-up): 指's old
+    # 日,匕,扌 flattened 旨 (delicious, rtk493 = 日,匕) in place instead of
+    # referencing it -- found because fixing other frames made
+    # audit_flattening.py newly flag this one (iterative convergence).
     "rtk711": {"character": "指", "keyword": "finger",
-               "expected_part_ids": {"rtk12", "rtk476", "kangxi64"}},
+               "expected_part_ids": {"rtk493", "kangxi64"}},
     "rtk705": {"character": "打", "keyword": "strike",
                "expected_part_ids": {"kangxi6", "kangxi64"}},
     "rtk1405": {"character": "降", "keyword": "descend",
@@ -182,8 +186,11 @@ EXPECTED_DECOMPOSITIONS = {
     # concept; see docs/2026-08-search-quality-audit.md for the full story.
     "rtk1619": {"character": "新", "keyword": "new",
                 "expected_part_ids": {"rtk462", "rtk207", "rtk1206"}},
+    # Further-collapsed 2026-08-29 (sweep batch 3 follow-up): 薪's old
+    # 艾,立,木,斤 flattened 新 (new, rtk1619) in place instead of
+    # referencing it -- same iterative-convergence discovery as rtk711.
     "rtk1620": {"character": "薪", "keyword": "fuel",
-                "expected_part_ids": {"prim-mugwort", "rtk462", "rtk207", "rtk1206"}},
+                "expected_part_ids": {"prim-mugwort", "rtk1619"}},
     "rtk1621": {"character": "親", "keyword": "parent",
                 "expected_part_ids": {"rtk61", "rtk462", "rtk207"}},
     # 弟-family fix (2026-08-25): all four re-flattened 弟 (younger brother,
@@ -287,8 +294,11 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk881", "rtk1743"}},
     "rtk257": {"character": "荻", "keyword": "reed",
                "expected_part_ids": {"prim-mugwort", "kangxi94", "rtk173"}},
+    # Further-collapsed 2026-08-29 (sweep batch 3 follow-up): the 犭-family
+    # fix only added the missing dog radical, it didn't also clean up the
+    # remainder -- 狩's 寸,宀 flattened 守 (guard, rtk198) in place.
     "rtk258": {"character": "狩", "keyword": "hunt",
-               "expected_part_ids": {"kangxi94", "rtk45", "kangxi40"}},
+               "expected_part_ids": {"kangxi94", "rtk198"}},
     "rtk277": {"character": "狂", "keyword": "lunatic",
                "expected_part_ids": {"kangxi94", "rtk271"}},
     "rtk361": {"character": "獄", "keyword": "prison",
@@ -299,14 +309,18 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"kangxi94", "rtk556"}},
     "rtk757": {"character": "獲", "keyword": "seize",
                "expected_part_ids": {"kangxi94", "rtk752", "prim-mugwort", "kangxi172"}},
+    # Further-collapsed 2026-08-29 (sweep batch 3 follow-up), same as 狩
+    # above: 猪's 日,老 flattened 者 (someone, rtk1345) in place.
     "rtk1352": {"character": "猪", "keyword": "boar",
-                "expected_part_ids": {"kangxi94", "rtk12", "rtk1340"}},
+                "expected_part_ids": {"kangxi94", "rtk1345"}},
     "rtk1356": {"character": "狭", "keyword": "cramped",
                 "expected_part_ids": {"kangxi94", "rtk1023", "rtk112", "rtk2", "kangxi12", "kangxi3", "kangxi8"}},
     "rtk1517": {"character": "犯", "keyword": "crime",
                 "expected_part_ids": {"kangxi94", "rtk75", "kangxi26"}},
+    # Further-collapsed 2026-08-29 (sweep batch 3 follow-up), same as 狩
+    # above: 猶's 酉,丷 flattened 酋 (chieftain, rtk2915) in place.
     "rtk1546": {"character": "猶", "keyword": "furthermore",
-                "expected_part_ids": {"kangxi94", "rtk1534", "kangxi12"}},
+                "expected_part_ids": {"kangxi94", "rtk2915"}},
     "rtk1566": {"character": "猛", "keyword": "fierce",
                 "expected_part_ids": {"kangxi94", "rtk1555", "rtk99"}},
     "rtk1917": {"character": "狙", "keyword": "aim at",
@@ -533,8 +547,13 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk12", "rtk462", "rtk518", "rtk59"}},
     "rtk635": {"character": "庁", "keyword": "government office",
                 "expected_part_ids": {"kangxi53", "rtk95"}},
+    # Further-collapsed 2026-08-29, same day as the batch above: fixing
+    # 刀,丶 -> 刃 left 心,刃 in place, which itself fully matches 忍
+    # (endure, rtk642)'s own parts -- audit_flattening.py caught this as a
+    # brand-new candidate right after the batch landed (iterative
+    # convergence: a fix can make the next redundancy visible).
     "rtk643": {"character": "認", "keyword": "acknowledge",
-                "expected_part_ids": {"rtk357", "rtk639", "rtk88"}},
+                "expected_part_ids": {"rtk357", "rtk642"}},
     "rtk648": {"character": "忠", "keyword": "loyalty",
                 "expected_part_ids": {"rtk39", "rtk639"}},
     "rtk650": {"character": "患", "keyword": "afflicted",
@@ -799,8 +818,11 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"kangxi178", "rtk11", "rtk26"}},
     "rtk1783": {"character": "幹", "keyword": "tree trunk",
                 "expected_part_ids": {"prim-umbrella", "rtk1777", "rtk26"}},
+    # Further-collapsed 2026-08-29, same iterative-convergence discovery
+    # as rtk643 above: fixing 人,冂 -> 内 left 一,内 in place, which fully
+    # matches 丙 (third class, rtk1096)'s own parts.
     "rtk1813": {"character": "病", "keyword": "ill",
-                "expected_part_ids": {"kangxi104", "rtk1", "rtk1095"}},
+                "expected_part_ids": {"kangxi104", "rtk1096"}},
     "rtk1816": {"character": "症", "keyword": "symptoms",
                 "expected_part_ids": {"kangxi104", "rtk405"}},
     "rtk1820": {"character": "嫉", "keyword": "envy",
