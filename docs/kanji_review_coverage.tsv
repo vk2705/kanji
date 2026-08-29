@@ -60,7 +60,7 @@ rtk58	貞	upright	58	yes
 rtk59	員	employee	59	yes
 rtk60	貼	post a bill	60	yes
 rtk61	見	see	61	no
-rtk62	児	newborn babe	62	no
+rtk62	児	newborn babe	62	yes
 rtk63	元	beginning	63	no
 rtk64	頁	page	64	yes
 rtk65	頑	stubborn	65	yes
@@ -71,7 +71,7 @@ rtk69	句	phrase	69	no
 rtk70	肌	texture	70	no
 rtk71	旬	decameron	71	no
 rtk72	勺	ladle	72	no
-rtk73	的	bull's eye	73	no
+rtk73	的	bull's eye	73	yes
 rtk74	首	neck	74	yes
 rtk75	乙	fish guts	75	no
 rtk76	乱	riot	76	no
@@ -129,7 +129,7 @@ rtk127	器	utensil	127	no
 rtk128	臭	stinking	128	no
 rtk129	嗅	sniff	129	no
 rtk130	妙	exquisite	130	no
-rtk131	省	focus	131	no
+rtk131	省	focus	131	yes
 rtk132	厚	thick	132	no
 rtk133	奇	strange	133	no
 rtk134	川	stream	134	no
@@ -139,20 +139,20 @@ rtk137	水	water	137	no
 rtk138	氷	icicle	138	no
 rtk139	永	eternity	139	no
 rtk140	泉	spring	140	no
-rtk141	腺	gland	141	no
+rtk141	腺	gland	141	yes
 rtk142	原	meadow	142	no
 rtk143	願	petition	143	yes
 rtk144	泳	swim	144	no
 rtk145	沼	marsh	145	no
 rtk146	沖	open sea	146	no
-rtk147	汎	pan-	147	no
+rtk147	汎	pan-	147	yes
 rtk148	江	creek	148	no
-rtk149	汰	cleanse	149	no
+rtk149	汰	cleanse	149	yes
 rtk150	汁	soup	150	no
 rtk151	沙	grains of sand	151	no
 rtk152	潮	tide	152	no
 rtk153	源	source	153	yes
-rtk154	活	lively	154	no
+rtk154	活	lively	154	yes
 rtk155	消	extinguish	155	no
 rtk156	況	but of course	156	no
 rtk157	河	river	157	no
@@ -211,12 +211,12 @@ rtk209	森	forest	209	no
 rtk210	桂	japanese judas-tree	210	no
 rtk211	柏	oak	211	no
 rtk212	枠	frame	212	no
-rtk213	梢	treetops	213	no
+rtk213	梢	treetops	213	yes
 rtk214	棚	shelf	214	yes
 rtk215	杏	apricot	215	no
 rtk216	桐	paulownia	216	yes
 rtk217	植	plant	217	no
-rtk218	椅	chair	218	no
+rtk218	椅	chair	218	yes
 rtk219	枯	wither	219	yes
 rtk220	朴	crude	220	no
 rtk221	村	town	221	no
@@ -235,8 +235,8 @@ rtk233	味	flavor	233	yes
 rtk234	妹	younger sister	234	yes
 rtk235	朱	vermilion	235	yes
 rtk236	株	stocks	236	no
-rtk237	若	young	237	no
-rtk238	草	grass	238	no
+rtk237	若	young	237	yes
+rtk238	草	grass	238	yes
 rtk239	苦	suffering	239	yes
 rtk240	苛	bullying	240	no
 rtk241	寛	tolerant	241	yes
@@ -249,8 +249,8 @@ rtk247	暮	livelihood	247	no
 rtk248	膜	membrane	248	no
 rtk249	苗	seedling	249	no
 rtk250	兆	portent	250	no
-rtk251	桃	peach tree	251	no
-rtk252	眺	stare	252	no
+rtk251	桃	peach tree	251	yes
+rtk252	眺	stare	252	yes
 rtk253	犬	dog	253	no
 rtk254	状	status quo	254	no
 rtk255	黙	silence	255	no
@@ -299,7 +299,7 @@ rtk297	辻	crossing	297	no
 rtk298	迅	swift	298	no
 rtk299	造	create	299	no
 rtk300	迫	urge	300	no
-rtk301	逃	escape	301	no
+rtk301	逃	escape	301	yes
 rtk302	辺	environs	302	no
 rtk303	巡	patrol	303	no
 rtk304	車	car	304	no
@@ -323,14 +323,14 @@ rtk321	冗	superfluous	321	no
 rtk322	冥	hades	322	no
 rtk323	軍	army	323	no
 rtk324	輝	radiance	324	no
-rtk325	運	carry	325	no
+rtk325	運	carry	325	yes
 rtk326	冠	crown	326	no
 rtk327	夢	dream	327	yes
 rtk328	坑	pit	328	no
 rtk329	高	tall	329	no
 rtk330	享	receive	330	no
 rtk331	塾	cram school	331	no
-rtk332	熟	mellow	332	no
+rtk332	熟	mellow	332	yes
 rtk333	亭	pavilion	333	no
 rtk334	京	capital	334	no
 rtk335	涼	refreshing	335	yes
@@ -486,11 +486,11 @@ rtk484	皆	all	484	no
 rtk485	楷	block letters	485	no
 rtk486	諧	orderliness	486	yes
 rtk487	混	mix	487	yes
-rtk488	渇	thirst	488	no
-rtk489	謁	audience	489	no
-rtk490	褐	brown	490	no
-rtk491	喝	hoarse	491	no
-rtk492	葛	kudzu	492	no
+rtk488	渇	thirst	488	yes
+rtk489	謁	audience	489	yes
+rtk490	褐	brown	490	yes
+rtk491	喝	hoarse	491	yes
+rtk492	葛	kudzu	492	yes
 rtk493	旨	delicious	493	no
 rtk494	脂	fat	494	yes
 rtk495	詣	visit a shrine	495	yes
@@ -633,7 +633,7 @@ rtk631	壇	podium	631	no
 rtk632	店	store	632	yes
 rtk633	庫	warehouse	633	no
 rtk634	庭	courtyard	634	no
-rtk635	庁	government office	635	no
+rtk635	庁	government office	635	yes
 rtk636	床	bed	636	no
 rtk637	麻	hemp	637	no
 rtk638	磨	grind	638	no
@@ -641,14 +641,14 @@ rtk639	心	heart	639	no
 rtk640	忘	forget	640	no
 rtk641	恣	selfish	641	no
 rtk642	忍	endure	642	yes
-rtk643	認	acknowledge	643	no
+rtk643	認	acknowledge	643	yes
 rtk644	忌	mourning	644	no
 rtk645	志	intention	645	no
 rtk646	誌	document	646	yes
 rtk647	芯	wick	647	no
-rtk648	忠	loyalty	648	no
+rtk648	忠	loyalty	648	yes
 rtk649	串	shish kebab	649	no
-rtk650	患	afflicted	650	no
+rtk650	患	afflicted	650	yes
 rtk651	思	think	651	no
 rtk652	恩	grace	652	yes
 rtk653	応	apply	653	no
@@ -774,9 +774,9 @@ rtk772	茎	stalk	772	no
 rtk773	怪	suspicious	773	yes
 rtk774	軽	lightly	774	no
 rtk775	叔	uncle	775	no
-rtk776	督	coach	776	no
+rtk776	督	coach	776	yes
 rtk777	寂	loneliness	777	yes
-rtk778	淑	graceful	778	no
+rtk778	淑	graceful	778	yes
 rtk779	反	anti-	779	no
 rtk780	坂	slope	780	yes
 rtk781	板	plank	781	no
@@ -791,7 +791,7 @@ rtk789	将	leader	789	no
 rtk790	奨	exhort	790	no
 rtk791	采	grab	791	no
 rtk792	採	pick	792	yes
-rtk793	菜	vegetable	793	no
+rtk793	菜	vegetable	793	yes
 rtk794	受	accept	794	no
 rtk795	授	impart	795	yes
 rtk796	愛	love	796	no
@@ -800,7 +800,7 @@ rtk798	払	pay	798	yes
 rtk799	広	wide	799	no
 rtk800	勾	hooked	800	no
 rtk801	拡	broaden	801	yes
-rtk802	鉱	mineral	802	no
+rtk802	鉱	mineral	802	yes
 rtk803	弁	valve	803	no
 rtk804	雄	male	804	no
 rtk805	台	pedestal	805	no
@@ -808,10 +808,10 @@ rtk806	怠	neglect	806	no
 rtk807	治	reign	807	no
 rtk808	冶	metallurgy	808	no
 rtk809	始	commence	809	no
-rtk810	胎	womb	810	no
+rtk810	胎	womb	810	yes
 rtk811	窓	window	811	yes
 rtk812	去	gone	812	no
-rtk813	法	method	813	no
+rtk813	法	method	813	yes
 rtk814	会	meeting	814	no
 rtk815	至	climax	815	no
 rtk816	室	room	816	yes
@@ -822,7 +822,7 @@ rtk820	棄	abandon	820	no
 rtk821	育	bring up	821	no
 rtk822	撤	remove	822	yes
 rtk823	充	allot	823	no
-rtk824	銃	gun	824	no
+rtk824	銃	gun	824	yes
 rtk825	硫	sulfur	825	no
 rtk826	流	current	826	no
 rtk827	允	license	827	no
@@ -848,7 +848,7 @@ rtk846	頒	partition	846	yes
 rtk847	公	public	847	no
 rtk848	松	pine tree	848	no
 rtk849	翁	venerable old man	849	no
-rtk850	訟	sue	850	no
+rtk850	訟	sue	850	yes
 rtk851	谷	valley	851	no
 rtk852	浴	bathe	852	no
 rtk853	容	contain	853	yes
@@ -870,7 +870,7 @@ rtk868	披	expose	868	yes
 rtk869	破	rend	869	no
 rtk870	被	incur	870	no
 rtk871	残	remainder	871	no
-rtk872	殉	martyrdom	872	no
+rtk872	殉	martyrdom	872	yes
 rtk873	殊	particularly	873	yes
 rtk874	殖	augment	874	no
 rtk875	列	file	875	yes
@@ -924,10 +924,10 @@ rtk922	力	power	922	no
 rtk923	男	man	923	no
 rtk924	労	labor	924	no
 rtk925	募	recruit	925	no
-rtk926	劣	inferiority	926	no
+rtk926	劣	inferiority	926	yes
 rtk927	功	achievement	927	no
 rtk928	勧	persuade	928	yes
-rtk929	努	toil	929	no
+rtk929	努	toil	929	yes
 rtk930	勃	uprising	930	no
 rtk931	励	encourage	931	yes
 rtk932	加	add	932	no
@@ -942,9 +942,9 @@ rtk940	復	restore	940	yes
 rtk941	得	gain	941	no
 rtk942	従	accompany	942	yes
 rtk943	徒	junior	943	no
-rtk944	待	wait	944	no
-rtk945	往	journey	945	no
-rtk946	征	subjugate	946	no
+rtk944	待	wait	944	yes
+rtk945	往	journey	945	yes
+rtk946	征	subjugate	946	yes
 rtk947	径	diameter	947	no
 rtk948	彼	he	948	no
 rtk949	役	duty	949	no
@@ -965,7 +965,7 @@ rtk963	和	harmony	963	no
 rtk964	移	shift	964	no
 rtk965	秒	second	965	no
 rtk966	秋	autumn	966	no
-rtk967	愁	distress	967	no
+rtk967	愁	distress	967	yes
 rtk968	私	private	968	no
 rtk969	秩	regularity	969	no
 rtk970	秘	secret	970	no
@@ -981,10 +981,10 @@ rtk979	委	committee	979	no
 rtk980	秀	excel	980	no
 rtk981	透	transparent	981	no
 rtk982	誘	entice	982	no
-rtk983	稽	training	983	no
+rtk983	稽	training	983	yes
 rtk984	穀	cereals	984	no
 rtk985	菌	germ	985	no
-rtk986	萎	numb	986	no
+rtk986	萎	numb	986	yes
 rtk987	米	rice	987	no
 rtk988	粉	flour	988	yes
 rtk989	粘	sticky	989	no
@@ -992,8 +992,8 @@ rtk990	粒	grains	990	no
 rtk991	粧	cosmetics	991	no
 rtk992	迷	astray	992	no
 rtk993	粋	chic	993	no
-rtk994	謎	riddle	994	no
-rtk995	糧	provisions	995	no
+rtk994	謎	riddle	994	yes
+rtk995	糧	provisions	995	yes
 rtk996	菊	chrysanthemum	996	no
 rtk997	奥	core	997	no
 rtk998	数	number	998	yes
@@ -1019,7 +1019,7 @@ rtk1017	算	calculate	1017	yes
 rtk1018	答	solution	1018	yes
 rtk1019	策	scheme	1019	yes
 rtk1020	簿	register	1020	yes
-rtk1021	築	fabricate	1021	no
+rtk1021	築	fabricate	1021	yes
 rtk1022	篭	basket	1022	yes
 rtk1023	人	person	1023	no
 rtk1024	佐	assistant	1024	yes
@@ -1133,7 +1133,7 @@ rtk1131	賜	grant	1131	yes
 rtk1132	尿	urine	1132	no
 rtk1133	尼	nun	1133	no
 rtk1134	尻	buttocks	1134	no
-rtk1135	泥	mud	1135	no
+rtk1135	泥	mud	1135	yes
 rtk1136	塀	fence	1136	no
 rtk1137	履	footgear	1137	yes
 rtk1138	屋	roof	1138	no
@@ -1154,7 +1154,7 @@ rtk1152	尽	exhaust	1152	no
 rtk1153	沢	swamp	1153	no
 rtk1154	訳	translate	1154	no
 rtk1155	択	choose	1155	yes
-rtk1156	昼	daytime	1156	no
+rtk1156	昼	daytime	1156	yes
 rtk1157	戸	door	1157	no
 rtk1158	肩	shoulder	1158	no
 rtk1159	房	tassel	1159	no
@@ -1274,7 +1274,7 @@ rtk1272	措	set aside	1272	yes
 rtk1273	散	scatter	1273	yes
 rtk1274	廿	twenty	1274	no
 rtk1275	庶	commoner	1275	no
-rtk1276	遮	intercept	1276	no
+rtk1276	遮	intercept	1276	yes
 rtk1277	席	seat	1277	no
 rtk1278	度	degrees	1278	no
 rtk1279	渡	transit	1279	no
@@ -1296,9 +1296,9 @@ rtk1294	勝	victory	1294	yes
 rtk1295	藤	wisteria	1295	yes
 rtk1296	謄	facsimilie	1296	yes
 rtk1297	片	one-sided	1297	no
-rtk1298	版	printing block	1298	no
+rtk1298	版	printing block	1298	yes
 rtk1299	之	of	1299	no
-rtk1300	乏	destitution	1300	no
+rtk1300	乏	destitution	1300	yes
 rtk1301	芝	turf	1301	no
 rtk1302	不	negative	1302	no
 rtk1303	否	negate	1303	no
@@ -1312,7 +1312,7 @@ rtk1310	挨	shove	1310	yes
 rtk1311	矛	halberd	1311	yes
 rtk1312	柔	tender	1312	no
 rtk1313	務	task	1313	no
-rtk1314	霧	fog	1314	no
+rtk1314	霧	fog	1314	yes
 rtk1315	班	squad	1315	yes
 rtk1316	帰	homecoming	1316	yes
 rtk1317	弓	bow	1317	no
@@ -1337,21 +1337,21 @@ rtk1335	与	bestow	1335	no
 rtk1336	写	copy	1336	no
 rtk1337	身	somebody	1337	no
 rtk1338	射	shoot	1338	no
-rtk1339	謝	apologize	1339	no
+rtk1339	謝	apologize	1339	yes
 rtk1340	老	old man	1340	no
 rtk1341	考	consider	1341	no
 rtk1342	孝	filial piety	1342	no
 rtk1343	教	teach	1343	yes
 rtk1344	拷	torture	1344	yes
 rtk1345	者	someone	1345	no
-rtk1346	煮	boil	1346	no
-rtk1347	著	renowned	1347	no
+rtk1346	煮	boil	1346	yes
+rtk1347	著	renowned	1347	yes
 rtk1348	箸	chopsticks	1348	yes
 rtk1349	署	signature	1349	yes
 rtk1350	暑	sultry	1350	no
-rtk1351	諸	various	1351	no
+rtk1351	諸	various	1351	yes
 rtk1352	猪	boar	1352	yes
-rtk1353	渚	strand	1353	no
+rtk1353	渚	strand	1353	yes
 rtk1354	賭	gamble	1354	yes
 rtk1355	峡	gorge	1355	yes
 rtk1356	狭	cramped	1356	yes
@@ -1368,22 +1368,22 @@ rtk1366	父	father	1366	no
 rtk1367	釜	cauldron	1367	yes
 rtk1368	交	mingle	1368	no
 rtk1369	効	merit	1369	no
-rtk1370	較	contrast	1370	no
+rtk1370	較	contrast	1370	yes
 rtk1371	校	exam	1371	no
 rtk1372	足	leg	1372	no
 rtk1373	促	stimulate	1373	yes
 rtk1374	捉	nab	1374	yes
 rtk1375	距	long-distance	1375	no
 rtk1376	路	path	1376	no
-rtk1377	露	dew	1377	no
-rtk1378	跳	hop	1378	no
+rtk1377	露	dew	1377	yes
+rtk1378	跳	hop	1378	yes
 rtk1379	躍	leap	1379	yes
 rtk1380	践	tread	1380	no
 rtk1381	踏	step	1381	no
 rtk1382	踪	trail	1382	yes
 rtk1383	骨	skeleton	1383	no
 rtk1384	滑	slippery	1384	no
-rtk1385	髄	marrow	1385	no
+rtk1385	髄	marrow	1385	yes
 rtk1386	禍	calamity	1386	yes
 rtk1387	渦	whirlpool	1387	no
 rtk1388	鍋	pot	1388	no
@@ -1427,7 +1427,7 @@ rtk1425	探	grope	1425	yes
 rtk1426	深	deep	1426	no
 rtk1427	丘	hill	1427	no
 rtk1428	岳	point	1428	no
-rtk1429	兵	soldier	1429	no
+rtk1429	兵	soldier	1429	yes
 rtk1430	浜	seacoast	1430	no
 rtk1431	糸	thread	1431	no
 rtk1432	織	weave	1432	no
@@ -1436,17 +1436,17 @@ rtk1434	縮	shrink	1434	yes
 rtk1435	繁	luxuriant	1435	yes
 rtk1436	縦	vertical	1436	yes
 rtk1437	緻	fine	1437	yes
-rtk1438	線	line	1438	no
+rtk1438	線	line	1438	yes
 rtk1439	綻	come apart at the seams	1439	yes
 rtk1440	締	tighten	1440	yes
 rtk1441	維	fiber	1441	no
 rtk1442	羅	gauze	1442	yes
 rtk1443	練	practice	1443	no
-rtk1444	緒	thong	1444	no
+rtk1444	緒	thong	1444	yes
 rtk1445	続	continue	1445	no
 rtk1446	絵	picture	1446	yes
 rtk1447	統	overall	1447	yes
-rtk1448	絞	strangle	1448	no
+rtk1448	絞	strangle	1448	yes
 rtk1449	給	salary	1449	yes
 rtk1450	絡	entwine	1450	yes
 rtk1451	結	tie	1451	yes
@@ -1474,7 +1474,7 @@ rtk1472	縁	affinity	1472	no
 rtk1473	網	netting	1473	yes
 rtk1474	緊	tense	1474	no
 rtk1475	紫	purple	1475	no
-rtk1476	縛	truss	1476	no
+rtk1476	縛	truss	1476	yes
 rtk1477	縄	straw rope	1477	no
 rtk1478	幼	infancy	1478	no
 rtk1479	後	behind	1479	no
@@ -1496,13 +1496,13 @@ rtk1494	孫	grandchild	1494	no
 rtk1495	懸	suspend	1495	yes
 rtk1496	遜	modest	1496	no
 rtk1497	却	instead	1497	no
-rtk1498	脚	shins	1498	no
+rtk1498	脚	shins	1498	yes
 rtk1499	卸	wholesale	1499	yes
 rtk1500	御	honorable	1500	yes
 rtk1501	服	clothing	1501	no
 rtk1502	命	fate	1502	no
 rtk1503	令	orders	1503	no
-rtk1504	零	zero	1504	no
+rtk1504	零	zero	1504	yes
 rtk1505	齢	age	1505	no
 rtk1506	冷	cool	1506	no
 rtk1507	領	jurisdiction	1507	yes
@@ -1526,7 +1526,7 @@ rtk1524	怨	grudge	1524	no
 rtk1525	柳	willow	1525	no
 rtk1526	卵	egg	1526	no
 rtk1527	留	detain	1527	no
-rtk1528	瑠	marine blue	1528	no
+rtk1528	瑠	marine blue	1528	yes
 rtk1529	貿	trade	1529	yes
 rtk1530	印	stamp	1530	no
 rtk1531	臼	mortar	1531	no
@@ -1534,7 +1534,7 @@ rtk1532	毀	break	1532	no
 rtk1533	興	entertain	1533	no
 rtk1534	酉	sign of the bird	1534	no
 rtk1535	酒	sake	1535	no
-rtk1536	酌	bartending	1536	no
+rtk1536	酌	bartending	1536	yes
 rtk1537	酎	hooch	1537	no
 rtk1538	酵	fermentation	1538	no
 rtk1539	酷	cruel	1539	no
@@ -1555,11 +1555,11 @@ rtk1553	喜	rejoice	1553	yes
 rtk1554	樹	timber-trees	1554	yes
 rtk1555	皿	dish	1555	no
 rtk1556	血	blood	1556	no
-rtk1557	盆	basin	1557	no
+rtk1557	盆	basin	1557	yes
 rtk1558	盟	alliance	1558	no
 rtk1559	盗	steal	1559	no
 rtk1560	温	warm	1560	no
-rtk1561	蓋	lid	1561	no
+rtk1561	蓋	lid	1561	yes
 rtk1562	監	oversee	1562	yes
 rtk1563	濫	overflow	1563	yes
 rtk1564	鑑	specimen	1564	yes
@@ -1581,16 +1581,16 @@ rtk1579	朗	melodious	1579	no
 rtk1580	浪	wandering	1580	no
 rtk1581	娘	daughter	1581	no
 rtk1582	食	eat	1582	no
-rtk1583	飯	meal	1583	no
+rtk1583	飯	meal	1583	yes
 rtk1584	飲	drink	1584	no
 rtk1585	飢	hungry	1585	no
-rtk1586	餓	starve	1586	no
+rtk1586	餓	starve	1586	yes
 rtk1587	飾	decorate	1587	yes
 rtk1588	餌	feed	1588	no
 rtk1589	館	bldg.	1589	yes
 rtk1590	餅	mochi	1590	yes
 rtk1591	養	foster	1591	yes
-rtk1592	飽	sated	1592	no
+rtk1592	飽	sated	1592	yes
 rtk1593	既	previously	1593	no
 rtk1594	概	outline	1594	yes
 rtk1595	慨	rue	1595	yes
@@ -1632,13 +1632,13 @@ rtk1630	碑	tombstone	1630	no
 rtk1631	陸	land	1631	yes
 rtk1632	睦	intimate	1632	no
 rtk1633	勢	forces	1633	no
-rtk1634	熱	heat	1634	no
+rtk1634	熱	heat	1634	yes
 rtk1635	菱	diamond	1635	no
 rtk1636	陵	mausoleum	1636	yes
 rtk1637	亥	sign of the hog	1637	no
 rtk1638	核	nucleus	1638	no
 rtk1639	刻	engrave	1639	yes
-rtk1640	該	above-stated	1640	no
+rtk1640	該	above-stated	1640	yes
 rtk1641	骸	remains	1641	no
 rtk1642	劾	censure	1642	no
 rtk1643	述	mention	1643	no
@@ -1668,7 +1668,7 @@ rtk1666	表	surface	1666	no
 rtk1667	俵	bag	1667	yes
 rtk1668	潔	undefiled	1668	no
 rtk1669	契	pledge	1669	no
-rtk1670	喫	consume	1670	no
+rtk1670	喫	consume	1670	yes
 rtk1671	害	harm	1671	yes
 rtk1672	轄	control	1672	yes
 rtk1673	割	proportion	1673	yes
@@ -1704,9 +1704,9 @@ rtk1702	嘆	sigh	1702	no
 rtk1703	難	difficult	1703	no
 rtk1704	華	splendor	1704	no
 rtk1705	垂	droop	1705	no
-rtk1706	唾	saliva	1706	no
-rtk1707	睡	drowsy	1707	no
-rtk1708	錘	spindle	1708	no
+rtk1706	唾	saliva	1706	yes
+rtk1707	睡	drowsy	1707	yes
+rtk1708	錘	spindle	1708	yes
 rtk1709	乗	ride	1709	no
 rtk1710	剰	surplus	1710	yes
 rtk1711	今	now	1711	no
@@ -1729,7 +1729,7 @@ rtk1727	廉	bargain	1727	yes
 rtk1728	西	west	1728	no
 rtk1729	価	value	1729	yes
 rtk1730	要	need	1730	no
-rtk1731	腰	loins	1731	no
+rtk1731	腰	loins	1731	yes
 rtk1732	票	ballot	1732	yes
 rtk1733	漂	drift	1733	yes
 rtk1734	標	signpost	1734	yes
@@ -1774,14 +1774,14 @@ rtk1772	偉	admirable	1772	yes
 rtk1773	違	difference	1773	no
 rtk1774	緯	horizontal	1774	no
 rtk1775	衛	defense	1775	no
-rtk1776	韓	korea	1776	no
+rtk1776	韓	korea	1776	yes
 rtk1777	干	dry	1777	no
 rtk1778	肝	liver	1778	no
 rtk1779	刊	publish	1779	yes
 rtk1780	汗	sweat	1780	no
 rtk1781	軒	flats	1781	no
 rtk1782	岸	beach	1782	no
-rtk1783	幹	tree trunk	1783	no
+rtk1783	幹	tree trunk	1783	yes
 rtk1784	芋	potato	1784	no
 rtk1785	宇	eaves	1785	yes
 rtk1786	余	too much	1786	no
@@ -1811,10 +1811,10 @@ rtk1809	働	work	1809	yes
 rtk1810	種	species	1810	no
 rtk1811	衝	collide	1811	no
 rtk1812	薫	fragrant	1812	no
-rtk1813	病	ill	1813	no
+rtk1813	病	ill	1813	yes
 rtk1814	痴	stupid	1814	yes
 rtk1815	痘	pox	1815	yes
-rtk1816	症	symptoms	1816	no
+rtk1816	症	symptoms	1816	yes
 rtk1817	瘍	carbuncle	1817	no
 rtk1818	痩	lose weight	1818	no
 rtk1819	疾	rapidly	1819	yes
@@ -1844,12 +1844,12 @@ rtk1842	僚	colleague	1842	yes
 rtk1843	瞭	obvious	1843	yes
 rtk1844	寮	dormitory	1844	yes
 rtk1845	療	heal	1845	yes
-rtk1846	彫	carve	1846	no
+rtk1846	彫	carve	1846	yes
 rtk1847	形	shape	1847	no
-rtk1848	影	shadow	1848	no
+rtk1848	影	shadow	1848	yes
 rtk1849	杉	cedar	1849	no
-rtk1850	彩	coloring	1850	no
-rtk1851	彰	patent	1851	no
+rtk1850	彩	coloring	1850	yes
+rtk1851	彰	patent	1851	yes
 rtk1852	彦	lad	1852	yes
 rtk1853	顔	face	1853	yes
 rtk1854	須	ought	1854	yes
@@ -1905,7 +1905,7 @@ rtk1903	碁	go	1903	no
 rtk1904	基	fundamentals	1904	no
 rtk1905	甚	tremendously	1905	no
 rtk1906	勘	intuition	1906	no
-rtk1907	堪	withstand	1907	no
+rtk1907	堪	withstand	1907	yes
 rtk1908	貴	precious	1908	yes
 rtk1909	遺	bequeath	1909	yes
 rtk1910	遣	dispatch	1910	no
@@ -1949,7 +1949,7 @@ rtk1947	丼	donburi	1947	no
 rtk1948	囲	surround	1948	no
 rtk1949	耕	till	1949	no
 rtk1950	亜	asia	1950	no
-rtk1951	悪	bad	1951	no
+rtk1951	悪	bad	1951	yes
 rtk1952	円	circle	1952	no
 rtk1953	角	angle	1953	no
 rtk1954	触	contact	1954	no
@@ -1988,15 +1988,15 @@ rtk1986	郡	county	1986	no
 rtk1987	郊	outskirts	1987	no
 rtk1988	部	section	1988	no
 rtk1989	都	metropolis	1989	no
-rtk1990	郵	mail	1990	no
+rtk1990	郵	mail	1990	yes
 rtk1991	邦	home country	1991	no
 rtk1992	那	interrogative	1992	no
 rtk1993	郷	hometown	1993	no
 rtk1994	響	echo	1994	no
 rtk1995	郎	son	1995	no
-rtk1996	廊	corridor	1996	no
+rtk1996	廊	corridor	1996	yes
 rtk1997	盾	shield	1997	no
-rtk1998	循	sequential	1998	no
+rtk1998	循	sequential	1998	yes
 rtk1999	派	faction	1999	no
 rtk2000	脈	vein	2000	no
 rtk2001	衆	masses	2001	no
@@ -2009,13 +2009,13 @@ rtk2007	司	director	2007	no
 rtk2008	伺	pay respects	2008	yes
 rtk2009	詞	parts of speech	2009	no
 rtk2010	飼	domesticate	2010	no
-rtk2011	嗣	heir	2011	no
+rtk2011	嗣	heir	2011	yes
 rtk2012	舟	boat	2012	no
 rtk2013	舶	liner	2013	no
 rtk2014	航	navigate	2014	yes
 rtk2015	舷	gunwale	2015	no
 rtk2016	般	carrier	2016	no
-rtk2017	盤	tray	2017	no
+rtk2017	盤	tray	2017	yes
 rtk2018	搬	conveyor	2018	yes
 rtk2019	船	ship	2019	no
 rtk2020	艦	warship	2020	yes
@@ -2047,7 +2047,7 @@ rtk2045	眉	eyebrow	2045	no
 rtk2046	呉	give	2046	no
 rtk2047	娯	recreation	2047	no
 rtk2048	誤	mistake	2048	yes
-rtk2049	蒸	steam	2049	no
+rtk2049	蒸	steam	2049	yes
 rtk2050	承	acquiesce	2050	no
 rtk2051	函	bin	2051	no
 rtk2052	極	poles	2052	no
@@ -2077,9 +2077,9 @@ rtk2075	展	unfold	2075	no
 rtk2076	喪	miss	2076	no
 rtk2077	巣	nest	2077	no
 rtk2078	単	simple	2078	no
-rtk2079	戦	war	2079	no
+rtk2079	戦	war	2079	yes
 rtk2080	禅	zen	2080	yes
-rtk2081	弾	bullet	2081	no
+rtk2081	弾	bullet	2081	yes
 rtk2082	桜	cherry tree	2082	no
 rtk2083	獣	animal	2083	no
 rtk2084	脳	brain	2084	no
@@ -2135,7 +2135,7 @@ rtk2133	駒	pony	2133	no
 rtk2134	験	verification	2134	no
 rtk2135	騎	equestrian	2135	no
 rtk2136	駐	parking	2136	no
-rtk2137	駆	drive	2137	no
+rtk2137	駆	drive	2137	yes
 rtk2138	駅	station	2138	no
 rtk2139	騒	boisterous	2139	no
 rtk2140	駄	burdensome	2140	no
@@ -2145,11 +2145,11 @@ rtk2143	罵	insult	2143	yes
 rtk2144	騰	inflation	2144	yes
 rtk2145	虎	tiger	2145	no
 rtk2146	虜	captive	2146	yes
-rtk2147	膚	skin	2147	no
+rtk2147	膚	skin	2147	yes
 rtk2148	虚	void	2148	no
 rtk2149	戯	frolic	2149	no
-rtk2150	虞	uneasiness	2150	no
-rtk2151	慮	prudence	2151	no
+rtk2150	虞	uneasiness	2150	yes
+rtk2151	慮	prudence	2151	yes
 rtk2152	劇	drama	2152	yes
 rtk2153	虐	tyrannize	2153	no
 rtk2154	鹿	deer	2154	no
@@ -2157,7 +2157,7 @@ rtk2155	麓	foot of a mountain	2155	no
 rtk2156	薦	recommend	2156	no
 rtk2157	慶	jubilation	2157	no
 rtk2158	麗	lovely	2158	no
-rtk2159	熊	bear	2159	no
+rtk2159	熊	bear	2159	yes
 rtk2160	能	ability	2160	no
 rtk2161	態	attitude	2161	no
 rtk2162	寅	sign of the tiger	2162	yes
@@ -2180,9 +2180,9 @@ rtk2178	魔	witch	2178	no
 rtk2179	魅	fascination	2179	yes
 rtk2180	塊	clod	2180	no
 rtk2181	襲	attack	2181	no
-rtk2182	嚇	upbraid	2182	no
+rtk2182	嚇	upbraid	2182	yes
 rtk2183	朕	majestic plural	2183	yes
-rtk2184	雰	atmosphere	2184	no
+rtk2184	雰	atmosphere	2184	yes
 rtk2185	箇	item	2185	yes
 rtk2186	錬	tempering	2186	yes
 rtk2187	遵	abide by	2187	yes

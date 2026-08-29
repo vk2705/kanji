@@ -3817,7 +3817,7 @@ above.
   down from 1650 to 1294.
 - Not deployed to the live server from this session; data-only change, no
   backend restart needed on next deploy.
-- Coverage: pending — see follow-up commit.
+- Coverage: **1193/3000 (39.8%)**.
 - **Next session**: roughly 1000+ raw `audit_flattening.py` candidates
   remain (most still noise pre-CSV-filter; expect ~150-200 CSV-confirmed
   after filtering, similar to this batch's starting point) — keep using
