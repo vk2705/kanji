@@ -536,7 +536,7 @@ rtk286:柱:pillar:王,木,丶
 rtk287:金:gold:王,ハ,个,丷
 rtk288:銑:pig iron:ノ,金,土,儿
 rtk289:鉢:bowl:一,金,木
-rtk290:銅:copper:金,口,冂,一
+rtk290:銅:copper:金,同
 rtk291:釣:angling:金,勺
 rtk292:針:needle:金,十
 rtk293:銘:inscription:金,名
@@ -559,9 +559,9 @@ rtk309:前:in front:一,月,丷
 rtk310:煎:broil:一,月,丷,杰
 rtk311:各:each:口,夂
 rtk312:格:status:口,木,夂
-rtk313:賂:bribe:貝,口,夂
+rtk313:賂:bribe:貝,各
 rtk314:略:abbreviation:口,田,夂
-rtk315:客:guest:口,夂,宀,primitive_roof
+rtk315:客:guest:各,宀,primitive_roof
 rtk316:額:forehead:貝,口,頁,夂,宀,primitive_roof
 rtk317:夏:summer:一,自,夂,目
 rtk318:処:dispose:几,夂
@@ -615,7 +615,7 @@ rtk365:訓:instruction:言,川
 rtk366:詔:imperial edict:言,召
 rtk367:詰:packed:言,吉
 rtk368:話:tale:言,口,舌
-rtk369:詠:recitation:言,水,丶
+rtk369:詠:recitation:言,永
 rtk370:詩:poem:言,寺
 rtk371:語:word:言,吾
 rtk372:読:read:言,売
@@ -664,7 +664,7 @@ rtk414:是:just so:日,疋
 rtk415:題:topic:貝,頁,是
 rtk416:堤:dike:土,是
 rtk417:建:build:廴,聿
-rtk418:鍵:key:金,廴,聿
+rtk418:鍵:key:金,建
 rtk419:延:prolong:一,止,廴
 rtk420:誕:nativity:ノ,言,止,廴
 rtk421:礎:cornerstone:口,石,疋,木
@@ -746,7 +746,7 @@ rtk496:壱:one (in documents):士,冖,匕
 rtk497:毎:every:母,毋
 rtk498:敏:cleverness:母,攵,毋
 rtk499:梅:plum:母,木,毋
-rtk500:海:sea:水,母,毋
+rtk500:海:sea:水,毎
 rtk501:乞:beg:ノ,一,乙,人
 rtk502:乾:drought:乙,十,日,ノ,一,人
 rtk503:腹:abdomen:月,日,夂,ノ,一,人
@@ -788,7 +788,7 @@ rtk538:説:opinion:言,口,丷,儿
 rtk539:鋭:pointed:金,口,丷,个,儿
 rtk540:曽:formerly:田,日,丷
 rtk541:増:increase:田,土,日,丷
-rtk542:贈:presents:貝,田,日,丷
+rtk542:贈:presents:貝,曽
 rtk543:東:east:｜,一,日,木,田
 rtk544:棟:ridgepole:｜,一,日,木,田
 rtk545:凍:frozen:｜,一,日,木,冫,田
@@ -827,7 +827,7 @@ rtk577:豚:pork:月,豕
 rtk578:逐:pursue:込,豕
 rtk579:遂:consummate:込,丷,豕
 rtk580:家:house:宀,primitive_roof,豕
-rtk581:嫁:marry into:女,宀,primitive_roof,豕
+rtk581:嫁:marry into:女,家
 rtk582:豪:overpowering:口,亠,冖,豕
 rtk583:腸:intestines:一,月,日,勿
 rtk584:場:location:土,日,一,勿
@@ -1026,10 +1026,10 @@ rtk776:督:coach:小,卜,又,目
 rtk777:寂:loneliness:小,卜,又,宀,primitive_roof
 rtk778:淑:graceful:水,小,卜,又
 rtk779:反:anti-:又,厂
-rtk780:坂:slope:土,又,厂
+rtk780:坂:slope:土,反
 rtk781:板:plank:又,木,厂
-rtk782:返:return:込,又,厂
-rtk783:販:marketing:貝,又,厂
+rtk782:返:return:込,反
+rtk783:販:marketing:貝,反
 rtk784:爪:claw:
 rtk785:妥:gentle:女,爪
 rtk786:乳:milk:乙,子,爪
@@ -1179,7 +1179,7 @@ rtk929:努:toil:女,又,力
 rtk930:勃:suddenness:子,十,力,冖
 rtk931:励:encourage:力,厂,万
 rtk932:加:add:口,力
-rtk933:賀:congratulations:貝,口,力
+rtk933:賀:congratulations:貝,加
 rtk934:架:erect:口,木,力
 rtk935:脇:armpit:月,力
 rtk936:脅:threaten:月,力
@@ -1297,7 +1297,7 @@ rtk1047:個:individual:人,固
 rtk1048:健:healthy:廴,聿
 rtk1049:側:side:貝
 rtk1050:侍:waiter:寸,土
-rtk1051:停:halt:口,亅,亠,冖,一
+rtk1051:停:halt:亻,亭
 rtk1052:値:price:十,目,｜,一
 rtk1053:倣:emulate:方,攵
 rtk1054:傲:be proud:土,方,攵,亠,二
@@ -1342,7 +1342,7 @@ rtk1092:久:long time:ノ,入
 rtk1093:畝:furrow:田,亠,久
 rtk1094:囚:captured:人,囗
 rtk1095:内:inside:人,冂
-rtk1096:丙:third class:一,人,冂
+rtk1096:丙:third class:一,内
 rtk1097:柄:design:一,人,木,冂
 rtk1098:肉:meat:冂,人
 rtk1099:腐:rot:寸,肉,广
@@ -1462,8 +1462,8 @@ rtk1212:哲:philosophy:斤,口,扌
 rtk1213:逝:departed:斤,込,扌
 rtk1214:誓:vow:斤,言,扌
 rtk1215:斬:beheading:斤,車
-rtk1216:暫:temporarily:斤,車,日
-rtk1217:漸:steadily:斤,車,水
+rtk1216:暫:temporarily:斬,日
+rtk1217:漸:steadily:斬,水
 rtk1218:断:severance:斤,米,｜,一
 rtk1219:質:substance:貝,斤
 rtk1220:斥:reject:斤,丶
@@ -1506,7 +1506,7 @@ rtk1256:曲:bend:｜,日
 rtk1257:曹:office:｜,一,日
 rtk1258:遭:encounter:｜,一,込,日
 rtk1259:漕:rowing:｜,一,水,日
-rtk1260:槽:vat:｜,一,日,木
+rtk1260:槽:vat:曹,木
 rtk1261:斗:big dipper:
 rtk1262:料:fee:斗,米
 rtk1263:科:department:禾,斗
@@ -1753,8 +1753,8 @@ rtk1503:令:orders:个,卩,一
 rtk1504:零:zero:雨,个,卩,一
 rtk1505:齢:age:止,歯,米,个,凵,卩,一
 rtk1506:冷:cool:个,冫,卩,一
-rtk1507:領:jurisdiction:貝,頁,个,卩,一
-rtk1508:鈴:small bell:金,个,卩,一
+rtk1507:領:jurisdiction:貝,頁,令
+rtk1508:鈴:small bell:金,令
 rtk1509:勇:courage:男,マ
 rtk1510:湧:boil:水,勇
 rtk1511:通:traffic:込,用,マ
@@ -1840,7 +1840,7 @@ rtk1590:餅:mochi rice cake:｜,ノ,一,食,二,丷,廾
 rtk1591:養:foster:食,羊
 rtk1592:飽:sated:食,勹,已
 rtk1593:既:previously:牙,艮
-rtk1594:概:outline:牙,艮,木
+rtk1594:概:outline:既,木
 rtk1595:慨:rue:牙,艮,state of mind
 rtk1596:平:even:干,丷
 rtk1597:呼:call:口,平
@@ -1958,12 +1958,12 @@ rtk1708:錘:weight:｜,ノ,一,金
 rtk1709:乗:ride:｜,ノ,一,禾,ハ
 rtk1710:剰:surplus:｜,ノ,一
 rtk1711:今:now:个,一
-rtk1712:含:contain:口,个,一
+rtk1712:含:contain:口,今
 rtk1713:貪:covet:貝,个,一
-rtk1714:吟:versify:口,个,一
+rtk1714:吟:versify:口,今
 rtk1715:念:wish:｜,一,心,个
 rtk1716:捻:twirl:｜,一,心,个,扌
-rtk1717:琴:harp:王,个,一
+rtk1717:琴:harp:王,今
 rtk1718:陰:shade:二,个,厶,阝,一
 rtk1719:予:beforehand:マ,一,亅
 rtk1720:序:preface:子,广,亅,マ,一
@@ -2294,7 +2294,7 @@ rtk2044:声:voice:士,尸
 rtk2045:眉:eyebrow:目,尸,｜
 rtk2046:呉:give:口,ハ
 rtk2047:娯:recreation:口,女,ハ
-rtk2048:誤:mistake:言,口,ハ
+rtk2048:誤:mistake:言,呉
 rtk2049:蒸:steam:ノ,一,亅,杰,艾
 rtk2050:承:acquiesce:ノ,二,亅,手
 rtk2051:函:box (archaic):一,水,凵

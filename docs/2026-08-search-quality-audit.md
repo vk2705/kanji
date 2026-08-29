@@ -3699,6 +3699,48 @@ above.
   81 orphaned `rad{N}` rows on the live DB is still the other standing
   item, needs production access.
 
+### 2026-08-29 — sweep batch 2: 24 more fixes, one missing-component catch
+
+- Continued the frame-ordered sweep: regenerated the CSV-filtered
+  `audit_flattening.py` candidate list (still 222 — ids shift slightly
+  release to release but the count landed back where it started once
+  batch 1's fixes were accounted for) and worked through another batch.
+  Checked each against `test_regression_fixes.py`'s existing pins first
+  (skipped `rtk261`/特, already deliberately settled as "flattened on
+  purpose" during an out-of-band review-queue session) and rendered a
+  representative sample before applying anything.
+- 23 of the 24 were the standard pattern — one compound-reference swap
+  each, all confirmed via render: `銅→金,同`, `賂→貝,各`,
+  `客→各,宀,primitive_roof`, `詠→言,永`, `鍵→金,建`, `海→水,毎`,
+  `贈→貝,曽`, `嫁→女,家`, `坂→土,反`, `返→込,反`, `販→貝,反`,
+  `賀→貝,加`, `丙→一,内`, `暫→斬,日`, `漸→斬,水`, `槽→曹,木`,
+  `領→貝,頁,令`, `鈴→金,令`, `概→既,木`, `含→口,今`, `吟→口,今`,
+  `琴→王,今`, `誤→言,呉`.
+- **`停` (halt) was different — a real missing-component bug**, the
+  same class as `伴`/`判`/`剃` from earlier this week: its old line
+  (`口,亅,亠,冖,一`) exactly matched `亭`'s own four flattened parts
+  plus a stray `一`, but rendering `停` next to `亭` and `亻` showed the
+  actual glyph is `亻`(person) + `亭`(pavilion) — the person radical
+  was entirely absent, silently replaced by an unrelated `一` that
+  doesn't correspond to anything visible in the character. Fixed to
+  `亻,亭`.
+- Verified: full rebuild from scratch; all 24 spot-checked via
+  `get_kanji_detail`, resolve to clean 2-3-chip sets (`停` now
+  correctly shows `{person, pavilion}`); `test_regression_fixes.py` —
+  added 23 new pinned entries (skipped a duplicate pin for `吟`, which
+  is structurally identical to `含`) — same 4 expected hanzi-scope
+  failures as every prior rebuild, nothing else; full search-term
+  regression checklist unchanged/correct (24 spot-check terms,
+  including "person" to confirm `停`'s fix didn't create a duplicate).
+- Not deployed to the live server from this session; data-only change,
+  no backend restart needed on next deploy.
+- Coverage: regenerated post-commit.
+- **Next session**: roughly 200 CSV-confirmed `audit_flattening.py`
+  candidates remain — continue the same batch-by-batch process
+  (regenerate the filtered list, skip already-pinned frames, render a
+  sample, apply, pin, verify). The 81 orphaned `rad{N}` rows on the
+  live DB is still the other standing item, needs production access.
+
 ## Tooling produced this session
 
 - `backend/render_glyphs.py` — added 2026-08-23. Renders requested
