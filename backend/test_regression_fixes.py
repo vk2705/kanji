@@ -873,6 +873,13 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk451", "rtk844"}},
     "rtk2187": {"character": "遵", "keyword": "abide by",
                 "expected_part_ids": {"rtk1547", "rtk843"}},
+    # 境 fixed (2026-08-29, owner-reported): old 音,土,日,立,儿 redundantly
+    # listed 音 alongside its own already-flattened 日,立 sub-parts side by
+    # side. cjkvi-ids confirms 境 = 土+竟, 竟 = 音+儿 -- added 竟 as a new
+    # primitive (prim-finally, with its own 音,儿 sub-decomposition) per
+    # owner request, rather than just deduplicating the flat list.
+    "rtk523": {"character": "境", "keyword": "boundary",
+               "expected_part_ids": {"rtk161", "prim-finally"}},
 }
 
 # character -> hanzi id, spot-checking the 429-character Unihan self-reference backfill

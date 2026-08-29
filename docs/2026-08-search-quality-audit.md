@@ -3878,6 +3878,38 @@ above.
   `rad{N}` rows on the live DB is still the other standing item, needs
   production access.
 
+### 2026-08-29 — owner spot-check: `境`'s redundant flattening, plus `竟` added as a real primitive
+
+- **Owner reported `境` should be `土`(ground) + `竟`(finally)**, with
+  `竟` itself being `音`(sound) + `儿`(legs). Confirmed via `cjkvi-ids`:
+  `境 = ⿰土竟`, `竟 = ⿱音儿` — exactly right. Live line was
+  `音,土,日,立,儿`, a redundant-flattening bug of the exact class this
+  audit's frame-ordered sweep has been clearing all session: `音`
+  (rtk518, "sound") is itself already `日,立` (matches `cjkvi-ids`'s
+  `音 = ⿱立日` directly), so listing `音` *and* its own already-flattened
+  `日`/`立` side by side double-counted the same structure.
+- **First fix (deduplicate only) wasn't what the owner wanted.** Dropped
+  the redundant `日,立`, leaving `土,音,儿` — correct, but flattened
+  through `竟` rather than showing it. Owner asked directly for `竟` to
+  be added to the database as its own entry. Added it as a new
+  primitive, `prim-finally:竟:finally`, with its *own* sub-decomposition
+  (`音,儿`) rather than just deduplicating -- matches the existing
+  recursive sub-decomposition architecture (`_resolve_parts_detail`'s
+  `sub_decompositions`, same mechanism `丗`/`prim-thirty` used two
+  sessions ago for `帯`): `境` now shows two top-level chips (`土`,
+  `竟`), and `竟` expands on demand to reveal `音`+`儿` underneath,
+  rather than flattening straight to five atomic pieces. Checked for a
+  same-script collision on "finally" first (only a `zh-Hani` hanzi row
+  existed with that meaning, no `ja-kanji` collision).
+- Verified: `sync_system_data.py --dry-run` matched expectations each
+  step (1 decomposition replaced for the first fix; 1 primitive
+  inserted + 1 decomposition replaced for the `竟` addition);
+  `get_kanji_detail` on `境` confirms the two-chip top level with
+  `竟`'s sub-decomposition resolving correctly; `test_regression_fixes.py`
+  — added a `境`/`竟` pin — 337/337 passing; `audit_self_reference.py`
+  full sweep clean; `kanji-backend.service` restarted, live API
+  spot-checked.
+
 ## Tooling produced this session
 
 - `backend/render_glyphs.py` — added 2026-08-23. Renders requested

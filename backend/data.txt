@@ -769,7 +769,7 @@ rtk519:暗:darkness:音,日,立
 rtk520:韻:rhyme:音,員,日,立
 rtk521:識:discriminating:音,言,日,立,戈
 rtk522:鏡:mirror:音,金,日,立,儿
-rtk523:境:boundary:音,土,日,立,儿
+rtk523:境:boundary:土,竟
 rtk524:亡:deceased:亠
 rtk525:盲:blind:亡,目,亠
 rtk526:妄:delusion:亡,女,亠
@@ -3328,6 +3328,7 @@ prim-katakana-yu:ユ:katakana yu
 # its 4 hosts (敵/滴/摘) share the on'yomi "teki", both used as corroborating
 # evidence for naming it, not as evidence for its internal structure.
 prim-heki:辟:heki:尸,口,辛
+prim-finally:竟:finally:音,儿
 prim-teki:啇:teki
 prim-sitting-on-the-ground:?:sitting on the ground
 prim-upside-down-row:业:upside down in a row
