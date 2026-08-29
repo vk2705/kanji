@@ -3629,7 +3629,7 @@ above.
 - Not deployed to the live server from this session (no production
   access here); data-only change, no backend restart needed on next
   deploy.
-- Coverage: regenerated post-commit.
+- Coverage: **1064/3000 (35.5%)**.
 - **This closes the `并` investigation** that ran across roughly a
   week of sessions: from ~182 wrong hosts down to 1 confirmed-correct
   one, via the horns cluster, the sheep/half/quarter/豆/弟/平 families,

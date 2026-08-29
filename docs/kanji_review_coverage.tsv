@@ -986,7 +986,7 @@ rtk984	穀	cereals	984	no
 rtk985	菌	germ	985	no
 rtk986	萎	numb	986	no
 rtk987	米	rice	987	no
-rtk988	粉	flour	988	no
+rtk988	粉	flour	988	yes
 rtk989	粘	sticky	989	no
 rtk990	粒	grains	990	no
 rtk991	粧	cosmetics	991	no
@@ -2065,7 +2065,7 @@ rtk2063	耗	decrease	2063	no
 rtk2064	尾	tail	2064	no
 rtk2065	宅	home	2065	yes
 rtk2066	託	consign	2066	no
-rtk2067	為	do	2067	no
+rtk2067	為	do	2067	yes
 rtk2068	偽	falsehood	2068	yes
 rtk2069	畏	apprehensive	2069	no
 rtk2070	長	long	2070	no
@@ -2087,7 +2087,7 @@ rtk2085	悩	trouble	2085	yes
 rtk2086	厳	stern	2086	yes
 rtk2087	鎖	chain	2087	yes
 rtk2088	挙	raise	2088	no
-rtk2089	誉	reputation	2089	no
+rtk2089	誉	reputation	2089	yes
 rtk2090	猟	game hunting	2090	yes
 rtk2091	鳥	bird	2091	no
 rtk2092	鳴	chirp	2092	no
@@ -2693,7 +2693,7 @@ rtk2691	糟	lees	2691	no
 rtk2692	糊	paste	2692	yes
 rtk2693	籾	unhulled rice	2693	no
 rtk2694	糠	rice bran	2694	no
-rtk2695	糞	excrement	2695	no
+rtk2695	糞	excrement	2695	yes
 rtk2696	粟	foxtail millet	2696	no
 rtk2697	繋	link up	2697	no
 rtk2698	綸	twine	2698	no
