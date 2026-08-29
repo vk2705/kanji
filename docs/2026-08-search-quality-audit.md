@@ -3910,6 +3910,61 @@ above.
   full sweep clean; `kanji-backend.service` restarted, live API
   spot-checked.
 
+### 2026-08-29 — owner asked "how many visitors": added a real first-party visit counter
+
+- **Owner asked how many people had visited the site.** No analytics of any
+  kind existed (no GA/Plausible/etc. in the frontend), so answered from
+  nginx's access logs directly first: of **201 unique IPs** hitting
+  `/kanji/*` paths over the last ~10 days (the log retention window),
+  only **15 ever loaded the actual page** rather than just probing a
+  path — and of those 15, most were identifiable bots (GPTBot,
+  DuckDuckBot, Google-Lens, Claude-SearchBot alone accounted for 3,706
+  of the raw hits, plus a botnet reusing one canned iPhone user-agent
+  string across dozens of unrelated IPs worldwide). What was left after
+  stripping bots pointed to the owner's own repeated testing (same
+  `87.58.x.x`/`5.22.130.12` ranges, heavy sustained interactive use
+  spread across the whole week), not a distinct outside visitor.
+  Realistic estimate: 0–1 genuine outside visitors in the last 10 days —
+  unsurprising for a newly-public site, but genuinely not knowable from
+  logs alone without this kind of manual bot-filtering every time.
+- **Owner asked for a real counter going forward**, picking a
+  self-hosted option over a third-party analytics script. Added:
+  `page_views` table (`_migrate_v5`, schema now at v5) — one row per
+  page load, tagged with a `visitor_id` read from (or freshly issued
+  into) a long-lived first-party `kanji_visitor` cookie, deliberately
+  *not* IP-based. `POST /analytics/pageview` (new `analytics.py`
+  router, no auth required) is called once per app load from
+  `App.jsx`'s mount effect, fire-and-forget (`recordPageView()` in
+  `api.js` never awaited or surfaced to the user — a failure here, ad
+  blocker or offline, can't affect the app). The key property this
+  gives over log-parsing: a bot that only ever hits URLs directly (which
+  this session's log analysis showed is the overwhelming majority of
+  this site's raw traffic) never executes the frontend JS that calls
+  this endpoint, so it never shows up here at all — no manual
+  bot-filtering needed going forward. `backend/visit_stats.py` is the
+  owner-facing read side (today/7d/30d/all-time summary, or `--days N`
+  for a daily breakdown) — same "one-off script reads `kanji.db`
+  directly" convention as `review_queue.py`/`coverage_status.py`, not a
+  public HTTP stats endpoint, since this schema has no admin-role
+  concept to gate one behind.
+- Verified: migration applied cleanly against the live DB
+  (`PRAGMA user_version` 4 → 5); `POST /analytics/pageview` tested
+  directly against both `127.0.0.1:8000` and the real public URL
+  (`https://srv.alteon.help/kanji/api/...`), cookie set and read back
+  correctly; `visit_stats.py` reflects the test hits; `npm run
+  build`/`lint` clean, frontend rebuilt with `/usr/bin/node-20`
+  (system default is still node 18) and deployed;
+  `test_regression_fixes.py` — 337/337 passing, unaffected (this
+  session touched no `data.txt` content); `kanji-backend.service`
+  restarted.
+- **Next session**: no immediate follow-up needed — this is a small,
+  self-contained addition. If real visitor numbers start showing up,
+  worth eventually deciding whether `visit_stats.py`'s output should
+  also get folded into whatever the "check things at the start of a
+  session" routine ends up being (alongside `review_queue.py` and
+  reading this file), same as that item flagged after the review-queue
+  feature shipped.
+
 ## Tooling produced this session
 
 - `backend/render_glyphs.py` — added 2026-08-23. Renders requested

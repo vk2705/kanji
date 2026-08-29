@@ -212,3 +212,15 @@ export async function setRowVisibility(table, rowId, visibility) {
   if (!res.ok) throw new Error(await extractError(res));
   return res.json();
 }
+
+// Fire-and-forget visit counter (see backend/database.py's _migrate_v5 docstring and
+// visit_stats.py) — deliberately never awaited or surfaced to the user; a failure
+// here (offline, ad blocker, etc.) shouldn't affect the app itself.
+export function recordPageView() {
+  fetch(`${BASE}/analytics/pageview`, {
+    method: "POST",
+    credentials: "include",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ path: window.location.pathname }),
+  }).catch(() => {});
+}

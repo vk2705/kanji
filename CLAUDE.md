@@ -63,8 +63,9 @@ cd android
 ./venv/bin/python3 backup_db.py             # online backup of kanji.db to backups/, prunes backups older than 14 days
 ./venv/bin/python3 sync_system_data.py --dry-run   # reconcile live system rows with data.txt/CSV without wiping user data
 ./venv/bin/python3 review_queue.py          # list pending user-submitted decomposition approve/dispute votes
+./venv/bin/python3 visit_stats.py           # site visit counts (today/7d/30d/all-time), or --days N for a daily breakdown
 ```
-`import_hanzi.py` refuses to run if any non-`ja-kanji` rows already exist (not safe to resume mid-run). `backup_db.py` is meant to run on a schedule (see Deployment). `backup_db.py`, `export_public_data.py`, `fix_kradfile_proxies.py`, `sync_system_data.py`, and `review_queue.py` also have a shebang pointing straight at `venv/bin/python3`, so `./script.py` works directly without the `./venv/bin/python3` prefix.
+`import_hanzi.py` refuses to run if any non-`ja-kanji` rows already exist (not safe to resume mid-run). `backup_db.py` is meant to run on a schedule (see Deployment). `backup_db.py`, `export_public_data.py`, `fix_kradfile_proxies.py`, `sync_system_data.py`, `review_queue.py`, and `visit_stats.py` also have a shebang pointing straight at `venv/bin/python3`, so `./script.py` works directly without the `./venv/bin/python3` prefix.
 
 There is no test suite in this repo currently.
 
@@ -115,14 +116,16 @@ decomposition_reviews(id PK, decomposition_id → decompositions.id, kanji_id �
 users(id PK, username TEXT UNIQUE, password_hash TEXT, auth_provider TEXT, display_name TEXT,
       ui_language TEXT CHECK(en|ru), study_script TEXT CHECK(ja-kanji|zh-Hans|zh-Hant))
 sessions(token PK, user_id → users.id, expires_at TEXT)
+page_views(id PK, visitor_id TEXT, path TEXT, viewed_at TEXT)  -- no owner_id/visibility; see Analytics below
 ```
 
 `migrate_schema()` is versioned (`PRAGMA user_version`), each version's body in its own
 `_migrate_vN(conn)` function gated by `if version < N` — v1 added the multi-user tables
 above (minus the last two `users` columns), v2 added `users.ui_language`/`study_script`,
-v3 added `kanji.image_url`, v4 added `decomposition_reviews`. Adding a v5 means adding a
-new `_migrate_v5` + `if version < 5` block, **not** touching the existing gated blocks
-(they must stay non-idempotent-safe, i.e. never re-run against an already-migrated DB).
+v3 added `kanji.image_url`, v4 added `decomposition_reviews`, v5 added `page_views`.
+Adding a v6 means adding a new `_migrate_v6` + `if version < 6` block, **not** touching
+the existing gated blocks (they must stay non-idempotent-safe, i.e. never re-run against
+an already-migrated DB).
 
 Key points:
 - `id=1` in `users` is a reserved **system** account that owns all Heisig-seeded and hanzi-seeded data; it's immutable to normal users by construction (`set_visibility` rejects `owner_id = 1`, and nothing in the write API lets a caller set `owner_id` to 1).
@@ -147,6 +150,10 @@ All endpoints require auth (`require_user`) and always write an explicit `owner_
 **Frontend UI**: login/register, plus a "Sign in with Google" button when `VITE_GOOGLE_CLIENT_ID` is set (`AuthBar.jsx`); on the kanji detail page, adding a personal alias to the kanji itself or to a decomposition part, writing your own mnemonic story, uploading a picture for a glyph-less kanji, and adding an alternate decomposition (all private by default); a dedicated create-kanji flow (`CreateKanji.jsx`) and a contributions browser with per-row visibility toggles (`MyContributions.jsx`), both reachable from header nav buttons shown only when logged in.
 
 **Decomposition review queue** (`decomposition_reviews` table, added 2026-08-25): any logged-in user can mark a decomposition on the detail page "approved" or "disputed" (`POST /decompositions/{id}/review`, `KanjiDetail.jsx`'s two buttons under each decomposition block) — this is the search-quality audit's standing "render it, don't just reason about it" verification practice (see `render_glyphs.py` above) exposed as something anyone can do from the page itself, not only inside an audit session. One row per `(decomposition, reviewer)`, upserted on a changed vote (`set_decomposition_review`). `backend/review_queue.py` is the maintainer-facing other half: lists pending (`processed_at IS NULL`) reviews so a maintainer can turn approvals into pinned `test_regression_fixes.py` entries and investigate disputes, then clear each one with `--mark-processed <id>...` — rows are marked processed, never deleted, so there's still an audit trail of what was reviewed and by whom.
+
+### Analytics (`backend/analytics.py`, added 2026-08-29)
+
+A minimal first-party visit counter, added after nginx access-log analysis showed the site's raw traffic is almost entirely bots/scanners (port scanners, AI/search crawlers, a residential-proxy botnet reusing one canned user-agent) with no quick way to tell how many real visitors there actually are. `POST /analytics/pageview` (no auth required, called once on app mount from `App.jsx` via `recordPageView()` in `api.js`, fire-and-forget — a failure here never affects the app) inserts one `page_views` row tagged with a `visitor_id`: read from the `kanji_visitor` cookie if present, otherwise a fresh `secrets.token_hex(16)` that gets set as a new cookie (same flags as the session cookie in `auth.py` minus `httponly`, since nothing sensitive is in it and there's no need to keep it from client JS; 1-year `max_age`). Deliberately not IP-based — a bot that only ever hits URLs directly, which is most of this site's raw traffic, never runs the frontend JS that calls this endpoint, so this naturally excludes it in a way parsing web server logs can't. `backend/visit_stats.py` is the owner-facing read side (today/7d/30d/all-time summary, or `--days N` for a daily breakdown) — same "one-off script reads `kanji.db` directly" convention as `review_queue.py`/`coverage_status.py` rather than a public HTTP stats endpoint, since there's no admin-role concept in this schema.
 
 ### Script-aware resolution (cross-script ambiguity)
 
@@ -208,6 +215,7 @@ frontend/src/
 | `PATCH` | `/kanji\|aliases\|decompositions\|stories/{id}/visibility` | Toggle public/private on a row you own |
 | `POST` | `/decompositions/{id}/review` | `{"verdict": "approved"\|"disputed"}` — record your own approve/dispute verdict on a decomposition (auth required); upserts on a changed vote |
 | `GET` | `/me/contributions` | Everything you've contributed, across all four tables |
+| `POST` | `/analytics/pageview` | `{"path"?}` — records one visit; no auth required, sets/reads the `kanji_visitor` cookie (see Analytics above) |
 
 `script` (on the three search endpoints and `study_script`) is one of `ja-kanji`/`zh-Hans`/`zh-Hant` — an invalid value 400s. Search/detail endpoints all take the caller's session (if any) to determine which private rows are visible; there is no `/admin/reimport` anymore (see Architecture).
 

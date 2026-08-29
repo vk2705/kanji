@@ -12,6 +12,7 @@ from database import (
 )
 from auth import router as auth_router, current_user
 from contributions import router as contributions_router
+from analytics import router as analytics_router
 
 UPLOAD_DIR = Path(__file__).parent / "uploads"
 
@@ -45,6 +46,7 @@ app.add_middleware(
 
 app.include_router(auth_router)
 app.include_router(contributions_router)
+app.include_router(analytics_router)
 
 # Created eagerly (not deferred to the lifespan handler) because StaticFiles needs the
 # directory to exist at mount time, which happens at import — before lifespan runs.

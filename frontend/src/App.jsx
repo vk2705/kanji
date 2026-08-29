@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { searchByParts, searchByText, searchByChar, getMe, updatePreferences } from "./api";
+import { searchByParts, searchByText, searchByChar, getMe, updatePreferences, recordPageView } from "./api";
 import ResultsGrid from "./components/ResultsGrid";
 import KanjiDetail from "./components/KanjiDetail";
 import AuthBar from "./components/AuthBar";
@@ -68,6 +68,10 @@ export default function App() {
         }
       })
       .catch(() => setUser(null));
+  }, []);
+
+  useEffect(() => {
+    recordPageView();
   }, []);
 
   function changeUiLang(lang) {

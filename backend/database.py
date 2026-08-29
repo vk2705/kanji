@@ -93,6 +93,12 @@ def migrate_schema(conn):
         conn.commit()
         version = 4
 
+    if version < 5:
+        _migrate_v5(conn)
+        conn.execute("PRAGMA user_version = 5")
+        conn.commit()
+        version = 5
+
 
 def _migrate_v1(conn):
     """"DB is a disposable cache" -> "DB is the source of truth": adds
@@ -232,6 +238,39 @@ def _migrate_v4(conn):
         CREATE INDEX IF NOT EXISTS idx_reviews_verdict ON decomposition_reviews(verdict, processed_at);
         CREATE INDEX IF NOT EXISTS idx_reviews_decomp   ON decomposition_reviews(decomposition_id);
     """)
+
+
+def _migrate_v5(conn):
+    """
+    A simple first-party visit counter (2026-08-29, owner-requested, after nginx-log
+    analysis showed the site's raw traffic is almost entirely bots/scanners with no
+    way to tell a real visitor from one without reading logs by hand). One row per
+    page load, tagged with a random visitor_id stored in a long-lived first-party
+    cookie (see analytics.py) — deliberately not IP-based, so it naturally excludes
+    the vast majority of non-JS-executing bot traffic (a bot hitting a URL directly
+    never runs the frontend JS that calls this), unlike parsing web server logs.
+    `visit_stats.py` is the owner-facing read side, same "one-off script reads
+    kanji.db directly" convention as review_queue.py/coverage_status.py rather than
+    a public HTTP stats endpoint — no admin-role concept exists in this schema yet.
+    """
+    conn.executescript("""
+        CREATE TABLE IF NOT EXISTS page_views (
+            id          INTEGER PRIMARY KEY AUTOINCREMENT,
+            visitor_id  TEXT NOT NULL,
+            path        TEXT,
+            viewed_at   TEXT NOT NULL DEFAULT (datetime('now'))
+        );
+        CREATE INDEX IF NOT EXISTS idx_page_views_visitor ON page_views(visitor_id);
+        CREATE INDEX IF NOT EXISTS idx_page_views_time ON page_views(viewed_at);
+    """)
+
+
+def record_page_view(conn, visitor_id: str, path: str | None):
+    conn.execute(
+        "INSERT INTO page_views (visitor_id, path) VALUES (?, ?)",
+        (visitor_id, path)
+    )
+    conn.commit()
 
 
 def _backfill_decompositions(conn):
