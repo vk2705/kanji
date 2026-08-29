@@ -288,7 +288,7 @@ rtk286	柱	pillar	286	no
 rtk287	金	gold	287	yes
 rtk288	銑	pig iron	288	no
 rtk289	鉢	bowl	289	no
-rtk290	銅	copper	290	no
+rtk290	銅	copper	290	yes
 rtk291	釣	angling	291	yes
 rtk292	針	needle	292	no
 rtk293	銘	inscription	293	yes
@@ -367,7 +367,7 @@ rtk365	訓	instruction	365	no
 rtk366	詔	imperial edict	366	yes
 rtk367	詰	packed	367	yes
 rtk368	話	tale	368	no
-rtk369	詠	recitation	369	no
+rtk369	詠	recitation	369	yes
 rtk370	詩	poem	370	yes
 rtk371	語	word	371	yes
 rtk372	読	read	372	yes
@@ -416,7 +416,7 @@ rtk414	是	just so	414	no
 rtk415	題	topic	415	yes
 rtk416	堤	dike	416	yes
 rtk417	建	build	417	no
-rtk418	鍵	key	418	no
+rtk418	鍵	key	418	yes
 rtk419	延	prolong	419	no
 rtk420	誕	nativity	420	no
 rtk421	礎	cornerstone	421	no
@@ -778,9 +778,9 @@ rtk776	督	coach	776	no
 rtk777	寂	loneliness	777	yes
 rtk778	淑	graceful	778	no
 rtk779	反	anti-	779	no
-rtk780	坂	slope	780	no
+rtk780	坂	slope	780	yes
 rtk781	板	plank	781	no
-rtk782	返	return	782	no
+rtk782	返	return	782	yes
 rtk783	販	marketing	783	yes
 rtk784	爪	claw	784	no
 rtk785	妥	gentle	785	no
@@ -1094,7 +1094,7 @@ rtk1092	久	long time	1092	no
 rtk1093	畝	furrow	1093	no
 rtk1094	囚	captured	1094	no
 rtk1095	内	inside	1095	no
-rtk1096	丙	third class	1096	no
+rtk1096	丙	third class	1096	yes
 rtk1097	柄	design	1097	no
 rtk1098	肉	meat	1098	no
 rtk1099	腐	rot	1099	yes
@@ -1214,8 +1214,8 @@ rtk1212	哲	philosophy	1212	yes
 rtk1213	逝	departed	1213	yes
 rtk1214	誓	vow	1214	yes
 rtk1215	斬	chop off	1215	no
-rtk1216	暫	temporarily	1216	no
-rtk1217	漸	steadily	1217	no
+rtk1216	暫	temporarily	1216	yes
+rtk1217	漸	steadily	1217	yes
 rtk1218	断	severance	1218	no
 rtk1219	質	substance	1219	yes
 rtk1220	斥	reject	1220	no
@@ -1258,7 +1258,7 @@ rtk1256	曲	bend	1256	no
 rtk1257	曹	cadet	1257	no
 rtk1258	遭	encounter	1258	no
 rtk1259	漕	rowing	1259	no
-rtk1260	槽	vat	1260	no
+rtk1260	槽	vat	1260	yes
 rtk1261	斗	big dipper	1261	no
 rtk1262	料	fee	1262	no
 rtk1263	科	department	1263	no
@@ -1506,7 +1506,7 @@ rtk1504	零	zero	1504	no
 rtk1505	齢	age	1505	no
 rtk1506	冷	cool	1506	no
 rtk1507	領	jurisdiction	1507	yes
-rtk1508	鈴	small bell	1508	no
+rtk1508	鈴	small bell	1508	yes
 rtk1509	勇	courage	1509	yes
 rtk1510	湧	bubble up	1510	yes
 rtk1511	通	traffic	1511	no
@@ -1592,7 +1592,7 @@ rtk1590	餅	mochi	1590	yes
 rtk1591	養	foster	1591	yes
 rtk1592	飽	sated	1592	no
 rtk1593	既	previously	1593	no
-rtk1594	概	outline	1594	no
+rtk1594	概	outline	1594	yes
 rtk1595	慨	rue	1595	yes
 rtk1596	平	even	1596	yes
 rtk1597	呼	call	1597	yes
@@ -1710,12 +1710,12 @@ rtk1708	錘	spindle	1708	no
 rtk1709	乗	ride	1709	no
 rtk1710	剰	surplus	1710	yes
 rtk1711	今	now	1711	no
-rtk1712	含	include	1712	no
+rtk1712	含	include	1712	yes
 rtk1713	貪	covet	1713	yes
-rtk1714	吟	versify	1714	no
+rtk1714	吟	versify	1714	yes
 rtk1715	念	wish	1715	no
 rtk1716	捻	wrench	1716	yes
-rtk1717	琴	harp	1717	no
+rtk1717	琴	harp	1717	yes
 rtk1718	陰	shade	1718	yes
 rtk1719	予	beforehand	1719	no
 rtk1720	序	preface	1720	no
@@ -2046,7 +2046,7 @@ rtk2044	声	voice	2044	no
 rtk2045	眉	eyebrow	2045	no
 rtk2046	呉	give	2046	no
 rtk2047	娯	recreation	2047	no
-rtk2048	誤	mistake	2048	no
+rtk2048	誤	mistake	2048	yes
 rtk2049	蒸	steam	2049	no
 rtk2050	承	acquiesce	2050	no
 rtk2051	函	bin	2051	no

@@ -3734,7 +3734,7 @@ above.
   including "person" to confirm `停`'s fix didn't create a duplicate).
 - Not deployed to the live server from this session; data-only change,
   no backend restart needed on next deploy.
-- Coverage: regenerated post-commit.
+- Coverage: **1087/3000 (36.2%)**.
 - **Next session**: roughly 200 CSV-confirmed `audit_flattening.py`
   candidates remain — continue the same batch-by-batch process
   (regenerate the filtered list, skip already-pinned frames, render a
