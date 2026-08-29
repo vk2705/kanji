@@ -3863,7 +3863,10 @@ above.
     "guard"/"someone"/"chieftain"/"third class"/"endure"/"delicious"/
     "hunt"/"boar"/"waver"/"firewood" all sane; re-running `audit_
     flattening.py` afterward: 1284 raw candidates (was 1294).
-  - Coverage: pending — see follow-up commit.
+  - Coverage: **1193/3000 (39.8%)** — unchanged from the previous entry;
+    all 7 of this follow-up's frames had already been touched by an
+    earlier commit (either the previous batch or the older out-of-band
+    `犭` fix), so none were new to the reviewed set.
 - **Next session**: the CSV-confirmed `audit_flattening.py` queue is
   essentially empty for the first time this audit — re-run the filter
   fresh rather than assuming a large backlog still exists. 1284 *raw*
