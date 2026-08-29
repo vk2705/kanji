@@ -3741,6 +3741,90 @@ above.
   sample, apply, pin, verify). The 81 orphaned `rad{N}` rows on the
   live DB is still the other standing item, needs production access.
 
+### 2026-08-29 — sweep batch 3: 187 fixes in one pass (owner asked for "next 500 kanji")
+
+- The owner explicitly asked for a much larger volume this session than
+  the previous 9- and 24-fix batches, so this batch scaled the same
+  methodology up rather than changing it: fresh rebuild, fresh
+  `audit_flattening.py` run (1650 raw candidates), CSV cross-check against
+  `heisig-kanjis.csv`'s `components` column (198 confirmed), minus frames
+  already pinned in `test_regression_fixes.py` (190 remaining, covering
+  186 unique outer frames — 4 frames each had two structurally-plausible
+  collapse targets, resolved by hand below).
+- **Methodology upgrade**: instead of matching the *raw* data.txt token
+  text (last batch's approach, which produced one unresolvable anomaly on
+  `rtk154`/活 because `rtk16`/古's own line uses alias text the raw
+  matcher couldn't line up), this batch matched the *resolved part-id*
+  sequence directly — the same contiguous-run logic `audit_flattening.py`
+  itself uses — then converted the matched run back to a token (the
+  matched compound's own character, or its keyword if it has no glyph).
+  Zero anomalies this time; the `rtk154` case resolved cleanly as
+  `ノ,古,水,舌` (via `rtk16`/古/old) once matched on ids rather than text.
+  This id-based approach is strictly better and should be the default for
+  any future batch.
+- Four outer frames had two valid-looking collapse targets (both fully
+  explain a contiguous run); picked by hand, verified against CSV/render
+  where the two choices weren't just cosmetically different:
+  - `往`(journey, rtk945): `主`(lord) over `玉`(jewel) — both resolve to
+    the identical two sub-parts, but Heisig's real story for 彳-compounds
+    is "lord", and CSV explicitly lists "lord" among 往's components.
+  - `慨`(rue, rtk1595): `既`(previously)+忄 over 牙+`恨`(resentment) —
+    rendered `慨` next to `既`/`恨`/`忄`: the real glyph is unambiguously
+    忄 (left) + 既 (right), not 牙+恨.
+  - `蒸`(steam, rtk2049): `丞`(helping hand) over `了`(complete) — 丞's
+    own resolved parts fully cover the 3-token run (了's only cover 2 of
+    the 3), the strictly larger/cleaner collapse, confirmed by CSV.
+  - `遵`(abide by, rtk2187): `尊`(revered) over `酋`(chieftain) — same
+    logic, 尊 fully covers the leftover 3 tokens after 込, 酋 only 2.
+- **Two more real missing-component bugs caught by the mandatory
+  render/CSV spot-check** (same class as `伴`/`判`/`剃`/`停` from earlier
+  sessions — a wrong/irrelevant token standing in for an entirely absent
+  person radical), both found while sampling roughly 35 of the 190
+  proposals across different structural clusters before trusting the
+  mechanical pattern for the rest:
+  - `便`(convenience, rtk1066): old line was `｜,更` — rendering `便` next
+    to `亻`/`更`/`｜` showed the "｜" was a wrong stand-in for the person
+    radical; the real glyph is `亻`+`更` exactly, no `｜` anywhere in it.
+    Fixed to `亻,更`.
+  - `侯`(marquis, rtk1767) — **not in the original 190-candidate list at
+    all**, found by cross-checking `heisig-kanjis.csv`'s components
+    column ("person; key; dart; drop; heavens") against its current
+    data.txt line while separately verifying `候`(climate, rtk1769),
+    which references it: `侯` was defined as just `矢,ユ`, missing the
+    person radical entirely. Confirmed via `cjkvi-ids`:
+    `侯 = ⿰亻⿱ユ矢` (person + [ユ over 矢]). Fixed to `亻,矢,ユ`. `候`
+    itself needed no separate person fix — `cjkvi-ids` shows
+    `候 = ⿰⿰亻丨⿱ユ矢`, i.e. `侯`'s own person+ユ+矢 plus one extra `｜`
+    stroke fused onto the person radical — so `候` collapses cleanly to
+    `侯,｜` referencing the now-fixed compound.
+- The remaining 185 fixes were the standard redundant-flattening pattern
+  — a compound's own already-taught parts pasted in place instead of a
+  reference to the compound itself — spot-checked in batches of ~10-15
+  across distinct clusters (the `扌`-hand-radical cluster: `拭→式,扌`,
+  `抱→包,扌`, `抄→少,扌`, `招→召,扌`, `持→寺,扌`, `授→受,扌`, etc.; the
+  `糸,幺,小`-thread cluster: `縮→糸,幺,小,宿`, `縦→糸,幺,小,従`,
+  `線→糸,幺,小,泉`, etc.; the `阝`-cluster: `阪→反,阝`, `陥→旧,勹,阝`,
+  `階→皆,阝`; plus dozens of one-off compound swaps like `寄→奇,宀`,
+  `運→込,軍`, `熱→土,丸,儿,杰`, `影→景,彡`, `熊→能,杰`, `演→水,寅`) — all
+  confirmed via render on the sampled subset, all structurally consistent
+  with CSV.
+- Verified: full rebuild from scratch; `test_regression_fixes.py` — added
+  187 new pinned entries (336 checks total), same 4 expected hanzi-scope
+  failures as every prior rebuild, nothing else; standard search-term
+  regression checklist (old, crime, sheep, horns, half, beans, altar,
+  turtle, lord, marquis, climate, convenience, revered, helping hand) all
+  sane; re-running `audit_flattening.py` afterward shows raw candidates
+  down from 1650 to 1294.
+- Not deployed to the live server from this session; data-only change, no
+  backend restart needed on next deploy.
+- Coverage: pending — see follow-up commit.
+- **Next session**: roughly 1000+ raw `audit_flattening.py` candidates
+  remain (most still noise pre-CSV-filter; expect ~150-200 CSV-confirmed
+  after filtering, similar to this batch's starting point) — keep using
+  the id-based contiguous-match approach from this session, not the
+  raw-text one. The 81 orphaned `rad{N}` rows on the live DB is still the
+  other standing item, needs production access.
+
 ## Tooling produced this session
 
 - `backend/render_glyphs.py` — added 2026-08-23. Renders requested
