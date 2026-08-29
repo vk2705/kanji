@@ -296,7 +296,7 @@ rtk44:丸:round:九,丶
 rtk45:寸:measurement:
 rtk46:肘:elbow:月,寸
 rtk47:専:specialty:十,寸,田
-rtk48:博:dr.:十,寸,田,丶
+rtk48:博:dr.:十,専,丶
 rtk49:占:fortune-telling:口,卜
 rtk50:上:above:一,卜
 rtk51:下:below:｜,一,卜
@@ -308,7 +308,7 @@ rtk56:貝:shellfish:目,ハ
 rtk57:唄:song:貝,口
 rtk58:貞:upright:貝,卜
 rtk59:員:employee:貝,口
-rtk60:貼:stick:貝,口,卜
+rtk60:貼:stick:貝,占
 rtk61:見:see:目,儿
 rtk62:児:newborn babe:｜,日,儿
 rtk63:元:beginning:二,儿
@@ -418,7 +418,7 @@ rtk167:圭:square jewel:土
 rtk168:封:seal:寸,土
 rtk169:涯:horizon:水,土,厂
 rtk170:寺:buddhist temple:寸,土
-rtk171:時:time:寸,土,日
+rtk171:時:time:寺,日
 rtk172:均:level:土,冫,勹,二
 rtk173:火:fire:
 rtk174:炎:inflammation:火
@@ -537,9 +537,9 @@ rtk287:金:gold:王,ハ,个,丷
 rtk288:銑:pig iron:ノ,金,土,儿
 rtk289:鉢:bowl:一,金,木
 rtk290:銅:copper:金,口,冂,一
-rtk291:釣:angling:金,丶,勹
+rtk291:釣:angling:金,勺
 rtk292:針:needle:金,十
-rtk293:銘:inscription:金,口,夕
+rtk293:銘:inscription:金,名
 rtk294:鎮:tranquilize:金,十,目,一,ハ
 rtk295:道:road-way:込,自,丷,首
 rtk296:導:guidance:込,自,寸,丷,首
@@ -612,14 +612,14 @@ rtk362:訂:revise:言,丁
 rtk363:訃:obituary:言,卜
 rtk364:討:chastise:言,寸
 rtk365:訓:instruction:言,川
-rtk366:詔:imperial edict:言,口,刀
+rtk366:詔:imperial edict:言,召
 rtk367:詰:packed:言,吉
 rtk368:話:tale:言,口,舌
 rtk369:詠:recitation:言,水,丶
-rtk370:詩:poem:言,寸,土
+rtk370:詩:poem:言,寺
 rtk371:語:word:言,吾
 rtk372:読:read:言,売
-rtk373:調:tune:言,口,土,冂
+rtk373:調:tune:言,周
 rtk374:談:discuss:火,言
 rtk375:諾:consent:ノ,一,言,口,艾
 rtk376:諭:rebuke:月,言,个,一
@@ -874,7 +874,7 @@ rtk624:国:country:王,囗,丶
 rtk625:団:group:寸,囗
 rtk626:因:cause:大,囗
 rtk627:姻:matrimony:女,因
-rtk628:咽:throat:口,大,囗
+rtk628:咽:throat:口,因
 rtk629:園:park:衣,口,土,囗
 rtk630:回:-times:口,囗
 rtk631:壇:podium:一,口,土,日,亠,囗

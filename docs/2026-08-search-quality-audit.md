@@ -3644,6 +3644,61 @@ above.
   of the dataset — a frame-ordered sweep, or wait for the next owner
   report / review-queue dispute.
 
+### 2026-08-29 — starting a proper frame-ordered sweep via `audit_flattening.py`
+
+- With the `并` investigation closed and no owner report or review-queue
+  item pending, picked up the standing "frame-ordered sweep" idea for
+  real. `audit_flattening.py` (built session 21, noted as noisy without
+  the CSV cross-check filter session 12 established) currently flags
+  **1728** raw candidates dataset-wide — far too many to review by eye.
+  Applied the same filter session 12 used: keep only candidates where
+  the *contained* kanji's own keyword literally appears in the
+  *containing* frame's `heisig-kanjis.csv` components column. Cuts it
+  to **231** plausible candidates — still a lot, but a real, trackable
+  backlog for future sessions rather than 1728 undifferentiated noise.
+- Verified and fixed a first batch of 9, each checked against
+  `test_regression_fixes.py`'s existing pins first (to avoid re-treading
+  already-deliberated decisions — `rtk691`/義 is in this candidate list
+  too but was already reviewed and pinned during the 羊-family fix, so
+  skipped) and rendered before touching:
+  - `博`/dr. (`rtk48`): the one genuinely interesting case in this batch
+    — not a simple redundant flatten. CSV lists "ten; needle" *twice*
+    ("ten; needle; acupuncturist; specialty; drop; **ten; needle**; rice
+    field; brains; glue"), and rendering confirmed why: `博` has its own
+    standalone `十` on the left, structurally separate from `専`
+    (specialty)'s own internal `十` on the right — the current flattened
+    line (`十,寸,田,丶`) only ever showed one `十` chip total (both
+    occurrences collapse to the same resolved id), which isn't wrong
+    exactly, just less structurally accurate than showing the outer `十`
+    plus an expandable `専` chip (which itself shows its own `十` on
+    expand). Fixed to `十,専,丶`.
+  - The rest were the standard pattern, one compound-reference swap
+    each: `貼``貝,占` (was `貝,口,卜`), `時``寺,日` (was `寸,土,日`),
+    `釣``金,勺` (was `金,丶,勹`), `銘``金,名` (was `金,口,夕`), `詔`
+    `言,召` (was `言,口,刀`), `詩``言,寺` (was `言,寸,土`), `調`
+    `言,周` (was `言,口,土,冂`), `咽``口,因` (was `口,大,囗`).
+- Verified: full rebuild from scratch; all 9 spot-checked via
+  `get_kanji_detail`, resolve to clean 2-3-chip sets;
+  `test_regression_fixes.py` — added 9 new pinned entries — same 4
+  expected hanzi-scope failures as every prior rebuild, nothing else;
+  full search-term regression checklist unchanged/correct
+  ("specialty"/"fortune-telling"/"buddhist temple"/"ladle"/"name"/
+  "seduce"/"circumference"/"cause"/"time"/"dr." all spot-checked).
+- Not deployed to the live server from this session (no production
+  access here); data-only change, no backend restart needed on next
+  deploy.
+- Coverage: regenerated post-commit.
+- **Next session**: **222 candidates remain** in the CSV-filtered
+  `audit_flattening.py` list (231 minus this session's 9) — a real,
+  trackable backlog for continuing the sweep. Re-run the same filter
+  script (CSV cross-check against `audit_flattening.py`'s raw output)
+  to regenerate the list, since ids shift as fixes land; check each
+  candidate against `test_regression_fixes.py`'s existing pins first
+  before re-investigating (a few, like `rtk691`, are already
+  deliberately-settled false positives for this tool's purposes). The
+  81 orphaned `rad{N}` rows on the live DB is still the other standing
+  item, needs production access.
+
 ## Tooling produced this session
 
 - `backend/render_glyphs.py` — added 2026-08-23. Renders requested

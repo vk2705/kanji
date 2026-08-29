@@ -394,6 +394,30 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk357", "rtk1531", "prim-katakana-ha", "rtk1"}},
     "rtk2695": {"character": "糞", "keyword": "shit",
                 "expected_part_ids": {"rtk987", "rtk14", "rtk1934"}},
+    # Frame-ordered sweep (2026-08-29): with the 并 investigation closed, started
+    # working through audit_flattening.py's candidate list (1728 raw, cross-checked
+    # against heisig-kanjis.csv's own components down to 231 plausible ones) --
+    # the same "contains kanji X's own full flattened parts" redundant-flattening
+    # pattern found throughout this whole audit, just not yet swept dataset-wide.
+    # A first confirmed batch, one per host:
+    "rtk48": {"character": "博", "keyword": "dr.",
+              "expected_part_ids": {"rtk10", "rtk47", "kangxi3"}},
+    "rtk60": {"character": "貼", "keyword": "stick",
+              "expected_part_ids": {"rtk56", "rtk49"}},
+    "rtk171": {"character": "時", "keyword": "time",
+               "expected_part_ids": {"rtk170", "rtk12"}},
+    "rtk291": {"character": "釣", "keyword": "angling",
+               "expected_part_ids": {"rtk287", "rtk72"}},
+    "rtk293": {"character": "銘", "keyword": "inscription",
+               "expected_part_ids": {"rtk287", "rtk117"}},
+    "rtk366": {"character": "詔", "keyword": "imperial edict",
+               "expected_part_ids": {"rtk357", "rtk90"}},
+    "rtk370": {"character": "詩", "keyword": "poem",
+               "expected_part_ids": {"rtk357", "rtk170"}},
+    "rtk373": {"character": "調", "keyword": "tune",
+               "expected_part_ids": {"rtk357", "rtk339"}},
+    "rtk628": {"character": "咽", "keyword": "throat",
+               "expected_part_ids": {"rtk11", "rtk626"}},
 }
 
 # character -> hanzi id, spot-checking the 429-character Unihan self-reference backfill
