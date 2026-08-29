@@ -3965,6 +3965,77 @@ above.
   reading this file), same as that item flagged after the review-queue
   feature shipped.
 
+### 2026-08-29 — owner questioned coverage, tried to get an external cross-check running: what worked and what didn't
+
+- **After the `境` fix, the owner asked why it wasn't caught automatically** —
+  they'd assumed every kanji was already being cross-checked against an
+  external source (specifically, the AI Overview Google shows for a
+  Heisig search). Answered plainly: no such per-kanji external check has
+  ever existed. What runs automatically is pattern-based (redundant
+  flattening, missing known radicals, self-references) plus this session's
+  own manual frame-ordered sweep against `cjkvi-ids`/CSV — currently
+  **1193/3000 (39.8%)** individually reviewed by any method, so `境` was
+  simply still in the unreviewed ~60%, not a check that failed.
+- **Tried to close that gap by actually reaching Google's AI Overview**,
+  in order of what was attempted:
+  1. `WebFetch` on a Google search URL — returned an error/troubleshooting
+     page, no real content.
+  2. The built-in web search tool — a different backend entirely (result
+     links + its own summary), never surfaces Google's AI Overview widget.
+  3. Installed Playwright + Chromium directly on the production server
+     (`pip install playwright`, `playwright install chromium`; Amazon
+     Linux 2023 has no `apt-get`, so `--with-deps` failed — installed the
+     actual missing shared libs, `atk`/`at-spi2-atk`/`mesa-libgbm`/`pango`/
+     etc., via `dnf` by hand) and pointed it at a real Google search.
+     **CAPTCHA-blocked on the very first request** — "Our systems have
+     detected unusual traffic from your computer network," tied to the
+     server's own public IP. Confirmed this is IP-reputation, not
+     rate-limiting: the same IP already shows up as a plain `curl` bot in
+     this project's own nginx logs (see the visit-counter entry above),
+     so Google has almost certainly already flagged it as a data-center
+     address — pacing requests out over a long period (the owner's
+     original "10 a day for a year" idea) targets the wrong failure mode
+     and likely wouldn't fix this specific block.
+  4. Owner offered remote-control access to their own home computer's
+     browser (AnyDesk-style) — not usable either: this session has no
+     remote-desktop viewing/control tool at all, independent of any
+     policy question.
+  5. **What actually works**: a standalone script the owner runs
+     themselves, locally, on their own computer — real residential IP,
+     a real visible (non-headless) browser window, no fingerprint
+     spoofing or CAPTCHA-defeating of any kind (if one appears, the
+     script pauses for the owner to solve it by hand). Built as
+     `tools/heisig-google-check/` (deliberately outside `backend/` to
+     make "does not run on the server" obvious): `check_kanji.py` picks
+     N not-yet-reviewed kanji per run (random by default, `--resume-only`
+     to go in order, `--id` for one specific kanji), searches each on
+     Google, extracts the AI Overview text via a best-guess CSS selector
+     list (Google's markup isn't a stable API and will drift — a
+     screenshot is saved for every kanji regardless, so nothing is lost
+     if the selector goes stale), and paces itself with a random 20-60s
+     delay between queries. `unreviewed_kanji.json` (1807 entries, a
+     snapshot of the coverage tsv's "no" rows plus each kanji's current
+     resolved parts) ships alongside it so the owner's machine doesn't
+     need any access back to this server. Progress persists locally
+     (`progress.json`) so repeated runs advance instead of repeating.
+     Results (`results.jsonl`) come back however's easiest — pasted
+     into a message, or committed and pushed if that checkout has git
+     access — for a future session to actually do the comparison
+     against `data.txt` and fix what's confirmed wrong.
+- **Not done here**: no actual cross-checking against `data.txt` yet —
+  this session only built and verified the collection tool exists and
+  the server-side blocker is real, not the analysis of any results
+  (there are none yet; the owner hasn't run it).
+- **Next session**: once `results.jsonl` comes back from the owner,
+  read it, spot-check `extracted_text` against `current_parts` per
+  entry, and treat each disagreement the way any owner-reported bug in
+  this audit gets investigated (`cjkvi-ids` as the tiebreaker when the
+  two disagree, since an LLM-generated AI Overview is exactly as
+  fallible as any other LLM's guess — including this project's own past
+  mistakes). If `extracted_text` comes back empty/wrong across most
+  entries, the CSS selectors in `check_kanji.py` need updating first
+  (instructions are in its own `README.md`).
+
 ## Tooling produced this session
 
 - `backend/render_glyphs.py` — added 2026-08-23. Renders requested

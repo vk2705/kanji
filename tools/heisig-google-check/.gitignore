@@ -1,0 +1,7 @@
+# Local runtime output from running check_kanji.py -- not shared via git, send back
+# results.jsonl directly (paste it, or commit+push it yourself if you want it tracked).
+venv/
+browser-profile/
+screenshots/
+results.jsonl
+progress.json
