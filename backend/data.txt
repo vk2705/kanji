@@ -9,7 +9,6 @@ rad2.4:?:obama,data, Mister T.
 rad2.5:??:pagoda-roof--vk,hito
 kangxi10:儿:human legs,legs
 rad2.7:?:enter,go in, put in
-rad2.8:?:animal legs
 kangxi12:丷:horns
 rad2.10:?:hood
 rad2.11:?:crown
@@ -245,7 +244,7 @@ prim28.2:':a drop of, drop
 
 rtk3:?:3,three:one,two
 rtk4:?:4,four:mouth,human legs
-rtk6:?:six,6:top hat,animal legs
+rtk6:六:six,6:top hat,ハ
 rtk7:七:seven: 
 rtk8:?:eight,8,infinity
 rtk16:?:old:mouth,ten
@@ -265,7 +264,7 @@ rtk2:二:two:
 rtk5:五:five:
 rtk9:九:nine,baseball:
 rtk10:十:ten:
-rtk11:口:mouth:囗
+rtk11:口:mouth:
 rtk12:日:day,sun,tongue wagging in mouth:
 rtk13:月:month,moon,flesh:
 rtk14:田:rice field:
@@ -789,9 +788,9 @@ rtk539:鋭:pointed:金,口,丷,个,儿
 rtk540:曽:formerly:田,日,丷
 rtk541:増:increase:田,土,日,丷
 rtk542:贈:presents:貝,曽
-rtk543:東:east:｜,一,日,木,田
-rtk544:棟:ridgepole:｜,一,日,木,田
-rtk545:凍:frozen:｜,一,日,木,冫,田
+rtk543:東:east:日,木
+rtk544:棟:ridgepole:木,東
+rtk545:凍:frozen:冫,東
 rtk546:妊:pregnancy:ノ,王,士,女
 rtk547:廷:courts:王,廴,士
 rtk548:染:dye:九,水,木
@@ -2002,7 +2001,7 @@ rtk1752:閣:tower:口,門,夂
 rtk1753:閑:leisure:木,門
 rtk1754:聞:hear:耳,門
 rtk1755:潤:wet:王,水,門
-rtk1756:欄:column:｜,一,日,木,門,田
+rtk1756:欄:column:木,門,東
 rtk1757:闘:fight:門,豆,寸
 rtk1758:倉:godown:ノ,口,个,尸,一
 rtk1759:創:genesis:口,个,一
@@ -2432,7 +2431,7 @@ rtk2182:嚇:menacing:口,赫
 rtk2183:朕:majestic plural:月,人,大,一,丷
 rtk2184:雰:atmosphere:雨,分
 rtk2185:箇:counter for articles:竹,固
-rtk2186:錬:tempering:｜,一,金,日,木,田,ハ
+rtk2186:錬:tempering:金,東
 rtk2187:遵:abide by:込,尊
 rtk2188:罷:quit:月,匕,厶
 rtk2189:屯:barracks:ノ,乙,凵
@@ -2794,7 +2793,7 @@ rtk2545:梯:ladder:木,弟
 rtk2546:柑:citrus:日,木,甘
 rtk2547:杭:stake:木,亠,几
 rtk2548:柊:holly:木,夂,丶
-rtk2549:柚:citron:｜,日,木,田
+rtk2549:柚:citron:木,由
 rtk2550:椀:wooden or lacquered bowl:木,夕,卩,宀,primitive_roof
 rtk2551:栂:hemlock:母,木,毋
 rtk2552:柾:straight grain:一,止,木
@@ -2989,7 +2988,7 @@ rtk2741:哉:how:口,土,戈
 rtk2742:詢:consult with:言,日,勹
 rtk2743:諄:tedious:言,子,亠,口
 rtk2744:讐:enemy:言,隹
-rtk2745:諌:admonish:｜,言,日,木,田
+rtk2745:諌:admonish:言,東
 rtk2746:諒:fact:言,口,小,亠
 rtk2747:讃:praise:貝,言,人,大,二,亠
 rtk2748:訊:request:ノ,言,几
@@ -3313,7 +3312,7 @@ prim-fire-radical:杰:fire radical
 kangxi104:疒:sickness radical,疔
 prim-track-radical:禹:track radical
 prim-katakana-no:ノ:katakana no
-prim-katakana-ha:ハ:katakana ha
+prim-katakana-ha:ハ:katakana ha,animal legs
 prim-katakana-ma:マ:katakana ma
 prim-katakana-yu:ユ:katakana yu
 

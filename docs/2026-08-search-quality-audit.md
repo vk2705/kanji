@@ -4265,3 +4265,147 @@ above.
   read it and treat each disagreement as an owner-reported bug (`cjkvi-
   ids` as tiebreaker). The 81 orphaned `rad{N}` rows on the live DB is
   still the other standing item, needs production access.
+
+## 2026-08-30 — processed the owner's results.jsonl (first pass)
+
+Owner ran `tools/heisig-google-check/check_kanji.py` on their home computer and
+pushed `tools/heisig-google-check/results.jsonl` (1812 entries: each kanji's
+Google AI Overview text, captured with "Show more" expanded). Instruction: "i
+pushed the results. please read and update our db if necessary."
+
+**Methodology, in order of trust:**
+
+1. Read a few entries in full by hand first (`rtk5`/五, `rtk6`/六) rather than
+   jumping straight to scripting — `rtk6` turned up a real bug on the first
+   try: its "animal legs" part was still the legacy placeholder `rad2.8`
+   (`character='?'`), never re-homed onto `prim-katakana-ha`(ハ) even though
+   that primitive already existed with the same glyph/meaning — the exact
+   "orphaned duplicate, never wired to its real glyph" pattern as `犭`/`罒`
+   earlier in this audit. Fixed: `rtk6`'s part → `prim-katakana-ha`; confirmed
+   `rad2.8` had zero remaining `parts`/`aliases` references and deleted the
+   dead row outright (data.txt line already had no other entry to remove).
+2. Wrote `backend/triage_google_check.py`: extracts CJK characters mentioned
+   in each entry's `extracted_text` (cut off at "Examples of X as a
+   Primitive"/"Would you like"/etc. markers, which introduce unrelated
+   example kanji, not X's own parts) and diffs against the live resolved
+   decomposition. Result: 1812 total, 0 not-found live, 1036 "consistent",
+   776 flagged (50 disjoint, 726 partial). Too noisy to trust as a direct bug
+   list — natural-language AI Overview text keeps mentioning unrelated
+   example kanji even past the cutoff markers — but it's a legitimate
+   discovery aid: it directly surfaced `rtk11` (below).
+3. Tried a stricter filter first (CSV's `components` column blank → flag):
+   862 candidates, 834 flagged. Rejected — re-confirms the known CSV
+   data-completeness gap (`rtk3`/三=一+二 is correct and well-known, CSV is
+   just blank for it).
+4. Switched to the authoritative check: real Unicode IDS atomicity
+   (`cjkvi-ids`; a character is atomic only if its own decomposition entry
+   equals itself, i.e. no structural decomposition exists in Unicode at all)
+   cross-referenced against kanji whose live decomposition is non-empty.
+   67 candidates (full list kept in this session's scratch output, not
+   committed — Heisig legitimately decomposes some Unicode-atomic glyphs on
+   purpose, e.g. 東=日+木 is a standard, celebrated RTK mnemonic despite
+   Unicode treating 東 as one ideograph, so this list needs case-by-case
+   judgment, not a blanket "empty it out").
+
+**Confirmed and fixed from the 67-item list:**
+
+- `rtk11`(口, mouth): was `口:mouth:囗` — an unrelated character (囗, "enclosure")
+  listed as 口's own part. CSV lists no components for 口 and IDS confirms it's
+  fully atomic. Fixed to empty parts (`rtk11:口:mouth:`). Spot-checked that
+  hosts using 口 as a part (e.g. `rtk21`/唱) still resolve correctly afterward.
+- `rtk543`(東, east): was `｜,一,日,木,田` — redundant flattening (｜+一 double-
+  counts 日's own strokes) plus an erroneous, unrelated 田 ("rice field", no
+  connection to "east"). CSV: "sun; day; tree; wood" → fixed to `日,木`.
+
+**Explicitly flagged, deliberately NOT fixed:** `rtk1186`(由,"wherefore"),
+`rtk1194`(甲,"armor"), `rtk1198`(申,"speaketh") all currently show the
+*identical* parts `｜,日,田` — clearly a copy-paste artifact, not per-glyph
+analysis (CSV gives each of them a completely different meaning: "sprout/
+shoot" / "armour/roots" / "monkey/sun/stick/day"). IDS confirms all three
+(and 田 itself) are genuinely Unicode-atomic, so any real decomposition here
+would be a *visual* Heisig-style teaching (each is 田 plus/minus a
+protruding stroke), not a structural one — exactly the case this audit's
+"render it, don't just reason about it" rule exists for. Tried to render them
+via `render_glyphs.py` to compare the three shapes side by side; no Chromium
+binary was available in this environment this session (`/opt/pw-browsers/`
+empty, none on PATH) — left this list for the next session that has a
+working renderer, rather than guess at which of ｜/一/etc. each one actually
+adds. `神` elsewhere in this file already references `申`/rtk1198 as a whole,
+atomic unit, which is at least consistent with leaving 申 atomic rather than
+inventing a decomposition for it.
+
+**Applied:** `sync_system_data.py --dry-run` → 1 decomposition replaced
+(rtk543), 1 removed "now atomic" (rtk11) → matched expectations exactly →
+`backup_db.py` → applied for real → verified live via `get_kanji_detail`.
+Manually deleted the now-fully-orphaned `rad2.8` row (kanji table only;
+`sync_system_data.py` never auto-deletes orphans by design).
+
+**Verified:** `test_regression_fixes.py` — updated the stale `rtk6` pin
+(`rad2.8`→`prim-katakana-ha`), added new pins for `rtk543` and a new
+`EXPECTED_ATOMIC`/`check_atomic` for `rtk11` (the checker requires a non-empty
+`decompositions` list, so a genuinely-atomic kanji needed its own check
+rather than reusing `EXPECTED_DECOMPOSITIONS`) — 340 checks, all pass, no
+other regressions. `audit_self_reference.py` also run clean.
+
+**Not deployed yet this session** — `git pull`/restart pending, see below.
+
+**Second wave — the same corruption had propagated to every 東-containing
+compound.** After fixing `rtk543`, grepped `data.txt` for the literal
+`｜,一,日,木,田`-style pattern and found it copy-pasted into every kanji whose
+CSV components mention 東 as a sub-part: `rtk544`(棟,ridgepole, CSV "tree;
+wood; east"), `rtk545`(凍,frozen, CSV "ice; east"), `rtk2186`(錬,tempering,
+CSV "...east; tree; wood; sun; day", plus a stray extra `ハ` with no CSV
+basis at all), `rtk2745`(諌,admonish, CSV blank but IDS `⿰言東` confirms it
+unambiguously). Also found `rtk2549`(柚,citron) with the same corrupted
+string despite IDS showing it's structurally unrelated to 東 at all
+(`⿰木由` — real right side is 由/rtk1186, not 東). And `rtk1756`(欄,column,
+CSV "tree; wood; gates; east...") — its real IDS parent `闌` isn't a taught
+Heisig frame in this dataset, so its mnemonic decomposition is 木+門+東 (all
+three already-taught primitives CSV names), not a literal IDS structural
+path. All six collapsed back to referencing the compound part as a whole
+(木/由/東/門 etc.) instead of re-flattening stale strokes. Verified each via
+`get_kanji_detail` post-sync; all six resolve exactly as expected.
+
+**Related, explicitly NOT fixed this session (flagged for next time):**
+`rtk749`(更,"grow late") itself carries the same `ノ,一,日,田`-style corrupted
+parts, and CSV's gloss for it ("Ameratasu; one; ceiling; sun; tucked under
+the arm") doesn't map cleanly onto any current primitive set — real IDS
+structure is `⿱一⿻日乂` (一 over an overlapping 日/乂), and 乂 has no taught
+primitive home yet. `rtk751`(梗) inherits the same problem since CSV names
+"tree; wood" + 更's own gloss-terms, i.e. it decomposes via 更, not 東 (a
+different fix path than the six above — was initially mis-suspected of being
+another simple 東-swap, corrected after checking IDS: `梗 = ⿰木更`, not
+`⿰木東`). `rtk1969`(典), `rtk1257`(曹), `rtk1806`(動 — CSV says "heavy"/重,
+not 東, and 重 is itself in the atomic-but-has-parts list above), `rtk2691`
+(糟), `rtk2895`(暢), and `rtk2449`(蘭 — CSV components blank, so no textual
+confirmation either way) all still carry a similar `｜,一,日`-style stroke
+cluster and need the same individual CSV+IDS (and ideally render, once
+Chromium is available again) treatment before touching — grouping them here
+as one cluster so the next session doesn't have to re-derive the grep.
+
+**Applied (both waves), verified, regression-tested**: `sync_system_data.py
+--dry-run` → backup → apply, twice (11 decompositions replaced total across
+both waves, 1 removed "now atomic"); `test_regression_fixes.py` now carries
+9 new/updated pins from this session (`rtk6`, `rtk543`, `rtk544`, `rtk545`,
+`rtk2186`, `rtk2549`, `rtk2745`, `rtk1756`, plus the new `EXPECTED_ATOMIC`/
+`check_atomic` for `rtk11`) — all checks pass; `audit_self_reference.py`
+clean (0 found).
+
+**Next session**: this is explicitly open-ended per the owner ("даже если
+проверка займет год, это стоит сделать" — even if it takes a year, worth
+doing). Priority follow-ups, roughly in order:
+1. The `更`/`梗`/`典`/`曹`/`動`/`糟`/`暢`/`蘭` cluster flagged just above —
+   needs a working Chromium (`render_glyphs.py` had no binary available this
+   session) plus individual CSV/IDS review, not a blind pattern-swap like the
+   six above got, since at least one candidate already turned out to need a
+   different fix path (更 itself, not 東) than the initial grep suggested.
+2. Render/resolve the 由/甲/申/田 cluster (identical copy-pasted parts on
+   three CSV-distinct glyphs).
+3. Continue through the remaining ~63 items of the original 67-item
+   IDS-atomic list (most are probably legitimate Heisig teachings needing
+   only a quick CSV/IDS confirmation, e.g. 犬=大+丶, 自=目, but none
+   individually verified yet).
+4. Consider mining the noisier 776-item `triage_google_check.py` output for
+   further genuine bugs beyond what the stricter IDS-atomic check catches
+   (e.g. wrong-but-non-atomic decompositions, which the atomic check can't
+   see at all).

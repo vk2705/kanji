@@ -48,8 +48,34 @@ import database  # noqa: E402
 EXPECTED_DECOMPOSITIONS = {
     "rtk1209": {"character": "祈", "keyword": "pray",
                 "expected_part_ids": {"rtk1206", "kangxi113"}},
+    # rad2.8 ("animal legs") was an orphaned legacy placeholder (character='?', never
+    # linked to its real glyph) that duplicated prim-katakana-ha (ハ) -- session
+    # 2026-08-30 re-homed rtk6's part onto prim-katakana-ha and retired rad2.8, same
+    # consolidation pattern as kangxi94/kangxi122 earlier in the audit.
     "rtk6": {"character": "六", "keyword": "six",
-             "expected_part_ids": {"kangxi8", "rad2.8"}},
+             "expected_part_ids": {"kangxi8", "prim-katakana-ha"}},
+    # Was ｜,一,日,木,田 -- redundant flattening (｜+一 = 日's own strokes double-counted)
+    # plus an erroneous, unrelated 田 -- CSV lists 東 as just "sun; day; tree; wood"
+    # (session 2026-08-30, found via cross-checking tools/heisig-google-check/results.jsonl).
+    "rtk543": {"character": "東", "keyword": "east",
+               "expected_part_ids": {"rtk12", "rtk207"}},
+    # The same ｜,一,日,木,田-style corrupted flatten as rtk543 had propagated to every
+    # 東-containing compound in data.txt (found by grepping for the literal pattern
+    # once rtk543 itself was fixed) -- collapsed each back to referencing 東/由 (or,
+    # for 欄, 木+門+東 per CSV's "tree; wood; gates; east") as a whole part instead of
+    # re-flattening its strokes. Session 2026-08-30.
+    "rtk544": {"character": "棟", "keyword": "ridgepole",
+               "expected_part_ids": {"rtk207", "rtk543"}},
+    "rtk545": {"character": "凍", "keyword": "frozen",
+               "expected_part_ids": {"kangxi15", "rtk543"}},
+    "rtk2186": {"character": "錬", "keyword": "tempering",
+                "expected_part_ids": {"rtk287", "rtk543"}},
+    "rtk2549": {"character": "柚", "keyword": "citron",
+                "expected_part_ids": {"rtk207", "rtk1186"}},
+    "rtk2745": {"character": "諌", "keyword": "admonish",
+                "expected_part_ids": {"rtk357", "rtk543"}},
+    "rtk1756": {"character": "欄", "keyword": "column",
+                "expected_part_ids": {"rtk207", "rtk1743", "rtk543"}},
     "rtk2014": {"character": "航", "keyword": "navigate",
                 "expected_part_ids": {"rtk2012", "kangxi8", "kangxi16"}},
     "rtk580": {"character": "家", "keyword": "house",
@@ -896,6 +922,18 @@ EXPECTED_HANZI_PRESENT = {
     "报": "hanzi-62a5", "万": "hanzi-4e07", "个": "hanzi-4e2a", "丰": "hanzi-4e30",
 }
 
+# kanji_id -> character, for kanji that are truly Unicode-IDS-atomic (no structural
+# decomposition exists at all -- character maps to itself in cjkvi-ids) and whose
+# live decomposition should therefore be empty. rtk11 (口) previously listed an
+# unrelated 囗 as a "part"; CSV and cjkvi-ids both agree 口 is atomic (session
+# 2026-08-30, found via cross-checking tools/heisig-google-check/results.jsonl).
+# Most of the 67-item IDS-atomic-but-has-parts candidates found in that session are
+# legitimate Heisig teachings (e.g. 東=日+木 despite Unicode treating 東 as atomic) and
+# are deliberately NOT pinned here -- only genuinely-fixed bugs belong in this set.
+EXPECTED_ATOMIC = {
+    "rtk11": "口",
+}
+
 
 def check_decompositions(conn) -> list[str]:
     failures = []
@@ -961,6 +999,24 @@ def check_no_kradfile_proxy(conn) -> list[str]:
     return failures
 
 
+def check_atomic(conn) -> list[str]:
+    failures = []
+    for kid, char in EXPECTED_ATOMIC.items():
+        row = conn.execute("SELECT character FROM kanji WHERE id = ?", (kid,)).fetchone()
+        if row is None:
+            failures.append(f"{kid} ({char}): kanji row no longer exists")
+            continue
+        if row["character"] != char:
+            failures.append(f"{kid}: character changed from {char!r} to {row['character']!r}")
+        detail = database.get_kanji_detail(conn, kid, viewer_id=None)
+        for decomp in detail["decompositions"]:
+            if decomp["parts_detail"]:
+                got = [p["id"] for p in decomp["parts_detail"]]
+                failures.append(f"{kid} ({char}): expected atomic (no parts) but "
+                                 f"decomposition {decomp.get('label')!r} has {got}")
+    return failures
+
+
 def check_no_self_reference(conn) -> list[str]:
     failures = []
     variant_rows = conn.execute("SELECT id, character FROM kanji WHERE variant_of = id").fetchall()
@@ -984,10 +1040,11 @@ def main():
     all_failures += check_decompositions(conn)
     all_failures += check_hanzi_present(conn)
     all_failures += check_no_kradfile_proxy(conn)
+    all_failures += check_atomic(conn)
     all_failures += check_no_self_reference(conn)
     conn.close()
 
-    total_checks = len(EXPECTED_DECOMPOSITIONS) + len(EXPECTED_HANZI_PRESENT) + 2
+    total_checks = len(EXPECTED_DECOMPOSITIONS) + len(EXPECTED_HANZI_PRESENT) + len(EXPECTED_ATOMIC) + 2
     if all_failures:
         print(f"FAILED: {len(all_failures)} problem(s) found across {total_checks} checks:\n")
         for f in all_failures:
