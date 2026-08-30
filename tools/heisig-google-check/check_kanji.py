@@ -175,6 +175,12 @@ def check_one(page, entry: dict) -> dict:
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--count", type=int, default=10, help="How many kanji to check this run (default 10)")
+    parser.add_argument("--all", action="store_true",
+                         help="Check every not-yet-done kanji in one run, in order, instead of --count random ones. "
+                              "Safe to Ctrl+C and re-run later -- progress is saved after each kanji, so it picks "
+                              "up where it left off. With ~1800 kanji and a 20-60s delay between each, expect this "
+                              "to take roughly 10-30 hours of wall-clock time (it doesn't need to be unattended --"
+                              "the browser window can just sit in the background between runs).")
     parser.add_argument("--id", help="Check one specific kanji id instead of random ones")
     parser.add_argument("--resume-only", action="store_true",
                          help="Don't pick new kanji, just re-run this many from the not-yet-done pool in order")
@@ -194,7 +200,9 @@ def main():
         if not pending:
             print("Nothing left to check -- every kanji in the list has been done.")
             return
-        if args.resume_only:
+        if args.all:
+            batch = pending
+        elif args.resume_only:
             batch = pending[:args.count]
         else:
             batch = random.sample(pending, min(args.count, len(pending)))
@@ -210,24 +218,28 @@ def main():
         )
         page = context.pages[0] if context.pages else context.new_page()
 
-        for i, entry in enumerate(batch, 1):
-            print(f"[{i}/{len(batch)}] {entry['id']} {entry['character']} ({entry['keyword']})...", end=" ", flush=True)
-            try:
-                record = check_one(page, entry)
-            except Exception as exc:
-                print(f"FAILED: {exc}")
-                continue
-            append_result(record)
-            done.add(entry["id"])
-            save_progress(done)
-            found = "found AI overview" if record["extracted_text"] else "no overview extracted (check screenshot)"
-            print(found)
+        try:
+            for i, entry in enumerate(batch, 1):
+                print(f"[{i}/{len(batch)}] {entry['id']} {entry['character']} ({entry['keyword']})...", end=" ", flush=True)
+                try:
+                    record = check_one(page, entry)
+                except Exception as exc:
+                    print(f"FAILED: {exc}")
+                    continue
+                append_result(record)
+                done.add(entry["id"])
+                save_progress(done)
+                found = "found AI overview" if record["extracted_text"] else "no overview extracted (check screenshot)"
+                print(found)
 
-            if i < len(batch):
-                delay = random.uniform(MIN_DELAY_SECONDS, MAX_DELAY_SECONDS)
-                time.sleep(delay)
-
-        context.close()
+                if i < len(batch):
+                    delay = random.uniform(MIN_DELAY_SECONDS, MAX_DELAY_SECONDS)
+                    time.sleep(delay)
+        except KeyboardInterrupt:
+            print(f"\nStopped early at [{i}/{len(batch)}]. Progress is saved -- "
+                  f"just re-run the same command later to pick up where you left off.")
+        finally:
+            context.close()
 
     print(f"\nDone. Results appended to {RESULTS_PATH.name}. "
           f"{len(done)}/{len(all_kanji)} kanji checked so far overall.")
