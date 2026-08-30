@@ -253,7 +253,7 @@ rtk17:?:I:five,mouth
 rtk18:?:risk:sun,eye
 rtk19:?:companion:flesh
 rtk20:?:bright:sun,moon
-rtk21:?:chant:mouth,tongue wagging in mouth
+rtk21:?:chant:mouth,昌
 
 
 rtk91:?::日,召

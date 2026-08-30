@@ -880,6 +880,14 @@ EXPECTED_DECOMPOSITIONS = {
     # owner request, rather than just deduplicating the flat list.
     "rtk523": {"character": "境", "keyword": "boundary",
                "expected_part_ids": {"rtk161", "prim-finally"}},
+    # 唱 fixed (2026-08-30, audit_csv_regressions.py rarity-filtered pass):
+    # old 口,日 was missing a whole second 日 -- cjkvi-ids confirms
+    # 唱 = 口+昌, 昌 = 日+日 (two suns stacked), and CSV's components list
+    # ("mouth; prosperous; sun; day; tongue wagging") independently names
+    # 昌 ("prosperous") as the real compound. Fixed to reference 昌
+    # (rtk25) directly rather than reproducing only one of its two suns.
+    "rtk21": {"character": "唱", "keyword": "chant",
+              "expected_part_ids": {"rtk11", "rtk25"}},
 }
 
 # character -> hanzi id, spot-checking the 429-character Unihan self-reference backfill

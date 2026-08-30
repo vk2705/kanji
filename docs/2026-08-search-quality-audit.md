@@ -4182,3 +4182,86 @@ above.
   tree (stop at the target character `并` itself when found, and stop
   at any character your own app already treats as atomic/taught,
   rather than decomposing indefinitely).
+
+### 2026-08-30 — daily check-in: caught up on out-of-band work, one more real bug via `audit_csv_regressions.py`
+
+- Pulled latest first: since the previous entry, an out-of-band session
+  fixed `境`/added `竟` as a real primitive (owner spot-check), added a
+  first-party visit counter (`page_views` table, schema now v5,
+  `backend/visit_stats.py`), and built `tools/heisig-google-check/` — a
+  script the *owner* runs locally (not on the server, which is
+  CAPTCHA-blocked by Google) to cross-check kanji against Google's AI
+  Overview. No `results.jsonl` back yet, so nothing to process from that
+  channel this session. Rebuilt and ran the full test suite clean
+  (338 checks, same 4 expected hanzi-scope failures) before doing
+  anything else, coverage confirmed at 1194/3000 (39.8%).
+- With `audit_flattening.py`'s CSV-confirmed queue empty (see the
+  previous entry), tried a different existing tool instead of the same
+  one again: `audit_csv_regressions.py` (1604 raw hits, same noise level
+  session 12 found originally). Applied a **rarity filter** — only trust
+  a "dropped" CSV term if it (its resolved id) appears in 2 or fewer
+  flagged entries total across the whole run, on the theory that a term
+  dropped from dozens of unrelated kanji is CSV's own pre-expansion
+  redundancy, not a real per-kanji mistake. Cut it to **61** candidates.
+- Checked whether each candidate's dropped compound is fully present as
+  a *subset* of the kanji's current resolved parts (not necessarily
+  contiguous): 42 yes, 19 no. The 19 "no" cases mean the CSV-named
+  concept's own sub-pieces aren't even all there — worth a future
+  session's individual attention but not a quick win.
+- Of the 42, checked which form a *contiguous* run (i.e. a clean
+  mechanical collapse like `audit_flattening.py`'s pattern) — only 13,
+  and several of those turned out to be `tid` already being a leaf/atomic
+  primitive already directly present (the checking script conflated
+  "no decomposition to recurse into" with "not present", flagging some
+  false collapses that were actually no-ops on closer look). Rather than
+  batch-apply a script with a known logic gap, worked two of them by
+  hand instead:
+  - **`唱`(chant, rtk21) — a real missing-component bug, same class as
+    `便`/`侯` two sessions ago.** Old line was `mouth,tongue wagging in
+    mouth` (口 + one 日). `cjkvi-ids` confirms `唱 = 口+昌`,
+    `昌 = 日+日` (two suns stacked) — CSV's components independently
+    name "prosperous" (昌) as the real compound, not just its own loose
+    sub-parts. The old line only ever showed one of `昌`'s two `日`s.
+    Fixed to `口,昌` (referencing the already-taught rtk25 directly, same
+    convention `昌` itself already uses for showing its own repeated `日`
+    as one chip). Confirmed via render.
+  - **`希`(hope, rtk1602) — investigated, NOT fixed, flagging for next
+    session.** CSV lists "sheaf" as a real component alongside "linen",
+    and the current line (`ノ,一,巾`) turns out to be an *exact*
+    reproduction of `布`(linen, rtk433)'s own 3 parts with nothing else
+    — meaning `希`'s actual top stroke (a double-X shape, confirmed by
+    rendering `希` next to `布` and candidate primitives) is entirely
+    unrepresented. `cjkvi-ids` says `⿱㐅布` (a single U+3405 `㐅` on top),
+    but the rendered glyph clearly shows two crossing strokes, and it
+    does **not** match `爻`(trigrams, kangxi89 — already used in `璽`/
+    `駁`/`爾`) either — `爻`'s bottom has an extra hook `希`'s top lacks.
+    Needs a fresh, uncontaminated look at what that top shape actually
+    is (possibly a new `prim-{slug}` primitive, following the `竟`/
+    `丗` precedent) before touching it. Also flagging `柳`(willow,
+    rtk1525)/`卵`(egg, rtk1526) as related: both currently reference
+    `卩`(kangxi26, "stamp") directly, but CSV says their real component is
+    `卯`(rtk2199)/its own left-hook variants, and `卯`'s own current
+    entry (`kangxi26` alone) looks like it might be missing its own left
+    stroke the same way — a small cascade worth resolving together.
+  - Left the other ~40 candidates (both non-contiguous and the
+    still-untrusted "contiguous" ones) alone rather than risk a rushed
+    batch — noting the specific script bug (atomic/leaf terms need an
+    explicit "already directly present?" check, not a silent skip) for
+    whoever continues this.
+- Verified: full rebuild from scratch; `test_regression_fixes.py` — 1
+  new pinned entry (`rtk21`), 338 checks, same 4 expected hanzi-scope
+  failures, nothing else; search-term regression checklist including
+  "chant"/"prosperous"/"tongue wagging" (still resolves to 日 itself via
+  self-identity, just no longer double-listed under 唱) all sane.
+- Not deployed to the live server from this session; data-only change,
+  no backend restart needed on next deploy.
+- Coverage: pending — see follow-up commit.
+- **Next session**: `希`/`柳`/`卵` cluster needs a fresh from-scratch
+  investigation (possible new primitive for `希`'s top stroke); the other
+  ~40 `audit_csv_regressions.py` rarity-filtered candidates from this
+  session need individual review, fixing the atomic-term subset-check
+  bug noted above first if scripting the check again. Once
+  `results.jsonl` comes back from the owner's Google cross-check tool,
+  read it and treat each disagreement as an owner-reported bug (`cjkvi-
+  ids` as tiebreaker). The 81 orphaned `rad{N}` rows on the live DB is
+  still the other standing item, needs production access.
