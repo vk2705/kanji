@@ -76,6 +76,35 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk357", "rtk543"}},
     "rtk1756": {"character": "欄", "keyword": "column",
                 "expected_part_ids": {"rtk207", "rtk1743", "rtk543"}},
+    # 由/甲/申 all carried identical copy-pasted parts (｜,日,田) despite being
+    # CSV-distinct glyphs; render_glyphs.py (Chromium+Noto Sans CJK JP installed this
+    # session) confirmed all three really are 田 plus one added stroke -- Heisig's own
+    # prim-pipe (｜) primitive -- just positioned differently (top/bottom/both), which
+    # this flattened parts-list model can't capture. Dropped the erroneous 日. Session
+    # 2026-08-30.
+    "rtk1186": {"character": "由", "keyword": "wherefore",
+                "expected_part_ids": {"rtk14", "prim-pipe"}},
+    "rtk1194": {"character": "甲", "keyword": "armor",
+                "expected_part_ids": {"rtk14", "prim-pipe"}},
+    "rtk1198": {"character": "申", "keyword": "speaketh",
+                "expected_part_ids": {"rtk14", "prim-pipe"}},
+    # 曹 was ｜,一,日 (missing 曲/"bend" entirely, despite CSV and the independent
+    # data_from_pdf.txt extraction both saying "one, bend, sun") -- confirmed via
+    # render that the top really is 曲-shaped. 動/糟 both reference 曹-family parts as
+    # whole compounds (重+力, 米+曹 respectively) per IDS, confirmed via render.
+    "rtk1257": {"character": "曹", "keyword": "cadet",
+                "expected_part_ids": {"rtk1", "rtk1256", "rtk12"}},
+    # 重 was ｜,ノ,一,日,里 -- IDS says 重 is actually Unicode-atomic, but render
+    # confirms the standard Heisig mnemonic 千("thousand")+里("village") holds up
+    # visually (top matches 千 exactly, bottom matches 里 exactly); CSV's "thousand;
+    # computer; rice field; brains; soil; dirt; ground" is 千's and 里's own
+    # sub-component gloss fragments bleeding through, not 重's real parts.
+    "rtk1805": {"character": "重", "keyword": "heavy",
+                "expected_part_ids": {"rtk40", "rtk185"}},
+    "rtk1806": {"character": "動", "keyword": "move",
+                "expected_part_ids": {"rtk1805", "rtk922"}},
+    "rtk2691": {"character": "糟", "keyword": "lees",
+                "expected_part_ids": {"rtk987", "rtk1257"}},
     "rtk2014": {"character": "航", "keyword": "navigate",
                 "expected_part_ids": {"rtk2012", "kangxi8", "kangxi16"}},
     "rtk580": {"character": "家", "keyword": "house",
@@ -88,8 +117,6 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"kangxi40", "rtk32", "rtk1", "rad1.1", "rtk12"}},
     "rtk1809": {"character": "働", "keyword": "work",
                 "expected_part_ids": {"kangxi9", "rtk1806"}},
-    "rtk1806": {"character": "動", "keyword": "move",
-                "expected_part_ids": {"prim-pipe", "rtk1", "rtk12", "rtk922", "rtk185", "prim-katakana-no"}},
     "rtk688": {"character": "看", "keyword": "watch over",
                "expected_part_ids": {"prim-katakana-no", "rtk1", "rtk687", "rtk2", "rtk15"}},
     "rtk1049": {"character": "側", "keyword": "side",

@@ -54,7 +54,17 @@ CHROME_CANDIDATES = [
     "/opt/pw-browsers/chromium/chrome-linux/chrome",
 ]
 
-FONT_STACK = "'WenQuanYi Zen Hei', 'Unifont-JP', sans-serif"
+# Fall back to whatever Chromium `playwright install` put in the default cache dir
+# (versioned subdirectory, e.g. ~/.cache/ms-playwright/chromium-1234/chrome-linux64/chrome)
+# if none of the fixed CHROME_CANDIDATES paths above exist.
+_PW_CACHE = Path.home() / ".cache" / "ms-playwright"
+if _PW_CACHE.is_dir():
+    for _entry in sorted(_PW_CACHE.glob("chromium-*")):
+        _bin = _entry / "chrome-linux64" / "chrome"
+        if _bin.exists():
+            CHROME_CANDIDATES.append(str(_bin))
+
+FONT_STACK = "'Noto Sans CJK JP', 'WenQuanYi Zen Hei', 'Unifont-JP', sans-serif"
 
 
 def find_chrome() -> str:

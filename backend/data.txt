@@ -1431,7 +1431,7 @@ rtk1182:崇:adore:山,宗
 rtk1183:祭:ritual:示,个,癶
 rtk1184:察:guess:ノ,示,宀,primitive_roof,癶
 rtk1185:擦:grate:ノ,示,宀,primitive_roof,扌,癶
-rtk1186:由:wherefore:｜,日,田
+rtk1186:由:wherefore:田,｜
 rtk1187:抽:pluck:｜,日,扌,田
 rtk1188:油:oil:｜,水,日,田
 rtk1189:袖:sleeve:｜,一,初,田
@@ -1439,11 +1439,11 @@ rtk1190:宙:mid-air:｜,日,宀,primitive_roof,田
 rtk1191:届:deliver:｜,日,尸,田
 rtk1192:笛:flute:｜,竹,日,田
 rtk1193:軸:axis:｜,車,日,田
-rtk1194:甲:armor:｜,日,田
+rtk1194:甲:armor:田,｜
 rtk1195:押:push:｜,日,扌,田
 rtk1196:岬:headland:｜,山,日,田,凵
 rtk1197:挿:insert:｜,千,日,扌,田
-rtk1198:申:have the honor to:｜,日,田
+rtk1198:申:have the honor to:田,｜
 rtk1199:伸:expand:｜,日,田
 rtk1200:神:gods:礻,申
 rtk1201:捜:search:｜,日,又,扌,田
@@ -1502,7 +1502,7 @@ rtk1253:満:full:｜,一,水,二,冂,山,艾
 rtk1254:画:brush-stroke:一,田,凵
 rtk1255:歯:tooth:止,米,凵
 rtk1256:曲:bend:｜,日
-rtk1257:曹:office:｜,一,日
+rtk1257:曹:office:一,曲,日
 rtk1258:遭:encounter:｜,一,込,日
 rtk1259:漕:rowing:｜,一,水,日
 rtk1260:槽:vat:曹,木
@@ -2050,8 +2050,8 @@ rtk1801:剣:sabre:口,人,个
 rtk1802:険:precipitous:口,人,个,阝
 rtk1803:検:examination:口,人,木,个
 rtk1804:倹:frugal:口,人,个,一
-rtk1805:重:heavy:｜,ノ,一,日,里
-rtk1806:動:move:｜,一,日,力,里,ノ
+rtk1805:重:heavy:千,里
+rtk1806:動:move:重,力
 rtk1807:腫:tumor:｜,月,日,里,ノ
 rtk1808:勲:meritorious deed:｜,力,杰,日,一,ノ
 rtk1809:働:work:亻,動
@@ -2934,7 +2934,7 @@ rtk2687:篇:volume:｜,一,戸,竹,冂,冊,尸,廾
 rtk2688:筈:notch of an arrow:口,舌,竹
 rtk2689:簸:winnow:甘,竹,皮,又
 rtk2690:粕:scrap:白,米
-rtk2691:糟:dregs:｜,一,日,米
+rtk2691:糟:dregs:米,曹
 rtk2692:糊:paste:米,胡
 rtk2693:籾:unhulled rice:刀,米,丶
 rtk2694:糠:rice bran:ヨ,水,米,广,隶

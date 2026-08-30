@@ -4409,3 +4409,91 @@ doing). Priority follow-ups, roughly in order:
    further genuine bugs beyond what the stricter IDS-atomic check catches
    (e.g. wrong-but-non-atomic decompositions, which the atomic check can't
    see at all).
+
+## 2026-08-30 (same session, continued) — got a renderer working, resolved the flagged clusters
+
+Installed a real headless Chromium (`./venv/bin/python3 -m playwright install
+chromium`, landed in `~/.cache/ms-playwright/`) plus `google-noto-sans-cjk-jp-fonts`
+/`google-noto-sans-cjk-sc-fonts` (the box had *no* CJK font installed at all --
+`render_glyphs.py` was silently producing blank glyph cells with only the
+codepoint label visible until this was caught and fixed). Updated
+`render_glyphs.py`'s `CHROME_CANDIDATES` to also probe the default
+`~/.cache/ms-playwright/chromium-*/chrome-linux64/chrome` path, and its
+`FONT_STACK` to lead with `Noto Sans CJK JP`. This unblocks the "render it,
+don't just reason about it" method for future sessions without needing the
+owner's local machine.
+
+**由/甲/申 resolved**: rendered side by side with 田 -- confirmed all three
+really are 田 plus one added vertical stroke (由: pokes through the top edge
+only; 甲: bottom only; 申: both). That's exactly Heisig's own `｜` primitive
+(`prim-pipe`, "pipe, walking stick, cane, line" -- already used elsewhere in
+the dataset), just placed differently, which this flattened parts-list model
+can't distinguish by position. Fixed all three to `田,｜` (dropping the
+erroneous `日` each previously also carried -- render confirms the base
+shape is unambiguously 田, not 日).
+
+**曹/動/糟 resolved**: `曹` was `｜,一,日`, silently missing `曲`("bend")
+despite CSV *and* the independent `data_from_pdf.txt` 4th-edition extraction
+both saying "one, bend, sun" -- render confirmed the top is 曲-shaped. Fixed
+to `一,曲,日`. `動`("move") and `糟`("dregs") were both re-flattening 曹-family
+strokes instead of referencing whole compounds; IDS (`動=⿰重力`,
+`糟=⿰米曹`) and render both confirm they should reference `重`+`力` and
+`米`+`曹` respectively. Fixed.
+
+**重 resolved** (found as a side effect of fixing 動): IDS says 重 is
+actually Unicode-atomic, but render confirms the standard, well-known Heisig
+mnemonic 千("thousand")+里("village") holds up visually -- the top matches 千
+exactly, the bottom matches 里 exactly. CSV's "thousand; computer; rice
+field; brains; soil; dirt; ground" turned out to be 千's and 里's own
+sub-component gloss fragments bleeding through onto 重's row, not 重's real
+parts. Fixed `｜,ノ,一,日,里` → `千,里`.
+
+**Still flagged, deliberately not fixed**: `更`("grow late") and `梗`
+(which decomposes via 更, not 東 as initially suspected -- corrected after
+checking IDS) both need a *new* primitive for the "tucked under the arm"
+concept CSV and `data_from_pdf.txt` agree on (IDS's own structural answer,
+`乂` inside `⿱一⿻日乂`, isn't a taught Heisig frame here, same "real IDS
+parent isn't independently taught" situation as 闌/欄 from the first pass) --
+creating and correctly rendering a brand-new primitive is real, careful work
+that deserves its own session, not a quick copy-fix. `暢`("carefree") has the
+same problem: its real IDS parent `昜` isn't a taught frame here either, and
+visually 昜/易 are close enough to have caused a confirmed mix-up mid-session
+(typed 易 by mistake while working from a codepoint copy-pasted out of a
+terminal grep, caught by re-verifying against the exact UTF-8 bytes in
+`cjkvi-ids` rather than trusting the terminal's rendering) -- another reason
+to be careful with this one specifically before touching it. `典`("code")
+render confirms 八 as the bottom component clearly, but the top shape and
+its correct primitive identity is still unconfirmed. `蘭`("orchid") CSV
+components are blank, so still no textual confirmation either way for its
+`門`/`東`-adjacent parts.
+
+Also noticed in passing (not touched, flagging for later): `rtk200`(宣)'s
+pinned decomposition includes `rad1.1` (`character='?'`, aliases
+"one,floor,ceiling,minus") as an expected part -- this looks like the same
+"orphaned legacy placeholder colliding with an already-taught primitive"
+bug class as `rad2.8`/`犭`/`罒` earlier in this audit (`rtk1`/一 already
+covers "one"), but `rtk200`'s own parts list is *also* visibly bloated/
+duplicated (`宀,primitive_roof,span,one,ceiling,sun,day,one,floor,one` --
+"one" appears three times), so untangling this one properly means fixing
+both the placeholder and the corrupted parts list together, not a quick
+alias rename like the earlier fixes in this class. Left as-is.
+
+**Applied, verified, regression-tested**: two more `sync_system_data.py
+--dry-run` → backup → apply rounds (6 decompositions replaced, then 1 more
+for 重 found afterward); all fixes verified live via `get_kanji_detail`;
+`test_regression_fixes.py` now has 9 more new pins from this half of the
+session (also removed one stale duplicate `"rtk1806"` key found while adding
+the new one -- Python dicts silently let the later definition win, so it had
+been dead code masking what the live pin actually checked); full suite and
+`audit_self_reference.py` both clean.
+
+**Next session priorities, updated**:
+1. `更`/`梗`/`暢` need a new "tucked under the arm"-style primitive
+   (name/glyph TBD -- CSV and PDF both hint at the concept but neither gives
+   a ready-made Unicode component to point at) -- treat this as new-primitive
+   creation work, following the `竟`/`丗` precedent, not a data.txt copy-fix.
+2. `典`'s top shape and `蘭`'s 東/門-adjacent parts still need resolving.
+3. The `rad1.1`/`rtk200` combined placeholder+corrupted-parts issue noted
+   above.
+4. Continue through the remaining ~63 items of the original 67-item
+   IDS-atomic list; keep mining `triage_google_check.py`'s 776-item output.
