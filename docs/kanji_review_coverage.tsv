@@ -19,7 +19,7 @@ rtk17	吾	i	17	no
 rtk18	冒	risk	18	no
 rtk19	朋	companion	19	no
 rtk20	明	bright	20	no
-rtk21	唱	chant	21	no
+rtk21	唱	chant	21	yes
 rtk22	晶	sparkle	22	no
 rtk23	品	goods	23	no
 rtk24	呂	spine	24	no
@@ -521,7 +521,7 @@ rtk519	暗	darkness	519	no
 rtk520	韻	rhyme	520	yes
 rtk521	識	discriminating	521	no
 rtk522	鏡	mirror	522	no
-rtk523	境	boundary	523	no
+rtk523	境	boundary	523	yes
 rtk524	亡	deceased	524	no
 rtk525	盲	blind	525	no
 rtk526	妄	delusion	526	no

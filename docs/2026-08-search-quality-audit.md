@@ -4255,7 +4255,7 @@ above.
   self-identity, just no longer double-listed under 唱) all sane.
 - Not deployed to the live server from this session; data-only change,
   no backend restart needed on next deploy.
-- Coverage: pending — see follow-up commit.
+- Coverage: **1195/3000 (39.8%)**.
 - **Next session**: `希`/`柳`/`卵` cluster needs a fresh from-scratch
   investigation (possible new primitive for `希`'s top stroke); the other
   ~40 `audit_csv_regressions.py` rarity-filtered candidates from this
