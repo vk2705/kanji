@@ -115,6 +115,20 @@ def looks_like_captcha(page) -> bool:
     return "unusual traffic" in text or "recaptcha" in text or "detected unusual traffic" in text
 
 
+def expand_ai_overview(page):
+    """AI Overview often truncates behind a 'Show more' toggle -- click it so both the
+    extracted text and the screenshot capture the full answer, not just the preview.
+    Best-effort: some overviews have nothing to expand, so a missing/unclickable
+    button is not an error."""
+    try:
+        button = page.get_by_role("button", name="Show more").first
+        if button.is_visible(timeout=2000):
+            button.click()
+            page.wait_for_timeout(800)
+    except Exception:
+        pass
+
+
 def extract_ai_overview(page) -> str | None:
     for selector in AI_OVERVIEW_SELECTORS:
         try:
@@ -138,6 +152,8 @@ def check_one(page, entry: dict) -> dict:
         print("     Solve it in the browser window, then press Enter here to continue...")
         input()
         page.wait_for_timeout(1500)
+
+    expand_ai_overview(page)
 
     screenshot_path = SCREENSHOTS_DIR / f"{entry['id']}.png"
     page.screenshot(path=str(screenshot_path), full_page=True)
