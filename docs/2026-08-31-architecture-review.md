@@ -31,17 +31,52 @@ throwaway private kanji + public alias inside an explicit transaction, asserts a
 unrelated/anonymous viewer can't resolve or write to it, asserts the owner still can,
 then unconditionally rolls back so no test data persists.
 
+### 2. High — schema migrations are versioned but not atomically transactional
+
+`migrate_schema()` committed after each migration, but each `_migrate_vN` body used
+`conn.executescript()` for its DDL — which, confirmed by direct testing against a
+throwaway DB, **always implicitly commits before running and doesn't honor a
+manually-opened transaction**, even one opened right before calling it. So even
+wrapping the old code in `BEGIN`/`COMMIT` wouldn't have helped; a crash partway
+through a multi-statement migration (e.g. `_migrate_v1`, which creates several
+tables and rebuilds `aliases`) really could leave `user_version` stale while some of
+that version's schema already existed, breaking the next startup on a duplicate
+`ALTER TABLE`/`CREATE TABLE`.
+
+**Fixed**: replaced every `executescript()` call in every `_migrate_vN` with
+individual `conn.execute()` calls (confirmed via direct testing that per-statement
+`execute()` *does* honor an explicit transaction, unlike `executescript()`), and
+rewrote `migrate_schema()` to open one explicit `BEGIN` per version, run that
+version's migration function, bump `PRAGMA user_version` (confirmed transactional in
+SQLite via direct testing), and `COMMIT` — with a `try/except: conn.rollback(); raise`
+around the whole thing so any exception anywhere in that version's migration rolls
+the entire version back atomically, `user_version` included. Migrations are now
+registered via a small `_register(version, fn)` call after each `_migrate_vN`
+definition instead of being hand-listed in `migrate_schema()`, so a future `_migrate_v6`
+only needs `_register(6, _migrate_v6)` — the runner loop needs no change.
+`_backfill_decompositions()` (called from inside `_migrate_v1`) no longer commits
+internally, since that would have silently closed the outer transaction early; its
+other caller (`import_data()`) already had its own `conn.commit()` right after, so
+this changes nothing there except making that commit slightly more inclusive (in a
+harmless way — it was always meant to be one atomic seed operation).
+
+**Verified**, not just asserted: wrote `check_migration_atomicity()` in
+`test_regression_fixes.py`, which runs entirely against a disposable temp-file DB
+(never touches the live `kanji.db`) — creates a fresh DB, monkeypatches the v1
+migration to create two tables and then raise partway through, confirms
+`user_version` stays at 0 and neither table exists after the simulated crash
+(previously would have been a real risk; now genuinely rolled back), then restores
+the real migration and confirms a retry — simulating a service restart after the
+crash — completes cleanly to the latest version with no duplicate-table error. Also
+manually re-ran the same scenario as an ad hoc script before writing the permanent
+test, and separately verified the ordinary paths still work: a fresh DB migrates
+0→5 correctly, an already-migrated DB is a clean no-op, and a copy of the real live
+DB (already at v5) round-trips through `migrate_schema()` with its data intact.
+Backend restarted against the real live DB with this new runner — starts clean.
+
 ## Status: NOT YET ADDRESSED (tracked for a future session)
 
 Numbered as in the original review.
-
-### 2. High — schema migrations are versioned but not atomically transactional
-
-`migrate_schema()` commits after each migration; an interrupted startup mid-migration
-could leave `user_version` stale while some DDL already landed, breaking the next
-startup on a duplicate `ALTER TABLE`. Fix: wrap each version's migration + its
-`user_version` bump in one explicit transaction; test against a throwaway copy of the
-DB with a simulated interruption before trusting the fix.
 
 ### 3. High — no isolated behavioral test suite
 
@@ -122,7 +157,7 @@ make results/detail pages bookmarkable and restore back-button behavior.
 
 1. ~~Fix the alias visibility flaw + its regression test~~ — done 2026-08-31.
 2. Introduce temp-DB API tests + CI (#3).
-3. Make migrations atomic before the next schema version bump (#2).
+3. ~~Make migrations atomic before the next schema version bump~~ — done 2026-08-31 (#2).
 4. Rate limits, validation limits, `PRAGMA busy_timeout`, analytics retention (#4).
 5. Off-host backup + restore rehearsal (#6).
 6. Frontend request races, error presentation, empty-source handling (#7, #8).

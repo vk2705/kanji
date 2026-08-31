@@ -1158,6 +1158,81 @@ def check_alias_visibility_boundary(conn) -> list[str]:
     return failures
 
 
+def check_migration_atomicity() -> list[str]:
+    """Regression test for the 2026-08-31 migration-atomicity fix (architecture
+    review finding #2): a crash partway through a schema migration must not leave
+    PRAGMA user_version pointing at a version whose schema changes are only
+    partially applied (which would make the next startup fail on a duplicate
+    ALTER TABLE / CREATE TABLE). Runs entirely against a throwaway temp-file DB —
+    never touches the live kanji.db."""
+    import tempfile
+    import os
+
+    failures = []
+    fd, path = tempfile.mkstemp(suffix=".db")
+    os.close(fd)
+    try:
+        saved_migrations = list(database._MIGRATIONS)
+        saved_db_path = database.DB_PATH
+        try:
+            database.DB_PATH = Path(path)
+            database.init_db()
+            conn = database.get_db()
+
+            def faulty_v1(c):
+                c.execute("CREATE TABLE users (id INTEGER PRIMARY KEY)")
+                c.execute("CREATE TABLE sessions (token TEXT PRIMARY KEY)")
+                raise RuntimeError("simulated crash mid-migration")
+
+            database._MIGRATIONS[:] = [
+                (v, faulty_v1 if v == 1 else fn) for v, fn in saved_migrations
+            ]
+
+            try:
+                database.migrate_schema(conn)
+                failures.append("migrate_schema() did not propagate the simulated "
+                                 "mid-migration crash (a real crash would be silently "
+                                 "swallowed)")
+            except RuntimeError:
+                pass  # expected
+
+            version = conn.execute("PRAGMA user_version").fetchone()[0]
+            if version != 0:
+                failures.append(f"after a crash partway through migration v1, "
+                                 f"user_version is {version}, expected 0 (unrolled-back "
+                                 f"PRAGMA user_version bump)")
+            tables = {r[0] for r in conn.execute(
+                "SELECT name FROM sqlite_master WHERE type='table'").fetchall()}
+            leaked = tables & {"users", "sessions"}
+            if leaked:
+                failures.append(f"after a crash partway through migration v1, "
+                                 f"{sorted(leaked)} still exist -- the transaction "
+                                 f"didn't roll back the partial schema change")
+
+            # Restore the real migrations and confirm a retry (simulating a service
+            # restart after the crash) completes cleanly with no duplicate-table error.
+            database._MIGRATIONS[:] = saved_migrations
+            try:
+                database.migrate_schema(conn)
+                version = conn.execute("PRAGMA user_version").fetchone()[0]
+                if version != max(v for v, _ in saved_migrations):
+                    failures.append(f"retry after the simulated crash left "
+                                     f"user_version at {version}, expected "
+                                     f"{max(v for v, _ in saved_migrations)}")
+            except Exception as e:
+                failures.append(f"retry after the simulated crash raised {e!r} "
+                                 f"instead of migrating cleanly from scratch")
+
+            conn.close()
+        finally:
+            database._MIGRATIONS[:] = saved_migrations
+            database.DB_PATH = saved_db_path
+    finally:
+        os.remove(path)
+
+    return failures
+
+
 def main():
     conn = database.sqlite3.connect(database.DB_PATH)
     conn.row_factory = database.sqlite3.Row
@@ -1171,7 +1246,9 @@ def main():
     all_failures += check_alias_visibility_boundary(conn)
     conn.close()
 
-    total_checks = len(EXPECTED_DECOMPOSITIONS) + len(EXPECTED_HANZI_PRESENT) + len(EXPECTED_ATOMIC) + 3
+    all_failures += check_migration_atomicity()
+
+    total_checks = len(EXPECTED_DECOMPOSITIONS) + len(EXPECTED_HANZI_PRESENT) + len(EXPECTED_ATOMIC) + 4
     if all_failures:
         print(f"FAILED: {len(all_failures)} problem(s) found across {total_checks} checks:\n")
         for f in all_failures:
@@ -1181,7 +1258,8 @@ def main():
         print(f"PASSED: all {total_checks} regression checks OK "
               f"({len(EXPECTED_DECOMPOSITIONS)} pinned decompositions, "
               f"{len(EXPECTED_HANZI_PRESENT)} hanzi presence spot-checks, "
-              f"KRADFILE-proxy + self-reference + alias-visibility-boundary invariants).")
+              f"KRADFILE-proxy + self-reference + alias-visibility-boundary + "
+              f"migration-atomicity invariants).")
         sys.exit(0)
 
 

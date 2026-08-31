@@ -59,6 +59,14 @@ def db_conn():
         conn.close()
 
 
+_MIGRATIONS = []  # populated below each _migrate_vN definition via _register
+
+
+def _register(version, fn):
+    _MIGRATIONS.append((version, fn))
+    return fn
+
+
 def migrate_schema(conn):
     """
     Idempotent schema upgrades gated by PRAGMA user_version — safe to call on every
@@ -66,45 +74,52 @@ def migrate_schema(conn):
     guarded by its own `if version < N` so re-running against a DB already past that
     version never re-issues a non-idempotent statement (e.g. a bare ALTER TABLE ADD
     COLUMN, which errors on a second run unlike CREATE TABLE IF NOT EXISTS).
+
+    Each version's DDL/DML and its PRAGMA user_version bump run inside one explicit
+    transaction (BEGIN ... COMMIT/ROLLBACK), so a crash or error partway through a
+    version can never leave user_version pointing at an old version while some of
+    that version's schema changes already landed (which would make the *next*
+    startup fail on a duplicate ALTER TABLE / CREATE TABLE, since those aren't
+    idempotent against a half-applied version). Each _migrate_vN body must therefore
+    use conn.execute() per-statement, not conn.executescript() — executescript()
+    always implicitly commits first and doesn't compose with a manually-opened
+    transaction, which would silently defeat this. (Found and fixed 2026-08-31,
+    architecture review finding #2 — see docs/2026-08-31-architecture-review.md.)
+    Verified against a temp DB with a fault injected mid-version: user_version
+    stays at the pre-migration value and none of that version's schema changes are
+    visible, so the next startup retries the whole version cleanly instead of
+    erroring on a duplicate ALTER TABLE.
     """
     version = conn.execute("PRAGMA user_version").fetchone()[0]
 
-    if version < 1:
-        _migrate_v1(conn)
-        conn.execute("PRAGMA user_version = 1")
-        conn.commit()
-        version = 1
-
-    if version < 2:
-        _migrate_v2(conn)
-        conn.execute("PRAGMA user_version = 2")
-        conn.commit()
-        version = 2
-
-    if version < 3:
-        _migrate_v3(conn)
-        conn.execute("PRAGMA user_version = 3")
-        conn.commit()
-        version = 3
-
-    if version < 4:
-        _migrate_v4(conn)
-        conn.execute("PRAGMA user_version = 4")
-        conn.commit()
-        version = 4
-
-    if version < 5:
-        _migrate_v5(conn)
-        conn.execute("PRAGMA user_version = 5")
-        conn.commit()
-        version = 5
+    for target_version, fn in sorted(_MIGRATIONS, key=lambda pair: pair[0]):
+        if version >= target_version:
+            continue
+        conn.execute("BEGIN")
+        try:
+            fn(conn)
+            # PRAGMA user_version can't take a bound parameter; target_version is a
+            # fixed int literal from this module's own _register() calls, not
+            # user input, so an f-string here is safe.
+            conn.execute(f"PRAGMA user_version = {target_version}")
+        except BaseException:
+            conn.rollback()
+            raise
+        else:
+            conn.commit()
+            version = target_version
 
 
 def _migrate_v1(conn):
     """"DB is a disposable cache" -> "DB is the source of truth": adds
     users/sessions/decompositions/stories tables and owner_id/visibility/script/
-    variant_of columns on kanji/aliases/parts."""
-    conn.executescript("""
+    variant_of columns on kanji/aliases/parts.
+
+    Runs as individual conn.execute() statements rather than one executescript()
+    call — see migrate_schema()'s docstring for why (executescript() always
+    implicitly commits, which would defeat the transaction migrate_schema() wraps
+    this in)."""
+    conn.execute("""
         CREATE TABLE IF NOT EXISTS users (
             id                INTEGER PRIMARY KEY AUTOINCREMENT,
             username          TEXT NOT NULL UNIQUE,
@@ -113,18 +128,22 @@ def _migrate_v1(conn):
             provider_user_id  TEXT,
             display_name      TEXT,
             created_at        TEXT NOT NULL DEFAULT (datetime('now'))
-        );
+        )
+    """)
 
+    conn.execute("""
         CREATE TABLE IF NOT EXISTS sessions (
             token       TEXT PRIMARY KEY,
             user_id     INTEGER NOT NULL REFERENCES users(id),
             created_at  TEXT NOT NULL DEFAULT (datetime('now')),
             expires_at  TEXT NOT NULL
-        );
-        CREATE INDEX IF NOT EXISTS idx_sessions_user ON sessions(user_id);
+        )
+    """)
+    conn.execute("CREATE INDEX IF NOT EXISTS idx_sessions_user ON sessions(user_id)")
 
-        CREATE TABLE IF NOT EXISTS user_entry_seq (id INTEGER PRIMARY KEY AUTOINCREMENT);
+    conn.execute("CREATE TABLE IF NOT EXISTS user_entry_seq (id INTEGER PRIMARY KEY AUTOINCREMENT)")
 
+    conn.execute("""
         CREATE TABLE IF NOT EXISTS decompositions (
             id          INTEGER PRIMARY KEY AUTOINCREMENT,
             kanji_id    TEXT NOT NULL REFERENCES kanji(id),
@@ -132,10 +151,12 @@ def _migrate_v1(conn):
             visibility  TEXT NOT NULL DEFAULT 'private' CHECK(visibility IN ('public','private')),
             label       TEXT,
             created_at  TEXT NOT NULL DEFAULT (datetime('now'))
-        );
-        CREATE INDEX IF NOT EXISTS idx_decomp_kanji ON decompositions(kanji_id);
-        CREATE INDEX IF NOT EXISTS idx_decomp_owner ON decompositions(owner_id);
+        )
+    """)
+    conn.execute("CREATE INDEX IF NOT EXISTS idx_decomp_kanji ON decompositions(kanji_id)")
+    conn.execute("CREATE INDEX IF NOT EXISTS idx_decomp_owner ON decompositions(owner_id)")
 
+    conn.execute("""
         CREATE TABLE IF NOT EXISTS stories (
             id          INTEGER PRIMARY KEY AUTOINCREMENT,
             kanji_id    TEXT NOT NULL REFERENCES kanji(id),
@@ -145,9 +166,9 @@ def _migrate_v1(conn):
             created_at  TEXT NOT NULL DEFAULT (datetime('now')),
             updated_at  TEXT NOT NULL DEFAULT (datetime('now')),
             UNIQUE(kanji_id, owner_id)
-        );
-        CREATE INDEX IF NOT EXISTS idx_stories_kanji ON stories(kanji_id);
+        )
     """)
+    conn.execute("CREATE INDEX IF NOT EXISTS idx_stories_kanji ON stories(kanji_id)")
 
     # Reserved system account, fixed id=1 — owns all Heisig-seeded data. Must exist
     # before the ALTER TABLEs below, which default owner_id to 1.
@@ -161,19 +182,17 @@ def _migrate_v1(conn):
     # owner_id is a plain INTEGER here (FK integrity enforced by always writing valid
     # user ids at the application layer, same as this app already does for kanji_id
     # elsewhere). variant_of/decomposition_id have no default, so REFERENCES is fine there.
-    conn.executescript("""
-        ALTER TABLE kanji ADD COLUMN owner_id   INTEGER NOT NULL DEFAULT 1;
-        ALTER TABLE kanji ADD COLUMN visibility TEXT NOT NULL DEFAULT 'public' CHECK(visibility IN ('public','private'));
-        ALTER TABLE kanji ADD COLUMN script     TEXT NOT NULL DEFAULT 'ja-kanji' CHECK(script IN ('ja-kanji','zh-Hans','zh-Hant','zh-Hani'));
-        ALTER TABLE kanji ADD COLUMN variant_of TEXT REFERENCES kanji(id);
+    conn.execute("ALTER TABLE kanji ADD COLUMN owner_id   INTEGER NOT NULL DEFAULT 1")
+    conn.execute("ALTER TABLE kanji ADD COLUMN visibility TEXT NOT NULL DEFAULT 'public' CHECK(visibility IN ('public','private'))")
+    conn.execute("ALTER TABLE kanji ADD COLUMN script     TEXT NOT NULL DEFAULT 'ja-kanji' CHECK(script IN ('ja-kanji','zh-Hans','zh-Hant','zh-Hani'))")
+    conn.execute("ALTER TABLE kanji ADD COLUMN variant_of TEXT REFERENCES kanji(id)")
 
-        ALTER TABLE parts ADD COLUMN decomposition_id INTEGER REFERENCES decompositions(id);
-    """)
+    conn.execute("ALTER TABLE parts ADD COLUMN decomposition_id INTEGER REFERENCES decompositions(id)")
 
     # aliases: relax UNIQUE(kanji_id, alias) -> UNIQUE(kanji_id, alias, owner_id) so two
     # different users can submit the same alias text. SQLite can't alter a UNIQUE
     # constraint in place, so rebuild the table.
-    conn.executescript("""
+    conn.execute("""
         CREATE TABLE aliases_new (
             id          INTEGER PRIMARY KEY AUTOINCREMENT,
             kanji_id    TEXT NOT NULL REFERENCES kanji(id),
@@ -181,32 +200,39 @@ def _migrate_v1(conn):
             owner_id    INTEGER NOT NULL DEFAULT 1 REFERENCES users(id),
             visibility  TEXT NOT NULL DEFAULT 'public' CHECK(visibility IN ('public','private')),
             UNIQUE(kanji_id, alias, owner_id)
-        );
-        INSERT INTO aliases_new (id, kanji_id, alias, owner_id, visibility)
-            SELECT id, kanji_id, alias, 1, 'public' FROM aliases;
-        DROP TABLE aliases;
-        ALTER TABLE aliases_new RENAME TO aliases;
-        CREATE INDEX IF NOT EXISTS idx_aliases_alias ON aliases(alias);
-        CREATE INDEX IF NOT EXISTS idx_aliases_kanji ON aliases(kanji_id);
+        )
     """)
+    conn.execute("""
+        INSERT INTO aliases_new (id, kanji_id, alias, owner_id, visibility)
+            SELECT id, kanji_id, alias, 1, 'public' FROM aliases
+    """)
+    conn.execute("DROP TABLE aliases")
+    conn.execute("ALTER TABLE aliases_new RENAME TO aliases")
+    conn.execute("CREATE INDEX IF NOT EXISTS idx_aliases_alias ON aliases(alias)")
+    conn.execute("CREATE INDEX IF NOT EXISTS idx_aliases_kanji ON aliases(kanji_id)")
 
     _backfill_decompositions(conn)
 
 
+_register(1, _migrate_v1)
+
+
 def _migrate_v2(conn):
     """Adds per-account UI language and study-language (script) preferences."""
-    conn.executescript("""
-        ALTER TABLE users ADD COLUMN ui_language  TEXT NOT NULL DEFAULT 'en' CHECK(ui_language IN ('en','ru'));
-        ALTER TABLE users ADD COLUMN study_script TEXT CHECK(study_script IN ('ja-kanji','zh-Hans','zh-Hant'));
-    """)
+    conn.execute("ALTER TABLE users ADD COLUMN ui_language  TEXT NOT NULL DEFAULT 'en' CHECK(ui_language IN ('en','ru'))")
+    conn.execute("ALTER TABLE users ADD COLUMN study_script TEXT CHECK(study_script IN ('ja-kanji','zh-Hans','zh-Hant'))")
+
+
+_register(2, _migrate_v2)
 
 
 def _migrate_v3(conn):
     """Adds kanji.image_url for user-invented primitives with no real Unicode glyph
     (an uploaded picture stands in for a `character`)."""
-    conn.executescript("""
-        ALTER TABLE kanji ADD COLUMN image_url TEXT;
-    """)
+    conn.execute("ALTER TABLE kanji ADD COLUMN image_url TEXT")
+
+
+_register(3, _migrate_v3)
 
 
 def _migrate_v4(conn):
@@ -224,7 +250,7 @@ def _migrate_v4(conn):
     is the "запомни этот метод" standing verification practice from the audit,
     exposed as a UI affordance instead of only ever running from a rendered PNG.
     """
-    conn.executescript("""
+    conn.execute("""
         CREATE TABLE IF NOT EXISTS decomposition_reviews (
             id               INTEGER PRIMARY KEY AUTOINCREMENT,
             decomposition_id INTEGER NOT NULL REFERENCES decompositions(id),
@@ -234,10 +260,13 @@ def _migrate_v4(conn):
             created_at       TEXT NOT NULL DEFAULT (datetime('now')),
             processed_at     TEXT,
             UNIQUE(decomposition_id, reviewer_id)
-        );
-        CREATE INDEX IF NOT EXISTS idx_reviews_verdict ON decomposition_reviews(verdict, processed_at);
-        CREATE INDEX IF NOT EXISTS idx_reviews_decomp   ON decomposition_reviews(decomposition_id);
+        )
     """)
+    conn.execute("CREATE INDEX IF NOT EXISTS idx_reviews_verdict ON decomposition_reviews(verdict, processed_at)")
+    conn.execute("CREATE INDEX IF NOT EXISTS idx_reviews_decomp   ON decomposition_reviews(decomposition_id)")
+
+
+_register(4, _migrate_v4)
 
 
 def _migrate_v5(conn):
@@ -253,16 +282,19 @@ def _migrate_v5(conn):
     kanji.db directly" convention as review_queue.py/coverage_status.py rather than
     a public HTTP stats endpoint — no admin-role concept exists in this schema yet.
     """
-    conn.executescript("""
+    conn.execute("""
         CREATE TABLE IF NOT EXISTS page_views (
             id          INTEGER PRIMARY KEY AUTOINCREMENT,
             visitor_id  TEXT NOT NULL,
             path        TEXT,
             viewed_at   TEXT NOT NULL DEFAULT (datetime('now'))
-        );
-        CREATE INDEX IF NOT EXISTS idx_page_views_visitor ON page_views(visitor_id);
-        CREATE INDEX IF NOT EXISTS idx_page_views_time ON page_views(viewed_at);
+        )
     """)
+    conn.execute("CREATE INDEX IF NOT EXISTS idx_page_views_visitor ON page_views(visitor_id)")
+    conn.execute("CREATE INDEX IF NOT EXISTS idx_page_views_time ON page_views(viewed_at)")
+
+
+_register(5, _migrate_v5)
 
 
 def record_page_view(conn, visitor_id: str, path: str | None):
@@ -279,6 +311,13 @@ def _backfill_decompositions(conn):
     parts row is linked to it. Idempotent — safe to call after migrate_schema() (upgrading
     a populated DB, where parts already has rows) and after import_data() (seeding a fresh
     DB, where parts gets populated only after migrate_schema() already ran).
+
+    Does not commit — callers own the transaction boundary (migrate_schema() wraps
+    its _migrate_v1() call, which calls this, in one atomic transaction; import_data()
+    commits once at the end of its own flow). Committing here would either be a
+    silent no-op (inside migrate_schema()'s already-open transaction, conn.commit()
+    just ends it early) or, worse, close out a transaction a caller expected to
+    still be able to roll back.
     """
     conn.execute("""
         INSERT INTO decompositions (kanji_id, owner_id, visibility, label)
@@ -290,7 +329,6 @@ def _backfill_decompositions(conn):
             SELECT id FROM decompositions d WHERE d.kanji_id = parts.kanji_id AND d.owner_id = 1
         ) WHERE decomposition_id IS NULL
     """)
-    conn.commit()
 
 
 def _load_parts_file(path: Path) -> dict[str, list[str]]:
