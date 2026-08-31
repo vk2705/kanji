@@ -4570,7 +4570,7 @@ been dead code masking what the live pin actually checked); full suite and
   one new primitive row, no backend restart needed on next deploy (a
   `sync_system_data.py` run picks up new/changed/deleted rows the same
   way regardless).
-- Coverage: pending — see follow-up commit.
+- Coverage: **1216/3000 (40.5%)**.
 - **Next session**: `蘭`'s `柬`/`東` question above, if a reliable
   external source turns up. Continue through the remaining IDS-atomic
   list and `triage_google_check.py`'s 776-item output, same as the

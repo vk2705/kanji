@@ -1,15 +1,15 @@
 id	character	keyword	frame	reviewed
-rtk1	一	one	1	no
+rtk1	一	one	1	yes
 rtk2	二	two	2	no
 rtk3	三	three	3	no
 rtk4	四	four	4	no
 rtk5	五	five	5	no
-rtk6	六	six	6	no
+rtk6	六	six	6	yes
 rtk7	七	seven	7	yes
 rtk8	八	eight	8	no
 rtk9	九	nine	9	yes
 rtk10	十	ten	10	no
-rtk11	口	mouth	11	no
+rtk11	口	mouth	11	yes
 rtk12	日	day	12	yes
 rtk13	月	month	13	yes
 rtk14	田	rice field	14	no
@@ -30,7 +30,7 @@ rtk28	世	generation	28	no
 rtk29	胃	stomach	29	no
 rtk30	旦	nightbreak	30	no
 rtk31	胆	gall bladder	31	no
-rtk32	亘	span	32	no
+rtk32	亘	span	32	yes
 rtk33	凹	concave	33	no
 rtk34	凸	convex	34	no
 rtk35	旧	olden times	35	no
@@ -541,9 +541,9 @@ rtk539	鋭	pointed	539	yes
 rtk540	曽	formerly	540	yes
 rtk541	増	increase	541	yes
 rtk542	贈	presents	542	yes
-rtk543	東	east	543	no
-rtk544	棟	ridgepole	544	no
-rtk545	凍	frozen	545	no
+rtk543	東	east	543	yes
+rtk544	棟	ridgepole	544	yes
+rtk545	凍	frozen	545	yes
 rtk546	妊	pregnancy	546	no
 rtk547	廷	courts	547	no
 rtk548	染	dye	548	no
@@ -747,9 +747,9 @@ rtk745	扱	handle	745	yes
 rtk746	丈	length	746	no
 rtk747	史	history	747	no
 rtk748	吏	officer	748	no
-rtk749	更	grow late	749	no
+rtk749	更	grow late	749	yes
 rtk750	硬	stiff	750	no
-rtk751	梗	spiny	751	no
+rtk751	梗	spiny	751	yes
 rtk752	又	or again	752	no
 rtk753	双	pair	753	no
 rtk754	桑	mulberry	754	no
@@ -1184,7 +1184,7 @@ rtk1182	崇	adore	1182	yes
 rtk1183	祭	ritual	1183	yes
 rtk1184	察	guess	1184	yes
 rtk1185	擦	grate	1185	yes
-rtk1186	由	wherefore	1186	no
+rtk1186	由	wherefore	1186	yes
 rtk1187	抽	pluck	1187	yes
 rtk1188	油	oil	1188	no
 rtk1189	袖	sleeve	1189	no
@@ -1192,11 +1192,11 @@ rtk1190	宙	mid-air	1190	yes
 rtk1191	届	deliver	1191	no
 rtk1192	笛	flute	1192	yes
 rtk1193	軸	axis	1193	no
-rtk1194	甲	armor	1194	no
+rtk1194	甲	armor	1194	yes
 rtk1195	押	push	1195	yes
 rtk1196	岬	headland	1196	no
 rtk1197	挿	insert	1197	yes
-rtk1198	申	speaketh	1198	no
+rtk1198	申	speaketh	1198	yes
 rtk1199	伸	expand	1199	yes
 rtk1200	神	gods	1200	yes
 rtk1201	捜	search	1201	yes
@@ -1255,7 +1255,7 @@ rtk1253	満	full	1253	no
 rtk1254	画	brush-stroke	1254	no
 rtk1255	歯	tooth	1255	no
 rtk1256	曲	bend	1256	no
-rtk1257	曹	cadet	1257	no
+rtk1257	曹	cadet	1257	yes
 rtk1258	遭	encounter	1258	no
 rtk1259	漕	rowing	1259	no
 rtk1260	槽	vat	1260	yes
@@ -1754,7 +1754,7 @@ rtk1752	閣	tower	1752	no
 rtk1753	閑	leisure	1753	no
 rtk1754	聞	hear	1754	no
 rtk1755	潤	wet	1755	no
-rtk1756	欄	column	1756	no
+rtk1756	欄	column	1756	yes
 rtk1757	闘	fight	1757	yes
 rtk1758	倉	godown	1758	no
 rtk1759	創	genesis	1759	yes
@@ -1803,8 +1803,8 @@ rtk1801	剣	saber	1801	yes
 rtk1802	険	precipitous	1802	yes
 rtk1803	検	examination	1803	no
 rtk1804	倹	frugal	1804	yes
-rtk1805	重	heavy	1805	no
-rtk1806	動	move	1806	no
+rtk1805	重	heavy	1805	yes
+rtk1806	動	move	1806	yes
 rtk1807	腫	tumor	1807	no
 rtk1808	勲	meritorious deed	1808	no
 rtk1809	働	work	1809	yes
@@ -1967,7 +1967,7 @@ rtk1965	遍	everywhere	1965	no
 rtk1966	編	compilation	1966	no
 rtk1967	冊	tome	1967	no
 rtk1968	柵	palisade	1968	no
-rtk1969	典	code	1969	no
+rtk1969	典	code	1969	yes
 rtk1970	氏	family name	1970	no
 rtk1971	紙	paper	1971	no
 rtk1972	婚	marriage	1972	no
@@ -2547,7 +2547,7 @@ rtk2545	梯	ladder	2545	yes
 rtk2546	柑	citrus tree	2546	no
 rtk2547	杭	picket	2547	no
 rtk2548	柊	holly	2548	no
-rtk2549	柚	citron	2549	no
+rtk2549	柚	citron	2549	yes
 rtk2550	椀	wooden bowl	2550	yes
 rtk2551	栂	hemlock	2551	no
 rtk2552	柾	spindle tree	2552	no
@@ -2689,7 +2689,7 @@ rtk2687	篇	livraison	2687	yes
 rtk2688	筈	should	2688	yes
 rtk2689	簸	winnow	2689	yes
 rtk2690	粕	settlings	2690	no
-rtk2691	糟	lees	2691	no
+rtk2691	糟	lees	2691	yes
 rtk2692	糊	paste	2692	yes
 rtk2693	籾	unhulled rice	2693	no
 rtk2694	糠	rice bran	2694	no
@@ -2743,7 +2743,7 @@ rtk2741	哉	i wonder	2741	no
 rtk2742	詢	counsel	2742	no
 rtk2743	諄	polite	2743	no
 rtk2744	讐	vendetta	2744	no
-rtk2745	諌	remonstrate	2745	no
+rtk2745	諌	remonstrate	2745	yes
 rtk2746	諒	verify	2746	no
 rtk2747	讃	compliment	2747	yes
 rtk2748	訊	query	2748	no
@@ -2893,7 +2893,7 @@ rtk2891	隼	peregrine falcon	2891	no
 rtk2892	耀	shimmering	2892	no
 rtk2893	夷	ebisu	2893	no
 rtk2894	嚢	cyst	2894	no
-rtk2895	暢	carefree	2895	no
+rtk2895	暢	carefree	2895	yes
 rtk2896	廻	circling	2896	no
 rtk2897	欣	elation	2897	no
 rtk2898	毅	stalwart	2898	no
