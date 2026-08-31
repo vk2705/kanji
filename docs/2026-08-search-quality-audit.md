@@ -4497,3 +4497,83 @@ been dead code masking what the live pin actually checked); full suite and
    above.
 4. Continue through the remaining ~63 items of the original 67-item
    IDS-atomic list; keep mining `triage_google_check.py`'s 776-item output.
+
+### 2026-08-31 — daily check-in: cleared the `更`/`梗`/`典`/`暢`/`亘`/`rad1.1` cluster
+
+- Pulled latest (two out-of-band commits since yesterday: the Google
+  cross-check results got processed, 15 bugs fixed total, and a real
+  Chromium+CJK-fonts renderer got installed in this environment). Rebuilt
+  and confirmed clean before starting: 352 checks, same 4 expected
+  hanzi-scope failures, review queue empty.
+- Picked up the previous session's "next session priorities" list in
+  order. All confirmed via `cjkvi-ids` + render (not just CSV, which is
+  blank or only loosely worded for several of these):
+  - **`rad1.1` was exactly the orphaned-legacy-placeholder pattern**
+    (`犭`/`罒`/`rad2.8` precedent) — its aliases (`one`, `floor`,
+    `ceiling`, `minus`) are all just Heisig's own recurring names for
+    the single primitive `一`("one"), reused under a different alias
+    depending on mnemonic context frame-to-frame. Moved all three
+    unclaimed aliases onto `rtk1`, deleted the now-fully-orphaned
+    `rad1.1` row (it had no other references anywhere in `data.txt`).
+  - **`亘`(span, rtk32)** was `一,二,日` — the `二`("two") has no real
+    connection to the glyph at all. `cjkvi-ids` confirms `亘 = 一+旦`
+    (already-taught `rtk30`, itself `日+一`). Fixed to `一,旦`.
+  - **`宣`(proclaim, rtk200)**, the corrupted/bloated line flagged two
+    sessions ago, resolved as a side effect of the `rad1.1` fix:
+    `cjkvi-ids` confirms `宣 = 宀+亘` exactly. The old line's `ceiling`/
+    `floor`/`one`(×3) tokens were all just noisy synonyms for tokens
+    `亘` itself already contains. Fixed to `宀,亘`.
+  - **`更`(grow late, rtk749)** was `ノ,一,日,田` — `田` has zero
+    connection to "grow late". `cjkvi-ids`: `更 = ⿱一⿻日乂` (一 on top,
+    乂 overlapping 日 below). `data_from_pdf.txt`'s 4th-edition
+    extraction independently names the same three primitives Heisig
+    actually teaches: "ceiling" (now `rtk1`/一, see above), "sun"
+    (`rtk12`/日), and "tucked under the arm" — a real Unicode character
+    (`乂`, U+4E42) that had no entry yet. Added
+    `prim-tucked-under-the-arm:乂:tucked under the arm` (checked for a
+    same-script collision first — none). Fixed `更` to `一,日,乂`.
+  - **`梗`(spiny, rtk751)** re-flattened `更`'s stale strokes instead of
+    referencing it (`cjkvi-ids`: `梗 = ⿰木更`). Fixed to `木,更`.
+  - **`典`(code, rtk1969)** was `｜,一,日,ハ` — render confirms the top is
+    unmistakably `曲`(bend, already-taught `rtk1256`), matching CSV's
+    own "bend; tool" gloss exactly; bottom is `八`. Fixed to `曲,八`.
+  - **`暢`(carefree, rtk2895)** was `｜,一,日,田,勿`, none of which belong.
+    `cjkvi-ids`: `暢 = ⿰申昜`, `昜 = ⿱旦勿`. Deliberately did **not** add
+    `昜` as its own primitive and flattened one level further instead
+    (`申,旦,勿`, all three already taught) — `昜`(U+661C) and
+    `易`(U+6613, "easy") render near-identically in this box's font, and
+    the previous session already caught itself mistyping one for the
+    other once; not worth the confusability risk for one rare kanji when
+    the fully-flattened form is just as accurate and uses only
+    unambiguous existing primitives.
+  - **`蘭`(orchid, rtk2449) investigated, deliberately left unfixed.**
+    `cjkvi-ids`: `蘭 = 艹+闌`, `闌 = 門+柬`. `柬`("selection") is real,
+    Unicode-atomic, and not currently taught — but CSV's components
+    column is completely blank for this kanji (no id_5th_ed keyword
+    hint either), meaning there's no Heisig-sourced confirmation of
+    what he actually calls this primitive or whether he even
+    distinguishes it from `東`("east", which the old broken line
+    approximated it with). Rendered `柬` next to `東` and confirmed
+    they're visually distinct (subtle extra strokes), but inventing a
+    decomposition with no textual Heisig source to back it, for one
+    rare frame, isn't worth the risk of guessing wrong — flagging for
+    whoever next has a way to actually check the book itself or a
+    reliable Google/AI Overview result for this specific frame.
+- Verified: full rebuild from scratch; `test_regression_fixes.py` — 6 new
+  pins (`rtk32`, `rtk749`, `rtk751`, `rtk1969`, `rtk2895`) plus `rtk200`'s
+  stale expected-value updated — 357 checks, same 4 expected hanzi-scope
+  failures, nothing else; `audit_self_reference.py` clean; search-term
+  regression checklist (ceiling/floor/minus/one all correctly collapse to
+  the same 456-hit count now that they share one id; span/proclaim/grow
+  late/tucked under the arm/spiny/bend/code/carefree all sane).
+- Not deployed to the live server from this session; data-only change +
+  one new primitive row, no backend restart needed on next deploy (a
+  `sync_system_data.py` run picks up new/changed/deleted rows the same
+  way regardless).
+- Coverage: pending — see follow-up commit.
+- **Next session**: `蘭`'s `柬`/`東` question above, if a reliable
+  external source turns up. Continue through the remaining IDS-atomic
+  list and `triage_google_check.py`'s 776-item output, same as the
+  previous two sessions' standing priority. The 81 orphaned `rad{N}`
+  rows on the live DB is still the other standing item, needs
+  production access.

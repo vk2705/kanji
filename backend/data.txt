@@ -1,4 +1,3 @@
-rad1.1:?:one,floor,ceiling,minus
 prim-pipe:｜:pipe, walking stick, cane, line, prim28.1
 kangxi3:丶:dot,tick,drop
 rad1.4:?:drop2,no
@@ -259,7 +258,7 @@ rtk91:?::日,召
 
 rtk2636:?:arrow shaft:bamboo,in front 
 # --- Imported from kanjidic2 + KRADFILE ---
-rtk1:一:one:
+rtk1:一:one,floor,ceiling,minus:
 rtk2:二:two:
 rtk5:五:five:
 rtk9:九:nine,baseball:
@@ -279,7 +278,7 @@ rtk28:世:generation:｜,一
 rtk29:胃:stomach:月,田
 rtk30:旦:daybreak:一,日
 rtk31:胆:gall bladder:一,月,日
-rtk32:亘:span:一,二,日
+rtk32:亘:span:一,旦
 rtk33:凹:concave:凵
 rtk34:凸:convex:｜,一,冂,凵
 rtk35:旧:old times:｜,日
@@ -446,7 +445,7 @@ rtk196:尚:esteem:口,冂
 rtk197:字:character:子,宀,primitive_roof
 rtk198:守:guard:寸,宀,primitive_roof
 rtk199:完:perfect:宀,primitive_roof,元
-rtk200:宣:proclaim:宀,primitive_roof,span,one,ceiling,sun,day,one,floor,one
+rtk200:宣:proclaim:宀,亘
 rtk201:宵:wee hours:宀,primitive_roof,肖
 rtk202:安:relax:女,宀,primitive_roof
 rtk203:宴:banquet:女,日,宀,primitive_roof
@@ -994,9 +993,9 @@ rtk745:扱:handle:扌,及
 rtk746:丈:length:ノ,一,丶
 rtk747:史:history:ノ,口
 rtk748:吏:officer:ノ,一,口,丶
-rtk749:更:grow late:ノ,一,日,田
+rtk749:更:grow late:一,日,乂
 rtk750:硬:stiff:ノ,一,口,石,日,田
-rtk751:梗:for the most part:ノ,一,日,木,田
+rtk751:梗:for the most part:木,更
 rtk752:又:or again:
 rtk753:双:pair:又,丶
 rtk754:桑:mulberry:又,木
@@ -2214,7 +2213,7 @@ rtk1965:遍:everywhere:｜,一,戸,込,冂,冊,尸,廾
 rtk1966:編:compilation:｜,一,戸,糸,幺,小,冂,冊,尸,廾
 rtk1967:冊:tome:｜,一,亅,冂,廾
 rtk1968:柵:stockade:｜,一,木,亅,冂,冊,廾
-rtk1969:典:code:｜,一,日,ハ
+rtk1969:典:code:曲,八
 rtk1970:氏:family name:
 rtk1971:紙:paper:氏,糸,幺,小
 rtk1972:婚:marriage:氏,女,日
@@ -3138,7 +3137,7 @@ rtk2891:隼:falcon:十,隹
 rtk2892:耀:shine:ヨ,尚,儿,隹
 rtk2893:夷:barbarian:ノ,一,弓,大
 rtk2894:嚢:pouch:｜,衣,一,口,ハ,亠,冖
-rtk2895:暢:stretch:｜,一,日,田,勿
+rtk2895:暢:stretch:申,旦,勿
 rtk2896:廻:round:口,囗,廴
 rtk2897:欣:take pleasure in:斤,欠
 rtk2898:毅:strong:立,亠,殳,豕,几,又
@@ -3331,3 +3330,4 @@ prim-finally:竟:finally:音,儿
 prim-teki:啇:teki
 prim-sitting-on-the-ground:?:sitting on the ground
 prim-upside-down-row:业:upside down in a row
+prim-tucked-under-the-arm:乂:tucked under the arm

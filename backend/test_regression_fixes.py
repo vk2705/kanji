@@ -113,8 +113,15 @@ EXPECTED_DECOMPOSITIONS = {
     # collision, since rtk12 (日) had no "sun" alias at all -- fixed as a side effect
     # of session 25's alias restoration (rtk12 got "sun" back), so "sun" and "day"
     # now both correctly resolve to rtk12 and collapse to one chip.
+    # Fixed 2026-08-31: was 宀,primitive_roof,span,one,ceiling,sun,day,one,
+    # floor,one -- corrupted/bloated (rad1.1, an orphaned legacy placeholder
+    # colliding with "ceiling"/"floor"/"minus" aliases that really belong on
+    # rtk1/一, plus "one"/"sun"/"day" duplicating 亘's own already-taught
+    # parts). cjkvi-ids confirms 宣 = 宀+亘 exactly. rad1.1 itself deleted
+    # (its aliases moved onto rtk1, its only other reference); see the 更/
+    # 梗/典/暢/亘 cluster fixed the same session for the rest of this batch.
     "rtk200": {"character": "宣", "keyword": "proclaim",
-               "expected_part_ids": {"kangxi40", "rtk32", "rtk1", "rad1.1", "rtk12"}},
+               "expected_part_ids": {"kangxi40", "rtk32"}},
     "rtk1809": {"character": "働", "keyword": "work",
                 "expected_part_ids": {"kangxi9", "rtk1806"}},
     "rtk688": {"character": "看", "keyword": "watch over",
@@ -941,6 +948,43 @@ EXPECTED_DECOMPOSITIONS = {
     # (rtk25) directly rather than reproducing only one of its two suns.
     "rtk21": {"character": "唱", "keyword": "chant",
               "expected_part_ids": {"rtk11", "rtk25"}},
+    # 更/梗/典/暢/亘 cluster fixed 2026-08-31, continuing the previous
+    # session's flagged "next session priorities". All confirmed via
+    # cjkvi-ids + render, not just CSV, since CSV is blank or only
+    # loosely worded for several of these.
+    #
+    # 亘 (rtk32) was 一,二,日 -- wrong: cjkvi-ids says 亘 = 一 + 旦
+    # (already-taught rtk30, itself 日+一), not "一,二,日" flattened with a
+    # 二 that isn't even part of the real glyph. Fixed to 一,旦.
+    "rtk32": {"character": "亘", "keyword": "span",
+              "expected_part_ids": {"rtk1", "rtk30"}},
+    # 更 (rtk749) was ノ,一,日,田 -- 田 has no connection to "grow late" at
+    # all. cjkvi-ids: 更 = ⿱一⿻日乂 (一 on top, 乂 overlapping 日 below).
+    # data_from_pdf.txt's 4th-edition extraction independently names the
+    # same three primitives Heisig actually teaches here: "ceiling"
+    # (rtk1/一 -- see the rad1.1 cleanup below), "sun" (rtk12/日), and
+    # "tucked under the arm" -- a real Unicode character (乂, U+4E42) with
+    # no existing entry, added as prim-tucked-under-the-arm.
+    "rtk749": {"character": "更", "keyword": "grow late",
+               "expected_part_ids": {"rtk1", "rtk12", "prim-tucked-under-the-arm"}},
+    # 梗 (rtk751) re-flattened 更's stale strokes instead of referencing it;
+    # cjkvi-ids: 梗 = ⿰木更. Fixed to 木,更.
+    "rtk751": {"character": "梗", "keyword": "spiny",
+               "expected_part_ids": {"rtk207", "rtk749"}},
+    # 典 (rtk1969) was ｜,一,日,ハ -- render confirms the top is unmistakably
+    # 曲 (bend, already-taught rtk1256), matching CSV's "bend; tool"
+    # component gloss; bottom is 八. Fixed to 曲,八.
+    "rtk1969": {"character": "典", "keyword": "code",
+                "expected_part_ids": {"rtk1256", "rtk8"}},
+    # 暢 (rtk2895) was ｜,一,日,田,勿 -- the 田/｜/一 tokens don't belong at
+    # all. cjkvi-ids: 暢 = ⿰申昜, 昜 = ⿱旦勿. Flattened one level past 昜
+    # (skipped adding it as its own primitive -- 昜/U+661C and 易/U+6613
+    # render near-identically in this font, and this session already found
+    # that exact mix-up once; safer to reference only the three
+    # already-taught, unambiguous primitives it resolves to). Fixed to
+    # 申,旦,勿 (rtk1198/rtk30/rtk1128, all pre-existing).
+    "rtk2895": {"character": "暢", "keyword": "carefree",
+                "expected_part_ids": {"rtk1198", "rtk30", "rtk1128"}},
 }
 
 # character -> hanzi id, spot-checking the 429-character Unihan self-reference backfill
