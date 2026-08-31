@@ -1,0 +1,58 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  backend-tests:
+    name: Backend tests (pytest, isolated temp-DB)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt -r requirements-dev.txt
+
+      # Only the isolated API suite (test_api_*.py) — each test gets its own
+      # throwaway temp-file DB via conftest.py, so this never touches a real
+      # kanji.db and needs no seed data checked in. test_regression_fixes.py and
+      # the audit_*.py scripts are a separate, deliberately live-kanji.db-only
+      # convention (see CLAUDE.md) and don't apply here — there is no kanji.db in
+      # a fresh CI checkout for them to read.
+      - name: Run pytest
+        run: python -m pytest -v
+
+  frontend:
+    name: Frontend lint + build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build

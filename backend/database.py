@@ -13,6 +13,16 @@ def get_db():
     conn.row_factory = sqlite3.Row
     conn.execute("PRAGMA foreign_keys = ON")
     conn.execute("PRAGMA journal_mode = WAL")
+    # Without this, a writer that finds the DB locked (another connection mid-write)
+    # raises "database is locked" immediately instead of waiting — surfaced concretely
+    # by the isolated test suite (architecture review finding #3, test_api_search.py),
+    # where a test fixture holding one connection open while making an API call on a
+    # second connection hit exactly this. Previously a known, accepted, low-priority
+    # gap (CLAUDE.md's "no PRAGMA busy_timeout... cheap fix if it comes up") — fixed
+    # here since it just did. 5s comfortably covers this app's short, simple
+    # transactions; WAL mode already means readers never block writers or each other,
+    # so this only matters for writer-vs-writer contention.
+    conn.execute("PRAGMA busy_timeout = 5000")
     return conn
 
 

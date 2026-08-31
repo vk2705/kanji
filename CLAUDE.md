@@ -67,7 +67,13 @@ cd android
 ```
 `import_hanzi.py` refuses to run if any non-`ja-kanji` rows already exist (not safe to resume mid-run). `backup_db.py` is meant to run on a schedule (see Deployment). `backup_db.py`, `export_public_data.py`, `fix_kradfile_proxies.py`, `sync_system_data.py`, `review_queue.py`, and `visit_stats.py` also have a shebang pointing straight at `venv/bin/python3`, so `./script.py` works directly without the `./venv/bin/python3` prefix.
 
-There is no test suite in this repo currently.
+**Tests** (added 2026-08-31, architecture review finding #3):
+```bash
+cd backend
+pip install -r requirements.txt -r requirements-dev.txt   # adds pytest, httpx
+./venv/bin/pytest -v
+```
+Runs the isolated API suite (`test_api_*.py`) — every test gets its own throwaway temp-file SQLite DB via `conftest.py`'s `db_path`/`app`/`client` fixtures (`app.dependency_overrides[db_conn]` points the real FastAPI app at it), so nothing ever touches `backend/kanji.db`. Covers auth-required checks, visibility/ownership rules (including the alias-visibility-leak class fixed the same session), migrations from each schema version, and `search_by_parts`'s depth/source/script filters. Runs in CI (`.github/workflows/ci.yml`) alongside frontend `lint`/`build` on every push/PR. `test_regression_fixes.py` and the `audit_*.py`/`coverage_status.py` scripts are a separate, deliberately-different convention — they read the live `kanji.db` directly (see "One-off data/maintenance scripts" above and each file's own docstring) and are not run via `pytest`.
 
 ## Architecture
 
@@ -234,7 +240,6 @@ Google SSO needs `GOOGLE_CLIENT_ID=<the OAuth client id>` set in `kanji-backend.
 - ~2,628 characters intentionally have both an `ja-kanji` row and a separate `zh-*` row for the same glyph (e.g. `rtk1701` and `hanzi-6f22` are both 漢) — this is a deliberate design choice (distinguish by `script`, don't dedupe), not a bug; see the script-aware resolution section above for how ambiguity is handled.
 - The Heisig mnemonic story text from the book is still **not** stored (copyright); user-authored stories are a separate, non-copyrighted addition. Frame numbers link to the book.
 - `android/` has a first-pass Android app: a WebView shell around the deployed `frontend/` (see `android/README.md`), not the from-scratch native REST client this section used to anticipate — cookie-session auth just works as-is since it's still a WebView under the hood. A true native client (own UI, talking to the FastAPI backend directly) is still a bigger future step if ever needed, and would need the persistent-`CookieJar`-or-token-auth switch this line originally flagged.
-- No `PRAGMA busy_timeout` set — concurrent writes can surface as `"database is locked"` errors under contention rather than corrupting data (SQLite WAL mode already protects against actual corruption); cheap fix if it comes up.
 - `expand_part_terms`/`_build_char_lookup` (`backend/database.py`) resolve a character part to its keyword without regard to `script`, so a glyph shared between an `ja-kanji` row and a `zh-*` row (see above) can silently pick the wrong one — unlike `resolve_alias`, which already is script-scoped. Found while fixing rtk1495's decomposition; not yet fixed. See `docs/2026-08-search-quality-audit.md` (session 2) for details.
 - Decomposition display/data is fully flattened to atomic primitives (e.g. 懸 shows `県,prefecture,糸,thread,心,heart`, not "prefecture" as a single expandable chip). The owner wants intermediate pieces shown too, with their own sub-decomposition available on demand — this needs the query-time recursive resolution described as an agreed-but-unexecuted architecture decision in `docs/2026-08-search-quality-audit.md`. Tracked there as the top-priority queued item.
 - Bulk decomposition-quality audit (extending the rtk1495-style fix dataset-wide) and bulk original-mnemonic generation (via the new `ai-mnemonics` pseudo-account, not `owner_id=1`) are both queued but not started — see `docs/2026-08-search-quality-audit.md`'s session 2 entry for scope and the tooling (`audit_decomposition.py`) built for the first one.

@@ -74,22 +74,88 @@ test, and separately verified the ordinary paths still work: a fresh DB migrates
 DB (already at v5) round-trips through `migrate_schema()` with its data intact.
 Backend restarted against the real live DB with this new runner — starts clean.
 
-## Status: NOT YET ADDRESSED (tracked for a future session)
-
-Numbered as in the original review.
-
 ### 3. High — no isolated behavioral test suite
 
 `test_regression_fixes.py` and the `audit_*.py` scripts are valuable but all read the
 live, mutable `kanji.db` — none of them exercise auth, visibility rules end-to-end,
-migrations, contribution-endpoint ownership checks, request validation, upload
-failure handling, or frontend behavior in isolation. Recommended: `pytest` +
-temporary SQLite DB + FastAPI `TestClient`, covering (highest value first): private-
-entry visibility through aliases (the class of bug #1 above lives in), anonymous/
-owner/unrelated-user reads, every contribution endpoint's ownership rules, migration
-from each schema version, recursive search depth/source/script filters, duplicate
-usernames/aliases, image upload failure consistency. Run in CI alongside the existing
-frontend lint/build.
+migrations, contribution-endpoint ownership checks, or search filters in isolation.
+
+**Fixed** (partially — see "not covered" below): added a `pytest` + temp-SQLite-DB +
+FastAPI `TestClient` suite. `backend/conftest.py` gives every test its own throwaway
+temp-file DB (`db_path` fixture — a real file, not `:memory:`, since `get_db()`
+always opens by path and the app's `db_conn()` dependency opens a fresh connection
+per request, so different `:memory:` connections wouldn't share data the way a real
+temp file does) and wires the real FastAPI app to it via
+`app.dependency_overrides[db_conn]` (the `app`/`client` fixtures) — no test ever
+touches `backend/kanji.db`. One non-obvious gotcha documented in `conftest.py`:
+`TestClient` needs `base_url="https://testserver"`, not the default `http://`, or
+the app's `secure=True` session/visitor cookies silently fail to round-trip and
+every login-dependent test would 401 with no obvious cause — confirmed this
+concretely with a minimal reproduction before writing the fixture.
+
+Four test files, 27 tests total, covering the review's own priority list:
+- `test_api_visibility.py` (4 tests) — private-entry visibility through aliases
+  (direct, isolated re-coverage of finding #1's exact bug class), anonymous/owner/
+  unrelated-user reads. **Caught a real bug in the test itself while writing it**:
+  the first draft of the alias-leak test still passed with the bug deliberately
+  reintroduced, because it addressed the victim kanji by its *real id* in the
+  write-endpoint assertions instead of by the *alias* — the actual exploit path.
+  Fixed the test, reran the before/after check (fails with the bug reintroduced,
+  passes with the fix) to confirm it now genuinely detects the vulnerability rather
+  than trivially always passing.
+- `test_api_contributions.py` (8 tests) — auth requirements on every write endpoint,
+  ownership checks on all four `PATCH .../visibility` endpoints, system-row (`owner_
+  id=1`) immutability, duplicate username rejection, duplicate alias-from-different-
+  owners *acceptance* (the `_migrate_v1` schema change this enables), story upsert-
+  not-duplicate behavior, and the `create_kanji_entry` missing-alias regression.
+- `test_api_migrations.py` (6 tests) — fresh-DB migration to latest, idempotent
+  re-run, the full 0→latest sequence, and (the review's specific ask) migrating
+  from each individual intermediate version by advancing a temp DB to exactly
+  version N-1 (using a filtered view of the same `_MIGRATIONS` registry the real
+  runner uses) and confirming the rest completes cleanly — plus two DB-level
+  sanity checks (the reserved system user, the relaxed `aliases` UNIQUE constraint).
+- `test_api_search.py` (9 tests) — `search_by_parts`'s depth (direct-only at
+  depth=1 vs. recursing to grandparents at depth=3), script, and source filters,
+  self-identity matching, whole-word text search, and private-decomposition
+  isolation. Two of these needed real debugging, not just writing assertions and
+  moving on: a `depth=1` test's own expected-result set was wrong (didn't account
+  for a direct, one-level match that legitimately isn't self-identity), and a
+  `sources` test's fixture accidentally entangled "which kanji rows are eligible"
+  with "which decomposition gets consulted" (both keyed off the same `sources` set)
+  — redesigned around a system-owned kanji with two decompositions so the kanji's
+  own eligibility stays constant across the scopes compared, isolating what the
+  test actually meant to check.
+
+**A genuine bug surfaced by writing these tests, fixed in passing**: two of the
+`test_api_search.py` tests initially failed with `sqlite3.OperationalError: database
+is locked` — not a test bug, but `get_db()` never set `PRAGMA busy_timeout`, a gap
+CLAUDE.md already listed as a known, accepted, low-priority limitation ("cheap fix
+if it comes up"). It came up: a fixture connection left open across an API call (a
+second, independent connection under the hood) hit exactly this. Added `PRAGMA
+busy_timeout = 5000` to `get_db()` — cheap, harmless in WAL mode (readers still
+never block writers), and directly useful for real concurrent-write contention in
+production too, not just this test suite. Confirmed `test_regression_fixes.py`'s
+full live-DB suite still passes unchanged with this added.
+
+**Also added**: `backend/requirements-dev.txt` (`pytest`, `httpx` — not bundled into
+the production `requirements.txt`) and `.github/workflows/ci.yml`, a new GitHub
+Actions workflow (this repo had no CI at all before) running the backend pytest
+suite and the existing frontend `lint`/`build` on every push to `master` and every
+PR — the "run in CI" half of the review's own recommendation. Confirmed `npm run
+lint` and `npm run build` both pass locally under node-20 before trusting the
+workflow file.
+
+**Not covered** (explicitly out of scope for this pass, left for later): request
+validation edge cases, upload failure-path consistency (review finding #5, not yet
+fixed either), and frontend behavior — the review's own list included these but
+they're either a different finding's territory or meaningfully more work (Playwright/
+frontend test tooling doesn't exist in this repo yet at all) than the temp-DB API
+suite above. Coverage can grow incrementally in future sessions; this pass
+establishes the harness and the four highest-value files, not full breadth.
+
+## Status: NOT YET ADDRESSED (tracked for a future session)
+
+Numbered as in the original review.
 
 ### 4. Medium — public write endpoints have no abuse controls
 
@@ -156,9 +222,11 @@ make results/detail pages bookmarkable and restore back-button behavior.
 ## Suggested order (per the review, still valid)
 
 1. ~~Fix the alias visibility flaw + its regression test~~ — done 2026-08-31.
-2. Introduce temp-DB API tests + CI (#3).
+2. ~~Introduce temp-DB API tests + CI~~ — done 2026-08-31 (#3; upload failure-path
+   and frontend coverage still not included, see #3's "not covered" note above).
 3. ~~Make migrations atomic before the next schema version bump~~ — done 2026-08-31 (#2).
-4. Rate limits, validation limits, `PRAGMA busy_timeout`, analytics retention (#4).
+4. Rate limits, validation limits, analytics retention (#4; `PRAGMA busy_timeout`
+   already done 2026-08-31 as a side effect of #3 — see #3 above).
 5. Off-host backup + restore rehearsal (#6).
 6. Frontend request races, error presentation, empty-source handling (#7, #8).
 7. Documentation pass (#9).
