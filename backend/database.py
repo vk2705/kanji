@@ -639,7 +639,16 @@ def resolve_alias(conn, term: str, viewer_id: int | None = None,
     When script_scope is given and the term is ambiguous across scripts (e.g. '一'
     matching both an rtk row and a hanzi row), prefers a match whose kanji.script is
     in script_scope; otherwise (or if nothing matches script_scope) prefers a
-    public/system match over the viewer's own private one, as before."""
+    public/system match over the viewer's own private one, as before.
+
+    The alias-lookup query also requires the *joined kanji* to be visible, not just
+    the alias row itself -- an alias can be made public while the kanji it names
+    stays private (e.g. a user publishes just the name of their own private kanji),
+    and callers like contributions.py's _visible_kanji_id() rely on this function as
+    their sole visibility gate for write endpoints. Same bug class as the
+    _resolve_parts_detail leak (2026-08-27) and the one _self_identity_kanji_ids
+    already guards against; found unfixed here 2026-08-31 during an architecture
+    review, confirmed exploitable via a rolled-back two-user test before fixing."""
     term = term.strip().lower()
     row = conn.execute(
         "SELECT id FROM kanji WHERE id = ? AND (visibility = 'public' OR owner_id = ?)",
@@ -650,8 +659,9 @@ def resolve_alias(conn, term: str, viewer_id: int | None = None,
     rows = conn.execute(
         "SELECT a.kanji_id, a.visibility, k.script FROM aliases a "
         "JOIN kanji k ON k.id = a.kanji_id "
-        "WHERE a.alias = ? AND (a.visibility = 'public' OR a.owner_id = ?)",
-        (term, viewer_id)
+        "WHERE a.alias = ? AND (a.visibility = 'public' OR a.owner_id = ?) "
+        "AND (k.visibility = 'public' OR k.owner_id = ?)",
+        (term, viewer_id, viewer_id)
     ).fetchall()
     if not rows:
         return None

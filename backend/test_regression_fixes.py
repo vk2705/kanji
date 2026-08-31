@@ -1103,6 +1103,61 @@ def check_no_self_reference(conn) -> list[str]:
     return failures
 
 
+def check_alias_visibility_boundary(conn) -> list[str]:
+    """Regression test for the 2026-08-31 resolve_alias() privacy leak: a public
+    alias on someone else's private kanji must not let an unrelated viewer resolve,
+    read, or (via contributions.py's _visible_kanji_id) write to that kanji. Inserts
+    a throwaway private kanji + public alias inside an explicit transaction and rolls
+    it back unconditionally, so this never leaves test data in the live DB regardless
+    of outcome."""
+    import contributions
+
+    failures = []
+    test_id = "usr-test-alias-boundary"
+    test_alias = "zzz-regression-test-alias-boundary"
+    owner_id, attacker_id = 8999001, 8999002
+
+    conn.isolation_level = None
+    conn.execute("BEGIN")
+    try:
+        conn.execute(
+            "INSERT INTO kanji (id, character, keyword, owner_id, visibility, script) "
+            "VALUES (?, '?', ?, ?, 'private', 'ja-kanji')",
+            (test_id, test_alias, owner_id)
+        )
+        conn.execute(
+            "INSERT INTO aliases (kanji_id, alias, owner_id, visibility) VALUES (?, ?, ?, 'public')",
+            (test_id, test_alias, owner_id)
+        )
+
+        leaked = database.resolve_alias(conn, test_alias, viewer_id=attacker_id)
+        if leaked is not None:
+            failures.append(f"resolve_alias leaked {leaked!r} to an unrelated viewer via a "
+                             f"public alias on a private kanji")
+
+        anon_leaked = database.resolve_alias(conn, test_alias, viewer_id=None)
+        if anon_leaked is not None:
+            failures.append(f"resolve_alias leaked {anon_leaked!r} to an anonymous viewer via a "
+                             f"public alias on a private kanji")
+
+        try:
+            contributions._visible_kanji_id(conn, test_alias, attacker_id)
+            failures.append("_visible_kanji_id let an unrelated viewer write to a private "
+                             "kanji via its public alias (expected a 404)")
+        except Exception:
+            pass  # expected: raises (404) for an unrelated viewer
+
+        owner_cid = database.resolve_alias(conn, test_alias, viewer_id=owner_id)
+        if owner_cid != test_id:
+            failures.append(f"resolve_alias broke the owner's own access: got {owner_cid!r}, "
+                             f"expected {test_id!r}")
+    finally:
+        conn.execute("ROLLBACK")
+        conn.isolation_level = ""
+
+    return failures
+
+
 def main():
     conn = database.sqlite3.connect(database.DB_PATH)
     conn.row_factory = database.sqlite3.Row
@@ -1113,9 +1168,10 @@ def main():
     all_failures += check_no_kradfile_proxy(conn)
     all_failures += check_atomic(conn)
     all_failures += check_no_self_reference(conn)
+    all_failures += check_alias_visibility_boundary(conn)
     conn.close()
 
-    total_checks = len(EXPECTED_DECOMPOSITIONS) + len(EXPECTED_HANZI_PRESENT) + len(EXPECTED_ATOMIC) + 2
+    total_checks = len(EXPECTED_DECOMPOSITIONS) + len(EXPECTED_HANZI_PRESENT) + len(EXPECTED_ATOMIC) + 3
     if all_failures:
         print(f"FAILED: {len(all_failures)} problem(s) found across {total_checks} checks:\n")
         for f in all_failures:
@@ -1125,7 +1181,7 @@ def main():
         print(f"PASSED: all {total_checks} regression checks OK "
               f"({len(EXPECTED_DECOMPOSITIONS)} pinned decompositions, "
               f"{len(EXPECTED_HANZI_PRESENT)} hanzi presence spot-checks, "
-              f"KRADFILE-proxy + self-reference invariants).")
+              f"KRADFILE-proxy + self-reference + alias-visibility-boundary invariants).")
         sys.exit(0)
 
 
