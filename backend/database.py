@@ -1473,14 +1473,16 @@ def set_visibility(conn, table: str, row_id: int | str, owner_id: int, visibilit
     return cur.rowcount > 0
 
 
-def set_kanji_image(conn, kanji_id: str, owner_id: int, image_url: str) -> bool:
+def set_kanji_image(conn, kanji_id: str, owner_id: int, image_url: str,
+                    commit: bool = True) -> bool:
     """Owner-only image attach/replace for a kanji with no real Unicode glyph. Same
     owner_id != 1 guard as set_visibility — system rows are immutable to normal users."""
     cur = conn.execute(
         "UPDATE kanji SET image_url = ? WHERE id = ? AND owner_id = ? AND owner_id != 1",
         (image_url, kanji_id, owner_id)
     )
-    conn.commit()
+    if commit:
+        conn.commit()
     return cur.rowcount > 0
 
 

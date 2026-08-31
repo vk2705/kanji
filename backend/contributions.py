@@ -1,3 +1,5 @@
+import os
+import tempfile
 from pathlib import Path
 from typing import Literal
 
@@ -25,6 +27,19 @@ IMAGE_EXTENSIONS = {
     "image/jpeg": "jpg",
     "image/webp": "webp",
 }
+
+
+def _detected_image_extension(data: bytes) -> str | None:
+    """Recognize the small set of formats accepted by the upload endpoint."""
+    if data.startswith((b"GIF87a", b"GIF89a")):
+        return "gif"
+    if data.startswith(b"\x89PNG\r\n\x1a\n"):
+        return "png"
+    if data.startswith(b"\xff\xd8\xff"):
+        return "jpg"
+    if len(data) >= 12 and data[:4] == b"RIFF" and data[8:12] == b"WEBP":
+        return "webp"
+    return None
 
 
 def _visible_kanji_id(conn, kanji_id: str, viewer_id: int) -> str:
@@ -72,14 +87,41 @@ def upload_kanji_image(kanji_id: str, file: UploadFile = File(...),
     data = file.file.read(MAX_IMAGE_BYTES + 1)
     if len(data) > MAX_IMAGE_BYTES:
         raise HTTPException(status_code=400, detail="Image too large (max 2MB)")
+    if not data:
+        raise HTTPException(status_code=400, detail="Image file is empty")
+    detected_ext = _detected_image_extension(data)
+    if detected_ext != ext:
+        raise HTTPException(status_code=400, detail="Image content does not match its declared type")
+
     image_url = f"/uploads/{cid}.{ext}"
-    if not set_kanji_image(conn, cid, user["id"], image_url):
-        raise HTTPException(status_code=403, detail="Not found or not owned by you")
-    for other_ext in IMAGE_EXTENSIONS.values():
-        old = UPLOAD_DIR / f"{cid}.{other_ext}"
-        if other_ext != ext and old.exists():
-            old.unlink()
-    (UPLOAD_DIR / f"{cid}.{ext}").write_bytes(data)
+    UPLOAD_DIR.mkdir(exist_ok=True)
+    target = UPLOAD_DIR / f"{cid}.{ext}"
+    previous = target.with_suffix(f".{ext}.previous")
+    fd, staged_name = tempfile.mkstemp(prefix=f".{cid}-", suffix=f".{ext}", dir=UPLOAD_DIR)
+    staged = Path(staged_name)
+    try:
+        with os.fdopen(fd, "wb") as staged_file:
+            staged_file.write(data)
+            staged_file.flush()
+            os.fsync(staged_file.fileno())
+        if target.exists():
+            os.replace(target, previous)
+        os.replace(staged, target)
+
+        if not set_kanji_image(conn, cid, user["id"], image_url, commit=False):
+            raise HTTPException(status_code=403, detail="Not found or not owned by you")
+        conn.commit()
+    except Exception:
+        conn.rollback()
+        staged.unlink(missing_ok=True)
+        target.unlink(missing_ok=True)
+        if previous.exists():
+            os.replace(previous, target)
+        raise
+    else:
+        previous.unlink(missing_ok=True)
+        for other_ext in set(IMAGE_EXTENSIONS.values()) - {ext}:
+            (UPLOAD_DIR / f"{cid}.{other_ext}").unlink(missing_ok=True)
     return {"image_url": image_url}
 
 

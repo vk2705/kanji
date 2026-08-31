@@ -3,6 +3,12 @@ Isolated tests for contribution-endpoint ownership rules (architecture review
 finding #3's second-highest priority item) and auth requirements. See conftest.py
 for the temp-DB/TestClient fixtures.
 """
+import sqlite3
+from io import BytesIO
+
+from fastapi.testclient import TestClient
+
+import contributions
 from conftest import register_user
 
 
@@ -143,3 +149,54 @@ def test_add_kanji_creates_findable_alias(client):
     assert r.status_code == 200, r.text
     ids_found = {row["id"] for row in r.json()["results"]}
     assert kid in ids_found
+
+
+def test_image_upload_validates_content_and_updates_atomically(app, client, conn, tmp_path, monkeypatch):
+    register_user(client, "image_owner")
+    r = client.post("/kanji", json={"keyword": "pictured", "visibility": "private"})
+    kid = r.json()["id"]
+    monkeypatch.setattr(contributions, "UPLOAD_DIR", tmp_path)
+
+    png = b"\x89PNG\r\n\x1a\n" + b"valid-enough-test-payload"
+    r = client.post(
+        f"/kanji/{kid}/image",
+        files={"file": ("picture.png", BytesIO(png), "image/png")},
+    )
+    assert r.status_code == 200, r.text
+    assert (tmp_path / f"{kid}.png").read_bytes() == png
+    assert conn.execute("SELECT image_url FROM kanji WHERE id = ?", (kid,)).fetchone()[0] == f"/uploads/{kid}.png"
+
+    r = client.post(
+        f"/kanji/{kid}/image",
+        files={"file": ("fake.png", BytesIO(b"not an image"), "image/png")},
+    )
+    assert r.status_code == 400, r.text
+    assert (tmp_path / f"{kid}.png").read_bytes() == png
+
+    replacement = b"\x89PNG\r\n\x1a\n" + b"replacement"
+    real_set_image = contributions.set_kanji_image
+
+    def fail_update(*args, **kwargs):
+        raise sqlite3.OperationalError("simulated database failure")
+
+    monkeypatch.setattr(contributions, "set_kanji_image", fail_update)
+    try:
+        # TestClient re-raises an unhandled server exception as a real Python
+        # exception by default (useful for most tests -- an unexpected 500 fails
+        # loudly with a traceback instead of needing an explicit status check) --
+        # but this test specifically wants the actual HTTP-500-and-recover
+        # behavior a real client would see, so use a one-off client with
+        # raise_server_exceptions=False instead of weakening the shared `client`
+        # fixture for every other test in this file.
+        crash_client = TestClient(app, base_url="https://testserver", raise_server_exceptions=False)
+        crash_client.cookies = client.cookies
+        r = crash_client.post(
+            f"/kanji/{kid}/image",
+            files={"file": ("replacement.png", BytesIO(replacement), "image/png")},
+        )
+        assert r.status_code == 500, r.text
+    finally:
+        monkeypatch.setattr(contributions, "set_kanji_image", real_set_image)
+
+    assert (tmp_path / f"{kid}.png").read_bytes() == png
+    assert conn.execute("SELECT image_url FROM kanji WHERE id = ?", (kid,)).fetchone()[0] == f"/uploads/{kid}.png"

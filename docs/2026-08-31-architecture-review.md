@@ -146,9 +146,10 @@ lint` and `npm run build` both pass locally under node-20 before trusting the
 workflow file.
 
 **Not covered** (explicitly out of scope for this pass, left for later): request
-validation edge cases, upload failure-path consistency (review finding #5, not yet
-fixed either), and frontend behavior — the review's own list included these but
-they're either a different finding's territory or meaningfully more work (Playwright/
+validation edge cases (fixed separately as #4, same day) and frontend behavior —
+upload failure-path consistency (#5) was also fixed separately, same day, with its
+own dedicated test. The review's own list included these but they're either a
+different finding's territory or meaningfully more work (Playwright/
 frontend test tooling doesn't exist in this repo yet at all) than the temp-DB API
 suite above. Coverage can grow incrementally in future sessions; this pass
 establishes the harness and the four highest-value files, not full breadth.
@@ -224,16 +225,59 @@ to the live DB (backup first); backend restarted; `visit_stats.py` and
 `prune_page_views.py --dry-run` both run clean against real production data
 post-migration.
 
+### 5. Medium — upload storage and DB updates aren't atomic
+
+`upload_kanji_image()` committed `image_url` before the file write completed — a
+disk-full/permission error could leave a dangling DB path to a missing file.
+`uploads/` was also excluded from `backup_db.py` entirely.
+
+**Fixed**, both sub-parts:
+
+- **Atomicity**: `upload_kanji_image()` now validates the actual file content
+  against its declared MIME type first (`_detected_image_extension` checks real
+  magic bytes — GIF/PNG/JPEG/WEBP signatures — not just the client-supplied
+  `Content-Type` header, which is trivially spoofable), before touching disk or
+  the DB at all. Writes to a staged temp file inside `uploads/` (`tempfile.
+  mkstemp`, same directory so the later rename is atomic — cross-filesystem
+  renames aren't), `fsync`s it, moves the previous file aside (`.previous`
+  suffix) rather than deleting it outright, atomically `os.replace()`s the staged
+  file into place, and only *then* commits `kanji.image_url`
+  (`set_kanji_image(..., commit=False)`, database.py's `set_kanji_image` gained
+  the `commit` parameter for this). Any failure anywhere in that sequence — bad
+  content, a DB error, anything — rolls the file back to its pre-upload state
+  (`conn.rollback()`, delete the staged file, restore `.previous` back onto the
+  target) before re-raising, so a partial failure can never leave `image_url`
+  pointing at a missing/corrupt file or a file on disk with no matching DB row.
+- **Backup coverage**: `backup_db.py` now also snapshots `uploads/` as a
+  `uploads-<timestamp>.tar.gz` alongside each `kanji-<timestamp>.db`, pruned on
+  the same 14-day retention. Skipped with a plain message (not an error) when
+  `uploads/` doesn't exist or is empty — a fresh install, or before anyone has
+  uploaded anything yet, has nothing to snapshot.
+
+**Verified**: manually exercised the real endpoint's happy path, the content-
+type-mismatch rejection, and (via `monkeypatch`ing `set_kanji_image` to raise)
+the mid-upload-DB-failure rollback path — confirmed the file on disk is
+genuinely restored to its pre-upload bytes in each case, not just that the
+request returns the right status code (deliberately broke the restore step
+first, confirmed the test actually catches a leftover-corrupted-file regression,
+then restored the real code and confirmed it passes). One new permanent test
+(`test_api_contributions.py::test_image_upload_validates_content_and_updates_
+atomically`) covers all three paths; needed a one-off `TestClient(...,
+raise_server_exceptions=False)` for the simulated-DB-failure assertion
+specifically, since the shared `client` fixture's default (re-raise unhandled
+server exceptions as real Python exceptions, useful for every other test)
+would otherwise turn the expected 500 into an uncaught exception in the test
+itself. Separately, 5 new tests (`test_backup_db.py`) cover `backup_db.py`'s
+uploads/ handling: missing dir, empty dir, real files archived correctly (and
+their content spot-checked after extraction), the DB backup still happening
+regardless of uploads/ state, and old backups of both kinds getting pruned.
+48 isolated tests total (was 42) and the 359 live-DB regression checks pass.
+Backend restarted; `backup_db.py` run against the real live server (uploads/
+is currently empty there — skipped cleanly, as designed).
+
 ## Status: NOT YET ADDRESSED (tracked for a future session)
 
 Numbered as in the original review.
-
-### 5. Medium — upload storage and DB updates aren't atomic
-
-`upload_kanji_image()` commits `image_url` before the file write completes — a
-disk-full/permission error leaves a dangling DB path to a missing file. `uploads/` is
-also excluded from `backup_db.py`. Fix: write to a temp file, verify its real format,
-atomically rename, commit only after; back up `uploads/` alongside `kanji.db`.
 
 ### 6. Medium — disaster recovery is incomplete
 
@@ -283,13 +327,14 @@ make results/detail pages bookmarkable and restore back-button behavior.
 ## Suggested order (per the review, still valid)
 
 1. ~~Fix the alias visibility flaw + its regression test~~ — done 2026-08-31.
-2. ~~Introduce temp-DB API tests + CI~~ — done 2026-08-31 (#3; upload failure-path
-   and frontend coverage still not included, see #3's "not covered" note above).
+2. ~~Introduce temp-DB API tests + CI~~ — done 2026-08-31 (#3; frontend coverage
+   still not included, see #3's "not covered" note above).
 3. ~~Make migrations atomic before the next schema version bump~~ — done 2026-08-31 (#2).
 4. ~~Rate limits, validation limits, analytics retention~~ — done 2026-08-31 (#4;
    `PRAGMA busy_timeout` already done as a side effect of #3 — see #3 above).
-5. Off-host backup + restore rehearsal (#6).
-6. Frontend request races, error presentation, empty-source handling (#7, #8).
-7. Documentation pass (#9).
-8. Primitive autocomplete, moderation tools, URL routing, the queued JP/ZH
+5. ~~Upload atomicity + uploads/ backup coverage~~ — done 2026-08-31 (#5).
+6. Off-host backup + restore rehearsal (#6).
+7. Frontend request races, error presentation, empty-source handling (#7, #8).
+8. Documentation pass (#9).
+9. Primitive autocomplete, moderation tools, URL routing, the queued JP/ZH
    counterpart-comparison badge (#10 plus CLAUDE.md's existing queued items).
