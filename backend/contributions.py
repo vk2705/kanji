@@ -2,7 +2,7 @@ from pathlib import Path
 from typing import Literal
 
 from fastapi import APIRouter, Depends, File, HTTPException, UploadFile
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 from database import (
     db_conn, resolve_alias,
@@ -37,8 +37,8 @@ def _visible_kanji_id(conn, kanji_id: str, viewer_id: int) -> str:
 
 
 class NewKanji(BaseModel):
-    keyword: str
-    character: str | None = None
+    keyword: str = Field(max_length=200)
+    character: str | None = Field(default=None, max_length=8)
     script: Script = "ja-kanji"
     visibility: Visibility = "private"
 
@@ -84,9 +84,17 @@ def upload_kanji_image(kanji_id: str, file: UploadFile = File(...),
 
 
 class NewDecomposition(BaseModel):
-    parts: list[str] = Field(min_length=1)
-    label: str | None = None
+    parts: list[str] = Field(min_length=1, max_length=50)
+    label: str | None = Field(default=None, max_length=200)
     visibility: Visibility = "private"
+
+    @field_validator("parts")
+    @classmethod
+    def _bound_each_part(cls, parts: list[str]) -> list[str]:
+        for p in parts:
+            if len(p) > 200:
+                raise ValueError("each part must be at most 200 characters")
+        return parts
 
 
 @router.post("/kanji/{kanji_id}/decompositions")
@@ -100,8 +108,8 @@ def add_decomposition(kanji_id: str, body: NewDecomposition, conn=Depends(db_con
 
 
 class NewAlias(BaseModel):
-    kanji_id: str
-    alias: str
+    kanji_id: str = Field(max_length=200)
+    alias: str = Field(max_length=200)
     visibility: Visibility = "private"
 
 
@@ -115,8 +123,8 @@ def add_alias(body: NewAlias, conn=Depends(db_conn), user=Depends(require_user))
 
 
 class NewStory(BaseModel):
-    kanji_id: str
-    story: str
+    kanji_id: str = Field(max_length=200)
+    story: str = Field(max_length=20_000)
     visibility: Visibility = "private"
 
 

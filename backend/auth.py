@@ -6,7 +6,7 @@ import bcrypt
 from fastapi import APIRouter, Cookie, Depends, HTTPException, Response
 from google.auth.transport import requests as google_requests
 from google.oauth2 import id_token as google_id_token
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from database import db_conn
 
@@ -27,11 +27,24 @@ _google_request = google_requests.Request()
 router = APIRouter(prefix="/auth", tags=["auth"])
 
 
+class PasswordTooLong(Exception):
+    """Defense-in-depth: register()'s own explicit byte-length check (below) is the
+    primary guard and returns a clean 400, but this protects any other/future caller
+    of hash_password() from reaching bcrypt's own ValueError unhandled -- confirmed
+    directly that a >72-byte password used to 500 here (Credentials.password's
+    max_length=72 only bounds *characters*, not bytes -- e.g. 72 emoji is 288 UTF-8
+    bytes, so a character-count Field alone doesn't fully close this)."""
+
+
 def hash_password(password: str) -> str:
+    if len(password.encode()) > 72:
+        raise PasswordTooLong()
     return bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
 
 
 def verify_password(password: str, password_hash: str) -> bool:
+    if len(password.encode()) > 72:
+        return False
     return bcrypt.checkpw(password.encode(), password_hash.encode())
 
 
@@ -78,8 +91,14 @@ def require_user(user: dict | None = Depends(current_user)) -> dict:
 
 
 class Credentials(BaseModel):
-    username: str
-    password: str
+    username: str = Field(max_length=100)
+    # 72 bytes is bcrypt's own hard limit (hashpw raises ValueError past it, rather
+    # than truncating) -- capping here turns that into a clean 422 instead of an
+    # unhandled 500 from inside hash_password()/verify_password(). 72 *characters*
+    # is already <= 72 bytes only for ASCII; multi-byte UTF-8 passwords hit the
+    # byte limit sooner, so hash_password() still has its own explicit check below
+    # for the general case (this Field bound is just the cheap common-case reject).
+    password: str = Field(max_length=72)
 
 
 class RegisterBody(Credentials):
@@ -95,6 +114,8 @@ def register(body: RegisterBody, response: Response, conn=Depends(db_conn)):
     username = body.username.strip().lower()
     if not username or len(body.password) < 8:
         raise HTTPException(status_code=400, detail="Username required, password must be at least 8 characters")
+    if len(body.password.encode()) > 72:
+        raise HTTPException(status_code=400, detail="Password must be at most 72 bytes")
     if body.ui_language not in ALLOWED_UI_LANGUAGES:
         raise HTTPException(status_code=400, detail="Invalid ui_language")
     if body.study_script is not None and body.study_script not in ALLOWED_STUDY_SCRIPTS:
@@ -117,8 +138,10 @@ def register(body: RegisterBody, response: Response, conn=Depends(db_conn)):
 class GoogleLoginBody(BaseModel):
     # The ID token (a signed JWT) returned client-side by Google Identity Services —
     # verified here, never trusted as-is. Same ui_language/study_script carry-over
-    # rationale as RegisterBody.
-    credential: str
+    # rationale as RegisterBody. A real Google ID token JWT is comfortably under 4KB;
+    # this cap is just resource-exhaustion defense-in-depth, not a functional limit —
+    # google_id_token.verify_oauth2_token rejects a malformed/oversized token anyway.
+    credential: str = Field(max_length=8192)
     ui_language: str = "en"
     study_script: str | None = None
 

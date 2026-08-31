@@ -1,7 +1,7 @@
 import secrets
 
 from fastapi import APIRouter, Cookie, Depends, Response
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from database import db_conn, record_page_view
 
@@ -12,7 +12,11 @@ VISITOR_TTL_DAYS = 365
 
 
 class PageView(BaseModel):
-    path: str | None = None
+    # No auth required on this endpoint (see pageview() below), so path is the one
+    # attacker-controlled field written to page_views on every call — bounded to stop
+    # someone using it to stuff arbitrarily large strings into the DB one row at a
+    # time (architecture review finding #4).
+    path: str | None = Field(default=None, max_length=500)
 
 
 @router.post("/analytics/pageview")

@@ -37,11 +37,33 @@ def summary(conn):
         ).fetchone()[0]
         print(f"{label:<14} {views:>6} page views, {visitors:>4} unique visitors")
 
-    total_views = conn.execute("SELECT COUNT(*) FROM page_views").fetchone()[0]
-    total_visitors = conn.execute("SELECT COUNT(DISTINCT visitor_id) FROM page_views").fetchone()[0]
+    # All-time totals combine live page_views rows with whatever prune_page_views.py
+    # has already rolled up into daily_visit_summary/known_visitors -- reading
+    # page_views alone would silently understate "all-time" once pruning has run
+    # (architecture review finding #4, 2026-08-31: page_views previously had no
+    # retention at all). A visitor counted in both the live rows and
+    # known_visitors (i.e. they visited both before and after the last prune) is
+    # only counted once, via the UNION below.
+    live_views = conn.execute("SELECT COUNT(*) FROM page_views").fetchone()[0]
+    pruned_views = conn.execute("SELECT COALESCE(SUM(view_count), 0) FROM daily_visit_summary").fetchone()[0]
+    total_views = live_views + pruned_views
+
+    total_visitors = conn.execute("""
+        SELECT COUNT(*) FROM (
+            SELECT visitor_id FROM page_views
+            UNION
+            SELECT visitor_id FROM known_visitors
+        )
+    """).fetchone()[0]
     print(f"{'All-time':<14} {total_views:>6} page views, {total_visitors:>4} unique visitors")
 
-    first = conn.execute("SELECT MIN(viewed_at) FROM page_views").fetchone()[0]
+    first = conn.execute("""
+        SELECT MIN(t) FROM (
+            SELECT MIN(viewed_at) AS t FROM page_views
+            UNION ALL
+            SELECT MIN(day) AS t FROM daily_visit_summary
+        )
+    """).fetchone()[0]
     if first:
         print(f"\nTracking since {first}")
     else:
@@ -49,17 +71,38 @@ def summary(conn):
 
 
 def daily_breakdown(conn, days: int):
+    """Per-day view/visitor counts for the requested window. Days still covered by
+    live page_views rows get an exact distinct-visitor count; any older days that
+    prune_page_views.py has already rolled up (architecture review finding #4,
+    2026-08-31) fall back to daily_visit_summary's per-day counts instead of
+    silently vanishing from the breakdown -- those are still exact for that single
+    day (COUNT(DISTINCT visitor_id) *within* one day is unaffected by pruning;
+    only cross-day dedup, i.e. the all-time total in summary() above, needs
+    known_visitors)."""
     cutoff = _since(days)
-    rows = conn.execute(
-        """SELECT date(viewed_at) AS day, COUNT(*) AS views, COUNT(DISTINCT visitor_id) AS visitors
-           FROM page_views WHERE viewed_at >= ? GROUP BY day ORDER BY day""",
-        (cutoff,)
-    ).fetchall()
+    live_rows = {
+        r["day"]: (r["views"], r["visitors"]) for r in conn.execute(
+            """SELECT date(viewed_at) AS day, COUNT(*) AS views, COUNT(DISTINCT visitor_id) AS visitors
+               FROM page_views WHERE viewed_at >= ? GROUP BY day""",
+            (cutoff,)
+        ).fetchall()
+    }
+    summary_rows = {
+        r["day"]: (r["view_count"], r["distinct_visitor_count"]) for r in conn.execute(
+            "SELECT day, view_count, distinct_visitor_count FROM daily_visit_summary WHERE day >= ?",
+            (cutoff[:10],)
+        ).fetchall()
+    }
+    # live_rows wins on any day present in both (shouldn't normally overlap --
+    # prune_page_views.py only rolls up days older than its retention window --
+    # but prefer the exact live figure if it ever does).
+    merged = {**summary_rows, **live_rows}
+    rows = sorted(merged.items())
     if not rows:
         print(f"No visits in the last {days} day(s).")
         return
     print(f"{'Date':<12} {'Views':>7} {'Visitors':>10}")
-    for day, views, visitors in rows:
+    for day, (views, visitors) in rows:
         print(f"{day:<12} {views:>7} {visitors:>10}")
 
 
@@ -69,6 +112,7 @@ def main():
     args = parser.parse_args()
 
     conn = sqlite3.connect(DB_PATH)
+    conn.row_factory = sqlite3.Row
     if args.days:
         daily_breakdown(conn, args.days)
     else:

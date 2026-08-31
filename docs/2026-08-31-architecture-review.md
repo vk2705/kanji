@@ -153,19 +153,80 @@ frontend test tooling doesn't exist in this repo yet at all) than the temp-DB AP
 suite above. Coverage can grow incrementally in future sessions; this pass
 establishes the harness and the four highest-value files, not full breadth.
 
-## Status: NOT YET ADDRESSED (tracked for a future session)
-
-Numbered as in the original review.
-
 ### 4. Medium — public write endpoints have no abuse controls
 
 No rate limiting anywhere (login, register, Google login, contributions, reviews,
 `/analytics/pageview`) — analytics in particular is an easy unbounded-growth vector
-since it needs no auth. Field lengths are almost entirely unconstrained (username,
-password, alias, label, story, analytics path). `hash_password()` can hit a bcrypt
-72-byte password limit and 500 rather than reject cleanly. Fix: nginx rate limits at
-minimum; Pydantic `max_length` constraints across write bodies; a page_views
-retention/aggregation policy.
+since it needs no auth. Field lengths were almost entirely unconstrained. `hash_
+password()` could hit bcrypt's 72-byte limit and 500 rather than reject cleanly.
+
+**Fixed**, all three sub-parts:
+
+- **Validation limits**: confirmed the bcrypt claim directly before fixing it — a
+  >72-byte password really did reach `bcrypt.hashpw()` unhandled and crash with a
+  raw `ValueError`/500. Added `Credentials.password`'s `Field(max_length=72)` (the
+  common-case reject at the Pydantic layer) plus an explicit `len(password.encode())
+  > 72` check in `register()` for the general case — Pydantic's `max_length` counts
+  *characters*, not bytes, so a 72-*emoji* password (288 UTF-8 bytes) sails past a
+  character-count check alone; confirmed this gap concretely before relying on the
+  fix. `hash_password()`/`verify_password()` also gained their own byte-length guard
+  (`PasswordTooLong`) as defense-in-depth for any other caller. Added
+  `Field(max_length=...)` across every other free-text write field (`keyword`,
+  `character`, decomposition `parts` — both list length and per-item length, `label`,
+  `alias`, `story`, `username`, the Google `credential`, and analytics' `path`).
+- **Rate limiting**: nginx `limit_req_zone`s (`kanji_auth` 5/min, `kanji_write`/
+  `kanji_write_nonget` 30/min, `kanji_analytics` 60/min, all per-IP) added via a new
+  `conf.d/kanji-ratelimit.conf` (declared there rather than editing the shared
+  `nginx.conf` this box's other projects also use, since `limit_req_zone` must live
+  at the `http{}` block level and `nginx.conf` already `include`s `conf.d/*.conf`
+  there) plus new `location` blocks in `default.d/kanji.conf` for `auth/(login|
+  register|google)`, the shared `/kanji/...` prefix (write-only — `limit_except`
+  turned out not to accept `limit_req` in its context at all, so GET/HEAD exemption
+  uses a `$request_method`-keyed `map` instead, where an empty zone key is
+  documented `limit_req_zone` behavior for "don't rate-limit this request"),
+  `aliases|stories|decompositions`, and `analytics/pageview`. Verified against the
+  **live** server, not just `nginx -t`: 8 rapid login attempts → six 401s then two
+  429s; 20 rapid `GET /kanji/rtk1` → all 200 (confirms the write-tier exemption
+  works); unrelated endpoints (`/search/text`, `/auth/me`) unaffected. Both config
+  files also checked into this repo at `deploy/nginx/` (with their own `README.md`)
+  as reference copies — the live box's actual nginx config is not otherwise
+  version-controlled at all.
+- **Analytics retention**: `page_views` had no pruning, and a naive "delete rows
+  older than N days" would have silently corrupted `visit_stats.py`'s all-time
+  unique-visitor count (a visitor whose only rows got deleted stops counting as
+  ever having visited) and broken its `--days N` breakdown for older ranges — so
+  this needed aggregation before deletion, not just deletion (this exact tradeoff
+  was put to the owner explicitly before building it: aggregate-then-prune vs. a
+  simpler accept-the-accuracy-loss cap; aggregate-then-prune was chosen). New
+  `_migrate_v6` adds `daily_visit_summary` (one row per calendar day) and
+  `known_visitors` (one row per `visitor_id` ever seen, first/last-seen) — the
+  latter is what makes the *all-time* distinct count survive pruning at all, since
+  per-day summaries alone can't dedupe a visitor who returns across multiple days
+  once the raw rows backing earlier days are gone. `prune_page_views.py` (new,
+  `backup_db.py`'s exact "one-off script, run on a schedule" convention) rolls
+  both tables up from `page_views` before deleting anything older than
+  `--retain-days` (default 90); `--dry-run` reports without writing. `visit_stats.py`
+  updated to union `page_views`/`known_visitors` for the all-time visitor count and
+  merge `page_views`/`daily_visit_summary` per-day for the breakdown, so its output
+  is unchanged by whether a prune has run. Deployed a new systemd timer
+  (`kanji-pageview-prune`, weekly) alongside the existing `kanji-db-backup` one.
+
+**Verified**: hand-traced the rollup/dedup math against a seeded temp DB (3 old
+days, a visitor returning across two of them, some recent rows) before trusting the
+script, then wrote 5 permanent isolated tests (`test_api_analytics_retention.py`)
+covering dry-run-changes-nothing, correct rollup+delete, the exact "all-time count
+would silently drop a visitor" scenario a naive delete-only approach would hit, and
+cross-day visitor dedup. 10 more isolated tests (`test_api_validation.py`) cover the
+new field limits, including the emoji-password edge case and a sanity check that
+ordinary-length input still works. All existing isolated tests (27) plus these 15
+new ones (42 total) and the 359 live-DB regression checks pass. Migration applied
+to the live DB (backup first); backend restarted; `visit_stats.py` and
+`prune_page_views.py --dry-run` both run clean against real production data
+post-migration.
+
+## Status: NOT YET ADDRESSED (tracked for a future session)
+
+Numbered as in the original review.
 
 ### 5. Medium — upload storage and DB updates aren't atomic
 
@@ -225,8 +286,8 @@ make results/detail pages bookmarkable and restore back-button behavior.
 2. ~~Introduce temp-DB API tests + CI~~ — done 2026-08-31 (#3; upload failure-path
    and frontend coverage still not included, see #3's "not covered" note above).
 3. ~~Make migrations atomic before the next schema version bump~~ — done 2026-08-31 (#2).
-4. Rate limits, validation limits, analytics retention (#4; `PRAGMA busy_timeout`
-   already done 2026-08-31 as a side effect of #3 — see #3 above).
+4. ~~Rate limits, validation limits, analytics retention~~ — done 2026-08-31 (#4;
+   `PRAGMA busy_timeout` already done as a side effect of #3 — see #3 above).
 5. Off-host backup + restore rehearsal (#6).
 6. Frontend request races, error presentation, empty-source handling (#7, #8).
 7. Documentation pass (#9).

@@ -307,6 +307,46 @@ def _migrate_v5(conn):
 _register(5, _migrate_v5)
 
 
+def _migrate_v6(conn):
+    """
+    Analytics retention (2026-08-31, architecture review finding #4): page_views had
+    no pruning at all — an unauthenticated endpoint (POST /analytics/pageview) that
+    grows the table forever is exactly the "easy unbounded-growth vector" the review
+    flagged. A naive "delete rows older than N days" would silently corrupt
+    visit_stats.py's all-time unique-visitor count (a visitor whose only rows got
+    pruned stops counting as ever having visited) and break its --days N breakdown
+    for pruned ranges, so pruning needs to aggregate first, not just delete.
+
+    daily_visit_summary holds one row per calendar day (view_count, distinct_
+    visitor_count for that day alone — accurate forever, independent of whether the
+    raw page_views rows for that day still exist). known_visitors holds one row per
+    visitor_id ever seen, first/last-seen timestamps — this is what makes an
+    all-time distinct-visitor count possible after old page_views rows are gone;
+    daily per-day distinct counts alone can't dedupe a visitor who returns across
+    multiple days once the raw rows backing earlier days are pruned.
+    prune_page_views.py (added alongside this migration) is the maintenance script
+    that populates both of these from page_views before deleting old raw rows —
+    same "one-off script, run on a schedule" convention as backup_db.py.
+    """
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS daily_visit_summary (
+            day                     TEXT PRIMARY KEY,
+            view_count              INTEGER NOT NULL,
+            distinct_visitor_count  INTEGER NOT NULL
+        )
+    """)
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS known_visitors (
+            visitor_id  TEXT PRIMARY KEY,
+            first_seen  TEXT NOT NULL,
+            last_seen   TEXT NOT NULL
+        )
+    """)
+
+
+_register(6, _migrate_v6)
+
+
 def record_page_view(conn, visitor_id: str, path: str | None):
     conn.execute(
         "INSERT INTO page_views (visitor_id, path) VALUES (?, ?)",

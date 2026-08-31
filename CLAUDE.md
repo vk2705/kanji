@@ -64,8 +64,9 @@ cd android
 ./venv/bin/python3 sync_system_data.py --dry-run   # reconcile live system rows with data.txt/CSV without wiping user data
 ./venv/bin/python3 review_queue.py          # list pending user-submitted decomposition approve/dispute votes
 ./venv/bin/python3 visit_stats.py           # site visit counts (today/7d/30d/all-time), or --days N for a daily breakdown
+./venv/bin/python3 prune_page_views.py --dry-run   # roll up + prune page_views rows older than 90 days (see Analytics)
 ```
-`import_hanzi.py` refuses to run if any non-`ja-kanji` rows already exist (not safe to resume mid-run). `backup_db.py` is meant to run on a schedule (see Deployment). `backup_db.py`, `export_public_data.py`, `fix_kradfile_proxies.py`, `sync_system_data.py`, `review_queue.py`, and `visit_stats.py` also have a shebang pointing straight at `venv/bin/python3`, so `./script.py` works directly without the `./venv/bin/python3` prefix.
+`import_hanzi.py` refuses to run if any non-`ja-kanji` rows already exist (not safe to resume mid-run). `backup_db.py` and `prune_page_views.py` are meant to run on a schedule (see Deployment). `backup_db.py`, `export_public_data.py`, `fix_kradfile_proxies.py`, `sync_system_data.py`, `review_queue.py`, `visit_stats.py`, and `prune_page_views.py` also have a shebang pointing straight at `venv/bin/python3`, so `./script.py` works directly without the `./venv/bin/python3` prefix.
 
 **Tests** (added 2026-08-31, architecture review finding #3):
 ```bash
@@ -123,15 +124,29 @@ users(id PK, username TEXT UNIQUE, password_hash TEXT, auth_provider TEXT, displ
       ui_language TEXT CHECK(en|ru), study_script TEXT CHECK(ja-kanji|zh-Hans|zh-Hant))
 sessions(token PK, user_id → users.id, expires_at TEXT)
 page_views(id PK, visitor_id TEXT, path TEXT, viewed_at TEXT)  -- no owner_id/visibility; see Analytics below
+daily_visit_summary(day TEXT PK, view_count INTEGER, distinct_visitor_count INTEGER)  -- see Analytics/retention below
+known_visitors(visitor_id TEXT PK, first_seen TEXT, last_seen TEXT)  -- see Analytics/retention below
 ```
 
-`migrate_schema()` is versioned (`PRAGMA user_version`), each version's body in its own
-`_migrate_vN(conn)` function gated by `if version < N` — v1 added the multi-user tables
+`migrate_schema()` is versioned (`PRAGMA user_version`); each version is registered as a
+`_migrate_vN(conn)` function via `_register(N, _migrate_vN)` (added 2026-08-31 — see
+"Migrations are atomic" below) rather than hand-listed. v1 added the multi-user tables
 above (minus the last two `users` columns), v2 added `users.ui_language`/`study_script`,
-v3 added `kanji.image_url`, v4 added `decomposition_reviews`, v5 added `page_views`.
-Adding a v6 means adding a new `_migrate_v6` + `if version < 6` block, **not** touching
-the existing gated blocks (they must stay non-idempotent-safe, i.e. never re-run against
-an already-migrated DB).
+v3 added `kanji.image_url`, v4 added `decomposition_reviews`, v5 added `page_views`, v6
+added `daily_visit_summary`/`known_visitors` (analytics retention). Adding a v7 means
+writing a new `_migrate_v7` function and calling `_register(7, _migrate_v7)` right after
+it, **not** touching the existing registered functions (they must stay
+non-idempotent-safe, i.e. never re-run against an already-migrated DB).
+
+**Migrations are atomic** (fixed 2026-08-31, architecture review finding #2 —
+`docs/2026-08-31-architecture-review.md`): each version's DDL/DML and its
+`PRAGMA user_version` bump run inside one explicit `BEGIN`/`COMMIT` transaction, with
+`conn.rollback()` on any exception — a crash partway through a version can't leave
+`user_version` pointing at an old version while some of that version's schema already
+landed (which would otherwise break the next startup on a duplicate `ALTER TABLE`).
+Each `_migrate_vN` body must use `conn.execute()` per statement, **not**
+`conn.executescript()` — the latter always implicitly commits first and silently
+defeats the wrapping transaction (confirmed by direct testing, not assumed).
 
 Key points:
 - `id=1` in `users` is a reserved **system** account that owns all Heisig-seeded and hanzi-seeded data; it's immutable to normal users by construction (`set_visibility` rejects `owner_id = 1`, and nothing in the write API lets a caller set `owner_id` to 1).
@@ -160,6 +175,8 @@ All endpoints require auth (`require_user`) and always write an explicit `owner_
 ### Analytics (`backend/analytics.py`, added 2026-08-29)
 
 A minimal first-party visit counter, added after nginx access-log analysis showed the site's raw traffic is almost entirely bots/scanners (port scanners, AI/search crawlers, a residential-proxy botnet reusing one canned user-agent) with no quick way to tell how many real visitors there actually are. `POST /analytics/pageview` (no auth required, called once on app mount from `App.jsx` via `recordPageView()` in `api.js`, fire-and-forget — a failure here never affects the app) inserts one `page_views` row tagged with a `visitor_id`: read from the `kanji_visitor` cookie if present, otherwise a fresh `secrets.token_hex(16)` that gets set as a new cookie (same flags as the session cookie in `auth.py` minus `httponly`, since nothing sensitive is in it and there's no need to keep it from client JS; 1-year `max_age`). Deliberately not IP-based — a bot that only ever hits URLs directly, which is most of this site's raw traffic, never runs the frontend JS that calls this endpoint, so this naturally excludes it in a way parsing web server logs can't. `backend/visit_stats.py` is the owner-facing read side (today/7d/30d/all-time summary, or `--days N` for a daily breakdown) — same "one-off script reads `kanji.db` directly" convention as `review_queue.py`/`coverage_status.py` rather than a public HTTP stats endpoint, since there's no admin-role concept in this schema.
+
+**Retention** (`backend/prune_page_views.py`, added 2026-08-31, architecture review finding #4): `POST /analytics/pageview` needs no auth, making unbounded `page_views` growth the easiest abuse vector in the app — this script bounds it. Meant to run on a schedule (systemd timer `kanji-pageview-prune`, weekly — see Deployment), it rolls up every `page_views` row older than `--retain-days` (default 90) into `daily_visit_summary` (one row per calendar day: `view_count`, `distinct_visitor_count`) and `known_visitors` (one row per `visitor_id` ever seen, `first_seen`/`last_seen`) *before* deleting the raw rows — a naive delete-only prune would silently corrupt `visit_stats.py`'s all-time unique-visitor count (a visitor whose only rows got deleted stops counting as ever having visited). `visit_stats.py`'s `summary()` unions `page_views` and `known_visitors` for the all-time visitor count and sums `page_views` + `daily_visit_summary` for the all-time view count; `daily_breakdown()` merges live per-day counts with `daily_visit_summary` rows for any requested day old enough to have been pruned already. `--dry-run` reports what would be pruned without writing anything.
 
 ### Script-aware resolution (cross-script ambiguity)
 
@@ -229,7 +246,9 @@ Uploaded images are written to `backend/uploads/{id}.{ext}` (filename always ser
 
 ## Deployment
 
-Live at `srv.alteon.help/kanji/` (shared EC2 box running other projects too). Frontend is a Vite build (`base: '/kanji/'`) copied to `/usr/share/nginx/html/kanji/`; backend runs as systemd service `kanji-backend.service` on `127.0.0.1:8000`, proxied by nginx at `/kanji/api/` (prefix stripped). Needs `python3.11` (backend venv) and `node-20` (build only) — the box's system Python/Node are too old. `backup_db.py` is meant to run on a systemd timer (`kanji-db-backup`) against the live `kanji.db`. Any backend code change needs `sudo systemctl restart kanji-backend.service` to take effect (unlike frontend rebuilds, which just need the new `dist/` copied over) — restarting re-runs `migrate_schema()` against the live DB, which is safe (idempotent) but back up first (`backup_db.py`) before a schema-changing deploy, same as before any direct DB script run. The `origin` remote pushes over SSH (`git@github.com:vk2705/kanji.git`), not HTTPS — GitHub has no password auth for git operations.
+Live at `srv.alteon.help/kanji/` (shared EC2 box running other projects too). Frontend is a Vite build (`base: '/kanji/'`) copied to `/usr/share/nginx/html/kanji/`; backend runs as systemd service `kanji-backend.service` on `127.0.0.1:8000`, proxied by nginx at `/kanji/api/` (prefix stripped). Needs `python3.11` (backend venv) and `node-20` (build only) — the box's system Python/Node are too old. `backup_db.py` and `prune_page_views.py` are meant to run on systemd timers (`kanji-db-backup`, `kanji-pageview-prune`) against the live `kanji.db`. Any backend code change needs `sudo systemctl restart kanji-backend.service` to take effect (unlike frontend rebuilds, which just need the new `dist/` copied over) — restarting re-runs `migrate_schema()` against the live DB, which is safe (idempotent) but back up first (`backup_db.py`) before a schema-changing deploy, same as before any direct DB script run. The `origin` remote pushes over SSH (`git@github.com:vk2705/kanji.git`), not HTTPS — GitHub has no password auth for git operations.
+
+**nginx rate limiting** (added 2026-08-31, architecture review finding #4): `deploy/nginx/` in this repo holds checked-in reference copies of the live nginx config — the actual config nginx reads is **not** managed by this repo (see that directory's own `README.md` for exactly which files map to which live paths and how to apply an update). `login`/`register`/`google` login are limited to 5 req/min/IP (burst 5); contribution-write endpoints (`kanji`/`aliases`/`stories`/`decompositions`, POST/PATCH only — `GET /kanji/{id}` is exempt via a `$request_method`-keyed `map`, since `limit_except` doesn't accept `limit_req` in its context) to 30 req/min/IP (burst 15); the unauthenticated `/analytics/pageview` to 60 req/min/IP (burst 20). All three return a plain `429` over the limit.
 
 Google SSO needs `GOOGLE_CLIENT_ID=<the OAuth client id>` set in `kanji-backend.service`'s environment (`systemctl edit kanji-backend.service` → `[Service]` `Environment=`, then restart) and the same value baked into the frontend build via `frontend/.env`'s `VITE_GOOGLE_CLIENT_ID` (Vite inlines it at `npm run build` time — changing it needs a rebuild, not just a restart). Both are the public client id, not a secret; see the Auth section above.
 
