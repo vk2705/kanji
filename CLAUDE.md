@@ -68,6 +68,7 @@ cd android
 ./venv/bin/python3 review_queue.py          # list pending user-submitted decomposition approve/dispute votes
 ./venv/bin/python3 visit_stats.py           # site visit counts (today/7d/30d/all-time), or --days N for a daily breakdown
 ./venv/bin/python3 prune_page_views.py --dry-run   # roll up + prune page_views rows older than 90 days (see Analytics)
+./venv/bin/python3 add_ru_aliases.py --dry-run     # add Russian-translation aliases under the ru-aliases pseudo-account (see Internationalization)
 ```
 `import_hanzi.py` refuses to run if any non-`ja-kanji` rows already exist (not safe to resume mid-run). `offsite_backup.py` requires `rclone` and an operator-configured `KANJI_BACKUP_REMOTE`; credentials belong in rclone's external config, never this repo. `backup_db.py`/`offsite_backup.py` and `prune_page_views.py` are meant to run on schedules (see Deployment). Maintenance scripts have shebangs pointing straight at `venv/bin/python3`, so they can be run directly.
 
@@ -206,6 +207,8 @@ Most `ja-kanji` rows share their glyph with a separate `zh-*` row from the hanzi
 ### Internationalization & study-language filter (frontend)
 
 `frontend/src/i18n.js` is a flat `{en: {...}, ru: {...}}` string dictionary plus a `t(lang, key, ...args)` helper (function-valued entries handle interpolation/pluralization) — no external i18n library. `App.jsx` holds `uiLang`/`studyScript` state, initialized from `localStorage` and overridden by the account's saved values once `/auth/me` resolves for a logged-in user; changes sync back via `PATCH /auth/preferences` when logged in. The study-language `<select>` (All / Japanese / Chinese Simplified / Chinese Traditional) maps directly to the `script` param threaded through every search call — no separate two-step picker.
+
+That `en`/`ru` split covers only the UI chrome — search *content* (kanji keywords/aliases) was English-only until `backend/add_ru_aliases.py` (added 2026-09-01, owner-requested): attaches a Russian translation of each kanji/hanzi's English keyword as a public alias, so a Russian-speaking user can search by the Russian word too, in any study-language mode. Owned by a dedicated `ru-aliases` pseudo-account (`auth_provider='system'`, no password — same reserved-account pattern as `owner_id=1`, just not immutable-by-construction the way system rows are) rather than `owner_id=1`, since these are machine-translated, not part of Heisig's book — keeps them distinguishable from real source data and independently re-editable by re-running the script. Matches by *keyword text* against every public `owner_id=1` row, so one translated English word (e.g. "one") covers every row sharing that exact keyword across all scripts (`ja-kanji` and every `zh-*`) in one pass — see the script's own docstring. Currently covers only a pilot batch (RTK frames 1-100 plus every hanzi row sharing one of those same keywords, ~200 rows); the `TRANSLATIONS` dict is meant to grow incrementally, re-running the script to add more (idempotent — already-inserted aliases are left alone).
 
 ### Frontend
 

@@ -4831,3 +4831,67 @@ independent sessions now — ~79-83 characters, needs a dedicated dedup pass
 with a script, not manual checks), the remaining ~35 items of the original
 67-item IDS-atomic list, and `triage_google_check.py`'s noisier 776-item
 output.
+
+### 2026-09-01 (same day) — Russian keyword aliases, pilot batch
+
+- Owner: "я подумал перевести названия каждого иероглифа по хейсигу на
+  русский и добавить как алиас. это возможно?" (thought about translating
+  every Heisig kanji name into Russian and adding it as an alias — is that
+  possible?). Recommended doing it as a small pilot batch first under a
+  dedicated pseudo-account (the `ai-mnemonics` pattern CLAUDE.md already
+  queues, applied to translations instead of mnemonics) rather than
+  editing `data.txt` directly, since these are machine-translated, not
+  Heisig-sourced. Owner confirmed, and asked to make sure hanzi are
+  covered too, not just the RTK kanji set.
+- Built `backend/add_ru_aliases.py`: creates (idempotently) a `ru-aliases`
+  account — `auth_provider='system'`, no password, same reserved-account
+  pattern as `owner_id=1` itself — then attaches a Russian alias to every
+  public `owner_id=1` row whose English `keyword` matches an entry in a
+  hardcoded `TRANSLATIONS` dict. Matches by **keyword text**, not id or
+  script, so translating one English word (e.g. "one") automatically
+  covers every row sharing that exact keyword across `ja-kanji` *and*
+  every `zh-*` script in a single pass — no separate hanzi-specific code
+  path needed.
+- Pilot batch: RTK frames 1-100, each translated by hand against the real
+  keyword text pulled from a live-imported DB (not guessed from memory of
+  "what frame N usually is"). A few non-obvious ones: `旬`("decameron",
+  Heisig's own wordplay on a 10-day period) → "декада" (the actual Russian
+  word for a 10-day period, closer to the real meaning than a literal
+  transliteration of "Decameron"); `中`("in") → "внутри" rather than the
+  bare preposition "в", since 中 as a primitive means "inside/within", not
+  the preposition.
+- **Verified hanzi coverage specifically**, since that was the explicit
+  ask: ran `import_hanzi.py` once in this sandbox (not part of the
+  standard local rebuild — see CLAUDE.md) purely to test end-to-end, and
+  confirmed the same 100-word pilot dict matched **208 rows total**, not
+  just the ~100 RTK ones — e.g. translating "sword" alone correctly
+  labeled `hanzi-92d8`/`hanzi-92e3`/`hanzi-93cc`/`hanzi-94d8`/`hanzi-9546`
+  (five different rare sword-related hanzi sharing that gloss), and
+  "bribe" similarly covered 6 hanzi variants beyond `rtk84`/賄. Reverted to
+  the standard non-hanzi local rebuild afterward for the rest of this
+  session's regression testing, matching this audit's established
+  convention — the script itself has no hanzi-specific logic to diverge,
+  so this was purely a one-time verification, not a permanent local-env
+  change.
+- Verified end-to-end via real searches, not just insert counts:
+  `search_by_substring(conn, "один")` → `rtk1`/一 (+ hanzi rows when
+  hanzi-seeded); `search_by_parts(["рот", "глаз"])` correctly returns
+  嗅/憩/眠 (kanji containing both mouth and eye) exactly like the English
+  equivalent search would.
+- **Not yet applied to the live server** — this only writes to a local
+  test DB in this sandbox; `add_ru_aliases.py` needs to be run by whoever
+  has production access (same "no SSH here" limitation as every other
+  live-DB script in this audit — see CLAUDE.md's Deployment section).
+  Documented in CLAUDE.md's "One-off data/maintenance scripts" list and
+  a new paragraph under Internationalization.
+- Not added to `test_regression_fixes.py` — deliberately, matching the
+  precedent set by `backfill_readings.py` (also live-DB-only content
+  outside the `data.txt`/CSV seeding pipeline, also not pinned there).
+- **Next session / ongoing**: `TRANSLATIONS` currently covers only
+  frames 1-100 (~100 English keywords, ~208 rows including hanzi
+  synonyms) — extending it to more of the ~3000 RTK keywords (and
+  eventually a meaningful slice of the ~21000 hanzi-only keywords, which
+  are far more numerous and often more obscure/verbose to translate well)
+  is open-ended, ongoing work: translate a batch, spot-check with real
+  searches the way this session did, re-run the script (idempotent, safe
+  to re-run with a grown dict).
