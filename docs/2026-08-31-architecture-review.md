@@ -275,54 +275,101 @@ regardless of uploads/ state, and old backups of both kinds getting pruned.
 Backend restarted; `backup_db.py` run against the real live server (uploads/
 is currently empty there — skipped cleanly, as designed).
 
-## Status: NOT YET ADDRESSED (tracked for a future session)
-
-Numbered as in the original review.
+## Status: FIXED (continued)
 
 ### 6. Medium — disaster recovery is incomplete
 
 `backup_db.py` only keeps 14 days locally — a host failure takes out prod and
 backups together. The committed anonymized `public_data_export.jsonl` intentionally
 excludes credentials/real ownership/uploads and has no restore tooling (already
-acknowledged in `DEPLOY_README.md`). Fix: encrypted off-host backups of the real DB +
-uploads, plus an actually-rehearsed restore drill; keep the anonymized export for
-auditing only, not as the DR plan.
+acknowledged in `DEPLOY_README.md`).
+
+**Fix (2026-09-01)**: `backend/offsite_backup.py` pairs a local `backup_db.py` run
+with a copy to an operator-configured `KANJI_BACKUP_REMOTE` via `rclone`; credentials
+stay in rclone's own external config, never this repo. `backend/restore_backup.py`
+performs a staged, integrity-checked restore of a database/uploads pair into a
+stopped backend — validates before either live path is replaced, and rejects an
+uploads archive that isn't safe to extract (path traversal). Covered by
+`test_api_backup_restore.py` (round-trip + the unsafe-archive rejection). The
+anonymized export stays an audit/data-portability snapshot only, per `DEPLOY_README.md`'s
+own note — not the DR plan. Still open: an *actually scheduled, unattended* restore
+drill (the doc covers the manual procedure; a periodic automated rehearsal is a
+further step, not yet built).
 
 ### 7. Medium — frontend requests can resolve out of order
 
 `runSearch()` and `KanjiDetail`'s detail loading don't abort or sequence-tag
 in-flight requests — a slow stale request can clobber a newer search/selection.
 Search errors also collapse into "no results" instead of a real error state, hiding
-outages. Fix: `AbortController` or a request-sequence guard; keep showing the
-previous result while loading; a distinct localized error state.
+outages.
+
+**Fix (2026-09-01)**: `AbortController` threaded through every `fetch` wrapper in
+`api.js` and both call sites — `App.jsx`'s `runSearch()` holds the current
+controller in a ref and aborts the previous one before starting a new search, so a
+slow older response can no longer land after a newer one; `KanjiDetail.jsx`'s
+`load()` aborts on kanji/sources change and on unmount. `AbortError` is filtered out
+of the error path everywhere so a deliberate cancellation never surfaces as a fake
+failure. A real server/network error now renders as a `role="alert"` message instead
+of silently becoming an empty "no results" state. Dropped the premature
+`setResults(null)` at the start of a search, so the previous results stay visible
+(with a loading indicator) until the new ones arrive or the search errors.
 
 ### 8. Medium — empty content-source selection behaves inconsistently
 
 Parts search sends `sources: []` and correctly means "match nothing." Text/character/
 detail requests instead encode sources as repeated query params, so an empty array
 sends zero params, which the backend reads as "no filter" (all sources) — the
-opposite meaning from parts search. Fix: pick one consistent encoding/meaning for
-"no sources selected" across all four endpoints, or disable search client-side when
-none are selected.
+opposite meaning from parts search.
+
+**Fix (2026-09-01)**: took the review's second suggested option — disable search
+client-side when no sources are selected, via a shared `canSearchSelectedSources()`
+guard on all three search handlers, rather than reworking the four endpoints' wire
+encodings to agree. Shows a new bilingual `selectSourceError` string instead of
+submitting a request that would otherwise hit the client/backend meaning mismatch.
+The underlying endpoint-encoding inconsistency itself is unchanged — this closes the
+user-facing symptom, not the API's internal inconsistency, which is still worth
+reconciling if a future caller other than this frontend ever sends an empty
+`sources` array to the query-param endpoints.
 
 ### 9. Medium — root `README.md` is stale enough to mislead
 
 Describes React 18, an old schema, old search semantics, and references the deleted
 `/admin/reimport` endpoint — its own rebuild instructions could cause real data loss
-if followed literally now that the DB holds user contributions. Fix: replace with a
-short overview derived from `CLAUDE.md`, with the destructive-data warning up front.
-(Also: `CLAUDE.md` itself has at least one stale "known limitation" note —
-script-aware `expand_part_terms()` — that the review says already exists; worth a
-pass to reconcile.)
+if followed literally now that the DB holds user contributions.
+
+**Fix (2026-09-01)**: `README.md` rewritten for React 19, the current multi-owner/
+visibility schema, the test suite, community contributions, script-aware search, and
+"the database is the source of truth, not a rebuildable cache" — the stale
+`/admin/reimport` rebuild instructions are gone, replaced with `sync_system_data.py`'s
+dry-run/apply workflow. `DEPLOY_README.md` gained the #6 backup/restore section
+above. `CLAUDE.md`'s Known Limitations trimmed of the two items this note flagged as
+already stale (script-scoped `expand_part_terms()`/`_build_char_lookup()` resolution,
+and the "fully flattened, not recursive" decomposition-display limitation — both
+already fixed in code by the time this pass happened, per `_resolve_parts_detail`'s
+`sub_decompositions` and `_script_group` handling).
 
 ### 10. Low — accessibility and mobile pass needed
 
 `KanjiCard.jsx` result cards are clickable `div`s (not keyboard-reachable), several
 controls rely on placeholder text alone, tabs lack ARIA tab semantics, expandable
 sections lack `aria-expanded`, no evident responsive breakpoint despite absolutely-
-positioned header controls. Fix: semantic buttons/links, visible labels, real tab
-state, focus styles, mobile viewport testing. URL-based routing (bonus) would also
-make results/detail pages bookmarkable and restore back-button behavior.
+positioned header controls.
+
+**Fix (2026-09-01)**: `KanjiCard.jsx` result cards are now native `<button>`
+elements (keyboard-reachable, native activation semantics; existing CSS already
+reset `background`/`border`/`padding`/`color`/`font` so the swap is visually
+unchanged). Added `aria-label` on inputs that relied on placeholder text alone
+(primitive/text/char search fields, alias/decomposition/story forms, image upload,
+create-kanji fields), `role="tablist"`/`role="tab"`/`aria-selected`/`aria-controls`
+on the search-mode tabs and the login/register tabs, `aria-expanded` on the
+decomposition-part disclosure toggle, `role="alert"` on error messages, and
+`role="status"`/`aria-live="polite"` on loading and result-count regions. Added a
+global `:focus-visible` outline (keyboard-only, no mouse-click outline) and a
+responsive breakpoint for the header, detail panel, image upload, and story-form
+actions on narrow viewports. Not done: URL-based routing (the review's bonus
+suggestion) — results/detail pages still aren't bookmarkable and the browser back
+button doesn't restore prior view state; a genuine mobile-device pass beyond the CSS
+breakpoint (only tested via browser devtools viewport resize).
 
 ## Suggested order (per the review, still valid)
 
@@ -333,8 +380,13 @@ make results/detail pages bookmarkable and restore back-button behavior.
 4. ~~Rate limits, validation limits, analytics retention~~ — done 2026-08-31 (#4;
    `PRAGMA busy_timeout` already done as a side effect of #3 — see #3 above).
 5. ~~Upload atomicity + uploads/ backup coverage~~ — done 2026-08-31 (#5).
-6. Off-host backup + restore rehearsal (#6).
-7. Frontend request races, error presentation, empty-source handling (#7, #8).
-8. Documentation pass (#9).
-9. Primitive autocomplete, moderation tools, URL routing, the queued JP/ZH
+6. ~~Off-host backup + restore rehearsal~~ — done 2026-09-01 (#6; unattended
+   scheduled rehearsal still open, see #6 above).
+7. ~~Frontend request races, error presentation, empty-source handling~~ — done
+   2026-09-01 (#7, #8; #8's underlying endpoint-encoding inconsistency itself is
+   still unreconciled, see #8 above).
+8. ~~Documentation pass~~ — done 2026-09-01 (#9).
+9. ~~Accessibility and mobile pass~~ — done 2026-09-01 (#10; URL routing and a
+   real mobile-device pass still open, see #10 above).
+10. Primitive autocomplete, moderation tools, URL routing, the queued JP/ZH
    counterpart-comparison badge (#10 plus CLAUDE.md's existing queued items).
