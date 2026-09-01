@@ -4785,3 +4785,33 @@ this session, and eventually back to `triage_google_check.py`'s noisier
   `triage_google_check.py`'s noisier 776-item output. The 81 orphaned
   `rad{N}` rows on the live DB is still the other standing item, needs
   production access.
+
+### 2026-09-01 — 匚/巨 redundancy in 拒/距, plus reconciling a parallel session
+
+Picked up the other item flagged for this same priority (already fixed
+independently and pushed by a parallel session for the 已/己/巳 cluster
+itself — see the entry directly above, which arrived first): `拒`(rtk921)
+and `距`(rtk1375) both listed `匚` alongside `巨`. `cjkvi-ids` gives
+`拒`=`⿰扌巨` and `距`=`⿰𧾷巨` — no `匚` in either; render confirmed 拒/距's
+right side matches `巨` stroke-for-stroke, no separate box shape. `距` also
+re-listed 足's own parts (`口`,`止`) instead of referencing `足`(rtk1372,
+already taught as `口`+`止`) as a whole compound. Fixed `拒` to `扌,巨` and
+`距` to `足,巨`. 2 new regression pins added (both landing on the
+`kangxi64`/`扌` duplicate-row id, same as several pins in the entry above —
+see that entry's "not fixed this session" note on the orphaned-`rad{N}`-rows
+issue, confirmed independently by both sessions now).
+
+Reconciliation note: found on push that a parallel session had already done
+the full 已/己/巳 host review (more thoroughly than my own first pass at it —
+real structural re-decompositions for 港/選/撰/倦/庖/鞄 via `cjkvi-ids`
+rather than a flat character swap, plus catching an unrelated `礼`/`礻` bug
+on 祀 in passing). Reset my own duplicate work and rebased just the
+additive `匚`/`巨` fix on top of theirs rather than pushing a competing
+version.
+
+**Next session**: `以`/`瓦`/`尺`, `rad3.16`'s "flag" identity, the orphaned
+`rad{N}`/`kangxi{N}`/`prim-{slug}` duplicate-row cleanup (confirmed by two
+independent sessions now — ~79-83 characters, needs a dedicated dedup pass
+with a script, not manual checks), the remaining ~35 items of the original
+67-item IDS-atomic list, and `triage_google_check.py`'s noisier 776-item
+output.

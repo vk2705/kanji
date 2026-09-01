@@ -1164,7 +1164,7 @@ rtk917:堅:strict:臣,土,又
 rtk918:臨:look to:ノ,口,臣,品,一,人
 rtk919:覧:perusal:ノ,見,臣,二
 rtk920:巨:gigantic:
-rtk921:拒:repel:匚,扌,巨
+rtk921:拒:repel:扌,巨
 rtk922:力:power:
 rtk923:男:male:田,力
 rtk924:労:labor:尚,力,冖
@@ -1618,7 +1618,7 @@ rtk1371:校:exam:父,木,亠
 rtk1372:足:leg:口,止
 rtk1373:促:stimulate:口,足,止
 rtk1374:捉:catch:口,足,扌,止
-rtk1375:距:long-distance:口,足,匚,巨,止
+rtk1375:距:long-distance:足,巨
 rtk1376:路:path:口,足,夂,止
 rtk1377:露:dew:雨,路
 rtk1378:跳:hop:口,足,兆,止

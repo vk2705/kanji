@@ -1095,6 +1095,16 @@ EXPECTED_DECOMPOSITIONS = {
     # JK variant confirms the right side is 巳, not 已. Fixed to 礻,巳.
     "rtk2993": {"character": "祀", "keyword": "enshrine",
                 "expected_part_ids": {"kangxi113", "rtk2200"}},
+    # 匚/巨 redundancy (2026-09-01, flagged alongside the 己/已/巳 review): 拒
+    # and 距 both listed 匚 alongside 巨, but cjkvi-ids gives 拒=⿰扌巨 and
+    # 距=⿰𧾷巨 -- no 匚 in either. Render confirmed 拒/距's right side matches
+    # 巨 exactly with no separate box shape. 距 also re-listed 足's own parts
+    # (口,止) instead of referencing 足 (rtk1372, already taught as 口+止) as
+    # a whole compound -- fixed to reference it directly.
+    "rtk921": {"character": "拒", "keyword": "repel",
+               "expected_part_ids": {"kangxi64", "rtk920"}},
+    "rtk1375": {"character": "距", "keyword": "long-distance",
+                "expected_part_ids": {"rtk1372", "rtk920"}},
 }
 
 # character -> hanzi id, spot-checking the 429-character Unihan self-reference backfill
