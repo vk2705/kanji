@@ -4777,7 +4777,7 @@ this session, and eventually back to `triage_google_check.py`'s noisier
   all sane.
 - Not deployed to the live server from this session; data-only change +
   one new primitive row, no backend restart needed on next deploy.
-- Coverage: pending — see follow-up commit.
+- Coverage: **1249/3000 (41.6%)**.
 - **Next session**: the `已`/"stop" keyword collision noted above; then
   back to the previous session's remaining queue — `以`/`瓦`/`尺`, the
   `匚`/`巨` redundancy question, `rad3.16`'s "flag" identity, the

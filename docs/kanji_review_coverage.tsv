@@ -26,15 +26,15 @@ rtk24	呂	spine	24	no
 rtk25	昌	prosperous	25	no
 rtk26	早	early	26	no
 rtk27	旭	rising sun	27	no
-rtk28	世	generation	28	no
+rtk28	世	generation	28	yes
 rtk29	胃	stomach	29	no
 rtk30	旦	nightbreak	30	no
 rtk31	胆	gall bladder	31	no
 rtk32	亘	span	32	yes
-rtk33	凹	concave	33	no
-rtk34	凸	convex	34	no
+rtk33	凹	concave	33	yes
+rtk34	凸	convex	34	yes
 rtk35	旧	olden times	35	no
-rtk36	自	oneself	36	no
+rtk36	自	oneself	36	yes
 rtk37	白	white	37	no
 rtk38	百	hundred	38	no
 rtk39	中	in	39	no
@@ -133,7 +133,7 @@ rtk131	省	focus	131	yes
 rtk132	厚	thick	132	no
 rtk133	奇	strange	133	no
 rtk134	川	stream	134	no
-rtk135	州	state	135	no
+rtk135	州	state	135	yes
 rtk136	順	obey	136	yes
 rtk137	水	water	137	no
 rtk138	氷	icicle	138	no
@@ -248,7 +248,7 @@ rtk246	墓	grave	246	no
 rtk247	暮	livelihood	247	no
 rtk248	膜	membrane	248	no
 rtk249	苗	seedling	249	no
-rtk250	兆	portent	250	no
+rtk250	兆	portent	250	yes
 rtk251	桃	peach tree	251	yes
 rtk252	眺	stare	252	yes
 rtk253	犬	dog	253	no
@@ -503,7 +503,7 @@ rtk501	乞	beg	501	no
 rtk502	乾	drought	502	yes
 rtk503	腹	abdomen	503	yes
 rtk504	複	duplicate	504	yes
-rtk505	欠	lack	505	no
+rtk505	欠	lack	505	yes
 rtk506	吹	blow	506	no
 rtk507	炊	cook	507	no
 rtk508	歌	song	508	no
@@ -562,12 +562,12 @@ rtk560	蝶	butterfly	560	no
 rtk561	独	single	561	yes
 rtk562	蚕	silkworm	562	no
 rtk563	風	wind	563	no
-rtk564	己	self	564	no
-rtk565	起	rouse	565	no
-rtk566	妃	queen	566	no
+rtk564	己	self	564	yes
+rtk565	起	rouse	565	yes
+rtk566	妃	queen	566	yes
 rtk567	改	reformation	567	yes
-rtk568	記	scribe	568	no
-rtk569	包	wrap	569	no
+rtk568	記	scribe	568	yes
+rtk569	包	wrap	569	yes
 rtk570	胞	placenta	570	yes
 rtk571	砲	cannon	571	yes
 rtk572	泡	bubble	572	yes
@@ -642,7 +642,7 @@ rtk640	忘	forget	640	no
 rtk641	恣	selfish	641	no
 rtk642	忍	endure	642	yes
 rtk643	認	acknowledge	643	yes
-rtk644	忌	mourning	644	no
+rtk644	忌	mourning	644	yes
 rtk645	志	intention	645	no
 rtk646	誌	document	646	yes
 rtk647	芯	wick	647	no
@@ -734,19 +734,19 @@ rtk732	械	contraption	732	no
 rtk733	鼻	nose	733	no
 rtk734	刑	punish	734	yes
 rtk735	型	mould	735	yes
-rtk736	才	genius	736	no
+rtk736	才	genius	736	yes
 rtk737	財	property	737	yes
 rtk738	材	lumber	738	no
 rtk739	存	suppose	739	no
 rtk740	在	exist	740	no
 rtk741	乃	from	741	no
 rtk742	携	portable	742	yes
-rtk743	及	reach out	743	no
+rtk743	及	reach out	743	yes
 rtk744	吸	suck	744	no
 rtk745	扱	handle	745	yes
-rtk746	丈	length	746	no
-rtk747	史	history	747	no
-rtk748	吏	officer	748	no
+rtk746	丈	length	746	yes
+rtk747	史	history	747	yes
+rtk748	吏	officer	748	yes
 rtk749	更	grow late	749	yes
 rtk750	硬	stiff	750	no
 rtk751	梗	spiny	751	yes
@@ -909,7 +909,7 @@ rtk907	潜	submerge	907	no
 rtk908	失	lose	908	no
 rtk909	鉄	iron	909	yes
 rtk910	迭	alternate	910	yes
-rtk911	臣	retainer	911	no
+rtk911	臣	retainer	911	yes
 rtk912	姫	princess	912	no
 rtk913	蔵	storehouse	913	no
 rtk914	臓	entrails	914	no
@@ -918,7 +918,7 @@ rtk916	腎	kidney	916	no
 rtk917	堅	strict	917	no
 rtk918	臨	look to	918	yes
 rtk919	覧	perusal	919	yes
-rtk920	巨	gigantic	920	no
+rtk920	巨	gigantic	920	yes
 rtk921	拒	repel	921	yes
 rtk922	力	power	922	no
 rtk923	男	man	923	no
@@ -1090,13 +1090,13 @@ rtk1088	荷	baggage	1088	yes
 rtk1089	俊	sagacious	1089	yes
 rtk1090	傍	bystander	1090	yes
 rtk1091	俺	myself	1091	yes
-rtk1092	久	long time	1092	no
+rtk1092	久	long time	1092	yes
 rtk1093	畝	furrow	1093	no
 rtk1094	囚	captured	1094	no
 rtk1095	内	inside	1095	no
 rtk1096	丙	third class	1096	yes
 rtk1097	柄	design	1097	no
-rtk1098	肉	meat	1098	no
+rtk1098	肉	meat	1098	yes
 rtk1099	腐	rot	1099	yes
 rtk1100	座	sit	1100	no
 rtk1101	挫	sprain	1101	yes
@@ -1272,7 +1272,7 @@ rtk1270	借	borrow	1270	yes
 rtk1271	惜	pity	1271	yes
 rtk1272	措	set aside	1272	yes
 rtk1273	散	scatter	1273	yes
-rtk1274	廿	twenty	1274	no
+rtk1274	廿	twenty	1274	yes
 rtk1275	庶	commoner	1275	no
 rtk1276	遮	intercept	1276	yes
 rtk1277	席	seat	1277	no
@@ -1452,7 +1452,7 @@ rtk1450	絡	entwine	1450	yes
 rtk1451	結	tie	1451	yes
 rtk1452	終	end	1452	yes
 rtk1453	級	class	1453	no
-rtk1454	紀	chronicle	1454	no
+rtk1454	紀	chronicle	1454	yes
 rtk1455	紅	crimson	1455	no
 rtk1456	納	settlement	1456	yes
 rtk1457	紡	spinning	1457	no
@@ -1542,7 +1542,7 @@ rtk1540	酬	repay	1540	no
 rtk1541	酪	dairy products	1541	no
 rtk1542	酢	vinegar	1542	no
 rtk1543	酔	drunk	1543	no
-rtk1544	配	distribute	1544	no
+rtk1544	配	distribute	1544	yes
 rtk1545	酸	acid	1545	no
 rtk1546	猶	waver	1546	yes
 rtk1547	尊	revered	1547	yes
@@ -1735,7 +1735,7 @@ rtk1733	漂	drift	1733	yes
 rtk1734	標	signpost	1734	yes
 rtk1735	栗	chestnut	1735	no
 rtk1736	慄	shudder	1736	yes
-rtk1737	遷	transition	1737	no
+rtk1737	遷	transition	1737	yes
 rtk1738	覆	capsize	1738	yes
 rtk1739	煙	smoke	1739	no
 rtk1740	南	south	1740	yes
@@ -1938,11 +1938,11 @@ rtk1936	異	uncommon	1936	no
 rtk1937	翼	wing	1937	no
 rtk1938	戴	accept humbly	1938	no
 rtk1939	洪	deluge	1939	no
-rtk1940	港	harbor	1940	no
+rtk1940	港	harbor	1940	yes
 rtk1941	暴	outburst	1941	no
 rtk1942	爆	bomb	1942	no
 rtk1943	恭	respect	1943	no
-rtk1944	選	elect	1944	no
+rtk1944	選	elect	1944	yes
 rtk1945	殿	mr.	1945	no
 rtk1946	井	well	1946	no
 rtk1947	丼	donburi	1947	no
@@ -2198,7 +2198,7 @@ rtk2196	丹	cinnabar	2196	no
 rtk2197	丑	sign of the cow	2197	no
 rtk2198	羞	humiliate	2198	yes
 rtk2199	卯	sign of the hare	2199	no
-rtk2200	巳	sign of the snake	2200	no
+rtk2200	巳	sign of the snake	2200	yes
 rtk2201	此	this here	2201	no
 rtk2202	柴	brushwood	2202	no
 rtk2203	些	whit	2203	no
@@ -2235,7 +2235,7 @@ rtk2233	厖	immense	2233	no
 rtk2234	或	a  (a certain)	2234	no
 rtk2235	兎	rabbit	2235	no
 rtk2236	也	est	2236	no
-rtk2237	巴	comma-design	2237	no
+rtk2237	巴	comma-design	2237	yes
 rtk2238	疋	critters	2238	no
 rtk2239	菫	violet	2239	no
 rtk2240	曼	mandala	2240	yes
@@ -2339,7 +2339,7 @@ rtk2337	嵌	fit into	2337	no
 rtk2338	帖	quire	2338	no
 rtk2339	幡	banner	2339	no
 rtk2340	幟	pennant	2340	no
-rtk2341	庖	cleaver	2341	no
+rtk2341	庖	cleaver	2341	yes
 rtk2342	廓	licensed quarters	2342	no
 rtk2343	庇	overhang	2343	no
 rtk2344	鷹	hawk	2344	yes
@@ -2804,7 +2804,7 @@ rtk2802	斡	auspices	2802	no
 rtk2803	鞍	saddle	2803	yes
 rtk2804	鞭	whip	2804	yes
 rtk2805	鞘	saddle straps	2805	no
-rtk2806	鞄	briefcase	2806	no
+rtk2806	鞄	briefcase	2806	yes
 rtk2807	靭	pliable	2807	no
 rtk2808	鞠	terminate	2808	no
 rtk2809	顛	overturn	2809	yes
@@ -2991,7 +2991,7 @@ rtk2989	嶽	point (old)	2989	no
 rtk2990	國	country (old)	2990	no
 rtk2991	脛	shin	2991	no
 rtk2992	勁	formidable	2992	no
-rtk2993	祀	enshrine	2993	no
+rtk2993	祀	enshrine	2993	yes
 rtk2994	祓	exorcism	2994	no
 rtk2995	躇	dither	2995	no
 rtk2996	壽	longevity (old)	2996	no
