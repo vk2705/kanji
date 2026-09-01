@@ -2,6 +2,7 @@ import { t } from "../i18n";
 
 const REPO_URL = "https://github.com/vk2705/kanji";
 const APK_URL = "https://github.com/vk2705/kanji/raw/master/android/releases/rtk-kanji-latest.apk";
+const PRIVACY_URL = "privacy.html";
 
 export default function AboutPage({ lang }) {
   return (
@@ -22,6 +23,13 @@ export default function AboutPage({ lang }) {
           {t(lang, "aboutDownloadLinkLabel")}
         </a>
         <p className="login-hint">{t(lang, "aboutDownloadNote")}</p>
+      </div>
+
+      <div className="contrib-section">
+        <h3>{t(lang, "aboutPrivacyHeading")}</h3>
+        <a className="about-link" href={PRIVACY_URL} target="_blank" rel="noreferrer">
+          {t(lang, "aboutPrivacyLinkLabel")}
+        </a>
       </div>
     </div>
   );

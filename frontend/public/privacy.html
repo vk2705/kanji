@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy — RTK Kanji Search</title>
+<style>
+  :root {
+    --bg: #0f0f13;
+    --surface: #1a1a24;
+    --text: #e0e0f0;
+    --text-muted: #8888aa;
+    --accent: #7c6ef0;
+    --accent-hover: #9d92f5;
+    --border: #2e2e3d;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #f7f7fb;
+      --surface: #ffffff;
+      --text: #1a1a24;
+      --text-muted: #55556a;
+      --accent: #5a4fd6;
+      --accent-hover: #4438c2;
+      --border: #dcdce6;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Segoe UI", system-ui, sans-serif;
+    line-height: 1.6;
+  }
+  .page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 32px 20px 64px;
+  }
+  h1 { font-size: 1.5rem; margin-bottom: 4px; }
+  h2 { font-size: 1.1rem; margin-top: 32px; color: var(--accent-hover); }
+  .updated { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 24px; }
+  a { color: var(--accent-hover); }
+  .lang-switch { margin-bottom: 24px; }
+  .lang-switch button {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+  }
+  .lang-switch button.active {
+    border-color: var(--accent);
+    color: var(--accent-hover);
+  }
+  ul { padding-left: 20px; }
+  [data-lang="ru"] { display: none; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="lang-switch">
+    <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+    <button id="btn-ru" onclick="setLang('ru')">RU</button>
+  </div>
+
+  <div data-lang="en">
+    <h1>Privacy Policy — RTK Kanji Search</h1>
+    <p class="updated">Last updated: 2026-09-01</p>
+
+    <p>RTK Kanji Search ("the app") is a kanji/hanzi lookup and study tool for
+    learners using the Remembering the Kanji method. This page explains what
+    data the app collects and how it's used, for both the web app at
+    <a href="https://srv.alteon.help/kanji/">srv.alteon.help/kanji/</a> and the
+    Android app that wraps it.</p>
+
+    <h2>Account data</h2>
+    <p>Creating an account is optional — you can search and browse without
+    signing in. If you register, we store your username, a bcrypt-hashed
+    password (never the plain password itself), and your display name if you
+    provide one. You can instead sign in with Google; in that case we store
+    only your Google account's public identifier and, if you allow it,
+    your display name — no password of any kind is stored for Google
+    accounts, and we never see your Google password.</p>
+
+    <h2>What you contribute</h2>
+    <p>If you're signed in, you may add kanji/hanzi entries, aliases,
+    breakdowns, mnemonic stories, and images. Anything you mark private is
+    visible only to you; anything public is visible to any visitor, the same
+    as the app's own built-in reference data. You can change a contribution's
+    visibility or, for most content, delete it at any time from your account.</p>
+
+    <h2>Anonymous visit counter</h2>
+    <p>The app records a simple visit counter using a random identifier
+    stored in a cookie on your device — not your IP address, not anything
+    that identifies you personally. This is used only to estimate how many
+    people use the site; it is not shared with any third party or used for
+    advertising.</p>
+
+    <h2>What we don't do</h2>
+    <ul>
+      <li>No advertising and no ad trackers.</li>
+      <li>No selling or sharing of your data with third parties.</li>
+      <li>No access to your device's contacts, location, camera (beyond the
+        one-time picture picker if you choose to upload an image), or any
+        other device data outside what a normal web page can see.</li>
+    </ul>
+
+    <h2>Data retention and deletion</h2>
+    <p>Account data and your contributions are kept as long as your account
+    exists. To request deletion of your account and associated data, contact
+    us at the address below.</p>
+
+    <h2>The Android app specifically</h2>
+    <p>The Android app is a thin wrapper that loads the same web app in a
+    browser view. It stores your login session as a cookie on your device
+    (the same way a browser tab would) so you stay signed in between app
+    launches, and nothing else beyond what's described above.</p>
+
+    <h2>Changes to this policy</h2>
+    <p>If this policy changes, the "Last updated" date above will change too.</p>
+
+    <h2>Contact</h2>
+    <p>Questions about this policy or a data deletion request:
+      <a href="https://github.com/vk2705/kanji/issues">open an issue on the project's GitHub</a>.</p>
+  </div>
+
+  <div data-lang="ru">
+    <h1>Политика конфиденциальности — RTK Kanji Search</h1>
+    <p class="updated">Обновлено: 2026-09-01</p>
+
+    <p>RTK Kanji Search («приложение») — инструмент для поиска и изучения
+    иероглифов по методу Remembering the Kanji. Эта страница объясняет, какие
+    данные собирает приложение и как они используются — как для веб-версии на
+    <a href="https://srv.alteon.help/kanji/">srv.alteon.help/kanji/</a>, так и
+    для Android-приложения, которое её оборачивает.</p>
+
+    <h2>Данные аккаунта</h2>
+    <p>Регистрация не обязательна — искать и просматривать иероглифы можно и
+    без входа. При регистрации мы храним имя пользователя, хэш пароля
+    (bcrypt, сам пароль никогда не хранится) и отображаемое имя, если вы его
+    указали. Также можно войти через Google — в этом случае хранится только
+    публичный идентификатор вашего Google-аккаунта и, если вы разрешите,
+    отображаемое имя; никакой пароль при этом не сохраняется, и мы не видим
+    ваш пароль от Google.</p>
+
+    <h2>Что вы добавляете сами</h2>
+    <p>Если вы вошли в аккаунт, вы можете добавлять иероглифы, псевдонимы,
+    разбор на части, мнемонические истории и изображения. Всё, что помечено
+    как приватное, видно только вам; публичное — видно всем посетителям, так
+    же как встроенные данные приложения. Видимость своего вклада можно
+    изменить, а большинство материалов — удалить в любой момент.</p>
+
+    <h2>Анонимный счётчик посещений</h2>
+    <p>Приложение ведёт простой счётчик посещений через случайный
+    идентификатор в cookie на вашем устройстве — не через IP-адрес и не
+    через что-либо, что вас идентифицирует. Используется только для оценки
+    посещаемости сайта; не передаётся третьим лицам и не используется для
+    рекламы.</p>
+
+    <h2>Чего мы не делаем</h2>
+    <ul>
+      <li>Никакой рекламы и рекламных трекеров.</li>
+      <li>Не продаём и не передаём ваши данные третьим лицам.</li>
+      <li>Не имеем доступа к контактам, геолокации, камере (кроме
+        одноразового выбора файла, если вы сами загружаете изображение) или
+        любым другим данным устройства сверх того, что видит обычная
+        веб-страница.</li>
+    </ul>
+
+    <h2>Хранение и удаление данных</h2>
+    <p>Данные аккаунта и ваш вклад хранятся, пока существует аккаунт. Чтобы
+    запросить удаление аккаунта и связанных данных, свяжитесь с нами по
+    адресу ниже.</p>
+
+    <h2>Об Android-приложении</h2>
+    <p>Android-приложение — тонкая оболочка, загружающая ту же веб-версию в
+    браузерном компоненте. Оно хранит сессию входа в cookie на вашем
+    устройстве (так же, как это делает вкладка браузера), чтобы вы
+    оставались авторизованы между запусками, и ничего сверх описанного
+    выше.</p>
+
+    <h2>Изменения политики</h2>
+    <p>При изменении этой политики дата «Обновлено» выше тоже изменится.</p>
+
+    <h2>Контакты</h2>
+    <p>По вопросам об этой политике или для запроса удаления данных:
+      <a href="https://github.com/vk2705/kanji/issues">откройте issue в GitHub-репозитории проекта</a>.</p>
+  </div>
+</div>
+<script>
+  function setLang(lang) {
+    document.querySelectorAll('[data-lang]').forEach(function (el) {
+      el.style.display = el.getAttribute('data-lang') === lang ? '' : 'none';
+    });
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.getElementById('btn-ru').classList.toggle('active', lang === 'ru');
+    document.documentElement.lang = lang;
+    try { localStorage.setItem('privacy_lang', lang); } catch (e) {}
+  }
+  (function () {
+    var saved;
+    try { saved = localStorage.getItem('privacy_lang'); } catch (e) {}
+    if (saved === 'ru') setLang('ru');
+  })();
+</script>
+</body>
+</html>

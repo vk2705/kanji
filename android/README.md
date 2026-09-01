@@ -97,3 +97,40 @@ above: no signing config is checked in, deliberately). This means:
   current.
 - Direct download link (raw file, served via GitHub):
   `https://github.com/vk2705/kanji/raw/master/android/releases/rtk-kanji-latest.apk`
+
+## Publishing to Google Play (not done yet)
+
+What's ready:
+- `applicationId = "help.alteon.kanji"`, `versionCode`/`versionName` are set
+  and don't need to change for a first submission.
+- A privacy policy page, required by Play Console's app-content
+  questionnaire, is live at `https://srv.alteon.help/kanji/privacy.html`
+  (source: `frontend/public/privacy.html`, EN/RU toggle) — paste that URL
+  into the Play Console listing form.
+
+What the app owner has to do (none of this is scriptable — it's tied to a
+personal Google identity and a one-time $25 fee):
+1. Register a Google Play Console developer account at
+   [play.google.com/console](https://play.google.com/console).
+2. Create the app listing: title, short/full description, category, content
+   rating questionnaire, screenshots (phone screenshots are required — a
+   real device or emulator capture of the app's search/detail screens), a
+   feature graphic (1024×500), and the privacy policy URL above.
+3. Build a **signed** `.aab` (Play requires an Android App Bundle, not an
+   APK, for new apps) — either with your own keystore (`./gradlew
+   :app:bundleRelease`, then sign it, same idea as the `apksigner` step
+   above but producing an `.aab`) or, the currently Google-recommended path,
+   let **Play App Signing** generate and hold the signing key for you after
+   your first upload (upload an app-signing-key-less "upload key"-signed
+   bundle; Play re-signs it with the key it manages). Either way, back up
+   whatever key you generate yourself — losing it means you can never
+   update the app under the same listing again.
+4. Submit for review. First-time app review can take a few days; Google may
+   ask for more information (especially around the login/account system and
+   what data it collects — the privacy policy page above is written to
+   answer that).
+
+Known blocker specific to this app: **Google Sign-In inside the WebView**
+(see "Known limitations" above) — worth testing explicitly during Play's
+review, since Play's automated checks sometimes flag broken OAuth flows.
+Local username/password login is unaffected either way.

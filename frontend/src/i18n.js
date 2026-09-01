@@ -127,6 +127,8 @@ export const translations = {
     aboutDownloadHeading: "Android app",
     aboutDownloadLinkLabel: "Download the Android APK",
     aboutDownloadNote: "Self-signed, not on the Play Store — you'll need to allow \"install from unknown sources\". See the android/ folder in the repo for build-from-source instructions.",
+    aboutPrivacyHeading: "Privacy",
+    aboutPrivacyLinkLabel: "Privacy Policy",
   },
 
   ru: {
@@ -249,6 +251,8 @@ export const translations = {
     aboutDownloadHeading: "Приложение для Android",
     aboutDownloadLinkLabel: "Скачать APK для Android",
     aboutDownloadNote: "Самоподписанный APK, вне Google Play — потребуется разрешить «установку из неизвестных источников». Инструкции по сборке из исходников — в папке android/ в репозитории.",
+    aboutPrivacyHeading: "Конфиденциальность",
+    aboutPrivacyLinkLabel: "Политика конфиденциальности",
   },
 };
 
