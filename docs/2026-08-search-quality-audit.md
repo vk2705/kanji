@@ -4786,6 +4786,22 @@ this session, and eventually back to `triage_google_check.py`'s noisier
   `rad{N}` rows on the live DB is still the other standing item, needs
   production access.
 
+### 2026-09-01 (same day, continued) — closed the 已/"stop" collision
+
+- Owner asked directly how the `已`/`止` "stop" keyword collision (flagged
+  a few entries above) would get resolved. Checked `heisig-kanjis.csv`
+  first rather than inventing a new name: `已`'s real 6th-edition keyword
+  is **"stop short"**, not bare "stop" — `data.txt`'s override had
+  clipped the CSV keyword down to just "stop" at some point, which is
+  the actual root cause of the collision with `止`(rtk396)'s own,
+  correct "stop". Restored `已`'s keyword to CSV's exact wording.
+  `resolve_alias` for both "stop" and "stop short" now correctly return
+  different ids.
+- Verified: full rebuild; `test_regression_fixes.py` — 398 checks, same
+  4 expected hanzi-scope failures; full pytest suite (48 tests) green.
+- Coverage unchanged (this touched an already-reviewed row's keyword
+  field, not a first-time review).
+
 ### 2026-09-01 — 匚/巨 redundancy in 拒/距, plus reconciling a parallel session
 
 Picked up the other item flagged for this same priority (already fixed

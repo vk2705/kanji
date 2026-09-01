@@ -3185,7 +3185,7 @@ rtk2940:翔:soar:羽,羊,冫
 rtk2941:皓:white:ノ,口,土,白
 rtk2942:黎:dark:黍,勿,禾,水
 rtk2943:赳:strong and brave:｜,走,土
-rtk2944:已:stop:
+rtk2944:已:stop short:
 rtk2945:棘:thorn:｜,巾,ハ,木,亠,冂
 rtk2946:祟:curse:｜,山,示,二,小,凵
 rtk2947:甦:be resuscitated:一,生,日,田,ノ
