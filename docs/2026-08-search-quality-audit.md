@@ -4895,3 +4895,54 @@ output.
   is open-ended, ongoing work: translate a batch, spot-check with real
   searches the way this session did, re-run the script (idempotent, safe
   to re-run with a grown dict).
+
+### 2026-09-01 (same day) — basic SEO so Google can actually find the site
+
+- Owner: "хочу попросить: сделать чтоб гугл находил наш сайт srv.alteon.help.
+  хотелось бы получить фитбек настоящих юзеров" (want Google to be able to
+  find the site, to get real user feedback).
+- `frontend/index.html` had a bare `<title>RTK Kanji Search</title>` and
+  nothing else — no meta description, no canonical URL, no Open Graph tags,
+  no `robots.txt`/`sitemap.xml` at all. Fixed:
+  - Real `<title>` and `<meta name="description">` (reused the existing
+    English `aboutIntro` copy from `i18n.js`, trimmed), explicit
+    `<meta name="robots" content="index, follow">`, `<link rel="canonical"
+    href="https://srv.alteon.help/kanji/">`, and Open Graph
+    title/description/url/type tags for link-preview quality.
+  - `frontend/public/robots.txt` (`Allow: /` + a `Sitemap:` line) and
+    `frontend/public/sitemap.xml` (one `<url>` entry, see below for why
+    only one) — verified via a real `npm run build` that Vite's HTML
+    transform correctly rewrites the existing favicon reference and the
+    new sitemap `<link>` from `/x` to `/kanji/x` (matching the site's
+    `base: '/kanji/'` config), and that both files land in `dist/` at the
+    paths the deployed site will serve them at (`/kanji/robots.txt`,
+    `/kanji/sitemap.xml`) — confirmed by inspecting `dist/index.html` and
+    `dist/*.{txt,xml}` after the build, not assumed.
+  - `npm run lint` clean.
+- **Three things need action outside this repo**, documented as a new
+  section in `DEPLOY_README.md` rather than attempted here — none of them
+  are things a session without server/Google credentials can do:
+  1. The crawler-standard `https://srv.alteon.help/robots.txt` (domain
+     root) is outside this repo's nginx scope (shared box, see
+     `deploy/nginx/README.md`) — needs checking/adding by whoever has
+     server access, with exact content given. If a root `robots.txt`
+     already exists and blocks everything, that alone would defeat
+     everything else here.
+  2. Google Search Console setup (add property, verify ownership, submit
+     the sitemap, "Request Indexing" on the main URL) needs the owner's
+     own Google account — can't be done by an AI session. Step-by-step
+     instructions given, including where to paste a verification meta tag
+     if the owner wants a future session to add it.
+  3. **Real limitation, not just a missing config**: the frontend has no
+     client-side routing at all (`App.jsx` — no react-router, the URL
+     never changes across a search) — Google can only ever index the one
+     root URL, not individual kanji. Flagged as a real, separate feature
+     project (per-kanji URLs + something for the crawler to see besides
+     an empty `<div id="root">`) if deeper discoverability is ever wanted,
+     not attempted this session.
+- Verified: full backend regression suite unaffected (frontend-only
+  change) — 400 checks, same 4 expected hanzi-scope failures; 51 pytest
+  tests green.
+- Not deployed to the live server from this session (no server access
+  here) — needs the normal frontend rebuild+copy deploy step, plus the
+  three manual items above from whoever has server/Google access.

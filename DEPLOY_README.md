@@ -173,6 +173,72 @@ removes the identity information needed to reconstruct real accounts, and it exc
 credentials, sessions, and upload files. Restore production from the encrypted raw
 database/upload backups described above.
 
+## SEO / getting Google to find the site (added 2026-09-01, owner request)
+
+The frontend build now ships `/kanji/robots.txt` and `/kanji/sitemap.xml`
+automatically (`frontend/public/robots.txt` / `sitemap.xml`, copied to
+`dist/` by the normal `npm run build` step) — no extra action needed beyond
+the usual frontend rebuild-and-copy-to-`/usr/share/nginx/html/kanji/` deploy
+step described in `CLAUDE.md`'s Deployment section. `index.html` also now
+has a real `<title>`/`<meta description>`/canonical URL/Open Graph tags
+instead of the bare `RTK Kanji Search` title it shipped with before.
+
+That covers everything reachable from *this* repo. Three more steps need
+someone with server access and/or the owner's Google account — none of them
+are things this repo (or an AI session without server/Google credentials)
+can do on its own:
+
+1. **Domain-root `robots.txt`.** Crawlers check `https://srv.alteon.help/robots.txt`
+   at the domain root by default — a path this repo's nginx config doesn't
+   own (the box is shared with other projects; see `deploy/nginx/README.md`).
+   Check whether a root `robots.txt` already exists (`curl -s
+   https://srv.alteon.help/robots.txt`). If it doesn't exist yet, or exists
+   and doesn't already disallow `/kanji/`, add (coordinate with whoever owns
+   the other projects on this box before overwriting an existing one):
+   ```
+   User-agent: *
+   Allow: /kanji/
+   Sitemap: https://srv.alteon.help/kanji/sitemap.xml
+   ```
+   If a root `robots.txt` already exists and disallows everything (or
+   disallows `/kanji/` specifically), that alone would fully block Google
+   regardless of anything else here — check this first.
+2. **Google Search Console.** Needs the owner's Google account, so has to be
+   done by a human:
+   - console.google.com/search-console → Add property → URL prefix →
+     `https://srv.alteon.help/kanji/`.
+   - Verify ownership — easiest is the "HTML tag" method: paste the
+     `<meta name="google-site-verification" content="...">` tag Search
+     Console gives you into `frontend/index.html`'s `<head>` (ask a future
+     session to add it and redeploy, or add it directly) and reload the
+     verification page. The "HTML file upload" method also works if Search
+     Console accepts a subpath property served from `/kanji/<file>` (drop
+     the given file into `frontend/public/`) — if it insists on a
+     domain-root path instead, that needs the same shared-box coordination
+     as the robots.txt step above.
+   - Once verified: Sitemaps → submit `https://srv.alteon.help/kanji/sitemap.xml`.
+   - URL Inspection tool → paste `https://srv.alteon.help/kanji/` → "Request
+     Indexing" — this is the fastest way to get the first crawl to happen,
+     rather than waiting for Google to discover the site organically.
+3. **Known limitation: only one URL exists to index.** The frontend is a
+   single-page app with no client-side routing (`App.jsx` has no
+   react-router or URL-based state) — every kanji search happens without
+   the URL ever changing, so Google can only ever index
+   `https://srv.alteon.help/kanji/` itself, not individual kanji. That's
+   fine for "can people find the site at all", but it means there's no way
+   to rank for e.g. a specific kanji search term, and the sitemap above is
+   necessarily a single `<url>` entry. Giving each kanji (or at least the
+   detail view) its own URL — e.g. `/kanji/k/明` — would be a real,
+   separate feature project (routing, server-side meta tags or
+   prerendering per kanji for the crawler to see actual content instead of
+   an empty `<div id="root">`) if deeper discoverability is wanted later;
+   not attempted here.
+
+`backend/visit_stats.py` (see `CLAUDE.md`'s Analytics section) is how to
+check afterward whether any of this actually brought real visitors — it
+already excludes bots that only ever hit URLs directly without running the
+frontend JS, so a genuine uptick there is a genuine uptick, not crawler noise.
+
 ## If something looks wrong
 
 - `sync_system_data.py` refuses to run against a database file that
