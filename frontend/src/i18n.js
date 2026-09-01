@@ -14,6 +14,7 @@ export const translations = {
     tabParts: "By Parts",
     tabText: "By Text",
     tabChar: "By Character",
+    searchModeLabel: "Search mode",
 
     partsHint: "Enter 1–3 RTK primitive names (e.g. sun, mouth, needle)",
     partsPlaceholder: (n) => `Primitive ${n}`,
@@ -52,6 +53,7 @@ export const translations = {
     sourceSystem: "Official (Heisig / system)",
     sourceCommunity: "Community contributions",
     sourceMine: "My own",
+    selectSourceError: "Select at least one content source.",
 
     searchDepthLabel: "Search depth",
     searchDepthHint: "How deep to look inside each primitive's own components. Higher settings find more, less obvious matches, but common primitives (e.g. \"mouth\", \"one\") can match most of the dataset at depth 5.",
@@ -130,6 +132,7 @@ export const translations = {
     tabParts: "По частям",
     tabText: "По тексту",
     tabChar: "По символу",
+    searchModeLabel: "Режим поиска",
 
     partsHint: "Введите 1–3 названия примитивов RTK (например: sun, mouth, needle)",
     partsPlaceholder: (n) => `Примитив ${n}`,
@@ -168,6 +171,7 @@ export const translations = {
     sourceSystem: "Официальные (Хайсиг / система)",
     sourceCommunity: "Вклад сообщества",
     sourceMine: "Мои собственные",
+    selectSourceError: "Выберите хотя бы один источник данных.",
 
     searchDepthLabel: "Глубина поиска",
     searchDepthHint: "Насколько глубоко искать внутри собственных компонентов каждого примитива. Чем выше значение, тем больше неочевидных совпадений находится, но частые примитивы (например, «mouth», «one») на глубине 5 могут совпасть с большей частью базы.",

@@ -41,6 +41,7 @@ function AliasAdder({ targetId, lang }) {
         value={value}
         onChange={(e) => setValue(e.target.value)}
         placeholder={t(lang, "addNamePlaceholder")}
+        aria-label={t(lang, "addNamePlaceholder")}
       />
       <button className="btn-primary part-add-submit" type="submit" disabled={busy}>
         {t(lang, "addBtn")}
@@ -70,7 +71,13 @@ export function ImageUpload({ kanjiId, lang, onUploaded }) {
 
   return (
     <div className="image-upload">
-      <input type="file" accept="image/gif,image/png,image/jpeg,image/webp" onChange={handleChange} disabled={busy} />
+      <input
+        type="file"
+        accept="image/gif,image/png,image/jpeg,image/webp"
+        onChange={handleChange}
+        disabled={busy}
+        aria-label={t(lang, "uploadImageHeading")}
+      />
       {error ? <span className="image-upload-hint status error">{error}</span> : (
         <span className="image-upload-hint">{t(lang, "uploadImageHint")}</span>
       )}
@@ -114,12 +121,14 @@ export function DecompositionForm({ kanjiId, lang, onAdded }) {
         value={parts}
         onChange={(e) => setParts(e.target.value)}
         placeholder={t(lang, "decompositionPartsPlaceholder")}
+        aria-label={t(lang, "decompositionPartsPlaceholder")}
       />
       <input
         className="input"
         value={label}
         onChange={(e) => setLabel(e.target.value)}
         placeholder={t(lang, "decompositionLabelPlaceholder")}
+        aria-label={t(lang, "decompositionLabelPlaceholder")}
       />
       <div className="story-form-actions">
         <label className="story-visibility">
@@ -154,6 +163,7 @@ function PartChip({ part, lang, user, onSelectPart }) {
             className="part-chip-expand"
             onClick={() => setExpanded((e) => !e)}
             aria-label={t(lang, expanded ? "collapsePart" : "expandPart")}
+            aria-expanded={expanded}
             title={t(lang, expanded ? "collapsePart" : "expandPart")}
           >
             {expanded ? "▾" : "▸"}
@@ -247,24 +257,32 @@ export default function KanjiDetail({ kanjiId, onSelectPart, onBack, user, lang 
   const [storyPublic, setStoryPublic] = useState(false);
   const [savingStory, setSavingStory] = useState(false);
 
-  function load() {
+  function load(signal) {
     setLoading(true);
     setError(null);
-    getKanji(kanjiId, sources)
+    return getKanji(kanjiId, sources, signal)
       .then((k) => {
         setKanji(k);
         const mine = k.stories?.find((s) => s.is_mine);
         setStoryText(mine?.story ?? "");
         setStoryPublic(mine?.visibility === "public");
       })
-      .catch((e) => setError(e.message))
-      .finally(() => setLoading(false));
+      .catch((e) => {
+        if (e.name !== "AbortError") setError(e.message);
+      })
+      .finally(() => {
+        if (!signal?.aborted) setLoading(false);
+      });
   }
 
   // sources is a freshly-built array/null each App render, so key on its sorted
   // contents rather than identity to avoid refetching on unrelated re-renders.
   const sourcesKey = sources ? [...sources].sort().join(",") : "";
-  useEffect(() => load(), [kanjiId, sourcesKey]);
+  useEffect(() => {
+    const controller = new AbortController();
+    load(controller.signal);
+    return () => controller.abort();
+  }, [kanjiId, sourcesKey]);
 
   async function handleSaveStory(e) {
     e.preventDefault();
@@ -280,8 +298,8 @@ export default function KanjiDetail({ kanjiId, onSelectPart, onBack, user, lang 
     }
   }
 
-  if (loading) return <div className="status">{t(lang, "loading")}</div>;
-  if (error) return <div className="status error">{t(lang, "errorPrefix", error)}</div>;
+  if (loading) return <div className="status" role="status" aria-live="polite">{t(lang, "loading")}</div>;
+  if (error) return <div className="status error" role="alert">{t(lang, "errorPrefix", error)}</div>;
   if (!kanji) return null;
 
   const otherStories = kanji.stories?.filter((s) => !s.is_mine) ?? [];
@@ -388,6 +406,7 @@ export default function KanjiDetail({ kanjiId, onSelectPart, onBack, user, lang 
               value={storyText}
               onChange={(e) => setStoryText(e.target.value)}
               placeholder={t(lang, "yourStoryPlaceholder")}
+              aria-label={t(lang, "yourStoryPlaceholder")}
               rows={4}
             />
             <div className="story-form-actions">

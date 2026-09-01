@@ -4,7 +4,7 @@ import { resolveImageUrl } from "../api";
 export default function KanjiCard({ kanji, onSelect }) {
   const char = displayChar(kanji.character);
   return (
-    <div className="kanji-card" onClick={() => onSelect(kanji.id)}>
+    <button type="button" className="kanji-card" onClick={() => onSelect(kanji.id)}>
       <div className="kanji-char">
         {char ?? (kanji.image_url
           ? <img className="kanji-char-img" src={resolveImageUrl(kanji.image_url)} alt={kanji.keyword || kanji.id} />
@@ -15,6 +15,6 @@ export default function KanjiCard({ kanji, onSelect }) {
         {kanji.frame && <span className="meta-frame">#{kanji.frame}</span>}
         {kanji.jlpt && <span className="meta-jlpt">{kanji.jlpt}</span>}
       </div>
-    </div>
+    </button>
   );
 }

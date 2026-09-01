@@ -124,12 +124,14 @@ export default function AuthBar({ user, setUser, lang = "en", uiLang, studyScrip
           {t(lang, "loginRegisterBtn")}
         </button>
       ) : (
-        <div className="auth-popover">
-          <div className="auth-tabs">
+        <div className="auth-popover" role="dialog" aria-label={t(lang, "loginRegisterBtn")}>
+          <div className="auth-tabs" role="tablist">
             <button
               className={`auth-tab ${mode === "login" ? "auth-tab-active" : ""}`}
               onClick={() => { setMode("login"); setError(""); }}
               type="button"
+              role="tab"
+              aria-selected={mode === "login"}
             >
               {t(lang, "loginTab")}
             </button>
@@ -137,6 +139,8 @@ export default function AuthBar({ user, setUser, lang = "en", uiLang, studyScrip
               className={`auth-tab ${mode === "register" ? "auth-tab-active" : ""}`}
               onClick={() => { setMode("register"); setError(""); }}
               type="button"
+              role="tab"
+              aria-selected={mode === "register"}
             >
               {t(lang, "registerTab")}
             </button>
@@ -145,6 +149,7 @@ export default function AuthBar({ user, setUser, lang = "en", uiLang, studyScrip
             <input
               className="input"
               placeholder={t(lang, "usernamePlaceholder")}
+              aria-label={t(lang, "usernamePlaceholder")}
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               autoComplete="username"
@@ -154,6 +159,7 @@ export default function AuthBar({ user, setUser, lang = "en", uiLang, studyScrip
               className="input"
               type="password"
               placeholder={mode === "register" ? t(lang, "passwordPlaceholderRegister") : t(lang, "passwordPlaceholder")}
+              aria-label={mode === "register" ? t(lang, "passwordPlaceholderRegister") : t(lang, "passwordPlaceholder")}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               autoComplete={mode === "login" ? "current-password" : "new-password"}
@@ -179,7 +185,7 @@ export default function AuthBar({ user, setUser, lang = "en", uiLang, studyScrip
               <div ref={googleBtnRef} />
             </div>
           )}
-          {error && <div className="auth-error">{error}</div>}
+          {error && <div className="auth-error" role="alert">{error}</div>}
         </div>
       )}
     </div>

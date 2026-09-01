@@ -15,10 +15,11 @@ async function extractError(res) {
   }
 }
 
-export async function searchByParts(parts, script = null, sources = null, depth = 1) {
+export async function searchByParts(parts, script = null, sources = null, depth = 1, signal = undefined) {
   const res = await fetch(`${BASE}/search/parts`, {
     method: "POST",
     credentials: "include",
+    signal,
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ parts, script, sources, depth }),
   });
@@ -26,34 +27,37 @@ export async function searchByParts(parts, script = null, sources = null, depth 
   return res.json();
 }
 
-export async function searchByText(q, script = null, sources = null) {
+export async function searchByText(q, script = null, sources = null, signal = undefined) {
   const params = new URLSearchParams({ q });
   if (script) params.set("script", script);
   if (sources) sources.forEach((s) => params.append("sources", s));
   const res = await fetch(`${BASE}/search/text?${params}`, {
     credentials: "include",
+    signal,
   });
   if (!res.ok) throw new Error(await extractError(res));
   return res.json();
 }
 
-export async function searchByChar(c, script = null, sources = null) {
+export async function searchByChar(c, script = null, sources = null, signal = undefined) {
   const params = new URLSearchParams({ c });
   if (script) params.set("script", script);
   if (sources) sources.forEach((s) => params.append("sources", s));
   const res = await fetch(`${BASE}/search/char?${params}`, {
     credentials: "include",
+    signal,
   });
   if (!res.ok) throw new Error(await extractError(res));
   return res.json();
 }
 
-export async function getKanji(id, sources = null) {
+export async function getKanji(id, sources = null, signal = undefined) {
   const params = new URLSearchParams();
   if (sources) sources.forEach((s) => params.append("sources", s));
   const qs = params.toString();
   const res = await fetch(`${BASE}/kanji/${encodeURIComponent(id)}${qs ? `?${qs}` : ""}`, {
     credentials: "include",
+    signal,
   });
   if (!res.ok) throw new Error(await extractError(res));
   return res.json();

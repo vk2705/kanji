@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { searchByParts, searchByText, searchByChar, getMe, updatePreferences, recordPageView } from "./api";
 import ResultsGrid from "./components/ResultsGrid";
 import KanjiDetail from "./components/KanjiDetail";
@@ -46,6 +46,8 @@ export default function App() {
   const [view, setView] = useState("search"); // "search" | "create" | "contributions" | "about"
   const [results, setResults] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [searchError, setSearchError] = useState("");
+  const searchController = useRef(null);
   const [selectedId, setSelectedId] = useState(null);
   const [user, setUser] = useState(null);
   const [uiLang, setUiLang] = useState(() => readLocal("ui_language", "en"));
@@ -72,6 +74,7 @@ export default function App() {
 
   useEffect(() => {
     recordPageView();
+    return () => searchController.current?.abort();
   }, []);
 
   function changeUiLang(lang) {
@@ -126,27 +129,41 @@ export default function App() {
   const [searchDepth, setSearchDepth] = useState(1);
 
   async function runSearch(fn) {
+    searchController.current?.abort();
+    const controller = new AbortController();
+    searchController.current = controller;
     setLoading(true);
-    setResults(null);
     setSelectedId(null);
     setFallbackMsg("");
+    setSearchError("");
     try {
-      await fn();
-    } catch {
-      setResults([]);
+      await fn(controller.signal);
+    } catch (error) {
+      if (error.name !== "AbortError") {
+        setSearchError(error.message || String(error));
+      }
     } finally {
-      setLoading(false);
+      if (searchController.current === controller) {
+        searchController.current = null;
+        setLoading(false);
+      }
     }
+  }
+
+  function canSearchSelectedSources() {
+    if (sources.size > 0) return true;
+    setSearchError(tt("selectSourceError"));
+    return false;
   }
 
   async function handlePartsSearch(e) {
     e.preventDefault();
     const filled = parts.filter((p) => p.trim());
-    if (!filled.length) return;
-    runSearch(async () => {
-      const data = await searchByParts(filled, studyScript || null, activeSources, searchDepth);
+    if (!filled.length || !canSearchSelectedSources()) return;
+    runSearch(async (signal) => {
+      const data = await searchByParts(filled, studyScript || null, activeSources, searchDepth, signal);
       if (data.results.length === 0 && filled.length === 1) {
-        const text = await searchByText(filled[0], studyScript || null, activeSources);
+        const text = await searchByText(filled[0], studyScript || null, activeSources, signal);
         setResults(text.results);
         if (text.results.length > 0) {
           setFallbackMsg(tt("fallbackMsg", filled[0]));
@@ -159,18 +176,18 @@ export default function App() {
 
   async function handleTextSearch(e) {
     e.preventDefault();
-    if (!textQuery.trim()) return;
-    runSearch(async () => {
-      const data = await searchByText(textQuery, studyScript || null, activeSources);
+    if (!textQuery.trim() || !canSearchSelectedSources()) return;
+    runSearch(async (signal) => {
+      const data = await searchByText(textQuery, studyScript || null, activeSources, signal);
       setResults(data.results);
     });
   }
 
   async function handleCharSearch(e) {
     e.preventDefault();
-    if (!charQuery.trim()) return;
-    runSearch(async () => {
-      const data = await searchByChar(charQuery, studyScript || null, activeSources);
+    if (!charQuery.trim() || !canSearchSelectedSources()) return;
+    runSearch(async (signal) => {
+      const data = await searchByChar(charQuery, studyScript || null, activeSources, signal);
       setResults(data ? [data] : []);
     });
   }
@@ -180,6 +197,7 @@ export default function App() {
     setResults(null);
     setSelectedId(null);
     setFallbackMsg("");
+    setSearchError("");
   }
 
   function selectKanji(id) {
@@ -204,6 +222,7 @@ export default function App() {
                 key={l}
                 className={`lang-btn ${uiLang === l ? "lang-btn-active" : ""}`}
                 onClick={() => changeUiLang(l)}
+                aria-pressed={uiLang === l}
               >
                 {l.toUpperCase()}
               </button>
@@ -280,10 +299,14 @@ export default function App() {
               ))}
             </fieldset>
 
-            <div className="tabs">
+            <div className="tabs" role="tablist" aria-label={tt("searchModeLabel")}>
               {TABS.map((label, i) => (
                 <button
                   key={label}
+                  type="button"
+                  role="tab"
+                  aria-selected={tab === i}
+                  aria-controls={`search-panel-${i}`}
                   className={`tab ${tab === i ? "tab-active" : ""}`}
                   onClick={() => handleTabChange(i)}
                 >
@@ -292,7 +315,7 @@ export default function App() {
               ))}
             </div>
 
-            <div className="search-panel">
+            <div className="search-panel" id={`search-panel-${tab}`} role="tabpanel">
               {tab === 0 && (
                 <form onSubmit={handlePartsSearch} className="search-form">
                   <p className="search-hint">{tt("partsHint")}</p>
@@ -302,6 +325,7 @@ export default function App() {
                         key={i}
                         className="input"
                         placeholder={tt("partsPlaceholder", i + 1)}
+                        aria-label={tt("partsPlaceholder", i + 1)}
                         value={p}
                         onChange={(e) => {
                           const next = [...parts];
@@ -335,6 +359,7 @@ export default function App() {
                   <input
                     className="input"
                     placeholder={tt("textPlaceholder")}
+                    aria-label={tt("textHint")}
                     value={textQuery}
                     onChange={(e) => setTextQuery(e.target.value)}
                   />
@@ -348,6 +373,7 @@ export default function App() {
                   <input
                     className="input input-large"
                     placeholder={tt("charPlaceholder")}
+                    aria-label={tt("charHint")}
                     value={charQuery}
                     onChange={(e) => setCharQuery(e.target.value)}
                     maxLength={2}
@@ -359,6 +385,9 @@ export default function App() {
 
             {fallbackMsg && (
               <p className="fallback-msg">{fallbackMsg}</p>
+            )}
+            {searchError && (
+              <div className="status error" role="alert">{tt("errorPrefix", searchError)}</div>
             )}
             <ResultsGrid
               results={results}

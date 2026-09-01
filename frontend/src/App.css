@@ -25,6 +25,18 @@ body {
   min-height: 100vh;
 }
 
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+:where(button, a, input, select, textarea, summary):focus-visible {
+  outline: 3px solid var(--kanji-color);
+  outline-offset: 3px;
+}
+
 .app {
   max-width: 900px;
   margin: 0 auto;
@@ -441,6 +453,8 @@ body {
   flex-direction: column;
   gap: 6px;
   align-items: center;
+  width: 100%;
+  color: inherit;
 }
 
 .kanji-card:hover {
@@ -973,4 +987,49 @@ body {
 .visibility-btn.is-public {
   color: var(--accent-hover);
   border-color: var(--accent-light);
+}
+
+@media (max-width: 640px) {
+  .app {
+    padding-inline: 14px;
+  }
+
+  .app-header {
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+  }
+
+  .header-controls {
+    position: static;
+    order: 2;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 18px;
+    gap: 8px;
+  }
+
+  .subtitle {
+    order: 1;
+  }
+
+  .search-panel,
+  .detail-panel {
+    padding: 18px;
+  }
+
+  .detail-header {
+    gap: 16px;
+  }
+
+  .back-btn {
+    position: static;
+    margin-bottom: 18px;
+  }
+
+  .image-upload,
+  .story-form-actions {
+    align-items: flex-start;
+    flex-direction: column;
+  }
 }

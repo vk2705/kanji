@@ -68,6 +68,7 @@ export default function CreateKanji({ lang, onDone }) {
           value={keyword}
           onChange={(e) => setKeyword(e.target.value)}
           placeholder={t(lang, "keywordPlaceholder")}
+          aria-label={t(lang, "keywordPlaceholder")}
           autoFocus
         />
         <input
@@ -75,11 +76,12 @@ export default function CreateKanji({ lang, onDone }) {
           value={character}
           onChange={(e) => setCharacter(e.target.value)}
           placeholder={t(lang, "characterPlaceholder")}
+          aria-label={t(lang, "characterPlaceholder")}
           maxLength={2}
         />
         <div>
           <div className="form-field-label">{t(lang, "scriptLabel")}</div>
-          <select className="input" value={script} onChange={(e) => setScript(e.target.value)}>
+          <select className="input" value={script} onChange={(e) => setScript(e.target.value)} aria-label={t(lang, "scriptLabel")}>
             {SCRIPTS.map((s) => (
               <option key={s} value={s}>{s}</option>
             ))}

@@ -104,11 +104,51 @@ or hit the live API directly:
 curl -s "https://srv.alteon.help/kanji/api/kanji/rtk355" | python3 -m json.tool
 ```
 
-## Periodic step — back up a flat copy to the repo
+## Scheduled backup and tested restore
+
+`backend/backup_db.py` creates a consistent SQLite backup and a matching
+`uploads-<timestamp>.tar.gz` when uploads exist. Local copies alone are not disaster
+recovery: host loss would remove both production and `backend/backups/`.
+
+Configure an encrypted or otherwise access-controlled `rclone` remote outside this
+repository, set `KANJI_BACKUP_REMOTE`, and schedule `backend/offsite_backup.py` after
+the local backup timer. The script creates a fresh paired backup and uploads only the
+new artifacts. Configure retention/versioning with the destination provider rather
+than deleting remote copies from this host.
+
+```bash
+rclone config
+export KANJI_BACKUP_REMOTE='encrypted-remote:kanji-production'
+cd backend
+./venv/bin/python3 offsite_backup.py
+rclone lsf "$KANJI_BACKUP_REMOTE"
+```
+
+Restore only while the backend is stopped. Download a matching database/upload pair,
+restore into the backend directory, run the integrity check, then restart and smoke
+test. Omitting `--uploads` intentionally restores an empty uploads directory.
+
+```bash
+sudo systemctl stop kanji-backend.service
+cd backend
+./venv/bin/python3 restore_backup.py \
+  /path/to/kanji-YYYYMMDD-HHMMSS.db \
+  --uploads /path/to/uploads-YYYYMMDD-HHMMSS.tar.gz \
+  --target-dir . --confirm
+sqlite3 kanji.db 'PRAGMA integrity_check;'
+sudo systemctl start kanji-backend.service
+curl -fsS 'https://srv.alteon.help/kanji/api/search/text?q=one' >/dev/null
+```
+
+Practice this restore into a temporary directory periodically. A backup is not
+considered healthy until the restored database passes integrity checks and a sample
+upload is readable.
+
+## Periodic anonymized export
 
 Separately from the above (do this on whatever cadence you prefer, not
 necessarily every deploy), commit an anonymized snapshot of the live
-database to the repo as a disaster-recovery copy:
+database to the repo as an audit/data-portability snapshot:
 
 ```bash
 export BACKUP_ANON_SECRET=...   # pick once, store it securely, NEVER commit it
@@ -128,12 +168,10 @@ stay wherever the server's other secrets already live (e.g. next to
 `GOOGLE_CLIENT_ID` in the systemd unit's environment) and must never be
 committed alongside the export it protects.
 
-**Known gap, as of 2026-08-14: there is no restore script yet.**
-`export_backup.py` only writes `kanji_export.jsonl`; nothing in this repo
-currently reads it back into a fresh `kanji.db`. If the server is lost
-today, the committed export is a record of the data, not yet a
-one-command recovery path — writing that importer is follow-up work, not
-something to assume exists.
+`export_backup.py` is not the disaster-recovery source: pseudonymization intentionally
+removes the identity information needed to reconstruct real accounts, and it excludes
+credentials, sessions, and upload files. Restore production from the encrypted raw
+database/upload backups described above.
 
 ## If something looks wrong
 

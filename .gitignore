@@ -4,8 +4,8 @@
 backend/kanji.db
 backend/backups/
 
-# User-uploaded images (glyph-less primitives) — not currently covered by
-# backup_db.py, which only backs up kanji.db.
+# User-uploaded images (glyph-less primitives). backup_db.py snapshots these
+# alongside kanji.db; offsite_backup.py copies both artifacts off-host.
 backend/uploads/
 
 # Python
