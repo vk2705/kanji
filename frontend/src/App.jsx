@@ -48,6 +48,7 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   const [searchError, setSearchError] = useState("");
   const searchController = useRef(null);
+  const resultsRef = useRef(null);
   const [selectedId, setSelectedId] = useState(null);
   const [user, setUser] = useState(null);
   const [uiLang, setUiLang] = useState(() => readLocal("ui_language", "en"));
@@ -136,6 +137,12 @@ export default function App() {
     setSelectedId(null);
     setFallbackMsg("");
     setSearchError("");
+    // On a small screen the search form can fill the whole viewport, so the results
+    // (appearing below it) are invisible until the user scrolls — nothing on the
+    // form itself changes when the search starts, so it looks like the button did
+    // nothing. Scroll the results area into view right away (not after the response
+    // arrives) so the loading indicator, and then the results, are visible immediately.
+    resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     try {
       await fn(controller.signal);
     } catch (error) {
@@ -383,18 +390,20 @@ export default function App() {
               )}
             </div>
 
-            {fallbackMsg && (
-              <p className="fallback-msg">{fallbackMsg}</p>
-            )}
-            {searchError && (
-              <div className="status error" role="alert">{tt("errorPrefix", searchError)}</div>
-            )}
-            <ResultsGrid
-              results={results}
-              onSelect={selectKanji}
-              loading={loading}
-              lang={uiLang}
-            />
+            <div ref={resultsRef}>
+              {fallbackMsg && (
+                <p className="fallback-msg">{fallbackMsg}</p>
+              )}
+              {searchError && (
+                <div className="status error" role="alert">{tt("errorPrefix", searchError)}</div>
+              )}
+              <ResultsGrid
+                results={results}
+                onSelect={selectKanji}
+                loading={loading}
+                lang={uiLang}
+              />
+            </div>
           </>
         )}
       </main>
