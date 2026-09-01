@@ -4946,3 +4946,103 @@ output.
 - Not deployed to the live server from this session (no server access
   here) — needs the normal frontend rebuild+copy deploy step, plus the
   three manual items above from whoever has server/Google access.
+
+### 2026-09-01 (same day) — owner bug reports exposed a real detector blind spot: 233 more fixes
+
+- Owner reported five kanji wrong in a row (椅, 格, 燥, 礎, 磨) and, after
+  the first couple were fixed reactively, pushed back hard on the pace:
+  "ты столько работал, а ошибки в каждом иероглифе. твои тесты не
+  годятся" (you worked so much, but there are errors in every kanji, your
+  tests are no good). Fair challenge — investigated the *root cause*
+  instead of continuing to fix one-by-one, and found a real, previously-
+  undocumented blind spot, not just "more unreviewed kanji" (coverage was
+  ~41% going into this).
+- **The five reports, individually**: `椅`=木+奇 (`cjkvi-ids`), was
+  wrongly `口,大,木,丁` — traced to *this audit's own earlier session*
+  matching it against `丁`(street) instead of the maximal `奇`(strange)
+  match, which also made the bug invisible to `audit_flattening.py`
+  afterward (丁 absorbed the tokens that would have matched). `格`=木+各,
+  `燥`=火+品+木 (had a redundant extra 口 duplicating 品's own), `礎`=石+
+  林+疋 (疋="critters"), `磨`=麻+石 — all the same redundant-flattening
+  pattern, all missed because of the bug below.
+- **Root cause, confirmed via the fifth report**: `audit_flattening.py`'s
+  contiguous-run check (by design, to cut noise — see its own docstring)
+  only catches a flattened compound's parts when they sit *adjacent* in
+  the outer kanji's part list. `格`'s bug (`各`'s own `口,夂` with `木`
+  sandwiched between them) is structurally identical but non-adjacent —
+  invisible to the existing tool, not a coverage gap.
+- **Fix**: wrote `backend/audit_flattening_subsequence.py` — same
+  approach, but matches an order-preserving *subsequence* instead of a
+  contiguous run. Noisier (1810 raw vs ~1000 for the contiguous check),
+  so applied the same CSV-cross-check filter (222 confirmed), spot-
+  rendered a diverse sample, then applied 206 fixes in one batch.
+- **Iterative convergence, twice**: re-ran both detectors after applying
+  the batch and found second-order matches the first pass could only
+  partially collapse — e.g. `苛`/`阿` each matched `丁` first (since `可`
+  =丁+口 wasn't literally assembled yet), then fully matched `可` once 丁
+  became a real token; `柄` similarly converged to `丙` after an
+  intermediate `内` step. Also caught (independently, via the same
+  re-run) that `奇`(rtk133, "strange") — the very primitive `椅`'s fix
+  now correctly references — was *itself* still wrongly flattened
+  (`一,口,大,亅` instead of `大,可`, since `可`=丁+口 wasn't referenced
+  either); fixed it too. Third re-run converged cleanly: only the 3
+  already-known, deliberately-settled false positives left (`特`/`義`/
+  `業`, all previously confirmed as legitimate exceptions with their own
+  documented reasoning).
+- **Owner's specific follow-up ask**: "в каждом канджи где в разбивке
+  есть рот, проверь действительно ли он там должен быть" (for every
+  kanji with 口/"mouth" in its breakdown, check it's really supposed to
+  be there). Built a precision check: for all 387 kanji currently listing
+  `rtk11`(口), recursively expand each one's real `cjkvi-ids` structure
+  and check whether 口 appears *anywhere* in it (not just top-level —
+  catches cases where 口 is buried inside an unreferenced sub-compound).
+  40 candidates where it doesn't. A CSV-text heuristic tried first (176
+  candidates) was far too noisy — most of those just had no CSV data at
+  all for that frame, not evidence of anything wrong.
+  - **Two real clusters shared one missing primitive each**, both never
+    added to this dataset at all despite being real, CSV-citable Heisig
+    primitives: `𠂤`("maestro", added as `prim-maestro`) — confirmed
+    across `追`/`阜`/`師`/`帥`/`官`/`埠`/`獅`/`槌`/`鎚` (9 hosts, one had
+    a further sub-primitive `帀`/"noren" = 一+巾, also added); and the
+    already-taught `束`("bundle") compound, which `頼`/`瀬`/`勅`/`疎`/
+    `辣`/`整`/`漱`/`菅` had all individually approximated with a spurious
+    `口`/`｜` instead of ever referencing.
+  - **Several were false positives** — legitimate Heisig teachings for an
+    otherwise Unicode-atomic glyph (`谷`/`事`/`豆`/`亜`/`民`/`革`/`束`
+    itself/`史`), CSV-confirmed and render-confirmed, the same pattern as
+    `東`=日+木 elsewhere in this audit. This matters as a general lesson:
+    "IDS doesn't structurally decompose X" is not the same claim as "X
+    has no real components" — Heisig sometimes teaches real visual
+    sub-strokes of a technically-atomic glyph.
+  - **Standalone bugs fixed**: `四`(was `口,人`, should be `囗,儿`
+    ["pent in; human legs" per CSV, no mouth]), `使`(was missing its
+    person radical entirely and didn't reference `吏`, fixed to `亻,吏`),
+    `免`/`兎`/`象`(dropped a spurious 口 each, confirmed via render — no
+    box shape anywhere in any of the three), `像`(was re-flattening
+    `象`'s own then-broken parts instead of referencing it, fixed to
+    `亻,象`), `蝦`(→`虫,又`, dropping 口 — the true top element has no
+    citable primitive, `又` alone is the closest confirmed real piece).
+  - **Deliberately left unfixed**: `壷`(crock) — genuinely ambiguous at
+    render resolution (a box-ish shape is visible where IDS says an
+    unresolvable stroke cluster sits), not worth guessing on one rare
+    kanji.
+- Verified: full rebuild from scratch; `test_regression_fixes.py` — 234
+  new/updated pins (211 from the subsequence batch + reconciliation
+  fixes, 23 from the mouth audit) — 633 checks, same 4 expected
+  hanzi-scope failures, nothing else; full pytest suite (51 tests)
+  green; `audit_self_reference.py` clean; both detectors re-run to
+  confirm convergence (contiguous: only the 3 known false positives;
+  mouth check: only CSV-confirmed legitimate cases + the one
+  deliberately-skipped `壷`).
+- Not deployed to the live server from this session; data-only change +
+  two new primitive rows (`prim-maestro`, `prim-noren`), no backend
+  restart needed on next deploy.
+- Coverage: pending — see follow-up commit.
+- **Next session**: `壷`'s ambiguous top element, if a better render or
+  external source turns up. `triage_google_check.py`'s noisier 776-item
+  output is still unmined. The 81 orphaned `rad{N}` rows on the live DB
+  is still the standing item needing production access. Worth
+  periodically re-running `audit_flattening_subsequence.py` (not just
+  the original contiguous one) as part of the standard sweep cadence
+  going forward, now that it's proven to catch real bugs the original
+  tool structurally cannot.
