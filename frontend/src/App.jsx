@@ -142,7 +142,13 @@ export default function App() {
     // form itself changes when the search starts, so it looks like the button did
     // nothing. Scroll the results area into view right away (not after the response
     // arrives) so the loading indicator, and then the results, are visible immediately.
-    resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    // Deferred to the next frame: setLoading(true) above hasn't been committed to the
+    // DOM yet at this point (React batches state updates), so scrolling synchronously
+    // here would measure the *pre-loading* layout — often the same empty state as
+    // before the click, which made this look like it did nothing on a real device.
+    requestAnimationFrame(() => {
+      resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
     try {
       await fn(controller.signal);
     } catch (error) {
