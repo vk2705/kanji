@@ -60,6 +60,7 @@ cd android
 ```bash
 ./venv/bin/python3 import_rtk.py            # append new rtk{frame} entries to data.txt from kanjidic2 + KRADFILE
 ./venv/bin/python3 import_hanzi.py          # one-time: seed Chinese hanzi (CJK Unified block) from Unihan.zip + cjkvi-ids
+./venv/bin/python3 backfill_readings.py --dry-run  # fill kanji.onyomi/kunyomi/pinyin from kanjidic2 + Unihan (see Pronunciation display)
 ./venv/bin/python3 backup_db.py             # online backup of kanji.db + a uploads/ tar.gz snapshot to backups/, prunes both older than 14 days
 ./venv/bin/python3 offsite_backup.py        # create a paired backup and copy it to KANJI_BACKUP_REMOTE via rclone
 ./venv/bin/python3 restore_backup.py DB --uploads ARCHIVE --target-dir . --confirm  # staged, integrity-checked restore (service must be stopped)
@@ -114,7 +115,9 @@ id:character:alias1,alias2,...:part1,part2,...;alt_decomp1,alt_decomp2
 kanji(id TEXT PK, character TEXT, keyword TEXT, frame INTEGER, stroke_count INTEGER, jlpt TEXT,
       owner_id INTEGER, visibility TEXT CHECK(public|private), script TEXT CHECK(ja-kanji|zh-Hans|zh-Hant|zh-Hani),
       variant_of TEXT → kanji.id,   -- simplified<->traditional link
-      image_url TEXT)   -- server-relative /uploads/{id}.{ext} path, for glyph-less user-invented primitives
+      image_url TEXT,   -- server-relative /uploads/{id}.{ext} path, for glyph-less user-invented primitives
+      onyomi TEXT, kunyomi TEXT,   -- comma-separated, ja-kanji rows only; see Pronunciation display below
+      pinyin TEXT)   -- zh-* rows only; see Pronunciation display below
 aliases(kanji_id → kanji.id, alias TEXT, owner_id INTEGER, visibility TEXT)  -- UNIQUE(kanji_id, alias, owner_id)
 parts(kanji_id → kanji.id, part_term TEXT, position INTEGER, decomposition_id → decompositions.id)
 decompositions(id PK, kanji_id → kanji.id, owner_id INTEGER, visibility TEXT, label TEXT)
@@ -135,8 +138,9 @@ known_visitors(visitor_id TEXT PK, first_seen TEXT, last_seen TEXT)  -- see Anal
 "Migrations are atomic" below) rather than hand-listed. v1 added the multi-user tables
 above (minus the last two `users` columns), v2 added `users.ui_language`/`study_script`,
 v3 added `kanji.image_url`, v4 added `decomposition_reviews`, v5 added `page_views`, v6
-added `daily_visit_summary`/`known_visitors` (analytics retention). Adding a v7 means
-writing a new `_migrate_v7` function and calling `_register(7, _migrate_v7)` right after
+added `daily_visit_summary`/`known_visitors` (analytics retention), v7 added
+`kanji.onyomi`/`kunyomi`/`pinyin` (see Pronunciation display below). Adding a v8 means
+writing a new `_migrate_v8` function and calling `_register(8, _migrate_v8)` right after
 it, **not** touching the existing registered functions (they must stay
 non-idempotent-safe, i.e. never re-run against an already-migrated DB).
 
@@ -180,6 +184,12 @@ A minimal first-party visit counter, added after nginx access-log analysis showe
 
 **Retention** (`backend/prune_page_views.py`, added 2026-08-31, architecture review finding #4): `POST /analytics/pageview` needs no auth, making unbounded `page_views` growth the easiest abuse vector in the app — this script bounds it. Meant to run on a schedule (systemd timer `kanji-pageview-prune`, weekly — see Deployment), it rolls up every `page_views` row older than `--retain-days` (default 90) into `daily_visit_summary` (one row per calendar day: `view_count`, `distinct_visitor_count`) and `known_visitors` (one row per `visitor_id` ever seen, `first_seen`/`last_seen`) *before* deleting the raw rows — a naive delete-only prune would silently corrupt `visit_stats.py`'s all-time unique-visitor count (a visitor whose only rows got deleted stops counting as ever having visited). `visit_stats.py`'s `summary()` unions `page_views` and `known_visitors` for the all-time visitor count and sums `page_views` + `daily_visit_summary` for the all-time view count; `daily_breakdown()` merges live per-day counts with `daily_visit_summary` rows for any requested day old enough to have been pruned already. `--dry-run` reports what would be pruned without writing anything.
 
+### Pronunciation display (`kanji.onyomi`/`kunyomi`/`pinyin`, added 2026-09-01)
+
+Each kanji detail view shows real-world pronunciations at the bottom of the panel — on'yomi/kun'yomi for `ja-kanji` rows, pinyin for `zh-*` rows — separate from the RTK keyword, which is a mnemonic gloss, not a reading. These three columns are plain nullable `TEXT` on `kanji` (comma-separated for on'yomi/kun'yomi, kanjidic2's own multi-reading order; a single toned pinyin string for `zh-*`), read-only display data with no per-owner/visibility machinery, since they're never user-edited.
+
+Populated by `backend/backfill_readings.py`, a one-off script separate from the `data.txt`/CSV import pipeline (neither of which carries reading data) and from `import_hanzi.py` (which refuses to run a second time against a populated DB): kanjidic2's `ja_on`/`ja_kun` `<reading>` elements for `ja-kanji` rows, Unihan's `kMandarin` field (same file/field `import_hanzi.py` already parses for a tone-stripped search alias — this script keeps the toned form instead, for display) for `zh-*` rows. Matches by `character`, not `id`, so a user's own private kanji sharing a glyph with a system row gets the same real-world reading. Safe to re-run — only fills `NULL` columns unless `--force`. Downloads `kanjidic2.xml.gz` from `https://www.edrdg.org/kanjidic/kanjidic2.xml.gz` (an HTTPS mirror — the plain-HTTP EDRDG FTP host `import_rtk.py` defaults to was unreachable from the sandbox this was written in) and `Unihan.zip` from `unicode.org`, same as `import_rtk.py`/`import_hanzi.py` otherwise use.
+
 ### Script-aware resolution (cross-script ambiguity)
 
 Most `ja-kanji` rows share their glyph with a separate `zh-*` row from the hanzi import (e.g. `一` exists as both `rtk1` and `hanzi-4e00`, each with their own `一` alias — ~2,628 characters like this, by design, see Known limitations). `SCRIPT_VISIBILITY` (`backend/database.py`) maps a study-language choice to the `kanji.script` values it should match (a Chinese variant also includes the script-neutral `zh-Hani` rows). `resolve_alias()`/`get_all_aliases_for_term()` take an optional `script_scope` to break ties toward the active study-language filter when a term is ambiguous across scripts; `_resolve_parts_detail()` (decomposition-chip resolution) instead derives its scope from the **viewed kanji's own** script (via `_script_group`), independent of the viewer's global preference — a Chinese hanzi's decomposition always resolves within Chinese-appropriate rows.
@@ -211,7 +221,7 @@ frontend/src/
   components/
     KanjiCard.jsx        # Single result card (char/image + keyword + id)
     ResultsGrid.jsx      # Grid of KanjiCards with loading/empty state
-    KanjiDetail.jsx      # Detail panel: aliases, decomposition tabs + parts as clickable chips, image upload, add-decomposition/part-name/mnemonic-story forms, per-decomposition approve/dispute review buttons — also exports ImageUpload and DecompositionForm for reuse in CreateKanji.jsx
+    KanjiDetail.jsx      # Detail panel: aliases, decomposition tabs + parts as clickable chips, image upload, add-decomposition/part-name/mnemonic-story forms, per-decomposition approve/dispute review buttons, on'yomi/kunyomi/pinyin at the bottom — also exports ImageUpload and DecompositionForm for reuse in CreateKanji.jsx
     CreateKanji.jsx      # Create a new kanji/hanzi entry, then optionally attach a picture and/or a decomposition inline
     MyContributions.jsx  # Browse everything you've contributed (kanji/decompositions/aliases/stories) with per-row public/private toggles
     AuthBar.jsx          # Login/register popover, logged-in state (username + logout)
@@ -225,7 +235,7 @@ frontend/src/
 | `POST` | `/search/parts` | Body: `{"parts": ["sun", "moon"], "script": null, "depth": 1}` — kanji containing all given primitives (or self-identical to one); optional `script`/`sources` filters; `depth` (1..`MAX_DECOMPOSITION_DEPTH`, default 1) controls how many decomposition levels to recurse through — see "Search logic" below |
 | `GET` | `/search/text?q=hat&script=` | Kanji whose id, keyword, or any visible alias contains the term as a whole word; optional `script` filter |
 | `GET` | `/search/char?c=明&script=` | Look up a kanji by its character glyph; optional `script` filter |
-| `GET` | `/kanji/{id}` | Full detail for one kanji (aliases + decompositions + stories, owner-grouped) |
+| `GET` | `/kanji/{id}` | Full detail for one kanji (aliases + decompositions + stories, owner-grouped; onyomi/kunyomi/pinyin if backfilled) |
 | `POST` | `/auth/register` | `{"username", "password", "ui_language"?, "study_script"?}` — creates a user, sets session cookie |
 | `POST` | `/auth/login` | `{"username", "password"}` — sets session cookie |
 | `POST` | `/auth/google` | `{"credential", "ui_language"?, "study_script"?}` — `credential` is a Google Identity Services ID token; verifies it, creates the account on first sign-in, sets session cookie |

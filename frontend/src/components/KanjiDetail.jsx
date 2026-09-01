@@ -439,6 +439,32 @@ export default function KanjiDetail({ kanjiId, onSelectPart, onBack, user, lang 
           </div>
         )}
       </section>
+
+      {(kanji.onyomi || kanji.kunyomi || kanji.pinyin) && (
+        <section className="detail-section readings-section">
+          <h3>{t(lang, "readingsHeading")}</h3>
+          <dl className="readings-list">
+            {kanji.onyomi && (
+              <div className="reading-row">
+                <dt>{t(lang, "onyomiLabel")}</dt>
+                <dd className="reading-value reading-ja">{kanji.onyomi}</dd>
+              </div>
+            )}
+            {kanji.kunyomi && (
+              <div className="reading-row">
+                <dt>{t(lang, "kunyomiLabel")}</dt>
+                <dd className="reading-value reading-ja">{kanji.kunyomi}</dd>
+              </div>
+            )}
+            {kanji.pinyin && (
+              <div className="reading-row">
+                <dt>{t(lang, "pinyinLabel")}</dt>
+                <dd className="reading-value">{kanji.pinyin}</dd>
+              </div>
+            )}
+          </dl>
+        </section>
+      )}
     </div>
   );
 }

@@ -989,6 +989,41 @@ textarea {
   border-color: var(--accent-light);
 }
 
+.readings-section {
+  border-top: 1px solid var(--border);
+  padding-top: 20px;
+}
+
+.readings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+}
+
+.reading-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.reading-row dt {
+  flex: 0 0 90px;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.reading-value {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.reading-ja {
+  font-family: "Noto Serif CJK JP", "Yu Mincho", serif;
+}
+
 @media (max-width: 640px) {
   .app {
     padding-inline: 14px;
@@ -1031,5 +1066,14 @@ textarea {
   .story-form-actions {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .reading-row {
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .reading-row dt {
+    flex-basis: auto;
   }
 }

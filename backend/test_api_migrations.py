@@ -141,3 +141,35 @@ def test_migrated_aliases_table_allows_same_alias_different_owners(db_path):
     except sqlite3.IntegrityError:
         pass
     conn.close()
+
+
+def test_v7_reading_columns_exist_and_are_nullable(db_path):
+    """_migrate_v7 adds kanji.onyomi/kunyomi/pinyin -- a fresh row must be insertable
+    without them (backfill_readings.py populates them separately, not at insert time)
+    and get_kanji_detail must surface whatever is there."""
+    conn = database.get_db()
+    conn.execute(
+        "INSERT INTO kanji (id, character, keyword, owner_id, visibility, script) "
+        "VALUES ('test-ja', '明', 'bright', 1, 'public', 'ja-kanji')"
+    )
+    conn.execute(
+        "INSERT INTO kanji (id, character, keyword, owner_id, visibility, script, pinyin) "
+        "VALUES ('test-zh', '漢', 'chinese', 1, 'public', 'zh-Hans', 'hàn')"
+    )
+    conn.commit()
+
+    detail = database.get_kanji_detail(conn, "test-ja", viewer_id=None)
+    assert detail["onyomi"] is None
+    assert detail["kunyomi"] is None
+    assert detail["pinyin"] is None
+
+    conn.execute("UPDATE kanji SET onyomi = ?, kunyomi = ? WHERE id = 'test-ja'", ("メイ", "あか.るい"))
+    conn.commit()
+    detail = database.get_kanji_detail(conn, "test-ja", viewer_id=None)
+    assert detail["onyomi"] == "メイ"
+    assert detail["kunyomi"] == "あか.るい"
+
+    detail_zh = database.get_kanji_detail(conn, "test-zh", viewer_id=None)
+    assert detail_zh["pinyin"] == "hàn"
+    assert detail_zh["onyomi"] is None
+    conn.close()

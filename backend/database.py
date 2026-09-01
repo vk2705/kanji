@@ -347,6 +347,31 @@ def _migrate_v6(conn):
 _register(6, _migrate_v6)
 
 
+def _migrate_v7(conn):
+    """
+    Pronunciation display (2026-09-01, owner-requested): kanji.onyomi/kunyomi hold
+    Japanese on'yomi/kun'yomi readings (comma-separated, katakana/hiragana as
+    kanjidic2 gives them) for script='ja-kanji' rows; kanji.pinyin holds Mandarin
+    pinyin (space-separated if polyphonic, tone marks kept) for script='zh-*' rows.
+    All three are plain nullable TEXT — read-only display data, never user-edited,
+    so no separate table/visibility/ownership machinery is warranted (unlike
+    aliases/decompositions/stories, which really are per-owner).
+
+    Seeded by a new one-off backend/backfill_readings.py (kanjidic2 for ja-kanji,
+    Unihan kMandarin for zh-*), not by this migration or import_data()/
+    sync_system_data.py -- those only ever touch heisig-kanjis.csv/data.txt/
+    data_from_pdf.txt content, which has no reading data at all. Safe to re-run
+    against a populated DB (UPDATEs by character, skips rows that already have a
+    value unless --force), unlike import_hanzi.py's one-time-only guard.
+    """
+    conn.execute("ALTER TABLE kanji ADD COLUMN onyomi TEXT")
+    conn.execute("ALTER TABLE kanji ADD COLUMN kunyomi TEXT")
+    conn.execute("ALTER TABLE kanji ADD COLUMN pinyin TEXT")
+
+
+_register(7, _migrate_v7)
+
+
 def record_page_view(conn, visitor_id: str, path: str | None):
     conn.execute(
         "INSERT INTO page_views (visitor_id, path) VALUES (?, ?)",
@@ -1037,7 +1062,8 @@ def get_kanji_detail(conn, kanji_id: str, viewer_id: int | None = None,
     if not cid:
         return None
     row = conn.execute(
-        "SELECT id, character, keyword, frame, stroke_count, jlpt, image_url, script, variant_of, owner_id "
+        "SELECT id, character, keyword, frame, stroke_count, jlpt, image_url, script, variant_of, owner_id, "
+        "onyomi, kunyomi, pinyin "
         "FROM kanji WHERE id = ? AND (visibility = 'public' OR owner_id = ?)",
         (cid, viewer_id)
     ).fetchone()
@@ -1049,6 +1075,7 @@ def get_kanji_detail(conn, kanji_id: str, viewer_id: int | None = None,
         "frame": row["frame"], "stroke_count": row["stroke_count"], "jlpt": row["jlpt"],
         "image_url": row["image_url"],
         "script": row["script"], "variant_of": row["variant_of"],
+        "onyomi": row["onyomi"], "kunyomi": row["kunyomi"], "pinyin": row["pinyin"],
         "is_system": row["owner_id"] == 1,
         "is_mine": viewer_id is not None and row["owner_id"] == viewer_id,
     }
