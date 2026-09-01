@@ -1037,6 +1037,64 @@ EXPECTED_DECOMPOSITIONS = {
     # 午 as a whole compound plus that one extra stroke.
     "rtk1114": {"character": "年", "keyword": "year",
                 "expected_part_ids": {"prim-katakana-no", "rtk610"}},
+    # 己/已/巳 host-by-host review (2026-09-01): 18 hosts wrongly used 已("stop")
+    # where cjkvi-ids's Japanese-standard variant calls for 己 (11 hosts) or
+    # 巳 (1 host, 祀); the other 6 needed a real re-decomposition, not just a
+    # character swap (see each entry's own comment). Also added prim-southeast
+    # (巽 = 己+共), a real 5th-edition-only Heisig frame (id_5th_ed=2861,
+    # dropped from the 6th) needed by 選/撰, since it's a genuine, citable
+    # compound shared by both rather than repeating 己+共 twice.
+    "rtk565": {"character": "起", "keyword": "rouse",
+               "expected_part_ids": {"rtk410", "rtk564"}},
+    "rtk566": {"character": "妃", "keyword": "queen",
+               "expected_part_ids": {"rtk102", "rtk564"}},
+    "rtk567": {"character": "改", "keyword": "reformation",
+               "expected_part_ids": {"rtk564", "kangxi66"}},
+    "rtk568": {"character": "記", "keyword": "scribe",
+               "expected_part_ids": {"rtk357", "rtk564"}},
+    "rtk569": {"character": "包", "keyword": "wrap",
+               "expected_part_ids": {"kangxi20", "rtk564"}},
+    "rtk644": {"character": "忌", "keyword": "mourning",
+               "expected_part_ids": {"rtk564", "rtk639"}},
+    "rtk1292": {"character": "巻", "keyword": "scroll",
+                "expected_part_ids": {"rtk112", "rtk2", "kangxi12", "rtk564"}},
+    "rtk1454": {"character": "紀", "keyword": "chronicle",
+                "expected_part_ids": {"rtk1431", "kangxi52", "rtk110", "rtk564"}},
+    "rtk1544": {"character": "配", "keyword": "distribute",
+                "expected_part_ids": {"rtk1534", "rtk564"}},
+    "rtk1737": {"character": "遷", "keyword": "transition",
+                "expected_part_ids": {"rtk843", "rtk1728", "rtk112", "rtk564"}},
+    # 港 was 水,ハ,已,井 -- neither ハ nor 井 have any connection to the real
+    # glyph. cjkvi-ids: 港 = 氵+巷, 巷 = 共+己 (Japanese variant); flattened
+    # past 巷 (not itself a taught frame, no Heisig citation for it) straight
+    # to its two real components.
+    "rtk1940": {"character": "港", "keyword": "harbor",
+                "expected_part_ids": {"rtk137", "rtk1934", "rtk564"}},
+    # 選 was ｜,込,二,ハ,已 -- cjkvi-ids: 選 = 込+巽. Fixed to reference the new
+    # prim-southeast primitive.
+    "rtk1944": {"character": "選", "keyword": "elect",
+                "expected_part_ids": {"rtk843", "prim-southeast"}},
+    # 倦 was 已,大,二,丷,卩,ハ -- a flattened mess re-copying 巻's own sub-parts
+    # (大,二,丷) plus stray tokens. cjkvi-ids: 倦 = 亻+巻(J variant). Fixed to
+    # reference the already-taught 巻 (rtk1292) directly.
+    "rtk2246": {"character": "倦", "keyword": "fed up",
+                "expected_part_ids": {"kangxi9", "rtk1292"}},
+    # 庖 was 勹,已,广 -- cjkvi-ids: 庖 = 广+包. Fixed to reference 包 (rtk569).
+    "rtk2341": {"character": "庖", "keyword": "cleaver",
+                "expected_part_ids": {"kangxi53", "rtk569"}},
+    # 撰 was ｜,二,ハ,已,扌 -- cjkvi-ids: 撰 = 扌+巽. Fixed to reference
+    # prim-southeast, same as 選 above.
+    "rtk2357": {"character": "撰", "keyword": "assortment",
+                "expected_part_ids": {"kangxi64", "prim-southeast"}},
+    # 鞄 was 革,勹,已 -- cjkvi-ids: 鞄 = 革+包. Fixed to reference 包 (rtk569).
+    "rtk2806": {"character": "鞄", "keyword": "briefcase",
+                "expected_part_ids": {"rtk2041", "rtk569"}},
+    # 祀 was 礼,已 -- two bugs at once: 礼 (the whole "salute" kanji, rtk1168)
+    # was standing in for 礻 (altar) again, the same bug class kangxi113's
+    # fix addressed dataset-wide but missed this one host; and cjkvi-ids's
+    # JK variant confirms the right side is 巳, not 已. Fixed to 礻,巳.
+    "rtk2993": {"character": "祀", "keyword": "enshrine",
+                "expected_part_ids": {"kangxi113", "rtk2200"}},
 }
 
 # character -> hanzi id, spot-checking the 429-character Unihan self-reference backfill
@@ -1069,6 +1127,21 @@ EXPECTED_ATOMIC = {
     "rtk911": "臣",  # retainer -- CSV: "slave" (a single gloss word, not parts);
                      # render confirms it does not match kangxi171/隶 (also "slave")
     "rtk920": "巨",  # gigantic -- CSV: "Fafner" (a single gloss word, not parts)
+    # 己/已/巳 host-by-host review (2026-09-01, daily check-in): confirmed via
+    # cjkvi-ids that Japanese-standard glyphs consistently use 己 (not 已)
+    # for what CSV calls "snake; self" across 11 hosts (see EXPECTED_DECOMPOSITIONS
+    # below), and 巳 for the two that specifically call for the "snake" reading
+    # (祀's JK variant, and 巳/rtk2200 itself). 已(rtk2944, "stop") had been
+    # wrongly substituted into all of them -- it now has zero hosts left, which
+    # surfaced a separate, pre-existing bug: 已's own keyword "stop" collides
+    # with rtk396(止)'s identical keyword, so 已 doesn't resolve via its own
+    # primary keyword at all (rtk396 wins the tie) -- flagged in the audit doc,
+    # not fixed this session (out of scope for today's specific investigation).
+    "rtk2200": "巳",  # sign of the snake -- was wrongly defined as "已" (a
+                      # different character); genuinely atomic, confirmed distinct
+                      # from 己/已 via render (top-right corner fully closed).
+    "rtk2237": "巴",  # comma-design -- was 乙,已 (fabricated); Unicode-atomic,
+                      # CSV components blank, render shows one continuous stroke.
 }
 
 

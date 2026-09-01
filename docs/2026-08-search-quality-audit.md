@@ -4701,3 +4701,87 @@ redundancy question, `rad3.16`'s "flag" identity, then continue down the
 remaining ~35 items of the original 67-item IDS-atomic list not yet reached
 this session, and eventually back to `triage_google_check.py`'s noisier
 776-item output.
+
+### 2026-09-01 — daily check-in: the 已/己/巳 host-by-host review, 18 hosts fixed
+
+- Pulled latest first: an architecture-review session had landed since
+  yesterday (CI, an isolated pytest API suite, atomic migrations/image
+  uploads, rate limits, analytics retention) plus another content session
+  had already picked up the standing IDS-atomic-list task and fixed 21
+  more kanji, closing out most of the list except the `已`/`己`/`巳`
+  cluster it flagged as top priority. Environment note: this sandbox's
+  system `cryptography`/`google-auth` install was missing `cffi` (a
+  `pyo3` panic on import) and `python-multipart` wasn't installed either
+  — both blocked `test_regression_fixes.py`'s new alias-visibility check
+  and the new pytest suite entirely. Fixed with
+  `pip install cffi && pip install -r requirements.txt -r requirements-dev.txt`;
+  full suite (398 checks after this session) and all 48 pytest tests then
+  ran clean. Worth normalizing this into whatever the box's setup step is
+  if it recurs.
+- Went through all 18 hosts using `已`("stop") as a part, per the previous
+  session's flagged priority. Methodology: pulled exact `cjkvi-ids`
+  entries for every host (catching two of my own codepoint typos this way
+  before they became commits — `妃`/`鞄` needed re-lookup with the correct
+  code point), since Unicode's region-tagged IDS variants (`[G]`/`[T]`/
+  `[J]`/`[K]`/`[V]`) directly answer "which of 己/已/巳 does the *Japanese*
+  standard glyph use" far more reliably than eyeballing three
+  near-identical box shapes at render size.
+- **11 hosts were a simple character swap** — `已`→`己`, confirmed by the
+  `[J]` (or unmarked/single-form) IDS variant in every case: `起`(rouse,
+  also dropped a spurious `土` token render couldn't confirm any trace
+  of), `妃`(queen), `改`(reformation), `記`(scribe), `包`(wrap), `忌`
+  (mourning), `巻`(scroll), `紀`(chronicle), `配`(distribute), `遷`
+  (transition, left its other flagged-but-out-of-scope `西`/`大` tokens
+  untouched), `港`(harbor — also dropped `ハ`/`井`, neither connected to
+  the real glyph at all; real structure is `氵`+`共`+`己` per `巷 = 共+己`,
+  flattened past `巷` itself since it's not a taught frame with any
+  Heisig citation).
+- **1 host needed `巳` instead**: `祀`(enshrine) — `cjkvi-ids`'s `[JK]`
+  variant confirms `巳`, not `己` or `已`. Also caught a *second*, unrelated
+  bug on the same kanji while rendering it: the altar radical (`礻`,
+  `kangxi113`) was standing in as the whole `礼`("salute", rtk1168) kanji
+  again — the exact bug class `kangxi113`'s dataset-wide fix addressed
+  weeks ago, just missed on this one host. Fixed to `礻,巳`.
+- **`巳`(rtk2200) and `巴`(rtk2237) themselves were bugs, not hosts**:
+  `巳`'s own line literally said its parts were `已` (a *different*
+  character) — fixed to atomic, confirmed via render that 己/已/巳 are
+  three genuinely distinct glyphs (differing only in how closed the
+  top-right corner is). `巴` had fabricated parts (`乙,已`) despite being
+  Unicode-atomic with a blank CSV components field and one continuous
+  render shape — fixed to atomic too.
+- **5 hosts needed a real re-decomposition**, not just a character swap:
+  `選`(elect) and `撰`(assortment) both resolve through `巽`("southeast")
+  per `cjkvi-ids`, which is a genuine 5th-edition-only Heisig frame
+  (`id_5th_ed=2861`, dropped from the 6th, per `heisig-kanjis.csv`) —
+  added as a new primitive (`prim-southeast:巽:southeast`, sub-decomposed
+  to `己,共`) rather than repeating `己+共` in both hosts separately, since
+  it's a real, citable compound, not an invented one. `倦`(fed up) was a
+  flattened re-copy of `巻`'s own sub-parts plus stray tokens — fixed to
+  reference `巻`(rtk1292) directly. `庖`(cleaver) and `鞄`(briefcase) both
+  reference `包`(rtk569, "wrap") directly per `cjkvi-ids`, not `已`.
+- **Side effect worth flagging, not fixed this session**: `已`(rtk2944,
+  "stop") now has zero hosts left, which surfaced that its own keyword
+  ("stop") collides with `rtk396`(止)'s identical keyword — `resolve_alias`
+  picks `rtk396` for a bare "stop" search, so `已` is effectively
+  unreachable by its own primary keyword. Same collision *class* as the
+  `个`/umbrella bug from a few sessions ago, just not yet confirmed
+  whether it needs a rename or is otherwise harmless since nothing
+  references `已` as a part anymore.
+- Verified: full rebuild from scratch; `test_regression_fixes.py` — 16 new
+  `EXPECTED_DECOMPOSITIONS` pins + 2 new `EXPECTED_ATOMIC` pins — 398
+  checks, same 4 expected hanzi-scope failures, nothing else; full pytest
+  suite (48 tests) green; `audit_self_reference.py` clean; search-term
+  regression checklist (self/snake/rouse/queen/reformation/scribe/wrap/
+  mourning/scroll/chronicle/distribute/transition/harbor/elect/
+  comma-design/fed up/cleaver/assortment/briefcase/enshrine/southeast)
+  all sane.
+- Not deployed to the live server from this session; data-only change +
+  one new primitive row, no backend restart needed on next deploy.
+- Coverage: pending — see follow-up commit.
+- **Next session**: the `已`/"stop" keyword collision noted above; then
+  back to the previous session's remaining queue — `以`/`瓦`/`尺`, the
+  `匚`/`巨` redundancy question, `rad3.16`'s "flag" identity, the
+  remaining ~35 items of the original 67-item IDS-atomic list, and
+  `triage_google_check.py`'s noisier 776-item output. The 81 orphaned
+  `rad{N}` rows on the live DB is still the other standing item, needs
+  production access.

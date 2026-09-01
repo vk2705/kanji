@@ -808,11 +808,11 @@ rtk561:独:single:犭,虫
 rtk562:蚕:silkworm:一,大,虫,二
 rtk563:風:wind:几,虫,ノ
 rtk564:己:self:
-rtk565:起:rouse:走,土,已
-rtk566:妃:queen:女,已
-rtk567:改:reformation:已,攵
-rtk568:記:scribe:言,已
-rtk569:包:wrap:勹,已
+rtk565:起:rouse:走,己
+rtk566:妃:queen:女,己
+rtk567:改:reformation:己,攵
+rtk568:記:scribe:言,己
+rtk569:包:wrap:勹,己
 rtk570:胞:placenta:月,包
 rtk571:砲:cannon:石,包
 rtk572:泡:bubbles:水,包
@@ -887,7 +887,7 @@ rtk640:忘:forget:心,亡,亠
 rtk641:恣:selfish:欠,心,冫
 rtk642:忍:endure:心,刃
 rtk643:認:acknowledge:言,忍
-rtk644:忌:mourning:心,已
+rtk644:忌:mourning:己,心
 rtk645:志:intention:士,心
 rtk646:誌:document:言,志
 rtk647:芯:wick:心,艾
@@ -1535,7 +1535,7 @@ rtk1288:畔:paddy ridge:田,半
 rtk1289:判:judgement:半,刀
 rtk1290:拳:fist:一,手,丷,大,二
 rtk1291:券:ticket:一,人,大,刀,二,丷
-rtk1292:巻:scroll:大,二,丷,已
+rtk1292:巻:scroll:大,二,丷,己
 rtk1293:圏:sphere:囗,巻
 rtk1294:勝:victory:月,人,大,二,丷,力
 rtk1295:藤:wisteria:｜,一,月,水,艾,二,大,丷
@@ -1697,7 +1697,7 @@ rtk1450:絡:entwine:口,糸,夂
 rtk1451:結:tie:口,士,糸
 rtk1452:終:end:糸,夂
 rtk1453:級:class:ノ,糸,幺,小,及
-rtk1454:紀:chronicle:糸,幺,小,已
+rtk1454:紀:chronicle:糸,幺,小,己
 rtk1455:紅:crimson:工,糸,幺,小
 rtk1456:納:settlement:糸,内
 rtk1457:紡:spinning:糸,幺,小,方
@@ -1787,7 +1787,7 @@ rtk1540:酬:repay:｜,川,酉,丶
 rtk1541:酪:dairy products:口,酉,夂
 rtk1542:酢:vinegar:｜,ノ,酉
 rtk1543:酔:drunk:九,十,酉
-rtk1544:配:distribute:酉,已
+rtk1544:配:distribute:酉,己
 rtk1545:酸:acid:酉,儿,厶,夂
 rtk1546:猶:furthermore:犭,酋
 rtk1547:尊:revered:寸,酋
@@ -1980,7 +1980,7 @@ rtk1733:漂:drift:水,票
 rtk1734:標:signpost:木,票
 rtk1735:栗:chestnut:西,木
 rtk1736:慄:fear:西,state of mind,木
-rtk1737:遷:transition:込,西,大,已
+rtk1737:遷:transition:込,西,大,己
 rtk1738:覆:capsize:西,日,夂,彳
 rtk1739:煙:smoke:火,西,土
 rtk1740:南:south:干,十,丷,冂
@@ -2183,11 +2183,11 @@ rtk1936:異:uncommon:一,田,ハ,井
 rtk1937:翼:wing:｜,一,羽,田,二,ハ,冫,井
 rtk1938:戴:be crowned with:｜,一,田,土,二,ハ,戈
 rtk1939:洪:deluge:｜,一,水,二,ハ
-rtk1940:港:harbor:水,ハ,已,井
+rtk1940:港:harbor:水,共,己
 rtk1941:暴:outburst:｜,一,水,二,日,ハ,井
 rtk1942:爆:bomb:｜,一,火,水,日,ハ,井
 rtk1943:恭:respect:心,ハ,井
-rtk1944:選:elect:｜,込,二,ハ,已
+rtk1944:選:elect:込,巽
 rtk1945:殿:mr.:｜,一,二,ハ,尸,殳,几,又
 rtk1946:井:well:｜,ノ,一,二
 rtk1947:丼:bowl:｜,ノ,二,丶,廾,井
@@ -2443,7 +2443,7 @@ rtk2196:丹:rust-colored:ノ,一,丶,亅
 rtk2197:丑:sign of the ox or cow:｜,ノ,一
 rtk2198:羞:feel ashamed:ノ,ヨ,羊
 rtk2199:卯:sign of the hare or rabbit:卩
-rtk2200:巳:sign of the snake or serpent:已
+rtk2200:巳:sign of the snake or serpent:
 rtk2201:此:this:止,匕
 rtk2202:柴:brush:止,木,匕
 rtk2203:些:a little bit:止,二,匕
@@ -2480,7 +2480,7 @@ rtk2233:厖:large:丶,厂,尤,彡,尢
 rtk2234:或:some:口,戈,一
 rtk2235:兎:rabbit:ノ,丶,儿,口,｜
 rtk2236:也:to be (classical):｜,乙,匕
-rtk2237:巴:comma-design:乙,已
+rtk2237:巴:comma-design:
 rtk2239:菫:the violet:｜,一,口,土,二,艾
 rtk2240:曼:wide:日,又
 rtk2241:云:say:一,二,厶
@@ -2488,7 +2488,7 @@ rtk2242:莫:must not:大,日,艾
 rtk2243:而:and yet:
 rtk2244:倭:yamato:禾,女
 rtk2245:侠:tomboy:人,大,二,丷,亠
-rtk2246:倦:lose interest in:已,大,二,丷,卩,ハ
+rtk2246:倦:lose interest in:亻,巻
 rtk2247:俄:sudden:亅,戈,手
 rtk2248:佃:cultivated rice field:田
 rtk2249:仔:offspring (animal):子
@@ -2583,7 +2583,7 @@ rtk2337:嵌:go into:甘,欠,山
 rtk2338:帖:quire (of paper):巾,口,卜
 rtk2339:幡:flag:巾,田,釆,米
 rtk2340:幟:flag:音,巾,日,立,戈
-rtk2341:庖:kitchen:勹,已,广
+rtk2341:庖:kitchen:广,包
 rtk2342:廓:enclosure:口,子,邦,亅,亠,广
 rtk2343:庇:protect:比,广
 rtk2344:鷹:hawk:鳥,广,杰,隹
@@ -2599,7 +2599,7 @@ rtk2353:捏:knead:土,日,扌
 rtk2354:掴:catch:王,囗,扌,丶
 rtk2355:捺:press:示,二,小,大,扌
 rtk2356:掻:scratch:虫,又,扌
-rtk2357:撰:composing:｜,二,ハ,已,扌
+rtk2357:撰:composing:扌,巽
 rtk2358:揃:be complete:扌,前
 rtk2359:捌:handle:口,力,扌,勹
 rtk2360:按:hold:女,宀,primitive_roof,扌
@@ -3047,7 +3047,7 @@ rtk2802:斡:go around:十,斗,日,个
 rtk2803:鞍:saddle:女,宀,primitive_roof,革
 rtk2804:鞭:whip:ノ,一,革,日,田
 rtk2805:鞘:sheath:革,月,尚
-rtk2806:鞄:suitcase:革,勹,已
+rtk2806:鞄:suitcase:革,包
 rtk2807:靭:soft:革,刀,丶
 rtk2808:鞠:ball:革,米,勹
 rtk2809:顛:overturn:貝,十,頁
@@ -3234,7 +3234,7 @@ rtk2989:嶽:peak:犬,言,山
 rtk2990:國:country:口,囗,戈
 rtk2991:脛:leg:月,工,巛
 rtk2992:勁:strong:工,巛,力
-rtk2993:祀:enshrine:礼,已
+rtk2993:祀:enshrine:礻,巳
 rtk2994:祓:exorcise:ノ,一,礼,丶
 rtk2995:躇:hesitate:口,足,日,老,艾,止
 rtk2996:壽:longevity:一,口,工,士,寸
@@ -3330,3 +3330,4 @@ prim-teki:啇:teki
 prim-sitting-on-the-ground:?:sitting on the ground
 prim-upside-down-row:业:upside down in a row
 prim-tucked-under-the-arm:乂:tucked under the arm
+prim-southeast:巽:southeast:己,共
