@@ -985,6 +985,58 @@ EXPECTED_DECOMPOSITIONS = {
     # 申,旦,勿 (rtk1198/rtk30/rtk1128, all pre-existing).
     "rtk2895": {"character": "暢", "keyword": "carefree",
                 "expected_part_ids": {"rtk1198", "rtk30", "rtk1128"}},
+    # Batch fixed 2026-09-01, continuing the IDS-atomic-but-has-parts review
+    # (67-item list from the Google-cross-check session). All confirmed via CSV
+    # components + render, not just CSV wording alone.
+    # 世 was ｜,一 -- render confirms the top matches 廿 ("twenty", rtk1274, itself
+    # fixed below) exactly, plus a bottom horizontal stroke; CSV says "ten; twenty".
+    "rtk28": {"character": "世", "keyword": "generation",
+              "expected_part_ids": {"rtk1274", "rtk1"}},
+    # 廿 was ｜,一,凵 -- the lone ｜ was redundant, both verticals already come from
+    # 凵; render confirms 廿 = 凵 + a top horizontal stroke exactly.
+    "rtk1274": {"character": "廿", "keyword": "twenty",
+                "expected_part_ids": {"kangxi17", "rtk1"}},
+    # 自 was missing the top dot entirely; CSV: "drop; eye" = 丶+目.
+    "rtk36": {"character": "自", "keyword": "oneself",
+              "expected_part_ids": {"kangxi3", "rtk15"}},
+    # 頁 was missing its top horizontal stroke; render confirms 頁 = 一 + 貝
+    # (matching CSV's "one; ceiling; ...(貝's own sub-components)").
+    "rtk64": {"character": "頁", "keyword": "page",
+              "expected_part_ids": {"rtk1", "rtk56"}},
+    # 州 had a redundant extra ｜ alongside 川+丶; CSV: "stream; flood; drops".
+    "rtk135": {"character": "州", "keyword": "state",
+               "expected_part_ids": {"rtk134", "kangxi3"}},
+    # 及 had a redundant extra ノ alongside 丶+乃; CSV: "fist; from; drop" -- render
+    # confirms 及 visually matches 乃 (whose own CSV components gloss is literally
+    # "fist") plus one added dot, not a separate ノ stroke.
+    "rtk743": {"character": "及", "keyword": "reach out",
+               "expected_part_ids": {"kangxi3", "rtk741"}},
+    # 丈 was ノ,一,丶 -- none of which reflect CSV's "stick; tucked under the arm".
+    # Render confirms the bottom matches prim-tucked-under-the-arm (乂) exactly.
+    "rtk746": {"character": "丈", "keyword": "length",
+               "expected_part_ids": {"rtk1", "prim-tucked-under-the-arm"}},
+    # 史 was ノ,口 -- CSV: "mouth; tucked under the arm" = 口+乂, confirmed by render.
+    "rtk747": {"character": "史", "keyword": "history",
+               "expected_part_ids": {"rtk11", "prim-tucked-under-the-arm"}},
+    # 吏 was re-flattening 史's parts instead of referencing it; render confirms
+    # 吏 = 一 + 史 (whole compound) exactly, matching CSV's overlapping gloss terms.
+    "rtk748": {"character": "吏", "keyword": "officer",
+               "expected_part_ids": {"rtk1", "rtk747"}},
+    # 久 was ノ,入 -- render confirms the top matches prim-hooked-hand (𠂊, "bound
+    # up") exactly and the bottom matches 人; CSV: "bound up; person; mummy".
+    "rtk1092": {"character": "久", "keyword": "long time",
+                "expected_part_ids": {"prim-hooked-hand", "rtk1023"}},
+    # 肉 was 冂,人 -- render confirms 肉 and 内 ("inside", rtk1095) share almost the
+    # same outer contour; CSV: "person; inside; belt; person" -- fixed to reference
+    # 内 as a whole compound plus the extra internal stroke (人) 肉 adds over 内.
+    "rtk1098": {"character": "肉", "keyword": "meat",
+                "expected_part_ids": {"rtk1095", "rtk1023"}},
+    # 年 was ノ,一,干 -- render confirms 年 and 午 ("noon", rtk610) are nearly
+    # identical, differing only by one added short stroke on top; CSV: "sign of
+    # the horse; sunglasses" (午 is the zodiac "horse" hour). Fixed to reference
+    # 午 as a whole compound plus that one extra stroke.
+    "rtk1114": {"character": "年", "keyword": "year",
+                "expected_part_ids": {"prim-katakana-no", "rtk610"}},
 }
 
 # character -> hanzi id, spot-checking the 429-character Unihan self-reference backfill
@@ -1003,6 +1055,20 @@ EXPECTED_HANZI_PRESENT = {
 # are deliberately NOT pinned here -- only genuinely-fixed bugs belong in this set.
 EXPECTED_ATOMIC = {
     "rtk11": "口",
+    # All confirmed atomic 2026-09-01: CSV components column is a single word that
+    # names the whole glyph's traditional gloss (turtle/yawn/genie/snake), not a
+    # parts list, and each is used elsewhere in data.txt as a whole-compound
+    # reference already -- not touching those downstream hosts, just this row's
+    # own stale parts.
+    "rtk33": "凹",   # concave -- CSV components blank; a simple atomic pictograph
+    "rtk34": "凸",   # convex -- CSV components blank; a simple atomic pictograph
+    "rtk250": "兆",  # portent -- CSV: "turtle" (a single gloss word, not parts)
+    "rtk505": "欠",  # lack -- CSV: "yawn" (a single gloss word, not parts)
+    "rtk564": "己",  # self -- CSV: "snake"; visually distinct from 已/巳, not the same glyph
+    "rtk736": "才",  # genius -- CSV: "genie" (a single gloss word, not parts)
+    "rtk911": "臣",  # retainer -- CSV: "slave" (a single gloss word, not parts);
+                     # render confirms it does not match kangxi171/隶 (also "slave")
+    "rtk920": "巨",  # gigantic -- CSV: "Fafner" (a single gloss word, not parts)
 }
 
 

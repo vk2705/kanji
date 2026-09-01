@@ -4577,3 +4577,127 @@ been dead code masking what the live pin actually checked); full suite and
   previous two sessions' standing priority. The 81 orphaned `rad{N}`
   rows on the live DB is still the other standing item, needs
   production access.
+
+## 2026-09-01 — continuing the IDS-atomic-but-has-parts review, 21 more fixes
+
+Owner: "займись проверкой иероглифов" (continue the kanji-checking work) —
+picking the standing task back up from the 67-item IDS-atomic list first
+compiled two sessions ago. Went through the list top-to-bottom, checking each
+against `heisig-kanjis.csv`'s `components` column and `render_glyphs.py`
+(Chromium now works in this environment, no longer blocked).
+
+**Fixed (real, confirmed bugs) — 13 kanji re-decomposed:**
+- `世`(generation, rtk28): was `｜,一` -- render confirms it's `廿`("twenty",
+  rtk1274) + a bottom horizontal stroke, matching CSV's "ten; twenty".
+- `廿`(twenty, rtk1274) itself: was `｜,一,凵` -- the lone `｜` was redundant,
+  both verticals already come from `凵`. Fixed to `凵,一`.
+- `自`(oneself, rtk36): was missing its top dot entirely (`目` alone). CSV:
+  "drop; eye" = `丶`+`目`.
+- `頁`(page, rtk64): was `貝` alone, missing the top horizontal stroke that's
+  clearly visible on render. Fixed to `一,貝`.
+- `州`(state, rtk135): had a redundant extra `｜` alongside the correct
+  `川,丶`. Removed it.
+- `及`(reach out, rtk743): had a redundant extra `ノ`; render confirms `及`
+  visually matches `乃`(rtk741, whose own CSV components gloss is literally
+  "fist") plus one added dot, not a separate `ノ` stroke.
+- `丈`(length, rtk746): was `ノ,一,丶`, none of which reflect CSV's "stick;
+  tucked under the arm". Render confirms the bottom matches
+  `prim-tucked-under-the-arm`(乂, added last session) exactly. Fixed to
+  `一,乂`.
+- `史`(history, rtk747): was `ノ,口` -- CSV: "mouth; tucked under the arm" =
+  `口`+`乂`, confirmed by render. Fixed.
+- `吏`(officer, rtk748): was re-flattening `史`'s parts (`ノ,一,口,丶`);
+  render confirms `吏` = `一` + `史`(whole compound). Fixed.
+- `久`(long time, rtk1092): was `ノ,入` -- render confirms the top matches
+  `prim-hooked-hand`(𠂊, "bound up") exactly and the bottom matches `人`; CSV:
+  "bound up; person; mummy". Fixed to `𠂊,人`.
+- `肉`(meat, rtk1098): was `冂,人` -- render confirms `肉` and `内`("inside",
+  rtk1095) share almost the same outer contour; CSV: "person; inside; belt;
+  person". Fixed to reference `内` as a whole compound plus the one extra
+  internal stroke `肉` adds over `内`.
+- `年`(year, rtk1114): was `ノ,一,干` -- render confirms `年` and `午`("noon",
+  rtk610) are nearly identical, differing by one added short stroke on top;
+  CSV: "sign of the horse; sunglasses" (午 is the zodiac "horse" hour). Fixed
+  to reference `午` as a whole compound plus that one extra stroke.
+
+**Fixed (made atomic) — 8 kanji, all confirmed via the same pattern: CSV's
+`components` column holds a single word naming the whole glyph's traditional
+mnemonic gloss (not a parts list), each is used elsewhere as a whole-compound
+reference already, and render shows the old "parts" bore no resemblance:**
+- `凹`(concave, rtk33) / `凸`(convex, rtk34): CSV components blank entirely;
+  simple atomic pictographs, no render-confirmable parts.
+- `兆`(portent, rtk250): CSV "turtle" -- rendered next to `kangxi90`(爿,
+  itself renamed "turtle" earlier in this audit) and confirmed they don't
+  match at all, so "turtle" isn't pointing at an existing primitive here,
+  it's just 兆's own traditional gloss.
+- `欠`(lack, rtk505): CSV "yawn". Also found and deleted the orphaned legacy
+  placeholder `rad4.17`(character=`?`, aliases "lack, yawn") that duplicated
+  it -- zero references anywhere, safe to remove outright (same "orphaned
+  KRADFILE-era placeholder" pattern as `犭`/`罒`/`rad2.8` earlier).
+- `己`(self, rtk564): was pointing at `已`("stop", rtk2944) -- rendered `己`/
+  `已`/`巳` side by side and confirmed all three are genuinely different
+  glyphs (differing only in how closed the bottom hook is), so `己`
+  referencing `已` was simply wrong, not a stylistic choice. CSV: "snake"
+  (己's own traditional gloss, unrelated to any of the three).
+- `才`(genius, rtk736): CSV "genie".
+- `臣`(retainer, rtk911): was `匚`, which doesn't remotely resemble the real
+  glyph. CSV "slave" -- rendered next to `kangxi171`(隶, which *also* has a
+  "slave" alias) and confirmed they don't match either, so this is a
+  same-gloss-word coincidence, not a collision to fix.
+- `巨`(gigantic, rtk920): CSV "Fafner" (an unusual Heisig mnemonic reference,
+  not a components list).
+
+**Investigated, deliberately left unfixed (flagging for next session):**
+- `以`(by means of, rtk1105): CSV says "plow; drop; person", but rendering
+  `耒`("plow", kangxi127) next to `以` shows no resemblance at all -- CSV
+  wording doesn't cleanly explain this one. Current `｜,人,丶` is at least
+  plausible-looking (right side resembles 人) but not confirmed either way.
+- `瓦`(tile, rtk1108): CSV lists 7 loosely-related gloss words ("one; ceiling;
+  cane; stick; drop; fishhook; ice"). Render shows the current lone `一` part
+  is not wrong, just incomplete -- the glyph has real additional structure
+  CSV's noisy wording doesn't cleanly decompose. Needs a slower, dedicated
+  pass, not a same-session guess.
+- `尺`(shaku, rtk1151): CSV "flag; stick". The only existing primitive with a
+  "flag" alias (`rad3.16`, character=`?`) is itself a fully orphaned,
+  glyph-less placeholder -- can't confirm what it's supposed to look like, so
+  left both `尺`'s current `尸,丶` parts and the orphaned `rad3.16` row alone
+  rather than guess. Flagging `rad3.16` specifically as a candidate for a
+  future "give it a real glyph or delete it" pass, same as `rad4.17` this
+  session.
+- `示`(show, rtk1167): checked and confirmed already correct (`二,小`,
+  matching CSV's "two; small" exactly) -- CSV's "altar" is just 示's own
+  traditional gloss, not a components hint. No change needed, noted here
+  only so the next session doesn't re-check it.
+- `礻`/`kangxi113` and the `己`/`已`/`巳`-as-a-part-elsewhere question: found
+  that `已`(rtk2944) is used as a literal part in 18+ other kanji (起, 妃,
+  記, 包, 忌, 配, 巻, 紀, 選, etc.) -- given 己/已/巳 are confirmed genuinely
+  distinct glyphs (see 己 above), some fraction of those 18 hosts may
+  actually need 己 or 巳 instead of 已. This needs a dedicated render pass
+  per host, not a blind bulk swap -- flagging as the single highest-value
+  next investigation, since it could be a systematic, longstanding KRADFILE-
+  era mix-up (same root-cause class CLAUDE.md already documents for other
+  proxy substitutions) affecting a two-digit number of kanji at once.
+- `匚`/`巨` overlap: `拒`(rtk921) and `距`(rtk1375) both list `匚` *and* `巨`
+  side by side as separate parts -- since 巨 itself was just confirmed
+  atomic-with-no-匚-relation, this pairing might be a redundant double-count
+  (巨's own shape may already contain what 匚 is standing in for) rather than
+  two genuinely separate strokes. Not investigated further this session;
+  flagging for the next one.
+
+**Applied**: two `sync_system_data.py --dry-run` → `backup_db.py` → apply
+rounds (12 decompositions replaced total, 7 removed "now atomic"); manually
+deleted the confirmed-orphaned `rad4.17` row after sync (zero remaining
+references). Verified live via `get_kanji_detail` for every fixed id, plus
+spot-checked several downstream hosts (姫/拒/丙/桃/吹/次 etc.) that reference
+the newly-atomic or newly-recomposed primitives, to confirm nothing broke.
+`test_regression_fixes.py` — 21 new pins (13 `EXPECTED_DECOMPOSITIONS`, 8
+`EXPECTED_ATOMIC`) — full suite passes; `audit_self_reference.py` clean.
+
+**Next session**: the `已`/`己`/`巳` host-by-host review (flagged above) is
+the standing top priority now -- it's the first finding this session that
+plausibly affects double digits of kanji at once, not just one or two.
+After that: `以`/`瓦`/`尺` (the three left unresolved above), the `匚`/`巨`
+redundancy question, `rad3.16`'s "flag" identity, then continue down the
+remaining ~35 items of the original 67-item IDS-atomic list not yet reached
+this session, and eventually back to `triage_google_check.py`'s noisier
+776-item output.

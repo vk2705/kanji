@@ -80,7 +80,6 @@ rad4.11:?:direction,compass
 rad4.12:?:Radical 71,negative
 rad4.14:?:sayeth,sun-
 rad4.16:?:tree, wood
-rad4.17:?:lack, yawn
 rad4.18:?:stop, footprint
 rad4.19:?:bones
 rad4.20:?:missile
@@ -274,15 +273,15 @@ rtk24:呂:spine:口,ノ
 rtk25:昌:prosperous:日
 rtk26:早:early:十,日
 rtk27:旭:rising sun:日,九
-rtk28:世:generation:｜,一
+rtk28:世:generation:廿,一
 rtk29:胃:stomach:月,田
 rtk30:旦:daybreak:一,日
 rtk31:胆:gall bladder:一,月,日
 rtk32:亘:span:一,旦
-rtk33:凹:concave:凵
-rtk34:凸:convex:｜,一,冂,凵
+rtk33:凹:concave:
+rtk34:凸:convex:
 rtk35:旧:old times:｜,日
-rtk36:自:oneself:目
+rtk36:自:oneself:丶,目
 rtk37:白:white:
 rtk38:百:hundred:一,白
 rtk39:中:in:｜,口
@@ -310,7 +309,7 @@ rtk60:貼:stick:貝,占
 rtk61:見:see:目,儿
 rtk62:児:newborn babe:旧,儿
 rtk63:元:beginning:二,儿
-rtk64:頁:page:貝
+rtk64:頁:page:一,貝
 rtk65:頑:stubborn:貝,頁,儿,二,元
 rtk66:凡:commonplace:丶,几
 rtk67:負:defeat:貝,勹
@@ -380,7 +379,7 @@ rtk131:省:government ministry:少,目
 rtk132:厚:thick:子,日,厂
 rtk133:奇:strange:一,口,大,亅
 rtk134:川:stream:
-rtk135:州:state:｜,川,丶
+rtk135:州:state:川,丶
 rtk136:順:obey:川,頁
 rtk137:水:water:
 rtk138:氷:icicle:水,丶
@@ -494,7 +493,7 @@ rtk246:墓:grave:大,土,日,艾
 rtk247:暮:evening:大,日,艾
 rtk248:膜:membrane:月,大,日,艾
 rtk249:苗:seedling:田,艾
-rtk250:兆:portent:儿,冫
+rtk250:兆:portent:
 rtk251:桃:peach:木,兆
 rtk252:眺:stare:目,兆
 rtk253:犬:dog:大,丶
@@ -749,7 +748,7 @@ rtk501:乞:beg:ノ,一,乙,人
 rtk502:乾:drought:乙,早,ノ,一,人
 rtk503:腹:abdomen:月,日,夂,ノ,一,人
 rtk504:複:duplicate:初,日,夂
-rtk505:欠:lack:勹,人
+rtk505:欠:lack:
 rtk506:吹:blow:欠,口
 rtk507:炊:cook:火,欠
 rtk508:歌:song:一,欠,口,亅
@@ -808,7 +807,7 @@ rtk560:蝶:butterfly:虫,木,世
 rtk561:独:single:犭,虫
 rtk562:蚕:silkworm:一,大,虫,二
 rtk563:風:wind:几,虫,ノ
-rtk564:己:self:已
+rtk564:己:self:
 rtk565:起:rouse:走,土,已
 rtk566:妃:queen:女,已
 rtk567:改:reformation:已,攵
@@ -980,19 +979,19 @@ rtk732:械:contraption:木,廾,戈
 rtk733:鼻:nose:自,田,廾,目
 rtk734:刑:punish:廾,ノ,二,一
 rtk735:型:mould:土,刑
-rtk736:才:genius:ノ,一,亅
+rtk736:才:genius:
 rtk737:財:property:ノ,一,貝,亅
 rtk738:材:lumber:ノ,一,木,亅
 rtk739:存:exist:｜,ノ,一,子
 rtk740:在:exist:｜,ノ,一,土
 rtk741:乃:from:｜,ノ,一
 rtk742:携:portable:ノ,扌,隹,乃
-rtk743:及:reach out:丶,乃,ノ
+rtk743:及:reach out:丶,乃
 rtk744:吸:suck:ノ,口,及
 rtk745:扱:handle:扌,及
-rtk746:丈:length:ノ,一,丶
-rtk747:史:history:ノ,口
-rtk748:吏:officer:ノ,一,口,丶
+rtk746:丈:length:一,乂
+rtk747:史:history:口,乂
+rtk748:吏:officer:一,史
 rtk749:更:grow late:一,日,乂
 rtk750:硬:stiff:ノ,一,口,石,日,田
 rtk751:梗:for the most part:木,更
@@ -1155,7 +1154,7 @@ rtk907:潜:submerge:水,日,二,大,人,亠
 rtk908:失:lose:ノ,人,二,大
 rtk909:鉄:iron:ノ,金,二,矢,大
 rtk910:迭:transfer:｜,ノ,一,牛,込,矢,大,二
-rtk911:臣:retainer:匚
+rtk911:臣:retainer:
 rtk912:姫:princess:女,臣
 rtk913:蔵:storehouse:ノ,臣,戈,艾,厂
 rtk914:臓:entrails:ノ,月,臣,戈,艾,厂
@@ -1164,7 +1163,7 @@ rtk916:腎:kidney:月,臣,又
 rtk917:堅:strict:臣,土,又
 rtk918:臨:look to:ノ,口,臣,品,一,人
 rtk919:覧:perusal:ノ,見,臣,二
-rtk920:巨:gigantic:匚
+rtk920:巨:gigantic:
 rtk921:拒:repel:匚,扌,巨
 rtk922:力:power:
 rtk923:男:male:田,力
@@ -1336,13 +1335,13 @@ rtk1088:荷:baggage:口,亅,艾,一
 rtk1089:俊:sagacious:儿,厶,夂
 rtk1090:傍:bystander:丷,方,立,亠,冖
 rtk1091:俺:i:乙,大,奄
-rtk1092:久:long time:ノ,入
+rtk1092:久:long time:𠂊,人
 rtk1093:畝:furrow:田,亠,久
 rtk1094:囚:captured:人,囗
 rtk1095:内:inside:人,冂
 rtk1096:丙:third class:一,内
 rtk1097:柄:design:一,人,木,冂
-rtk1098:肉:meat:冂,人
+rtk1098:肉:meat:内,人
 rtk1099:腐:rot:寸,肉,广
 rtk1100:座:squat:｜,土,人,广
 rtk1101:挫:crush:坐,扌
@@ -1358,7 +1357,7 @@ rtk1110:宮:shinto shrine:口,宀,primitive_roof,ノ
 rtk1111:営:camp:口,尚,冖,ノ
 rtk1112:善:virtuous:王,口,丷,羊
 rtk1113:膳:small low table:王,月,口,丷,羊
-rtk1114:年:year:ノ,一,干
+rtk1114:年:year:ノ,午
 rtk1115:夜:night:亠,亻,夂,夕
 rtk1116:液:fluid:水,亠,攵,夕
 rtk1117:塚:hillock:土,冖,豕
@@ -1518,7 +1517,7 @@ rtk1270:借:borrow:日,廾,二
 rtk1271:惜:pity:昔,忄
 rtk1272:措:set aside:昔,扌
 rtk1273:散:scatter:月,攵,廾,二
-rtk1274:廿:twenty:｜,一,凵
+rtk1274:廿:twenty:凵,一
 rtk1275:庶:commoner:广,杰
 rtk1276:遮:intercept:一,込,庶
 rtk1277:席:seat:巾,广,一,凵
