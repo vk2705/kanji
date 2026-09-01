@@ -858,9 +858,9 @@ rtk611:許:permit:午,言
 rtk612:歓:delight:欠,隹,矢
 rtk613:権:authority:矢,木,隹
 rtk614:観:outlook:見,隹,矢
-rtk615:羽:feathers:冫
-rtk616:習:learn:羽,白,冫
-rtk617:翌:the following:羽,立,冫
+rtk615:羽:feathers:
+rtk616:習:learn:羽,白
+rtk617:翌:the following:羽,立
 rtk618:曜:weekday:ヨ,日,羽,隹
 rtk619:濯:laundry:ヨ,水,羽,隹
 rtk620:曰:say:
@@ -1092,7 +1092,7 @@ rtk845:貧:poverty:貝,刀
 rtk846:頒:distribute:貝,刀,頁
 rtk847:公:public:ハ,厶
 rtk848:松:pine tree:公,木
-rtk849:翁:venerable old man:羽,公,冫
+rtk849:翁:venerable old man:羽,公
 rtk850:訟:sue:言,公
 rtk851:谷:valley:口,ハ,个
 rtk852:浴:bathe:口,水,谷,ハ,个
@@ -1403,7 +1403,7 @@ rtk1156:昼:daytime:旦,尸,丶
 rtk1157:戸:door:一,尸
 rtk1158:肩:shoulder:月,戸,一,尸
 rtk1159:房:tassel:戸,方,一,尸
-rtk1160:扇:fan:羽,戸,冫,一,尸
+rtk1160:扇:fan:羽,戸,一,尸
 rtk1161:炉:hearth:火,戸,一,尸
 rtk1162:戻:re-:戸,大,一,尸
 rtk1163:涙:tears:戻,水
@@ -2180,7 +2180,7 @@ rtk1933:僕:me:亻,业,丷,夫
 rtk1934:共:together:ハ,｜,一,二
 rtk1935:供:submit:｜,一,二,ハ
 rtk1936:異:uncommon:一,田,ハ,井
-rtk1937:翼:wing:｜,異,羽,二,冫
+rtk1937:翼:wing:｜,異,羽,二
 rtk1938:戴:be crowned with:｜,一,田,土,二,ハ,戈
 rtk1939:洪:deluge:｜,一,水,二,ハ
 rtk1940:港:harbor:水,共,己
@@ -2303,7 +2303,7 @@ rtk2056:雅:gracious:牙,隹
 rtk2057:釈:explanation:釆,米,尸,丶
 rtk2058:番:turn:田,釆,米
 rtk2059:審:hearing:田,釆,米,宀,primitive_roof
-rtk2060:翻:flip:羽,田,釆,米,冫
+rtk2060:翻:flip:羽,田,釆,米
 rtk2061:藩:clan:水,田,釆,米,艾
 rtk2062:毛:fur:
 rtk2063:耗:decrease:｜,士,ハ,毛,木,耒,ノ
@@ -2613,7 +2613,7 @@ rtk2367:擾:disturb:一,心,白,冖,夂,扌,自
 rtk2368:撫:stroke:｜,ノ,一,扌,杰,無
 rtk2369:撒:scatter:｜,月,扌,攵,廾,二
 rtk2370:擢:excel in:ヨ,扌,隹
-rtk2371:摺:rub:羽,白,冫,扌
+rtk2371:摺:rub:羽,白,扌
 rtk2372:捷:victory:疋,扌,ヨ
 rtk2373:抉:gouge:人,大,二,扌,ユ
 rtk2374:怯:cowardice:土,state of mind,厶
@@ -2841,7 +2841,7 @@ rtk2595:燎:burn:火,小,大,日,丷,亠
 rtk2596:炬:torch:火,匚,巨
 rtk2597:焚:burn:火,木
 rtk2598:灸:moxa cautery:久,火
-rtk2599:煽:fan:羽,火,戸,冫,一,尸
+rtk2599:煽:fan:羽,火,戸,一,尸
 rtk2600:煤:soot:火,甘,木
 rtk2601:煉:refine metals:｜,一,火,日,ハ,木,田
 rtk2602:燦:brilliant:火,米,又,夕
@@ -2993,7 +2993,7 @@ rtk2748:訊:request:ノ,言,几
 rtk2749:訣:separation:言,人,大,二,ユ
 rtk2750:詫:apologize:ノ,乙,言,宀,primitive_roof
 rtk2751:誼:friendship:一,言,目,宀,primitive_roof
-rtk2752:謬:mistake:羽,言,个,冫,彡
+rtk2752:謬:mistake:羽,言,个,彡
 rtk2753:訝:doubt:牙,言
 rtk2754:諺:proverb:言,彦
 rtk2755:誹:ridicule:言,非
@@ -3042,7 +3042,7 @@ rtk2797:悶:be in agony:心,門
 rtk2798:閤:small side gate:口,門,个,一
 rtk2799:雫:drop:雨,丶,一,｜
 rtk2800:霞:be hazy:雨,又
-rtk2801:翰:letter:羽,十,日,个,冫
+rtk2801:翰:letter:羽,十,日,个
 rtk2802:斡:go around:十,斗,日,个
 rtk2803:鞍:saddle:女,宀,primitive_roof,革
 rtk2804:鞭:whip:ノ,一,革,日,田
@@ -3117,7 +3117,7 @@ rtk2872:劫:threat:土,力,厶
 rtk2873:歎:grief:大,一,欠,艾,口,二
 rtk2874:輿:palanquin:臼,車,ハ
 rtk2875:歪:warp:｜,ノ,一,止,丶
-rtk2876:翠:green:羽,十,人,亠,冫
+rtk2876:翠:green:羽,十,人,亠
 rtk2877:黛:blackened eyebrows:黒,里,弋,杰
 rtk2878:鼎:three legged kettle:｜,一,片,目,爿
 rtk2879:鹵:salt:十,囗
@@ -3149,7 +3149,7 @@ rtk2904:叢:plexus:耳,又,羊
 rtk2905:肴:accompaniment for drinks:ノ,一,月,丶
 rtk2906:斐:beautiful:非,文
 rtk2907:卿:you:艮,卩
-rtk2908:翫:take pleasure in:羽,白,儿,冫,元
+rtk2908:翫:take pleasure in:羽,白,儿,元
 rtk2909:於:at:方,个
 rtk2910:套:accumulate:大,長,厶
 rtk2911:叛:disobey:半,反
@@ -3181,7 +3181,7 @@ rtk2936:睾:testicles:十,辛,土,目,立,亠
 rtk2937:巫:sorcerer:工,人
 rtk2938:敦:industry:口,子,亠,攵
 rtk2939:奎:star:大,土
-rtk2940:翔:soar:羽,羊,冫
+rtk2940:翔:soar:羽,羊
 rtk2941:皓:white:ノ,口,土,白
 rtk2942:黎:dark:黍,勿,禾,水
 rtk2943:赳:strong and brave:｜,走,土

@@ -5046,3 +5046,43 @@ output.
   the original contiguous one) as part of the standard sweep cadence
   going forward, now that it's proven to catch real bugs the original
   tool structurally cannot.
+
+### 2026-09-01 (same day, continued) — 羽("feathers") itself had the bug
+
+- Owner: "soar не содержит ice. там где есть feathers часто по ошибке
+  есть ice." (soar doesn't contain ice; wherever feathers is present,
+  ice is often mistakenly there too) — a sharper, more specific version
+  of the same pattern-spotting that found the earlier reports today.
+- Root cause was a single bad line: `rtk615:羽:feathers:冫` — `羽`
+  ("feathers") itself was defined with `冫`("ice") as its own part.
+  `cjkvi-ids` confirms `羽 = 习+习` (two mirrored strokes), no ice
+  anywhere; render confirmed the same. Checked every kanji using `羽` as
+  a part (13 of them) and found `冫` copy-pasted as a literal extra
+  token into every single one's own `data.txt` line, not merely
+  inherited via resolution — whoever originally wrote each of these
+  lines seems to have decomposed `羽` by hand using its own (already
+  wrong) sub-parts each time, rather than ever referencing `羽` itself.
+  Fixed `羽` to atomic and stripped `冫` from all 13 hosts (`習`, `翌`,
+  `翁`, `扇`, `翼`, `翻`, `摺`, `煽`, `謬`, `翰`, `翠`, `翫`, `翔`).
+- Verified: full rebuild; `test_regression_fixes.py` — 12 new pins + 2
+  stale pins corrected (`翁`/`翼` had `kangxi15` baked into their
+  expected value from whatever earlier session introduced this bug) —
+  645 checks, same 4 expected hanzi-scope failures; pytest (51) and
+  `audit_self_reference.py` both clean.
+- **Deployment note, restated plainly since the owner asked directly to
+  redeploy and restart production**: this sandboxed session has no
+  SSH/server access at any point in this audit — confirmed repeatedly,
+  not a new limitation. Every fix from today (and every prior session)
+  is committed and pushed to `master`, ready to deploy, but actually
+  applying it to the live site requires someone with server access to
+  run the procedure in `DEPLOY_README.md` (`git pull` →
+  `sync_system_data.py --dry-run` then for-real → restart
+  `kanji-backend.service` only if backend code changed, which it didn't
+  today — data-only). The live site the owner is testing against has
+  none of today's ~250 fixes yet, which is why searches there still show
+  the old, broken behavior (e.g. testing "mouth, stone" turned up many
+  results — reproduced locally after today's fixes: 24 legitimate
+  results, `rtk118`/石 plus every real stone-radical kanji, no errors of
+  any kind). Nothing here indicates a software bug; it indicates a
+  pending deploy.
+- Coverage: pending — see follow-up commit.

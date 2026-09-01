@@ -1328,7 +1328,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk848": {"character": "松", "keyword": "pine tree",
                 "expected_part_ids": {"rtk207", "rtk847"}},
     "rtk849": {"character": "翁", "keyword": "venerable old man",
-                "expected_part_ids": {"kangxi15", "rtk615", "rtk847"}},
+                "expected_part_ids": {"rtk615", "rtk847"}},
     "rtk854": {"character": "溶", "keyword": "melt",
                 "expected_part_ids": {"rtk137", "rtk853"}},
     "rtk883": {"character": "趣", "keyword": "gist",
@@ -1536,7 +1536,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1910": {"character": "遣", "keyword": "dispatch",
                 "expected_part_ids": {"rtk1", "rtk39", "rtk843"}},
     "rtk1937": {"character": "翼", "keyword": "wing",
-                "expected_part_ids": {"kangxi15", "prim-pipe", "rtk1936", "rtk2", "rtk615"}},
+                "expected_part_ids": {"prim-pipe", "rtk1936", "rtk2", "rtk615"}},
     "rtk1972": {"character": "婚", "keyword": "marriage",
                 "expected_part_ids": {"rtk102", "rtk2526"}},
     "rtk1977": {"character": "眠", "keyword": "sleep",
@@ -1642,6 +1642,35 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk556", "rtk752"}},
     "rtk2791": {"character": "鎚", "keyword": "hammer",
                 "expected_part_ids": {"rtk1359", "rtk287"}},
+    # 羽("feathers") owner-reported (2026-09-01): 羽 itself was wrongly defined
+    # with kangxi15("ice", 冫) as its own part -- cjkvi-ids confirms 羽 = 习+习
+    # (two mirrored strokes), no ice anywhere; render confirms too. That one
+    # bug had been copy-pasted as a literal extra token into all 13 kanji
+    # using 羽 as a part, since each host's own data.txt line listed 冫
+    # explicitly rather than just referencing 羽. Fixed 羽 to atomic and
+    # removed the redundant 冫 from every host.
+    "rtk616": {"character": "習", "keyword": "learn",
+               "expected_part_ids": {"rtk37", "rtk615"}},
+    "rtk617": {"character": "翌", "keyword": "the following",
+               "expected_part_ids": {"rtk462", "rtk615"}},
+    "rtk1160": {"character": "扇", "keyword": "fan",
+               "expected_part_ids": {"kangxi44", "rtk1", "rtk1157", "rtk615"}},
+    "rtk2060": {"character": "翻", "keyword": "flip",
+               "expected_part_ids": {"kangxi165", "rtk14", "rtk615", "rtk987"}},
+    "rtk2371": {"character": "摺", "keyword": "rubbing",
+               "expected_part_ids": {"kangxi64", "rtk37", "rtk615"}},
+    "rtk2599": {"character": "煽", "keyword": "fanning",
+               "expected_part_ids": {"kangxi44", "rtk1", "rtk1157", "rtk173", "rtk615"}},
+    "rtk2752": {"character": "謬", "keyword": "fallible",
+               "expected_part_ids": {"kangxi59", "prim-umbrella", "rtk357", "rtk615"}},
+    "rtk2801": {"character": "翰", "keyword": "quill",
+               "expected_part_ids": {"prim-umbrella", "rtk10", "rtk12", "rtk615"}},
+    "rtk2876": {"character": "翠", "keyword": "jade green",
+               "expected_part_ids": {"kangxi8", "rtk10", "rtk1023", "rtk615"}},
+    "rtk2908": {"character": "翫", "keyword": "fiddle with",
+               "expected_part_ids": {"kangxi10", "rtk37", "rtk615", "rtk63"}},
+    "rtk2940": {"character": "翔", "keyword": "soar",
+               "expected_part_ids": {"rtk586", "rtk615"}},
 }
 
 # character -> hanzi id, spot-checking the 429-character Unihan self-reference backfill
@@ -1689,6 +1718,8 @@ EXPECTED_ATOMIC = {
                       # from 己/已 via render (top-right corner fully closed).
     "rtk2237": "巴",  # comma-design -- was 乙,已 (fabricated); Unicode-atomic,
                       # CSV components blank, render shows one continuous stroke.
+    "rtk615": "羽",   # feathers -- was wrongly kangxi15("ice"); cjkvi-ids
+                      # confirms 羽 = 习+习 (two mirrored strokes), no ice.
 }
 
 
