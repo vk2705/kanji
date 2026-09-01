@@ -5037,7 +5037,9 @@ output.
 - Not deployed to the live server from this session; data-only change +
   two new primitive rows (`prim-maestro`, `prim-noren`), no backend
   restart needed on next deploy.
-- Coverage: pending — see follow-up commit.
+- Coverage: not captured separately — the follow-up commit below (羽 fix,
+  same day) landed before `coverage_status.py` was re-run, so its number
+  covers both batches together.
 - **Next session**: `壷`'s ambiguous top element, if a better render or
   external source turns up. `triage_google_check.py`'s noisier 776-item
   output is still unmined. The 81 orphaned `rad{N}` rows on the live DB
@@ -5085,4 +5087,5 @@ output.
   results, `rtk118`/石 plus every real stone-radical kanji, no errors of
   any kind). Nothing here indicates a software bug; it indicates a
   pending deploy.
-- Coverage: pending — see follow-up commit.
+- Coverage: **1408/3000 (46.9%)** (covers this batch and the previous
+  233-fix batch together, see its own entry's note above).
