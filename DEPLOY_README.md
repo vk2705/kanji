@@ -239,6 +239,40 @@ check afterward whether any of this actually brought real visitors — it
 already excludes bots that only ever hit URLs directly without running the
 frontend JS, so a genuine uptick there is a genuine uptick, not crawler noise.
 
+## Google Sign-In button not appearing (added 2026-09-02, owner report)
+
+If the "Sign in with Google" button doesn't show up on the login popover at
+all (not "shows an error", just entirely absent), this is almost always a
+missing build-time config value, not a code bug — `AuthBar.jsx` skips
+loading the Google script entirely when `VITE_GOOGLE_CLIENT_ID` is falsy
+(`frontend/.env`), by design (see the comment right above that check).
+Vite bakes this in at **build time**, not runtime, so setting the value
+alone does nothing until the frontend is rebuilt and redeployed.
+
+Needs the owner's own Google account — can't be done by an AI session:
+
+1. [Google Cloud Console](https://console.cloud.google.com/apis/credentials)
+   → Create OAuth client ID → Web application → Authorized JavaScript
+   origins: `https://srv.alteon.help` (and `http://localhost:5173` for local
+   dev). No redirect URI needed (this uses Google Identity Services'
+   client-side token flow, not a server redirect).
+2. The resulting Client ID is a public identifier, not a secret — set the
+   *same* value in two places:
+   - Backend: `sudo systemctl edit kanji-backend.service` → add
+     `Environment=GOOGLE_CLIENT_ID=<id>` under `[Service]` → restart.
+   - Frontend: `frontend/.env` → `VITE_GOOGLE_CLIENT_ID=<id>`.
+3. Rebuild the frontend (`npm run build`) and copy `dist/` to
+   `/usr/share/nginx/html/kanji/` — a `.env` edit alone does not take
+   effect without this step.
+4. Verify: reload the live site, open the login popover, confirm the
+   Google button now renders. If it renders but sign-in itself fails,
+   that's a *different* problem (client ID mismatch between frontend/
+   backend, or wrong authorized origin) — check the backend logs for the
+   actual `verify_oauth2_token` exception rather than guessing.
+
+See `CLAUDE.md`'s "Google SSO" section for the full design (why both a
+frontend and backend value are needed, and why they must match).
+
 ## If something looks wrong
 
 - `sync_system_data.py` refuses to run against a database file that
