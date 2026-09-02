@@ -511,7 +511,7 @@ rtk265:介:jammed in:ハ,个
 rtk266:界:world:田,个,儿
 rtk267:茶:tea:个,艾,木
 rtk268:脊:stature:月,二,人
-rtk269:合:fit:口,个,一
+rtk269:合:fit:口,亼
 rtk270:塔:pagoda:合,土,艾
 rtk271:王:king:
 rtk272:玉:jewel:王,丶
@@ -699,7 +699,7 @@ rtk453:曇:cloudy weather:雨,二,日,厶
 rtk454:雷:thunder:雨,田
 rtk455:霜:frost:雨,相
 rtk456:冬:winter:夂,丶
-rtk457:天:heavens:一,大,二
+rtk457:天:heavens:一,大
 rtk458:妖:attractive:ノ,女,大
 rtk459:沃:fertility:ノ,水,大
 rtk460:橋:bridge:ノ,口,木,冂
@@ -1143,10 +1143,10 @@ rtk897:寧:rather:丁,心,宀,皿
 rtk898:濁:voiced:水,虫,勹
 rtk899:環:ring:衣,王,口,一
 rtk900:還:send back:衣,口,込,一
-rtk901:夫:husband:人,二,大,亠
+rtk901:夫:husband:一,大
 rtk902:扶:aid:人,二,扌,大
 rtk903:渓:mountain stream:水,人,爪,土,二,大
-rtk904:規:standard:見,土,人,二,大
+rtk904:規:standard:夫,見
 rtk905:替:exchange:人,大,二,日,亠
 rtk906:賛:approve:貝,人,大,二,亠
 rtk907:潜:submerge:水,日,二,大,人,亠
@@ -1547,7 +1547,7 @@ rtk1301:芝:turf:亠,艾
 rtk1302:不:negative:｜,ノ,一,丶
 rtk1303:否:negate:ノ,一,口,｜,丶
 rtk1304:杯:counter for cupfuls:｜,ノ,一,木,礼
-rtk1305:矢:dart:ノ,大,一
+rtk1305:矢:dart:ノ,天
 rtk1306:矯:rectify:ノ,口,矢,冂,大
 rtk1307:族:tribe:方,矢
 rtk1308:知:know:口,矢
@@ -1745,7 +1745,7 @@ rtk1499:卸:wholesale:ノ,止,卩
 rtk1500:御:honorable:卸,彳
 rtk1501:服:clothing:月,又,卩
 rtk1502:命:fate:合,卩
-rtk1503:令:orders:个,卩,一
+rtk1503:令:orders:亼,卩
 rtk1504:零:zero:雨,令
 rtk1505:齢:age:止,歯,米,令,凵
 rtk1506:冷:cool:令,冫
@@ -1943,7 +1943,7 @@ rtk1697:棒:rod:｜,一,人,木,二,大
 rtk1698:謹:discreet:言,土,艾,口,二
 rtk1699:僅:a wee bit:土,艾,口,二,一
 rtk1700:勤:diligence:土,力,艾,口,二,一
-rtk1701:漢:sino-:水,艾,口,一,大,二
+rtk1701:漢:sino-:水,艾,口,夫
 rtk1702:嘆:sigh:ノ,一,口,艾,二,大
 rtk1703:難:difficult:艾,隹,大,口,亠,二
 rtk1704:華:splendor:｜,一,艾
@@ -1953,7 +1953,7 @@ rtk1707:睡:drowsy:垂,目
 rtk1708:錘:weight:垂,金
 rtk1709:乗:ride:｜,ノ,一,禾,ハ
 rtk1710:剰:surplus:｜,ノ,一
-rtk1711:今:now:个,一
+rtk1711:今:now:亼,一
 rtk1712:含:contain:口,今
 rtk1713:貪:covet:貝,个,一
 rtk1714:吟:versify:口,今
@@ -2000,7 +2000,7 @@ rtk1754:聞:hear:耳,門
 rtk1755:潤:wet:王,水,門
 rtk1756:欄:column:木,門,東
 rtk1757:闘:fight:門,豆,寸
-rtk1758:倉:godown:ノ,口,个,尸,一
+rtk1758:倉:godown:ノ,口,亼,尸,一
 rtk1759:創:genesis:口,个,一
 rtk1760:非:un-:
 rtk1761:俳:haiku:非
@@ -2119,7 +2119,7 @@ rtk1873:薬:medicine:日,木,冫,艾
 rtk1874:率:ratio:玄,十,亠,冫,幺
 rtk1875:渋:astringent:止,水,冫
 rtk1876:摂:vicarious:耳,冫,扌
-rtk1877:央:center:ノ,一,大,冖
+rtk1877:央:center:冖,大
 rtk1878:英:england:ノ,艾,大,冖
 rtk1879:映:reflect:ノ,日,大,冖
 rtk1880:赤:red:土
@@ -2899,7 +2899,7 @@ rtk2655:穣:good crops:衣,禾,ハ,亠
 rtk2656:稜:angle:禾,土,儿,夂
 rtk2657:稀:rare:ノ,一,禾,巾,丶
 rtk2658:穆:respectful:禾,小,白,彡
-rtk2659:窺:lie in wait:見,ハ,宀,primitive_roof,一,大,穴,二,儿
+rtk2659:窺:lie in wait:穴,規
 rtk2660:窄:narrow:｜,ノ,穴,儿,宀,primitive_roof
 rtk2661:穿:put on (to the feet):牙,穴,儿,宀,primitive_roof
 rtk2662:竃:kitchen stove:亀,穴,土,宀,primitive_roof,儿,乙,勹,田
@@ -3333,3 +3333,4 @@ prim-southeast:巽:southeast:己,共
 prim-maestro:𠂤:maestro
 prim-noren:帀:noren:一,巾
 prim-bushes:丰:bushes
+prim-meeting:亼:meeting

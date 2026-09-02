@@ -1718,6 +1718,73 @@ EXPECTED_DECOMPOSITIONS = {
     # rtk110 and deleted the orphan.
     "rtk196": {"character": "尚", "keyword": "esteem",
                "expected_part_ids": {"kangxi13", "rtk11", "rtk110"}},
+    # Continuing the common-primitive audit (2026-09-02, interactive
+    # follow-up): 天(rtk457, "heavens") itself had a stray "二"("two") that
+    # doesn't appear anywhere in cjkvi-ids's ⿱一大 or the render -- 天 is
+    # just 一+大. That in turn revealed 矢(rtk1305, "dart") was flattening
+    # 天's own (now-corrected) parts instead of referencing 天 directly --
+    # CSV's components for 矢 are exactly "drop; heavens", and a render
+    # comparison confirms 矢 = ノ("drop", the extra stroke) sitting on 天.
+    "rtk457": {"character": "天", "keyword": "heavens",
+               "expected_part_ids": {"rtk1", "rtk112"}},
+    "rtk1305": {"character": "矢", "keyword": "dart",
+                "expected_part_ids": {"prim-katakana-no", "rtk457"}},
+    # Separately, found the same "个 has an extra stroke the real shape
+    # doesn't have" anti-pattern documented elsewhere in this project
+    # (CLAUDE.md's own 个/"umbrella" case) recurring for a *different*
+    # shape: 个 (umbrella, cjkvi-ids ⿱人丨, WITH a vertical stroke through
+    # the roof) had been used as a stand-in for 亼 ("meeting", cjkvi-ids
+    # ⿱人一, no vertical stroke -- just a roof over a floor-line) in every
+    # kanji where CSV's components column names "meeting" as a distinct,
+    # real component: 合, 令 (already fixed above), 今, 倉. Render-confirmed
+    # (合/命's peaks lack the umbrella's vertical descender) and added
+    # prim-meeting (亼, IDS-atomic, not a taught RTK frame, referenced by
+    # its own character like every other prim-* per convention -- not by
+    # its id string, an early mistake in this same edit caught before
+    # commit). Left 余 alone even though cjkvi-ids also shows 亼 there --
+    # its own CSV components list "umbrella", not "meeting", unlike the
+    # other four, so there isn't the same clear signal Heisig taught it
+    # via the same primitive there. Also left 会/金/介/全/傘/舎/禽 alone --
+    # their cjkvi-ids tops are plain 人 (person), a separate, lower-
+    # confidence question not examined closely enough this session to act
+    # on. 命(rtk1502) needed no direct edit -- it already referenced 合
+    # itself rather than flattening, so the fix cascades automatically.
+    "rtk269": {"character": "合", "keyword": "fit",
+               "expected_part_ids": {"rtk11", "prim-meeting"}},
+    "rtk1503": {"character": "令", "keyword": "orders",
+                "expected_part_ids": {"prim-meeting", "kangxi26"}},
+    "rtk1711": {"character": "今", "keyword": "now",
+                "expected_part_ids": {"prim-meeting", "rtk1"}},
+    "rtk1758": {"character": "倉", "keyword": "godown",
+                "expected_part_ids": {"prim-katakana-no", "rtk11", "prim-meeting", "kangxi44", "rtk1"}},
+    # Re-running audit_flattening.py after the 天 fix above surfaced 3 more
+    # hosts sharing 天's exact old bug signature (a stray "二" alongside
+    # "一,大") -- the classic iterative-convergence pattern: fixing one
+    # compound reveals identical bugs elsewhere that were previously
+    # indistinguishable from noise. 夫(rtk901, "husband") itself was 人,二,
+    # 大,亠 -- none of which except 大 has any visual relation to the glyph;
+    # CSV/cjkvi-ids agree it's exactly "one; large" (一,大), rendering
+    # confirms it's 大 with one extra stroke on top, same shape family as
+    # 天. That cascaded to two more: 漢("Sino-", CSV names "husband" as a
+    # real component, was flattening 夫's old wrong parts) and, one level
+    # deeper, 規(rtk904, "standard", cjkvi-ids ⿰夫見, CSV "husband; see")
+    # which was 見,土,人,二,大 -- fixed to 夫,見 -- which in turn fixed
+    # 窺("peep", cjkvi-ids ⿱穴規) which was flattening 規's old wrong parts
+    # under a 9-token pile. 央(rtk1877, "center") was a separate render-only
+    # finding (cjkvi-ids has no decomposition for it at all, so no CSV/IDS
+    # component list to cross-check): was ノ,一,大,冖 but a render comparison
+    # against 大/冖 alone shows only two real visual chunks -- a box (冖)
+    # over 大 -- with no room for the extra ノ/一 strokes.
+    "rtk901": {"character": "夫", "keyword": "husband",
+               "expected_part_ids": {"rtk1", "rtk112"}},
+    "rtk904": {"character": "規", "keyword": "standard",
+               "expected_part_ids": {"rtk901", "rtk61"}},
+    "rtk1701": {"character": "漢", "keyword": "sino-",
+                "expected_part_ids": {"rtk137", "prim-mugwort", "rtk11", "rtk901"}},
+    "rtk1877": {"character": "央", "keyword": "center",
+                "expected_part_ids": {"kangxi14", "rtk112"}},
+    "rtk2659": {"character": "窺", "keyword": "lie in wait",
+                "expected_part_ids": {"rtk1413", "rtk904"}},
 }
 
 # character -> hanzi id, spot-checking the 429-character Unihan self-reference backfill
