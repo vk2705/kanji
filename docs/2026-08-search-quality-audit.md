@@ -5153,3 +5153,76 @@ output.
   items unchanged: `壷`'s ambiguous top element, `triage_google_check.py`'s
   unmined output, the 81 orphaned `rad{N}` rows on the live DB (needs
   production access).
+
+### 2026-09-02 (same day, continued) — 天/矢/夫/規/漢/央/窺, and the 个-vs-亼 conflation
+
+- Still no new owner report — continuing the common-primitives audit
+  interactively. While checking `check_common_primitives.py`'s remaining
+  lower-usage-count tail (矢, 鬼, 鹿, 令 among others), CSV's components
+  column for `矢`("dart") read "drop; heavens" — but `矢`'s current parts
+  were `ノ,大,一`, flattening `天`("heavens")'s own parts instead of
+  referencing it. Checking `天`(rtk457) itself first: it had a stray
+  `二`("two") with no connection to `cjkvi-ids`'s `⿱一大` or the render —
+  fixed to `一,大`, then fixed `矢` to `ノ,天`.
+- Re-ran `audit_flattening.py` after that (standard iterative-convergence
+  practice) and it surfaced three more hosts sharing `天`'s exact old bug
+  signature (a stray `二` next to `一,大`) that had been invisible until
+  `天`'s own footprint shrank: `夫`(rtk901, "husband") was `人,二,大,亠` —
+  none of which except `大` has any relation to the glyph; CSV/`cjkvi-ids`
+  agree it's exactly `一,大`, and a render confirms it's `大` with one
+  extra stroke on top (same shape family as `天`). That cascaded one more
+  level: `漢`(CSV names "husband" as a real component, was flattening
+  `夫`'s old wrong parts) and `規`(rtk904, "standard", `cjkvi-ids` `⿰夫見`,
+  CSV "husband; see") which was `見,土,人,二,大` — fixed to `夫,見` — which
+  in turn fixed `窺`("peep", `cjkvi-ids` `⿱穴規`), which was flattening
+  `規`'s old wrong parts under a pile of 9 tokens. Also fixed `央`(rtk1877,
+  "center") on render evidence alone (`cjkvi-ids` has no decomposition
+  for it to cross-check): was `ノ,一,大,冖` but only `冖`+`大` are actually
+  visible.
+- Separately, while investigating `令`(rtk1503) more closely than the
+  9-2 daily batch had, found a second, larger pattern: the "个 has an
+  extra stroke the real shape doesn't have" anti-pattern this project
+  already hit once (see the `个`/"umbrella" case in `CLAUDE.md`) recurs
+  for a *different* shape. `个`("umbrella", `cjkvi-ids` `⿱人丨`, has a
+  vertical stroke through the roof) had been standing in for
+  `亼`("meeting", `cjkvi-ids` `⿱人一`, no vertical stroke — just a roof
+  over a floor-line) in every kanji whose CSV components column names
+  "meeting" as a real, distinct component: `合`, `令`, `今`, `倉`.
+  Render-confirmed (`合`/`命`'s peaks visibly lack `个`'s descender) and
+  added `prim-meeting` (`亼`, IDS-atomic, not a taught RTK frame — and
+  referenced by its own character in every host, not by its id string,
+  a mistake caught and corrected before this was verified/committed).
+  Deliberately left `余` alone even though `cjkvi-ids` also shows `亼`
+  there — its own CSV components say "umbrella", not "meeting", unlike
+  the other four, so there isn't the same clear signal Heisig taught it
+  via this primitive there. Also left `会`/`金`/`介`/`全`/`傘`/`舎`/`禽`
+  alone — their `cjkvi-ids` tops are plain `人`(person), a separate,
+  lower-confidence question not examined closely enough this session to
+  act on safely. `命`(rtk1502) needed no direct edit since it already
+  referenced `合` itself rather than flattening it.
+- Verified: full rebuild; `test_regression_fixes.py` — 11 new pins (6 for
+  the 天/矢/夫/規/漢/央/窺 cluster, 5 for the 合/令/今/倉/prim-meeting
+  cluster — `尚`'s pin was already in from the prior commit today) — 667
+  checks, same 4 expected hanzi-scope non-issues; pytest (51 passed);
+  `audit_self_reference.py` clean; `audit_flattening.py` re-run to
+  confirm convergence — the only remaining hit is a known, pre-existing
+  `倉`/`合` false positive (`口` sits next to `亼` in `倉`'s own part list
+  coincidentally, but isn't conceptually paired into "`合`" there — same
+  coincidental-adjacency class already documented elsewhere in this
+  audit, not a bug).
+- Not deployed to the live server from this session (no SSH/server
+  access) — data-only change + one new primitive row (`prim-meeting`), no
+  backend restart needed on next deploy.
+- Coverage: **1427/3000 (47.6%)**.
+- **Next session**: still-unreviewed entries from the common-primitives
+  tail (`鬼`, `鹿` were looked at this session but stayed inconclusive —
+  render evidence didn't clearly separate a real bug from CSV's habit of
+  listing extra synonym words for the same visual chunk; left unfixed
+  rather than force a low-confidence edit). The `会`/`金`/`介`/`全`/`傘`/
+  `舎`/`禽`/`余` "plain 人 vs 个" question flagged above is worth a
+  dedicated pass with its own careful render comparisons, given how many
+  kanji use `个` (70+) and how easy it is to get this kind of shape
+  conflation wrong in either direction. Other standing items unchanged:
+  `壷`'s ambiguous top element, `triage_google_check.py`'s unmined
+  output, the 81 orphaned `rad{N}` rows on the live DB (needs production
+  access).

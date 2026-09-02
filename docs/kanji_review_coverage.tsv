@@ -267,7 +267,7 @@ rtk265	介	jammed in	265	no
 rtk266	界	world	266	no
 rtk267	茶	tea	267	no
 rtk268	脊	spinal column	268	no
-rtk269	合	fit	269	no
+rtk269	合	fit	269	yes
 rtk270	塔	pagoda	270	yes
 rtk271	王	king	271	no
 rtk272	玉	jewel	272	no
@@ -455,7 +455,7 @@ rtk453	曇	cloudy weather	453	no
 rtk454	雷	thunder	454	no
 rtk455	霜	frost	455	yes
 rtk456	冬	winter	456	yes
-rtk457	天	heavens	457	no
+rtk457	天	heavens	457	yes
 rtk458	妖	bewitched	458	no
 rtk459	沃	irrigate	459	no
 rtk460	橋	bridge	460	no
@@ -899,10 +899,10 @@ rtk897	寧	rather	897	yes
 rtk898	濁	voiced	898	yes
 rtk899	環	ring	899	yes
 rtk900	還	send back	900	yes
-rtk901	夫	husband	901	no
+rtk901	夫	husband	901	yes
 rtk902	扶	aid	902	yes
 rtk903	渓	mountain stream	903	no
-rtk904	規	standard	904	no
+rtk904	規	standard	904	yes
 rtk905	替	exchange	905	no
 rtk906	賛	approve	906	yes
 rtk907	潜	submerge	907	no
@@ -1501,7 +1501,7 @@ rtk1499	卸	wholesale	1499	yes
 rtk1500	御	honorable	1500	yes
 rtk1501	服	clothing	1501	no
 rtk1502	命	fate	1502	yes
-rtk1503	令	orders	1503	no
+rtk1503	令	orders	1503	yes
 rtk1504	零	zero	1504	yes
 rtk1505	齢	age	1505	yes
 rtk1506	冷	cool	1506	yes
@@ -1699,7 +1699,7 @@ rtk1697	棒	rod	1697	no
 rtk1698	謹	discreet	1698	no
 rtk1699	僅	trifle	1699	yes
 rtk1700	勤	diligence	1700	no
-rtk1701	漢	sino-	1701	no
+rtk1701	漢	sino-	1701	yes
 rtk1702	嘆	sigh	1702	no
 rtk1703	難	difficult	1703	no
 rtk1704	華	splendor	1704	no
@@ -1709,7 +1709,7 @@ rtk1707	睡	drowsy	1707	yes
 rtk1708	錘	spindle	1708	yes
 rtk1709	乗	ride	1709	no
 rtk1710	剰	surplus	1710	yes
-rtk1711	今	now	1711	no
+rtk1711	今	now	1711	yes
 rtk1712	含	include	1712	yes
 rtk1713	貪	covet	1713	yes
 rtk1714	吟	versify	1714	yes
@@ -1756,7 +1756,7 @@ rtk1754	聞	hear	1754	no
 rtk1755	潤	wet	1755	no
 rtk1756	欄	column	1756	yes
 rtk1757	闘	fight	1757	yes
-rtk1758	倉	godown	1758	no
+rtk1758	倉	godown	1758	yes
 rtk1759	創	genesis	1759	yes
 rtk1760	非	un-	1760	no
 rtk1761	俳	haiku	1761	yes
@@ -1875,7 +1875,7 @@ rtk1873	薬	medicine	1873	no
 rtk1874	率	ratio	1874	no
 rtk1875	渋	astringent	1875	no
 rtk1876	摂	vicarious	1876	yes
-rtk1877	央	center	1877	no
+rtk1877	央	center	1877	yes
 rtk1878	英	england	1878	no
 rtk1879	映	reflect	1879	no
 rtk1880	赤	red	1880	no
