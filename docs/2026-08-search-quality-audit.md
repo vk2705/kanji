@@ -5089,3 +5089,67 @@ output.
   pending deploy.
 - Coverage: **1408/3000 (46.9%)** (covers this batch and the previous
   233-fix batch together, see its own entry's note above).
+
+### 2026-09-02 (daily check-in) — 邦/辰/尚: continuing the proactive common-primitives audit
+
+- No new owner report this session — direct follow-through on the
+  standing lesson from "ты столько работал, а ошибки в каждом
+  иероглифе. твои тесты не годятся": the same systematic methodology
+  that found `羽` (every primitive used ≥5 times as a component,
+  cross-checked against CSV components + `cjkvi-ids` real structure via
+  a scratch script, `check_common_primitives.py`) is now being run
+  proactively as a standing practice, not just reactively after a
+  report. Found two more real bugs before anyone hit them:
+  - **邦** ("home country", used 12x as a component): was `ノ,二`, with
+    no connection to CSV's real components ("bushes; city walls").
+    `cjkvi-ids`: `邦 = 丰+阝`. Added `prim-bushes` (丰, IDS-atomic, not a
+    taught RTK frame, render-confirmed against 邦's actual glyph).
+  - **辰** ("sign of the dragon", used 9x as a component): was `衣,厂`
+    — render confirmed `衣`("clothing") has no visual connection to the
+    glyph at all. `cjkvi-ids`'s real fine-stroke structure has no clean
+    citable primitive for the remainder beyond `厂,二`, so fixed to that
+    and stopped there rather than invent a shaky one-off primitive for
+    a single stroke detail (same restraint as the earlier `谷`/`事`/`豆`
+    atomic-with-mnemonic-substrokes calls). The wrong `衣` (and, once 辰
+    is referenced directly, the also-redundant `厂`) had been
+    copy-pasted into all 9 hosts that already separately listed `辰`
+    itself — classic redundant-flattening, same pattern as `羽`/`冫`:
+    `辱`, `震`, `振`, `娠`, `唇`, `農`, `晨`, `膿`, `賑` all cleaned up.
+  - **尚** ("esteem", used **49x** as a component — the highest-leverage
+    single fix this audit has made): was missing an entire component
+    (`口,冂` only, 2 parts). `cjkvi-ids`: `尚 = ⿱⺌冋`, `冋 = ⿵冂口` — a
+    real third part is missing. Render (`小` next to `尚`) confirmed
+    尚's top two strokes closely match 小's top portion, close enough to
+    reuse `小` directly as a pragmatic stand-in (same precedent as `个`
+    for "person"), rather than introduce the rarely-rendered CJK Radical
+    Supplement character `⺌` on its own. While fixing this, also found
+    the "small" alias had been resolving to an **orphaned placeholder**
+    row, `rad3.13:?:little,small` — same orphaned-legacy-placeholder bug
+    class fixed earlier this audit for `rad1.1`/`rad2.8`/`rad4.17`.
+    Retargeted `small` onto `rtk110`(小) directly and deleted the
+    orphan. Because 尚's 49 hosts all reference it via the character
+    token `尚` itself (not via duplicated flattened sub-parts), fixing
+    `尚` alone cascades correctly to every host's "made from" display
+    with no further per-host edits needed.
+- Verified: full rebuild; `test_regression_fixes.py` — 11 new pins (10
+  for the 邦/辰 cluster + 1 for 尚) plus one stale pin corrected
+  (`rtk2170`/農 had baked-in references to the old wrong `辰` structure)
+  — 656 checks, same 4 expected hanzi-scope failures (hanzi import isn't
+  part of the standard rebuild); pytest (51 passed); `audit_self_reference.py`
+  clean (0 issues).
+- Not deployed to the live server from this session (no SSH/server
+  access, as established repeatedly) — data-only change + one new
+  primitive row (`prim-bushes`), no backend restart needed on next
+  deploy.
+- Coverage: **1418/3000 (47.3%)**.
+- **Next session**: continue reviewing the remaining unverified entries
+  in the ~72-item common-primitives list (most of the high-usage-count
+  entries have now been checked; the lower-count tail, roughly
+  usage-count 5–30, still has a handful of only-glanced-at entries, e.g.
+  `rtk1305`/矢, `rtk2175`/鬼, `rtk2154`/鹿, `rtk1503`/令). Consider
+  formalizing `check_common_primitives.py` as a committed, reusable tool
+  (like `audit_flattening_subsequence.py` was) rather than a scratch
+  script, since it's now found two real bug clusters. Other standing
+  items unchanged: `壷`'s ambiguous top element, `triage_google_check.py`'s
+  unmined output, the 81 orphaned `rad{N}` rows on the live DB (needs
+  production access).

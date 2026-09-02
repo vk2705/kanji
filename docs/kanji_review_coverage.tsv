@@ -108,7 +108,7 @@ rtk106	貫	pierce	106	yes
 rtk107	兄	elder brother	107	no
 rtk108	呪	curse	108	no
 rtk109	克	overcome	109	yes
-rtk110	小	little	110	no
+rtk110	小	little	110	yes
 rtk111	少	few	111	no
 rtk112	大	large	112	no
 rtk113	多	many	113	no
@@ -194,7 +194,7 @@ rtk192	同	same	192	no
 rtk193	洞	den	193	yes
 rtk194	胴	trunk	194	yes
 rtk195	向	yonder	195	no
-rtk196	尚	esteem	196	no
+rtk196	尚	esteem	196	yes
 rtk197	字	character	197	yes
 rtk198	守	guard	198	yes
 rtk199	完	perfect	199	yes
@@ -1989,7 +1989,7 @@ rtk1987	郊	outskirts	1987	yes
 rtk1988	部	section	1988	no
 rtk1989	都	metropolis	1989	yes
 rtk1990	郵	mail	1990	yes
-rtk1991	邦	home country	1991	no
+rtk1991	邦	home country	1991	yes
 rtk1992	那	interrogative	1992	no
 rtk1993	郷	hometown	1993	no
 rtk1994	響	echo	1994	no
@@ -2162,12 +2162,12 @@ rtk2160	能	ability	2160	no
 rtk2161	態	attitude	2161	yes
 rtk2162	寅	sign of the tiger	2162	yes
 rtk2163	演	performance	2163	yes
-rtk2164	辰	sign of the dragon	2164	no
-rtk2165	辱	embarrass	2165	no
-rtk2166	震	quake	2166	no
+rtk2164	辰	sign of the dragon	2164	yes
+rtk2165	辱	embarrass	2165	yes
+rtk2166	震	quake	2166	yes
 rtk2167	振	shake	2167	yes
-rtk2168	娠	with child	2168	no
-rtk2169	唇	lips	2169	no
+rtk2168	娠	with child	2168	yes
+rtk2169	唇	lips	2169	yes
 rtk2170	農	agriculture	2170	yes
 rtk2171	濃	concentrated	2171	yes
 rtk2172	送	send off	2172	yes
@@ -2518,7 +2518,7 @@ rtk2516	暈	halo	2516	no
 rtk2517	暉	glitter	2517	no
 rtk2518	旱	dry weather	2518	no
 rtk2519	晏	clear skies	2519	yes
-rtk2520	晨	morrow	2520	no
+rtk2520	晨	morrow	2520	yes
 rtk2521	晒	bleaching	2521	no
 rtk2522	晃	limpid	2522	no
 rtk2523	曝	air out	2523	no
@@ -2526,7 +2526,7 @@ rtk2524	曙	dawn	2524	yes
 rtk2525	昂	elevate	2525	no
 rtk2526	昏	dusk	2526	no
 rtk2527	晦	last day of the month	2527	yes
-rtk2528	膿	pus	2528	no
+rtk2528	膿	pus	2528	yes
 rtk2529	腑	viscera	2529	yes
 rtk2530	胱	bladder	2530	no
 rtk2531	胚	embryo	2531	no
