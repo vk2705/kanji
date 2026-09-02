@@ -38,7 +38,6 @@ rad3.9:?:woman
 rad3.10:?:child
 rad3.11:?:house
 rad3.12:?:measurement, glue
-rad3.13:?:little,small
 rad3.14:?:?????????????????????????????
 kangxi43:尢:chihuahua with one human leg,lame
 rad3.16:?:flag
@@ -354,7 +353,7 @@ rtk106:貫:pierce:母,貝
 rtk107:兄:elder brother:口,儿
 rtk108:呪:spell:口,儿
 rtk109:克:overcome:古,儿
-rtk110:小:little:
+rtk110:小:little,small:
 rtk111:少:few:ノ,小
 rtk112:大:large:
 rtk113:多:many:夕
@@ -440,7 +439,7 @@ rtk192:同:same:口,冂,一
 rtk193:洞:den:水,同
 rtk194:胴:trunk:月,同
 rtk195:向:yonder:口,冂
-rtk196:尚:esteem:口,冂
+rtk196:尚:esteem:小,冂,口
 rtk197:字:character:子,宀,primitive_roof
 rtk198:守:guard:寸,宀,primitive_roof
 rtk199:完:perfect:宀,primitive_roof,元
@@ -2234,7 +2233,7 @@ rtk1987:郊:outskirts:交,邦
 rtk1988:部:section:口,邦,立
 rtk1989:都:metropolis:者,邦
 rtk1990:郵:mail:垂,邦
-rtk1991:邦:home country:ノ,二
+rtk1991:邦:home country:丰,阝
 rtk1992:那:what?:刀,邦,二
 rtk1993:郷:home town:艮,邦,幺
 rtk1994:響:echo:音,艮,日,邦,立,幺
@@ -2407,13 +2406,13 @@ rtk2160:能:ability:月,匕,厶
 rtk2161:態:attitude:能,心
 rtk2162:寅:sign of the tiger:田,ハ,宀,primitive_roof,一
 rtk2163:演:performance:水,寅
-rtk2164:辰:sign of the dragon:衣,厂
-rtk2165:辱:embarrass:衣,寸,辰,厂
-rtk2166:震:quake:衣,雨,辰,厂
-rtk2167:振:shake:衣,辰,厂,扌
-rtk2168:娠:with child:衣,女,辰,厂
-rtk2169:唇:lips:衣,口,辰,厂
-rtk2170:農:agriculture:曲,衣,一,辰,厂
+rtk2164:辰:sign of the dragon:厂,二
+rtk2165:辱:embarrass:辰,寸
+rtk2166:震:quake:辰,雨
+rtk2167:振:shake:辰,扌
+rtk2168:娠:with child:辰,女
+rtk2169:唇:lips:辰,口
+rtk2170:農:agriculture:曲,辰
 rtk2171:濃:concentrated:農,水
 rtk2172:送:escort:込,丷,大,一,二
 rtk2173:関:connection:人,大,二,ハ,門,丷,一
@@ -2762,7 +2761,7 @@ rtk2516:暈:halo:車,日,冖
 rtk2517:暉:shine:車,日,冖
 rtk2518:旱:drought:干,日
 rtk2519:晏:late:女,日,宀,primitive_roof
-rtk2520:晨:morning:辰,日,衣
+rtk2520:晨:morning:辰,日
 rtk2521:晒:bleach:西,日
 rtk2522:晃:clear:一,尚,日,儿
 rtk2523:曝:bleach:｜,一,水,日,ハ
@@ -2770,7 +2769,7 @@ rtk2524:曙:dawn:日,老
 rtk2525:昂:rise:日,卩
 rtk2526:昏:dark:氏,日
 rtk2527:晦:dark:日,母,毋
-rtk2528:膿:pus:｜,衣,一,月,辰,日,厂
+rtk2528:膿:pus:｜,一,月,辰,日
 rtk2529:腑:viscera:月,寸,广
 rtk2530:胱:bladder:月,尚,儿
 rtk2531:胚:embryo:｜,ノ,一,月,丶
@@ -3008,7 +3007,7 @@ rtk2763:輯:gather:口,耳,車
 rtk2764:豹:leopard:丶,勹,豸
 rtk2765:賎:despise:貝,戈,二
 rtk2766:貰:get:貝,世
-rtk2767:賑:flourish:貝,辰,衣
+rtk2767:賑:flourish:貝,辰
 rtk2768:贖:redeem:貝,士,儿,囗
 rtk2769:躓:stumble:貝,斤,口,足,止
 rtk2770:蹄:hoof:足,帝
@@ -3333,3 +3332,4 @@ prim-tucked-under-the-arm:乂:tucked under the arm
 prim-southeast:巽:southeast:己,共
 prim-maestro:𠂤:maestro
 prim-noren:帀:noren:一,巾
+prim-bushes:丰:bushes

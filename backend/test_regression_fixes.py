@@ -1577,8 +1577,10 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"prim-fire-radical", "rtk126", "rtk2132"}},
     "rtk2161": {"character": "態", "keyword": "attitude",
                 "expected_part_ids": {"rtk2160", "rtk639"}},
+    # Corrected 2026-09-01 (common-primitive audit): further converged now
+    # that 辰(rtk2164) itself is fixed -- cjkvi-ids: 農 = 曲+辰 exactly.
     "rtk2170": {"character": "農", "keyword": "agriculture",
-                "expected_part_ids": {"kangxi27", "rtk1", "rtk1256", "rtk2164", "rtk423"}},
+                "expected_part_ids": {"rtk1256", "rtk2164"}},
     "rtk2171": {"character": "濃", "keyword": "concentrated",
                 "expected_part_ids": {"rtk137", "rtk2170"}},
     "rtk2194": {"character": "璽", "keyword": "imperial seal",
@@ -1671,6 +1673,51 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"kangxi10", "rtk37", "rtk615", "rtk63"}},
     "rtk2940": {"character": "翔", "keyword": "soar",
                "expected_part_ids": {"rtk586", "rtk615"}},
+    # Common-primitive audit (2026-09-01, daily check-in): systematically
+    # checked every primitive used >=5 times as a part against CSV/cjkvi-ids,
+    # the same methodology that caught 羽 above, applied proactively rather
+    # than waiting for another owner report. Two more clusters found:
+    # 邦("home country") was ノ,二 -- doesn't match CSV's "bushes; city walls"
+    # at all; cjkvi-ids: 邦 = 丰+阝. Added prim-bushes (丰, IDS-atomic, not a
+    # taught frame). 辰("sign of the dragon") was 衣,厂 -- 衣("clothing") has
+    # no connection to the glyph (render confirmed); cjkvi-ids's real
+    # structure is fine-stroke-level with no clean citable primitive for the
+    # remainder, so fixed to what's confirmed correct (厂,二) and stopped
+    # there rather than invent a shaky primitive for the last stroke detail.
+    # That wrong 衣 had been redundantly copy-pasted into all 9 hosts
+    # alongside a correct reference to 辰 itself -- dropped 衣 (and 厂, also
+    # redundant once 辰 is referenced directly) from all of them.
+    "rtk1991": {"character": "邦", "keyword": "home country",
+               "expected_part_ids": {"kangxi170", "prim-bushes"}},
+    "rtk2164": {"character": "辰", "keyword": "sign of the dragon",
+               "expected_part_ids": {"kangxi27", "rtk2"}},
+    "rtk2165": {"character": "辱", "keyword": "embarrass",
+               "expected_part_ids": {"rtk2164", "rtk45"}},
+    "rtk2166": {"character": "震", "keyword": "quake",
+               "expected_part_ids": {"rtk2164", "rtk451"}},
+    "rtk2167": {"character": "振", "keyword": "shake",
+               "expected_part_ids": {"kangxi64", "rtk2164"}},
+    "rtk2168": {"character": "娠", "keyword": "with child",
+               "expected_part_ids": {"rtk102", "rtk2164"}},
+    "rtk2169": {"character": "唇", "keyword": "lips",
+               "expected_part_ids": {"rtk11", "rtk2164"}},
+    "rtk2520": {"character": "晨", "keyword": "morrow",
+               "expected_part_ids": {"rtk12", "rtk2164"}},
+    "rtk2528": {"character": "膿", "keyword": "pus",
+               "expected_part_ids": {"prim-pipe", "rtk1", "rtk12", "rtk13", "rtk2164"}},
+    "rtk2767": {"character": "賑", "keyword": "bustling",
+               "expected_part_ids": {"rtk2164", "rtk56"}},
+    # Same audit, same session: 尚(rtk196, "esteem") used 49x as a component --
+    # was missing a real component entirely (口,冂 only). cjkvi-ids: 尚 =
+    # small-variant + 冂 + 口 (尚 = ⿱⺌冋, 冋 = ⿵冂口). Render-confirmed 尚's
+    # top two strokes match 小's top portion closely enough to reuse 小
+    # directly (same pragmatic-approximation precedent as 个 for "person").
+    # The "small" alias had been pointing at an orphaned rad3.13:?  row
+    # instead of rtk110 -- same orphaned-placeholder bug class as rad1.1/
+    # rad2.8/rad4.17 fixed earlier in this audit. Retargeted "small" to
+    # rtk110 and deleted the orphan.
+    "rtk196": {"character": "尚", "keyword": "esteem",
+               "expected_part_ids": {"kangxi13", "rtk11", "rtk110"}},
 }
 
 # character -> hanzi id, spot-checking the 429-character Unihan self-reference backfill
