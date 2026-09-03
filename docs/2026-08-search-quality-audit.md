@@ -5297,3 +5297,102 @@ output.
   full CSV+render pass. Other standing items unchanged: `壷`'s ambiguous
   top element, `triage_google_check.py`'s unmined output, the 81 orphaned
   `rad{N}` rows on the live DB (needs production access).
+
+### 2026-09-04 — 保 missing "person", and a third detector blind spot: the whole 石(stone) family
+
+- Owner report: after redeploying, "still have problems" — no dispute
+  button, Google auth shows a black screen in the app, and searching
+  "tree, mouth" surfaces wrong results including `保`("protect")
+  specifically "missing left part."
+- `保` was `口,木` — entirely missing `亻`("person"), exactly the literal
+  left radical the owner pointed at. `cjkvi-ids` confirms `保` = `⿰亻呆`;
+  CSV names "person" as a real component alongside `呆`(rtk2297,
+  "dumbfounded", already correctly `口,木`)'s own redundantly-restated
+  subparts. Fixed to `亻,呆`. The other two "tree, mouth" false positives
+  were redundant-flattening, not missing components: `操`("maneuver")
+  listed a bare `口` alongside `品`(rtk23, "goods", which already implies
+  a mouth-shape recursively) — the extra literal `口` is what made a
+  depth-1 "mouth" search wrongly match it; fixed to `扌,品,木`.
+  `藁`("straw") similarly re-listed `高`("tall")'s own subparts (`口,亠,
+  冂`) alongside `高` itself; fixed to `艾,高,木`.
+- The Google auth / dispute button reports turned out to be the same
+  root cause: Google blocks its own sign-in SDK from working inside
+  embedded WebViews (an anti-phishing measure), already a documented but
+  unaddressed limitation of the Android app (`android/README.md`). Fixed
+  by detecting the WebView (a marker `MainActivity.kt` now appends to its
+  user agent) and hiding the broken Google button there instead of
+  letting it render a black screen — username/password auth is
+  unaffected, and the dispute button only needs a logged-in user, so this
+  should unblock both reports on the Android app specifically. This does
+  **not** touch the website; if the same reports recur outside the app,
+  that's a different bug to investigate separately.
+- Owner then asked, pointedly, to check the decomposition of *every one*
+  of a "stone, mouth" search's 24 results and explain why the whole class
+  hadn't been caught already, rather than accept one-off fixes. Checking
+  all 23 non-atomic kanji currently listing `石`("stone") at once (not
+  reactively, one report at a time) found the real scope: `石` itself is
+  correctly `厂,口` (cliff, mouth) — but *every single host* built on top
+  of it was also separately re-listing a bare `口` alongside `石`, even
+  though `cjkvi-ids` confirms all 23 are cleanly `[石 + exactly one other
+  component]` with no independent mouth stroke anywhere (`岩`=`⿱山石`,
+  `破`=`⿰石皮`, `碑`=`⿰石卑`, …). That stray `口` is exactly what made a
+  depth-1 "mouth" search wrongly match all of them — searching
+  stone+mouth now correctly returns only `石` itself.
+  - **Why this wasn't already caught**: it's a third, previously-
+    undocumented detector blind spot, distinct from the two found
+    earlier in this audit. `audit_flattening.py` (contiguous) and
+    `audit_flattening_subsequence.py` (order-preserving) both look for a
+    taught compound's **entire** part-set reappearing inside a host —
+    here, `石` is only two parts (`厂,口`), and hosts referenced `石`
+    itself directly *plus* just **one** of its two parts (`口`) floating
+    redundantly alongside it, never the full `厂,口` pair. Neither
+    detector's matching logic is built to catch "a referenced compound's
+    parts overlap the host by exactly one token" — a full-part-set match
+    would false-positive constantly on any two-part primitive used
+    everywhere (imagine flagging every kanji with both `石` and `厂` as
+    "redundant" — `厂` alone is extremely common and usually
+    unrelated). This is a real gap, not a false-positive tuning issue,
+    but it isn't obvious how to close it without reintroducing a flood of
+    noise; it took a direct, systematic per-kanji check of one term's
+    entire result set to surface it, not automated detection. Worth
+    keeping in mind: any single-token overlap between a host and a
+    two-part primitive it also references directly is worth a manual
+    look, especially for a primitive as common as `石`.
+  - Beyond the universal redundant `口`, several also needed their
+    *other* component fixed: `硬`(→`更`, rtk749), `砦`(→`此`, rtk2201),
+    `磐`(→`般`, rtk2016), `碇`(→`定`, rtk408), `碗`(→`宛`, rtk1521),
+    `碩`(→`頁`, rtk64, also dropped a redundant `貝`), `磯`(→`幾`,
+    rtk1481), `碍`(→`旦`+`寸`, rtk30), `砺`(→`厂`+`万`, rtk68, dropped a
+    stray `斤`) — all "reference the already-taught compound directly"
+    fixes. `確`(`⿰石隺`, `隺`=`⿻冖隹`) needed `宀`("roof") corrected to
+    `冖`("cover") — render-confirmed the top lacks `宀`'s extra dot.
+    `研`(`⿰石开`, `开`=`⿱一廾` exactly) and `砕`(`⿰石卆`, `卆`=`⿱九十`
+    exactly) each had several unrelated stray tokens dropped. The rest
+    (`拓`, `硫`, `岩`, `磁`, `碑`, `碁`, `柘`, `碧`, `硯`, `碓`) needed only
+    the redundant `口` dropped.
+  - Noted but **not** fixed this session: `primitive_roof` — a token used
+    alongside `宀` in 20+ existing lines throughout `data.txt` — doesn't
+    resolve to any real kanji id and is silently dropped on import
+    (confirmed via `get_kanji_detail`). It's inert dead weight, not a
+    visible bug (no orphan `?` chip appears), so lower priority than the
+    fixes above, but worth a dedicated cleanup pass later.
+- Verified: full rebuild; `test_regression_fixes.py` — 23 new pins + 1
+  corrected stale pin (`rtk1630`/碑, which had been keyed to the same `口`
+  bug) — 700 checks, same 4 expected hanzi-scope non-issues; pytest (51
+  passed); `audit_self_reference.py` clean; `audit_flattening.py` re-run
+  to confirm convergence (897, down from 919); directly re-ran the
+  "stone, mouth" and "tree, mouth" parts searches to confirm the false
+  positives are gone.
+- Not deployed to the live server from this session (no SSH/server
+  access) — data changes need `sync_system_data.py` + DB reseed per
+  usual; the Android fix needs a new APK build; the frontend fix needs a
+  rebuild+redeploy.
+- Coverage: **1452/3000 (48.4%)**.
+- **Next session**: given `石` alone hid 23 bugs, worth spot-checking a
+  few other very common two-part primitives the same deliberate way (list
+  every host, not just what an automated detector flags) rather than
+  waiting for another owner report to reveal the same blind spot
+  elsewhere. `慶`'s bottom-shape question and the `primitive_roof` cleanup
+  noted above are also still open. Other standing items unchanged: `壷`'s
+  ambiguous top element, `triage_google_check.py`'s unmined output, the
+  81 orphaned `rad{N}` rows on the live DB (needs production access).

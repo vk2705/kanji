@@ -119,7 +119,7 @@ rtk117	名	name	117	no
 rtk118	石	stone	118	yes
 rtk119	肖	resemblance	119	no
 rtk120	硝	nitrate	120	yes
-rtk121	砕	smash	121	no
+rtk121	砕	smash	121	yes
 rtk122	砂	sand	122	yes
 rtk123	妬	jealous	123	yes
 rtk124	削	plane	124	yes
@@ -727,7 +727,7 @@ rtk725	接	touch	725	yes
 rtk726	掲	put up a notice	726	yes
 rtk727	掛	hang	727	yes
 rtk728	捗	make headway	728	yes
-rtk729	研	polish	729	no
+rtk729	研	polish	729	yes
 rtk730	戒	commandment	730	no
 rtk731	弄	tinker with	731	no
 rtk732	械	contraption	732	no
@@ -748,7 +748,7 @@ rtk746	丈	length	746	yes
 rtk747	史	history	747	yes
 rtk748	吏	officer	748	yes
 rtk749	更	grow late	749	yes
-rtk750	硬	stiff	750	no
+rtk750	硬	stiff	750	yes
 rtk751	梗	spiny	751	yes
 rtk752	又	or again	752	no
 rtk753	双	pair	753	no
@@ -823,14 +823,14 @@ rtk821	育	bring up	821	no
 rtk822	撤	remove	822	yes
 rtk823	充	allot	823	no
 rtk824	銃	gun	824	yes
-rtk825	硫	sulfur	825	no
+rtk825	硫	sulfur	825	yes
 rtk826	流	current	826	no
 rtk827	允	license	827	no
 rtk828	唆	tempt	828	no
 rtk829	出	exit	829	no
 rtk830	山	mountain	830	no
 rtk831	拙	bungling	831	yes
-rtk832	岩	boulder	832	no
+rtk832	岩	boulder	832	yes
 rtk833	炭	charcoal	833	yes
 rtk834	岐	branch off	834	no
 rtk835	峠	mountain pass	835	yes
@@ -867,7 +867,7 @@ rtk865	皮	pelt	865	no
 rtk866	波	waves	866	no
 rtk867	婆	old woman	867	no
 rtk868	披	expose	868	yes
-rtk869	破	rend	869	no
+rtk869	破	rend	869	yes
 rtk870	被	incur	870	no
 rtk871	残	remainder	871	no
 rtk872	殉	martyrdom	872	yes
@@ -1901,7 +1901,7 @@ rtk1899	欺	deceit	1899	no
 rtk1900	棋	chess piece	1900	no
 rtk1901	旗	national flag	1901	yes
 rtk1902	期	period	1902	no
-rtk1903	碁	go	1903	no
+rtk1903	碁	go	1903	yes
 rtk1904	基	fundamentals	1904	no
 rtk1905	甚	tremendously	1905	no
 rtk1906	勘	intuition	1906	no
@@ -2202,7 +2202,7 @@ rtk2200	巳	sign of the snake	2200	yes
 rtk2201	此	this here	2201	no
 rtk2202	柴	brushwood	2202	no
 rtk2203	些	whit	2203	no
-rtk2204	砦	fort	2204	no
+rtk2204	砦	fort	2204	yes
 rtk2205	髭	beard	2205	no
 rtk2206	禽	fowl	2206	no
 rtk2207	檎	apple	2207	no
@@ -2478,7 +2478,7 @@ rtk2476	蒔	sowing	2476	no
 rtk2477	芹	parsley	2477	no
 rtk2478	苫	thatching	2478	no
 rtk2479	蒼	pale blue	2479	no
-rtk2480	藁	straw	2480	no
+rtk2480	藁	straw	2480	yes
 rtk2481	蕪	turnip	2481	yes
 rtk2482	藷	sweet potato	2482	no
 rtk2483	薮	quack	2483	yes
@@ -2575,7 +2575,7 @@ rtk2573	楯	escutcheon	2573	no
 rtk2574	榎	hackberry	2574	no
 rtk2575	樺	birch	2575	no
 rtk2576	槍	lance	2576	no
-rtk2577	柘	wild mulberry	2577	no
+rtk2577	柘	wild mulberry	2577	yes
 rtk2578	梱	bale	2578	no
 rtk2579	枇	loquat	2579	no
 rtk2580	樋	downspout	2580	no
@@ -2630,17 +2630,17 @@ rtk2628	眸	apple of the eye	2628	no
 rtk2629	眩	dizzy	2629	no
 rtk2630	雉	pheasant	2630	yes
 rtk2631	矩	carpenter’s square	2631	yes
-rtk2632	磐	crag	2632	no
+rtk2632	磐	crag	2632	yes
 rtk2633	碇	grapnel	2633	yes
-rtk2634	碧	blue-green	2634	no
-rtk2635	硯	inkstone	2635	no
+rtk2634	碧	blue-green	2634	yes
+rtk2635	硯	inkstone	2635	yes
 rtk2636	砥	grindstone	2636	no
 rtk2637	碗	teacup	2637	yes
-rtk2638	碍	obstacle	2638	no
+rtk2638	碍	obstacle	2638	yes
 rtk2639	碩	illustrious	2639	yes
-rtk2640	磯	rocky beach	2640	no
-rtk2641	砺	whetstone	2641	no
-rtk2642	碓	mill	2642	no
+rtk2640	磯	rocky beach	2640	yes
+rtk2641	砺	whetstone	2641	yes
+rtk2642	碓	mill	2642	yes
 rtk2643	禦	fend off	2643	yes
 rtk2644	祷	beseech	2644	no
 rtk2645	祐	ancestral tablet	2645	no
