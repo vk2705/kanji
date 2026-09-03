@@ -620,7 +620,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk502": {"character": "乾", "keyword": "drought",
                 "expected_part_ids": {"prim-katakana-no", "rtk1", "rtk1023", "rtk26", "rtk75"}},
     "rtk520": {"character": "韻", "keyword": "rhyme",
-                "expected_part_ids": {"rtk12", "rtk462", "rtk518", "rtk59"}},
+                "expected_part_ids": {"rtk518", "rtk59"}},
     "rtk635": {"character": "庁", "keyword": "government office",
                 "expected_part_ids": {"kangxi53", "rtk95"}},
     # Further-collapsed 2026-08-29, same day as the batch above: fixing
@@ -795,7 +795,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1390": {"character": "阪", "keyword": "heights",
                 "expected_part_ids": {"kangxi170", "rtk779"}},
     "rtk1393": {"character": "障", "keyword": "hinder",
-                "expected_part_ids": {"kangxi170", "rtk26", "rtk462", "rtk518"}},
+                "expected_part_ids": {"kangxi170", "rtk464"}},
     "rtk1395": {"character": "随", "keyword": "follow",
                 "expected_part_ids": {"kangxi170", "rtk83", "rtk843"}},
     "rtk1404": {"character": "墜", "keyword": "crash",
@@ -910,7 +910,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1850": {"character": "彩", "keyword": "coloring",
                 "expected_part_ids": {"kangxi59", "rtk791"}},
     "rtk1851": {"character": "彰", "keyword": "patent",
-                "expected_part_ids": {"kangxi59", "rtk26", "rtk462", "rtk518"}},
+                "expected_part_ids": {"kangxi59", "rtk464"}},
     "rtk1907": {"character": "堪", "keyword": "withstand",
                 "expected_part_ids": {"rtk161", "rtk1830", "rtk1894"}},
     "rtk1951": {"character": "悪", "keyword": "bad",
@@ -1446,7 +1446,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1401": {"character": "院", "keyword": "inst.",
                 "expected_part_ids": {"kangxi10", "kangxi170", "rtk199", "rtk2"}},
     "rtk1419": {"character": "窃", "keyword": "stealth",
-                "expected_part_ids": {"kangxi10", "kangxi40", "rtk1413", "rtk89"}},
+                "expected_part_ids": {"rtk1413", "rtk89"}},
     "rtk1433": {"character": "繕", "keyword": "darning",
                 "expected_part_ids": {"rtk1112", "rtk1431"}},
     "rtk1443": {"character": "練", "keyword": "practice",
@@ -1661,13 +1661,13 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk617": {"character": "翌", "keyword": "the following",
                "expected_part_ids": {"rtk462", "rtk615"}},
     "rtk1160": {"character": "扇", "keyword": "fan",
-               "expected_part_ids": {"kangxi44", "rtk1", "rtk1157", "rtk615"}},
+               "expected_part_ids": {"rtk1157", "rtk615"}},
     "rtk2060": {"character": "翻", "keyword": "flip",
                "expected_part_ids": {"kangxi165", "rtk14", "rtk615", "rtk987"}},
     "rtk2371": {"character": "摺", "keyword": "rubbing",
                "expected_part_ids": {"kangxi64", "rtk37", "rtk615"}},
     "rtk2599": {"character": "煽", "keyword": "fanning",
-               "expected_part_ids": {"kangxi44", "rtk1", "rtk1157", "rtk173", "rtk615"}},
+               "expected_part_ids": {"rtk1160", "rtk173"}},
     "rtk2752": {"character": "謬", "keyword": "fallible",
                "expected_part_ids": {"kangxi59", "prim-umbrella", "rtk357", "rtk615"}},
     "rtk2801": {"character": "翰", "keyword": "quill",
@@ -1985,7 +1985,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1382": {"character": "踪", "keyword": "trail",
                "expected_part_ids": {"rtk1181", "rtk1372"}},
     "rtk1432": {"character": "織", "keyword": "weave",
-               "expected_part_ids": {"kangxi62", "rtk12", "rtk1431", "rtk462", "rtk518"}},
+               "expected_part_ids": {"kangxi62", "rtk1431", "rtk518"}},
     "rtk1437": {"character": "緻", "keyword": "fine",
                "expected_part_ids": {"kangxi28", "kangxi66", "rtk1", "rtk1431", "rtk161", "rtk815"}},
     "rtk1440": {"character": "締", "keyword": "tighten",
@@ -2067,7 +2067,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1929": {"character": "繊", "keyword": "slender",
                "expected_part_ids": {"kangxi62", "rtk1431", "rtk161", "rtk1880"}},
     "rtk1966": {"character": "編", "keyword": "compilation",
-               "expected_part_ids": {"kangxi13", "kangxi44", "kangxi55", "prim-pipe", "rtk1", "rtk1157", "rtk1431", "rtk1967"}},
+               "expected_part_ids": {"prim-fishfinger", "rtk1431"}},
     "rtk1971": {"character": "紙", "keyword": "paper",
                "expected_part_ids": {"rtk1431", "rtk1970"}},
     "rtk2025": {"character": "繭", "keyword": "cocoon",
@@ -2190,6 +2190,146 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"prim-mugwort", "rtk1345", "rtk1372"}},
     "rtk2997": {"character": "躊", "keyword": "hesitate",
                "expected_part_ids": {"rtk1372", "rtk341", "rtk45", "rtk80"}},
+    # Continuing the proactive spot-check (2026-09-04, same session):
+    # audit_direct_ref_overlap.py's next four families, same discipline
+    # (every fix confirmed via cjkvi-ids, several needed deeper attention
+    # beyond a simple redundant-token drop):
+    #  - 尚(rtk196, used 14x) -- 賞/堂/常/裳/掌/嘗 all correctly reference
+    #    尚 but redundantly repeat its own "口"; also carried a stray
+    #    "冖" nowhere in cjkvi-ids's real ⿱𫩠X tops. 償(rtk1060) was
+    #    entirely missing "亻" (same missing-component class as 保/促
+    #    today) and should reference 賞 directly (cjkvi-ids ⿰亻賞). 党
+    #    (⿱龸兄) and 哨(⿰口肖) were using 尚 outright where the real
+    #    top is a plainer "小" shape -- fixed 肖(rtk119) itself (was
+    #    wrongly 月,尚; cjkvi-ids ⿱⺌月) and referenced 兄/肖 directly.
+    #    Left 蔽/弊/瞥/鼈/獣 (all real cjkvi-ids 敝-family or otherwise
+    #    unrelated to 尚) unexamined -- a different, more involved
+    #    question for another session.
+    #  - 戸(rtk1157, used 17x) -- 肩/房/扇/炉/戻/雇/所/扉/芦 all
+    #    correctly reference 戸 but redundantly repeat its own "一,尸".
+    #    偏/遍/編/篇/騙 were flattening a *second-level* compound (扁,
+    #    CSV: "fishfinger") into 7-8 tokens each instead of referencing
+    #    it -- added prim-fishfinger. 偏 was also entirely missing "亻"
+    #    (cjkvi-ids ⿰亻扁). 啓/肇 use a different compound (𢼄=戸+攵) and
+    #    had two stray tokens each dropped. 煽 was flattening 戸+羽
+    #    instead of referencing 扇(rtk1160) directly (cjkvi-ids ⿰火扇).
+    #  - 穴(rtk1413, used 16x) -- most hosts correctly reference 穴 but
+    #    redundantly repeat its own "儿,宀". 容/蓉 don't contain 穴 at
+    #    all (cjkvi-ids ⿱宀谷) -- they'd wrongly picked up 穴 because 宀
+    #    happens to be one of 穴's own parts too, a sharper version of
+    #    the same overlap bug. 窒 and 腔 were flattening already-taught
+    #    compounds (至, 空) instead of referencing them directly.
+    #  - 音(rtk518, used 14x) -- most hosts correctly reference 音 but
+    #    redundantly repeat its own "日,立" (though 暗 needed *only*
+    #    "立" dropped, since cjkvi-ids ⿰日音 means its own "日" token
+    #    does double duty as 音's real external neighbor, not just an
+    #    internal duplicate -- not a blind "drop the whole overlap"
+    #    case). 章(rtk464) doesn't contain 音 at all (cjkvi-ids ⿱立早,
+    #    same "picked up the primitive via one shared sub-part" trap as
+    #    容/蓉 above) -- fixing it let 障/彰 correctly reference 章
+    #    directly instead of flattening its pre-fix wrong parts. 識/職/
+    #    織/幟 were flattening 戠(=音+戈, not separately taught) instead
+    #    of referencing 音 + 戈 directly. 億 was entirely missing "亻"
+    #    and should reference 意 directly (cjkvi-ids ⿰亻意, same
+    #    missing-component class again).
+    "rtk119": {"character": "肖", "keyword": "resemblance",
+               "expected_part_ids": {"rtk110", "rtk13"}},
+    "rtk464": {"character": "章", "keyword": "badge",
+               "expected_part_ids": {"rtk26", "rtk462"}},
+    "rtk519": {"character": "暗", "keyword": "darkness",
+               "expected_part_ids": {"rtk12", "rtk518"}},
+    "rtk521": {"character": "識", "keyword": "discriminating",
+               "expected_part_ids": {"kangxi62", "rtk357", "rtk518"}},
+    "rtk522": {"character": "鏡", "keyword": "mirror",
+               "expected_part_ids": {"kangxi10", "rtk287", "rtk518"}},
+    "rtk654": {"character": "意", "keyword": "idea",
+               "expected_part_ids": {"rtk518", "rtk639"}},
+    "rtk811": {"character": "窓", "keyword": "window",
+               "expected_part_ids": {"kangxi28", "rtk1413", "rtk639"}},
+    "rtk853": {"character": "容", "keyword": "contain",
+               "expected_part_ids": {"kangxi40", "rtk851"}},
+    "rtk859": {"character": "賞", "keyword": "prize",
+               "expected_part_ids": {"rtk196", "rtk56"}},
+    "rtk860": {"character": "党", "keyword": "party",
+               "expected_part_ids": {"rtk107", "rtk110"}},
+    "rtk861": {"character": "堂", "keyword": "hall",
+               "expected_part_ids": {"rtk161", "rtk196"}},
+    "rtk862": {"character": "常", "keyword": "usual",
+               "expected_part_ids": {"rtk196", "rtk432"}},
+    "rtk863": {"character": "裳", "keyword": "skirt",
+               "expected_part_ids": {"rtk196", "rtk423"}},
+    "rtk864": {"character": "掌", "keyword": "manipulate",
+               "expected_part_ids": {"rtk196", "rtk687"}},
+    "rtk887": {"character": "職", "keyword": "post",
+               "expected_part_ids": {"kangxi62", "rtk518", "rtk881"}},
+    "rtk1058": {"character": "億", "keyword": "hundred million",
+               "expected_part_ids": {"kangxi9", "rtk654"}},
+    "rtk1060": {"character": "償", "keyword": "reparation",
+               "expected_part_ids": {"kangxi9", "rtk859"}},
+    "rtk1158": {"character": "肩", "keyword": "shoulder",
+               "expected_part_ids": {"rtk1157", "rtk13"}},
+    "rtk1159": {"character": "房", "keyword": "tassel",
+               "expected_part_ids": {"rtk1157", "rtk529"}},
+    "rtk1161": {"character": "炉", "keyword": "hearth",
+               "expected_part_ids": {"rtk1157", "rtk173"}},
+    "rtk1162": {"character": "戻", "keyword": "re-",
+               "expected_part_ids": {"rtk112", "rtk1157"}},
+    "rtk1164": {"character": "雇", "keyword": "employ",
+               "expected_part_ids": {"kangxi172", "rtk1157"}},
+    "rtk1166": {"character": "啓", "keyword": "disclose",
+               "expected_part_ids": {"kangxi66", "rtk11", "rtk1157"}},
+    "rtk1208": {"character": "所", "keyword": "place",
+               "expected_part_ids": {"rtk1157", "rtk1206"}},
+    "rtk1414": {"character": "空", "keyword": "empty",
+               "expected_part_ids": {"rtk1413", "rtk80"}},
+    "rtk1416": {"character": "突", "keyword": "stab",
+               "expected_part_ids": {"rtk112", "rtk1413"}},
+    "rtk1417": {"character": "究", "keyword": "research",
+               "expected_part_ids": {"rtk1413", "rtk9"}},
+    "rtk1418": {"character": "窒", "keyword": "plug up",
+               "expected_part_ids": {"rtk1413", "rtk815"}},
+    "rtk1420": {"character": "窟", "keyword": "cavern",
+               "expected_part_ids": {"kangxi44", "prim-pipe", "rtk1413", "rtk830"}},
+    "rtk1421": {"character": "窪", "keyword": "depression",
+               "expected_part_ids": {"rtk137", "rtk1413", "rtk161"}},
+    "rtk1423": {"character": "窯", "keyword": "kiln",
+               "expected_part_ids": {"prim-fire-radical", "rtk1413", "rtk586"}},
+    "rtk1424": {"character": "窮", "keyword": "hard up",
+               "expected_part_ids": {"rtk1317", "rtk1337", "rtk1413"}},
+    "rtk1748": {"character": "闇", "keyword": "pitch dark",
+               "expected_part_ids": {"rtk1743", "rtk518"}},
+    "rtk1766": {"character": "扉", "keyword": "front door",
+               "expected_part_ids": {"rtk1157", "rtk1760"}},
+    "rtk1964": {"character": "偏", "keyword": "partial",
+               "expected_part_ids": {"kangxi9", "prim-fishfinger"}},
+    "rtk1965": {"character": "遍", "keyword": "everywhere",
+               "expected_part_ids": {"prim-fishfinger", "rtk843"}},
+    "rtk1994": {"character": "響", "keyword": "echo",
+               "expected_part_ids": {"kangxi138", "kangxi52", "rtk1991", "rtk518"}},
+    "rtk2277": {"character": "哨", "keyword": "scout",
+               "expected_part_ids": {"rtk11", "rtk119"}},
+    "rtk2340": {"character": "幟", "keyword": "pennant",
+               "expected_part_ids": {"kangxi62", "rtk432", "rtk518"}},
+    "rtk2448": {"character": "蓉", "keyword": "lotus blossom",
+               "expected_part_ids": {"kangxi40", "prim-mugwort", "rtk851"}},
+    "rtk2450": {"character": "芦", "keyword": "hollow reed",
+               "expected_part_ids": {"prim-mugwort", "rtk1157"}},
+    "rtk2535": {"character": "腔", "keyword": "body cavity",
+               "expected_part_ids": {"rtk13", "rtk1414"}},
+    "rtk2660": {"character": "窄", "keyword": "tight",
+               "expected_part_ids": {"prim-katakana-no", "prim-pipe", "rtk1413"}},
+    "rtk2661": {"character": "穿", "keyword": "drill",
+               "expected_part_ids": {"rtk1413", "rtk2053"}},
+    "rtk2662": {"character": "竃", "keyword": "kitchen stove",
+               "expected_part_ids": {"kangxi20", "rtk14", "rtk1413", "rtk161", "rtk573", "rtk75"}},
+    "rtk2687": {"character": "篇", "keyword": "livraison",
+               "expected_part_ids": {"prim-fishfinger", "rtk1007"}},
+    "rtk2821": {"character": "騙", "keyword": "cheat",
+               "expected_part_ids": {"prim-fishfinger", "rtk2132"}},
+    "rtk2883": {"character": "嘗", "keyword": "lick",
+               "expected_part_ids": {"rtk196", "rtk493"}},
+    "rtk2902": {"character": "肇", "keyword": "founding",
+               "expected_part_ids": {"kangxi129", "kangxi66", "rtk1157"}},
 }
 
 # character -> hanzi id, spot-checking the 429-character Unihan self-reference backfill
