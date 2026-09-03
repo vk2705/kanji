@@ -1785,6 +1785,47 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"kangxi14", "rtk112"}},
     "rtk2659": {"character": "窺", "keyword": "lie in wait",
                 "expected_part_ids": {"rtk1413", "rtk904"}},
+    # Same daily check-in (2026-09-03), picking up last session's flagged
+    # "鹿/比 stayed inconclusive" item with fresh eyes: 比(rtk482, "compare")
+    # was atomic (no parts) despite CSV explicitly listing "spoon; sitting
+    # on the ground" as its real components -- exactly the same pair
+    # already used correctly for 北(rtk480, "north"), whose own CSV row is
+    # identical. Decomposed 比 the same way: 匕,prim-sitting-on-the-ground.
+    # That in turn made 鹿(rtk2154, "deer")'s bug provable: CSV's "cave;
+    # antlers; compare; spoon; sitting on the ground" is [cave] + [antlers]
+    # + [compare, redundantly re-expanded into its own spoon/sitting-on-
+    # the-ground parts] -- "antlers" was the one real component missing
+    # entirely (confirmed via cjkvi-ids, which shows a ⿻コ⿰丨丨 shape between
+    # 广 and 比 with no standalone citable character anywhere in cjkvi-ids,
+    # so added prim-antlers the same glyph-less way as prim-sitting-on-
+    # the-ground). Fixed 鹿 to 广,prim-antlers,比. That in turn exposed
+    # redundant-flattening in 6 more kanji that all separately re-listed
+    # 比 and/or 广 alongside 鹿 itself once cjkvi-ids confirmed 鹿 is a
+    # single clean top-level component of each: 麓(⿱林鹿, CSV also
+    # separately names "grove"=林), 麗(⿱丽鹿, kept the existing 一,冂
+    # approximation of 丽 since CSV independently confirms "one; ceiling;
+    # mediocre"), 麟(⿰鹿粦, 粦=米+舛 per cjkvi-ids, dropped a stray "夕" that
+    # didn't belong), 漉(⿰氵鹿), 塵(⿸鹿土), 麒(⿰鹿其, kept the existing 甘,ハ
+    # approximation of 其). 慶(rtk2157) shows the same top shape as 鹿 in
+    # cjkvi-ids but its own bottom differs enough from 比 in a render
+    # comparison that it wasn't touched -- left as a separate, still-open
+    # question rather than guess.
+    "rtk482": {"character": "比", "keyword": "compare",
+               "expected_part_ids": {"rtk476", "prim-sitting-on-the-ground"}},
+    "rtk2154": {"character": "鹿", "keyword": "deer",
+                "expected_part_ids": {"kangxi53", "prim-antlers", "rtk482"}},
+    "rtk2155": {"character": "麓", "keyword": "foot of a mountain",
+                "expected_part_ids": {"rtk208", "rtk2154"}},
+    "rtk2158": {"character": "麗", "keyword": "lovely",
+                "expected_part_ids": {"rtk1", "kangxi13", "rtk2154"}},
+    "rtk2210": {"character": "麟", "keyword": "chinese unicorn",
+                "expected_part_ids": {"rtk2154", "rtk987", "kangxi136"}},
+    "rtk2398": {"character": "漉", "keyword": "manufacture paper",
+                "expected_part_ids": {"rtk137", "rtk2154"}},
+    "rtk2853": {"character": "塵", "keyword": "dust",
+                "expected_part_ids": {"rtk2154", "rtk161"}},
+    "rtk2854": {"character": "麒", "keyword": "chinese unicorn",
+                "expected_part_ids": {"rtk1894", "prim-katakana-ha", "rtk2154"}},
 }
 
 # character -> hanzi id, spot-checking the 429-character Unihan self-reference backfill

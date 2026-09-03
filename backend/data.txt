@@ -724,7 +724,7 @@ rtk478:匂:fragrant:勹,匕
 rtk479:頃:time:貝,頁,匕
 rtk480:北:north:匕,prim-sitting-on-the-ground
 rtk481:背:stature:月,北
-rtk482:比:compare:
+rtk482:比:compare:匕,prim-sitting-on-the-ground
 rtk483:昆:descendants:日,比
 rtk484:皆:all:白,比
 rtk485:楷:square character style:白,比,木
@@ -2396,11 +2396,11 @@ rtk2150:虞:fear:呉,卜,匕,厂,虍
 rtk2151:慮:prudence:思,卜,匕,厂,虍
 rtk2152:劇:drama:卜,匕,厂,虍,豕
 rtk2153:虐:tyrannize:卜,匕,匚,厂,虍
-rtk2154:鹿:deer:比,广
-rtk2155:麓:foot of a mountain:鹿,比,木,广
+rtk2154:鹿:deer:广,prim-antlers,比
+rtk2155:麓:foot of a mountain:林,鹿
 rtk2156:薦:recommend:广,杰,艾
 rtk2157:慶:jubilation:心,冖,夂,广
-rtk2158:麗:lovely:一,鹿,比,冂,广
+rtk2158:麗:lovely:一,冂,鹿
 rtk2159:熊:bear:能,杰
 rtk2160:能:ability:月,匕,厶
 rtk2161:態:attitude:能,心
@@ -2452,7 +2452,7 @@ rtk2206:禽:bird:个,亠,冂,凵,厶,禹,丶,ノ
 rtk2207:檎:apple:木,个,亠,冂,厶,禹
 rtk2208:憐:pity:舛,米,state of mind,夕
 rtk2209:燐:phosphorus:火,舛,米,夕
-rtk2210:麟:chinese unicorn:鹿,舛,比,米,夕,广
+rtk2210:麟:chinese unicorn:鹿,米,舛
 rtk2211:鱗:scales (fish):魚,舛,田,米,夕,杰
 rtk2212:奄:cover:乙,大,日
 rtk2213:庵:hermitage:田,广,大
@@ -2639,7 +2639,7 @@ rtk2394:梁:weir:水,刀,木,丶
 rtk2395:澱:sediment:｜,一,水,二,ハ,尸,殳,几,又
 rtk2396:洛:kyoto:口,水,夂
 rtk2397:汝:you:水,女
-rtk2398:漉:manufacture paper:鹿,水,比,广
+rtk2398:漉:manufacture paper:水,鹿
 rtk2399:瀕:shore:ノ,貝,止,水,小,頁
 rtk2400:濠:moat:口,水,亠,冖,豕
 rtk2401:溌:sprinkle:二,水,儿,癶
@@ -3093,8 +3093,8 @@ rtk2849:鷲:eagle:口,小,鳥,丶,亠,尤,杰,尢
 rtk2850:鴨:wild duck:｜,鳥,日,杰,田
 rtk2851:鳶:black kite:鳥,弋,杰
 rtk2852:梟:owl:鳥,木
-rtk2853:塵:dust:鹿,土,比,广
-rtk2854:麒:chinese unicorn:甘,鹿,ハ,比,广
+rtk2853:塵:dust:鹿,土
+rtk2854:麒:chinese unicorn:甘,ハ,鹿
 rtk2855:舅:father-in-law:臼,田,力
 rtk2856:鼠:rat:臼
 rtk2857:鑿:chisel:臼,干,金,丷,殳,几,又
@@ -3334,3 +3334,4 @@ prim-maestro:𠂤:maestro
 prim-noren:帀:noren:一,巾
 prim-bushes:丰:bushes
 prim-meeting:亼:meeting
+prim-antlers:?:antlers
