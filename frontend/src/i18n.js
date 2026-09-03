@@ -78,6 +78,7 @@ export const translations = {
     cancelBtn: "Cancel",
     logoutBtn: "Log out",
     authDividerOr: "or",
+    authGoogleUnavailableInApp: "Google sign-in isn't available in the app — use a username and password above, or open the website in a browser.",
 
     yourStoryHeading: "Your mnemonic story",
     yourStoryPlaceholder: "Write your own mnemonic for this kanji…",
@@ -202,6 +203,7 @@ export const translations = {
     cancelBtn: "Отмена",
     logoutBtn: "Выйти",
     authDividerOr: "или",
+    authGoogleUnavailableInApp: "Вход через Google недоступен в приложении — используйте имя пользователя и пароль выше, либо откройте сайт в браузере.",
 
     yourStoryHeading: "Ваша мнемоническая история",
     yourStoryPlaceholder: "Напишите свою мнемонику для этого кандзи…",

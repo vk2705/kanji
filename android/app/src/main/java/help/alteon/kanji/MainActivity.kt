@@ -68,6 +68,11 @@ class MainActivity : AppCompatActivity() {
             cacheMode = WebSettings.LOAD_DEFAULT
             mixedContentMode = WebSettings.MIXED_CONTENT_NEVER_ALLOW
             mediaPlaybackRequiresUserGesture = false
+            // Lets the frontend (AuthBar.jsx) detect it's running inside this WebView
+            // shell and skip the Google Identity Services button — Google blocks that
+            // SDK from rendering inside embedded WebViews (disallowed_useragent), which
+            // otherwise shows as a blank/black screen instead of a real sign-in prompt.
+            userAgentString = "$userAgentString KanjiAndroidApp"
         }
 
         binding.webView.webViewClient = object : WebViewClient() {

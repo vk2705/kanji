@@ -5,6 +5,15 @@ import { t } from "../i18n";
 // Public identifier, safe to embed in the built bundle — see CLAUDE.md "Google SSO".
 const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
+// The Android WebView shell (android/MainActivity.kt) appends this marker to its
+// user agent. Google actively blocks its own Identity Services SDK from rendering
+// inside embedded WebViews (the "disallowed_useragent" anti-phishing check) — the
+// button either silently fails or renders a blank/black frame instead of a real
+// sign-in prompt. Rather than let that happen, skip the Google flow entirely in
+// this context; see android/README.md's "Known limitations" for the full story
+// and what a real fix (Chrome Custom Tabs + OAuth redirect) would take.
+const IS_ANDROID_WEBVIEW = /KanjiAndroidApp/.test(navigator.userAgent);
+
 let googleScriptPromise = null;
 function loadGoogleScript() {
   if (window.google?.accounts?.id) return Promise.resolve();
@@ -42,7 +51,7 @@ export default function AuthBar({ user, setUser, lang = "en", uiLang, studyScrip
   }
 
   useEffect(() => {
-    if (!open || user || !GOOGLE_CLIENT_ID) return;
+    if (!open || user || !GOOGLE_CLIENT_ID || IS_ANDROID_WEBVIEW) return;
     let cancelled = false;
     loadGoogleScript()
       .then(() => {
@@ -179,7 +188,13 @@ export default function AuthBar({ user, setUser, lang = "en", uiLang, studyScrip
               </button>
             </div>
           </form>
-          {GOOGLE_CLIENT_ID && (
+          {GOOGLE_CLIENT_ID && IS_ANDROID_WEBVIEW && (
+            <div className="auth-google">
+              <div className="auth-divider">{t(lang, "authDividerOr")}</div>
+              <p className="login-hint">{t(lang, "authGoogleUnavailableInApp")}</p>
+            </div>
+          )}
+          {GOOGLE_CLIENT_ID && !IS_ANDROID_WEBVIEW && (
             <div className="auth-google">
               <div className="auth-divider">{t(lang, "authDividerOr")}</div>
               <div ref={googleBtnRef} />

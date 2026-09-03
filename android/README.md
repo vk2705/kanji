@@ -54,16 +54,20 @@ IP instead for that case.
 
 ## Known limitations
 
-- **Google Sign-In will likely not work inside the WebView.** Google
-  actively blocks its OAuth flow inside generic embedded WebViews
-  (`disallowed_useragent`) as an anti-phishing measure. `MainActivity`
-  already routes any off-host navigation (which includes Google's
-  account-chooser redirect) out to the system browser as a partial
-  mitigation, but the Google Identity Services JS SDK itself
-  (`AuthBar.jsx`) may still fail before that redirect ever happens. Local
-  username/password auth is unaffected. Fixing this properly means Chrome
-  Custom Tabs plus a real OAuth redirect flow — a bigger change than this
-  first pass, and out of scope until someone hits it in practice.
+- **Google Sign-In doesn't work inside the WebView, and is hidden there
+  rather than fixed (owner-reported 2026-09-04: a black screen on tapping
+  it).** Google actively blocks its OAuth flow inside generic embedded
+  WebViews (`disallowed_useragent`) as an anti-phishing measure — the
+  Identity Services JS SDK's button/prompt (`AuthBar.jsx`) renders a
+  blank/black frame instead of a real sign-in UI when it detects it's
+  inside one. `MainActivity` appends a `KanjiAndroidApp` marker to the
+  WebView's user agent string; `AuthBar.jsx` checks for that marker and
+  skips loading the Google SDK entirely in that context, showing a short
+  note pointing at username/password auth (unaffected) or the website
+  instead. This avoids the broken/blank experience but doesn't restore
+  Google Sign-In inside the app — fixing that properly still means Chrome
+  Custom Tabs plus a real OAuth redirect flow, a bigger change than this
+  mitigation, and still not done.
 - No app icon variety (adaptive icon only, `minSdk = 26`) — devices on
   Android 7.1 and older aren't supported. Given this is a wrapper around a
   web app with no other native-code dependency on API level, lowering
