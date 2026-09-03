@@ -1826,6 +1826,27 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk2154", "rtk161"}},
     "rtk2854": {"character": "麒", "keyword": "chinese unicorn",
                 "expected_part_ids": {"rtk1894", "prim-katakana-ha", "rtk2154"}},
+    # Owner report (2026-09-04): searching "tree, mouth" surfaced wrong
+    # results, and 保("protect") specifically was "missing left part".
+    # 保 was 口,木 -- entirely missing 亻("person"), the literal left
+    # radical the owner pointed at; cjkvi-ids confirms 保 = ⿰亻呆, and CSV
+    # names "person" as a real component alongside 呆(rtk2297,"dumbfounded",
+    # itself already correctly 口,木)'s own redundantly-restated subparts.
+    # Fixed to 亻,呆. The other two reported false positives were
+    # redundant-flattening, not missing components: 操("maneuver") listed
+    # a bare "口" alongside "品"(rtk23, "goods") even though 品 already
+    # implies a mouth-shape recursively -- the extra literal "口" was what
+    # made a depth-1 "mouth" search wrongly match it; cjkvi-ids confirms
+    # 操 = 扌+喿(=品+木) with no separate mouth stroke, so dropped the
+    # redundant "口". 藁("straw") similarly re-listed 高(rtk329,"tall")'s
+    # own subparts (口,亠,冂) alongside 高 itself; cjkvi-ids confirms
+    # 藁 = 艹+槀(=高+木), so fixed to 艾,高,木.
+    "rtk1072": {"character": "保", "keyword": "protect",
+                "expected_part_ids": {"kangxi9", "rtk2297"}},
+    "rtk724": {"character": "操", "keyword": "maneuver",
+               "expected_part_ids": {"kangxi64", "rtk23", "rtk207"}},
+    "rtk2480": {"character": "藁", "keyword": "straw",
+                "expected_part_ids": {"prim-mugwort", "rtk329", "rtk207"}},
 }
 
 # character -> hanzi id, spot-checking the 429-character Unihan self-reference backfill

@@ -966,7 +966,7 @@ rtk720:拾:pick up:合,扌
 rtk721:担:shouldering:旦,扌
 rtk722:拠:foothold:処,扌
 rtk723:描:sketch:田,扌,艾
-rtk724:操:maneuver:口,木,扌,品
+rtk724:操:maneuver:扌,品,木
 rtk725:接:touch:妾,扌
 rtk726:掲:put up (a notice):日,匂,扌
 rtk727:掛:hang:土,卜,扌
@@ -1314,7 +1314,7 @@ rtk1068:優:tenderness:一,心,白,冖,夂,自
 rtk1069:伐:fell:戈
 rtk1070:宿:inn:白,宀,primitive_roof
 rtk1071:傷:wound:ノ,日,勿,一,人,勹
-rtk1072:保:protect:口,木
+rtk1072:保:protect:亻,呆
 rtk1073:褒:praise:衣,口,小,亠
 rtk1074:傑:greatness:舛,木,夕
 rtk1075:付:adhere:寸
@@ -2721,7 +2721,7 @@ rtk2476:蒔:sow (seeds):寸,土,日,艾
 rtk2477:芹:parsley:斤,艾
 rtk2478:苫:rush matting:口,卜,艾
 rtk2479:蒼:blue:ノ,口,个,艾,一
-rtk2480:藁:straw:口,高,木,亠,冂,艾
+rtk2480:藁:straw:艾,高,木
 rtk2481:蕪:turnip:｜,ノ,一,杰,艾,無
 rtk2482:藷:potato:言,日,老,艾
 rtk2483:薮:thicket:女,米,艾,攵
