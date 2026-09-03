@@ -364,7 +364,7 @@ rtk117:名:name:口,夕
 rtk118:石:stone:厂,口
 rtk119:肖:resemblance:月,尚
 rtk120:硝:nitrate:石,肖
-rtk121:砕:smash:ノ,口,十,石,九
+rtk121:砕:smash:石,九,十
 rtk122:砂:sand:石,少
 rtk123:妬:jealous:女,石
 rtk124:削:plane:月,尚
@@ -851,7 +851,7 @@ rtk605:雌:feminine:此,隹
 rtk606:準:semi-:十,水,隹
 rtk607:奮:stirred up:大,田,隹
 rtk608:奪:rob:寸,大,隹
-rtk609:確:assurance:口,石,宀,primitive_roof,隹
+rtk609:確:assurance:石,冖,隹
 rtk610:午:noon:ノ,干,十
 rtk611:許:permit:午,言
 rtk612:歓:delight:欠,隹,矢
@@ -945,7 +945,7 @@ rtk699:抄:extract:少,扌
 rtk700:抗:confront:亠,几,扌
 rtk701:批:criticism:比,扌
 rtk702:招:beckon:召,扌
-rtk703:拓:clear (the land):口,石,扌
+rtk703:拓:clear (the land):石,扌
 rtk704:拍:clap:白,扌
 rtk705:打:strike:亅,扌
 rtk706:拘:arrest:句,扌
@@ -971,7 +971,7 @@ rtk725:接:touch:妾,扌
 rtk726:掲:put up (a notice):日,匂,扌
 rtk727:掛:hang:土,卜,扌
 rtk728:捗:make progress:歩,扌
-rtk729:研:polish:｜,口,石,亅,廾,ノ,二,一
+rtk729:研:polish:石,一,廾
 rtk730:戒:commandment:廾,戈
 rtk731:弄:play with:王,廾
 rtk732:械:contraption:木,廾,戈
@@ -992,7 +992,7 @@ rtk746:丈:length:一,乂
 rtk747:史:history:口,乂
 rtk748:吏:officer:一,史
 rtk749:更:grow late:一,日,乂
-rtk750:硬:stiff:ノ,一,口,石,日,田
+rtk750:硬:stiff:石,更
 rtk751:梗:for the most part:木,更
 rtk752:又:or again:
 rtk753:双:pair:又,丶
@@ -1067,14 +1067,14 @@ rtk821:育:bring up:月,亠,厶
 rtk822:撤:remove:育,扌,攵
 rtk823:充:allot:亠,儿,厶
 rtk824:銃:gun:金,充
-rtk825:硫:sulphur:口,石,川,亠,厶
+rtk825:硫:sulphur:石,川,亠,厶
 rtk826:流:current:水,川,亠,厶
 rtk827:允:license:厶,儿
 rtk828:唆:tempt:口,儿,厶,夂
 rtk829:出:exit:｜,山,凵
 rtk830:山:mountain:
 rtk831:拙:bungling:出,扌
-rtk832:岩:boulder:口,山,石
+rtk832:岩:boulder:山,石
 rtk833:炭:charcoal:灰,山
 rtk834:岐:branch off:山,支,又,十
 rtk835:峠:mountain peak:下,山
@@ -1111,7 +1111,7 @@ rtk865:皮:pelt:又
 rtk866:波:waves:水,皮,又
 rtk867:婆:old woman:水,女,皮,又
 rtk868:披:expose:皮,又,扌
-rtk869:破:rend:口,石,皮,又
+rtk869:破:rend:石,皮
 rtk870:被:incur:初,皮,又
 rtk871:残:remainder:歹,戈,二
 rtk872:殉:martyrdom:旬,歹
@@ -1733,7 +1733,7 @@ rtk1487:弦:bowstring:弓,玄,亠,幺
 rtk1488:擁:hug:玄,推
 rtk1489:滋:nourishing:一,水,丷,幺
 rtk1490:慈:mercy:一,心,丷,幺
-rtk1491:磁:magnet:一,口,石,丷,幺
+rtk1491:磁:magnet:石,一,丷,幺
 rtk1492:系:lineage:ノ,糸,幺,小
 rtk1493:係:person in charge:ノ,糸,幺,小
 rtk1494:孫:grandchild:系,子
@@ -1872,7 +1872,7 @@ rtk1626:叫:shout:｜,口,十
 rtk1627:糾:twist:｜,糸,幺,小,十
 rtk1628:収:income:｜,又
 rtk1629:卑:lowly:十,田
-rtk1630:碑:tombstone:口,卑,石
+rtk1630:碑:tombstone:卑,石
 rtk1631:陸:land:土,儿,阝
 rtk1632:睦:intimate:土,目,儿
 rtk1633:勢:forces:土,力,丶,儿,九
@@ -2145,7 +2145,7 @@ rtk1899:欺:deceit:甘,欠,ハ
 rtk1900:棋:chess piece:甘,ハ,木
 rtk1901:旗:flag:甘,ハ,方
 rtk1902:期:period:甘,月,ハ
-rtk1903:碁:go:一,口,石,ハ,甘
+rtk1903:碁:go:石,甘,ハ
 rtk1904:基:fundamentals:一,甘,土,ハ
 rtk1905:甚:tremendously:一,甘,儿
 rtk1906:勘:intuition:力,匚,甘,儿
@@ -2446,7 +2446,7 @@ rtk2200:巳:sign of the snake or serpent:
 rtk2201:此:this:止,匕
 rtk2202:柴:brush:止,木,匕
 rtk2203:些:a little bit:止,二,匕
-rtk2204:砦:fort:口,止,石,匕
+rtk2204:砦:fort:石,此
 rtk2205:髭:beard:止,長,匕,彡,髟
 rtk2206:禽:bird:个,亠,冂,凵,厶,禹,丶,ノ
 rtk2207:檎:apple:木,个,亠,冂,厶,禹
@@ -2818,7 +2818,7 @@ rtk2573:楯:shield:斤,十,木,目,厂
 rtk2574:榎:lotus tree:一,自,木,目,夂
 rtk2575:樺:birch:｜,一,木,艾
 rtk2576:槍:spear:口,木,个,一
-rtk2577:柘:wild mulberry:口,石,木
+rtk2577:柘:wild mulberry:石,木
 rtk2578:梱:pack:木,囗
 rtk2579:枇:loquat:比,木
 rtk2580:樋:water pipe:込,木,用,マ
@@ -2873,16 +2873,16 @@ rtk2628:眸:pupil of the eye:牛,目,厶
 rtk2629:眩:faint:玄,目,亠,幺
 rtk2630:雉:pheasant:矢,隹
 rtk2631:矩:ruler:矢,巨
-rtk2632:磐:rock:口,舟,石,殳,几,又
-rtk2633:碇:anchor:口,石,疋,宀,primitive_roof
-rtk2634:碧:blue:王,口,石,白
-rtk2635:硯:inkstone:見,口,石
-rtk2637:碗:porcelain bowl:口,石,夕,卩,宀,primitive_roof
-rtk2638:碍:obstacle:口,寸,石,日,一
-rtk2639:碩:large:貝,口,石,頁
-rtk2640:磯:seashore:ノ,口,石,戈,幺,丶
-rtk2641:砺:whetstone:一,斤,口,石,厂
-rtk2642:碓:pestle:口,石,隹
+rtk2632:磐:rock:石,般
+rtk2633:碇:anchor:石,定
+rtk2634:碧:blue:王,石,白
+rtk2635:硯:inkstone:見,石
+rtk2637:碗:porcelain bowl:石,宛
+rtk2638:碍:obstacle:石,旦,寸
+rtk2639:碩:large:石,頁
+rtk2640:磯:seashore:石,幾
+rtk2641:砺:whetstone:石,厂,万
+rtk2642:碓:pestle:石,隹
 rtk2643:禦:defend:止,示,二,小,卩,彳
 rtk2644:祷:pray:ノ,寸,礼,土,亠,二
 rtk2645:祐:help:ノ,一,口,礼

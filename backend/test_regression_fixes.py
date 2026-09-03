@@ -1493,8 +1493,13 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk1007", "rtk1572"}},
     "rtk1589": {"character": "館", "keyword": "bldg.",
                 "expected_part_ids": {"rtk1363", "rtk1582"}},
+    # Corrected 2026-09-04 (owner-reported "stone, mouth" search bug --
+    # see the big pin block below): the redundant "口"(rtk11) this pin was
+    # keying off of is exactly the bug — 石(rtk118) already contains its
+    # own 口 recursively, and 碑's real cjkvi-ids structure (⿰石卑) has no
+    # separate mouth stroke.
     "rtk1630": {"character": "碑", "keyword": "tombstone",
-                "expected_part_ids": {"rtk11", "rtk118", "rtk1629"}},
+                "expected_part_ids": {"rtk118", "rtk1629"}},
     "rtk1638": {"character": "核", "keyword": "nucleus",
                 "expected_part_ids": {"rtk1637", "rtk207"}},
     "rtk1641": {"character": "骸", "keyword": "remains",
@@ -1847,6 +1852,80 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"kangxi64", "rtk23", "rtk207"}},
     "rtk2480": {"character": "藁", "keyword": "straw",
                 "expected_part_ids": {"prim-mugwort", "rtk329", "rtk207"}},
+    # Owner report (2026-09-04): "search for stone+mouth brings mistakes".
+    # Checked all 23 non-atomic 石("stone")-family kanji at once (every
+    # host currently listing 石) rather than one at a time, since the
+    # pattern turned out to be near-universal: 石 itself is correctly
+    # 厂,口 (cliff, mouth) -- but essentially every host built on top of it
+    # was ALSO separately re-listing a bare "口" alongside "石", even
+    # though cjkvi-ids confirms every single one of these 23 characters is
+    # cleanly [石 + exactly one other real component] with no independent
+    # mouth stroke anywhere (e.g. 岩=⿱山石, 破=⿰石皮, 碑=⿰石卑, ...). That
+    # stray "口" is exactly what made a depth-1 "mouth" search wrongly
+    # match all of them. Beyond dropping the universal redundant "口",
+    # several also needed their *other* component fixed, following the
+    # same two established patterns:
+    #  - reference an already-taught compound directly instead of
+    #    re-flattening its own parts: 硬(更, rtk749), 砦(此, rtk2201),
+    #    磐(般, rtk2016), 碇(定, rtk408), 碗(宛, rtk1521),
+    #    碩(頁, rtk64 -- also dropped a redundant "貝", 頁's own part),
+    #    磯(幾, rtk1481), 碍(旦, rtk30, kept the separate "寸"),
+    #    砺(万, rtk68, kept the separate "厂", dropped a stray "斤"
+    #    that didn't belong at all).
+    #  - trust cjkvi-ids's real structure over a previous rough guess:
+    #    確(⿰石隺, 隺=⿻冖隹 -- render-confirmed the top is 冖("cover"),
+    #    not the previously-used 宀("roof"), which has an extra dot);
+    #    研(⿰石开, 开=⿱一廾 exactly -- dropped 4 unrelated stray tokens);
+    #    砕(⿰石卆, 卆=⿱九十 exactly, dropped a stray "ノ").
+    #  - the rest needed only the redundant "口" dropped, their other
+    #    parts were already correct: 拓, 硫, 岩, 磁, 碑(also referenced
+    #    卑, rtk1629, directly already), 碁(其≈甘,ハ per the established
+    #    approximation from the 麒 fix, also dropped a stray "一"), 柘,
+    #    碧, 硯, 碓.
+    "rtk121": {"character": "砕", "keyword": "smash",
+               "expected_part_ids": {"rtk118", "rtk9", "rtk10"}},
+    "rtk609": {"character": "確", "keyword": "assurance",
+               "expected_part_ids": {"rtk118", "kangxi14", "kangxi172"}},
+    "rtk703": {"character": "拓", "keyword": "clear (the land)",
+               "expected_part_ids": {"rtk118", "kangxi64"}},
+    "rtk729": {"character": "研", "keyword": "polish",
+               "expected_part_ids": {"rtk118", "rtk1", "kangxi55"}},
+    "rtk750": {"character": "硬", "keyword": "stiff",
+               "expected_part_ids": {"rtk118", "rtk749"}},
+    "rtk825": {"character": "硫", "keyword": "sulphur",
+               "expected_part_ids": {"rtk118", "rtk134", "kangxi8", "kangxi28"}},
+    "rtk832": {"character": "岩", "keyword": "boulder",
+               "expected_part_ids": {"rtk830", "rtk118"}},
+    "rtk869": {"character": "破", "keyword": "rend",
+               "expected_part_ids": {"rtk118", "rtk865"}},
+    "rtk1491": {"character": "磁", "keyword": "magnet",
+                "expected_part_ids": {"rtk118", "rtk1", "kangxi12", "kangxi52"}},
+    "rtk1903": {"character": "碁", "keyword": "go",
+                "expected_part_ids": {"rtk118", "rtk1894", "prim-katakana-ha"}},
+    "rtk2204": {"character": "砦", "keyword": "fort",
+                "expected_part_ids": {"rtk118", "rtk2201"}},
+    "rtk2577": {"character": "柘", "keyword": "wild mulberry",
+                "expected_part_ids": {"rtk118", "rtk207"}},
+    "rtk2632": {"character": "磐", "keyword": "rock",
+                "expected_part_ids": {"rtk118", "rtk2016"}},
+    "rtk2633": {"character": "碇", "keyword": "anchor",
+                "expected_part_ids": {"rtk118", "rtk408"}},
+    "rtk2634": {"character": "碧", "keyword": "blue",
+                "expected_part_ids": {"rtk271", "rtk118", "rtk37"}},
+    "rtk2635": {"character": "硯", "keyword": "inkstone",
+                "expected_part_ids": {"rtk61", "rtk118"}},
+    "rtk2637": {"character": "碗", "keyword": "porcelain bowl",
+                "expected_part_ids": {"rtk118", "rtk1521"}},
+    "rtk2638": {"character": "碍", "keyword": "obstacle",
+                "expected_part_ids": {"rtk118", "rtk30", "rtk45"}},
+    "rtk2639": {"character": "碩", "keyword": "large",
+                "expected_part_ids": {"rtk118", "rtk64"}},
+    "rtk2640": {"character": "磯", "keyword": "seashore",
+                "expected_part_ids": {"rtk118", "rtk1481"}},
+    "rtk2641": {"character": "砺", "keyword": "whetstone",
+                "expected_part_ids": {"rtk118", "kangxi27", "rtk68"}},
+    "rtk2642": {"character": "碓", "keyword": "pestle",
+                "expected_part_ids": {"rtk118", "kangxi172"}},
 }
 
 # character -> hanzi id, spot-checking the 429-character Unihan self-reference backfill
