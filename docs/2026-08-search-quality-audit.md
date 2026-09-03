@@ -5226,3 +5226,74 @@ output.
   `壷`'s ambiguous top element, `triage_google_check.py`'s unmined
   output, the 81 orphaned `rad{N}` rows on the live DB (needs production
   access).
+
+### 2026-09-03 (daily check-in) — resolved the 个-vs-人 question, then fixed 比/鹿's missing "antlers"
+
+- No pending reviews in `review_queue.py`, no new owner report. First
+  cleared an item flagged as open at the end of the previous session: is
+  `个`("umbrella", `cjkvi-ids` `⿱人丨`, has a vertical stroke) wrongly
+  standing in for plain `人`("person", no vertical stroke) in `会`, `金`,
+  `介`, `全`, `傘`, `舎`, `企`, `禽` — all kanji whose `cjkvi-ids` top is
+  literally `人`, not `亼` or `个`? Checked each against its own CSV
+  components row and found CSV explicitly says **"umbrella"** for every
+  one of them (`会`: "one; wall; umbrella; rising cloud; two; elbow;
+  wall" — which also confirms `会`'s existing `二,个,厶` is exactly right,
+  not a bug). This settles it: Heisig's own real primitive choice here
+  genuinely is "umbrella," regardless of which existing Unicode character
+  `cjkvi-ids` happens to classify the shape under — a useful, generalizable
+  lesson (CSV's real named components outrank raw `cjkvi-ids`
+  shape-family matching whenever the two disagree on *which primitive
+  Heisig actually taught*, even if `cjkvi-ids` is still authoritative for
+  *whether a component is structurally present at all*). `余` was
+  double-checked too and also left alone — CSV says "umbrella" for it as
+  well, not "meeting", consistent with everything else in this batch. No
+  data changes from this part; it closes out an open question instead.
+- Applied that same lesson to the still-inconclusive `鬼`/`鹿` items from
+  last time. `比`(rtk482, "compare") was atomic despite CSV explicitly
+  listing "spoon; sitting on the ground" as its real components — the
+  exact same pair already used correctly for `北`(rtk480, "north")'s
+  identical CSV row. Decomposed `比` to `匕,prim-sitting-on-the-ground` to
+  match. That made `鹿`(rtk2154, "deer")'s bug provable where it had
+  stayed ambiguous before: CSV's "cave; antlers; compare; spoon; sitting
+  on the ground" parses as cave + antlers + compare (redundantly
+  re-expanded into its own now-identified spoon/sitting-on-the-ground
+  parts) — "antlers" was a real, distinct component missing entirely.
+  `cjkvi-ids` confirms a `⿻コ⿰丨丨` shape sitting between `广` and `比` with
+  no standalone citable character anywhere in `cjkvi-ids`'s own data, so
+  added `prim-antlers` the same glyph-less way as the existing
+  `prim-sitting-on-the-ground` (character `?`, hidden by the frontend's
+  `displayChar()`). Fixed `鹿` to `广,prim-antlers,比`.
+  - `鬼` itself was re-examined too but stayed genuinely inconclusive —
+    its current `匕` token does visually match a real hook-stroke in a
+    zoomed render, unlike `鹿`'s case where a whole chunk was provably
+    absent. Left unchanged.
+- Re-ran `audit_flattening.py` after the `鹿` fix (standard
+  iterative-convergence practice) — no new hits from this specific fix,
+  but a manual grep for other hosts of `比`/`广` alongside `鹿` (prompted
+  by how the earlier 邦/辰/天/夫 clusters worked) turned up 6 more kanji
+  that each separately re-listed `比` and/or `广` redundantly alongside
+  `鹿` itself, confirmed via `cjkvi-ids` showing `鹿` as one clean
+  top-level component of each: `麓`(`⿱林鹿`, CSV also separately names
+  "grove"=`林`), `麗`(`⿱丽鹿`, kept the existing `一,冂` approximation of
+  `丽` since CSV independently confirms "one; ceiling; mediocre"),
+  `麟`(`⿰鹿粦`, `粦`=`米`+`舛` per `cjkvi-ids`, dropped a stray "夕" token
+  that didn't belong anywhere), `漉`(`⿰氵鹿`), `塵`(`⿸鹿土`), `麒`(`⿰鹿其`,
+  kept the existing `甘,ハ` approximation of `其`).
+- Left `慶`(rtk2157) alone — its `cjkvi-ids` shows the same `鹿`-shaped
+  top, but a direct render comparison against `鹿` shows the bottom
+  differs enough (a flowing stroke replacing `比`'s two legs) that
+  guessing at the right fix wasn't safe this session.
+- Verified: full rebuild; `test_regression_fixes.py` — 8 new pins (比,
+  鹿, 麓, 麗, 麟, 漉, 塵, 麒) — 675 checks, same 4 expected hanzi-scope
+  non-issues; pytest (51 passed); `audit_self_reference.py` clean;
+  `audit_flattening.py` re-run to confirm convergence (no hits involving
+  any of these 8, count down slightly from 925 to 919).
+- Not deployed to the live server from this session (no SSH/server
+  access) — data-only change + one new primitive row (`prim-antlers`), no
+  backend restart needed on next deploy.
+- Coverage: **1435/3000 (47.8%)**.
+- **Next session**: `慶`'s bottom-shape question, left open above. The
+  remaining lower-usage-count common-primitives entries not yet given a
+  full CSV+render pass. Other standing items unchanged: `壷`'s ambiguous
+  top element, `triage_google_check.py`'s unmined output, the 81 orphaned
+  `rad{N}` rows on the live DB (needs production access).

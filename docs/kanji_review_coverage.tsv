@@ -480,7 +480,7 @@ rtk478	匂	aroma	478	no
 rtk479	頃	about that time	479	yes
 rtk480	北	north	480	yes
 rtk481	背	stature	481	yes
-rtk482	比	compare	482	no
+rtk482	比	compare	482	yes
 rtk483	昆	descendants	483	no
 rtk484	皆	all	484	no
 rtk485	楷	block letters	485	no
@@ -2152,11 +2152,11 @@ rtk2150	虞	uneasiness	2150	yes
 rtk2151	慮	prudence	2151	yes
 rtk2152	劇	drama	2152	yes
 rtk2153	虐	tyrannize	2153	no
-rtk2154	鹿	deer	2154	no
-rtk2155	麓	foot of a mountain	2155	no
+rtk2154	鹿	deer	2154	yes
+rtk2155	麓	foot of a mountain	2155	yes
 rtk2156	薦	recommend	2156	no
 rtk2157	慶	jubilation	2157	no
-rtk2158	麗	lovely	2158	no
+rtk2158	麗	lovely	2158	yes
 rtk2159	熊	bear	2159	yes
 rtk2160	能	ability	2160	no
 rtk2161	態	attitude	2161	yes
@@ -2208,7 +2208,7 @@ rtk2206	禽	fowl	2206	no
 rtk2207	檎	apple	2207	no
 rtk2208	憐	sympathize with	2208	yes
 rtk2209	燐	phosphorus	2209	no
-rtk2210	麟	camelopard	2210	no
+rtk2210	麟	camelopard	2210	yes
 rtk2211	鱗	scaled	2211	no
 rtk2212	奄	encompassing	2212	no
 rtk2213	庵	hermitage	2213	no
@@ -2396,7 +2396,7 @@ rtk2394	梁	roofbeam	2394	no
 rtk2395	澱	sediment	2395	no
 rtk2396	洛	old kyoto	2396	no
 rtk2397	汝	thou	2397	no
-rtk2398	漉	filter	2398	no
+rtk2398	漉	filter	2398	yes
 rtk2399	瀕	on the verge of	2399	yes
 rtk2400	濠	moat	2400	no
 rtk2401	溌	spray	2401	no
@@ -2851,8 +2851,8 @@ rtk2849	鷲	eagle	2849	no
 rtk2850	鴨	wild duck	2850	no
 rtk2851	鳶	black kite	2851	no
 rtk2852	梟	owl	2852	no
-rtk2853	塵	dust	2853	no
-rtk2854	麒	giraffe	2854	no
+rtk2853	塵	dust	2853	yes
+rtk2854	麒	giraffe	2854	yes
 rtk2855	舅	father-in-law	2855	no
 rtk2856	鼠	mouse	2856	no
 rtk2857	鑿	bore	2857	yes
