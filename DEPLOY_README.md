@@ -273,6 +273,54 @@ Needs the owner's own Google account — can't be done by an AI session:
 See `CLAUDE.md`'s "Google SSO" section for the full design (why both a
 frontend and backend value are needed, and why they must match).
 
+## Frontend change deployed but the live site still shows old behavior (added 2026-09-04, recurring owner report)
+
+This has now come up more than once (SEO tags, the decomposition dispute
+button) — the fix is committed and pushed, the owner redeploys, and the
+live site still behaves like before. This is a **frontend build/deploy**
+issue, not a backend or data issue — nothing here touches `sync_system_data.py`
+or the database. Frontend code changes (anything under `frontend/src/`,
+e.g. `AuthBar.jsx`, `KanjiDetail.jsx`) need their own separate deploy step
+that's easy to skip or get wrong:
+
+1. **Rebuild, don't just `git pull`.** `git pull` only updates the source
+   files on the server; it does **not** regenerate `frontend/dist/`. You
+   must run `cd frontend && npm install && npm run build` after pulling,
+   then copy the *new* `dist/` output to wherever nginx serves it from
+   (per `CLAUDE.md`'s Deployment section: `/usr/share/nginx/html/kanji/`)
+   — copying the whole directory (overwriting old files), not merging.
+   The single most common cause of "I redeployed but nothing changed" is
+   this step being skipped or copying to the wrong path.
+2. **Verify the copy actually landed** before blaming the browser: `ls -la
+   /usr/share/nginx/html/kanji/assets/` on the server and check the
+   filenames/timestamps are from *just now*, not from an earlier deploy.
+   Vite fingerprints each JS/CSS file's name with a content hash, so a
+   real rebuild always produces different filenames — if the filenames
+   in that directory match what a previous deploy already had, the build
+   either didn't run or didn't get copied.
+3. **Then, and only then, suspect the browser.** A hard refresh
+   (Ctrl+Shift+R / Cmd+Shift+R) or a private/incognito window rules out
+   stale cached `index.html`/JS in one step. If the deployed files are
+   confirmed fresh (step 2) but a normal reload still shows old behavior,
+   check whether nginx is serving `index.html` itself with a long
+   `Cache-Control`/`Expires` header — content-hashed asset files (the
+   `.js`/`.css` under `assets/`) are safe to cache forever, but
+   `index.html` (which references those filenames) should not be, or
+   browsers can keep using an old `index.html` pointing at old assets
+   indefinitely. This project's own nginx config isn't tracked in this
+   repo (see `deploy/nginx/README.md`), so check the live config directly
+   for an overly broad cache rule covering `index.html`.
+4. **A feature needing login** (like the dispute button) also needs a
+   real logged-in session and a kanji that actually has a decomposition
+   to review — the review buttons render per-decomposition, so a kanji
+   with none yet (e.g. a user-created one nobody has decomposed) won't
+   show them; that's expected, not a bug. Confirmed working end-to-end
+   locally (register/login → search a normal kanji like 明 → the
+   ✓ Approve / ✗ Dispute buttons appear under "Made from") as of the
+   2026-09-04 session — if it's still missing on the live site after
+   confirming steps 1-3 above, the deploy genuinely hasn't picked up the
+   current frontend build yet.
+
 ## If something looks wrong
 
 - `sync_system_data.py` refuses to run against a database file that
