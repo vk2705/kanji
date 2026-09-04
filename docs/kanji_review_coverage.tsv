@@ -448,7 +448,7 @@ rtk446	刺	thorn	446	yes
 rtk447	制	system	447	yes
 rtk448	製	made in...	448	yes
 rtk449	転	revolve	449	no
-rtk450	芸	technique	450	no
+rtk450	芸	technique	450	yes
 rtk451	雨	rain	451	no
 rtk452	雲	cloud	452	no
 rtk453	曇	cloudy weather	453	no
@@ -571,7 +571,7 @@ rtk569	包	wrap	569	yes
 rtk570	胞	placenta	570	yes
 rtk571	砲	cannon	571	yes
 rtk572	泡	bubble	572	yes
-rtk573	亀	tortoise	573	no
+rtk573	亀	tortoise	573	yes
 rtk574	電	electricity	574	no
 rtk575	竜	dragon	575	no
 rtk576	滝	waterfall	576	no
@@ -682,7 +682,7 @@ rtk680	惧	disquieting	680	yes
 rtk681	憧	yearn	681	yes
 rtk682	憬	hanker	682	yes
 rtk683	慕	pining	683	no
-rtk684	添	annexed	684	no
+rtk684	添	annexed	684	yes
 rtk685	必	invariably	685	no
 rtk686	泌	ooze	686	yes
 rtk687	手	hand	687	no
@@ -901,7 +901,7 @@ rtk899	環	ring	899	yes
 rtk900	還	send back	900	yes
 rtk901	夫	husband	901	yes
 rtk902	扶	aid	902	yes
-rtk903	渓	mountain stream	903	no
+rtk903	渓	mountain stream	903	yes
 rtk904	規	standard	904	yes
 rtk905	替	exchange	905	no
 rtk906	賛	approve	906	yes
@@ -1150,7 +1150,7 @@ rtk1148	遅	slow	1148	yes
 rtk1149	漏	leak	1149	no
 rtk1150	刷	printing	1150	yes
 rtk1151	尺	shaku	1151	no
-rtk1152	尽	exhaust	1152	no
+rtk1152	尽	exhaust	1152	yes
 rtk1153	沢	swamp	1153	no
 rtk1154	訳	translate	1154	no
 rtk1155	択	choose	1155	yes
@@ -1299,7 +1299,7 @@ rtk1297	片	one-sided	1297	no
 rtk1298	版	printing block	1298	yes
 rtk1299	之	of	1299	no
 rtk1300	乏	destitution	1300	yes
-rtk1301	芝	turf	1301	no
+rtk1301	芝	turf	1301	yes
 rtk1302	不	negative	1302	no
 rtk1303	否	negate	1303	no
 rtk1304	杯	cupfuls	1304	no
@@ -1428,7 +1428,7 @@ rtk1426	深	deep	1426	no
 rtk1427	丘	hill	1427	no
 rtk1428	岳	point	1428	no
 rtk1429	兵	soldier	1429	yes
-rtk1430	浜	seacoast	1430	no
+rtk1430	浜	seacoast	1430	yes
 rtk1431	糸	thread	1431	no
 rtk1432	織	weave	1432	yes
 rtk1433	繕	darning	1433	yes
@@ -1576,9 +1576,9 @@ rtk1574	節	node	1574	yes
 rtk1575	退	retreat	1575	no
 rtk1576	限	limit	1576	yes
 rtk1577	眼	eyeball	1577	no
-rtk1578	良	good	1578	no
+rtk1578	良	good	1578	yes
 rtk1579	朗	melodious	1579	no
-rtk1580	浪	wandering	1580	no
+rtk1580	浪	wandering	1580	yes
 rtk1581	娘	daughter	1581	no
 rtk1582	食	eat	1582	no
 rtk1583	飯	meal	1583	yes
@@ -1606,7 +1606,7 @@ rtk1604	胸	bosom	1604	no
 rtk1605	離	detach	1605	no
 rtk1606	璃	crystal	1606	no
 rtk1607	殺	kill	1607	no
-rtk1608	爽	bracing	1608	no
+rtk1608	爽	bracing	1608	yes
 rtk1609	純	genuine	1609	yes
 rtk1610	頓	immediate	1610	yes
 rtk1611	鈍	dull	1611	no
@@ -1876,7 +1876,7 @@ rtk1874	率	ratio	1874	no
 rtk1875	渋	astringent	1875	no
 rtk1876	摂	vicarious	1876	yes
 rtk1877	央	center	1877	yes
-rtk1878	英	england	1878	no
+rtk1878	英	england	1878	yes
 rtk1879	映	reflect	1879	no
 rtk1880	赤	red	1880	no
 rtk1881	赦	pardon	1881	yes
@@ -2239,7 +2239,7 @@ rtk2237	巴	comma-design	2237	yes
 rtk2238	疋	critters	2238	no
 rtk2239	菫	violet	2239	no
 rtk2240	曼	mandala	2240	yes
-rtk2241	云	quote	2241	no
+rtk2241	云	quote	2241	yes
 rtk2242	莫	shalt	2242	no
 rtk2243	而	and then	2243	no
 rtk2244	倭	yamato	2244	yes
@@ -2403,7 +2403,7 @@ rtk2401	溌	spray	2401	no
 rtk2402	湊	port	2402	no
 rtk2403	淋	solitude	2403	no
 rtk2404	浩	abounding	2404	no
-rtk2405	汀	water’s edge	2405	no
+rtk2405	汀	water’s edge	2405	yes
 rtk2406	鴻	large goose	2406	no
 rtk2407	潅	souse	2407	yes
 rtk2408	溢	brimming	2408	yes
@@ -2434,7 +2434,7 @@ rtk2432	狛	a-un	2432	yes
 rtk2433	獅	lion	2433	yes
 rtk2434	狒	baboon	2434	yes
 rtk2435	莨	tobacco	2435	no
-rtk2436	茉	jasmine	2436	no
+rtk2436	茉	jasmine	2436	yes
 rtk2437	莉	hawthorn	2437	yes
 rtk2438	苺	strawberry	2438	no
 rtk2439	萩	bush clover	2439	no
@@ -2457,7 +2457,7 @@ rtk2455	蕗	butterbur	2455	yes
 rtk2456	茄	eggplant	2456	no
 rtk2457	蔭	behind the scenes	2457	yes
 rtk2458	蓬	wormwood	2458	no
-rtk2459	芥	mustard	2459	no
+rtk2459	芥	mustard	2459	yes
 rtk2460	萌	germinate	2460	no
 rtk2461	葡	grape	2461	no
 rtk2462	萄	grape vine	2462	no
@@ -2490,7 +2490,7 @@ rtk2488	莞	candle rush	2488	yes
 rtk2489	蒐	collector	2489	no
 rtk2490	菅	sedge	2490	yes
 rtk2491	葦	ditch reed	2491	no
-rtk2492	迪	way	2492	no
+rtk2492	迪	way	2492	yes
 rtk2493	辿	track down	2493	no
 rtk2494	這	crawl	2494	no
 rtk2495	迂	detour	2495	no
@@ -2873,7 +2873,7 @@ rtk2871	靄	mist	2871	no
 rtk2872	劫	kalpa	2872	no
 rtk2873	歎	bemoan	2873	no
 rtk2874	輿	palanquin	2874	no
-rtk2875	歪	warped	2875	no
+rtk2875	歪	warped	2875	yes
 rtk2876	翠	jade green	2876	yes
 rtk2877	黛	blue-black	2877	yes
 rtk2878	鼎	tripod	2878	no
@@ -2973,7 +2973,7 @@ rtk2971	淵	abyss (old)	2971	no
 rtk2972	伍	v	2972	yes
 rtk2973	什	x	2973	yes
 rtk2974	萬	ten thousand (old)	2974	no
-rtk2975	邁	pass through	2975	no
+rtk2975	邁	pass through	2975	yes
 rtk2976	燭	candlelight	2976	yes
 rtk2977	逞	tough	2977	no
 rtk2978	燈	lamp (old)	2978	yes
@@ -2986,7 +2986,7 @@ rtk2984	埜	plains (old)	2984	no
 rtk2985	龍	dragon (old)	2985	no
 rtk2986	寵	patronage	2986	yes
 rtk2987	聾	deafness	2987	no
-rtk2988	慾	longing (old)	2988	no
+rtk2988	慾	longing (old)	2988	yes
 rtk2989	嶽	point (old)	2989	no
 rtk2990	國	country (old)	2990	no
 rtk2991	脛	shin	2991	no

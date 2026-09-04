@@ -5609,3 +5609,74 @@ output.
   `朿`/`敝`-family questions, `慶`'s bottom shape, `壷`'s ambiguous top
   element, `triage_google_check.py`'s unmined output, the 81 orphaned
   `rad{N}` rows on the live DB.
+
+### 2026-09-04 (same day, continued) — mining the owner's own Google results.jsonl
+
+- Owner asked to continue checking the database against the owner's own
+  Google AI Overview lookups (`tools/heisig-google-check/results.jsonl`,
+  1812 entries, pushed back on 2026-08-30) and research every
+  disagreement — not another owner-reported single kanji this time, but
+  a standing, already-built tool (`triage_google_check.py`) nobody had
+  worked all the way through yet.
+- `triage_google_check.py` flags 651 of 1812 kanji where the live
+  decomposition and Google's mentioned characters don't overlap enough
+  to look consistent, split into 43 "DISJOINT" (zero character overlap
+  at all — the strongest signal) and 608 "PARTIAL" (something in ours
+  that Google's text doesn't echo — much noisier, most likely just
+  Google's own text omitting a real part rather than us having a wrong
+  one). Worked through all 43 DISJOINT entries this session, same
+  `cjkvi-ids`/CSV/render discipline as every other fix — this is a
+  heuristic pre-filter over another LLM's guess, not a verdict, so
+  every flag still needed independent verification, not blind trust.
+  Most turned out to be false positives (Google mentioning an unrelated
+  example kanji that uses the target as a component, not a real part of
+  the target itself, or a kanji this same session had already fixed
+  earlier today before `results.jsonl` was scraped — 梗, 党, 邦). But 19
+  were real, previously-uncaught bugs:
+  - **Missing components** (same class as `保`/`促`/`偏` found earlier
+    today): `良` was missing "丶" (`cjkvi-ids` confirms `⿱丶艮`, and a
+    render shows the extra top dot clearly); `爽` was missing "大"
+    entirely (render shows the glyph's outer frame is `大` with a
+    doubled-cross shape overlaid inside, approximated with the
+    already-established `乂`).
+  - **Wrong box shape** — the opposite direction of the same `田`-vs-
+    another-box-shape confusion this audit has hit before: `亀` had
+    `田`(rice field, 4-cell grid) where a render clearly shows a 2-cell
+    `日`(sun/day) box instead. Checked `申` side by side with the same
+    question and confirmed its `田` *is* correct there — a useful
+    reminder to actually render both directions rather than assume a
+    pattern generalizes.
+  - **Reference an already-taught compound directly instead of
+    flattening** (this audit's most common fix shape by far): `渓`→`夫`,
+    `尽`→`尺`, `芝`→`之`, `浜`→`兵`, `浪`→`良`, `英`→`央`, `汀`→`丁`,
+    `茉`→`末`, `芥`→`介`, `迪`→`由`, `邁`→`萬`, `慾`→`欲`, `添`→`天`(+`心`),
+    and `芸`→`云` — which needed `云` itself fixed first, since it was
+    `一,二,厶` but `cjkvi-ids`'s `⿱二厶` has no `一`. `歪`
+    (`cjkvi-ids` `⿱不正`) now references both `不` and `正` directly
+    instead of a flattened mash of both.
+  - Deliberately left several DISJOINT hits alone rather than force a
+    low-confidence call: `単`/`脳` share an unusual `cjkvi-ids` "𭕄"
+    marker neither side of this session's investigation could resolve
+    confidently; `壷`'s top element is the same already-standing
+    ambiguous question from earlier sessions; `斡`, `華`, `予`, `共`,
+    `蒲`, `汚`, `之`(itself), `了`, `袖`, `浄` all had plausible existing
+    approximations without strong enough counter-evidence to override
+    them.
+- Verified: full rebuild; `test_regression_fixes.py` — 19 new pins —
+  **925 checks**, same 4 expected hanzi-scope non-issues; pytest (56
+  passed); `audit_self_reference.py` clean; `audit_direct_ref_overlap.py`
+  re-run against every newly-referenced compound (夫, 尺, 之, 兵, 良,
+  央, 丁, 末, 介, 由, 萬, 欲, 不, 正) to confirm none of today's fixes
+  introduced a new redundant-overlap bug.
+- Not deployed to the live server (no SSH/server access) — data-only
+  change.
+- Coverage: **1605/3000 (53.5%)**.
+- **Next session**: the 608 PARTIAL hits in `results.jsonl` are still
+  completely unmined — much noisier than the DISJOINT set, so probably
+  worth a lighter, faster triage pass rather than the same per-kanji
+  render treatment for all 608. Otherwise the standing list is
+  unchanged: `audit_direct_ref_overlap.py --min-usage 3`'s ~139
+  remaining candidates, the `刂`/`primitive_roof` dead-token grep
+  cleanup, the `朿`/`敝`-family questions, `単`/`脳`'s shared "𭕄"
+  marker, `慶`'s bottom shape, `壷`'s ambiguous top element, the 81
+  orphaned `rad{N}` rows on the live DB.
