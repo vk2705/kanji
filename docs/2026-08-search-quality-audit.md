@@ -6205,7 +6205,7 @@ output.
   pytest (56 passed); `audit_self_reference.py` clean.
 - Not deployed (no SSH/server access) — data-only change, needs
   `sync_system_data.py` + reseed.
-- Coverage: will regenerate after commit.
+- Coverage: **1636/3000 (54.5%)**.
 - **Next session**: continue the sequential sweep from rtk2691. Worth
   keeping an eye out for more id collisions between that scratch-draft
   block (frames 3/4/8/16/17/18/19/20/21/91, all still present) and any
