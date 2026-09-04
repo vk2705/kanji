@@ -6334,7 +6334,7 @@ output.
   convergence: **104 candidates remaining, down from 136**.
 - Not deployed (no SSH/server access) — data-only change, needs
   `sync_system_data.py` + reseed.
-- Coverage: will regenerate after commit.
+- Coverage: **1654/3000 (55.1%)**.
 - **Next session**: continue working through
   `audit_direct_ref_overlap.py --min-usage 3`'s remaining ~104
   candidates directly — this session's pass showed it converges cleanly

@@ -253,7 +253,7 @@ rtk251	桃	peach tree	251	yes
 rtk252	眺	stare	252	yes
 rtk253	犬	dog	253	no
 rtk254	状	status quo	254	no
-rtk255	黙	silence	255	no
+rtk255	黙	silence	255	yes
 rtk256	然	sort of thing	256	no
 rtk257	荻	reed	257	yes
 rtk258	狩	hunt	258	yes
@@ -956,7 +956,7 @@ rtk954	微	delicate	954	yes
 rtk955	街	boulevard	955	no
 rtk956	桁	girder	956	no
 rtk957	衡	equilibrium	957	no
-rtk958	稿	draft	958	no
+rtk958	稿	draft	958	yes
 rtk959	稼	earnings	959	yes
 rtk960	程	extent	960	yes
 rtk961	税	tax	961	yes
@@ -1382,7 +1382,7 @@ rtk1380	践	tread	1380	yes
 rtk1381	踏	step	1381	yes
 rtk1382	踪	trail	1382	yes
 rtk1383	骨	skeleton	1383	no
-rtk1384	滑	slippery	1384	no
+rtk1384	滑	slippery	1384	yes
 rtk1385	髄	marrow	1385	yes
 rtk1386	禍	calamity	1386	yes
 rtk1387	渦	whirlpool	1387	no
@@ -1866,7 +1866,7 @@ rtk1864	蚊	mosquito	1864	no
 rtk1865	斑	speckled	1865	no
 rtk1866	斉	adjusted	1866	no
 rtk1867	剤	dose	1867	yes
-rtk1868	済	finish	1868	no
+rtk1868	済	finish	1868	yes
 rtk1869	斎	purification	1869	yes
 rtk1870	粛	solemn	1870	no
 rtk1871	塁	bases	1871	no
@@ -2118,16 +2118,16 @@ rtk2116	缶	tin can	2116	no
 rtk2117	陶	pottery	2117	yes
 rtk2118	揺	swing	2118	yes
 rtk2119	謡	noh chanting	2119	no
-rtk2120	鬱	gloom	2120	no
+rtk2120	鬱	gloom	2120	yes
 rtk2121	就	concerning	2121	yes
 rtk2122	蹴	kick	2122	yes
 rtk2123	懇	sociable	2123	yes
 rtk2124	墾	groundbreaking	2124	yes
 rtk2125	貌	countenance	2125	no
 rtk2126	免	excuse	2126	yes
-rtk2127	逸	elude	2127	no
-rtk2128	晩	nightfall	2128	no
-rtk2129	勉	exertion	2129	no
+rtk2127	逸	elude	2127	yes
+rtk2128	晩	nightfall	2128	yes
+rtk2129	勉	exertion	2129	yes
 rtk2130	象	elephant	2130	yes
 rtk2131	像	statue	2131	yes
 rtk2132	馬	horse	2132	no
@@ -2231,7 +2231,7 @@ rtk2229	芻	hay	2229	no
 rtk2230	雛	chick	2230	no
 rtk2231	趨	scurry	2231	no
 rtk2232	尤	understandably	2232	no
-rtk2233	厖	immense	2233	no
+rtk2233	厖	immense	2233	yes
 rtk2234	或	a  (a certain)	2234	no
 rtk2235	兎	rabbit	2235	yes
 rtk2236	也	est	2236	no
@@ -2288,7 +2288,7 @@ rtk2286	嘘	fib	2286	no
 rtk2287	啄	peck at	2287	no
 rtk2288	吠	barking	2288	no
 rtk2289	吊	dangle	2289	no
-rtk2290	噛	chew	2290	no
+rtk2290	噛	chew	2290	yes
 rtk2291	叶	within my ability	2291	no
 rtk2292	吻	sides of the mouth	2292	no
 rtk2293	吃	stammer	2293	yes
@@ -2332,7 +2332,7 @@ rtk2330	屑	rubbish	2330	no
 rtk2331	屡	frequently	2331	no
 rtk2332	屍	corpse	2332	no
 rtk2333	屏	folding screen	2333	no
-rtk2334	嵩	high-reaching	2334	no
+rtk2334	嵩	high-reaching	2334	yes
 rtk2335	崚	rugged mountains	2335	no
 rtk2336	嶺	mountaintop	2336	yes
 rtk2337	嵌	fit into	2337	no
@@ -2536,7 +2536,7 @@ rtk2534	肋	rib	2534	no
 rtk2535	腔	body cavity	2535	yes
 rtk2536	肱	armrest	2536	no
 rtk2537	胡	uncivilized	2537	yes
-rtk2538	楓	maple tree	2538	no
+rtk2538	楓	maple tree	2538	yes
 rtk2539	楊	purple willow	2539	no
 rtk2540	椋	oriental elm	2540	yes
 rtk2541	榛	hazel	2541	no
@@ -2662,7 +2662,7 @@ rtk2660	窄	tight	2660	yes
 rtk2661	穿	drill	2661	yes
 rtk2662	竃	kitchen stove	2662	yes
 rtk2663	竪	longness	2663	no
-rtk2664	颯	rustling	2664	no
+rtk2664	颯	rustling	2664	yes
 rtk2665	站	outpost	2665	no
 rtk2666	靖	repose	2666	yes
 rtk2667	妾	concubine	2667	no
@@ -2723,7 +2723,7 @@ rtk2721	蚤	flea	2721	no
 rtk2722	蟹	crab	2722	no
 rtk2723	蛋	protein	2723	no
 rtk2724	蟄	hibernation	2724	no
-rtk2725	蝿	housefly	2725	no
+rtk2725	蝿	housefly	2725	yes
 rtk2726	蟻	ant	2726	yes
 rtk2727	蝋	wax	2727	no
 rtk2728	蝦	shrimp	2728	yes
@@ -2847,7 +2847,7 @@ rtk2845	鸚	parakeet	2845	yes
 rtk2846	鵡	parrot	2846	no
 rtk2847	鵜	cormorant	2847	yes
 rtk2848	鷺	heron	2848	yes
-rtk2849	鷲	eagle	2849	no
+rtk2849	鷲	eagle	2849	yes
 rtk2850	鴨	wild duck	2850	no
 rtk2851	鳶	black kite	2851	no
 rtk2852	梟	owl	2852	no
@@ -2885,8 +2885,8 @@ rtk2883	嘗	lick	2883	yes
 rtk2884	殆	almost	2884	no
 rtk2885	牌	mahjong tiles	2885	no
 rtk2886	覗	peek	2886	no
-rtk2887	齟	disagree	2887	no
-rtk2888	齬	discord	2888	no
+rtk2887	齟	disagree	2887	yes
+rtk2888	齬	discord	2888	yes
 rtk2889	秦	manchu dynasty	2889	no
 rtk2890	雀	sparrow	2890	no
 rtk2891	隼	peregrine falcon	2891	no
@@ -2929,7 +2929,7 @@ rtk2927	丞	helping hand	2927	no
 rtk2928	亮	translucent	2928	no
 rtk2929	胤	blood relative	2929	no
 rtk2930	疏	transcription	2930	no
-rtk2931	膏	ointment	2931	no
+rtk2931	膏	ointment	2931	yes
 rtk2932	魁	pioneer	2932	no
 rtk2933	馨	ambrosial	2933	no
 rtk2934	牒	label	2934	no
