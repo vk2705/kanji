@@ -5758,3 +5758,81 @@ output.
   dead-token grep cleanup, the `朿`/`敝`-family questions, `単`/`脳`'s
   shared "𭕄" marker, `慶`'s bottom shape, `壷`'s ambiguous top element,
   the 81 orphaned `rad{N}` rows on the live DB.
+
+### 2026-09-05 — 5 disputed reviews, then the whole single-`亻` person-radical family (86 kanji)
+
+- Owner had queued **5 disputed** decompositions in `review_queue.py`
+  (#9-13): `椋`(rtk2540), `桔`(rtk2561), `検`(rtk1803), `橋`(rtk460),
+  `麿`(rtk2903). All five were the same root cause — **KRADFILE
+  over-fragmentation from the original `import_rtk.py` seed**: a whole RTK
+  primitive shattered into stray strokes. For three of them
+  (`椋`/`桔`/`麿`) `heisig-kanjis.csv` had an *empty* `components` field
+  (rare N1/uncommon frames outside the 6th-ed core), so the KRADFILE guess
+  in `data.txt` won the merge unopposed; for `橋`/`検` the CSV baseline was
+  actually fine but a hand-typed `data.txt` line (KRADFILE-derived) beat it
+  (step 3 wins). Fixes, all render- + `cjkvi-ids`-confirmed:
+  - `椋` `口,小,木,亠` → `木,京` (亠+口+小 was a shattered `京`).
+  - `桔` `口,士,木` → `木,吉` (士+口 was a shattered `吉`).
+  - `橋` `ノ,口,木,冂` → `木,ノ,口,大,冂` — was missing `大` and a `口`
+    versus its own `喬`-family siblings `嬌`(rtk461)/`矯`(rtk1306), which
+    both decompose the `喬` part as `ノ,口,大,冂`.
+  - `麿` `口,木,广,麻,ノ` → `麻,呂` — `麻` was **double-counted** (listed
+    alongside its own sub-parts `广`,`木`), plus a spurious `ノ`. `麿` =
+    `⿸麻呂` per `cjkvi-ids`, render-confirmed.
+  - `検` left as the family value `木,口,人,个` — its dispute is really the
+    standing `个`-vs-`亼` question shared across the whole `僉` family
+    (`剣`/`険`/`験`/`倹` all use `口,人,个`); splitting `検` off alone would
+    just diverge it. Flagged for the family-wide `个`/`亼` decision, not
+    fixed unilaterally.
+  - Also fixed `呂`(rtk24) itself in passing: was `口,ノ` — missing the
+    **second `口`** entirely (the `ノ` is another KRADFILE proxy). RTK
+    teaches `呂` as two mouths; → `口,口`.
+- Then, per the user's "check every one of rtk1000-3000, don't wait for me
+  to find errors": ran a `cjkvi-ids`-vs-`data.txt` cross-check for the
+  **person radical** — every `rtk*` kanji whose IDS has `亻` as a direct
+  top-level component but whose `data.txt` parts list has no
+  person-resolving token. **86 hits** — essentially the entire
+  single-`亻`-radical family: `佐 侶 但 住 位 仲 体 件 仕 他 伏 仏 休 伯 俗
+  信 佳 例 健 側 侍 値 倣 傲 偵 僧 儀 仙 催 仁 侮 倍 優 伐 傑 付 任 代 化 傾
+  何 俊 傍 俺 併 伸 作 侵 伊 儒 備 借 係 債 俵 僅 価 俳 候 偉 仰 僚 修 供 倫
+  低 伺 偽 偶 倭 俄 佃 仔 仇 伽 儲 僑 倶 侃 偲 侭 脩 伍 什` and more. Every
+  one came in from `import_rtk.py`'s KRADFILE pass with `亻` **dropped**,
+  usually replaced by a stray `ノ` ("katakana no") — so a "person" search
+  missed all 86. This is the exact `保`(rtk1072) bug the owner reported
+  2026-09-04, but dataset-wide across one whole radical family — the tip of
+  that iceberg.
+  - **Why not caught before**: the `保` fix was reactive (one owner
+    report). No detector looks for "IDS names `亻` but our parts don't" —
+    `audit_radicals.py` only flags *unresolvable* tokens (these lines had
+    resolvable but *wrong* tokens), and the flattening detectors look for
+    redundancy, not omission. A `cjkvi-ids`-presence check per radical is
+    the right tool and hadn't been run for `亻`.
+  - Fix: for the ~65 where the IDS right-hand side is itself a taught
+    system kanji, collapsed to `亻,<compound>` (enables recursive search,
+    matches the already-fixed `rtk1072:保:亻,呆` style); for the rest,
+    prepended `亻` and kept the existing sub-decomposition, dropping the
+    bare `ノ` proxy. 6 of the 86 had **stale regression pins** keyed to
+    their pre-fix (person-less) value — `側`/`偽`/`儀`/`候`/`傾`/`係` — all
+    updated to the corrected `亻,X` form.
+- Verified: full rebuild; `test_regression_fixes.py` — added a
+  `check_person_radical_present` **structural invariant** (all 86 hosts
+  must carry a person-resolving part) rather than 86 brittle individual
+  pins, matching the KRADFILE-proxy invariant's philosophy; +5 disputed
+  pins; 6 stale pins corrected → **1025 real checks pass** (same 4
+  expected hanzi-scope non-issues, since the shadow DB doesn't run
+  `import_hanzi.py`). pytest: 56 passed. `audit_self_reference.py`: 0.
+  `audit_radicals.py`: still just 2 unnamed tokens (`亦`, `'ninety'`) —
+  the fix introduced no new unresolvable terms.
+- `review_queue.py --mark-processed 6 7 8 9 10 11 12 13` — cleared all 8
+  (the 3 remaining `approved` votes #6-8 for `状`/`帯`/`泥` reviewed and
+  left as-is; nothing to fix).
+- Not deployed to the live server (no SSH/server access) — data-only
+  change; needs `sync_system_data.py` + reseed on deploy.
+- Coverage: **~1710/3000** (92 more `data.txt` lines edited).
+- **Next session**: continue the rtk1000-3000 sequential sweep from
+  rtk1043 onward (person family done; `氵`/`扌`/`阝`/`艹` radical families
+  are worth the same `cjkvi-ids`-presence check `亻` just got). Standing
+  list otherwise unchanged: `audit_direct_ref_overlap.py --min-usage 3`
+  (~136 candidates), the `个`/`亼` family-wide decision (now also blocking
+  `検`), the `刂`/`primitive_roof` dead-token cleanup, `慶`'s bottom shape,
+  `壷`'s top element, the 81 orphaned `rad{N}` rows on the live DB.

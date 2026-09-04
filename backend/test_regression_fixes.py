@@ -127,7 +127,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk688": {"character": "看", "keyword": "watch over",
                "expected_part_ids": {"prim-katakana-no", "rtk1", "rtk687", "rtk2", "rtk15"}},
     "rtk1049": {"character": "側", "keyword": "side",
-                "expected_part_ids": {"rtk56"}},
+                "expected_part_ids": {"kangxi9", "rtk92"}},  # 亻 + 則 (person radical added 2026-09-05)
     "rtk2087": {"character": "鎖", "keyword": "chain",
                 "expected_part_ids": {"rtk56", "rtk287", "rtk196"}},
     "rtk1909": {"character": "遺", "keyword": "bequeath",
@@ -468,8 +468,7 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"prim-katakana-no", "prim-fire-radical",
                                        "prim-katakana-yu", "kangxi3", "kangxi20"}},
     "rtk2068": {"character": "偽", "keyword": "falsehood",
-                "expected_part_ids": {"kangxi3", "prim-fire-radical",
-                                       "prim-katakana-yu", "prim-katakana-no", "kangxi20"}},
+                "expected_part_ids": {"kangxi9", "rtk2067"}},  # 亻 + 為 (person radical added 2026-09-05)
     "rtk2089": {"character": "誉", "keyword": "reputation",
                 "expected_part_ids": {"rtk357", "rtk1531", "prim-katakana-ha", "rtk1"}},
     "rtk2695": {"character": "糞", "keyword": "shit",
@@ -735,7 +734,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1021": {"character": "築", "keyword": "fabricate",
                 "expected_part_ids": {"rtk1007", "rtk207", "rtk66", "rtk80"}},
     "rtk1059": {"character": "儀", "keyword": "ceremony",
-                "expected_part_ids": {"rtk1", "rtk586", "rtk690"}},
+                "expected_part_ids": {"kangxi9", "rtk691"}},  # 亻 + 義 (person radical added 2026-09-05)
     "rtk1066": {"character": "便", "keyword": "convenience",
                 "expected_part_ids": {"kangxi9", "rtk749"}},
     "rtk1101": {"character": "挫", "keyword": "sprain",
@@ -889,7 +888,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1767": {"character": "侯", "keyword": "marquis",
                 "expected_part_ids": {"kangxi9", "prim-katakana-yu", "rtk1305"}},
     "rtk1769": {"character": "候", "keyword": "climate",
-                "expected_part_ids": {"prim-pipe", "rtk1767"}},
+                "expected_part_ids": {"kangxi9", "prim-pipe", "rtk1767"}},  # 亻 added 2026-09-05
     "rtk1776": {"character": "韓", "keyword": "korea",
                 "expected_part_ids": {"kangxi178", "rtk11", "rtk26"}},
     "rtk1783": {"character": "幹", "keyword": "tree trunk",
@@ -1970,7 +1969,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1000": {"character": "類", "keyword": "sort",
                "expected_part_ids": {"rtk112", "rtk64", "rtk987"}},
     "rtk1086": {"character": "傾", "keyword": "lean",
-               "expected_part_ids": {"rtk476", "rtk64"}},
+               "expected_part_ids": {"kangxi9", "rtk479"}},  # 亻 + 頃 (person radical added 2026-09-05)
     "rtk1333": {"character": "顎", "keyword": "chin",
                "expected_part_ids": {"kangxi20", "rtk11", "rtk2", "rtk64"}},
     "rtk1358": {"character": "頬", "keyword": "cheek",
@@ -2050,7 +2049,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1492": {"character": "系", "keyword": "lineage",
                "expected_part_ids": {"prim-katakana-no", "rtk1431"}},
     "rtk1493": {"character": "係", "keyword": "person in charge",
-               "expected_part_ids": {"prim-katakana-no", "rtk1431"}},
+               "expected_part_ids": {"kangxi9", "rtk1492"}},  # 亻 + 系 (person radical added 2026-09-05)
     "rtk1512": {"character": "踊", "keyword": "jump",
                "expected_part_ids": {"kangxi26", "rtk1265", "rtk1372"}},
     "rtk1609": {"character": "純", "keyword": "genuine",
@@ -2576,6 +2575,21 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"rtk2091", "rtk830"}},
     "rtk2160": {"character": "能", "keyword": "ability",
                "expected_part_ids": {"kangxi28", "prim-sitting-on-the-ground", "rtk13", "rtk476"}},
+    # Five owner-disputed decompositions (review_queue.py #9-13, 2026-09-04), all
+    # KRADFILE over-fragmentation from the original import_rtk.py pass: a whole RTK
+    # primitive shattered into stray strokes because heisig-kanjis.csv had no
+    # components for these rare N1/uncommon frames (so the KRADFILE guess in data.txt
+    # won the merge by default). Fixed 2026-09-05 to reference the real compound.
+    "rtk2540": {"character": "椋", "keyword": "type of deciduous tree",  # was 口,小,木,亠 (亠+口+小 = shattered 京)
+               "expected_part_ids": {"rtk207", "rtk334"}},              # 木 + 京
+    "rtk2561": {"character": "桔", "keyword": "used in plant names",     # was 口,士,木 (士+口 = shattered 吉)
+               "expected_part_ids": {"rtk207", "rtk342"}},              # 木 + 吉
+    "rtk460": {"character": "橋", "keyword": "bridge",                   # was ノ,口,木,冂 — missing 大 + a 口 vs siblings 嬌/矯
+               "expected_part_ids": {"kangxi13", "prim-katakana-no", "rtk11", "rtk112", "rtk207"}},
+    "rtk2903": {"character": "麿", "keyword": "i",                       # was 口,木,广,麻,ノ — 麻 double-counted w/ its own 广,木; spurious ノ
+               "expected_part_ids": {"rtk24", "rtk637"}},               # 麻 + 呂
+    "rtk24": {"character": "呂", "keyword": "spine",                     # was 口,ノ — missing the second 口 entirely (ノ = KRADFILE proxy)
+               "expected_part_ids": {"rtk11"}},                          # 口,口 (dedupes to one id, order-independent)
 }
 
 # character -> hanzi id, spot-checking the 429-character Unihan self-reference backfill
@@ -2707,6 +2721,47 @@ def check_atomic(conn) -> list[str]:
                 got = [p["id"] for p in decomp["parts_detail"]]
                 failures.append(f"{kid} ({char}): expected atomic (no parts) but "
                                  f"decomposition {decomp.get('label')!r} has {got}")
+    return failures
+
+
+# Every rtk* kanji whose cjkvi-ids decomposition has the standing person radical 亻
+# as a direct top-level component (⿰亻X and friends) must carry a person-resolving
+# part. 86 of them didn't (2026-09-05): the whole single-亻-radical family — 佐 侶 但
+# 住 位 仲 体 件 仕 他 伏 仏 休 …  — came in from import_rtk.py's KRADFILE pass with
+# 亻 dropped entirely, usually replaced by a stray ノ ("katakana no") proxy, so a
+# "person" search missed every one of them. Same bug shape as 保 (rtk1072, fixed
+# 2026-09-04) but dataset-wide. Structural rather than 86 individual pins, matching
+# the KRADFILE-proxy invariant's philosophy for bulk fixes.
+PERSON_RADICAL_HOSTS = [
+    "rtk1024", "rtk1025", "rtk1026", "rtk1027", "rtk1028", "rtk1029", "rtk1030",
+    "rtk1032", "rtk1033", "rtk1034", "rtk1035", "rtk1037", "rtk1038", "rtk1039",
+    "rtk1040", "rtk1041", "rtk1042", "rtk1043", "rtk1044", "rtk1046", "rtk1048",
+    "rtk1049", "rtk1050", "rtk1052", "rtk1053", "rtk1054", "rtk1056", "rtk1057",
+    "rtk1059", "rtk1061", "rtk1062", "rtk1063", "rtk1064", "rtk1067", "rtk1068",
+    "rtk1069", "rtk1074", "rtk1075", "rtk1078", "rtk1080", "rtk1083", "rtk1086",
+    "rtk1087", "rtk1089", "rtk1090", "rtk1091", "rtk1107", "rtk1199", "rtk1224",
+    "rtk1231", "rtk1245", "rtk1250", "rtk1267", "rtk1270", "rtk1493", "rtk1664",
+    "rtk1667", "rtk1699", "rtk1729", "rtk1761", "rtk1769", "rtk1772", "rtk1836",
+    "rtk1842", "rtk1858", "rtk1935", "rtk1962", "rtk1973", "rtk2008", "rtk2068",
+    "rtk2105", "rtk2244", "rtk2247", "rtk2248", "rtk2249", "rtk2250", "rtk2251",
+    "rtk2252", "rtk2253", "rtk2254", "rtk2255", "rtk2256", "rtk2257", "rtk2258",
+    "rtk2972", "rtk2973",
+]
+
+_PERSON_PART_IDS = {"kangxi9"}  # 亻/⺅/人 all resolve here
+
+
+def check_person_radical_present(conn) -> list[str]:
+    failures = []
+    for kid in PERSON_RADICAL_HOSTS:
+        detail = database.get_kanji_detail(conn, kid, viewer_id=None)
+        if not detail["decompositions"]:
+            failures.append(f"{kid}: no decomposition at all (person radical fix regressed)")
+            continue
+        part_ids = {p["id"] for p in detail["decompositions"][0]["parts_detail"]}
+        if not (part_ids & _PERSON_PART_IDS):
+            failures.append(f"{kid} ({detail['character']}): missing the person radical "
+                            f"亻 again (got {sorted(part_ids)})")
     return failures
 
 
@@ -2865,12 +2920,14 @@ def main():
     all_failures += check_no_kradfile_proxy(conn)
     all_failures += check_atomic(conn)
     all_failures += check_no_self_reference(conn)
+    all_failures += check_person_radical_present(conn)
     all_failures += check_alias_visibility_boundary(conn)
     conn.close()
 
     all_failures += check_migration_atomicity()
 
-    total_checks = len(EXPECTED_DECOMPOSITIONS) + len(EXPECTED_HANZI_PRESENT) + len(EXPECTED_ATOMIC) + 4
+    total_checks = (len(EXPECTED_DECOMPOSITIONS) + len(EXPECTED_HANZI_PRESENT)
+                    + len(EXPECTED_ATOMIC) + len(PERSON_RADICAL_HOSTS) + 4)
     if all_failures:
         print(f"FAILED: {len(all_failures)} problem(s) found across {total_checks} checks:\n")
         for f in all_failures:
