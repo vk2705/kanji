@@ -6051,3 +6051,50 @@ output.
   slightly higher-value target, since `rad4.16` turning up inside `枠`'s
   decomposition today is a concrete example of what those orphaned rows
   are quietly doing to search quality).
+
+### 2026-09-05 (continued) — sequential rtk1981-2270 review: a fourth detector blind spot — 人 vs 亻 (9 kanji)
+
+- Continued the sequential sweep (rtk1981-2270 checked). Cleaned one more
+  `primitive_lid` dead-duplicate token in passing (`rtk2014`/航, same
+  mechanism as `primitive_roof`, just a single occurrence this time — no
+  resolved-id change).
+- Spot-checked `rtk2087`/鎖 (`貝,金,尚` looked like it might have the wrong
+  top component) by rendering it next to `賞`(rtk859), which shares the
+  exact same "small-top over 貝" visual shape and is already correctly
+  `尚,貝` — confirms `鎖`'s existing `尚` was right all along. Worth noting
+  as a near-miss: briefly changed it to `小` based on a first-glance render
+  comparison, caught the mistake by rendering a same-shaped sibling
+  side-by-side before committing, reverted. The lesson from `擁`
+  yesterday generalizes here too — verify against the *resolved* state or
+  a same-shaped sibling, not a first impression.
+- Found a **fourth systematic detector blind spot** while checking
+  `rtk2245`/侠 and `rtk2259`/倅: both had a bare `人`("person", `rtk1023`)
+  where `cjkvi-ids` calls for the compressed left-radical `亻`
+  (`kangxi9`) — render-confirmed both clearly show `亻`'s shape, not
+  standalone `人`. This is a different failure mode than yesterday's
+  86-kanji `亻`-omission family: these hosts weren't *missing* a
+  person-concept token, they had the *wrong one* — `人` resolves fine on
+  its own (it's a real, correct kanji id), so no search miss, but it's a
+  different DB row than `亻`, meaning `check_person_radical_present`'s
+  "does any part resolve to `kangxi9`" test structurally can't catch this
+  class. A dedicated scan (cjkvi-ids has `亻` as a leaf, `data.txt` uses
+  literal `人` instead of `亻`) found **9 total** dataset-wide: `侠`,
+  `倅`, `伝`, `依`, `個`, `傷`, `似`, `倹`, `做`. `倹` additionally had a
+  wrong non-person reference (`合`/"fit" instead of the real `僉` shape
+  shared with `剣`/`険` — render-confirmed side by side) — fixed to match
+  the family.
+- Verified: full rebuild; `test_regression_fixes.py` — 8 new pins (`侠`
+  through `做`), 1 stale pin corrected (`倹`, which had been keyed to the
+  wrong `合` reference) — **1062 checks**, same 4 expected hanzi-scope
+  non-issues; pytest (56 passed); `audit_self_reference.py` clean;
+  confirmed 0 remaining `人`-vs-`亻` mismatches dataset-wide.
+- Not deployed (no SSH/server access) — data-only change, needs
+  `sync_system_data.py` + reseed.
+- Coverage: will regenerate after commit.
+- **Next session**: continue the sequential sweep from rtk2271. The
+  `人`-vs-`亻` pattern is now a documented fourth blind spot worth
+  remembering when reviewing any left-radical `亻` host by hand (the
+  existing detectors can't find it). Standing list otherwise unchanged:
+  `audit_direct_ref_overlap.py --min-usage 3` (~136 candidates), the
+  `个`/`亼` family decision, `慶`'s bottom shape, `壷`'s top element, the
+  81 orphaned `rad{N}` rows on the live DB.

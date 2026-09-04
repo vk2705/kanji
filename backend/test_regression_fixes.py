@@ -1534,8 +1534,10 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk1793", "rtk843"}},
     "rtk1800": {"character": "整", "keyword": "organize",
                 "expected_part_ids": {"kangxi66", "rtk1793", "rtk405"}},
+    # Was 合,人 (人 not 亻, and 合/"fit" is a wrong reference -- render-confirmed
+    # the right side is the same 僉 shape as 剣/険, not 合-shaped) -- 2026-09-05
     "rtk1804": {"character": "倹", "keyword": "frugal",
-                "expected_part_ids": {"rtk1023", "rtk269"}},
+                "expected_part_ids": {"kangxi9", "rtk11", "rtk1023", "prim-umbrella"}},
     "rtk1857": {"character": "惨", "keyword": "wretched",
                 "expected_part_ids": {"kangxi61", "rtk1856"}},
     "rtk1897": {"character": "謀", "keyword": "conspire",
@@ -2630,6 +2632,33 @@ EXPECTED_DECOMPOSITIONS = {
                                                                 # siblings (変/蛮/恋/湾), which all use 亠 for this same
                                                                 # primitive. Closed the last single-glyph gap in
                                                                 # audit_radicals.py's undefined-terms check.
+    # These 9 (found continuing the sequential sweep, 2026-09-05) are a DIFFERENT bug
+    # shape than PERSON_RADICAL_HOSTS below: each already had a person-concept token,
+    # just the WRONG one -- bare 人(rtk1023, the standalone "person" kanji) instead of
+    # the compressed left-radical 亻(kangxi9) cjkvi-ids actually calls for. Both
+    # resolve fine (no missing-part search miss), so check_person_radical_present's
+    # "does any part resolve to kangxi9" test can't catch this class -- it takes the
+    # bare id/character text literally correct-looking 人 as satisfying "has a
+    # person," which is wrong for a decomposition, if not for search. Every one
+    # confirmed by rendering the left-side shape before fixing (matches 保's 亻, not
+    # standalone 人). 倹 additionally had a wrong non-亻 reference (合/"fit" instead
+    # of the real 僉 shape shared with 剣/険) found the same way.
+    "rtk2245": {"character": "侠", "keyword": "tomboy",
+               "expected_part_ids": {"kangxi12", "kangxi8", "kangxi9", "rtk112", "rtk2"}},
+    "rtk2259": {"character": "倅", "keyword": "son",
+               "expected_part_ids": {"kangxi8", "kangxi9", "rtk10"}},
+    "rtk1036": {"character": "伝", "keyword": "transmit",
+               "expected_part_ids": {"kangxi9", "rtk2241"}},
+    "rtk1045": {"character": "依", "keyword": "reliant",
+               "expected_part_ids": {"kangxi9", "rtk423"}},
+    "rtk1047": {"character": "個", "keyword": "individual",
+               "expected_part_ids": {"kangxi9", "rtk622"}},
+    "rtk1071": {"character": "傷", "keyword": "wound",
+               "expected_part_ids": {"kangxi20", "kangxi9", "prim-katakana-no", "rtk1", "rtk1128", "rtk12"}},
+    "rtk1106": {"character": "似", "keyword": "becoming",
+               "expected_part_ids": {"kangxi3", "kangxi9"}},
+    "rtk2260": {"character": "做", "keyword": "make",
+               "expected_part_ids": {"kangxi9", "rtk355"}},
     "rtk212": {"character": "枠", "keyword": "frame",  # had NO data.txt override at all -- fell through to
                "expected_part_ids": {"rtk9", "rtk10", "rtk207"}},  # heisig-kanjis.csv's raw components text
                                                                      # verbatim, which includes "ninety" (a dead,

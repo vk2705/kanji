@@ -1279,7 +1279,7 @@ rtk1032:件:affair:亻,牛
 rtk1033:仕:attend:亻,士
 rtk1034:他:other:亻,也
 rtk1035:伏:prostrated:亻,犬
-rtk1036:伝:transmit:人,云
+rtk1036:伝:transmit:亻,云
 rtk1037:仏:buddha:亻,厶
 rtk1038:休:rest:亻,木
 rtk1039:仮:sham:亻,反
@@ -1288,9 +1288,9 @@ rtk1041:伯:chief:亻,白
 rtk1042:俗:vulgar:亻,谷
 rtk1043:信:faith:亻,言
 rtk1044:佳:excellent:亻,圭
-rtk1045:依:reliant:人,衣
+rtk1045:依:reliant:亻,衣
 rtk1046:例:example:亻,列
-rtk1047:個:individual:人,固
+rtk1047:個:individual:亻,固
 rtk1048:健:healthy:亻,建
 rtk1049:側:side:亻,則
 rtk1050:侍:waiter:亻,寺
@@ -1314,7 +1314,7 @@ rtk1067:倍:double:亻,口,立
 rtk1068:優:tenderness:亻,憂
 rtk1069:伐:fell:亻,戈
 rtk1070:宿:inn:白,宀
-rtk1071:傷:wound:ノ,日,勿,一,人,勹
+rtk1071:傷:wound:亻,ノ,日,勿,一,勹
 rtk1072:保:protect:亻,呆
 rtk1073:褒:praise:亠,保,衣
 rtk1074:傑:greatness:亻,舛,木,夕
@@ -1349,7 +1349,7 @@ rtk1102:卒:graduate:十,人,亠
 rtk1103:傘:umbrella:十,人,个
 rtk1104:匁:monme:ノ,勹,丶
 rtk1105:以:by means of:｜,人,丶
-rtk1106:似:becoming:人,丶
+rtk1106:似:becoming:亻,丶
 rtk1107:併:join:亻,并
 rtk1108:瓦:tile:一
 rtk1109:瓶:bottle:瓦,丷,二,一,ノ
@@ -2047,7 +2047,7 @@ rtk1800:整:organize:束,攵,正
 rtk1801:剣:sabre:口,人,个
 rtk1802:険:precipitous:口,人,个,阝
 rtk1803:検:examination:木,口,人,个
-rtk1804:倹:frugal:合,人
+rtk1804:倹:frugal:亻,口,人,个
 rtk1805:重:heavy:千,里
 rtk1806:動:move:重,力
 rtk1807:腫:tumor:｜,月,日,里,ノ
@@ -2257,7 +2257,7 @@ rtk2010:飼:domesticate:口,艮,亅,个,食
 rtk2011:嗣:heir:｜,司,冂
 rtk2012:舟:boat:
 rtk2013:舶:liner:舟,白
-rtk2014:航:navigate:舟,亠,primitive_lid,几
+rtk2014:航:navigate:舟,亠,几
 rtk2015:舷:gunwale:玄,舟,亠,幺
 rtk2016:般:carrier:舟,殳,几,又
 rtk2017:盤:tray:皿,般
@@ -2487,7 +2487,7 @@ rtk2241:云:say:二,厶
 rtk2242:莫:must not:大,日,艾
 rtk2243:而:and yet:
 rtk2244:倭:yamato:亻,委
-rtk2245:侠:tomboy:人,大,二,丷,亠
+rtk2245:侠:tomboy:亻,大,二,丷,亠
 rtk2246:倦:lose interest in:亻,巻
 rtk2247:俄:sudden:亻,我
 rtk2248:佃:cultivated rice field:亻,田
@@ -2501,8 +2501,8 @@ rtk2255:侃:strong:亻,口,川
 rtk2256:偲:recollect:亻,思
 rtk2257:侭:as it is:亻,尽
 rtk2258:脩:dried meat:亻,月,攵,｜
-rtk2259:倅:son:十,人,亠
-rtk2260:做:make:人,故
+rtk2259:倅:son:亻,十,亠
+rtk2260:做:make:亻,故
 rtk2261:冴:be clear:牙,冫
 rtk2262:凋:wither:口,土,冂,冫
 rtk2263:凌:endure:土,儿,冫,夂
