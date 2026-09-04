@@ -6152,7 +6152,8 @@ output.
   dataset-wide via the recursive-aware presence check.
 - Not deployed (no SSH/server access) — data-only change, needs
   `sync_system_data.py` + reseed.
-- Coverage: will regenerate after commit.
+- Coverage: **1634/3000 (54.5%)** (unchanged — same undercounting effect
+  as prior radical-family batches).
 - **Next session**: continue the sequential sweep from rtk2551. Given
   `亻`/`罒`/`犭` have all turned out to have systemic omission bugs,
   worth running the same recursive-aware presence check proactively
