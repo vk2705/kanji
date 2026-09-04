@@ -2625,6 +2625,21 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"rtk1695", "rtk207"}},
     "rtk1768": {"character": "喉", "keyword": "throat",  # was 口,矢 -- dropped ユ(ktakana-yu) entirely instead of
                "expected_part_ids": {"rtk11", "rtk1767"}},  # referencing 侯(rtk1767), which is already taught
+    "rtk1883": {"character": "跡", "keyword": "tracks",  # was 亦,足,亠 -- 亦 has no defining row anywhere in
+               "expected_part_ids": {"kangxi8", "rtk1372"}},  # data.txt, silently dropped; aligned with its own
+                                                                # siblings (変/蛮/恋/湾), which all use 亠 for this same
+                                                                # primitive. Closed the last single-glyph gap in
+                                                                # audit_radicals.py's undefined-terms check.
+    "rtk212": {"character": "枠", "keyword": "frame",  # had NO data.txt override at all -- fell through to
+               "expected_part_ids": {"rtk9", "rtk10", "rtk207"}},  # heisig-kanjis.csv's raw components text
+                                                                     # verbatim, which includes "ninety" (a dead,
+                                                                     # alias-less term -- CSV's own gloss for 卆's
+                                                                     # 九+十 combination, not a real primitive
+                                                                     # name) plus a legacy orphaned rad4.16 row.
+                                                                     # Added an override: render-confirmed 枠 =
+                                                                     # 木 + 卆(=九,十). Closed the last multi-char
+                                                                     # gap in the same check -- 0 undefined terms
+                                                                     # dataset-wide as of 2026-09-05.
 }
 
 # character -> hanzi id, spot-checking the 429-character Unihan self-reference backfill

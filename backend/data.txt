@@ -455,6 +455,7 @@ rtk208:林:grove:木
 rtk209:森:forest:木
 rtk210:桂:japanese judas-tree:土,木
 rtk211:柏:oak:白,木
+rtk212:枠:frame:木,九,十
 rtk213:梢:treetops:肖,木
 rtk214:棚:shelf:木,朋
 rtk215:杏:apricot:口,木
@@ -2125,7 +2126,7 @@ rtk1879:映:reflect:ノ,日,大,冖
 rtk1880:赤:red:土
 rtk1881:赦:pardon:赤,土,攵
 rtk1882:変:unusual:亠,夂
-rtk1883:跡:tracks:亦,足,亠
+rtk1883:跡:tracks:足,亠
 rtk1884:蛮:barbarian:虫,亠
 rtk1885:恋:romance:心,ハ,亠
 rtk1886:湾:gulf:弓,水,亠

@@ -6005,3 +6005,49 @@ output.
   list unchanged: `audit_direct_ref_overlap.py --min-usage 3` (~136
   candidates), the `个`/`亼` family decision, `慶`'s bottom shape, `壷`'s
   top element, the 81 orphaned `rad{N}` rows on the live DB.
+
+### 2026-09-05 (continued) — sequential rtk1841-1980: `audit_radicals.py`'s last 2 undefined terms closed, 0 dataset-wide
+
+- Continued the sequential sweep (rtk1841-1980 checked this pass; all
+  clean except the two below). Along the way, spotted the last two
+  survivors of a check this project has been chipping away at since
+  "Finding 1" of the original search-quality audit: `audit_radicals.py`'s
+  undefined-part-term scan, which had been sitting at "2 distinct
+  undefined part terms" for several sessions without anyone tracking them
+  down individually.
+  - **`亦`** (found via rtk1883 `跡`, "tracks") has no defining row
+    anywhere in `data.txt` — it was silently dropped on import, so `跡`
+    was quietly missing one of its three listed parts. Its siblings
+    (`変`/`蛮`/`恋`/`湾`, all sharing the same `亦`-shaped primitive per
+    `cjkvi-ids`) all already use `亠` for it instead — aligned `跡` to
+    match, closing the gap consistently rather than inventing a new
+    primitive name.
+  - **`"ninety"`** (found via `rtk212` `枠`, "frame") turned out to be a
+    different bug shape entirely: `rtk212` had **no `data.txt` override at
+    all**, so `import_data()` fell through to `heisig-kanjis.csv`'s raw
+    `components` text verbatim — `"tree; wood; ninety; nine; baseball;
+    ten; needle"` — and "ninety" isn't a real primitive name anywhere,
+    just the CSV's own gloss for `卆`'s `九`+`十` combination. The existing
+    decomposition was also carrying a legacy orphaned `rad4.16` row
+    (placeholder `?` glyph, aliased "tree, wood" — a pure duplicate of
+    `rtk207`/木). Render-confirmed `枠` = `木` + `卆`(=`九`,`十`); added a
+    proper override: `木,九,十`.
+  - Both closed the same afternoon `audit_radicals.py` was re-run to
+    confirm: **0 distinct undefined part terms, 0 occurrences, across the
+    entire rtk* dataset** — every part_term used anywhere now resolves to
+    a real kanji/alias. This is a genuine milestone for the project's
+    oldest open finding, not just incremental progress.
+- Verified: full rebuild; `test_regression_fixes.py` — 2 new pins
+  (`跡`/`枠`) — **1054 checks**, same 4 expected hanzi-scope non-issues;
+  pytest (56 passed); `audit_self_reference.py` clean;
+  `audit_radicals.py` confirmed 0/0.
+- Not deployed (no SSH/server access) — data-only change, needs
+  `sync_system_data.py` + reseed.
+- Coverage: will regenerate after commit.
+- **Next session**: continue the sequential sweep from rtk1981. Standing
+  list unchanged: `audit_direct_ref_overlap.py --min-usage 3` (~136
+  candidates), the `个`/`亼` family decision, `慶`'s bottom shape, `壷`'s
+  top element, the 81 orphaned `rad{N}` rows on the live DB (now a
+  slightly higher-value target, since `rad4.16` turning up inside `枠`'s
+  decomposition today is a concrete example of what those orphaned rows
+  are quietly doing to search quality).
