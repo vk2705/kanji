@@ -5483,3 +5483,55 @@ output.
   top element, `triage_google_check.py`'s unmined output, the
   `primitive_roof` dead-token cleanup, the 81 orphaned `rad{N}` rows on
   the live DB (needs production access).
+
+### 2026-09-04 (same day, continued) — five more families, and a second dead alias token found
+
+- Kept working through `audit_direct_ref_overlap.py --min-usage 3`
+  proactively rather than stopping at the halfway-mark coverage
+  milestone. Same discipline, `cjkvi-ids` cross-checked before every
+  edit:
+  - `青`(rtk1654, 10 hosts) — the "clear/blue" family (精,請,情,晴,清,
+    静,靖,錆,鯖) correctly referenced `青` but redundantly repeated its
+    own parts. `瀞` was flattening `静` instead of referencing it
+    directly.
+  - `示`(rtk1167, 10 hosts) — several hosts (`剽`,`捺`,`禦`,`綜`,`瓢`,
+    `祟`) were flattening an already-taught second-level compound
+    (`票`, `奈`, `御`, `宗`, `出`) instead of referencing it; `剽` was
+    also entirely missing "刀". While fixing it, found a **second dead
+    alias token** of the same kind as `primitive_roof`: `刂` (the
+    right-side radical form of 刀) isn't a registered alias anywhere in
+    this system — only `刀` itself is — so a part list using `刂`
+    silently drops that component on import, the same trap as before.
+    Corrected `剽` and `到`(rtk817, caught the same way) to use `刀`.
+    `蔚` doesn't contain `示` at all (its real structure is unrelated)
+    — dropped it rather than force an approximation.
+  - `至`(rtk815, 9 hosts) — `到` was missing "刀" (see above) and
+    `倒`/`緻`/`渥` were flattening second-level compounds (`到`, `致`,
+    `屋`) instead of referencing them.
+  - `巾`(rtk432, 9 hosts) — only fixed the one clean case (`凧`=几+巾);
+    left `刺`/`策`/`棘` (real `朿`-family) and `幣`/`蔽`/`弊`/`瞥`/`逓`
+    (`敝`-family, already an open question) for another session rather
+    than force an uncertain call.
+  - `自`(rtk36, 9 hosts) — most hosts correctly referenced `自` but
+    redundantly repeated its own "目". `嗅`/`榎`/`鼾` were flattening
+    already-taught compounds (`臭`, `夏`, `鼻`) instead of referencing
+    them.
+- Verified: full rebuild; `test_regression_fixes.py` — corrected 3 stale
+  pins, added 35 new pins — **903 checks**, same 4 expected hanzi-scope
+  non-issues; pytest (51 passed); `audit_self_reference.py` clean;
+  `audit_direct_ref_overlap.py`'s `--min-usage 3` candidate count now
+  **139** (down from 384 at the start of today's session).
+- Not deployed to the live server (no SSH/server access) — data-only
+  change, no backend restart needed on next deploy.
+- Coverage: **1584/3000 (52.8%)**.
+- **Next session**: `刂` joins `primitive_roof` on a short watch-list of
+  known-dead alias tokens worth grepping for across the rest of
+  `data.txt` at some point (both silently drop the component they were
+  meant to represent, with no visible symptom other than a missing
+  chip). `audit_direct_ref_overlap.py --min-usage 3` still has 139
+  candidates in smaller families (usage 3-8) to keep working through.
+  The `朿`/`敝`-family clusters in `巾`'s hosts, the deliberately-skipped
+  `敝`-family cluster in `尚`'s hosts, and `慶`'s bottom shape are all
+  still open. Other standing items unchanged: `壷`'s ambiguous top
+  element, `triage_google_check.py`'s unmined output, the 81 orphaned
+  `rad{N}` rows on the live DB (needs production access).
