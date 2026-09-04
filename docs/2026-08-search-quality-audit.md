@@ -6123,7 +6123,7 @@ output.
   passed); `audit_self_reference.py` clean.
 - Not deployed (no SSH/server access) — data-only change, needs
   `sync_system_data.py` + reseed.
-- Coverage: will regenerate after commit.
+- Coverage: **1634/3000 (54.5%)**.
 - **Next session**: continue the sequential sweep from rtk2411. Standing
   list unchanged: `audit_direct_ref_overlap.py --min-usage 3` (~136
   candidates), the `个`/`亼` family decision, `慶`'s bottom shape, `壷`'s
