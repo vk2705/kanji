@@ -46,6 +46,44 @@ import database  # noqa: E402
 # kanji_id -> {"character": ..., "expected_part_ids": [...]} — the resolved top-level
 # parts_detail ids from get_kanji_detail's first (system) decomposition, order-independent.
 EXPECTED_DECOMPOSITIONS = {
+    # 咼 ("jawbone") was flattened as bare 口,冂 independently in all four hosts
+    # (禍/渦/鍋/過) via the original KRADFILE import -- heisig-kanjis.csv's own
+    # components column already named it "jawbone; joint; hood; mouth" but that
+    # text was shadowed by data.txt's flattened override (data.txt always wins
+    # the merge). Owner flagged 過's parts as not making sense as a mnemonic
+    # despite being structurally correct -- added a real prim-jawbone primitive
+    # and pointed all four hosts at it. 2026-09-06.
+    "rtk1386": {"character": "禍", "keyword": "calamity",
+                "expected_part_ids": {"kangxi113", "prim-jawbone"}},
+    "rtk1387": {"character": "渦", "keyword": "whirlpool",
+                "expected_part_ids": {"prim-jawbone", "rtk137"}},
+    "rtk1388": {"character": "鍋", "keyword": "pot",
+                "expected_part_ids": {"prim-jawbone", "rtk287"}},
+    "rtk1389": {"character": "過", "keyword": "overdo",
+                "expected_part_ids": {"prim-jawbone", "rtk843"}},
+    # Was 日,木,冫,艾 -- render-confirmed the middle/bottom is 楽(rtk1872)'s own
+    # shape (白,木,冫), not a bare 日; owner-disputed via the review queue.
+    "rtk1873": {"character": "薬", "keyword": "medicine",
+                "expected_part_ids": {"prim-mugwort", "rtk1872"}},
+    # The following 8 kanji were fixed 2026-09-06 by mining tools/heisig-google-check/
+    # results.jsonl's DISJOINT flags (triage_google_check.py) directly, per the owner's
+    # explicit instruction -- each confirmed by cjkvi-ids/render before fixing.
+    "rtk1189": {"character": "袖", "keyword": "sleeve",  # was ｜,一,初,田 -- flattened
+               "expected_part_ids": {"rtk1186", "rtk431"}},  # instead of referencing 由 directly
+    "rtk1239": {"character": "浄", "keyword": "clean",  # was 水,亅,勹,ヨ -- flattened
+               "expected_part_ids": {"rtk1238", "rtk137"}},  # instead of referencing 争 directly
+    "rtk1325": {"character": "沸", "keyword": "seethe",  # was ｜,ノ,弓,水 -- a botched partial
+               "expected_part_ids": {"prim-dollar-sign", "rtk137"}},  # flatten of 弗 ("dollar sign")
+    "rtk1326": {"character": "費", "keyword": "expense",  # was ｜,貝,弓 -- same 弗 fix
+               "expected_part_ids": {"prim-dollar-sign", "rtk56"}},
+    "rtk1329": {"character": "巧", "keyword": "adroit",  # was 工,一,勹 -- the whole 丂("snare")
+               "expected_part_ids": {"prim-snare", "rtk80"}},  # family was flattening it as 一,勹
+    "rtk1330": {"character": "号", "keyword": "nickname",
+               "expected_part_ids": {"prim-snare", "rtk11"}},
+    "rtk1331": {"character": "朽", "keyword": "decay",
+               "expected_part_ids": {"prim-snare", "rtk207"}},
+    "rtk1334": {"character": "汚", "keyword": "dirty",
+               "expected_part_ids": {"prim-snare", "rtk137"}},
     "rtk1209": {"character": "祈", "keyword": "pray",
                 "expected_part_ids": {"rtk1206", "kangxi113"}},
     # rad2.8 ("animal legs") was an orphaned legacy placeholder (character='?', never
@@ -2202,8 +2240,10 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"rtk12", "rtk183", "rtk752"}},
     "rtk2827": {"character": "鯛", "keyword": "sea bream",
                "expected_part_ids": {"kangxi13", "rtk11", "rtk161", "rtk183"}},
+    # Was 弓,魚,冫 -- a literal flatten of 弱(rtk1323)'s own parts instead of
+    # referencing it directly; owner-disputed via the review queue, 2026-09-06
     "rtk2828": {"character": "鰯", "keyword": "sardine",
-               "expected_part_ids": {"kangxi15", "rtk1317", "rtk183"}},
+               "expected_part_ids": {"rtk1323", "rtk183"}},
     "rtk2830": {"character": "鮭", "keyword": "salmon",
                "expected_part_ids": {"rtk161", "rtk183"}},
     "rtk2831": {"character": "鮪", "keyword": "tuna",

@@ -6432,3 +6432,78 @@ output.
   Standing list otherwise unchanged: the `个`/`亼` family decision,
   `慶`'s bottom shape, `壷`'s top element, the 81 orphaned `rad{N}` rows
   on the live DB.
+
+### 2026-09-06 — 2 disputed reviews (薬/鰯), then mining `results.jsonl`'s remaining DISJOINT flags directly
+
+- Owner had 2 more disputed reviews queued: `薬`(rtk1873, "medicine") was
+  `日,木,冫,艾` — render-confirmed the middle/bottom is actually
+  `楽`(rtk1872)'s own shape (`白,木,冫`), not a bare `日`; fixed to
+  `艾,楽`. `鰯`(rtk2828, "sardine") was `弓,魚,冫` — a literal flatten of
+  `弱`(rtk1323)'s own parts instead of referencing it directly; fixed to
+  `魚,弱`.
+- Owner then flagged that `過`("overdo")'s parts (`口,込,冂`) don't work
+  as a mnemonic even though they're structurally accurate — `口`+`冂`
+  turned out to be a flattened `咼`("jawbone"), a real, coherent Heisig
+  primitive that the original `import_rtk.py` KRADFILE pass had silently
+  shattered into two disconnected-looking radical fragments,
+  independently, in all four kanji built on it (`禍`/`渦`/`鍋`/`過`).
+  Confirmed directly from `results.jsonl`'s AI Overview text for `過`
+  (Heisig's own listed breakdown: "Jawbone . . . road"), which also
+  explains *why* this survived every prior automated check: the CSV's
+  own `components` column already said "jawbone; joint; hood; mouth" for
+  the sibling kanji, but `data.txt`'s flattened override always wins the
+  merge, so the correct wording was sitting right there, just shadowed.
+  Added a real `prim-jawbone` primitive and pointed all four hosts at
+  it.
+- Owner then asked to mine `results.jsonl` (the owner's own Google AI
+  Overview cross-check) directly rather than working from independent
+  re-derivation. Built a shadow-DB variant of the existing
+  `triage_google_check.py` (which normally reads the *live* `kanji.db`,
+  stale relative to this session's in-progress `data.txt` edits) so the
+  comparison reflects current work. Re-running it against the fully
+  updated dataset: **27 DISJOINT** flags remained (down from the
+  historical count, confirming several were already fixed in earlier
+  sessions this weekend). Went through all 27 individually
+  (`--show-text` for the actual AI Overview content, `cjkvi-ids` +
+  render as the tiebreaker per this audit's standing discipline — Google's
+  AI Overview is itself just another LLM's guess, not authoritative on
+  its own):
+  - Real bugs found and fixed: `袖`(was flattening `由`, rtk1186, instead
+    of referencing it), `浄`(was flattening `争`, rtk1238), `沸`+`費`
+    (both flattening/misrepresenting `弗`, "dollar sign" per Heisig's
+    own text — added a real `prim-dollar-sign` primitive), `汚`+`巧`+
+    `号`+`朽` (a 4-kanji family all flattening `丂`, "snare" per Heisig's
+    own text, as an unlabeled `一,勹` — added a real `prim-snare`
+    primitive and pointed the whole family at it).
+  - False positives, confirmed and left alone: `世`/`肉`/`申` (atomic
+    kanji where the flag was just unrelated "used in these words"
+    chatter); `梗`/`追`/`師`/`良`/`邦` (already correctly resolved —
+    Google's own text listed unrelated example characters, not real
+    disagreement); `党`(render-confirmed the bottom is `兄`, matching
+    `cjkvi-ids`, not bare `儿` as Google's text loosely suggested);
+    `競`(both sides resolve to the same primitive set either way, so
+    "two identical halves" changes nothing at the schema level);
+    `脳`(Google's own text explicitly says brain has *no* connection to
+    "brains"/`田`, confirming the current non-`田` decomposition is
+    right, not wrong); `単`/`之`/`壷`/`斡` (already-tracked standing
+    open questions, or the AI Overview text was truncated with no real
+    breakdown given).
+- Verified: full rebuild; `test_regression_fixes.py` — 8 new pins (the
+  `results.jsonl`-mined batch) plus the 5 from the `咼`/`薬` fixes above
+  — **1171 checks**, same 4 expected hanzi-scope non-issues; pytest (56
+  passed); `audit_self_reference.py` clean; `audit_radicals.py` still
+  0/0 (the two new `prim-jawbone`/`prim-dollar-sign`/`prim-snare` rows
+  are properly defined, not orphaned).
+- `review_queue.py --mark-processed 14 15` — cleared both disputed
+  reviews.
+- Not deployed (no SSH/server access) — data-only change, needs
+  `sync_system_data.py` + reseed.
+- Coverage: will regenerate after commit.
+- **Next session**: `results.jsonl` still has 584 PARTIAL flags
+  un-triaged (the noisier "something in ours not echoed in Google's
+  text" bucket, historically lower-yield than DISJOINT but still found
+  real bugs in past sessions — e.g. the `忘`/`忙`/`盲`/`妄` `亡`-overlap
+  family). Standing list otherwise unchanged: `audit_direct_ref_overlap.py
+  --min-usage 2`'s ~45 remaining candidates, the `个`/`亼` family
+  decision, `慶`'s bottom shape, `壷`'s top element, the 81 orphaned
+  `rad{N}` rows on the live DB.

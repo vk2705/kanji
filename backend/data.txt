@@ -1,4 +1,7 @@
 prim-pipe:｜:pipe, walking stick, cane, line, prim28.1
+prim-jawbone:咼:jawbone:口,冂
+prim-dollar-sign:弗:dollar sign:弓,｜
+prim-snare:丂:snare:一,勹
 kangxi3:丶:dot,tick,drop
 rad1.4:?:drop2,no
 rad1.6:?:feathered stick, barb radical
@@ -1432,7 +1435,7 @@ rtk1185:擦:grate:察,扌
 rtk1186:由:wherefore:田,｜
 rtk1187:抽:pluck:｜,日,扌,田
 rtk1188:油:oil:｜,水,日,田
-rtk1189:袖:sleeve:｜,一,初,田
+rtk1189:袖:sleeve:初,由
 rtk1190:宙:mid-air:｜,日,宀,田
 rtk1191:届:deliver:｜,日,尸,田
 rtk1192:笛:flute:｜,竹,日,田
@@ -1482,7 +1485,7 @@ rtk1235:掃:sweep:ヨ,巾,冖,扌
 rtk1236:当:hit:ヨ,尚
 rtk1237:彙:same kind:ヨ,田,木,冖,彑
 rtk1238:争:contend:ヨ,一,亅,勹
-rtk1239:浄:clean:水,亅,勹,ヨ
+rtk1239:浄:clean:水,争
 rtk1240:事:matter:一,口,亅,ヨ
 rtk1241:唐:t'ang:｜,ヨ,一,口,广
 rtk1242:糖:sugar:口,米,广
@@ -1568,16 +1571,16 @@ rtk1321:強:strong:弓,虫,厶
 rtk1322:弥:all the more:ノ,弓,亅,小
 rtk1323:弱:weak:弓,冫
 rtk1324:溺:drown:弱,水
-rtk1325:沸:seethe:｜,ノ,弓,水
-rtk1326:費:expense:｜,貝,弓
+rtk1325:沸:seethe:水,弗
+rtk1326:費:expense:貝,弗
 rtk1327:第:no.:弓,竹
 rtk1328:弟:younger brother:｜,ノ,弓,丷
-rtk1329:巧:adroit:工,一,勹
-rtk1330:号:nickname:一,口,勹
-rtk1331:朽:decay:一,木,勹
+rtk1329:巧:adroit:工,丂
+rtk1330:号:nickname:口,丂
+rtk1331:朽:decay:木,丂
 rtk1332:誇:boast:言,大,二,勹
 rtk1333:顎:jaw:口,頁,二,勹
-rtk1334:汚:dirty:一,水,勹,二
+rtk1334:汚:dirty:水,丂
 rtk1335:与:bestow:勹,一,卜
 rtk1336:写:copy:一,冖,勹
 rtk1337:身:somebody:
@@ -1629,10 +1632,10 @@ rtk1382:踪:remains:足,宗
 rtk1383:骨:skeleton:月,冖,冂
 rtk1384:滑:slippery:水,骨
 rtk1385:髄:marrow:有,込,骨
-rtk1386:禍:calamity:礻,口,冂
-rtk1387:渦:whirlpool:｜,口,水,冂
-rtk1388:鍋:pot:金,口,冂
-rtk1389:過:overdo:口,込,冂
+rtk1386:禍:calamity:礻,咼
+rtk1387:渦:whirlpool:水,咼
+rtk1388:鍋:pot:金,咼
+rtk1389:過:overdo:込,咼
 rtk1390:阪:heights:反,阝
 rtk1391:阿:africa:可,阝
 rtk1392:際:occasion:ノ,示,癶,阝
@@ -2116,7 +2119,7 @@ rtk1869:斎:purification:斉,示
 rtk1870:粛:solemn:｜,ノ,ヨ,米,隶
 rtk1871:塁:bases:田,土,冫
 rtk1872:楽:music:白,木,冫
-rtk1873:薬:medicine:日,木,冫,艾
+rtk1873:薬:medicine:艾,楽
 rtk1874:率:ratio:十,冫,玄
 rtk1875:渋:astringent:止,水,冫
 rtk1876:摂:vicarious:耳,冫,扌
@@ -3069,7 +3072,7 @@ rtk2824:駈:run:斤,馬,杰,一
 rtk2825:驢:donkey:皿,田,馬,卜,匕,厂,虍,杰
 rtk2826:鰻:eel:魚,日,又
 rtk2827:鯛:sea bream:魚,口,土,冂
-rtk2828:鰯:sardine:弓,魚,冫
+rtk2828:鰯:sardine:魚,弱
 rtk2829:鱒:salmon trout:魚,尊
 rtk2830:鮭:salmon:魚,土
 rtk2831:鮪:tuna:ノ,一,魚,月
