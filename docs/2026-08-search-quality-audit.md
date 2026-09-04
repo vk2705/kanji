@@ -6293,3 +6293,54 @@ output.
   `个`/`亼` family decision (blocks `検`'s disputed-review resolution),
   `慶`'s bottom shape, `壷`'s top element, the 81 orphaned `rad{N}` rows
   on the live DB (needs production access to enumerate/audit).
+
+### 2026-09-05 (continued) — `audit_direct_ref_overlap.py --min-usage 3`: 136 → 104 candidates, 33 kanji fixed
+
+- Started working through the standing `audit_direct_ref_overlap.py
+  --min-usage 3` worklist directly (the redundant-overlap-alongside-a-
+  direct-reference bug shape from the `石`/`糸`/`頁`/`魚` families found
+  in earlier sessions) rather than another radical scan, since it's the
+  next-highest-leverage standing item.
+- Cleared 6 primitive families in this pass, all confirmed by checking
+  each referenced compound's own resolved parts before collapsing:
+  - `骨`(rtk1383, 4 hosts): `滑`/`髄`/`骸` were each re-listing `骨`'s own
+    `月,冖,冂` alongside referencing it directly.
+  - `歯`(rtk1255, 4 hosts): `齢`/`噛`/`齟`/`齬` were each re-listing
+    `歯`'s own `止,米,凵`; `齟`/`齬` also needed their *other* component
+    fixed to reference `且`(rtk2190)/`吾`(rtk17) directly instead of
+    flattening.
+  - `風`(rtk563, 3 hosts): `繭`/`楓`/`颯` were each re-listing `風`'s own
+    `几,虫,ノ` (or a subset).
+  - `免`(rtk2126, 4 hosts): `逸`/`晩`/`勉`/`挽` were each re-listing
+    `免`'s own `儿,勹`.
+  - `尤`(rtk2232, 3 hosts): `就`/`厖` were re-listing `尤`'s own `丶,尢`;
+    `鷲` was a badly mangled flatten (`口,小,鳥,丶,亠,尤,杰,尢`) that
+    turned out to need a *different* fix entirely — `cjkvi-ids` shows
+    `⿱就鳥`, so it should reference `就`(rtk2121, itself just cleaned up
+    two lines above) directly, not flatten `尤` a second level down.
+  - `亀`(rtk573, 3 hosts): `縄`/`竃`/`蝿` were each re-listing `亀`'s own
+    `乙,勹` — kept the extra `田` each host also carries, since that's
+    a real shared "电"-shape component `cjkvi-ids` confirms
+    (`⿻日电`), not redundant with `亀` itself.
+  - `高`(rtk329, 4 hosts, found continuing the sweep after the first 6):
+    `稿`/`嵩`/`縞`/`膏` were each re-listing `高`'s own `口,亠,冂`.
+  - Also `専`(`博`), `無`(`舞`/`撫`/`蕪`), `内`(`肉`), `斉`(`剤`/`済`),
+    `黒`(`黙`/`黛`), `缶`(`鬱`) — one or two hosts each, same pattern.
+- Verified: full rebuild; `test_regression_fixes.py` — 9 stale pins
+  corrected (the redundant-value pins these hosts had before), 24 new
+  pins added — **1099 checks**, same 4 expected hanzi-scope non-issues;
+  pytest (56 passed); `audit_self_reference.py` clean;
+  `audit_direct_ref_overlap.py --min-usage 3` re-run to confirm
+  convergence: **104 candidates remaining, down from 136**.
+- Not deployed (no SSH/server access) — data-only change, needs
+  `sync_system_data.py` + reseed.
+- Coverage: will regenerate after commit.
+- **Next session**: continue working through
+  `audit_direct_ref_overlap.py --min-usage 3`'s remaining ~104
+  candidates directly — this session's pass showed it converges cleanly
+  and steadily (136 → 104 in one sitting) without needing render
+  verification for most cases, since the check itself already proves
+  the redundancy structurally (the compound's own resolved parts are a
+  strict subset of the host's). Standing list otherwise unchanged: the
+  `个`/`亼` family decision, `慶`'s bottom shape, `壷`'s top element, the
+  81 orphaned `rad{N}` rows on the live DB.

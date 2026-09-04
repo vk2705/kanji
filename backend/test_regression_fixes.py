@@ -483,8 +483,10 @@ EXPECTED_DECOMPOSITIONS = {
     # the same "contains kanji X's own full flattened parts" redundant-flattening
     # pattern found throughout this whole audit, just not yet swept dataset-wide.
     # A first confirmed batch, one per host:
+    # Was redundantly re-listing 専(rtk47)'s own 十 alongside referencing it
+    # directly -- 2026-09-05, audit_direct_ref_overlap.py
     "rtk48": {"character": "博", "keyword": "dr.",
-              "expected_part_ids": {"rtk10", "rtk47", "kangxi3"}},
+              "expected_part_ids": {"rtk47", "kangxi3"}},
     "rtk60": {"character": "貼", "keyword": "stick",
               "expected_part_ids": {"rtk56", "rtk49"}},
     "rtk171": {"character": "時", "keyword": "time",
@@ -793,8 +795,10 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk1376", "rtk451"}},
     "rtk1378": {"character": "跳", "keyword": "hop",
                 "expected_part_ids": {"rtk1372", "rtk250"}},
+    # Was redundantly re-listing 骨(rtk1383)'s own 冖 alongside referencing it
+    # directly -- 2026-09-05, audit_direct_ref_overlap.py
     "rtk1385": {"character": "髄", "keyword": "marrow",
-                "expected_part_ids": {"kangxi14", "rtk1383", "rtk83", "rtk843"}},
+                "expected_part_ids": {"rtk1383", "rtk83", "rtk843"}},
     "rtk1390": {"character": "阪", "keyword": "heights",
                 "expected_part_ids": {"kangxi170", "rtk779"}},
     "rtk1393": {"character": "障", "keyword": "hinder",
@@ -1048,8 +1052,10 @@ EXPECTED_DECOMPOSITIONS = {
     # 肉 was 冂,人 -- render confirms 肉 and 内 ("inside", rtk1095) share almost the
     # same outer contour; CSV: "person; inside; belt; person" -- fixed to reference
     # 内 as a whole compound plus the extra internal stroke (人) 肉 adds over 内.
+    # Was redundantly re-listing 内(rtk1095)'s own 人 alongside referencing it
+    # directly -- 2026-09-05, audit_direct_ref_overlap.py
     "rtk1098": {"character": "肉", "keyword": "meat",
-                "expected_part_ids": {"rtk1095", "rtk1023"}},
+                "expected_part_ids": {"rtk1095"}},
     # 年 was ノ,一,干 -- render confirms 年 and 午 ("noon", rtk610) are nearly
     # identical, differing only by one added short stroke on top; CSV: "sign of
     # the horse; sunglasses" (午 is the zodiac "horse" hour). Fixed to reference
@@ -1475,8 +1481,10 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"kangxi26", "rtk812"}},
     "rtk1502": {"character": "命", "keyword": "fate",
                 "expected_part_ids": {"kangxi26", "rtk269"}},
+    # Was redundantly re-listing 歯(rtk1255)'s own 止,米,凵 alongside referencing
+    # it directly -- 2026-09-05, audit_direct_ref_overlap.py
     "rtk1505": {"character": "齢", "keyword": "age",
-                "expected_part_ids": {"kangxi17", "rtk1255", "rtk1503", "rtk396", "rtk987"}},
+                "expected_part_ids": {"rtk1255", "rtk1503"}},
     "rtk1506": {"character": "冷", "keyword": "cool",
                 "expected_part_ids": {"kangxi15", "rtk1503"}},
     "rtk1514": {"character": "擬", "keyword": "mimic",
@@ -1508,8 +1516,10 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk118", "rtk1629"}},
     "rtk1638": {"character": "核", "keyword": "nucleus",
                 "expected_part_ids": {"rtk1637", "rtk207"}},
+    # Was redundantly re-listing 骨(rtk1383)'s own 月,冖,冂 alongside referencing
+    # it directly -- 2026-09-05, audit_direct_ref_overlap.py
     "rtk1641": {"character": "骸", "keyword": "remains",
-                "expected_part_ids": {"kangxi13", "kangxi14", "rtk13", "rtk1383", "rtk1637"}},
+                "expected_part_ids": {"rtk1383", "rtk1637"}},
     "rtk1642": {"character": "劾", "keyword": "censure",
                 "expected_part_ids": {"rtk1637", "rtk922"}},
     "rtk1662": {"character": "績", "keyword": "exploits",
@@ -1578,8 +1588,10 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk161", "rtk2862"}},
     "rtk2111": {"character": "遡", "keyword": "go upstream",
                 "expected_part_ids": {"rtk2862", "rtk843"}},
+    # Was redundantly re-listing 尤(rtk2232)'s own 丶,尢 alongside referencing it
+    # directly -- 2026-09-05, audit_direct_ref_overlap.py
     "rtk2121": {"character": "就", "keyword": "concerning",
-                "expected_part_ids": {"kangxi3", "kangxi43", "rtk2232", "rtk334"}},
+                "expected_part_ids": {"rtk2232", "rtk334"}},
     "rtk2122": {"character": "蹴", "keyword": "kick",
                 "expected_part_ids": {"rtk1372", "rtk2121"}},
     "rtk2133": {"character": "駒", "keyword": "pony",
@@ -2050,8 +2062,10 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"kangxi12", "kangxi13", "rtk1431", "rtk524"}},
     "rtk1474": {"character": "緊", "keyword": "tense",
                "expected_part_ids": {"rtk1431", "rtk752", "rtk911"}},
+    # Was redundantly re-listing 亀(rtk573)'s own 乙,勹 alongside referencing it
+    # directly -- 2026-09-05, audit_direct_ref_overlap.py
     "rtk1477": {"character": "縄", "keyword": "straw rope",
-               "expected_part_ids": {"kangxi20", "rtk14", "rtk1431", "rtk573", "rtk75"}},
+               "expected_part_ids": {"rtk14", "rtk1431", "rtk573"}},
     "rtk1492": {"character": "系", "keyword": "lineage",
                "expected_part_ids": {"prim-katakana-no", "rtk1431"}},
     "rtk1493": {"character": "係", "keyword": "person in charge",
@@ -2094,8 +2108,10 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"prim-fishfinger", "rtk1431"}},
     "rtk1971": {"character": "紙", "keyword": "paper",
                "expected_part_ids": {"rtk1431", "rtk1970"}},
+    # Was partial-overlap re-listing 風(rtk563)'s own 虫 alongside referencing it
+    # directly -- 2026-09-05, audit_direct_ref_overlap.py
     "rtk2025": {"character": "繭", "keyword": "cocoon",
-               "expected_part_ids": {"kangxi13", "prim-mugwort", "rtk1431", "rtk556", "rtk563"}},
+               "expected_part_ids": {"kangxi13", "prim-mugwort", "rtk1431", "rtk563"}},
     "rtk2102": {"character": "緩", "keyword": "slacken",
                "expected_part_ids": {"prim-katakana-no", "rtk1", "rtk1431", "rtk752", "rtk784"}},
     "rtk2114": {"character": "綱", "keyword": "hawser",
@@ -2146,8 +2162,10 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"kangxi10", "kangxi34", "rtk1431", "rtk161"}},
     "rtk2711": {"character": "絃", "keyword": "catgut",
                "expected_part_ids": {"kangxi8", "rtk1431", "rtk1484"}},
+    # Was redundantly re-listing 高(rtk329)'s own 口,亠,冂 alongside referencing
+    # it directly -- 2026-09-05, audit_direct_ref_overlap.py
     "rtk2712": {"character": "縞", "keyword": "stripe",
-               "expected_part_ids": {"kangxi13", "kangxi8", "rtk11", "rtk1431", "rtk329"}},
+               "expected_part_ids": {"rtk1431", "rtk329"}},
     "rtk2713": {"character": "綬", "keyword": "gimp",
                "expected_part_ids": {"kangxi14", "rtk1431", "rtk752", "rtk784"}},
     "rtk2714": {"character": "紗", "keyword": "gossamer",
@@ -2440,8 +2458,10 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"prim-katakana-no", "prim-pipe", "rtk1413"}},
     "rtk2661": {"character": "穿", "keyword": "drill",
                "expected_part_ids": {"rtk1413", "rtk2053"}},
+    # Was redundantly re-listing 亀(rtk573)'s own 乙,勹 alongside referencing it
+    # directly -- 2026-09-05, audit_direct_ref_overlap.py
     "rtk2662": {"character": "竃", "keyword": "kitchen stove",
-               "expected_part_ids": {"kangxi20", "rtk14", "rtk1413", "rtk161", "rtk573", "rtk75"}},
+               "expected_part_ids": {"rtk14", "rtk1413", "rtk161", "rtk573"}},
     "rtk2687": {"character": "篇", "keyword": "livraison",
                "expected_part_ids": {"prim-fishfinger", "rtk1007"}},
     "rtk2821": {"character": "騙", "keyword": "cheat",
@@ -2665,6 +2685,58 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"kangxi170", "rtk2069"}},  # (rtk2069)'s own parts instead of referencing it
     "rtk2553": {"character": "榊", "keyword": "sacred shinto tree",  # was ｜,日,木,礼,田 -- 礼(rtk1168) is a wrong
                "expected_part_ids": {"rtk1200", "rtk207"}},  # reference entirely; real structure is 木+神(rtk1200)
+    # The following batch (2026-09-05) are all the same "redundant overlap
+    # alongside a direct reference" bug audit_direct_ref_overlap.py detects --
+    # a compound is referenced directly (correct) but one or more of the
+    # compound's own resolved parts are ALSO listed separately (redundant).
+    "rtk1384": {"character": "滑", "keyword": "slippery",
+               "expected_part_ids": {"rtk137", "rtk1383"}},
+    "rtk2290": {"character": "噛", "keyword": "chew",
+               "expected_part_ids": {"rtk11", "rtk1255"}},
+    "rtk2887": {"character": "齟", "keyword": "uneven",
+               "expected_part_ids": {"rtk1255", "rtk2190"}},
+    "rtk2888": {"character": "齬", "keyword": "irregular teeth",
+               "expected_part_ids": {"rtk1255", "rtk17"}},
+    "rtk2538": {"character": "楓", "keyword": "maple",
+               "expected_part_ids": {"rtk207", "rtk563"}},
+    "rtk2664": {"character": "颯", "keyword": "sudden",
+               "expected_part_ids": {"rtk462", "rtk563"}},
+    "rtk2127": {"character": "逸", "keyword": "deviate",
+               "expected_part_ids": {"prim-katakana-no", "rtk2126", "rtk843"}},
+    "rtk2128": {"character": "晩", "keyword": "nightfall",
+               "expected_part_ids": {"rtk12", "rtk2126"}},
+    "rtk2129": {"character": "勉", "keyword": "exertion",
+               "expected_part_ids": {"rtk2126", "rtk922"}},
+    "rtk2350": {"character": "挽", "keyword": "saw",
+               "expected_part_ids": {"kangxi64", "rtk2126"}},
+    "rtk2233": {"character": "厖", "keyword": "large",
+               "expected_part_ids": {"kangxi27", "kangxi59", "rtk2232"}},
+    "rtk2849": {"character": "鷲", "keyword": "eagle",  # was a mangled flatten of both 就(rtk2121) and 鳥;
+               "expected_part_ids": {"rtk2091", "rtk2121"}},  # IDS ⿱就鳥 -- now references both directly
+    "rtk255": {"character": "黙", "keyword": "silence",
+               "expected_part_ids": {"rtk186", "rtk253"}},
+    "rtk2877": {"character": "黛", "keyword": "blackened eyebrows",
+               "expected_part_ids": {"kangxi56", "rtk186"}},
+    "rtk1867": {"character": "剤", "keyword": "dose",
+               "expected_part_ids": {"rtk1866", "rtk87"}},
+    "rtk1868": {"character": "済", "keyword": "settle (debt etc.)",
+               "expected_part_ids": {"rtk137", "rtk1866"}},
+    "rtk1912": {"character": "舞", "keyword": "dance",
+               "expected_part_ids": {"kangxi136", "rtk114", "rtk1913", "rtk2"}},
+    "rtk2368": {"character": "撫", "keyword": "stroke",
+               "expected_part_ids": {"kangxi64", "rtk1913"}},
+    "rtk2481": {"character": "蕪", "keyword": "turnip",
+               "expected_part_ids": {"prim-mugwort", "rtk1913"}},
+    "rtk2725": {"character": "蝿", "keyword": "fly",
+               "expected_part_ids": {"rtk14", "rtk556", "rtk573"}},
+    "rtk2120": {"character": "鬱", "keyword": "gloom",
+               "expected_part_ids": {"kangxi14", "kangxi192", "kangxi59", "rtk207", "rtk2116", "rtk476"}},
+    "rtk958": {"character": "稿", "keyword": "draft",
+               "expected_part_ids": {"kangxi115", "rtk329"}},
+    "rtk2334": {"character": "嵩", "keyword": "be aggravated",
+               "expected_part_ids": {"rtk329", "rtk830"}},
+    "rtk2931": {"character": "膏", "keyword": "fat",
+               "expected_part_ids": {"rtk13", "rtk329"}},
     "rtk2636": {"character": "砥", "keyword": "grindstone",  # was character "?", keyword "arrow shaft", parts
                "expected_part_ids": {"rtk118", "rtk1970"}},  # "bamboo,in front" -- a leftover scratch-draft line
                                                                 # near the top of data.txt (predates the real
