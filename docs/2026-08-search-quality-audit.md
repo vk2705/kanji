@@ -6344,3 +6344,44 @@ output.
   strict subset of the host's). Standing list otherwise unchanged: the
   `个`/`亼` family decision, `慶`'s bottom shape, `壷`'s top element, the
   81 orphaned `rad{N}` rows on the live DB.
+
+### 2026-09-05 (continued) — `audit_direct_ref_overlap.py --min-usage 2`: 104 → 79 candidates, 28 more kanji fixed
+
+- Kept working through the worklist at `--min-usage 2` (down from `3`,
+  since `3` converged): six more families, 28 kanji.
+  - `井`(rtk1946, 5 hosts): `寒`/`異`/`暴`/`爆`/`丼`/`耕` were each
+    re-listing `井`'s own `｜,ノ,一,二`.
+  - `支`(rtk768, 6 hosts): `技`/`枝`/`肢`/`岐`/`妓`/`艘` were each
+    re-listing `支`'s own `十,又`.
+  - `鬼`(rtk2175, 6 hosts): `醜`/`塊`/`蒐`/`魁` were each re-listing
+    `鬼`'s own `田,儿,匕,厶`; `魂` and `魔` needed their *other*
+    component fixed too — `魂` was flattening a redundant `二` where
+    `cjkvi-ids` (`⿰云鬼`) calls for referencing `云`(rtk2241) directly,
+    and `魔` was flattening `麻`(rtk637)'s own parts instead of
+    referencing it.
+  - `玄`(rtk1484, 5 hosts): `畜`/`弦`/`率`/`舷`/`眩` were each
+    re-listing `玄`'s own `亠,幺`.
+  - `冊`(rtk1967, 5 hosts): `論`/`倫`/`輪`/`綸` correctly reference the
+    compound `侖`(亼+冊, via `个`+`冊`) but redundantly re-listed `冊`'s
+    own `｜,一,亅,廾`; `柵` and `珊` don't have `侖` in their real
+    structure at all (`cjkvi-ids`: `⿰木冊`/`⿰王冊`) — they'd been
+    carrying the same `亼`-shape parts as their `侖`-family neighbors
+    by copy-paste, not by actual structure. Fixed to reference bare
+    `冊` only.
+- Verified: full rebuild; `test_regression_fixes.py` — 2 stale pins
+  corrected, 26 new pins — **1127 checks**, same 4 expected hanzi-scope
+  non-issues; pytest (56 passed); `audit_self_reference.py` clean;
+  `audit_direct_ref_overlap.py --min-usage 2` confirms convergence: **79
+  candidates remaining, down from 104**.
+- Not deployed (no SSH/server access) — data-only change, needs
+  `sync_system_data.py` + reseed.
+- Coverage: will regenerate after commit.
+- **Next session**: continue `audit_direct_ref_overlap.py --min-usage
+  2`'s remaining ~79 candidates — the pattern of "correctly references
+  a compound but redundantly re-lists that compound's own parts, and
+  sometimes the *other* component turns out to need a fix too" has held
+  up consistently across five sessions' worth of families now, so it's
+  worth continuing to work through methodically rather than switching
+  strategies. Standing list otherwise unchanged: the `个`/`亼` family
+  decision, `慶`'s bottom shape, `壷`'s top element, the 81 orphaned
+  `rad{N}` rows on the live DB.
