@@ -5839,3 +5839,69 @@ output.
   (~136 candidates), the `个`/`亼` family-wide decision (now also blocking
   `検`), the `刂`/`primitive_roof` dead-token cleanup, `慶`'s bottom shape,
   `壷`'s top element, the 81 orphaned `rad{N}` rows on the live DB.
+
+### 2026-09-05 (continued) — the `亻` presence check, run against 8 more radical families
+
+- Continuing the sequential rtk1000-3000 sweep: ran the same
+  `cjkvi-ids`-presence check that found the 86-kanji `亻` family against
+  every other common radical (`水`/`扌`/`阝`/`艹`/`忄`/`犭`/`礻`/`衣`,
+  `糸`/`貝`/`金`/`馬`/`魚`/`鳥`/`食`/`示`). Most came back clean or
+  near-clean — the `亻` family was the outlier, not the norm.
+- **First version of the check was too shallow and produced two false
+  positives that would have been real regressions** — worth recording
+  since it changes how to run this check safely going forward: `擁`
+  (rtk1488, `玄,推`) and the `祐`/`祷`/`祇`/`祢`/`禄`/`禎`/`郭`/`郡`/…
+  ~16-kanji `礻`/`阝` "hits" all *do* carry the radical, just one level of
+  indirection down through a referenced compound (`推`=`扌,隹`,
+  `礼`=`礻,乙`, `邦`=`丰,阝`) that a shallow "does `parts_detail`'s
+  top-level list contain the radical id" check doesn't see, since
+  `parts_detail` only exposes the directly-listed parts, not their own
+  recursive expansion. Caught by resolving `擁`'s *pre-edit* value with
+  `get_kanji_detail` before committing to the "fix" — it already resolved
+  to `{rtk1484, rtk716}`, both of which carry the needed radical
+  transitively. Reverted that edit; left the `礻`/`阝` indirect-reference
+  cases alone entirely (not bugs). Lesson for next time: verify the *old*
+  value's resolution before editing, not just the presence-check's
+  top-level output.
+- Six real bugs survived that check, confirmed by verifying the *old*
+  value's resolution genuinely lacked the radical (not just at the top
+  level):
+  - `汁`(rtk150, "soup") was `十` alone — missing `水` entirely.
+  - `耶`(rtk2720) was `耳,邦` — `邦`("home country") is a semantically
+    bogus whole-kanji stand-in for what's really just a bare `阝` on
+    ​耶's right side (it happened to carry `阝` transitively, so this
+    wasn't a search-index miss, but it's still a nonsense mnemonic
+    reference) — replaced with the direct `耳,阝`.
+  - `薗`(rtk2980) was `衣,口,土,囗,艾` — flattening `園`(rtk629)'s own
+    parts instead of referencing it directly; → `艾,園`.
+  - `狒`(rtk2434, "baboon") was `｜,ノ,弓` — missing `犭` entirely, plus a
+    botched decomposition of `弗`; → `犭,弓,ノ,｜`.
+  - `祓`(rtk2994, "exorcise") was `ノ,一,礼,丶` — a byte-level flatten of
+    `礼`(rtk1168)'s own strokes rather than a real reference (and
+    render-confirmed the right side is shaped like `犬`, not `礼`); →
+    `礻,犬`.
+  - `初`(rtk431, "first time") was `刀` alone — missing `衣` (radical
+    #145, the clothing radical `衤`, already taught as `rtk423`/"garment"
+    since it's RTK's own primitive for it) entirely. This one **silently
+    propagated through 15 downstream kanji** that correctly *reference*
+    `初` (`裕`/`褐`/`複`/`被`/`裾`/`襟`/`袖`/`裸`/`補`/`衿`/`袷`/`袴`/
+    `襖`/`裡`, plus `初` itself) — none of those needed their own edit,
+    confirmed by re-checking `裕`(rtk856) after the `初` fix alone.
+- Verified: full rebuild; `test_regression_fixes.py` — 6 new pins with the
+  false-positive-vs-real-bug distinction noted inline — **1035 checks**,
+  same 4 expected hanzi-scope non-issues; pytest (56 passed);
+  `audit_self_reference.py` clean.
+- Not deployed to the live server (no SSH/server access) — data-only
+  change, needs `sync_system_data.py` + reseed.
+- Coverage: will regenerate via `coverage_status.py` after commit (most of
+  these lines were likely already counted from earlier audit passes, same
+  as the `亻` batch — the git-blame-based metric undercounts genuinely new
+  review work when a line was touched before for an unrelated reason).
+- **Next session**: continue the sequential rtk1000-3000 sweep — this
+  session covered rtk1000-1043 in detail (person family) plus a handful of
+  cross-cutting radical-family checks, but the bulk of rtk1043-3000 still
+  hasn't had an individual per-kanji look. `audit_direct_ref_overlap.py
+  --min-usage 3`'s ~136 candidates remain the highest-leverage next
+  target. Standing list otherwise unchanged: the `个`/`亼` family
+  decision, `刂`/`primitive_roof` cleanup, `慶`'s bottom shape, `壷`'s top
+  element, the 81 orphaned `rad{N}` rows on the live DB.

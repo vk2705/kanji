@@ -393,7 +393,7 @@ rtk146:沖:open sea:中,水
 rtk147:汎:pan-:水,凡
 rtk148:江:creek:工,水
 rtk149:汰:washing:水,太
-rtk150:汁:soup:十
+rtk150:汁:soup:水,十
 rtk151:沙:sand:少,水
 rtk152:潮:tide:月,早,水
 rtk153:源:source:水,原
@@ -673,7 +673,7 @@ rtk427:壊:demolition:衣,十,土
 rtk428:哀:pathetic:衣,口
 rtk429:遠:distant:衣,口,込,土
 rtk430:猿:monkey:犭,衣,口,土
-rtk431:初:first time:刀
+rtk431:初:first time:衣,刀
 rtk432:巾:towel:冂,｜
 rtk433:布:linen:ノ,一,巾
 rtk434:帆:sail:巾,凡
@@ -2675,7 +2675,7 @@ rtk2430:狗:puppy:口,勹
 rtk2431:狐:fox:瓜
 rtk2432:狛:archaic part of korea:白
 rtk2433:獅:lion:犭,師
-rtk2434:狒:baboon:｜,ノ,弓
+rtk2434:狒:baboon:犭,弓,ノ,｜
 rtk2435:莨:tobacco:艮,艾
 rtk2436:茉:jasmine:艾,末
 rtk2437:莉:jasmine:禾,艾
@@ -2960,7 +2960,7 @@ rtk2716:聯:party:耳,幺
 rtk2717:聡:wise:耳,心,ハ,厶
 rtk2718:聘:invite:｜,耳,日,一,勹
 rtk2719:耽:addicted:耳,尢,冖
-rtk2720:耶:question mark:耳,邦
+rtk2720:耶:question mark:耳,阝
 rtk2721:蚤:flea:虫,又
 rtk2722:蟹:crab:角,牛,虫,刀
 rtk2723:蛋:barbarian:虫,疋
@@ -3220,7 +3220,7 @@ rtk2976:燭:light:火,虫,勹
 rtk2977:逞:sturdy:王,口,込
 rtk2978:燈:lamp:火,登
 rtk2979:裡:reverse:初,里
-rtk2980:薗:garden:衣,口,土,囗,艾
+rtk2980:薗:garden:艾,園
 rtk2981:鋪:shop:金,十,用,丶
 rtk2982:嶋:island:山,鳥,杰
 rtk2983:峯:peak:｜,一,山,夂
@@ -3234,7 +3234,7 @@ rtk2990:國:country:口,囗,戈
 rtk2991:脛:leg:月,工,巛
 rtk2992:勁:strong:工,巛,力
 rtk2993:祀:enshrine:礻,巳
-rtk2994:祓:exorcise:ノ,一,礼,丶
+rtk2994:祓:exorcise:礻,犬
 rtk2995:躇:hesitate:艾,者,足
 rtk2996:壽:longevity:一,口,工,士,寸
 rtk2997:躊:hesitate:工,士,寸,足

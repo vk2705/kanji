@@ -2590,6 +2590,25 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"rtk24", "rtk637"}},               # 麻 + 呂
     "rtk24": {"character": "呂", "keyword": "spine",                     # was 口,ノ — missing the second 口 entirely (ノ = KRADFILE proxy)
                "expected_part_ids": {"rtk11"}},                          # 口,口 (dedupes to one id, order-independent)
+    # Six more single-instance radical-omission bugs found via the same cjkvi-ids
+    # presence check (2026-09-05, continued), each real (confirmed the old value
+    # didn't carry the radical even transitively, unlike two other candidates —
+    # 擁/rtk1488 and 祐-family/rtk1168-referencing kanji — that were false positives
+    # from the shallow single-level parts_detail check and were left alone).
+    "rtk150": {"character": "汁", "keyword": "soup",       # was 十 alone — missing 水 (soup is water + ten)
+               "expected_part_ids": {"rtk10", "rtk137"}},
+    "rtk2720": {"character": "耶", "keyword": "question mark",  # was 耳,邦 — 邦("home country") is a semantically-bogus
+               "expected_part_ids": {"kangxi170", "rtk881"}},   # whole-kanji stand-in for a bare 阝; now 耳,阝 directly
+    "rtk2980": {"character": "薗", "keyword": "garden",    # was 衣,口,土,囗,艾 — flattened 園's own parts instead of
+               "expected_part_ids": {"prim-mugwort", "rtk629"}},  # referencing it; now 艾,園
+    "rtk2434": {"character": "狒", "keyword": "baboon",     # was ｜,ノ,弓 — missing 犭 entirely, plus a botched 弗
+               "expected_part_ids": {"kangxi94", "prim-katakana-no", "prim-pipe", "rtk1317"}},
+    "rtk2994": {"character": "祓", "keyword": "exorcise",   # was ノ,一,礼,丶 — a byte-level flatten of 礼's strokes,
+               "expected_part_ids": {"kangxi113", "rtk253"}},   # not a real reference; render shows 犬, not 礼-shaped
+    "rtk431": {"character": "初", "keyword": "first time",  # was 刀 alone — missing 衣 (the clothing radical 衤), which
+               "expected_part_ids": {"rtk423", "rtk87"}},   # then silently propagated through every kanji that
+                                                              # correctly *referenced* 初 (裕/被/裾/襟/袖/裸/補/... — 15
+                                                              # kanji total, all auto-fixed by this one root fix)
 }
 
 # character -> hanzi id, spot-checking the 429-character Unihan self-reference backfill
