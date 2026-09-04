@@ -6165,3 +6165,54 @@ output.
   `audit_direct_ref_overlap.py --min-usage 3` (~136 candidates), the
   `个`/`亼` family decision, `慶`'s bottom shape, `壷`'s top element, the
   81 orphaned `rad{N}` rows on the live DB.
+
+### 2026-09-05 (continued) — sequential rtk2551-2690: a leftover scratch-draft line silently corrupting `砥`
+
+- Continued the sequential sweep (rtk2551-2690 checked). Found
+  `rtk2553`/榊 (`｜,日,木,礼,田`) referencing `礼`(rtk1168, "salutation")
+  where `⿰木神` calls for `神`(rtk1200, already taught) — fixed to
+  `木,神`.
+- Then found something structurally different: `rtk2636`/砥
+  ("grindstone") showed `bamboo,in front` as its parts when dumped,
+  which turned out to be literal English text, not resolved primitive
+  names — a strong signal something was wrong with the *line itself*,
+  not just its content. Traced it to a **leftover scratch-draft block**
+  near the very top of `data.txt` (`rtk3`/`rtk4`/`rtk8`/`rtk16`/`rtk17`/
+  `rtk18`/`rtk19`/`rtk20`/`rtk21`/`rtk91`/`rtk2636`, all using `?` as a
+  placeholder character, predating the real kanjidic2/CSV import
+  pipeline) — an id collision where this pre-import test line happened
+  to reuse the real `rtk2636` id and silently override its parts with
+  completely unrelated garbage (`竹`/bamboo, `前`/rtk309, nothing to do
+  with a grindstone). The character/keyword still came through correctly
+  from the CSV in the live DB (the override's own character field being
+  `?` doesn't suppress those), which is exactly why this hid so well —
+  `rtk2636`'s glyph and keyword both looked completely normal; only its
+  parts were silently wrong.
+  - Checked the other 9 lines in the same scratch block the same way
+    (resolve each, compare against CSV/IDS) rather than assuming they're
+    all broken just because they share the same `?`-placeholder pattern:
+    all 9 turned out to be **coincidentally correct** — their parts
+    overrides happen to match the real primitive breakdown (`rtk3`/三 =
+    `一,二`; `rtk18`/冒 = `日,目`; etc.) even though the lines themselves
+    are leftover drafts. Left them as-is (functionally fine, just
+    stylistically confusing for a future maintainer) rather than
+    "fixing" something that isn't broken.
+  - Fixed `rtk2636` to `石,氏` (render/IDS-confirmed `⿰石氐`; `氐` isn't
+    independently taught, so used `氏` per the established stand-in
+    convention already used for `低`/`抵`/`底`).
+- Verified: full rebuild; `test_regression_fixes.py` — 2 new pins
+  (`榊`/`砥`) — **1075 checks**, same 4 expected hanzi-scope non-issues;
+  pytest (56 passed); `audit_self_reference.py` clean.
+- Not deployed (no SSH/server access) — data-only change, needs
+  `sync_system_data.py` + reseed.
+- Coverage: will regenerate after commit.
+- **Next session**: continue the sequential sweep from rtk2691. Worth
+  keeping an eye out for more id collisions between that scratch-draft
+  block (frames 3/4/8/16/17/18/19/20/21/91, all still present) and any
+  future `data.txt` edits — a collision silently wins by file order, not
+  by which line is "real," so a future line reusing one of those 10
+  frame numbers would silently corrupt it the same way `rtk2636` was.
+  Standing list otherwise unchanged: `audit_direct_ref_overlap.py
+  --min-usage 3` (~136 candidates), the `个`/`亼` family decision,
+  `慶`'s bottom shape, `壷`'s top element, the 81 orphaned `rad{N}` rows
+  on the live DB.

@@ -254,7 +254,7 @@ rtk21:?:chant:mouth,昌
 
 rtk91:?::日,召
 
-rtk2636:?:arrow shaft:bamboo,in front 
+rtk2636:砥:grindstone:石,氏
 # --- Imported from kanjidic2 + KRADFILE ---
 rtk1:一:one,floor,ceiling,minus:
 rtk2:二:two:
@@ -2795,7 +2795,7 @@ rtk2549:柚:citron:木,由
 rtk2550:椀:wooden or lacquered bowl:木,夕,卩,宀
 rtk2551:栂:hemlock:母,木,毋
 rtk2552:柾:straight grain:一,止,木
-rtk2553:榊:sacred shinto tree:｜,日,木,礼,田
+rtk2553:榊:sacred shinto tree:木,神
 rtk2554:樫:evergreen oak:臣,土,又,木
 rtk2555:槙:twig:十,ハ,木,目
 rtk2556:楢:oak:木,酋

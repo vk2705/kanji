@@ -2663,6 +2663,20 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"rtk11", "rtk1637"}},  # own parts instead of referencing it directly
     "rtk2505": {"character": "隈", "keyword": "corner",  # was 衣,田,阝 -- flattened (and dropped a 一 from) 畏
                "expected_part_ids": {"kangxi170", "rtk2069"}},  # (rtk2069)'s own parts instead of referencing it
+    "rtk2553": {"character": "榊", "keyword": "sacred shinto tree",  # was ｜,日,木,礼,田 -- 礼(rtk1168) is a wrong
+               "expected_part_ids": {"rtk1200", "rtk207"}},  # reference entirely; real structure is 木+神(rtk1200)
+    "rtk2636": {"character": "砥", "keyword": "grindstone",  # was character "?", keyword "arrow shaft", parts
+               "expected_part_ids": {"rtk118", "rtk1970"}},  # "bamboo,in front" -- a leftover scratch-draft line
+                                                                # near the top of data.txt (predates the real
+                                                                # kanjidic2/CSV import) had an id collision with
+                                                                # the real rtk2636/砥, silently overriding its
+                                                                # parts with completely unrelated garbage (the
+                                                                # character/keyword still came through correctly
+                                                                # from the CSV since the override's own character
+                                                                # field is "?", but the parts override still
+                                                                # applied). Fixed to 石,氏 (氐 isn't independently
+                                                                # taught; 氏 is the established stand-in per
+                                                                # 低/抵/底's own convention).
     "rtk212": {"character": "枠", "keyword": "frame",  # had NO data.txt override at all -- fell through to
                "expected_part_ids": {"rtk9", "rtk10", "rtk207"}},  # heisig-kanjis.csv's raw components text
                                                                      # verbatim, which includes "ninety" (a dead,
