@@ -5396,3 +5396,90 @@ output.
   noted above are also still open. Other standing items unchanged: `壷`'s
   ambiguous top element, `triage_google_check.py`'s unmined output, the
   81 orphaned `rad{N}` rows on the live DB (needs production access).
+
+### 2026-09-04 — three app-behavior reports, then a fourth detector blind spot found at scale
+
+- Owner report, after redeploying: no dispute button, Google auth shows a
+  black screen "in app", and a "tree, mouth" search surfaces wrong
+  results including `保`("protect") specifically "missing left part".
+- `保` was `口,木` — entirely missing `亻`("person"), the literal left
+  radical the owner pointed at. `cjkvi-ids` confirms `保` = `⿰亻呆`; fixed
+  to `亻,呆` (`呆`, rtk2297, was already correctly `口,木`). The other two
+  "tree, mouth" false positives were redundant-flattening: `操`
+  ("maneuver") had a bare `口` alongside `品`("goods", which already
+  implies a mouth-shape) — fixed to `扌,品,木`. `藁`("straw") re-listed
+  `高`("tall")'s own subparts alongside `高` itself — fixed to `艾,高,木`.
+- **Google auth / dispute button**: both turned out to share one root
+  cause. Google blocks its Identity Services SDK from working inside
+  embedded WebViews (an anti-phishing measure) — already a documented,
+  unaddressed limitation of the Android app. Fixed by having
+  `MainActivity.kt` append a `KanjiAndroidApp` marker to the WebView's
+  user agent, which `AuthBar.jsx` now checks to skip loading the Google
+  SDK entirely and show a short explanatory note instead of a black
+  screen. This needs a **new APK build + install** to take effect — a
+  code fix alone doesn't update an already-installed app, and this
+  session has no way to build/sign/distribute one.
+- Separately verified the dispute button end-to-end locally (register →
+  login → search 明 → ✓ Approve / ✗ Dispute render correctly under "Made
+  from") after the owner reported it missing again despite logging in
+  with username/password — confirmed **not a code bug**. This is the
+  second "redeployed but nothing changed" report (SEO tags were the
+  first), so `DEPLOY_README.md` now has a concrete checklist: rebuild
+  `dist/` (not just `git pull`), verify the copied files have fresh
+  timestamps, then suspect `index.html` caching before assuming the code
+  is wrong.
+- Owner then asked to check every one of a "stone, mouth" search's 24
+  results and explain why the whole class hadn't been caught already.
+  Found a **third detector blind spot**: `石`("stone") itself is
+  correctly `厂,口`, but *every one* of the 23 other kanji built on it
+  was also separately re-listing a bare `口` alongside `石` — neither
+  existing detector catches a *partial* overlap between a host and a
+  directly-referenced compound (both require the compound's *entire*
+  part-set to reappear). Fixed all 23 (a few also needed their other
+  component corrected — full list in that commit), and built
+  `audit_direct_ref_overlap.py` to search for this pattern systematically
+  instead of relying on another owner report.
+- Owner asked to run that search proactively across other common
+  primitives. It found the identical bug at **far larger scale** — four
+  more families, 142 kanji: `糸`("thread", 77 hosts — the entire
+  silk/thread radical family), `頁`("page", 26 hosts — the "head/page"
+  family, plus `嶺` needed a follow-on fix once `領` was corrected),
+  `魚`("fish", 20 hosts — the entire fish-radical family), `足`("leg", 19
+  hosts — which also surfaced `促` missing "person," same class as `保`,
+  plus a few CSV/render-corrected stray tokens). Then four more, 57
+  kanji: `尚`(14 hosts — `償` missing "person"; `党`/`哨` were using the
+  wrong shape entirely, fixed by correcting `肖` itself), `戸`(17 hosts —
+  `偏`/`遍`/`編`/`篇`/`騙` were flattening a second-level compound `扁`
+  instead of referencing it, new `prim-fishfinger`; `偏` missing
+  "person"), `穴`(16 hosts — `容`/`蓉` don't contain `穴` at all, a
+  sharper version of the overlap bug where they'd picked it up only
+  because `宀` happens to be one of `穴`'s own parts), `音`(14 hosts —
+  `章` likewise doesn't contain `音` at all; `暗` needed *only* one of its
+  two overlapping tokens dropped, since its own `日` legitimately does
+  double duty as both `音`'s internal part and `暗`'s own external
+  neighbor — not a blind drop-the-whole-overlap case). Every fix
+  cross-checked against `cjkvi-ids` first, same discipline as the rest of
+  this audit; deliberately left a handful of harder cases open rather
+  than guess (`蔽`/`弊`/`瞥`/`鼈`/`獣`'s real `敝`-family structure; `慶`'s
+  bottom shape from a prior session).
+- Verified across all three commits: full rebuilds; `test_regression_fixes.py`
+  reached **868 checks** (same 4 expected hanzi-scope non-issues) after
+  correcting 31 stale pins and adding 168 new ones; pytest (51 passed)
+  and `audit_self_reference.py` (0 issues) after every commit;
+  `audit_flattening.py` and the new `audit_direct_ref_overlap.py` re-run
+  after each batch to confirm convergence (that detector's candidate
+  count at `--min-usage 3` dropped from 384 to 178 over the session).
+- Not deployed to the live server (no SSH/server access) — data changes
+  need `sync_system_data.py` + reseed; the Android fix needs a new APK
+  build; the frontend fix needs a rebuild+redeploy (see the new
+  `DEPLOY_README.md` checklist above).
+- Coverage: **1558/3000 (51.9%)** — passed the halfway mark this session.
+- **Next session**: `audit_direct_ref_overlap.py --min-usage 3` still has
+  178 candidates across smaller primitive families (usage 3-13) — this
+  is now a standing, high-leverage tool to keep working through
+  proactively rather than wait for more owner reports. The deliberately-
+  skipped `敝`-family cluster (`蔽`/`弊`/`瞥`/`鼈`/`獣`) and `慶`'s bottom
+  shape are still open. Other standing items unchanged: `壷`'s ambiguous
+  top element, `triage_google_check.py`'s unmined output, the
+  `primitive_roof` dead-token cleanup, the 81 orphaned `rad{N}` rows on
+  the live DB (needs production access).
