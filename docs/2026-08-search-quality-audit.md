@@ -6043,7 +6043,7 @@ output.
   `audit_radicals.py` confirmed 0/0.
 - Not deployed (no SSH/server access) — data-only change, needs
   `sync_system_data.py` + reseed.
-- Coverage: will regenerate after commit.
+- Coverage: **1633/3000 (54.4%)**.
 - **Next session**: continue the sequential sweep from rtk1981. Standing
   list unchanged: `audit_direct_ref_overlap.py --min-usage 3` (~136
   candidates), the `个`/`亼` family decision, `慶`'s bottom shape, `壷`'s
