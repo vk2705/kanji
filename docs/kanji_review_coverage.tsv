@@ -1127,8 +1127,8 @@ rtk1125	旋	rotation	1125	yes
 rtk1126	遊	play	1126	yes
 rtk1127	旅	trip	1127	yes
 rtk1128	勿	not	1128	no
-rtk1129	物	thing	1129	no
-rtk1130	易	easy	1130	no
+rtk1129	物	thing	1129	yes
+rtk1130	易	easy	1130	yes
 rtk1131	賜	grant	1131	yes
 rtk1132	尿	urine	1132	no
 rtk1133	尼	nun	1133	no
@@ -1611,18 +1611,18 @@ rtk1609	純	genuine	1609	yes
 rtk1610	頓	immediate	1610	yes
 rtk1611	鈍	dull	1611	no
 rtk1612	辛	spicy	1612	no
-rtk1613	辞	resign	1613	no
-rtk1614	梓	catalpa	1614	no
+rtk1613	辞	resign	1613	yes
+rtk1614	梓	catalpa	1614	yes
 rtk1615	宰	superintend	1615	yes
 rtk1616	壁	wall	1616	yes
 rtk1617	璧	holed gem	1617	yes
-rtk1618	避	evade	1618	no
+rtk1618	避	evade	1618	yes
 rtk1619	新	new	1619	yes
 rtk1620	薪	firewood	1620	yes
 rtk1621	親	parent	1621	yes
-rtk1622	幸	happiness	1622	no
+rtk1622	幸	happiness	1622	yes
 rtk1623	執	tenacious	1623	yes
-rtk1624	摯	clasp	1624	no
+rtk1624	摯	clasp	1624	yes
 rtk1625	報	report	1625	yes
 rtk1626	叫	shout	1626	no
 rtk1627	糾	twist	1627	yes
@@ -1815,7 +1815,7 @@ rtk1813	病	ill	1813	yes
 rtk1814	痴	stupid	1814	yes
 rtk1815	痘	pox	1815	yes
 rtk1816	症	symptoms	1816	yes
-rtk1817	瘍	carbuncle	1817	no
+rtk1817	瘍	carbuncle	1817	yes
 rtk1818	痩	lose weight	1818	no
 rtk1819	疾	rapidly	1819	yes
 rtk1820	嫉	envy	1820	yes
@@ -2290,7 +2290,7 @@ rtk2288	吠	barking	2288	no
 rtk2289	吊	dangle	2289	no
 rtk2290	噛	chew	2290	yes
 rtk2291	叶	within my ability	2291	no
-rtk2292	吻	sides of the mouth	2292	no
+rtk2292	吻	sides of the mouth	2292	yes
 rtk2293	吃	stammer	2293	yes
 rtk2294	噺	spin a tale	2294	yes
 rtk2295	噌	miso	2295	yes
@@ -2507,7 +2507,7 @@ rtk2505	隈	nook	2505	yes
 rtk2506	憑	possessed	2506	no
 rtk2507	惹	attract	2507	no
 rtk2508	悉	without exception	2508	no
-rtk2509	忽	instantaneously	2509	no
+rtk2509	忽	instantaneously	2509	yes
 rtk2510	惣	firstborn son	2510	no
 rtk2511	愈	in the nick of time	2511	yes
 rtk2512	恕	sensitive	2512	no
@@ -2722,7 +2722,7 @@ rtk2720	耶	exclamation	2720	yes
 rtk2721	蚤	flea	2721	no
 rtk2722	蟹	crab	2722	no
 rtk2723	蛋	protein	2723	no
-rtk2724	蟄	hibernation	2724	no
+rtk2724	蟄	hibernation	2724	yes
 rtk2725	蝿	housefly	2725	yes
 rtk2726	蟻	ant	2726	yes
 rtk2727	蝋	wax	2727	no

@@ -6402,7 +6402,7 @@ output.
   convergence: **61 candidates remaining, down from 79**.
 - Not deployed (no SSH/server access) — data-only change, needs
   `sync_system_data.py` + reseed.
-- Coverage: will regenerate after commit.
+- Coverage: **1690/3000 (56.3%)**.
 - **Next session**: continue `audit_direct_ref_overlap.py --min-usage
   2`'s remaining ~61 candidates — the largest families (`矢`/`勿`/`辛`)
   are now cleared, so remaining candidates are smaller usage counts
