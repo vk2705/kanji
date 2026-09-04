@@ -694,7 +694,7 @@ rtk448:製:made in...:衣,牛,巾
 rtk449:転:revolve:車,二,厶
 rtk450:芸:technique:艾,云
 rtk451:雨:rain:
-rtk452:雲:cloud:一,雨,二,厶
+rtk452:雲:cloud:雨,云
 rtk453:曇:cloudy weather:雨,二,日,厶
 rtk454:雷:thunder:雨,田
 rtk455:霜:frost:雨,相
@@ -767,8 +767,8 @@ rtk521:識:discriminating:言,音,戈
 rtk522:鏡:mirror:金,音,儿
 rtk523:境:boundary:土,竟
 rtk524:亡:deceased:亠
-rtk525:盲:blind:亡,目,亠
-rtk526:妄:delusion:亡,女,亠
+rtk525:盲:blind:亡,目
+rtk526:妄:delusion:亡,女
 rtk527:荒:laid waste:川,艾,亡
 rtk528:望:ambition:王,亡,月
 rtk529:方:direction:
@@ -825,7 +825,7 @@ rtk579:遂:consummate:込,丷,豕
 rtk580:家:house:宀,primitive_roof,豕
 rtk581:嫁:marry into:女,家
 rtk582:豪:overpowering:口,亠,冖,豕
-rtk583:腸:intestines:一,月,日,勿
+rtk583:腸:intestines:月,勿,旦
 rtk584:場:location:土,日,一,勿
 rtk585:湯:hot water:｜,一,水,日,勿
 rtk586:羊:sheep:王,丷
@@ -882,7 +882,7 @@ rtk636:床:bed:木,广
 rtk637:麻:hemp:木,广
 rtk638:磨:grind:麻,石
 rtk639:心:heart:
-rtk640:忘:forget:心,亡,亠
+rtk640:忘:forget:心,亡
 rtk641:恣:selfish:欠,心,冫
 rtk642:忍:endure:心,刃
 rtk643:認:acknowledge:言,忍
@@ -901,13 +901,13 @@ rtk655:臆:timidity:意,月
 rtk656:想:idea:心,相
 rtk657:息:breath:自,心
 rtk658:憩:recess:自,心,舌
-rtk659:恵:favor:一,心,田
+rtk659:恵:favor:十,心,田
 rtk660:恐:fear:工,心,凡
 rtk661:惑:beguile:口,心,戈
 rtk662:感:emotion:ノ,口,心,戈
 rtk663:憂:melancholy:一,自,心,冖,夂,白
 rtk664:寡:widow:一,自,刀,ハ,宀,primitive_roof
-rtk665:忙:busy:亡,亠
+rtk665:忙:busy:忄,亡
 rtk666:悦:ecstasy:兄,丷,忄
 rtk667:恒:constancy:一,日,state of mind
 rtk668:悼:lament:十,日,state of mind,卜
@@ -995,7 +995,7 @@ rtk749:更:grow late:一,日,乂
 rtk750:硬:stiff:石,更
 rtk751:梗:for the most part:木,更
 rtk752:又:or again:
-rtk753:双:pair:又,丶
+rtk753:双:pair:又
 rtk754:桑:mulberry:又,木
 rtk755:隻:vessels:又,隹
 rtk756:護:safeguard:言,隻,艾
@@ -1190,7 +1190,7 @@ rtk944:待:wait:寺,彳
 rtk945:往:journey:主,彳
 rtk946:征:subjugate:正,彳
 rtk947:径:diameter:土,又,彳
-rtk948:彼:he:皮,又,彳
+rtk948:彼:he:彳,皮
 rtk949:役:duty:彳,殳,几,又
 rtk950:徳:benevolence:十,心,彳
 rtk951:徹:penetrate:育,彳,攵
@@ -1212,7 +1212,7 @@ rtk966:秋:autumn:火,禾
 rtk967:愁:distress:秋,心
 rtk968:私:private:禾,厶
 rtk969:秩:regularity:ノ,禾,人,土,大
-rtk970:秘:secret:必,禾,丶
+rtk970:秘:secret:禾,必
 rtk971:称:appellation:ノ,禾,小,一
 rtk972:利:profit:禾
 rtk973:梨:pear tree:禾,木
@@ -1821,7 +1821,7 @@ rtk1575:退:retreat:込,艮
 rtk1576:限:limit:艮,阝
 rtk1577:眼:eyeball:艮,目
 rtk1578:良:good:丶,艮
-rtk1579:朗:melodious:月,艮
+rtk1579:朗:melodious:月,良
 rtk1580:浪:wandering:水,良
 rtk1581:娘:daughter:艮,女
 rtk1582:食:eat:
@@ -2336,11 +2336,11 @@ rtk2090:猟:game-hunting:犭,尚,用,几
 rtk2091:鳥:bird:杰
 rtk2092:鳴:chirp:口,鳥,杰
 rtk2093:鶴:crane:鳥,杰,隹,宀,primitive_roof,冖
-rtk2094:烏:crow:鳥,杰
+rtk2094:烏:crow:丶,口,一,杰
 rtk2095:蔦:vine:鳥,杰,艾
 rtk2096:鳩:pigeon:九,鳥,杰
 rtk2097:鶏:chicken:人,爪,土,大,鳥,杰,二
-rtk2098:島:island:山,鳥,白
+rtk2098:島:island:山,鳥
 rtk2099:暖:warmth:友,爪,日
 rtk2100:媛:beautiful woman:ノ,女,爪,又
 rtk2101:援:abet:友,爪,扌
@@ -2402,7 +2402,7 @@ rtk2156:薦:recommend:广,杰,艾
 rtk2157:慶:jubilation:心,冖,夂,广
 rtk2158:麗:lovely:一,冂,鹿
 rtk2159:熊:bear:能,杰
-rtk2160:能:ability:月,匕,厶
+rtk2160:能:ability:月,匕,厶,prim-sitting-on-the-ground
 rtk2161:態:attitude:能,心
 rtk2162:寅:sign of the tiger:田,ハ,宀,primitive_roof,一
 rtk2163:演:performance:水,寅

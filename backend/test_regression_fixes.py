@@ -1353,8 +1353,11 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"kangxi115", "kangxi12", "rtk107"}},
     "rtk965": {"character": "秒", "keyword": "second",
                 "expected_part_ids": {"kangxi115", "rtk111"}},
+    # Corrected 2026-09-05 (results.jsonl PARTIAL mining): cjkvi-ids
+    # confirms 秘 = ⿰禾必 exactly -- the extra "丶"(kangxi3) was
+    # redundant with 必(rtk685)'s own structure.
     "rtk970": {"character": "秘", "keyword": "secret",
-                "expected_part_ids": {"kangxi115", "kangxi3", "rtk685"}},
+                "expected_part_ids": {"kangxi115", "rtk685"}},
     "rtk974": {"character": "穫", "keyword": "harvest",
                 "expected_part_ids": {"kangxi115", "prim-mugwort", "rtk755"}},
     "rtk976": {"character": "稲", "keyword": "rice plant",
@@ -2514,6 +2517,65 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"rtk2974", "rtk843"}},
     "rtk2988": {"character": "慾", "keyword": "longing (old)",
                "expected_part_ids": {"rtk639", "rtk855"}},
+    # Continuing the results.jsonl mining into the noisier 622 "PARTIAL"
+    # flags (2026-09-05, daily check-in): filtered for the highest-signal
+    # subset first -- exactly one of our tokens missing from Google's
+    # text, no kana noise in Google's mentions, and Google's own mentions
+    # short/clean -- then cjkvi-ids/CSV-verified each survivor as usual.
+    # Most PARTIAL hits are the water/氵, 込/辶, ハ/八, 艾/艹 radical-
+    # variant false positives this audit already knows about (Google's
+    # text uses the compound-radical form, ours uses the standalone
+    # character -- both correct), or 个("umbrella") cases already
+    # resolved earlier this session -- skipped all of those. Real bugs
+    # found in the filtered subset:
+    #  - 忘/忙/盲/妄 all redundantly repeated 亡(rtk524)'s own "亠" part
+    #    alongside referencing 亡 directly (this audit's most common bug
+    #    shape); 忙 was additionally missing "忄" entirely (cjkvi-ids
+    #    ⿰忄亡) where it had "亠" doing nothing useful in its place.
+    #  - 朗 was flattening 良's pre-fix parts instead of referencing it
+    #    (cjkvi-ids K variant ⿰良月); 島 had a stray extra "白" cjkvi-ids
+    #    doesn't call for (⿹⑦山, confirmed by render: 鳥 sits cleanly on
+    #    山 with nothing else); 烏 was using the wrong reference entirely
+    #    -- it's missing a stroke 鳥 has (render-confirmed), so CSV's
+    #    real component list ("drop; mouth; one; tail feathers") was
+    #    used instead of flattening via the too-similar 鳥.
+    #  - 能 was missing "prim-sitting-on-the-ground" (the same
+    #    spoon/sitting-on-the-ground pair from 北/比 found earlier this
+    #    audit -- CSV confirms "spoon; sitting on the ground" for 能 too).
+    #  - 雲/腸/恵 were each flattening an already-taught compound's own
+    #    parts (云, 旦, and a stray "一" instead of "十" respectively --
+    #    CSV explicitly names "ten" for 恵, not "one").
+    #  - 双/彼/秘 each carried one redundant extra stroke duplicating
+    #    part of an already-referenced compound (双=又+又 per cjkvi-ids,
+    #    "no duplicate token" convention collapses to one; 彼's 又 is
+    #    already inside 皮 per the established rtk865 fix; 秘's 丶 is
+    #    already inside 必).
+    "rtk452": {"character": "雲", "keyword": "cloud",
+               "expected_part_ids": {"rtk2241", "rtk451"}},
+    "rtk525": {"character": "盲", "keyword": "blind",
+               "expected_part_ids": {"rtk15", "rtk524"}},
+    "rtk526": {"character": "妄", "keyword": "delusion",
+               "expected_part_ids": {"rtk102", "rtk524"}},
+    "rtk583": {"character": "腸", "keyword": "intestines",
+               "expected_part_ids": {"rtk1128", "rtk13", "rtk30"}},
+    "rtk640": {"character": "忘", "keyword": "forget",
+               "expected_part_ids": {"rtk524", "rtk639"}},
+    "rtk659": {"character": "恵", "keyword": "favor",
+               "expected_part_ids": {"rtk10", "rtk14", "rtk639"}},
+    "rtk665": {"character": "忙", "keyword": "busy",
+               "expected_part_ids": {"kangxi61", "rtk524"}},
+    "rtk753": {"character": "双", "keyword": "pair",
+               "expected_part_ids": {"rtk752"}},
+    "rtk948": {"character": "彼", "keyword": "he",
+               "expected_part_ids": {"kangxi60", "rtk865"}},
+    "rtk1579": {"character": "朗", "keyword": "melodious",
+               "expected_part_ids": {"rtk13", "rtk1578"}},
+    "rtk2094": {"character": "烏", "keyword": "crow",
+               "expected_part_ids": {"kangxi3", "prim-fire-radical", "rtk1", "rtk11"}},
+    "rtk2098": {"character": "島", "keyword": "island",
+               "expected_part_ids": {"rtk2091", "rtk830"}},
+    "rtk2160": {"character": "能", "keyword": "ability",
+               "expected_part_ids": {"kangxi28", "prim-sitting-on-the-ground", "rtk13", "rtk476"}},
 }
 
 # character -> hanzi id, spot-checking the 429-character Unihan self-reference backfill
