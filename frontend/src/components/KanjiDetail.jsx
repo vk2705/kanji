@@ -2,6 +2,22 @@ import { useEffect, useState } from "react";
 import { getKanji, addAlias, addStory, createDecomposition, uploadKanjiImage, resolveImageUrl, reviewDecomposition } from "../api";
 import { displayChar } from "../utils";
 import { t } from "../i18n";
+import AutocompleteInput from "./AutocompleteInput";
+
+// DecompositionForm's parts field is a single comma-separated input ("water, fire,
+// tree") rather than one box per part, so autocomplete only makes sense against the
+// segment currently being typed — the text after the last comma — not the whole
+// value. Picking a suggestion replaces just that segment and leaves earlier,
+// already-finished parts untouched.
+function lastSegment(value) {
+  return value.slice(value.lastIndexOf(",") + 1).trim();
+}
+
+function replaceLastSegment(value, suggestion) {
+  const lastComma = value.lastIndexOf(",");
+  const prefix = lastComma === -1 ? "" : value.slice(0, lastComma + 1) + " ";
+  return `${prefix}${suggestion}`;
+}
 
 function AliasAdder({ targetId, lang }) {
   const [open, setOpen] = useState(false);
@@ -35,11 +51,11 @@ function AliasAdder({ targetId, lang }) {
 
   return (
     <form className="part-add-form" onSubmit={handleSubmit}>
-      <input
+      <AutocompleteInput
         className="input part-add-input"
         autoFocus
         value={value}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={setValue}
         placeholder={t(lang, "addNamePlaceholder")}
         aria-label={t(lang, "addNamePlaceholder")}
       />
@@ -116,10 +132,12 @@ export function DecompositionForm({ kanjiId, lang, onAdded }) {
 
   return (
     <form className="story-form" onSubmit={handleSubmit}>
-      <input
+      <AutocompleteInput
         className="input"
         value={parts}
-        onChange={(e) => setParts(e.target.value)}
+        onChange={setParts}
+        getQuery={lastSegment}
+        applySuggestion={replaceLastSegment}
         placeholder={t(lang, "decompositionPartsPlaceholder")}
         aria-label={t(lang, "decompositionPartsPlaceholder")}
       />

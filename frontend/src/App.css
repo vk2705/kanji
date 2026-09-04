@@ -389,6 +389,42 @@ textarea {
   min-width: 120px;
 }
 
+.autocomplete-wrap {
+  position: relative;
+  flex: 1;
+}
+
+.autocomplete-suggestions {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: 20;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  max-height: 220px;
+  overflow-y: auto;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+}
+
+.autocomplete-suggestion {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 8px 14px;
+  background: none;
+  border: none;
+  color: var(--text);
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.autocomplete-suggestion:hover,
+.autocomplete-suggestion.autocomplete-suggestion-active {
+  background: var(--accent-light);
+}
+
 .input {
   padding: 10px 14px;
   background: var(--surface2);

@@ -198,3 +198,51 @@ def test_private_decomposition_only_visible_to_its_owner_in_search(conn, client)
     r = client.post("/search/parts", json={"parts": ["only-i-can-see-this"], "depth": 1})
     assert r.status_code == 200, r.text
     assert "k_priv" not in {row["id"] for row in r.json()["results"]}
+
+
+def test_suggest_matches_substring_anywhere_not_just_whole_word(conn, client):
+    """/search/suggest is for autocomplete mid-keystroke, so unlike search_by_substring
+    (whole-word, for final search precision) it must match a query appearing anywhere
+    inside a name -- a user typing "ate" hasn't necessarily reached a word boundary."""
+    _seed_kanji(conn, "k_gate", "門", "gatehouse")
+    conn.commit()
+    r = client.get("/search/suggest", params={"q": "ate"})
+    assert r.status_code == 200, r.text
+    assert "gatehouse" in r.json()["suggestions"]
+
+
+def test_suggest_splits_comma_separated_synonym_lists(conn, client):
+    """A keyword/alias can itself be a comma-separated synonym list (e.g. "one,
+    floor, ceiling, minus") -- suggestions must be the individual names, not the
+    whole joined string."""
+    _seed_kanji(conn, "k_syn", "多", "many, plentiful, abundant")
+    conn.commit()
+    r = client.get("/search/suggest", params={"q": "plent"})
+    assert r.status_code == 200, r.text
+    assert r.json()["suggestions"] == ["plentiful"]
+
+
+def test_suggest_prefix_matches_rank_before_mid_word_matches(conn, client):
+    _seed_kanji(conn, "k_ate1", "亜", "plate")
+    _seed_kanji(conn, "k_ate2", "亙", "ateam")
+    conn.commit()
+    r = client.get("/search/suggest", params={"q": "ate"})
+    assert r.status_code == 200, r.text
+    suggestions = r.json()["suggestions"]
+    assert suggestions.index("ateam") < suggestions.index("plate")
+
+
+def test_suggest_excludes_private_terms(conn, client):
+    """Suggestions only ever come from the shared public vocabulary -- a private
+    term one user invented isn't a useful (or visible) suggestion for anyone else
+    typing into the same bounded input."""
+    _seed_kanji(conn, "k_hidden", "隠", "hiddenword", visibility="private")
+    conn.commit()
+    r = client.get("/search/suggest", params={"q": "hidden"})
+    assert r.status_code == 200, r.text
+    assert "hiddenword" not in r.json()["suggestions"]
+
+
+def test_suggest_requires_nonempty_query(conn, client):
+    r = client.get("/search/suggest", params={"q": ""})
+    assert r.status_code == 422

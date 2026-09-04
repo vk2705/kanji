@@ -7,7 +7,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from database import (
     init_db, import_data, get_db, db_conn, migrate_schema,
-    search_by_parts, search_by_substring, search_by_char,
+    search_by_parts, search_by_substring, search_by_char, suggest_terms,
     get_kanji_detail, SCRIPT_VISIBILITY, SOURCE_SCOPES, MAX_DECOMPOSITION_DEPTH
 )
 from auth import router as auth_router, current_user
@@ -105,6 +105,15 @@ def search_text(q: str = Query(..., min_length=1), script: str | None = Query(No
     sources = _validate_sources(sources)
     results = search_by_substring(conn, q, user["id"] if user else None, script, sources)
     return {"results": results, "count": len(results)}
+
+
+@app.get("/search/suggest")
+def search_suggest(q: str = Query(..., min_length=1), conn=Depends(db_conn)):
+    """Autocomplete for the free-text primitive-name inputs (DecompositionForm's parts
+    field, alias-add inputs) — no auth required, same as the other search endpoints;
+    doesn't take viewer_id/script/sources since it only ever suggests from the shared
+    public vocabulary (see suggest_terms's docstring)."""
+    return {"suggestions": suggest_terms(conn, q)}
 
 
 @app.get("/search/char")

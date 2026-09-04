@@ -1018,6 +1018,50 @@ def search_by_substring(conn, substring: str, viewer_id: int | None = None,
     return _rows_to_dicts(conn, rows, viewer_id)
 
 
+def suggest_terms(conn, q: str, limit: int = 10) -> list[str]:
+    """Autocomplete suggestions for the free-text primitive-name inputs (the parts
+    field in DecompositionForm, alias-add inputs) — see CLAUDE.md's 2026-08-14 queued
+    item. Unlike search_by_substring (whole-word, for final search precision), this
+    matches q as a substring *anywhere* within a name, since the user is still mid-
+    keystroke and hasn't necessarily reached a word boundary yet. Only public
+    keywords/aliases are considered — a private term one user invented isn't a useful
+    suggestion for everyone else typing into the same bounded vocabulary. Keywords and
+    aliases can themselves be comma-separated synonym lists, so each is split into
+    individual names before matching/returning. Prefix matches sort before mid-word
+    matches, then alphabetically; deduplicated."""
+    q = q.strip().lower()
+    if not q:
+        return []
+    like = f"%{q}%"
+    rows = conn.execute(
+        """
+        SELECT term FROM (
+            SELECT keyword AS term FROM kanji WHERE visibility = 'public'
+            UNION
+            SELECT alias AS term FROM aliases WHERE visibility = 'public'
+        )
+        WHERE LOWER(term) LIKE ?
+        """,
+        (like,)
+    ).fetchall()
+    candidates = set()
+    for r in rows:
+        for piece in r["term"].split(","):
+            piece = piece.strip()
+            if piece and q in piece.lower():
+                candidates.add(piece)
+
+    def sort_key(term: str):
+        lower = term.lower()
+        # Prefix matches first, then shorter terms — with a fixed suggestion count,
+        # a short exact-ish match (e.g. "mouth") is far more likely what a user typing
+        # "mou" wants than a long compound sharing the same prefix ("mountain goat
+        # with horns missing"), which would otherwise crowd it out alphabetically.
+        return (0 if lower.startswith(q) else 1, len(lower), lower)
+
+    return sorted(candidates, key=sort_key)[:limit]
+
+
 def search_by_char(conn, character: str, viewer_id: int | None = None,
                     script: str | None = None, sources: set[str] | None = None) -> dict | None:
     """Find a kanji by its character glyph. A user's own private duplicate of an
