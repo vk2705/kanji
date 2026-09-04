@@ -1160,7 +1160,7 @@ rtk914:臓:entrails:蔵,月
 rtk915:賢:intelligent:貝,臣,又
 rtk916:腎:kidney:月,臣,又
 rtk917:堅:strict:臣,土,又
-rtk918:臨:look to:ノ,口,臣,品,一,人
+rtk918:臨:look to:ノ,臣,品,一,人
 rtk919:覧:perusal:ノ,見,臣,二
 rtk920:巨:gigantic:
 rtk921:拒:repel:扌,巨
@@ -1711,7 +1711,7 @@ rtk1465:索:cord:糸,十,冖
 rtk1466:総:general:糸,心,公
 rtk1467:綿:cotton:巾,糸,白
 rtk1468:絹:silk:月,口,糸
-rtk1469:繰:winding:口,糸,木,品
+rtk1469:繰:winding:糸,木,品
 rtk1470:継:inherit:｜,糸,米
 rtk1471:緑:green:ヨ,糸,水,隶
 rtk1472:縁:affinity:ヨ,糸,豕
@@ -2433,7 +2433,7 @@ rtk2187:遵:abide by:込,尊
 rtk2188:罷:quit:月,匕,厶
 rtk2189:屯:barracks:ノ,乙,凵
 rtk2190:且:moreover:一,目
-rtk2191:藻:seaweed:口,水,木,艾,品
+rtk2191:藻:seaweed:水,木,艾,品
 rtk2192:隷:slave:ヨ,士,水,隶,示
 rtk2193:癒:healing:月,心,个,疔
 rtk2194:璽:emperor's seal:爾,王
@@ -2867,7 +2867,7 @@ rtk2622:痒:itchy:羊,疔
 rtk2623:痰:sputum:火,疔
 rtk2624:疹:measles:个,彡,疔
 rtk2625:痔:piles:寸,土,疔
-rtk2626:癌:cancer:口,山,疔,品
+rtk2626:癌:cancer:山,疔,品
 rtk2627:痺:palsy:十,田,疔
 rtk2628:眸:pupil of the eye:牛,目,厶
 rtk2629:眩:faint:玄,目,亠,幺

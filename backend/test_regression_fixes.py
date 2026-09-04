@@ -2014,8 +2014,24 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"rtk1431", "rtk37", "rtk432"}},
     "rtk1468": {"character": "絹", "keyword": "silk",
                "expected_part_ids": {"rtk11", "rtk13", "rtk1431"}},
+    # Owner asked to search "goods" (2026-09-04) -- checked all 8 results
+    # against cjkvi-ids. 品(rtk23, "goods") itself is correctly just "口"
+    # (one mouth, per the established no-duplicate-token convention for
+    # its own 3-mouth shape). 燥/操/嘔 already correctly referenced 品
+    # directly with no issue. But 臨/繰/藻/癌 all redundantly repeated a
+    # bare "口" alongside "品" -- the same overlap bug as everything else
+    # in this audit today, just not caught until asked directly. Dropped
+    # the redundant "口" from all three (臨's remaining ノ,臣,一,人
+    # approximates 臣+𠂉 per cjkvi-ids ⿰臣⿱𠂉品; 癌's "疔" is an existing
+    # alias for kangxi104/疒, not a separate error).
     "rtk1469": {"character": "繰", "keyword": "winding",
-               "expected_part_ids": {"rtk11", "rtk1431", "rtk207", "rtk23"}},
+               "expected_part_ids": {"rtk1431", "rtk207", "rtk23"}},
+    "rtk918": {"character": "臨", "keyword": "look to",
+               "expected_part_ids": {"prim-katakana-no", "rtk1", "rtk1023", "rtk23", "rtk911"}},
+    "rtk2191": {"character": "藻", "keyword": "seaweed",
+                "expected_part_ids": {"prim-mugwort", "rtk137", "rtk207", "rtk23"}},
+    "rtk2626": {"character": "癌", "keyword": "cancer",
+                "expected_part_ids": {"kangxi104", "rtk23", "rtk830"}},
     "rtk1470": {"character": "継", "keyword": "inherit",
                "expected_part_ids": {"prim-pipe", "rtk1431", "rtk987"}},
     "rtk1471": {"character": "緑", "keyword": "green",
