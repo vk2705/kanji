@@ -2666,15 +2666,15 @@ rtk2420:淀:pool:水,疋,宀
 rtk2421:涅:black soil:水,土,日
 rtk2422:斧:ax:斤,父
 rtk2423:爺:old man:耳,父,邦
-rtk2424:猾:crafty:月,骨,冂,冖
-rtk2425:猥:obscene:衣,田
-rtk2426:狡:cunning:父,亠
-rtk2427:狸:tanuki:里
-rtk2428:狼:wolf:艮
-rtk2429:狽:wolf:貝
-rtk2430:狗:puppy:口,勹
-rtk2431:狐:fox:瓜
-rtk2432:狛:archaic part of korea:白
+rtk2424:猾:crafty:犭,骨
+rtk2425:猥:obscene:犭,畏
+rtk2426:狡:cunning:犭,交
+rtk2427:狸:tanuki:犭,里
+rtk2428:狼:wolf:犭,良
+rtk2429:狽:wolf:犭,貝
+rtk2430:狗:puppy:犭,句
+rtk2431:狐:fox:犭,瓜
+rtk2432:狛:archaic part of korea:犭,白
 rtk2433:獅:lion:犭,師
 rtk2434:狒:baboon:犭,弓,ノ,｜
 rtk2435:莨:tobacco:艮,艾
@@ -2747,7 +2747,7 @@ rtk2501:迄:until:乙,込
 rtk2502:逗:stop:込,豆
 rtk2503:鄭:an ancient chinese province:酋,大,阝
 rtk2504:隕:fall:貝,口,阝
-rtk2505:隈:corner:衣,田,阝
+rtk2505:隈:corner:阝,畏
 rtk2506:憑:depend:心,馬,冫,杰
 rtk2507:惹:attract:ノ,一,口,心,艾
 rtk2508:悉:all:ノ,心,釆,米

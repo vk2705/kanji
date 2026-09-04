@@ -6124,7 +6124,43 @@ output.
 - Not deployed (no SSH/server access) — data-only change, needs
   `sync_system_data.py` + reseed.
 - Coverage: **1634/3000 (54.5%)**.
-- **Next session**: continue the sequential sweep from rtk2411. Standing
-  list unchanged: `audit_direct_ref_overlap.py --min-usage 3` (~136
-  candidates), the `个`/`亼` family decision, `慶`'s bottom shape, `壷`'s
-  top element, the 81 orphaned `rad{N}` rows on the live DB.
+- **Next session**: continue the sequential sweep from rtk2411.
+
+### 2026-09-05 (continued) — sequential rtk2411-2550: the whole `犭` (wild-dog) radical family missing (9 kanji)
+
+- Continued the sequential sweep (rtk2411-2550 checked this pass).
+  Found **one unbroken run in frame order**, `rtk2424`-`rtk2432` (`猾 猥
+  狡 狸 狼 狽 狗 狐 狛`), all missing `犭`("pack of wild dogs", `kangxi94`)
+  entirely — same systemic-omission shape as the `亻` and `罒` families
+  found earlier this weekend, this time affecting every single kanji in
+  one contiguous frame block. A couple were badly wrong, not just
+  missing the radical: `猾` was `月,骨,冂,冖` (right shape, but the wrong
+  left radical entirely) and `狡` was `父,亠` (completely unrelated to
+  its real `⿰犭交` structure). Render-confirmed all 9 before fixing;
+  collapsed each to `犭,<compound>` since every RHS was already a taught
+  kanji (`骨`/`畏`/`交`/`里`/`良`/`貝`/`句`/`瓜`/`白`).
+- Separately, `rtk2505`/隈 (`衣,田,阝`) turned out to be the exact same
+  flatten-instead-of-reference bug already fixed for `猥`(rtk2425) in
+  this same pass — both were mangling `畏`(rtk2069)'s own parts (and
+  dropping its `一`) instead of referencing it directly. Fixed to
+  `阝,畏`.
+- Verified: full rebuild; `test_regression_fixes.py` — new
+  `check_wild_dog_radical_present` structural invariant (9 hosts, same
+  pattern as person/net), 1 new individual pin (`隈`) — **1073 checks**,
+  same 4 expected hanzi-scope non-issues; pytest (56 passed);
+  `audit_self_reference.py` clean; confirmed 0 remaining `犭`-omissions
+  dataset-wide via the recursive-aware presence check.
+- Not deployed (no SSH/server access) — data-only change, needs
+  `sync_system_data.py` + reseed.
+- Coverage: will regenerate after commit.
+- **Next session**: continue the sequential sweep from rtk2551. Given
+  `亻`/`罒`/`犭` have all turned out to have systemic omission bugs,
+  worth running the same recursive-aware presence check proactively
+  against the remaining common radicals not yet swept this exact way
+  (`忄`, `礻`, `扌`, `阝` were checked with the first-pass shallow script
+  earlier and came back clean, but the shallow script was wrong for `犭`
+  specifically until this session's recursive-aware version, so those
+  results deserve a second look). Standing list otherwise unchanged:
+  `audit_direct_ref_overlap.py --min-usage 3` (~136 candidates), the
+  `个`/`亼` family decision, `慶`'s bottom shape, `壷`'s top element, the
+  81 orphaned `rad{N}` rows on the live DB.

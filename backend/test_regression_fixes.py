@@ -2661,6 +2661,8 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"kangxi9", "rtk355"}},
     "rtk2283": {"character": "咳", "keyword": "cough",  # was 口,人,亠,ノ,丶 -- a literal flatten of 亥(rtk1637)'s
                "expected_part_ids": {"rtk11", "rtk1637"}},  # own parts instead of referencing it directly
+    "rtk2505": {"character": "隈", "keyword": "corner",  # was 衣,田,阝 -- flattened (and dropped a 一 from) 畏
+               "expected_part_ids": {"kangxi170", "rtk2069"}},  # (rtk2069)'s own parts instead of referencing it
     "rtk212": {"character": "枠", "keyword": "frame",  # had NO data.txt override at all -- fell through to
                "expected_part_ids": {"rtk9", "rtk10", "rtk207"}},  # heisig-kanjis.csv's raw components text
                                                                      # verbatim, which includes "ninety" (a dead,
@@ -2877,6 +2879,35 @@ def check_net_radical_present(conn) -> list[str]:
     return failures
 
 
+# Same bug shape as PERSON_RADICAL_HOSTS/NET_RADICAL_HOSTS, found 2026-09-05
+# continuing the sequential sweep: 9 kanji (the whole rtk2424-2432 block, one
+# unbroken run in frame order) whose cjkvi-ids decomposition has 犭(kangxi94, the
+# "pack of wild dogs" radical) as a top-level component but whose data.txt parts
+# list dropped it entirely, several replaced with completely unrelated tokens
+# (猾 was 月,骨,冂,冖; 狡 was 父,亠 -- neither shares a single component with the
+# real glyph).
+WILD_DOG_RADICAL_HOSTS = [
+    "rtk2424", "rtk2425", "rtk2426", "rtk2427", "rtk2428", "rtk2429",
+    "rtk2430", "rtk2431", "rtk2432",
+]
+
+_WILD_DOG_PART_IDS = {"kangxi94"}
+
+
+def check_wild_dog_radical_present(conn) -> list[str]:
+    failures = []
+    for kid in WILD_DOG_RADICAL_HOSTS:
+        detail = database.get_kanji_detail(conn, kid, viewer_id=None)
+        if not detail["decompositions"]:
+            failures.append(f"{kid}: no decomposition at all (wild-dog radical fix regressed)")
+            continue
+        part_ids = {p["id"] for p in detail["decompositions"][0]["parts_detail"]}
+        if not (part_ids & _WILD_DOG_PART_IDS):
+            failures.append(f"{kid} ({detail['character']}): missing the wild-dog radical "
+                            f"犭 again (got {sorted(part_ids)})")
+    return failures
+
+
 def check_no_self_reference(conn) -> list[str]:
     failures = []
     variant_rows = conn.execute("SELECT id, character FROM kanji WHERE variant_of = id").fetchall()
@@ -3034,6 +3065,7 @@ def main():
     all_failures += check_no_self_reference(conn)
     all_failures += check_person_radical_present(conn)
     all_failures += check_net_radical_present(conn)
+    all_failures += check_wild_dog_radical_present(conn)
     all_failures += check_alias_visibility_boundary(conn)
     conn.close()
 
@@ -3041,7 +3073,7 @@ def main():
 
     total_checks = (len(EXPECTED_DECOMPOSITIONS) + len(EXPECTED_HANZI_PRESENT)
                     + len(EXPECTED_ATOMIC) + len(PERSON_RADICAL_HOSTS)
-                    + len(NET_RADICAL_HOSTS) + 4)
+                    + len(NET_RADICAL_HOSTS) + len(WILD_DOG_RADICAL_HOSTS) + 4)
     if all_failures:
         print(f"FAILED: {len(all_failures)} problem(s) found across {total_checks} checks:\n")
         for f in all_failures:
