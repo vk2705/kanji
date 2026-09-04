@@ -1152,8 +1152,8 @@ rtk905:替:exchange:人,大,二,日,亠
 rtk906:賛:approve:貝,人,大,二,亠
 rtk907:潜:submerge:水,日,二,大,人,亠
 rtk908:失:lose:ノ,人,二,大
-rtk909:鉄:iron:ノ,金,二,矢,大
-rtk910:迭:transfer:｜,ノ,一,牛,込,矢,大,二
+rtk909:鉄:iron:金,矢
+rtk910:迭:transfer:込,矢
 rtk911:臣:retainer:
 rtk912:姫:princess:女,臣
 rtk913:蔵:storehouse:ノ,臣,戈,艾,厂
@@ -1171,7 +1171,7 @@ rtk924:労:labor:尚,力,冖
 rtk925:募:recruit:大,日,力,艾
 rtk926:劣:inferiority:少,力
 rtk927:功:achievement:工,力
-rtk928:勧:persuade:ノ,力,隹,矢
+rtk928:勧:persuade:力,隹,矢
 rtk929:努:toil:奴,力
 rtk930:勃:suddenness:子,十,力,冖
 rtk931:励:encourage:力,厂,万
@@ -1314,7 +1314,7 @@ rtk1067:倍:double:亻,口,立
 rtk1068:優:tenderness:亻,憂
 rtk1069:伐:fell:亻,戈
 rtk1070:宿:inn:白,宀
-rtk1071:傷:wound:亻,ノ,日,勿,一,勹
+rtk1071:傷:wound:亻,日,一,勿
 rtk1072:保:protect:亻,呆
 rtk1073:褒:praise:亠,保,衣
 rtk1074:傑:greatness:亻,舛,木,夕
@@ -1372,8 +1372,8 @@ rtk1125:旋:rotation:疋,方
 rtk1126:遊:play:込,子,方
 rtk1127:旅:trip:ノ,方
 rtk1128:勿:not:ノ,勹
-rtk1129:物:thing:勿,牛,勹,ノ
-rtk1130:易:easy:日,勿,勹,ノ
+rtk1129:物:thing:牛,勿
+rtk1130:易:easy:日,勿
 rtk1131:賜:grant:勿,貝,日
 rtk1132:尿:urine:水,尸
 rtk1133:尼:nun:匕,尸
@@ -1549,7 +1549,7 @@ rtk1302:不:negative:｜,ノ,一,丶
 rtk1303:否:negate:ノ,一,口,｜,丶
 rtk1304:杯:counter for cupfuls:木,不
 rtk1305:矢:dart:ノ,天
-rtk1306:矯:rectify:ノ,口,矢,冂,大
+rtk1306:矯:rectify:口,矢,冂,大
 rtk1307:族:tribe:方,矢
 rtk1308:知:know:口,矢
 rtk1309:智:wisdom:知,日
@@ -1856,18 +1856,18 @@ rtk1609:純:genuine:糸,屯
 rtk1610:頓:suddenly:頁,屯
 rtk1611:鈍:dull:金,屯
 rtk1612:辛:spicy:十,立
-rtk1613:辞:resign:口,十,辛,舌,立
-rtk1614:梓:catalpa tree:十,辛,木,立
-rtk1615:宰:superintend:十,辛,立,宀
+rtk1613:辞:resign:口,舌,辛
+rtk1614:梓:catalpa tree:木,辛
+rtk1615:宰:superintend:宀,辛
 rtk1616:壁:wall:辟,土
 rtk1617:璧:sphere:王,辟
-rtk1618:避:evade:口,込,十,辛,立,尸
+rtk1618:避:evade:口,込,尸,辛
 rtk1619:新:new:立,木,斤
 rtk1620:薪:fuel:艾,新
 rtk1621:親:parent:見,立,木
-rtk1622:幸:happiness:十,辛,立,亠
+rtk1622:幸:happiness:亠,辛
 rtk1623:執:tenacious:幸,丸
-rtk1624:摯:gift:ノ,九,手,十,辛,立,丶
+rtk1624:摯:gift:ノ,九,手,丶,辛
 rtk1625:報:report:幸,卩,又
 rtk1626:叫:shout:｜,口,十
 rtk1627:糾:twist:｜,糸,十
@@ -2060,7 +2060,7 @@ rtk1813:病:ill:丙,疒
 rtk1814:痴:stupid:知,疔
 rtk1815:痘:pox:豆,疔
 rtk1816:症:symptoms:正,疒
-rtk1817:瘍:swelling:ノ,一,日,勹,疔,勿
+rtk1817:瘍:swelling:一,日,疔,勿
 rtk1818:痩:get thin:又,疔
 rtk1819:疾:rapidly:矢,疔
 rtk1820:嫉:jealous:女,疾
@@ -2534,7 +2534,7 @@ rtk2288:吠:bark:犬,口
 rtk2289:吊:suspend:巾,口
 rtk2290:噛:chew:口,歯
 rtk2291:叶:grant:口,十
-rtk2292:吻:proboscis:勿,口,勹,ノ
+rtk2292:吻:proboscis:口,勿
 rtk2293:吃:stammer:乙,口
 rtk2294:噺:talk:口,新
 rtk2295:噌:boisterous:口,田,日,丷
@@ -2751,7 +2751,7 @@ rtk2505:隈:corner:阝,畏
 rtk2506:憑:depend:心,馬,冫,杰
 rtk2507:惹:attract:ノ,一,口,心,艾
 rtk2508:悉:all:ノ,心,釆,米
-rtk2509:忽:in a moment:勿,心,勹,ノ
+rtk2509:忽:in a moment:心,勿
 rtk2510:惣:all:牛,心,勿
 rtk2511:愈:be superior:月,心,个,一
 rtk2512:恕:excuse:口,女,心
@@ -2965,7 +2965,7 @@ rtk2720:耶:question mark:耳,阝
 rtk2721:蚤:flea:虫,又
 rtk2722:蟹:crab:角,牛,虫,刀
 rtk2723:蛋:barbarian:虫,疋
-rtk2724:蟄:hibernation of insects:九,十,辛,虫,立,丶,亠
+rtk2724:蟄:hibernation of insects:九,虫,丶,亠,辛
 rtk2725:蝿:fly:虫,田,亀
 rtk2726:蟻:ant:一,虫,羊,亅,戈,手
 rtk2727:蝋:wax:｜,一,尚,虫,用,几
@@ -3177,7 +3177,7 @@ rtk2932:魁:charging ahead of others:斗,鬼
 rtk2933:馨:fragrant:禾,香,士,日,又,几,殳,尸
 rtk2934:牒:label:片,木,世
 rtk2935:瞥:glance at:｜,巾,尚,丷,目,冂,攵
-rtk2936:睾:testicles:十,辛,土,目,立,亠
+rtk2936:睾:testicles:土,目,亠,辛
 rtk2937:巫:sorcerer:工,人
 rtk2938:敦:industry:口,子,亠,攵
 rtk2939:奎:star:大,土
