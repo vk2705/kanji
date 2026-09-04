@@ -2442,6 +2442,78 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"rtk196", "rtk493"}},
     "rtk2902": {"character": "肇", "keyword": "founding",
                "expected_part_ids": {"kangxi129", "kangxi66", "rtk1157"}},
+    # Owner asked to cross-check the live DB against the owner's own Google
+    # AI Overview results (tools/heisig-google-check/results.jsonl) via
+    # triage_google_check.py, which flags 651 kanji where our decomposition
+    # and Google's mentioned characters don't line up. Worked through the
+    # 43 "DISJOINT" (zero overlap -- the strongest signal) entries first,
+    # cjkvi-ids/CSV/render-verified as always; most turned out to be false
+    # positives (the heuristic doesn't distinguish Google mentioning a real
+    # component from mentioning an unrelated example kanji), but 19 were
+    # real bugs:
+    #  - missing components (same class as 保/促/偏 earlier): 良 missing
+    #    "丶" (cjkvi-ids ⿱丶艮); 爽 missing "大" entirely (cjkvi-ids shows
+    #    大 overlaid with a doubled-cross shape, approximated with the
+    #    already-established 乂).
+    #  - wrong box shape (同"石/砕" family's 田-vs-something confusion,
+    #    but the OTHER direction this time): 亀 had 田(rice field) where
+    #    render confirms a 2-cell 日(sun/day) box, not a 4-cell one.
+    #  - reference an already-taught compound directly instead of
+    #    flattening: 渓→夫, 尽→尺, 芝→之, 浜→兵, 浪→良, 英→央, 汀→丁,
+    #    茉→末, 芥→介, 迪→由, 邁→萬(rtk2974), 慾→欲, 添→天(+心), and
+    #    芸→云 (which needed 云 itself fixed first -- was 一,二,厶 but
+    #    cjkvi-ids ⿱二厶 has no "一"). 歪(cjkvi-ids ⿱不正) now references
+    #    both 不 and 正 directly instead of a flattened mash of both.
+    # Deliberately left many more DISJOINT hits alone after checking them:
+    # some were already fixed earlier this same session (梗, 党, 邦--
+    # Google's results.jsonl was scraped before those fixes landed), some
+    # are confirmed-correct existing approximations once rendered (申's
+    # real 田 box, 競, 追, 師, 沸, 鳥/馬's 杰-for-灬 stand-in), and several
+    # stayed genuinely inconclusive (壷's already-standing ambiguous top,
+    # 単/脳's shared "𭕄" marker, 之's own atomic breakdown, 斡, 華, 予,
+    # 共, 蒲, 汚, 之, 了, 袖, 浄) -- left unfixed rather than force a
+    # low-confidence call, matching this audit's standing discipline.
+    # The 608 "PARTIAL" hits (something in ours not echoed in Google's
+    # text -- much noisier, most likely just Google's text omitting a
+    # real part rather than us having a wrong one) are still unmined.
+    "rtk450": {"character": "芸", "keyword": "technique",
+               "expected_part_ids": {"prim-mugwort", "rtk2241"}},
+    "rtk573": {"character": "亀", "keyword": "tortoise",
+               "expected_part_ids": {"kangxi20", "rtk12", "rtk75"}},
+    "rtk684": {"character": "添", "keyword": "annexed",
+               "expected_part_ids": {"rtk137", "rtk457", "rtk639"}},
+    "rtk903": {"character": "渓", "keyword": "mountain stream",
+               "expected_part_ids": {"rtk137", "rtk784", "rtk901"}},
+    "rtk1152": {"character": "尽", "keyword": "exhaust",
+               "expected_part_ids": {"kangxi3", "rtk1151"}},
+    "rtk1301": {"character": "芝", "keyword": "turf",
+               "expected_part_ids": {"prim-mugwort", "rtk1299"}},
+    "rtk1430": {"character": "浜", "keyword": "seacoast",
+               "expected_part_ids": {"rtk137", "rtk1429"}},
+    "rtk1578": {"character": "良", "keyword": "good",
+               "expected_part_ids": {"kangxi138", "kangxi3"}},
+    "rtk1580": {"character": "浪", "keyword": "wandering",
+               "expected_part_ids": {"rtk137", "rtk1578"}},
+    "rtk1608": {"character": "爽", "keyword": "bracing",
+               "expected_part_ids": {"prim-tucked-under-the-arm", "rtk112"}},
+    "rtk1878": {"character": "英", "keyword": "england",
+               "expected_part_ids": {"prim-mugwort", "rtk1877"}},
+    "rtk2241": {"character": "云", "keyword": "quote",
+               "expected_part_ids": {"kangxi28", "rtk2"}},
+    "rtk2405": {"character": "汀", "keyword": "water’s edge",
+               "expected_part_ids": {"rtk137", "rtk95"}},
+    "rtk2436": {"character": "茉", "keyword": "jasmine",
+               "expected_part_ids": {"prim-mugwort", "rtk230"}},
+    "rtk2459": {"character": "芥", "keyword": "mustard",
+               "expected_part_ids": {"prim-mugwort", "rtk265"}},
+    "rtk2492": {"character": "迪", "keyword": "way",
+               "expected_part_ids": {"rtk1186", "rtk843"}},
+    "rtk2875": {"character": "歪", "keyword": "warped",
+               "expected_part_ids": {"rtk1302", "rtk405"}},
+    "rtk2975": {"character": "邁", "keyword": "pass through",
+               "expected_part_ids": {"rtk2974", "rtk843"}},
+    "rtk2988": {"character": "慾", "keyword": "longing (old)",
+               "expected_part_ids": {"rtk639", "rtk855"}},
 }
 
 # character -> hanzi id, spot-checking the 429-character Unihan self-reference backfill

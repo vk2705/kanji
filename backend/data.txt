@@ -692,7 +692,7 @@ rtk446:刺:thorn:巾,ハ,木,亅,冂
 rtk447:制:system:ノ,牛,巾,二
 rtk448:製:made in...:衣,牛,巾
 rtk449:転:revolve:車,二,厶
-rtk450:芸:technique:二,厶,艾
+rtk450:芸:technique:艾,云
 rtk451:雨:rain:
 rtk452:雲:cloud:一,雨,二,厶
 rtk453:曇:cloudy weather:雨,二,日,厶
@@ -815,7 +815,7 @@ rtk569:包:wrap:勹,己
 rtk570:胞:placenta:月,包
 rtk571:砲:cannon:石,包
 rtk572:泡:bubbles:水,包
-rtk573:亀:tortoise:田,勹,乙
+rtk573:亀:tortoise:日,勹,乙
 rtk574:電:electricity:雨,田,乙
 rtk575:竜:dragon:立,田,乙
 rtk576:滝:waterfall:水,田,立,竜
@@ -926,7 +926,7 @@ rtk680:惧:fear:ハ,state of mind,目
 rtk681:憧:yearn after:state of mind,童
 rtk682:憬:yearn for:口,小,日,state of mind,亠
 rtk683:慕:pining:心,大,日,艾
-rtk684:添:annexed:ノ,水,心,大,一,二
+rtk684:添:annexed:水,天,心
 rtk685:必:invariably:ノ,心
 rtk686:泌:ooze:必,水,丶
 rtk687:手:hand:
@@ -1145,7 +1145,7 @@ rtk899:環:ring:衣,王,口,一
 rtk900:還:send back:衣,口,込,一
 rtk901:夫:husband:一,大
 rtk902:扶:aid:人,二,扌,大
-rtk903:渓:mountain stream:水,人,爪,土,二,大
+rtk903:渓:mountain stream:水,爪,夫
 rtk904:規:standard:夫,見
 rtk905:替:exchange:人,大,二,日,亠
 rtk906:賛:approve:貝,人,大,二,亠
@@ -1394,7 +1394,7 @@ rtk1148:遅:slow:込,羊,尸
 rtk1149:漏:leak:雨,水,尸
 rtk1150:刷:printing:巾,尸
 rtk1151:尺:shaku:尸,丶
-rtk1152:尽:exhaust:尸,丶
+rtk1152:尽:exhaust:尺,丶
 rtk1153:沢:swamp:水,尸,丶
 rtk1154:訳:translate:言,尸,丶
 rtk1155:択:choose:尸,扌,丶
@@ -1543,7 +1543,7 @@ rtk1297:片:one-sided:
 rtk1298:版:printing block:片,反
 rtk1299:之:of:乙,丶,亠,廴
 rtk1300:乏:destitution:ノ,之
-rtk1301:芝:turf:亠,艾
+rtk1301:芝:turf:艾,之
 rtk1302:不:negative:｜,ノ,一,丶
 rtk1303:否:negate:ノ,一,口,｜,丶
 rtk1304:杯:counter for cupfuls:｜,ノ,一,木,礼
@@ -1672,7 +1672,7 @@ rtk1426:深:deep:水,木,儿,冖
 rtk1427:丘:hill:一,斤
 rtk1428:岳:point:山,斤,一
 rtk1429:兵:soldier:丘,ハ
-rtk1430:浜:seacoast:斤,水,ハ,一
+rtk1430:浜:seacoast:水,兵
 rtk1431:糸:thread:幺,小
 rtk1432:織:weave:糸,音,戈
 rtk1433:繕:darning:善,糸
@@ -1820,9 +1820,9 @@ rtk1574:節:node:即,竹
 rtk1575:退:retreat:込,艮
 rtk1576:限:limit:艮,阝
 rtk1577:眼:eyeball:艮,目
-rtk1578:良:good:艮
+rtk1578:良:good:丶,艮
 rtk1579:朗:melodious:月,艮
-rtk1580:浪:wandering:艮,水
+rtk1580:浪:wandering:水,良
 rtk1581:娘:daughter:艮,女
 rtk1582:食:eat:
 rtk1583:飯:meal:食,反
@@ -1850,7 +1850,7 @@ rtk1604:胸:bosom:月,凵,勹,ノ,丶
 rtk1605:離:detach:亠,凵,禹,隹
 rtk1606:璃:glassy:王,亠,凵,禹
 rtk1607:殺:kill:木,殳,ノ,丶,几,又
-rtk1608:爽:refreshing:一,人,亠
+rtk1608:爽:refreshing:大,乂
 rtk1609:純:genuine:糸,屯
 rtk1610:頓:suddenly:頁,屯
 rtk1611:鈍:dull:金,屯
@@ -2120,7 +2120,7 @@ rtk1874:率:ratio:玄,十,亠,冫,幺
 rtk1875:渋:astringent:止,水,冫
 rtk1876:摂:vicarious:耳,冫,扌
 rtk1877:央:center:冖,大
-rtk1878:英:england:ノ,艾,大,冖
+rtk1878:英:england:艾,央
 rtk1879:映:reflect:ノ,日,大,冖
 rtk1880:赤:red:土
 rtk1881:赦:pardon:赤,土,攵
@@ -2482,7 +2482,7 @@ rtk2236:也:to be (classical):｜,乙,匕
 rtk2237:巴:comma-design:
 rtk2239:菫:the violet:｜,一,口,土,二,艾
 rtk2240:曼:wide:日,又
-rtk2241:云:say:一,二,厶
+rtk2241:云:say:二,厶
 rtk2242:莫:must not:大,日,艾
 rtk2243:而:and yet:
 rtk2244:倭:yamato:禾,女
@@ -2646,7 +2646,7 @@ rtk2401:溌:sprinkle:二,水,儿,癶
 rtk2402:湊:port:一,水,大,二,人
 rtk2403:淋:lonely:水,木
 rtk2404:浩:wide expanse:ノ,口,水,土
-rtk2405:汀:water's edge:一,水,亅
+rtk2405:汀:water's edge:水,丁
 rtk2406:鴻:large bird:工,水,鳥,杰
 rtk2407:潅:pour into:水,隹,矢
 rtk2408:溢:overflow:水,益
@@ -2677,7 +2677,7 @@ rtk2432:狛:archaic part of korea:白
 rtk2433:獅:lion:犭,師
 rtk2434:狒:baboon:｜,ノ,弓
 rtk2435:莨:tobacco:艮,艾
-rtk2436:茉:jasmine:｜,一,ハ,木,亠,艾
+rtk2436:茉:jasmine:艾,末
 rtk2437:莉:jasmine:禾,艾
 rtk2438:苺:strawberry:母,艾,毋
 rtk2439:萩:bush clover:火,禾,艾
@@ -2700,7 +2700,7 @@ rtk2455:蕗:butterbur:艾,路
 rtk2456:茄:eggplant:口,力,艾
 rtk2457:蔭:shade:二,个,厶,艾,阝,一
 rtk2458:蓬:sagebrush:｜,一,込,夂,艾
-rtk2459:芥:mustard:个,艾,儿
+rtk2459:芥:mustard:艾,介
 rtk2460:萌:show symptoms of:月,日,艾
 rtk2461:葡:wild grape:十,用,勹,艾,丶
 rtk2462:萄:grape vine:缶,勹,艾
@@ -2733,7 +2733,7 @@ rtk2488:莞:smiling:二,儿,宀,primitive_roof,艾,元
 rtk2489:蒐:gather:鬼,田,儿,匕,艾,厶
 rtk2490:菅:sedge:艾,官
 rtk2491:葦:reed:口,艾,韋
-rtk2492:迪:edify:｜,込,日,田
+rtk2492:迪:edify:込,由
 rtk2493:辿:follow (road):込,山
 rtk2494:這:crawl:言,込
 rtk2495:迂:roundabout way:干,込,二,亅
@@ -3115,7 +3115,7 @@ rtk2871:靄:mist:雨,言,日,勹,匕
 rtk2872:劫:threat:土,力,厶
 rtk2873:歎:grief:大,一,欠,艾,口,二
 rtk2874:輿:palanquin:臼,車,ハ
-rtk2875:歪:warp:｜,ノ,一,止,丶
+rtk2875:歪:warp:不,正
 rtk2876:翠:green:羽,十,人,亠
 rtk2877:黛:blackened eyebrows:黒,里,弋,杰
 rtk2878:鼎:three legged kettle:｜,一,片,目,爿
@@ -3215,7 +3215,7 @@ rtk2971:淵:abyss:｜,一,水,爿,片
 rtk2972:伍:five:五
 rtk2973:什:utensil:十
 rtk2974:萬:ten thousand:田,日,冂,禹,艾
-rtk2975:邁:go:込,田,禹,艾
+rtk2975:邁:go:込,萬
 rtk2976:燭:light:火,虫,勹
 rtk2977:逞:sturdy:王,口,込
 rtk2978:燈:lamp:火,登
@@ -3228,7 +3228,7 @@ rtk2984:埜:open country:土,木
 rtk2985:龍:dragon:月,立
 rtk2986:寵:affection:月,立,宀,primitive_roof
 rtk2987:聾:deafness:月,耳,立
-rtk2988:慾:covetousness:欠,口,心,谷,ハ,个
+rtk2988:慾:covetousness:欲,心
 rtk2989:嶽:peak:犬,言,山
 rtk2990:國:country:口,囗,戈
 rtk2991:脛:leg:月,工,巛
