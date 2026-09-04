@@ -2619,6 +2619,12 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"rtk1302", "rtk207"}},  # right side is 不(rtk1302)-shaped, not remotely 礼-shaped
     "rtk1349": {"character": "署", "keyword": "signature",  # was 日,老 -- an exact copy-paste of 暑(rtk1350)'s own
                "expected_part_ids": {"kangxi122", "rtk1345"}},  # value; IDS/render confirm the top is 罒 (net), not 日
+    "rtk1696": {"character": "俸", "keyword": "stipend",  # was ｜,一,人,大,二 -- a literal stroke flatten instead of
+               "expected_part_ids": {"kangxi9", "rtk1695"}},   # referencing 奉(rtk1695), which is already taught
+    "rtk1697": {"character": "棒", "keyword": "rod",  # was ｜,一,人,木,二,大 -- same flatten-instead-of-reference bug
+               "expected_part_ids": {"rtk1695", "rtk207"}},
+    "rtk1768": {"character": "喉", "keyword": "throat",  # was 口,矢 -- dropped ユ(ktakana-yu) entirely instead of
+               "expected_part_ids": {"rtk11", "rtk1767"}},  # referencing 侯(rtk1767), which is already taught
 }
 
 # character -> hanzi id, spot-checking the 429-character Unihan self-reference backfill

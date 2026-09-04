@@ -5966,3 +5966,42 @@ output.
   unchanged: `audit_direct_ref_overlap.py --min-usage 3` (~136
   candidates), the `个`/`亼` family decision, `慶`'s bottom shape, `壷`'s
   top element, the 81 orphaned `rad{N}` rows on the live DB.
+
+### 2026-09-05 (continued) — sequential rtk1351-1840 review: 俸/棒/喉 fixed, everything else already clean
+
+- Continued the sequential sweep (owner: "continue next sessions, until
+  out of credits"). rtk1351-1770 covered this pass, each kanji checked
+  against `cjkvi-ids` + CSV.
+- The `糸`(thread, rtk1431-1477) and `阝`(mound-radical, rtk1390-1412)
+  families — both already fixed in earlier sessions per the audit doc's
+  own history — held up: every host in both ranges correctly carries its
+  radical. Good confirmation those fixes were durable, not a regression
+  risk from today's other radical-family work.
+- **rtk1696 俸** ("stipend") and **rtk1697 棒** ("rod") were both
+  literal-stroke flattens (`｜,一,人,大,二` / `｜,一,人,木,二,大`) instead
+  of referencing `奉`(rtk1695, "observance"), which is already taught and
+  sitting right next to them in frame order — fixed to `亻,奉` / `木,奉`.
+  Checked the rest of `奉`'s Joyo-kanji family via `cjkvi-ids` (`唪 埲 捧
+  淎` etc.) — none of the others are in RTK's frame set, so no further
+  fixes needed.
+- **rtk1768 喉** ("throat") was `口,矢` — a partial flatten that kept only
+  one of `侯`(rtk1767, "marquis")'s two parts and silently dropped `ユ`
+  (katakana-yu) entirely, even though `侯` itself is already taught two
+  frames earlier. Fixed to `口,侯`.
+- Everything else in this range checked out, including some that looked
+  suspicious at first glance and turned out fine on closer inspection:
+  the `疔` token peppered through the `疒`(sickness radical) family
+  (rtk1813-1826) looked like a dead/unresolvable placeholder (no visible
+  keyword when dumped) but is actually a real listed alias of `疒`
+  (`kangxi104:疒:sickness radical,疔`) and resolves correctly — confirmed
+  via `get_kanji_detail`, not just eyeballing the dump.
+- Verified: full rebuild; `test_regression_fixes.py` — 3 new pins
+  (俸/棒/喉) — **1053 checks**, same 4 expected hanzi-scope non-issues;
+  pytest (56 passed); `audit_self_reference.py` clean.
+- Not deployed (no SSH/server access) — data-only change, needs
+  `sync_system_data.py` + reseed.
+- Coverage: will regenerate after commit.
+- **Next session**: continue the sequential sweep from rtk1841. Standing
+  list unchanged: `audit_direct_ref_overlap.py --min-usage 3` (~136
+  candidates), the `个`/`亼` family decision, `慶`'s bottom shape, `壷`'s
+  top element, the 81 orphaned `rad{N}` rows on the live DB.

@@ -1938,8 +1938,8 @@ rtk1692:泰:peaceful:｜,一,水,二,人,大
 rtk1693:奏:play music:天,禾,人
 rtk1694:実:reality:士,大,宀
 rtk1695:奉:observance:｜,一,人,大,二
-rtk1696:俸:stipend:｜,一,人,大,二
-rtk1697:棒:rod:｜,一,人,木,二,大
+rtk1696:俸:stipend:亻,奉
+rtk1697:棒:rod:木,奉
 rtk1698:謹:discreet:言,土,艾,口,二
 rtk1699:僅:a wee bit:亻,土,艾,口,二,一
 rtk1700:勤:diligence:土,力,艾,口,二,一
@@ -2010,7 +2010,7 @@ rtk1764:罪:guilt:罒,非
 rtk1765:輩:comrade:車,非
 rtk1766:扉:front door:戸,非
 rtk1767:侯:marquis:亻,矢,ユ
-rtk1768:喉:throat:口,矢
+rtk1768:喉:throat:口,侯
 rtk1769:候:climate:亻,侯,｜
 rtk1770:決:decide:水,人,大,二,ユ
 rtk1771:快:cheerful:人,大,二,state of mind,ユ
