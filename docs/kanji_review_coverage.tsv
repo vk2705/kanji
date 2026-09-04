@@ -1187,7 +1187,7 @@ rtk1185	擦	grate	1185	yes
 rtk1186	由	wherefore	1186	yes
 rtk1187	抽	pluck	1187	yes
 rtk1188	油	oil	1188	no
-rtk1189	袖	sleeve	1189	no
+rtk1189	袖	sleeve	1189	yes
 rtk1190	宙	mid-air	1190	yes
 rtk1191	届	deliver	1191	no
 rtk1192	笛	flute	1192	yes
@@ -1237,7 +1237,7 @@ rtk1235	掃	sweep	1235	yes
 rtk1236	当	hit	1236	no
 rtk1237	彙	glossary	1237	no
 rtk1238	争	contend	1238	no
-rtk1239	浄	clean	1239	no
+rtk1239	浄	clean	1239	yes
 rtk1240	事	matter	1240	no
 rtk1241	唐	t'ang	1241	no
 rtk1242	糖	sugar	1242	no
@@ -1323,16 +1323,16 @@ rtk1321	強	strong	1321	no
 rtk1322	弥	more and more	1322	yes
 rtk1323	弱	weak	1323	no
 rtk1324	溺	drowning	1324	yes
-rtk1325	沸	seethe	1325	no
+rtk1325	沸	seethe	1325	yes
 rtk1326	費	expense	1326	yes
 rtk1327	第	no.	1327	yes
 rtk1328	弟	younger brother	1328	yes
-rtk1329	巧	adroit	1329	no
-rtk1330	号	nickname	1330	no
-rtk1331	朽	decay	1331	no
+rtk1329	巧	adroit	1329	yes
+rtk1330	号	nickname	1330	yes
+rtk1331	朽	decay	1331	yes
 rtk1332	誇	boast	1332	no
 rtk1333	顎	chin	1333	yes
-rtk1334	汚	dirty	1334	no
+rtk1334	汚	dirty	1334	yes
 rtk1335	与	bestow	1335	no
 rtk1336	写	copy	1336	no
 rtk1337	身	somebody	1337	no
@@ -1385,9 +1385,9 @@ rtk1383	骨	skeleton	1383	no
 rtk1384	滑	slippery	1384	yes
 rtk1385	髄	marrow	1385	yes
 rtk1386	禍	calamity	1386	yes
-rtk1387	渦	whirlpool	1387	no
-rtk1388	鍋	pot	1388	no
-rtk1389	過	overdo	1389	no
+rtk1387	渦	whirlpool	1387	yes
+rtk1388	鍋	pot	1388	yes
+rtk1389	過	overdo	1389	yes
 rtk1390	阪	heights	1390	yes
 rtk1391	阿	africa	1391	yes
 rtk1392	際	occasion	1392	yes
@@ -1871,7 +1871,7 @@ rtk1869	斎	purification	1869	yes
 rtk1870	粛	solemn	1870	no
 rtk1871	塁	bases	1871	no
 rtk1872	楽	music	1872	no
-rtk1873	薬	medicine	1873	no
+rtk1873	薬	medicine	1873	yes
 rtk1874	率	ratio	1874	yes
 rtk1875	渋	astringent	1875	no
 rtk1876	摂	vicarious	1876	yes

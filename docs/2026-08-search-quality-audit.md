@@ -6498,7 +6498,7 @@ output.
   reviews.
 - Not deployed (no SSH/server access) — data-only change, needs
   `sync_system_data.py` + reseed.
-- Coverage: will regenerate after commit.
+- Coverage: **1713/3000 (57.1%)**.
 - **Next session**: `results.jsonl` still has 584 PARTIAL flags
   un-triaged (the noisier "something in ours not echoed in Google's
   text" bucket, historically lower-yield than DISJOINT but still found
