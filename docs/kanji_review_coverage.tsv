@@ -1302,7 +1302,7 @@ rtk1300	乏	destitution	1300	yes
 rtk1301	芝	turf	1301	yes
 rtk1302	不	negative	1302	no
 rtk1303	否	negate	1303	no
-rtk1304	杯	cupfuls	1304	no
+rtk1304	杯	cupfuls	1304	yes
 rtk1305	矢	dart	1305	yes
 rtk1306	矯	rectify	1306	yes
 rtk1307	族	tribe	1307	yes

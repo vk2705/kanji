@@ -5957,7 +5957,7 @@ output.
   passed); `audit_self_reference.py` clean.
 - Not deployed (no SSH/server access) — data-only change, needs
   `sync_system_data.py` + reseed.
-- Coverage: will regenerate after commit.
+- Coverage: **1631/3000 (54.4%)**.
 - **Next session**: continue the sequential sweep from rtk1351. The
   `罒`-family discovery suggests it's worth running the same recursive-
   aware presence check against a few more common radicals not yet swept
