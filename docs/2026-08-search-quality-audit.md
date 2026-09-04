@@ -6090,7 +6090,9 @@ output.
   confirmed 0 remaining `人`-vs-`亻` mismatches dataset-wide.
 - Not deployed (no SSH/server access) — data-only change, needs
   `sync_system_data.py` + reseed.
-- Coverage: will regenerate after commit.
+- Coverage: **1633/3000 (54.4%)** (unchanged — the fixed lines this
+  session were mostly already touched by earlier sessions for other
+  reasons, same undercounting effect noted in the person-radical batch).
 - **Next session**: continue the sequential sweep from rtk2271. The
   `人`-vs-`亻` pattern is now a documented fourth blind spot worth
   remembering when reviewing any left-radical `亻` host by hand (the
