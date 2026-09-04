@@ -6216,3 +6216,45 @@ output.
   --min-usage 3` (~136 candidates), the `个`/`亼` family decision,
   `慶`'s bottom shape, `壷`'s top element, the 81 orphaned `rad{N}` rows
   on the live DB.
+
+### 2026-09-05 (continued) — sequential rtk2691-3000: clean, completing the first full rtk1000-3000 pass
+
+- Finished the sequential sweep through the end of the range: rtk2691-
+  2830, rtk2831-2900, and rtk2901-3000 all checked individually against
+  `cjkvi-ids` + CSV, render-verifying anything ambiguous (e.g. `rtk2962`
+  薩's `艾,阝,産` looked like it might be missing a real `隡` reference,
+  but render-confirmed `産`'s shape genuinely sits inside `薩`'s
+  structure — not a bug). No further fixes found in this stretch.
+- This completes the **first full sequential pass through rtk1000-3000**
+  (the owner's original "check all kanji, don't wait for me to find
+  errors" mandate from earlier in the session) — every one of the 2001
+  kanji in that range has now been individually looked at, not just
+  flagged by an automated detector. Total yield from the whole pass:
+  roughly 130+ individual fixes across ~15 separate bug classes,
+  including four newly-documented systemic detector blind spots (person-
+  radical omission, net-radical omission, wild-dog-radical omission, and
+  `人`-vs-`亻` wrong-reference) each affecting a double-digit number of
+  kanji, plus a from-scratch closure of the project's oldest open
+  finding (`audit_radicals.py`'s undefined-part-term scan, now 0/0
+  dataset-wide) and a leftover scratch-draft-line data corruption bug.
+- Verified: full rebuild; `test_regression_fixes.py` unchanged since the
+  last commit (no new fixes this batch) — still **1075 checks**, same 4
+  expected hanzi-scope non-issues; pytest (56 passed).
+- Not deployed (no SSH/server access) — nothing new to deploy from this
+  specific batch.
+- Coverage: **1636/3000 (54.5%)** — coverage still lags the "individually
+  reviewed" total substantially, since the metric only counts lines
+  touched by a commit *after* the audit began, and this pass's largest
+  yield (clean ranges + the radical-family fixes) mostly landed on lines
+  a much earlier, unrelated commit had already touched.
+- **Next session**: rtk1000-3000 has now had one full pass; the highest-
+  leverage next step is almost certainly a **second pass** applying the
+  now-proven recursive-aware radical-presence check to more common
+  radicals across the *whole* dataset (not just this range) —
+  `亻`/`罒`/`犭` all turned out to have systemic omissions once actually
+  checked, so `扌`/`阝`/`礻`/`忄`/`貝`/`金` deserve the same treatment
+  rather than trusting the shallow first-pass check some of them got
+  earlier. Standing list otherwise unchanged: `audit_direct_ref_overlap.py
+  --min-usage 3` (~136 candidates), the `个`/`亼` family decision,
+  `慶`'s bottom shape, `壷`'s top element, the 81 orphaned `rad{N}` rows
+  on the live DB.
