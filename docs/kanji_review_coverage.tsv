@@ -22,7 +22,7 @@ rtk20	明	bright	20	no
 rtk21	唱	chant	21	yes
 rtk22	晶	sparkle	22	no
 rtk23	品	goods	23	no
-rtk24	呂	spine	24	no
+rtk24	呂	spine	24	yes
 rtk25	昌	prosperous	25	no
 rtk26	早	early	26	no
 rtk27	旭	rising sun	27	no
@@ -458,7 +458,7 @@ rtk456	冬	winter	456	yes
 rtk457	天	heavens	457	yes
 rtk458	妖	bewitched	458	no
 rtk459	沃	irrigate	459	no
-rtk460	橋	bridge	460	no
+rtk460	橋	bridge	460	yes
 rtk461	嬌	attractive	461	no
 rtk462	立	stand up	462	no
 rtk463	泣	cry	463	no
@@ -1081,7 +1081,7 @@ rtk1079	賃	fare	1079	yes
 rtk1080	代	substitute	1080	yes
 rtk1081	袋	sack	1081	yes
 rtk1082	貸	lend	1082	yes
-rtk1083	化	change	1083	no
+rtk1083	化	change	1083	yes
 rtk1084	花	flower	1084	yes
 rtk1085	貨	freight	1085	yes
 rtk1086	傾	lean	1086	yes
@@ -1801,7 +1801,7 @@ rtk1799	速	quick	1799	yes
 rtk1800	整	organize	1800	yes
 rtk1801	剣	saber	1801	yes
 rtk1802	険	precipitous	1802	yes
-rtk1803	検	examination	1803	no
+rtk1803	検	examination	1803	yes
 rtk1804	倹	frugal	1804	yes
 rtk1805	重	heavy	1805	yes
 rtk1806	動	move	1806	yes
@@ -2538,7 +2538,7 @@ rtk2536	肱	armrest	2536	no
 rtk2537	胡	uncivilized	2537	yes
 rtk2538	楓	maple tree	2538	no
 rtk2539	楊	purple willow	2539	no
-rtk2540	椋	oriental elm	2540	no
+rtk2540	椋	oriental elm	2540	yes
 rtk2541	榛	hazel	2541	no
 rtk2542	櫛	comb	2542	yes
 rtk2543	槌	wooden hammer	2543	yes
@@ -2559,7 +2559,7 @@ rtk2557	橘	mandarin orange	2557	no
 rtk2558	桧	japanese cypress	2558	no
 rtk2559	棲	roost	2559	no
 rtk2560	栖	nestle	2560	no
-rtk2561	桔	bellflower	2561	no
+rtk2561	桔	bellflower	2561	yes
 rtk2562	杜	temple grove	2562	no
 rtk2563	杷	grain rake	2563	no
 rtk2564	梶	oar	2564	no
@@ -2901,7 +2901,7 @@ rtk2899	斯	this	2899	no
 rtk2900	匙	wooden spoon	2900	no
 rtk2901	匡	set straight	2901	no
 rtk2902	肇	founding	2902	yes
-rtk2903	麿	utamaro	2903	no
+rtk2903	麿	utamaro	2903	yes
 rtk2904	叢	conglomerate	2904	yes
 rtk2905	肴	entreat	2905	no
 rtk2906	斐	symmetrically patterned	2906	no

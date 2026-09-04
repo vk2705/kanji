@@ -5828,7 +5828,10 @@ output.
   left as-is; nothing to fix).
 - Not deployed to the live server (no SSH/server access) — data-only
   change; needs `sync_system_data.py` + reseed on deploy.
-- Coverage: **~1710/3000** (92 more `data.txt` lines edited).
+- Coverage: **1625/3000 (54.2%)** — 92 `data.txt` lines edited but only 7
+  were first-time reviews; most of the 亻 family had already been touched
+  by earlier audit commits (for other reasons) without anyone checking the
+  person radical specifically, which is exactly how this bug survived.
 - **Next session**: continue the rtk1000-3000 sequential sweep from
   rtk1043 onward (person family done; `氵`/`扌`/`阝`/`艹` radical families
   are worth the same `cjkvi-ids`-presence check `亻` just got). Standing
