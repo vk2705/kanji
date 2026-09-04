@@ -6258,3 +6258,38 @@ output.
   --min-usage 3` (~136 candidates), the `个`/`亼` family decision,
   `慶`'s bottom shape, `壷`'s top element, the 81 orphaned `rad{N}` rows
   on the live DB.
+
+### 2026-09-05 (continued) — proactive second-pass radical-presence scan: ~20 more common radicals checked, all clean
+
+- With the sequential rtk1000-3000 pass complete, started the flagged
+  "second pass" — running the recursive-aware radical-presence check
+  (the one that found the `亻`/`罒`/`犭` families) proactively against
+  ~20 more common radicals dataset-wide, rather than waiting to stumble
+  into another one kanji at a time: `扌`(hand), `貝`(shellfish), `金`
+  (gold), `阝`(mound-left, re-checked with the corrected script), `馬`
+  (horse), `見`(see), `車`(car), `頁`(page), `雨`(rain), `禾`(grain),
+  `虫`(insect), `魚`(fish), `鳥`(bird), `示`(altar/show), `酉`(sake),
+  `隹`(short-tailed bird), `豆`(beans), `皿`(dish), `骨`(bone), `方`
+  (direction), `皮`(pelt), `臣`(retainer), `矢`(dart), `辛`(spicy),
+  `殳`(weapon), `攵`(rap/taskmaster).
+- **All clean** — every apparent "hit" was either the atomic primitive
+  matching itself (a self-reference false positive baked into how the
+  check works: an atomic kanji's own IDS entry is just itself as a
+  single-character leaf) or an already-confirmed transitive case
+  (`鎮`/`候` referencing a compound that itself carries the radical).
+  No new bugs found. This is a reassuring result after finding three
+  systemic families in a row earlier this session — it confirms those
+  three (`亻`/`罒`/`犭`) were a real, bounded problem from `import_rtk.py`'s
+  original KRADFILE pass, not a sign that *every* common radical has
+  silent gaps throughout the dataset.
+- Not deployed — no data changes this pass (a scan turning up clean is
+  still useful signal, recorded here rather than silently discarded).
+- Coverage: unchanged (no `data.txt` edits this pass).
+- **Next session**: the highest-leverage remaining items are the
+  standing ones that were already hard before this session:
+  `audit_direct_ref_overlap.py --min-usage 3` (~136 candidates, a
+  different bug shape than the radical-omission families — worth
+  working through directly rather than via more radical scans), the
+  `个`/`亼` family decision (blocks `検`'s disputed-review resolution),
+  `慶`'s bottom shape, `壷`'s top element, the 81 orphaned `rad{N}` rows
+  on the live DB (needs production access to enumerate/audit).
