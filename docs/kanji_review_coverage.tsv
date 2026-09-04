@@ -768,8 +768,8 @@ rtk766	撃	beat	766	no
 rtk767	殻	husk	767	yes
 rtk768	支	branch	768	no
 rtk769	技	skill	769	yes
-rtk770	枝	bough	770	no
-rtk771	肢	limb	771	no
+rtk770	枝	bough	770	yes
+rtk771	肢	limb	771	yes
 rtk772	茎	stalk	772	no
 rtk773	怪	suspicious	773	yes
 rtk774	軽	lightly	774	no
@@ -832,7 +832,7 @@ rtk830	山	mountain	830	no
 rtk831	拙	bungling	831	yes
 rtk832	岩	boulder	832	yes
 rtk833	炭	charcoal	833	yes
-rtk834	岐	branch off	834	no
+rtk834	岐	branch off	834	yes
 rtk835	峠	mountain pass	835	yes
 rtk836	崩	crumble	836	yes
 rtk837	密	secrecy	837	yes
@@ -1483,9 +1483,9 @@ rtk1481	幾	how many	1481	no
 rtk1482	機	mechanism	1482	no
 rtk1483	畿	capital suburbs	1483	no
 rtk1484	玄	mysterious	1484	no
-rtk1485	畜	livestock	1485	no
+rtk1485	畜	livestock	1485	yes
 rtk1486	蓄	amass	1486	yes
-rtk1487	弦	bowstring	1487	no
+rtk1487	弦	bowstring	1487	yes
 rtk1488	擁	hug	1488	yes
 rtk1489	滋	nourishing	1489	yes
 rtk1490	慈	mercy	1490	yes
@@ -1872,7 +1872,7 @@ rtk1870	粛	solemn	1870	no
 rtk1871	塁	bases	1871	no
 rtk1872	楽	music	1872	no
 rtk1873	薬	medicine	1873	no
-rtk1874	率	ratio	1874	no
+rtk1874	率	ratio	1874	yes
 rtk1875	渋	astringent	1875	no
 rtk1876	摂	vicarious	1876	yes
 rtk1877	央	center	1877	yes
@@ -1934,20 +1934,20 @@ rtk1932	撲	slap	1932	yes
 rtk1933	僕	me	1933	yes
 rtk1934	共	together	1934	no
 rtk1935	供	submit	1935	yes
-rtk1936	異	uncommon	1936	no
+rtk1936	異	uncommon	1936	yes
 rtk1937	翼	wing	1937	yes
 rtk1938	戴	accept humbly	1938	no
 rtk1939	洪	deluge	1939	no
 rtk1940	港	harbor	1940	yes
-rtk1941	暴	outburst	1941	no
-rtk1942	爆	bomb	1942	no
+rtk1941	暴	outburst	1941	yes
+rtk1942	爆	bomb	1942	yes
 rtk1943	恭	respect	1943	no
 rtk1944	選	elect	1944	yes
 rtk1945	殿	mr.	1945	no
 rtk1946	井	well	1946	no
-rtk1947	丼	donburi	1947	no
+rtk1947	丼	donburi	1947	yes
 rtk1948	囲	surround	1948	no
-rtk1949	耕	till	1949	no
+rtk1949	耕	till	1949	yes
 rtk1950	亜	asia	1950	no
 rtk1951	悪	bad	1951	yes
 rtk1952	円	circle	1952	no
@@ -1959,14 +1959,14 @@ rtk1957	講	lecture	1957	no
 rtk1958	購	subscription	1958	yes
 rtk1959	構	posture	1959	no
 rtk1960	溝	gutter	1960	no
-rtk1961	論	argument	1961	no
+rtk1961	論	argument	1961	yes
 rtk1962	倫	ethics	1962	yes
-rtk1963	輪	wheel	1963	no
+rtk1963	輪	wheel	1963	yes
 rtk1964	偏	partial	1964	yes
 rtk1965	遍	everywhere	1965	yes
 rtk1966	編	compilation	1966	yes
 rtk1967	冊	tome	1967	no
-rtk1968	柵	palisade	1968	no
+rtk1968	柵	palisade	1968	yes
 rtk1969	典	code	1969	yes
 rtk1970	氏	family name	1970	no
 rtk1971	紙	paper	1971	yes
@@ -2013,7 +2013,7 @@ rtk2011	嗣	heir	2011	yes
 rtk2012	舟	boat	2012	no
 rtk2013	舶	liner	2013	no
 rtk2014	航	navigate	2014	yes
-rtk2015	舷	gunwale	2015	no
+rtk2015	舷	gunwale	2015	yes
 rtk2016	般	carrier	2016	no
 rtk2017	盤	tray	2017	yes
 rtk2018	搬	conveyor	2018	yes
@@ -2174,11 +2174,11 @@ rtk2172	送	send off	2172	yes
 rtk2173	関	connection	2173	yes
 rtk2174	咲	blossom	2174	yes
 rtk2175	鬼	ghost	2175	no
-rtk2176	醜	ugly	2176	no
-rtk2177	魂	soul	2177	no
-rtk2178	魔	witch	2178	no
+rtk2176	醜	ugly	2176	yes
+rtk2177	魂	soul	2177	yes
+rtk2178	魔	witch	2178	yes
 rtk2179	魅	fascination	2179	yes
-rtk2180	塊	clod	2180	no
+rtk2180	塊	clod	2180	yes
 rtk2181	襲	attack	2181	no
 rtk2182	嚇	upbraid	2182	yes
 rtk2183	朕	majestic plural	2183	yes
@@ -2310,7 +2310,7 @@ rtk2308	姦	violate	2308	no
 rtk2309	婢	handmaiden	2309	no
 rtk2310	婉	well finished	2310	yes
 rtk2311	娼	harlot	2311	no
-rtk2312	妓	courtesan	2312	no
+rtk2312	妓	courtesan	2312	yes
 rtk2313	娃	fair	2313	no
 rtk2314	姪	niece	2314	yes
 rtk2315	嬬	mistress	2315	no
@@ -2487,7 +2487,7 @@ rtk2485	蕨	bracken	2485	yes
 rtk2486	蔚	grow plentiful	2486	yes
 rtk2487	茜	madder red	2487	no
 rtk2488	莞	candle rush	2488	yes
-rtk2489	蒐	collector	2489	no
+rtk2489	蒐	collector	2489	yes
 rtk2490	菅	sedge	2490	yes
 rtk2491	葦	ditch reed	2491	no
 rtk2492	迪	way	2492	yes
@@ -2612,7 +2612,7 @@ rtk2610	琳	chime	2610	no
 rtk2611	琉	lapis lazuli	2611	no
 rtk2612	瑳	burnish	2612	yes
 rtk2613	琢	hone	2613	no
-rtk2614	珊	coral	2614	no
+rtk2614	珊	coral	2614	yes
 rtk2615	瑚	coral reef	2615	yes
 rtk2616	瑞	fortunate	2616	no
 rtk2617	玖	jet	2617	no
@@ -2627,7 +2627,7 @@ rtk2625	痔	hemorrhoids	2625	no
 rtk2626	癌	cancer	2626	yes
 rtk2627	痺	paralysis	2627	no
 rtk2628	眸	apple of the eye	2628	no
-rtk2629	眩	dizzy	2629	no
+rtk2629	眩	dizzy	2629	yes
 rtk2630	雉	pheasant	2630	yes
 rtk2631	矩	carpenter’s square	2631	yes
 rtk2632	磐	crag	2632	yes
@@ -2856,7 +2856,7 @@ rtk2854	麒	giraffe	2854	yes
 rtk2855	舅	father-in-law	2855	no
 rtk2856	鼠	mouse	2856	no
 rtk2857	鑿	bore	2857	yes
-rtk2858	艘	small craft	2858	no
+rtk2858	艘	small craft	2858	yes
 rtk2859	瞑	close the eyes	2859	no
 rtk2860	暝	murky	2860	no
 rtk2861	坐	sitting in meditation	2861	no
@@ -2930,7 +2930,7 @@ rtk2928	亮	translucent	2928	no
 rtk2929	胤	blood relative	2929	no
 rtk2930	疏	transcription	2930	no
 rtk2931	膏	ointment	2931	yes
-rtk2932	魁	pioneer	2932	no
+rtk2932	魁	pioneer	2932	yes
 rtk2933	馨	ambrosial	2933	no
 rtk2934	牒	label	2934	no
 rtk2935	瞥	glimpse	2935	yes
