@@ -1987,7 +1987,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1432": {"character": "織", "keyword": "weave",
                "expected_part_ids": {"kangxi62", "rtk1431", "rtk518"}},
     "rtk1437": {"character": "緻", "keyword": "fine",
-               "expected_part_ids": {"kangxi28", "kangxi66", "rtk1", "rtk1431", "rtk161", "rtk815"}},
+               "expected_part_ids": {"rtk1431", "rtk818"}},
     "rtk1440": {"character": "締", "keyword": "tighten",
                "expected_part_ids": {"rtk1431", "rtk466"}},
     "rtk1441": {"character": "維", "keyword": "fiber",
@@ -2103,7 +2103,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk2701": {"character": "緋", "keyword": "scarlet",
                "expected_part_ids": {"rtk1431", "rtk1760"}},
     "rtk2702": {"character": "綜", "keyword": "synthesis",
-               "expected_part_ids": {"kangxi40", "rtk1167", "rtk1431", "rtk2"}},
+               "expected_part_ids": {"rtk1181", "rtk1431"}},
     "rtk2703": {"character": "紐", "keyword": "string",
                "expected_part_ids": {"prim-pipe", "rtk1", "rtk1431"}},
     "rtk2704": {"character": "紘", "keyword": "chinstrap",
@@ -2165,7 +2165,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk2834": {"character": "鱈", "keyword": "cod",
                "expected_part_ids": {"prim-katakana-yo", "rtk183", "rtk451"}},
     "rtk2835": {"character": "鯖", "keyword": "mackerel",
-               "expected_part_ids": {"kangxi8", "rtk13", "rtk161", "rtk1654", "rtk183", "rtk2"}},
+               "expected_part_ids": {"rtk1654", "rtk183"}},
     "rtk2836": {"character": "鮫", "keyword": "shark",
                "expected_part_ids": {"kangxi8", "rtk1366", "rtk183"}},
     "rtk2837": {"character": "鰹", "keyword": "bonito",
@@ -2190,6 +2190,102 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"prim-mugwort", "rtk1345", "rtk1372"}},
     "rtk2997": {"character": "躊", "keyword": "hesitate",
                "expected_part_ids": {"rtk1372", "rtk341", "rtk45", "rtk80"}},
+    # Continuing the proactive spot-check further (2026-09-04): five more
+    # primitive families from audit_direct_ref_overlap.py, same discipline:
+    #  - 青(rtk1654=月,土,二,亠; used 10x) -- the whole "clear/blue" family
+    #    (精,請,情,晴,清,静,靖,錆,鯖) correctly referenced 青 but redundantly
+    #    repeated its own parts. 瀞 was flattening 静 instead of
+    #    referencing it directly (cjkvi-ids ⿰氵静).
+    #  - 示(rtk1167=二,小; used 10x) -- several hosts (剽,捺,禦,綜,瓢,祟) were
+    #    flattening an already-taught second-level compound (票, 奈, 御,
+    #    宗, 出) instead of referencing it; 剽 also turned out to be
+    #    entirely missing "刀"(sword) -- and while fixing it, caught a
+    #    latent bug in my own edit: "刂"(the radical form) isn't a
+    #    registered alias in this system (only "刀" is; same silent-drop
+    #    behavior as the already-known-dead "primitive_roof" token) --
+    #    corrected both this and 到(rtk817) to use "刀". 蔚 doesn't
+    #    contain 示 at all (real cjkvi-ids ⿱艹尉, unrelated) -- dropped it
+    #    rather than force an approximation.
+    #  - 至(rtk815=土,厶; used 9x) -- 到 was missing "刀" (see above) and
+    #    倒/緻/渥 were flattening second-level compounds (到, 致, 屋)
+    #    instead of referencing them.
+    #  - 巾(rtk432; used 9x) -- only the one clean case fixed (凧=几+巾);
+    #    left 刺/策/棘 (real cjkvi-ids 朿-family) and 幣/蔽/弊/瞥/逓 (敝-
+    #    family, already flagged as an open question) for another
+    #    session rather than force an uncertain call.
+    #  - 自(rtk36=丶,目; used 9x) -- most hosts correctly referenced 自 but
+    #    redundantly repeated its own "目". 嗅/榎/鼾 were flattening
+    #    already-taught compounds (臭, 夏, 鼻) instead of referencing them.
+    "rtk74": {"character": "首", "keyword": "neck",
+               "expected_part_ids": {"kangxi12", "rtk36"}},
+    "rtk128": {"character": "臭", "keyword": "stinking",
+               "expected_part_ids": {"rtk112", "rtk36"}},
+    "rtk129": {"character": "嗅", "keyword": "sniff",
+               "expected_part_ids": {"rtk11", "rtk128"}},
+    "rtk317": {"character": "夏", "keyword": "summer",
+               "expected_part_ids": {"kangxi34", "rtk1", "rtk36"}},
+    "rtk657": {"character": "息", "keyword": "breath",
+               "expected_part_ids": {"rtk36", "rtk639"}},
+    "rtk658": {"character": "憩", "keyword": "recess",
+               "expected_part_ids": {"rtk36", "rtk41", "rtk639"}},
+    "rtk733": {"character": "鼻", "keyword": "nose",
+               "expected_part_ids": {"kangxi55", "rtk14", "rtk36"}},
+    "rtk816": {"character": "室", "keyword": "room",
+               "expected_part_ids": {"kangxi40", "rtk815"}},
+    "rtk817": {"character": "到", "keyword": "arrival",
+               "expected_part_ids": {"rtk815", "rtk87"}},
+    "rtk818": {"character": "致", "keyword": "doth",
+               "expected_part_ids": {"kangxi66", "rtk815"}},
+    "rtk1055": {"character": "倒", "keyword": "overthrow",
+               "expected_part_ids": {"kangxi9", "rtk817"}},
+    "rtk1138": {"character": "屋", "keyword": "roof",
+               "expected_part_ids": {"kangxi44", "rtk815"}},
+    "rtk1655": {"character": "精", "keyword": "refined",
+               "expected_part_ids": {"rtk1654", "rtk987"}},
+    "rtk1656": {"character": "請", "keyword": "solicit",
+               "expected_part_ids": {"rtk1654", "rtk357"}},
+    "rtk1657": {"character": "情", "keyword": "feelings",
+               "expected_part_ids": {"kangxi61", "rtk1654"}},
+    "rtk1658": {"character": "晴", "keyword": "clear up",
+               "expected_part_ids": {"rtk12", "rtk1654"}},
+    "rtk1659": {"character": "清", "keyword": "pure",
+               "expected_part_ids": {"rtk137", "rtk1654"}},
+    "rtk1660": {"character": "静", "keyword": "quiet",
+               "expected_part_ids": {"kangxi20", "kangxi6", "prim-katakana-yo", "rtk1654"}},
+    "rtk2264": {"character": "凛", "keyword": "stately",
+               "expected_part_ids": {"kangxi15", "kangxi31", "kangxi8", "rtk11", "rtk1167"}},
+    "rtk2265": {"character": "凧", "keyword": "kite",
+               "expected_part_ids": {"kangxi16", "rtk432"}},
+    "rtk2269": {"character": "剽", "keyword": "menace",
+               "expected_part_ids": {"rtk1732", "rtk87"}},
+    "rtk2314": {"character": "姪", "keyword": "niece",
+               "expected_part_ids": {"rtk102", "rtk815"}},
+    "rtk2355": {"character": "捺", "keyword": "impress",
+               "expected_part_ids": {"kangxi64", "rtk1175"}},
+    "rtk2411": {"character": "渥", "keyword": "moisten",
+               "expected_part_ids": {"rtk1138", "rtk137"}},
+    "rtk2414": {"character": "瀞", "keyword": "river pool",
+               "expected_part_ids": {"rtk137", "rtk1660"}},
+    "rtk2484": {"character": "蒜", "keyword": "garlic",
+               "expected_part_ids": {"prim-mugwort", "rtk1167"}},
+    "rtk2486": {"character": "蔚", "keyword": "grow plentiful",
+               "expected_part_ids": {"kangxi44", "prim-mugwort", "rtk45"}},
+    "rtk2574": {"character": "榎", "keyword": "hackberry",
+               "expected_part_ids": {"rtk207", "rtk317"}},
+    "rtk2643": {"character": "禦", "keyword": "fend off",
+               "expected_part_ids": {"rtk1167", "rtk1500"}},
+    "rtk2666": {"character": "靖", "keyword": "repose",
+               "expected_part_ids": {"rtk1654", "rtk462"}},
+    "rtk2735": {"character": "蛭", "keyword": "leech",
+               "expected_part_ids": {"rtk556", "rtk815"}},
+    "rtk2793": {"character": "錆", "keyword": "rust",
+               "expected_part_ids": {"rtk1654", "rtk287"}},
+    "rtk2920": {"character": "瓢", "keyword": "gourd",
+               "expected_part_ids": {"rtk1732", "rtk2022"}},
+    "rtk2946": {"character": "祟", "keyword": "haunt",
+               "expected_part_ids": {"rtk1167", "rtk829"}},
+    "rtk2951": {"character": "鼾", "keyword": "snore",
+               "expected_part_ids": {"rtk1777", "rtk733"}},
     # Continuing the proactive spot-check (2026-09-04, same session):
     # audit_direct_ref_overlap.py's next four families, same discipline
     # (every fix confirmed via cjkvi-ids, several needed deeper attention
