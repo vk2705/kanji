@@ -5902,3 +5902,67 @@ output.
   target. Standing list otherwise unchanged: the `个`/`亼` family
   decision, `刂`/`primitive_roof` cleanup, `慶`'s bottom shape, `壷`'s top
   element, the 81 orphaned `rad{N}` rows on the live DB.
+
+### 2026-09-05 (continued) — sequential rtk1043-1350 review: `primitive_roof` cleanup, 換/杯/署 fixed, `罒` (net radical) family found (12 kanji)
+
+- Owner: "continue next sessions, until out of credits" — kept going on
+  the strict sequential rtk1000-3000 sweep from rtk1043 (where the person-
+  radical session left off), rendering/cross-checking each kanji against
+  `cjkvi-ids` + CSV before moving to the next.
+- **`primitive_roof` global cleanup**: a prior session's noted-but-
+  deferred item. Confirmed the actual mechanism first (it's not quite what
+  was assumed): `kangxi40:宀:roof,primitive_roof` — it's a real *alias* of
+  `宀`, so `resolve_alias("primitive_roof")` does resolve, it just always
+  duplicated an already-separately-listed literal `宀` in the same parts
+  field (54 occurrences, 100% paired with `宀`). Stripped the dead
+  duplicate token from all 54 lines (a field-aware strip, not a blind
+  string replace, so it doesn't corrupt alternate-decomposition `;`
+  groups). No resolved-id changes anywhere, confirmed by a clean
+  before/after `test_regression_fixes.py` diff.
+- **rtk1073 褒** ("praise") was `衣,口,小,亠` — flattening
+  `保`(rtk1072)'s own `呆` sub-parts with a wrong `小` where `呆` actually
+  has `木`; CSV explicitly names "protect" as a component. → `亠,保,衣`.
+- **rtk1122 換** ("interchange") was `扌,𠂊,央` — render-confirmed this is
+  simply wrong: `換`'s right side is the *same* `奐` shape as its own
+  sibling `喚`(rtk1121, `⿰口奐` vs `換`'s `⿰扌奐`), not remotely
+  `央`(rtk1877, "center")-shaped. The **pre-existing regression pin baked
+  the bug in** (pinned to the wrong-but-internally-consistent value) — a
+  reminder that a pin only proves stability, not correctness. Fixed to
+  match `喚`'s own treatment of `奐` (`四,大,冂,勹`), pin corrected.
+- **rtk1304 杯** ("cupfuls") was `｜,ノ,一,木,礼` — render-confirmed the
+  right side is `不`(rtk1302)-shaped, nothing like `礼`(rtk1168, "altar" +
+  "fishhook") which was just a stray wrong reference. → `木,不`.
+- **rtk1349 署** ("signature") was `日,老` — an exact copy-paste of its
+  neighbor `暑`(rtk1350)'s own value. IDS (`⿱罒者`) and render both confirm
+  the top is `罒` (net/eye radical), not `日` (day) — a different
+  primitive that only superficially resembles it in a small font. →
+  `罒,者`.
+- Fixing 署 raised the obvious question of whether `罒` had the same
+  dataset-wide omission problem `亻` did. It did: the same recursive-aware
+  presence check (verifying actual *resolved* part ids via
+  `get_kanji_detail`, not just literal token text — the lesson from
+  yesterday's `擁`/`礻`-family false positives) found **12 more kanji**
+  missing `罒` entirely: `買`(was just `貝`), `置`, `罰`(was just `言`),
+  `徳`, `羅`, `爵`, `憲`, `罪`(was just `非`), `罵`, `罷`, `曼`, `罫`. Every
+  one confirmed against `cjkvi-ids`; the clearer ones (買/置/罰/羅/爵/罪/
+  罵/罷/罫) also render-confirmed — `罒`'s flatter, four-stroke shape is
+  visually distinct from the similar-looking `四`("four") it could easily
+  be confused with, which is exactly the kind of mixup this bug pattern
+  produces. Fixed by prepending `罒` to each existing decomposition.
+- Verified: full rebuild; `test_regression_fixes.py` — new
+  `check_net_radical_present` structural invariant (12 hosts, same
+  pattern as `check_person_radical_present`), 3 new individual pins
+  (褒/杯/署), 1 stale pin corrected (`羅`, which needed `kangxi122` added)
+  — **1050 checks**, same 4 expected hanzi-scope non-issues; pytest (56
+  passed); `audit_self_reference.py` clean.
+- Not deployed (no SSH/server access) — data-only change, needs
+  `sync_system_data.py` + reseed.
+- Coverage: will regenerate after commit.
+- **Next session**: continue the sequential sweep from rtk1351. The
+  `罒`-family discovery suggests it's worth running the same recursive-
+  aware presence check against a few more common radicals not yet swept
+  this way (e.g. `冖`, `匚`, `已`/`巳`-adjacent shapes) rather than waiting
+  to stumble into them one kanji at a time. Standing list otherwise
+  unchanged: `audit_direct_ref_overlap.py --min-usage 3` (~136
+  candidates), the `个`/`亼` family decision, `慶`'s bottom shape, `壷`'s
+  top element, the 81 orphaned `rad{N}` rows on the live DB.

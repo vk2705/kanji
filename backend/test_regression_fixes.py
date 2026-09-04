@@ -140,8 +140,12 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"rtk173", "rtk256"}},
     "rtk1115": {"character": "夜", "keyword": "night",
                 "expected_part_ids": {"kangxi8", "kangxi9", "kangxi34", "rtk114"}},
+    # Was 扌,𠂊,央 (rtk1877, "center") -- render-confirmed 換's right side is the
+    # SAME 奐 shape as 喚(rtk1121)'s own right side (they're siblings, ⿰口奐 vs
+    # ⿰扌奐), not remotely 央-shaped; the pre-fix pin baked the bug in. Fixed
+    # 2026-09-05 to match 喚's own 奐 treatment (四,大,冂,勹).
     "rtk1122": {"character": "換", "keyword": "interchange",
-                "expected_part_ids": {"kangxi64", "prim-hooked-hand", "rtk1877"}},
+                "expected_part_ids": {"kangxi64", "kangxi13", "kangxi20", "rtk4", "rtk112"}},
     # Further-collapsed 2026-08-29 (sweep batch 3 follow-up): 指's old
     # 日,匕,扌 flattened 旨 (delicious, rtk493 = 日,匕) in place instead of
     # referencing it -- found because fixing other frames made
@@ -1994,8 +1998,8 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"rtk1431", "rtk466"}},
     "rtk1441": {"character": "維", "keyword": "fiber",
                "expected_part_ids": {"kangxi172", "rtk1431"}},
-    "rtk1442": {"character": "羅", "keyword": "gauze",
-               "expected_part_ids": {"kangxi172", "rtk1431"}},
+    "rtk1442": {"character": "羅", "keyword": "gauze",  # was missing 罒 (net radical) entirely — 2026-09-05
+               "expected_part_ids": {"kangxi122", "kangxi172", "rtk1431"}},
     "rtk1453": {"character": "級", "keyword": "class",
                "expected_part_ids": {"prim-katakana-no", "rtk1431", "rtk743"}},
     "rtk1455": {"character": "紅", "keyword": "crimson",
@@ -2609,6 +2613,12 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"rtk423", "rtk87"}},   # then silently propagated through every kanji that
                                                               # correctly *referenced* 初 (裕/被/裾/襟/袖/裸/補/... — 15
                                                               # kanji total, all auto-fixed by this one root fix)
+    "rtk1073": {"character": "褒", "keyword": "praise",  # was 衣,口,小,亠 -- flattened 保(rtk1072)'s own 呆 with a
+               "expected_part_ids": {"kangxi8", "rtk1072", "rtk423"}},  # wrong 小 for 木; CSV names "protect" directly
+    "rtk1304": {"character": "杯", "keyword": "counter for cupfuls",  # was ｜,ノ,一,木,礼 -- render-confirmed the
+               "expected_part_ids": {"rtk1302", "rtk207"}},  # right side is 不(rtk1302)-shaped, not remotely 礼-shaped
+    "rtk1349": {"character": "署", "keyword": "signature",  # was 日,老 -- an exact copy-paste of 暑(rtk1350)'s own
+               "expected_part_ids": {"kangxi122", "rtk1345"}},  # value; IDS/render confirm the top is 罒 (net), not 日
 }
 
 # character -> hanzi id, spot-checking the 429-character Unihan self-reference backfill
@@ -2784,6 +2794,37 @@ def check_person_radical_present(conn) -> list[str]:
     return failures
 
 
+# Same bug shape as PERSON_RADICAL_HOSTS, found 2026-09-05 continuing the sequential
+# sweep: 12 kanji whose cjkvi-ids decomposition has 罒 (net/eye radical, kangxi122) as
+# a top-level component but whose data.txt parts list dropped it entirely (買 was just
+# 貝, 罰 just 言, etc. — the mnemonic component that actually makes them "net over X"
+# was silently missing). Found via the same recursive-aware presence check built for
+# the 亻 family, this time checking actual resolved part ids (not just literal token
+# text) to avoid the false-positive trap that check_person_radical_present's sibling
+# investigation hit with 擁/rtk1488 (a radical present transitively through a
+# referenced compound isn't a bug).
+NET_RADICAL_HOSTS = [
+    "rtk894", "rtk895", "rtk896", "rtk950", "rtk1442", "rtk1573", "rtk1674",
+    "rtk1764", "rtk2143", "rtk2188", "rtk2240", "rtk2737",
+]
+
+_NET_PART_IDS = {"kangxi122"}  # 罒/网 resolve here
+
+
+def check_net_radical_present(conn) -> list[str]:
+    failures = []
+    for kid in NET_RADICAL_HOSTS:
+        detail = database.get_kanji_detail(conn, kid, viewer_id=None)
+        if not detail["decompositions"]:
+            failures.append(f"{kid}: no decomposition at all (net radical fix regressed)")
+            continue
+        part_ids = {p["id"] for p in detail["decompositions"][0]["parts_detail"]}
+        if not (part_ids & _NET_PART_IDS):
+            failures.append(f"{kid} ({detail['character']}): missing the net radical "
+                            f"罒 again (got {sorted(part_ids)})")
+    return failures
+
+
 def check_no_self_reference(conn) -> list[str]:
     failures = []
     variant_rows = conn.execute("SELECT id, character FROM kanji WHERE variant_of = id").fetchall()
@@ -2940,13 +2981,15 @@ def main():
     all_failures += check_atomic(conn)
     all_failures += check_no_self_reference(conn)
     all_failures += check_person_radical_present(conn)
+    all_failures += check_net_radical_present(conn)
     all_failures += check_alias_visibility_boundary(conn)
     conn.close()
 
     all_failures += check_migration_atomicity()
 
     total_checks = (len(EXPECTED_DECOMPOSITIONS) + len(EXPECTED_HANZI_PRESENT)
-                    + len(EXPECTED_ATOMIC) + len(PERSON_RADICAL_HOSTS) + 4)
+                    + len(EXPECTED_ATOMIC) + len(PERSON_RADICAL_HOSTS)
+                    + len(NET_RADICAL_HOSTS) + 4)
     if all_failures:
         print(f"FAILED: {len(all_failures)} problem(s) found across {total_checks} checks:\n")
         for f in all_failures:
