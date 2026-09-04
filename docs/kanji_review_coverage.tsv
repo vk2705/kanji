@@ -2189,7 +2189,7 @@ rtk2187	遵	abide by	2187	yes
 rtk2188	罷	quit	2188	yes
 rtk2189	屯	barracks	2189	no
 rtk2190	且	moreover	2190	no
-rtk2191	藻	seaweed	2191	no
+rtk2191	藻	seaweed	2191	yes
 rtk2192	隷	slave	2192	yes
 rtk2193	癒	healing	2193	yes
 rtk2194	璽	imperial seal	2194	yes
@@ -2624,7 +2624,7 @@ rtk2622	痒	itch	2622	yes
 rtk2623	痰	phlegm	2623	no
 rtk2624	疹	measles	2624	no
 rtk2625	痔	hemorrhoids	2625	no
-rtk2626	癌	cancer	2626	no
+rtk2626	癌	cancer	2626	yes
 rtk2627	痺	paralysis	2627	no
 rtk2628	眸	apple of the eye	2628	no
 rtk2629	眩	dizzy	2629	no

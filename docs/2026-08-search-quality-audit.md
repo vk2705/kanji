@@ -5535,3 +5535,77 @@ output.
   still open. Other standing items unchanged: `壷`'s ambiguous top
   element, `triage_google_check.py`'s unmined output, the 81 orphaned
   `rad{N}` rows on the live DB (needs production access).
+
+### 2026-09-04 (same day, continued) — a live-search spot-check, and the autocomplete feature shipped
+
+- Owner asked to search "goods" (品, rtk23, used 8x) directly. `品` itself
+  is correctly just `口` (no-duplicate-token convention for its own
+  3-mouth shape); `燥`/`操`/`嘔` already correctly referenced it. `臨`/
+  `繰`/`藻`/`癌` all redundantly repeated a bare `口` alongside `品` —
+  same overlap bug as the rest of today, just found by checking a live
+  query instead of the automated detector. Fixed all three (`癌`'s
+  `疔` token is a pre-existing, legitimate alias of `kangxi104`/`疒`, not
+  a separate error).
+- Owner asked about "mouse"+"stone" and "goods" searches, then about the
+  Russian-aliases feature's status. Ran `add_ru_aliases.py` against this
+  session's local DB to demonstrate it works (105 aliases inserted from
+  the 100-word pilot batch, e.g. "рот"→口, "глаз"→目, "один"→一) — the
+  owner then reported "глаз" found nothing on the live site, confirming
+  what was already suspected: the script has never been run against
+  production. This is a one-off maintenance script, not something a
+  code deploy applies automatically — someone with server access needs
+  to run `python3 add_ru_aliases.py` there directly.
+- Owner asked why there's no substring hint when typing a primitive
+  name, then explicitly asked to prioritize building it — the item
+  queued in `CLAUDE.md` since 2026-08-14. Built it:
+  - Backend: `suggest_terms(conn, q, limit=10)` in `database.py` — a
+    new, different match than `search_by_substring` (whole-word, for
+    final search precision): autocomplete needs to match `q` **anywhere**
+    inside a candidate name, since the user is still mid-keystroke and
+    hasn't necessarily reached a word boundary. Splits comma-separated
+    synonym lists into individual names, only considers public rows
+    (a private term isn't a useful suggestion for anyone else typing
+    into the same bounded vocabulary), ranks prefix-matches first then
+    **shortest-first** — an early version sorted purely alphabetically
+    among prefix matches and found "mouth" got crowded out of a 10-item
+    cap by nine different "mount-" compounds; sorting by length first
+    fixed that. New `GET /search/suggest?q=` endpoint (no auth, no
+    script/sources — nothing about a suggestion is viewer-specific). 5
+    new pytest tests in `test_api_search.py`.
+  - Frontend: new `AutocompleteInput.jsx` wraps a text `<input>` with a
+    suggestions dropdown; `getQuery`/`applySuggestion` props let each
+    caller define what's being typed and what picking a suggestion
+    produces — `AliasAdder`'s field is one value (query == value), but
+    `DecompositionForm`'s parts field is a comma-separated list
+    (autocomplete only applies to the segment after the last comma, and
+    picking a suggestion replaces just that segment). New
+    `useSuggestions.js` hook debounces the lookup (200ms, 2-char
+    minimum). Wired into both inputs in `KanjiDetail.jsx`.
+  - Verified end-to-end locally via Playwright: register → login → open
+    明 → typing into the alias-add "+" field shows a working dropdown
+    (e.g. "wat" → water/watchtower/...), and typing "water, mou" into
+    the decomposition-parts field shows suggestions for just the "mou"
+    segment, clicking one (e.g. "mountain") correctly produces
+    "water, mountain" without disturbing the finished "water" segment.
+- Verified: backend pytest (56 passed, up from 51 — the 5 new
+  `/search/suggest` tests), `oxlint` clean, `npm run build` succeeds.
+  For the `品` fix specifically: full rebuild, `test_regression_fixes.py`
+  (906 checks, 1 stale pin corrected + 3 new), `audit_self_reference.py`
+  clean, and the "goods" search re-run to confirm the same 8 results
+  with the redundant tokens gone.
+- Not deployed to the live server (no SSH/server access) — the `品`-family
+  fix is data-only; the autocomplete feature needs both a backend
+  restart (new endpoint) and a frontend rebuild+redeploy. The Russian
+  aliases still need `add_ru_aliases.py` run against production
+  separately — that's not part of a normal code deploy at all.
+- Updated `CLAUDE.md`: struck the autocomplete item from "Known
+  limitations," documented the new endpoint/match semantics in "Search
+  logic," and added `AutocompleteInput.jsx`/`useSuggestions.js` to the
+  frontend file tree.
+- Coverage: **1586/3000 (52.9%)**.
+- **Next session**: same standing items as this morning's entry —
+  `audit_direct_ref_overlap.py --min-usage 3`'s remaining ~139
+  candidates, the `刂`/`primitive_roof` dead-token grep cleanup, the
+  `朿`/`敝`-family questions, `慶`'s bottom shape, `壷`'s ambiguous top
+  element, `triage_google_check.py`'s unmined output, the 81 orphaned
+  `rad{N}` rows on the live DB.
