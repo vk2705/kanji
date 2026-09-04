@@ -1694,8 +1694,10 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"prim-umbrella", "rtk10", "rtk12", "rtk615"}},
     "rtk2876": {"character": "翠", "keyword": "jade green",
                "expected_part_ids": {"kangxi8", "rtk10", "rtk1023", "rtk615"}},
+    # Was redundantly re-listing 元(rtk63)'s own 儿 alongside referencing it
+    # directly -- 2026-09-05, audit_direct_ref_overlap.py
     "rtk2908": {"character": "翫", "keyword": "fiddle with",
-               "expected_part_ids": {"kangxi10", "rtk37", "rtk615", "rtk63"}},
+               "expected_part_ids": {"rtk37", "rtk615", "rtk63"}},
     "rtk2940": {"character": "翔", "keyword": "soar",
                "expected_part_ids": {"rtk586", "rtk615"}},
     # Common-primitive audit (2026-09-01, daily check-in): systematically
@@ -1972,8 +1974,10 @@ EXPECTED_DECOMPOSITIONS = {
     #    render-confirmed), and more of the same "reference the taught
     #    compound directly" pattern (踪->足,宗; 蕗->艾,路; 鷺->路,鳥;
     #    躇->艾,者,足).
+    # Was redundantly re-listing 元(rtk63)'s own 二,儿 alongside referencing it
+    # directly -- 2026-09-05, audit_direct_ref_overlap.py
     "rtk65": {"character": "頑", "keyword": "stubborn",
-               "expected_part_ids": {"kangxi10", "rtk2", "rtk63", "rtk64"}},
+               "expected_part_ids": {"rtk63", "rtk64"}},
     "rtk86": {"character": "項", "keyword": "paragraph",
                "expected_part_ids": {"rtk64", "rtk80"}},
     "rtk415": {"character": "題", "keyword": "topic",
@@ -2737,6 +2741,34 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"rtk14", "rtk556", "rtk573"}},
     "rtk2120": {"character": "鬱", "keyword": "gloom",
                "expected_part_ids": {"kangxi14", "kangxi192", "kangxi59", "rtk207", "rtk2116", "rtk476"}},
+    "rtk1786": {"character": "余", "keyword": "too much",
+               "expected_part_ids": {"kangxi6", "prim-katakana-ha", "prim-umbrella", "rtk1", "rtk1167"}},
+    "rtk226": {"character": "暦", "keyword": "calendar",
+               "expected_part_ids": {"rtk12", "rtk637"}},
+    "rtk402": {"character": "歴", "keyword": "curriculum",
+               "expected_part_ids": {"rtk396", "rtk637"}},
+    "rtk689": {"character": "摩", "keyword": "chafe",
+               "expected_part_ids": {"rtk637", "rtk687"}},
+    "rtk276": {"character": "玩", "keyword": "play",
+               "expected_part_ids": {"rtk271", "rtk63"}},
+    "rtk326": {"character": "冠", "keyword": "crown",
+               "expected_part_ids": {"kangxi14", "rtk45", "rtk63"}},
+    "rtk2488": {"character": "莞", "keyword": "smiling",
+               "expected_part_ids": {"kangxi40", "prim-mugwort", "rtk63"}},
+    "rtk852": {"character": "浴", "keyword": "bathe",
+               "expected_part_ids": {"rtk137", "rtk851"}},
+    "rtk855": {"character": "欲", "keyword": "longing",
+               "expected_part_ids": {"rtk505", "rtk851"}},
+    "rtk856": {"character": "裕", "keyword": "abundant",
+               "expected_part_ids": {"rtk431", "rtk851"}},
+    "rtk742": {"character": "携", "keyword": "portable",
+               "expected_part_ids": {"kangxi172", "kangxi64", "rtk741"}},
+    "rtk980": {"character": "秀", "keyword": "excel",
+               "expected_part_ids": {"kangxi115", "rtk741"}},
+    "rtk981": {"character": "透", "keyword": "transparent",
+               "expected_part_ids": {"kangxi115", "rtk741", "rtk843"}},
+    "rtk2320": {"character": "孕", "keyword": "become pregnant",
+               "expected_part_ids": {"rtk741", "rtk99"}},
     "rtk909": {"character": "鉄", "keyword": "iron",
                "expected_part_ids": {"rtk1305", "rtk287"}},
     "rtk910": {"character": "迭", "keyword": "transfer",

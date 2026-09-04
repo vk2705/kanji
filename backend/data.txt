@@ -309,7 +309,7 @@ rtk61:見:see:目,儿
 rtk62:児:newborn babe:旧,儿
 rtk63:元:beginning:二,儿
 rtk64:頁:page:一,貝
-rtk65:頑:stubborn:頁,儿,二,元
+rtk65:頑:stubborn:頁,元
 rtk66:凡:commonplace:丶,几
 rtk67:負:defeat:貝,勹
 rtk68:万:ten thousand:｜,ノ,一
@@ -469,7 +469,7 @@ rtk222:相:inter-:木,目
 rtk223:机:desk:木,几
 rtk224:本:book:一,木
 rtk225:札:tag:乙,木
-rtk226:暦:calendar:日,麻,木,厂,广
+rtk226:暦:calendar:日,麻
 rtk227:案:plan:安,木
 rtk228:燥:parch:火,品,木
 rtk229:未:un-:一,木
@@ -519,7 +519,7 @@ rtk272:玉:jewel:王,丶
 rtk273:宝:treasure:玉,宀
 rtk274:珠:pearl:王,朱
 rtk275:現:present:王,見
-rtk276:玩:play:王,儿,二,元
+rtk276:玩:play:王,元
 rtk277:狂:lunatic:犭,王
 rtk278:旺:flourishing:王,日
 rtk279:皇:emperor:王,白
@@ -569,7 +569,7 @@ rtk322:冥:dark:日,ハ,亠,冖
 rtk323:軍:army:車,冖
 rtk324:輝:radiance:軍,尚,儿,一
 rtk325:運:carry:込,軍
-rtk326:冠:crown:寸,儿,冖,元
+rtk326:冠:crown:寸,冖,元
 rtk327:夢:dream:夕,冖,艾
 rtk328:坑:pit:土,亠,几
 rtk329:高:tall:口,亠,冂
@@ -645,7 +645,7 @@ rtk398:渉:ford:歩,水
 rtk399:頻:repeatedly:歩,頁
 rtk400:肯:agreement:月,止
 rtk401:企:undertake:止,个
-rtk402:歴:curriculum:止,麻,木,厂,广
+rtk402:歴:curriculum:止,麻
 rtk403:武:warrior:止,弋
 rtk404:賦:levy:貝,武
 rtk405:正:correct:一,止
@@ -932,7 +932,7 @@ rtk685:必:invariably:ノ,心
 rtk686:泌:ooze:必,水,丶
 rtk687:手:hand:
 rtk688:看:watch over:ノ,一,手,二,目
-rtk689:摩:chafe:手,木,广,麻
+rtk689:摩:chafe:手,麻
 rtk690:我:ego:亅,戈,手
 rtk691:義:righteousness:一,羊,亅,戈,手
 rtk692:議:deliberation:一,言,羊,我
@@ -985,7 +985,7 @@ rtk738:材:lumber:ノ,一,木,亅
 rtk739:存:exist:｜,ノ,一,子
 rtk740:在:exist:｜,ノ,一,土
 rtk741:乃:from:｜,ノ,一
-rtk742:携:portable:ノ,扌,隹,乃
+rtk742:携:portable:扌,隹,乃
 rtk743:及:reach out:丶,乃
 rtk744:吸:suck:ノ,口,及
 rtk745:扱:handle:扌,及
@@ -1095,11 +1095,11 @@ rtk848:松:pine tree:公,木
 rtk849:翁:venerable old man:羽,公
 rtk850:訟:sue:言,公
 rtk851:谷:valley:口,ハ,个
-rtk852:浴:bathe:口,水,谷,ハ,个
+rtk852:浴:bathe:水,谷
 rtk853:容:contain:宀,谷
 rtk854:溶:melt:容,水
-rtk855:欲:longing:欠,口,谷,ハ,个
-rtk856:裕:abundant:口,初,谷,ハ,个
+rtk855:欲:longing:欠,谷
+rtk856:裕:abundant:初,谷
 rtk857:鉛:lead:金,口,ハ
 rtk858:沿:run alongside:口,水,ハ
 rtk859:賞:prize:尚,貝
@@ -1223,8 +1223,8 @@ rtk976:稲:rice plant:旧,禾,爪
 rtk977:香:incense:禾,日
 rtk978:季:seasons:禾,子
 rtk979:委:committee:禾,女
-rtk980:秀:excel:乃,禾,ノ
-rtk981:透:transparent:ノ,禾,込,乃
+rtk980:秀:excel:禾,乃
+rtk981:透:transparent:禾,込,乃
 rtk982:誘:entice:秀,言
 rtk983:稽:think:禾,旨,尤
 rtk984:穀:cereals:禾,士,冖,殳,几,又
@@ -2029,7 +2029,7 @@ rtk1782:岸:beach:干,山,厂
 rtk1783:幹:tree trunk:干,早,个
 rtk1784:芋:taro:一,艾,干
 rtk1785:宇:eaves:干,亅,宀
-rtk1786:余:too much:一,二,ハ,个,亅,示,小
+rtk1786:余:too much:一,ハ,个,亅,示
 rtk1787:除:exclude:示,个,阝,一
 rtk1788:徐:gradually:禾,个,彳,一
 rtk1789:叙:confer:禾,又,个,一
@@ -2562,7 +2562,7 @@ rtk2316:姥:old woman:女,老,匕
 rtk2317:姑:mother-in-law:女,古
 rtk2318:姐:elder sister:女,目
 rtk2319:嬉:glad:女,喜
-rtk2320:孕:become pregnant:乃,子,ノ
+rtk2320:孕:become pregnant:子,乃
 rtk2321:孜:industriousness:子,攵
 rtk2322:宥:soothe:ノ,一,月,宀
 rtk2323:寓:temporary abode:田,冂,厶,宀,禹
@@ -2730,7 +2730,7 @@ rtk2484:蒜:garlic:艾,示
 rtk2485:蕨:bracken:欠,丷,厂,屮,艾
 rtk2486:蔚:dense growth:艾,寸,尸
 rtk2487:茜:madder:西,艾
-rtk2488:莞:smiling:二,儿,宀,艾,元
+rtk2488:莞:smiling:宀,艾,元
 rtk2489:蒐:gather:艾,鬼
 rtk2490:菅:sedge:艾,官
 rtk2491:葦:reed:口,艾,韋
@@ -3149,7 +3149,7 @@ rtk2904:叢:plexus:耳,又,羊
 rtk2905:肴:accompaniment for drinks:ノ,一,月,丶
 rtk2906:斐:beautiful:非,文
 rtk2907:卿:you:艮,卩
-rtk2908:翫:take pleasure in:羽,白,儿,元
+rtk2908:翫:take pleasure in:羽,白,元
 rtk2909:於:at:方,个
 rtk2910:套:accumulate:大,長,厶
 rtk2911:叛:disobey:半,反

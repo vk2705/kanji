@@ -6410,3 +6410,25 @@ output.
   Standing list otherwise unchanged: the `个`/`亼` family decision,
   `慶`'s bottom shape, `壷`'s top element, the 81 orphaned `rad{N}` rows
   on the live DB.
+
+### 2026-09-05 (continued) — `audit_direct_ref_overlap.py --min-usage 2`: 61 → ~40 candidates, 20 more kanji fixed
+
+- Cleared 5 more families: `示`(rtk1167, 17x — `余` was re-listing
+  `示`'s own `二,小`), `麻`(rtk637, 6x — `暦`/`歴`/`摩` re-listing `木,广`),
+  `元`(rtk63, 6x — `頑`/`玩`/`冠`/`莞`/`翫` re-listing `二,儿`), `谷`
+  (rtk851, 6x — `浴`/`欲`/`裕` re-listing `口,ハ,个`), `乃`(rtk741, 5x —
+  `携`/`秀`/`透`/`孕` re-listing `｜,ノ,一`).
+- Verified: full rebuild; `test_regression_fixes.py` — 2 stale pins
+  corrected (`翫`, `頑`), 14 new pins — **1158 checks**, same 4 expected
+  hanzi-scope non-issues; pytest (56 passed); `audit_self_reference.py`
+  clean; `audit_direct_ref_overlap.py --min-usage 2` confirms
+  convergence: **45 candidates remaining, down from 61**.
+- Not deployed (no SSH/server access) — data-only change, needs
+  `sync_system_data.py` + reseed.
+- Coverage: will regenerate after commit.
+- **Next session**: continue `audit_direct_ref_overlap.py --min-usage
+  2`'s remaining ~45 candidates (mostly 2x-usage families now — lower
+  yield per family but the same reliable pattern).
+  Standing list otherwise unchanged: the `个`/`亼` family decision,
+  `慶`'s bottom shape, `壷`'s top element, the 81 orphaned `rad{N}` rows
+  on the live DB.
