@@ -5680,3 +5680,81 @@ output.
   cleanup, the `朿`/`敝`-family questions, `単`/`脳`'s shared "𭕄"
   marker, `慶`'s bottom shape, `壷`'s ambiguous top element, the 81
   orphaned `rad{N}` rows on the live DB.
+
+### 2026-09-05 (daily check-in) — mining the noisier 622 PARTIAL results.jsonl flags
+
+- No pending reviews in `review_queue.py`. Picked up exactly where
+  yesterday's entry left off: the 622 "PARTIAL" flags from
+  `triage_google_check.py` (something in our own decomposition that the
+  owner's Google AI Overview text doesn't echo) — much noisier than the
+  43 DISJOINT flags finished yesterday, since a short AI Overview
+  snippet routinely omits a real component without that meaning our
+  side is wrong. Rather than repeat yesterday's full per-kanji render
+  treatment on all 622 (explicitly flagged as impractical in yesterday's
+  own "next session" note), wrote a quick filter script
+  (scratch, not committed) for the highest-signal subset first: exactly
+  **one** of our tokens missing from Google's text, **no kana** in
+  Google's mentions (kana in the mentions is a strong tell the "AI
+  Overview" text leaked furigana/reading notation rather than real
+  primitive names), and Google's own mention list short and clean. That
+  cut 622 down to 126 candidates worth a manual look — still verified
+  every survivor against `cjkvi-ids`/CSV before touching anything, same
+  discipline as always, since the filter is a triage aid, not a verdict.
+- Most of the 126 were already-known false-positive *patterns* this
+  audit has documented repeatedly, just newly encountered via this
+  specific tool: `水`/`氵`, `込`/`辶`, `ハ`/`八`, `艾`/`艹` radical-variant
+  pairs (both sides are correct, the tool just doesn't know they're
+  equivalent), and a handful of `个`("umbrella") cases already resolved
+  earlier this same session's `个`-vs-`人` investigation. Skipped all of
+  those. Found 14 real bugs in what remained:
+  - `忘`/`忙`/`盲`/`妄` all redundantly repeated `亡`(rtk524)'s own "亠"
+    part alongside referencing `亡` directly — this audit's most common
+    bug shape, this time surfaced by the Google cross-check instead of
+    `audit_direct_ref_overlap.py`. `忙` was additionally missing "忄"
+    entirely (`cjkvi-ids` `⿰忄亡`) where "亠" was doing nothing useful
+    in its place.
+  - `朗` was flattening `良`'s **pre-fix** parts instead of referencing
+    it directly (`cjkvi-ids`'s K variant `⿰良月`) — confirms yesterday's
+    `良` fix (`丶,艮`) was worth doing beyond just `良` itself. `島` had
+    a stray extra "白" `cjkvi-ids` doesn't call for at all (`⿹⑦山`,
+    confirmed by render: `鳥` sits cleanly on `山` with nothing else
+    needed). `烏` was using the **wrong** reference entirely — it's
+    render-confirmed missing a stroke `鳥` has (compare `鳥`'s extra
+    top-left dash), so CSV's real component list ("drop; mouth; one;
+    tail feathers") was used instead of flattening via the too-similar
+    `鳥`.
+  - `能` was missing "prim-sitting-on-the-ground" — the exact
+    spoon/sitting-on-the-ground pair from `北`/`比` found earlier this
+    audit; CSV confirms "spoon; sitting on the ground" for `能` too.
+  - `雲`/`腸`/`恵` were each flattening an already-taught compound's own
+    parts instead of referencing it (`云`, `旦`) or had a plain wrong
+    token (`恵` had "一" where CSV explicitly names "ten" — should be
+    "十").
+  - `双`/`彼`/`秘` each carried one redundant extra stroke duplicating
+    part of an already-referenced compound: `双` = `又`+`又` per
+    `cjkvi-ids` (the established "no duplicate token" convention
+    collapses this to one `又`); `彼`'s extra `又` is already inside
+    `皮` per the `rtk865` fix; `秘`'s extra `丶` is already inside `必`.
+- Verified: full rebuild; `test_regression_fixes.py` — 1 stale pin
+  corrected (`rtk970`/秘, keyed to the pre-fix redundant value), 13 new
+  pins — **938 checks**, same 4 expected hanzi-scope non-issues; pytest
+  (56 passed); `audit_self_reference.py` clean; `audit_flattening.py`
+  and `audit_direct_ref_overlap.py` re-run against every newly-
+  referenced compound (`亡`, `良`, `云`, `旦`, `皮`, `必`, `鳥`) to
+  confirm none of today's fixes introduced a new bug of either kind.
+- Not deployed to the live server (no SSH/server access) — data-only
+  change.
+- Coverage: **1618/3000 (53.9%)**.
+- **Next session**: ~496 of the 622 PARTIAL flags remain un-triaged
+  (everything the quick filter excluded — multiple missing tokens, or
+  kana/long text suggesting more scraping noise). Worth deciding whether
+  a second, looser filter pass is worth the noise, or whether that pool
+  is better mined some other way (e.g. cross-referencing against
+  `audit_direct_ref_overlap.py`'s own remaining candidates, since
+  several of today's real bugs — `忘`/`忙`/`盲`/`妄`'s `亡` overlap, `能`'s
+  missing sitting-on-the-ground — turned out to be findable either way).
+  Otherwise the standing list is unchanged: `audit_direct_ref_overlap.py
+  --min-usage 3`'s ~139 remaining candidates, the `刂`/`primitive_roof`
+  dead-token grep cleanup, the `朿`/`敝`-family questions, `単`/`脳`'s
+  shared "𭕄" marker, `慶`'s bottom shape, `壷`'s ambiguous top element,
+  the 81 orphaned `rad{N}` rows on the live DB.

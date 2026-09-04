@@ -450,7 +450,7 @@ rtk448	製	made in...	448	yes
 rtk449	転	revolve	449	no
 rtk450	芸	technique	450	yes
 rtk451	雨	rain	451	no
-rtk452	雲	cloud	452	no
+rtk452	雲	cloud	452	yes
 rtk453	曇	cloudy weather	453	no
 rtk454	雷	thunder	454	no
 rtk455	霜	frost	455	yes
@@ -523,8 +523,8 @@ rtk521	識	discriminating	521	yes
 rtk522	鏡	mirror	522	yes
 rtk523	境	boundary	523	yes
 rtk524	亡	deceased	524	no
-rtk525	盲	blind	525	no
-rtk526	妄	delusion	526	no
+rtk525	盲	blind	525	yes
+rtk526	妄	delusion	526	yes
 rtk527	荒	laid waste	527	no
 rtk528	望	ambition	528	no
 rtk529	方	direction	529	no
@@ -581,7 +581,7 @@ rtk579	遂	consummate	579	yes
 rtk580	家	house	580	yes
 rtk581	嫁	marry into	581	yes
 rtk582	豪	overpowering	582	no
-rtk583	腸	intestines	583	no
+rtk583	腸	intestines	583	yes
 rtk584	場	location	584	no
 rtk585	湯	hot water	585	no
 rtk586	羊	sheep	586	yes
@@ -638,7 +638,7 @@ rtk636	床	bed	636	no
 rtk637	麻	hemp	637	no
 rtk638	磨	grind	638	yes
 rtk639	心	heart	639	no
-rtk640	忘	forget	640	no
+rtk640	忘	forget	640	yes
 rtk641	恣	selfish	641	no
 rtk642	忍	endure	642	yes
 rtk643	認	acknowledge	643	yes
@@ -657,13 +657,13 @@ rtk655	臆	cowardice	655	yes
 rtk656	想	concept	656	yes
 rtk657	息	breath	657	yes
 rtk658	憩	recess	658	yes
-rtk659	恵	favor	659	no
+rtk659	恵	favor	659	yes
 rtk660	恐	fear	660	yes
 rtk661	惑	beguile	661	no
 rtk662	感	emotion	662	no
 rtk663	憂	melancholy	663	no
 rtk664	寡	widow	664	yes
-rtk665	忙	busy	665	no
+rtk665	忙	busy	665	yes
 rtk666	悦	ecstasy	666	yes
 rtk667	恒	constancy	667	yes
 rtk668	悼	lament	668	yes
@@ -751,7 +751,7 @@ rtk749	更	grow late	749	yes
 rtk750	硬	stiff	750	yes
 rtk751	梗	spiny	751	yes
 rtk752	又	or again	752	no
-rtk753	双	pair	753	no
+rtk753	双	pair	753	yes
 rtk754	桑	mulberry	754	no
 rtk755	隻	vessels	755	no
 rtk756	護	safeguard	756	yes
@@ -946,7 +946,7 @@ rtk944	待	wait	944	yes
 rtk945	往	journey	945	yes
 rtk946	征	subjugate	946	yes
 rtk947	径	diameter	947	no
-rtk948	彼	he	948	no
+rtk948	彼	he	948	yes
 rtk949	役	duty	949	no
 rtk950	徳	benevolence	950	yes
 rtk951	徹	penetrate	951	yes
@@ -1577,7 +1577,7 @@ rtk1575	退	retreat	1575	no
 rtk1576	限	limit	1576	yes
 rtk1577	眼	eyeball	1577	no
 rtk1578	良	good	1578	yes
-rtk1579	朗	melodious	1579	no
+rtk1579	朗	melodious	1579	yes
 rtk1580	浪	wandering	1580	yes
 rtk1581	娘	daughter	1581	no
 rtk1582	食	eat	1582	no
@@ -2092,11 +2092,11 @@ rtk2090	猟	game hunting	2090	yes
 rtk2091	鳥	bird	2091	no
 rtk2092	鳴	chirp	2092	no
 rtk2093	鶴	crane	2093	yes
-rtk2094	烏	crow	2094	no
+rtk2094	烏	crow	2094	yes
 rtk2095	蔦	vine	2095	no
 rtk2096	鳩	pigeon	2096	no
 rtk2097	鶏	chicken	2097	no
-rtk2098	島	island	2098	no
+rtk2098	島	island	2098	yes
 rtk2099	暖	warmth	2099	yes
 rtk2100	媛	beautiful woman	2100	no
 rtk2101	援	abet	2101	yes
@@ -2158,7 +2158,7 @@ rtk2156	薦	recommend	2156	no
 rtk2157	慶	jubilation	2157	no
 rtk2158	麗	lovely	2158	yes
 rtk2159	熊	bear	2159	yes
-rtk2160	能	ability	2160	no
+rtk2160	能	ability	2160	yes
 rtk2161	態	attitude	2161	yes
 rtk2162	寅	sign of the tiger	2162	yes
 rtk2163	演	performance	2163	yes
