@@ -5893,10 +5893,7 @@ output.
   `audit_self_reference.py` clean.
 - Not deployed to the live server (no SSH/server access) — data-only
   change, needs `sync_system_data.py` + reseed.
-- Coverage: will regenerate via `coverage_status.py` after commit (most of
-  these lines were likely already counted from earlier audit passes, same
-  as the `亻` batch — the git-blame-based metric undercounts genuinely new
-  review work when a line was touched before for an unrelated reason).
+- Coverage: **1630/3000 (54.3%)**.
 - **Next session**: continue the sequential rtk1000-3000 sweep — this
   session covered rtk1000-1043 in detail (person family) plus a handful of
   cross-cutting radical-family checks, but the bulk of rtk1043-3000 still

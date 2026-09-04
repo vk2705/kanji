@@ -148,7 +148,7 @@ rtk146	沖	open sea	146	yes
 rtk147	汎	pan-	147	yes
 rtk148	江	creek	148	no
 rtk149	汰	cleanse	149	yes
-rtk150	汁	soup	150	no
+rtk150	汁	soup	150	yes
 rtk151	沙	grains of sand	151	yes
 rtk152	潮	tide	152	yes
 rtk153	源	source	153	yes
@@ -429,7 +429,7 @@ rtk427	壊	demolition	427	yes
 rtk428	哀	pathetic	428	yes
 rtk429	遠	distant	429	no
 rtk430	猿	monkey	430	yes
-rtk431	初	first time	431	no
+rtk431	初	first time	431	yes
 rtk432	巾	towel	432	no
 rtk433	布	linen	433	no
 rtk434	帆	sail	434	yes
@@ -2718,7 +2718,7 @@ rtk2716	聯	strung together	2716	no
 rtk2717	聡	attentive	2717	no
 rtk2718	聘	summons	2718	no
 rtk2719	耽	addiction	2719	no
-rtk2720	耶	exclamation	2720	no
+rtk2720	耶	exclamation	2720	yes
 rtk2721	蚤	flea	2721	no
 rtk2722	蟹	crab	2722	no
 rtk2723	蛋	protein	2723	no
@@ -2978,7 +2978,7 @@ rtk2976	燭	candlelight	2976	yes
 rtk2977	逞	tough	2977	no
 rtk2978	燈	lamp (old)	2978	yes
 rtk2979	裡	back (old)	2979	no
-rtk2980	薗	park (alternate)	2980	no
+rtk2980	薗	park (alternate)	2980	yes
 rtk2981	鋪	shop (alternate)	2981	no
 rtk2982	嶋	island (alternate)	2982	no
 rtk2983	峯	summit (alternate)	2983	no
@@ -2992,7 +2992,7 @@ rtk2990	國	country (old)	2990	no
 rtk2991	脛	shin	2991	no
 rtk2992	勁	formidable	2992	no
 rtk2993	祀	enshrine	2993	yes
-rtk2994	祓	exorcism	2994	no
+rtk2994	祓	exorcism	2994	yes
 rtk2995	躇	dither	2995	yes
 rtk2996	壽	longevity (old)	2996	no
 rtk2997	躊	hesitate	2997	yes
