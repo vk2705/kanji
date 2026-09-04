@@ -224,7 +224,7 @@ rtk222	相	inter-	222	no
 rtk223	机	desk	223	no
 rtk224	本	book	224	no
 rtk225	札	tag	225	no
-rtk226	暦	calendar	226	no
+rtk226	暦	calendar	226	yes
 rtk227	案	plan	227	yes
 rtk228	燥	parch	228	yes
 rtk229	未	not yet	229	yes
@@ -274,7 +274,7 @@ rtk272	玉	jewel	272	no
 rtk273	宝	treasure	273	yes
 rtk274	珠	pearl	274	yes
 rtk275	現	present	275	no
-rtk276	玩	toy	276	no
+rtk276	玩	toy	276	yes
 rtk277	狂	lunatic	277	yes
 rtk278	旺	effulgent	278	no
 rtk279	皇	emperor	279	no
@@ -324,7 +324,7 @@ rtk322	冥	hades	322	no
 rtk323	軍	army	323	no
 rtk324	輝	radiance	324	yes
 rtk325	運	carry	325	yes
-rtk326	冠	crown	326	no
+rtk326	冠	crown	326	yes
 rtk327	夢	dream	327	yes
 rtk328	坑	pit	328	no
 rtk329	高	tall	329	no
@@ -400,7 +400,7 @@ rtk398	渉	ford	398	yes
 rtk399	頻	repeatedly	399	yes
 rtk400	肯	agreement	400	no
 rtk401	企	undertake	401	no
-rtk402	歴	curriculum	402	no
+rtk402	歴	curriculum	402	yes
 rtk403	武	warrior	403	no
 rtk404	賦	levy	404	yes
 rtk405	正	correct	405	no
@@ -687,7 +687,7 @@ rtk685	必	invariably	685	no
 rtk686	泌	ooze	686	yes
 rtk687	手	hand	687	no
 rtk688	看	watch over	688	no
-rtk689	摩	chafe	689	no
+rtk689	摩	chafe	689	yes
 rtk690	我	ego	690	no
 rtk691	義	righteousness	691	yes
 rtk692	議	deliberation	692	yes
@@ -850,11 +850,11 @@ rtk848	松	pine tree	848	yes
 rtk849	翁	venerable old man	849	yes
 rtk850	訟	sue	850	yes
 rtk851	谷	valley	851	no
-rtk852	浴	bathe	852	no
+rtk852	浴	bathe	852	yes
 rtk853	容	contain	853	yes
 rtk854	溶	melt	854	yes
-rtk855	欲	longing	855	no
-rtk856	裕	abundant	856	no
+rtk855	欲	longing	855	yes
+rtk856	裕	abundant	856	yes
 rtk857	鉛	lead (metal)	857	yes
 rtk858	沿	run alongside	858	no
 rtk859	賞	prize	859	yes
@@ -978,8 +978,8 @@ rtk976	稲	rice plant	976	yes
 rtk977	香	incense	977	no
 rtk978	季	seasons	978	no
 rtk979	委	committee	979	no
-rtk980	秀	excel	980	no
-rtk981	透	transparent	981	no
+rtk980	秀	excel	980	yes
+rtk981	透	transparent	981	yes
 rtk982	誘	entice	982	yes
 rtk983	稽	training	983	yes
 rtk984	穀	cereals	984	no
@@ -1784,7 +1784,7 @@ rtk1782	岸	beach	1782	no
 rtk1783	幹	tree trunk	1783	yes
 rtk1784	芋	potato	1784	no
 rtk1785	宇	eaves	1785	yes
-rtk1786	余	too much	1786	no
+rtk1786	余	too much	1786	yes
 rtk1787	除	exclude	1787	yes
 rtk1788	徐	gradually	1788	no
 rtk1789	叙	confer	1789	no
@@ -2318,7 +2318,7 @@ rtk2316	姥	aged woman	2316	no
 rtk2317	姑	mother-in-law	2317	yes
 rtk2318	姐	young miss	2318	no
 rtk2319	嬉	overjoyed	2319	yes
-rtk2320	孕	expecting	2320	no
+rtk2320	孕	expecting	2320	yes
 rtk2321	孜	assiduous	2321	yes
 rtk2322	宥	soothe	2322	yes
 rtk2323	寓	imply	2323	yes
