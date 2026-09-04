@@ -2659,6 +2659,8 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"kangxi3", "kangxi9"}},
     "rtk2260": {"character": "做", "keyword": "make",
                "expected_part_ids": {"kangxi9", "rtk355"}},
+    "rtk2283": {"character": "咳", "keyword": "cough",  # was 口,人,亠,ノ,丶 -- a literal flatten of 亥(rtk1637)'s
+               "expected_part_ids": {"rtk11", "rtk1637"}},  # own parts instead of referencing it directly
     "rtk212": {"character": "枠", "keyword": "frame",  # had NO data.txt override at all -- fell through to
                "expected_part_ids": {"rtk9", "rtk10", "rtk207"}},  # heisig-kanjis.csv's raw components text
                                                                      # verbatim, which includes "ninety" (a dead,

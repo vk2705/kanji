@@ -6100,3 +6100,31 @@ output.
   `audit_direct_ref_overlap.py --min-usage 3` (~136 candidates), the
   `个`/`亼` family decision, `慶`'s bottom shape, `壷`'s top element, the
   81 orphaned `rad{N}` rows on the live DB.
+
+### 2026-09-05 (continued) — sequential rtk2271-2410 review: one more flatten-instead-of-reference fix
+
+- Continued the sequential sweep (rtk2271-2410 checked this pass).
+  Double-checked `rtk2276`/仄 (`人,厂`, bare `人` inside a cliff) against
+  the newly-documented `人`-vs-`亻` blind spot before moving on — rendered
+  it and confirmed the `人` there really is the standalone shape (unlike
+  `侠`/`倅`'s compressed `亻`), so no fix needed; a useful confirmation
+  that the blind spot is specifically about *compressed left-radical*
+  position, not bare `人` everywhere.
+- **rtk2283 咳** ("cough") was `口,人,亠,ノ,丶` — an exact literal flatten
+  of `亥`(rtk1637, "sign of the hog")'s own parts instead of referencing
+  it directly, even though `亥` is already taught six frames earlier and
+  render-confirms the right side matches it closely. Fixed to `口,亥`.
+- Everything else in this range (the `扌`/finger and `氵`/water radical
+  families, `广`/cave, `尸`/corpse, `女`/woman, `子`/child, `宀`/roof) was
+  clean and consistently referencing already-taught compounds — no
+  further bugs found this pass.
+- Verified: full rebuild; `test_regression_fixes.py` — 1 new pin (`咳`)
+  — **1063 checks**, same 4 expected hanzi-scope non-issues; pytest (56
+  passed); `audit_self_reference.py` clean.
+- Not deployed (no SSH/server access) — data-only change, needs
+  `sync_system_data.py` + reseed.
+- Coverage: will regenerate after commit.
+- **Next session**: continue the sequential sweep from rtk2411. Standing
+  list unchanged: `audit_direct_ref_overlap.py --min-usage 3` (~136
+  candidates), the `个`/`亼` family decision, `慶`'s bottom shape, `壷`'s
+  top element, the 81 orphaned `rad{N}` rows on the live DB.

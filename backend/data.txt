@@ -2525,7 +2525,7 @@ rtk2279:囁:whisper:口,耳
 rtk2280:喋:talk:口,木,世
 rtk2281:嘩:noisy:一,口,艾,｜
 rtk2282:噂:rumor:口,尊
-rtk2283:咳:cough:口,人,亠,ノ,丶
+rtk2283:咳:cough:口,亥
 rtk2284:喧:noisy:一,口,日,宀
 rtk2285:叩:strike:口,卩
 rtk2286:嘘:lie:口,卜,匕,厂,虍
