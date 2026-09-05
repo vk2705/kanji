@@ -6864,3 +6864,83 @@ for.
 
 Not started this session — the list is built, the loop begins next
 session.
+
+## 2026-09-05 (daily check-in): worklist loop, day 1 — 20 processed, 11 real fixes
+
+Pulled the `decomposition_worklist.json` machinery from the prior
+session (verified clean first: full rebuild, 1186 checks/4 expected
+failures, pytest 56 passed, `audit_radicals.py` 0/0, no pending
+reviews). Ran the daily loop for the first time: `worklist_next.py -n 20`,
+decided each against `cjkvi-ids` + `render_glyphs.py` (Google's AI
+Overview text is a lead, not a verdict, per this audit's standing
+rule), recorded every decision via `--decide`, then rebuilt the
+worklist to drop the resolved rows (1088 → 1080 total, 1068 pending —
+some rows the batch touched weren't in this exact 20 but happened to
+already agree once the fixes landed).
+
+**9 kept as-is** (`keep-ours`) after verification found Google's
+alternative wasn't actually better: `二`/`大` are genuinely atomic in
+Heisig (CSV confirms; Google's internal stroke breakdown is real but
+not how the primitive is taught); `亘` already references the taught
+`旦` compound directly, which is better practice than Google's flat
+`一,日,一`; `升`'s current `千,廾` matches the render better than
+Google's own-flagged-"garbled" `千,十`; `真`/`左`/`右`/`有` already
+match Google's own breakdown, just via a compound reference (`具`) or
+raw strokes (`ノ,一`) instead of the unregistered `𠂇`; `孔` already
+uses the established `乙`-for-`乚` stand-in convention.
+
+**11 real fixes**, found by rendering each host + Google's suggested
+primitives side by side and cross-checking `cjkvi-ids`:
+- **Missing decomposition entirely** (`白`, `寸`, `舌` — the last one
+  had only `口`, missing its whole top): `白`=`丶,日` (CSV: "drop; sun;
+  day" — the classic "sun with a ray" mnemonic shape); `寸`=`十,丶`
+  (CSV: "drop; ten with a hook"); `舌`=`千,口` (`千`=rtk40, already
+  taught the frame immediately before).
+- **Spurious/extra stroke not present in the glyph**: `下` had an
+  extra `｜` (real shape is just `一,卜` per `cjkvi-ids` `⿱一卜`); `直`
+  had the same spurious `｜` (kept the real extra `一` at the very
+  bottom, confirmed by a solo high-res render showing it's genuinely
+  wider than `目`'s own bottom stroke — Google's alternative `乚`
+  fishhook suggestion does *not* match the render here, so this one is
+  `custom`, not straight `use-google`).
+- **Wrong/suboptimal primitive substituted for an already-registered
+  one**: `万` was flattened to raw `｜,ノ,一` instead of the registered
+  `勹`(kangxi20, "bound up") — `cjkvi-ids`'s own `⿱一⿰丿𠃌` is literally
+  `勹`'s shape; `別` used `勹` where render shows a `刂` shape instead
+  (fixed to `刀`, the established `刂`-substitute per the `到`/`剽` fix
+  earlier this audit).
+- **Missing the `刂`(sword) side entirely**: `則` (`貝` only → `貝,刀`)
+  and `副` (`一,口,田` only → `+刀`) both dropped their whole right
+  side.
+- **Redundant direct-reference overlap** (this audit's established
+  pattern #3): `乱` re-listed `舌`'s own `口` alongside referencing
+  `舌` directly — no second `口` anywhere in the render, dropped.
+- **A previous fix's compound reference didn't survive a fresh render
+  check**: `博` was `専,丶` (from an earlier same-day
+  `audit_direct_ref_overlap.py` pass that just removed a redundant
+  duplicate `十` without re-deriving the whole thing from scratch). A
+  side-by-side render of `博` vs `専` vs `甫` vs `田` shows `博`'s right
+  side has a box with a single internal divider (matching `甫`'s own
+  `⿺⿻十月丶`, confirmed against `cjkvi-ids`) — not `専`'s symmetric `田`
+  cross-grid; the two just look similar at small sizes. `甫` isn't
+  itself registered, so flattened to `十,月,丶,寸` (deduping the `十`
+  that's also the host's separate standalone left radical). Updated
+  the pin and its comment to explain the correction rather than
+  silently overwriting the earlier reasoning.
+
+Verified: full rebuild (3000 kanji, 3007 overrides); `test_regression_fixes.py`
+— 1 corrected + 11 new pins — **1196 checks**, same 4 expected
+hanzi-scope non-issues; pytest (56 passed); `audit_self_reference.py`
+clean; `audit_radicals.py` still 0/0; `review_queue.py` clean.
+`build_decomp_worklist.py` rebuilt: **1080 rows, 1068 pending**.
+Not deployed (no SSH/server access) — data-only change, needs
+`sync_system_data.py` + reseed.
+
+**Next session**: continue the worklist loop (`worklist_next.py -n 20`,
+≤20/day per owner mandate). Standing list unchanged otherwise:
+`audit_direct_ref_overlap.py --min-usage 2`'s 37 remaining candidates
+(the `敝`-family and `獣`/`鑿` marked deliberately-deferred), the 584
+un-triaged PARTIAL `results.jsonl` flags (lower priority now that the
+worklist is the primary daily driver), the `个`/`亼` family decision,
+`慶`'s bottom shape, `壷`'s top element, the 81 orphaned `rad{N}` rows
+on the live DB.

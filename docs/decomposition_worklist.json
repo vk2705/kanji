@@ -17,10 +17,10 @@
   "cjkvi_leaves": [
    "一"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-05"
  },
  {
   "id": "rtk32",
@@ -46,62 +46,10 @@
    "一",
    "日"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk37",
-  "char": "白",
-  "keyword": "white",
-  "our_parts": [],
-  "google_parts": [
-   "丶",
-   "日"
-  ],
-  "google_primitive_names": {
-   "丶": "drop",
-   "日": "sun / day"
-  },
-  "google_confidence": "high",
-  "google_note": "A drop over sun. Alt primitive 'white bird' / 'dove'.",
-  "cjkvi_ids": "白",
-  "cjkvi_leaves": [
-   "白"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk41",
-  "char": "舌",
-  "keyword": "tongue",
-  "our_parts": [
-   "口"
-  ],
-  "google_parts": [
-   "千",
-   "口"
-  ],
-  "google_primitive_names": {
-   "千": "thousand",
-   "口": "mouth"
-  },
-  "google_confidence": "high",
-  "google_note": "Thousand (top) over mouth (bottom).",
-  "cjkvi_ids": "⿱千口",
-  "cjkvi_leaves": [
-   "丿",
-   "十",
-   "口"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-05"
  },
  {
   "id": "rtk42",
@@ -127,34 +75,10 @@
    "丨",
    "丿"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk45",
-  "char": "寸",
-  "keyword": "measurement",
-  "our_parts": [],
-  "google_parts": [
-   "十",
-   "丶"
-  ],
-  "google_primitive_names": {
-   "十": "ten / needle",
-   "丶": "a drop / eyedropper"
-  },
-  "google_confidence": "high",
-  "google_note": "Ten/needle + a drop. Primitive meaning of 寸 itself is 'glue'.",
-  "cjkvi_ids": "寸",
-  "cjkvi_leaves": [
-   "寸"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-05"
  },
  {
   "id": "rtk48",
@@ -185,69 +109,15 @@
    "寸",
    "月"
   ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk51",
-  "char": "下",
-  "keyword": "below",
-  "our_parts": [
-   "｜",
-   "一",
-   "卜"
+  "status": "custom",
+  "decision": [
+   "十",
+   "月",
+   "丶",
+   "寸"
   ],
-  "google_parts": [
-   "一",
-   "卜"
-  ],
-  "google_primitive_names": {
-   "一": "ceiling / one",
-   "卜": "magic wand"
-  },
-  "google_confidence": "high",
-  "google_note": "Ceiling line with magic wand hanging below.",
-  "cjkvi_ids": "⿱一卜",
-  "cjkvi_leaves": [
-   "一",
-   "卜"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk68",
-  "char": "万",
-  "keyword": "ten thousand",
-  "our_parts": [
-   "｜",
-   "ノ",
-   "一"
-  ],
-  "google_parts": [
-   "一",
-   "勹"
-  ],
-  "google_primitive_names": {
-   "一": "one / ceiling",
-   "勹": "bound up"
-  },
-  "google_confidence": "high",
-  "google_note": "One/ceiling stroke + bound up (with modified stroke order).",
-  "cjkvi_ids": "⿱一⿰丿𠃌",
-  "cjkvi_leaves": [
-   "一",
-   "丿",
-   "𠃌"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-05"
  },
  {
   "id": "rtk76",
@@ -275,10 +145,13 @@
    "十",
    "口"
   ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "custom",
+  "decision": [
+   "乙",
+   "舌"
+  ],
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-05"
  },
  {
   "id": "rtk77",
@@ -308,10 +181,14 @@
    "且",
    "十"
   ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "custom",
+  "decision": [
+   "十",
+   "目",
+   "一"
+  ],
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-05"
  },
  {
   "id": "rtk79",
@@ -342,10 +219,10 @@
    "八",
    "十"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-05"
  },
  {
   "id": "rtk81",
@@ -371,10 +248,10 @@
    "工",
    "𠂇"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-05"
  },
  {
   "id": "rtk82",
@@ -400,10 +277,10 @@
    "口",
    "𠂇"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-05"
  },
  {
   "id": "rtk83",
@@ -429,106 +306,10 @@
    "月",
    "𠂇"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk92",
-  "char": "則",
-  "keyword": "rule",
-  "our_parts": [
-   "貝"
-  ],
-  "google_parts": [
-   "貝",
-   "刂"
-  ],
-  "google_primitive_names": {
-   "貝": "shellfish / clam / money",
-   "刂": "saber / sword"
-  },
-  "google_confidence": "high",
-  "google_note": "Shellfish (left) + saber (right).",
-  "cjkvi_ids": "⿰貝刂",
-  "cjkvi_leaves": [
-   "八",
-   "刂",
-   "目"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk93",
-  "char": "副",
-  "keyword": "vice-",
-  "our_parts": [
-   "一",
-   "口",
-   "田"
-  ],
-  "google_parts": [
-   "一",
-   "口",
-   "田",
-   "刂"
-  ],
-  "google_primitive_names": {
-   "一": "one",
-   "口": "mouth",
-   "田": "rice field",
-   "刂": "saber"
-  },
-  "google_confidence": "high",
-  "google_note": "Left cluster one+mouth+rice field (Heisig's 'wealth' primitive) + saber (right).",
-  "cjkvi_ids": "⿰畐刂",
-  "cjkvi_leaves": [
-   "一",
-   "刂",
-   "口",
-   "田"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk94",
-  "char": "別",
-  "keyword": "separate",
-  "our_parts": [
-   "口",
-   "力",
-   "勹"
-  ],
-  "google_parts": [
-   "口",
-   "力",
-   "刂"
-  ],
-  "google_primitive_names": {
-   "口": "mouth / bound up",
-   "力": "power",
-   "刂": "dagger / sword"
-  },
-  "google_confidence": "medium",
-  "google_note": "Google calls the left side 'bound up' (a 口 + short line) and right side dagger (刂). It does not clearly name a 力. current_parts is 口+力+勹. Left-side element name uncertain in the text.",
-  "cjkvi_ids": "⿰𠮠刂",
-  "cjkvi_leaves": [
-   "丿",
-   "刂",
-   "口",
-   "𠃌"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-05"
  },
  {
   "id": "rtk100",
@@ -553,10 +334,10 @@
    "乚",
    "子"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-05"
  },
  {
   "id": "rtk112",
@@ -578,10 +359,10 @@
    "一",
    "人"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-05"
  },
  {
   "id": "rtk125",

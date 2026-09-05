@@ -284,21 +284,21 @@ rtk33:凹:concave:
 rtk34:凸:convex:
 rtk35:旧:old times:｜,日
 rtk36:自:oneself:丶,目
-rtk37:白:white:
+rtk37:白:white:丶,日
 rtk38:百:hundred:一,白
 rtk39:中:in:｜,口
 rtk40:千:thousand:ノ,十
-rtk41:舌:tongue:口
+rtk41:舌:tongue:千,口
 rtk42:升:measuring box:千,廾
 rtk43:昇:rise up:升,日
 rtk44:丸:round:九,丶
-rtk45:寸:measurement:
+rtk45:寸:measurement:十,丶
 rtk46:肘:elbow:月,寸
 rtk47:専:specialty:十,寸,田
-rtk48:博:dr.:専,丶
+rtk48:博:dr.:十,月,丶,寸
 rtk49:占:fortune-telling:口,卜
 rtk50:上:above:一,卜
-rtk51:下:below:｜,一,卜
+rtk51:下:below:一,卜
 rtk52:卓:eminent:卜,早
 rtk53:朝:morning:早,月
 rtk54:嘲:ridicule:口,朝
@@ -315,7 +315,7 @@ rtk64:頁:page:一,貝
 rtk65:頑:stubborn:頁,元
 rtk66:凡:commonplace:丶,几
 rtk67:負:defeat:貝,勹
-rtk68:万:ten thousand:｜,ノ,一
+rtk68:万:ten thousand:一,勹
 rtk69:句:phrase:口,勹
 rtk70:肌:texture:月,几
 rtk71:旬:decameron:日,勹
@@ -323,8 +323,8 @@ rtk72:勺:ladle:丶,勹
 rtk73:的:bull's eye:白,勺
 rtk74:首:neck:自,丷
 rtk75:乙:the latter:
-rtk76:乱:riot:乙,口,舌
-rtk77:直:straightaway:十,目,｜,一
+rtk76:乱:riot:乙,舌
+rtk77:直:straightaway:十,目,一
 rtk78:具:tool:一,ハ,目
 rtk79:真:true:具,十
 rtk80:工:craft:
@@ -338,9 +338,9 @@ rtk87:刀:sword:
 rtk88:刃:blade:刀,丶
 rtk89:切:cut:七,刀
 rtk90:召:seduce:口,刀
-rtk92:則:rule:貝
-rtk93:副:vice-:一,口,田
-rtk94:別:separate:口,力,勹
+rtk92:則:rule:貝,刀
+rtk93:副:vice-:一,口,田,刀
+rtk94:別:separate:口,力,刀
 rtk95:丁:street:一,亅
 rtk96:町:town:田,丁
 rtk97:可:can:丁,口

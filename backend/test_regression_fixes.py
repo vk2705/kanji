@@ -540,10 +540,16 @@ EXPECTED_DECOMPOSITIONS = {
     # the same "contains kanji X's own full flattened parts" redundant-flattening
     # pattern found throughout this whole audit, just not yet swept dataset-wide.
     # A first confirmed batch, one per host:
-    # Was redundantly re-listing 専(rtk47)'s own 十 alongside referencing it
-    # directly -- 2026-09-05, audit_direct_ref_overlap.py
+    # Corrected 2026-09-05 (decomposition_worklist.json review): the prior
+    # fix (comment above, since removed) collapsed this to 専(rtk47)+丶,
+    # but a side-by-side render of 博 vs 専 vs 甫 vs 田 shows the right
+    # side's box has a single internal divider (matching 甫's own
+    # ⿺⿻十月丶, confirmed against cjkvi-ids) -- not 専's own symmetric
+    # 田 cross-grid. 甫 isn't itself a registered primitive, so it's
+    # flattened to its own real parts (十,月,丶), deduping the 十 that's
+    # also the host's separate standalone left radical.
     "rtk48": {"character": "博", "keyword": "dr.",
-              "expected_part_ids": {"rtk47", "kangxi3"}},
+              "expected_part_ids": {"rtk10", "rtk13", "kangxi3", "rtk45"}},
     "rtk60": {"character": "貼", "keyword": "stick",
               "expected_part_ids": {"rtk56", "rtk49"}},
     "rtk171": {"character": "時", "keyword": "time",
@@ -1083,6 +1089,55 @@ EXPECTED_DECOMPOSITIONS = {
     # (matching CSV's "one; ceiling; ...(貝's own sub-components)").
     "rtk64": {"character": "頁", "keyword": "page",
               "expected_part_ids": {"rtk1", "rtk56"}},
+    # 2026-09-05 decomposition_worklist.json batch (built from
+    # google_decompositions.json cross-check + cjkvi-ids + render):
+    # 白 had NO decomposition at all; render confirms 丶(drop) + 日(sun),
+    # matching CSV ("drop; sun; day") -- the classic "sun with a ray"
+    # mnemonic shape.
+    "rtk37": {"character": "白", "keyword": "white",
+              "expected_part_ids": {"kangxi3", "rtk12"}},
+    # 舌 was missing its top entirely (just 口); render confirms
+    # 千(rtk40, already taught one frame earlier) + 口.
+    "rtk41": {"character": "舌", "keyword": "tongue",
+              "expected_part_ids": {"rtk11", "rtk40"}},
+    # 寸 had NO decomposition at all; render confirms 十(with a hook) + 丶,
+    # matching CSV ("drop; ten with a hook").
+    "rtk45": {"character": "寸", "keyword": "measurement",
+              "expected_part_ids": {"kangxi3", "rtk10"}},
+    # 下 had a spurious extra ｜; render confirms just 一(top) + 卜(below),
+    # matching cjkvi-ids ⿱一卜 -- no separate pipe stroke.
+    "rtk51": {"character": "下", "keyword": "below",
+              "expected_part_ids": {"kangxi25", "rtk1"}},
+    # 万 was flattened to ｜,ノ,一 instead of referencing the already-
+    # registered 勹(kangxi20, "bound up"); render + cjkvi-ids
+    # (⿱一⿰丿𠃌, which is 勹's own shape) confirm 一+勹.
+    "rtk68": {"character": "万", "keyword": "ten thousand",
+              "expected_part_ids": {"kangxi20", "rtk1"}},
+    # 乱 redundantly re-listed 舌(rtk41)'s own 口 alongside referencing
+    # it directly; render shows no second 口 anywhere in 乱 -- pure
+    # redundant cruft, dropped.
+    "rtk76": {"character": "乱", "keyword": "riot",
+              "expected_part_ids": {"rtk41", "rtk75"}},
+    # 直 had a spurious extra ｜; render confirms 十(top) + 目(middle) +
+    # a genuine extra wide 一 at the very bottom (visibly wider than
+    # 目's own bottom stroke) -- no separate pipe, and no fishhook shape
+    # (Google's "乚" suggestion doesn't match the render here).
+    "rtk77": {"character": "直", "keyword": "straightaway",
+              "expected_part_ids": {"rtk1", "rtk10", "rtk15"}},
+    # 則/副/別 were all missing their 刂(sword radical) side entirely, or
+    # (別) substituting the wrong shape for it: 則 had only 貝; 副 had
+    # only 一,口,田; 別 had 勹 where render shows a 刂 shape instead (刂
+    # isn't its own registered primitive in this system -- 刀, rtk87,
+    # is the established stand-in, per the 到/剽 fix earlier this audit).
+    "rtk92": {"character": "則", "keyword": "rule",
+              "expected_part_ids": {"rtk56", "rtk87"}},
+    "rtk93": {"character": "副", "keyword": "vice-",
+              "expected_part_ids": {"rtk1", "rtk11", "rtk14", "rtk87"}},
+    "rtk94": {"character": "別", "keyword": "separate",
+              "expected_part_ids": {"rtk11", "rtk87", "rtk922"}},
+    # 博 -- see the corrected pin near rtk47/rtk48 above (this same
+    # session's worklist batch also touched it after a fresh render
+    # comparison superseded an earlier, less careful fix).
     # 州 had a redundant extra ｜ alongside 川+丶; CSV: "stream; flood; drops".
     "rtk135": {"character": "州", "keyword": "state",
                "expected_part_ids": {"rtk134", "kangxi3"}},
