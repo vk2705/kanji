@@ -6805,3 +6805,62 @@ on the live DB.
   positives). **2395 usable records kept.** `need_rerun.json` rebuilt:
   **605 kanji** (598 css + 7 short). Owner re-runs
   `check_kanji.py --from-list need_rerun.json`.
+
+### 2026-09-05 (continued) — a persistent, shrinking worklist (owner mandate: stop re-scanning; 20/day)
+
+Owner, verbatim: *"you should not check entire database every time. make
+a list of kanji to check, and after we are done with some kanji, remove
+it from the list forever. it is a finite list… every day process only
+20 problematic kanji."* And: Google's breakdowns look better than ours
+in most disagreements (confirmed — see below).
+
+**`docs/decomposition_worklist.json`** — the finite list. One row per
+rtk* kanji whose **current `data.txt`** primary decomposition disagrees
+with Google's AI-Overview breakdown (`google_decompositions.json`),
+after collapsing visual-variant noise (`｜`/`丨`, `ノ`/`丿`, `氵`/`水`,
+Heisig names → glyphs, etc.). **1088 rows, all `pending`.** Each row
+carries everything a reviewer needs: our parts, Google's parts +
+primitive names + confidence + note, the `cjkvi-ids` sequence and leaf
+set. Fields `status` / `decision` / `reviewed_by` / `reviewed_at` start
+empty.
+
+- **`backend/build_decomp_worklist.py`** regenerates it. Preserves every
+  row whose `status != pending` and only refreshes pending ones + adds
+  newly-disagreeing kanji. Re-run after a new `google_decompositions.json`
+  or a `data.txt` content-fix commit — a kanji whose fixed decomposition
+  now agrees with Google simply drops off. Read-only except the JSON;
+  never touches `kanji.db`. Built from `data.txt`, not the DB, so it's
+  never stale against in-flight fixes.
+- **`backend/worklist_next.py`** is the daily driver: `-n 20` prints the
+  next 20 pending with full context; `--id X` shows one; `--decide X
+  --status use-google --parts 土,亘 --by claude` records a decision in
+  the JSON. Recording a decision does **not** edit `data.txt` — that
+  stays a separate deliberate edit + commit so the doc-per-commit rule
+  and the render-it check still gate every real data change.
+
+**The daily loop** (≤20 kanji, no full-list passes, to save AI credits):
+1. `./venv/bin/python3 worklist_next.py -n 20`
+2. For each: decide keep-ours / use-google / custom, cross-checking
+   `cjkvi-ids` + `render_glyphs.py` on anything non-obvious (Google's
+   AI Overview is still just another model — cjkvi + a rendered glyph
+   break the tie).
+3. `worklist_next.py --decide … ` for each.
+4. Batch the `use-google`/`custom` ones into one `data.txt` edit +
+   `test_regression_fixes.py` pins + commit + doc entry.
+5. `build_decomp_worklist.py` to drop the now-resolved rows.
+
+**What the disagreements actually are** (sampled the 1088): the large
+majority are our data **over-decomposing** — KRADFILE-style flattening
+of a coherent RTK primitive into strokes — while Google keeps the
+primitive (e.g. rtk81 左 ours `ノ,一,工` vs Google `𠂇,工`; rtk165 垣
+ours `一,土,日` vs `土,亘`; rtk164 埼 ours `口,大,土,｜,一` vs `土,奇`).
+That is the same KRADFILE over-fragmentation this audit has been
+clearing family-by-family — the worklist just enumerates every
+remaining instance. Google is the better source in most of these, but
+each still needs the render-it check before the `data.txt` edit.
+Genuinely-suspect Google text is already isolated in
+`backend/google_doubts.json` (19 rows) and is not what the worklist is
+for.
+
+Not started this session — the list is built, the loop begins next
+session.
