@@ -858,9 +858,9 @@ rtk608:奪:rob:寸,大,隹
 rtk609:確:assurance:石,冖,隹
 rtk610:午:noon:ノ,干
 rtk611:許:permit:午,言
-rtk612:歓:delight:欠,隹,矢
-rtk613:権:authority:矢,木,隹
-rtk614:観:outlook:見,隹,矢
+rtk612:歓:delight:欠,丷,隹
+rtk613:権:authority:木,丷,隹
+rtk614:観:outlook:見,丷,隹
 rtk615:羽:feathers:
 rtk616:習:learn:羽,白
 rtk617:翌:the following:羽,立
@@ -1155,8 +1155,8 @@ rtk905:替:exchange:人,大,二,日,亠
 rtk906:賛:approve:貝,人,大,二,亠
 rtk907:潜:submerge:水,日,二,大,人,亠
 rtk908:失:lose:ノ,人,二,大
-rtk909:鉄:iron:金,矢
-rtk910:迭:transfer:込,矢
+rtk909:鉄:iron:金,失
+rtk910:迭:transfer:込,失
 rtk911:臣:retainer:
 rtk912:姫:princess:女,臣
 rtk913:蔵:storehouse:ノ,臣,戈,艾,厂
@@ -1174,7 +1174,7 @@ rtk924:労:labor:尚,力,冖
 rtk925:募:recruit:大,日,力,艾
 rtk926:劣:inferiority:少,力
 rtk927:功:achievement:工,力
-rtk928:勧:persuade:力,隹,矢
+rtk928:勧:persuade:力,丷,隹
 rtk929:努:toil:奴,力
 rtk930:勃:suddenness:子,十,力,冖
 rtk931:励:encourage:力,厂,万

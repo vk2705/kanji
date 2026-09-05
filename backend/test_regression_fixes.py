@@ -2836,12 +2836,27 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"kangxi115", "rtk741", "rtk843"}},
     "rtk2320": {"character": "孕", "keyword": "become pregnant",
                "expected_part_ids": {"rtk741", "rtk99"}},
+    # 2026-09-05: corrected -- the earlier 矢-family cleanup wrongly collapsed 鉄 to
+    # reference 矢(dart), but cjkvi-ids ⿰金失 and heisig-kanjis.csv's own component
+    # list ("metal; gold; lose; drop; husband") both name 失(lose, rtk908), not 矢.
     "rtk909": {"character": "鉄", "keyword": "iron",
-               "expected_part_ids": {"rtk1305", "rtk287"}},
+               "expected_part_ids": {"rtk287", "rtk908"}},
+    # 2026-09-05: same correction as rtk909 -- ⿺辶失 / CSV "transfer; lose; drop;
+    # husband; road" -> 失(rtk908), not 矢(dart).
     "rtk910": {"character": "迭", "keyword": "transfer",
-               "expected_part_ids": {"rtk1305", "rtk843"}},
+               "expected_part_ids": {"rtk843", "rtk908"}},
+    # 2026-09-05: the whole 雚-family (歓/権/観/勧) carried a spurious 矢(dart) from
+    # the earlier 矢-family cleanup. cjkvi-ids and heisig-kanjis.csv's own component
+    # lists ("pegasus; horse; ...; turkey") name 隹(turkey) with a 丷/horns top, no
+    # 矢 anywhere. The Joyo forms use an abbreviated 雚, drawn 丷 over 隹.
+    "rtk612": {"character": "歓", "keyword": "delight",
+               "expected_part_ids": {"kangxi12", "kangxi172", "rtk505"}},
+    "rtk613": {"character": "権", "keyword": "authority",
+               "expected_part_ids": {"kangxi12", "kangxi172", "rtk207"}},
+    "rtk614": {"character": "観", "keyword": "outlook",
+               "expected_part_ids": {"kangxi12", "kangxi172", "rtk61"}},
     "rtk928": {"character": "勧", "keyword": "persuade",
-               "expected_part_ids": {"kangxi172", "rtk1305", "rtk922"}},
+               "expected_part_ids": {"kangxi12", "kangxi172", "rtk922"}},
     "rtk1306": {"character": "矯", "keyword": "rectify",
                "expected_part_ids": {"kangxi13", "rtk11", "rtk112", "rtk1305"}},
     "rtk1129": {"character": "物", "keyword": "thing",
