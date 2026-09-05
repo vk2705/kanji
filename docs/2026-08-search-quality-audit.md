@@ -6681,3 +6681,12 @@ on the live DB.
   (`test_regression_fixes.py` now 1186 checks, pytest 56 passed).
 - Not deployed (no SSH/server access) — data-only change, needs
   `sync_system_data.py` + reseed on deploy.
+- Added `check_kanji.py --from-list need_rerun.json`: re-checks exactly
+  the ids in a JSON list, ignoring `progress.json` (the existing modes
+  all skip anything already in `progress.json`, and every rerun id is
+  already marked done). Builds each batch entry from the list file's own
+  `id`/`character`/`keyword` fields, falling back to `unreviewed_kanji.json`
+  only for `current_parts` — ~540 of the 771 rerun ids are no longer in
+  `unreviewed_kanji.json` because they've since been reviewed, so a
+  `by_id`-only lookup would silently drop them. Each rerun appends a
+  fresh `results.jsonl` record; newest wins when the file is read.

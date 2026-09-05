@@ -31,6 +31,10 @@ Usage:
     venv/bin/python3 check_kanji.py --id rtk523      # check one specific kanji by id
     venv/bin/python3 check_kanji.py --resume-only    # don't pick new random ones, just
                                                       # retry any that failed/were skipped
+    venv/bin/python3 check_kanji.py --from-list need_rerun.json   # re-check exactly the
+                                                      # ids in that file, even ones already
+                                                      # in progress.json (for when a past
+                                                      # run got no/truncated Google text)
 
 Run it once a day (or whenever) -- it remembers what's already been checked in
 progress.json and won't repeat kanji. Sending results back: either paste the
@@ -184,6 +188,12 @@ def main():
     parser.add_argument("--id", help="Check one specific kanji id instead of random ones")
     parser.add_argument("--resume-only", action="store_true",
                          help="Don't pick new kanji, just re-run this many from the not-yet-done pool in order")
+    parser.add_argument("--from-list", metavar="FILE",
+                         help="Re-check exactly the ids listed in FILE (a JSON list of {\"id\": ...} "
+                              "objects or a bare JSON list of id strings), in order, ignoring progress.json. "
+                              "Use this to redo kanji whose earlier run produced no/truncated Google text. "
+                              "results.jsonl gets a fresh appended record for each; the newest wins when the "
+                              "file is read later.")
     args = parser.parse_args()
 
     SCREENSHOTS_DIR.mkdir(exist_ok=True)
@@ -191,7 +201,32 @@ def main():
     done = load_progress()
     by_id = {e["id"]: e for e in all_kanji}
 
-    if args.id:
+    if args.from_list:
+        raw = json.loads(Path(args.from_list).read_text(encoding="utf-8"))
+        if not isinstance(raw, list) or not raw:
+            raise SystemExit(f"{args.from_list}: expected a non-empty JSON list")
+        batch = []
+        for x in raw:
+            entry = x if isinstance(x, dict) else {"id": x}
+            eid = entry.get("id")
+            if not eid:
+                continue
+            # Prefer the full record from the kanji list (has current_parts); fall back
+            # to whatever fields the list file itself carries -- need_rerun.json has
+            # id/character/keyword but not current_parts, and ~half its ids are no
+            # longer in unreviewed_kanji.json because they've since been reviewed.
+            base = dict(by_id.get(eid, {}))
+            base.setdefault("id", eid)
+            base.setdefault("character", entry.get("character", ""))
+            base.setdefault("keyword", entry.get("keyword", ""))
+            base.setdefault("current_parts", entry.get("current_parts", []))
+            if not base["character"]:
+                print(f"  skipping {eid}: no character glyph available")
+                continue
+            batch.append(base)
+        if not batch:
+            raise SystemExit("Nothing to check -- no usable entries in the list.")
+    elif args.id:
         if args.id not in by_id:
             raise SystemExit(f"{args.id} not found in {KANJI_LIST_PATH.name}")
         batch = [by_id[args.id]]
@@ -207,8 +242,12 @@ def main():
         else:
             batch = random.sample(pending, min(args.count, len(pending)))
 
-    print(f"Checking {len(batch)} kanji ({len(done)} already done, "
-          f"{len(all_kanji) - len(done)} remaining before this run)...")
+    if args.from_list:
+        print(f"Re-checking {len(batch)} kanji from {args.from_list} "
+              f"(ignoring progress.json for this run)...")
+    else:
+        print(f"Checking {len(batch)} kanji ({len(done)} already done, "
+              f"{len(all_kanji) - len(done)} remaining before this run)...")
     print("A browser window will open. Leave it alone unless a CAPTCHA appears.\n")
 
     with sync_playwright() as p:
