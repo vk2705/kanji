@@ -6507,3 +6507,87 @@ output.
   --min-usage 2`'s ~45 remaining candidates, the `个`/`亼` family
   decision, `慶`'s bottom shape, `壷`'s top element, the 81 orphaned
   `rad{N}` rows on the live DB.
+
+## 2026-09-05 (daily check-in): worked `audit_direct_ref_overlap.py --min-usage 2`'s worklist (45 → 37)
+
+Pulled 5 commits of out-of-band work from a prior unattended run (示/麻/
+元/谷/乃, 矢/勿/辛 families, 薬/鰯 disputed-review fixes, `咼`/`弗`/`丂`
+primitive discoveries, a shadow-DB `triage_google_check.py` variant, a
+new `audit_radicals.py` tool) — verified it first (full rebuild, 1171
+checks/4 expected failures, pytest 56 passed, `audit_radicals.py` 0/0
+clean, no pending reviews) before adding anything of my own.
+
+Went through the `--min-usage 2` worklist (45 candidates) by hand:
+for each, pulled `cjkvi-ids`'s real IDS decomposition for the host
+character plus (when needed) the flagged sub-primitive, and rendered
+via `render_glyphs.py` wherever the IDS entry alone was ambiguous. Most
+of the 45 turned out to be genuine "double duty" — the flagged token is
+a real, separately-drawn second occurrence of the same primitive shape
+elsewhere in the host (e.g. 鉛=金+㕣 has its own `ハ` distinct from
+`金`'s internal `ハ`; 曹=[一 over 曲]+日 has its own bottom `日` distinct
+from `曲`'s internal `日`; this exact pattern was already established
+for 暗/尽/棟/欄/亘 in earlier sessions) — those are correctly left
+alone. Found and fixed **8 real bugs**, all `金`(gold)/`干`(dry)-family,
+falling into three sub-patterns:
+- **Spurious token, not present in the glyph at all** (same class as
+  the `刂`/`primitive_roof` dead-token finds, but here the token *does*
+  resolve — it's just wrong for this host): `鋭`(pointed, rtk539) had
+  `个`(umbrella) alongside `丷`+`兄` for its `兌`-side, but `兌` is
+  `⿱八兄` — no umbrella shape anywhere (confirmed against the
+  already-correct sibling entries `脱`/`説`, rtk537/538, which use the
+  same `兌` and correctly list only `丷,兄`). `鋏`(scissors, rtk2795)
+  had the same spurious `个` next to `人,大` for `夾`=`⿻大从` — render
+  confirms `夾` is just "big flanked by two people," no umbrella stroke.
+- **Old flattening cruft that should collapse to a direct reference to
+  an already-taught kanji**: `釜`(cauldron, rtk1367) was flattened all
+  the way down to `一,干,丷,父,王,丶,ノ,金` (8 tokens, mixing `金`'s own
+  sub-parts with `金` itself) when render+CSV ("father; metal; gold")
+  confirm it's simply `父,金`. `鎌`(sickle, rtk1725) was similarly
+  flattened to 7 raw strokes instead of referencing `兼`(rtk1723,
+  already taught) directly — render confirms `鎌`=`金`+`兼` cleanly.
+  `鋲`(rivet, rtk2785) used `斤`(ax) + a bare `ハ` for its right side
+  instead of referencing `兵`(rtk1429, soldier, already taught,
+  `⿱丘八`) directly.
+- **Wrong primitive substituted for a visually-similar one that's
+  already registered**: `拝`(worship, rtk1686) used `｜,一,干` for its
+  right side (`⿱一丰`), but `丰`("bushes") is already a registered
+  primitive (`prim-bushes`) and CSV's own component list for this frame
+  names it explicitly ("finger; fingers; one; ceiling; bushes") — render
+  confirms the right side has 4 horizontals + a vertical (一 + 丰's own
+  3+vertical), not 干's 2+vertical. `南`(south, rtk1740) listed a
+  spurious `干` alongside its real `十,丷,冂` — `cjkvi-ids` gives
+  `⿱十⿵冂𢆉`: the top is plain `十`, not `干` (which needs an *extra*
+  crossbar `南` simply doesn't have). `午`(noon, rtk610) listed a
+  redundant `十` alongside `ノ,干` — `干` already fully contains `十`
+  (`干`=`十`+`一`) with no second occurrence anywhere in `午`'s 4
+  strokes (unlike the `亘`=`一`+`旦` case, where the extra `一` **is** a
+  real second stroke — confirmed by comparing renders side by side).
+
+Also spot-checked several structurally-similar candidates that turned
+out to be correct as-is and are now the concrete precedent for future
+double-duty calls on this list: `鉛`(rtk857, `金`'s `ハ` vs `㕣`'s own
+`ハ`), `砺`(rtk2641, `石`'s `厂` vs `厉`'s own `⿸厂万`), `棟`/`欄`
+(rtk544/1756, `木` vs `東`'s internal `日`+`木` — same family as the
+earlier `暗` precedent), `曹`(rtk1257), `亘`(rtk32). Left the `敝`-family
+(`蔽`/`弊`/`瞥`/`鼈`/`幣`, which use `尚` as a deliberate shape
+stand-in for Heisig's unregistered "shredder" primitive) and `獣`/`鑿`
+alone — genuinely ambiguous multi-layer cases where CSV's `components`
+column doesn't cleanly map to a single correct fix; adding to the
+standing deferred list below rather than guessing.
+
+Verified: full rebuild (3000 kanji, 3007 overrides); `test_regression_fixes.py`
+— 8 new/updated pins — **1178 checks**, same 4 expected hanzi-scope
+non-issues; pytest (56 passed); `audit_self_reference.py` clean;
+`audit_flattening.py`/`audit_flattening_subsequence.py` show only
+pre-existing obscure-variant-kanji findings in the 2960s-2990s range
+(unrelated to this batch, not touched); `audit_radicals.py` still 0/0.
+`audit_direct_ref_overlap.py --min-usage 2`: **45 → 37** candidates.
+Not deployed (no SSH/server access) — data-only change, needs
+`sync_system_data.py` + reseed.
+
+**Next session**: `audit_direct_ref_overlap.py --min-usage 2`'s
+remaining 37 candidates (now with the `敝`-family and `獣`/`鑿` marked
+as deliberately-deferred rather than unreviewed — see above), the 584
+un-triaged PARTIAL `results.jsonl` flags, the `个`/`亼` family decision,
+`慶`'s bottom shape, `壷`'s top element, the 81 orphaned `rad{N}` rows
+on the live DB.

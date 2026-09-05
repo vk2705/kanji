@@ -785,7 +785,7 @@ rtk535:放:set free:方,攵
 rtk536:激:violent:水,白,方,攵
 rtk537:脱:undress:月,兄,丷
 rtk538:説:opinion:言,兄,丷
-rtk539:鋭:pointed:金,兄,丷,个
+rtk539:鋭:pointed:金,兄,丷
 rtk540:曽:formerly:田,日,丷
 rtk541:増:increase:曽,土
 rtk542:贈:presents:貝,曽
@@ -856,7 +856,7 @@ rtk606:準:semi-:十,水,隹
 rtk607:奮:stirred up:大,田,隹
 rtk608:奪:rob:寸,大,隹
 rtk609:確:assurance:石,冖,隹
-rtk610:午:noon:ノ,干,十
+rtk610:午:noon:ノ,干
 rtk611:許:permit:午,言
 rtk612:歓:delight:欠,隹,矢
 rtk613:権:authority:矢,木,隹
@@ -1613,7 +1613,7 @@ rtk1363:官:bureaucrat:宀,𠂤
 rtk1364:棺:coffin:官,木
 rtk1365:管:pipe:官,竹
 rtk1366:父:father:
-rtk1367:釜:kettle:一,干,丷,父,王,丶,ノ,金
+rtk1367:釜:kettle:父,金
 rtk1368:交:mingle:父,亠
 rtk1369:効:merit:交,力
 rtk1370:較:contrast:車,交
@@ -1932,7 +1932,7 @@ rtk1682:隆:hump:生,夂,阝
 rtk1683:峰:summit:｜,一,山,夂
 rtk1684:蜂:bee:｜,一,虫,夂
 rtk1685:縫:sew:｜,一,込,糸,夂
-rtk1686:拝:worship:｜,一,干,扌
+rtk1686:拝:worship:扌,一,丰
 rtk1687:寿:longevity:ノ,一,寸,二
 rtk1688:鋳:casting:ノ,亠,土,金,寸
 rtk1689:籍:enroll:｜,一,竹,土,日,ハ,木,亠,耒,二,ノ
@@ -1971,7 +1971,7 @@ rtk1721:預:deposit:欠,予,頁
 rtk1722:野:plains:矛,里,亅
 rtk1723:兼:concurrently:｜,ヨ,一,ハ,丷
 rtk1724:嫌:dislike:｜,ヨ,女,ハ,丷
-rtk1725:鎌:sickle:金,王,丶,ノ,ヨ,丷,ハ
+rtk1725:鎌:sickle:金,兼
 rtk1726:謙:self-effacing:｜,ヨ,言,ハ,丷
 rtk1727:廉:bargain:｜,ヨ,ハ,广,丷
 rtk1728:西:west:
@@ -1986,7 +1986,7 @@ rtk1736:慄:fear:西,state of mind,木
 rtk1737:遷:transition:込,西,大,己
 rtk1738:覆:capsize:西,日,夂,彳
 rtk1739:煙:smoke:火,西,土
-rtk1740:南:south:干,十,丷,冂
+rtk1740:南:south:十,丷,冂
 rtk1741:楠:camphor tree:木,南
 rtk1742:献:offering:犬,南
 rtk1743:門:gate:
@@ -3029,7 +3029,7 @@ rtk2781:鋤:spade up:金,目,力
 rtk2782:鋸:saw (cuts wood):金,居
 rtk2783:錐:auger:金,隹
 rtk2784:鍬:hoe with long blade at acute angle:火,禾,金
-rtk2785:鋲:rivet:斤,金,ハ
+rtk2785:鋲:rivet:金,兵
 rtk2786:錫:copper:金,日,勿
 rtk2787:錨:anchor:金,田,艾
 rtk2788:釘:nail:一,金,亅
@@ -3039,7 +3039,7 @@ rtk2791:鎚:hammer:金,追
 rtk2792:鉦:bell:一,金,止
 rtk2793:錆:rust:金,青
 rtk2794:鍾:spindle:｜,金,日,里,ノ
-rtk2795:鋏:scissors:金,人,大,个
+rtk2795:鋏:scissors:金,人,大
 rtk2796:閃:flash:人,門
 rtk2797:悶:be in agony:心,門
 rtk2798:閤:small side gate:口,門,个,一
