@@ -186,73 +186,85 @@ _EXPAND_AND_READ_JS = r"""
     try { c.scrollIntoView({ block: "center" }); c.click(); clicked++; } catch (e) {}
   }
 
-  // 2. Locate the AI Overview region -- pick the BIGGEST text container, not the
-  //    first match (the first is often just the heading wrapper).
+  // Read an element's visible prose, ignoring <style>/<script>/<template> and
+  // hidden subtrees (Google stashes raw CSS text in display:none nodes, and our
+  // unclamp step below could otherwise reveal it).
+  const proseOf = (el) => {
+    const clone = el.cloneNode(true);
+    clone.querySelectorAll("style,script,template,noscript").forEach(n => n.remove());
+    return (clone.innerText || clone.textContent || "").replace(/\s+\n/g, "\n").trim();
+  };
+  // True when a string is CSS/JS text, not prose: lots of { } ; relative to words.
+  const looksLikeCode = (s) => {
+    if (!s) return false;
+    const braces = (s.match(/[{}();]/g) || []).length;
+    const words = (s.match(/[A-Za-zÀ-￿]{3,}/g) || []).length;
+    return braces > 8 && braces > words * 0.3;
+  };
+
+  // 3. Open <details>, set aria-expanded, strip clamp styles (never on hidden /
+  //    style / script nodes) so truncated prose becomes readable.
+  document.querySelectorAll("details:not([open])").forEach(d => { d.open = true; unclamped++; });
+  document.querySelectorAll("[aria-expanded='false']").forEach(e => e.setAttribute("aria-expanded", "true"));
+  for (const el of document.querySelectorAll("div,span,p,li,section,article")) {
+    if (el.closest("style,script,template,noscript") || el.hasAttribute("hidden")) continue;
+    const cs = getComputedStyle(el);
+    if (cs.display === "none" && !el.innerText) continue;
+    const clamped =
+      cs.webkitLineClamp && cs.webkitLineClamp !== "none" ||
+      cs.display === "-webkit-box" ||
+      (cs.maxHeight && cs.maxHeight !== "none" && parseFloat(cs.maxHeight) < el.scrollHeight - 4);
+    if (clamped) {
+      el.style.setProperty("-webkit-line-clamp", "unset", "important");
+      el.style.setProperty("max-height", "none", "important");
+      el.style.setProperty("display", cs.display === "-webkit-box" ? "block" : cs.display, "important");
+      unclamped++;
+    }
+  }
+
+  // 2. Locate the AI Overview region: the container with the MOST prose that
+  //    holds an "AI Overview" heading and isn't CSS/JS text.
   const cands = new Set();
   for (const sel of [
     "[aria-label='AI Overview']", "[aria-label*='AI Overview' i]",
     "#m-x-content", "#Odp5De", "div[data-attrid='wa:/description']",
     "div[jsname='I4bIT']", "[data-attrid*='overview' i]",
   ]) document.querySelectorAll(sel).forEach(e => cands.add(e));
-
-  // heading-based: the container that HOLDS an "AI Overview" heading
   for (const h of document.querySelectorAll("h1,h2,h3,div[role='heading'],span,div")) {
     if (norm(h.textContent) !== "ai overview") continue;
     let n = h;
     for (let i = 0; i < 8 && n && n.parentElement; i++) { n = n.parentElement; cands.add(n); }
   }
 
-  let root = null, rootLen = 0;
+  let root = null, best = 0;
   for (const c of cands) {
-    const L = (c.innerText || "").length;
-    // must contain the heading text and a real body, and not be the whole page
-    if (L > rootLen && L < 20000 && /ai overview/i.test(c.innerText || "")) { root = c; rootLen = L; }
+    const s = proseOf(c);
+    if (!/ai overview/i.test(s) || looksLikeCode(s)) continue;
+    // score = prose length, penalised if it still contains obvious CSS blocks
+    const score = s.length - (s.match(/[{};]/g) || []).length * 30;
+    if (score > best && s.length < 12000) { root = c; best = score; }
   }
   if (!root) {
-    // last resort: any element mentioning "Remembering the Kanji" near the top
-    for (const c of document.querySelectorAll("div")) {
-      const t = c.innerText || "";
-      if (t.length > 200 && t.length < 8000 && /Remembering the Kanji|RTK|primitive/i.test(t)) { root = c; break; }
+    for (const c of document.querySelectorAll("div,section")) {
+      const s = proseOf(c);
+      if (s.length > 200 && s.length < 8000 && !looksLikeCode(s) &&
+          /Remembering the Kanji|RTK|primitive|Heisig/i.test(s)) { root = c; break; }
     }
   }
   if (!root) return { text: null, clicked, unclamped, foundRoot: false };
 
-  // 3. Open <details>, set aria-expanded, strip clamp styles inside root.
-  root.querySelectorAll("details:not([open])").forEach(d => { d.open = true; unclamped++; });
-  root.querySelectorAll("[aria-expanded='false']").forEach(e => e.setAttribute("aria-expanded", "true"));
-  for (const el of root.querySelectorAll("*")) {
-    const cs = getComputedStyle(el);
-    const clamped =
-      cs.webkitLineClamp && cs.webkitLineClamp !== "none" ||
-      cs.display === "-webkit-box" ||
-      (cs.maxHeight && cs.maxHeight !== "none" && parseFloat(cs.maxHeight) < el.scrollHeight - 4) ||
-      ((cs.overflow === "hidden" || cs.overflowY === "hidden") && el.scrollHeight > el.clientHeight + 4);
-    if (clamped) {
-      el.style.setProperty("-webkit-line-clamp", "unset", "important");
-      el.style.setProperty("max-height", "none", "important");
-      el.style.setProperty("height", "auto", "important");
-      el.style.setProperty("overflow", "visible", "important");
-      el.style.setProperty("display", "block", "important");
-      unclamped++;
-    }
-  }
-
-  // Trim the surrounding page chrome: keep from the "AI Overview" heading to
-  // just before the "Show more"/"Web results"/"People also ask" that follows it.
-  let text = (root.innerText || "").trim();
+  // Trim surrounding page chrome.
+  let text = proseOf(root);
   const startM = text.search(/AI Overview/i);
   if (startM >= 0) text = text.slice(startM);
   const endM = text.search(/\n\s*(Web results|People also ask|Related searches|Related questions)\b/i);
   if (endM > 200) text = text.slice(0, endM).trim();
-  // drop a trailing expand/collapse control line
   text = text.replace(/\n?\s*Show (more|less)( AI Overview)?\s*$/i, "").trim();
   text = text.replace(/\n?\s*(Generative AI is experimental|AI responses may include mistakes)[^\n]*$/i, "").trim();
 
-  // "Generating" = the box exists but Google is still streaming it in. Only a
-  // genuinely tiny body counts now that `root` is the biggest text container.
   const body = norm(text).replace(/^ai overview/, "").trim();
   const generating =
-    body.length < 60 ||
+    body.length < 60 || looksLikeCode(body) ||
     /^(searching|generating|loading|thinking)\b/.test(body) ||
     body === "…" || body === "...";
 

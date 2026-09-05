@@ -1,3614 +1,3632 @@
 [
  {
+  "id": "rtk5",
+  "character": "五",
+  "keyword": "five",
+  "reason": "short"
+ },
+ {
+  "id": "rtk42",
+  "character": "升",
+  "keyword": "measuring box",
+  "reason": "short"
+ },
+ {
+  "id": "rtk47",
+  "character": "専",
+  "keyword": "specialty",
+  "reason": "short"
+ },
+ {
+  "id": "rtk53",
+  "character": "朝",
+  "keyword": "morning",
+  "reason": "short"
+ },
+ {
   "id": "rtk57",
   "character": "唄",
   "keyword": "pop song",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk65",
   "character": "頑",
   "keyword": "stubborn",
-  "reason": "too-short"
+  "reason": "css"
+ },
+ {
+  "id": "rtk73",
+  "character": "的",
+  "keyword": "bull's eye",
+  "reason": "short"
  },
  {
   "id": "rtk86",
   "character": "項",
   "keyword": "paragraph",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk105",
   "character": "母",
   "keyword": "mama",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk106",
   "character": "貫",
   "keyword": "pierce",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk108",
   "character": "呪",
   "keyword": "curse",
-  "reason": "too-short"
+  "reason": "css"
+ },
+ {
+  "id": "rtk109",
+  "character": "克",
+  "keyword": "overcome",
+  "reason": "short"
  },
  {
   "id": "rtk133",
   "character": "奇",
   "keyword": "strange",
-  "reason": "too-short"
+  "reason": "css"
+ },
+ {
+  "id": "rtk141",
+  "character": "腺",
+  "keyword": "gland",
+  "reason": "short"
  },
  {
   "id": "rtk147",
   "character": "汎",
   "keyword": "pan-",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk149",
   "character": "汰",
   "keyword": "cleanse",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk157",
   "character": "河",
   "keyword": "river",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk199",
   "character": "完",
   "keyword": "perfect",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk213",
   "character": "梢",
   "keyword": "treetops",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk242",
   "character": "薄",
   "keyword": "dilute",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk248",
   "character": "膜",
   "keyword": "membrane",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk308",
   "character": "喩",
   "keyword": "metaphor",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk312",
   "character": "格",
   "keyword": "status",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk325",
   "character": "運",
   "keyword": "carry",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk333",
   "character": "亭",
   "keyword": "pavilion",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk338",
   "character": "舎",
   "keyword": "cottage",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk342",
   "character": "吉",
   "keyword": "good luck",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk344",
   "character": "荘",
   "keyword": "villa",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk358",
   "character": "警",
   "keyword": "admonish",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk369",
   "character": "詠",
   "keyword": "recitation",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk379",
   "character": "弐",
   "keyword": "ii (two)",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk391",
   "character": "減",
   "keyword": "dwindle",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk404",
   "character": "賦",
   "keyword": "levy",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk415",
   "character": "題",
   "keyword": "topic",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk417",
   "character": "建",
   "keyword": "build",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk418",
   "character": "鍵",
   "keyword": "key",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk426",
   "character": "裏",
   "keyword": "back",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk444",
   "character": "帯",
   "keyword": "sash",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk446",
   "character": "刺",
   "keyword": "thorn",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk458",
   "character": "妖",
   "keyword": "bewitched",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk471",
   "character": "商",
   "keyword": "make a deal",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk472",
   "character": "嫡",
   "keyword": "legitimate wife",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk473",
   "character": "適",
   "keyword": "suitable",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk475",
   "character": "敵",
   "keyword": "enemy",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk479",
   "character": "頃",
   "keyword": "about that time",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk489",
   "character": "謁",
   "keyword": "audience",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk501",
   "character": "乞",
   "keyword": "beg",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk502",
   "character": "乾",
   "keyword": "drought",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk520",
   "character": "韻",
   "keyword": "rhyme",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk537",
   "character": "脱",
   "keyword": "undress",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk544",
   "character": "棟",
   "keyword": "ridgepole",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk574",
   "character": "電",
   "keyword": "electricity",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk578",
   "character": "逐",
   "keyword": "pursue",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk591",
   "character": "達",
   "keyword": "accomplished",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk592",
   "character": "羨",
   "keyword": "envious",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk593",
   "character": "差",
   "keyword": "distinction",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk605",
   "character": "雌",
   "keyword": "female",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk608",
   "character": "奪",
   "keyword": "rob",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk610",
   "character": "午",
   "keyword": "noon",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk617",
   "character": "翌",
   "keyword": "the following",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk625",
   "character": "団",
   "keyword": "group",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk627",
   "character": "姻",
   "keyword": "matrimony",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk631",
   "character": "壇",
   "keyword": "podium",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk664",
   "character": "寡",
   "keyword": "widow",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk682",
   "character": "憬",
   "keyword": "hanker",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk683",
   "character": "慕",
   "keyword": "pining",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk688",
   "character": "看",
   "keyword": "watch over",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk689",
   "character": "摩",
   "keyword": "chafe",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk696",
   "character": "拉",
   "keyword": "yank",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk699",
   "character": "抄",
   "keyword": "extract",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk701",
   "character": "批",
   "keyword": "criticism",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk706",
   "character": "拘",
   "keyword": "arrest",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk713",
   "character": "拶",
   "keyword": "imminent",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk720",
   "character": "拾",
   "keyword": "pick up",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk721",
   "character": "担",
   "keyword": "shouldering",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk722",
   "character": "拠",
   "keyword": "foothold",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk734",
   "character": "刑",
   "keyword": "punish",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk735",
   "character": "型",
   "keyword": "mould",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk739",
   "character": "存",
   "keyword": "suppose",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk748",
   "character": "吏",
   "keyword": "officer",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk755",
   "character": "隻",
   "keyword": "vessels",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk761",
   "character": "抜",
   "keyword": "slip out",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk764",
   "character": "股",
   "keyword": "thigh",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk798",
   "character": "払",
   "keyword": "pay",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk805",
   "character": "台",
   "keyword": "pedestal",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk820",
   "character": "棄",
   "keyword": "abandon",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk824",
   "character": "銃",
   "keyword": "gun",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk848",
   "character": "松",
   "keyword": "pine tree",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk862",
   "character": "常",
   "keyword": "usual",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk868",
   "character": "披",
   "keyword": "expose",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk885",
   "character": "撮",
   "keyword": "snapshot",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk889",
   "character": "敢",
   "keyword": "daring",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk892",
   "character": "慢",
   "keyword": "ridicule",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk893",
   "character": "漫",
   "keyword": "loose",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk898",
   "character": "濁",
   "keyword": "voiced",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk899",
   "character": "環",
   "keyword": "ring",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk900",
   "character": "還",
   "keyword": "send back",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk910",
   "character": "迭",
   "keyword": "alternate",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk947",
   "character": "径",
   "keyword": "diameter",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk959",
   "character": "稼",
   "keyword": "earnings",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk973",
   "character": "梨",
   "keyword": "pear tree",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk975",
   "character": "穂",
   "keyword": "ear of a plant",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk976",
   "character": "稲",
   "keyword": "rice plant",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk983",
   "character": "稽",
   "keyword": "training",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk996",
   "character": "菊",
   "keyword": "chrysanthemum",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk999",
   "character": "楼",
   "keyword": "watchtower",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1000",
   "character": "類",
   "keyword": "sort",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1002",
   "character": "膝",
   "keyword": "knee",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1016",
   "character": "等",
   "keyword": "etc.",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1025",
   "character": "侶",
   "keyword": "partner",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1026",
   "character": "但",
   "keyword": "however",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1032",
   "character": "件",
   "keyword": "affair",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1036",
   "character": "伝",
   "keyword": "transmit",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1037",
   "character": "仏",
   "keyword": "buddha",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1039",
   "character": "仮",
   "keyword": "provisional",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1040",
   "character": "伎",
   "keyword": "performing artist",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1041",
   "character": "伯",
   "keyword": "chief",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1042",
   "character": "俗",
   "keyword": "vulgar",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1043",
   "character": "信",
   "keyword": "faith",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1045",
   "character": "依",
   "keyword": "reliant",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1046",
   "character": "例",
   "keyword": "example",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1048",
   "character": "健",
   "keyword": "healthy",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1050",
   "character": "侍",
   "keyword": "waiter",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk1051",
   "character": "停",
   "keyword": "halt",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1052",
   "character": "値",
   "keyword": "price",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1053",
   "character": "倣",
   "keyword": "emulate",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1054",
   "character": "傲",
   "keyword": "arrogance",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1055",
   "character": "倒",
   "keyword": "overthrow",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1089",
   "character": "俊",
   "keyword": "sagacious",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1091",
   "character": "俺",
   "keyword": "myself",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1131",
   "character": "賜",
   "keyword": "grant",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1133",
   "character": "尼",
   "keyword": "nun",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1135",
   "character": "泥",
   "keyword": "mud",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1137",
   "character": "履",
   "keyword": "footgear",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk1177",
   "character": "慰",
   "keyword": "consolation",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1178",
   "character": "款",
   "keyword": "goodwill",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1207",
   "character": "析",
   "keyword": "chop",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1211",
   "character": "折",
   "keyword": "fold",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk1233",
   "character": "寝",
   "keyword": "lie down",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1235",
   "character": "掃",
   "keyword": "sweep",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk1256",
   "character": "曲",
   "keyword": "bend",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk1263",
   "character": "科",
   "keyword": "department",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1271",
   "character": "惜",
   "keyword": "pity",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1298",
   "character": "版",
   "keyword": "printing block",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1306",
   "character": "矯",
   "keyword": "rectify",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk1311",
   "character": "矛",
   "keyword": "halberd",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk1341",
   "character": "考",
   "keyword": "consider",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1349",
   "character": "署",
   "keyword": "signature",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1353",
   "character": "渚",
   "keyword": "strand",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk1355",
   "character": "峡",
   "keyword": "gorge",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1360",
   "character": "阜",
   "keyword": "large hill",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1376",
   "character": "路",
   "keyword": "path",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1402",
   "character": "陣",
   "keyword": "camp",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk1446",
   "character": "絵",
   "keyword": "picture",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1447",
   "character": "統",
   "keyword": "overall",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk1460",
   "character": "経",
   "keyword": "sutra",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1466",
   "character": "総",
   "keyword": "general",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk1470",
   "character": "継",
   "keyword": "inherit",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1479",
   "character": "後",
   "keyword": "behind",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1480",
   "character": "幽",
   "keyword": "faint",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1491",
   "character": "磁",
   "keyword": "magnet",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk1494",
   "character": "孫",
   "keyword": "grandchild",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1503",
   "character": "令",
   "keyword": "orders",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1509",
   "character": "勇",
   "keyword": "courage",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1511",
   "character": "通",
   "keyword": "traffic",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1518",
   "character": "氾",
   "keyword": "widespread",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1519",
   "character": "厄",
   "keyword": "unlucky",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1525",
   "character": "柳",
   "keyword": "willow",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1526",
   "character": "卵",
   "keyword": "egg",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1528",
   "character": "瑠",
   "keyword": "marine blue",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1534",
   "character": "酉",
   "keyword": "sign of the bird",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1535",
   "character": "酒",
   "keyword": "sake",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1540",
   "character": "酬",
   "keyword": "repay",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1549",
   "character": "頭",
   "keyword": "head",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1561",
   "character": "蓋",
   "keyword": "lid",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1571",
   "character": "根",
   "keyword": "root",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1572",
   "character": "即",
   "keyword": "instant",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1575",
   "character": "退",
   "keyword": "retreat",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1582",
   "character": "食",
   "keyword": "eat",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1584",
   "character": "飲",
   "keyword": "drink",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1593",
   "character": "既",
   "keyword": "previously",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1599",
   "character": "評",
   "keyword": "evaluate",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1605",
   "character": "離",
   "keyword": "detach",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1609",
   "character": "純",
   "keyword": "genuine",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1623",
   "character": "執",
   "keyword": "tenacious",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1627",
   "character": "糾",
   "keyword": "twist",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1638",
   "character": "核",
   "keyword": "nucleus",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1663",
   "character": "積",
   "keyword": "volume",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1664",
   "character": "債",
   "keyword": "bond",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1665",
   "character": "漬",
   "keyword": "pickling",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1714",
   "character": "吟",
   "keyword": "versify",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1736",
   "character": "慄",
   "keyword": "shudder",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1738",
   "character": "覆",
   "keyword": "capsize",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1748",
   "character": "闇",
   "keyword": "pitch dark",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk1781",
   "character": "軒",
   "keyword": "flats",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1784",
   "character": "芋",
   "keyword": "potato",
-  "reason": "too-short"
- },
- {
-  "id": "rtk1786",
-  "character": "余",
-  "keyword": "too much",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1788",
   "character": "徐",
   "keyword": "gradually",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1789",
   "character": "叙",
   "keyword": "confer",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1790",
   "character": "途",
   "keyword": "route",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1791",
   "character": "斜",
   "keyword": "diagonal",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1792",
   "character": "塗",
   "keyword": "paint",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1793",
   "character": "束",
   "keyword": "bundle",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1798",
   "character": "辣",
   "keyword": "bitter",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1803",
   "character": "検",
   "keyword": "examination",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1805",
   "character": "重",
   "keyword": "heavy",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1807",
   "character": "腫",
   "keyword": "tumor",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1808",
   "character": "勲",
   "keyword": "meritorious deed",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1811",
   "character": "衝",
   "keyword": "collide",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1812",
   "character": "薫",
   "keyword": "fragrant",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1818",
   "character": "痩",
   "keyword": "lose weight",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1825",
   "character": "痛",
   "keyword": "pain",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1827",
   "character": "匿",
   "keyword": "hide",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1828",
   "character": "匠",
   "keyword": "artisan",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1832",
   "character": "枢",
   "keyword": "hinge",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1847",
   "character": "形",
   "keyword": "shape",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1849",
   "character": "杉",
   "keyword": "cedar",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1856",
   "character": "参",
   "keyword": "visit",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1860",
   "character": "診",
   "keyword": "checkup",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk1866",
   "character": "斉",
   "keyword": "adjusted",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1867",
   "character": "剤",
   "keyword": "dose",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1868",
   "character": "済",
   "keyword": "finish",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1869",
   "character": "斎",
   "keyword": "purification",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1870",
   "character": "粛",
   "keyword": "solemn",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1871",
   "character": "塁",
   "keyword": "bases",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1872",
   "character": "楽",
   "keyword": "music",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1874",
   "character": "率",
   "keyword": "ratio",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1875",
   "character": "渋",
   "keyword": "astringent",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1877",
   "character": "央",
   "keyword": "center",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1879",
   "character": "映",
   "keyword": "reflect",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1883",
   "character": "跡",
   "keyword": "tracks",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1886",
   "character": "湾",
   "keyword": "gulf",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1887",
   "character": "黄",
   "keyword": "yellow",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1888",
   "character": "横",
   "keyword": "sideways",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1890",
   "character": "色",
   "keyword": "color",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1893",
   "character": "肥",
   "keyword": "fertilizer",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1896",
   "character": "某",
   "keyword": "so-and-so",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk1898",
   "character": "媒",
   "keyword": "mediator",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1899",
   "character": "欺",
   "keyword": "deceit",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1902",
   "character": "期",
   "keyword": "period",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1903",
   "character": "碁",
   "keyword": "go",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1905",
   "character": "甚",
   "keyword": "tremendously",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1910",
   "character": "遣",
   "keyword": "dispatch",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1914",
   "character": "組",
   "keyword": "association",
-  "reason": "too-short"
- },
- {
-  "id": "rtk1916",
-  "character": "租",
-  "keyword": "tariff",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1920",
   "character": "査",
   "keyword": "investigate",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1921",
   "character": "助",
   "keyword": "help",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1922",
   "character": "宜",
   "keyword": "best regards",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1923",
   "character": "畳",
   "keyword": "tatami mat",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1936",
   "character": "異",
   "keyword": "uncommon",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1939",
   "character": "洪",
   "keyword": "deluge",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1940",
   "character": "港",
   "keyword": "harbor",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1942",
   "character": "爆",
   "keyword": "bomb",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1943",
   "character": "恭",
   "keyword": "respect",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1945",
   "character": "殿",
   "keyword": "mr.",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1946",
   "character": "井",
   "keyword": "well",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1950",
   "character": "亜",
   "keyword": "asia",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1952",
   "character": "円",
   "keyword": "circle",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1953",
   "character": "角",
   "keyword": "angle",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1957",
   "character": "講",
   "keyword": "lecture",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1959",
   "character": "構",
   "keyword": "posture",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1960",
   "character": "溝",
   "keyword": "gutter",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1961",
   "character": "論",
   "keyword": "argument",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk1963",
   "character": "輪",
   "keyword": "wheel",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1966",
   "character": "編",
   "keyword": "compilation",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1967",
   "character": "冊",
   "keyword": "tome",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1969",
   "character": "典",
   "keyword": "code",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1971",
   "character": "紙",
   "keyword": "paper",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk1975",
   "character": "底",
   "keyword": "bottom",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1976",
   "character": "民",
   "keyword": "people",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1979",
   "character": "哺",
   "keyword": "suckle",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1982",
   "character": "舗",
   "keyword": "shop",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1984",
   "character": "邸",
   "keyword": "residence",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1986",
   "character": "郡",
   "keyword": "county",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1987",
   "character": "郊",
   "keyword": "outskirts",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1988",
   "character": "部",
   "keyword": "section",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1994",
   "character": "響",
   "keyword": "echo",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1997",
   "character": "盾",
   "keyword": "shield",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk1999",
   "character": "派",
   "keyword": "faction",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2000",
   "character": "脈",
   "keyword": "vein",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2001",
   "character": "衆",
   "keyword": "masses",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2003",
   "character": "段",
   "keyword": "grade",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2006",
   "character": "幻",
   "keyword": "phantasm",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2007",
   "character": "司",
   "keyword": "director",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2013",
   "character": "舶",
   "keyword": "liner",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2017",
   "character": "盤",
   "keyword": "tray",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2018",
   "character": "搬",
   "keyword": "conveyor",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2022",
   "character": "瓜",
   "keyword": "melon",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2023",
   "character": "弧",
   "keyword": "arc",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2029",
   "character": "来",
   "keyword": "come",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2033",
   "character": "沈",
   "keyword": "sink",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2034",
   "character": "枕",
   "keyword": "pillow",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2037",
   "character": "衰",
   "keyword": "decline",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2041",
   "character": "革",
   "keyword": "leather",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2044",
   "character": "声",
   "keyword": "voice",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2050",
   "character": "承",
   "keyword": "acquiesce",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2051",
   "character": "函",
   "keyword": "bin",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2052",
   "character": "極",
   "keyword": "poles",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk2057",
   "character": "釈",
   "keyword": "interpretation",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk2062",
   "character": "毛",
   "keyword": "fur",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2063",
   "character": "耗",
   "keyword": "decrease",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2065",
   "character": "宅",
   "keyword": "home",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2066",
   "character": "託",
   "keyword": "consign",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2067",
   "character": "為",
   "keyword": "do",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk2069",
   "character": "畏",
   "keyword": "apprehensive",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2083",
   "character": "獣",
   "keyword": "animal",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2102",
   "character": "緩",
   "keyword": "slacken",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2104",
   "character": "嘱",
   "keyword": "entrust",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2148",
   "character": "虚",
   "keyword": "void",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2149",
   "character": "戯",
   "keyword": "frolic",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2152",
   "character": "劇",
   "keyword": "drama",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2154",
   "character": "鹿",
   "keyword": "deer",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2156",
   "character": "薦",
   "keyword": "recommend",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2161",
   "character": "態",
   "keyword": "attitude",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2164",
   "character": "辰",
   "keyword": "sign of the dragon",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2166",
   "character": "震",
   "keyword": "quake",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2183",
   "character": "朕",
   "keyword": "majestic plural",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2185",
   "character": "箇",
   "keyword": "item",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2186",
   "character": "錬",
   "keyword": "tempering",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2187",
   "character": "遵",
   "keyword": "abide by",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2190",
   "character": "且",
   "keyword": "moreover",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2191",
   "character": "藻",
   "keyword": "seaweed",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2194",
   "character": "璽",
   "keyword": "imperial seal",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2197",
   "character": "丑",
   "keyword": "sign of the cow",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2198",
   "character": "羞",
   "keyword": "humiliate",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2200",
   "character": "巳",
   "keyword": "sign of the snake",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2202",
   "character": "柴",
   "keyword": "brushwood",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2204",
   "character": "砦",
   "keyword": "fort",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2208",
   "character": "憐",
   "keyword": "sympathize with",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2210",
   "character": "麟",
   "keyword": "camelopard",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2211",
   "character": "鱗",
   "keyword": "scaled",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2212",
   "character": "奄",
   "keyword": "encompassing",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2213",
   "character": "庵",
   "keyword": "hermitage",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2218",
   "character": "竣",
   "keyword": "complete a job",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2220",
   "character": "皐",
   "keyword": "lunar month",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2222",
   "character": "綴",
   "keyword": "mend",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2223",
   "character": "鎧",
   "keyword": "suit of armor",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2227",
   "character": "籤",
   "keyword": "lottery",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2228",
   "character": "懺",
   "keyword": "penitential",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2229",
   "character": "芻",
   "keyword": "hay",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2230",
   "character": "雛",
   "keyword": "chick",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk2231",
   "character": "趨",
   "keyword": "scurry",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk2237",
   "character": "巴",
   "keyword": "comma-design",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2239",
   "character": "菫",
   "keyword": "violet",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2244",
   "character": "倭",
   "keyword": "yamato",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2245",
   "character": "侠",
   "keyword": "chivalry",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2247",
   "character": "俄",
   "keyword": "abrupt",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2249",
   "character": "仔",
   "keyword": "animal offspring",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2250",
   "character": "仇",
   "keyword": "foe",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2251",
   "character": "伽",
   "keyword": "look after",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2253",
   "character": "僑",
   "keyword": "emigrant",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk2261",
   "character": "冴",
   "keyword": "sharp",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2263",
   "character": "凌",
   "keyword": "pull through",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2264",
   "character": "凛",
   "keyword": "stately",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2267",
   "character": "夙",
   "keyword": "earlybird",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2269",
   "character": "剽",
   "keyword": "menace",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk2272",
   "character": "厭",
   "keyword": "despondent",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2276",
   "character": "仄",
   "keyword": "insinuate",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2277",
   "character": "哨",
   "keyword": "scout",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2279",
   "character": "囁",
   "keyword": "whisper",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2280",
   "character": "喋",
   "keyword": "chatter",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2283",
   "character": "咳",
   "keyword": "cough",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2286",
   "character": "嘘",
   "keyword": "fib",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2287",
   "character": "啄",
   "keyword": "peck at",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2288",
   "character": "吠",
   "keyword": "barking",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2294",
   "character": "噺",
   "keyword": "spin a tale",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2295",
   "character": "噌",
   "keyword": "miso",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2298",
   "character": "喰",
   "keyword": "ingest",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2299",
   "character": "埴",
   "keyword": "clay",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2301",
   "character": "壕",
   "keyword": "dugout",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk2302",
   "character": "垢",
   "keyword": "blemish",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2305",
   "character": "堰",
   "keyword": "dam",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2306",
   "character": "堵",
   "keyword": "railing",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk2309",
   "character": "婢",
   "keyword": "handmaiden",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2311",
   "character": "娼",
   "keyword": "harlot",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2313",
   "character": "娃",
   "keyword": "fair",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2314",
   "character": "姪",
   "keyword": "niece",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2318",
   "character": "姐",
   "keyword": "young miss",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk2320",
   "character": "孕",
   "keyword": "expecting",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2328",
   "character": "屠",
   "keyword": "butchering",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2329",
   "character": "屁",
   "keyword": "fart",
-  "reason": "too-short"
- },
- {
-  "id": "rtk2330",
-  "character": "屑",
-  "keyword": "rubbish",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2331",
   "character": "屡",
   "keyword": "frequently",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2333",
   "character": "屏",
   "keyword": "folding screen",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2334",
   "character": "嵩",
   "keyword": "high-reaching",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2335",
   "character": "崚",
   "keyword": "rugged mountains",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2339",
   "character": "幡",
   "keyword": "banner",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2340",
   "character": "幟",
   "keyword": "pennant",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2341",
   "character": "庖",
   "keyword": "cleaver",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2342",
   "character": "廓",
   "keyword": "licensed quarters",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2345",
   "character": "庄",
   "keyword": "shire",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2346",
   "character": "廟",
   "keyword": "tomb sanctuary",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2357",
   "character": "撰",
   "keyword": "assortment",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2359",
   "character": "捌",
   "keyword": "deal with",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2361",
   "character": "播",
   "keyword": "disseminate",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2362",
   "character": "揖",
   "keyword": "collect",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2365",
   "character": "撚",
   "keyword": "twirl",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2370",
   "character": "擢",
   "keyword": "outstanding",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2372",
   "character": "捷",
   "keyword": "spoils",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk2375",
   "character": "惟",
   "keyword": "ponder",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2376",
   "character": "惚",
   "keyword": "infatuation",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2378",
   "character": "惇",
   "keyword": "considerate",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2380",
   "character": "恢",
   "keyword": "enlarge",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2383",
   "character": "洸",
   "keyword": "glistening",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2384",
   "character": "滉",
   "keyword": "bounding main",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2387",
   "character": "洵",
   "keyword": "swirling waters",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2388",
   "character": "滲",
   "keyword": "seep",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2391",
   "character": "泪",
   "keyword": "teardrops",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2394",
   "character": "梁",
   "keyword": "roofbeam",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2396",
   "character": "洛",
   "keyword": "old kyoto",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2401",
   "character": "溌",
   "keyword": "spray",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2403",
   "character": "淋",
   "keyword": "solitude",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2404",
   "character": "浩",
   "keyword": "abounding",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2406",
   "character": "鴻",
   "keyword": "large goose",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2407",
   "character": "潅",
   "keyword": "souse",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2409",
   "character": "湛",
   "keyword": "inundate",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2412",
   "character": "灘",
   "keyword": "rough seas",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2413",
   "character": "汲",
   "keyword": "draw water",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2414",
   "character": "瀞",
   "keyword": "river pool",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2416",
   "character": "渕",
   "keyword": "abyss",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk2417",
   "character": "沌",
   "keyword": "chaos",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2419",
   "character": "濡",
   "keyword": "drench",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2421",
   "character": "涅",
   "keyword": "black soil",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk2422",
   "character": "斧",
   "keyword": "hatchet",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2435",
   "character": "莨",
   "keyword": "tobacco",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2438",
   "character": "苺",
   "keyword": "strawberry",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2440",
   "character": "藝",
   "keyword": "technique (old)",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2442",
   "character": "蓑",
   "keyword": "straw raincoat",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2447",
   "character": "芙",
   "keyword": "lotus flower",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2449",
   "character": "蘭",
   "keyword": "orchid",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2450",
   "character": "芦",
   "keyword": "hollow reed",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk2454",
   "character": "蕎",
   "keyword": "buckwheat",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2458",
   "character": "蓬",
   "keyword": "wormwood",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2460",
   "character": "萌",
   "keyword": "germinate",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2465",
   "character": "苓",
   "keyword": "cocklebur",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2467",
   "character": "蒙",
   "keyword": "darken",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2468",
   "character": "茅",
   "keyword": "grassy reed",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2469",
   "character": "芭",
   "keyword": "plantain",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2471",
   "character": "葱",
   "keyword": "onion",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2472",
   "character": "葵",
   "keyword": "hollyhock",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2473",
   "character": "葺",
   "keyword": "shingling",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2476",
   "character": "蒔",
   "keyword": "sowing",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2478",
   "character": "苫",
   "keyword": "thatching",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2479",
   "character": "蒼",
   "keyword": "pale blue",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk2484",
   "character": "蒜",
   "keyword": "garlic",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2491",
   "character": "葦",
   "keyword": "ditch reed",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2493",
   "character": "辿",
   "keyword": "track down",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2496",
   "character": "遁",
   "keyword": "shirk",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2498",
   "character": "遥",
   "keyword": "far off",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2499",
   "character": "遼",
   "keyword": "faraway",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2500",
   "character": "逼",
   "keyword": "pressing",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2509",
   "character": "忽",
   "keyword": "instantaneously",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2515",
   "character": "晟",
   "keyword": "aglow",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2517",
   "character": "暉",
   "keyword": "glitter",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk2520",
   "character": "晨",
   "keyword": "morrow",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2525",
   "character": "昂",
   "keyword": "elevate",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2526",
   "character": "昏",
   "keyword": "dusk",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2531",
   "character": "胚",
   "keyword": "embryo",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2534",
   "character": "肋",
   "keyword": "rib",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2536",
   "character": "肱",
   "keyword": "armrest",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2538",
   "character": "楓",
   "keyword": "maple tree",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk2540",
   "character": "椋",
   "keyword": "oriental elm",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2541",
   "character": "榛",
   "keyword": "hazel",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2543",
   "character": "槌",
   "keyword": "wooden hammer",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2544",
   "character": "樵",
   "keyword": "mallet",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk2545",
   "character": "梯",
   "keyword": "ladder",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2555",
   "character": "槙",
   "keyword": "black pine",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2556",
   "character": "楢",
   "keyword": "japanese oak",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2557",
   "character": "橘",
   "keyword": "mandarin orange",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2564",
   "character": "梶",
   "keyword": "oar",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2569",
   "character": "橿",
   "keyword": "sturdy oak",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2576",
   "character": "槍",
   "keyword": "lance",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2578",
   "character": "梱",
   "keyword": "bale",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk2579",
   "character": "枇",
   "keyword": "loquat",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2584",
   "character": "椰",
   "keyword": "coconut tree",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2585",
   "character": "檀",
   "keyword": "sandalwood",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2586",
   "character": "樗",
   "keyword": "sumac",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2591",
   "character": "楕",
   "keyword": "ellipse",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2593",
   "character": "毬",
   "keyword": "furball",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2600",
   "character": "煤",
   "keyword": "soot",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2602",
   "character": "燦",
   "keyword": "dazzling",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2605",
   "character": "焔",
   "keyword": "flames",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2606",
   "character": "烹",
   "keyword": "stew",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2607",
   "character": "牽",
   "keyword": "tug",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2611",
   "character": "琉",
   "keyword": "lapis lazuli",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2613",
   "character": "琢",
   "keyword": "hone",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2614",
   "character": "珊",
   "keyword": "coral",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2616",
   "character": "瑞",
   "keyword": "fortunate",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2617",
   "character": "玖",
   "keyword": "jet",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2620",
   "character": "畢",
   "keyword": "lastly",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2629",
   "character": "眩",
   "keyword": "dizzy",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2630",
   "character": "雉",
   "keyword": "pheasant",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2632",
   "character": "磐",
   "keyword": "crag",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk2634",
   "character": "碧",
   "keyword": "blue-green",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2635",
   "character": "硯",
   "keyword": "inkstone",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2636",
   "character": "砥",
   "keyword": "grindstone",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2643",
   "character": "禦",
   "keyword": "fend off",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2646",
   "character": "祇",
   "keyword": "local god",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk2654",
   "character": "稗",
   "keyword": "crabgrass",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2656",
   "character": "稜",
   "keyword": "imperial authority",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2657",
   "character": "稀",
   "keyword": "sparse",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2658",
   "character": "穆",
   "keyword": "obeisant",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2663",
   "character": "竪",
   "keyword": "longness",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2669",
   "character": "袷",
   "keyword": "lined kimono",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2686",
   "character": "笈",
   "keyword": "backpack",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk2687",
   "character": "篇",
   "keyword": "livraison",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk2691",
   "character": "糟",
   "keyword": "lees",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2696",
   "character": "粟",
   "keyword": "foxtail millet",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2698",
   "character": "綸",
   "keyword": "twine",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2703",
   "character": "紐",
   "keyword": "string",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2704",
   "character": "紘",
   "keyword": "chinstrap",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2708",
   "character": "紬",
   "keyword": "pongee",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2710",
   "character": "綾",
   "keyword": "damask",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2713",
   "character": "綬",
   "keyword": "gimp",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2721",
   "character": "蚤",
   "keyword": "flea",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2723",
   "character": "蛋",
   "keyword": "protein",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2724",
   "character": "蟄",
   "keyword": "hibernation",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2727",
   "character": "蝋",
   "keyword": "wax",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2728",
   "character": "蝦",
   "keyword": "shrimp",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk2729",
   "character": "蛸",
   "keyword": "octopus",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2731",
   "character": "蝉",
   "keyword": "cicada",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2740",
   "character": "截",
   "keyword": "incision",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2742",
   "character": "詢",
   "keyword": "counsel",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2744",
   "character": "讐",
   "keyword": "vendetta",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2746",
   "character": "諒",
   "keyword": "verify",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2753",
   "character": "訝",
   "keyword": "wary",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2755",
   "character": "誹",
   "keyword": "slander",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2756",
   "character": "謂",
   "keyword": "so-called",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk2757",
   "character": "諜",
   "keyword": "secret agent",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2762",
   "character": "輻",
   "keyword": "spoke",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2763",
   "character": "輯",
   "keyword": "assemble",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2764",
   "character": "豹",
   "keyword": "panther",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2772",
   "character": "跨",
   "keyword": "straddle",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2776",
   "character": "醐",
   "keyword": "ghee",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2777",
   "character": "醇",
   "keyword": "strong sake",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2780",
   "character": "銚",
   "keyword": "keg",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2786",
   "character": "錫",
   "keyword": "tin",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2787",
   "character": "錨",
   "keyword": "anchor",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2788",
   "character": "釘",
   "keyword": "nail",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2799",
   "character": "雫",
   "keyword": "trickle",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2801",
   "character": "翰",
   "keyword": "quill",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2815",
   "character": "饗",
   "keyword": "feast",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2817",
   "character": "飴",
   "keyword": "sweets",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2820",
   "character": "馳",
   "keyword": "rush",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2821",
   "character": "騙",
   "keyword": "cheat",
-  "reason": "too-short"
- },
- {
-  "id": "rtk2825",
-  "character": "驢",
-  "keyword": "donkey",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2827",
   "character": "鯛",
   "keyword": "sea bream",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2828",
   "character": "鰯",
   "keyword": "sardine",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2833",
   "character": "鯵",
   "keyword": "horse mackerel",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2834",
   "character": "鱈",
   "keyword": "cod",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2843",
   "character": "鴎",
   "keyword": "seagull",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2849",
   "character": "鷲",
   "keyword": "eagle",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2850",
   "character": "鴨",
   "keyword": "wild duck",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2852",
   "character": "梟",
   "keyword": "owl",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2853",
   "character": "塵",
   "keyword": "dust",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2859",
   "character": "瞑",
   "keyword": "close the eyes",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2860",
   "character": "暝",
   "keyword": "murky",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2861",
   "character": "坐",
   "keyword": "sitting in meditation",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2864",
   "character": "洩",
   "keyword": "dribble out",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2865",
   "character": "彗",
   "keyword": "comet",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2867",
   "character": "爾",
   "keyword": "let it be",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk2868",
   "character": "嘉",
   "keyword": "applaud",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2869",
   "character": "兇",
   "keyword": "evil",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2870",
   "character": "兜",
   "keyword": "helmet",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk2871",
   "character": "靄",
   "keyword": "mist",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2872",
   "character": "劫",
   "keyword": "kalpa",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2873",
   "character": "歎",
   "keyword": "bemoan",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk2874",
   "character": "輿",
   "keyword": "palanquin",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2878",
   "character": "鼎",
   "keyword": "tripod",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk2879",
   "character": "鹵",
   "keyword": "rocksalt",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2881",
   "character": "虔",
   "keyword": "reserved",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2882",
   "character": "燕",
   "keyword": "swallow",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2885",
   "character": "牌",
   "keyword": "mahjong tiles",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2887",
   "character": "齟",
   "keyword": "disagree",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2889",
   "character": "秦",
   "keyword": "manchu dynasty",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2890",
   "character": "雀",
   "keyword": "sparrow",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2892",
   "character": "耀",
   "keyword": "shimmering",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk2894",
   "character": "嚢",
   "keyword": "cyst",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2898",
   "character": "毅",
   "keyword": "stalwart",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2899",
   "character": "斯",
   "keyword": "this",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2905",
   "character": "肴",
   "keyword": "entreat",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk2907",
   "character": "卿",
   "keyword": "magistrate",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk2910",
   "character": "套",
   "keyword": "hackneyed",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2913",
   "character": "壷",
   "keyword": "crock",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk2914",
   "character": "叡",
   "keyword": "sapience",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2920",
   "character": "瓢",
   "keyword": "gourd",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2921",
   "character": "琵",
   "keyword": "biwa",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2923",
   "character": "叉",
   "keyword": "forked",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2924",
   "character": "乖",
   "keyword": "disobey",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2926",
   "character": "圃",
   "keyword": "vegetable patch",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2927",
   "character": "丞",
   "keyword": "helping hand",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2928",
   "character": "亮",
   "keyword": "translucent",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2930",
   "character": "疏",
   "keyword": "transcription",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2941",
   "character": "皓",
   "keyword": "beaming",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2942",
   "character": "黎",
   "keyword": "tenebrous",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2944",
   "character": "已",
   "keyword": "stop short",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2947",
   "character": "甦",
   "keyword": "resuscitate",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2951",
   "character": "鼾",
   "keyword": "snore",
-  "reason": "truncated-noshow"
+  "reason": "css"
  },
  {
   "id": "rtk2955",
   "character": "粍",
   "keyword": "millimeter",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2959",
   "character": "吋",
   "keyword": "inch",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2963",
   "character": "菩",
   "keyword": "bo tree",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2964",
   "character": "唖",
   "keyword": "babble",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2966",
   "character": "迦",
   "keyword": "sanskrit ka",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2971",
   "character": "淵",
   "keyword": "abyss (old)",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2983",
   "character": "峯",
   "keyword": "summit (alternate)",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2985",
   "character": "龍",
   "keyword": "dragon (old)",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2990",
   "character": "國",
   "keyword": "country (old)",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2992",
   "character": "勁",
   "keyword": "formidable",
-  "reason": "too-short"
+  "reason": "css"
  },
  {
   "id": "rtk2995",
   "character": "躇",
   "keyword": "dither",
-  "reason": "too-short"
+  "reason": "css"
  }
 ]

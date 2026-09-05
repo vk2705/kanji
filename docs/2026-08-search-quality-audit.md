@@ -6780,3 +6780,28 @@ on the live DB.
   across two poll calls, no chrome leakage, not flagged generating.
   Original synthetic suite (`/tmp/jstest.py`, line-clamp / max-height /
   details / no-overview) still green.
+
+### 2026-09-05 (continued) — the button worked, but the reader ate the CSS
+
+- Owner's rerun with the sibling-button fix: 602/602 got text — but the
+  text was **raw CSS** (`AI Overview:root{--nkmQOe:Arial,sans-serif;…}`,
+  ~16k chars each). Cause: the unclamp step set `display:block
+  !important` on hidden nodes, revealing `<style>`/`display:none` blocks
+  full of CSS text that Google stashes inside the overview wrapper, and
+  the "biggest container" heuristic then picked that wrapper.
+- Fixes: (a) read via `proseOf(el)` — a clone with
+  `<style>/<script>/<template>/<noscript>` removed; (b) never unclamp a
+  node inside `<style>`/`<script>` or one that is `[hidden]`; (c) score
+  root candidates by *prose* (reject anything where `{};` count > 8 and
+  > 0.3× word count — the CSS signature); (d) `looksLikeCode` also
+  guards the final text and the `generating` check.
+- Verified with a third headless test (`/tmp/jstest3.py`): overview
+  wrapper containing a real `<style>` tag AND a `display:none` div of
+  CSS custom properties AND a `max-height`-clamped prose child — output
+  is the clean prose only, no `--nkmQOe`, no `{display:none}`, the
+  below-the-fold line recovered. All three test files green.
+- Scrubbed `results.jsonl`: dropped the 598 CSS-polluted + 7 too-short
+  records (all 598 unmistakably start with literal CSS — no false
+  positives). **2395 usable records kept.** `need_rerun.json` rebuilt:
+  **605 kanji** (598 css + 7 short). Owner re-runs
+  `check_kanji.py --from-list need_rerun.json`.
