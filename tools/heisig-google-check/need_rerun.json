@@ -1,4628 +1,3614 @@
 [
  {
-  "id": "rtk5",
-  "character": "五",
-  "keyword": "five",
-  "reason": "Text truncated at 'Show more' with no primitive breakdown given."
- },
- {
-  "id": "rtk42",
-  "character": "升",
-  "keyword": "measuring box",
-  "reason": "Self-contradictory / garbled: names the right component as '升 (needle / ten with an extra stroke)' — a self-reference — while also saying the primitives taught right before are 'thousand (千) and needle (十)'. Breakdown is recoverable but the text is muddled."
- },
- {
-  "id": "rtk47",
-  "character": "専",
-  "keyword": "specialty",
-  "reason": "Text truncated at 'Show more' with only the keyword given, no primitive breakdown."
- },
- {
-  "id": "rtk53",
-  "character": "朝",
-  "keyword": "morning",
-  "reason": "no usable Google text"
- },
- {
   "id": "rtk57",
   "character": "唄",
   "keyword": "pop song",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk65",
   "character": "頑",
   "keyword": "stubborn",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk73",
-  "character": "的",
-  "keyword": "bull's eye",
-  "reason": "Main AI Overview is a generic explainer about the RTK method in general (bundle 束, rest 休, etc.), not about 的 specifically; the 白+勺 breakdown only appears incidentally in a cited external snippet."
+  "reason": "too-short"
  },
  {
   "id": "rtk86",
   "character": "項",
   "keyword": "paragraph",
-  "reason": "Text truncated at 'Show more' with no primitive breakdown given."
+  "reason": "too-short"
  },
  {
   "id": "rtk105",
   "character": "母",
   "keyword": "mama",
-  "reason": "Text truncated at 'Show more' with no primitive breakdown given."
+  "reason": "too-short"
  },
  {
   "id": "rtk106",
   "character": "貫",
   "keyword": "pierce",
-  "reason": "Text truncated at 'Show more' with only the keyword given, no primitive breakdown."
+  "reason": "too-short"
  },
  {
   "id": "rtk108",
   "character": "呪",
   "keyword": "curse",
-  "reason": "Text truncated at 'Show more'; only states the frame number, no primitive breakdown."
- },
- {
-  "id": "rtk109",
-  "character": "克",
-  "keyword": "overcome",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk133",
   "character": "奇",
   "keyword": "strange",
-  "reason": "Text truncated at 'Show more' with no primitive breakdown given."
- },
- {
-  "id": "rtk141",
-  "character": "腺",
-  "keyword": "gland",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk147",
   "character": "汎",
   "keyword": "pan-",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk149",
   "character": "汰",
   "keyword": "cleanse",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk157",
   "character": "河",
   "keyword": "river",
-  "reason": "Text truncated at 'Show more' immediately after the intro sentence; no primitive breakdown given at all."
- },
- {
-  "id": "rtk185",
-  "character": "里",
-  "keyword": "ri",
-  "reason": "Text truncated at 'Show more' after only listing keyword/primitive meaning ('computer'); no sub-breakdown of 里 itself is given."
- },
- {
-  "id": "rtk194",
-  "character": "胴",
-  "keyword": "trunk",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk199",
   "character": "完",
   "keyword": "perfect",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk213",
   "character": "梢",
   "keyword": "treetops",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk235",
-  "character": "朱",
-  "keyword": "vermilion",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk242",
   "character": "薄",
   "keyword": "dilute",
-  "reason": "Text truncated at 'Show more' right after the intro sentence; no primitive breakdown given."
+  "reason": "too-short"
  },
  {
   "id": "rtk248",
   "character": "膜",
   "keyword": "membrane",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk280",
-  "character": "呈",
-  "keyword": "display",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk285",
-  "character": "注",
-  "keyword": "pour",
-  "reason": "Text truncated at 'Show more' with no primitive breakdown given."
- },
- {
-  "id": "rtk288",
-  "character": "銑",
-  "keyword": "pig iron",
-  "reason": "Text truncated at 'Show more' with no primitive breakdown given."
+  "reason": "too-short"
  },
  {
   "id": "rtk308",
   "character": "喩",
   "keyword": "metaphor",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk311",
-  "character": "各",
-  "keyword": "each",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk312",
   "character": "格",
   "keyword": "status",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk318",
-  "character": "処",
-  "keyword": "dispose",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk325",
   "character": "運",
   "keyword": "carry",
-  "reason": "Text truncated at 'Show more' with no primitive breakdown given."
- },
- {
-  "id": "rtk328",
-  "character": "坑",
-  "keyword": "pit",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk333",
   "character": "亭",
   "keyword": "pavilion",
-  "reason": "Text truncated at 'Show more' with no primitive breakdown given."
- },
- {
-  "id": "rtk335",
-  "character": "涼",
-  "keyword": "refreshing",
-  "reason": "Text truncated at 'Show more' with no primitive breakdown given."
+  "reason": "too-short"
  },
  {
   "id": "rtk338",
   "character": "舎",
   "keyword": "cottage",
-  "reason": "Text truncated at 'Show more' with no primitive breakdown given."
+  "reason": "too-short"
  },
  {
   "id": "rtk342",
   "character": "吉",
   "keyword": "good luck",
-  "reason": "Self-contradictory/garbled: the text labels the top part '吉 (Top Part): 十' with primitive meaning 'Ten' and bottom '吉 (Bottom Part): 口', mislabeling both segments as '吉' and substituting 十 for the standard 士 (samurai/gentleman)."
+  "reason": "too-short"
  },
  {
   "id": "rtk344",
   "character": "荘",
   "keyword": "villa",
-  "reason": "Self-contradictory: the breakdown table gives 艹 (flower) + 广 (cave) + 土 (soil), but 荘 is 艹 over 壮 (not 广); the text's own quoted 6th-ed story ('a pair of turtle-samurai') describes 壮, contradicting the table."
- },
- {
-  "id": "rtk349",
-  "character": "書",
-  "keyword": "write",
-  "reason": "Text truncated at 'Show more' with no primitive breakdown given."
- },
- {
-  "id": "rtk351",
-  "character": "牧",
-  "keyword": "breed",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk354",
-  "character": "枚",
-  "keyword": "a sheet of",
-  "reason": "Text truncated at 'Show more' with no primitive breakdown given."
+  "reason": "too-short"
  },
  {
   "id": "rtk358",
   "character": "警",
   "keyword": "admonish",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk369",
   "character": "詠",
   "keyword": "recitation",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk375",
-  "character": "諾",
-  "keyword": "consent",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk376",
-  "character": "諭",
-  "keyword": "rebuke",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk379",
   "character": "弐",
   "keyword": "ii (two)",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk384",
-  "character": "茂",
-  "keyword": "overgrown",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk389",
-  "character": "威",
-  "keyword": "intimidate",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk391",
   "character": "減",
   "keyword": "dwindle",
-  "reason": "Text truncated at 'Show more' with no primitive breakdown given."
- },
- {
-  "id": "rtk402",
-  "character": "歴",
-  "keyword": "curriculum",
-  "reason": "Text truncated at 'Show more' with no primitive breakdown given."
+  "reason": "too-short"
  },
  {
   "id": "rtk404",
   "character": "賦",
   "keyword": "levy",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk415",
   "character": "題",
   "keyword": "topic",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk416",
-  "character": "堤",
-  "keyword": "dike",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk417",
   "character": "建",
   "keyword": "build",
-  "reason": "Text truncated at 'Show more' with no primitive breakdown given."
+  "reason": "too-short"
  },
  {
   "id": "rtk418",
   "character": "鍵",
   "keyword": "key",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk426",
   "character": "裏",
   "keyword": "back",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk444",
   "character": "帯",
   "keyword": "sash",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk446",
   "character": "刺",
   "keyword": "thorn",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk458",
   "character": "妖",
   "keyword": "bewitched",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk465",
-  "character": "競",
-  "keyword": "vie",
-  "reason": "truncated / doubtful"
+  "reason": "too-short"
  },
  {
   "id": "rtk471",
   "character": "商",
   "keyword": "make a deal",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk472",
   "character": "嫡",
   "keyword": "legitimate wife",
-  "reason": "Text self-contradicts: it describes the right side of 嫡 as the primitive 帝 (sovereign = vase + crown/apron + towel), but the right side of 嫡 is actually 啇 (antique). The mnemonic story even says 'woman + emperor', which is wrong for this character."
+  "reason": "too-short"
  },
  {
   "id": "rtk473",
   "character": "適",
   "keyword": "suitable",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk475",
   "character": "敵",
   "keyword": "enemy",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk477",
-  "character": "叱",
-  "keyword": "scold",
-  "reason": "truncated / doubtful"
+  "reason": "too-short"
  },
  {
   "id": "rtk479",
   "character": "頃",
   "keyword": "about that time",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk482",
-  "character": "比",
-  "keyword": "compare",
-  "reason": "truncated / doubtful"
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk489",
   "character": "謁",
   "keyword": "audience",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk501",
   "character": "乞",
   "keyword": "beg",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk502",
   "character": "乾",
   "keyword": "drought",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk508",
-  "character": "歌",
-  "keyword": "song",
-  "reason": "truncated / doubtful"
- },
- {
-  "id": "rtk511",
-  "character": "茨",
-  "keyword": "briar",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk518",
-  "character": "音",
-  "keyword": "sound",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk520",
   "character": "韻",
   "keyword": "rhyme",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk532",
-  "character": "芳",
-  "keyword": "perfumed",
-  "reason": "truncated / doubtful"
+  "reason": "too-short"
  },
  {
   "id": "rtk537",
   "character": "脱",
   "keyword": "undress",
-  "reason": "no usable Google text"
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk544",
   "character": "棟",
   "keyword": "ridgepole",
-  "reason": "truncated / doubtful"
- },
- {
-  "id": "rtk547",
-  "character": "廷",
-  "keyword": "courts",
-  "reason": "truncated / doubtful"
+  "reason": "too-short"
  },
  {
   "id": "rtk574",
   "character": "電",
   "keyword": "electricity",
-  "reason": "truncated / doubtful"
+  "reason": "too-short"
  },
  {
   "id": "rtk578",
   "character": "逐",
   "keyword": "pursue",
-  "reason": "truncated / doubtful"
+  "reason": "too-short"
  },
  {
   "id": "rtk591",
   "character": "達",
   "keyword": "accomplished",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk592",
   "character": "羨",
   "keyword": "envious",
-  "reason": "no usable Google text"
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk593",
   "character": "差",
   "keyword": "distinction",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk601",
-  "character": "集",
-  "keyword": "gather",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk602",
-  "character": "准",
-  "keyword": "quasi-",
-  "reason": "truncated / doubtful"
+  "reason": "too-short"
  },
  {
   "id": "rtk605",
   "character": "雌",
   "keyword": "female",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk608",
   "character": "奪",
   "keyword": "rob",
-  "reason": "truncated / doubtful"
+  "reason": "too-short"
  },
  {
   "id": "rtk610",
   "character": "午",
   "keyword": "noon",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk617",
   "character": "翌",
   "keyword": "the following",
-  "reason": "truncated / doubtful"
+  "reason": "too-short"
  },
  {
   "id": "rtk625",
   "character": "団",
   "keyword": "group",
-  "reason": "truncated / doubtful"
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk627",
   "character": "姻",
   "keyword": "matrimony",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk631",
   "character": "壇",
   "keyword": "podium",
-  "reason": "truncated / doubtful"
- },
- {
-  "id": "rtk646",
-  "character": "誌",
-  "keyword": "document",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk664",
   "character": "寡",
   "keyword": "widow",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk666",
-  "character": "悦",
-  "keyword": "ecstasy",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk671",
-  "character": "慌",
-  "keyword": "disconcerted",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk673",
-  "character": "憎",
-  "keyword": "hate",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk674",
-  "character": "慣",
-  "keyword": "accustomed",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk676",
-  "character": "惰",
-  "keyword": "lazy",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk679",
-  "character": "憶",
-  "keyword": "recollection",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk680",
-  "character": "惧",
-  "keyword": "disquieting",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk682",
   "character": "憬",
   "keyword": "hanker",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk683",
   "character": "慕",
   "keyword": "pining",
-  "reason": "truncated / doubtful"
+  "reason": "too-short"
  },
  {
   "id": "rtk688",
   "character": "看",
   "keyword": "watch over",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk689",
   "character": "摩",
   "keyword": "chafe",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk696",
   "character": "拉",
   "keyword": "yank",
-  "reason": "Text truncated at 'Show more' after only giving the keyword; no primitive breakdown provided."
+  "reason": "too-short"
  },
  {
   "id": "rtk699",
   "character": "抄",
   "keyword": "extract",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk701",
   "character": "批",
   "keyword": "criticism",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk704",
-  "character": "拍",
-  "keyword": "clap",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk706",
   "character": "拘",
   "keyword": "arrest",
-  "reason": "Text truncated at 'Show more' after only giving the keyword; no primitive breakdown provided."
+  "reason": "too-short"
  },
  {
   "id": "rtk713",
   "character": "拶",
   "keyword": "imminent",
-  "reason": "Text truncated at 'Show more' immediately after promising the breakdown; no primitive breakdown provided."
- },
- {
-  "id": "rtk719",
-  "character": "損",
-  "keyword": "damage",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk720",
   "character": "拾",
   "keyword": "pick up",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk721",
   "character": "担",
   "keyword": "shouldering",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk722",
   "character": "拠",
   "keyword": "foothold",
-  "reason": "truncated, no breakdown given"
+  "reason": "too-short"
  },
  {
   "id": "rtk734",
   "character": "刑",
   "keyword": "punish",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk735",
   "character": "型",
   "keyword": "mould",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk739",
   "character": "存",
   "keyword": "suppose",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk748",
   "character": "吏",
   "keyword": "officer",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk751",
-  "character": "梗",
-  "keyword": "spiny",
-  "reason": "Text is truncated to just a Chinese-language intro naming the keyword and frame number; it cuts off before giving any actual primitive breakdown."
+  "reason": "too-short"
  },
  {
   "id": "rtk755",
   "character": "隻",
   "keyword": "vessels",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk761",
   "character": "抜",
   "keyword": "slip out",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk764",
   "character": "股",
   "keyword": "thigh",
-  "reason": "Text is nothing but the boilerplate intro sentence followed by 'Show more' — no breakdown content was actually captured."
- },
- {
-  "id": "rtk766",
-  "character": "撃",
-  "keyword": "beat",
-  "reason": "Text explicitly and specifically claims the top-left component is NOT 車 (car/wagon) but a distinct primitive 𠦝 ('mist'), directly contradicting the app's current_parts (which includes 車). This is a substantive factual claim that could easily be an AI hallucination/mix-up given how visually similar 車 and 𠦝 are, so it should be checked against a primary source before being trusted as a correction."
- },
- {
-  "id": "rtk775",
-  "character": "叔",
-  "keyword": "uncle",
-  "reason": "Text is internally inconsistent about the left-hand stack: it lists 卜 (divining rod), 小 (small), and then describes an unrelated 'extra line' as ALSO meaning 'crotch' on the left side, separate from the 又 ('crotch') on the right side of the character — i.e. it assigns the same primitive name 'crotch' to two different strokes/components in the same kanji without reconciling this, and separately offers an alternate community parse ('above + small + crotch + crotch')."
- },
- {
-  "id": "rtk776",
-  "character": "督",
-  "keyword": "coach",
-  "reason": "truncated, no breakdown given"
- },
- {
-  "id": "rtk788",
-  "character": "淫",
-  "keyword": "lewd",
-  "reason": "Text is truncated mid-explanation (cuts off right before the mnemonic story), and introduces an oddly specific unnamed sub-glyph '𭕄 — Drop' with no clear explanation of how it fits into the standard primitive vocabulary, making the sub-breakdown of the right-hand stack hard to trust as given."
- },
- {
-  "id": "rtk790",
-  "character": "奨",
-  "keyword": "exhort",
-  "reason": "Text's own labeling of positions is confusing/self-contradictory — it labels a component 'Top Left: 爿' but describes it as 'Turtle (or Turtle-shell / Left flank)', then labels another as 'Top Right: 寽 (minus the bottom, effectively 爫+一)' while also saying 'bottom_center' for 大, garbling the actual spatial layout of a character that Google itself says mirrors 将's structure exactly (top+bottom, not top-left/top-right/bottom-center as stated)."
- },
- {
-  "id": "rtk791",
-  "character": "采",
-  "keyword": "grab",
-  "reason": "Text opens by stating the character's keyword is 'dice' (or 'die'), which does not match the app's stored keyword 'grab' at all — a strong signal the AI Overview may be describing the wrong kanji or a different edition's keyword outright, even though the primitive breakdown given (claw + tree) happens to still be plausible for 采."
- },
- {
-  "id": "rtk797",
-  "character": "曖",
-  "keyword": "unclear",
-  "reason": "Text gives two different, inconsistent sub-breakdowns of the right-hand cluster in the same answer: one labels the bottom element '友 (Friend, composed of narwhal + crotch)' and separately describes it via '愛' as heart+walking legs — these are different characters/structures being conflated for the same visual region."
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk798",
   "character": "払",
   "keyword": "pay",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk802",
-  "character": "鉱",
-  "keyword": "mineral",
-  "reason": "truncated, no breakdown given"
+  "reason": "too-short"
  },
  {
   "id": "rtk805",
   "character": "台",
   "keyword": "pedestal",
-  "reason": "Text is nothing but the boilerplate intro followed by 'Show more' — no breakdown content was actually captured, despite several other records in this same batch (806/807/808/809) independently and consistently describing 台's breakdown as 厶+口."
- },
- {
-  "id": "rtk816",
-  "character": "室",
-  "keyword": "room",
-  "reason": "truncated, no breakdown given"
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk820",
   "character": "棄",
   "keyword": "abandon",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk824",
   "character": "銃",
   "keyword": "gun",
-  "reason": "truncated, no breakdown given"
- },
- {
-  "id": "rtk828",
-  "character": "唆",
-  "keyword": "tempt",
-  "reason": "The top sub-element of the right-hand cluster (夋) is described only as a vague triangle symbol '▲' with three different possible names offered in the same sentence ('silo / private / elbow'), never settling on Heisig's actual primitive name — this reads as the AI guessing rather than reporting a specific known primitive."
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk848",
   "character": "松",
   "keyword": "pine tree",
-  "reason": "Text is nothing but the boilerplate intro sentence followed by 'Show more' — no breakdown content was actually captured."
- },
- {
-  "id": "rtk849",
-  "character": "翁",
-  "keyword": "venerable old man",
-  "reason": "Text cuts off right after the intro sentence ('Here is the breakdown...Show more') with no actual breakdown content captured."
- },
- {
-  "id": "rtk853",
-  "character": "容",
-  "keyword": "contain",
-  "reason": "truncated, no breakdown given"
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk862",
   "character": "常",
   "keyword": "usual",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk868",
   "character": "披",
   "keyword": "expose",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk885",
   "character": "撮",
   "keyword": "snapshot",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk889",
   "character": "敢",
   "keyword": "daring",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk892",
   "character": "慢",
   "keyword": "ridicule",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk893",
   "character": "漫",
   "keyword": "loose",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk898",
   "character": "濁",
   "keyword": "voiced",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk899",
   "character": "環",
   "keyword": "ring",
-  "reason": "truncated, no breakdown given"
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk900",
   "character": "還",
   "keyword": "send back",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk907",
-  "character": "潜",
-  "keyword": "submerge",
-  "reason": "truncated / doubtful"
+  "reason": "too-short"
  },
  {
   "id": "rtk910",
   "character": "迭",
   "keyword": "alternate",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk947",
   "character": "径",
   "keyword": "diameter",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk949",
-  "character": "役",
-  "keyword": "duty",
-  "reason": "truncated / doubtful"
- },
- {
-  "id": "rtk958",
-  "character": "稿",
-  "keyword": "draft",
-  "reason": "truncated / doubtful"
+  "reason": "too-short"
  },
  {
   "id": "rtk959",
   "character": "稼",
   "keyword": "earnings",
-  "reason": "truncated, no breakdown given"
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk973",
   "character": "梨",
   "keyword": "pear tree",
-  "reason": "truncated (Russian text), no breakdown given"
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk975",
   "character": "穂",
   "keyword": "ear of a plant",
-  "reason": "truncated / doubtful"
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk976",
   "character": "稲",
   "keyword": "rice plant",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk983",
   "character": "稽",
   "keyword": "training",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk984",
-  "character": "穀",
-  "keyword": "cereals",
-  "reason": "truncated / doubtful"
+  "reason": "too-short"
  },
  {
   "id": "rtk996",
   "character": "菊",
   "keyword": "chrysanthemum",
-  "reason": "truncated / doubtful"
+  "reason": "too-short"
  },
  {
   "id": "rtk999",
   "character": "楼",
   "keyword": "watchtower",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1000",
   "character": "類",
   "keyword": "sort",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1002",
   "character": "膝",
   "keyword": "knee",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk1014",
-  "character": "筆",
-  "keyword": "writing brush",
-  "reason": "truncated, no breakdown given"
+  "reason": "too-short"
  },
  {
   "id": "rtk1016",
   "character": "等",
   "keyword": "etc.",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk1017",
-  "character": "算",
-  "keyword": "calculate",
-  "reason": "truncated, no breakdown given (says 'three distinct primitives' but does not list them)"
+  "reason": "too-short"
  },
  {
   "id": "rtk1025",
   "character": "侶",
   "keyword": "partner",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1026",
   "character": "但",
   "keyword": "however",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1032",
   "character": "件",
   "keyword": "affair",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1036",
   "character": "伝",
   "keyword": "transmit",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1037",
   "character": "仏",
   "keyword": "buddha",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1039",
   "character": "仮",
   "keyword": "provisional",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1040",
   "character": "伎",
   "keyword": "performing artist",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1041",
   "character": "伯",
   "keyword": "chief",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1042",
   "character": "俗",
   "keyword": "vulgar",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1043",
   "character": "信",
   "keyword": "faith",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1045",
   "character": "依",
   "keyword": "reliant",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1046",
   "character": "例",
   "keyword": "example",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1048",
   "character": "健",
   "keyword": "healthy",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1050",
   "character": "侍",
   "keyword": "waiter",
-  "reason": "truncated, no breakdown given"
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk1051",
   "character": "停",
   "keyword": "halt",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1052",
   "character": "値",
   "keyword": "price",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1053",
   "character": "倣",
   "keyword": "emulate",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1054",
   "character": "傲",
   "keyword": "arrogance",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1055",
   "character": "倒",
   "keyword": "overthrow",
-  "reason": "truncated, no breakdown given"
- },
- {
-  "id": "rtk1083",
-  "character": "化",
-  "keyword": "change",
-  "reason": "truncated / doubtful"
+  "reason": "too-short"
  },
  {
   "id": "rtk1089",
   "character": "俊",
   "keyword": "sagacious",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk1090",
-  "character": "傍",
-  "keyword": "bystander",
-  "reason": "Truncated: says 'four distinct primitive elements arranged from left to right' then 'Show more' with no actual breakdown."
+  "reason": "too-short"
  },
  {
   "id": "rtk1091",
   "character": "俺",
   "keyword": "myself",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk1106",
-  "character": "似",
-  "keyword": "similar",
-  "reason": "Truncated ('Show more') with no breakdown; also states keyword as 'resemble' rather than 'similar'."
- },
- {
-  "id": "rtk1120",
-  "character": "弊",
-  "keyword": "abuse",
-  "reason": "Garbled: gives keyword as 'bad luck', bottom-right described inconsistently with a placeholder emoji ('𠂉 / 📥'), and self-contradicts on the component structure of 弊."
+  "reason": "too-short"
  },
  {
   "id": "rtk1131",
   "character": "賜",
   "keyword": "grant",
-  "reason": "Truncated ('Show more') immediately after the keyword; no breakdown given."
+  "reason": "too-short"
  },
  {
   "id": "rtk1133",
   "character": "尼",
   "keyword": "nun",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1135",
   "character": "泥",
   "keyword": "mud",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1137",
   "character": "履",
   "keyword": "footgear",
-  "reason": "Truncated ('Show more') after the keyword line; no breakdown given."
- },
- {
-  "id": "rtk1176",
-  "character": "尉",
-  "keyword": "military officer",
-  "reason": "Truncated ('Show more') after 'The primitive breakdown ... are as follows:'; no breakdown given."
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk1177",
   "character": "慰",
   "keyword": "consolation",
-  "reason": "Truncated ('Show more') right after the keyword; no breakdown given."
+  "reason": "too-short"
  },
  {
   "id": "rtk1178",
   "character": "款",
   "keyword": "goodwill",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1207",
   "character": "析",
   "keyword": "chop",
-  "reason": "truncated / doubtful"
+  "reason": "too-short"
  },
  {
   "id": "rtk1211",
   "character": "折",
   "keyword": "fold",
-  "reason": "Truncated ('Show more') after the keyword; no breakdown given."
- },
- {
-  "id": "rtk1216",
-  "character": "暫",
-  "keyword": "temporarily",
-  "reason": "Truncated ('Show more') after mentioning 'three distinct primitive pieces' but not naming them."
- },
- {
-  "id": "rtk1227",
-  "character": "剥",
-  "keyword": "peel off",
-  "reason": "Truncated ('Show more') after only restating the keyword; no primitive breakdown."
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk1233",
   "character": "寝",
   "keyword": "lie down",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1235",
   "character": "掃",
   "keyword": "sweep",
-  "reason": "Truncated ('Show more') after the keyword line; no breakdown given."
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk1256",
   "character": "曲",
   "keyword": "bend",
-  "reason": "truncated / doubtful"
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk1263",
   "character": "科",
   "keyword": "department",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1271",
   "character": "惜",
   "keyword": "pity",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk1282",
-  "character": "墳",
-  "keyword": "tomb",
-  "reason": "Truncated ('Show more') after saying it is 'broken down step-by-step into a sequence of simpler primitive elements' without listing them."
+  "reason": "too-short"
  },
  {
   "id": "rtk1298",
   "character": "版",
   "keyword": "printing block",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1306",
   "character": "矯",
   "keyword": "rectify",
-  "reason": "Truncated ('Show more') right after the keyword; no breakdown given."
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk1311",
   "character": "矛",
   "keyword": "halberd",
-  "reason": "Truncated ('Show more') after the keyword; no breakdown given."
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk1341",
   "character": "考",
   "keyword": "consider",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1349",
   "character": "署",
   "keyword": "signature",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1353",
   "character": "渚",
   "keyword": "strand",
-  "reason": "Truncated: only states keyword, then 'Show more' with no primitive breakdown."
- },
- {
-  "id": "rtk1354",
-  "character": "賭",
-  "keyword": "gamble",
-  "reason": "Truncated: 'Its primitives break down as follows:' then 'Show more' with nothing."
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk1355",
   "character": "峡",
   "keyword": "gorge",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1360",
   "character": "阜",
   "keyword": "large hill",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1376",
   "character": "路",
   "keyword": "path",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1402",
   "character": "陣",
   "keyword": "camp",
-  "reason": "Truncated: keyword only, then 'Show more', no breakdown."
- },
- {
-  "id": "rtk1404",
-  "character": "墜",
-  "keyword": "crash",
-  "reason": "Self-contradictory: correctly IDs top as 隊 (regiment) but then labels the 阝 primitive 'bureaucrat on the right side' — 阝 is on the left here and 墜 has no right-side 阝; stray internally inconsistent note."
- },
- {
-  "id": "rtk1408",
-  "character": "隣",
-  "keyword": "neighboring",
-  "reason": "Truncated: 'Its unique primitive breakdown is configured...' then 'Show more', no actual parts."
- },
- {
-  "id": "rtk1434",
-  "character": "縮",
-  "keyword": "shrink",
-  "reason": "Garbled sub-breakdown: decomposes 宿 into 'house + bushes 𣏟 + road' which is wrong (宿 = house 宀 + person 亻 + hundred 百); invented components."
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk1446",
   "character": "絵",
   "keyword": "picture",
-  "reason": "Truncated: keyword only, then 'Show more', no breakdown."
+  "reason": "too-short"
  },
  {
   "id": "rtk1447",
   "character": "統",
   "keyword": "overall",
-  "reason": "Truncated: frame/keyword only, then 'Show more', no breakdown."
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk1460",
   "character": "経",
   "keyword": "sutra",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk1465",
-  "character": "索",
-  "keyword": "cord",
-  "reason": "truncated / doubtful"
+  "reason": "too-short"
  },
  {
   "id": "rtk1466",
   "character": "総",
   "keyword": "general",
-  "reason": "Truncated: keyword only, then 'Show more', no breakdown."
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk1470",
   "character": "継",
   "keyword": "inherit",
-  "reason": "truncated / doubtful"
+  "reason": "too-short"
  },
  {
   "id": "rtk1479",
   "character": "後",
   "keyword": "behind",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1480",
   "character": "幽",
   "keyword": "faint",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1491",
   "character": "磁",
   "keyword": "magnet",
-  "reason": "Truncated: keyword only, then 'Show more', no breakdown."
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk1494",
   "character": "孫",
   "keyword": "grandchild",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1503",
   "character": "令",
   "keyword": "orders",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1509",
   "character": "勇",
   "keyword": "courage",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1511",
   "character": "通",
   "keyword": "traffic",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1518",
   "character": "氾",
   "keyword": "widespread",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1519",
   "character": "厄",
   "keyword": "unlucky",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk1524",
-  "character": "怨",
-  "keyword": "grudge",
-  "reason": "truncated / doubtful"
+  "reason": "too-short"
  },
  {
   "id": "rtk1525",
   "character": "柳",
   "keyword": "willow",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1526",
   "character": "卵",
   "keyword": "egg",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1528",
   "character": "瑠",
   "keyword": "marine blue",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1534",
   "character": "酉",
   "keyword": "sign of the bird",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1535",
   "character": "酒",
   "keyword": "sake",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1540",
   "character": "酬",
   "keyword": "repay",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1549",
   "character": "頭",
   "keyword": "head",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1561",
   "character": "蓋",
   "keyword": "lid",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk1564",
-  "character": "鑑",
-  "keyword": "specimen",
-  "reason": "Truncated: strokes/keyword only, 'The Heisig primitive meaning breakdown is structured as follows:' then 'Show more', no parts."
+  "reason": "too-short"
  },
  {
   "id": "rtk1571",
   "character": "根",
   "keyword": "root",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1572",
   "character": "即",
   "keyword": "instant",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1575",
   "character": "退",
   "keyword": "retreat",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1582",
   "character": "食",
   "keyword": "eat",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1584",
   "character": "飲",
   "keyword": "drink",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1593",
   "character": "既",
   "keyword": "previously",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk1595",
-  "character": "慨",
-  "keyword": "rue",
-  "reason": "text truncated with 'Show more' before any primitive breakdown is given"
+  "reason": "too-short"
  },
  {
   "id": "rtk1599",
   "character": "評",
   "keyword": "evaluate",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1605",
   "character": "離",
   "keyword": "detach",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1609",
   "character": "純",
   "keyword": "genuine",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1623",
   "character": "執",
   "keyword": "tenacious",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1627",
   "character": "糾",
   "keyword": "twist",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk1636",
-  "character": "陵",
-  "keyword": "mausoleum",
-  "reason": "text truncated with 'Show more'; says 'breaks down into three distinct primitive components' but never lists them"
+  "reason": "too-short"
  },
  {
   "id": "rtk1638",
   "character": "核",
   "keyword": "nucleus",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk1641",
-  "character": "骸",
-  "keyword": "remains",
-  "reason": "truncated / doubtful"
+  "reason": "too-short"
  },
  {
   "id": "rtk1663",
   "character": "積",
   "keyword": "volume",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1664",
   "character": "債",
   "keyword": "bond",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1665",
   "character": "漬",
   "keyword": "pickling",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1714",
   "character": "吟",
   "keyword": "versify",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1736",
   "character": "慄",
   "keyword": "shudder",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1738",
   "character": "覆",
   "keyword": "capsize",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
-  "id": "rtk1749",
-  "character": "簡",
-  "keyword": "simplicity",
-  "reason": "text truncated with 'Show more' before the hierarchical breakdown"
- },
- {
-  "id": "rtk1772",
-  "character": "偉",
-  "keyword": "admirable",
-  "reason": "text truncated with 'Show more' before the primitive breakdown"
+  "id": "rtk1748",
+  "character": "闇",
+  "keyword": "pitch dark",
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk1781",
   "character": "軒",
   "keyword": "flats",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1784",
   "character": "芋",
   "keyword": "potato",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1786",
   "character": "余",
   "keyword": "too much",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1788",
   "character": "徐",
   "keyword": "gradually",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1789",
   "character": "叙",
   "keyword": "confer",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1790",
   "character": "途",
   "keyword": "route",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1791",
   "character": "斜",
   "keyword": "diagonal",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1792",
   "character": "塗",
   "keyword": "paint",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1793",
   "character": "束",
   "keyword": "bundle",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1798",
   "character": "辣",
   "keyword": "bitter",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1803",
   "character": "検",
   "keyword": "examination",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk1804",
-  "character": "倹",
-  "keyword": "frugal",
-  "reason": "self-contradictory: claims the right side is 兼 (concurrently) then describes a 田 rice field inside it; 倹 actually shares its right side (㑒/僉, 'awl'/'omni-') with 剣 and 険, not 兼"
+  "reason": "too-short"
  },
  {
   "id": "rtk1805",
   "character": "重",
   "keyword": "heavy",
-  "reason": "no usable Google text"
+  "reason": "too-short"
+ },
+ {
+  "id": "rtk1807",
+  "character": "腫",
+  "keyword": "tumor",
+  "reason": "too-short"
  },
  {
   "id": "rtk1808",
   "character": "勲",
   "keyword": "meritorious deed",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1811",
   "character": "衝",
   "keyword": "collide",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1812",
   "character": "薫",
   "keyword": "fragrant",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1818",
   "character": "痩",
   "keyword": "lose weight",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1825",
   "character": "痛",
   "keyword": "pain",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1827",
   "character": "匿",
   "keyword": "hide",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1828",
   "character": "匠",
   "keyword": "artisan",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1832",
   "character": "枢",
   "keyword": "hinge",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk1843",
-  "character": "瞭",
-  "keyword": "obvious",
-  "reason": "garbled/self-contradictory: describes the right side as 寮 (dormitory, containing a 宀 house roof) and even introduces 元 (二 + 儿), but 瞭's right side is 尞 with no roof"
+  "reason": "too-short"
  },
  {
   "id": "rtk1847",
   "character": "形",
   "keyword": "shape",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1849",
   "character": "杉",
   "keyword": "cedar",
-  "reason": "no usable Google text"
+  "reason": "too-short"
+ },
+ {
+  "id": "rtk1856",
+  "character": "参",
+  "keyword": "visit",
+  "reason": "too-short"
+ },
+ {
+  "id": "rtk1860",
+  "character": "診",
+  "keyword": "checkup",
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk1866",
   "character": "斉",
   "keyword": "adjusted",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1867",
   "character": "剤",
   "keyword": "dose",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1868",
   "character": "済",
   "keyword": "finish",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1869",
   "character": "斎",
   "keyword": "purification",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1870",
   "character": "粛",
   "keyword": "solemn",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1871",
   "character": "塁",
   "keyword": "bases",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1872",
   "character": "楽",
   "keyword": "music",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1874",
   "character": "率",
   "keyword": "ratio",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1875",
   "character": "渋",
   "keyword": "astringent",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1877",
   "character": "央",
   "keyword": "center",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1879",
   "character": "映",
   "keyword": "reflect",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1883",
   "character": "跡",
   "keyword": "tracks",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1886",
   "character": "湾",
   "keyword": "gulf",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1887",
   "character": "黄",
   "keyword": "yellow",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1888",
   "character": "横",
   "keyword": "sideways",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1890",
   "character": "色",
   "keyword": "color",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1893",
   "character": "肥",
   "keyword": "fertilizer",
-  "reason": "no usable Google text"
+  "reason": "too-short"
+ },
+ {
+  "id": "rtk1896",
+  "character": "某",
+  "keyword": "so-and-so",
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk1898",
   "character": "媒",
   "keyword": "mediator",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1899",
   "character": "欺",
   "keyword": "deceit",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1902",
   "character": "期",
   "keyword": "period",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1903",
   "character": "碁",
   "keyword": "go",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1905",
   "character": "甚",
   "keyword": "tremendously",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1910",
   "character": "遣",
   "keyword": "dispatch",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1914",
   "character": "組",
   "keyword": "association",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1916",
   "character": "租",
   "keyword": "tariff",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1920",
   "character": "査",
   "keyword": "investigate",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1921",
   "character": "助",
   "keyword": "help",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1922",
   "character": "宜",
   "keyword": "best regards",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1923",
   "character": "畳",
   "keyword": "tatami mat",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk1926",
-  "character": "譜",
-  "keyword": "musical score",
-  "reason": "text truncated with no breakdown"
+  "reason": "too-short"
  },
  {
   "id": "rtk1936",
   "character": "異",
   "keyword": "uncommon",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1939",
   "character": "洪",
   "keyword": "deluge",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1940",
   "character": "港",
   "keyword": "harbor",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1942",
   "character": "爆",
   "keyword": "bomb",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1943",
   "character": "恭",
   "keyword": "respect",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1945",
   "character": "殿",
   "keyword": "mr.",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1946",
   "character": "井",
   "keyword": "well",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1950",
   "character": "亜",
   "keyword": "asia",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1952",
   "character": "円",
   "keyword": "circle",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1953",
   "character": "角",
   "keyword": "angle",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1957",
   "character": "講",
   "keyword": "lecture",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk1958",
-  "character": "購",
-  "keyword": "subscription",
-  "reason": "text truncated mid-breakdown; right side 冓 named but not decomposed"
+  "reason": "too-short"
  },
  {
   "id": "rtk1959",
   "character": "構",
   "keyword": "posture",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1960",
   "character": "溝",
   "keyword": "gutter",
-  "reason": "no usable Google text"
+  "reason": "too-short"
+ },
+ {
+  "id": "rtk1961",
+  "character": "論",
+  "keyword": "argument",
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk1963",
   "character": "輪",
   "keyword": "wheel",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1966",
   "character": "編",
   "keyword": "compilation",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1967",
   "character": "冊",
   "keyword": "tome",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1969",
   "character": "典",
   "keyword": "code",
-  "reason": "no usable Google text"
+  "reason": "too-short"
+ },
+ {
+  "id": "rtk1971",
+  "character": "紙",
+  "keyword": "paper",
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk1975",
   "character": "底",
   "keyword": "bottom",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1976",
   "character": "民",
   "keyword": "people",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1979",
   "character": "哺",
   "keyword": "suckle",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1982",
   "character": "舗",
   "keyword": "shop",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1984",
   "character": "邸",
   "keyword": "residence",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1986",
   "character": "郡",
   "keyword": "county",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1987",
   "character": "郊",
   "keyword": "outskirts",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1988",
   "character": "部",
   "keyword": "section",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1994",
   "character": "響",
   "keyword": "echo",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1997",
   "character": "盾",
   "keyword": "shield",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk1999",
   "character": "派",
   "keyword": "faction",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2000",
   "character": "脈",
   "keyword": "vein",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2001",
   "character": "衆",
   "keyword": "masses",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2003",
   "character": "段",
   "keyword": "grade",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2006",
   "character": "幻",
   "keyword": "phantasm",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2007",
   "character": "司",
   "keyword": "director",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2013",
   "character": "舶",
   "keyword": "liner",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2017",
   "character": "盤",
   "keyword": "tray",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2018",
   "character": "搬",
   "keyword": "conveyor",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2022",
   "character": "瓜",
   "keyword": "melon",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2023",
   "character": "弧",
   "keyword": "arc",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2024",
-  "character": "孤",
-  "keyword": "orphan",
-  "reason": "text truncated with no breakdown"
+  "reason": "too-short"
  },
  {
   "id": "rtk2029",
   "character": "来",
   "keyword": "come",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2033",
   "character": "沈",
   "keyword": "sink",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2034",
   "character": "枕",
   "keyword": "pillow",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2037",
   "character": "衰",
   "keyword": "decline",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2040",
-  "character": "麺",
-  "keyword": "noodles",
-  "reason": "text truncated with no full breakdown"
+  "reason": "too-short"
  },
  {
   "id": "rtk2041",
   "character": "革",
   "keyword": "leather",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2044",
   "character": "声",
   "keyword": "voice",
-  "reason": "text truncated with no breakdown"
+  "reason": "too-short"
  },
  {
   "id": "rtk2050",
   "character": "承",
   "keyword": "acquiesce",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2051",
   "character": "函",
   "keyword": "bin",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2052",
   "character": "極",
   "keyword": "poles",
-  "reason": "text truncated with no breakdown"
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk2057",
   "character": "釈",
   "keyword": "interpretation",
-  "reason": "text truncated with no breakdown"
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk2062",
   "character": "毛",
   "keyword": "fur",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2063",
   "character": "耗",
   "keyword": "decrease",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2065",
   "character": "宅",
   "keyword": "home",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2066",
   "character": "託",
   "keyword": "consign",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2067",
   "character": "為",
   "keyword": "do",
-  "reason": "text truncated with no breakdown"
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk2069",
   "character": "畏",
   "keyword": "apprehensive",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2076",
-  "character": "喪",
-  "keyword": "miss",
-  "reason": "text truncated with no breakdown"
- },
- {
-  "id": "rtk2082",
-  "character": "桜",
-  "keyword": "cherry tree",
-  "reason": "text truncated with no breakdown"
+  "reason": "too-short"
  },
  {
   "id": "rtk2083",
   "character": "獣",
   "keyword": "animal",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2084",
-  "character": "脳",
-  "keyword": "brain",
-  "reason": "text truncated; only mentions irony that brain has no 田 primitive, no actual breakdown"
+  "reason": "too-short"
  },
  {
   "id": "rtk2102",
   "character": "緩",
   "keyword": "slacken",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2104",
   "character": "嘱",
   "keyword": "entrust",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2106",
-  "character": "遇",
-  "keyword": "interview",
-  "reason": "text truncated with no breakdown"
- },
- {
-  "id": "rtk2112",
-  "character": "岡",
-  "keyword": "mount",
-  "reason": "self-inconsistent keyword: text states keyword is 'hill' while our data and sibling records (2113-2115) treat 岡 as 'mount'/'ridge'; breakdown itself (冂+山) is fine"
- },
- {
-  "id": "rtk2122",
-  "character": "蹴",
-  "keyword": "kick",
-  "reason": "text truncated; only the left-side 'foot' primitive given, right side not described"
- },
- {
-  "id": "rtk2125",
-  "character": "貌",
-  "keyword": "countenance",
-  "reason": "text truncated with no breakdown"
- },
- {
-  "id": "rtk2133",
-  "character": "駒",
-  "keyword": "pony",
-  "reason": "text truncated with no breakdown"
- },
- {
-  "id": "rtk2134",
-  "character": "験",
-  "keyword": "verification",
-  "reason": "text truncated with no breakdown"
- },
- {
-  "id": "rtk2136",
-  "character": "駐",
-  "keyword": "parking",
-  "reason": "truncated with no breakdown given"
- },
- {
-  "id": "rtk2145",
-  "character": "虎",
-  "keyword": "tiger",
-  "reason": "truncated; says 'broken down from top to bottom into two primary Heisig primitives' but never lists them"
+  "reason": "too-short"
  },
  {
   "id": "rtk2148",
   "character": "虚",
   "keyword": "void",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2149",
   "character": "戯",
   "keyword": "frolic",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2150",
-  "character": "虞",
-  "keyword": "uneasiness",
-  "reason": "truncated; only keyword given, no breakdown"
+  "reason": "too-short"
  },
  {
   "id": "rtk2152",
   "character": "劇",
   "keyword": "drama",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2154",
   "character": "鹿",
   "keyword": "deer",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2156",
   "character": "薦",
   "keyword": "recommend",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2158",
-  "character": "麗",
-  "keyword": "lovely",
-  "reason": "truncated; 'broken down into two primary parts, arranged vertically' then cut off"
+  "reason": "too-short"
  },
  {
   "id": "rtk2161",
   "character": "態",
   "keyword": "attitude",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2164",
   "character": "辰",
   "keyword": "sign of the dragon",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2166",
   "character": "震",
   "keyword": "quake",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2183",
   "character": "朕",
   "keyword": "majestic plural",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2185",
   "character": "箇",
   "keyword": "item",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2186",
   "character": "錬",
   "keyword": "tempering",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2187",
   "character": "遵",
   "keyword": "abide by",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2190",
   "character": "且",
   "keyword": "moreover",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2191",
   "character": "藻",
   "keyword": "seaweed",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2194",
   "character": "璽",
   "keyword": "imperial seal",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2195",
-  "character": "潟",
-  "keyword": "lagoon",
-  "reason": "truncated with no breakdown given"
+  "reason": "too-short"
  },
  {
   "id": "rtk2197",
   "character": "丑",
   "keyword": "sign of the cow",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2198",
   "character": "羞",
   "keyword": "humiliate",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2200",
   "character": "巳",
   "keyword": "sign of the snake",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2202",
   "character": "柴",
   "keyword": "brushwood",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2204",
   "character": "砦",
   "keyword": "fort",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2206",
-  "character": "禽",
-  "keyword": "fowl",
-  "reason": "truncated with no breakdown given"
+  "reason": "too-short"
  },
  {
   "id": "rtk2208",
   "character": "憐",
   "keyword": "sympathize with",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2210",
   "character": "麟",
   "keyword": "camelopard",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2211",
   "character": "鱗",
   "keyword": "scaled",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2212",
   "character": "奄",
   "keyword": "encompassing",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2213",
   "character": "庵",
   "keyword": "hermitage",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2215",
-  "character": "悛",
-  "keyword": "make amends",
-  "reason": "truncated with no breakdown given"
- },
- {
-  "id": "rtk2216",
-  "character": "駿",
-  "keyword": "steed",
-  "reason": "truncated; 'broken down into ... a left side and a right side' then cut off"
- },
- {
-  "id": "rtk2217",
-  "character": "峻",
-  "keyword": "steep",
-  "reason": "truncated with no breakdown given"
+  "reason": "too-short"
  },
  {
   "id": "rtk2218",
   "character": "竣",
   "keyword": "complete a job",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2220",
   "character": "皐",
   "keyword": "lunar month",
-  "reason": "truncated; only frame number given, no breakdown"
+  "reason": "too-short"
  },
  {
   "id": "rtk2222",
   "character": "綴",
   "keyword": "mend",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2223",
   "character": "鎧",
   "keyword": "suit of armor",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2227",
   "character": "籤",
   "keyword": "lottery",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2228",
   "character": "懺",
   "keyword": "penitential",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2229",
   "character": "芻",
   "keyword": "hay",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2230",
   "character": "雛",
   "keyword": "chick",
-  "reason": "truncated with no breakdown given"
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk2231",
   "character": "趨",
   "keyword": "scurry",
-  "reason": "truncated with no breakdown given"
- },
- {
-  "id": "rtk2234",
-  "character": "或",
-  "keyword": "a  (a certain)",
-  "reason": "off-topic; AI Overview is a generic explanation of what Heisig primitives are and never breaks down 或 itself"
- },
- {
-  "id": "rtk2236",
-  "character": "也",
-  "keyword": "est",
-  "reason": "truncated with no breakdown given"
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk2237",
   "character": "巴",
   "keyword": "comma-design",
-  "reason": "truncated with no breakdown given"
+  "reason": "too-short"
  },
  {
   "id": "rtk2239",
   "character": "菫",
   "keyword": "violet",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2240",
-  "character": "曼",
-  "keyword": "mandala",
-  "reason": "truncated with no breakdown given"
- },
- {
-  "id": "rtk2242",
-  "character": "莫",
-  "keyword": "shalt",
-  "reason": "truncated with no breakdown given"
+  "reason": "too-short"
  },
  {
   "id": "rtk2244",
   "character": "倭",
   "keyword": "yamato",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2245",
   "character": "侠",
   "keyword": "chivalry",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2247",
   "character": "俄",
   "keyword": "abrupt",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2249",
   "character": "仔",
   "keyword": "animal offspring",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2250",
   "character": "仇",
   "keyword": "foe",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2251",
   "character": "伽",
   "keyword": "look after",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
-  "id": "rtk2258",
-  "character": "脩",
-  "keyword": "dried meat",
-  "reason": "truncated; 'composed of three primitive elements layered together' then cut off"
- },
- {
-  "id": "rtk2259",
-  "character": "倅",
-  "keyword": "my son",
-  "reason": "truncated; 'broken down ... into two primary components' then cut off"
+  "id": "rtk2253",
+  "character": "僑",
+  "keyword": "emigrant",
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk2261",
   "character": "冴",
   "keyword": "sharp",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2263",
   "character": "凌",
   "keyword": "pull through",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2264",
   "character": "凛",
   "keyword": "stately",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2266",
-  "character": "凪",
-  "keyword": "lull",
-  "reason": "truncated with no breakdown given"
+  "reason": "too-short"
  },
  {
   "id": "rtk2267",
   "character": "夙",
   "keyword": "earlybird",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2269",
   "character": "剽",
   "keyword": "menace",
-  "reason": "truncated with no breakdown given"
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk2272",
   "character": "厭",
   "keyword": "despondent",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2276",
   "character": "仄",
   "keyword": "insinuate",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2277",
   "character": "哨",
   "keyword": "scout",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2279",
   "character": "囁",
   "keyword": "whisper",
-  "reason": "truncated; only keyword given, no breakdown"
+  "reason": "too-short"
  },
  {
   "id": "rtk2280",
   "character": "喋",
   "keyword": "chatter",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2283",
   "character": "咳",
   "keyword": "cough",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2286",
   "character": "嘘",
   "keyword": "fib",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2287",
   "character": "啄",
   "keyword": "peck at",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2288",
   "character": "吠",
   "keyword": "barking",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2292",
-  "character": "吻",
-  "keyword": "sides of the mouth",
-  "reason": "truncated with no breakdown given"
+  "reason": "too-short"
  },
  {
   "id": "rtk2294",
   "character": "噺",
   "keyword": "spin a tale",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2295",
   "character": "噌",
   "keyword": "miso",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2298",
   "character": "喰",
   "keyword": "ingest",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2299",
   "character": "埴",
   "keyword": "clay",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2301",
   "character": "壕",
   "keyword": "dugout",
-  "reason": "truncated with no breakdown given"
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk2302",
   "character": "垢",
   "keyword": "blemish",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2305",
   "character": "堰",
   "keyword": "dam",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2306",
   "character": "堵",
   "keyword": "railing",
-  "reason": "truncated; 'structurally broken down from left to right' then cut off"
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk2309",
   "character": "婢",
   "keyword": "handmaiden",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2311",
   "character": "娼",
   "keyword": "harlot",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2313",
   "character": "娃",
   "keyword": "fair",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2314",
   "character": "姪",
   "keyword": "niece",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2318",
   "character": "姐",
   "keyword": "young miss",
-  "reason": "truncated; only core info given, no breakdown"
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk2320",
   "character": "孕",
   "keyword": "expecting",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2328",
   "character": "屠",
   "keyword": "butchering",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2329",
   "character": "屁",
   "keyword": "fart",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2330",
   "character": "屑",
   "keyword": "rubbish",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2331",
   "character": "屡",
   "keyword": "frequently",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2333",
   "character": "屏",
   "keyword": "folding screen",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2334",
   "character": "嵩",
   "keyword": "high-reaching",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2335",
   "character": "崚",
   "keyword": "rugged mountains",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2339",
   "character": "幡",
   "keyword": "banner",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2340",
   "character": "幟",
   "keyword": "pennant",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2341",
   "character": "庖",
   "keyword": "cleaver",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2342",
   "character": "廓",
   "keyword": "licensed quarters",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2345",
   "character": "庄",
   "keyword": "shire",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2346",
   "character": "廟",
   "keyword": "tomb sanctuary",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2353",
-  "character": "捏",
-  "keyword": "fabrication",
-  "reason": "truncated: ends at 'Here is the structured primitive breakdown...' then 'Show more' with no breakdown given"
- },
- {
-  "id": "rtk2355",
-  "character": "捺",
-  "keyword": "impress",
-  "reason": "truncated: 'The exact breakdown of its primitive elements... follows:' then 'Show more', no breakdown"
+  "reason": "too-short"
  },
  {
   "id": "rtk2357",
   "character": "撰",
   "keyword": "assortment",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2359",
   "character": "捌",
   "keyword": "deal with",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2361",
   "character": "播",
   "keyword": "disseminate",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2362",
   "character": "揖",
   "keyword": "collect",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2365",
   "character": "撚",
   "keyword": "twirl",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2368",
-  "character": "撫",
-  "keyword": "petting",
-  "reason": "truncated: 'Here is the exact primitive breakdown...' then 'Show more', no breakdown"
+  "reason": "too-short"
  },
  {
   "id": "rtk2370",
   "character": "擢",
   "keyword": "outstanding",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2372",
   "character": "捷",
   "keyword": "spoils",
-  "reason": "truncated: only keyword given, then 'Show more', no breakdown"
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk2375",
   "character": "惟",
   "keyword": "ponder",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2376",
   "character": "惚",
   "keyword": "infatuation",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2378",
   "character": "惇",
   "keyword": "considerate",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2380",
   "character": "恢",
   "keyword": "enlarge",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2383",
   "character": "洸",
   "keyword": "glistening",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2384",
   "character": "滉",
   "keyword": "bounding main",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2386",
-  "character": "洲",
-  "keyword": "continent",
-  "reason": "truncated: ends at heading 'Primitives Breakdown' with no content"
+  "reason": "too-short"
  },
  {
   "id": "rtk2387",
   "character": "洵",
   "keyword": "swirling waters",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2388",
   "character": "滲",
   "keyword": "seep",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2389",
-  "character": "洒",
-  "keyword": "rinse",
-  "reason": "truncated: 'Below is the complete primitive breakdown...' then 'Show more', no breakdown"
+  "reason": "too-short"
  },
  {
   "id": "rtk2391",
   "character": "泪",
   "keyword": "teardrops",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2394",
   "character": "梁",
   "keyword": "roofbeam",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2396",
   "character": "洛",
   "keyword": "old kyoto",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2400",
-  "character": "濠",
-  "keyword": "moat",
-  "reason": "truncated: 'The exact breakdown of its primitives... is detailed below.' then 'Show more', no breakdown"
+  "reason": "too-short"
  },
  {
   "id": "rtk2401",
   "character": "溌",
   "keyword": "spray",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2403",
   "character": "淋",
   "keyword": "solitude",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2404",
   "character": "浩",
   "keyword": "abounding",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2406",
   "character": "鴻",
   "keyword": "large goose",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2407",
   "character": "潅",
   "keyword": "souse",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2409",
   "character": "湛",
   "keyword": "inundate",
-  "reason": "truncated: only keyword given, then 'Show more', no breakdown"
- },
- {
-  "id": "rtk2411",
-  "character": "渥",
-  "keyword": "moisten",
-  "reason": "truncated: intro sentence then 'Show more', no breakdown"
+  "reason": "too-short"
  },
  {
   "id": "rtk2412",
   "character": "灘",
   "keyword": "rough seas",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2413",
   "character": "汲",
   "keyword": "draw water",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2414",
   "character": "瀞",
   "keyword": "river pool",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2416",
   "character": "渕",
   "keyword": "abyss",
-  "reason": "truncated: only keyword given, then 'Show more', no breakdown"
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk2417",
   "character": "沌",
   "keyword": "chaos",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2419",
   "character": "濡",
   "keyword": "drench",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2421",
   "character": "涅",
   "keyword": "black soil",
-  "reason": "truncated: core info given, then 'Show more', no primitive breakdown"
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk2422",
   "character": "斧",
   "keyword": "hatchet",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2435",
   "character": "莨",
   "keyword": "tobacco",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2438",
   "character": "苺",
   "keyword": "strawberry",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2440",
   "character": "藝",
   "keyword": "technique (old)",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2442",
   "character": "蓑",
   "keyword": "straw raincoat",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2447",
   "character": "芙",
   "keyword": "lotus flower",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2449",
   "character": "蘭",
   "keyword": "orchid",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2450",
   "character": "芦",
   "keyword": "hollow reed",
-  "reason": "truncated: only keyword given, then 'Show more', no breakdown"
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk2454",
   "character": "蕎",
   "keyword": "buckwheat",
-  "reason": "truncated: only keyword given, then 'Show more', no breakdown"
+  "reason": "too-short"
  },
  {
   "id": "rtk2458",
   "character": "蓬",
   "keyword": "wormwood",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2460",
   "character": "萌",
   "keyword": "germinate",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2461",
-  "character": "葡",
-  "keyword": "grape",
-  "reason": "truncated: 'broken down into four distinct primitive elements... Here is the precise visual breakdown' then 'Show more', no actual breakdown"
+  "reason": "too-short"
  },
  {
   "id": "rtk2465",
   "character": "苓",
   "keyword": "cocklebur",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2467",
   "character": "蒙",
   "keyword": "darken",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2468",
   "character": "茅",
   "keyword": "grassy reed",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2469",
   "character": "芭",
   "keyword": "plantain",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2471",
   "character": "葱",
   "keyword": "onion",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2472",
   "character": "葵",
   "keyword": "hollyhock",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2473",
   "character": "葺",
   "keyword": "shingling",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2476",
   "character": "蒔",
   "keyword": "sowing",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2478",
   "character": "苫",
   "keyword": "thatching",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2479",
   "character": "蒼",
   "keyword": "pale blue",
-  "reason": "truncated: only keyword given, then 'Show more', no breakdown"
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk2484",
   "character": "蒜",
   "keyword": "garlic",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2485",
-  "character": "蕨",
-  "keyword": "bracken",
-  "reason": "truncated: 'breaks down into three distinct primitive layers' then 'Show more', no layers listed"
+  "reason": "too-short"
  },
  {
   "id": "rtk2491",
   "character": "葦",
   "keyword": "ditch reed",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2493",
   "character": "辿",
   "keyword": "track down",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2495",
-  "character": "迂",
-  "keyword": "detour",
-  "reason": "truncated: 'breaks down into two distinct primitive elements:' then 'Show more', elements not listed"
+  "reason": "too-short"
  },
  {
   "id": "rtk2496",
   "character": "遁",
   "keyword": "shirk",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2498",
   "character": "遥",
   "keyword": "far off",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2499",
   "character": "遼",
   "keyword": "faraway",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2500",
   "character": "逼",
   "keyword": "pressing",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2509",
   "character": "忽",
   "keyword": "instantaneously",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2513",
-  "character": "昴",
-  "keyword": "overarching",
-  "reason": "truncated: 'The breakdown of its primitive elements... is detailed below.' then 'Show more', no breakdown"
+  "reason": "too-short"
  },
  {
   "id": "rtk2515",
   "character": "晟",
   "keyword": "aglow",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2516",
-  "character": "暈",
-  "keyword": "halo",
-  "reason": "truncated: 'A detailed breakdown of its primitives...follows below:' then 'Show more', no breakdown"
+  "reason": "too-short"
  },
  {
   "id": "rtk2517",
   "character": "暉",
   "keyword": "glitter",
-  "reason": "truncated: 'broken down into two primary parts from left to right:' then 'Show more', parts not listed"
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk2520",
   "character": "晨",
   "keyword": "morrow",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2523",
-  "character": "曝",
-  "keyword": "air out",
-  "reason": "truncated: 'Here is the structural and primitive breakdown...' then 'Show more', no breakdown"
+  "reason": "too-short"
  },
  {
   "id": "rtk2525",
   "character": "昂",
   "keyword": "elevate",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2526",
   "character": "昏",
   "keyword": "dusk",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2531",
   "character": "胚",
   "keyword": "embryo",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2534",
   "character": "肋",
   "keyword": "rib",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2536",
   "character": "肱",
   "keyword": "armrest",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2538",
   "character": "楓",
   "keyword": "maple tree",
-  "reason": "text truncated at 'Show more'; only keyword given, no primitive breakdown"
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk2540",
   "character": "椋",
   "keyword": "oriental elm",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2541",
   "character": "榛",
   "keyword": "hazel",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2543",
   "character": "槌",
   "keyword": "wooden hammer",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2544",
   "character": "樵",
   "keyword": "mallet",
-  "reason": "text truncated at 'Show more'; no breakdown given"
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk2545",
   "character": "梯",
   "keyword": "ladder",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2547",
-  "character": "杭",
-  "keyword": "picket",
-  "reason": "text truncated at 'Show more'; promises breakdown but gives none"
+  "reason": "too-short"
  },
  {
   "id": "rtk2555",
   "character": "槙",
   "keyword": "black pine",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2556",
   "character": "楢",
   "keyword": "japanese oak",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2557",
   "character": "橘",
   "keyword": "mandarin orange",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2558",
-  "character": "桧",
-  "keyword": "japanese cypress",
-  "reason": "text truncated at 'Show more'; no breakdown given"
- },
- {
-  "id": "rtk2561",
-  "character": "桔",
-  "keyword": "bellflower",
-  "reason": "text truncated at 'Show more'; no breakdown given"
+  "reason": "too-short"
  },
  {
   "id": "rtk2564",
   "character": "梶",
   "keyword": "oar",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2568",
-  "character": "櫓",
-  "keyword": "turret",
-  "reason": "text truncated at 'Show more'; no breakdown given"
+  "reason": "too-short"
  },
  {
   "id": "rtk2569",
   "character": "橿",
   "keyword": "sturdy oak",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2576",
   "character": "槍",
   "keyword": "lance",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2578",
   "character": "梱",
   "keyword": "bale",
-  "reason": "text truncated at 'Show more'; only keyword given, no primitive breakdown"
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk2579",
   "character": "枇",
   "keyword": "loquat",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2583",
-  "character": "栞",
-  "keyword": "bookmark",
-  "reason": "text truncated at 'Show more'; only keyword given, no primitive breakdown"
+  "reason": "too-short"
  },
  {
   "id": "rtk2584",
   "character": "椰",
   "keyword": "coconut tree",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2585",
   "character": "檀",
   "keyword": "sandalwood",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2586",
   "character": "樗",
   "keyword": "sumac",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2591",
   "character": "楕",
   "keyword": "ellipse",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2593",
   "character": "毬",
   "keyword": "furball",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2600",
   "character": "煤",
   "keyword": "soot",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2602",
   "character": "燦",
   "keyword": "dazzling",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2605",
   "character": "焔",
   "keyword": "flames",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2606",
   "character": "烹",
   "keyword": "stew",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2607",
   "character": "牽",
   "keyword": "tug",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2611",
   "character": "琉",
   "keyword": "lapis lazuli",
-  "reason": "text truncated at 'Show more'; only keyword given, no primitive breakdown"
+  "reason": "too-short"
  },
  {
   "id": "rtk2613",
   "character": "琢",
   "keyword": "hone",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2614",
   "character": "珊",
   "keyword": "coral",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2616",
   "character": "瑞",
   "keyword": "fortunate",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2617",
   "character": "玖",
   "keyword": "jet",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2620",
   "character": "畢",
   "keyword": "lastly",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2629",
   "character": "眩",
   "keyword": "dizzy",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2630",
   "character": "雉",
   "keyword": "pheasant",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2632",
   "character": "磐",
   "keyword": "crag",
-  "reason": "text truncated at 'Show more'; only keyword given, no primitive breakdown"
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk2634",
   "character": "碧",
   "keyword": "blue-green",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2635",
   "character": "硯",
   "keyword": "inkstone",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2636",
   "character": "砥",
   "keyword": "grindstone",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2642",
-  "character": "碓",
-  "keyword": "mill",
-  "reason": "text truncated at 'Show more'; no breakdown given"
+  "reason": "too-short"
  },
  {
   "id": "rtk2643",
   "character": "禦",
   "keyword": "fend off",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2645",
-  "character": "祐",
-  "keyword": "ancestral tablet",
-  "reason": "text truncated at 'Show more'; says two primitives but names none"
+  "reason": "too-short"
  },
  {
   "id": "rtk2646",
   "character": "祇",
   "keyword": "local god",
-  "reason": "text truncated at 'Show more'; only keyword given, no primitive breakdown"
- },
- {
-  "id": "rtk2647",
-  "character": "祢",
-  "keyword": "ancestral shrine",
-  "reason": "text truncated at 'Show more'; only keyword given, no primitive breakdown"
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk2654",
   "character": "稗",
   "keyword": "crabgrass",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2656",
   "character": "稜",
   "keyword": "imperial authority",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2657",
   "character": "稀",
   "keyword": "sparse",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2658",
   "character": "穆",
   "keyword": "obeisant",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2663",
   "character": "竪",
   "keyword": "longness",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2669",
   "character": "袷",
   "keyword": "lined kimono",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2670",
-  "character": "袴",
-  "keyword": "pleated skirt",
-  "reason": "truncated / doubtful"
- },
- {
-  "id": "rtk2671",
-  "character": "襖",
-  "keyword": "sliding door",
-  "reason": "truncated / doubtful"
+  "reason": "too-short"
  },
  {
   "id": "rtk2686",
   "character": "笈",
   "keyword": "backpack",
-  "reason": "text truncated at 'Show more'; only keyword given, no primitive breakdown"
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk2687",
   "character": "篇",
   "keyword": "livraison",
-  "reason": "text truncated at 'Show more'; only keyword given, no primitive breakdown"
- },
- {
-  "id": "rtk2690",
-  "character": "粕",
-  "keyword": "settlings",
-  "reason": "truncated / doubtful"
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk2691",
   "character": "糟",
   "keyword": "lees",
-  "reason": "truncated / doubtful"
- },
- {
-  "id": "rtk2693",
-  "character": "籾",
-  "keyword": "unhulled rice",
-  "reason": "truncated / doubtful"
+  "reason": "too-short"
  },
  {
   "id": "rtk2696",
   "character": "粟",
   "keyword": "foxtail millet",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2698",
   "character": "綸",
   "keyword": "twine",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2699",
-  "character": "絨",
-  "keyword": "carpet yarn",
-  "reason": "truncated / doubtful"
+  "reason": "too-short"
  },
  {
   "id": "rtk2703",
   "character": "紐",
   "keyword": "string",
-  "reason": "truncated / doubtful"
+  "reason": "too-short"
  },
  {
   "id": "rtk2704",
   "character": "紘",
   "keyword": "chinstrap",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2707",
-  "character": "繍",
-  "keyword": "embroidery",
-  "reason": "truncated / doubtful"
+  "reason": "too-short"
  },
  {
   "id": "rtk2708",
   "character": "紬",
   "keyword": "pongee",
-  "reason": "truncated / doubtful"
+  "reason": "too-short"
  },
  {
   "id": "rtk2710",
   "character": "綾",
   "keyword": "damask",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2713",
   "character": "綬",
   "keyword": "gimp",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2716",
-  "character": "聯",
-  "keyword": "strung together",
-  "reason": "truncated / doubtful"
- },
- {
-  "id": "rtk2718",
-  "character": "聘",
-  "keyword": "summons",
-  "reason": "truncated / doubtful"
+  "reason": "too-short"
  },
  {
   "id": "rtk2721",
   "character": "蚤",
   "keyword": "flea",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2723",
   "character": "蛋",
   "keyword": "protein",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2724",
   "character": "蟄",
   "keyword": "hibernation",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2727",
   "character": "蝋",
   "keyword": "wax",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2728",
   "character": "蝦",
   "keyword": "shrimp",
-  "reason": "truncated / doubtful"
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk2729",
   "character": "蛸",
   "keyword": "octopus",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2731",
   "character": "蝉",
   "keyword": "cicada",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2736",
-  "character": "蛎",
-  "keyword": "oyster",
-  "reason": "truncated / doubtful"
- },
- {
-  "id": "rtk2739",
-  "character": "裟",
-  "keyword": "monk’s sash",
-  "reason": "truncated / doubtful"
+  "reason": "too-short"
  },
  {
   "id": "rtk2740",
   "character": "截",
   "keyword": "incision",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2742",
   "character": "詢",
   "keyword": "counsel",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2744",
   "character": "讐",
   "keyword": "vendetta",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2746",
   "character": "諒",
   "keyword": "verify",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2748",
-  "character": "訊",
-  "keyword": "query",
-  "reason": "truncated / doubtful"
- },
- {
-  "id": "rtk2752",
-  "character": "謬",
-  "keyword": "fallible",
-  "reason": "truncated / doubtful"
+  "reason": "too-short"
  },
  {
   "id": "rtk2753",
   "character": "訝",
   "keyword": "wary",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2755",
   "character": "誹",
   "keyword": "slander",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2756",
   "character": "謂",
   "keyword": "so-called",
-  "reason": "truncated / doubtful"
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk2757",
   "character": "諜",
   "keyword": "secret agent",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2761",
-  "character": "輔",
-  "keyword": "reinforce",
-  "reason": "truncated / doubtful"
+  "reason": "too-short"
  },
  {
   "id": "rtk2762",
   "character": "輻",
   "keyword": "spoke",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2763",
   "character": "輯",
   "keyword": "assemble",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2764",
   "character": "豹",
   "keyword": "panther",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2772",
   "character": "跨",
   "keyword": "straddle",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2775",
-  "character": "醍",
-  "keyword": "whey",
-  "reason": "truncated / doubtful"
+  "reason": "too-short"
  },
  {
   "id": "rtk2776",
   "character": "醐",
   "keyword": "ghee",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2777",
   "character": "醇",
   "keyword": "strong sake",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2780",
   "character": "銚",
   "keyword": "keg",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2785",
-  "character": "鋲",
-  "keyword": "rivet",
-  "reason": "truncated with no breakdown given"
+  "reason": "too-short"
  },
  {
   "id": "rtk2786",
   "character": "錫",
   "keyword": "tin",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2787",
   "character": "錨",
   "keyword": "anchor",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2788",
   "character": "釘",
   "keyword": "nail",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2790",
-  "character": "鋒",
-  "keyword": "sword’s point",
-  "reason": "truncated / doubtful"
+  "reason": "too-short"
  },
  {
   "id": "rtk2799",
   "character": "雫",
   "keyword": "trickle",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2801",
   "character": "翰",
   "keyword": "quill",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2802",
-  "character": "斡",
-  "keyword": "auspices",
-  "reason": "truncated / doubtful"
- },
- {
-  "id": "rtk2808",
-  "character": "鞠",
-  "keyword": "terminate",
-  "reason": "truncated / doubtful"
+  "reason": "too-short"
  },
  {
   "id": "rtk2815",
   "character": "饗",
   "keyword": "feast",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2817",
   "character": "飴",
   "keyword": "sweets",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2820",
   "character": "馳",
   "keyword": "rush",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2821",
   "character": "騙",
   "keyword": "cheat",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2823",
-  "character": "駁",
-  "keyword": "rebuttal",
-  "reason": "truncated / doubtful"
+  "reason": "too-short"
  },
  {
   "id": "rtk2825",
   "character": "驢",
   "keyword": "donkey",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2827",
   "character": "鯛",
   "keyword": "sea bream",
-  "reason": "truncated / doubtful"
+  "reason": "too-short"
  },
  {
   "id": "rtk2828",
   "character": "鰯",
   "keyword": "sardine",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2830",
-  "character": "鮭",
-  "keyword": "salmon",
-  "reason": "truncated / doubtful"
- },
- {
-  "id": "rtk2831",
-  "character": "鮪",
-  "keyword": "tuna",
-  "reason": "truncated / doubtful"
+  "reason": "too-short"
  },
  {
   "id": "rtk2833",
   "character": "鯵",
   "keyword": "horse mackerel",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2834",
   "character": "鱈",
   "keyword": "cod",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2835",
-  "character": "鯖",
-  "keyword": "mackerel",
-  "reason": "truncated / doubtful"
- },
- {
-  "id": "rtk2839",
-  "character": "鰐",
-  "keyword": "alligator",
-  "reason": "truncated / doubtful"
+  "reason": "too-short"
  },
  {
   "id": "rtk2843",
   "character": "鴎",
   "keyword": "seagull",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2849",
   "character": "鷲",
   "keyword": "eagle",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2850",
   "character": "鴨",
   "keyword": "wild duck",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2852",
   "character": "梟",
   "keyword": "owl",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2853",
   "character": "塵",
   "keyword": "dust",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2857",
-  "character": "鑿",
-  "keyword": "bore",
-  "reason": "garbled and self-contradictory (业 vs 'short vertical strokes/drops', 戈 vs 殳 in top row) and cut off mid-sentence before completing the breakdown"
+  "reason": "too-short"
  },
  {
   "id": "rtk2859",
   "character": "瞑",
   "keyword": "close the eyes",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2860",
   "character": "暝",
   "keyword": "murky",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2861",
   "character": "坐",
   "keyword": "sitting in meditation",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2864",
   "character": "洩",
   "keyword": "dribble out",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2865",
   "character": "彗",
   "keyword": "comet",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2867",
   "character": "爾",
   "keyword": "let it be",
-  "reason": "truncated / doubtful"
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk2868",
   "character": "嘉",
   "keyword": "applaud",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2869",
   "character": "兇",
   "keyword": "evil",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2870",
   "character": "兜",
   "keyword": "helmet",
-  "reason": "truncated / doubtful"
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk2871",
   "character": "靄",
   "keyword": "mist",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2872",
   "character": "劫",
   "keyword": "kalpa",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2873",
   "character": "歎",
   "keyword": "bemoan",
-  "reason": "truncated / doubtful"
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk2874",
   "character": "輿",
   "keyword": "palanquin",
-  "reason": "truncated / doubtful"
- },
- {
-  "id": "rtk2876",
-  "character": "翠",
-  "keyword": "jade green",
-  "reason": "truncated / doubtful"
+  "reason": "too-short"
  },
  {
   "id": "rtk2878",
   "character": "鼎",
   "keyword": "tripod",
-  "reason": "truncated / doubtful"
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk2879",
   "character": "鹵",
   "keyword": "rocksalt",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2881",
   "character": "虔",
   "keyword": "reserved",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2882",
   "character": "燕",
   "keyword": "swallow",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2885",
   "character": "牌",
   "keyword": "mahjong tiles",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2887",
   "character": "齟",
   "keyword": "disagree",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2888",
-  "character": "齬",
-  "keyword": "discord",
-  "reason": "truncated / doubtful"
+  "reason": "too-short"
  },
  {
   "id": "rtk2889",
   "character": "秦",
   "keyword": "manchu dynasty",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2890",
   "character": "雀",
   "keyword": "sparrow",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2892",
   "character": "耀",
   "keyword": "shimmering",
-  "reason": "truncated / doubtful"
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk2894",
   "character": "嚢",
   "keyword": "cyst",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2896",
-  "character": "廻",
-  "keyword": "circling",
-  "reason": "truncated / doubtful"
+  "reason": "too-short"
  },
  {
   "id": "rtk2898",
   "character": "毅",
   "keyword": "stalwart",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2899",
   "character": "斯",
   "keyword": "this",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2904",
-  "character": "叢",
-  "keyword": "conglomerate",
-  "reason": "truncated with no breakdown given"
+  "reason": "too-short"
  },
  {
   "id": "rtk2905",
   "character": "肴",
   "keyword": "entreat",
-  "reason": "truncated / doubtful"
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk2907",
   "character": "卿",
   "keyword": "magistrate",
-  "reason": "truncated / doubtful"
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk2910",
   "character": "套",
   "keyword": "hackneyed",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2913",
   "character": "壷",
   "keyword": "crock",
-  "reason": "truncated / doubtful"
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk2914",
   "character": "叡",
   "keyword": "sapience",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2920",
   "character": "瓢",
   "keyword": "gourd",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2921",
   "character": "琵",
   "keyword": "biwa",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2923",
   "character": "叉",
   "keyword": "forked",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2924",
   "character": "乖",
   "keyword": "disobey",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2926",
   "character": "圃",
   "keyword": "vegetable patch",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2927",
   "character": "丞",
   "keyword": "helping hand",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2928",
   "character": "亮",
   "keyword": "translucent",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2929",
-  "character": "胤",
-  "keyword": "blood relative",
-  "reason": "truncated / doubtful"
+  "reason": "too-short"
  },
  {
   "id": "rtk2930",
   "character": "疏",
   "keyword": "transcription",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2932",
-  "character": "魁",
-  "keyword": "pioneer",
-  "reason": "truncated with no breakdown given"
- },
- {
-  "id": "rtk2933",
-  "character": "馨",
-  "keyword": "ambrosial",
-  "reason": "truncated with no breakdown given"
- },
- {
-  "id": "rtk2936",
-  "character": "睾",
-  "keyword": "testicle",
-  "reason": "self-contradictory: claims blood (血) + happiness (幸) + dish (皿), but 皿 does not appear in this character and the text itself admits the top 'blood' stroke is 'slightly altered'"
- },
- {
-  "id": "rtk2937",
-  "character": "巫",
-  "keyword": "sorceress",
-  "reason": "truncated with no breakdown given"
+  "reason": "too-short"
  },
  {
   "id": "rtk2941",
   "character": "皓",
   "keyword": "beaming",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2942",
   "character": "黎",
   "keyword": "tenebrous",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2944",
   "character": "已",
   "keyword": "stop short",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2947",
   "character": "甦",
   "keyword": "resuscitate",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2951",
   "character": "鼾",
   "keyword": "snore",
-  "reason": "truncated with no breakdown given"
+  "reason": "truncated-noshow"
  },
  {
   "id": "rtk2955",
   "character": "粍",
   "keyword": "millimeter",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2959",
   "character": "吋",
   "keyword": "inch",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2961",
-  "character": "梵",
-  "keyword": "brahman",
-  "reason": "truncated with no breakdown given"
+  "reason": "too-short"
  },
  {
   "id": "rtk2963",
   "character": "菩",
   "keyword": "bo tree",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2964",
   "character": "唖",
   "keyword": "babble",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2966",
   "character": "迦",
   "keyword": "sanskrit ka",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2971",
   "character": "淵",
   "keyword": "abyss (old)",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2974",
-  "character": "萬",
-  "keyword": "ten thousand (old)",
-  "reason": "truncated with no breakdown given"
- },
- {
-  "id": "rtk2977",
-  "character": "逞",
-  "keyword": "tough",
-  "reason": "truncated with no breakdown given"
+  "reason": "too-short"
  },
  {
   "id": "rtk2983",
   "character": "峯",
   "keyword": "summit (alternate)",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2985",
   "character": "龍",
   "keyword": "dragon (old)",
-  "reason": "no usable Google text"
- },
- {
-  "id": "rtk2988",
-  "character": "慾",
-  "keyword": "longing (old)",
-  "reason": "truncated; states 'four distinct primitives' but does not list them"
+  "reason": "too-short"
  },
  {
   "id": "rtk2990",
   "character": "國",
   "keyword": "country (old)",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  },
  {
   "id": "rtk2992",
   "character": "勁",
   "keyword": "formidable",
-  "reason": "truncated with no breakdown given"
- },
- {
-  "id": "rtk2993",
-  "character": "祀",
-  "keyword": "enshrine",
-  "reason": "truncated with no breakdown given"
- },
- {
-  "id": "rtk2994",
-  "character": "祓",
-  "keyword": "exorcism",
-  "reason": "truncated with no breakdown given"
+  "reason": "too-short"
  },
  {
   "id": "rtk2995",
   "character": "躇",
   "keyword": "dither",
-  "reason": "no usable Google text"
+  "reason": "too-short"
  }
 ]

@@ -6717,3 +6717,35 @@ on the live DB.
 - Untestable here (no display; Google blocks the server IP) — owner runs
   `check_kanji.py --from-list need_rerun.json` (add `--no-delay` to go
   flat out).
+
+### 2026-09-05 (continued) — the "Searching…" state; JS extraction verified against a headless browser
+
+- Owner ran the rerun and pushed 123 records (`d0b3d0f`). Only 2
+  (`rtk5`, `rtk42`) actually went through the new JS path — and both got
+  **full 2100+ char text with `expand_clicks: 0`**: the clamp-CSS
+  stripping recovered the whole overview without needing to click
+  anything, which is the whole point of not depending on the button.
+  The other 121 were from the old script still in the working tree at
+  the time.
+- Of those 121: **63 were captured as literally "Searching…"** — Google
+  had not finished generating the overview when the old script
+  screenshotted and read. That's a *timing* failure, not a Show-more
+  failure. Added a `generating` signal to the JS (overview box present
+  but body is `< 40` chars / starts with "searching|generating|
+  loading|thinking") and a matching poll state in `expand_and_read`:
+  `APPEAR_BUDGET_S` (12s) to wait for the box to exist at all, then
+  `GENERATING_BUDGET_S` (25s) to keep polling while it's still
+  streaming. A still-"Searching…" result is stored as `extracted_text:
+  null` + `still_generating: true` so a re-run picks it up instead of a
+  useless partial.
+- **Verified the injection JS against a real headless Chromium** (the
+  backend venv has `playwright` importable; `/tmp/jstest.py`) on three
+  synthetic pages: a `-webkit-line-clamp` + `max-height` + `<details>`
+  page (all three revealed, `unclamped: 2`, one expander click), a
+  "Searching…" page (correctly `generating: true`), and a no-overview
+  page (correctly `foundRoot: false`). Also added a `data-ck-clicked`
+  marker so the poll loop never re-clicks a toggle it already opened.
+- Rebuilt `need_rerun.json` from the whole 3000-row deduped
+  `results.jsonl` (newest record wins per id): **602 still unusable**
+  (539 too-short, 63 truncated-with-Show-more) — down from 771. Owner
+  re-runs `check_kanji.py --from-list need_rerun.json`.

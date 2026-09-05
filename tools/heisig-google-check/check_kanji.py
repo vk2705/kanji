@@ -188,17 +188,21 @@ _EXPAND_AND_READ_JS = r"""
 
   let clicked = 0, unclamped = 0;
 
-  // 2. Click expander controls inside the region, a few rounds (chained toggles).
+  // 2. Click expander controls inside the region, a few rounds (a "Show more"
+  //    can reveal another one). Never click the same element twice -- some of
+  //    these toggle, so a second click would re-collapse. The marker attribute
+  //    persists across this function's repeated calls from the poll loop.
   for (let round = 0; round < 4; round++) {
     let any = false;
     const ctrls = root.querySelectorAll(
       "button, [role='button'], a[jsaction], [jsaction*='click'], summary"
     );
     for (const c of ctrls) {
+      if (c.hasAttribute("data-ck-clicked")) continue;
       const lab = norm(c.getAttribute("aria-label")) || norm(c.textContent);
-      const expandable = c.getAttribute("aria-expanded");
-      const isMore = labels.includes(lab) || expandable === "false";
+      const isMore = labels.includes(lab) || c.getAttribute("aria-expanded") === "false";
       if (!isMore) continue;
+      c.setAttribute("data-ck-clicked", "1");
       try {
         c.scrollIntoView({ block: "center" });
         c.click();
@@ -229,40 +233,85 @@ _EXPAND_AND_READ_JS = r"""
     }
   }
 
-  return { text: (root.innerText || "").trim() || null, clicked, unclamped, foundRoot: true };
+  const text = (root.innerText || "").trim();
+  // "Generating" = the overview box exists but Google is still streaming it in
+  // ("Searching...", a lone "AI Overview" heading, a bare loading dot). Treat a
+  // short body that is basically just the heading / a spinner word as not-ready.
+  const body = norm(text).replace(/^ai overview/, "").trim();
+  const generating =
+    body.length < 40 ||
+    /^(searching|generating|loading|thinking)\b/.test(body) ||
+    body === "…" || body === "...";
+
+  return { text: text || null, clicked, unclamped, foundRoot: true, generating };
 }
 """
 
+# How long to keep polling once the AI Overview box has appeared but is still
+# "Searching..." -- Google can take a while to finish generating one.
+GENERATING_BUDGET_S = 25
+# How long to wait for ANY AI Overview box to show up before giving up on this
+# query having one at all.
+APPEAR_BUDGET_S = 12
+
 
 def expand_and_read(page) -> dict:
-    """Poll for the AI Overview (it streams in after the page settles), then run
-    one JS pass that forces it fully open and returns its text. Repeats until the
-    text stops growing. Returns {text, clicked, unclamped, found_root}."""
-    deadline = time.monotonic() + 12
-    best = {"text": None, "clicked": 0, "unclamped": 0, "found_root": False}
+    """Poll for the AI Overview, run a JS pass that forces it fully open, and
+    return its text. Handles the three states seen in practice:
+      - no overview box ever appears  -> give up after APPEAR_BUDGET_S
+      - box appears but says "Searching..." -> keep polling to GENERATING_BUDGET_S
+      - box has real text             -> expand it, return once it stops growing
+    Returns {text, clicked, unclamped, found_root, generating}."""
+    start = time.monotonic()
+    best = {"text": None, "clicked": 0, "unclamped": 0, "found_root": False, "generating": False}
     stable = 0
-    while time.monotonic() < deadline:
+    first_real_text_at = None
+    while True:
+        now = time.monotonic()
         try:
             r = page.evaluate(_EXPAND_AND_READ_JS, SHOW_MORE_LABELS)
         except Exception:
+            if now - start > APPEAR_BUDGET_S:
+                break
             page.wait_for_timeout(400)
             continue
+
+        found = bool(r.get("found_root"))
+        generating = bool(r.get("generating"))
         cur_len = len(r.get("text") or "")
         best_len = len(best["text"] or "")
-        if r.get("found_root"):
+
+        if found:
             best["found_root"] = True
-        if cur_len >= best_len:
+        best["generating"] = generating
+        if cur_len >= best_len and not (generating and best_len > 0):
             best["text"] = r.get("text") or best["text"]
-            best["clicked"] = max(best["clicked"], r.get("clicked", 0))
-            best["unclamped"] = max(best["unclamped"], r.get("unclamped", 0))
+        best["clicked"] = max(best["clicked"], r.get("clicked", 0))
+        best["unclamped"] = max(best["unclamped"], r.get("unclamped", 0))
         best_len = len(best["text"] or "")
-        # Done once we have a decent chunk of text that stopped growing.
-        if cur_len > 0 and cur_len <= best_len:
-            stable += 1
-            if stable >= 2 and best_len > 200:
-                break
-        else:
+
+        # Terminal conditions.
+        if not found and now - start > APPEAR_BUDGET_S:
+            break  # no overview on this page
+        if found and generating:
+            if now - start > GENERATING_BUDGET_S:
+                break  # gave it a fair chance; still spinning
             stable = 0
+            page.wait_for_timeout(700)
+            continue
+        if found and not generating and cur_len > 0:
+            if first_real_text_at is None:
+                first_real_text_at = now
+            # Done once real text stopped growing for two polls, or we've been
+            # reading real text for 10s (chained expansions settled).
+            if cur_len <= best_len:
+                stable += 1
+                if stable >= 2 and best_len > 120:
+                    break
+            else:
+                stable = 0
+            if now - first_real_text_at > 10:
+                break
         page.wait_for_timeout(500)
     return best
 
@@ -288,13 +337,21 @@ def check_one(page, entry: dict) -> dict:
     screenshot_path = SCREENSHOTS_DIR / f"{entry['id']}.png"
     page.screenshot(path=str(screenshot_path), full_page=True)
 
+    text = r["text"]
+    if r["generating"]:
+        # Box appeared but Google never finished generating -- the text is just
+        # "Searching..."/the heading. Store null so a re-run picks it up rather
+        # than a useless partial.
+        text = None
+
     return {
         "id": entry["id"],
         "character": entry["character"],
         "keyword": entry["keyword"],
         "current_parts": entry["current_parts"],
         "query": query,
-        "extracted_text": r["text"],
+        "extracted_text": text,
+        "still_generating": r["generating"],  # box appeared but never finished
         "expand_clicks": r["clicked"],       # expander controls clicked inside the overview
         "unclamped_nodes": r["unclamped"],   # nodes whose truncation CSS was stripped
         "found_overview": r["found_root"],   # the AI Overview region was located at all
@@ -407,16 +464,17 @@ def main():
                 done.add(entry["id"])
                 save_progress(done)
                 if record["extracted_text"]:
-                    found = f"found AI overview ({len(record['extracted_text'])} chars"
+                    found = f"OK  {len(record['extracted_text'])} chars"
                     if record.get("expand_clicks"):
                         found += f", {record['expand_clicks']} expand-clicks"
                     if record.get("unclamped_nodes"):
                         found += f", {record['unclamped_nodes']} unclamped"
-                    found += ")"
+                elif record.get("still_generating"):
+                    found = "SKIP  overview still 'Searching...' after 25s (stored null; re-run later)"
                 elif record.get("found_overview"):
-                    found = "overview region found but no text extracted (check screenshot)"
+                    found = "SKIP  overview box found but empty (check screenshot)"
                 else:
-                    found = "no AI overview on page (check screenshot)"
+                    found = "SKIP  no AI overview for this query (check screenshot)"
                 print(found)
 
                 if i < len(batch) and delay_max > 0:
