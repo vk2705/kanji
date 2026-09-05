@@ -6641,3 +6641,43 @@ on the live DB.
   `m_*_decomp.json` into `backend/google_decompositions.json`, then
   build the doubts table and the full truncated-rerun list for the
   owner.
+
+### 2026-09-05 (continued) — LLM re-read finished: `google_decompositions.json` committed, doubts table + rerun list delivered
+
+- All 13 batches (m_00–m_12) complete. `assemble_final.py` merged them
+  into **`backend/google_decompositions.json`** — 2478 entries, one per
+  kanji with usable Google text. Format per entry:
+  `{character, parts: [...], primitive_names: {char: english_name}, confidence, note}`.
+  1978 high / 234 medium / 266 low confidence; 229 have `parts: null`
+  (Google text truncated at "Show more"). Committed 2569135, pushed.
+  This is now the project's third standing reference alongside
+  `cjkvi-ids` and `heisig-kanjis.csv`'s `components` column — but the
+  weakest of the three (it's one more LLM's reading of one more LLM's
+  summary), so `cjkvi-ids` + a rendered glyph still break every tie.
+- **`backend/google_doubts.json`** — 19 rows where the Google text
+  *itself* is untrustworthy (self-contradictory, about a different
+  character, keyword mismatch, garbled with placeholder emoji, or a
+  substantive claim that needs a primary source). Presented to the
+  owner as a table for adjudication. NOT auto-applied. The one that
+  actually matters if true: **`rtk766` 撃** — Google insists the
+  top-left is `𠦝` ("mist"), explicitly *not* `車`; our data has `車`.
+  Needs a primary-source check before any change.
+- **`tools/heisig-google-check/need_rerun.json`** — 771 kanji for the
+  owner to re-scrape with `check_kanji.py`: 522 where Google returned no
+  usable text at all ("Searching…" / empty), + ~249 truncated at "Show
+  more" before the breakdown.
+- Ledger artifact rebuilt from the LLM-read data (was the old regex
+  extraction): match 1083 / differ 1053 / disjoint 96 / doubt 17 /
+  truncated 229 / no-text 522. `differ`/`disjoint` are mostly depth
+  differences (our data one level deeper, or Google over-decomposing),
+  not bugs — only `doubt` rows need a human.
+- Earlier this session, 6 more real bugs fixed from the m_* agent
+  findings (all cross-checked against `cjkvi-ids` + render first):
+  `rtk909` 鉄 / `rtk910` 迭 were `金,矢` / `込,矢` — both use `失`(lose),
+  not `矢`(dart); this was my own error from the f7d6ded 矢-family
+  cleanup. Same mistake in the 雚-family: `rtk612` 歓 / `rtk613` 権 /
+  `rtk614` 観 / `rtk928` 勧 had a spurious `矢`; the shared right element
+  is `隹`(turkey) under a `丷` top, no dart. All 6 fixed + pinned
+  (`test_regression_fixes.py` now 1186 checks, pytest 56 passed).
+- Not deployed (no SSH/server access) — data-only change, needs
+  `sync_system_data.py` + reseed on deploy.
