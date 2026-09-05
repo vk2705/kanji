@@ -35,21 +35,21 @@ rtk33	凹	concave	33	yes
 rtk34	凸	convex	34	yes
 rtk35	旧	olden times	35	no
 rtk36	自	oneself	36	yes
-rtk37	白	white	37	no
+rtk37	白	white	37	yes
 rtk38	百	hundred	38	no
 rtk39	中	in	39	no
 rtk40	千	thousand	40	no
-rtk41	舌	tongue	41	no
+rtk41	舌	tongue	41	yes
 rtk42	升	measuring box	42	yes
 rtk43	昇	rise up	43	yes
 rtk44	丸	round	44	no
-rtk45	寸	measurement	45	no
+rtk45	寸	measurement	45	yes
 rtk46	肘	elbow	46	no
 rtk47	専	specialty	47	no
 rtk48	博	dr.	48	yes
 rtk49	占	fortune-telling	49	no
 rtk50	上	above	50	no
-rtk51	下	below	51	no
+rtk51	下	below	51	yes
 rtk52	卓	eminent	52	yes
 rtk53	朝	morning	53	yes
 rtk54	嘲	derision	54	yes
@@ -66,7 +66,7 @@ rtk64	頁	page	64	yes
 rtk65	頑	stubborn	65	yes
 rtk66	凡	mediocre	66	no
 rtk67	負	defeat	67	yes
-rtk68	万	ten thousand	68	no
+rtk68	万	ten thousand	68	yes
 rtk69	句	phrase	69	no
 rtk70	肌	texture	70	no
 rtk71	旬	decameron	71	no
@@ -74,8 +74,8 @@ rtk72	勺	ladle	72	no
 rtk73	的	bull's eye	73	yes
 rtk74	首	neck	74	yes
 rtk75	乙	fish guts	75	no
-rtk76	乱	riot	76	no
-rtk77	直	straightaway	77	no
+rtk76	乱	riot	76	yes
+rtk77	直	straightaway	77	yes
 rtk78	具	tool	78	no
 rtk79	真	true	79	yes
 rtk80	工	craft	80	no
@@ -87,7 +87,7 @@ rtk85	貢	tribute	85	yes
 rtk86	項	paragraph	86	yes
 rtk87	刀	sword	87	no
 rtk88	刃	blade	88	no
-rtk89	切	cut	89	no
+rtk89	切	cut	89	yes
 rtk90	召	seduce	90	no
 rtk91	昭	shining	91	yes
 rtk92	則	rule	92	yes
@@ -142,7 +142,7 @@ rtk140	泉	spring	140	no
 rtk141	腺	gland	141	yes
 rtk142	原	meadow	142	no
 rtk143	願	petition	143	yes
-rtk144	泳	swim	144	no
+rtk144	泳	swim	144	yes
 rtk145	沼	marsh	145	yes
 rtk146	沖	open sea	146	yes
 rtk147	汎	pan-	147	yes
@@ -170,7 +170,7 @@ rtk168	封	seal	168	no
 rtk169	涯	horizon	169	no
 rtk170	寺	buddhist temple	170	no
 rtk171	時	time	171	yes
-rtk172	均	level	172	no
+rtk172	均	level	172	yes
 rtk173	火	fire	173	no
 rtk174	炎	inflammation	174	no
 rtk175	煩	anxiety	175	yes
@@ -234,7 +234,7 @@ rtk232	沫	splash	232	yes
 rtk233	味	flavor	233	yes
 rtk234	妹	younger sister	234	yes
 rtk235	朱	vermilion	235	yes
-rtk236	株	stocks	236	no
+rtk236	株	stocks	236	yes
 rtk237	若	young	237	yes
 rtk238	草	grass	238	yes
 rtk239	苦	suffering	239	yes
