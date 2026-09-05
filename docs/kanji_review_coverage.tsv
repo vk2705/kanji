@@ -123,9 +123,9 @@ rtk121	砕	smash	121	yes
 rtk122	砂	sand	122	yes
 rtk123	妬	jealous	123	yes
 rtk124	削	plane	124	yes
-rtk125	光	ray	125	no
+rtk125	光	ray	125	yes
 rtk126	太	plump	126	no
-rtk127	器	utensil	127	no
+rtk127	器	utensil	127	yes
 rtk128	臭	stinking	128	yes
 rtk129	嗅	sniff	129	yes
 rtk130	妙	exquisite	130	yes
@@ -162,29 +162,29 @@ rtk160	測	fathom	160	yes
 rtk161	土	soil	161	no
 rtk162	吐	spit	162	no
 rtk163	圧	pressure	163	no
-rtk164	埼	cape	164	no
-rtk165	垣	hedge	165	no
-rtk166	填	inlay	166	no
+rtk164	埼	cape	164	yes
+rtk165	垣	hedge	165	yes
+rtk166	填	inlay	166	yes
 rtk167	圭	squared jewel	167	no
-rtk168	封	seal	168	no
-rtk169	涯	horizon	169	no
+rtk168	封	seal	168	yes
+rtk169	涯	horizon	169	yes
 rtk170	寺	buddhist temple	170	no
 rtk171	時	time	171	yes
 rtk172	均	level	172	yes
 rtk173	火	fire	173	no
 rtk174	炎	inflammation	174	no
 rtk175	煩	anxiety	175	yes
-rtk176	淡	thin	176	no
+rtk176	淡	thin	176	yes
 rtk177	灯	lamp	177	yes
 rtk178	畑	farm	178	no
 rtk179	災	disaster	179	no
 rtk180	灰	ashes	180	no
 rtk181	点	spot	181	yes
 rtk182	照	illuminate	182	yes
-rtk183	魚	fish	183	no
+rtk183	魚	fish	183	yes
 rtk184	漁	fishing	184	yes
 rtk185	里	ri	185	no
-rtk186	黒	black	186	no
+rtk186	黒	black	186	yes
 rtk187	墨	black ink	187	yes
 rtk188	鯉	carp	188	yes
 rtk189	量	quantity	189	yes
@@ -193,7 +193,7 @@ rtk191	埋	bury	191	no
 rtk192	同	same	192	no
 rtk193	洞	den	193	yes
 rtk194	胴	trunk	194	yes
-rtk195	向	yonder	195	no
+rtk195	向	yonder	195	yes
 rtk196	尚	esteem	196	yes
 rtk197	字	character	197	yes
 rtk198	守	guard	198	yes
@@ -254,7 +254,7 @@ rtk252	眺	stare	252	yes
 rtk253	犬	dog	253	no
 rtk254	状	status quo	254	no
 rtk255	黙	silence	255	yes
-rtk256	然	sort of thing	256	no
+rtk256	然	sort of thing	256	yes
 rtk257	荻	reed	257	yes
 rtk258	狩	hunt	258	yes
 rtk259	猫	cat	259	yes
@@ -597,7 +597,7 @@ rtk595	唯	solely	595	no
 rtk596	堆	piled high	596	no
 rtk597	椎	sweet oak	597	no
 rtk598	誰	who?	598	no
-rtk599	焦	char	599	no
+rtk599	焦	char	599	yes
 rtk600	礁	reef	600	yes
 rtk601	集	gather	601	no
 rtk602	准	quasi-	602	no
@@ -1273,7 +1273,7 @@ rtk1271	惜	pity	1271	yes
 rtk1272	措	set aside	1272	yes
 rtk1273	散	scatter	1273	yes
 rtk1274	廿	twenty	1274	yes
-rtk1275	庶	commoner	1275	no
+rtk1275	庶	commoner	1275	yes
 rtk1276	遮	intercept	1276	yes
 rtk1277	席	seat	1277	no
 rtk1278	度	degrees	1278	no
@@ -1806,11 +1806,11 @@ rtk1804	倹	frugal	1804	yes
 rtk1805	重	heavy	1805	yes
 rtk1806	動	move	1806	yes
 rtk1807	腫	tumor	1807	no
-rtk1808	勲	meritorious deed	1808	no
+rtk1808	勲	meritorious deed	1808	yes
 rtk1809	働	work	1809	yes
 rtk1810	種	species	1810	no
 rtk1811	衝	collide	1811	no
-rtk1812	薫	fragrant	1812	no
+rtk1812	薫	fragrant	1812	yes
 rtk1813	病	ill	1813	yes
 rtk1814	痴	stupid	1814	yes
 rtk1815	痘	pox	1815	yes
@@ -2089,13 +2089,13 @@ rtk2087	鎖	chain	2087	yes
 rtk2088	挙	raise	2088	no
 rtk2089	誉	reputation	2089	yes
 rtk2090	猟	game hunting	2090	yes
-rtk2091	鳥	bird	2091	no
-rtk2092	鳴	chirp	2092	no
+rtk2091	鳥	bird	2091	yes
+rtk2092	鳴	chirp	2092	yes
 rtk2093	鶴	crane	2093	yes
 rtk2094	烏	crow	2094	yes
-rtk2095	蔦	vine	2095	no
-rtk2096	鳩	pigeon	2096	no
-rtk2097	鶏	chicken	2097	no
+rtk2095	蔦	vine	2095	yes
+rtk2096	鳩	pigeon	2096	yes
+rtk2097	鶏	chicken	2097	yes
 rtk2098	島	island	2098	yes
 rtk2099	暖	warmth	2099	yes
 rtk2100	媛	beautiful woman	2100	no
@@ -2130,14 +2130,14 @@ rtk2128	晩	nightfall	2128	yes
 rtk2129	勉	exertion	2129	yes
 rtk2130	象	elephant	2130	yes
 rtk2131	像	statue	2131	yes
-rtk2132	馬	horse	2132	no
+rtk2132	馬	horse	2132	yes
 rtk2133	駒	pony	2133	yes
-rtk2134	験	verification	2134	no
-rtk2135	騎	equestrian	2135	no
+rtk2134	験	verification	2134	yes
+rtk2135	騎	equestrian	2135	yes
 rtk2136	駐	parking	2136	yes
 rtk2137	駆	drive	2137	yes
-rtk2138	駅	station	2138	no
-rtk2139	騒	boisterous	2139	no
+rtk2138	駅	station	2138	yes
+rtk2139	騒	boisterous	2139	yes
 rtk2140	駄	burdensome	2140	yes
 rtk2141	驚	wonder	2141	yes
 rtk2142	篤	fervent	2142	yes
@@ -2154,7 +2154,7 @@ rtk2152	劇	drama	2152	yes
 rtk2153	虐	tyrannize	2153	no
 rtk2154	鹿	deer	2154	yes
 rtk2155	麓	foot of a mountain	2155	yes
-rtk2156	薦	recommend	2156	no
+rtk2156	薦	recommend	2156	yes
 rtk2157	慶	jubilation	2157	no
 rtk2158	麗	lovely	2158	yes
 rtk2159	熊	bear	2159	yes
@@ -2193,7 +2193,7 @@ rtk2191	藻	seaweed	2191	yes
 rtk2192	隷	slave	2192	yes
 rtk2193	癒	healing	2193	yes
 rtk2194	璽	imperial seal	2194	yes
-rtk2195	潟	lagoon	2195	no
+rtk2195	潟	lagoon	2195	yes
 rtk2196	丹	cinnabar	2196	no
 rtk2197	丑	sign of the cow	2197	no
 rtk2198	羞	humiliate	2198	yes
@@ -2214,7 +2214,7 @@ rtk2212	奄	encompassing	2212	no
 rtk2213	庵	hermitage	2213	no
 rtk2214	掩	shrouded	2214	yes
 rtk2215	悛	make amends	2215	yes
-rtk2216	駿	steed	2216	no
+rtk2216	駿	steed	2216	yes
 rtk2217	峻	steep	2217	no
 rtk2218	竣	complete a job	2218	no
 rtk2219	犀	rhinoceros	2219	no
@@ -2266,7 +2266,7 @@ rtk2264	凛	stately	2264	yes
 rtk2265	凧	kite	2265	yes
 rtk2266	凪	lull	2266	no
 rtk2267	夙	earlybird	2267	no
-rtk2268	鳳	phoenix	2268	no
+rtk2268	鳳	phoenix	2268	yes
 rtk2269	剽	menace	2269	yes
 rtk2270	劉	slaughter	2270	yes
 rtk2271	剃	shave	2271	yes
@@ -2404,7 +2404,7 @@ rtk2402	湊	port	2402	no
 rtk2403	淋	solitude	2403	no
 rtk2404	浩	abounding	2404	no
 rtk2405	汀	water’s edge	2405	yes
-rtk2406	鴻	large goose	2406	no
+rtk2406	鴻	large goose	2406	yes
 rtk2407	潅	souse	2407	yes
 rtk2408	溢	brimming	2408	yes
 rtk2409	湛	inundate	2409	no
@@ -2451,7 +2451,7 @@ rtk2449	蘭	orchid	2449	no
 rtk2450	芦	hollow reed	2450	yes
 rtk2451	薯	yam	2451	yes
 rtk2452	菖	iris	2452	no
-rtk2453	蕉	banana	2453	no
+rtk2453	蕉	banana	2453	yes
 rtk2454	蕎	buckwheat	2454	no
 rtk2455	蕗	butterbur	2455	yes
 rtk2456	茄	eggplant	2456	no
@@ -2504,7 +2504,7 @@ rtk2502	逗	standstill	2502	yes
 rtk2503	鄭	courtesy	2503	yes
 rtk2504	隕	falling	2504	yes
 rtk2505	隈	nook	2505	yes
-rtk2506	憑	possessed	2506	no
+rtk2506	憑	possessed	2506	yes
 rtk2507	惹	attract	2507	no
 rtk2508	悉	without exception	2508	no
 rtk2509	忽	instantaneously	2509	yes
@@ -2542,7 +2542,7 @@ rtk2540	椋	oriental elm	2540	yes
 rtk2541	榛	hazel	2541	no
 rtk2542	櫛	comb	2542	yes
 rtk2543	槌	wooden hammer	2543	yes
-rtk2544	樵	mallet	2544	no
+rtk2544	樵	mallet	2544	yes
 rtk2545	梯	ladder	2545	yes
 rtk2546	柑	citrus tree	2546	no
 rtk2547	杭	picket	2547	no
@@ -2604,7 +2604,7 @@ rtk2602	燦	dazzling	2602	no
 rtk2603	灼	refulgent	2603	no
 rtk2604	烙	branding	2604	no
 rtk2605	焔	flames	2605	no
-rtk2606	烹	stew	2606	no
+rtk2606	烹	stew	2606	yes
 rtk2607	牽	tug	2607	no
 rtk2608	牝	female animal	2608	no
 rtk2609	牡	male animal	2609	yes
@@ -2816,14 +2816,14 @@ rtk2814	餐	repast	2814	no
 rtk2815	饗	feast	2815	no
 rtk2816	蝕	eclipse	2816	no
 rtk2817	飴	sweets	2817	no
-rtk2818	駕	stretcher	2818	no
-rtk2819	騨	piebald	2819	no
-rtk2820	馳	rush	2820	no
+rtk2818	駕	stretcher	2818	yes
+rtk2819	騨	piebald	2819	yes
+rtk2820	馳	rush	2820	yes
 rtk2821	騙	cheat	2821	yes
-rtk2822	馴	tame	2822	no
-rtk2823	駁	rebuttal	2823	no
-rtk2824	駈	gallop	2824	no
-rtk2825	驢	donkey	2825	no
+rtk2822	馴	tame	2822	yes
+rtk2823	駁	rebuttal	2823	yes
+rtk2824	駈	gallop	2824	yes
+rtk2825	驢	donkey	2825	yes
 rtk2826	鰻	eel	2826	yes
 rtk2827	鯛	sea bream	2827	yes
 rtk2828	鰯	sardine	2828	yes
@@ -2841,15 +2841,15 @@ rtk2839	鰐	alligator	2839	yes
 rtk2840	鮒	crucian carp	2840	yes
 rtk2841	鮨	sushi	2841	yes
 rtk2842	鰭	fish fin	2842	yes
-rtk2843	鴎	seagull	2843	no
-rtk2844	鵬	roc	2844	no
+rtk2843	鴎	seagull	2843	yes
+rtk2844	鵬	roc	2844	yes
 rtk2845	鸚	parakeet	2845	yes
-rtk2846	鵡	parrot	2846	no
+rtk2846	鵡	parrot	2846	yes
 rtk2847	鵜	cormorant	2847	yes
 rtk2848	鷺	heron	2848	yes
 rtk2849	鷲	eagle	2849	yes
-rtk2850	鴨	wild duck	2850	no
-rtk2851	鳶	black kite	2851	no
+rtk2850	鴨	wild duck	2850	yes
+rtk2851	鳶	black kite	2851	yes
 rtk2852	梟	owl	2852	no
 rtk2853	塵	dust	2853	yes
 rtk2854	麒	giraffe	2854	yes
@@ -2880,7 +2880,7 @@ rtk2878	鼎	tripod	2878	no
 rtk2879	鹵	rocksalt	2879	no
 rtk2880	鹸	lye	2880	no
 rtk2881	虔	reserved	2881	no
-rtk2882	燕	swallow	2882	no
+rtk2882	燕	swallow	2882	yes
 rtk2883	嘗	lick	2883	yes
 rtk2884	殆	almost	2884	no
 rtk2885	牌	mahjong tiles	2885	no
@@ -2914,7 +2914,7 @@ rtk2912	尖	sharp point	2912	no
 rtk2913	壷	crock	2913	no
 rtk2914	叡	sapience	2914	no
 rtk2915	酋	chieftain	2915	yes
-rtk2916	鴬	nightingale	2916	no
+rtk2916	鴬	nightingale	2916	yes
 rtk2917	赫	incandescent	2917	no
 rtk2918	臥	supinate	2918	no
 rtk2919	甥	nephew	2919	no
@@ -2980,7 +2980,7 @@ rtk2978	燈	lamp (old)	2978	yes
 rtk2979	裡	back (old)	2979	no
 rtk2980	薗	park (alternate)	2980	yes
 rtk2981	鋪	shop (alternate)	2981	no
-rtk2982	嶋	island (alternate)	2982	no
+rtk2982	嶋	island (alternate)	2982	yes
 rtk2983	峯	summit (alternate)	2983	no
 rtk2984	埜	plains (old)	2984	no
 rtk2985	龍	dragon (old)	2985	no
