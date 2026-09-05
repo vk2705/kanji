@@ -15,10 +15,16 @@ story of what was tried first and why.
 What this does NOT do: it doesn't try to defeat CAPTCHAs, spoof a browser
 fingerprint, or hide that it's automated. It opens a real, visible Chrome window
 (via Playwright, using a persistent profile so it behaves like a normal returning
-visitor across days) and paces itself with random delays between queries -- the
-same as a person doing this by hand, just less tedious. If Google ever shows a
-CAPTCHA, the script pauses and waits for you to solve it in the visible window
-before continuing.
+visitor across days) with a short randomized pause between queries (--delay MIN MAX
+to change it, --no-delay for none). If Google ever shows a CAPTCHA, the script
+pauses and waits for you to solve it in the visible window before continuing.
+
+Reading the AI Overview: Google truncates it behind a "Show more" toggle and its
+markup drifts, so instead of hunting for one button selector the script runs a JS
+pass over the whole AI Overview region that clicks every expander it finds AND
+strips the CSS that clamps height (line-clamp / max-height / overflow) -- so the
+full text is recovered even when the click target has moved. extracted_text is the
+region's complete innerText.
 
 Setup (one-time):
     python3 -m venv venv
@@ -35,6 +41,8 @@ Usage:
                                                       # ids in that file, even ones already
                                                       # in progress.json (for when a past
                                                       # run got no/truncated Google text)
+    venv/bin/python3 check_kanji.py --from-list need_rerun.json --no-delay   # ...as fast
+                                                      # as possible (higher CAPTCHA risk)
 
 Run it once a day (or whenever) -- it remembers what's already been checked in
 progress.json and won't repeat kanji. Sending results back: either paste the
@@ -44,12 +52,13 @@ way, a future session can read it and do the actual comparison against data.txt.
 
 Output:
     results.jsonl   -- one JSON object per kanji checked: id, character, keyword,
-                       current_parts (what the DB currently has), the extracted AI
-                       Overview text (or null if none was found), expand_clicks
-                       (how many "Show more" clicks landed), maybe_truncated (true
-                       if a "Show more" control was still on the page after
-                       expanding -- text is probably still a preview, re-run it),
-                       and a path to a saved screenshot for manual review either way.
+                       current_parts (what the DB currently has), extracted_text
+                       (the full AI Overview text, or null), expand_clicks
+                       (expander controls clicked inside the overview),
+                       unclamped_nodes (nodes whose truncation CSS was force-
+                       stripped), found_overview (whether the AI Overview region
+                       was located at all), and a path to a saved screenshot for
+                       manual review either way.
     screenshots/    -- one PNG per kanji checked, full page, so nothing is lost even
                        if the text extraction below picks the wrong element (Google
                        changes its markup periodically -- if extracted_text keeps
@@ -96,8 +105,13 @@ AI_OVERVIEW_SELECTORS = [
     "c-wiz[data-node-index] div[data-content-feature]",
 ]
 
-MIN_DELAY_SECONDS = 20
-MAX_DELAY_SECONDS = 60
+# Pause between queries. Short by default -- long enough to not look like a
+# scripted flood, short enough to get through the list quickly. Override with
+# --delay MIN MAX, or --no-delay for zero (fastest, but a few hundred back-to-back
+# Google searches from one IP is the surest way to get CAPTCHA'd -- see module
+# docstring; if that happens, the script pauses for you to solve it).
+DEFAULT_MIN_DELAY_SECONDS = 2.0
+DEFAULT_MAX_DELAY_SECONDS = 4.0
 
 
 def load_kanji_list() -> list[dict]:
@@ -129,165 +143,150 @@ def looks_like_captcha(page) -> bool:
     return "unusual traffic" in text or "recaptcha" in text or "detected unusual traffic" in text
 
 
-# Exact (trimmed, lowercased) label / aria-label of the AI Overview expand control.
-# Google varies and localizes this; add whatever your browser's locale shows if
-# none match (open a screenshot, Inspect the button). Matched as a whole string
-# after trimming -- NOT a substring, so "more results" / "learn more" don't match.
-SHOW_MORE_LABELS = {
-    "show more", "show all", "see more", "show more ai overview",
-    "показать больше", "ещё", "еще", "развернуть",  # ru
+# Whole-string (trimmed, lowercased) label / aria-label of a "Show more" control.
+# Matched exactly, not as a substring, so "more results" / "learn more" don't fire.
+# Add your browser locale's wording if a screenshot shows the button unclicked.
+SHOW_MORE_LABELS = [
+    "show more", "show all", "see more", "show more ai overview", "expand",
+    "показать больше", "ещё", "еще", "развернуть", "показать всё", "показать все",
+]
+
+# One JS pass that (a) finds the AI Overview region, (b) forces every truncation
+# mechanism Google is known to use inside it OPEN -- clicking expander controls,
+# setting aria-expanded, opening <details>, and stripping the CSS that clamps
+# height (line-clamp / -webkit-box / max-height / overflow) -- and (c) returns the
+# region's full innerText. This is deliberately not dependent on one button
+# selector: even if the click target has changed, killing the clamp CSS still
+# reveals the text that was hidden below the fold.
+_EXPAND_AND_READ_JS = r"""
+(labels) => {
+  const norm = s => (s || "").replace(/\s+/g, " ").trim().toLowerCase();
+
+  // 1. Locate the AI Overview region.
+  let root = null;
+  const bySel = [
+    "[aria-label='AI Overview']", "[aria-label*='AI Overview' i]",
+    "#m-x-content", "#Odp5De", "div[data-attrid='wa:/description']",
+    "div[jsname='I4bIT']",
+  ];
+  for (const sel of bySel) { const e = document.querySelector(sel); if (e) { root = e; break; } }
+  if (!root) {
+    // Fall back: find a heading whose text is "AI Overview" and walk up to a
+    // container that holds a meaningful amount of text.
+    const heads = [...document.querySelectorAll("h1,h2,h3,div[role='heading'],span")]
+      .filter(e => norm(e.textContent) === "ai overview");
+    if (heads.length) {
+      let n = heads[0];
+      for (let i = 0; i < 6 && n && n.parentElement; i++) {
+        n = n.parentElement;
+        if ((n.innerText || "").length > 400) { root = n; break; }
+      }
+      if (!root) root = heads[0].parentElement;
+    }
+  }
+  if (!root) return { text: null, clicked: 0, unclamped: 0, foundRoot: false };
+
+  let clicked = 0, unclamped = 0;
+
+  // 2. Click expander controls inside the region, a few rounds (chained toggles).
+  for (let round = 0; round < 4; round++) {
+    let any = false;
+    const ctrls = root.querySelectorAll(
+      "button, [role='button'], a[jsaction], [jsaction*='click'], summary"
+    );
+    for (const c of ctrls) {
+      const lab = norm(c.getAttribute("aria-label")) || norm(c.textContent);
+      const expandable = c.getAttribute("aria-expanded");
+      const isMore = labels.includes(lab) || expandable === "false";
+      if (!isMore) continue;
+      try {
+        c.scrollIntoView({ block: "center" });
+        c.click();
+        clicked++; any = true;
+      } catch (e) {}
+    }
+    if (!any) break;
+  }
+
+  // 3. Open <details>, set aria-expanded, and strip clamp styles everywhere in root.
+  root.querySelectorAll("details:not([open])").forEach(d => { d.open = true; unclamped++; });
+  root.querySelectorAll("[aria-expanded='false']").forEach(e => e.setAttribute("aria-expanded", "true"));
+  const all = root.querySelectorAll("*");
+  for (const el of all) {
+    const cs = getComputedStyle(el);
+    const clamped =
+      cs.webkitLineClamp && cs.webkitLineClamp !== "none" ||
+      cs.display === "-webkit-box" ||
+      (cs.maxHeight && cs.maxHeight !== "none" && parseFloat(cs.maxHeight) < el.scrollHeight - 4) ||
+      ((cs.overflow === "hidden" || cs.overflowY === "hidden") && el.scrollHeight > el.clientHeight + 4);
+    if (clamped) {
+      el.style.setProperty("-webkit-line-clamp", "unset", "important");
+      el.style.setProperty("max-height", "none", "important");
+      el.style.setProperty("height", "auto", "important");
+      el.style.setProperty("overflow", "visible", "important");
+      el.style.setProperty("display", "block", "important");
+      unclamped++;
+    }
+  }
+
+  return { text: (root.innerText || "").trim() || null, clicked, unclamped, foundRoot: true };
 }
-# CSS roots the expand button is searched under -- keeps the scan inside the AI
-# Overview and off the rest of the results page. Union of the container selectors
-# in AI_OVERVIEW_SELECTORS plus a couple of expandable-wrapper guesses.
-_OVERVIEW_ROOTS = (
-    "[aria-label*='AI Overview']", "#m-x-content", "div[jsname='I4bIT']",
-    "#Odp5De", "div[data-md]", "g-expandable-container", "div.LT6Xte",
-)
+"""
 
 
-def _find_show_more(page):
-    """Return a clickable 'Show more' handle inside the AI Overview, or None.
-    Google renders it inconsistently (real <button>, <div role="button">, <a>,
-    label on the element or a child <span>), so scan candidate controls that sit
-    under an overview root and match an exact expand label."""
-    for root in _OVERVIEW_ROOTS:
+def expand_and_read(page) -> dict:
+    """Poll for the AI Overview (it streams in after the page settles), then run
+    one JS pass that forces it fully open and returns its text. Repeats until the
+    text stops growing. Returns {text, clicked, unclamped, found_root}."""
+    deadline = time.monotonic() + 12
+    best = {"text": None, "clicked": 0, "unclamped": 0, "found_root": False}
+    stable = 0
+    while time.monotonic() < deadline:
         try:
-            controls = page.locator(
-                f"{root} :is(button, [role='button'], a[jsaction])"
-            )
+            r = page.evaluate(_EXPAND_AND_READ_JS, SHOW_MORE_LABELS)
         except Exception:
+            page.wait_for_timeout(400)
             continue
-        try:
-            n = min(controls.count(), 25)
-        except Exception:
-            continue
-        for i in range(n):
-            el = controls.nth(i)
-            try:
-                if not el.is_visible(timeout=200):
-                    continue
-                label = (el.get_attribute("aria-label") or el.inner_text() or "").strip().lower()
-            except Exception:
-                continue
-            if label in SHOW_MORE_LABELS:
-                return el
-    # Last resort: role-based lookup anywhere on the page, exact name only.
-    for name in ("Show more", "Show all"):
-        try:
-            loc = page.get_by_role("button", name=name, exact=True).first
-            if loc.count() and loc.is_visible(timeout=400):
-                return loc
-        except Exception:
-            pass
-    return None
-
-
-def _overview_text_len(page) -> int:
-    for selector in AI_OVERVIEW_SELECTORS:
-        try:
-            el = page.query_selector(selector)
-            if el:
-                t = (el.inner_text() or "").strip()
-                if t:
-                    return len(t)
-        except Exception:
-            continue
-    return 0
-
-
-def expand_ai_overview(page) -> int:
-    """AI Overview often truncates behind a 'Show more' toggle -- click it so both the
-    extracted text and the screenshot capture the full answer, not just the preview.
-    Returns the number of expand clicks that landed.
-
-    The overview streams in after the page settles, so this polls for the expand
-    control for a few seconds, scrolls it into view, clicks it, and repeats until
-    the extracted text stops growing (Google sometimes chains 'Show more' ->
-    another 'Show more'). Best-effort: an overview with nothing to expand, or no
-    overview at all, is not an error."""
-    deadline = time.monotonic() + 12  # overview can take several seconds to render
-    last_len = -1
-    clicks = 0
-    stable_no_button = 0
-    while time.monotonic() < deadline and clicks < 4:
-        btn = _find_show_more(page)
-        if btn is None:
-            cur = _overview_text_len(page)
-            # If we already have overview text and it stopped growing with no button,
-            # we're done. If we have nothing yet, keep waiting -- it may still be
-            # streaming in (up to the deadline).
-            if cur > 0 and cur == last_len:
-                stable_no_button += 1
-                if stable_no_button >= 2:
-                    return clicks
-            else:
-                stable_no_button = 0
-            last_len = cur
-            page.wait_for_timeout(700)
-            continue
-        stable_no_button = 0
-        try:
-            btn.scroll_into_view_if_needed(timeout=1500)
-            page.wait_for_timeout(200)
-            btn.click(timeout=2000)
-            clicks += 1
-            page.wait_for_timeout(1000)  # let the expanded content render
-        except Exception:
-            page.wait_for_timeout(500)
-        new_len = _overview_text_len(page)
-        if new_len <= last_len and clicks > 0:
-            return clicks
-        last_len = new_len
-    return clicks
-
-
-def _still_truncated(page) -> bool:
-    """After expand_ai_overview, is a 'Show more'-type control still on the page?
-    If so the extracted text is probably still a preview -- flag it so a re-run
-    can target it later."""
-    return _find_show_more(page) is not None
-
-
-def extract_ai_overview(page) -> str | None:
-    for selector in AI_OVERVIEW_SELECTORS:
-        try:
-            el = page.query_selector(selector)
-            if el:
-                text = el.inner_text().strip()
-                if text:
-                    return text
-        except Exception:
-            continue
-    return None
+        cur_len = len(r.get("text") or "")
+        best_len = len(best["text"] or "")
+        if r.get("found_root"):
+            best["found_root"] = True
+        if cur_len >= best_len:
+            best["text"] = r.get("text") or best["text"]
+            best["clicked"] = max(best["clicked"], r.get("clicked", 0))
+            best["unclamped"] = max(best["unclamped"], r.get("unclamped", 0))
+        best_len = len(best["text"] or "")
+        # Done once we have a decent chunk of text that stopped growing.
+        if cur_len > 0 and cur_len <= best_len:
+            stable += 1
+            if stable >= 2 and best_len > 200:
+                break
+        else:
+            stable = 0
+        page.wait_for_timeout(500)
+    return best
 
 
 def check_one(page, entry: dict) -> dict:
     query = QUERY_TEMPLATE.format(char=entry["character"])
     page.goto(f"https://www.google.com/search?q={query}", timeout=30000)
-    # The AI Overview is generated live and lands a few seconds after the rest of
-    # the page. Wait for network to go quiet, then a fixed beat, before looking
-    # for it -- expand_ai_overview() polls past this too, but starting later means
-    # fewer wasted poll cycles on a not-yet-rendered overview.
+    # No fixed sleep here -- expand_and_read() polls for the AI Overview itself
+    # (it streams in after the page settles) and returns as soon as the text
+    # stops growing, so a static wait would only ever be dead time.
     try:
-        page.wait_for_load_state("networkidle", timeout=8000)
+        page.wait_for_load_state("domcontentloaded", timeout=8000)
     except Exception:
         pass
-    page.wait_for_timeout(2500)
 
     if looks_like_captcha(page):
         print(f"\n  !! CAPTCHA shown for {entry['id']} ({entry['character']}).")
         print("     Solve it in the browser window, then press Enter here to continue...")
         input()
-        page.wait_for_timeout(1500)
 
-    clicks = expand_ai_overview(page)
-    still_truncated = _still_truncated(page)
+    r = expand_and_read(page)
 
     screenshot_path = SCREENSHOTS_DIR / f"{entry['id']}.png"
     page.screenshot(path=str(screenshot_path), full_page=True)
-
-    extracted = extract_ai_overview(page)
 
     return {
         "id": entry["id"],
@@ -295,9 +294,10 @@ def check_one(page, entry: dict) -> dict:
         "keyword": entry["keyword"],
         "current_parts": entry["current_parts"],
         "query": query,
-        "extracted_text": extracted,
-        "expand_clicks": clicks,          # how many 'Show more' clicks landed (0 = none needed/found)
-        "maybe_truncated": still_truncated,  # a 'Show more' control was still present after expanding
+        "extracted_text": r["text"],
+        "expand_clicks": r["clicked"],       # expander controls clicked inside the overview
+        "unclamped_nodes": r["unclamped"],   # nodes whose truncation CSS was stripped
+        "found_overview": r["found_root"],   # the AI Overview region was located at all
         "screenshot": str(screenshot_path.relative_to(HERE)),
         "checked_at": datetime.now(timezone.utc).isoformat(),
     }
@@ -309,9 +309,9 @@ def main():
     parser.add_argument("--all", action="store_true",
                          help="Check every not-yet-done kanji in one run, in order, instead of --count random ones. "
                               "Safe to Ctrl+C and re-run later -- progress is saved after each kanji, so it picks "
-                              "up where it left off. With ~1800 kanji and a 20-60s delay between each, expect this "
-                              "to take roughly 10-30 hours of wall-clock time (it doesn't need to be unattended --"
-                              "the browser window can just sit in the background between runs).")
+                              "up where it left off. At the default ~3s delay, budget very roughly 10-15s per "
+                              "kanji including page load and extraction. The browser window can sit in the "
+                              "background between runs.")
     parser.add_argument("--id", help="Check one specific kanji id instead of random ones")
     parser.add_argument("--resume-only", action="store_true",
                          help="Don't pick new kanji, just re-run this many from the not-yet-done pool in order")
@@ -321,7 +321,18 @@ def main():
                               "Use this to redo kanji whose earlier run produced no/truncated Google text. "
                               "results.jsonl gets a fresh appended record for each; the newest wins when the "
                               "file is read later.")
+    parser.add_argument("--delay", nargs=2, type=float, metavar=("MIN", "MAX"),
+                         default=[DEFAULT_MIN_DELAY_SECONDS, DEFAULT_MAX_DELAY_SECONDS],
+                         help=f"Random pause (seconds) between queries "
+                              f"(default {DEFAULT_MIN_DELAY_SECONDS} {DEFAULT_MAX_DELAY_SECONDS})")
+    parser.add_argument("--no-delay", action="store_true",
+                         help="No pause between queries at all -- fastest, but hammering Google from one "
+                              "IP is the surest way to get CAPTCHA-blocked. The script will pause for you "
+                              "to solve a CAPTCHA if one appears, so this is recoverable, just slower when "
+                              "it goes wrong.")
     args = parser.parse_args()
+
+    delay_min, delay_max = (0.0, 0.0) if args.no_delay else (args.delay[0], args.delay[1])
 
     SCREENSHOTS_DIR.mkdir(exist_ok=True)
     all_kanji = load_kanji_list()
@@ -398,17 +409,18 @@ def main():
                 if record["extracted_text"]:
                     found = f"found AI overview ({len(record['extracted_text'])} chars"
                     if record.get("expand_clicks"):
-                        found += f", {record['expand_clicks']}x show-more"
-                    if record.get("maybe_truncated"):
-                        found += ", STILL TRUNCATED"
+                        found += f", {record['expand_clicks']} expand-clicks"
+                    if record.get("unclamped_nodes"):
+                        found += f", {record['unclamped_nodes']} unclamped"
                     found += ")"
+                elif record.get("found_overview"):
+                    found = "overview region found but no text extracted (check screenshot)"
                 else:
-                    found = "no overview extracted (check screenshot)"
+                    found = "no AI overview on page (check screenshot)"
                 print(found)
 
-                if i < len(batch):
-                    delay = random.uniform(MIN_DELAY_SECONDS, MAX_DELAY_SECONDS)
-                    time.sleep(delay)
+                if i < len(batch) and delay_max > 0:
+                    time.sleep(random.uniform(delay_min, delay_max))
         except KeyboardInterrupt:
             print(f"\nStopped early at [{i}/{len(batch)}]. Progress is saved -- "
                   f"just re-run the same command later to pick up where you left off.")

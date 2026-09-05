@@ -6690,23 +6690,30 @@ on the live DB.
   `unreviewed_kanji.json` because they've since been reviewed, so a
   `by_id`-only lookup would silently drop them. Each rerun appends a
   fresh `results.jsonl` record; newest wins when the file is read.
-- **Reworked `expand_ai_overview()`** — the owner reported it "often
-  does not clock the Show more button", which is why ~249 of the
-  `need_rerun.json` entries are truncated. Old version: one
-  `get_by_role("button", name="Show more")` with a 2s visibility wait,
-  fired once right after a fixed page wait. Problems: the overview
-  streams in *after* the page settles (button often not there yet); the
-  control is frequently a `<div role="button">` or `<a>` with the label
-  on a child span, not a `<button>`; localized/renamed labels miss; no
-  scroll-into-view; no retry; chained "Show more → Show more" not
-  handled. New version: waits for `networkidle`, then polls up to 12s
-  for an expand control scoped to the AI-Overview container (union of
-  the known root selectors), matches an *exact* trimmed label from a
-  set (en + ru, no bare "more" so "more results" etc. don't false-fire),
-  scrolls it in, clicks, and loops until the extracted text stops
-  growing or 4 clicks land. Records `expand_clicks` and
-  `maybe_truncated` (a Show more was still present afterward) in each
-  `results.jsonl` row so the next rerun list can be built from the data
-  instead of guessed. Also widened `AI_OVERVIEW_SELECTORS` with the
-  2026-09 mount points. Can't test here (no display / Google blocks the
-  server IP) — owner runs it.
+- **`expand_ai_overview` → `expand_and_read` (JS-driven).** Owner
+  reported the button-clicking approach still misses "Show more" — the
+  first rework (scoped exact-label button scan) didn't fix it either.
+  Root problem: chasing one clickable element is inherently brittle
+  against Google's markup drift. New approach doesn't depend on a button
+  selector at all: one `page.evaluate()` pass locates the AI Overview
+  region (by `aria-label`/known ids, or by walking up from an "AI
+  Overview" heading), then **both** clicks every expander-looking
+  control inside it (label match or `aria-expanded=false`, a few rounds
+  for chained toggles) **and** force-strips every truncation mechanism —
+  `-webkit-line-clamp`, `display:-webkit-box`, `max-height`,
+  `overflow:hidden` on any node whose `scrollHeight` exceeds its box —
+  and opens `<details>`. So the full text is recovered from the DOM even
+  when the click target has moved or is gone. `extracted_text` is now
+  the region's complete `innerText`. Records `expand_clicks`,
+  `unclamped_nodes`, `found_overview` per row.
+- **Removed the 20–60s inter-query delay** (owner: "run without
+  delay"). Now `--delay MIN MAX` (default 2–4s) / `--no-delay`. Kept a
+  small default because a few hundred back-to-back Google searches from
+  one residential IP is the classic CAPTCHA trigger — the script still
+  pauses for a manual solve if one appears, so `--no-delay` is
+  recoverable, just slower when it trips. Also dropped the fixed
+  post-load `wait_for_timeout` — `expand_and_read` polls for the
+  overview itself and returns the moment the text stops growing.
+- Untestable here (no display; Google blocks the server IP) — owner runs
+  `check_kanji.py --from-list need_rerun.json` (add `--no-delay` to go
+  flat out).
