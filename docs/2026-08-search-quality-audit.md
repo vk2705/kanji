@@ -6591,3 +6591,53 @@ as deliberately-deferred rather than unreviewed — see above), the 584
 un-triaged PARTIAL `results.jsonl` flags, the `个`/`亼` family decision,
 `慶`'s bottom shape, `壷`'s top element, the 81 orphaned `rad{N}` rows
 on the live DB.
+
+### 2026-09-05 (continued) — owner pushed the full 3000-kanji Google cross-check; started an LLM re-read of the whole file
+
+- Owner ran `tools/heisig-google-check/check_kanji.py --all` on their
+  own machine and pushed the result: `results.jsonl` is now **3005
+  lines / 3000 unique kanji** (was 1812) — every RTK frame has a Google
+  AI Overview record now, ~2478 with usable text.
+- Owner's instruction: stop trusting the regex extractor
+  (`triage_google_check.py`'s char-extraction), have an LLM actually
+  *read* each AI Overview and produce a simplified decomposition JSON to
+  keep as a **respected reference** alongside `cjkvi-ids`/CSV; and
+  prepare a table of *real doubts* — cases where the Google data itself
+  looks bad — for the owner to adjudicate.
+- Approach: split the 2478 usable records into batches, hand each to a
+  worker sub-agent that reads every `extracted_text` in full and writes
+  `{id: {parts, primitive_names, confidence, note}}` plus a per-batch
+  doubts list. Running **2 agents at a time** (an earlier attempt at 6
+  parallel burned the session rate-limit and several agents mis-scoped
+  themselves as orchestrators; the 2-at-a-time + explicit
+  "no-sub-agents, write incrementally" instructions fixed both). Output
+  accumulates in `scratchpad/results/m_*_decomp.json`. Batches 00-05
+  done so far (~780 records); ~1700 remain.
+- **First 5 real bugs already confirmed** from the m_00/m_01 agents'
+  findings, each cross-checked against `cjkvi-ids` + a rendered-glyph
+  comparison before fixing (Google's AI Overview alone is never the
+  tiebreaker — same discipline as always):
+  - `rtk89` 切 ("cut"): was `刀,匕` — left side is `七`(seven), not
+    `匕`(spoon). `cjkvi-ids` `⿰七刀`; render confirms the leftward hook.
+  - `rtk236` 株 ("stocks"): was `牛,木` — right side is `朱`(vermilion,
+    rtk235), not `牛`. `cjkvi-ids` `⿰木朱`.
+  - `rtk144` 泳 ("swim"): was `水,丶` — right side is the full
+    `永`(eternity, rtk139), not a lone drop. `cjkvi-ids` `⿰氵永`.
+  - `rtk172` 均 ("level"): was `土,冫,勹,二` — right side is `匀` (`勹`
+    wrapping a single `丶`); the `冫` and `二` were spurious. →
+    `土,勹,丶`.
+  - `rtk124` 削 ("plane"): was `月,尚` — left side is `肖`(rtk119, "肖"
+    itself `小,月`), not `尚`(esteem). `cjkvi-ids` `⿰肖刂`. → `肖,刀`.
+- Verified: full rebuild; `test_regression_fixes.py` — 5 new pins —
+  **1183 checks**, same 4 expected hanzi-scope non-issues; pytest (56
+  passed); `audit_self_reference.py` clean.
+- Not deployed (no SSH/server access) — data-only change.
+- **Truncated-text list building up**: the agents are flagging every
+  kanji whose Google AI Overview cut off at "Show more" with no
+  breakdown given — 76 so far from the first ~840 records analyzed
+  (`scratchpad/need_google_rerun_partial.json`). Once the whole file is
+  read, that becomes the list the owner re-runs the scraper on.
+- **Next**: finish the LLM read (batches m_06 through m_12), merge all
+  `m_*_decomp.json` into `backend/google_decompositions.json`, then
+  build the doubts table and the full truncated-rerun list for the
+  owner.

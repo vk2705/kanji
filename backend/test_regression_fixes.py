@@ -46,6 +46,19 @@ import database  # noqa: E402
 # kanji_id -> {"character": ..., "expected_part_ids": [...]} — the resolved top-level
 # parts_detail ids from get_kanji_detail's first (system) decomposition, order-independent.
 EXPECTED_DECOMPOSITIONS = {
+    # 2026-09-05: five wrong-left-component bugs surfaced by the LLM re-read of
+    # the full results.jsonl Google cross-check, each then confirmed against
+    # cjkvi-ids + a rendered-glyph comparison before fixing.
+    "rtk89": {"character": "切", "keyword": "cut",  # was 刀,匕 -- left side is 七(seven), not 匕(spoon); cjkvi ⿰七刀
+              "expected_part_ids": {"rtk7", "rtk87"}},
+    "rtk236": {"character": "株", "keyword": "stocks",  # was 牛,木 -- right side is 朱(vermilion), not 牛; cjkvi ⿰木朱
+               "expected_part_ids": {"rtk207", "rtk235"}},
+    "rtk144": {"character": "泳", "keyword": "swim",  # was 水,丶 -- right side is the full 永(eternity), not a lone 丶
+               "expected_part_ids": {"rtk137", "rtk139"}},
+    "rtk172": {"character": "均", "keyword": "level",  # was 土,冫,勹,二 -- right side is 匀(勹+丶); the 冫,二 were spurious
+               "expected_part_ids": {"kangxi20", "kangxi3", "rtk161"}},
+    "rtk124": {"character": "削", "keyword": "plane",  # was 月,尚 -- left side is 肖(rtk119), not 尚(esteem); cjkvi ⿰肖刂
+               "expected_part_ids": {"rtk119", "rtk87"}},
     # 咼 ("jawbone") was flattened as bare 口,冂 independently in all four hosts
     # (禍/渦/鍋/過) via the original KRADFILE import -- heisig-kanjis.csv's own
     # components column already named it "jawbone; joint; hood; mouth" but that
