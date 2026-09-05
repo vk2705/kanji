@@ -1,0 +1,312 @@
+[
+ {
+  "id": "rtk42",
+  "character": "升",
+  "keyword": "measuring box",
+  "our_parts": [
+   "ノ",
+   "廾",
+   "十"
+  ],
+  "google_says": [
+   "千",
+   "十"
+  ],
+  "reason": "Self-contradictory / garbled: names the right component as '升 (needle / ten with an extra stroke)' — a self-reference — while also saying the primitives taught right before are 'thousand (千) and needle (十)'. Breakdown is recoverable but the text is muddled.",
+  "raw": "千 (thousand): The upper-left stroke... 升 (needle / ten with an extra stroke): In Heisig's system, a standalone cross 十 means 'ten' or 'needle'."
+ },
+ {
+  "id": "rtk73",
+  "character": "的",
+  "keyword": "bull's eye",
+  "our_parts": [
+   "白",
+   "勺"
+  ],
+  "google_says": [
+   "白",
+   "勺"
+  ],
+  "reason": "Main AI Overview is a generic explainer about the RTK method in general (bundle 束, rest 休, etc.), not about 的 specifically; the 白+勺 breakdown only appears incidentally in a cited external snippet.",
+  "raw": "James Heisig's Remembering the Kanji breaks down complex characters into small, manageable building blocks called primitives. What Are Heisig Primitives?"
+ },
+ {
+  "id": "rtk342",
+  "character": "吉",
+  "keyword": "good luck",
+  "our_parts": [
+   "口",
+   "士"
+  ],
+  "google_says": [
+   "士",
+   "口"
+  ],
+  "reason": "Self-contradictory/garbled: the text labels the top part '吉 (Top Part): 十' with primitive meaning 'Ten' and bottom '吉 (Bottom Part): 口', mislabeling both segments as '吉' and substituting 十 for the standard 士 (samurai/gentleman).",
+  "raw": "吉 (Top Part): 十 Primitive Meaning: Ten (or needle). 吉 (Bottom Part): 口 Primitive Meaning: Mouth."
+ },
+ {
+  "id": "rtk344",
+  "character": "荘",
+  "keyword": "villa",
+  "our_parts": [
+   "艾",
+   "壮"
+  ],
+  "google_says": [
+   "艹",
+   "壮"
+  ],
+  "reason": "Self-contradictory: the breakdown table gives 艹 (flower) + 广 (cave) + 土 (soil), but 荘 is 艹 over 壮 (not 广); the text's own quoted 6th-ed story ('a pair of turtle-samurai') describes 壮, contradicting the table.",
+  "raw": "艹 (Top): Flower ... 广 (Middle/Left enclosure): Cave ... 土 (Bottom right): Soil ... 'The villa pictured here is filled with exotic flowers... and has a pair of turtle-samurai standing before its gates."
+ },
+ {
+  "id": "rtk472",
+  "character": "嫡",
+  "keyword": "legitimate wife",
+  "our_parts": [
+   "女",
+   "啇"
+  ],
+  "google_says": [
+   "女",
+   "啇"
+  ],
+  "reason": "Text self-contradicts: it describes the right side of 嫡 as the primitive 帝 (sovereign = vase + crown/apron + towel), but the right side of 嫡 is actually 啇 (antique). The mnemonic story even says 'woman + emperor', which is wrong for this character.",
+  "raw": "Right Side (帝): 立 (vases / stand up)... 冖 (apron / crown)... 巾 (towel)... Note on the right side: The component 帝 is itself a standalone kanji meaning sovereign or emperor"
+ },
+ {
+  "id": "rtk766",
+  "character": "撃",
+  "keyword": "beat",
+  "our_parts": [
+   "車",
+   "手",
+   "殳",
+   "几",
+   "又"
+  ],
+  "google_says": [
+   "𠦝",
+   "殳",
+   "手"
+  ],
+  "reason": "Text explicitly and specifically claims the top-left component is NOT 車 (car/wagon) but a distinct primitive 𠦝 ('mist'), directly contradicting the app's current_parts (which includes 車). This is a substantive factual claim that could easily be an AI hallucination/mix-up given how visually similar 車 and 𠦝 are, so it should be checked against a primary source before being trusted as a correction.",
+  "raw": "Top Left (𠦝): Mist. Note: Heisig distinguishes this from \"car/wagon\" (車). In mist, the central vertical stroke does not poke through the bottom line."
+ },
+ {
+  "id": "rtk775",
+  "character": "叔",
+  "keyword": "uncle",
+  "our_parts": [
+   "小",
+   "卜",
+   "又"
+  ],
+  "google_says": [
+   "卜",
+   "小",
+   "又"
+  ],
+  "reason": "Text is internally inconsistent about the left-hand stack: it lists 卜 (divining rod), 小 (small), and then describes an unrelated 'extra line' as ALSO meaning 'crotch' on the left side, separate from the 又 ('crotch') on the right side of the character — i.e. it assigns the same primitive name 'crotch' to two different strokes/components in the same kanji without reconciling this, and separately offers an alternate community parse ('above + small + crotch + crotch').",
+  "raw": "一 (crotch): In this specific visual configuration, the extra line intersecting the bottom element is stylized in stories as a crotch or legs tucked under. ... Right Side: 又 ... the layout parses as: a"
+ },
+ {
+  "id": "rtk790",
+  "character": "奨",
+  "keyword": "exhort",
+  "our_parts": [
+   "寸",
+   "大",
+   "爪",
+   "爿"
+  ],
+  "google_says": [
+   "爿",
+   "爫",
+   "一",
+   "大"
+  ],
+  "reason": "Text's own labeling of positions is confusing/self-contradictory — it labels a component 'Top Left: 爿' but describes it as 'Turtle (or Turtle-shell / Left flank)', then labels another as 'Top Right: 寽 (minus the bottom, effectively 爫+一)' while also saying 'bottom_center' for 大, garbling the actual spatial layout of a character that Google itself says mirrors 将's structure exactly (top+bottom, not top-left/top-right/bottom-center as stated).",
+  "raw": "🔝 Top Left: 爿 ... 🔝 Top Right: 寽 (minus the bottom, effectively 爫 + 一) ... bottom_center ⬇️ Bottom: 大"
+ },
+ {
+  "id": "rtk791",
+  "character": "采",
+  "keyword": "grab",
+  "our_parts": [
+   "爪",
+   "木"
+  ],
+  "google_says": [
+   "爫",
+   "木"
+  ],
+  "reason": "Text opens by stating the character's keyword is 'dice' (or 'die'), which does not match the app's stored keyword 'grab' at all — a strong signal the AI Overview may be describing the wrong kanji or a different edition's keyword outright, even though the primitive breakdown given (claw + tree) happens to still be plausible for 采.",
+  "raw": "In James Heisig's Remembering the Kanji (RTK) method, the character 采 has the specific keyword \"dice\" (or die)."
+ },
+ {
+  "id": "rtk797",
+  "character": "曖",
+  "keyword": "unclear",
+  "our_parts": [
+   "心",
+   "爪",
+   "日",
+   "冖",
+   "夂"
+  ],
+  "google_says": [
+   "日",
+   "愛"
+  ],
+  "reason": "Text gives two different, inconsistent sub-breakdowns of the right-hand cluster in the same answer: one labels the bottom element '友 (Friend, composed of narwhal + crotch)' and separately describes it via '愛' as heart+walking legs — these are different characters/structures being conflated for the same visual region.",
+  "raw": "友 (Bottom Right): Friend (composed of the primitives narwhal 𠂉 and crotch 又) ... you can visually break it down into Sun + Love."
+ },
+ {
+  "id": "rtk828",
+  "character": "唆",
+  "keyword": "tempt",
+  "our_parts": [
+   "口",
+   "儿",
+   "厶",
+   "夂"
+  ],
+  "google_says": [
+   "口",
+   "夋"
+  ],
+  "reason": "The top sub-element of the right-hand cluster (夋) is described only as a vague triangle symbol '▲' with three different possible names offered in the same sentence ('silo / private / elbow'), never settling on Heisig's actual primitive name — this reads as the AI guessing rather than reporting a specific known primitive.",
+  "raw": "▲ (Right side - Top): Silo (also referred to as private or elbow depending on the specific lesson context, but traditionally grouped as silo / storefront roof when looking at the top of 夋)."
+ },
+ {
+  "id": "rtk1120",
+  "character": "弊",
+  "keyword": "abuse",
+  "our_parts": [
+   "｜",
+   "巾",
+   "尚",
+   "丷",
+   "冂",
+   "廾",
+   "攵"
+  ],
+  "google_says": [
+   "敝",
+   "廾"
+  ],
+  "reason": "Garbled: gives keyword as 'bad luck', bottom-right described inconsistently with a placeholder emoji ('𠂉 / 📥'), and self-contradicts on the component structure of 弊.",
+  "raw": "the kanji 弊 has the official keyword bad luck (or vices ...). 𠂉 / 📥 (Bottom Right Variant or integrated component): ... the bottom element is actually 𦉢 (a tattered shredding action) or grouped simply"
+ },
+ {
+  "id": "rtk1404",
+  "character": "墜",
+  "keyword": "crash",
+  "our_parts": [
+   "土",
+   "隊"
+  ],
+  "google_says": [
+   "隊",
+   "土"
+  ],
+  "reason": "Self-contradictory: correctly IDs top as 隊 (regiment) but then labels the 阝 primitive 'bureaucrat on the right side' — 阝 is on the left here and 墜 has no right-side 阝; stray internally inconsistent note.",
+  "raw": "阝 (Left Side): \"Regiment\" (Heisig uses this keyword specifically when it appears on the left side of a kanji; on the right side, it means bureaucrat)."
+ },
+ {
+  "id": "rtk1434",
+  "character": "縮",
+  "keyword": "shrink",
+  "our_parts": [
+   "糸",
+   "宿"
+  ],
+  "google_says": [
+   "糸",
+   "宿"
+  ],
+  "reason": "Garbled sub-breakdown: decomposes 宿 into 'house + bushes 𣏟 + road' which is wrong (宿 = house 宀 + person 亻 + hundred 百); invented components.",
+  "raw": "宀 (Top Right): House ... 𣏟 (Middle Right): Bushes (two trees side by side) ... 一 + 疋/ (Bottom Right): Road"
+ },
+ {
+  "id": "rtk1804",
+  "character": "倹",
+  "keyword": "frugal",
+  "our_parts": [
+   "亻",
+   "口",
+   "人",
+   "个"
+  ],
+  "google_says": [
+   "亻",
+   "僉"
+  ],
+  "reason": "self-contradictory: claims the right side is 兼 (concurrently) then describes a 田 rice field inside it; 倹 actually shares its right side (㑒/僉, 'awl'/'omni-') with 剣 and 険, not 兼",
+  "raw": "兼 (Right): This is a standalone kanji that means concurrently... exists within: 田 (rice field / brains)"
+ },
+ {
+  "id": "rtk1843",
+  "character": "瞭",
+  "keyword": "obvious",
+  "our_parts": [
+   "小",
+   "日",
+   "丷",
+   "目",
+   "大"
+  ],
+  "google_says": [
+   "目",
+   "尞"
+  ],
+  "reason": "garbled/self-contradictory: describes the right side as 寮 (dormitory, containing a 宀 house roof) and even introduces 元 (二 + 儿), but 瞭's right side is 尞 with no roof",
+  "raw": "宀 (House): The top roof component on the right side... 元 (Beginning): Built further from: 二 (Two)... 儿 (Human Legs)"
+ },
+ {
+  "id": "rtk2112",
+  "character": "岡",
+  "keyword": "mount",
+  "our_parts": [
+   "丷",
+   "冂",
+   "一",
+   "山"
+  ],
+  "google_says": [
+   "冂",
+   "山"
+  ],
+  "reason": "self-inconsistent keyword: text states keyword is 'hill' while our data and sibling records (2113-2115) treat 岡 as 'mount'/'ridge'; breakdown itself (冂+山) is fine",
+  "raw": "the kanji 岡 is assigned the keyword \"hill\"."
+ },
+ {
+  "id": "rtk2234",
+  "character": "或",
+  "keyword": "a  (a certain)",
+  "our_parts": [
+   "口",
+   "戈",
+   "一"
+  ],
+  "google_says": null,
+  "reason": "off-topic; AI Overview is a generic explanation of what Heisig primitives are and never breaks down 或 itself",
+  "raw": "What are Heisig Primitives? Custom Building Blocks: They are not the same as traditional dictionary radicals... If you have a specific kanji or primitive in mind, tell me which character..."
+ },
+ {
+  "id": "rtk2936",
+  "character": "睾",
+  "keyword": "testicle",
+  "our_parts": [
+   "土",
+   "目",
+   "亠",
+   "辛"
+  ],
+  "google_says": null,
+  "reason": "self-contradictory: claims blood (血) + happiness (幸) + dish (皿), but 皿 does not appear in this character and the text itself admits the top 'blood' stroke is 'slightly altered'",
+  "raw": "Top: 血 (Blood) - Note that the horizontal top stroke is slightly altered ... Bottom: 皿 (Dish / Plate)"
+ }
+]
