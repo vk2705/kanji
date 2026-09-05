@@ -6749,3 +6749,34 @@ on the live DB.
   `results.jsonl` (newest record wins per id): **602 still unusable**
   (539 too-short, 63 truncated-with-Show-more) — down from 771. Owner
   re-runs `check_kanji.py --from-list need_rerun.json`.
+
+### 2026-09-05 (continued) — `--debug` found it: the expand button is OUTSIDE the overview container
+
+- Owner's rerun had *every* kanji stuck at "Searching…". Ran
+  `check_kanji.py --id rtk57 --debug` (new flag: dumps page HTML +
+  visible text + every clickable control's label, leaves browser open).
+  Result: the AI Overview **was fully present** (4157 chars of body
+  text, real breakdown in it) — the failures were all in the script.
+  Two bugs:
+  1. The expand control is labelled **"Show more AI Overview"** and
+     lives **outside** the element my JS picked as `root`, so
+     `root.querySelectorAll(...)` never saw it. Google renders the
+     trigger as a sibling of the overview container, not a child.
+  2. `root` was matching a tiny heading wrapper (first selector hit),
+     whose `innerText` is `< 40` chars → my "generating" heuristic
+     fired → every result written as `null` + `still_generating`.
+- Fix: (a) click "Show more…" controls **document-wide** before
+  locating the region, exact/regex label match, `data-ck-clicked`
+  marker so the poll loop never re-clicks a toggle; (b) choose `root`
+  as the **largest** text container (< 20k chars) that contains an "AI
+  Overview" heading, not the first selector match; (c) trim page chrome
+  — slice from the "AI Overview" heading to just before "Web
+  results"/"People also ask", drop a trailing "Show more/less" and the
+  "Generative AI is experimental" disclaimer.
+- Verified against a headless Chromium (`/tmp/jstest2.py`) with a page
+  built to match the real structure — overview content in one div, the
+  "Show more AI Overview" button a sibling outside it, body clamped
+  until clicked: full text recovered, button clicked exactly once
+  across two poll calls, no chrome leakage, not flagged generating.
+  Original synthetic suite (`/tmp/jstest.py`, line-clamp / max-height /
+  details / no-overview) still green.

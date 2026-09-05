@@ -162,61 +162,65 @@ _EXPAND_AND_READ_JS = r"""
 (labels) => {
   const norm = s => (s || "").replace(/\s+/g, " ").trim().toLowerCase();
 
-  // 1. Locate the AI Overview region.
-  let root = null;
-  const bySel = [
-    "[aria-label='AI Overview']", "[aria-label*='AI Overview' i]",
-    "#m-x-content", "#Odp5De", "div[data-attrid='wa:/description']",
-    "div[jsname='I4bIT']",
-  ];
-  for (const sel of bySel) { const e = document.querySelector(sel); if (e) { root = e; break; } }
-  if (!root) {
-    // Fall back: find a heading whose text is "AI Overview" and walk up to a
-    // container that holds a meaningful amount of text.
-    const heads = [...document.querySelectorAll("h1,h2,h3,div[role='heading'],span")]
-      .filter(e => norm(e.textContent) === "ai overview");
-    if (heads.length) {
-      let n = heads[0];
-      for (let i = 0; i < 6 && n && n.parentElement; i++) {
-        n = n.parentElement;
-        if ((n.innerText || "").length > 400) { root = n; break; }
-      }
-      if (!root) root = heads[0].parentElement;
-    }
-  }
-  if (!root) return { text: null, clicked: 0, unclamped: 0, foundRoot: false };
-
   let clicked = 0, unclamped = 0;
 
-  // 2. Click expander controls inside the region, a few rounds (a "Show more"
-  //    can reveal another one). Never click the same element twice -- some of
-  //    these toggle, so a second click would re-collapse. The marker attribute
-  //    persists across this function's repeated calls from the poll loop.
-  for (let round = 0; round < 4; round++) {
-    let any = false;
-    const ctrls = root.querySelectorAll(
-      "button, [role='button'], a[jsaction], [jsaction*='click'], summary"
-    );
-    for (const c of ctrls) {
-      if (c.hasAttribute("data-ck-clicked")) continue;
-      const lab = norm(c.getAttribute("aria-label")) || norm(c.textContent);
-      const isMore = labels.includes(lab) || c.getAttribute("aria-expanded") === "false";
-      if (!isMore) continue;
-      c.setAttribute("data-ck-clicked", "1");
-      try {
-        c.scrollIntoView({ block: "center" });
-        c.click();
-        clicked++; any = true;
-      } catch (e) {}
-    }
-    if (!any) break;
+  // 1. Click any "Show more AI Overview" / "Show more" control ANYWHERE on the
+  //    page (the trigger sits OUTSIDE the overview container). Do this before
+  //    locating the region -- clicking it is often what makes the full text
+  //    render. Never click the same control twice (some toggle); the marker
+  //    attribute persists across this function's repeated calls.
+  const allCtrls = document.querySelectorAll(
+    "button, [role='button'], a[jsaction], [jsaction*='click'], summary, span[role='button'], div[tabindex]"
+  );
+  for (const c of allCtrls) {
+    if (c.hasAttribute("data-ck-clicked")) continue;
+    const lab = norm(c.getAttribute("aria-label")) || norm(c.textContent);
+    if (!lab) continue;
+    const isMore =
+      labels.includes(lab) ||
+      lab === "show more ai overview" ||
+      /^show more( ai overview)?$/.test(lab) ||
+      (lab === "more" && norm(c.closest("[aria-label*='AI Overview' i], [data-attrid*='overview' i]") ? "x" : "") === "x");
+    if (!isMore) continue;
+    c.setAttribute("data-ck-clicked", "1");
+    try { c.scrollIntoView({ block: "center" }); c.click(); clicked++; } catch (e) {}
   }
 
-  // 3. Open <details>, set aria-expanded, and strip clamp styles everywhere in root.
+  // 2. Locate the AI Overview region -- pick the BIGGEST text container, not the
+  //    first match (the first is often just the heading wrapper).
+  const cands = new Set();
+  for (const sel of [
+    "[aria-label='AI Overview']", "[aria-label*='AI Overview' i]",
+    "#m-x-content", "#Odp5De", "div[data-attrid='wa:/description']",
+    "div[jsname='I4bIT']", "[data-attrid*='overview' i]",
+  ]) document.querySelectorAll(sel).forEach(e => cands.add(e));
+
+  // heading-based: the container that HOLDS an "AI Overview" heading
+  for (const h of document.querySelectorAll("h1,h2,h3,div[role='heading'],span,div")) {
+    if (norm(h.textContent) !== "ai overview") continue;
+    let n = h;
+    for (let i = 0; i < 8 && n && n.parentElement; i++) { n = n.parentElement; cands.add(n); }
+  }
+
+  let root = null, rootLen = 0;
+  for (const c of cands) {
+    const L = (c.innerText || "").length;
+    // must contain the heading text and a real body, and not be the whole page
+    if (L > rootLen && L < 20000 && /ai overview/i.test(c.innerText || "")) { root = c; rootLen = L; }
+  }
+  if (!root) {
+    // last resort: any element mentioning "Remembering the Kanji" near the top
+    for (const c of document.querySelectorAll("div")) {
+      const t = c.innerText || "";
+      if (t.length > 200 && t.length < 8000 && /Remembering the Kanji|RTK|primitive/i.test(t)) { root = c; break; }
+    }
+  }
+  if (!root) return { text: null, clicked, unclamped, foundRoot: false };
+
+  // 3. Open <details>, set aria-expanded, strip clamp styles inside root.
   root.querySelectorAll("details:not([open])").forEach(d => { d.open = true; unclamped++; });
   root.querySelectorAll("[aria-expanded='false']").forEach(e => e.setAttribute("aria-expanded", "true"));
-  const all = root.querySelectorAll("*");
-  for (const el of all) {
+  for (const el of root.querySelectorAll("*")) {
     const cs = getComputedStyle(el);
     const clamped =
       cs.webkitLineClamp && cs.webkitLineClamp !== "none" ||
@@ -233,13 +237,22 @@ _EXPAND_AND_READ_JS = r"""
     }
   }
 
-  const text = (root.innerText || "").trim();
-  // "Generating" = the overview box exists but Google is still streaming it in
-  // ("Searching...", a lone "AI Overview" heading, a bare loading dot). Treat a
-  // short body that is basically just the heading / a spinner word as not-ready.
+  // Trim the surrounding page chrome: keep from the "AI Overview" heading to
+  // just before the "Show more"/"Web results"/"People also ask" that follows it.
+  let text = (root.innerText || "").trim();
+  const startM = text.search(/AI Overview/i);
+  if (startM >= 0) text = text.slice(startM);
+  const endM = text.search(/\n\s*(Web results|People also ask|Related searches|Related questions)\b/i);
+  if (endM > 200) text = text.slice(0, endM).trim();
+  // drop a trailing expand/collapse control line
+  text = text.replace(/\n?\s*Show (more|less)( AI Overview)?\s*$/i, "").trim();
+  text = text.replace(/\n?\s*(Generative AI is experimental|AI responses may include mistakes)[^\n]*$/i, "").trim();
+
+  // "Generating" = the box exists but Google is still streaming it in. Only a
+  // genuinely tiny body counts now that `root` is the biggest text container.
   const body = norm(text).replace(/^ai overview/, "").trim();
   const generating =
-    body.length < 40 ||
+    body.length < 60 ||
     /^(searching|generating|loading|thinking)\b/.test(body) ||
     body === "…" || body === "...";
 
