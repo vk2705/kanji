@@ -55,10 +55,84 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"rtk207", "rtk235"}},
     "rtk144": {"character": "泳", "keyword": "swim",  # was 水,丶 -- right side is the full 永(eternity), not a lone 丶
                "expected_part_ids": {"rtk137", "rtk139"}},
-    "rtk172": {"character": "均", "keyword": "level",  # was 土,冫,勹,二 -- right side is 匀(勹+丶); the 冫,二 were spurious
-               "expected_part_ids": {"kangxi20", "kangxi3", "rtk161"}},
+    # Corrected 2026-09-05 (decomposition_worklist.json review, second look):
+    # the prior fix (comment above, since replaced) called this 勹+丶, but a
+    # solo high-res render shows the enclosed shape is two stacked strokes,
+    # not one dot -- matching cjkvi-ids's JTKV form 勻=⿹勹二 (the simplified
+    # G form 匀=⿹勹冫 is the same idea, two strokes either way). Neither 勺
+    # (ladle, 勹+丶, tried and rejected first) nor 匀/勻 themselves are
+    # registered primitives, so flattened to 勹+二.
+    "rtk172": {"character": "均", "keyword": "level",
+               "expected_part_ids": {"kangxi20", "rtk2", "rtk161"}},
     "rtk124": {"character": "削", "keyword": "plane",  # was 月,尚 -- left side is 肖(rtk119), not 尚(esteem); cjkvi ⿰肖刂
                "expected_part_ids": {"rtk119", "rtk87"}},
+    # 2026-09-05 decomposition_worklist.json batch, day 2 (built from
+    # google_decompositions.json cross-check + cjkvi-ids + render):
+    # 光 had a spurious 一+尚 where render shows a plain 小 top (no box/口
+    # shape at all -- 尚 doesn't belong here) over 儿.
+    "rtk125": {"character": "光", "keyword": "ray",
+               "expected_part_ids": {"kangxi10", "rtk110"}},
+    # 器 used 大 for the center element; render clearly shows 犬(with its
+    # extra dot stroke), not plain 大, surrounded by four 口 (deduped to one
+    # per the established "no duplicate primitive" convention).
+    "rtk127": {"character": "器", "keyword": "utensil",
+               "expected_part_ids": {"rtk11", "rtk253"}},
+    # 埼 was flattened (口,大,土,｜,一) instead of referencing 奇(rtk133,
+    # "strange" = 大+可, already taught) directly.
+    "rtk164": {"character": "埼", "keyword": "cape",
+               "expected_part_ids": {"rtk133", "rtk161"}},
+    # 垣 was flattened (一,土,日) instead of referencing 亘(rtk32, already
+    # taught) directly.
+    "rtk165": {"character": "垣", "keyword": "hedge",
+               "expected_part_ids": {"rtk161", "rtk32"}},
+    # 填 was flattened (十,土,ハ,目) instead of referencing 真(rtk79,
+    # already taught) directly.
+    "rtk166": {"character": "填", "keyword": "inlay",
+               "expected_part_ids": {"rtk161", "rtk79"}},
+    # 封/涯 both had only a single 土 where render confirms two stacked 土
+    # (matching 圭, rtk167, "squared jewel" -- already taught immediately
+    # before 封 in the frame sequence); referenced directly instead of
+    # dedup-flattening to a lone 土.
+    "rtk168": {"character": "封", "keyword": "seal",
+               "expected_part_ids": {"rtk167", "rtk45"}},
+    "rtk169": {"character": "涯", "keyword": "horizon",
+               "expected_part_ids": {"kangxi27", "rtk137", "rtk167"}},
+    # 均's right side needed a second look: the worklist's first pass tried
+    # 勺(ladle, 勹+丶) per Google's suggestion, but a solo high-res render
+    # shows two stacked strokes inside 勹, not one dot -- matching
+    # cjkvi-ids's 勻/匀=⿹勹二 (or ⿹勹冫) shape, not 勺. Neither 勻/匀 nor 勺
+    # are registered primitives, so flattened to 勹+二 (see the corrected
+    # pin comment above, near rtk172, for the full account).
+    # 淡 had a single 火 where render confirms 炎(rtk174, "inflammation" =
+    # 火+火, already taught immediately after 火) is the real right side.
+    "rtk176": {"character": "淡", "keyword": "thin",
+               "expected_part_ids": {"rtk137", "rtk174"}},
+    # 点/照/黒 (and 66 other kanji) used "杰"(U+6770, an unrelated real
+    # character, "hero") as a stand-in for the 4-dot fire-radical shape at
+    # their bottom -- but 灬(U+706C) is itself a real, independently
+    # renderable Unicode character that matches the shape exactly, so the
+    # whole family (registered as prim-fire-radical) was repointed from 杰
+    # to 灬 in one global data.txt substitution rather than left as a
+    # coincidental-lookalike hack.
+    "rtk181": {"character": "点", "keyword": "spot",
+               "expected_part_ids": {"prim-fire-radical", "rtk49"}},
+    "rtk182": {"character": "照", "keyword": "illuminate",
+               "expected_part_ids": {"prim-fire-radical", "rtk91"}},
+    # 魚 was also missing its top hook entirely (render shows a clear
+    # extra stroke above the 田 box, matching 𠂊/prim-hooked-hand, already
+    # used elsewhere in this system for the same "bound up" hook shape).
+    "rtk183": {"character": "魚", "keyword": "fish",
+               "expected_part_ids": {"prim-fire-radical", "prim-hooked-hand", "rtk14"}},
+    "rtk186": {"character": "黒", "keyword": "black",
+               "expected_part_ids": {"prim-fire-radical", "rtk185"}},
+    # 墨 had 黒 itself as a part, but render shows its top is just 里(rtk185,
+    # 田+土) with NO fire-dots at all -- referencing the full 黒 (which
+    # includes 灬) was wrong, not just imprecise.
+    "rtk187": {"character": "墨", "keyword": "black ink",
+               "expected_part_ids": {"rtk161", "rtk185"}},
+    # 向 was missing its top-left diagonal stroke entirely.
+    "rtk195": {"character": "向", "keyword": "yonder",
+               "expected_part_ids": {"kangxi13", "prim-katakana-no", "rtk11"}},
     # 咼 ("jawbone") was flattened as bare 口,冂 independently in all four hosts
     # (禍/渦/鍋/過) via the original KRADFILE import -- heisig-kanjis.csv's own
     # components column already named it "jawbone; joint; hood; mouth" but that
@@ -637,8 +711,11 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk137", "rtk66"}},
     "rtk149": {"character": "汰", "keyword": "cleanse",
                 "expected_part_ids": {"rtk126", "rtk137"}},
+    # Corrected 2026-09-05 (decomposition_worklist.json review): was
+    # flattened to ノ,古,水,舌 -- render confirms 活 = 水(氵) + 舌 only,
+    # no 古 and no extra ノ anywhere in the glyph.
     "rtk154": {"character": "活", "keyword": "lively",
-                "expected_part_ids": {"prim-katakana-no", "rtk137", "rtk16", "rtk41"}},
+                "expected_part_ids": {"rtk137", "rtk41"}},
     "rtk204": {"character": "寄", "keyword": "draw near",
                 "expected_part_ids": {"kangxi40", "rtk133"}},
     "rtk213": {"character": "梢", "keyword": "treetops",
@@ -1304,8 +1381,11 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk137", "rtk39"}},
     "rtk151": {"character": "沙", "keyword": "grains of sand",
                 "expected_part_ids": {"rtk111", "rtk137"}},
+    # Corrected 2026-09-05 (decomposition_worklist.json review): was
+    # flattened to 月,早,水 instead of referencing 朝(rtk53, "morning" =
+    # 早+月, already taught) directly.
     "rtk152": {"character": "潮", "keyword": "tide",
-                "expected_part_ids": {"rtk13", "rtk137", "rtk26"}},
+                "expected_part_ids": {"rtk137", "rtk53"}},
     "rtk155": {"character": "消", "keyword": "extinguish",
                 "expected_part_ids": {"rtk119", "rtk137"}},
     "rtk156": {"character": "況", "keyword": "but of course",

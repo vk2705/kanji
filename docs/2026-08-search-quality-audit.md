@@ -6944,3 +6944,80 @@ un-triaged PARTIAL `results.jsonl` flags (lower priority now that the
 worklist is the primary daily driver), the `个`/`亼` family decision,
 `慶`'s bottom shape, `壷`'s top element, the 81 orphaned `rad{N}` rows
 on the live DB.
+
+## 2026-09-05 (continued): worklist loop, day 2 — 20 processed, a global fix, and one self-correction
+
+Ran `worklist_next.py -n 20` for the second batch. 6 kept as-is
+(`尚`/`宣`/`宴` already correctly use a compound reference or a fuller
+breakdown than Google's compressed one — same "prefer the taught
+compound" call as day 1).
+
+**A systemic fix, found via 4 of the 20 rows**: `点`/`照`/`魚`/`黒` all
+flagged Google saying their bottom "fire" shape was mis-encoded.
+Checked what our data actually used: **`杰`** (U+6770, the real,
+unrelated word "hero") as a stand-in for the 4-dot fire-radical shape,
+registered as `prim-fire-radical`. `杰`'s bottom half happens to look
+like the fire-dots, but `灬` (U+706C) is itself a real, independently
+renderable Unicode character that matches the shape exactly and isn't
+some obscure/unrenderable codepoint — confirmed by rendering it
+directly. Not a Kangxi radical in its own right per `CJKRadicals.txt`
+(radical 86's own codepoint is `火`, U+706B, not U+706C), so it keeps
+the existing `prim-fire-radical` id, just with the correct character —
+one global `sed 's/杰/灬/'` across all **66** occurrences in `data.txt`
+(every one checked first: all were genuinely the fire-dots use, no
+false hits). Rebuilding the worklist afterward showed the impact
+reached far beyond this batch: **1110 previously-disagreeing rows
+across the whole 3000-kanji corpus now agree with Google**, not just
+the 4 in today's batch — a single wrong stand-in character had been
+quietly throwing off the cross-check for every kanji built on the fire
+radical.
+
+**10 more real fixes** (beyond the `灬` family): `光` had a spurious
+`一,尚` where render shows a plain `小` top (no box/口 anywhere) over
+`儿`; `器` used `大` for its center element where render clearly shows
+`犬` (with the extra dot) surrounded by four `口`; `潮`/`活` were both
+flattened instead of referencing an already-taught compound directly
+(`朝`=早+月, `舌`=千+口 — `活` also had two outright spurious tokens,
+`ノ,古`, that don't exist anywhere in the glyph); `埼`/`垣`/`填` were
+each flattened instead of referencing `奇`/`亘`/`真` (all already
+taught) directly; `封`/`涯` both had only a single `土` where render
+confirms two stacked `土` (matching `圭`, "squared jewel", taught
+immediately before `封`) — referenced directly rather than relying on
+the "list a doubled primitive once" dedup convention when a taught
+compound name already exists for it; `淡` had a single `火` for the
+same reason, fixed to reference `炎` (taught right after `火`); `墨`
+had `黒` itself as a part, but render shows its top is just `里`
+(`黒`'s own non-fire half) — referencing the fuller `黒` was wrong, not
+just imprecise, since it implies fire-dots that aren't there; `向` was
+missing its top-left diagonal stroke entirely; `魚` was *also* missing
+its top hook (`𠂊`/prim-hooked-hand, already used elsewhere) on top of
+the `灬` fix.
+
+**A self-correction worth flagging**: for `均`, Google's suggestion
+(`勺`, "ladle") looked plausible against the day-1-style rendering
+pass and got applied first — but a *second*, higher-resolution solo
+render of `均` alone (prompted by cross-checking the existing project
+pin, which predates this worklist and called it something else again)
+showed the enclosed shape is clearly two stacked strokes, not `勺`'s
+single dot. `cjkvi-ids` confirms: the real shape is `勻`/`匀`
+(⿹勹二 / ⿹勹冫), not `勺` (⿹勹丶) — two visually close but genuinely
+different characters. Neither `勻`/`匀` is registered, so flattened to
+`勹,二`. Recorded as a lesson: when a render is ambiguous at normal
+size, re-render the single glyph alone at full size before trusting
+either source.
+
+Verified: full rebuild (3000 kanji, 3007 overrides); `test_regression_fixes.py`
+— 3 corrected + 15 new pins — **1210 checks**, same 4 expected
+hanzi-scope non-issues; pytest (56 passed); `audit_self_reference.py`
+clean; `audit_radicals.py` still 0/0; `review_queue.py` clean. Sanity-
+checked `audit_flattening.py`/`audit_flattening_subsequence.py`
+against a stashed pre-batch rebuild: 602/759 baseline candidates vs.
+588/759 after — confirms these two tools are a large, expected,
+pre-existing backlog (not a 0-clean gate like the other two audits)
+that this batch nudged down slightly, not a regression. `build_decomp_worklist.py`
+rebuilt: **1047 rows, 1030 pending** (down from 1080/1068 — the `灬`
+fix's wide reach did most of that drop). Not deployed (no SSH/server
+access) — data-only change, needs `sync_system_data.py` + reseed.
+
+**Next session**: continue the worklist loop (`worklist_next.py -n 20`).
+Standing list unchanged otherwise (see day 1 entry above).

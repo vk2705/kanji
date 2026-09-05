@@ -365,304 +365,6 @@
   "reviewed_at": "2026-09-05"
  },
  {
-  "id": "rtk125",
-  "char": "光",
-  "keyword": "ray",
-  "our_parts": [
-   "一",
-   "尚",
-   "儿"
-  ],
-  "google_parts": [
-   "小",
-   "儿"
-  ],
-  "google_primitive_names": {
-   "小": "small",
-   "儿": "human legs"
-  },
-  "google_confidence": "high",
-  "google_note": "Small (⺌, top) over human legs (儿, bottom). current_parts uses 一+尚+儿.",
-  "cjkvi_ids": "⿱⺌兀",
-  "cjkvi_leaves": [
-   "⺌",
-   "一",
-   "丿",
-   "乚"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk127",
-  "char": "器",
-  "keyword": "utensil",
-  "our_parts": [
-   "口",
-   "大"
-  ],
-  "google_parts": [
-   "口",
-   "口",
-   "犬",
-   "口",
-   "口"
-  ],
-  "google_primitive_names": {
-   "口": "mouth",
-   "犬": "dog"
-  },
-  "google_confidence": "high",
-  "google_note": "Four mouths (口) at the corners around a dog (犬) in the center. current_parts uses 大 for center.",
-  "cjkvi_ids": "⿳吅犬吅",
-  "cjkvi_leaves": [
-   "口",
-   "犬"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk152",
-  "char": "潮",
-  "keyword": "tide",
-  "our_parts": [
-   "月",
-   "早",
-   "水"
-  ],
-  "google_parts": [
-   "水",
-   "朝"
-  ],
-  "google_primitive_names": {
-   "水": "water",
-   "朝": "morning",
-   "十": "needle",
-   "日": "sun",
-   "月": "moon"
-  },
-  "google_confidence": "high",
-  "google_note": "水 + 朝 (朝 = 十 + 日 + 十 + 月).",
-  "cjkvi_ids": "⿰氵朝",
-  "cjkvi_leaves": [
-   "十",
-   "日",
-   "月",
-   "氵"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk154",
-  "char": "活",
-  "keyword": "lively",
-  "our_parts": [
-   "ノ",
-   "古",
-   "水",
-   "舌"
-  ],
-  "google_parts": [
-   "水",
-   "舌"
-  ],
-  "google_primitive_names": {
-   "水": "water",
-   "舌": "tongue",
-   "千": "thousand",
-   "口": "mouth"
-  },
-  "google_confidence": "high",
-  "google_note": "Google: water + tongue (舌 = 千 + 口). Current parts use ノ+古 instead of 千.",
-  "cjkvi_ids": "⿰氵舌",
-  "cjkvi_leaves": [
-   "丿",
-   "十",
-   "口",
-   "氵"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk164",
-  "char": "埼",
-  "keyword": "cape",
-  "our_parts": [
-   "口",
-   "大",
-   "土",
-   "｜",
-   "一"
-  ],
-  "google_parts": [
-   "土",
-   "奇"
-  ],
-  "google_primitive_names": {
-   "土": "soil",
-   "奇": "strange",
-   "大": "large/St. Bernard",
-   "可": "can",
-   "口": "mouth",
-   "丁": "nail/spike"
-  },
-  "google_confidence": "high",
-  "google_note": "土 + 奇 (奇 = 大 + 可 [口+丁]).",
-  "cjkvi_ids": "⿰土奇",
-  "cjkvi_leaves": [
-   "一",
-   "亅",
-   "人",
-   "十",
-   "口"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk165",
-  "char": "垣",
-  "keyword": "hedge",
-  "our_parts": [
-   "一",
-   "土",
-   "日"
-  ],
-  "google_parts": [
-   "土",
-   "亘"
-  ],
-  "google_primitive_names": {
-   "土": "soil/ground",
-   "亘": "span",
-   "一": "ceiling/floor",
-   "日": "sun/daybreak"
-  },
-  "google_confidence": "high",
-  "google_note": "土 + 亘 (亘 = 一 + 日/旦 + 一).",
-  "cjkvi_ids": "⿰土亘",
-  "cjkvi_leaves": [
-   "一",
-   "十",
-   "日"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk166",
-  "char": "填",
-  "keyword": "fill in",
-  "our_parts": [
-   "十",
-   "土",
-   "ハ",
-   "目"
-  ],
-  "google_parts": [
-   "土",
-   "真"
-  ],
-  "google_primitive_names": {
-   "土": "soil",
-   "真": "true/truth",
-   "十": "ten/needle",
-   "具": "tool"
-  },
-  "google_confidence": "high",
-  "google_note": "土 + 真 (真 = 十 + 具). Google says 具 not 目+ハ; but breakdown reduces to 真.",
-  "cjkvi_ids": "⿰土真",
-  "cjkvi_leaves": [
-   "一",
-   "且",
-   "八",
-   "十"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk168",
-  "char": "封",
-  "keyword": "seal",
-  "our_parts": [
-   "寸",
-   "土"
-  ],
-  "google_parts": [
-   "圭",
-   "寸"
-  ],
-  "google_primitive_names": {
-   "圭": "ivy/squared jewel",
-   "寸": "glue/inch",
-   "土": "soil"
-  },
-  "google_confidence": "high",
-  "google_note": "圭 (= 土 + 土) + 寸. Google calls 圭 'ivy' here.",
-  "cjkvi_ids": "⿰圭寸",
-  "cjkvi_leaves": [
-   "一",
-   "十",
-   "寸"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk169",
-  "char": "涯",
-  "keyword": "horizon",
-  "our_parts": [
-   "水",
-   "土",
-   "厂"
-  ],
-  "google_parts": [
-   "水",
-   "厂",
-   "圭"
-  ],
-  "google_primitive_names": {
-   "水": "water",
-   "厂": "cliff",
-   "圭": "ivy",
-   "土": "soil"
-  },
-  "google_confidence": "high",
-  "google_note": "水 + 厂 + 圭 (圭 = 土+土). Current parts: 水,土,厂 (single 土).",
-  "cjkvi_ids": "⿰氵厓",
-  "cjkvi_leaves": [
-   "一",
-   "十",
-   "厂",
-   "氵"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
   "id": "rtk172",
   "char": "均",
   "keyword": "level",
@@ -690,106 +392,14 @@
    "勹",
    "十"
   ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk176",
-  "char": "淡",
-  "keyword": "thin",
-  "our_parts": [
-   "火",
-   "水"
+  "status": "custom",
+  "decision": [
+   "土",
+   "勹",
+   "二"
   ],
-  "google_parts": [
-   "水",
-   "炎"
-  ],
-  "google_primitive_names": {
-   "水": "water",
-   "炎": "inflammation",
-   "火": "fire"
-  },
-  "google_confidence": "high",
-  "google_note": "水 + 炎 (炎 = 火 + 火). Current parts: 火,水 (single 火).",
-  "cjkvi_ids": "⿰氵炎",
-  "cjkvi_leaves": [
-   "人",
-   "八",
-   "氵"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk181",
-  "char": "点",
-  "keyword": "spot",
-  "our_parts": [
-   "占",
-   "杰"
-  ],
-  "google_parts": [
-   "占",
-   "灬"
-  ],
-  "google_primitive_names": {
-   "占": "fortune-telling",
-   "ト": "fortune-telling",
-   "口": "mouth/bound up",
-   "灬": "oven-fire"
-  },
-  "google_confidence": "high",
-  "google_note": "Google: ト + 口 + 灬 = 占 + 灬. Current parts use 杰 which is a mis-encoding of 灬 base.",
-  "cjkvi_ids": "⿱占灬",
-  "cjkvi_leaves": [
-   "⺊",
-   "口",
-   "灬"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk182",
-  "char": "照",
-  "keyword": "illuminate",
-  "our_parts": [
-   "昭",
-   "杰"
-  ],
-  "google_parts": [
-   "昭",
-   "灬"
-  ],
-  "google_primitive_names": {
-   "昭": "shining",
-   "日": "sun",
-   "刀": "sword",
-   "口": "mouth",
-   "灬": "oven-fire",
-   "召": "seduce"
-  },
-  "google_confidence": "high",
-  "google_note": "昭 (= 日 + 召[刀+口]) + 灬.",
-  "cjkvi_ids": "⿱昭灬",
-  "cjkvi_leaves": [
-   "丿",
-   "口",
-   "日",
-   "灬",
-   "𠃌"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-05"
  },
  {
   "id": "rtk183",
@@ -817,103 +427,14 @@
    "田",
    "𠂊"
   ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk186",
-  "char": "黒",
-  "keyword": "black",
-  "our_parts": [
-   "里",
-   "杰"
-  ],
-  "google_parts": [
-   "里",
+  "status": "custom",
+  "decision": [
+   "𠂊",
+   "田",
    "灬"
   ],
-  "google_primitive_names": {
-   "里": "computer",
-   "田": "rice field/brain",
-   "土": "soil",
-   "灬": "hearth-fire"
-  },
-  "google_confidence": "high",
-  "google_note": "里 (= 田 + 土) + 灬. Current parts use 杰.",
-  "cjkvi_ids": "⿱里灬",
-  "cjkvi_leaves": [
-   "一",
-   "灬",
-   "甲"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk187",
-  "char": "墨",
-  "keyword": "black ink",
-  "our_parts": [
-   "土",
-   "黒"
-  ],
-  "google_parts": [
-   "里",
-   "土"
-  ],
-  "google_primitive_names": {
-   "里": "village/computer",
-   "田": "rice field",
-   "土": "soil/ground"
-  },
-  "google_confidence": "high",
-  "google_note": "Google: 里 (= 田 + 土) over 土. Current parts: 土, 黒 — Google says the top is 里 not 黒.",
-  "cjkvi_ids": "⿱黑土",
-  "cjkvi_leaves": [
-   "⑧",
-   "一",
-   "十",
-   "灬"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk195",
-  "char": "向",
-  "keyword": "yonder",
-  "our_parts": [
-   "口",
-   "冂"
-  ],
-  "google_parts": [
-   "丿",
-   "冂",
-   "口"
-  ],
-  "google_primitive_names": {
-   "丿": "drop",
-   "冂": "helmet/hood",
-   "口": "mouth"
-  },
-  "google_confidence": "high",
-  "google_note": "Google: 丿 + 冂 + 口. Current parts: 口, 冂 (missing 丿).",
-  "cjkvi_ids": "⿵⿱丿冂口",
-  "cjkvi_leaves": [
-   "丿",
-   "冂",
-   "口"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-05"
  },
  {
   "id": "rtk196",
@@ -941,10 +462,10 @@
    "冂",
    "口"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-05"
  },
  {
   "id": "rtk200",
@@ -974,10 +495,10 @@
    "宀",
    "日"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-05"
  },
  {
   "id": "rtk203",
@@ -1005,10 +526,10 @@
    "宀",
    "日"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-05"
  },
  {
   "id": "rtk205",
@@ -1637,7 +1158,7 @@
   "our_parts": [
    "犬",
    "夕",
-   "杰"
+   "灬"
   ],
   "google_parts": [
    "月",
@@ -2518,37 +2039,6 @@
   "reviewed_at": null
  },
  {
-  "id": "rtk310",
-  "char": "煎",
-  "keyword": "broil",
-  "our_parts": [
-   "前",
-   "杰"
-  ],
-  "google_parts": [
-   "前",
-   "灬"
-  ],
-  "google_primitive_names": {
-   "前": "in front",
-   "灬": "oven-fire"
-  },
-  "google_confidence": "high",
-  "google_note": "前 (in front) + 灬 (oven-fire). Our data uses 杰 for the fire bottom.",
-  "cjkvi_ids": "⿱前灬",
-  "cjkvi_leaves": [
-   "一",
-   "丷",
-   "刂",
-   "月",
-   "灬"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
   "id": "rtk316",
   "char": "額",
   "keyword": "forehead",
@@ -2798,7 +2288,7 @@
    "丶",
    "九",
    "享",
-   "杰"
+   "灬"
   ],
   "google_parts": [
    "享",
@@ -5516,34 +5006,6 @@
    "丨",
    "丷",
    "目"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk599",
-  "char": "焦",
-  "keyword": "char",
-  "our_parts": [
-   "杰",
-   "隹"
-  ],
-  "google_parts": [
-   "隹",
-   "灬"
-  ],
-  "google_primitive_names": {
-   "隹": "turkey",
-   "灬": "oven-fire/hearth-fire"
-  },
-  "google_confidence": "high",
-  "google_note": "Current_parts uses 杰 (which is itself 木+灬, a different character) instead of the plain 灬 (four-dot fire) the text describes - possible discrepancy, though 杰 does visually contain 灬.",
-  "cjkvi_ids": "⿱隹灬",
-  "cjkvi_leaves": [
-   "灬",
-   "隹"
   ],
   "status": "pending",
   "decision": null,
@@ -8592,7 +8054,7 @@
   "char": "烈",
   "keyword": "ardent",
   "our_parts": [
-   "杰",
+   "灬",
    "歹"
   ],
   "google_parts": [
@@ -13873,7 +13335,7 @@
   "keyword": "commoner",
   "our_parts": [
    "广",
-   "杰"
+   "灬"
   ],
   "google_parts": [
    "广",
@@ -15051,37 +14513,6 @@
   "reviewed_at": null
  },
  {
-  "id": "rtk1346",
-  "char": "煮",
-  "keyword": "boil",
-  "our_parts": [
-   "者",
-   "杰"
-  ],
-  "google_parts": [
-   "者",
-   "灬"
-  ],
-  "google_primitive_names": {
-   "者": "someone",
-   "灬": "hearth/cooking fire",
-   "耂": "old man",
-   "日": "sun"
-  },
-  "google_confidence": "high",
-  "google_note": "者 (someone; = old man 耂 + sun 日) over 灬 hearth/oven-fire.",
-  "cjkvi_ids": "⿱者灬",
-  "cjkvi_leaves": [
-   "日",
-   "灬",
-   "耂"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
   "id": "rtk1347",
   "char": "著",
   "keyword": "renowned",
@@ -15843,41 +15274,6 @@
    "十",
    "宀",
    "氵"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk1423",
-  "char": "窯",
-  "keyword": "kiln",
-  "our_parts": [
-   "穴",
-   "羊",
-   "杰"
-  ],
-  "google_parts": [
-   "穴",
-   "羊",
-   "灬"
-  ],
-  "google_primitive_names": {
-   "穴": "hole/cave",
-   "羊": "sheep",
-   "灬": "oven-fire"
-  },
-  "google_confidence": "high",
-  "google_note": "Hole 穴 top; bottom 羔 = sheep 羊 over oven-fire 灬.",
-  "cjkvi_ids": "⿱穴羔",
-  "cjkvi_leaves": [
-   "一",
-   "丷",
-   "八",
-   "十",
-   "宀",
-   "灬"
   ],
   "status": "pending",
   "decision": null,
@@ -18503,7 +17899,7 @@
    "土",
    "丸",
    "儿",
-   "杰"
+   "灬"
   ],
   "google_parts": [
    "土",
@@ -21897,7 +21293,7 @@
    "｜",
    "ノ",
    "一",
-   "杰"
+   "灬"
   ],
   "google_parts": [
    "𠂉",
@@ -23348,7 +22744,7 @@
   "keyword": "steam",
   "our_parts": [
    "丞",
-   "杰",
+   "灬",
    "艾"
   ],
   "google_parts": [
@@ -23925,7 +23321,7 @@
   "char": "鳥",
   "keyword": "bird",
   "our_parts": [
-   "杰"
+   "灬"
   ],
   "google_parts": [
    "白",
@@ -23952,42 +23348,12 @@
   "reviewed_at": null
  },
  {
-  "id": "rtk2092",
-  "char": "鳴",
-  "keyword": "chirp",
-  "our_parts": [
-   "口",
-   "鳥",
-   "杰"
-  ],
-  "google_parts": [
-   "口",
-   "鳥"
-  ],
-  "google_primitive_names": {
-   "口": "mouth",
-   "鳥": "bird"
-  },
-  "google_confidence": "high",
-  "google_note": "",
-  "cjkvi_ids": "⿰口鳥",
-  "cjkvi_leaves": [
-   "⑦",
-   "口",
-   "灬"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
   "id": "rtk2093",
   "char": "鶴",
   "keyword": "crane",
   "our_parts": [
    "鳥",
-   "杰",
+   "灬",
    "隹",
    "宀",
    "冖"
@@ -24024,7 +23390,7 @@
    "丶",
    "口",
    "一",
-   "杰"
+   "灬"
   ],
   "google_parts": [
    "鳥",
@@ -24052,7 +23418,7 @@
   "keyword": "vine",
   "our_parts": [
    "鳥",
-   "杰",
+   "灬",
    "艾"
   ],
   "google_parts": [
@@ -24078,36 +23444,6 @@
   "reviewed_at": null
  },
  {
-  "id": "rtk2096",
-  "char": "鳩",
-  "keyword": "pigeon",
-  "our_parts": [
-   "九",
-   "鳥",
-   "杰"
-  ],
-  "google_parts": [
-   "九",
-   "鳥"
-  ],
-  "google_primitive_names": {
-   "九": "baseball / baseball team",
-   "鳥": "bird"
-  },
-  "google_confidence": "high",
-  "google_note": "",
-  "cjkvi_ids": "⿰九鳥",
-  "cjkvi_leaves": [
-   "⑦",
-   "九",
-   "灬"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
   "id": "rtk2097",
   "char": "鶏",
   "keyword": "chicken",
@@ -24117,7 +23453,7 @@
    "土",
    "大",
    "鳥",
-   "杰",
+   "灬",
    "二"
   ],
   "google_parts": [
@@ -24903,7 +24239,7 @@
   "char": "馬",
   "keyword": "horse",
   "our_parts": [
-   "杰"
+   "灬"
   ],
   "google_parts": [
    "𠂉",
@@ -24928,37 +24264,6 @@
   "reviewed_at": null
  },
  {
-  "id": "rtk2133",
-  "char": "駒",
-  "keyword": "pony",
-  "our_parts": [
-   "句",
-   "馬",
-   "杰"
-  ],
-  "google_parts": [
-   "馬",
-   "句"
-  ],
-  "google_primitive_names": {
-   "馬": "horse",
-   "句": "phrase"
-  },
-  "google_confidence": "low",
-  "google_note": "text truncated ('Show more'); only says left primitive + right primitive. Right side is 句. Our data: 口,馬,勹.",
-  "cjkvi_ids": "⿰馬句",
-  "cjkvi_leaves": [
-   "⑥",
-   "勹",
-   "口",
-   "灬"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
   "id": "rtk2134",
   "char": "験",
   "keyword": "verification",
@@ -24967,7 +24272,7 @@
    "人",
    "馬",
    "个",
-   "杰"
+   "灬"
   ],
   "google_parts": [
    "馬",
@@ -25002,7 +24307,7 @@
    "馬",
    "亅",
    "一",
-   "杰"
+   "灬"
   ],
   "google_parts": [
    "馬",
@@ -25029,44 +24334,13 @@
   "reviewed_at": null
  },
  {
-  "id": "rtk2137",
-  "char": "駆",
-  "keyword": "drive",
-  "our_parts": [
-   "馬",
-   "区",
-   "杰"
-  ],
-  "google_parts": [
-   "馬",
-   "区"
-  ],
-  "google_primitive_names": {
-   "馬": "horse",
-   "区": "ward"
-  },
-  "google_confidence": "high",
-  "google_note": "Left horse (馬) + right ward (区).",
-  "cjkvi_ids": "⿰馬区",
-  "cjkvi_leaves": [
-   "⑥",
-   "㐅",
-   "匚",
-   "灬"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
   "id": "rtk2138",
   "char": "駅",
   "keyword": "station",
   "our_parts": [
    "馬",
    "尸",
-   "杰",
+   "灬",
    "丶"
   ],
   "google_parts": [
@@ -25098,7 +24372,7 @@
    "虫",
    "馬",
    "又",
-   "杰"
+   "灬"
   ],
   "google_parts": [
    "馬",
@@ -25125,101 +24399,6 @@
   "reviewed_at": null
  },
  {
-  "id": "rtk2140",
-  "char": "駄",
-  "keyword": "burdensome",
-  "our_parts": [
-   "太",
-   "馬",
-   "杰"
-  ],
-  "google_parts": [
-   "馬",
-   "太"
-  ],
-  "google_primitive_names": {
-   "馬": "horse",
-   "太": "plump",
-   "大": "large",
-   "丶": "drop"
-  },
-  "google_confidence": "high",
-  "google_note": "Left horse (馬) + right 太 (plump) = large (大) + drop (丶).",
-  "cjkvi_ids": "⿰馬太",
-  "cjkvi_leaves": [
-   "⑥",
-   "一",
-   "丶",
-   "人",
-   "灬"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk2142",
-  "char": "篤",
-  "keyword": "fervent",
-  "our_parts": [
-   "竹",
-   "杰",
-   "馬"
-  ],
-  "google_parts": [
-   "竹",
-   "馬"
-  ],
-  "google_primitive_names": {
-   "竹": "bamboo",
-   "馬": "horse"
-  },
-  "google_confidence": "high",
-  "google_note": "Top bamboo (竹) + bottom horse (馬).",
-  "cjkvi_ids": "⿱竹馬",
-  "cjkvi_leaves": [
-   "⑥",
-   "亅",
-   "灬",
-   "𠂊"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk2143",
-  "char": "罵",
-  "keyword": "abuse",
-  "our_parts": [
-   "罒",
-   "馬",
-   "杰"
-  ],
-  "google_parts": [
-   "罒",
-   "馬"
-  ],
-  "google_primitive_names": {
-   "罒": "net",
-   "馬": "horse"
-  },
-  "google_confidence": "high",
-  "google_note": "Top 网/罒 (net; sometimes eye) + bottom horse (馬).",
-  "cjkvi_ids": "⿱罒馬",
-  "cjkvi_leaves": [
-   "⑥",
-   "灬",
-   "罒"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
   "id": "rtk2144",
   "char": "騰",
   "keyword": "leaping up",
@@ -25231,7 +24410,7 @@
    "人",
    "大",
    "二",
-   "杰"
+   "灬"
   ],
   "google_parts": [
    "月",
@@ -25443,41 +24622,6 @@
    "夂",
    "广",
    "心"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk2159",
-  "char": "熊",
-  "keyword": "bear",
-  "our_parts": [
-   "能",
-   "杰"
-  ],
-  "google_parts": [
-   "能",
-   "灬"
-  ],
-  "google_primitive_names": {
-   "能": "ability",
-   "灬": "cooking hearth/flames",
-   "厶": "elbow",
-   "月": "flesh",
-   "匕": "spoon"
-  },
-  "google_confidence": "high",
-  "google_note": "Top 能 (ability) + bottom 灬 (cooking hearth / flames).",
-  "cjkvi_ids": "⿱能灬",
-  "cjkvi_leaves": [
-   "⺆",
-   "丿",
-   "乚",
-   "冫",
-   "厶",
-   "灬"
   ],
   "status": "pending",
   "decision": null,
@@ -26465,37 +25609,6 @@
   "reviewed_at": null
  },
  {
-  "id": "rtk2268",
-  "char": "鳳",
-  "keyword": "male mythical bird",
-  "our_parts": [
-   "鳥",
-   "几",
-   "杰"
-  ],
-  "google_parts": [
-   "几",
-   "鳥"
-  ],
-  "google_primitive_names": {
-   "几": "wind",
-   "鳥": "bird"
-  },
-  "google_confidence": "high",
-  "google_note": "Outer 几 (wind) + inner 鳥 (bird). Text keyword 'male phoenix' vs our 'phoenix' - same char.",
-  "cjkvi_ids": "⿵几𩾏",
-  "cjkvi_leaves": [
-   "⑦",
-   "一",
-   "几",
-   "灬"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
   "id": "rtk2270",
   "char": "劉",
   "keyword": "weapon of war",
@@ -27051,41 +26164,6 @@
    "⺊",
    "口",
    "巾"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk2344",
-  "char": "鷹",
-  "keyword": "hawk",
-  "our_parts": [
-   "鳥",
-   "广",
-   "杰",
-   "隹"
-  ],
-  "google_parts": [
-   "广",
-   "隹",
-   "鳥"
-  ],
-  "google_primitive_names": {
-   "广": "cave",
-   "隹": "turkey",
-   "鳥": "bird"
-  },
-  "google_confidence": "high",
-  "google_note": "Google: 广 (cave) + 隹 (turkey) + 鳥 (bird). Does not mention 杰/灬 separately.",
-  "cjkvi_ids": "⿸䧹鳥",
-  "cjkvi_leaves": [
-   "⑦",
-   "亻",
-   "广",
-   "灬",
-   "隹"
   ],
   "status": "pending",
   "decision": null,
@@ -28519,7 +27597,7 @@
   "char": "蕉",
   "keyword": "banana",
   "our_parts": [
-   "杰",
+   "灬",
    "艾",
    "隹"
   ],
@@ -29468,40 +28546,6 @@
    "口",
    "目",
    "阝"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk2506",
-  "char": "憑",
-  "keyword": "depend",
-  "our_parts": [
-   "心",
-   "馬",
-   "冫",
-   "杰"
-  ],
-  "google_parts": [
-   "冫",
-   "馬",
-   "心"
-  ],
-  "google_primitive_names": {
-   "冫": "ice/celery",
-   "馬": "horse",
-   "心": "heart/valentine"
-  },
-  "google_confidence": "high",
-  "google_note": "Google: 冫 (ice) top-left + 馬 (horse) top-right + 心 (heart) bottom.",
-  "cjkvi_ids": "⿱馮心",
-  "cjkvi_leaves": [
-   "⑥",
-   "冫",
-   "心",
-   "灬"
   ],
   "status": "pending",
   "decision": null,
@@ -33486,7 +32530,7 @@
    "口",
    "馬",
    "力",
-   "杰"
+   "灬"
   ],
   "google_parts": [
    "加",
@@ -33520,7 +32564,7 @@
    "尚",
    "田",
    "馬",
-   "杰"
+   "灬"
   ],
   "google_parts": [
    "馬",
@@ -33546,43 +32590,13 @@
   "reviewed_at": null
  },
  {
-  "id": "rtk2822",
-  "char": "馴",
-  "keyword": "get used to",
-  "our_parts": [
-   "川",
-   "馬",
-   "杰"
-  ],
-  "google_parts": [
-   "馬",
-   "川"
-  ],
-  "google_primitive_names": {
-   "馬": "horse",
-   "川": "stream/river"
-  },
-  "google_confidence": "medium",
-  "google_note": "text gives the kanji's keyword as 'domesticated' rather than app's 'tame' - same meaning, just a wording difference; decomposition itself is clear",
-  "cjkvi_ids": "⿰馬川",
-  "cjkvi_leaves": [
-   "⑥",
-   "川",
-   "灬"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
   "id": "rtk2824",
   "char": "駈",
   "keyword": "run",
   "our_parts": [
    "斤",
    "馬",
-   "杰",
+   "灬",
    "一"
   ],
   "google_parts": [
@@ -33884,7 +32898,7 @@
   "our_parts": [
    "月",
    "鳥",
-   "杰"
+   "灬"
   ],
   "google_parts": [
    "朋",
@@ -33915,7 +32929,7 @@
    "貝",
    "女",
    "鳥",
-   "杰"
+   "灬"
   ],
   "google_parts": [
    "嬰",
@@ -33951,7 +32965,7 @@
    "鳥",
    "弋",
    "戈",
-   "杰"
+   "灬"
   ],
   "google_parts": [
    "武",
@@ -33970,38 +32984,6 @@
    "丶",
    "乚",
    "止",
-   "灬"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk2851",
-  "char": "鳶",
-  "keyword": "black kite",
-  "our_parts": [
-   "鳥",
-   "弋",
-   "杰"
-  ],
-  "google_parts": [
-   "弋",
-   "鳥"
-  ],
-  "google_primitive_names": {
-   "弋": "shoot",
-   "鳥": "bird"
-  },
-  "google_confidence": "high",
-  "google_note": "text gives keyword 'kite falcon'/'black kite'",
-  "cjkvi_ids": "⿱弋鳥",
-  "cjkvi_leaves": [
-   "⑦",
-   "一",
-   "丶",
-   "乚",
    "灬"
   ],
   "status": "pending",
@@ -34507,7 +33489,7 @@
    "尚",
    "鳥",
    "冖",
-   "杰"
+   "灬"
   ],
   "google_parts": [
    "⺍",
@@ -35305,36 +34287,6 @@
    "人",
    "十",
    "月"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk2982",
-  "char": "嶋",
-  "keyword": "island",
-  "our_parts": [
-   "山",
-   "鳥",
-   "杰"
-  ],
-  "google_parts": [
-   "山",
-   "鳥"
-  ],
-  "google_primitive_names": {
-   "山": "mountain",
-   "鳥": "bird"
-  },
-  "google_confidence": "high",
-  "google_note": "variant of 島, mountain and bird side-by-side.",
-  "cjkvi_ids": "⿰山鳥",
-  "cjkvi_leaves": [
-   "⑦",
-   "山",
-   "灬"
   ],
   "status": "pending",
   "decision": null,
