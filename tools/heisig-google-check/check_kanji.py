@@ -45,8 +45,11 @@ way, a future session can read it and do the actual comparison against data.txt.
 Output:
     results.jsonl   -- one JSON object per kanji checked: id, character, keyword,
                        current_parts (what the DB currently has), the extracted AI
-                       Overview text (or null if none was found), and a path to a
-                       saved screenshot for manual review either way.
+                       Overview text (or null if none was found), expand_clicks
+                       (how many "Show more" clicks landed), maybe_truncated (true
+                       if a "Show more" control was still on the page after
+                       expanding -- text is probably still a preview, re-run it),
+                       and a path to a saved screenshot for manual review either way.
     screenshots/    -- one PNG per kanji checked, full page, so nothing is lost even
                        if the text extraction below picks the wrong element (Google
                        changes its markup periodically -- if extracted_text keeps
@@ -78,12 +81,19 @@ QUERY_TEMPLATE = "heisig kanji {char} primitives meaning breakdown"
 # Google's AI Overview markup changes periodically and isn't a stable public API --
 # these are best-guess CSS selectors as of 2026-08. If extracted_text comes back
 # empty/wrong for everything, open a screenshot, right-click the AI Overview box in
-# a real browser -> Inspect, and add/update a selector here.
+# a real browser -> Inspect, and add/update a selector here. Ordered most- to
+# least- specific; the last few are broad structural guesses.
 AI_OVERVIEW_SELECTORS = [
     "[data-attrid='wa:/description']",
     "div.LT6Xte",  # a historically-used AI Overview container class; likely stale
     "div[data-md]",
     "#Odp5De",
+    "#m-x-content",              # AI Overview mount point seen 2026-09
+    "div[jsname='I4bIT']",
+    "[aria-label='AI Overview']",
+    "[aria-label*='AI Overview']",
+    "div.WaaZC",                 # inner text block of the overview
+    "c-wiz[data-node-index] div[data-content-feature]",
 ]
 
 MIN_DELAY_SECONDS = 20
@@ -119,18 +129,124 @@ def looks_like_captcha(page) -> bool:
     return "unusual traffic" in text or "recaptcha" in text or "detected unusual traffic" in text
 
 
-def expand_ai_overview(page):
+# Exact (trimmed, lowercased) label / aria-label of the AI Overview expand control.
+# Google varies and localizes this; add whatever your browser's locale shows if
+# none match (open a screenshot, Inspect the button). Matched as a whole string
+# after trimming -- NOT a substring, so "more results" / "learn more" don't match.
+SHOW_MORE_LABELS = {
+    "show more", "show all", "see more", "show more ai overview",
+    "показать больше", "ещё", "еще", "развернуть",  # ru
+}
+# CSS roots the expand button is searched under -- keeps the scan inside the AI
+# Overview and off the rest of the results page. Union of the container selectors
+# in AI_OVERVIEW_SELECTORS plus a couple of expandable-wrapper guesses.
+_OVERVIEW_ROOTS = (
+    "[aria-label*='AI Overview']", "#m-x-content", "div[jsname='I4bIT']",
+    "#Odp5De", "div[data-md]", "g-expandable-container", "div.LT6Xte",
+)
+
+
+def _find_show_more(page):
+    """Return a clickable 'Show more' handle inside the AI Overview, or None.
+    Google renders it inconsistently (real <button>, <div role="button">, <a>,
+    label on the element or a child <span>), so scan candidate controls that sit
+    under an overview root and match an exact expand label."""
+    for root in _OVERVIEW_ROOTS:
+        try:
+            controls = page.locator(
+                f"{root} :is(button, [role='button'], a[jsaction])"
+            )
+        except Exception:
+            continue
+        try:
+            n = min(controls.count(), 25)
+        except Exception:
+            continue
+        for i in range(n):
+            el = controls.nth(i)
+            try:
+                if not el.is_visible(timeout=200):
+                    continue
+                label = (el.get_attribute("aria-label") or el.inner_text() or "").strip().lower()
+            except Exception:
+                continue
+            if label in SHOW_MORE_LABELS:
+                return el
+    # Last resort: role-based lookup anywhere on the page, exact name only.
+    for name in ("Show more", "Show all"):
+        try:
+            loc = page.get_by_role("button", name=name, exact=True).first
+            if loc.count() and loc.is_visible(timeout=400):
+                return loc
+        except Exception:
+            pass
+    return None
+
+
+def _overview_text_len(page) -> int:
+    for selector in AI_OVERVIEW_SELECTORS:
+        try:
+            el = page.query_selector(selector)
+            if el:
+                t = (el.inner_text() or "").strip()
+                if t:
+                    return len(t)
+        except Exception:
+            continue
+    return 0
+
+
+def expand_ai_overview(page) -> int:
     """AI Overview often truncates behind a 'Show more' toggle -- click it so both the
     extracted text and the screenshot capture the full answer, not just the preview.
-    Best-effort: some overviews have nothing to expand, so a missing/unclickable
-    button is not an error."""
-    try:
-        button = page.get_by_role("button", name="Show more").first
-        if button.is_visible(timeout=2000):
-            button.click()
-            page.wait_for_timeout(800)
-    except Exception:
-        pass
+    Returns the number of expand clicks that landed.
+
+    The overview streams in after the page settles, so this polls for the expand
+    control for a few seconds, scrolls it into view, clicks it, and repeats until
+    the extracted text stops growing (Google sometimes chains 'Show more' ->
+    another 'Show more'). Best-effort: an overview with nothing to expand, or no
+    overview at all, is not an error."""
+    deadline = time.monotonic() + 12  # overview can take several seconds to render
+    last_len = -1
+    clicks = 0
+    stable_no_button = 0
+    while time.monotonic() < deadline and clicks < 4:
+        btn = _find_show_more(page)
+        if btn is None:
+            cur = _overview_text_len(page)
+            # If we already have overview text and it stopped growing with no button,
+            # we're done. If we have nothing yet, keep waiting -- it may still be
+            # streaming in (up to the deadline).
+            if cur > 0 and cur == last_len:
+                stable_no_button += 1
+                if stable_no_button >= 2:
+                    return clicks
+            else:
+                stable_no_button = 0
+            last_len = cur
+            page.wait_for_timeout(700)
+            continue
+        stable_no_button = 0
+        try:
+            btn.scroll_into_view_if_needed(timeout=1500)
+            page.wait_for_timeout(200)
+            btn.click(timeout=2000)
+            clicks += 1
+            page.wait_for_timeout(1000)  # let the expanded content render
+        except Exception:
+            page.wait_for_timeout(500)
+        new_len = _overview_text_len(page)
+        if new_len <= last_len and clicks > 0:
+            return clicks
+        last_len = new_len
+    return clicks
+
+
+def _still_truncated(page) -> bool:
+    """After expand_ai_overview, is a 'Show more'-type control still on the page?
+    If so the extracted text is probably still a preview -- flag it so a re-run
+    can target it later."""
+    return _find_show_more(page) is not None
 
 
 def extract_ai_overview(page) -> str | None:
@@ -149,6 +265,14 @@ def extract_ai_overview(page) -> str | None:
 def check_one(page, entry: dict) -> dict:
     query = QUERY_TEMPLATE.format(char=entry["character"])
     page.goto(f"https://www.google.com/search?q={query}", timeout=30000)
+    # The AI Overview is generated live and lands a few seconds after the rest of
+    # the page. Wait for network to go quiet, then a fixed beat, before looking
+    # for it -- expand_ai_overview() polls past this too, but starting later means
+    # fewer wasted poll cycles on a not-yet-rendered overview.
+    try:
+        page.wait_for_load_state("networkidle", timeout=8000)
+    except Exception:
+        pass
     page.wait_for_timeout(2500)
 
     if looks_like_captcha(page):
@@ -157,7 +281,8 @@ def check_one(page, entry: dict) -> dict:
         input()
         page.wait_for_timeout(1500)
 
-    expand_ai_overview(page)
+    clicks = expand_ai_overview(page)
+    still_truncated = _still_truncated(page)
 
     screenshot_path = SCREENSHOTS_DIR / f"{entry['id']}.png"
     page.screenshot(path=str(screenshot_path), full_page=True)
@@ -171,6 +296,8 @@ def check_one(page, entry: dict) -> dict:
         "current_parts": entry["current_parts"],
         "query": query,
         "extracted_text": extracted,
+        "expand_clicks": clicks,          # how many 'Show more' clicks landed (0 = none needed/found)
+        "maybe_truncated": still_truncated,  # a 'Show more' control was still present after expanding
         "screenshot": str(screenshot_path.relative_to(HERE)),
         "checked_at": datetime.now(timezone.utc).isoformat(),
     }
@@ -268,7 +395,15 @@ def main():
                 append_result(record)
                 done.add(entry["id"])
                 save_progress(done)
-                found = "found AI overview" if record["extracted_text"] else "no overview extracted (check screenshot)"
+                if record["extracted_text"]:
+                    found = f"found AI overview ({len(record['extracted_text'])} chars"
+                    if record.get("expand_clicks"):
+                        found += f", {record['expand_clicks']}x show-more"
+                    if record.get("maybe_truncated"):
+                        found += ", STILL TRUNCATED"
+                    found += ")"
+                else:
+                    found = "no overview extracted (check screenshot)"
                 print(found)
 
                 if i < len(batch):
