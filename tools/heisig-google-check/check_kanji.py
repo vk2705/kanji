@@ -257,6 +257,10 @@ _EXPAND_AND_READ_JS = r"""
   let text = proseOf(root);
   const startM = text.search(/AI Overview/i);
   if (startM >= 0) text = text.slice(startM);
+  // strip the "AI Overview" / "AI Mode reply for <query>" header line(s)
+  text = text.replace(/^AI Overview\s*/i, "")
+             .replace(/^AI Mode reply for [^\n]*\n?/i, "")
+             .trim();
   const endM = text.search(/\n\s*(Web results|People also ask|Related searches|Related questions)\b/i);
   if (endM > 200) text = text.slice(0, endM).trim();
   text = text.replace(/\n?\s*Show (more|less)( AI Overview)?\s*$/i, "").trim();
@@ -301,7 +305,7 @@ def expand_and_read(page) -> dict:
             page.wait_for_timeout(400)
             continue
 
-        found = bool(r.get("found_root"))
+        found = bool(r.get("foundRoot"))
         generating = bool(r.get("generating"))
         cur_len = len(r.get("text") or "")
         best_len = len(best["text"] or "")
