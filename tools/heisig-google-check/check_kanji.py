@@ -316,7 +316,50 @@ def expand_and_read(page) -> dict:
     return best
 
 
-def check_one(page, entry: dict) -> dict:
+def dump_debug(page, entry: dict):
+    """Save everything about the current page so we can see why the AI Overview
+    isn't coming through: full HTML, visible text, and a list of every button /
+    role=button with its label. Written next to the script."""
+    stem = HERE / f"debug_{entry['id']}"
+    try:
+        (stem.with_suffix(".html")).write_text(page.content(), encoding="utf-8")
+    except Exception as e:
+        print(f"  (couldn't save HTML: {e})")
+    try:
+        body_text = page.evaluate("() => document.body.innerText")
+        (stem.with_suffix(".txt")).write_text(body_text, encoding="utf-8")
+    except Exception:
+        body_text = ""
+    try:
+        controls = page.evaluate("""() => {
+          const out = [];
+          for (const c of document.querySelectorAll("button, [role='button'], a[jsaction], summary")) {
+            const t = (c.getAttribute("aria-label") || c.innerText || "").replace(/\\s+/g," ").trim();
+            if (t) out.push(t.slice(0, 80));
+          }
+          return out;
+        }""")
+    except Exception:
+        controls = []
+    print(f"\n  === DEBUG {entry['id']} {entry['character']} ===")
+    print(f"  page title: {page.title()!r}")
+    print(f"  body text length: {len(body_text)}")
+    low = body_text.lower()
+    for probe in ("ai overview", "ai-powered overview", "sign in", "unusual traffic",
+                  "generative ai is experimental", "show more", "search labs"):
+        if probe in low:
+            i = low.index(probe)
+            print(f"  found {probe!r}: ...{body_text[max(0,i-40):i+80]!r}...")
+    print(f"  {len(controls)} clickable controls; labels containing 'overview'/'more'/'ai':")
+    for c in controls:
+        cl = c.lower()
+        if any(k in cl for k in ("overview", "more", "ai ", "generat", "show", "expand")):
+            print(f"    - {c!r}")
+    print(f"  full HTML -> {stem.with_suffix('.html').name}, text -> {stem.with_suffix('.txt').name}")
+    print(f"  === end debug ===\n")
+
+
+def check_one(page, entry: dict, debug: bool = False) -> dict:
     query = QUERY_TEMPLATE.format(char=entry["character"])
     page.goto(f"https://www.google.com/search?q={query}", timeout=30000)
     # No fixed sleep here -- expand_and_read() polls for the AI Overview itself
@@ -331,6 +374,10 @@ def check_one(page, entry: dict) -> dict:
         print(f"\n  !! CAPTCHA shown for {entry['id']} ({entry['character']}).")
         print("     Solve it in the browser window, then press Enter here to continue...")
         input()
+
+    if debug:
+        page.wait_for_timeout(3000)
+        dump_debug(page, entry)
 
     r = expand_and_read(page)
 
@@ -387,6 +434,13 @@ def main():
                               "IP is the surest way to get CAPTCHA-blocked. The script will pause for you "
                               "to solve a CAPTCHA if one appears, so this is recoverable, just slower when "
                               "it goes wrong.")
+    parser.add_argument("--debug", action="store_true",
+                         help="For each kanji, dump the full page HTML + visible text + a list of every "
+                              "clickable control (debug_<id>.html / .txt) and print what markers are on "
+                              "the page. Use this when the AI Overview isn't coming through -- it shows "
+                              "whether Google is serving one at all, asking for sign-in, showing a CAPTCHA, "
+                              "or just needs a control clicked that the script isn't finding. Also keeps "
+                              "the browser open at the end so you can look. Pair with --id or a 1-item list.")
     args = parser.parse_args()
 
     delay_min, delay_max = (0.0, 0.0) if args.no_delay else (args.delay[0], args.delay[1])
@@ -456,7 +510,7 @@ def main():
             for i, entry in enumerate(batch, 1):
                 print(f"[{i}/{len(batch)}] {entry['id']} {entry['character']} ({entry['keyword']})...", end=" ", flush=True)
                 try:
-                    record = check_one(page, entry)
+                    record = check_one(page, entry, debug=args.debug)
                 except Exception as exc:
                     print(f"FAILED: {exc}")
                     continue
@@ -483,6 +537,8 @@ def main():
             print(f"\nStopped early at [{i}/{len(batch)}]. Progress is saved -- "
                   f"just re-run the same command later to pick up where you left off.")
         finally:
+            if args.debug:
+                input("\n--debug: browser left open. Look at the page, then press Enter to close...")
             context.close()
 
     print(f"\nDone. Results appended to {RESULTS_PATH.name}. "

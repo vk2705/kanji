@@ -5,3 +5,5 @@ browser-profile/
 screenshots/
 results.jsonl
 progress.json
+debug_*.html
+debug_*.txt
