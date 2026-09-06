@@ -259,12 +259,12 @@ rtk257	荻	reed	257	yes
 rtk258	狩	hunt	258	yes
 rtk259	猫	cat	259	yes
 rtk260	牛	cow	260	no
-rtk261	特	special	261	no
+rtk261	特	special	261	yes
 rtk262	告	revelation	262	yes
 rtk263	先	before	263	no
 rtk264	洗	wash	264	yes
 rtk265	介	jammed in	265	no
-rtk266	界	world	266	no
+rtk266	界	world	266	yes
 rtk267	茶	tea	267	yes
 rtk268	脊	spinal column	268	no
 rtk269	合	fit	269	yes
@@ -280,7 +280,7 @@ rtk278	旺	effulgent	278	no
 rtk279	皇	emperor	279	no
 rtk280	呈	display	280	no
 rtk281	全	whole	281	no
-rtk282	栓	plug	282	no
+rtk282	栓	plug	282	yes
 rtk283	理	logic	283	no
 rtk284	主	lord	284	no
 rtk285	注	pour	285	yes
