@@ -7021,3 +7021,51 @@ access) — data-only change, needs `sync_system_data.py` + reseed.
 
 **Next session**: continue the worklist loop (`worklist_next.py -n 20`).
 Standing list unchanged otherwise (see day 1 entry above).
+
+## 2026-09-06: owner catch — 咅 (立+口) needed its own primitive, not two loose strokes
+
+Owner, verbatim, pushing back on a "mouth" search result showing `培`
+(cultivate): *"стоять +рот = это отдельный элемент"* — "stand+mouth
+= a separate element." Checked: `立,口` (raw, unregistered as a unit)
+was used identically across **6** kanji — `賠`/`培`/`剖`/`倍`/`陪`/`菩`
+— each flattening the same recurring shape instead of referencing it
+as one compound, exactly the pattern already fixed for `圭`/`真`/`亘`
+this week. `咅` itself isn't a numbered RTK frame (not its own taught
+kanji), so per the `prim-jawbone`/`prim-dollar-sign`/`prim-snare`
+precedent it needed a `prim-{slug}` id. First guess was a purely
+descriptive `prim-podium`; owner then asked directly *"咅 означает
+отказ. у нас точно нет такого примитива?"* ("咅 means refusal — are we
+sure we don't already have this primitive?") — checked (`aliases` and
+`kanji.character`/`keyword`, nothing under 咅 or any refusal/reject/
+decline synonym) and confirmed it was genuinely new, not a duplicate.
+Owner then supplied the real answer with a source: 咅's official
+Heisig keyword in the classic RTK vol. 1 English editions is
+**"Muzzle"** (some fan adaptations render it as "spit in refusal" —
+consistent with Google's own earlier note on this shape, "咅=spit").
+Renamed `prim-podium` → **`prim-muzzle`** before it ever shipped in a
+commit.
+
+While fixing this, render confirmed `剖`(divide) was *also* missing
+its whole `刂`(sword) side entirely — the exact same missing-component
+bug class as `則`/`副` from the prior worklist batch, just not yet
+reached by the sequential `-n 20` loop. `倍`/`菩` didn't disagree with
+Google's own check (their flattened form still "reads" the same to
+it), but got the same `prim-muzzle` treatment anyway since the goal is
+a correct registered primitive, not just Google-agreement.
+
+Verified: full rebuild (3000 kanji, 3008 overrides — one new primitive
+row); `test_regression_fixes.py` — 6 new pins — **1216 checks**, same
+4 expected hanzi-scope non-issues; pytest (56 passed);
+`audit_self_reference.py` clean; `audit_radicals.py` still 0/0 (new
+primitive properly defined, not orphaned); `review_queue.py` clean.
+4 of the 6 hosts were independently already flagged pending in
+`decomposition_worklist.json` (Google had spotted the same 咅 pattern
+and even named it) — recorded decisions for all 4 and rebuilt: 1047 →
+**1044 rows, 1027 pending**. Not deployed (no SSH/server access).
+
+**Lesson for future primitive-naming**: when adding a `prim-{slug}`
+for a shape with no RTK frame, check for a real Heisig-taught keyword
+(via the owner, RTK vol. 1 itself, or an AI-Overview note already on
+file) before defaulting to an invented descriptive name — a made-up
+name that turns out to have a real established one is worse than
+taking one extra turn to ask.

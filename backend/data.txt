@@ -761,9 +761,9 @@ rtk511:茨:briar:艾,次
 rtk512:資:assets:貝,次
 rtk513:姿:figure:次,女
 rtk514:諮:consult with:次,言,口
-rtk515:賠:compensation:貝,口,立
-rtk516:培:cultivate:口,土,立
-rtk517:剖:divide:口,立
+rtk515:賠:compensation:貝,咅
+rtk516:培:cultivate:土,咅
+rtk517:剖:divide:咅,刀
 rtk518:音:sound:日,立
 rtk519:暗:darkness:音,日
 rtk520:韻:rhyme:音,員
@@ -1313,7 +1313,7 @@ rtk1063:仁:humanity:亻,二
 rtk1064:侮:scorn:亻,母,毋
 rtk1065:使:use:亻,吏
 rtk1066:便:convenience:亻,更
-rtk1067:倍:double:亻,口,立
+rtk1067:倍:double:亻,咅
 rtk1068:優:tenderness:亻,憂
 rtk1069:伐:fell:亻,戈
 rtk1070:宿:inn:白,宀
@@ -1642,7 +1642,7 @@ rtk1392:際:occasion:ノ,示,癶,阝
 rtk1393:障:hinder:阝,章
 rtk1394:隙:crevice:小,日,阝
 rtk1395:随:follow:有,込,阝
-rtk1396:陪:obeisance:口,立,阝
+rtk1396:陪:obeisance:咅,阝
 rtk1397:陽:sunshine:一,日,阝,勿
 rtk1398:陳:exhibit:阝,東
 rtk1399:防:ward off:方,阝
@@ -3207,7 +3207,7 @@ rtk2959:吋:inch:口,寸
 rtk2960:呎:foot:口,尸,丶
 rtk2961:梵:sanskrit:木,丶,几
 rtk2962:薩:salvation:艾,阝,産
-rtk2963:菩:kind of grass:口,立,艾
+rtk2963:菩:kind of grass:咅,艾
 rtk2964:唖:mute:｜,一,口
 rtk2965:牟:pupil (eye):牛,厶
 rtk2966:迦:(used phonetically):口,込,力
@@ -3340,3 +3340,4 @@ prim-bushes:丰:bushes
 prim-meeting:亼:meeting
 prim-antlers:?:antlers
 prim-fishfinger:扁:fishfinger
+prim-muzzle:咅:muzzle

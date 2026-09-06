@@ -1456,6 +1456,28 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk102", "rtk510"}},
     "rtk514": {"character": "諮", "keyword": "consult with",
                 "expected_part_ids": {"rtk11", "rtk357", "rtk510"}},
+    # 2026-09-06 (owner catch, verbatim: "стоять +рот = это отдельный
+    # элемент" -- "stand+mouth = a separate element"): 賠/培/剖/倍/陪/菩
+    # all flattened 立+口 raw instead of referencing the recurring
+    # compound shape as one unit. Owner confirmed the official Heisig
+    # keyword for 咅 is "Muzzle" (RTK vol. 1, classic English editions) --
+    # registered as prim-muzzle. Like prim-jawbone/prim-dollar-sign/
+    # prim-snare, it has a real Heisig-taught name but no numbered RTK
+    # frame of its own (咅 isn't a standalone kanji).
+    # 剖 was additionally missing its whole 刂(sword) side entirely (same
+    # missing-component class as 則/副 from the prior worklist batch).
+    "rtk515": {"character": "賠", "keyword": "compensation",
+                "expected_part_ids": {"prim-muzzle", "rtk56"}},
+    "rtk516": {"character": "培", "keyword": "cultivate",
+                "expected_part_ids": {"prim-muzzle", "rtk161"}},
+    "rtk517": {"character": "剖", "keyword": "divide",
+                "expected_part_ids": {"prim-muzzle", "rtk87"}},
+    "rtk1067": {"character": "倍", "keyword": "double",
+                "expected_part_ids": {"kangxi9", "prim-muzzle"}},
+    "rtk1396": {"character": "陪", "keyword": "auxiliary",
+                "expected_part_ids": {"kangxi170", "prim-muzzle"}},
+    "rtk2963": {"character": "菩", "keyword": "bo tree",
+                "expected_part_ids": {"prim-mugwort", "prim-muzzle"}},
     "rtk537": {"character": "脱", "keyword": "undress",
                 "expected_part_ids": {"kangxi12", "rtk107", "rtk13"}},
     "rtk538": {"character": "説", "keyword": "explanation",

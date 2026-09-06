@@ -4282,106 +4282,6 @@
   "reviewed_at": null
  },
  {
-  "id": "rtk515",
-  "char": "賠",
-  "keyword": "compensation",
-  "our_parts": [
-   "貝",
-   "口",
-   "立"
-  ],
-  "google_parts": [
-   "貝",
-   "咅"
-  ],
-  "google_primitive_names": {
-   "貝": "shellfish",
-   "咅": "spit",
-   "立": "standing up/vase",
-   "口": "mouth"
-  },
-  "google_confidence": "high",
-  "google_note": "right side 咅 = 立 over 口 = spit",
-  "cjkvi_ids": "⿰貝咅",
-  "cjkvi_leaves": [
-   "一",
-   "丶",
-   "丷",
-   "八",
-   "口",
-   "目"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk516",
-  "char": "培",
-  "keyword": "cultivate",
-  "our_parts": [
-   "口",
-   "土",
-   "立"
-  ],
-  "google_parts": [
-   "土",
-   "咅"
-  ],
-  "google_primitive_names": {
-   "土": "soil",
-   "咅": "muzzle (composite of stand up/vase + mouth)"
-  },
-  "google_confidence": "medium",
-  "google_note": "Text gives both a compact reading (soil + muzzle/咅) and a strict stroke breakdown (soil + stand up/立 + mouth/口). Current_parts (口,土,立) matches the strict/flattened reading; recorded parts here follow the same strict flattened set since that matches current_parts and is explicitly given as the alternative in the text: parts kept as [土, 立, 口] to match current data - see note that 立+口 together are also called compound primitive 咅.",
-  "cjkvi_ids": "⿰土咅",
-  "cjkvi_leaves": [
-   "一",
-   "丶",
-   "丷",
-   "十",
-   "口"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk517",
-  "char": "剖",
-  "keyword": "divide",
-  "our_parts": [
-   "口",
-   "立"
-  ],
-  "google_parts": [
-   "咅",
-   "刂"
-  ],
-  "google_primitive_names": {
-   "立": "vase/stand",
-   "口": "mouth",
-   "咅": "spit",
-   "刂": "saber/knife"
-  },
-  "google_confidence": "high",
-  "google_note": "left side 咅 (vase over mouth) = spit",
-  "cjkvi_ids": "⿰咅刂",
-  "cjkvi_leaves": [
-   "一",
-   "丶",
-   "丷",
-   "刂",
-   "口"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
   "id": "rtk522",
   "char": "鏡",
   "keyword": "mirror",
@@ -10045,6 +9945,39 @@
   "reviewed_at": null
  },
  {
+  "id": "rtk1067",
+  "char": "倍",
+  "keyword": "double",
+  "our_parts": [
+   "亻",
+   "咅"
+  ],
+  "google_parts": [
+   "亻",
+   "立",
+   "口"
+  ],
+  "google_primitive_names": {
+   "亻": "person",
+   "立": "vase",
+   "口": "mouth"
+  },
+  "google_confidence": "high",
+  "google_note": "Right side 立+口 = 咅 often grouped as 'spit'.",
+  "cjkvi_ids": "⿰亻咅",
+  "cjkvi_leaves": [
+   "一",
+   "丶",
+   "丷",
+   "亻",
+   "口"
+  ],
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
   "id": "rtk1070",
   "char": "宿",
   "keyword": "inn",
@@ -14958,40 +14891,6 @@
    "辶",
    "阝",
    "𠂇"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk1396",
-  "char": "陪",
-  "keyword": "obeisance",
-  "our_parts": [
-   "口",
-   "立",
-   "阝"
-  ],
-  "google_parts": [
-   "阝",
-   "咅"
-  ],
-  "google_primitive_names": {
-   "阝": "pinnacle/mound",
-   "咅": "muzzle",
-   "立": "vase/top hat",
-   "口": "mouth"
-  },
-  "google_confidence": "high",
-  "google_note": "Keyword given as 'obeisant'. Pinnacle 阝 + 咅 'muzzle' (= 立 + mouth 口).",
-  "cjkvi_ids": "⿰阝咅",
-  "cjkvi_leaves": [
-   "一",
-   "丶",
-   "丷",
-   "口",
-   "阝"
   ],
   "status": "pending",
   "decision": null,
