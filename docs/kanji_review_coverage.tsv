@@ -514,7 +514,7 @@ rtk512	資	assets	512	yes
 rtk513	姿	figure	513	yes
 rtk514	諮	consult with	514	yes
 rtk515	賠	compensation	515	yes
-rtk516	培	cultivate	516	no
+rtk516	培	cultivate	516	yes
 rtk517	剖	divide	517	yes
 rtk518	音	sound	518	no
 rtk519	暗	darkness	519	yes
@@ -2961,7 +2961,7 @@ rtk2959	吋	inch	2959	no
 rtk2960	呎	foot	2960	no
 rtk2961	梵	brahman	2961	no
 rtk2962	薩	bodhisattva	2962	yes
-rtk2963	菩	bo tree	2963	no
+rtk2963	菩	bo tree	2963	yes
 rtk2964	唖	babble	2964	no
 rtk2965	牟	moo	2965	no
 rtk2966	迦	sanskrit ka	2966	no
