@@ -340,10 +340,10 @@
    "口",
    "田"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-06"
  },
  {
   "id": "rtk100",
@@ -689,72 +689,6 @@
   "reviewed_at": "2026-09-06"
  },
  {
-  "id": "rtk259",
-  "char": "猫",
-  "keyword": "cat",
-  "our_parts": [
-   "犭",
-   "田",
-   "艹"
-  ],
-  "google_parts": [
-   "犭",
-   "苗"
-  ],
-  "google_primitive_names": {
-   "犭": "pack of wild dogs",
-   "苗": "seedling",
-   "艹": "flower/grass",
-   "田": "rice field/brains"
-  },
-  "google_confidence": "high",
-  "google_note": "犭 + 苗 (苗 = 艹 + 田).",
-  "cjkvi_ids": "⿰犭苗",
-  "cjkvi_leaves": [
-   "丨",
-   "十",
-   "犭",
-   "田"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk261",
-  "char": "特",
-  "keyword": "special",
-  "our_parts": [
-   "牛",
-   "寸",
-   "土"
-  ],
-  "google_parts": [
-   "牛",
-   "寺"
-  ],
-  "google_primitive_names": {
-   "牛": "cow",
-   "寺": "buddhist temple",
-   "土": "soil",
-   "寸": "glue"
-  },
-  "google_confidence": "high",
-  "google_note": "牛 + 寺 (寺 = 土 + 寸).",
-  "cjkvi_ids": "⿰牛寺",
-  "cjkvi_leaves": [
-   "一",
-   "十",
-   "寸",
-   "牛"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
   "id": "rtk263",
   "char": "先",
   "keyword": "before",
@@ -781,10 +715,10 @@
    "乚",
    "𠂒"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-06"
  },
  {
   "id": "rtk265",
@@ -810,43 +744,10 @@
    "丿",
    "人"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk266",
-  "char": "界",
-  "keyword": "world",
-  "our_parts": [
-   "田",
-   "个",
-   "儿"
-  ],
-  "google_parts": [
-   "田",
-   "介"
-  ],
-  "google_primitive_names": {
-   "田": "rice field",
-   "介": "jammed in",
-   "𠆢": "umbrella",
-   "ハ": "walking legs"
-  },
-  "google_confidence": "high",
-  "google_note": "田 + 介 (介 = 𠆢 + ハ). Current parts: 田, 个, 儿.",
-  "cjkvi_ids": "⿱田介",
-  "cjkvi_leaves": [
-   "丨",
-   "丿",
-   "人",
-   "田"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-06"
  },
  {
   "id": "rtk267",
@@ -876,10 +777,10 @@
    "十",
    "朩"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-06"
  },
  {
   "id": "rtk268",
@@ -909,10 +810,10 @@
    "八",
    "月"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-06"
  },
  {
   "id": "rtk269",
@@ -940,10 +841,10 @@
    "人",
    "口"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-06"
  },
  {
   "id": "rtk281",
@@ -970,71 +871,10 @@
    "人",
    "十"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk282",
-  "char": "栓",
-  "keyword": "plug",
-  "our_parts": [
-   "王",
-   "木",
-   "个"
-  ],
-  "google_parts": [
-   "木",
-   "全"
-  ],
-  "google_primitive_names": {
-   "木": "tree/wood",
-   "全": "whole"
-  },
-  "google_confidence": "high",
-  "google_note": "Left 木 (tree), right 全 (whole = umbrella 人 + king 王).",
-  "cjkvi_ids": "⿰木全",
-  "cjkvi_leaves": [
-   "一",
-   "人",
-   "十",
-   "木"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk286",
-  "char": "柱",
-  "keyword": "pillar",
-  "our_parts": [
-   "玉",
-   "木"
-  ],
-  "google_parts": [
-   "木",
-   "主"
-  ],
-  "google_primitive_names": {
-   "木": "tree/wood",
-   "主": "lord/candlestick"
-  },
-  "google_confidence": "high",
-  "google_note": "Left 木 (tree), right 主 (lord = drop 丶 + king 王).",
-  "cjkvi_ids": "⿰木主",
-  "cjkvi_leaves": [
-   "一",
-   "丶",
-   "十",
-   "木"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-06"
  },
  {
   "id": "rtk287",
@@ -1065,44 +905,10 @@
    "人",
    "十"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk294",
-  "char": "鎮",
-  "keyword": "tranquilize",
-  "our_parts": [
-   "針",
-   "目",
-   "一",
-   "ハ"
-  ],
-  "google_parts": [
-   "金",
-   "真"
-  ],
-  "google_primitive_names": {
-   "金": "metal",
-   "真": "true"
-  },
-  "google_confidence": "high",
-  "google_note": "Left 金 (metal), right 真 (true = 十 + 目 eye + 一 + 八). Our data uses 針+目+一+ハ which is odd; Google clearly says 金+真.",
-  "cjkvi_ids": "⿰金真",
-  "cjkvi_leaves": [
-   "一",
-   "且",
-   "丷",
-   "人",
-   "八",
-   "十"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-06"
  },
  {
   "id": "rtk295",
@@ -1131,10 +937,10 @@
    "自",
    "辶"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-06"
  },
  {
   "id": "rtk296",
@@ -1165,10 +971,10 @@
    "自",
    "辶"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-06"
  },
  {
   "id": "rtk297",
@@ -1193,10 +999,10 @@
    "十",
    "辶"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-06"
  },
  {
   "id": "rtk298",
@@ -1225,10 +1031,10 @@
    "十",
    "辶"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-06"
  },
  {
   "id": "rtk299",
@@ -1256,10 +1062,10 @@
    "辶",
    "𠂒"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-06"
  },
  {
   "id": "rtk300",
@@ -1284,10 +1090,10 @@
    "白",
    "辶"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-06"
  },
  {
   "id": "rtk301",
@@ -8577,38 +8383,6 @@
    "丷",
    "亅",
    "八"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk1005",
-  "char": "球",
-  "keyword": "ball",
-  "our_parts": [
-   "玉",
-   "水"
-  ],
-  "google_parts": [
-   "王",
-   "求"
-  ],
-  "google_primitive_names": {
-   "王": "jewel (king used as primitive)",
-   "求": "request"
-  },
-  "google_confidence": "high",
-  "google_note": "Text's optional deeper sub-breakdown of 求 here ('arrow' + 'grains of rice') conflicts with rtk1004's own text (which said 求 = water + drop) -- an inconsistency between two separate AI Overview answers, but it doesn't affect 球's own clear top-level parts (王+求).",
-  "cjkvi_ids": "⿰王求",
-  "cjkvi_leaves": [
-   "一",
-   "丶",
-   "丷",
-   "亅",
-   "八",
-   "十"
   ],
   "status": "pending",
   "decision": null,
@@ -23184,8 +22958,7 @@
    "口",
    "人",
    "馬",
-   "个",
-   "灬"
+   "个"
   ],
   "google_parts": [
    "馬",
@@ -23219,8 +22992,7 @@
    "大",
    "馬",
    "亅",
-   "一",
-   "灬"
+   "一"
   ],
   "google_parts": [
    "馬",
@@ -23253,7 +23025,6 @@
   "our_parts": [
    "馬",
    "尸",
-   "灬",
    "丶"
   ],
   "google_parts": [
@@ -23284,8 +23055,7 @@
   "our_parts": [
    "虫",
    "馬",
-   "又",
-   "灬"
+   "又"
   ],
   "google_parts": [
    "馬",
@@ -23322,8 +23092,7 @@
    "一",
    "人",
    "大",
-   "二",
-   "灬"
+   "二"
   ],
   "google_parts": [
    "月",
@@ -30955,8 +30724,7 @@
   "our_parts": [
    "口",
    "馬",
-   "力",
-   "灬"
+   "力"
   ],
   "google_parts": [
    "加",
@@ -30989,8 +30757,7 @@
    "十",
    "尚",
    "田",
-   "馬",
-   "灬"
+   "馬"
   ],
   "google_parts": [
    "馬",
@@ -31022,7 +30789,6 @@
   "our_parts": [
    "斤",
    "馬",
-   "灬",
    "一"
   ],
   "google_parts": [

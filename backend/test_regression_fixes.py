@@ -487,8 +487,10 @@ EXPECTED_DECOMPOSITIONS = {
     # bug fixed earlier this session. Linked it to the real glyph 犭 as
     # kangxi94, keyword "pack of wild dogs" (Heisig's own term, matches
     # CSV, no collision), and added it to all 15 hosts.
+    # Corrected 2026-09-06 (worklist loop, day 4): 田,艹 collapses to
+    # referencing 苗(rtk249, "seedling" = 艹+田, already taught) directly.
     "rtk259": {"character": "猫", "keyword": "cat",
-               "expected_part_ids": {"kangxi94", "rtk14", "prim-mugwort"}},
+               "expected_part_ids": {"kangxi94", "rtk249"}},
     "rtk890": {"character": "聴", "keyword": "listen",
                "expected_part_ids": {"rtk881", "rtk10", "kangxi122", "rtk639"}},
     "rtk1754": {"character": "聞", "keyword": "hear",
@@ -529,12 +531,16 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk2090": {"character": "猟", "keyword": "game-hunting",
                 "expected_part_ids": {"kangxi94", "rtk196", "rtk1265", "kangxi16"}},
     # Owner-approved via the review queue (2026-08-27), confirmed correct
-    # against cjkvi-ids before pinning: 警 = ⿱敬言, 特 = ⿰牛寺 (寺 already
-    # flattened to 土,寸 elsewhere in data.txt).
+    # against cjkvi-ids before pinning: 警 = ⿱敬言, 特 = ⿰牛寺 (寺 was
+    # flattened to 土,寸 elsewhere in data.txt at the time).
     "rtk358": {"character": "警", "keyword": "admonish",
                "expected_part_ids": {"rtk356", "rtk357"}},
+    # Corrected 2026-09-06 (worklist loop, day 4): 寺(rtk170, "buddhist
+    # temple") is itself a taught kanji now, so 特's own flattened 寸,土
+    # collapses to referencing it directly instead -- supersedes the
+    # 2026-08-27 pin above, which predates that.
     "rtk261": {"character": "特", "keyword": "special",
-               "expected_part_ids": {"rtk260", "rtk45", "rtk161"}},
+               "expected_part_ids": {"rtk260", "rtk170"}},
     # kangxi90 (爿) renamed "radical 90" -> "turtle" (2026-08-27), Heisig's
     # own name per heisig-kanjis.csv -- correct keyword, but that earlier
     # session never rendered the actual hosts to check the GLYPH, only the
@@ -812,8 +818,12 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk207", "rtk250"}},
     "rtk252": {"character": "眺", "keyword": "stare",
                 "expected_part_ids": {"rtk15", "rtk250"}},
+    # Corrected 2026-09-06 (worklist loop, day 4): 鎮 was wrongly built on
+    # 針(rtk292, "needle" = 金+十) with extra raw strokes tacked on -- but
+    # render confirms 鎮 = 金 + 真 (rtk79, already taught) cleanly, no
+    # relation to 針's own right side at all.
     "rtk294": {"character": "鎮", "keyword": "tranquillize",
-                "expected_part_ids": {"prim-katakana-ha", "rtk1", "rtk15", "rtk292"}},
+                "expected_part_ids": {"rtk287", "rtk79"}},
     "rtk301": {"character": "逃", "keyword": "escape",
                 "expected_part_ids": {"rtk250", "rtk843"}},
     "rtk310": {"character": "煎", "keyword": "roast",
@@ -1150,8 +1160,14 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"kangxi62", "rtk2078"}},
     "rtk2081": {"character": "弾", "keyword": "bullet",
                 "expected_part_ids": {"rtk1317", "rtk2078"}},
+    # Corrected 2026-09-06 (worklist loop, day 4): found while fixing 駐 --
+    # 馬(rtk2132) is itself taught with 灬(its own legs) as its one listed
+    # part, so ALL 19 other 馬-family hosts that also separately relisted
+    # 灬 were doing the exact "direct-reference overlap" redundancy this
+    # audit's pattern #3 targets (spot-checked all 19 via render: not one
+    # has a second, separate fire-dots shape anywhere else in the glyph).
     "rtk2137": {"character": "駆", "keyword": "drive",
-                "expected_part_ids": {"prim-fire-radical", "rtk1831", "rtk2132"}},
+                "expected_part_ids": {"rtk1831", "rtk2132"}},
     "rtk2147": {"character": "膚", "keyword": "skin",
                 "expected_part_ids": {"kangxi141", "kangxi25", "kangxi27", "rtk29", "rtk476"}},
     "rtk2150": {"character": "虞", "keyword": "uneasiness",
@@ -1449,8 +1465,6 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk102", "rtk111"}},
     "rtk133": {"character": "奇", "keyword": "strange",
                 "expected_part_ids": {"rtk112", "rtk97"}},
-    "rtk133": {"character": "奇", "keyword": "strange",
-                "expected_part_ids": {"rtk112", "rtk97"}},
     "rtk145": {"character": "沼", "keyword": "marsh",
                 "expected_part_ids": {"rtk137", "rtk90"}},
     "rtk146": {"character": "沖", "keyword": "open sea",
@@ -1482,10 +1496,59 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"prim-mugwort", "rtk161", "rtk269"}},
     "rtk273": {"character": "宝", "keyword": "treasure",
                 "expected_part_ids": {"kangxi40", "rtk272"}},
-    "rtk285": {"character": "注", "keyword": "pour",
-                "expected_part_ids": {"rtk137", "rtk272"}},
+    # Corrected 2026-09-06 (worklist loop, day 4): 柱/注 both had 玉(jewel,
+    # dot at bottom-right) where render clearly shows 主(lord, rtk284,
+    # dot at TOP) instead -- the two look similar enough at small sizes
+    # to mix up, but the dot position is genuinely different. Same bug
+    # found in 球 (王,求 -- was 玉,水, wrong on both parts) and 駐 (馬,主
+    # -- was 玉,馬,灬, which also redundantly re-listed 馬's own 灬 legs).
+    # 界/栓 collapse to referencing 介/全 (both already taught) directly.
+    "rtk266": {"character": "界", "keyword": "world",
+                "expected_part_ids": {"rtk14", "rtk265"}},
+    "rtk282": {"character": "栓", "keyword": "plug",
+                "expected_part_ids": {"rtk207", "rtk281"}},
     "rtk286": {"character": "柱", "keyword": "pillar",
-                "expected_part_ids": {"rtk207", "rtk272"}},
+                "expected_part_ids": {"rtk207", "rtk284"}},
+    "rtk285": {"character": "注", "keyword": "pour",
+                "expected_part_ids": {"rtk137", "rtk284"}},
+    "rtk1005": {"character": "球", "keyword": "ball",
+                "expected_part_ids": {"rtk271", "rtk1004"}},
+    "rtk2136": {"character": "駐", "keyword": "stop-over",
+                "expected_part_ids": {"rtk2132", "rtk284"}},
+    # The rest of the 馬-family redundant-灬 fix (see the rtk2137 comment
+    # above for the full account) -- one pin per remaining host.
+    "rtk2134": {"character": "験", "keyword": "verification",
+                "expected_part_ids": {"prim-umbrella", "rtk1023", "rtk11", "rtk2132"}},
+    "rtk2135": {"character": "騎", "keyword": "equestrian",
+                "expected_part_ids": {"kangxi6", "rtk1", "rtk11", "rtk112", "rtk2132"}},
+    "rtk2138": {"character": "駅", "keyword": "station",
+                "expected_part_ids": {"kangxi3", "kangxi44", "rtk2132"}},
+    "rtk2139": {"character": "騒", "keyword": "boisterous",
+                "expected_part_ids": {"rtk2132", "rtk556", "rtk752"}},
+    "rtk2142": {"character": "篤", "keyword": "fervent",
+                "expected_part_ids": {"rtk1007", "rtk2132"}},
+    "rtk2143": {"character": "罵", "keyword": "insult",
+                "expected_part_ids": {"kangxi122", "rtk2132"}},
+    "rtk2144": {"character": "騰", "keyword": "inflation",
+                "expected_part_ids": {"kangxi12", "rtk1", "rtk1023", "rtk112", "rtk13", "rtk2", "rtk2132"}},
+    "rtk2216": {"character": "駿", "keyword": "steed",
+                "expected_part_ids": {"kangxi10", "kangxi28", "kangxi34", "rtk2132"}},
+    "rtk2506": {"character": "憑", "keyword": "possessed",
+                "expected_part_ids": {"kangxi15", "rtk2132", "rtk639"}},
+    "rtk2818": {"character": "駕", "keyword": "stretcher",
+                "expected_part_ids": {"rtk11", "rtk2132", "rtk922"}},
+    "rtk2819": {"character": "騨", "keyword": "piebald",
+                "expected_part_ids": {"rtk10", "rtk14", "rtk196", "rtk2132"}},
+    "rtk2820": {"character": "馳", "keyword": "rush",
+                "expected_part_ids": {"rtk2132", "rtk2236"}},
+    "rtk2822": {"character": "馴", "keyword": "tame",
+                "expected_part_ids": {"rtk134", "rtk2132"}},
+    "rtk2823": {"character": "駁", "keyword": "rebuttal",
+                "expected_part_ids": {"kangxi89", "rtk2132"}},
+    "rtk2824": {"character": "駈", "keyword": "gallop",
+                "expected_part_ids": {"rtk1", "rtk1206", "rtk2132"}},
+    "rtk2825": {"character": "驢", "keyword": "donkey",
+                "expected_part_ids": {"kangxi141", "kangxi25", "kangxi27", "rtk14", "rtk1555", "rtk2132", "rtk476"}},
     "rtk288": {"character": "銑", "keyword": "pig iron",
                 "expected_part_ids": {"rtk263", "rtk287"}},
     "rtk289": {"character": "鉢", "keyword": "bowl",
@@ -1665,8 +1728,6 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk49", "rtk987"}},
     "rtk991": {"character": "粧", "keyword": "cosmetics",
                 "expected_part_ids": {"rtk2345", "rtk987"}},
-    "rtk1005": {"character": "球", "keyword": "ball",
-                "expected_part_ids": {"rtk137", "rtk272"}},
     "rtk1015": {"character": "筒", "keyword": "cylinder",
                 "expected_part_ids": {"rtk1007", "rtk192"}},
     "rtk1016": {"character": "等", "keyword": "etc.",
@@ -1677,8 +1738,6 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"kangxi3", "rtk1007", "rtk137", "rtk47"}},
     "rtk1088": {"character": "荷", "keyword": "baggage",
                 "expected_part_ids": {"prim-mugwort", "rtk1087"}},
-    "rtk1097": {"character": "柄", "keyword": "design",
-                "expected_part_ids": {"rtk1096", "rtk207"}},
     "rtk1097": {"character": "柄", "keyword": "design",
                 "expected_part_ids": {"rtk1096", "rtk207"}},
     "rtk1099": {"character": "腐", "keyword": "rot",
@@ -1739,8 +1798,6 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk1368", "rtk207"}},
     "rtk1376": {"character": "路", "keyword": "path",
                 "expected_part_ids": {"rtk1372", "rtk311"}},
-    "rtk1391": {"character": "阿", "keyword": "africa",
-                "expected_part_ids": {"kangxi170", "rtk97"}},
     "rtk1391": {"character": "阿", "keyword": "africa",
                 "expected_part_ids": {"kangxi170", "rtk97"}},
     "rtk1398": {"character": "陳", "keyword": "line up",
@@ -1885,11 +1942,9 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk2122": {"character": "蹴", "keyword": "kick",
                 "expected_part_ids": {"rtk1372", "rtk2121"}},
     "rtk2133": {"character": "駒", "keyword": "pony",
-                "expected_part_ids": {"prim-fire-radical", "rtk2132", "rtk69"}},
-    "rtk2136": {"character": "駐", "keyword": "parking",
-                "expected_part_ids": {"prim-fire-radical", "rtk2132", "rtk272"}},
+                "expected_part_ids": {"rtk2132", "rtk69"}},
     "rtk2140": {"character": "駄", "keyword": "burdensome",
-                "expected_part_ids": {"prim-fire-radical", "rtk126", "rtk2132"}},
+                "expected_part_ids": {"rtk126", "rtk2132"}},
     "rtk2161": {"character": "態", "keyword": "attitude",
                 "expected_part_ids": {"rtk2160", "rtk639"}},
     # Corrected 2026-09-01 (common-primitive audit): further converged now
@@ -1935,8 +1990,6 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk1793", "rtk2238"}},
     "rtk1798": {"character": "辣", "keyword": "bitter",
                 "expected_part_ids": {"rtk1612", "rtk1793"}},
-    "rtk1800": {"character": "整", "keyword": "organize",
-                "expected_part_ids": {"kangxi66", "rtk1793", "rtk405"}},
     "rtk2126": {"character": "免", "keyword": "excuse",
                 "expected_part_ids": {"kangxi10", "kangxi20", "prim-pipe", "rtk1"}},
     "rtk2130": {"character": "象", "keyword": "elephant",
@@ -2392,8 +2445,6 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"kangxi59", "rtk64"}},
     "rtk1863": {"character": "紋", "keyword": "family crest",
                "expected_part_ids": {"rtk1431", "rtk1861"}},
-    "rtk1883": {"character": "跡", "keyword": "tracks",
-               "expected_part_ids": {"kangxi8", "rtk1372"}},
     "rtk1891": {"character": "絶", "keyword": "discontinue",
                "expected_part_ids": {"rtk1431", "rtk1890"}},
     "rtk1895": {"character": "紺", "keyword": "navy blue",

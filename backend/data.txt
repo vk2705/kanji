@@ -505,14 +505,14 @@ rtk255:黙:silence:犬,黒
 rtk256:然:sort of thing:犬,夕,灬
 rtk257:荻:reed:艹,犭,火
 rtk258:狩:hunt:犭,守
-rtk259:猫:cat:犭,田,艹
+rtk259:猫:cat:犭,苗
 rtk260:牛:cow:
-rtk261:特:special:牛,寸,土
+rtk261:特:special:牛,寺
 rtk262:告:revelation:牛,口
 rtk263:先:before:ノ,土,儿
 rtk264:洗:wash:先,水
 rtk265:介:jammed in:ハ,个
-rtk266:界:world:田,个,儿
+rtk266:界:world:田,介
 rtk267:茶:tea:个,艹,木
 rtk268:脊:stature:月,二,人
 rtk269:合:fit:口,亼
@@ -528,11 +528,11 @@ rtk278:旺:flourishing:王,日
 rtk279:皇:emperor:王,白
 rtk280:呈:display:王,口
 rtk281:全:whole:王,ハ,个
-rtk282:栓:plug:王,木,个
+rtk282:栓:plug:木,全
 rtk283:理:logic:王,里
 rtk284:主:lord:王,丶
-rtk285:注:pour:玉,水
-rtk286:柱:pillar:玉,木
+rtk285:注:pour:主,水
+rtk286:柱:pillar:木,主
 rtk287:金:gold:王,ハ,个,丷
 rtk288:銑:pig iron:先,金
 rtk289:鉢:bowl:本,金
@@ -540,7 +540,7 @@ rtk290:銅:copper:金,同
 rtk291:釣:angling:金,勺
 rtk292:針:needle:金,十
 rtk293:銘:inscription:金,名
-rtk294:鎮:tranquilize:針,目,一,ハ
+rtk294:鎮:tranquilize:金,真
 rtk295:道:road-way:込,自,丷,首
 rtk296:導:guidance:込,自,寸,丷,首
 rtk297:辻:crossing:込,十
@@ -1251,7 +1251,7 @@ rtk1001:漆:lacquer:水,木,个
 rtk1002:膝:knee:月,水,木,个
 rtk1003:様:esq.:水,木,羊
 rtk1004:求:request:一,水,丶
-rtk1005:球:ball:玉,水
+rtk1005:球:ball:王,求
 rtk1006:救:salvation:水,丶,攵
 rtk1007:竹:bamboo:
 rtk1008:笑:laugh:禾,竹,大
@@ -2379,18 +2379,18 @@ rtk2129:勉:exertion:力,免
 rtk2130:象:elephant:勹,豕,一
 rtk2131:像:statue:亻,象
 rtk2132:馬:horse:灬
-rtk2133:駒:pony:句,馬,灬
-rtk2134:験:verification:口,人,馬,个,灬
-rtk2135:騎:equestrian:口,大,馬,亅,一,灬
-rtk2136:駐:stop-over:玉,馬,灬
-rtk2137:駆:drive:馬,区,灬
-rtk2138:駅:station:馬,尸,灬,丶
-rtk2139:騒:boisterous:虫,馬,又,灬
-rtk2140:駄:burdensome:太,馬,灬
+rtk2133:駒:pony:句,馬
+rtk2134:験:verification:口,人,馬,个
+rtk2135:騎:equestrian:口,大,馬,亅,一
+rtk2136:駐:stop-over:馬,主
+rtk2137:駆:drive:馬,区
+rtk2138:駅:station:馬,尸,丶
+rtk2139:騒:boisterous:虫,馬,又
+rtk2140:駄:burdensome:太,馬
 rtk2141:驚:wonder:敬,馬
-rtk2142:篤:fervent:竹,灬,馬
-rtk2143:罵:abuse:罒,馬,灬
-rtk2144:騰:leaping up:月,馬,丷,一,人,大,二,灬
+rtk2142:篤:fervent:竹,馬
+rtk2143:罵:abuse:罒,馬
+rtk2144:騰:leaping up:月,馬,丷,一,人,大,二
 rtk2145:虎:tiger:卜,儿,匕,厂,虍
 rtk2146:虜:captive:男,卜,匕,厂,虍
 rtk2147:膚:skin:胃,卜,匕,厂,虍
@@ -2462,7 +2462,7 @@ rtk2212:奄:cover:乙,大,日
 rtk2213:庵:hermitage:田,广,大
 rtk2214:掩:cover:乙,大,日,扌,奄
 rtk2215:悛:amend:state of mind,儿,厶,夂
-rtk2216:駿:a good horse:馬,儿,厶,夂,灬
+rtk2216:駿:a good horse:馬,儿,厶,夂
 rtk2217:峻:high:山,儿,厶,夂
 rtk2218:竣:end:立,儿,厶,夂
 rtk2219:犀:rhinoceros:尸,｜,二,十,ノ,一
@@ -2751,7 +2751,7 @@ rtk2502:逗:stop:込,豆
 rtk2503:鄭:an ancient chinese province:酋,大,阝
 rtk2504:隕:fall:貝,口,阝
 rtk2505:隈:corner:阝,畏
-rtk2506:憑:depend:心,馬,冫,灬
+rtk2506:憑:depend:心,馬,冫
 rtk2507:惹:attract:ノ,一,口,心,艹
 rtk2508:悉:all:ノ,心,釆,米
 rtk2509:忽:in a moment:心,勿
@@ -3062,14 +3062,14 @@ rtk2814:餐:eat:食,又,夕
 rtk2815:饗:banquet:艮,食,邦,幺
 rtk2816:蝕:eclipse:食,虫
 rtk2817:飴:rice jelly:口,食,厶
-rtk2818:駕:vehicle:口,馬,力,灬
-rtk2819:騨:dappled grey horse:十,尚,田,馬,灬
-rtk2820:馳:run:馬,也,灬
+rtk2818:駕:vehicle:口,馬,力
+rtk2819:騨:dappled grey horse:十,尚,田,馬
+rtk2820:馳:run:馬,也
 rtk2821:騙:deceive:馬,扁
-rtk2822:馴:get used to:川,馬,灬
-rtk2823:駁:refutation:馬,爻,灬
-rtk2824:駈:run:斤,馬,灬,一
-rtk2825:驢:donkey:皿,田,馬,卜,匕,厂,虍,灬
+rtk2822:馴:get used to:川,馬
+rtk2823:駁:refutation:馬,爻
+rtk2824:駈:run:斤,馬,一
+rtk2825:驢:donkey:皿,田,馬,卜,匕,厂,虍
 rtk2826:鰻:eel:魚,日,又
 rtk2827:鯛:sea bream:魚,口,土,冂
 rtk2828:鰯:sardine:魚,弱

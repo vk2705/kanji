@@ -7155,3 +7155,73 @@ might be a similar coincidental-lookalike rather than the real shape —
 not urgent, but a pattern now established enough to watch for
 proactively rather than only stumbling into via the worklist. Standing
 list otherwise unchanged (see day 1/2 entries above).
+
+## 2026-09-06 (continued): worklist loop, day 4 — 玉-vs-主 mixups and the whole 馬-family's redundant 灬
+
+Ran `worklist_next.py -n 20` again same day (owner asked for another
+batch directly). 11 kept as-is, including re-confirming the
+`个`/`umbrella` convention for `介`/`全`/`茶`/`合` against Google's
+"mis-encoding" claims — already explicitly settled earlier this audit
+via CSV, not something to re-litigate on a less rigorous source's say-
+so (`界`, `栓`, and `鎮`, however, needed a fix each — see below, since
+those were genuine flattening/wrong-reference bugs, not the `个`
+question at all).
+
+**`玉`(jewel, dot at bottom-right) vs `主`(lord, dot at top) mixup**,
+found via `柱`: render showed `柱`'s right side clearly matching `主`
+(already taught, rtk284), not `玉` — the two are easy to confuse at
+small sizes but the dot sits in a different place. Grepped every other
+`玉` usage to check for the same mistake: `注`(pour) had it too (same
+fix, `主`); `宝`/`国` were confirmed correct (`cjkvi-ids` gives real
+`⿱宀玉`/`⿴囗玉`); `球`(ball) turned out to have a *different*, worse
+bug — both parts wrong (`玉,水` when the real structure per
+`cjkvi-ids` is `⿰王求`, plain `王`+`求`, no water and no jewel at all);
+`駐`(stop-over) had the `主`-mixup *and* a redundant `灬`, which led to
+the bigger finding below.
+
+**The whole 馬-family was re-listing its own already-taught legs.**
+`馬`(rtk2132, horse) is itself taught with `灬` as its one listed part
+— so every kanji built on `馬` that *also* separately listed `灬`
+alongside it was doing the exact "direct-reference overlap" redundancy
+this audit's pattern #3 has targeted since day 1 (the `金`-family
+fix). Grepped for it: **19 hosts** had the redundant `灬` — every
+`馬`-containing kanji in the dataset except `馬` itself and the two
+(`驚`, `騙`) that don't use `灬` at all. Rendered all 19 solo (not just
+`駐`) to confirm none has a genuine *second*, separately-drawn
+fire-dots shape elsewhere in the glyph (double-duty, which would have
+meant keeping some of them) — none did, so all 19 got the redundant
+token dropped in one pass: `駒`/`験`/`騎`/`駆`/`騒`/`駄`/`篤`/`罵`/
+`騰`/`駿`/`憑`/`駕`/`騨`/`馳`/`馴`/`駁`/`駈`/`驢` (plus `駐` above).
+
+**Also found while going through the batch**: `界`(world) had `个,儿`
+where render shows it's really `田` + `介`(already taught) directly —
+`介`'s own bottom is `ハ`, not `儿`, so the flattened form was subtly
+wrong on top of not referencing the compound; `栓`(plug) collapsed to
+referencing `全`(already taught) directly instead of its own raw
+`王,ハ,个`; `鎮`(tranquillize) was wrongly built on `針`("needle" =
+金+十) with extra raw strokes bolted on, when render confirms it's
+cleanly `金`+`真`(both already taught), no relation to `針` at all.
+
+Verified: full rebuild (3000 kanji, 3007 overrides — no new
+primitives this batch, all fixes referenced existing taught kanji or
+dropped redundant tokens); `test_regression_fixes.py` — 6 corrected +
+several pre-existing exact-duplicate pins found and removed along the
+way (`rtk1005`, `rtk2136`/`駐` had duplicated under two different
+keyword spellings, `rtk2133` similarly) + 22 new pins — **1258
+checks**, same 4 expected hanzi-scope non-issues; pytest (56 passed);
+`audit_self_reference.py` clean; `audit_radicals.py` still 0/0;
+`review_queue.py` clean. `build_decomp_worklist.py` rebuilt: 1000 →
+**993 rows, 958 pending**. Not deployed (no SSH/server access).
+
+Ran the `collections.Counter` sweep on `EXPECTED_DECOMPOSITIONS` right
+away instead of deferring it: found **5 more** duplicate keys beyond
+the 3 already hit in passing (`rtk133`, `rtk1097`, `rtk1391`, `rtk1800`,
+`rtk1883`) — all byte-identical pairs except `rtk1883`, where one copy
+carried a useful explanatory comment (kept that one, dropped the bare
+copy). All silent (Python just keeps the last value), so none of these
+were ever actually breaking test coverage — just source-file noise
+accumulated over many sessions' worth of Edit-tool insertions. Cleaned
+up all 5; checked again post-cleanup — 0 duplicates.
+
+**Next session**: continue the worklist loop. Standing list otherwise
+unchanged (see earlier entries above).
