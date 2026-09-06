@@ -339,7 +339,7 @@ rtk88:刃:blade:刀,丶
 rtk89:切:cut:七,刀
 rtk90:召:seduce:口,刀
 rtk92:則:rule:貝,刀
-rtk93:副:vice-:一,口,田,刀
+rtk93:副:vice-:畐,刀
 rtk94:別:separate:口,力,刀
 rtk95:丁:street:一,亅
 rtk96:町:town:田,丁
@@ -451,19 +451,19 @@ rtk201:宵:wee hours:宀,肖
 rtk202:安:relax:女,宀
 rtk203:宴:banquet:安,日
 rtk204:寄:draw near:奇,宀
-rtk205:富:wealth:口,田,宀,一
+rtk205:富:wealth:宀,畐
 rtk206:貯:savings:丁,貝,宀
 rtk207:木:tree:
 rtk208:林:grove:木
 rtk209:森:forest:木
-rtk210:桂:japanese judas-tree:土,木
+rtk210:桂:japanese judas-tree:木,圭
 rtk211:柏:oak:白,木
 rtk212:枠:frame:木,九,十
 rtk213:梢:treetops:肖,木
 rtk214:棚:shelf:木,朋
 rtk215:杏:apricot:口,木
 rtk216:桐:paulownia:木,同
-rtk217:植:plant:十,木,目
+rtk217:植:plant:木,直
 rtk218:椅:chair:木,奇
 rtk219:枯:wither:古,木
 rtk220:朴:crude:卜,木
@@ -472,7 +472,7 @@ rtk222:相:inter-:木,目
 rtk223:机:desk:木,几
 rtk224:本:book:一,木
 rtk225:札:tag:乙,木
-rtk226:暦:calendar:日,麻
+rtk226:暦:calendar:厂,林,日
 rtk227:案:plan:安,木
 rtk228:燥:parch:火,品,木
 rtk229:未:un-:一,木
@@ -483,29 +483,29 @@ rtk233:味:flavor:口,未
 rtk234:妹:younger sister:女,未
 rtk235:朱:vermilion:未,丶
 rtk236:株:stocks:木,朱
-rtk237:若:young:右,艾
-rtk238:草:grass:早,艾
-rtk239:苦:suffering:艾,古
-rtk240:苛:torment:可,艾
-rtk241:寛:tolerant:見,宀,艾
-rtk242:薄:dilute:専,水,丶,艾
-rtk243:葉:leaf:木,世,艾
-rtk244:模:imitation:大,日,木,艾
-rtk245:漠:vague:水,大,日,艾
-rtk246:墓:grave:大,土,日,艾
-rtk247:暮:evening:大,日,艾
-rtk248:膜:membrane:月,大,日,艾
-rtk249:苗:seedling:田,艾
+rtk237:若:young:右,艹
+rtk238:草:grass:早,艹
+rtk239:苦:suffering:艹,古
+rtk240:苛:torment:可,艹
+rtk241:寛:tolerant:見,宀,艹
+rtk242:薄:dilute:専,水,丶,艹
+rtk243:葉:leaf:木,世,艹
+rtk244:模:imitation:木,莫
+rtk245:漠:vague:水,莫
+rtk246:墓:grave:莫,土
+rtk247:暮:evening:莫,日
+rtk248:膜:membrane:月,莫
+rtk249:苗:seedling:田,艹
 rtk250:兆:portent:
 rtk251:桃:peach:木,兆
 rtk252:眺:stare:目,兆
 rtk253:犬:dog:大,丶
-rtk254:状:status quo:犬,爿
+rtk254:状:status quo:犬,丬
 rtk255:黙:silence:犬,黒
 rtk256:然:sort of thing:犬,夕,灬
-rtk257:荻:reed:艾,犭,火
+rtk257:荻:reed:艹,犭,火
 rtk258:狩:hunt:犭,守
-rtk259:猫:cat:犭,田,艾
+rtk259:猫:cat:犭,田,艹
 rtk260:牛:cow:
 rtk261:特:special:牛,寸,土
 rtk262:告:revelation:牛,口
@@ -513,10 +513,10 @@ rtk263:先:before:ノ,土,儿
 rtk264:洗:wash:先,水
 rtk265:介:jammed in:ハ,个
 rtk266:界:world:田,个,儿
-rtk267:茶:tea:个,艾,木
+rtk267:茶:tea:个,艹,木
 rtk268:脊:stature:月,二,人
 rtk269:合:fit:口,亼
-rtk270:塔:pagoda:合,土,艾
+rtk270:塔:pagoda:合,土,艹
 rtk271:王:king:
 rtk272:玉:jewel:王,丶
 rtk273:宝:treasure:玉,宀
@@ -566,14 +566,14 @@ rtk316:額:forehead:各,頁,宀
 rtk317:夏:summer:一,自,夂
 rtk318:処:dispose:几,夂
 rtk319:条:article:木,夂
-rtk320:落:fall:艾,洛
+rtk320:落:fall:艹,洛
 rtk321:冗:superfluous:冖,几
 rtk322:冥:dark:日,ハ,亠,冖
 rtk323:軍:army:車,冖
 rtk324:輝:radiance:軍,尚,儿,一
 rtk325:運:carry:込,軍
 rtk326:冠:crown:寸,冖,元
-rtk327:夢:dream:夕,冖,艾
+rtk327:夢:dream:夕,冖,艹
 rtk328:坑:pit:土,亠,几
 rtk329:高:tall:口,亠,冂
 rtk330:享:enjoy:口,子,亠
@@ -589,8 +589,8 @@ rtk339:周:circumference:口,土,冂
 rtk340:週:week:周,込
 rtk341:士:gentleman:
 rtk342:吉:good luck:口,士
-rtk343:壮:robust:士,爿
-rtk344:荘:villa:艾,壮
+rtk343:壮:robust:士,丬
+rtk344:荘:villa:艹,壮
 rtk345:売:sell:士,儿,冖
 rtk346:学:study:子,尚,冖
 rtk347:覚:memorize:見,尚,冖
@@ -602,7 +602,7 @@ rtk352:攻:aggression:工,攵
 rtk353:敗:failure:貝,攵
 rtk354:枚:sheet of...:木,攵
 rtk355:故:happenstance:古,攵
-rtk356:敬:awe:句,攵,艾
+rtk356:敬:awe:句,攵,艹
 rtk357:言:say:
 rtk358:警:admonish:敬,言
 rtk359:計:plot:言,十
@@ -621,7 +621,7 @@ rtk371:語:word:言,吾
 rtk372:読:read:言,売
 rtk373:調:tune:言,周
 rtk374:談:discuss:火,言
-rtk375:諾:consent:ノ,一,言,口,艾
+rtk375:諾:consent:ノ,一,言,口,艹
 rtk376:諭:rebuke:月,言,个,一
 rtk377:式:style:工,弋
 rtk378:試:test:言,式
@@ -630,7 +630,7 @@ rtk380:域:range:口,土,戈
 rtk381:賊:burglar:貝,十,戈
 rtk382:栽:plantation:土,木,戈
 rtk383:載:ride:車,土,戈
-rtk384:茂:overgrown:艾,成
+rtk384:茂:overgrown:艹,成
 rtk385:戚:grieve:小,卜,成
 rtk386:成:turn into:ノ,戈
 rtk387:城:castle:土,成
@@ -638,7 +638,7 @@ rtk388:誠:sincerity:言,成
 rtk389:威:intimidate:女,厂,成
 rtk390:滅:destroy:火,水,成
 rtk391:減:dwindle:口,水,亅,戈
-rtk392:蔑:ignore:艾,成
+rtk392:蔑:ignore:艹,成
 rtk393:桟:scaffold:木,戈,二
 rtk394:銭:coin:金,戈,二
 rtk395:浅:shallow:水,戈,二
@@ -648,7 +648,7 @@ rtk398:渉:ford:歩,水
 rtk399:頻:repeatedly:歩,頁
 rtk400:肯:agreement:月,止
 rtk401:企:undertake:止,个
-rtk402:歴:curriculum:止,麻
+rtk402:歴:curriculum:厂,林,止
 rtk403:武:warrior:止,弋
 rtk404:賦:levy:貝,武
 rtk405:正:correct:一,止
@@ -681,9 +681,9 @@ rtk431:初:first time:衣,刀
 rtk432:巾:towel:冂,｜
 rtk433:布:linen:ノ,一,巾
 rtk434:帆:sail:巾,凡
-rtk435:幅:hanging scroll:一,巾,口,田
+rtk435:幅:hanging scroll:畐,巾
 rtk436:帽:cap:巾,冒
-rtk437:幕:curtain:巾,大,日,艾
+rtk437:幕:curtain:巾,莫
 rtk438:幌:canopy:巾,尚,日,儿
 rtk439:錦:brocade:巾,金,白
 rtk440:市:market:巾,亠
@@ -696,7 +696,7 @@ rtk446:刺:thorn:巾,ハ,木,亅,冂
 rtk447:制:system:ノ,牛,巾,二
 rtk448:製:made in...:衣,牛,巾
 rtk449:転:revolve:車,二,厶
-rtk450:芸:technique:艾,云
+rtk450:芸:technique:艹,云
 rtk451:雨:rain:
 rtk452:雲:cloud:雨,云
 rtk453:曇:cloudy weather:雨,二,日,厶
@@ -738,7 +738,7 @@ rtk488:渇:thirst:水,日,匂
 rtk489:謁:audience:言,日,匂
 rtk490:褐:brown:初,日,匂
 rtk491:喝:hoarse:口,日,匂
-rtk492:葛:arrowroot:日,匂,艾
+rtk492:葛:arrowroot:日,匂,艹
 rtk493:旨:delicious:日,匕
 rtk494:脂:fat:月,旨
 rtk495:詣:visit a temple:言,旨
@@ -757,7 +757,7 @@ rtk507:炊:cook:火,欠
 rtk508:歌:song:丁,欠,口
 rtk509:軟:soft:欠,車
 rtk510:次:next:欠,冫
-rtk511:茨:briar:艾,次
+rtk511:茨:briar:艹,次
 rtk512:資:assets:貝,次
 rtk513:姿:figure:次,女
 rtk514:諮:consult with:次,言,口
@@ -773,12 +773,12 @@ rtk523:境:boundary:土,竟
 rtk524:亡:deceased:亠
 rtk525:盲:blind:亡,目
 rtk526:妄:delusion:亡,女
-rtk527:荒:laid waste:川,艾,亡
+rtk527:荒:laid waste:川,艹,亡
 rtk528:望:ambition:王,亡,月
 rtk529:方:direction:
 rtk530:妨:disturb:女,方
 rtk531:坊:boy:土,方
-rtk532:芳:perfume:方,艾
+rtk532:芳:perfume:方,艹
 rtk533:肪:obese:月,方
 rtk534:訪:call on:言,方
 rtk535:放:set free:方,攵
@@ -893,7 +893,7 @@ rtk643:認:acknowledge:言,忍
 rtk644:忌:mourning:己,心
 rtk645:志:intention:士,心
 rtk646:誌:document:言,志
-rtk647:芯:wick:心,艾
+rtk647:芯:wick:心,艹
 rtk648:忠:loyalty:中,心
 rtk649:串:spit:｜,口
 rtk650:患:afflicted:中,心
@@ -929,7 +929,7 @@ rtk679:憶:recollection:意,忄
 rtk680:惧:fear:ハ,state of mind,目
 rtk681:憧:yearn after:state of mind,童
 rtk682:憬:yearn for:口,小,日,state of mind,亠
-rtk683:慕:pining:心,大,日,艾
+rtk683:慕:pining:心,莫
 rtk684:添:annexed:水,天,心
 rtk685:必:invariably:ノ,心
 rtk686:泌:ooze:必,水,丶
@@ -944,7 +944,7 @@ rtk694:抹:rub:扌,末
 rtk695:拭:wipe:式,扌
 rtk696:拉:latin:立,扌
 rtk697:抱:embrace:包,扌
-rtk698:搭:board:合,扌,艾
+rtk698:搭:board:合,扌,艹
 rtk699:抄:extract:少,扌
 rtk700:抗:confront:亠,几,扌
 rtk701:批:criticism:比,扌
@@ -969,7 +969,7 @@ rtk719:損:damage:員,扌
 rtk720:拾:pick up:合,扌
 rtk721:担:shouldering:旦,扌
 rtk722:拠:foothold:処,扌
-rtk723:描:sketch:田,扌,艾
+rtk723:描:sketch:田,扌,艹
 rtk724:操:maneuver:扌,品,木
 rtk725:接:touch:妾,扌
 rtk726:掲:put up (a notice):日,匂,扌
@@ -1002,8 +1002,8 @@ rtk752:又:or again:
 rtk753:双:pair:又
 rtk754:桑:mulberry:又,木
 rtk755:隻:vessels:又,隹
-rtk756:護:safeguard:言,隻,艾
-rtk757:獲:seize:犭,又,艾,隹
+rtk756:護:safeguard:言,隻,艹
+rtk757:獲:seize:犭,又,艹,隹
 rtk758:奴:guy:女,又
 rtk759:怒:angry:奴,心
 rtk760:友:friend:ノ,一,又
@@ -1018,7 +1018,7 @@ rtk768:支:branch:十,又
 rtk769:技:skill:扌,支
 rtk770:枝:bough:木,支
 rtk771:肢:limb:月,支
-rtk772:茎:stalk:土,又,艾
+rtk772:茎:stalk:土,又,艹
 rtk773:怪:suspicious:土,state of mind,又
 rtk774:軽:lightly:車,土,又
 rtk775:叔:uncle:小,卜,又
@@ -1035,11 +1035,11 @@ rtk785:妥:gentle:女,爪
 rtk786:乳:milk:乙,子,爪
 rtk787:浮:floating:子,水,爪
 rtk788:淫:lewdness:ノ,士,水,爪,王
-rtk789:将:leader:寸,爪,爿
+rtk789:将:leader:寸,爪,丬
 rtk790:奨:exhort:将,大
 rtk791:采:dice:爪,木
 rtk792:採:pick:采,扌
-rtk793:菜:vegetable:采,艾
+rtk793:菜:vegetable:采,艹
 rtk794:受:accept:爪,又,冖
 rtk795:授:impart:受,扌
 rtk796:愛:love:心,爪,冖,夂
@@ -1125,7 +1125,7 @@ rtk875:列:file:歹
 rtk876:裂:split:衣,歹,亠
 rtk877:烈:ardent:灬,歹
 rtk878:死:death:一,夕,匕,歹
-rtk879:葬:interment:一,夕,匕,廾,艾
+rtk879:葬:interment:一,夕,匕,廾,艹
 rtk880:瞬:wink:牛,舛,爪,目,夕,冖
 rtk881:耳:ear:
 rtk882:取:take:耳,又
@@ -1159,7 +1159,7 @@ rtk909:鉄:iron:金,失
 rtk910:迭:transfer:込,失
 rtk911:臣:retainer:
 rtk912:姫:princess:女,臣
-rtk913:蔵:storehouse:ノ,臣,戈,艾,厂
+rtk913:蔵:storehouse:ノ,臣,戈,艹,厂
 rtk914:臓:entrails:蔵,月
 rtk915:賢:intelligent:貝,臣,又
 rtk916:腎:kidney:月,臣,又
@@ -1171,7 +1171,7 @@ rtk921:拒:repel:扌,巨
 rtk922:力:power:
 rtk923:男:male:田,力
 rtk924:労:labor:尚,力,冖
-rtk925:募:recruit:大,日,力,艾
+rtk925:募:recruit:大,日,力,艹
 rtk926:劣:inferiority:少,力
 rtk927:功:achievement:工,力
 rtk928:勧:persuade:力,丷,隹
@@ -1220,7 +1220,7 @@ rtk970:秘:secret:禾,必
 rtk971:称:appellation:ノ,禾,小,一
 rtk972:利:profit:禾
 rtk973:梨:pear tree:禾,木
-rtk974:穫:harvest:禾,隻,艾
+rtk974:穫:harvest:禾,隻,艹
 rtk975:穂:ear:禾,十,心,田
 rtk976:稲:rice plant:旧,禾,爪
 rtk977:香:incense:禾,日
@@ -1231,8 +1231,8 @@ rtk981:透:transparent:禾,込,乃
 rtk982:誘:entice:秀,言
 rtk983:稽:think:禾,旨,尤
 rtk984:穀:cereals:禾,士,冖,殳,几,又
-rtk985:菌:germ:禾,囗,艾
-rtk986:萎:wither:委,艾
+rtk985:菌:germ:禾,囗,艹
+rtk986:萎:wither:委,艹
 rtk987:米:rice:
 rtk988:粉:flour:米,分
 rtk989:粘:sticky:占,米
@@ -1242,7 +1242,7 @@ rtk992:迷:astray:込,米
 rtk993:粋:chic:九,十,米
 rtk994:謎:riddle:言,迷
 rtk995:糧:provisions:旦,米,里
-rtk996:菊:chrysanthemum:米,勹,艾
+rtk996:菊:chrysanthemum:米,勹,艹
 rtk997:奥:heart:大,米,冂
 rtk998:数:number:女,米,攵
 rtk999:楼:watchtower:女,米,木
@@ -1330,11 +1330,11 @@ rtk1080:代:substitute:亻,弋
 rtk1081:袋:sack:衣,弋,亠
 rtk1082:貸:lend:貝,弋
 rtk1083:化:change:亻,匕
-rtk1084:花:flower:匕,艾
+rtk1084:花:flower:匕,艹
 rtk1085:貨:freight:貝,匕
 rtk1086:傾:lean:亻,頃
 rtk1087:何:what:亻,可
-rtk1088:荷:baggage:何,艾
+rtk1088:荷:baggage:何,艹
 rtk1089:俊:sagacious:亻,儿,厶,夂
 rtk1090:傍:bystander:亻,丷,方,立,亠,冖
 rtk1091:俺:i:亻,奄
@@ -1365,7 +1365,7 @@ rtk1115:夜:night:亠,亻,夂,夕
 rtk1116:液:fluid:水,亠,攵,夕
 rtk1117:塚:hillock:土,冖,豕
 rtk1118:幣:cash:巾,丷,冂,攵
-rtk1119:蔽:cover:｜,巾,尚,丷,冂,攵,艾
+rtk1119:蔽:cover:｜,巾,尚,丷,冂,攵,艹
 rtk1120:弊:abuse:｜,巾,尚,丷,冂,廾,攵
 rtk1121:喚:yell:四,大,冂,勹
 rtk1122:換:interchange:扌,四,大,冂,勹
@@ -1417,7 +1417,7 @@ rtk1167:示:show:二,小
 rtk1168:礼:salute:礻,乙
 rtk1169:祥:auspicious:礻,羊
 rtk1170:祝:celebrate:礻,兄
-rtk1171:福:blessing:礻,一,口,田
+rtk1171:福:blessing:礻,畐
 rtk1172:祉:welfare:礻,止
 rtk1173:社:company:礻,土
 rtk1174:視:inspection:礻,見
@@ -1449,7 +1449,7 @@ rtk1199:伸:expand:亻,申
 rtk1200:神:gods:礻,申
 rtk1201:捜:search:｜,日,又,扌,田
 rtk1202:果:fruit:｜,田,木
-rtk1203:菓:candy:田,木,艾
+rtk1203:菓:candy:田,木,艹
 rtk1204:課:chapter:言,田,木
 rtk1205:裸:naked:初,田,木
 rtk1206:斤:axe:
@@ -1479,7 +1479,7 @@ rtk1229:急:hurry:ヨ,心,勹
 rtk1230:穏:calm:ヨ,禾,心,爪
 rtk1231:侵:encroach:亻,ヨ,又,冖
 rtk1232:浸:immersed:ヨ,水,又,冖
-rtk1233:寝:lie down:ヨ,又,冖,宀,爿
+rtk1233:寝:lie down:ヨ,又,冖,宀,丬
 rtk1234:婦:lady:ヨ,巾,女,冖
 rtk1235:掃:sweep:ヨ,巾,冖,扌
 rtk1236:当:hit:ヨ,尚
@@ -1499,7 +1499,7 @@ rtk1249:需:demand:雨,而
 rtk1250:儒:confucian:亻,需
 rtk1251:端:edge:山,而,立
 rtk1252:両:both:｜,一,冂,山
-rtk1253:満:full:両,水,二,艾
+rtk1253:満:full:両,水,二,艹
 rtk1254:画:brush-stroke:一,田,凵
 rtk1255:歯:tooth:止,米,凵
 rtk1256:曲:bend:｜,日
@@ -1513,7 +1513,7 @@ rtk1263:科:department:禾,斗
 rtk1264:図:map:斗,囗
 rtk1265:用:utilize:
 rtk1266:庸:commonplace:ヨ,用,广,聿
-rtk1267:備:equip:亻,用,厂,艾
+rtk1267:備:equip:亻,用,厂,艹
 rtk1268:昔:once upon a time:｜,一,二,日
 rtk1269:錯:confused:金,日,廾,二
 rtk1270:借:borrow:亻,昔
@@ -1527,9 +1527,9 @@ rtk1277:席:seat:巾,广,一,凵
 rtk1278:度:degrees:又,广,一,凵
 rtk1279:渡:transit:水,又,广
 rtk1280:奔:run:ノ,一,十,大,廾
-rtk1281:噴:erupt:貝,口,十,艾
-rtk1282:墳:tomb:貝,十,土,艾
-rtk1283:憤:aroused:貝,十,state of mind,艾
+rtk1281:噴:erupt:貝,口,十,艹
+rtk1282:墳:tomb:貝,十,土,艹
+rtk1283:憤:aroused:貝,十,state of mind,艹
 rtk1284:焼:bake:火,十,儿
 rtk1285:暁:daybreak:十,日,儿,廾
 rtk1286:半:half:｜,二,丷,十
@@ -1541,13 +1541,13 @@ rtk1291:券:ticket:一,人,大,刀,二,丷
 rtk1292:巻:scroll:大,二,丷,己
 rtk1293:圏:sphere:囗,巻
 rtk1294:勝:victory:月,人,大,二,丷,力
-rtk1295:藤:wisteria:｜,一,月,水,艾,二,大,丷
+rtk1295:藤:wisteria:｜,一,月,水,艹,二,大,丷
 rtk1296:謄:mimeograph:｜,一,月,言,二,大,丷
 rtk1297:片:one-sided:
 rtk1298:版:printing block:片,反
 rtk1299:之:of:乙,丶,亠,廴
 rtk1300:乏:destitution:ノ,之
-rtk1301:芝:turf:艾,之
+rtk1301:芝:turf:艹,之
 rtk1302:不:negative:｜,ノ,一,丶
 rtk1303:否:negate:ノ,一,口,｜,丶
 rtk1304:杯:counter for cupfuls:木,不
@@ -1593,7 +1593,7 @@ rtk1343:教:teach:孝,攵
 rtk1344:拷:torture:老,扌
 rtk1345:者:someone:日,老
 rtk1346:煮:boil:者,灬
-rtk1347:著:renowned:者,艾
+rtk1347:著:renowned:者,艹
 rtk1348:箸:chopsticks:竹,者
 rtk1349:署:signature:罒,者
 rtk1350:暑:sultry:日,老
@@ -1732,7 +1732,7 @@ rtk1482:機:loom:ノ,木,丶,幺,戈
 rtk1483:畿:capital:田,幺,戈,丶,ノ
 rtk1484:玄:mysterious:亠,幺
 rtk1485:畜:livestock:田,玄
-rtk1486:蓄:amass:艾,畜
+rtk1486:蓄:amass:艹,畜
 rtk1487:弦:bowstring:弓,玄
 rtk1488:擁:hug:玄,推
 rtk1489:滋:nourishing:一,水,丷,幺
@@ -1769,7 +1769,7 @@ rtk1519:厄:unlucky:卩,厂
 rtk1520:危:dangerous:勹,厂,卩
 rtk1521:宛:address:夕,卩,宀
 rtk1522:腕:arm:月,宛
-rtk1523:苑:garden:夕,卩,艾
+rtk1523:苑:garden:夕,卩,艹
 rtk1524:怨:grudge:心,夕,卩
 rtk1525:柳:willow:木,卩
 rtk1526:卵:egg:ノ,卜,丶,卩
@@ -1807,11 +1807,11 @@ rtk1557:盆:basin:皿,分
 rtk1558:盟:alliance:月,皿,日
 rtk1559:盗:steal:次,皿
 rtk1560:温:warm:皿,水,日
-rtk1561:蓋:cover:皿,去,艾
+rtk1561:蓋:cover:皿,去,艹
 rtk1562:監:oversee:皿,臣,二
 rtk1563:濫:excessive:ノ,監,水
 rtk1564:鑑:specimen:金,監
-rtk1565:藍:indigo:ノ,監,艾
+rtk1565:藍:indigo:ノ,監,艹
 rtk1566:猛:fierce:犭,皿,子
 rtk1567:盛:boom:成,皿
 rtk1568:塩:salt:口,皿,土,ノ,一,人
@@ -1866,7 +1866,7 @@ rtk1616:壁:wall:辟,土
 rtk1617:璧:sphere:王,辟
 rtk1618:避:evade:口,込,尸,辛
 rtk1619:新:new:立,木,斤
-rtk1620:薪:fuel:艾,新
+rtk1620:薪:fuel:艹,新
 rtk1621:親:parent:見,立,木
 rtk1622:幸:happiness:亠,辛
 rtk1623:執:tenacious:幸,丸
@@ -1881,7 +1881,7 @@ rtk1631:陸:land:土,儿,阝
 rtk1632:睦:intimate:土,目,儿
 rtk1633:勢:forces:土,力,丶,儿,九
 rtk1634:熱:heat:土,丸,儿,灬
-rtk1635:菱:diamond (shape):土,儿,夂,艾
+rtk1635:菱:diamond (shape):土,儿,夂,艹
 rtk1636:陵:mausoleum:土,儿,夂,阝
 rtk1637:亥:sign of the hog:人,亠,ノ,丶
 rtk1638:核:nucleus:亥,木
@@ -1944,13 +1944,13 @@ rtk1694:実:reality:士,大,宀
 rtk1695:奉:observance:｜,一,人,大,二
 rtk1696:俸:stipend:亻,奉
 rtk1697:棒:rod:木,奉
-rtk1698:謹:discreet:言,土,艾,口,二
-rtk1699:僅:a wee bit:亻,土,艾,口,二,一
-rtk1700:勤:diligence:土,力,艾,口,二,一
-rtk1701:漢:sino-:水,艾,口,夫
-rtk1702:嘆:sigh:ノ,一,口,艾,二,大
-rtk1703:難:difficult:艾,隹,大,口,亠,二
-rtk1704:華:splendor:｜,一,艾
+rtk1698:謹:discreet:言,土,艹,口,二
+rtk1699:僅:a wee bit:亻,土,艹,口,二,一
+rtk1700:勤:diligence:土,力,艹,口,二,一
+rtk1701:漢:sino-:水,艹,口,夫
+rtk1702:嘆:sigh:ノ,一,口,艹,二,大
+rtk1703:難:difficult:艹,隹,大,口,亠,二
+rtk1704:華:splendor:｜,一,艹
 rtk1705:垂:droop:｜,ノ,一
 rtk1706:唾:saliva:垂,口
 rtk1707:睡:drowsy:垂,目
@@ -2030,7 +2030,7 @@ rtk1780:汗:sweat:干,水
 rtk1781:軒:flats:干,車
 rtk1782:岸:beach:干,山,厂
 rtk1783:幹:tree trunk:干,早,个
-rtk1784:芋:taro:一,艾,干
+rtk1784:芋:taro:一,艹,干
 rtk1785:宇:eaves:干,亅,宀
 rtk1786:余:too much:一,ハ,个,亅,示
 rtk1787:除:exclude:示,个,阝,一
@@ -2058,7 +2058,7 @@ rtk1808:勲:meritorious deed:｜,力,灬,日,一,ノ
 rtk1809:働:work:亻,動
 rtk1810:種:species:｜,禾,日,里,ノ
 rtk1811:衝:collide:｜,行,日,彳,里,ノ
-rtk1812:薫:send forth fragrance:｜,灬,艾,日,ノ,一
+rtk1812:薫:send forth fragrance:｜,灬,艹,日,ノ,一
 rtk1813:病:ill:丙,疒
 rtk1814:痴:stupid:知,疔
 rtk1815:痘:pox:豆,疔
@@ -2073,7 +2073,7 @@ rtk1823:疲:exhausted:皮,又,疔
 rtk1824:疫:epidemic:殳,疔,几,又
 rtk1825:痛:pain:用,疔,マ
 rtk1826:癖:mannerism:疔,辟
-rtk1827:匿:hide:ノ,口,匚,艾
+rtk1827:匿:hide:ノ,口,匚,艹
 rtk1828:匠:artisan:斤,匚
 rtk1829:医:doctor:矢,匚
 rtk1830:匹:equal:儿,匚
@@ -2119,12 +2119,12 @@ rtk1869:斎:purification:斉,示
 rtk1870:粛:solemn:｜,ノ,ヨ,米,隶
 rtk1871:塁:bases:田,土,冫
 rtk1872:楽:music:白,木,冫
-rtk1873:薬:medicine:艾,楽
+rtk1873:薬:medicine:艹,楽
 rtk1874:率:ratio:十,冫,玄
 rtk1875:渋:astringent:止,水,冫
 rtk1876:摂:vicarious:耳,冫,扌
 rtk1877:央:center:冖,大
-rtk1878:英:england:艾,央
+rtk1878:英:england:艹,央
 rtk1879:映:reflect:ノ,日,大,冖
 rtk1880:赤:red:土
 rtk1881:赦:pardon:赤,土,攵
@@ -2227,7 +2227,7 @@ rtk1977:眠:sleep:民,目
 rtk1978:捕:catch:十,用,丶,扌
 rtk1979:哺:nurse:口,十,用,丶
 rtk1980:浦:bay:十,水,用,丶
-rtk1981:蒲:bullrush:水,用,丶,艾,十
+rtk1981:蒲:bullrush:水,用,丶,艹,十
 rtk1982:舗:shop:舎,十,用,丶
 rtk1983:補:supplement:十,初,用,丶
 rtk1984:邸:residence:氏,邦
@@ -2271,7 +2271,7 @@ rtk2021:艇:rowboat:王,舟,廴
 rtk2022:瓜:melon:厶
 rtk2023:弧:arc:瓜,弓
 rtk2024:孤:orphan:瓜,子
-rtk2025:繭:cocoon:艾,冂,糸,風
+rtk2025:繭:cocoon:艹,冂,糸,風
 rtk2026:益:benefit:一,皿,ハ,丷
 rtk2027:暇:spare time:日,又
 rtk2028:敷:spread:十,田,方,丶,攵
@@ -2295,19 +2295,19 @@ rtk2045:眉:eyebrow:目,尸,｜
 rtk2046:呉:give:口,ハ
 rtk2047:娯:recreation:呉,女
 rtk2048:誤:mistake:言,呉
-rtk2049:蒸:steam:丞,灬,艾
+rtk2049:蒸:steam:丞,灬,艹
 rtk2050:承:acquiesce:ノ,二,亅,手
 rtk2051:函:box (archaic):一,水,凵
 rtk2052:極:extreme:口,又,木,一
 rtk2053:牙:tusk:
-rtk2054:芽:bud:牙,艾
+rtk2054:芽:bud:牙,艹
 rtk2055:邪:wicked:牙,邦
 rtk2056:雅:gracious:牙,隹
 rtk2057:釈:explanation:釆,米,尸,丶
 rtk2058:番:turn:田,釆,米
 rtk2059:審:hearing:田,釆,米,宀
 rtk2060:翻:flip:羽,田,釆,米
-rtk2061:藩:clan:水,田,釆,米,艾
+rtk2061:藩:clan:水,田,釆,米,艹
 rtk2062:毛:fur:
 rtk2063:耗:decrease:｜,士,ハ,毛,木,耒,ノ
 rtk2064:尾:tail:毛,尸
@@ -2341,7 +2341,7 @@ rtk2091:鳥:bird:灬
 rtk2092:鳴:chirp:口,鳥,灬
 rtk2093:鶴:crane:鳥,灬,隹,宀,冖
 rtk2094:烏:crow:丶,口,一,灬
-rtk2095:蔦:vine:鳥,灬,艾
+rtk2095:蔦:vine:鳥,灬,艹
 rtk2096:鳩:pigeon:九,鳥,灬
 rtk2097:鶏:chicken:人,爪,土,大,鳥,灬,二
 rtk2098:島:island:山,鳥
@@ -2402,7 +2402,7 @@ rtk2152:劇:drama:卜,匕,厂,虍,豕
 rtk2153:虐:tyrannize:卜,匕,匚,厂,虍
 rtk2154:鹿:deer:广,prim-antlers,比
 rtk2155:麓:foot of a mountain:林,鹿
-rtk2156:薦:recommend:广,灬,艾
+rtk2156:薦:recommend:广,灬,艹
 rtk2157:慶:jubilation:心,冖,夂,广
 rtk2158:麗:lovely:一,冂,鹿
 rtk2159:熊:bear:能,灬
@@ -2437,7 +2437,7 @@ rtk2187:遵:abide by:込,尊
 rtk2188:罷:quit:罒,月,匕,厶
 rtk2189:屯:barracks:ノ,乙,凵
 rtk2190:且:moreover:一,目
-rtk2191:藻:seaweed:水,木,艾,品
+rtk2191:藻:seaweed:水,木,艹,品
 rtk2192:隷:slave:ヨ,士,水,隶,示
 rtk2193:癒:healing:月,心,个,疔
 rtk2194:璽:emperor's seal:爾,王
@@ -2472,10 +2472,10 @@ rtk2222:綴:compose:糸,又
 rtk2223:鎧:put on armor:金,山,豆
 rtk2224:凱:victory song:山,豆,几
 rtk2225:呑:drink:ノ,口,大
-rtk2226:韮:leek:韭,艾
+rtk2226:韮:leek:韭,艹
 rtk2227:籤:lottery:竹,戈,韭,人
 rtk2228:懺:regret:人,state of mind,戈,韭
-rtk2229:芻:grass cutting:勹,屮,艾
+rtk2229:芻:grass cutting:勹,屮,艹
 rtk2230:雛:chick:勹,屮,隹
 rtk2231:趨:run:走,土,勹,屮
 rtk2232:尤:reasonable:丶,尢
@@ -2484,10 +2484,10 @@ rtk2234:或:some:口,戈,一
 rtk2235:兎:rabbit:ノ,丶,儿,｜
 rtk2236:也:to be (classical):｜,乙,匕
 rtk2237:巴:comma-design:
-rtk2239:菫:the violet:｜,一,口,土,二,艾
+rtk2239:菫:the violet:｜,一,口,土,二,艹
 rtk2240:曼:wide:日,罒,又
 rtk2241:云:say:二,厶
-rtk2242:莫:must not:大,日,艾
+rtk2242:莫:must not:大,日,艹
 rtk2243:而:and yet:
 rtk2244:倭:yamato:亻,委
 rtk2245:侠:tomboy:亻,大,二,丷,亠
@@ -2526,7 +2526,7 @@ rtk2277:哨:scout:口,肖
 rtk2278:咎:blame:口,人,夂
 rtk2279:囁:whisper:口,耳
 rtk2280:喋:talk:口,木,世
-rtk2281:嘩:noisy:一,口,艾,｜
+rtk2281:嘩:noisy:一,口,艹,｜
 rtk2282:噂:rumor:口,尊
 rtk2283:咳:cough:口,亥
 rtk2284:喧:noisy:一,口,日,宀
@@ -2657,7 +2657,7 @@ rtk2408:溢:overflow:水,益
 rtk2409:湛:fill:｜,一,甘,水,儿,匚
 rtk2410:淳:pure:口,子,水,亠
 rtk2411:渥:kindness:水,屋
-rtk2412:灘:open sea:水,大,口,艾,隹,亠,二
+rtk2412:灘:open sea:水,大,口,艹,隹,亠,二
 rtk2413:汲:draw (water):ノ,水,及
 rtk2414:瀞:pure water:水,静
 rtk2415:溜:collect:水,刀,厶,田
@@ -2680,63 +2680,63 @@ rtk2431:狐:fox:犭,瓜
 rtk2432:狛:archaic part of korea:犭,白
 rtk2433:獅:lion:犭,師
 rtk2434:狒:baboon:犭,弓,ノ,｜
-rtk2435:莨:tobacco:艮,艾
-rtk2436:茉:jasmine:艾,末
-rtk2437:莉:jasmine:禾,艾
-rtk2438:苺:strawberry:母,艾,毋
-rtk2439:萩:bush clover:火,禾,艾
-rtk2440:藝:art:九,土,二,丶,儿,厶,艾
-rtk2441:薙:mow down (the enemy):矢,艾,隹
-rtk2442:蓑:straw raincoat:衣,一,亠,艾
-rtk2443:苔:moss:口,厶,艾
-rtk2444:蕩:melt:｜,一,水,日,艾,勿
-rtk2445:蔓:vine:日,又,艾
-rtk2446:蓮:lotus:込,車,艾
-rtk2447:芙:lotus:人,二,艾,大
-rtk2448:蓉:lotus:艾,宀,谷
-rtk2449:蘭:orchid:｜,一,日,木,門,艾
-rtk2450:芦:reed:戸,艾
-rtk2451:薯:potato:日,老,艾
-rtk2452:菖:iris:日,艾
-rtk2453:蕉:banana:灬,艾,隹
-rtk2454:蕎:buckwheat:ノ,口,冂,艾,大
-rtk2455:蕗:butterbur:艾,路
-rtk2456:茄:eggplant:口,力,艾
-rtk2457:蔭:shade:二,个,厶,艾,阝,一
-rtk2458:蓬:sagebrush:｜,一,込,夂,艾
-rtk2459:芥:mustard:艾,介
-rtk2460:萌:show symptoms of:月,日,艾
-rtk2461:葡:wild grape:十,用,勹,艾,丶
-rtk2462:萄:grape vine:缶,勹,艾
-rtk2463:蘇:be resuscitated:禾,魚,艾
-rtk2464:蕃:grow luxuriously:田,釆,米,艾
-rtk2465:苓:plant:个,卩,艾,一
-rtk2466:菰:reed used for matting:瓜,子,艾
-rtk2467:蒙:ignorance:冖,艾,豕
-rtk2468:茅:miscanthus reed:矛,艾
-rtk2469:芭:banana:巴,艾
-rtk2470:苅:cutting (grass):艾
-rtk2471:葱:stone leek:心,丶,艾,勿
-rtk2472:葵:hollyhock:人,大,二,癶,艾,ノ
-rtk2473:葺:thatch:口,耳,艾
-rtk2474:蕊:pistil:心,艾
-rtk2475:茸:mushroom:耳,艾
-rtk2476:蒔:sow (seeds):寸,土,日,艾
-rtk2477:芹:parsley:斤,艾
-rtk2478:苫:rush matting:口,卜,艾
-rtk2479:蒼:blue:ノ,口,个,艾,一
-rtk2480:藁:straw:艾,高,木
-rtk2481:蕪:turnip:艾,無
-rtk2482:藷:potato:言,日,老,艾
-rtk2483:薮:thicket:女,米,艾,攵
-rtk2484:蒜:garlic:艾,示
-rtk2485:蕨:bracken:欠,丷,厂,屮,艾
-rtk2486:蔚:dense growth:艾,寸,尸
-rtk2487:茜:madder:西,艾
-rtk2488:莞:smiling:宀,艾,元
-rtk2489:蒐:gather:艾,鬼
-rtk2490:菅:sedge:艾,官
-rtk2491:葦:reed:口,艾,韋
+rtk2435:莨:tobacco:艮,艹
+rtk2436:茉:jasmine:艹,末
+rtk2437:莉:jasmine:禾,艹
+rtk2438:苺:strawberry:母,艹,毋
+rtk2439:萩:bush clover:火,禾,艹
+rtk2440:藝:art:九,土,二,丶,儿,厶,艹
+rtk2441:薙:mow down (the enemy):矢,艹,隹
+rtk2442:蓑:straw raincoat:衣,一,亠,艹
+rtk2443:苔:moss:口,厶,艹
+rtk2444:蕩:melt:｜,一,水,日,艹,勿
+rtk2445:蔓:vine:日,又,艹
+rtk2446:蓮:lotus:込,車,艹
+rtk2447:芙:lotus:人,二,艹,大
+rtk2448:蓉:lotus:艹,宀,谷
+rtk2449:蘭:orchid:｜,一,日,木,門,艹
+rtk2450:芦:reed:戸,艹
+rtk2451:薯:potato:日,老,艹
+rtk2452:菖:iris:日,艹
+rtk2453:蕉:banana:灬,艹,隹
+rtk2454:蕎:buckwheat:ノ,口,冂,艹,大
+rtk2455:蕗:butterbur:艹,路
+rtk2456:茄:eggplant:口,力,艹
+rtk2457:蔭:shade:二,个,厶,艹,阝,一
+rtk2458:蓬:sagebrush:｜,一,込,夂,艹
+rtk2459:芥:mustard:艹,介
+rtk2460:萌:show symptoms of:月,日,艹
+rtk2461:葡:wild grape:十,用,勹,艹,丶
+rtk2462:萄:grape vine:缶,勹,艹
+rtk2463:蘇:be resuscitated:禾,魚,艹
+rtk2464:蕃:grow luxuriously:田,釆,米,艹
+rtk2465:苓:plant:个,卩,艹,一
+rtk2466:菰:reed used for matting:瓜,子,艹
+rtk2467:蒙:ignorance:冖,艹,豕
+rtk2468:茅:miscanthus reed:矛,艹
+rtk2469:芭:banana:巴,艹
+rtk2470:苅:cutting (grass):艹
+rtk2471:葱:stone leek:心,丶,艹,勿
+rtk2472:葵:hollyhock:人,大,二,癶,艹,ノ
+rtk2473:葺:thatch:口,耳,艹
+rtk2474:蕊:pistil:心,艹
+rtk2475:茸:mushroom:耳,艹
+rtk2476:蒔:sow (seeds):寸,土,日,艹
+rtk2477:芹:parsley:斤,艹
+rtk2478:苫:rush matting:口,卜,艹
+rtk2479:蒼:blue:ノ,口,个,艹,一
+rtk2480:藁:straw:艹,高,木
+rtk2481:蕪:turnip:艹,無
+rtk2482:藷:potato:言,日,老,艹
+rtk2483:薮:thicket:女,米,艹,攵
+rtk2484:蒜:garlic:艹,示
+rtk2485:蕨:bracken:欠,丷,厂,屮,艹
+rtk2486:蔚:dense growth:艹,寸,尸
+rtk2487:茜:madder:西,艹
+rtk2488:莞:smiling:宀,艹,元
+rtk2489:蒐:gather:艹,鬼
+rtk2490:菅:sedge:艹,官
+rtk2491:葦:reed:口,艹,韋
 rtk2492:迪:edify:込,由
 rtk2493:辿:follow (road):込,山
 rtk2494:這:crawl:言,込
@@ -2752,7 +2752,7 @@ rtk2503:鄭:an ancient chinese province:酋,大,阝
 rtk2504:隕:fall:貝,口,阝
 rtk2505:隈:corner:阝,畏
 rtk2506:憑:depend:心,馬,冫,灬
-rtk2507:惹:attract:ノ,一,口,心,艾
+rtk2507:惹:attract:ノ,一,口,心,艹
 rtk2508:悉:all:ノ,心,釆,米
 rtk2509:忽:in a moment:心,勿
 rtk2510:惣:all:牛,心,勿
@@ -2820,7 +2820,7 @@ rtk2571:李:plum:子,木
 rtk2572:棉:cotton:巾,白,木
 rtk2573:楯:shield:斤,十,木,目,厂
 rtk2574:榎:lotus tree:木,夏
-rtk2575:樺:birch:｜,一,木,艾
+rtk2575:樺:birch:｜,一,木,艹
 rtk2576:槍:spear:口,木,个,一
 rtk2577:柘:wild mulberry:石,木
 rtk2578:梱:pack:木,囗
@@ -2863,7 +2863,7 @@ rtk2614:珊:coral:王,冊
 rtk2615:瑚:ancestral offering receptacle:王,胡
 rtk2616:瑞:congratulations:王,山,而
 rtk2617:玖:beautiful black jewel:久,王
-rtk2618:瑛:sparkle of jewelry:ノ,王,艾,大,冖
+rtk2618:瑛:sparkle of jewelry:ノ,王,艹,大,冖
 rtk2619:玲:sound of jewels:王,个,卩,一
 rtk2620:畢:the end:｜,一,田
 rtk2621:畦:rice paddy ridge:田,土
@@ -3018,7 +3018,7 @@ rtk2770:蹄:hoof:足,帝
 rtk2771:蹟:remains:貝,土,亠,二,足
 rtk2772:跨:be:大,二,勹,足
 rtk2773:跪:kneel:卩,厂,勹,足
-rtk2774:醤:a kind of miso:寸,爪,酉,爿
+rtk2774:醤:a kind of miso:寸,爪,酉,丬
 rtk2775:醍:whey:酉,日,疋
 rtk2776:醐:boiled butter:酉,胡
 rtk2777:醇:pure sake:口,子,酉,亠
@@ -3031,7 +3031,7 @@ rtk2783:錐:auger:金,隹
 rtk2784:鍬:hoe with long blade at acute angle:火,禾,金
 rtk2785:鋲:rivet:金,兵
 rtk2786:錫:copper:金,日,勿
-rtk2787:錨:anchor:金,田,艾
+rtk2787:錨:anchor:金,田,艹
 rtk2788:釘:nail:一,金,亅
 rtk2789:鑓:spear:｜,一,金,口,込
 rtk2790:鋒:dagger:｜,一,金,夂
@@ -3117,16 +3117,16 @@ rtk2869:兇:wickedness:儿,凵,丶,ノ
 rtk2870:兜:helmet:白,儿
 rtk2871:靄:mist:雨,言,日,勹,匕
 rtk2872:劫:threat:土,力,厶
-rtk2873:歎:grief:大,一,欠,艾,口,二
+rtk2873:歎:grief:大,一,欠,艹,口,二
 rtk2874:輿:palanquin:臼,車,ハ
 rtk2875:歪:warp:不,正
 rtk2876:翠:green:羽,十,人,亠
 rtk2877:黛:blackened eyebrows:黒,弋
-rtk2878:鼎:three legged kettle:｜,一,片,目,爿
+rtk2878:鼎:three legged kettle:｜,一,片,目,丬
 rtk2879:鹵:salt:十,囗
 rtk2880:鹸:saltiness:口,十,人,个,囗,鹵
 rtk2881:虔:respect:文,卜,匕,厂,虍
-rtk2882:燕:swallow (bird):口,匕,灬,爿,艾
+rtk2882:燕:swallow (bird):口,匕,灬,丬,艹
 rtk2883:嘗:once:尚,旨
 rtk2884:殆:almost:口,厶,歹
 rtk2885:牌:label:十,田,片
@@ -3168,7 +3168,7 @@ rtk2920:瓢:gourd:瓜,票
 rtk2921:琵:glissando on strings:王,比
 rtk2922:琶:lute:王,巴
 rtk2923:叉:fork in road:又,丶
-rtk2924:乖:oppose:ノ,十,匕,爿
+rtk2924:乖:oppose:ノ,十,匕,丬
 rtk2925:畠:field:田,白
 rtk2926:圃:garden:十,用,丶,囗
 rtk2927:丞:help:ノ,一,亅
@@ -3206,8 +3206,8 @@ rtk2958:浬:knot:水,里,田,土
 rtk2959:吋:inch:口,寸
 rtk2960:呎:foot:口,尸,丶
 rtk2961:梵:sanskrit:木,丶,几
-rtk2962:薩:salvation:艾,阝,産
-rtk2963:菩:kind of grass:咅,艾
+rtk2962:薩:salvation:艹,阝,産
+rtk2963:菩:kind of grass:咅,艹
 rtk2964:唖:mute:｜,一,口
 rtk2965:牟:pupil (eye):牛,厶
 rtk2966:迦:(used phonetically):口,込,力
@@ -3215,16 +3215,16 @@ rtk2967:珈:ornamental hairpin:王,口,力
 rtk2968:琲:string of many pearls:王,非
 rtk2969:檜:japanese cypress:日,木,个,一
 rtk2970:轡:bit (horse):口,糸,車
-rtk2971:淵:abyss:｜,一,水,爿,片
+rtk2971:淵:abyss:｜,一,水,丬,片
 rtk2972:伍:five:亻,五
 rtk2973:什:utensil:亻,十
-rtk2974:萬:ten thousand:田,日,冂,禹,艾
+rtk2974:萬:ten thousand:田,日,冂,禹,艹
 rtk2975:邁:go:込,萬
 rtk2976:燭:light:火,虫,勹
 rtk2977:逞:sturdy:王,口,込
 rtk2978:燈:lamp:火,登
 rtk2979:裡:reverse:初,里
-rtk2980:薗:garden:艾,園
+rtk2980:薗:garden:艹,園
 rtk2981:鋪:shop:金,十,用,丶
 rtk2982:嶋:island:山,鳥,灬
 rtk2983:峯:peak:｜,一,山,夂
@@ -3239,7 +3239,7 @@ rtk2991:脛:leg:月,工,巛
 rtk2992:勁:strong:工,巛,力
 rtk2993:祀:enshrine:礻,巳
 rtk2994:祓:exorcise:礻,犬
-rtk2995:躇:hesitate:艾,者,足
+rtk2995:躇:hesitate:艹,者,足
 rtk2996:壽:longevity:一,口,工,士,寸
 rtk2997:躊:hesitate:工,士,寸,足
 rtk2998:饅:bean-jam dumpling:食,日,又
@@ -3248,7 +3248,7 @@ rtk3000:鼈:snapping turtle:小,尚,冂,攵,黽
 
 # Official Kangxi-radical entries added to fill previously-unnamed primitives
 # (Finding 1, 2026-08 search-quality audit). Names are the standard public-domain
-# Kangxi radical English names (or, for 艾/厶, the established primitive meaning);
+# Kangxi radical English names (or, for 艹/厶, the established primitive meaning);
 # not Heisig book text.
 kangxi8:亠:lid,primitive_lid,top hat
 kangxi13:冂:border,down box
@@ -3288,7 +3288,7 @@ kangxi84:气:steam,air
 kangxi190:髟:long hair
 kangxi192:鬯:sacrificial wine
 kangxi205:黽:frog,toad
-prim-mugwort:艾:mugwort
+prim-mugwort:艹:mugwort
 prim-thirty:丗:thirty,buckle,apron
 kangxi52:幺:tiny,short thread
 kangxi40:宀:roof,primitive_roof
@@ -3341,3 +3341,5 @@ prim-meeting:亼:meeting
 prim-antlers:?:antlers
 prim-fishfinger:扁:fishfinger
 prim-muzzle:咅:muzzle
+prim-wealth:畐:wealth
+prim-half-turtle:丬:turtle

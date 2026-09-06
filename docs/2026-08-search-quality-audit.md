@@ -7069,3 +7069,89 @@ for a shape with no RTK frame, check for a real Heisig-taught keyword
 file) before defaulting to an invented descriptive name — a made-up
 name that turns out to have a real established one is worse than
 taking one extra turn to ask.
+
+## 2026-09-06 (daily check-in): worklist loop, day 3 — two more systemic character fixes, two more primitives
+
+Pulled latest (already up to date with the owner's 咅/prim-muzzle fix
+from the previous wake-up), verified clean (1216 checks/4 expected,
+pytest 56 passed, radicals/self-reference clean, no pending reviews),
+then ran `worklist_next.py -n 20`.
+
+**Two more `杰`/`灬`-style systemic character fixes found while working
+this batch** (not flagged as their own worklist rows, since Google's
+own text also uses the same wrong-looking-right character — these
+only surface by actually rendering):
+- **`艾`(U+827E, "mugwort" — a real, unrelated plant kanji) was standing
+  in for `艹`(U+8279, the grass/flowers radical) across 159 occurrences**
+  registered as `prim-mugwort`. Same pattern as `杰`/`灬` exactly: `艹`
+  is itself a real, independently renderable CJK Unified Ideograph, not
+  some unrenderable radical-only form. Sampled ~20 of the 159 hosts
+  (若/草/苦/苛/寛/薄/葉/模/漠/墓/暮/膜/苗/荻/猫/茶/塔/落/夢/荘) — all
+  consistently need just the bare grass-top, never `艾`'s own distinct
+  bottom (乂) — global `sed 's/艾/艹/'`, kept the `prim-mugwort` id
+  (unlike the character, the id/keyword choice wasn't in question here).
+- **`爿`(U+723F, kangxi90, correctly the *official* CJKRadicals.txt
+  codepoint for radical 90) was standing in for the simplified 3-stroke
+  `丬`(U+4E2C) across all 10 of its real uses** (状/壮/将/寝/醤/鼎/燕/
+  乖/淵, render-checked individually). A 2026-08-27 session had already
+  corrected kangxi90's *keyword* from generic "radical 90" to Heisig's
+  real name "turtle" (confirmed via CSV) — but never rendered the
+  actual hosts, so the character mismatch survived. Since `丬`≠`爿`'s
+  CJKRadicals.txt codepoint, per this project's own radical-naming rule
+  it couldn't just take over kangxi90 — registered separately as
+  `prim-half-turtle` (same "turtle" keyword, since Heisig's name is
+  confirmed to apply to this shape too, just a different id).
+  kangxi90 itself stays correctly defined, now simply unreferenced by
+  any host (harmless, same as several other rarely-used kangxiN rows).
+
+**Two more recurring-compound primitives**, same "Heisig-named shape,
+no RTK frame" class as `咅`/prim-muzzle from the previous wake-up:
+- **`畐`("wealth")** — `一,口,田` was flattened raw across `副`/`富`/
+  `幅`/`福` (4 hosts; `副`'s own comment from two days ago already
+  called this cluster "Heisig's 'wealth' primitive" without registering
+  it) — registered as `prim-wealth`, all 4 repointed, including `富`
+  itself (the taught kanji "wealth" — `宀`+`畐`, so the primitive and
+  the kanji share a name because Heisig's naming genuinely does that
+  here, not a mistake).
+- **`莫`** turned out to already be a taught kanji (`rtk2242`, "must
+  not") — `大,日,艹` (or a subset alongside the host's own extra part)
+  was flattened raw across `模`/`漠`/`墓`/`暮`/`膜`/`幕`/`慕` (7 hosts)
+  instead of referencing it directly.
+
+**Also found and fixed** (render-confirmed, not part of a systemic
+family): `暦`(calendar) *and* `歴`(curriculum, same bug, found by
+checking who else used `麻`) both had `麻`(hemp) where the real shape
+is `厂`+`林` (cliff enclosing two 木 trees) — `麻`'s own bottom really
+is a `木木` pair too, close enough at a glance to cause the mixup, but
+`暦`/`歴` have no `广` roof over it the way real `麻` does (double-
+checked `磨`/`摩`/`魔`/`麿` still correctly use full `麻` as-is); `桂`
+and `植` were flattened instead of referencing `圭`/`直` (both already
+fixed to be real taught primitives earlier this week) directly.
+
+**11 kept as-is**: `貯`(no recurring pattern to name — a one-off, not
+worth a new primitive over); `棚`(already references the taught `朋`
+compound, better than Google's flat reading); `札`/`孔`-family already
+use the established `乙`-for-`乚` convention; `苦`/`苗`/`葉`/`寛`
+needed no data.txt change beyond the `艹` fix; `真`(pinned in an
+earlier batch, unaffected here); `然`(render shows a genuine `夕`, not
+Google's suggested `月` — checked and rejected, not blindly accepted).
+
+Verified: full rebuild (3000 kanji, 3010 overrides — two new primitive
+rows); `test_regression_fixes.py` — 3 corrected + 26 new pins, plus a
+pre-existing exact-duplicate dict key (`rtk240`) noticed and cleaned up
+in passing — **1240 checks**, same 4 expected hanzi-scope non-issues;
+pytest (56 passed); `audit_self_reference.py` clean; `audit_radicals.py`
+still 0/0; `review_queue.py` clean. `build_decomp_worklist.py` rebuilt:
+1044 → **1000 rows, 979 pending** (the `艹` fix's reach, like `灬`
+before it, went well beyond this batch's own 20 rows). Not deployed
+(no SSH/server access) — data-only change, needs `sync_system_data.py`
++ reseed.
+
+**Next session**: continue the worklist loop (`worklist_next.py -n 20`).
+Given two `-radical-standing-in-for-a-full-unrelated-character` finds
+in three days (`杰`/`灬`, `艾`/`艹`), worth a quick standing check on
+any OTHER heavily-reused single-glyph primitives whose character field
+might be a similar coincidental-lookalike rather than the real shape —
+not urgent, but a pattern now established enough to watch for
+proactively rather than only stumbling into via the worklist. Standing
+list otherwise unchanged (see day 1/2 entries above).

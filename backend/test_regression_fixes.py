@@ -536,11 +536,18 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk261": {"character": "特", "keyword": "special",
                "expected_part_ids": {"rtk260", "rtk45", "rtk161"}},
     # kangxi90 (爿) renamed "radical 90" -> "turtle" (2026-08-27), Heisig's
-    # own name per heisig-kanjis.csv (consistent across all 5 CSV-covered
-    # hosts: 状/壮/将/奨/寝). Pinning 状 to confirm the rename didn't touch
-    # its own resolved id, just its keyword.
+    # own name per heisig-kanjis.csv -- correct keyword, but that earlier
+    # session never rendered the actual hosts to check the GLYPH, only the
+    # name. Corrected 2026-09-06 (worklist loop, day 3): 状/壮/将/寝/醤/
+    # 鼎/燕/乖/淵 all render with the simplified 3-stroke 丬(U+4E2C), not
+    # kangxi90's own 爿(U+723F, more strokes -- and correctly kept as
+    # kangxi90, since 723F is radical 90's real CJKRadicals.txt codepoint,
+    # not 4E2C). Registered the simplified glyph separately as
+    # prim-half-turtle (same Heisig-confirmed "turtle" keyword, distinct
+    # id) rather than overwriting kangxi90's character, which would have
+    # broken the radical-verification rule this project follows.
     "rtk254": {"character": "状", "keyword": "status quo",
-               "expected_part_ids": {"rtk253", "kangxi90"}},
+               "expected_part_ids": {"rtk253", "prim-half-turtle"}},
     # 帯 fixed from its old ｜,一,巾,冖 flattening to 丗,冖,巾 (2026-08-27),
     # matching cjkvi-ids's 帯 = ⿳丗冖巾 directly -- new prim-thirty (丗)
     # primitive added for this. Also the case that surfaced the
@@ -718,6 +725,71 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk137", "rtk41"}},
     "rtk204": {"character": "寄", "keyword": "draw near",
                 "expected_part_ids": {"kangxi40", "rtk133"}},
+    # 2026-09-06 worklist loop, day 3 batch:
+    # 富/副/幅/福 all flattened 一,口,田 raw instead of referencing 畐
+    # (Heisig's "wealth" primitive, no RTK frame of its own -- registered
+    # as prim-wealth).
+    "rtk205": {"character": "富", "keyword": "wealth",
+                "expected_part_ids": {"kangxi40", "prim-wealth"}},
+    "rtk435": {"character": "幅", "keyword": "hanging scroll",
+                "expected_part_ids": {"prim-wealth", "rtk432"}},
+    "rtk1171": {"character": "福", "keyword": "blessing",
+                "expected_part_ids": {"kangxi113", "prim-wealth"}},
+    # 桂/植 were flattened instead of referencing 圭/直 (both already
+    # taught) directly.
+    "rtk210": {"character": "桂", "keyword": "japanese judas-tree",
+                "expected_part_ids": {"rtk167", "rtk207"}},
+    "rtk217": {"character": "植", "keyword": "plant",
+                "expected_part_ids": {"rtk207", "rtk77"}},
+    # 苦/苗/葉/寛 needed no data.txt change beyond the systemic 艾->艹
+    # character fix (below) -- pinned to lock in the corrected result.
+    "rtk239": {"character": "苦", "keyword": "suffering",
+                "expected_part_ids": {"prim-mugwort", "rtk16"}},
+    "rtk249": {"character": "苗", "keyword": "seedling",
+                "expected_part_ids": {"prim-mugwort", "rtk14"}},
+    "rtk243": {"character": "葉", "keyword": "leaf",
+                "expected_part_ids": {"prim-mugwort", "rtk207", "rtk28"}},
+    "rtk241": {"character": "寛", "keyword": "tolerant",
+                "expected_part_ids": {"kangxi40", "prim-mugwort", "rtk61"}},
+    # 模/漠/墓/暮/膜/幕/慕 all flattened 大,日,艹 (or a subset alongside
+    # their own extra part) raw instead of referencing 莫(rtk2242,
+    # already taught as its own frame, "must not") directly.
+    "rtk244": {"character": "模", "keyword": "imitation",
+                "expected_part_ids": {"rtk207", "rtk2242"}},
+    "rtk245": {"character": "漠", "keyword": "vague",
+                "expected_part_ids": {"rtk137", "rtk2242"}},
+    "rtk246": {"character": "墓", "keyword": "grave",
+                "expected_part_ids": {"rtk161", "rtk2242"}},
+    "rtk247": {"character": "暮", "keyword": "livelihood",
+                "expected_part_ids": {"rtk12", "rtk2242"}},
+    "rtk248": {"character": "膜", "keyword": "membrane",
+                "expected_part_ids": {"rtk13", "rtk2242"}},
+    "rtk437": {"character": "幕", "keyword": "curtain",
+                "expected_part_ids": {"rtk2242", "rtk432"}},
+    "rtk683": {"character": "慕", "keyword": "pining",
+                "expected_part_ids": {"rtk2242", "rtk639"}},
+    # 壮/将/寝/醤/鼎/燕/乖/淵 (plus 状, pinned separately above) all used
+    # kangxi90's own 爿(U+723F, the correct CJKRadicals.txt codepoint for
+    # radical 90) where render shows the simplified 3-stroke 丬(U+4E2C)
+    # instead -- registered separately as prim-half-turtle rather than
+    # overwriting kangxi90's character (see the rtk254 comment above for
+    # the full account).
+    "rtk343": {"character": "壮", "keyword": "robust",
+                "expected_part_ids": {"prim-half-turtle", "rtk341"}},
+    "rtk789": {"character": "将", "keyword": "leader",
+                "expected_part_ids": {"prim-half-turtle", "rtk45", "rtk784"}},
+    "rtk1233": {"character": "寝", "keyword": "lie down",
+                "expected_part_ids": {"kangxi14", "kangxi40", "prim-half-turtle", "prim-katakana-yo", "rtk752"}},
+    "rtk2774": {"character": "醤", "keyword": "soy sauce",
+                "expected_part_ids": {"prim-half-turtle", "rtk1534", "rtk45", "rtk784"}},
+    "rtk2878": {"character": "鼎", "keyword": "tripod",
+                "expected_part_ids": {"prim-half-turtle", "prim-pipe", "rtk1", "rtk1297", "rtk15"}},
+    "rtk2882": {"character": "燕", "keyword": "swallow",
+                "expected_part_ids": {"prim-fire-radical", "prim-half-turtle", "prim-mugwort", "rtk11", "rtk476"}},
+    "rtk2924": {"character": "乖", "keyword": "disobey",
+                "expected_part_ids": {"prim-half-turtle", "prim-katakana-no", "rtk10", "rtk476"}},
+    "rtk2971": {"character": "淵", "keyword": "abyss (old)",
+                "expected_part_ids": {"prim-half-turtle", "prim-pipe", "rtk1", "rtk1297", "rtk137"}},
     "rtk213": {"character": "梢", "keyword": "treetops",
                 "expected_part_ids": {"rtk119", "rtk207"}},
     # Corrected 2026-09-01 (owner-reported): the original sweep-batch-1 fix
@@ -1208,8 +1280,12 @@ EXPECTED_DECOMPOSITIONS = {
     # is the established stand-in, per the 到/剽 fix earlier this audit).
     "rtk92": {"character": "則", "keyword": "rule",
               "expected_part_ids": {"rtk56", "rtk87"}},
+    # Corrected 2026-09-06 (worklist loop, day 3): 一,口,田 is itself a
+    # recurring compound (畐, Heisig's "wealth" primitive, no RTK frame of
+    # its own -- also used raw in 富/幅/福) -- registered as prim-wealth
+    # and referenced directly instead of listing its 3 sub-strokes.
     "rtk93": {"character": "副", "keyword": "vice-",
-              "expected_part_ids": {"rtk1", "rtk11", "rtk14", "rtk87"}},
+              "expected_part_ids": {"prim-wealth", "rtk87"}},
     "rtk94": {"character": "別", "keyword": "separate",
               "expected_part_ids": {"rtk11", "rtk87", "rtk922"}},
     # 博 -- see the corrected pin near rtk47/rtk48 above (this same
@@ -1396,8 +1472,6 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"kangxi40", "rtk56", "rtk95"}},
     "rtk227": {"character": "案", "keyword": "plan",
                 "expected_part_ids": {"rtk202", "rtk207"}},
-    "rtk240": {"character": "苛", "keyword": "bullying",
-                "expected_part_ids": {"prim-mugwort", "rtk97"}},
     "rtk240": {"character": "苛", "keyword": "bullying",
                 "expected_part_ids": {"prim-mugwort", "rtk97"}},
     "rtk242": {"character": "薄", "keyword": "dilute",
@@ -2967,10 +3041,16 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"kangxi14", "kangxi192", "kangxi59", "rtk207", "rtk2116", "rtk476"}},
     "rtk1786": {"character": "余", "keyword": "too much",
                "expected_part_ids": {"kangxi6", "prim-katakana-ha", "prim-umbrella", "rtk1", "rtk1167"}},
+    # Corrected 2026-09-06 (worklist loop, day 3): both 暦 and 歴 had
+    # 麻(hemp, rtk637) where render clearly shows 厂+林 instead (cliff
+    # enclosing two 木 trees) -- 麻's own bottom is a full 木木 pair under
+    # a 广 roof, visually close enough at a glance to cause the mixup, but
+    # 暦/歴's actual top has no 广 roof at all, just a bare 厂 cliff line.
+    # (麻 itself is correctly used as-is in 磨/摩/魔/麿, render-checked.)
     "rtk226": {"character": "暦", "keyword": "calendar",
-               "expected_part_ids": {"rtk12", "rtk637"}},
+               "expected_part_ids": {"kangxi27", "rtk12", "rtk208"}},
     "rtk402": {"character": "歴", "keyword": "curriculum",
-               "expected_part_ids": {"rtk396", "rtk637"}},
+               "expected_part_ids": {"kangxi27", "rtk396", "rtk208"}},
     "rtk689": {"character": "摩", "keyword": "chafe",
                "expected_part_ids": {"rtk637", "rtk687"}},
     "rtk276": {"character": "玩", "keyword": "play",

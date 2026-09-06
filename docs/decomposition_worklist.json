@@ -312,6 +312,40 @@
   "reviewed_at": "2026-09-05"
  },
  {
+  "id": "rtk93",
+  "char": "副",
+  "keyword": "vice-",
+  "our_parts": [
+   "畐",
+   "刀"
+  ],
+  "google_parts": [
+   "一",
+   "口",
+   "田",
+   "刂"
+  ],
+  "google_primitive_names": {
+   "一": "one",
+   "口": "mouth",
+   "田": "rice field",
+   "刂": "saber"
+  },
+  "google_confidence": "high",
+  "google_note": "Left cluster one+mouth+rice field (Heisig's 'wealth' primitive) + saber (right).",
+  "cjkvi_ids": "⿰畐刂",
+  "cjkvi_leaves": [
+   "一",
+   "刂",
+   "口",
+   "田"
+  ],
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
   "id": "rtk100",
   "char": "孔",
   "keyword": "cavity",
@@ -532,41 +566,6 @@
   "reviewed_at": "2026-09-05"
  },
  {
-  "id": "rtk205",
-  "char": "富",
-  "keyword": "wealth",
-  "our_parts": [
-   "口",
-   "田",
-   "宀",
-   "一"
-  ],
-  "google_parts": [
-   "宀",
-   "畐"
-  ],
-  "google_primitive_names": {
-   "宀": "house/roof",
-   "畐": "wealth",
-   "一": "one/ceiling",
-   "口": "mouth",
-   "田": "rice field/brain"
-  },
-  "google_confidence": "high",
-  "google_note": "宀 + 畐 (畐 = 一 + 口 + 田). Current parts match components.",
-  "cjkvi_ids": "⿱宀畐",
-  "cjkvi_leaves": [
-   "一",
-   "口",
-   "宀",
-   "田"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
   "id": "rtk206",
   "char": "貯",
   "keyword": "savings",
@@ -594,40 +593,10 @@
    "宀",
    "目"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk210",
-  "char": "桂",
-  "keyword": "japanese judas-tree",
-  "our_parts": [
-   "土",
-   "木"
-  ],
-  "google_parts": [
-   "木",
-   "圭"
-  ],
-  "google_primitive_names": {
-   "木": "tree",
-   "圭": "ivy",
-   "土": "soil"
-  },
-  "google_confidence": "high",
-  "google_note": "木 + 圭 (圭 = 土 + 土). Google keyword given as 'cinnamon tree'. Current parts: 土, 木 (single 土).",
-  "cjkvi_ids": "⿰木圭",
-  "cjkvi_leaves": [
-   "一",
-   "十",
-   "木"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-06"
  },
  {
   "id": "rtk214",
@@ -653,44 +622,10 @@
    "月",
    "木"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk217",
-  "char": "植",
-  "keyword": "plant",
-  "our_parts": [
-   "十",
-   "木",
-   "目"
-  ],
-  "google_parts": [
-   "木",
-   "直"
-  ],
-  "google_primitive_names": {
-   "木": "tree/wood",
-   "直": "straightaway/honest",
-   "十": "needle/ten",
-   "目": "eye",
-   "乚": "L-hook/fishhook"
-  },
-  "google_confidence": "high",
-  "google_note": "木 + 直 (直 = 十 + 目 + 乚).",
-  "cjkvi_ids": "⿰木直",
-  "cjkvi_leaves": [
-   "一",
-   "且",
-   "十",
-   "木"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-06"
  },
  {
   "id": "rtk225",
@@ -715,441 +650,10 @@
    "乚",
    "木"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk226",
-  "char": "暦",
-  "keyword": "calendar",
-  "our_parts": [
-   "日",
-   "麻"
-  ],
-  "google_parts": [
-   "厂",
-   "林",
-   "日"
-  ],
-  "google_primitive_names": {
-   "厂": "cliff",
-   "林": "grove",
-   "木": "tree",
-   "日": "day/sun"
-  },
-  "google_confidence": "high",
-  "google_note": "厂 + 林 (= 木+木) + 日. Current parts include spurious 麻, 广.",
-  "cjkvi_ids": "⿸𠩵日",
-  "cjkvi_leaves": [
-   "厂",
-   "日",
-   "木"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk237",
-  "char": "若",
-  "keyword": "young",
-  "our_parts": [
-   "右",
-   "艾"
-  ],
-  "google_parts": [
-   "艹",
-   "右"
-  ],
-  "google_primitive_names": {
-   "艹": "flowers",
-   "右": "right",
-   "𠂇": "left hand",
-   "口": "mouth"
-  },
-  "google_confidence": "high",
-  "google_note": "艹 + 右 (右 = 𠂇 + 口). Current parts: 右, 艾 (艾 is a mis-encoding of 艹).",
-  "cjkvi_ids": "⿱艹右",
-  "cjkvi_leaves": [
-   "丨",
-   "十",
-   "口",
-   "𠂇"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk238",
-  "char": "草",
-  "keyword": "grass",
-  "our_parts": [
-   "早",
-   "艾"
-  ],
-  "google_parts": [
-   "艹",
-   "早"
-  ],
-  "google_primitive_names": {
-   "艹": "flower",
-   "早": "early",
-   "日": "sun",
-   "十": "needle"
-  },
-  "google_confidence": "high",
-  "google_note": "艹 + 早 (早 = 日 + 十).",
-  "cjkvi_ids": "⿱艹早",
-  "cjkvi_leaves": [
-   "丨",
-   "十",
-   "日"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk239",
-  "char": "苦",
-  "keyword": "suffering",
-  "our_parts": [
-   "艾",
-   "古"
-  ],
-  "google_parts": [
-   "艹",
-   "古"
-  ],
-  "google_primitive_names": {
-   "艹": "flower",
-   "古": "old",
-   "十": "ten",
-   "口": "mouth"
-  },
-  "google_confidence": "high",
-  "google_note": "艹 + 古 (古 = 十 + 口).",
-  "cjkvi_ids": "⿱艹古",
-  "cjkvi_leaves": [
-   "丨",
-   "十",
-   "口"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk240",
-  "char": "苛",
-  "keyword": "torment",
-  "our_parts": [
-   "可",
-   "艾"
-  ],
-  "google_parts": [
-   "艹",
-   "可"
-  ],
-  "google_primitive_names": {
-   "艹": "flower",
-   "可": "can/possible",
-   "丁": "T-shirt",
-   "口": "mouth"
-  },
-  "google_confidence": "high",
-  "google_note": "艹 + 可 (可 = 丁 + 口). Google keyword given as 'irritation'. Current parts: 一,口,亅,艾 - Google gives 可 as the unit.",
-  "cjkvi_ids": "⿱艹可",
-  "cjkvi_leaves": [
-   "一",
-   "丨",
-   "亅",
-   "十",
-   "口"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk241",
-  "char": "寛",
-  "keyword": "tolerant",
-  "our_parts": [
-   "見",
-   "宀",
-   "艾"
-  ],
-  "google_parts": [
-   "宀",
-   "艹",
-   "見"
-  ],
-  "google_primitive_names": {
-   "宀": "house",
-   "艹": "flower/grass",
-   "見": "see",
-   "目": "eye",
-   "儿": "human legs"
-  },
-  "google_confidence": "high",
-  "google_note": "宀 + 艹 + 見 (見 = 目 + 儿).",
-  "cjkvi_ids": "⿱宀莧",
-  "cjkvi_leaves": [
-   "丨",
-   "丿",
-   "乚",
-   "十",
-   "宀",
-   "目"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk243",
-  "char": "葉",
-  "keyword": "leaf",
-  "our_parts": [
-   "木",
-   "世",
-   "艾"
-  ],
-  "google_parts": [
-   "艹",
-   "世",
-   "木"
-  ],
-  "google_primitive_names": {
-   "艹": "flower/grass",
-   "世": "generation",
-   "木": "tree"
-  },
-  "google_confidence": "high",
-  "google_note": "",
-  "cjkvi_ids": "⿱艹枼",
-  "cjkvi_leaves": [
-   "世",
-   "丨",
-   "十",
-   "木"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk244",
-  "char": "模",
-  "keyword": "imitation",
-  "our_parts": [
-   "大",
-   "日",
-   "木",
-   "艾"
-  ],
-  "google_parts": [
-   "木",
-   "莫"
-  ],
-  "google_primitive_names": {
-   "木": "tree/wood",
-   "莫": "graveyard",
-   "艹": "flowers",
-   "日": "sun",
-   "大": "St. Bernard/large"
-  },
-  "google_confidence": "high",
-  "google_note": "木 + 莫 (莫 = 艹 + 日 + 大).",
-  "cjkvi_ids": "⿰木莫",
-  "cjkvi_leaves": [
-   "一",
-   "丨",
-   "人",
-   "十",
-   "日",
-   "木"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk245",
-  "char": "漠",
-  "keyword": "vague",
-  "our_parts": [
-   "水",
-   "大",
-   "日",
-   "艾"
-  ],
-  "google_parts": [
-   "水",
-   "莫"
-  ],
-  "google_primitive_names": {
-   "水": "water",
-   "莫": "graveyard",
-   "艹": "flower",
-   "日": "sun",
-   "大": "large"
-  },
-  "google_confidence": "high",
-  "google_note": "水 + 莫 (莫 = 艹 + 日 + 大).",
-  "cjkvi_ids": "⿰氵莫",
-  "cjkvi_leaves": [
-   "一",
-   "丨",
-   "人",
-   "十",
-   "日",
-   "氵"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk246",
-  "char": "墓",
-  "keyword": "grave",
-  "our_parts": [
-   "大",
-   "土",
-   "日",
-   "艾"
-  ],
-  "google_parts": [
-   "莫",
-   "土"
-  ],
-  "google_primitive_names": {
-   "莫": "graveyard",
-   "艹": "flower",
-   "日": "sun",
-   "大": "St. Bernard dog",
-   "土": "soil/ground"
-  },
-  "google_confidence": "high",
-  "google_note": "莫 (= 艹 + 日 + 大) + 土.",
-  "cjkvi_ids": "⿱莫土",
-  "cjkvi_leaves": [
-   "一",
-   "丨",
-   "人",
-   "十",
-   "日"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk247",
-  "char": "暮",
-  "keyword": "evening",
-  "our_parts": [
-   "大",
-   "日",
-   "艾"
-  ],
-  "google_parts": [
-   "莫",
-   "日"
-  ],
-  "google_primitive_names": {
-   "莫": "graveyard",
-   "艹": "grass/salad",
-   "日": "sun/day",
-   "大": "large",
-   "日 (bottom)": "sun/day"
-  },
-  "google_confidence": "high",
-  "google_note": "莫 (= 艹 + 日 + 大) + 日. Current parts: 大, 日, 艾 — missing the bottom 日 distinction but components consistent.",
-  "cjkvi_ids": "⿱莫日",
-  "cjkvi_leaves": [
-   "一",
-   "丨",
-   "人",
-   "十",
-   "日"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk249",
-  "char": "苗",
-  "keyword": "seedling",
-  "our_parts": [
-   "田",
-   "艾"
-  ],
-  "google_parts": [
-   "艹",
-   "田"
-  ],
-  "google_primitive_names": {
-   "艹": "flower/grass",
-   "田": "rice field"
-  },
-  "google_confidence": "high",
-  "google_note": "",
-  "cjkvi_ids": "⿱艹田",
-  "cjkvi_leaves": [
-   "丨",
-   "十",
-   "田"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk254",
-  "char": "状",
-  "keyword": "status quo",
-  "our_parts": [
-   "犬",
-   "爿"
-  ],
-  "google_parts": [
-   "丬",
-   "犬"
-  ],
-  "google_primitive_names": {
-   "丬": "turtle/bed",
-   "犬": "dog"
-  },
-  "google_confidence": "high",
-  "google_note": "Current parts use 爿 (traditional form); Heisig/Google use 丬.",
-  "cjkvi_ids": "⿰丬犬",
-  "cjkvi_leaves": [
-   "丬",
-   "犬"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-06"
  },
  {
   "id": "rtk256",
@@ -1179,45 +683,10 @@
    "犬",
    "𠂊"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk257",
-  "char": "荻",
-  "keyword": "reed",
-  "our_parts": [
-   "艾",
-   "犭",
-   "火"
-  ],
-  "google_parts": [
-   "艹",
-   "犭",
-   "火"
-  ],
-  "google_primitive_names": {
-   "艹": "flower",
-   "犭": "pack of wild dogs",
-   "火": "fire",
-   "狄": "barbarian"
-  },
-  "google_confidence": "high",
-  "google_note": "艹 + 狄 (狄 = 犭 + 火).",
-  "cjkvi_ids": "⿱艹狄",
-  "cjkvi_leaves": [
-   "丨",
-   "人",
-   "八",
-   "十",
-   "犭"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-06"
  },
  {
   "id": "rtk259",
@@ -1226,7 +695,7 @@
   "our_parts": [
    "犭",
    "田",
-   "艾"
+   "艹"
   ],
   "google_parts": [
    "犭",
@@ -1385,7 +854,7 @@
   "keyword": "tea",
   "our_parts": [
    "个",
-   "艾",
+   "艹",
    "木"
   ],
   "google_parts": [
@@ -1469,42 +938,6 @@
   "cjkvi_leaves": [
    "一",
    "人",
-   "口"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk270",
-  "char": "塔",
-  "keyword": "pagoda",
-  "our_parts": [
-   "合",
-   "土",
-   "艾"
-  ],
-  "google_parts": [
-   "土",
-   "艹",
-   "合"
-  ],
-  "google_primitive_names": {
-   "土": "soil/earth",
-   "艹": "flower",
-   "合": "fit/suit",
-   "𠆢": "meeting",
-   "口": "mouth"
-  },
-  "google_confidence": "high",
-  "google_note": "土 + 艹 + 合 (合 = 亼 + 口). Current parts: 口,土,个,艾,一 — consistent.",
-  "cjkvi_ids": "⿰土荅",
-  "cjkvi_leaves": [
-   "一",
-   "丨",
-   "人",
-   "十",
    "口"
   ],
   "status": "pending",
@@ -2106,7 +1539,7 @@
   "char": "落",
   "keyword": "fall",
   "our_parts": [
-   "艾",
+   "艹",
    "洛"
   ],
   "google_parts": [
@@ -2212,7 +1645,7 @@
   "our_parts": [
    "夕",
    "冖",
-   "艾"
+   "艹"
   ],
   "google_parts": [
    "艹",
@@ -2373,27 +1806,26 @@
   "reviewed_at": null
  },
  {
-  "id": "rtk344",
-  "char": "荘",
-  "keyword": "villa",
+  "id": "rtk343",
+  "char": "壮",
+  "keyword": "robust",
   "our_parts": [
-   "艾",
-   "壮"
+   "士",
+   "丬"
   ],
   "google_parts": [
-   "艹",
-   "壮"
+   "爿",
+   "士"
   ],
   "google_primitive_names": {
-   "艹": "flower",
-   "壮": "robust"
+   "爿": "turtle",
+   "士": "samurai/gentleman"
   },
-  "google_confidence": "medium",
-  "google_note": "Google's table says 艹 (flower) + 广 (cave) + 土 (soil), self-contradictory (荘 = 艹 over 壮, not 广). The 6th-ed story it quotes ('pair of turtle-samurai') confirms 壮 (turtle+samurai). Our data 艾+壮 is right.",
-  "cjkvi_ids": "⿱艹壮",
+  "google_confidence": "high",
+  "google_note": "Left 丬/爿 (turtle) + right 士 (samurai). Matches our data.",
+  "cjkvi_ids": "⿰丬士",
   "cjkvi_leaves": [
    "一",
-   "丨",
    "丬",
    "十"
   ],
@@ -2505,7 +1937,7 @@
   "our_parts": [
    "句",
    "攵",
-   "艾"
+   "艹"
   ],
   "google_parts": [
    "苟",
@@ -2838,7 +2270,7 @@
   "char": "蔑",
   "keyword": "ignore",
   "our_parts": [
-   "艾",
+   "艹",
    "成"
   ],
   "google_parts": [
@@ -3486,78 +2918,6 @@
   "reviewed_at": null
  },
  {
-  "id": "rtk435",
-  "char": "幅",
-  "keyword": "hanging scroll",
-  "our_parts": [
-   "一",
-   "巾",
-   "口",
-   "田"
-  ],
-  "google_parts": [
-   "巾",
-   "畐"
-  ],
-  "google_primitive_names": {
-   "巾": "towel",
-   "畐": "wealth",
-   "一": "ceiling",
-   "口": "mouth",
-   "田": "rice field/brains"
-  },
-  "google_confidence": "high",
-  "google_note": "",
-  "cjkvi_ids": "⿰巾畐",
-  "cjkvi_leaves": [
-   "一",
-   "口",
-   "巾",
-   "田"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk437",
-  "char": "幕",
-  "keyword": "curtain",
-  "our_parts": [
-   "巾",
-   "大",
-   "日",
-   "艾"
-  ],
-  "google_parts": [
-   "莫",
-   "巾"
-  ],
-  "google_primitive_names": {
-   "艹": "grass/graffiti",
-   "日": "sun",
-   "大": "St. Bernard dog/large",
-   "巾": "towel",
-   "莫": "graveyard"
-  },
-  "google_confidence": "high",
-  "google_note": "top 3 (艹+日+大) = 莫 graveyard",
-  "cjkvi_ids": "⿱莫巾",
-  "cjkvi_leaves": [
-   "一",
-   "丨",
-   "人",
-   "十",
-   "巾",
-   "日"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
   "id": "rtk438",
   "char": "幌",
   "keyword": "canopy",
@@ -3756,36 +3116,6 @@
    "一",
    "厶",
    "車"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk450",
-  "char": "芸",
-  "keyword": "technique",
-  "our_parts": [
-   "艾",
-   "云"
-  ],
-  "google_parts": [
-   "艹",
-   "云"
-  ],
-  "google_primitive_names": {
-   "艹": "flower",
-   "云": "rising cloud"
-  },
-  "google_confidence": "high",
-  "google_note": "Current parts (二,厶,艾) look like a sub-breakdown mixup - 云 alone is the correct top-level part per Google text, not 二+厶.",
-  "cjkvi_ids": "⿱艹云",
-  "cjkvi_leaves": [
-   "一",
-   "丨",
-   "十",
-   "厶"
   ],
   "status": "pending",
   "decision": null,
@@ -4131,7 +3461,7 @@
   "our_parts": [
    "日",
    "匂",
-   "艾"
+   "艹"
   ],
   "google_parts": [
    "艹",
@@ -4337,42 +3667,6 @@
   "cjkvi_leaves": [
    "一",
    "丶",
-   "𠃊"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk527",
-  "char": "荒",
-  "keyword": "laid waste",
-  "our_parts": [
-   "川",
-   "艾",
-   "亡"
-  ],
-  "google_parts": [
-   "艹",
-   "亡",
-   "川"
-  ],
-  "google_primitive_names": {
-   "艹": "flower",
-   "亡": "deceased/perish",
-   "川": "stream/flood"
-  },
-  "google_confidence": "high",
-  "google_note": "Matches current_parts (艾≈艹 flower, 亡, 川).",
-  "cjkvi_ids": "⿱艹巟",
-  "cjkvi_leaves": [
-   "一",
-   "丨",
-   "丶",
-   "丿",
-   "乚",
-   "十",
    "𠃊"
   ],
   "status": "pending",
@@ -5181,35 +4475,6 @@
   "reviewed_at": null
  },
  {
-  "id": "rtk647",
-  "char": "芯",
-  "keyword": "wick",
-  "our_parts": [
-   "心",
-   "艾"
-  ],
-  "google_parts": [
-   "艹",
-   "心"
-  ],
-  "google_primitive_names": {
-   "艹": "flower/grass",
-   "心": "heart"
-  },
-  "google_confidence": "high",
-  "google_note": "Matches current_parts (艾≈艹, 心). Note: text gives the keyword as 'core' rather than 'wick' - same character/breakdown, different keyword wording.",
-  "cjkvi_ids": "⿱艹心",
-  "cjkvi_leaves": [
-   "丨",
-   "十",
-   "心"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
   "id": "rtk650",
   "char": "患",
   "keyword": "afflicted",
@@ -5680,41 +4945,6 @@
   "reviewed_at": null
  },
  {
-  "id": "rtk698",
-  "char": "搭",
-  "keyword": "board",
-  "our_parts": [
-   "合",
-   "扌",
-   "艾"
-  ],
-  "google_parts": [
-   "扌",
-   "艹",
-   "合"
-  ],
-  "google_primitive_names": {
-   "扌": "finger/hand",
-   "艹": "flower",
-   "合": "fit/suit"
-  },
-  "google_confidence": "high",
-  "google_note": "",
-  "cjkvi_ids": "⿰扌荅",
-  "cjkvi_leaves": [
-   "一",
-   "丨",
-   "人",
-   "十",
-   "口",
-   "扌"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
   "id": "rtk700",
   "char": "抗",
   "keyword": "confront",
@@ -5883,7 +5113,7 @@
   "our_parts": [
    "田",
    "扌",
-   "艾"
+   "艹"
   ],
   "google_parts": [
    "扌",
@@ -6195,7 +5425,7 @@
   "our_parts": [
    "言",
    "隻",
-   "艾"
+   "艹"
   ],
   "google_parts": [
    "言",
@@ -6217,44 +5447,6 @@
    "十",
    "又",
    "言",
-   "隹"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk757",
-  "char": "獲",
-  "keyword": "seize",
-  "our_parts": [
-   "犭",
-   "又",
-   "艾",
-   "隹"
-  ],
-  "google_parts": [
-   "犭",
-   "艹",
-   "隹",
-   "又"
-  ],
-  "google_primitive_names": {
-   "犭": "pack of wild dogs",
-   "艹": "flower/flowers",
-   "隹": "turkey",
-   "又": "crotch",
-   "隻": "vessels"
-  },
-  "google_confidence": "high",
-  "google_note": "pack of wild dogs (犭) + flowers (艹) + turkey (隹) + crotch (又); right side 艹+隹+又 grouped as vessels (隻).",
-  "cjkvi_ids": "⿰犭蒦",
-  "cjkvi_leaves": [
-   "丨",
-   "十",
-   "又",
-   "犭",
    "隹"
   ],
   "status": "pending",
@@ -6498,7 +5690,7 @@
   "our_parts": [
    "土",
    "又",
-   "艾"
+   "艹"
   ],
   "google_parts": [
    "艹",
@@ -6753,7 +5945,7 @@
   "our_parts": [
    "寸",
    "爪",
-   "爿"
+   "丬"
   ],
   "google_parts": [
    "爿",
@@ -6850,7 +6042,7 @@
   "keyword": "vegetable",
   "our_parts": [
    "采",
-   "艾"
+   "艹"
   ],
   "google_parts": [
    "艹",
@@ -8024,7 +7216,7 @@
    "夕",
    "匕",
    "廾",
-   "艾"
+   "艹"
   ],
   "google_parts": [
    "艹",
@@ -8463,43 +7655,6 @@
   "reviewed_at": null
  },
  {
-  "id": "rtk913",
-  "char": "蔵",
-  "keyword": "storehouse",
-  "our_parts": [
-   "ノ",
-   "臣",
-   "戈",
-   "艾",
-   "厂"
-  ],
-  "google_parts": [
-   "艹",
-   "厂",
-   "戈",
-   "臣"
-  ],
-  "google_primitive_names": {
-   "艹": "flower",
-   "厂": "cliff",
-   "戈": "fiesta (halberd)",
-   "臣": "retainer"
-  },
-  "google_confidence": "high",
-  "google_note": "Text gives explicit 4-primitive breakdown matching current_parts's 艾(≈艹),厂,戈,臣; current_parts's extra ノ is not mentioned in text as a separate part.",
-  "cjkvi_ids": "⿱艹𮍏",
-  "cjkvi_leaves": [
-   "丨",
-   "十",
-   "戊",
-   "臣"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
   "id": "rtk915",
   "char": "賢",
   "keyword": "intelligent",
@@ -8653,45 +7808,6 @@
    "冖",
    "𠃌",
    "𭕄"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk925",
-  "char": "募",
-  "keyword": "recruit",
-  "our_parts": [
-   "大",
-   "日",
-   "力",
-   "艾"
-  ],
-  "google_parts": [
-   "艹",
-   "日",
-   "大",
-   "力"
-  ],
-  "google_primitive_names": {
-   "艹": "grass",
-   "日": "sun / day",
-   "大": "stool",
-   "力": "muscle"
-  },
-  "google_confidence": "high",
-  "google_note": "Text gives explicit 4-primitive breakdown (grouped as graveyard=艹+日+大, plus muscle). Matches current_parts (大,日,力,艾) closely.",
-  "cjkvi_ids": "⿱莫力",
-  "cjkvi_leaves": [
-   "一",
-   "丨",
-   "丿",
-   "人",
-   "十",
-   "日",
-   "𠃌"
   ],
   "status": "pending",
   "decision": null,
@@ -9181,7 +8297,7 @@
   "our_parts": [
    "禾",
    "隻",
-   "艾"
+   "艹"
   ],
   "google_parts": [
    "禾",
@@ -9241,46 +8357,12 @@
   "reviewed_at": null
  },
  {
-  "id": "rtk985",
-  "char": "菌",
-  "keyword": "germ",
-  "our_parts": [
-   "禾",
-   "囗",
-   "艾"
-  ],
-  "google_parts": [
-   "艹",
-   "囗",
-   "禾"
-  ],
-  "google_primitive_names": {
-   "艹": "flower (grass)",
-   "囗": "bound up (pent-up)",
-   "禾": "wheat (rice plant)"
-  },
-  "google_confidence": "high",
-  "google_note": "Text notes 囗+禾 together are sometimes treated as the sub-kanji/primitive 囷 (round granary), but the three-part breakdown is given explicitly.",
-  "cjkvi_ids": "⿱艹囷",
-  "cjkvi_leaves": [
-   "丨",
-   "丿",
-   "十",
-   "囗",
-   "木"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
   "id": "rtk986",
   "char": "萎",
   "keyword": "wither",
   "our_parts": [
    "委",
-   "艾"
+   "艹"
   ],
   "google_parts": [
    "艹",
@@ -10304,7 +9386,7 @@
   "keyword": "flower",
   "our_parts": [
    "匕",
-   "艾"
+   "艹"
   ],
   "google_parts": [
    "艹",
@@ -10388,38 +9470,6 @@
    "乚",
    "亻",
    "頁"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk1088",
-  "char": "荷",
-  "keyword": "baggage",
-  "our_parts": [
-   "何",
-   "艾"
-  ],
-  "google_parts": [
-   "艹",
-   "何"
-  ],
-  "google_primitive_names": {
-   "艹": "flower",
-   "何": "what (person + can)"
-  },
-  "google_confidence": "high",
-  "google_note": "",
-  "cjkvi_ids": "⿱艹何",
-  "cjkvi_leaves": [
-   "一",
-   "丨",
-   "亅",
-   "亻",
-   "十",
-   "口"
   ],
   "status": "pending",
   "decision": null,
@@ -10883,7 +9933,7 @@
    "丷",
    "冂",
    "攵",
-   "艾"
+   "艹"
   ],
   "google_parts": [
    "艹",
@@ -11584,6 +10634,40 @@
   "reviewed_at": null
  },
  {
+  "id": "rtk1171",
+  "char": "福",
+  "keyword": "blessing",
+  "our_parts": [
+   "礻",
+   "畐"
+  ],
+  "google_parts": [
+   "礻",
+   "一",
+   "口",
+   "田"
+  ],
+  "google_primitive_names": {
+   "礻": "altar",
+   "一": "one",
+   "口": "mouth",
+   "田": "rice field"
+  },
+  "google_confidence": "high",
+  "google_note": "Right side 畐 = one + mouth + rice field ('wealth').",
+  "cjkvi_ids": "⿰礻畐",
+  "cjkvi_leaves": [
+   "一",
+   "口",
+   "田",
+   "礻"
+  ],
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
   "id": "rtk1179",
   "char": "禁",
   "keyword": "prohibition",
@@ -12093,39 +11177,6 @@
   "google_note": "Google's breakdown differs from current_parts (｜,田,木): says top primitive is 日 (sun), not 田. Matches keyword logic (brain/sun on top of tree).",
   "cjkvi_ids": "⿻日木",
   "cjkvi_leaves": [
-   "日",
-   "木"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk1203",
-  "char": "菓",
-  "keyword": "candy",
-  "our_parts": [
-   "田",
-   "木",
-   "艾"
-  ],
-  "google_parts": [
-   "艹",
-   "田",
-   "木"
-  ],
-  "google_primitive_names": {
-   "艹": "flowers",
-   "田": "brains",
-   "木": "tree"
-  },
-  "google_confidence": "high",
-  "google_note": "Note: text says official RTK keyword is 'candy', not 'confectionary' as in current data — likely just an edition/translation difference, not a decomposition issue. Matches current_parts (田,木,艾 ~ 艹) closely; 艾 vs 艹 likely same flower/grass primitive rendered differently.",
-  "cjkvi_ids": "⿱艹果",
-  "cjkvi_leaves": [
-   "丨",
-   "十",
    "日",
    "木"
   ],
@@ -12905,7 +11956,7 @@
    "両",
    "水",
    "二",
-   "艾"
+   "艹"
   ],
   "google_parts": [
    "水",
@@ -13116,44 +12167,6 @@
    "丨",
    "广",
    "月"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk1267",
-  "char": "備",
-  "keyword": "equip",
-  "our_parts": [
-   "亻",
-   "用",
-   "厂",
-   "艾"
-  ],
-  "google_parts": [
-   "亻",
-   "艹",
-   "厂",
-   "用"
-  ],
-  "google_primitive_names": {
-   "亻": "person",
-   "艹": "flower",
-   "厂": "cliff",
-   "用": "screwdriver / utilize"
-  },
-  "google_confidence": "high",
-  "google_note": "",
-  "cjkvi_ids": "⿰亻𤰇",
-  "cjkvi_leaves": [
-   "一",
-   "丨",
-   "丿",
-   "亻",
-   "冂",
-   "十"
   ],
   "status": "pending",
   "decision": null,
@@ -13456,45 +12469,6 @@
   "reviewed_at": null
  },
  {
-  "id": "rtk1281",
-  "char": "噴",
-  "keyword": "erupt",
-  "our_parts": [
-   "貝",
-   "口",
-   "十",
-   "艾"
-  ],
-  "google_parts": [
-   "口",
-   "十",
-   "艹",
-   "貝"
-  ],
-  "google_primitive_names": {
-   "口": "mouth",
-   "十": "needle",
-   "艹": "flower",
-   "貝": "clam"
-  },
-  "google_confidence": "medium",
-  "google_note": "Text says mouth + haystack (three tens) + clam. Right side = 賁: 十 + 艹(flower) over 貝. Text's 'three tens' loosely describes 十+艹.",
-  "cjkvi_ids": "⿰口賁",
-  "cjkvi_leaves": [
-   "一",
-   "丨",
-   "丿",
-   "八",
-   "十",
-   "口",
-   "目"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
   "id": "rtk1283",
   "char": "憤",
   "keyword": "aroused",
@@ -13502,7 +12476,7 @@
    "貝",
    "十",
    "state of mind",
-   "艾"
+   "艹"
   ],
   "google_parts": [
    "忄",
@@ -13814,7 +12788,7 @@
    "一",
    "月",
    "水",
-   "艾",
+   "艹",
    "二",
    "大",
    "丷"
@@ -13881,36 +12855,6 @@
    "人",
    "月",
    "言"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk1301",
-  "char": "芝",
-  "keyword": "turf",
-  "our_parts": [
-   "艾",
-   "之"
-  ],
-  "google_parts": [
-   "艹",
-   "之"
-  ],
-  "google_primitive_names": {
-   "艹": "flower/grass",
-   "之": "of (aka Zorro/zig-zag)"
-  },
-  "google_confidence": "high",
-  "google_note": "current_parts (亠,艾) is a coarser/partial rendering of the same 艹+之 structure — broadly consistent (艾~艹), though current_parts lacks an explicit 之/廴-type component; still calling this high confidence in what Google states.",
-  "cjkvi_ids": "⿱艹之",
-  "cjkvi_leaves": [
-   "②",
-   "丨",
-   "丶",
-   "十"
   ],
   "status": "pending",
   "decision": null,
@@ -14437,36 +13381,6 @@
   "google_note": "Clear top/bottom split, matches current_parts (日, 老).",
   "cjkvi_ids": "⿸耂日",
   "cjkvi_leaves": [
-   "日",
-   "耂"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk1347",
-  "char": "著",
-  "keyword": "renowned",
-  "our_parts": [
-   "者",
-   "艾"
-  ],
-  "google_parts": [
-   "艹",
-   "者"
-  ],
-  "google_primitive_names": {
-   "艹": "flowers",
-   "者": "puppet"
-  },
-  "google_confidence": "high",
-  "google_note": "Flowers 艹 on top, puppet 者 (someone -> puppet as primitive) bottom.",
-  "cjkvi_ids": "⿱艹者",
-  "cjkvi_leaves": [
-   "丨",
-   "十",
    "日",
    "耂"
   ],
@@ -15861,41 +14775,6 @@
   "reviewed_at": null
  },
  {
-  "id": "rtk1486",
-  "char": "蓄",
-  "keyword": "amass",
-  "our_parts": [
-   "艾",
-   "畜"
-  ],
-  "google_parts": [
-   "艹",
-   "畜"
-  ],
-  "google_primitive_names": {
-   "艹": "flower",
-   "畜": "livestock",
-   "亠": "lid",
-   "幺": "cocoon",
-   "田": "rice field"
-  },
-  "google_confidence": "high",
-  "google_note": "Flower 艹 + livestock 畜; 畜 = 亠+幺 (cocoon) + rice field 田.",
-  "cjkvi_ids": "⿱艹畜",
-  "cjkvi_leaves": [
-   "②",
-   "一",
-   "丨",
-   "丶",
-   "十",
-   "田"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
   "id": "rtk1488",
   "char": "擁",
   "keyword": "hug",
@@ -16379,7 +15258,7 @@
   "our_parts": [
    "夕",
    "卩",
-   "艾"
+   "艹"
   ],
   "google_parts": [
    "艹",
@@ -16914,7 +15793,7 @@
   "our_parts": [
    "ノ",
    "監",
-   "艾"
+   "艹"
   ],
   "google_parts": [
    "艹",
@@ -17499,39 +16378,6 @@
   "reviewed_at": null
  },
  {
-  "id": "rtk1620",
-  "char": "薪",
-  "keyword": "fuel",
-  "our_parts": [
-   "艾",
-   "新"
-  ],
-  "google_parts": [
-   "艹",
-   "新"
-  ],
-  "google_primitive_names": {
-   "艹": "flower/grass",
-   "新": "new (= 立 vase + 木 tree + 斤 axe)"
-  },
-  "google_confidence": "high",
-  "google_note": "Text keyword given as 'fuel'; our keyword 'firewood'",
-  "cjkvi_ids": "⿱艹新",
-  "cjkvi_leaves": [
-   "一",
-   "丨",
-   "丶",
-   "丷",
-   "十",
-   "朩",
-   "𠂆"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
   "id": "rtk1622",
   "char": "幸",
   "keyword": "happiness",
@@ -17835,7 +16681,7 @@
    "土",
    "儿",
    "夂",
-   "艾"
+   "艹"
   ],
   "google_parts": [
    "艹",
@@ -19048,13 +17894,51 @@
   "reviewed_at": null
  },
  {
+  "id": "rtk1698",
+  "char": "謹",
+  "keyword": "discreet",
+  "our_parts": [
+   "言",
+   "土",
+   "艹",
+   "口",
+   "二"
+  ],
+  "google_parts": [
+   "言",
+   "艾",
+   "口",
+   "土",
+   "二"
+  ],
+  "google_primitive_names": {
+   "言": "words",
+   "艾": "flower",
+   "口": "mouth",
+   "土": "grow up"
+  },
+  "google_confidence": "high",
+  "google_note": "Right side 堇 ('cabbage') = flower+mouth+grow up, matching current_parts.",
+  "cjkvi_ids": "⿰言堇",
+  "cjkvi_leaves": [
+   "口",
+   "廿",
+   "言",
+   "龶"
+  ],
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
   "id": "rtk1699",
   "char": "僅",
   "keyword": "a wee bit",
   "our_parts": [
    "亻",
    "土",
-   "艾",
+   "艹",
    "口",
    "二",
    "一"
@@ -19082,12 +17966,53 @@
   "reviewed_at": null
  },
  {
+  "id": "rtk1700",
+  "char": "勤",
+  "keyword": "diligence",
+  "our_parts": [
+   "土",
+   "力",
+   "艹",
+   "口",
+   "二",
+   "一"
+  ],
+  "google_parts": [
+   "土",
+   "力",
+   "艾",
+   "口",
+   "二",
+   "一"
+  ],
+  "google_primitive_names": {
+   "艾": "flower",
+   "口": "mouth",
+   "土": "grow up/master",
+   "力": "power"
+  },
+  "google_confidence": "high",
+  "google_note": "Left = cabbage (堇, same as 謹's right side), right = power.",
+  "cjkvi_ids": "⿰堇力",
+  "cjkvi_leaves": [
+   "丿",
+   "口",
+   "廿",
+   "龶",
+   "𠃌"
+  ],
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
   "id": "rtk1701",
   "char": "漢",
   "keyword": "sino-",
   "our_parts": [
    "水",
-   "艾",
+   "艹",
    "口",
    "夫"
   ],
@@ -19114,6 +18039,118 @@
    "口",
    "廿",
    "氵"
+  ],
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "rtk1702",
+  "char": "嘆",
+  "keyword": "sigh",
+  "our_parts": [
+   "ノ",
+   "一",
+   "口",
+   "艹",
+   "二",
+   "大"
+  ],
+  "google_parts": [
+   "ノ",
+   "一",
+   "口",
+   "艾",
+   "二",
+   "大"
+  ],
+  "google_primitive_names": {
+   "口(left)": "mouth",
+   "艾/一/二/大(right cluster)": "scarecrow (flower+mouth+husband)"
+  },
+  "google_confidence": "high",
+  "google_note": "Left mouth + right scarecrow cluster identical to 漢/難's shared 𦰩 component.",
+  "cjkvi_ids": "⿰口⿱廿⿻口夫",
+  "cjkvi_leaves": [
+   "一",
+   "人",
+   "口",
+   "廿"
+  ],
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "rtk1703",
+  "char": "難",
+  "keyword": "difficult",
+  "our_parts": [
+   "艹",
+   "隹",
+   "大",
+   "口",
+   "亠",
+   "二"
+  ],
+  "google_parts": [
+   "艾",
+   "隹",
+   "口",
+   "大",
+   "口",
+   "亠",
+   "二"
+  ],
+  "google_primitive_names": {
+   "艾": "flower",
+   "口": "mouth",
+   "大(夫)": "husband",
+   "隹": "turkey/short-tailed bird"
+  },
+  "google_confidence": "high",
+  "google_note": "Same 𦰩 scarecrow left side (flower+mouth+husband) + turkey (隹) on right.",
+  "cjkvi_ids": "⿰⿱廿⿻口夫隹",
+  "cjkvi_leaves": [
+   "一",
+   "人",
+   "口",
+   "廿",
+   "隹"
+  ],
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "rtk1704",
+  "char": "華",
+  "keyword": "splendor",
+  "our_parts": [
+   "｜",
+   "一",
+   "艹"
+  ],
+  "google_parts": [
+   "｜",
+   "一",
+   "艾"
+  ],
+  "google_primitive_names": {
+   "艾": "flower",
+   "｜/一(middle)": "silage",
+   "十": "needle"
+  },
+  "google_confidence": "medium",
+  "google_note": "Text was truncated; top=flower is clear, but middle 'silage' and bottom 'needle' details are inferred from partial text.",
+  "cjkvi_ids": "⿱艹⑦",
+  "cjkvi_leaves": [
+   "⑦",
+   "丨",
+   "十"
   ],
   "status": "pending",
   "decision": null,
@@ -20828,7 +19865,7 @@
   "char": "薬",
   "keyword": "medicine",
   "our_parts": [
-   "艾",
+   "艹",
    "楽"
   ],
   "google_parts": [
@@ -20862,7 +19899,7 @@
   "char": "英",
   "keyword": "england",
   "our_parts": [
-   "艾",
+   "艹",
    "央"
   ],
   "google_parts": [
@@ -22034,6 +21071,43 @@
   "reviewed_at": null
  },
  {
+  "id": "rtk1981",
+  "char": "蒲",
+  "keyword": "bullrush",
+  "our_parts": [
+   "水",
+   "用",
+   "丶",
+   "艹",
+   "十"
+  ],
+  "google_parts": [
+   "水",
+   "用",
+   "丶",
+   "艾",
+   "十"
+  ],
+  "google_primitive_names": {
+   "艾": "flower",
+   "水/用/十(浦)": "bay"
+  },
+  "google_confidence": "high",
+  "google_note": "",
+  "cjkvi_ids": "⿱艹浦",
+  "cjkvi_leaves": [
+   "丨",
+   "丶",
+   "十",
+   "月",
+   "氵"
+  ],
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
   "id": "rtk1989",
   "char": "都",
   "keyword": "metropolis",
@@ -22257,7 +21331,7 @@
   "char": "繭",
   "keyword": "cocoon",
   "our_parts": [
-   "艾",
+   "艹",
    "冂",
    "糸",
    "風"
@@ -22644,7 +21718,7 @@
   "our_parts": [
    "丞",
    "灬",
-   "艾"
+   "艹"
   ],
   "google_parts": [
    "艹",
@@ -22673,35 +21747,6 @@
    "亅",
    "十",
    "灬"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk2054",
-  "char": "芽",
-  "keyword": "bud",
-  "our_parts": [
-   "牙",
-   "艾"
-  ],
-  "google_parts": [
-   "艹",
-   "牙"
-  ],
-  "google_primitive_names": {
-   "艹": "flower",
-   "牙": "tusk / fang"
-  },
-  "google_confidence": "high",
-  "google_note": "",
-  "cjkvi_ids": "⿱艹牙",
-  "cjkvi_leaves": [
-   "丨",
-   "十",
-   "牙"
   ],
   "status": "pending",
   "decision": null,
@@ -22810,7 +21855,7 @@
    "田",
    "釆",
    "米",
-   "艾"
+   "艹"
   ],
   "google_parts": [
    "艹",
@@ -23304,37 +22349,6 @@
   "cjkvi_ids": "⿹⑥灬",
   "cjkvi_leaves": [
    "⑥",
-   "灬"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk2095",
-  "char": "蔦",
-  "keyword": "vine",
-  "our_parts": [
-   "鳥",
-   "灬",
-   "艾"
-  ],
-  "google_parts": [
-   "艹",
-   "鳥"
-  ],
-  "google_primitive_names": {
-   "艹": "flower / grass",
-   "鳥": "bird"
-  },
-  "google_confidence": "high",
-  "google_note": "",
-  "cjkvi_ids": "⿱艹鳥",
-  "cjkvi_leaves": [
-   "⑦",
-   "丨",
-   "十",
    "灬"
   ],
   "status": "pending",
@@ -25222,36 +24236,6 @@
   "reviewed_at": null
  },
  {
-  "id": "rtk2226",
-  "char": "韮",
-  "keyword": "leek",
-  "our_parts": [
-   "韭",
-   "艾"
-  ],
-  "google_parts": [
-   "艹",
-   "韭"
-  ],
-  "google_primitive_names": {
-   "艹": "flower/grass",
-   "韭": "leek"
-  },
-  "google_confidence": "high",
-  "google_note": "Top 艹 (flower) + bottom 韭 (leek).",
-  "cjkvi_ids": "⿱艹韭",
-  "cjkvi_leaves": [
-   "一",
-   "丨",
-   "十",
-   "非"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
   "id": "rtk2232",
   "char": "尤",
   "keyword": "reasonable",
@@ -25582,7 +24566,7 @@
   "our_parts": [
    "一",
    "口",
-   "艾",
+   "艹",
    "｜"
   ],
   "google_parts": [
@@ -27117,41 +26101,12 @@
   "reviewed_at": null
  },
  {
-  "id": "rtk2436",
-  "char": "茉",
-  "keyword": "jasmine",
-  "our_parts": [
-   "艾",
-   "末"
-  ],
-  "google_parts": [
-   "艹",
-   "末"
-  ],
-  "google_primitive_names": {
-   "艹": "flower/grass",
-   "末": "not yet"
-  },
-  "google_confidence": "high",
-  "google_note": "Google: 艹 + 末 (not yet).",
-  "cjkvi_ids": "⿱艹末",
-  "cjkvi_leaves": [
-   "丨",
-   "十",
-   "末"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
   "id": "rtk2437",
   "char": "莉",
   "keyword": "jasmine",
   "our_parts": [
    "禾",
-   "艾"
+   "艹"
   ],
   "google_parts": [
    "艹",
@@ -27185,7 +26140,7 @@
   "our_parts": [
    "火",
    "禾",
-   "艾"
+   "艹"
   ],
   "google_parts": [
    "艹",
@@ -27219,7 +26174,7 @@
   "keyword": "mow down (the enemy)",
   "our_parts": [
    "矢",
-   "艾",
+   "艹",
    "隹"
   ],
   "google_parts": [
@@ -27255,7 +26210,7 @@
   "our_parts": [
    "口",
    "厶",
-   "艾"
+   "艹"
   ],
   "google_parts": [
    "艹",
@@ -27290,7 +26245,7 @@
    "一",
    "水",
    "日",
-   "艾",
+   "艹",
    "勿"
   ],
   "google_parts": [
@@ -27331,7 +26286,7 @@
   "our_parts": [
    "日",
    "又",
-   "艾"
+   "艹"
   ],
   "google_parts": [
    "艹",
@@ -27366,7 +26321,7 @@
   "our_parts": [
    "込",
    "車",
-   "艾"
+   "艹"
   ],
   "google_parts": [
    "艹",
@@ -27397,7 +26352,7 @@
   "char": "蓉",
   "keyword": "lotus",
   "our_parts": [
-   "艾",
+   "艹",
    "宀",
    "谷"
   ],
@@ -27433,7 +26388,7 @@
   "our_parts": [
    "日",
    "老",
-   "艾"
+   "艹"
   ],
   "google_parts": [
    "艹",
@@ -27467,7 +26422,7 @@
   "keyword": "iris",
   "our_parts": [
    "日",
-   "艾"
+   "艹"
   ],
   "google_parts": [
    "艹",
@@ -27492,80 +26447,13 @@
   "reviewed_at": null
  },
  {
-  "id": "rtk2453",
-  "char": "蕉",
-  "keyword": "banana",
-  "our_parts": [
-   "灬",
-   "艾",
-   "隹"
-  ],
-  "google_parts": [
-   "艹",
-   "隹",
-   "灬"
-  ],
-  "google_primitive_names": {
-   "艹": "flower/grass",
-   "隹": "(turkey, not stated)",
-   "灬": "(cooking fire, not stated)"
-  },
-  "google_confidence": "medium",
-  "google_note": "Google gives layout 艹 (top) / 隹 (middle) / 灬 (bottom) then truncates ('Show more'). 隹+灬 = 焦.",
-  "cjkvi_ids": "⿱艹焦",
-  "cjkvi_leaves": [
-   "丨",
-   "十",
-   "灬",
-   "隹"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk2455",
-  "char": "蕗",
-  "keyword": "butterbur",
-  "our_parts": [
-   "艾",
-   "路"
-  ],
-  "google_parts": [
-   "艹",
-   "路"
-  ],
-  "google_primitive_names": {
-   "艹": "flower/grass",
-   "路": "path",
-   "⻊": "leg",
-   "夂": "each",
-   "口": "mouth"
-  },
-  "google_confidence": "high",
-  "google_note": "Google: 艹 + 路 (path) = 足/⻊ + 各 (夂+口).",
-  "cjkvi_ids": "⿱艹路",
-  "cjkvi_leaves": [
-   "丨",
-   "十",
-   "口",
-   "夂",
-   "止"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
   "id": "rtk2456",
   "char": "茄",
   "keyword": "eggplant",
   "our_parts": [
    "口",
    "力",
-   "艾"
+   "艹"
   ],
   "google_parts": [
    "艹",
@@ -27600,7 +26488,7 @@
    "二",
    "个",
    "厶",
-   "艾",
+   "艹",
    "阝",
    "一"
   ],
@@ -27634,108 +26522,6 @@
   "reviewed_at": null
  },
  {
-  "id": "rtk2459",
-  "char": "芥",
-  "keyword": "mustard",
-  "our_parts": [
-   "艾",
-   "介"
-  ],
-  "google_parts": [
-   "艹",
-   "介"
-  ],
-  "google_primitive_names": {
-   "艹": "flower/grass",
-   "介": "jammed in / mediate"
-  },
-  "google_confidence": "high",
-  "google_note": "Google: 艹 + 介 (jammed in).",
-  "cjkvi_ids": "⿱艹介",
-  "cjkvi_leaves": [
-   "丨",
-   "丿",
-   "人",
-   "十"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk2462",
-  "char": "萄",
-  "keyword": "grape vine",
-  "our_parts": [
-   "缶",
-   "勹",
-   "艾"
-  ],
-  "google_parts": [
-   "艹",
-   "勹",
-   "缶"
-  ],
-  "google_primitive_names": {
-   "艹": "flower/grass",
-   "勹": "bound up/wrapped",
-   "缶": "tin can"
-  },
-  "google_confidence": "high",
-  "google_note": "Google: 艹 + 勹 (bound up) + 缶 (tin can).",
-  "cjkvi_ids": "⿱艹匋",
-  "cjkvi_leaves": [
-   "丨",
-   "勹",
-   "十",
-   "缶"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk2463",
-  "char": "蘇",
-  "keyword": "be resuscitated",
-  "our_parts": [
-   "禾",
-   "魚",
-   "艾"
-  ],
-  "google_parts": [
-   "艹",
-   "魚",
-   "禾"
-  ],
-  "google_primitive_names": {
-   "艹": "flower/grass",
-   "魚": "fish",
-   "禾": "wheat",
-   "勹": "bound up/hook",
-   "田": "rice field",
-   "灬": "cooking hearth"
-  },
-  "google_confidence": "high",
-  "google_note": "Google: 艹 + 魚 (fish) + 禾 (wheat).",
-  "cjkvi_ids": "⿱艹穌",
-  "cjkvi_leaves": [
-   "丨",
-   "丿",
-   "十",
-   "木",
-   "灬",
-   "田",
-   "𠂊"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
   "id": "rtk2464",
   "char": "蕃",
   "keyword": "grow luxuriously",
@@ -27743,7 +26529,7 @@
    "田",
    "釆",
    "米",
-   "艾"
+   "艹"
   ],
   "google_parts": [
    "艹",
@@ -27777,7 +26563,7 @@
   "our_parts": [
    "瓜",
    "子",
-   "艾"
+   "艹"
   ],
   "google_parts": [
    "艹",
@@ -27808,7 +26594,7 @@
   "char": "苅",
   "keyword": "cutting (grass)",
   "our_parts": [
-   "艾"
+   "艹"
   ],
   "google_parts": [
    "艹",
@@ -27835,165 +26621,6 @@
   "reviewed_at": null
  },
  {
-  "id": "rtk2474",
-  "char": "蕊",
-  "keyword": "pistil",
-  "our_parts": [
-   "心",
-   "艾"
-  ],
-  "google_parts": [
-   "艹",
-   "心",
-   "心",
-   "心"
-  ],
-  "google_primitive_names": {
-   "艹": "flower/grass/flowerpot",
-   "心": "heart"
-  },
-  "google_confidence": "high",
-  "google_note": "Google: 艹 + three 心 (hearts).",
-  "cjkvi_ids": "⿱艹惢",
-  "cjkvi_leaves": [
-   "丨",
-   "十",
-   "心"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk2475",
-  "char": "茸",
-  "keyword": "mushroom",
-  "our_parts": [
-   "耳",
-   "艾"
-  ],
-  "google_parts": [
-   "艹",
-   "耳"
-  ],
-  "google_primitive_names": {
-   "艹": "flower",
-   "耳": "ear"
-  },
-  "google_confidence": "high",
-  "google_note": "",
-  "cjkvi_ids": "⿱艹耳",
-  "cjkvi_leaves": [
-   "丨",
-   "十",
-   "耳"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk2477",
-  "char": "芹",
-  "keyword": "parsley",
-  "our_parts": [
-   "斤",
-   "艾"
-  ],
-  "google_parts": [
-   "艹",
-   "斤"
-  ],
-  "google_primitive_names": {
-   "艹": "flower/grass",
-   "斤": "axe"
-  },
-  "google_confidence": "high",
-  "google_note": "",
-  "cjkvi_ids": "⿱艹斤",
-  "cjkvi_leaves": [
-   "一",
-   "丨",
-   "十",
-   "𠂆"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk2480",
-  "char": "藁",
-  "keyword": "straw",
-  "our_parts": [
-   "艾",
-   "高",
-   "木"
-  ],
-  "google_parts": [
-   "艹",
-   "高",
-   "木"
-  ],
-  "google_primitive_names": {
-   "艹": "flower/grass",
-   "高": "tall/high",
-   "木": "tree/wood"
-  },
-  "google_confidence": "high",
-  "google_note": "Google: 艹 + 高 (tall) + 木 (tree).",
-  "cjkvi_ids": "⿱艹槀",
-  "cjkvi_leaves": [
-   "一",
-   "丨",
-   "丶",
-   "冂",
-   "十",
-   "口",
-   "木"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk2481",
-  "char": "蕪",
-  "keyword": "turnip",
-  "our_parts": [
-   "艾",
-   "無"
-  ],
-  "google_parts": [
-   "艹",
-   "無"
-  ],
-  "google_primitive_names": {
-   "艹": "flower",
-   "無": "nothingness/none",
-   "灬": "oven-fire"
-  },
-  "google_confidence": "high",
-  "google_note": "Google: 艹 + 無 (nothingness).",
-  "cjkvi_ids": "⿱艹無",
-  "cjkvi_leaves": [
-   "一",
-   "丨",
-   "十",
-   "卌",
-   "灬",
-   "𠂉"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
   "id": "rtk2482",
   "char": "藷",
   "keyword": "potato",
@@ -28001,7 +26628,7 @@
    "言",
    "日",
    "老",
-   "艾"
+   "艹"
   ],
   "google_parts": [
    "艹",
@@ -28035,7 +26662,7 @@
   "our_parts": [
    "女",
    "米",
-   "艾",
+   "艹",
    "攵"
   ],
   "google_parts": [
@@ -28069,7 +26696,7 @@
   "char": "蔚",
   "keyword": "dense growth",
   "our_parts": [
-   "艾",
+   "艹",
    "寸",
    "尸"
   ],
@@ -28100,44 +26727,12 @@
   "reviewed_at": null
  },
  {
-  "id": "rtk2487",
-  "char": "茜",
-  "keyword": "madder",
-  "our_parts": [
-   "西",
-   "艾"
-  ],
-  "google_parts": [
-   "艹",
-   "西"
-  ],
-  "google_primitive_names": {
-   "艹": "flower/grass",
-   "西": "west"
-  },
-  "google_confidence": "high",
-  "google_note": "",
-  "cjkvi_ids": "⿱艹西",
-  "cjkvi_leaves": [
-   "一",
-   "丨",
-   "丿",
-   "乚",
-   "十",
-   "口"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
   "id": "rtk2488",
   "char": "莞",
   "keyword": "smiling",
   "our_parts": [
    "宀",
-   "艾",
+   "艹",
    "元"
   ],
   "google_parts": [
@@ -28158,74 +26753,6 @@
    "丨",
    "丿",
    "乚",
-   "十",
-   "宀"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk2489",
-  "char": "蒐",
-  "keyword": "gather",
-  "our_parts": [
-   "艾",
-   "鬼"
-  ],
-  "google_parts": [
-   "艹",
-   "鬼"
-  ],
-  "google_primitive_names": {
-   "艹": "flower/grass",
-   "鬼": "ghost/ogre",
-   "田": "brains",
-   "儿": "human legs",
-   "厶": "elbow/private"
-  },
-  "google_confidence": "high",
-  "google_note": "Google: 艹 + 鬼 (ghost). Keyword given 'gather' (our 'collector').",
-  "cjkvi_ids": "⿱艹鬼",
-  "cjkvi_leaves": [
-   "丨",
-   "丿",
-   "乚",
-   "十",
-   "厶",
-   "田"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk2490",
-  "char": "菅",
-  "keyword": "sedge",
-  "our_parts": [
-   "艾",
-   "官"
-  ],
-  "google_parts": [
-   "艹",
-   "官"
-  ],
-  "google_primitive_names": {
-   "艹": "flower",
-   "官": "bureaucrat",
-   "宀": "house",
-   "𠂊": "bound up",
-   "口": "mouth"
-  },
-  "google_confidence": "high",
-  "google_note": "Google: 艹 + 官 (bureaucrat) = 宀 + 𠂊 + 口.",
-  "cjkvi_ids": "⿱艹官",
-  "cjkvi_leaves": [
-   "㠯",
-   "丨",
    "十",
    "宀"
   ],
@@ -28460,7 +26987,7 @@
    "一",
    "口",
    "心",
-   "艾"
+   "艹"
   ],
   "google_parts": [
    "若",
@@ -29318,7 +27845,7 @@
    "｜",
    "一",
    "木",
-   "艾"
+   "艹"
   ],
   "google_parts": [
    "木",
@@ -29906,7 +28433,7 @@
   "our_parts": [
    "ノ",
    "王",
-   "艾",
+   "艹",
    "大",
    "冖"
   ],
@@ -31868,7 +30395,7 @@
    "寸",
    "爪",
    "酉",
-   "爿"
+   "丬"
   ],
   "google_parts": [
    "将",
@@ -33953,6 +32480,44 @@
   "reviewed_at": null
  },
  {
+  "id": "rtk2962",
+  "char": "薩",
+  "keyword": "salvation",
+  "our_parts": [
+   "艹",
+   "阝",
+   "産"
+  ],
+  "google_parts": [
+   "艾",
+   "阝",
+   "産"
+  ],
+  "google_primitive_names": {
+   "艾": "flower/grass",
+   "阝": "pinnacle",
+   "産": "give birth/products",
+   "立": "vase/stand"
+  },
+  "google_confidence": "medium",
+  "google_note": "text confused/garbled on the right component (mixes 产/産/立); top-level flower + pinnacle + produce is clear",
+  "cjkvi_ids": "⿱艹隡",
+  "cjkvi_leaves": [
+   "一",
+   "丨",
+   "丶",
+   "丷",
+   "十",
+   "厂",
+   "生",
+   "阝"
+  ],
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
   "id": "rtk2967",
   "char": "珈",
   "keyword": "ornamental hairpin",
@@ -34125,7 +32690,7 @@
   "char": "薗",
   "keyword": "garden",
   "our_parts": [
-   "艾",
+   "艹",
    "園"
   ],
   "google_parts": [
