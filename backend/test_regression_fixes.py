@@ -790,13 +790,17 @@ EXPECTED_DECOMPOSITIONS = {
     # ヨ that only covered half of 羽's own two-ヨ shape.
     "rtk2892": {"character": "耀", "keyword": "shimmering",
                 "expected_part_ids": {"kangxi172", "rtk125", "rtk615"}},
-    # 悩 had a literal dead English-text token ("state of mind" -- silently
-    # dropped on import, same class as the earlier primitive_roof/刂 dead-
-    # token finds) alongside a wrong 尚; render + cjkvi-ids (⿰忄⿱𭕄凶)
-    # confirm the right side is 凶(villain, already taught), not 尚 or 凵.
+    # 悩 had a wrong 尚,凵 for its right side; render + cjkvi-ids
+    # (⿰忄⿱𭕄凶) confirm it's 凶(villain, already taught) instead.
+    # NOTE: an earlier version of this fix also swapped the line's
+    # "state of mind" token for 忄, wrongly believing it was a dead
+    # token -- it's actually a real, long-established alias for
+    # kangxi61/忄 (see data.txt's own kangxi61 line, and its many other
+    # correct uses e.g. rtk667). Harmless no-op (both resolve to the
+    # same id), corrected here only to avoid repeating the false claim.
     # (脳/巣/単 share a similar-looking 𭕄-prefixed structure per cjkvi-ids
-    # and may have the same mixup -- left as a standing open question,
-    # same as this project's existing note on that shared marker.)
+    # and may have the same 尚-vs-凶 mixup -- left as a standing open
+    # question, same as this project's existing note on that marker.)
     "rtk2085": {"character": "悩", "keyword": "trouble",
                 "expected_part_ids": {"kangxi61", "rtk1603"}},
     "rtk683": {"character": "慕", "keyword": "pining",

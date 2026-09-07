@@ -7287,11 +7287,21 @@ under `尚,儿` again in 6 more kanji — `晃`(day 5's `輝` fix should have
 prompted this sooner: `晃`=`日`+`光` is itself taught, and `幌`/`滉`
 build on `晃`; `洸`/`胱` build on `光` directly; `耀` also had a bare
 `ヨ` where `羽`(feathers, already taught) fits its own two-`ヨ` shape
-cleanly. While in there, also found `悩`(trouble) had a literal dead
-English-text token, `"state of mind"` — silently dropped on import,
-same class as the earlier `primitive_roof`/`刂` dead-token finds —
-alongside a wrong `尚`; render + `cjkvi-ids` (`⿰忄⿱𭕄凶`) confirm the
-right side is `凶`(villain, already taught), not `尚` or `凵`. Left
+cleanly. While in there, also touched `悩`(trouble), which had a
+wrong `尚` and `凵` for its right side — render + `cjkvi-ids`
+(`⿰忄⿱𭕄凶`) confirm it's `凶`(villain, already taught) instead.
+**Correction (owner caught this the same day)**: my first pass wrongly
+called the line's `"state of mind"` token a dead/garbage string and
+"fixed" it to `忄` — but `state of mind` is in fact a long-established,
+heavily-used real alias for `kangxi61`/`忄` (registered right in
+`data.txt`, confirmed resolving correctly in dozens of other kanji
+e.g. `恒`/`rtk667`, and documented at length earlier in this very audit
+log). Swapping it for `忄` was a harmless no-op (both resolve to the
+same canonical id), not a functional bug fix — the only real fix in
+this pin was the right side (`尚,凵` → `凶`). Lesson: check the aliases
+table (or just trust a clean `audit_radicals.py` run, which had
+already reported 0 undefined terms) before calling anything a "dead
+token."  Left
 `脳`/`巣`/`単` alone — they share the same `𭕄`-prefixed structure per
 `cjkvi-ids` and may have the identical mixup, but this is the
 project's existing, deliberately-unresolved open question about that
