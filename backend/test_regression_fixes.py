@@ -772,6 +772,33 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk13", "rtk2242"}},
     "rtk437": {"character": "幕", "keyword": "curtain",
                 "expected_part_ids": {"rtk2242", "rtk432"}},
+    # 2026-09-07, found while checking remaining 尚 usages after the
+    # ツ/schoolhouse fix above: 晃/幌/洸/滉/胱/耀 all had 尚,儿 (or a
+    # superset with a spurious extra 一) where render + cjkvi-ids confirm
+    # a clean 光 reference instead (晃=日+光; 幌/滉 build on 晃 itself).
+    "rtk2522": {"character": "晃", "keyword": "limpid",
+                "expected_part_ids": {"rtk12", "rtk125"}},
+    "rtk438": {"character": "幌", "keyword": "canopy",
+                "expected_part_ids": {"rtk2522", "rtk432"}},
+    "rtk2383": {"character": "洸", "keyword": "glistening",
+                "expected_part_ids": {"rtk125", "rtk137"}},
+    "rtk2384": {"character": "滉", "keyword": "bounding main",
+                "expected_part_ids": {"rtk137", "rtk2522"}},
+    "rtk2530": {"character": "胱", "keyword": "bladder",
+                "expected_part_ids": {"rtk125", "rtk13"}},
+    # 耀's own extra token (羽, feathers, already taught) replaces a bare
+    # ヨ that only covered half of 羽's own two-ヨ shape.
+    "rtk2892": {"character": "耀", "keyword": "shimmering",
+                "expected_part_ids": {"kangxi172", "rtk125", "rtk615"}},
+    # 悩 had a literal dead English-text token ("state of mind" -- silently
+    # dropped on import, same class as the earlier primitive_roof/刂 dead-
+    # token finds) alongside a wrong 尚; render + cjkvi-ids (⿰忄⿱𭕄凶)
+    # confirm the right side is 凶(villain, already taught), not 尚 or 凵.
+    # (脳/巣/単 share a similar-looking 𭕄-prefixed structure per cjkvi-ids
+    # and may have the same mixup -- left as a standing open question,
+    # same as this project's existing note on that shared marker.)
+    "rtk2085": {"character": "悩", "keyword": "trouble",
+                "expected_part_ids": {"kangxi61", "rtk1603"}},
     "rtk683": {"character": "慕", "keyword": "pining",
                 "expected_part_ids": {"rtk2242", "rtk639"}},
     # 壮/将/寝/醤/鼎/燕/乖/淵 (plus 状, pinned separately above) all used
@@ -826,12 +853,75 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk287", "rtk79"}},
     "rtk301": {"character": "逃", "keyword": "escape",
                 "expected_part_ids": {"rtk250", "rtk843"}},
+    # 2026-09-07 worklist loop, day 5 batch:
+    # 前 had a spurious extra 一 and was missing 刀(刂) entirely.
+    "rtk309": {"character": "前", "keyword": "in front",
+                "expected_part_ids": {"kangxi12", "rtk13", "rtk87"}},
+    # 夢 was missing 罒(net/eyeglasses) entirely.
+    "rtk327": {"character": "夢", "keyword": "dream",
+                "expected_part_ids": {"kangxi122", "kangxi14", "prim-mugwort", "rtk114"}},
+    # 学/覚/栄/蛍/労/営/鴬 -- see the rtk1111 comment below for the full
+    # ツ/prim-katakana-tsu account.
+    "rtk346": {"character": "学", "keyword": "study",
+                "expected_part_ids": {"kangxi14", "prim-katakana-tsu", "rtk99"}},
+    "rtk347": {"character": "覚", "keyword": "memorize",
+                "expected_part_ids": {"kangxi14", "prim-katakana-tsu", "rtk61"}},
+    "rtk348": {"character": "栄", "keyword": "flourish",
+                "expected_part_ids": {"kangxi14", "prim-katakana-tsu", "rtk207"}},
+    "rtk557": {"character": "蛍", "keyword": "lightning bug",
+                "expected_part_ids": {"kangxi14", "prim-katakana-tsu", "rtk556"}},
+    "rtk924": {"character": "労", "keyword": "labor",
+                "expected_part_ids": {"kangxi14", "prim-katakana-tsu", "rtk922"}},
+    "rtk2916": {"character": "鴬", "keyword": "nightingale",
+                "expected_part_ids": {"kangxi14", "prim-katakana-tsu", "rtk2091"}},
+    # The whole 鳥-family had the exact same redundant-灬 bug as the
+    # 馬-family fix on day 4 -- 鳥(rtk2091) is itself taught with 灬 as
+    # its one listed part, so every other 鳥-containing kanji that also
+    # separately listed 灬 was re-listing something already implied by
+    # the 鳥 reference. Rendered all 16 solo to confirm none has a
+    # genuine second, separate fire-dots shape -- dropped the redundant
+    # token from all of them in one pass (鴬, above, needed both this
+    # AND the ツ fix).
+    "rtk2092": {"character": "鳴", "keyword": "chirp",
+                "expected_part_ids": {"rtk11", "rtk2091"}},
+    "rtk2093": {"character": "鶴", "keyword": "crane",
+                "expected_part_ids": {"kangxi14", "kangxi172", "kangxi40", "rtk2091"}},
+    "rtk2095": {"character": "蔦", "keyword": "vine",
+                "expected_part_ids": {"prim-mugwort", "rtk2091"}},
+    "rtk2096": {"character": "鳩", "keyword": "pigeon",
+                "expected_part_ids": {"rtk2091", "rtk9"}},
+    "rtk2097": {"character": "鶏", "keyword": "chicken",
+                "expected_part_ids": {"rtk1023", "rtk112", "rtk161", "rtk2", "rtk2091", "rtk784"}},
+    "rtk2268": {"character": "鳳", "keyword": "phoenix",
+                "expected_part_ids": {"kangxi16", "rtk2091"}},
+    "rtk2344": {"character": "鷹", "keyword": "hawk",
+                "expected_part_ids": {"kangxi172", "kangxi53", "rtk2091"}},
+    "rtk2406": {"character": "鴻", "keyword": "large goose",
+                "expected_part_ids": {"rtk137", "rtk2091", "rtk80"}},
+    "rtk2843": {"character": "鴎", "keyword": "seagull",
+                "expected_part_ids": {"kangxi22", "kangxi3", "prim-katakana-no", "rtk2091"}},
+    "rtk2844": {"character": "鵬", "keyword": "roc",
+                "expected_part_ids": {"rtk13", "rtk2091"}},
+    "rtk2845": {"character": "鸚", "keyword": "parakeet",
+                "expected_part_ids": {"rtk102", "rtk2091", "rtk56"}},
+    "rtk2846": {"character": "鵡", "keyword": "parrot",
+                "expected_part_ids": {"kangxi56", "kangxi62", "rtk2091", "rtk396"}},
+    "rtk2850": {"character": "鴨", "keyword": "wild duck",
+                "expected_part_ids": {"prim-pipe", "rtk12", "rtk14", "rtk2091"}},
+    "rtk2851": {"character": "鳶", "keyword": "black kite",
+                "expected_part_ids": {"kangxi56", "rtk2091"}},
+    "rtk2982": {"character": "嶋", "keyword": "island (alternate)",
+                "expected_part_ids": {"rtk2091", "rtk830"}},
     "rtk310": {"character": "煎", "keyword": "roast",
                 "expected_part_ids": {"prim-fire-radical", "rtk309"}},
     "rtk325": {"character": "運", "keyword": "carry",
                 "expected_part_ids": {"rtk323", "rtk843"}},
+    # Corrected 2026-09-07 (worklist loop, day 5): 塾/熟 both flattened
+    # 丸(round, rtk44 = 九+丶, already taught) into its own raw parts
+    # instead of referencing it directly, alongside 享(receive, rtk330,
+    # already taught).
     "rtk332": {"character": "熟", "keyword": "mellow",
-                "expected_part_ids": {"kangxi3", "prim-fire-radical", "rtk330", "rtk9"}},
+                "expected_part_ids": {"prim-fire-radical", "rtk330", "rtk44"}},
     "rtk356": {"character": "敬", "keyword": "awe",
                 "expected_part_ids": {"kangxi66", "prim-mugwort", "rtk69"}},
     "rtk488": {"character": "渇", "keyword": "thirst",
@@ -1555,12 +1645,18 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk224", "rtk287"}},
     "rtk314": {"character": "略", "keyword": "abbreviation",
                 "expected_part_ids": {"rtk14", "rtk311"}},
+    # Corrected 2026-09-07 (worklist loop, day 5): 額 was flattened
+    # (各,宀) instead of referencing 客(guest, rtk315, already taught)
+    # directly.
     "rtk316": {"character": "額", "keyword": "forehead",
-                "expected_part_ids": {"kangxi40", "rtk311", "rtk64"}},
+                "expected_part_ids": {"rtk315", "rtk64"}},
+    # 輝 used 尚(wrong -- no box/口 shape in 光's top, same mistake as the
+    # original 光 bug from day 2) plus a spurious extra 一, instead of
+    # referencing 光(already fixed) directly.
     "rtk324": {"character": "輝", "keyword": "radiance",
-                "expected_part_ids": {"kangxi10", "rtk1", "rtk196", "rtk323"}},
+                "expected_part_ids": {"rtk125", "rtk323"}},
     "rtk331": {"character": "塾", "keyword": "cram school",
-                "expected_part_ids": {"kangxi3", "rtk161", "rtk330", "rtk9"}},
+                "expected_part_ids": {"rtk161", "rtk330", "rtk44"}},
     "rtk336": {"character": "景", "keyword": "scenery",
                 "expected_part_ids": {"rtk12", "rtk334"}},
     "rtk340": {"character": "週", "keyword": "week",
@@ -1746,8 +1842,14 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"prim-pipe", "rtk1023", "rtk2345"}},
     "rtk1110": {"character": "宮", "keyword": "shinto shrine",
                 "expected_part_ids": {"kangxi40", "rtk24"}},
+    # Corrected 2026-09-07 (worklist loop, day 5): 学/覚/栄/蛍/労/営/鴬
+    # all used 尚(esteem, box+口 shape) for their top -- but render shows
+    # a plain 2-3-stroke ツ(katakana tsu) shape, no box/口 anywhere,
+    # same mistake as the original 光 bug from day 2 (光/輝, fixed
+    # above). Registered ツ as prim-katakana-tsu (same convention as the
+    # existing prim-katakana-ha/no/yo) and repointed all 7.
     "rtk1111": {"character": "営", "keyword": "occupation",
-                "expected_part_ids": {"kangxi14", "rtk196", "rtk24"}},
+                "expected_part_ids": {"kangxi14", "prim-katakana-tsu", "rtk24"}},
     "rtk1113": {"character": "膳", "keyword": "dining tray",
                 "expected_part_ids": {"rtk1112", "rtk13"}},
     "rtk1121": {"character": "喚", "keyword": "yell",

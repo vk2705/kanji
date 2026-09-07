@@ -7225,3 +7225,85 @@ up all 5; checked again post-cleanup — 0 duplicates.
 
 **Next session**: continue the worklist loop. Standing list otherwise
 unchanged (see earlier entries above).
+
+## 2026-09-07 (daily check-in): worklist loop, day 5 — 尚-vs-ツ mixup, the whole 鳥-family's redundant 灬
+
+Pulled latest (already up to date), verified clean (1258 checks/4
+expected, pytest 56 passed, 0 dict duplicates, radicals/self-reference
+clean, no pending reviews), ran `worklist_next.py -n 20`.
+
+**7 kept as-is** (`逃`/`辺`/`巡`/`連`/`輸` already match; `週`/`士`/`壮`
+already correct — `士` genuinely atomic per CSV despite Google's
+internal `十`+`一` reading; `落` already references the taught `洛`
+directly, better than Google's flat `水,各`; `夏` and its `一,自,夂`
+approximation left alone — genuinely ambiguous top, Google's own
+alternative isn't any cleaner).
+
+**Another `尚`-vs-real-shape mixup, this time `尚` standing in for
+katakana `ツ`**: `輝`(radiance) still had the *original* `光` bug (day
+2's fix registered `光`=`小,儿` correctly, but `輝` had never been
+updated to reference it — still had `尚,儿,一` raw, plus a spurious
+extra `一`). Fixed to `軍,光`. That prompted a broader check: `尚`
+alongside `冖` turned out to be the same "schoolhouse" mistake in
+**7** kanji (`学`/`覚`/`栄`/`蛍`/`労`/`営`/`鴬`) — render shows a plain
+2-3-stroke katakana `ツ` shape at the top of all of them, no box/口
+anywhere, so `尚` (which has a real box+`口`) doesn't belong. Registered
+`ツ` as `prim-katakana-tsu`, matching the existing `prim-katakana-ha`/
+`-no`/`-yo` convention, and repointed all 7.
+
+**The whole 鳥-family had the exact same redundant-`灬` bug as the
+馬-family (day 4).** `鳥`(rtk2091, bird) is itself taught with `灬` as
+its one listed part, so the **16** other 鳥-containing kanji that also
+separately listed `灬` (`鳴`/`鶴`/`蔦`/`鳩`/`鶏`/`鳳`/`鷹`/`鴻`/`鴎`/
+`鵬`/`鸚`/`鵡`/`鴨`/`鳶`/`嶋`, plus `鴬` above) were re-listing
+something the `鳥` reference already implies. Rendered all 16 solo
+(same discipline as day 4's 馬-family pass) to confirm none has a
+genuine second, separately-drawn fire-dots shape — dropped the
+redundant token from all of them in one pass.
+
+**Also found and fixed**: `前`(in front) had a spurious extra `一` and
+was missing `刀`(`刂`) entirely — render shows `丷,月,刂` cleanly, no
+extra ceiling stroke; `額`(forehead) was flattened (`各,宀`) instead of
+referencing `客`(guest, already taught) directly; `冥`(dark) had raw
+`ハ,亠` where `六`(six, already taught = `亠`+`ハ`) fits directly;
+`夢`(dream) was missing `罒`(net/eyeglasses) entirely — render clearly
+shows a 4-section box between the grass-top and the crown; `塾`/`熟`
+both flattened `丸`(round, already taught = `九`+`丶`) into raw strokes
+instead of referencing it alongside `享`(already taught).
+
+Verified: full rebuild (3000 kanji, 3008 overrides — one new
+primitive, `prim-katakana-tsu`); `test_regression_fixes.py` — 5
+corrected + 24 new pins — **1281 checks**, same 4 expected hanzi-scope
+non-issues; pytest (56 passed); `audit_self_reference.py` clean;
+`audit_radicals.py` still 0/0; `review_queue.py` clean.
+`build_decomp_worklist.py` rebuilt: 993 → **982 rows, 936 pending**.
+Not deployed (no SSH/server access) — data-only change, needs
+`sync_system_data.py` + reseed.
+
+**Chased the `尚` lead immediately instead of deferring it** (flagged
+above as "worth grepping... next"): grepped every remaining `尚`
+usage and found a **third** mixup, the same `光`(day 2) shape hiding
+under `尚,儿` again in 6 more kanji — `晃`(day 5's `輝` fix should have
+prompted this sooner: `晃`=`日`+`光` is itself taught, and `幌`/`滉`
+build on `晃`; `洸`/`胱` build on `光` directly; `耀` also had a bare
+`ヨ` where `羽`(feathers, already taught) fits its own two-`ヨ` shape
+cleanly. While in there, also found `悩`(trouble) had a literal dead
+English-text token, `"state of mind"` — silently dropped on import,
+same class as the earlier `primitive_roof`/`刂` dead-token finds —
+alongside a wrong `尚`; render + `cjkvi-ids` (`⿰忄⿱𭕄凶`) confirm the
+right side is `凶`(villain, already taught), not `尚` or `凵`. Left
+`脳`/`巣`/`単` alone — they share the same `𭕄`-prefixed structure per
+`cjkvi-ids` and may have the identical mixup, but this is the
+project's existing, deliberately-unresolved open question about that
+marker, not something to guess at under today's time budget.
+
+Re-verified after these 7 additions: **1288 checks**, same 4 expected;
+pytest, radicals, self-reference all still clean.
+`build_decomp_worklist.py` rebuilt again: 982 → **979 rows, 933
+pending**.
+
+**Next session**: continue the worklist loop. `脳`/`巣`/`単`'s shared
+`𭕄` marker now has a concrete lead (`悩`'s sibling fix, same `凶`-like
+right side) worth a render-based push next time, rather than staying
+purely deferred. Standing list otherwise unchanged (see earlier
+entries above).

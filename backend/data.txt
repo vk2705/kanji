@@ -555,30 +555,30 @@ rtk305:連:take along:込,車
 rtk306:軌:rut:車,九
 rtk307:輸:transport:月,車,个,一
 rtk308:喩:metaphor:月,口,个,一
-rtk309:前:in front:一,月,丷
+rtk309:前:in front:丷,月,刀
 rtk310:煎:broil:前,灬
 rtk311:各:each:口,夂
 rtk312:格:status:木,各
 rtk313:賂:bribe:貝,各
 rtk314:略:abbreviation:各,田
 rtk315:客:guest:各,宀
-rtk316:額:forehead:各,頁,宀
+rtk316:額:forehead:客,頁
 rtk317:夏:summer:一,自,夂
 rtk318:処:dispose:几,夂
 rtk319:条:article:木,夂
 rtk320:落:fall:艹,洛
 rtk321:冗:superfluous:冖,几
-rtk322:冥:dark:日,ハ,亠,冖
+rtk322:冥:dark:冖,日,六
 rtk323:軍:army:車,冖
-rtk324:輝:radiance:軍,尚,儿,一
+rtk324:輝:radiance:軍,光
 rtk325:運:carry:込,軍
 rtk326:冠:crown:寸,冖,元
-rtk327:夢:dream:夕,冖,艹
+rtk327:夢:dream:艹,罒,冖,夕
 rtk328:坑:pit:土,亠,几
 rtk329:高:tall:口,亠,冂
 rtk330:享:enjoy:口,子,亠
-rtk331:塾:cram school:丶,九,享,土
-rtk332:熟:mellow:丶,九,享,灬
+rtk331:塾:cram school:丸,享,土
+rtk332:熟:mellow:丸,享,灬
 rtk333:亭:pavilion:口,亅,亠,冖
 rtk334:京:capital:口,小,亠
 rtk335:涼:refreshing:水,京
@@ -592,9 +592,9 @@ rtk342:吉:good luck:口,士
 rtk343:壮:robust:士,丬
 rtk344:荘:villa:艹,壮
 rtk345:売:sell:士,儿,冖
-rtk346:学:study:子,尚,冖
-rtk347:覚:memorize:見,尚,冖
-rtk348:栄:flourish:尚,木,冖
+rtk346:学:study:子,ツ,冖
+rtk347:覚:memorize:見,ツ,冖
+rtk348:栄:flourish:ツ,木,冖
 rtk349:書:write:日,聿
 rtk350:津:haven:水,聿
 rtk351:牧:breed:牛,攵
@@ -684,7 +684,7 @@ rtk434:帆:sail:巾,凡
 rtk435:幅:hanging scroll:畐,巾
 rtk436:帽:cap:巾,冒
 rtk437:幕:curtain:巾,莫
-rtk438:幌:canopy:巾,尚,日,儿
+rtk438:幌:canopy:巾,晃
 rtk439:錦:brocade:巾,金,白
 rtk440:市:market:巾,亠
 rtk441:柿:persimmon:｜,市,木,冂
@@ -803,7 +803,7 @@ rtk553:栃:horse chestnut:斤,木,厂
 rtk554:地:ground:土,也
 rtk555:池:pond:水,也
 rtk556:虫:insect:
-rtk557:蛍:lightning-bug:尚,虫,冖
+rtk557:蛍:lightning-bug:ツ,虫,冖
 rtk558:蛇:snake:虫,匕,宀
 rtk559:虹:rainbow:工,虫
 rtk560:蝶:butterfly:虫,木,世
@@ -1170,7 +1170,7 @@ rtk920:巨:gigantic:
 rtk921:拒:repel:扌,巨
 rtk922:力:power:
 rtk923:男:male:田,力
-rtk924:労:labor:尚,力,冖
+rtk924:労:labor:ツ,力,冖
 rtk925:募:recruit:大,日,力,艹
 rtk926:劣:inferiority:少,力
 rtk927:功:achievement:工,力
@@ -1357,7 +1357,7 @@ rtk1107:併:join:亻,并
 rtk1108:瓦:tile:一
 rtk1109:瓶:bottle:瓦,丷,二,一,ノ
 rtk1110:宮:shinto shrine:呂,宀
-rtk1111:営:camp:呂,尚,冖
+rtk1111:営:camp:呂,ツ,冖
 rtk1112:善:virtuous:王,口,丷,羊
 rtk1113:膳:small low table:善,月
 rtk1114:年:year:ノ,午
@@ -2331,19 +2331,19 @@ rtk2081:弾:bullet:弓,単
 rtk2082:桜:cherry:女,尚,木
 rtk2083:獣:animal:犬,口,尚,田
 rtk2084:脳:brain:月,尚,凵
-rtk2085:悩:trouble:尚,state of mind,凵
+rtk2085:悩:trouble:忄,凶
 rtk2086:厳:stern:敢,尚,厂
 rtk2087:鎖:chain:貝,金,尚
 rtk2088:挙:raise:手,尚,ハ
 rtk2089:誉:reputation:言,臼,ハ,一
 rtk2090:猟:game-hunting:犭,尚,用,几
 rtk2091:鳥:bird:灬
-rtk2092:鳴:chirp:口,鳥,灬
-rtk2093:鶴:crane:鳥,灬,隹,宀,冖
+rtk2092:鳴:chirp:口,鳥
+rtk2093:鶴:crane:鳥,隹,宀,冖
 rtk2094:烏:crow:丶,口,一,灬
-rtk2095:蔦:vine:鳥,灬,艹
-rtk2096:鳩:pigeon:九,鳥,灬
-rtk2097:鶏:chicken:人,爪,土,大,鳥,灬,二
+rtk2095:蔦:vine:鳥,艹
+rtk2096:鳩:pigeon:九,鳥
+rtk2097:鶏:chicken:人,爪,土,大,鳥,二
 rtk2098:島:island:山,鳥
 rtk2099:暖:warmth:友,爪,日
 rtk2100:媛:beautiful woman:ノ,女,爪,又
@@ -2513,7 +2513,7 @@ rtk2264:凛:cold:口,示,亠,冫,囗
 rtk2265:凧:kite:巾,几
 rtk2266:凪:lull:止,几
 rtk2267:夙:bright and early:几,歹
-rtk2268:鳳:male mythical bird:鳥,几,灬
+rtk2268:鳳:male mythical bird:鳥,几
 rtk2269:剽:threat:票,刀
 rtk2270:劉:weapon of war:金,厶
 rtk2271:剃:shave:弟,刀
@@ -2589,7 +2589,7 @@ rtk2340:幟:flag:巾,音,戈
 rtk2341:庖:kitchen:广,包
 rtk2342:廓:enclosure:口,子,邦,亅,亠,广
 rtk2343:庇:protect:比,广
-rtk2344:鷹:hawk:鳥,广,灬,隹
+rtk2344:鷹:hawk:鳥,广,隹
 rtk2345:庄:level:土,广
 rtk2346:廟:mausoleum:月,十,日,广
 rtk2347:彊:strong:一,弓,田
@@ -2628,8 +2628,8 @@ rtk2379:恰:just as:口,state of mind,个,一
 rtk2380:恢:wide:火,厂,state of mind
 rtk2381:悌:serving our elders:弟,state of mind
 rtk2382:澪:water route:雨,水,个,卩,一
-rtk2383:洸:sparkling water:水,尚,儿
-rtk2384:滉:deep and broad (water):水,尚,日,儿
+rtk2383:洸:sparkling water:水,光
+rtk2384:滉:deep and broad (water):水,晃
 rtk2385:漱:gargle:水,束,欠
 rtk2386:洲:continent:｜,水,川,丶
 rtk2387:洵:alike:水,日,勹
@@ -2651,7 +2651,7 @@ rtk2402:湊:port:一,水,大,二,人
 rtk2403:淋:lonely:水,木
 rtk2404:浩:wide expanse:ノ,口,水,土
 rtk2405:汀:water's edge:水,丁
-rtk2406:鴻:large bird:工,水,鳥,灬
+rtk2406:鴻:large bird:工,水,鳥
 rtk2407:潅:pour into:水,隹,矢
 rtk2408:溢:overflow:水,益
 rtk2409:湛:fill:｜,一,甘,水,儿,匚
@@ -2767,7 +2767,7 @@ rtk2518:旱:drought:干,日
 rtk2519:晏:late:女,日,宀
 rtk2520:晨:morning:辰,日
 rtk2521:晒:bleach:西,日
-rtk2522:晃:clear:一,尚,日,儿
+rtk2522:晃:clear:日,光
 rtk2523:曝:bleach:｜,一,水,日,ハ
 rtk2524:曙:dawn:日,老
 rtk2525:昂:rise:日,卩
@@ -2775,7 +2775,7 @@ rtk2526:昏:dark:氏,日
 rtk2527:晦:dark:日,母,毋
 rtk2528:膿:pus:｜,一,月,辰,日
 rtk2529:腑:viscera:月,寸,广
-rtk2530:胱:bladder:月,尚,儿
+rtk2530:胱:bladder:月,光
 rtk2531:胚:embryo:｜,ノ,一,月,丶
 rtk2532:肛:anus:工,月
 rtk2533:脆:brittle:月,厂,勹,卩
@@ -3087,15 +3087,15 @@ rtk2839:鰐:alligator:魚,口,二,勹
 rtk2840:鮒:carp:魚,寸
 rtk2841:鮨:sushi:魚,日,匕
 rtk2842:鰭:fin:魚,日,老,匕
-rtk2843:鴎:seagull:鳥,匚,灬,ノ,丶
-rtk2844:鵬:phoenix:月,鳥,灬
-rtk2845:鸚:parrot:貝,女,鳥,灬
-rtk2846:鵡:cockatoo:止,鳥,弋,戈,灬
+rtk2843:鴎:seagull:鳥,匚,ノ,丶
+rtk2844:鵬:phoenix:月,鳥
+rtk2845:鸚:parrot:貝,女,鳥
+rtk2846:鵡:cockatoo:止,鳥,弋,戈
 rtk2847:鵜:cormorant:弟,鳥
 rtk2848:鷺:heron:路,鳥
 rtk2849:鷲:eagle:就,鳥
-rtk2850:鴨:wild duck:｜,鳥,日,灬,田
-rtk2851:鳶:black kite:鳥,弋,灬
+rtk2850:鴨:wild duck:｜,鳥,日,田
+rtk2851:鳶:black kite:鳥,弋
 rtk2852:梟:owl:鳥,木
 rtk2853:塵:dust:鹿,土
 rtk2854:麒:chinese unicorn:甘,ハ,鹿
@@ -3136,7 +3136,7 @@ rtk2888:齬:irregular teeth:歯,吾
 rtk2889:秦:manchu dynasty:一,禾,二,人,大
 rtk2890:雀:sparrow:ノ,小,隹
 rtk2891:隼:falcon:十,隹
-rtk2892:耀:shine:ヨ,尚,儿,隹
+rtk2892:耀:shine:光,羽,隹
 rtk2893:夷:barbarian:ノ,一,弓,大
 rtk2894:嚢:pouch:｜,衣,一,口,ハ,亠,冖
 rtk2895:暢:stretch:申,旦,勿
@@ -3160,7 +3160,7 @@ rtk2912:尖:be pointed:小,大
 rtk2913:壷:jar:｜,一,口,士,冖
 rtk2914:叡:intelligence:ハ,卜,又,目,冖
 rtk2915:酋:chieftain:酉,丷
-rtk2916:鴬:nightingale:尚,鳥,冖,灬
+rtk2916:鴬:nightingale:ツ,鳥,冖
 rtk2917:赫:suddenly:赤,土
 rtk2918:臥:bend down:臣,人
 rtk2919:甥:nephew:生,田,力
@@ -3226,7 +3226,7 @@ rtk2978:燈:lamp:火,登
 rtk2979:裡:reverse:初,里
 rtk2980:薗:garden:艹,園
 rtk2981:鋪:shop:金,十,用,丶
-rtk2982:嶋:island:山,鳥,灬
+rtk2982:嶋:island:山,鳥
 rtk2983:峯:peak:｜,一,山,夂
 rtk2984:埜:open country:土,木
 rtk2985:龍:dragon:月,立
@@ -3343,3 +3343,4 @@ prim-fishfinger:扁:fishfinger
 prim-muzzle:咅:muzzle
 prim-wealth:畐:wealth
 prim-half-turtle:丬:turtle
+prim-katakana-tsu:ツ:katakana tsu

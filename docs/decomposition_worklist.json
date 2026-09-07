@@ -1118,10 +1118,10 @@
    "兆",
    "辶"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-07"
  },
  {
   "id": "rtk302",
@@ -1147,10 +1147,10 @@
    "辶",
    "𠃌"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-07"
  },
  {
   "id": "rtk303",
@@ -1175,10 +1175,10 @@
    "辶",
    "𡿨"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-07"
  },
  {
   "id": "rtk305",
@@ -1203,10 +1203,10 @@
    "車",
    "辶"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-07"
  },
  {
   "id": "rtk307",
@@ -1239,74 +1239,10 @@
    "月",
    "車"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk309",
-  "char": "前",
-  "keyword": "in front",
-  "our_parts": [
-   "一",
-   "月",
-   "丷"
-  ],
-  "google_parts": [
-   "丷",
-   "月",
-   "刂"
-  ],
-  "google_primitive_names": {
-   "丷": "horns",
-   "月": "flesh",
-   "刂": "saber"
-  },
-  "google_confidence": "high",
-  "google_note": "丷 (horns) + 月 (flesh) + 刂 (saber). Note Google omits the 一 our data lists; standard RTK is horns+flesh+saber (meeting of butchers). Our data adds 一.",
-  "cjkvi_ids": "⿱䒑刖",
-  "cjkvi_leaves": [
-   "一",
-   "丷",
-   "刂",
-   "月"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk316",
-  "char": "額",
-  "keyword": "forehead",
-  "our_parts": [
-   "各",
-   "頁",
-   "宀"
-  ],
-  "google_parts": [
-   "客",
-   "頁"
-  ],
-  "google_primitive_names": {
-   "客": "guest",
-   "頁": "page/head"
-  },
-  "google_confidence": "high",
-  "google_note": "Left 客 (guest = 宀 + 各), right 頁 (page/head = 一 + 貝). Our data uses 各+頁+宀. Frame #1156 stated is wrong (minor).",
-  "cjkvi_ids": "⿰客頁",
-  "cjkvi_leaves": [
-   "口",
-   "夂",
-   "宀",
-   "頁"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-07"
  },
  {
   "id": "rtk317",
@@ -1335,10 +1271,10 @@
    "夂",
    "自"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-07"
  },
  {
   "id": "rtk320",
@@ -1368,118 +1304,10 @@
    "夂",
    "氵"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk322",
-  "char": "冥",
-  "keyword": "dark",
-  "our_parts": [
-   "日",
-   "ハ",
-   "亠",
-   "冖"
-  ],
-  "google_parts": [
-   "冖",
-   "日",
-   "六"
-  ],
-  "google_primitive_names": {
-   "冖": "crown",
-   "日": "sun",
-   "六": "six"
-  },
-  "google_confidence": "high",
-  "google_note": "冖 (crown) + 日 (sun) + 六 (six). Our data uses 日+ハ+亠+冖 decomposing 六 into 亠+ハ. Order given is crown-sun-six but glyph is sun on top; treat parts set as reported.",
-  "cjkvi_ids": "⿱冖昗",
-  "cjkvi_leaves": [
-   "一",
-   "丶",
-   "八",
-   "冖",
-   "日"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk324",
-  "char": "輝",
-  "keyword": "radiance",
-  "our_parts": [
-   "軍",
-   "尚",
-   "儿",
-   "一"
-  ],
-  "google_parts": [
-   "光",
-   "軍"
-  ],
-  "google_primitive_names": {
-   "光": "ray/light",
-   "軍": "army",
-   "冖": "crown",
-   "車": "car"
-  },
-  "google_confidence": "high",
-  "google_note": "Left 光 (ray = ⺌ + 儿/兀 human legs), right 軍 (army = 冖 crown + 車 car). Our data 車+尚+儿+冖+一 approximates; 尚 is wrong-ish but close.",
-  "cjkvi_ids": "⿰光軍",
-  "cjkvi_leaves": [
-   "⺌",
-   "一",
-   "丿",
-   "乚",
-   "冖",
-   "車"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk327",
-  "char": "夢",
-  "keyword": "dream",
-  "our_parts": [
-   "夕",
-   "冖",
-   "艹"
-  ],
-  "google_parts": [
-   "艹",
-   "罒",
-   "冖",
-   "夕"
-  ],
-  "google_primitive_names": {
-   "艹": "flower",
-   "罒": "eye/eyeglasses",
-   "冖": "crown",
-   "夕": "evening"
-  },
-  "google_confidence": "high",
-  "google_note": "艹 (flower) + 罒 (eyeglasses) + 冖 (crown) + 夕 (evening). Our data omits 罒 (eye). Text says 'four distinct' components.",
-  "cjkvi_ids": "⿳𦭝冖夕",
-  "cjkvi_leaves": [
-   "丨",
-   "丶",
-   "冖",
-   "十",
-   "罒",
-   "𠂊"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-07"
  },
  {
   "id": "rtk331",
@@ -1514,46 +1342,14 @@
    "口",
    "子"
   ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk332",
-  "char": "熟",
-  "keyword": "mellow",
-  "our_parts": [
-   "丶",
-   "九",
-   "享",
-   "灬"
-  ],
-  "google_parts": [
-   "享",
+  "status": "custom",
+  "decision": [
    "丸",
-   "灬"
+   "享",
+   "土"
   ],
-  "google_primitive_names": {
-   "享": "enjoy",
-   "丸": "round/fat man",
-   "灬": "oven-fire"
-  },
-  "google_confidence": "high",
-  "google_note": "享 (enjoy) + 丸 (round) + 灬 (oven-fire). Our data 丶+九+享+杰 decomposes 丸 as 九+丶 and uses 杰 for fire.",
-  "cjkvi_ids": "⿱孰灬",
-  "cjkvi_leaves": [
-   "一",
-   "丶",
-   "九",
-   "口",
-   "子",
-   "灬"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-07"
  },
  {
   "id": "rtk340",
@@ -1581,10 +1377,10 @@
    "口",
    "辶"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-07"
  },
  {
   "id": "rtk341",
@@ -1606,10 +1402,10 @@
    "一",
    "十"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-07"
  },
  {
   "id": "rtk343",
@@ -1635,106 +1431,10 @@
    "丬",
    "十"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk346",
-  "char": "学",
-  "keyword": "study",
-  "our_parts": [
-   "子",
-   "尚",
-   "冖"
-  ],
-  "google_parts": [
-   "ツ",
-   "冖",
-   "子"
-  ],
-  "google_primitive_names": {
-   "ツ": "schoolhouse (with roof)",
-   "冖": "crown/roof",
-   "子": "child"
-  },
-  "google_confidence": "high",
-  "google_note": "Top 3 strokes + 冖 = 'schoolhouse'; 子 (child) below. Our data 子+尚+冖 uses 尚 loosely for the schoolhouse top.",
-  "cjkvi_ids": "⿳𭕄冖子",
-  "cjkvi_leaves": [
-   "冖",
-   "子",
-   "𭕄"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk347",
-  "char": "覚",
-  "keyword": "memorize",
-  "our_parts": [
-   "見",
-   "尚",
-   "冖"
-  ],
-  "google_parts": [
-   "ツ",
-   "冖",
-   "見"
-  ],
-  "google_primitive_names": {
-   "ツ": "schoolhouse",
-   "見": "see"
-  },
-  "google_confidence": "high",
-  "google_note": "Schoolhouse top (ツ + 冖) + 見 (see = 目 + 儿). Our data 見+尚+冖.",
-  "cjkvi_ids": "⿳𭕄冖見",
-  "cjkvi_leaves": [
-   "丿",
-   "乚",
-   "冖",
-   "目",
-   "𭕄"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk348",
-  "char": "栄",
-  "keyword": "flourish",
-  "our_parts": [
-   "尚",
-   "木",
-   "冖"
-  ],
-  "google_parts": [
-   "ツ",
-   "冖",
-   "木"
-  ],
-  "google_primitive_names": {
-   "ツ": "schoolhouse",
-   "木": "tree"
-  },
-  "google_confidence": "high",
-  "google_note": "Schoolhouse top (ツ + 冖) + 木 (tree). Our data 尚+木+冖.",
-  "cjkvi_ids": "⿳𭕄冖木",
-  "cjkvi_leaves": [
-   "冖",
-   "木",
-   "𭕄"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-07"
  },
  {
   "id": "rtk356",
@@ -2724,42 +2424,6 @@
   "reviewed_at": null
  },
  {
-  "id": "rtk438",
-  "char": "幌",
-  "keyword": "canopy",
-  "our_parts": [
-   "巾",
-   "尚",
-   "日",
-   "儿"
-  ],
-  "google_parts": [
-   "巾",
-   "晃"
-  ],
-  "google_primitive_names": {
-   "巾": "towel",
-   "日": "sun",
-   "光": "ray",
-   "晃": "clear"
-  },
-  "google_confidence": "high",
-  "google_note": "right side = 日 sun + 光 ray = 晃 clear",
-  "cjkvi_ids": "⿰巾晃",
-  "cjkvi_leaves": [
-   "⺌",
-   "一",
-   "丿",
-   "乚",
-   "巾",
-   "日"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
   "id": "rtk441",
   "char": "柿",
   "keyword": "persimmon",
@@ -3675,37 +3339,6 @@
    "木",
    "𠂆",
    "𠃌"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk557",
-  "char": "蛍",
-  "keyword": "lightning-bug",
-  "our_parts": [
-   "尚",
-   "虫",
-   "冖"
-  ],
-  "google_parts": [
-   "ツ",
-   "冖",
-   "虫"
-  ],
-  "google_primitive_names": {
-   "ツ+冖(schoolhouse cluster)": "schoolhouse",
-   "虫": "insect"
-  },
-  "google_confidence": "medium",
-  "google_note": "Top-level breakdown is schoolhouse (composite of ツ+𠆢+冂/冖) + insect. Current_parts (尚,虫,冖) uses 尚 as a stand-in for the schoolhouse cluster which is a reasonable simplification; keeping close to current_parts structure but noting the schoolhouse top is itself compound.",
-  "cjkvi_ids": "⿳𭕄冖虫",
-  "cjkvi_leaves": [
-   "冖",
-   "虫",
-   "𭕄"
   ],
   "status": "pending",
   "decision": null,
@@ -7588,39 +7221,6 @@
   "reviewed_at": null
  },
  {
-  "id": "rtk924",
-  "char": "労",
-  "keyword": "labor",
-  "our_parts": [
-   "尚",
-   "力",
-   "冖"
-  ],
-  "google_parts": [
-   "⺌",
-   "冖",
-   "力"
-  ],
-  "google_primitive_names": {
-   "⺌": "schoolhouse / candlestick / sparks",
-   "冖": "crown / top hat",
-   "力": "power / muscle"
-  },
-  "google_confidence": "high",
-  "google_note": "Text gives explicit 3-primitive top-to-bottom breakdown, matching current_parts's 尚(≈⺌+冖 combined? ) - note current_parts lists 尚 as one part plus 冖 separately, which is redundant/inconsistent; text keeps ⺌ and 冖 as two separate primitives (not combined into 尚) for this kanji.",
-  "cjkvi_ids": "⿳𭕄冖力",
-  "cjkvi_leaves": [
-   "丿",
-   "冖",
-   "𠃌",
-   "𭕄"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
   "id": "rtk928",
   "char": "勧",
   "keyword": "persuade",
@@ -9509,7 +9109,7 @@
   "keyword": "camp",
   "our_parts": [
    "呂",
-   "尚",
+   "ツ",
    "冖"
   ],
   "google_parts": [
@@ -21832,9 +21432,8 @@
   "char": "悩",
   "keyword": "trouble",
   "our_parts": [
-   "尚",
-   "state of mind",
-   "凵"
+   "忄",
+   "凶"
   ],
   "google_parts": [
    "忄",
@@ -22071,7 +21670,6 @@
   "keyword": "crane",
   "our_parts": [
    "鳥",
-   "灬",
    "隹",
    "宀",
    "冖"
@@ -22140,7 +21738,6 @@
    "土",
    "大",
    "鳥",
-   "灬",
    "二"
   ],
   "google_parts": [
@@ -26946,41 +26543,6 @@
   "reviewed_at": null
  },
  {
-  "id": "rtk2522",
-  "char": "晃",
-  "keyword": "clear",
-  "our_parts": [
-   "一",
-   "尚",
-   "日",
-   "儿"
-  ],
-  "google_parts": [
-   "日",
-   "光"
-  ],
-  "google_primitive_names": {
-   "日": "sun/day",
-   "光": "ray/spark/light",
-   "⺌": "small/candle sparks",
-   "兀": "human legs"
-  },
-  "google_confidence": "high",
-  "google_note": "Google: 日 (sun) over 光 (ray). Keyword given 'limpid'.",
-  "cjkvi_ids": "⿱日光",
-  "cjkvi_leaves": [
-   "⺌",
-   "一",
-   "丿",
-   "乚",
-   "日"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
   "id": "rtk2524",
   "char": "曙",
   "keyword": "dawn",
@@ -27099,38 +26661,6 @@
    "亻",
    "寸",
    "广",
-   "月"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk2530",
-  "char": "胱",
-  "keyword": "bladder",
-  "our_parts": [
-   "月",
-   "尚",
-   "儿"
-  ],
-  "google_parts": [
-   "月",
-   "光"
-  ],
-  "google_primitive_names": {
-   "月": "part of the body/flesh",
-   "光": "ray/light"
-  },
-  "google_confidence": "high",
-  "google_note": "光 sub-broken into ⺌ (spark/little) + 兀 (human legs).",
-  "cjkvi_ids": "⿰月光",
-  "cjkvi_leaves": [
-   "⺌",
-   "一",
-   "丿",
-   "乚",
    "月"
   ],
   "status": "pending",
@@ -31089,8 +30619,7 @@
   "keyword": "phoenix",
   "our_parts": [
    "月",
-   "鳥",
-   "灬"
+   "鳥"
   ],
   "google_parts": [
    "朋",
@@ -31120,8 +30649,7 @@
   "our_parts": [
    "貝",
    "女",
-   "鳥",
-   "灬"
+   "鳥"
   ],
   "google_parts": [
    "嬰",
@@ -31156,8 +30684,7 @@
    "止",
    "鳥",
    "弋",
-   "戈",
-   "灬"
+   "戈"
   ],
   "google_parts": [
    "武",
@@ -31678,10 +31205,9 @@
   "char": "鴬",
   "keyword": "nightingale",
   "our_parts": [
-   "尚",
+   "ツ",
    "鳥",
-   "冖",
-   "灬"
+   "冖"
   ],
   "google_parts": [
    "⺍",
