@@ -320,7 +320,7 @@ rtk318	処	dispose	318	yes
 rtk319	条	twig	319	yes
 rtk320	落	fall	320	yes
 rtk321	冗	superfluous	321	no
-rtk322	冥	hades	322	no
+rtk322	冥	hades	322	yes
 rtk323	軍	army	323	no
 rtk324	輝	radiance	324	yes
 rtk325	運	carry	325	yes
@@ -344,9 +344,9 @@ rtk342	吉	good luck	342	no
 rtk343	壮	robust	343	yes
 rtk344	荘	villa	344	yes
 rtk345	売	sell	345	no
-rtk346	学	study	346	no
-rtk347	覚	memorize	347	no
-rtk348	栄	flourish	348	no
+rtk346	学	study	346	yes
+rtk347	覚	memorize	347	yes
+rtk348	栄	flourish	348	yes
 rtk349	書	write	349	no
 rtk350	津	haven	350	no
 rtk351	牧	breed	351	yes
@@ -436,7 +436,7 @@ rtk434	帆	sail	434	yes
 rtk435	幅	hanging scroll	435	yes
 rtk436	帽	cap	436	yes
 rtk437	幕	curtain	437	yes
-rtk438	幌	canopy	438	no
+rtk438	幌	canopy	438	yes
 rtk439	錦	brocade	439	no
 rtk440	市	market	440	no
 rtk441	柿	persimmon	441	yes
@@ -555,7 +555,7 @@ rtk553	栃	horse chestnut	553	no
 rtk554	地	ground	554	no
 rtk555	池	pond	555	no
 rtk556	虫	insect	556	no
-rtk557	蛍	lightning bug	557	no
+rtk557	蛍	lightning bug	557	yes
 rtk558	蛇	snake	558	yes
 rtk559	虹	rainbow	559	no
 rtk560	蝶	butterfly	560	no
@@ -922,7 +922,7 @@ rtk920	巨	gigantic	920	yes
 rtk921	拒	repel	921	yes
 rtk922	力	power	922	no
 rtk923	男	man	923	no
-rtk924	労	labor	924	no
+rtk924	労	labor	924	yes
 rtk925	募	recruit	925	yes
 rtk926	劣	inferiority	926	yes
 rtk927	功	achievement	927	no
@@ -2381,8 +2381,8 @@ rtk2379	恰	as if	2379	yes
 rtk2380	恢	enlarge	2380	yes
 rtk2381	悌	respect for elders	2381	yes
 rtk2382	澪	canal	2382	no
-rtk2383	洸	glistening	2383	no
-rtk2384	滉	bounding main	2384	no
+rtk2383	洸	glistening	2383	yes
+rtk2384	滉	bounding main	2384	yes
 rtk2385	漱	gargle	2385	yes
 rtk2386	洲	continent	2386	no
 rtk2387	洵	swirling waters	2387	no
@@ -2520,7 +2520,7 @@ rtk2518	旱	dry weather	2518	no
 rtk2519	晏	clear skies	2519	yes
 rtk2520	晨	morrow	2520	yes
 rtk2521	晒	bleaching	2521	no
-rtk2522	晃	limpid	2522	no
+rtk2522	晃	limpid	2522	yes
 rtk2523	曝	air out	2523	no
 rtk2524	曙	dawn	2524	yes
 rtk2525	昂	elevate	2525	no
@@ -2528,7 +2528,7 @@ rtk2526	昏	dusk	2526	no
 rtk2527	晦	last day of the month	2527	yes
 rtk2528	膿	pus	2528	yes
 rtk2529	腑	viscera	2529	yes
-rtk2530	胱	bladder	2530	no
+rtk2530	胱	bladder	2530	yes
 rtk2531	胚	embryo	2531	no
 rtk2532	肛	anus	2532	no
 rtk2533	脆	fragile	2533	no
@@ -2890,7 +2890,7 @@ rtk2888	齬	discord	2888	yes
 rtk2889	秦	manchu dynasty	2889	no
 rtk2890	雀	sparrow	2890	no
 rtk2891	隼	peregrine falcon	2891	no
-rtk2892	耀	shimmering	2892	no
+rtk2892	耀	shimmering	2892	yes
 rtk2893	夷	ebisu	2893	no
 rtk2894	嚢	cyst	2894	no
 rtk2895	暢	carefree	2895	yes
