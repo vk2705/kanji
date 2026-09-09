@@ -2125,20 +2125,20 @@ rtk2073:脹:dilate:月,長
 rtk2074:髪:hair of the head:夂,一,長,彡,髟
 rtk2075:展:unfold:｜,衣,一,二,尸
 rtk2076:喪:miss:｜,衣,一,口,亠
-rtk2077:巣:nest:尚,田,木
-rtk2078:単:simple:十,尚,田
+rtk2077:巣:nest:ツ,果
+rtk2078:単:simple:ツ,甲,一
 rtk2079:戦:war:単,戈
 rtk2080:禅:zen:礻,単
 rtk2081:弾:bullet:弓,単
-rtk2082:桜:cherry:女,尚,木
-rtk2083:獣:animal:犬,口,尚,田
-rtk2084:脳:brain:月,尚,凵
+rtk2082:桜:cherry:木,ツ,女
+rtk2083:獣:animal:犬,口,ツ,田
+rtk2084:脳:brain:月,ツ,凶
 rtk2085:悩:trouble:忄,凶
-rtk2086:厳:stern:敢,尚,厂
+rtk2086:厳:stern:敢,ツ,厂
 rtk2087:鎖:chain:貝,金,尚
-rtk2088:挙:raise:手,尚,ハ
-rtk2089:誉:reputation:言,臼,ハ,一
-rtk2090:猟:game-hunting:犭,尚,用,几
+rtk2088:挙:raise:手,ツ,ハ,一
+rtk2089:誉:reputation:言,ツ,ハ,一
+rtk2090:猟:game-hunting:犭,ツ,用,几
 rtk2091:鳥:bird:灬
 rtk2092:鳴:chirp:口,鳥
 rtk2093:鶴:crane:鳥,隹,宀,冖
@@ -2815,7 +2815,7 @@ rtk2765:賎:despise:貝,戈,二
 rtk2766:貰:get:貝,世
 rtk2767:賑:flourish:貝,辰
 rtk2768:贖:redeem:貝,士,儿,囗
-rtk2769:躓:stumble:貝,斤,足
+rtk2769:躓:stumble:質,足
 rtk2770:蹄:hoof:足,帝
 rtk2771:蹟:remains:貝,土,亠,二,足
 rtk2772:跨:be:大,二,勹,足
@@ -3041,9 +3041,9 @@ rtk2991:脛:leg:月,工,巛
 rtk2992:勁:strong:工,巛,力
 rtk2993:祀:enshrine:礻,巳
 rtk2994:祓:exorcise:礻,犬
-rtk2995:躇:hesitate:艹,者,足
+rtk2995:躇:hesitate:著,足
 rtk2996:壽:longevity:一,口,工,士,寸
-rtk2997:躊:hesitate:工,士,寸,足
+rtk2997:躊:hesitate:壽,足
 rtk2998:饅:bean-jam dumpling:曼,食
 rtk2999:嘔:vomit:口,匚,品
 rtk3000:鼈:snapping turtle:小,尚,冂,攵,黽
@@ -3145,5 +3145,5 @@ prim-fishfinger:扁:fishfinger
 prim-muzzle:咅:muzzle
 prim-wealth:畐:wealth
 prim-half-turtle:丬:turtle
-prim-katakana-tsu:ツ:katakana tsu
+prim-owl:ツ:owl crown,owl-head
 prim-parade:戊:parade

@@ -576,7 +576,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1917": {"character": "狙", "keyword": "aim at",
                 "expected_part_ids": {"kangxi94", "rtk1", "rtk15"}},
     "rtk2090": {"character": "猟", "keyword": "game-hunting",
-                "expected_part_ids": {"kangxi94", "rtk196", "rtk1265", "kangxi16"}},
+                "expected_part_ids": {"kangxi16", "kangxi94", "prim-owl", "rtk1265"}},
     # Owner-approved via the review queue (2026-08-27), confirmed correct
     # against cjkvi-ids before pinning: 警 = ⿱敬言, 特 = ⿰牛寺 (寺 was
     # flattened to 土,寸 elsewhere in data.txt at the time).
@@ -665,7 +665,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk2068": {"character": "偽", "keyword": "falsehood",
                 "expected_part_ids": {"kangxi9", "rtk2067"}},  # 亻 + 為 (person radical added 2026-09-05)
     "rtk2089": {"character": "誉", "keyword": "reputation",
-                "expected_part_ids": {"rtk357", "rtk1531", "prim-katakana-ha", "rtk1"}},
+                "expected_part_ids": {"prim-katakana-ha", "prim-owl", "rtk1", "rtk357"}},
     "rtk2695": {"character": "糞", "keyword": "shit",
                 "expected_part_ids": {"rtk1936", "rtk987"}},
     # Frame-ordered sweep (2026-08-29): with the 并 investigation closed, started
@@ -912,19 +912,19 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk327": {"character": "夢", "keyword": "dream",
                 "expected_part_ids": {"kangxi122", "kangxi14", "prim-mugwort", "rtk114"}},
     # 学/覚/栄/蛍/労/営/鴬 -- see the rtk1111 comment below for the full
-    # ツ/prim-katakana-tsu account.
+    # ツ/prim-owl account.
     "rtk346": {"character": "学", "keyword": "study",
-                "expected_part_ids": {"kangxi14", "prim-katakana-tsu", "rtk99"}},
+                "expected_part_ids": {"kangxi14", "prim-owl", "rtk99"}},
     "rtk347": {"character": "覚", "keyword": "memorize",
-                "expected_part_ids": {"kangxi14", "prim-katakana-tsu", "rtk61"}},
+                "expected_part_ids": {"kangxi14", "prim-owl", "rtk61"}},
     "rtk348": {"character": "栄", "keyword": "flourish",
-                "expected_part_ids": {"kangxi14", "prim-katakana-tsu", "rtk207"}},
+                "expected_part_ids": {"kangxi14", "prim-owl", "rtk207"}},
     "rtk557": {"character": "蛍", "keyword": "lightning bug",
-                "expected_part_ids": {"kangxi14", "prim-katakana-tsu", "rtk556"}},
+                "expected_part_ids": {"kangxi14", "prim-owl", "rtk556"}},
     "rtk924": {"character": "労", "keyword": "labor",
-                "expected_part_ids": {"kangxi14", "prim-katakana-tsu", "rtk922"}},
+                "expected_part_ids": {"kangxi14", "prim-owl", "rtk922"}},
     "rtk2916": {"character": "鴬", "keyword": "nightingale",
-                "expected_part_ids": {"kangxi14", "prim-katakana-tsu", "rtk2091"}},
+                "expected_part_ids": {"kangxi14", "prim-owl", "rtk2091"}},
     # The whole 鳥-family had the exact same redundant-灬 bug as the
     # 馬-family fix on day 4 -- 鳥(rtk2091) is itself taught with 灬 as
     # its one listed part, so every other 鳥-containing kanji that also
@@ -1902,10 +1902,10 @@ EXPECTED_DECOMPOSITIONS = {
     # all used 尚(esteem, box+口 shape) for their top -- but render shows
     # a plain 2-3-stroke ツ(katakana tsu) shape, no box/口 anywhere,
     # same mistake as the original 光 bug from day 2 (光/輝, fixed
-    # above). Registered ツ as prim-katakana-tsu (same convention as the
+    # above). Registered ツ as prim-owl (same convention as the
     # existing prim-katakana-ha/no/yo) and repointed all 7.
     "rtk1111": {"character": "営", "keyword": "occupation",
-                "expected_part_ids": {"kangxi14", "prim-katakana-tsu", "rtk24"}},
+                "expected_part_ids": {"kangxi14", "prim-owl", "rtk24"}},
     "rtk1113": {"character": "膳", "keyword": "dining tray",
                 "expected_part_ids": {"rtk1112", "rtk13"}},
     "rtk1121": {"character": "喚", "keyword": "yell",
@@ -2084,7 +2084,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk2047": {"character": "娯", "keyword": "recreation",
                 "expected_part_ids": {"rtk102", "rtk2046"}},
     "rtk2086": {"character": "厳", "keyword": "stern",
-                "expected_part_ids": {"kangxi27", "rtk196", "rtk889"}},
+                "expected_part_ids": {"kangxi27", "prim-owl", "rtk889"}},
     "rtk2099": {"character": "暖", "keyword": "warmth",
                 "expected_part_ids": {"rtk12", "rtk760", "rtk784"}},
     "rtk2101": {"character": "援", "keyword": "abet",
@@ -2686,7 +2686,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk2730": {"character": "螺", "keyword": "screw",
                "expected_part_ids": {"rtk1464", "rtk556"}},
     "rtk2769": {"character": "躓", "keyword": "stumble",
-               "expected_part_ids": {"rtk1206", "rtk1372", "rtk56"}},
+               "expected_part_ids": {"rtk1219", "rtk1372"}},
     "rtk2771": {"character": "蹟", "keyword": "vestiges",
                "expected_part_ids": {"kangxi8", "rtk1372", "rtk161", "rtk2", "rtk56"}},
     "rtk2772": {"character": "跨", "keyword": "straddle",
@@ -2744,9 +2744,9 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk2970": {"character": "轡", "keyword": "tinkling bell",
                "expected_part_ids": {"rtk11", "rtk1431", "rtk304"}},
     "rtk2995": {"character": "躇", "keyword": "dither",
-               "expected_part_ids": {"prim-mugwort", "rtk1345", "rtk1372"}},
+               "expected_part_ids": {"rtk1347", "rtk1372"}},
     "rtk2997": {"character": "躊", "keyword": "hesitate",
-               "expected_part_ids": {"rtk1372", "rtk341", "rtk45", "rtk80"}},
+               "expected_part_ids": {"rtk1372", "rtk2996"}},
     # Continuing the proactive spot-check further (2026-09-04): five more
     # primitive families from audit_direct_ref_overlap.py, same discipline:
     #  - 青(rtk1654=月,土,二,亠; used 10x) -- the whole "clear/blue" family

@@ -57,6 +57,13 @@ RADICAL_VARIANTS = {
     "丨": "｜",
     "乚": "乙",
     "⺉": "刀",
+    # 𧾷 is the combining form of 足, which this project already uses in every
+    # one of its hosts (促/路/踊 …).
+    "𧾷": "足",
+    # 𭕄 is cjkvi's marker for the three-stroke crown of 学/覚/栄/巣/単. It was a
+    # standing open question in this audit ("the shared 𭕄 marker"); rendering
+    # 巣/単 beside 学 and 尚 settles it — same ツ crown as 学, no 尚 box in sight.
+    "𭕄": "ツ",
 }
 
 
