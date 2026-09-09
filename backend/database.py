@@ -826,16 +826,75 @@ def _self_identity_kanji_ids(conn, term: str, viewer_id: int | None,
 
 def get_all_aliases_for_term(conn, term: str, viewer_id: int | None = None,
                               script_scope: tuple[str, ...] | None = None) -> set[str]:
-    """Return the full visible alias set for a primitive (for parts-table matching)."""
+    """Return the full visible alias set for a primitive (for parts-table matching).
+
+    Unions *every* entry the term names, not just resolve_alias's single canonical
+    pick (owner decision, 2026-09-09: "when searching by parts and a term has several
+    meanings, bring both — we don't know which one the user meant"). A search box
+    takes a word, and plenty of words name two different things in this database: the
+    standalone kanji and the primitive drawn inside other kanji. "owl" is both 梟
+    (rtk2852, the bird) and 𭕄 (prim-owl, the three-stroke crown of 学/巣/単); "heart"
+    is both 心 (rtk639) and 忄 (kangxi61); "finger" both 指 and 扌. Picking one — and
+    resolve_alias picks whichever row SQLite hands back first, which is usually the
+    standalone kanji — silently hid the other reading's hosts, so a parts search for
+    "owl" returned 1 kanji where "owl crown" returned 17.
+
+    This deliberately mirrors _self_identity_kanji_ids, which already returns every
+    match for the same reason (a term ambiguous across *scripts* must self-identify
+    against all of them). The two halves of the same search now agree.
+
+    resolve_alias itself is left alone: its callers (contributions.py's write-path
+    visibility gate, decomposition-chip resolution) need exactly one id, and a write
+    endpoint that suddenly addressed several rows would be a different bug entirely.
+    """
     term = term.strip().lower()
-    cid = resolve_alias(conn, term, viewer_id, script_scope)
-    if not cid:
-        return {term}
     rows = conn.execute(
-        "SELECT alias FROM aliases WHERE kanji_id = ? AND (visibility = 'public' OR owner_id = ?)",
-        (cid, viewer_id)
+        "SELECT id AS kanji_id, script FROM kanji "
+        "WHERE id = ? AND (visibility = 'public' OR owner_id = ?)",
+        (term, viewer_id)
     ).fetchall()
-    return {r["alias"] for r in rows} | {term, cid}
+    if not rows:
+        rows = conn.execute(
+            "SELECT DISTINCT a.kanji_id, k.script FROM aliases a "
+            "JOIN kanji k ON k.id = a.kanji_id "
+            "WHERE a.alias = ? AND (a.visibility = 'public' OR a.owner_id = ?) "
+            "AND (k.visibility = 'public' OR k.owner_id = ?)",
+            (term, viewer_id, viewer_id)
+        ).fetchall()
+    if not rows:
+        return {term}
+    if script_scope:
+        # Script is a filter the user actually set, so it still narrows; meaning is
+        # not, so it doesn't.
+        scoped = [r for r in rows if r["script"] in script_scope]
+        if scoped:
+            rows = scoped
+    ids = {r["kanji_id"] for r in rows}
+    ph = ",".join("?" * len(ids))
+    aliases = {r["alias"] for r in conn.execute(
+        f"SELECT alias FROM aliases WHERE kanji_id IN ({ph}) "
+        f"AND (visibility = 'public' OR owner_id = ?)",
+        [*ids, viewer_id]
+    )}
+
+    # Widening to every meaning of the *queried* word must not also widen to every
+    # meaning of its synonyms, or the union chains through unrelated entries: "cover"
+    # names 蓋 (rtk1561), whose own keyword is "lid" — and "lid" is separately the name
+    # of 亠 (kangxi8), a completely different shape. Following that chain returned all
+    # 102 hosts that draw a 亠 to someone searching for a 冖. So a synonym is usable as
+    # a search key only when everything it names is already in the answer set;
+    # otherwise it is dropped and only its owner's unambiguous names are kept.
+    ambiguous = set()
+    for alias in aliases - ids - {term}:
+        claimants = {r["kanji_id"] for r in conn.execute(
+            "SELECT DISTINCT a.kanji_id FROM aliases a JOIN kanji k ON k.id = a.kanji_id "
+            "WHERE a.alias = ? AND (a.visibility = 'public' OR a.owner_id = ?) "
+            "AND (k.visibility = 'public' OR k.owner_id = ?)",
+            (alias, viewer_id, viewer_id)
+        )}
+        if claimants - ids:
+            ambiguous.add(alias)
+    return (aliases - ambiguous) | ids | {term}
 
 
 def _kanji_with_part_terms(conn, terms: set[str], viewer_id: int | None,

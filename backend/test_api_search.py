@@ -170,6 +170,57 @@ def test_text_search_is_whole_word_only(conn, client):
     assert ids == {"k_hat"}, f"expected only the whole-word 'hat' match, got {ids}"
 
 
+def test_ambiguous_term_returns_every_meaning(conn, client):
+    """A part term naming more than one entry searches for all of them (owner decision,
+    2026-09-09). The real case: "owl" is both 梟, the bird, and 𭕄, the three-stroke
+    crown drawn in 学/巣/単 -- a searcher typing one word means either, so hosts of
+    both come back rather than whichever row SQLite happened to return first."""
+    _seed_kanji(conn, "k_owl_bird", "梟", "owl")
+    _seed_kanji(conn, "k_owl_crown", "𭕄", "owl crown")
+    _seed_kanji(conn, "k_host", "学", "study")
+    _seed_alias(conn, "k_owl_bird", "owl")
+    _seed_alias(conn, "k_owl_crown", "owl crown")
+    _seed_alias(conn, "k_owl_crown", "owl")
+    _seed_decomposition(conn, "k_host", 1, ["owl crown"])
+    conn.commit()
+
+    r = client.post("/search/parts", json={"parts": ["owl"], "depth": 1})
+    assert r.status_code == 200, r.text
+    ids = {row["id"] for row in r.json()["results"]}
+    assert ids == {"k_owl_bird", "k_owl_crown", "k_host"}, (
+        f"both readings of 'owl' should match -- the bird by self-identity, the crown "
+        f"by self-identity plus its host 学; got {ids}"
+    )
+
+
+def test_ambiguous_term_does_not_chain_through_ambiguous_synonyms(conn, client):
+    """Widening to every meaning of the queried word must not widen to every meaning of
+    its synonyms. Live case: "cover" names 蓋, whose own keyword "lid" separately names
+    the unrelated shape 亠 -- following that chain handed every 亠 host to someone
+    searching for a 冖. A synonym is only usable as a search key when everything it
+    names is already in the answer set."""
+    _seed_kanji(conn, "k_cover_prim", "冖", "cover")
+    _seed_kanji(conn, "k_lid_kanji", "蓋", "lid")
+    _seed_kanji(conn, "k_lid_prim", "亠", "top hat")
+    _seed_kanji(conn, "k_cover_host", "冗", "cover-host")
+    _seed_kanji(conn, "k_lid_host", "亡", "lid-host")
+    _seed_alias(conn, "k_cover_prim", "cover")
+    _seed_alias(conn, "k_lid_kanji", "cover")   # 蓋 is glossed "cover" too
+    _seed_alias(conn, "k_lid_kanji", "lid")
+    _seed_alias(conn, "k_lid_prim", "lid")      # ...but so is a different shape
+    _seed_decomposition(conn, "k_cover_host", 1, ["cover"])
+    _seed_decomposition(conn, "k_lid_host", 1, ["lid"])
+    conn.commit()
+
+    r = client.post("/search/parts", json={"parts": ["cover"], "depth": 1})
+    assert r.status_code == 200, r.text
+    ids = {row["id"] for row in r.json()["results"]}
+    assert ids == {"k_cover_prim", "k_lid_kanji", "k_cover_host"}, (
+        f"both entries named 'cover' should match, but the 'lid' chain must not drag "
+        f"in 亠 or its hosts; got {ids}"
+    )
+
+
 def test_private_decomposition_only_visible_to_its_owner_in_search(conn, client):
     """A private decomposition's part terms don't leak into parts-search results for
     other viewers, matching the visibility model described in CLAUDE.md."""

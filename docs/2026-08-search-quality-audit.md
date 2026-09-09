@@ -7456,3 +7456,58 @@ gap is *unregistered* compound components — 507 distinct ones, led by 甫, 其
 昜, 每, 翟, 夋 (real characters we could register) and by cjkvi's unencoded
 `③`/`⑤` placeholders (which we never can). Registering the top real ones is the
 next bulk lever, not another 20-a-day queue.
+
+## 2026-09-09 (later) — ambiguous part terms now return every meaning
+
+Owner decision, prompted by asking what a parts search for `owl` returns: **1
+kanji** (梟, the bird) where the crown primitive's own name `owl crown` returned
+17. Owner's ruling, verbatim: *"когда ищут по частям и есть многозначные
+случаи, типа совы, надо приносить оба понимания, так как мы не знаем что юзер
+имел ввиду"* — when a part search hits an ambiguous term, bring both readings,
+because we don't know which one was meant.
+
+**The bug.** `get_all_aliases_for_term()` (the parts search's alias expander)
+called `resolve_alias()`, which collapses an ambiguous term to *one* id — and
+with no tie-breaker beyond script it returns whichever public row SQLite hands
+back first, in practice the standalone kanji. The other reading's hosts then
+became unreachable. This was inconsistent with `_self_identity_kanji_ids()`,
+which had already been fixed (2026-08-27) to return *every* match for the same
+reason. The two halves of one search disagreed about what a word means.
+
+91 part terms are claimed by more than one `ja-kanji` row. The systematic shape
+is *standalone kanji vs. the primitive drawn inside other kanji*: `heart` is 心
+(rtk639) and 忄 (kangxi61); `finger` is 指 and 扌; `mother` is 母 and 毋;
+`spear` is 槍/鑓 and 戈.
+
+**The fix.** `get_all_aliases_for_term` now unions the alias sets of every
+visible claimant. `resolve_alias` itself is untouched — its other callers
+(contributions.py's write-path visibility gate, decomposition-chip resolution)
+need exactly one id, and a write endpoint addressing several rows would be a
+different bug.
+
+**The trap found while measuring it.** A naive union broadened results +10.1%,
+almost all of it one term: `cover` 64 → 158. Cause is a *chain*, not a second
+meaning — `cover` names 蓋 (rtk1561), whose own keyword is `lid`, and `lid`
+separately names 亠 (kangxi8), a completely unrelated shape. Unioning handed all
+102 hosts that draw a 亠 to someone searching for a 冖. So the union now drops
+any synonym that names something outside the answer set: a synonym is usable as
+a search key only when everything it names is already in the result. Widening to
+every meaning of the *queried word* must not widen to every meaning of its
+synonyms.
+
+**Measured effect** with the guard, over 31 sampled terms: **-0.5% total**. Only
+`heart` +27 (the 忄 hosts, previously invisible), `say` +5, `wide` +5, `cover`
++1, `mother` +1 — and `lid` **-49**, where the guard removed a pre-existing
+leak in the opposite direction. Precisely targeted, not a broadening.
+
+`prim-owl` also gained the bare alias `owl` alongside `owl crown`/`owl-head`;
+without it the word only ever named the bird. `owl` now returns 18 — 梟 plus the
+17 crown hosts — and a text search still shows the two entries separately, so
+the distinction the owner asked for ("don't confuse the primitive with the real
+kanji, give them different ids") is preserved: two rows, two ids, one word
+reaching both.
+
+Two pytest cases pin the behaviour (`test_ambiguous_term_returns_every_meaning`,
+`test_ambiguous_term_does_not_chain_through_ambiguous_synonyms`). Verified: 58
+pytest passed, `test_regression_fixes.py` 1300 checks with only the 4 known
+hanzi-scope non-issues, dead-token detector 0/0, over-flatten detector 0.

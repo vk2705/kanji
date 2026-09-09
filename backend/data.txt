@@ -3145,5 +3145,5 @@ prim-fishfinger:扁:fishfinger
 prim-muzzle:咅:muzzle
 prim-wealth:畐:wealth
 prim-half-turtle:丬:turtle
-prim-owl:𭕄:owl crown,owl-head
+prim-owl:𭕄:owl crown,owl-head,owl
 prim-parade:戊:parade
