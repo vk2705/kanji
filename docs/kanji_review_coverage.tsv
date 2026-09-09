@@ -358,7 +358,7 @@ rtk356	敬	awe	356	yes
 rtk357	言	say	357	no
 rtk358	警	admonish	358	yes
 rtk359	計	plot	359	no
-rtk360	詮	elucidate	360	no
+rtk360	詮	elucidate	360	yes
 rtk361	獄	prison	361	yes
 rtk362	訂	revise	362	yes
 rtk363	訃	obituary	363	no
@@ -372,7 +372,7 @@ rtk370	詩	poem	370	yes
 rtk371	語	word	371	yes
 rtk372	読	read	372	yes
 rtk373	調	tune	373	yes
-rtk374	談	discuss	374	no
+rtk374	談	discuss	374	yes
 rtk375	諾	consent	375	yes
 rtk376	諭	rebuke	376	yes
 rtk377	式	style	377	no
@@ -401,17 +401,17 @@ rtk399	頻	repeatedly	399	yes
 rtk400	肯	agreement	400	no
 rtk401	企	undertake	401	no
 rtk402	歴	curriculum	402	yes
-rtk403	武	warrior	403	no
+rtk403	武	warrior	403	yes
 rtk404	賦	levy	404	yes
 rtk405	正	correct	405	no
 rtk406	証	evidence	406	yes
 rtk407	政	politics	407	yes
 rtk408	定	determine	408	yes
 rtk409	錠	lock	409	yes
-rtk410	走	run	410	no
+rtk410	走	run	410	yes
 rtk411	超	transcend	411	yes
-rtk412	赴	proceed	412	no
-rtk413	越	surpass	413	no
+rtk412	赴	proceed	412	yes
+rtk413	越	surpass	413	yes
 rtk414	是	just so	414	no
 rtk415	題	topic	415	yes
 rtk416	堤	dike	416	yes
@@ -941,7 +941,7 @@ rtk939	律	rhythm	939	no
 rtk940	復	restore	940	yes
 rtk941	得	gain	941	no
 rtk942	従	accompany	942	yes
-rtk943	徒	junior	943	no
+rtk943	徒	junior	943	yes
 rtk944	待	wait	944	yes
 rtk945	往	journey	945	yes
 rtk946	征	subjugate	946	yes
@@ -2229,7 +2229,7 @@ rtk2227	籤	lottery	2227	yes
 rtk2228	懺	penitential	2228	yes
 rtk2229	芻	hay	2229	yes
 rtk2230	雛	chick	2230	no
-rtk2231	趨	scurry	2231	no
+rtk2231	趨	scurry	2231	yes
 rtk2232	尤	understandably	2232	no
 rtk2233	厖	immense	2233	yes
 rtk2234	或	a  (a certain)	2234	no
@@ -2941,7 +2941,7 @@ rtk2939	奎	andromeda	2939	no
 rtk2940	翔	soar	2940	yes
 rtk2941	皓	beaming	2941	no
 rtk2942	黎	tenebrous	2942	no
-rtk2943	赳	bold	2943	no
+rtk2943	赳	bold	2943	yes
 rtk2944	已	stop short	2944	yes
 rtk2945	棘	thornbush	2945	no
 rtk2946	祟	haunt	2946	yes
