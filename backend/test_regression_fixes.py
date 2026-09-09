@@ -134,11 +134,13 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"prim-fire-radical", "prim-hooked-hand", "rtk14"}},
     "rtk186": {"character": "黒", "keyword": "black",
                "expected_part_ids": {"prim-fire-radical", "rtk185"}},
-    # 墨 had 黒 itself as a part, but render shows its top is just 里(rtk185,
-    # 田+土) with NO fire-dots at all -- referencing the full 黒 (which
-    # includes 灬) was wrong, not just imprecise.
+    # 墨 = 黒 over 土. This pin previously read 里+土, on a note claiming a render
+    # showed "NO fire-dots at all" above the 土 -- re-rendered 2026-09-09 beside 黒
+    # and 里, and the four 灬 dots are plainly there, exactly as in 黒/黙. The
+    # earlier reading was simply a misread of the image, so the pin is restored to
+    # the full 黒 rather than its 灬-less top half.
     "rtk187": {"character": "墨", "keyword": "black ink",
-               "expected_part_ids": {"rtk161", "rtk185"}},
+               "expected_part_ids": {"rtk161", "rtk186"}},
     # 向 was missing its top-left diagonal stroke entirely.
     "rtk195": {"character": "向", "keyword": "yonder",
                "expected_part_ids": {"kangxi13", "prim-katakana-no", "rtk11"}},
@@ -291,7 +293,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1405": {"character": "降", "keyword": "descend",
                 "expected_part_ids": {"kangxi34", "kangxi170", "prim-winter-cow"}},
     "rtk1397": {"character": "陽", "keyword": "sunshine",
-                "expected_part_ids": {"rtk1", "rtk12", "kangxi170", "rtk1128"}},
+                "expected_part_ids": {"kangxi170", "prim-piggy-bank"}},
     # Corrected 2026-09-01 (owner-reported 口 audit): was kangxi170,rtk10,
     # rtk11,prim-pipe -- wrong on two counts (阝 doesn't belong on the
     # standalone 阜 itself, and 口/｜ were standing in for a completely
@@ -833,10 +835,12 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk137", "rtk2522"}},
     "rtk2530": {"character": "胱", "keyword": "bladder",
                 "expected_part_ids": {"rtk125", "rtk13"}},
-    # 耀's own extra token (羽, feathers, already taught) replaces a bare
-    # ヨ that only covered half of 羽's own two-ヨ shape.
+    # 耀's bare ヨ token only covered half of 羽's own two-ヨ shape; it was
+    # first replaced by 羽 itself, and now by 翟 (prim-futon, Heisig's name for
+    # the 羽-over-隹 compound 耀 actually contains), which carries the 羽 one
+    # level down instead of alongside it.
     "rtk2892": {"character": "耀", "keyword": "shimmering",
-                "expected_part_ids": {"kangxi172", "rtk125", "rtk615"}},
+                "expected_part_ids": {"prim-futon", "rtk125"}},
     # 悩 had a wrong 尚,凵 for its right side; render + cjkvi-ids
     # (⿰忄⿱𭕄凶) confirm it's 凶(villain, already taught) instead.
     # NOTE: an earlier version of this fix also swapped the line's
@@ -865,7 +869,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1233": {"character": "寝", "keyword": "lie down",
                 "expected_part_ids": {"kangxi14", "kangxi40", "prim-half-turtle", "prim-katakana-yo", "rtk752"}},
     "rtk2774": {"character": "醤", "keyword": "soy sauce",
-                "expected_part_ids": {"prim-half-turtle", "rtk1534", "rtk45", "rtk784"}},
+                "expected_part_ids": {"rtk1534", "rtk789"}},
     "rtk2878": {"character": "鼎", "keyword": "tripod",
                 "expected_part_ids": {"prim-half-turtle", "prim-pipe", "rtk1", "rtk1297", "rtk15"}},
     "rtk2882": {"character": "燕", "keyword": "swallow",
@@ -1369,14 +1373,15 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1969": {"character": "典", "keyword": "code",
                 "expected_part_ids": {"rtk1256", "rtk8"}},
     # 暢 (rtk2895) was ｜,一,日,田,勿 -- the 田/｜/一 tokens don't belong at
-    # all. cjkvi-ids: 暢 = ⿰申昜, 昜 = ⿱旦勿. Flattened one level past 昜
-    # (skipped adding it as its own primitive -- 昜/U+661C and 易/U+6613
-    # render near-identically in this font, and this session already found
-    # that exact mix-up once; safer to reference only the three
-    # already-taught, unambiguous primitives it resolves to). Fixed to
-    # 申,旦,勿 (rtk1198/rtk30/rtk1128, all pre-existing).
+    # all. cjkvi-ids: 暢 = ⿰申昜, 昜 = ⿱旦勿. First fixed to 申,旦,勿, one level
+    # flatter than the real structure, because 昜/U+661C and 易/U+6613 were
+    # thought to render near-identically. 2026-09-09: rendered large side by
+    # side and they do not -- 昜 carries a horizontal bar under its 日 (it is
+    # 旦+勿) that 易 lacks, plainly visible in 暢/陽 versus 賜. 昜 is now
+    # registered as prim-piggy-bank (Heisig's own name for it, per CSV), so
+    # this pins the real structure: 申 + 昜.
     "rtk2895": {"character": "暢", "keyword": "carefree",
-                "expected_part_ids": {"rtk1198", "rtk30", "rtk1128"}},
+                "expected_part_ids": {"prim-piggy-bank", "rtk1198"}},
     # Batch fixed 2026-09-01, continuing the IDS-atomic-but-has-parts review
     # (67-item list from the Google-cross-check session). All confirmed via CSV
     # components + render, not just CSV wording alone.
@@ -1673,7 +1678,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk2144": {"character": "騰", "keyword": "inflation",
                 "expected_part_ids": {"kangxi12", "rtk1", "rtk1023", "rtk112", "rtk13", "rtk2", "rtk2132"}},
     "rtk2216": {"character": "駿", "keyword": "steed",
-                "expected_part_ids": {"kangxi10", "kangxi28", "kangxi34", "rtk2132"}},
+                "expected_part_ids": {"prim-streetwalker", "rtk2132"}},
     "rtk2506": {"character": "憑", "keyword": "possessed",
                 "expected_part_ids": {"kangxi15", "rtk2132", "rtk639"}},
     "rtk2818": {"character": "駕", "keyword": "stretcher",
@@ -1768,11 +1773,11 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk2963": {"character": "菩", "keyword": "bo tree",
                 "expected_part_ids": {"prim-mugwort", "prim-muzzle"}},
     "rtk537": {"character": "脱", "keyword": "undress",
-                "expected_part_ids": {"kangxi12", "rtk107", "rtk13"}},
+                "expected_part_ids": {"prim-devil", "rtk13"}},
     "rtk538": {"character": "説", "keyword": "explanation",
-                "expected_part_ids": {"kangxi12", "rtk107", "rtk357"}},
+                "expected_part_ids": {"prim-devil", "rtk357"}},
     "rtk539": {"character": "鋭", "keyword": "pointed",
-                "expected_part_ids": {"kangxi12", "rtk107", "rtk287"}},
+                "expected_part_ids": {"prim-devil", "rtk287"}},
     "rtk541": {"character": "増", "keyword": "increase",
                 "expected_part_ids": {"rtk161", "rtk540"}},
     "rtk550": {"character": "賓", "keyword": "v.i.p.",
@@ -1788,7 +1793,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk655": {"character": "臆", "keyword": "cowardice",
                 "expected_part_ids": {"rtk13", "rtk654"}},
     "rtk666": {"character": "悦", "keyword": "ecstasy",
-                "expected_part_ids": {"kangxi12", "kangxi61", "rtk107"}},
+                "expected_part_ids": {"kangxi61", "prim-devil"}},
     "rtk671": {"character": "慌", "keyword": "disconcerted",
                 "expected_part_ids": {"kangxi61", "rtk527"}},
     "rtk672": {"character": "悔", "keyword": "repent",
@@ -1862,7 +1867,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk960": {"character": "程", "keyword": "extent",
                 "expected_part_ids": {"kangxi115", "rtk280"}},
     "rtk961": {"character": "税", "keyword": "tax",
-                "expected_part_ids": {"kangxi115", "kangxi12", "rtk107"}},
+                "expected_part_ids": {"kangxi115", "prim-devil"}},
     "rtk965": {"character": "秒", "keyword": "second",
                 "expected_part_ids": {"kangxi115", "rtk111"}},
     # Corrected 2026-09-05 (results.jsonl PARTIAL mining): cjkvi-ids
@@ -2042,7 +2047,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1718": {"character": "陰", "keyword": "shade",
                 "expected_part_ids": {"kangxi170", "kangxi28", "rtk1711", "rtk2"}},
     "rtk1745": {"character": "閲", "keyword": "review",
-                "expected_part_ids": {"kangxi12", "rtk107", "rtk1743"}},
+                "expected_part_ids": {"prim-devil", "rtk1743"}},
     "rtk1752": {"character": "閣", "keyword": "tower",
                 "expected_part_ids": {"rtk1743", "rtk311"}},
     "rtk1799": {"character": "速", "keyword": "quick",
@@ -2508,7 +2513,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1374": {"character": "捉", "keyword": "nab",
                "expected_part_ids": {"kangxi64", "rtk1372"}},
     "rtk1379": {"character": "躍", "keyword": "leap",
-               "expected_part_ids": {"kangxi172", "rtk1372", "rtk615"}},
+               "expected_part_ids": {"prim-futon", "rtk1372"}},
     "rtk1380": {"character": "践", "keyword": "tread",
                "expected_part_ids": {"kangxi62", "rtk1", "rtk1372"}},
     "rtk1381": {"character": "踏", "keyword": "step",
@@ -2632,7 +2637,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk2336": {"character": "嶺", "keyword": "mountaintop",
                "expected_part_ids": {"rtk1507", "rtk830"}},
     "rtk2399": {"character": "瀕", "keyword": "on the verge of",
-               "expected_part_ids": {"prim-katakana-no", "rtk110", "rtk137", "rtk396", "rtk64"}},
+               "expected_part_ids": {"rtk137", "rtk399"}},
     "rtk2455": {"character": "蕗", "keyword": "butterbur",
                "expected_part_ids": {"prim-mugwort", "rtk1376"}},
     "rtk2463": {"character": "蘇", "keyword": "resurrect",
@@ -2670,7 +2675,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk2709": {"character": "綺", "keyword": "ornate",
                "expected_part_ids": {"rtk133", "rtk1431"}},
     "rtk2710": {"character": "綾", "keyword": "damask",
-               "expected_part_ids": {"kangxi10", "kangxi34", "rtk1431", "rtk161"}},
+               "expected_part_ids": {"prim-mao", "rtk1431"}},
     # Was redundantly re-listing 玄(rtk1484)'s own 亠 alongside referencing it
     # directly -- 2026-09-05, audit_direct_ref_overlap.py
     "rtk2711": {"character": "絃", "keyword": "catgut",
@@ -3097,7 +3102,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk526": {"character": "妄", "keyword": "delusion",
                "expected_part_ids": {"rtk102", "rtk524"}},
     "rtk583": {"character": "腸", "keyword": "intestines",
-               "expected_part_ids": {"rtk1128", "rtk13", "rtk30"}},
+               "expected_part_ids": {"prim-piggy-bank", "rtk13"}},
     "rtk640": {"character": "忘", "keyword": "forget",
                "expected_part_ids": {"rtk524", "rtk639"}},
     "rtk659": {"character": "恵", "keyword": "favor",
@@ -3233,7 +3238,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk255": {"character": "黙", "keyword": "silence",
                "expected_part_ids": {"rtk186", "rtk253"}},
     "rtk2877": {"character": "黛", "keyword": "blackened eyebrows",
-               "expected_part_ids": {"kangxi56", "rtk186"}},
+               "expected_part_ids": {"rtk1080", "rtk186"}},
     "rtk1867": {"character": "剤", "keyword": "dose",
                "expected_part_ids": {"rtk1866", "rtk87"}},
     "rtk1868": {"character": "済", "keyword": "settle (debt etc.)",
@@ -3394,7 +3399,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk2931": {"character": "膏", "keyword": "fat",
                "expected_part_ids": {"rtk13", "rtk329"}},
     "rtk2636": {"character": "砥", "keyword": "grindstone",  # was character "?", keyword "arrow shaft", parts
-               "expected_part_ids": {"rtk118", "rtk1970"}},  # "bamboo,in front" -- a leftover scratch-draft line
+               "expected_part_ids": {"prim-calling-card", "rtk118"}},  # "bamboo,in front" -- a leftover scratch-draft line
                                                                 # near the top of data.txt (predates the real
                                                                 # kanjidic2/CSV import) had an id collision with
                                                                 # the real rtk2636/砥, silently overriding its

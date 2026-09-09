@@ -44,8 +44,11 @@ RADICAL_VARIANTS = {
     "飠": "食", "饣": "食",
     "爫": "爪",
     "户": "戸",
-    "兑": "兌",
     "覀": "西",
+    # 兑 vs 兌 is NOT a notation difference and must not be mapped: rendering 脱/説
+    # beside both settles it — the hosts draw 兑's two separate 丷 dots, not 兌's
+    # joined 八. An earlier 兑->兌 line here was the lookalike-carrier mistake this
+    # audit keeps having to undo, so it is gone.
     "釒": "金", "钅": "金",
     "訁": "言", "讠": "言",
     "牜": "牛",
@@ -64,15 +67,44 @@ RADICAL_VARIANTS = {
 
 
 def load_ids(path=IDS_PATH):
-    """character -> its first listed IDS decomposition string."""
+    """character -> its IDS decomposition string, preferring the Japanese variant.
+
+    A cjkvi line can carry several decompositions, each tagged with the regions it
+    holds for: 敏 is `⿰每攵[GTKV]` *and* `⿰毎攵[J]`. Taking the first one blindly
+    reads mainland/Taiwan shapes into a dataset that is Heisig's Japanese kanji, and
+    it misreports: 每 (U+6BCF) looked like an unregistered component with 6 hosts
+    when the shape those hosts actually draw is 毎 (U+6BCE), which has been sitting
+    in the database as rtk497 "every" all along. An untagged entry applies
+    everywhere, so it is the fallback.
+    """
+    table = {}
+    for ch, variants in _raw_ids(path).items():
+        chosen = next((v for v, tags in variants if "J" in tags), None)
+        if chosen is None:
+            chosen = next((v for v, tags in variants if not tags), None)
+        table[ch] = chosen if chosen is not None else variants[0][0]
+    return table
+
+
+def _raw_ids(path=IDS_PATH):
+    """character -> [(decomposition, region tags), ...] in file order."""
     table = {}
     with open(path, encoding="utf-8") as fh:
         for line in fh:
             if line.startswith("#"):
                 continue
             fields = line.rstrip("\n").split("\t")
-            if len(fields) >= 3:
-                table.setdefault(fields[1], fields[2])
+            if len(fields) < 3 or fields[1] in table:
+                continue
+            variants = []
+            for field in fields[2:]:
+                body, tags = field, ""
+                if body.endswith("]") and "[" in body:
+                    body, _, tags = body[:-1].partition("[")
+                if body:
+                    variants.append((body, tags))
+            if variants:
+                table[fields[1]] = variants
     return table
 
 

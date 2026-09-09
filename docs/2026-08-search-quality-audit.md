@@ -7511,3 +7511,90 @@ Two pytest cases pin the behaviour (`test_ambiguous_term_returns_every_meaning`,
 `test_ambiguous_term_does_not_chain_through_ambiguous_synonyms`). Verified: 58
 pytest passed, `test_regression_fixes.py` 1300 checks with only the 4 known
 hanzi-scope non-issues, dead-token detector 0/0, over-flatten detector 0.
+
+## 2026-09-09 (later still) — 12 compound primitives registered, and cjkvi's `[J]` variants
+
+Continuing the owner-approved "register the missing compound components" pass.
+
+### The `[J]` bug in the detector
+
+`audit_overflatten.py::load_ids` took the *first* decomposition on each cjkvi
+line. But a line can carry several, each tagged with the regions it holds for:
+敏 is `⿰每攵[GTKV]` **and** `⿰毎攵[J]`. Taking the first read mainland/Taiwan
+shapes into a dataset that is Heisig's *Japanese* kanji — and it misreported
+outright: 每 (U+6BCF) looked like an unregistered component with 6 hosts when
+the shape those hosts draw is 毎 (U+6BCE), sitting in the database as **rtk497
+"every"** the whole time. `load_ids` now prefers the `[J]` variant, falling back
+to an untagged entry (which applies everywhere). That alone unlocked **27
+collapses** the detector had been blind to (投/没/股/設 dropping 殳's own 几+又;
+花 and 貨 gaining the 化 they were missing; 墨 → 黒+土; 黛 → 代+黒).
+
+### Two more wrong lookalike carriers, both caught by rendering
+
+- **兑 (U+5151), not 兌 (U+514C).** `RADICAL_VARIANTS` mapped 兑→兌, treating the
+  difference as notation. It is not: rendered large, 兌 has a joined 八 top and
+  兑 two separate 丷 dots, and 脱/説/鋭/税/悦/閲 all plainly draw the dots. cjkvi
+  agrees (`⿰月兑`). The mapping is gone and 兑 is what got registered.
+- **昜 (U+661C) is distinguishable from 易 (U+6613) after all.** A 2026-09-01 pin
+  comment on 暢 recorded a deliberate decision *not* to register 昜, on the
+  grounds that the two "render near-identically in this font". Re-rendered
+  larger: 昜 carries a horizontal bar under its 日 (it is 旦+勿) that 易 lacks —
+  obvious in 暢/陽 versus 賜. The caution was right to exist and wrong on the
+  facts; 昜 is now `prim-piggy-bank` and 暢 pins the real structure 申+昜.
+
+### One earlier fix reversed on re-rendering
+
+`rtk187` 墨 was pinned as 里+土 on a note claiming a render showed "NO fire-dots
+at all" above the 土. Re-rendered beside 黒/黙/里: the four 灬 dots are plainly
+there. That was a misread of the image, not a font issue, and the pin is
+restored to 黒+土. Worth recording as the first time this audit's own rendering
+method caught a *previous* rendering session's error — the method works, but the
+looking has to be done at a size where the strokes are legible.
+
+### The 12 primitives
+
+Every keyword is Heisig's own, read out of `heisig-kanjis.csv`'s components
+column — never invented, per the twice-learned lesson. Each was then confirmed
+*structurally* rather than by eye: for a candidate name, take every CSV kanji
+whose components list it and intersect their IDS component sets; the glyph they
+all share is what the name denotes. All twelve came back clean.
+
+| id | glyph | Heisig name | hosts |
+|---|---|---|---|
+| `prim-bushel-basket` | 其 | bushel basket, hamper | 9 |
+| `prim-piggy-bank` | 昜 | piggy bank | 8 |
+| `prim-dog-tag` | 甫 | dog-tag | 8 |
+| `prim-harvest-festival` | 𢦏 | harvest festival, thanksgiving | 7 |
+| `prim-streetwalker` | 夋 | streetwalker | 7 |
+| `prim-devil` | 兑 | devil | 6 |
+| `prim-futon` | 翟 | futon | 6 |
+| `prim-talking-cricket` | 禺 | talking cricket | 6 |
+| `prim-mao` | 夌 | mao | 6 |
+| `prim-pup-tent` | 尞 | pup tent | 6 |
+| `prim-awl` | 㑒 | awl | 6 |
+| `prim-calling-card` | 氐 | calling card | 5 |
+
+Two of these names are already taken by a full kanji — `awl` is also 錐
+(rtk2783), and the structural check confirms the book really does use the word
+for both. That would have been a silent regression this morning; with the
+ambiguity fix landed earlier today it is simply an ambiguous term, and a search
+for "awl" returns both readings, which is the point.
+
+Sub-decompositions follow cjkvi's top level so the detector stays self-
+consistent; 其/禺/夌/尞 are left with none, since theirs need components
+(⑤ placeholder, 圥, 昚) we still can't register.
+
+Registering the twelve unlocked a further **34 collapses**, run to convergence
+(detector back to 0). **18 regression pins rewritten** — all had frozen the
+flattened form the new primitives replace.
+
+**Result: exact match against cjkvi top level 50.0% → 53.4%.** 1300 pins with
+only the 4 known hanzi-scope non-issues, 58 pytest, 0 dead tokens, 0
+self-references.
+
+**Next**: the remaining unregistered components are now dominated by shapes with
+no standalone Unicode character to carry them — 𠂉 (13 hosts), 𠃌 (9), 䒑 (8),
+𧘇 (8), 龶 (8), 𤰔 (7), 𦍌 (7) — plus cjkvi's unencoded ①-⑦ placeholders. Several
+of the CJK-Ext ones do have codepoints but render as tofu in common fonts, which
+is a real user-facing cost the `image_url` mechanism was built for; that
+trade-off wants an owner decision before the next batch.
