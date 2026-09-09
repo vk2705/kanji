@@ -8,7 +8,8 @@ from pydantic import BaseModel
 from database import (
     init_db, import_data, get_db, db_conn, migrate_schema,
     search_by_parts, search_by_substring, search_by_char, suggest_terms,
-    get_kanji_detail, SCRIPT_VISIBILITY, SOURCE_SCOPES, MAX_DECOMPOSITION_DEPTH
+    get_kanji_detail, SCRIPT_VISIBILITY, SOURCE_SCOPES, MAX_DECOMPOSITION_DEPTH,
+    PRIMITIVE_IMAGE_DIR
 )
 from auth import router as auth_router, current_user
 from contributions import router as contributions_router
@@ -52,6 +53,14 @@ app.include_router(analytics_router)
 # directory to exist at mount time, which happens at import — before lifespan runs.
 UPLOAD_DIR.mkdir(exist_ok=True)
 app.mount("/uploads", StaticFiles(directory=UPLOAD_DIR), name="uploads")
+
+# Pictures for primitives whose real codepoint most fonts can't draw (𭕄, 𢦏, 㑒 …),
+# rendered by make_primitive_images.py. Deliberately a separate mount from /uploads:
+# these are committed repo assets, not user content, and are not part of the upload
+# backup set. Read-only either way — nothing in the write API targets this directory.
+PRIMITIVE_IMAGE_DIR.mkdir(exist_ok=True)
+app.mount("/primitive-images", StaticFiles(directory=PRIMITIVE_IMAGE_DIR),
+          name="primitive-images")
 
 
 def _validate_script(script: str | None) -> str | None:

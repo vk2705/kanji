@@ -34,9 +34,16 @@ never duplicated here), then diffs its owner_id=1 + script='ja-kanji' rows
 against the live DB's, and applies only the difference:
 
   - kanji: insert missing ids, update changed fields (character/keyword/
-    frame/stroke_count/jlpt). Never touches `image_url` (not something
-    data.txt can express — clobbering it would erase a manually-attached
-    primitive picture) or any row with a different owner_id.
+    frame/stroke_count/jlpt/image_url). Never touches a row with a different
+    owner_id. `image_url` was excluded here originally, to avoid erasing a
+    manually-attached primitive picture; since 2026-09-09 it *is* synced,
+    because a system row's picture is now repo content like everything else
+    on this list — make_primitive_images.py renders the primitives whose
+    codepoint most fonts can't draw, and import_data() points image_url at
+    the committed file. There is no hand-attached picture to lose: users
+    cannot attach one to a system row at all (set_kanji_image carries the
+    same `owner_id != 1` guard as set_visibility), and this sync is scoped
+    to owner_id=1 rows.
   - aliases: add what the source now has, remove what it no longer does.
     Scoped to owner_id=1 rows on ja-kanji kanji only — a user's own alias on
     a system kanji (a different owner_id) is untouched.
@@ -111,7 +118,7 @@ def open_db(path: Path) -> sqlite3.Connection:
 
 
 def sync_kanji(shadow: sqlite3.Connection, live: sqlite3.Connection, dry_run: bool) -> dict:
-    fields = ["character", "keyword", "frame", "stroke_count", "jlpt"]
+    fields = ["character", "keyword", "frame", "stroke_count", "jlpt", "image_url"]
     shadow_rows = {r["id"]: dict(r) for r in shadow.execute(
         f"SELECT id, {', '.join(fields)} FROM kanji WHERE {SYSTEM_JA_KANJI}")}
     live_rows = {r["id"]: dict(r) for r in live.execute(
@@ -123,9 +130,10 @@ def sync_kanji(shadow: sqlite3.Connection, live: sqlite3.Connection, dry_run: bo
             if not dry_run:
                 live.execute(
                     "INSERT INTO kanji (id, character, keyword, frame, stroke_count, jlpt, "
-                    "owner_id, visibility, script) VALUES (?, ?, ?, ?, ?, ?, 1, 'public', 'ja-kanji')",
+                    "image_url, owner_id, visibility, script) "
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, 1, 'public', 'ja-kanji')",
                     (kid, srow["character"], srow["keyword"], srow["frame"],
-                     srow["stroke_count"], srow["jlpt"])
+                     srow["stroke_count"], srow["jlpt"], srow["image_url"])
                 )
             inserted.append(kid)
         else:

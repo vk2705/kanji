@@ -1,14 +1,11 @@
-import { displayChar } from "../utils";
-import { resolveImageUrl } from "../api";
+import Glyph from "./Glyph";
 
 export default function KanjiCard({ kanji, onSelect }) {
-  const char = displayChar(kanji.character);
   return (
     <button type="button" className="kanji-card" onClick={() => onSelect(kanji.id)}>
       <div className="kanji-char">
-        {char ?? (kanji.image_url
-          ? <img className="kanji-char-img" src={resolveImageUrl(kanji.image_url)} alt={kanji.keyword || kanji.id} />
-          : "·")}
+        <Glyph character={kanji.character} imageUrl={kanji.image_url}
+               keyword={kanji.keyword} id={kanji.id} imgClassName="kanji-char-img" />
       </div>
       <div className="kanji-keyword">{kanji.keyword || kanji.id}</div>
       <div className="kanji-meta">

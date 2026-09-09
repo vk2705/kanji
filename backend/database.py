@@ -665,6 +665,7 @@ def import_data():
         overrides_applied += 1
 
     _backfill_decompositions(conn)
+    attach_primitive_images(conn)
 
     conn.commit()
     conn.close()
@@ -1523,6 +1524,43 @@ def _rows_to_dicts(conn, rows, viewer_id: int | None = None) -> list[dict]:
 # Everything here is invoked only behind auth (see auth.require_user) and always
 # writes an explicit owner_id — never system (id=1), which stays immutable to
 # normal users by construction (nothing here lets owner_id be set to 1).
+
+PRIMITIVE_IMAGE_DIR = Path(__file__).resolve().parent / "primitive_images"
+PRIMITIVE_IMAGE_URL_PREFIX = "/primitive-images"
+
+
+def attach_primitive_images(conn, commit: bool = False) -> int:
+    """Point each system row at its committed picture, where one exists.
+
+    Some primitives Heisig teaches only have codepoints in the thin end of Unicode
+    (𭕄 the owl crown in CJK Ext G, 𢦏 harvest festival in Ext B, 㑒 in Ext A), which
+    most fonts cannot draw — a reader gets an empty box. Substituting a lookalike
+    from a well-supported block is the mistake this project has had to undo most
+    often, so the codepoint stays correct and `make_primitive_images.py` renders a
+    PNG instead; this points `image_url` at it. Files live in `primitive_images/`,
+    committed to the repo, and are served by their own StaticFiles mount — distinct
+    from `uploads/`, which is gitignored user content.
+
+    Safe on any DB: it only ever writes owner_id=1 rows, which no user can attach an
+    image to (`set_kanji_image` has the same owner_id != 1 guard as `set_visibility`),
+    so there is no user picture here to clobber. Callers inside a larger transaction
+    pass commit=False, the default.
+    """
+    if not PRIMITIVE_IMAGE_DIR.is_dir():
+        return 0
+    updated = 0
+    for image in sorted(PRIMITIVE_IMAGE_DIR.glob("*.png")):
+        url = f"{PRIMITIVE_IMAGE_URL_PREFIX}/{image.name}"
+        cur = conn.execute(
+            "UPDATE kanji SET image_url = ? WHERE id = ? AND owner_id = 1 AND "
+            "(image_url IS NULL OR image_url != ?)",
+            (url, image.stem, url)
+        )
+        updated += cur.rowcount
+    if commit:
+        conn.commit()
+    return updated
+
 
 def next_user_entry_id(conn) -> str:
     """Collision-free id for a new user-created kanji/primitive entry: usr{n}, n from

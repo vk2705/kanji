@@ -7598,3 +7598,80 @@ no standalone Unicode character to carry them — 𠂉 (13 hosts), 𠃌 (9), 䒑
 of the CJK-Ext ones do have codepoints but render as tofu in common fonts, which
 is a real user-facing cost the `image_url` mechanism was built for; that
 trade-off wants an owner decision before the next batch.
+
+## 2026-09-09 (end of day) — pictures for the primitives Unicode can't show
+
+Owner decision, answering the open question the previous entry closed on:
+*"да сделай картинку для таких глифов"* — the remaining components live at
+codepoints most fonts can't draw, so render a picture rather than degrade the
+data.
+
+This is the standing anti-pattern stated positively. Every time this audit has
+reached for a well-supported lookalike to dodge a rendering problem — `ツ` for
+`𭕄`, `杰` for `灬`, `艾` for `艹`, `爿` for `丬` — it has had to undo it later.
+The codepoint is the thing that is *true*; the empty box is a display problem,
+so it gets a display fix.
+
+**`backend/make_primitive_images.py`** renders one PNG per affected primitive,
+via the same headless Chromium `render_glyphs.py` uses. It selects by codepoint
+block, and only those:
+
+- **Plane 2+** (U+20000+, CJK Ext B–G) — effectively no system font ships these.
+  They render here only because Unifont is installed, and Unifont is a **16px
+  bitmap** face: enlarged, `𠂉`/`𠃌`/`𢦏` come out as visible staircases, which
+  is how this was noticed at all.
+- **CJK Ext A** (U+3400–U+4DBF) — patchy rather than absent. Desktop CJK fonts
+  have it; Android's do not reliably, and this project ships an Android WebView
+  app, so it counts.
+
+Anything outside those blocks must **not** get a picture: an image duplicating a
+perfectly good glyph is a needless request and a second thing to keep in sync.
+
+The run turned up **six**, three of them long-registered primitives that have
+been showing readers an empty box all along without anyone noticing:
+`prim-owl` 𭕄, `prim-harvest-festival` 𢦏, `prim-awl` 㑒, `prim-hooked-hand` 𠂊,
+`prim-maestro` 𠂤, `prim-winter-cow` 㐄.
+
+Two rendering decisions worth keeping:
+
+- **Mincho, not gothic.** `App.css` already asks for `"Noto Serif CJK JP", "Yu
+  Mincho", serif` on all three glyph surfaces, so HanaMin (a Mincho face, and
+  the only free font here with full Ext B/G coverage — `apt-get install
+  fonts-hanazono`) is the *matching* choice, not a compromise. Drawn in
+  `--kanji-color` on transparent.
+- **The canvas is exactly one em.** First pass used a 256px canvas at 0.86em,
+  and the result was correct but visibly *smaller* than the real glyphs beside
+  it, because the CSS sizes these with `max-width`/`max-height` + `object-fit` —
+  so the canvas box, not the ink, is what gets scaled to 1.4rem. Making the
+  canvas exactly the em square at the rendered size makes an image chip and a
+  text chip occupy the same space with the same internal proportions. Verified
+  by screenshotting the real `App.css` with real images: 㑒 now sits between 冖
+  and 刀 at matching weight, and 𭕄 correctly reads as a shallow crown, the same
+  depth it has inside 学.
+
+**Wiring.** `database.py::attach_primitive_images()` (end of `import_data`)
+points `image_url` at `/primitive-images/{id}.png` where the file exists;
+`main.py` mounts that directory read-only, separate from `/uploads` because
+these are committed repo assets rather than user content (and so are correctly
+absent from the upload backup set). `sync_system_data.py` now syncs `image_url`
+too — previously excluded to avoid erasing a hand-attached picture, which cannot
+happen on the rows it touches: it is scoped to `owner_id = 1`, and
+`set_kanji_image` refuses those outright.
+
+**Frontend.** All three surfaces had their own copy of `char ?? (image_url ?
+<img> : "·")`; they now share `Glyph.jsx`, which inverts the precedence to
+*picture first*. The old rule ("character, or a picture if there isn't one") was
+written when the only images were for user-invented primitives with no glyph at
+all. It is exactly wrong for this new case, where `character` is present and
+correct and showing it is what produces the empty box. `image_url` is only ever
+set deliberately, so its presence means the glyph alone was judged insufficient.
+
+Verified: 62 pytest (4 new, covering the selection rule, idempotency, the
+"never touch a user's upload" boundary, and the end-to-end part-chip path), 1300
+regression pins with only the 4 known hanzi-scope non-issues, frontend lint and
+build clean.
+
+**Deploy note**: this needs the usual `git pull` + `systemctl restart
+kanji-backend.service` *plus* a `sync_system_data.py` run to move `image_url`
+onto the live rows — the live DB does not re-seed. The PNGs themselves ship with
+the repo, so nothing needs uploading.

@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { getKanji, addAlias, addStory, createDecomposition, uploadKanjiImage, resolveImageUrl, reviewDecomposition } from "../api";
+import { getKanji, addAlias, addStory, createDecomposition, uploadKanjiImage, reviewDecomposition } from "../api";
 import { displayChar } from "../utils";
 import { t } from "../i18n";
 import AutocompleteInput from "./AutocompleteInput";
+import Glyph from "./Glyph";
 
 // DecompositionForm's parts field is a single comma-separated input ("water, fire,
 // tree") rather than one box per part, so autocomplete only makes sense against the
@@ -164,7 +165,6 @@ export function DecompositionForm({ kanjiId, lang, onAdded }) {
 
 function PartChip({ part, lang, user, onSelectPart }) {
   const [expanded, setExpanded] = useState(false);
-  const partChar = displayChar(part.character);
   // sub_decompositions is a list of alternative decompositions of THIS part (e.g. a
   // system breakdown and a user's own) — usually just one, but every alternative
   // renders as its own line when expanded, same idea as the top-level decompositions
@@ -193,9 +193,8 @@ function PartChip({ part, lang, user, onSelectPart }) {
           disabled={!part.id}
         >
           <span className="part-chip-char">
-            {partChar ?? (part.image_url
-              ? <img className="part-chip-img" src={resolveImageUrl(part.image_url)} alt={part.keyword || part.id} />
-              : "·")}
+            <Glyph character={part.character} imageUrl={part.image_url}
+                   keyword={part.keyword} id={part.id} imgClassName="part-chip-img" />
           </span>
           <span className="part-chip-label">{part.keyword || part.id}</span>
           {part.frame && <span className="part-chip-frame">#{part.frame}</span>}
@@ -340,9 +339,8 @@ export default function KanjiDetail({ kanjiId, onSelectPart, onBack, user, lang 
 
       <div className="detail-header">
         <span className="detail-char">
-          {char ?? (kanji.image_url
-            ? <img className="detail-char-img" src={resolveImageUrl(kanji.image_url)} alt={kanji.keyword || kanji.id} />
-            : "·")}
+          <Glyph character={kanji.character} imageUrl={kanji.image_url}
+                 keyword={kanji.keyword} id={kanji.id} imgClassName="detail-char-img" />
         </span>
         <div className="detail-meta">
           <div className="detail-keyword">
