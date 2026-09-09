@@ -7370,3 +7370,89 @@ access) — data-only change, needs `sync_system_data.py` + reseed.
 **Next session**: continue the worklist loop. Standing list unchanged
 (see earlier entries above, including the still-open `脳`/`巣`/`単`
 `𭕄` lead).
+
+## 2026-09-09 (owner escalation): the real reason progress felt stuck
+
+Owner, after searching "mouth" and getting ~300 hits: *"очень много ошибок…
+почему несмотря на 2 месяца работы… мы имеем этот хаос? … подозреваю что ты
+сам обратно портишь правильные разбиения."* Three separate claims, each
+checked against data rather than argued with.
+
+**"You revert correct decompositions" — checked, not supported.** Replayed all
+101 commits touching `data.txt` and diffed every kanji's parts at each step:
+1882 kanji changed at least once, **47 oscillated** (returned to an earlier
+value). 46 of the 47 are a single incident — the `primitive_roof` dead token I
+added on 2026-08-22 and removed on 2026-09-04 — and the 47th is the same story
+with `primitive_lid`. No kanji was ever moved from a correct decomposition to a
+worse one and left there. What *is* true, and the suspicion is fair for it: I
+introduce errors during bulk edits (those dead tokens; the spurious `矢` in the
+雚-family, whose fix commit says "from my own earlier cleanup"). The failure
+mode is bad new edits, not reverting good ones.
+
+**"No progress" — there is progress, but the pace was the real problem.**
+Objective metric (does our top-level decomposition match cjkvi-ids' top level):
+8.8% at the audit's start → 36.1% by day 6. Real, but at 20 kanji/day against
+~1800 remaining that is ~90 more days.
+
+**Why "mouth" looked like chaos — measured, not guessed.** Of its 271 hits:
+127 (47%) genuinely have 口 as a direct component; **134 (49%) are
+over-flattened** — 口 *is* in the kanji, but nested inside a compound we should
+be referencing (吉, 舌, 各, 或, 袁, 喬, 咸…), so the host shows up as a direct
+match for every letter it was shattered into; 10 (4%) are IDS-atomic kanji
+Heisig legitimately teaches via sub-strokes (史, 谷, 事, 豆, 束, 亜, 民, 革).
+**The search algorithm is fine. The data was shattered.**
+
+**The method was the bug.** I had been hand-verifying 20 kanji a day through a
+Google-disagreement queue, rendering each one, on a problem that is largely
+mechanically decidable: cjkvi-ids already states each character's direct
+children, so "we list a descendant where ground truth lists its parent" is a
+computable predicate, not a judgement call.
+
+### `backend/audit_overflatten.py` (new)
+
+Detects and fixes that predicate. Two design decisions matter:
+
+- **The target is cjkvi-ids' top level, not a rewrite of our token list.** The
+  first version collapsed our own tokens into the largest matching component
+  and immediately produced a wrong answer for `呪`(⿰口兄): it ate the host's
+  own left 口 as if it were 兄's internal one, deleting half the kanji. Deriving
+  the answer from ground truth instead of mutating a known-wrong list removes
+  that whole class of mistake.
+- **Word-form aliases resolve before comparing.** Otherwise `悟`, carrying the
+  perfectly valid alias `state of mind`, gets handed a second, duplicate `忄`.
+
+Safety gate: a fix is only emitted when every target component is registered
+here, when the result is a subset of cjkvi-ids' own top level (so it can never
+invent a component the glyph lacks), and when every dropped token genuinely
+lives *below* a target component. `RADICAL_VARIANTS` maps cjkvi's combining
+forms to the free-standing kanji this project registers (氵→水, 糹→糸, 刂→刀 …)
+— notation, not judgement, and it alone unlocked ~230 of the fixes.
+
+### Applied this session
+
+- **212 over-flattened decompositions collapsed** (38 in the "mouth" scope,
+  then 174 dataset-wide), re-run to convergence: 0 candidates remain.
+- **198 legacy `rad*` rows deleted.** Investigating "bow" turned up a phantom
+  result — `rad3.29`, alias "bow", no glyph. That led to 199 glyph-less system
+  rows left over from the original Perl app, carrying junk keywords (`obama`,
+  `Mister T.`, `stamp2?`, `yu`/`euro`, `pagoda-roof--vk`) and, worse, **54
+  aliases duplicated against real kanji** — with `resolve_alias` picking the
+  *phantom* for `arrow`, `axe`, `dagger`, `dirt`, `cave`, `flag`. 306 text
+  searches surfaced a glyph-less row. Verified all but one were referenced by
+  nothing; the one exception (`cave`) resolves to the real 广 once the phantom
+  is gone. Glyph-less system rows: 199 → 2 (both deliberate: `prim-antlers`,
+  `prim-sitting-on-the-ground`).
+- **38 regression pins rewritten** — they had frozen the flattened form (打 as
+  扌+亅, 禁 as 示+木, 貧 as 貝+刀), i.e. the suite was guarding the bug.
+
+Result: exact match against cjkvi-ids **36.1% → 48.5%** in one pass, versus
+32%→36% for the preceding four days of 20-a-day manual work. `mouth` 271 → 231,
+`soil` 159 → 147, `bow` 22 → 21. Verified: dead-token detector still 0/0,
+`test_regression_fixes.py` 1300 checks with only the 4 known hanzi-scope
+non-issues, pytest 56 passed, self-reference clean.
+
+**Next**: the detector now reports 0, but 48.5% exact match means the remaining
+gap is *unregistered* compound components — 507 distinct ones, led by 甫, 其,
+昜, 每, 翟, 夋 (real characters we could register) and by cjkvi's unencoded
+`③`/`⑤` placeholders (which we never can). Registering the top real ones is the
+next bulk lever, not another 20-a-day queue.
