@@ -1466,72 +1466,10 @@
    "口",
    "攵"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk360",
-  "char": "詮",
-  "keyword": "discussion",
-  "our_parts": [
-   "王",
-   "言",
-   "个",
-   "ハ"
-  ],
-  "google_parts": [
-   "言",
-   "全"
-  ],
-  "google_primitive_names": {
-   "言": "say/words",
-   "全": "whole"
-  },
-  "google_confidence": "high",
-  "google_note": "Left 言 (words) + right 全 (whole = 𠆢 umbrella + 王 king). Our data 王+言+个+ハ matches expanded.",
-  "cjkvi_ids": "⿰言全",
-  "cjkvi_leaves": [
-   "一",
-   "人",
-   "十",
-   "言"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk374",
-  "char": "談",
-  "keyword": "discuss",
-  "our_parts": [
-   "火",
-   "言"
-  ],
-  "google_parts": [
-   "言",
-   "炎"
-  ],
-  "google_primitive_names": {
-   "言": "say/words",
-   "炎": "inflammation",
-   "火": "fire/flame"
-  },
-  "google_confidence": "high",
-  "google_note": "Left 言 (say) + right 炎 (inflammation = 火 + 火, two fires). Our data 火+言 lists one 火; standard is two fires.",
-  "cjkvi_ids": "⿰言炎",
-  "cjkvi_leaves": [
-   "人",
-   "八",
-   "言"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-09"
  },
  {
   "id": "rtk380",
@@ -1564,10 +1502,10 @@
    "十",
    "口"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-09"
  },
  {
   "id": "rtk381",
@@ -1600,10 +1538,10 @@
    "目",
    "𠂇"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-09"
  },
  {
   "id": "rtk382",
@@ -1635,10 +1573,10 @@
    "十",
    "木"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-09"
  },
  {
   "id": "rtk383",
@@ -1671,10 +1609,10 @@
    "十",
    "車"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-09"
  },
  {
   "id": "rtk385",
@@ -1704,10 +1642,14 @@
    "小",
    "戊"
   ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "custom",
+  "decision": [
+   "小",
+   "卜",
+   "戊"
+  ],
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-09"
  },
  {
   "id": "rtk386",
@@ -1732,10 +1674,10 @@
    "戊",
    "𠃌"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-09"
  },
  {
   "id": "rtk390",
@@ -1766,10 +1708,14 @@
    "戊",
    "氵"
   ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "custom",
+  "decision": [
+   "火",
+   "水",
+   "戊"
+  ],
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-09"
  },
  {
   "id": "rtk392",
@@ -1801,10 +1747,15 @@
    "戊",
    "罒"
   ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "custom",
+  "decision": [
+   "艹",
+   "罒",
+   "十",
+   "戊"
+  ],
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-09"
  },
  {
   "id": "rtk393",
@@ -1835,10 +1786,10 @@
    "乚",
    "木"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-09"
  },
  {
   "id": "rtk394",
@@ -1870,10 +1821,10 @@
    "人",
    "十"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-09"
  },
  {
   "id": "rtk395",
@@ -1903,10 +1854,10 @@
    "乚",
    "氵"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-09"
  },
  {
   "id": "rtk401",
@@ -1931,42 +1882,10 @@
    "人",
    "止"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk403",
-  "char": "武",
-  "keyword": "warrior",
-  "our_parts": [
-   "止",
-   "弋"
-  ],
-  "google_parts": [
-   "一",
-   "止",
-   "戈"
-  ],
-  "google_primitive_names": {
-   "一": "one",
-   "止": "footprint/stop",
-   "戈": "fiesta"
-  },
-  "google_confidence": "high",
-  "google_note": "一 (one) + 止 (footprint) + 戈 (fiesta). Our data 止+弋 - lists 弋 (arrow) instead of 戈 and omits 一. Google's breakdown (footprint + fiesta + one) is standard RTK; also mentions 'quiver' compound.",
-  "cjkvi_ids": "⿹⿶弋一止",
-  "cjkvi_leaves": [
-   "一",
-   "丶",
-   "乚",
-   "止"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-09"
  },
  {
   "id": "rtk410",
@@ -1992,76 +1911,13 @@
    "十",
    "龰"
   ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk411",
-  "char": "超",
-  "keyword": "transcend",
-  "our_parts": [
-   "召",
-   "走",
-   "土"
-  ],
-  "google_parts": [
-   "走",
-   "召"
-  ],
-  "google_primitive_names": {
-   "走": "run",
-   "召": "seduce",
-   "刀": "sword/dagger",
-   "口": "mouth"
-  },
-  "google_confidence": "high",
-  "google_note": "Left 走 (run) + right 召 (seduce = 刀 sword + 口 mouth). Our data 口+走+土+刀 matches expanded (土 from 走).",
-  "cjkvi_ids": "⿺走召",
-  "cjkvi_leaves": [
-   "一",
-   "丿",
-   "十",
-   "口",
-   "龰",
-   "𠃌"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk412",
-  "char": "赴",
-  "keyword": "proceed",
-  "our_parts": [
-   "走",
+  "status": "custom",
+  "decision": [
    "土",
-   "卜"
+   "止"
   ],
-  "google_parts": [
-   "走",
-   "卜"
-  ],
-  "google_primitive_names": {
-   "走": "run",
-   "卜": "divining rod"
-  },
-  "google_confidence": "high",
-  "google_note": "Enclosing 走 (run) + 卜 (divining rod). Our data 走+土+卜 matches (土 from 走).",
-  "cjkvi_ids": "⿺走卜",
-  "cjkvi_leaves": [
-   "一",
-   "十",
-   "卜",
-   "龰"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-09"
  },
  {
   "id": "rtk413",
@@ -2090,10 +1946,13 @@
    "戉",
    "龰"
   ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "custom",
+  "decision": [
+   "走",
+   "戈"
+  ],
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-09"
  },
  {
   "id": "rtk419",
@@ -6726,38 +6585,6 @@
   "reviewed_at": null
  },
  {
-  "id": "rtk883",
-  "char": "趣",
-  "keyword": "purport",
-  "our_parts": [
-   "取",
-   "走",
-   "土"
-  ],
-  "google_parts": [
-   "走",
-   "取"
-  ],
-  "google_primitive_names": {
-   "走": "run",
-   "取": "take (itself ear+crotch)"
-  },
-  "google_confidence": "high",
-  "google_note": "Text gives top-level breakdown as run + take (取, which is ear+hand). current_parts flattens 取 into 耳+又 and also adds an unexplained 土 that the text never mentions at all for 趣.",
-  "cjkvi_ids": "⿺走取",
-  "cjkvi_leaves": [
-   "一",
-   "十",
-   "又",
-   "耳",
-   "龰"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
   "id": "rtk884",
   "char": "最",
   "keyword": "utmost",
@@ -7351,37 +7178,6 @@
    "寸",
    "彳",
    "日"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
- },
- {
-  "id": "rtk943",
-  "char": "徒",
-  "keyword": "on foot",
-  "our_parts": [
-   "走",
-   "土",
-   "彳"
-  ],
-  "google_parts": [
-   "彳",
-   "走"
-  ],
-  "google_primitive_names": {
-   "彳": "going man",
-   "走": "run"
-  },
-  "google_confidence": "high",
-  "google_note": "Text gives top-level breakdown as going man + run (走, itself further split into soil+legs/mending). current_parts flattens to 走,土,彳 which matches the leaf-level equivalent.",
-  "cjkvi_ids": "⿰彳走",
-  "cjkvi_leaves": [
-   "一",
-   "十",
-   "彳",
-   "龰"
   ],
   "status": "pending",
   "decision": null,
@@ -31461,8 +31257,7 @@
   "keyword": "strong and brave",
   "our_parts": [
    "｜",
-   "走",
-   "土"
+   "走"
   ],
   "google_parts": [
    "走",

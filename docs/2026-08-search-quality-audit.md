@@ -7317,3 +7317,56 @@ pending**.
 right side) worth a render-based push next time, rather than staying
 purely deferred. Standing list otherwise unchanged (see earlier
 entries above).
+
+## 2026-09-09 (daily check-in): worklist loop, day 6 — 成-vs-戊 mixup, the whole 走-family's redundant 土
+
+Pulled latest (already up to date, including the owner's same-day
+correction of the `悩`/"state of mind" false-alarm from the prior
+session), verified clean (1288 checks/4 expected, pytest 56 passed,
+0 dict duplicates, radicals/self-reference clean, no pending reviews),
+ran `worklist_next.py -n 20`.
+
+**10 kept as-is**: `敬` already references the taught `句` compound
+(better than Google's flat `苟`); `域`/`賊`/`栽`/`載` all already
+"match expanded" per Google's own note; `成` itself, and the `戔`-family
+(`桟`/`銭`/`浅`, already `木/金/水`+`戈`+`二`) confirmed correct by
+render — Google's "two stacked 戈" phrasing for `戔` was just loose
+wording, not a real disagreement; `企` already matches.
+
+**Another look-alike-character mixup, `成`(turn into, has an extra
+stroke) standing in for the simpler `戊`**: `戚`/`滅`/`蔑` all used
+`成` for their outer frame, but render shows the frame lacks `成`'s
+extra diagonal stroke — it's `戊`. Cross-checked against Google's more
+granular suggestion (`戌` for `滅`, `戍` for `蔑` — two more variants
+in this same confusable family, differing only by a dot/crossbar) by
+rendering `戊`/`戌`/`戍` side by side directly against `滅`/`蔑`'s own
+frames: neither shows a crossbar (`戌`) or dot (`戍`) at any resolution
+tested, so both are `戊` like `戚`, not the finer variants Google
+proposed — registered as `prim-parade` (CSV's own keyword for this
+primitive at frame 385). `蔑` was additionally undersplit to just 2
+tokens when the real structure has 4 — was missing `罒`(net) and `十`
+entirely.
+
+**`武`** had `弋`(a simple cross, no hook) where render shows `戈`(with
+the hook) instead, plus a missing top `一`.
+
+**The whole 走-family had the exact same redundant-part-already-
+included-by-reference bug as 馬/鳥 (days 4-5).** `走`(run) was itself
+missing its own bottom `止`(stop, already taught) entirely — fixed
+first — which meant **7** hosts built on `走` (`超`/`赴`/`越`/`趣`/
+`徒`/`趨`/`赳`) that redundantly relisted `走`'s own `土` alongside
+referencing `走` directly needed the overlap fix, not a missing-
+component one. Rendered all 7 solo to confirm no genuine second `土`
+anywhere — dropped the redundant token from all of them.
+
+Verified: full rebuild (3000 kanji, 3009 overrides — one new
+primitive, `prim-parade`); `test_regression_fixes.py` — 2 corrected +
+34 new pins — **1300 checks**, same 4 expected hanzi-scope non-issues;
+pytest (56 passed); `audit_self_reference.py` clean; `audit_radicals.py`
+still 0/0; `review_queue.py` clean. `build_decomp_worklist.py`
+rebuilt: 979 → **972 rows, 911 pending**. Not deployed (no SSH/server
+access) — data-only change, needs `sync_system_data.py` + reseed.
+
+**Next session**: continue the worklist loop. Standing list unchanged
+(see earlier entries above, including the still-open `脳`/`巣`/`単`
+`𭕄` lead).

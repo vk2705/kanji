@@ -506,6 +506,44 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"kangxi94", "rtk271"}},
     "rtk361": {"character": "獄", "keyword": "prison",
                "expected_part_ids": {"kangxi94", "rtk357", "rtk253"}},
+    # 2026-09-09 worklist loop, day 6 batch:
+    # 詮/談 collapse to referencing 全/炎 (both already taught) directly.
+    "rtk360": {"character": "詮", "keyword": "elucidate",
+               "expected_part_ids": {"rtk281", "rtk357"}},
+    "rtk374": {"character": "談", "keyword": "discuss",
+               "expected_part_ids": {"rtk174", "rtk357"}},
+    # 戚/滅/蔑 all had 成(rtk386, "turn into" -- has an extra stroke) for
+    # their outer frame where render clearly shows the simpler 戊 shape
+    # instead (no extra stroke) -- registered as prim-parade (per CSV's
+    # own keyword for this exact primitive at frame 385). 蔑 was also
+    # missing 罒(net) and 十 entirely -- was undersplit to just 2 tokens
+    # when the real structure has 4.
+    "rtk385": {"character": "戚", "keyword": "relatives",
+               "expected_part_ids": {"kangxi25", "prim-parade", "rtk110"}},
+    "rtk390": {"character": "滅", "keyword": "destroy",
+               "expected_part_ids": {"prim-parade", "rtk137", "rtk173"}},
+    "rtk392": {"character": "蔑", "keyword": "revile",
+               "expected_part_ids": {"kangxi122", "prim-mugwort", "prim-parade", "rtk10"}},
+    # 武 used 弋(stake, a simple cross, no hook) where render shows 戈
+    # (spear, with the hook) instead, and was missing the top 一 entirely.
+    "rtk403": {"character": "武", "keyword": "warrior",
+               "expected_part_ids": {"kangxi62", "rtk1", "rtk396"}},
+    # 走 was missing its own bottom 止(stop, already taught) entirely --
+    # which then meant 超/赴/越/趣/徒/趨/赳 (all built on 走) needed the
+    # redundant-overlap fix (drop 土, which 走 already includes) rather
+    # than the missing-component fix.
+    "rtk410": {"character": "走", "keyword": "run",
+               "expected_part_ids": {"rtk161", "rtk396"}},
+    "rtk412": {"character": "赴", "keyword": "proceed",
+               "expected_part_ids": {"kangxi25", "rtk410"}},
+    "rtk413": {"character": "越", "keyword": "surpass",
+               "expected_part_ids": {"kangxi62", "rtk410"}},
+    "rtk943": {"character": "徒", "keyword": "junior",
+               "expected_part_ids": {"kangxi60", "rtk410"}},
+    "rtk2231": {"character": "趨", "keyword": "scurry",
+               "expected_part_ids": {"kangxi20", "kangxi45", "rtk410"}},
+    "rtk2943": {"character": "赳", "keyword": "bold",
+               "expected_part_ids": {"prim-pipe", "rtk410"}},
     "rtk430": {"character": "猿", "keyword": "monkey",
                "expected_part_ids": {"kangxi94", "rtk423", "rtk11", "rtk161"}},
     "rtk561": {"character": "独", "keyword": "single",
@@ -1673,8 +1711,13 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk397", "rtk64"}},
     "rtk406": {"character": "証", "keyword": "evidence",
                 "expected_part_ids": {"rtk357", "rtk405"}},
+    # Corrected 2026-09-09 (worklist loop, day 6): 走(rtk410) is itself
+    # taught with 土 as one of its own parts, so 超/趣 (and several other
+    # 走-family hosts, see the rtk412 comment below) redundantly relisted
+    # it alongside referencing 走 directly -- same pattern #3 as the
+    # 馬/鳥-family fixes.
     "rtk411": {"character": "超", "keyword": "transcend",
-                "expected_part_ids": {"rtk161", "rtk410", "rtk90"}},
+                "expected_part_ids": {"rtk410", "rtk90"}},
     "rtk441": {"character": "柿", "keyword": "persimmon",
                 "expected_part_ids": {"kangxi13", "prim-pipe", "rtk207", "rtk440"}},
     "rtk442": {"character": "姉", "keyword": "elder sister",
@@ -1792,7 +1835,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk854": {"character": "溶", "keyword": "melt",
                 "expected_part_ids": {"rtk137", "rtk853"}},
     "rtk883": {"character": "趣", "keyword": "gist",
-                "expected_part_ids": {"rtk161", "rtk410", "rtk882"}},
+                "expected_part_ids": {"rtk410", "rtk882"}},
     "rtk884": {"character": "最", "keyword": "utmost",
                 "expected_part_ids": {"rtk1", "rtk12", "rtk882"}},
     "rtk885": {"character": "撮", "keyword": "snapshot",

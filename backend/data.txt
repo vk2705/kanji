@@ -606,7 +606,7 @@ rtk356:敬:awe:句,攵,艹
 rtk357:言:say:
 rtk358:警:admonish:敬,言
 rtk359:計:plot:言,十
-rtk360:詮:discussion:王,言,个,ハ
+rtk360:詮:discussion:言,全
 rtk361:獄:prison:犭,言,犬
 rtk362:訂:revise:言,丁
 rtk363:訃:obituary:言,卜
@@ -620,7 +620,7 @@ rtk370:詩:poem:言,寺
 rtk371:語:word:言,吾
 rtk372:読:read:言,売
 rtk373:調:tune:言,周
-rtk374:談:discuss:火,言
+rtk374:談:discuss:言,炎
 rtk375:諾:consent:ノ,一,言,口,艹
 rtk376:諭:rebuke:月,言,个,一
 rtk377:式:style:工,弋
@@ -631,14 +631,14 @@ rtk381:賊:burglar:貝,十,戈
 rtk382:栽:plantation:土,木,戈
 rtk383:載:ride:車,土,戈
 rtk384:茂:overgrown:艹,成
-rtk385:戚:grieve:小,卜,成
+rtk385:戚:grieve:小,卜,戊
 rtk386:成:turn into:ノ,戈
 rtk387:城:castle:土,成
 rtk388:誠:sincerity:言,成
 rtk389:威:intimidate:女,厂,成
-rtk390:滅:destroy:火,水,成
+rtk390:滅:destroy:火,水,戊
 rtk391:減:dwindle:口,水,亅,戈
-rtk392:蔑:ignore:艹,成
+rtk392:蔑:ignore:艹,罒,十,戊
 rtk393:桟:scaffold:木,戈,二
 rtk394:銭:coin:金,戈,二
 rtk395:浅:shallow:水,戈,二
@@ -649,17 +649,17 @@ rtk399:頻:repeatedly:歩,頁
 rtk400:肯:agreement:月,止
 rtk401:企:undertake:止,个
 rtk402:歴:curriculum:厂,林,止
-rtk403:武:warrior:止,弋
+rtk403:武:warrior:一,止,戈
 rtk404:賦:levy:貝,武
 rtk405:正:correct:一,止
 rtk406:証:evidence:正,言
 rtk407:政:politics:攵,正
 rtk408:定:determine:疋,宀
 rtk409:錠:lock:金,定
-rtk410:走:run:土
-rtk411:超:transcend:召,走,土
-rtk412:赴:proceed:走,土,卜
-rtk413:越:surpass:走,土,戈
+rtk410:走:run:土,止
+rtk411:超:transcend:召,走
+rtk412:赴:proceed:走,卜
+rtk413:越:surpass:走,戈
 rtk414:是:just so:日,疋
 rtk415:題:topic:頁,是
 rtk416:堤:dike:土,是
@@ -1129,7 +1129,7 @@ rtk879:葬:interment:一,夕,匕,廾,艹
 rtk880:瞬:wink:牛,舛,爪,目,夕,冖
 rtk881:耳:ear:
 rtk882:取:take:耳,又
-rtk883:趣:purport:取,走,土
+rtk883:趣:purport:取,走
 rtk884:最:utmost:一,取,日
 rtk885:撮:snapshot:取,日,扌
 rtk886:恥:shame:耳,心
@@ -1189,7 +1189,7 @@ rtk939:律:rhythm:彳,聿
 rtk940:復:restore:日,夂,彳,ノ,一,人
 rtk941:得:gain:寸,日,彳,一
 rtk942:従:accompany:丷,疋,彳
-rtk943:徒:on foot:走,土,彳
+rtk943:徒:on foot:走,彳
 rtk944:待:wait:寺,彳
 rtk945:往:journey:主,彳
 rtk946:征:subjugate:正,彳
@@ -2477,7 +2477,7 @@ rtk2227:籤:lottery:竹,戈,韭,人
 rtk2228:懺:regret:人,state of mind,戈,韭
 rtk2229:芻:grass cutting:勹,屮,艹
 rtk2230:雛:chick:勹,屮,隹
-rtk2231:趨:run:走,土,勹,屮
+rtk2231:趨:run:走,勹,屮
 rtk2232:尤:reasonable:丶,尢
 rtk2233:厖:large:厂,彡,尤
 rtk2234:或:some:口,戈,一
@@ -3187,7 +3187,7 @@ rtk2939:奎:star:大,土
 rtk2940:翔:soar:羽,羊
 rtk2941:皓:white:ノ,口,土,白
 rtk2942:黎:dark:黍,勿,禾,水
-rtk2943:赳:strong and brave:｜,走,土
+rtk2943:赳:strong and brave:｜,走
 rtk2944:已:stop short:
 rtk2945:棘:thorn:｜,巾,ハ,木,亠,冂
 rtk2946:祟:curse:示,出
@@ -3344,3 +3344,4 @@ prim-muzzle:咅:muzzle
 prim-wealth:畐:wealth
 prim-half-turtle:丬:turtle
 prim-katakana-tsu:ツ:katakana tsu
+prim-parade:戊:parade
