@@ -1530,7 +1530,7 @@ rtk1478:幼:infancy:力,幺
 rtk1479:後:behind:夂,幺,彳
 rtk1480:幽:seclude:｜,凵,幺
 rtk1481:幾:how many:ノ,幺,戈,丶
-rtk1482:機:loom:ノ,木,丶,幺,戈
+rtk1482:機:loom:幾,木
 rtk1483:畿:capital:田,幺,戈,丶,ノ
 rtk1484:玄:mysterious:亠,幺
 rtk1485:畜:livestock:田,玄
@@ -1611,7 +1611,7 @@ rtk1559:盗:steal:次,皿
 rtk1560:温:warm:皿,水,日
 rtk1561:蓋:cover:皿,去,艹
 rtk1562:監:oversee:皿,臣,二
-rtk1563:濫:excessive:ノ,監,水
+rtk1563:濫:excessive:水,監
 rtk1564:鑑:specimen:金,監
 rtk1565:藍:indigo:ノ,監,艹
 rtk1566:猛:fierce:犭,皿,子
@@ -1687,7 +1687,7 @@ rtk1635:菱:diamond (shape):土,儿,夂,艹
 rtk1636:陵:mausoleum:土,儿,夂,阝
 rtk1637:亥:sign of the hog:人,亠,ノ,丶
 rtk1638:核:nucleus:亥,木
-rtk1639:刻:engrave:亠,人,ノ,丶
+rtk1639:刻:engrave:亥,刀
 rtk1640:該:above-stated:言,亥
 rtk1641:骸:bone:骨,亥
 rtk1642:劾:censure:亥,力
@@ -2262,7 +2262,7 @@ rtk2210:麟:chinese unicorn:鹿,米,舛
 rtk2211:鱗:scales (fish):魚,舛,米,夕
 rtk2212:奄:cover:乙,大,日
 rtk2213:庵:hermitage:田,广,大
-rtk2214:掩:cover:乙,大,日,扌,奄
+rtk2214:掩:cover:奄,扌
 rtk2215:悛:amend:state of mind,儿,厶,夂
 rtk2216:駿:a good horse:馬,儿,厶,夂
 rtk2217:峻:high:山,儿,厶,夂
@@ -2460,7 +2460,7 @@ rtk2409:湛:fill:｜,一,甘,水,儿,匚
 rtk2410:淳:pure:享,水
 rtk2411:渥:kindness:水,屋
 rtk2412:灘:open sea:水,大,口,艹,隹,亠,二
-rtk2413:汲:draw (water):ノ,水,及
+rtk2413:汲:draw (water):及,水
 rtk2414:瀞:pure water:水,静
 rtk2415:溜:collect:水,刀,厶,田
 rtk2416:渕:edge:水,人,大,二,丷
@@ -2481,7 +2481,7 @@ rtk2430:狗:puppy:犭,句
 rtk2431:狐:fox:犭,瓜
 rtk2432:狛:archaic part of korea:犭,白
 rtk2433:獅:lion:犭,師
-rtk2434:狒:baboon:犭,弓,ノ,｜
+rtk2434:狒:baboon:弗,犭
 rtk2435:莨:tobacco:良,艹
 rtk2436:茉:jasmine:艹,末
 rtk2437:莉:jasmine:利,艹
@@ -2491,7 +2491,7 @@ rtk2440:藝:art:九,土,二,丶,儿,厶,艹
 rtk2441:薙:mow down (the enemy):艹,雉
 rtk2442:蓑:straw raincoat:衣,一,亠,艹
 rtk2443:苔:moss:台,艹
-rtk2444:蕩:melt:｜,一,水,日,艹,勿
+rtk2444:蕩:melt:湯,艹
 rtk2445:蔓:vine:曼,艹
 rtk2446:蓮:lotus:込,車,艹
 rtk2447:芙:lotus:人,二,艹,大
@@ -2555,7 +2555,7 @@ rtk2504:隕:fall:員,阝
 rtk2505:隈:corner:阝,畏
 rtk2506:憑:depend:心,馬,冫
 rtk2507:惹:attract:ノ,一,口,心,艹
-rtk2508:悉:all:ノ,心,釆,米
+rtk2508:悉:all:心,釆
 rtk2509:忽:in a moment:心,勿
 rtk2510:惣:all:心,物
 rtk2511:愈:be superior:月,心,个,一
@@ -2760,7 +2760,7 @@ rtk2710:綾:design:糸,土,儿,夂
 rtk2711:絃:string:糸,玄
 rtk2712:縞:stripe:糸,高
 rtk2713:綬:ribbon:受,糸
-rtk2714:紗:gauze:ノ,糸
+rtk2714:紗:gauze:少,糸
 rtk2715:舵:rudder:舟,匕,宀
 rtk2716:聯:party:耳,幺
 rtk2717:聡:wise:耳,心,ハ,厶
@@ -2785,7 +2785,7 @@ rtk2735:蛭:leech:至,虫
 rtk2736:蛎:oyster:斤,虫,厂
 rtk2737:罫:ruled line:罒,土,卜
 rtk2738:袈:a coarse camlet:加,衣
-rtk2739:裟:buddhist surplice:ノ,衣,水,小,亠
+rtk2739:裟:buddhist surplice:沙,衣
 rtk2740:截:cut off:土,戈,隹
 rtk2741:哉:how:口,土,戈
 rtk2742:詢:consult with:旬,言
@@ -2796,7 +2796,7 @@ rtk2746:諒:fact:京,言
 rtk2747:讃:praise:貝,言,人,大,二,亠
 rtk2748:訊:request:ノ,言,几
 rtk2749:訣:separation:言,人,大,二,ユ
-rtk2750:詫:apologize:ノ,乙,言,宀
+rtk2750:詫:apologize:宅,言
 rtk2751:誼:friendship:一,言,目,宀
 rtk2752:謬:mistake:羽,言,个,彡
 rtk2753:訝:doubt:牙,言

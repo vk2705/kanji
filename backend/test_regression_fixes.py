@@ -2005,7 +2005,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1559": {"character": "盗", "keyword": "steal",
                 "expected_part_ids": {"rtk1555", "rtk510"}},
     "rtk1563": {"character": "濫", "keyword": "overflow",
-                "expected_part_ids": {"prim-katakana-no", "rtk137", "rtk1562"}},
+                "expected_part_ids": {"rtk137", "rtk1562"}},
     "rtk1567": {"character": "盛", "keyword": "boom",
                 "expected_part_ids": {"rtk1555", "rtk386"}},
     "rtk1574": {"character": "節", "keyword": "node",
@@ -2682,7 +2682,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk2713": {"character": "綬", "keyword": "gimp",
                "expected_part_ids": {"rtk1431", "rtk794"}},
     "rtk2714": {"character": "紗", "keyword": "gossamer",
-               "expected_part_ids": {"prim-katakana-no", "rtk1431"}},
+               "expected_part_ids": {"rtk111", "rtk1431"}},
     "rtk2730": {"character": "螺", "keyword": "screw",
                "expected_part_ids": {"rtk1464", "rtk556"}},
     "rtk2769": {"character": "躓", "keyword": "stumble",
@@ -3143,7 +3143,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk2980": {"character": "薗", "keyword": "garden",    # was 衣,口,土,囗,艾 — flattened 園's own parts instead of
                "expected_part_ids": {"prim-mugwort", "rtk629"}},  # referencing it; now 艾,園
     "rtk2434": {"character": "狒", "keyword": "baboon",     # was ｜,ノ,弓 — missing 犭 entirely, plus a botched 弗
-               "expected_part_ids": {"kangxi94", "prim-katakana-no", "prim-pipe", "rtk1317"}},
+               "expected_part_ids": {"kangxi94", "prim-dollar-sign"}},
     "rtk2994": {"character": "祓", "keyword": "exorcise",   # was ノ,一,礼,丶 — a byte-level flatten of 礼's strokes,
                "expected_part_ids": {"kangxi113", "rtk253"}},   # not a real reference; render shows 犬, not 礼-shaped
     "rtk431": {"character": "初", "keyword": "first time",  # was 刀 alone — missing 衣 (the clothing radical 衤), which

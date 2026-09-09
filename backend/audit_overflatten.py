@@ -51,6 +51,12 @@ RADICAL_VARIANTS = {
     "牜": "牛",
     "𤣩": "王",
     "灬": "灬",
+    # Stroke primitives: this project spells them with the katakana/fullwidth
+    # forms it registered long ago, cjkvi-ids with the CJK stroke codepoints.
+    "丿": "ノ",
+    "丨": "｜",
+    "乚": "乙",
+    "⺉": "刀",
 }
 
 
