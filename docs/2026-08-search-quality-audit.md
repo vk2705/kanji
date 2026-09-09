@@ -7675,3 +7675,79 @@ build clean.
 kanji-backend.service` *plus* a `sync_system_data.py` run to move `image_url`
 onto the live rows — the live DB does not re-seed. The PNGs themselves ship with
 the repo, so nothing needs uploading.
+
+## 2026-09-09 (daily check-in) — five stroke primitives, and a second opinion on "safe to drop"
+
+Continuing the registration pass, now unblocked by yesterday's picture
+mechanism: four of the five components registered here are supplementary-plane
+codepoints no common font draws, which is exactly what had kept them out.
+
+### The five
+
+Same method as the previous batch — Heisig's own name from
+`heisig-kanjis.csv`, confirmed *structurally* (every CSV kanji listing the name
+must share exactly this glyph), then rendered beside real hosts:
+
+| id | glyph | name | hosts | verified against |
+|---|---|---|---|---|
+| `prim-reclining` | 𠂉 | reclining, lying down | 13 | 毎 午 矢 |
+| `prim-scarf` | 𧘇 | scarf | 8 | 衣 表 哀 |
+| `prim-sheaf` | 㐅 | sheaf | 7 | 凶 区 刈 |
+| `prim-by-ones-side` | 𠂇 | by one's side | 6 | 左 右 友 |
+| `prim-mist` | 𠦝 | mist | 6 | 朝 幹 |
+
+Seven other high-frequency candidates were **rejected** by the same structural
+check and are deliberately left unregistered: `䒑`, `龶`, `𤰔`, `𦍌`, `乀`, `コ`,
+`𠃌`. In each case the CSV name that looked like theirs resolves to something
+else — "horns" is 丷 (kangxi12), "glue" is 寸, "sheep" is 羊 — or resolves to
+nothing single. Registering them would have meant inventing a name, which is the
+lesson this audit has had to learn twice. (`コ` is additionally cjkvi's *own*
+lookalike shorthand: katakana standing in for a rake shape.)
+
+"mist" collides with 靄 (rtk2871), a second genuine book homonym after "awl"/錐
+— harmless now that an ambiguous term returns both readings.
+
+### The bigger lever: our own tree as a second opinion
+
+With those registered the detector still found only 2 collapses, and
+`--show-skipped` said why: **496** candidates were blocked by "our token(s) are
+nowhere in the cjkvi tree" — the second-largest bucket after the 799 needing an
+unregistered component. 左 spelled `ノ,一,工` could not be collapsed to `𠂇,工`
+because cjkvi has no entry saying 𠂇 is drawn as ノ + 一; it treats 𠂇 as atomic,
+and a great deal of this project's stroke vocabulary (`ノ ｜ 一 ハ ヨ 卜 丶`)
+lives below cjkvi's atomic line.
+
+So `collapse()` now consults **our own decomposition tree** alongside cjkvi's,
+for the "is this token safe to drop" test *only*. The argument for it is narrow
+and, on inspection, strong: the target still comes wholly from cjkvi, so this
+can widen which rows get fixed but cannot turn a fix into a different answer;
+and dropping a token is safe exactly when the information survives one level
+down, which makes *our* tree — the one search actually walks — the more relevant
+authority for that question, not a weaker one.
+
+That unlocked **173 collapses**, applied and run to convergence. Sampling
+confirms they are the target bug class throughout: 波 `水,皮,又` → `水,皮`; the
+whole 且 family (組/粗/租/狙/阻/査/助/宜/姐, each `一,目` → `且`); the 尺 family
+(沢/訳/択/昼/釈/駅/呎, each `尸,丶` → `尺`); the 兼 family; the 者/署 family. A
+number also repair a *missing* component along the way — 瑳 was `ノ,工,羊`, with
+its 王 absent entirely, and becomes `差,王`.
+
+**33 regression pins rewritten**; none carried a deliberate rationale (the two
+that appeared to were trailing comments belonging to the preceding entry).
+
+Also fixed `render_glyphs.py`'s font stack, which still preferred Unifont for
+rare glyphs — a 16px bitmap face, so every Ext B/G comparison this tool produced
+was a staircase. HanaMin now sits ahead of it (but after the gothic faces, so
+common kanji keep the gothic look). The audit's own "look at it and decide" tool
+should not be showing pixel mush for precisely the glyphs hardest to judge.
+
+**Result: exact match against cjkvi top level 53.4% → 59.4%.** `mouth` 231 →
+215, `sun` 165 → 143, `soil` 141 → 136. Verified: detector 0, dead-token
+detector 0/0, 0 self-references, 1300 pins with only the 4 known hanzi-scope
+non-issues, 62 pytest.
+
+**Next**: the 799 "needs an unregistered component" bucket is now the whole
+remaining gap, and its head is the seven rejected above plus cjkvi's unencoded
+①-⑦ placeholders. Those need a source for Heisig's names that the CSV components
+column doesn't provide — the book itself, or the `tools/heisig-google-check/`
+route. Worth an owner conversation before guessing.

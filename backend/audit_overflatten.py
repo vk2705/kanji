@@ -181,7 +181,58 @@ def alias_to_char(conn):
     return mapping
 
 
-def collapse(ids, known, ch, parts, aliases=None):
+def our_descendants(own, ch, _depth=0, _seen=None):
+    """Every glyph strictly below ch in *our own* decomposition tree.
+
+    Second opinion for the "is this token safe to drop" check only — never for the
+    target, which stays cjkvi's. cjkvi stops at what it considers atomic, and a lot
+    of what this project registers is below that line: it has no entry saying 𠂇 (by
+    one's side) is drawn as ノ + 一, so 左's flattened ノ,一,工 looked like tokens
+    "nowhere in the cjkvi tree" and could not be collapsed to 𠂇,工 even though
+    Heisig's own component list says exactly that.
+
+    Dropping a token is only ever safe if the information survives one level down,
+    and *our* tree is the one search actually walks — so it is the more relevant
+    authority for that specific question, not a weaker one. The collapse target is
+    still derived wholly from cjkvi, so this can widen what gets fixed but cannot
+    change any fix into a different answer.
+    """
+    if _seen is None:
+        _seen = set()
+    if ch in _seen or _depth > 12:
+        return set()
+    _seen = _seen | {ch}
+    out = set()
+    for kid in own.get(ch, ()):
+        out.add(kid)
+        out |= our_descendants(own, kid, _depth + 1, _seen)
+    return out
+
+
+def own_decomposition_tree(conn):
+    """glyph -> set of glyphs its system decomposition lists, for our_descendants."""
+    tree = {}
+    rows = conn.execute(
+        "SELECT k.character AS host, p.part_term FROM parts p "
+        "JOIN kanji k ON k.id = p.kanji_id "
+        "JOIN decompositions d ON d.id = p.decomposition_id "
+        "WHERE d.owner_id = 1 AND k.owner_id = 1 AND k.script = 'ja-kanji' "
+        "AND k.character IS NOT NULL AND length(k.character) = 1"
+    )
+    alias_char = None
+    for host, term in rows:
+        if len(term) == 1:
+            tree.setdefault(host, set()).add(term)
+        else:
+            if alias_char is None:
+                alias_char = alias_to_char(conn)
+            glyph = alias_char.get(term)
+            if glyph:
+                tree.setdefault(host, set()).add(glyph)
+    return tree
+
+
+def collapse(ids, known, ch, parts, aliases=None, own=None):
     """Return (new_parts, note) or (None, reason).
 
     The target is cjkvi-ids' own top level, not a rewrite of our token list.
@@ -191,6 +242,7 @@ def collapse(ids, known, ch, parts, aliases=None):
     eaten as if it were 兄's internal one, silently deleting the left half.
     """
     aliases = aliases or {}
+    own = own or {}
     top = top_level(ids, ch)
     if not top:
         return None, "atomic in cjkvi-ids"
@@ -212,10 +264,10 @@ def collapse(ids, known, ch, parts, aliases=None):
     # we must not throw away on its say-so.
     below = set()
     for comp in top:
-        below |= descendants(ids, comp)
+        below |= descendants(ids, comp) | our_descendants(own, comp)
     stray = sorted(glyphs - top - below)
     if stray:
-        return None, f"our token(s) {''.join(stray)} are nowhere in the cjkvi tree"
+        return None, f"our token(s) {''.join(stray)} are nowhere in either tree"
 
     shattered = sorted(glyphs - top)
     if not shattered:
@@ -244,6 +296,7 @@ def main():
     conn = database.get_db()
     known = registered_chars(conn)
     aliases = alias_to_char(conn)
+    own = own_decomposition_tree(conn)
     rows = read_data_txt(args.data)
 
     scope = None
@@ -255,7 +308,7 @@ def main():
     for kid, (line, ch, parts) in rows.items():
         if scope is not None and kid not in scope:
             continue
-        new_parts, info = collapse(ids, known, ch, parts, aliases)
+        new_parts, info = collapse(ids, known, ch, parts, aliases, own)
         if new_parts is None:
             if info not in ("atomic in cjkvi-ids", "nothing to collapse", "no single-glyph tokens"):
                 skipped.append((kid, ch, parts, info))

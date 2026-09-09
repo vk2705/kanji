@@ -64,7 +64,15 @@ if _PW_CACHE.is_dir():
         if _bin.exists():
             CHROME_CANDIDATES.append(str(_bin))
 
-FONT_STACK = "'Noto Sans CJK JP', 'WenQuanYi Zen Hei', 'Unifont-JP', sans-serif"
+# HanaMin sits ahead of Unifont deliberately. Unifont covers almost everything, but
+# it is a 16px *bitmap* face: enlarged for comparison, a CJK Ext B/G glyph like 𠂉 or
+# 𢦏 comes out as a staircase, which is a poor basis for "look at it and decide" —
+# this tool's whole purpose. HanaMin (`apt-get install fonts-hanazono`) has real
+# outlines for Ext A–G. It is Mincho, so it stays *after* the gothic faces: common
+# kanji keep the gothic look, and only the rare glyphs those faces lack fall through
+# to it. Unifont remains the last resort for anything even HanaMin misses.
+FONT_STACK = ("'Noto Sans CJK JP', 'WenQuanYi Zen Hei', "
+              "'HanaMinA', 'HanaMinB', 'Unifont-JP', sans-serif")
 
 
 def find_chrome() -> str:
