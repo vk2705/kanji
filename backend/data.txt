@@ -394,9 +394,9 @@ rtk342:吉:good luck:口,士
 rtk343:壮:robust:士,丬
 rtk344:荘:villa:艹,壮
 rtk345:売:sell:士,儿,冖
-rtk346:学:study:子,ツ,冖
-rtk347:覚:memorize:見,ツ,冖
-rtk348:栄:flourish:ツ,木,冖
+rtk346:学:study:子,𭕄,冖
+rtk347:覚:memorize:見,𭕄,冖
+rtk348:栄:flourish:𭕄,木,冖
 rtk349:書:write:日,聿
 rtk350:津:haven:水,聿
 rtk351:牧:breed:牛,攵
@@ -605,7 +605,7 @@ rtk553:栃:horse chestnut:斤,木,厂
 rtk554:地:ground:土,也
 rtk555:池:pond:水,也
 rtk556:虫:insect:
-rtk557:蛍:lightning-bug:ツ,虫,冖
+rtk557:蛍:lightning-bug:𭕄,虫,冖
 rtk558:蛇:snake:虫,匕,宀
 rtk559:虹:rainbow:工,虫
 rtk560:蝶:butterfly:虫,木,世
@@ -972,7 +972,7 @@ rtk920:巨:gigantic:
 rtk921:拒:repel:扌,巨
 rtk922:力:power:
 rtk923:男:male:田,力
-rtk924:労:labor:ツ,力,冖
+rtk924:労:labor:𭕄,力,冖
 rtk925:募:recruit:力,莫
 rtk926:劣:inferiority:少,力
 rtk927:功:achievement:工,力
@@ -1159,7 +1159,7 @@ rtk1107:併:join:亻,并
 rtk1108:瓦:tile:一
 rtk1109:瓶:bottle:瓦,丷,二,一,ノ
 rtk1110:宮:shinto shrine:呂,宀
-rtk1111:営:camp:呂,ツ,冖
+rtk1111:営:camp:呂,𭕄,冖
 rtk1112:善:virtuous:王,口,丷,羊
 rtk1113:膳:small low table:善,月
 rtk1114:年:year:ノ,午
@@ -2125,20 +2125,20 @@ rtk2073:脹:dilate:月,長
 rtk2074:髪:hair of the head:夂,一,長,彡,髟
 rtk2075:展:unfold:｜,衣,一,二,尸
 rtk2076:喪:miss:｜,衣,一,口,亠
-rtk2077:巣:nest:ツ,果
-rtk2078:単:simple:ツ,甲,一
+rtk2077:巣:nest:𭕄,果
+rtk2078:単:simple:𭕄,甲,一
 rtk2079:戦:war:単,戈
 rtk2080:禅:zen:礻,単
 rtk2081:弾:bullet:弓,単
-rtk2082:桜:cherry:木,ツ,女
-rtk2083:獣:animal:犬,口,ツ,田
-rtk2084:脳:brain:月,ツ,凶
+rtk2082:桜:cherry:木,𭕄,女
+rtk2083:獣:animal:犬,口,𭕄,田
+rtk2084:脳:brain:月,𭕄,凶
 rtk2085:悩:trouble:忄,凶
-rtk2086:厳:stern:敢,ツ,厂
+rtk2086:厳:stern:敢,𭕄,厂
 rtk2087:鎖:chain:貝,金,尚
-rtk2088:挙:raise:手,ツ,ハ,一
-rtk2089:誉:reputation:言,ツ,ハ,一
-rtk2090:猟:game-hunting:犭,ツ,用,几
+rtk2088:挙:raise:手,𭕄,ハ,一
+rtk2089:誉:reputation:言,𭕄,ハ,一
+rtk2090:猟:game-hunting:犭,𭕄,用,几
 rtk2091:鳥:bird:灬
 rtk2092:鳴:chirp:口,鳥
 rtk2093:鶴:crane:鳥,隹,宀,冖
@@ -2962,7 +2962,7 @@ rtk2912:尖:be pointed:小,大
 rtk2913:壷:jar:｜,一,口,士,冖
 rtk2914:叡:intelligence:ハ,卜,又,目,冖
 rtk2915:酋:chieftain:酉,丷
-rtk2916:鴬:nightingale:ツ,鳥,冖
+rtk2916:鴬:nightingale:𭕄,鳥,冖
 rtk2917:赫:suddenly:赤
 rtk2918:臥:bend down:臣,人
 rtk2919:甥:nephew:生,男
@@ -3145,5 +3145,5 @@ prim-fishfinger:扁:fishfinger
 prim-muzzle:咅:muzzle
 prim-wealth:畐:wealth
 prim-half-turtle:丬:turtle
-prim-owl:ツ:owl crown,owl-head
+prim-owl:𭕄:owl crown,owl-head
 prim-parade:戊:parade
