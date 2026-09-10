@@ -20,7 +20,17 @@ function replaceLastSegment(value, suggestion) {
   return `${prefix}${suggestion}`;
 }
 
-function AliasAdder({ targetId, lang }) {
+// The autocomplete endpoint only accepts the three study-language values; a
+// script-neutral (zh-Hani) kanji maps to no filter. Keeps name suggestions on a
+// kanji's own detail page inside that kanji's script, matching how the backend
+// resolves its decomposition chips (_resolve_parts_detail's _script_group).
+function suggestScope(script) {
+  return script === "ja-kanji" || script === "zh-Hans" || script === "zh-Hant"
+    ? script
+    : null;
+}
+
+function AliasAdder({ targetId, lang, script = null }) {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
   const [added, setAdded] = useState(null);
@@ -57,6 +67,7 @@ function AliasAdder({ targetId, lang }) {
         autoFocus
         value={value}
         onChange={setValue}
+        script={suggestScope(script)}
         placeholder={t(lang, "addNamePlaceholder")}
         aria-label={t(lang, "addNamePlaceholder")}
       />
@@ -102,7 +113,7 @@ export function ImageUpload({ kanjiId, lang, onUploaded }) {
   );
 }
 
-export function DecompositionForm({ kanjiId, lang, onAdded }) {
+export function DecompositionForm({ kanjiId, lang, onAdded, script = null }) {
   const [parts, setParts] = useState("");
   const [label, setLabel] = useState("");
   const [isPublic, setIsPublic] = useState(false);
@@ -139,6 +150,7 @@ export function DecompositionForm({ kanjiId, lang, onAdded }) {
         onChange={setParts}
         getQuery={lastSegment}
         applySuggestion={replaceLastSegment}
+        script={suggestScope(script)}
         placeholder={t(lang, "decompositionPartsPlaceholder")}
         aria-label={t(lang, "decompositionPartsPlaceholder")}
       />
@@ -163,7 +175,7 @@ export function DecompositionForm({ kanjiId, lang, onAdded }) {
   );
 }
 
-function PartChip({ part, lang, user, onSelectPart }) {
+function PartChip({ part, lang, user, onSelectPart, kanjiScript = null }) {
   const [expanded, setExpanded] = useState(false);
   // sub_decompositions is a list of alternative decompositions of THIS part (e.g. a
   // system breakdown and a user's own) — usually just one, but every alternative
@@ -199,7 +211,7 @@ function PartChip({ part, lang, user, onSelectPart }) {
           <span className="part-chip-label">{part.keyword || part.id}</span>
           {part.frame && <span className="part-chip-frame">#{part.frame}</span>}
         </button>
-        {user && part.id && <AliasAdder targetId={part.id} lang={lang} />}
+        {user && part.id && <AliasAdder targetId={part.id} lang={lang} script={kanjiScript} />}
       </div>
       {hasSubParts && expanded && (
         <div className="sub-decompositions">
@@ -210,7 +222,7 @@ function PartChip({ part, lang, user, onSelectPart }) {
               )}
               <div className="parts-list sub-parts">
                 {sd.parts.map((sub, j) => (
-                  <PartChip key={j} part={sub} lang={lang} user={user} onSelectPart={onSelectPart} />
+                  <PartChip key={j} part={sub} lang={lang} user={user} onSelectPart={onSelectPart} kanjiScript={kanjiScript} />
                 ))}
               </div>
             </div>
@@ -345,7 +357,7 @@ export default function KanjiDetail({ kanjiId, onSelectPart, onBack, user, lang 
         <div className="detail-meta">
           <div className="detail-keyword">
             {kanji.keyword || kanji.id}
-            {user && <AliasAdder targetId={kanji.id} lang={lang} />}
+            {user && <AliasAdder targetId={kanji.id} lang={lang} script={kanji.script} />}
           </div>
           <div className="detail-badges">
             {kanji.frame && <span className="badge badge-frame">{t(lang, "rtkFrame", kanji.frame)}</span>}
@@ -388,7 +400,7 @@ export default function KanjiDetail({ kanjiId, onSelectPart, onBack, user, lang 
               )}
               <div className="parts-list">
                 {d.parts_detail.map((part, j) => (
-                  <PartChip key={j} part={part} lang={lang} user={user} onSelectPart={onSelectPart} />
+                  <PartChip key={j} part={part} lang={lang} user={user} onSelectPart={onSelectPart} kanjiScript={kanji.script} />
                 ))}
               </div>
               {user && (
@@ -407,7 +419,7 @@ export default function KanjiDetail({ kanjiId, onSelectPart, onBack, user, lang 
               <summary className="login-hint" style={{ cursor: "pointer" }}>
                 {t(lang, "addDecompositionHeading")}
               </summary>
-              <DecompositionForm kanjiId={kanji.id} lang={lang} onAdded={() => load()} />
+              <DecompositionForm kanjiId={kanji.id} lang={lang} onAdded={() => load()} script={kanji.script} />
             </details>
           )}
         </section>

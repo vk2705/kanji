@@ -7981,3 +7981,36 @@ no references anywhere. `sync_system_data.py` only ever *warns* about a system r
 missing from source (never auto-deletes), so `backend/delete_dead_beta_rows.py`
 is the manual counterpart — it re-checks nothing references a row before removing
 it. Backup `backups/kanji-20260910-104405.db`.
+
+## 2026-09-10 (later still) — "mo)" was a valid search, and hints ignored the study language
+
+Two owner reports.
+
+**`search "mo)"` should not succeed.** It returned 2 hanzi, both keyworded
+"molybdenum (element 42, mo)". `search_by_substring` already replaces commas with
+spaces before its `LIKE '% q %'` whole-word check, but not brackets — so
+`"...42, mo)"` became `"...42  mo) "`, and `mo)` sat between two spaces and
+matched, while `"element"` *failed* the same keyword because the `(` stayed glued
+to it. Fixed by de-bounding `( ) [ ] " “ ”` in the field the same way commas are
+already handled (nested `REPLACE()` inside the SQL). The query stays literal, so
+`"mo)"` matches nothing now (every `)` is gone from the fields) while `"mo"` still
+matches its 91 real hosts and `"element"` correctly starts matching the 167
+element keywords. Word-internal punctuation is deliberately untouched — `who?`,
+`fortune-telling`, `bull's eye`, `water’s edge`, `dr.` all still work (verified).
+`suggest_terms` got the matching guard: a comma-split piece containing a bracket
+(`"(element 42"`, `"mo)"`) is a disambiguation fragment, not a name anyone types,
+so it's dropped.
+
+**Primitive-search hints should respect the study language.** `suggest_terms` /
+`/search/suggest` took no `script`, so a user filtered to Japanese was still
+offered names that exist only on hanzi rows (e.g. typing "jiang" surfaced ten
+Chinese river/province names). Added a `script` param, threaded from the same
+study-language filter the three search endpoints already use. On the parts-search
+form it's the global `studyScript`; on a kanji's own detail page (the alias-add
+and add-decomposition inputs) it's *that kanji's* script, matching how the
+backend already scopes its decomposition-chip resolution
+(`_resolve_parts_detail`'s `_script_group`) — a `zh-Hani` script-neutral kanji
+maps to no filter (`suggestScope` in `KanjiDetail.jsx`, since `/search/suggest`
+only accepts the three study-language values).
+
+4 new pytest cases; frontend rebuilt + redeployed (`index-CITChwsA.js`).

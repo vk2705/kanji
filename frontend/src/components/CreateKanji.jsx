@@ -26,7 +26,7 @@ export default function CreateKanji({ lang, onDone }) {
         script,
         visibility: isPrivate ? "private" : "public",
       });
-      setCreated({ id: res.id, character: character.trim() });
+      setCreated({ id: res.id, character: character.trim(), script });
     } catch (err) {
       setError(err.message);
     } finally {
@@ -49,7 +49,7 @@ export default function CreateKanji({ lang, onDone }) {
 
         <section className="detail-section">
           <h3>{t(lang, "addDecompositionHeading")}</h3>
-          <DecompositionForm kanjiId={created.id} lang={lang} onAdded={() => {}} />
+          <DecompositionForm kanjiId={created.id} lang={lang} onAdded={() => {}} script={created.script} />
         </section>
 
         <button className="btn-primary" onClick={() => onDone(created.id)}>

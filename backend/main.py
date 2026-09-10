@@ -117,12 +117,15 @@ def search_text(q: str = Query(..., min_length=1), script: str | None = Query(No
 
 
 @app.get("/search/suggest")
-def search_suggest(q: str = Query(..., min_length=1), conn=Depends(db_conn)):
+def search_suggest(q: str = Query(..., min_length=1), script: str | None = Query(None),
+                   conn=Depends(db_conn)):
     """Autocomplete for the free-text primitive-name inputs (DecompositionForm's parts
-    field, alias-add inputs) — no auth required, same as the other search endpoints;
-    doesn't take viewer_id/script/sources since it only ever suggests from the shared
-    public vocabulary (see suggest_terms's docstring)."""
-    return {"suggestions": suggest_terms(conn, q)}
+    field, alias-add inputs) — no auth required, same as the other search endpoints.
+    No viewer_id/sources (always suggests from the shared public vocabulary), but does
+    take the study-language `script` so a Japanese learner isn't offered names that
+    only exist on hanzi rows (see suggest_terms's docstring)."""
+    script = _validate_script(script)
+    return {"suggestions": suggest_terms(conn, q, script=script)}
 
 
 @app.get("/search/char")

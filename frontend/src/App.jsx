@@ -341,6 +341,7 @@ export default function App() {
                         placeholder={tt("partsPlaceholder", i + 1)}
                         aria-label={tt("partsPlaceholder", i + 1)}
                         value={p}
+                        script={studyScript || null}
                         onChange={(v) => {
                           const next = [...parts];
                           next[i] = v;

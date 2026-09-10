@@ -8,9 +8,10 @@ const DEBOUNCE_MS = 200;
 // field in DecompositionForm, alias-add inputs) — see CLAUDE.md's 2026-08-14 queued
 // item. `query` is whatever substring the caller wants suggestions for (e.g. just the
 // segment currently being typed in a comma-separated field, not necessarily the whole
-// input value). A trailing-call-wins counter guards against an earlier, slower request
-// clobbering a newer result if responses arrive out of order.
-export function useSuggestions(query) {
+// input value). `script` is the active study-language filter, so suggestions stay
+// inside the vocabulary the user can actually search. A trailing-call-wins counter
+// guards against an earlier, slower request clobbering a newer result out of order.
+export function useSuggestions(query, script = null) {
   const [suggestions, setSuggestions] = useState([]);
   const latestRequestId = useRef(0);
 
@@ -23,7 +24,7 @@ export function useSuggestions(query) {
     const requestId = ++latestRequestId.current;
     const timer = setTimeout(async () => {
       try {
-        const results = await suggestTerms(trimmed);
+        const results = await suggestTerms(trimmed, script);
         if (latestRequestId.current === requestId) setSuggestions(results);
       } catch {
         // autocomplete is a convenience, not worth surfacing an error for
@@ -31,7 +32,7 @@ export function useSuggestions(query) {
       }
     }, DEBOUNCE_MS);
     return () => clearTimeout(timer);
-  }, [query]);
+  }, [query, script]);
 
   return suggestions;
 }

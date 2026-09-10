@@ -39,12 +39,15 @@ export async function searchByText(q, script = null, sources = null, signal = un
   return res.json();
 }
 
-// No credentials/signal needed — suggestions only ever come from the shared public
-// vocabulary (see backend's suggest_terms docstring), so there's nothing viewer- or
-// session-specific about the result, and typing fast enough to want request
-// cancellation is exactly what useSuggestions' debounce already prevents.
-export async function suggestTerms(q) {
-  const res = await fetch(`${BASE}/search/suggest?${new URLSearchParams({ q })}`);
+// No credentials/signal needed — suggestions come from the shared public vocabulary
+// (see backend's suggest_terms docstring), so there's nothing viewer- or session-
+// specific about the result, and typing fast enough to want request cancellation is
+// exactly what useSuggestions' debounce already prevents. `script` is the active
+// study-language filter, so a Japanese learner isn't offered hanzi-only names.
+export async function suggestTerms(q, script) {
+  const params = new URLSearchParams({ q });
+  if (script) params.set("script", script);
+  const res = await fetch(`${BASE}/search/suggest?${params}`);
   if (!res.ok) throw new Error(await extractError(res));
   return (await res.json()).suggestions;
 }

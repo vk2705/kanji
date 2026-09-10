@@ -1041,10 +1041,21 @@ def search_by_substring(conn, substring: str, viewer_id: int | None = None,
     word — not an arbitrary substring ("hat" matches "hat"/"hat trick"/"bright hat" but
     not "chatter", "what", or "hate"). Keywords/aliases can be comma-separated synonym
     lists (e.g. "hate, detest, abhor"), so commas are normalised to spaces before the
-    word-boundary check, alongside the string's own start/end. sources (a subset of
-    SOURCE_SCOPES) restricts results to kanji owned within the selected contributor
-    scope(s), regardless of whether the match itself came from the id/keyword or an
-    alias — the alias's own owner isn't considered separately."""
+    word-boundary check, alongside the string's own start/end.
+
+    Bracketing punctuation — ( ) [ ] and double quotes — is normalised to spaces too,
+    so it acts as a word boundary rather than clinging to the token beside it. Without
+    this, a keyword like "molybdenum (element 42, mo)" makes a search for the junk
+    string "mo)" succeed (it sits between two spaces once the comma is replaced), while
+    "element" fails (the "(" clings to it). Word-internal punctuation that is part of
+    the actual term — the hyphen in "fortune-telling", the apostrophe in "bull's eye"
+    and "water’s edge", the "?" in "who?", the "." in "dr." — is deliberately left
+    alone. The query is matched literally, so "mo)" no longer matches anything (the
+    ")" is gone from every field) while a real word like "mo" still does.
+
+    sources (a subset of SOURCE_SCOPES) restricts results to kanji owned within the
+    selected contributor scope(s), regardless of whether the match itself came from the
+    id/keyword or an alias — the alias's own owner isn't considered separately."""
     sub = substring.strip().lower()
     word = f"% {sub} %"
     script_scope = SCRIPT_VISIBILITY.get(script) if script else None
@@ -1055,9 +1066,17 @@ def search_by_substring(conn, substring: str, viewer_id: int | None = None,
         script_params = list(script_scope)
     source_sql, source_params = _source_scope_sql("k.", sources, viewer_id)
     source_cond = f" AND {source_sql}" if source_sql else ""
+
+    # Characters that must not glue to an adjacent word for the whole-word match.
+    # Nested REPLACE()s rather than a helper because this has to run inside SQLite.
+    def _debound(expr: str) -> str:
+        for ch in (",", "(", ")", "[", "]", "“", "”", '"'):
+            expr = f"REPLACE({expr}, '{ch}', ' ')"
+        return expr
+
     id_bounded = "(' ' || k.id || ' ')"
-    keyword_bounded = "(' ' || REPLACE(k.keyword, ',', ' ') || ' ')"
-    alias_bounded = "(' ' || REPLACE(a.alias, ',', ' ') || ' ')"
+    keyword_bounded = f"(' ' || {_debound('k.keyword')} || ' ')"
+    alias_bounded = f"(' ' || {_debound('a.alias')} || ' ')"
     rows = conn.execute(
         f"""
         SELECT DISTINCT k.id, k.character, k.keyword, k.frame, k.stroke_count, k.jlpt, k.image_url
@@ -1078,7 +1097,7 @@ def search_by_substring(conn, substring: str, viewer_id: int | None = None,
     return _rows_to_dicts(conn, rows, viewer_id)
 
 
-def suggest_terms(conn, q: str, limit: int = 10) -> list[str]:
+def suggest_terms(conn, q: str, limit: int = 10, script: str | None = None) -> list[str]:
     """Autocomplete suggestions for the free-text primitive-name inputs (the parts
     field in DecompositionForm, alias-add inputs) — see CLAUDE.md's 2026-08-14 queued
     item. Unlike search_by_substring (whole-word, for final search precision), this
@@ -1088,27 +1107,46 @@ def suggest_terms(conn, q: str, limit: int = 10) -> list[str]:
     suggestion for everyone else typing into the same bounded vocabulary. Keywords and
     aliases can themselves be comma-separated synonym lists, so each is split into
     individual names before matching/returning. Prefix matches sort before mid-word
-    matches, then alphabetically; deduplicated."""
+    matches, then alphabetically; deduplicated.
+
+    `script` (one of SCRIPT_VISIBILITY's keys) restricts suggestions to names attached
+    to kanji in that script group — so a user studying Japanese isn't offered a
+    primitive name that only exists on a hanzi row they can't search. Passed straight
+    through from the study-language filter; None = suggest from every script."""
     q = q.strip().lower()
     if not q:
         return []
     like = f"%{q}%"
+    script_scope = SCRIPT_VISIBILITY.get(script) if script else None
+    script_cond = ""
+    script_params: list[str] = []
+    if script_scope:
+        ph = ",".join("?" * len(script_scope))
+        script_cond = f" AND k.script IN ({ph})"
+        script_params = list(script_scope)
     rows = conn.execute(
-        """
+        f"""
         SELECT term FROM (
-            SELECT keyword AS term FROM kanji WHERE visibility = 'public'
+            SELECT k.keyword AS term FROM kanji k
+            WHERE k.visibility = 'public'{script_cond}
             UNION
-            SELECT alias AS term FROM aliases WHERE visibility = 'public'
+            SELECT a.alias AS term FROM aliases a
+            JOIN kanji k ON k.id = a.kanji_id
+            WHERE a.visibility = 'public'{script_cond}
         )
         WHERE LOWER(term) LIKE ?
         """,
-        (like,)
+        (*script_params, *script_params, like)
     ).fetchall()
     candidates = set()
     for r in rows:
         for piece in r["term"].split(","):
             piece = piece.strip()
-            if piece and q in piece.lower():
+            # A piece carrying a bracket is a disambiguation fragment, not a name a
+            # user would ever type as a primitive ("(element 42, mo)" splits to the
+            # junk "(element 42" and "mo)"). Same reasoning as search_by_substring's
+            # de-bounding — offer only pieces that read as a real term.
+            if piece and q in piece.lower() and not any(c in piece for c in "()[]"):
                 candidates.add(piece)
 
     def sort_key(term: str):

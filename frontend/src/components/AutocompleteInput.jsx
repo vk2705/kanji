@@ -15,6 +15,7 @@ export default function AutocompleteInput({
   onChange,
   getQuery = (v) => v,
   applySuggestion = (_v, suggestion) => suggestion,
+  script = null,
   inputRef: externalRef,
   ...inputProps
 }) {
@@ -23,7 +24,7 @@ export default function AutocompleteInput({
   const wrapRef = useRef(null);
   const ownInputRef = useRef(null);
   const inputRef = externalRef ?? ownInputRef;
-  const suggestions = useSuggestions(open ? getQuery(value) : "");
+  const suggestions = useSuggestions(open ? getQuery(value) : "", script);
 
   useEffect(() => {
     setActiveIndex(-1);

@@ -297,3 +297,48 @@ def test_suggest_excludes_private_terms(conn, client):
 def test_suggest_requires_nonempty_query(conn, client):
     r = client.get("/search/suggest", params={"q": ""})
     assert r.status_code == 422
+
+
+def test_text_search_treats_brackets_as_word_boundary(conn, client):
+    """A keyword like "molybdenum (element 42, mo)" must not let the junk string "mo)"
+    match: the ")" is normalised to a space, same as the comma, so it can't cling to
+    the token. A real word inside the parens ("element") does match; word-internal
+    punctuation ("who?", "fortune-telling") is untouched."""
+    _seed_kanji(conn, "k_mo", "鉬", "molybdenum (element 42, mo)")
+    _seed_kanji(conn, "k_who", "誰", "who?")
+    conn.commit()
+
+    assert client.get("/search/text", params={"q": "mo)"}).json()["results"] == []
+    assert client.get("/search/text", params={"q": "mo("}).json()["results"] == []
+    assert {r["id"] for r in client.get("/search/text", params={"q": "element"}).json()["results"]} == {"k_mo"}
+    assert {r["id"] for r in client.get("/search/text", params={"q": "mo"}).json()["results"]} == {"k_mo"}
+    assert {r["id"] for r in client.get("/search/text", params={"q": "who?"}).json()["results"]} == {"k_who"}
+
+
+def test_suggest_skips_bracketed_fragments(conn, client):
+    """Splitting "molybdenum (element 42, mo)" on commas yields the junk pieces
+    "(element 42" and "mo)" -- neither is a name a user would type, so a piece with a
+    bracket in it is dropped."""
+    _seed_kanji(conn, "k_mo", "鉬", "molybdenum (element 42, mo)")
+    conn.commit()
+    assert client.get("/search/suggest", params={"q": "mo)"}).json()["suggestions"] == []
+    assert "(element 42" not in client.get("/search/suggest", params={"q": "element"}).json()["suggestions"]
+
+
+def test_suggest_restricted_to_study_script(conn, client):
+    """A name attached only to a hanzi row isn't offered to someone whose study-language
+    filter is set to Japanese."""
+    _seed_kanji(conn, "k_zh", "潖", "pa river (in guangdong)", script="zh-Hans")
+    _seed_alias(conn, "k_zh", "pariver")
+    _seed_kanji(conn, "k_ja", "川", "pariver stream", script="ja-kanji")
+    conn.commit()
+
+    assert "pariver" in client.get("/search/suggest", params={"q": "pariver"}).json()["suggestions"]
+    ja = client.get("/search/suggest", params={"q": "pariver", "script": "ja-kanji"}).json()["suggestions"]
+    assert "pariver" not in ja and "pariver stream" in ja
+    zh = client.get("/search/suggest", params={"q": "pariver", "script": "zh-Hans"}).json()["suggestions"]
+    assert "pariver" in zh
+
+
+def test_suggest_rejects_invalid_script(conn, client):
+    assert client.get("/search/suggest", params={"q": "mo", "script": "klingon"}).status_code == 400
