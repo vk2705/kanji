@@ -7956,3 +7956,28 @@ rtk2378); rtk2828/rtk549 from the approved batch were already pinned.
 commits `99d57b3..232de2a` (autocomplete wired into parts search, 5 stroke
 primitives, 5 primitive images, WAL sidecars untracked). All then re-synced
 together with the fixes above.
+
+### 2026-09-10 (follow-up) — "beta" now searches both 阝 at once
+
+Owner: *"when I look for 'beta', I get all results together, as if it was left
+beta or right beta — can we add such an alias that won't disturb other search
+results?"*
+
+It already works, once the alias exists on both rows. `search_by_parts` runs
+every term through `get_all_aliases_for_term`, which unions **every** meaning of
+an ambiguous word (built 2026-09-09 for "owl" = 梟 the bird + 𭕄 the crown). So
+adding `beta` as an alias on `kangxi163` (it was only on `kangxi170`) makes a
+parts search for "beta" return both sides' hosts together — 38 (left) + 17
+(right) = 55 — while "pinnacle" still returns only left and "walls" only right.
+Nothing else moves: the synonym-safety guard drops `city walls` from the
+expansion because it also names 邑 (rtk2296), so no unrelated kanji leak in. Text
+search for "beta" already matched both by keyword.
+
+Also deleted two dead rows that had been polluting the *text* search for "beta":
+`rad3.39` ("rightside beta", glyph `?`) and `rad3.40` ("leftside beta", glyph
+`阝`) — KRADFILE-era placeholders the `kangxi{n}` migration superseded with new
+ids instead of renaming, leaving them with zero aliases, zero decompositions, and
+no references anywhere. `sync_system_data.py` only ever *warns* about a system row
+missing from source (never auto-deletes), so `backend/delete_dead_beta_rows.py`
+is the manual counterpart — it re-checks nothing references a row before removing
+it. Backup `backups/kanji-20260910-104405.db`.

@@ -22,7 +22,7 @@ kangxi55:廾:two hands
 kangxi58:彑:pig's head,Radical 58,pig snout,mutual difficulties,two walls
 kangxi64:扌:finger
 kangxi170:阝:pinnacle,leftside beta,beta
-kangxi163:⻏:walls,city walls,rightside beta,ozato
+kangxi163:⻏:walls,city walls,rightside beta,ozato,beta
 prim-winter-cow:㐄:winter cow
 
 kangxi61:忄:heart,valentine,state of mind
