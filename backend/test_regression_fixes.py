@@ -473,8 +473,8 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk2112", "rtk87"}},
     "rtk2282": {"character": "噂", "keyword": "rumor",
                 "expected_part_ids": {"rtk11", "rtk1547"}},
-    "rtk2503": {"character": "鄭", "keyword": "an ancient chinese province",
-                "expected_part_ids": {"rtk2915", "rtk112", "kangxi170"}},
+    # rtk2503 (鄭) moved to the 2026-09-10 dispute block at the end of this dict —
+    # its 阝 is right-side (ozato), corrected from kangxi170 to kangxi163.
     "rtk2911": {"character": "叛", "keyword": "disobey",
                 "expected_part_ids": {"rtk1286", "rtk779"}},
     "rtk473": {"character": "適", "keyword": "suitable",
@@ -1295,8 +1295,8 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk161", "rtk1905"}},
     "rtk1951": {"character": "悪", "keyword": "bad",
                 "expected_part_ids": {"rtk1950", "rtk639"}},
-    "rtk1990": {"character": "郵", "keyword": "mail",
-                "expected_part_ids": {"rtk1705", "rtk1991"}},
+    "rtk1990": {"character": "郵", "keyword": "mail",  # 邦→⻏ 2026-09-10 (right-side 阝, see the block above rtk1986)
+                "expected_part_ids": {"rtk1705", "kangxi163"}},
     "rtk1996": {"character": "廊", "keyword": "corridor",
                 "expected_part_ids": {"kangxi53", "rtk1995"}},
     "rtk1998": {"character": "循", "keyword": "sequential",
@@ -1750,8 +1750,11 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"kangxi66", "rtk497"}},
     "rtk499": {"character": "梅", "keyword": "plum",
                 "expected_part_ids": {"rtk207", "rtk497"}},
+    # 2026-09-10 (dispute review): was 丁,欠,口 (rtk11/rtk505/rtk95) — dropped one
+    # full 可. 歌 = 哥 + 欠, 哥 = 可 + 可 (Heisig's "canned music": two cans + a yawn).
+    # Now 可,可,欠 → resolves to {rtk97, rtk505}, 可 listed twice.
     "rtk508": {"character": "歌", "keyword": "song",
-                "expected_part_ids": {"rtk11", "rtk505", "rtk95"}},
+                "expected_part_ids": {"rtk97", "rtk505"}},
     "rtk513": {"character": "姿", "keyword": "figure",
                 "expected_part_ids": {"rtk102", "rtk510"}},
     "rtk514": {"character": "諮", "keyword": "consult with",
@@ -2083,12 +2086,18 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk15", "rtk1976"}},
     "rtk1982": {"character": "舗", "keyword": "shop",
                 "expected_part_ids": {"kangxi3", "rtk10", "rtk1265", "rtk338"}},
+    # 2026-09-10 (dispute review): the right-side 阝 (ozato, Kangxi 163, "walls")
+    # was proxied by the whole kanji 邦(rtk1991, "home country" = 丰+阝) across 15
+    # kanji — same KRADFILE-substitution class as 扎→扌 and 阡→阝(left). data.txt
+    # only had the LEFT-side 阝 (kangxi170, "pinnacle"); added kangxi163 with glyph
+    # ⻏ (U+2ECF, CJK RADICAL CITY — a distinct codepoint so a literal 阝 doesn't
+    # resolve ambiguously) + a rendered image, and bulk-replaced 邦→⻏ in all 15.
     "rtk1986": {"character": "郡", "keyword": "county",
-                "expected_part_ids": {"rtk1246", "rtk1991"}},
+                "expected_part_ids": {"rtk1246", "kangxi163"}},
     "rtk1987": {"character": "郊", "keyword": "outskirts",
-                "expected_part_ids": {"rtk1368", "rtk1991"}},
+                "expected_part_ids": {"rtk1368", "kangxi163"}},
     "rtk1989": {"character": "都", "keyword": "metropolis",
-                "expected_part_ids": {"rtk1345", "rtk1991"}},
+                "expected_part_ids": {"rtk1345", "kangxi163"}},
     "rtk2018": {"character": "搬", "keyword": "conveyor",
                 "expected_part_ids": {"kangxi64", "rtk2016"}},
     "rtk2020": {"character": "艦", "keyword": "warship",
@@ -2227,8 +2236,11 @@ EXPECTED_DECOMPOSITIONS = {
     # That wrong 衣 had been redundantly copy-pasted into all 9 hosts
     # alongside a correct reference to 辰 itself -- dropped 衣 (and 厂, also
     # redundant once 辰 is referenced directly) from all of them.
+    # 2026-09-10: 邦's own 阝 is right-side (ozato), not left — the earlier fix
+    # (2026-09-05) picked kangxi170 only because kangxi163 didn't exist yet. Now
+    # 丰,⻏ → {prim-bushes, kangxi163}.
     "rtk1991": {"character": "邦", "keyword": "home country",
-               "expected_part_ids": {"kangxi170", "prim-bushes"}},
+               "expected_part_ids": {"kangxi163", "prim-bushes"}},
     "rtk2164": {"character": "辰", "keyword": "sign of the dragon",
                "expected_part_ids": {"kangxi27", "rtk2"}},
     "rtk2165": {"character": "辱", "keyword": "embarrass",
@@ -3150,8 +3162,8 @@ EXPECTED_DECOMPOSITIONS = {
     # from the shallow single-level parts_detail check and were left alone).
     "rtk150": {"character": "汁", "keyword": "soup",       # was 十 alone — missing 水 (soup is water + ten)
                "expected_part_ids": {"rtk10", "rtk137"}},
-    "rtk2720": {"character": "耶", "keyword": "question mark",  # was 耳,邦 — 邦("home country") is a semantically-bogus
-               "expected_part_ids": {"kangxi170", "rtk881"}},   # whole-kanji stand-in for a bare 阝; now 耳,阝 directly
+    "rtk2720": {"character": "耶", "keyword": "question mark",  # was 耳,邦 — 邦 is a bogus whole-kanji stand-in for a bare
+               "expected_part_ids": {"kangxi163", "rtk881"}},   # 阝; corrected to right-side ⻏ (kangxi163) 2026-09-10
     "rtk2980": {"character": "薗", "keyword": "garden",    # was 衣,口,土,囗,艾 — flattened 園's own parts instead of
                "expected_part_ids": {"prim-mugwort", "rtk629"}},  # referencing it; now 艾,園
     "rtk2434": {"character": "狒", "keyword": "baboon",     # was ｜,ノ,弓 — missing 犭 entirely, plus a botched 弗
@@ -3427,6 +3439,21 @@ EXPECTED_DECOMPOSITIONS = {
                                                                      # 木 + 卆(=九,十). Closed the last multi-char
                                                                      # gap in the same check -- 0 undefined terms
                                                                      # dataset-wide as of 2026-09-05.
+
+    # 2026-09-10 — decomposition-review-queue disputes (vitaly.kroivets), each
+    # render-verified against heisig-kanjis.csv's components column:
+    "rtk1775": {"character": "衛", "keyword": "defense",  # was 口,行,彳,韋 — 行 and 彳 double-counted (彳 is 行's
+               "expected_part_ids": {"kangxi178", "rtk938"}},  # left half); 口 comes from 韋. Now 行,韋.
+    "rtk2966": {"character": "迦", "keyword": "sanskrit ka",  # was 口,込,力 — 込(=辶+入) injected a phantom 入.
+               "expected_part_ids": {"kangxi162", "rtk932"}},  # 迦 = 辶 + 加. Now 辶,加.
+    "rtk2009": {"character": "詞", "keyword": "parts of speech",  # was 司,言 in that order — parts right, layout
+               "expected_part_ids": {"rtk357", "rtk2007"}},  # reversed (言 left, 司 right). Now 言,司.
+    "rtk2503": {"character": "鄭", "keyword": "courtesy",  # right-side 阝 (ozato) was literal 阝 → left-side
+               "expected_part_ids": {"kangxi163", "rtk112", "rtk2915"}},  # kangxi170; corrected to ⻏/kangxi163.
+    # 2026-09-10 — one more approved decomposition from the same review batch
+    # (鰯/rtk2828 and 燃/rtk549 were already pinned earlier in this dict):
+    "rtk2378": {"character": "惇", "keyword": "considerate",
+               "expected_part_ids": {"kangxi61", "rtk330"}},  # 忄("state of mind") + 享
 }
 
 # character -> hanzi id, spot-checking the 429-character Unihan self-reference backfill

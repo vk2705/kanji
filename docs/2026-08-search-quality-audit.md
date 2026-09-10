@@ -7871,3 +7871,88 @@ hanzi-scope non-issues, 62 pytest.
 same method applies and needs no new source, just more batches with a render
 check each. The genuinely blocked remainder is cjkvi's unencoded ①-⑦ placeholders
 and components like ⺼/𠮛/乀/𠄌 that need their own registration first.
+
+## 2026-09-10 (later) — decomposition-review-queue disputes, and the right-side 阝
+
+Cleared the review queue (`review_queue.py`): 10 pending, 7 disputed + 3
+approved, all filed by the owner from the detail-page approve/dispute buttons.
+Every one render-verified against `heisig-kanjis.csv`'s components column per
+the standing "render it, don't just reason about it" rule.
+
+### The 3 approved — pinned as-is
+
+鰯 (sardine) = 魚 + 弱, 惇 (considerate) = 忄 + 享, 燃 (burn) = 火 + 然. All
+correct; added to `test_regression_fixes.py`.
+
+### 2 disputes NOT upheld
+
+- **割 (proportion)** `刀,害` — 割 = 害 + 刂(sword). Correct as taught; 刀→刂 is
+  Heisig's own primitive. Left alone.
+- **鯛 (sea bream)** `周,魚` — 鯛 = 魚 + 周. Correct. Left alone.
+
+### 4 individual fixes
+
+- **歌 (song)** was `丁,欠,口` — dropped a whole 可. 歌 = 哥 + 欠, and 哥 = 可 + 可
+  (Heisig's "canned music": two cans and a yawn). CSV: "can; ... mouth; street;
+  ... lack". `可` already exists as `rtk97` (= 丁 + 口). Now `可,可,欠`.
+- **衛 (defense)** was `口,行,彳,韋` — `行` and `彳` were double-counted (彳 is
+  the left half of 行, which wraps 韋), and `口` is already inside 韋. CSV:
+  "defence; boulevard; going; ... mouth". Now `行,韋`.
+- **迦 (sanskrit ka)** was `口,込,力` — `込` (= 辶 + 入) injected a phantom 入 that
+  isn't in 迦. 迦 = 辶 + 加. Now `辶,加` (加 = `rtk932`, itself 口 + 力).
+- **詞 (parts of speech)** was `司,言` — parts right, order wrong: the glyph is
+  言 (left) + 司 (right). Now `言,司`.
+
+### The big one: right-side 阝 (ozato) had no entry — 15 kanji proxied it with 邦
+
+`data.txt` had exactly one 阝 primitive: `kangxi170`, glyph `阝` (U+961D),
+keyword — after this session — "pinnacle", the **left-side** mound/hill radical
+(阜). The **right-side** 阝 (ozato, from 邑 "city", Kangxi radical 163, Heisig
+"walls" / CSV "city walls") had no entry at all. So 15 kanji whose right
+element is a bare 阝 listed the whole kanji **邦** ("home country" = 丰 + 阝)
+as a stand-in: 邸 郭 郡 郊 部 都 郵 那 郷 郎 邪 爺 椰 (via 耶) 鄭, plus 邦 itself
+and 耶 which had used the *left* `阝`/`kangxi170` because that was the only
+option. Same KRADFILE-substitution class as `扎`→`扌` (114 kanji, 2026-08-22)
+and `阡`→`阝`-left (40 kanji): a real unrelated kanji standing in for a
+radical that lacked its own registered primitive.
+
+CSV's components column confirms "city walls" for the 阝 in every one of these
+that carries components (14 of them do), and `data_from_pdf.txt` — extracted
+from Heisig's own PDF — consistently names left-阝 "pinnacle" (障/陽/降/陸/…)
+and right-阝 "city walls" (邸: `bushes,city walls`). The earlier fixes that
+picked `kangxi170` for 邦/耶 (2026-09-05) did so only because `kangxi163`
+didn't exist yet.
+
+**Fix:**
+
+- New `data.txt` entry `kangxi163:⻏:walls,city walls,rightside beta,ozato`.
+  Glyph is **U+2ECF ⻏ (CJK RADICAL CITY)**, not U+961D — a distinct codepoint,
+  so a literal `阝` in a decomposition still resolves unambiguously to the
+  left-side `kangxi170` and there's no `resolve_alias` tie. U+2ECF renders as
+  "阝" in most fonts but the CJK Radicals Supplement block is patchy on Android
+  (same reason Ext A gets images), so `kangxi163` also gets a rendered
+  `primitive_images/kangxi163.png` — added a `FORCE_IMAGE` set to
+  `make_primitive_images.py` for codepoints that need a picture for
+  disambiguation rather than for being unrenderable, and an `overflow: hidden`
+  to its render page (U+2ECF's metrics overflowed the em box and Chromium drew
+  scrollbars into the screenshot).
+- `kangxi170` line: dropped the "city walls" alias it wrongly carried, keyword
+  is now "pinnacle" (was "leftside beta").
+- Bulk-replaced `邦`/`阝`→`⻏` in all 15 right-side hosts + 耶.
+
+`sync_system_data.py`: 1 kanji inserted (`kangxi163`), 1 updated (`kangxi170`
+keyword), 6 aliases added / 1 removed, 57 decompositions replaced. Backed up to
+`kanji.db.bak-20260910-*`.
+
+**Regression pins:** rewrote 7 that used `rtk1991`(邦)/`kangxi170` for a
+right-side 阝 (rtk508, rtk1986, rtk1987, rtk1989, rtk1990, rtk1991, rtk2720),
+plus rtk2503 which had a stale duplicate entry (one `kangxi170`, one added here)
+collapsed to a single `kangxi163` pin. Added 4 new (rtk1775, rtk2966, rtk2009,
+rtk2378); rtk2828/rtk549 from the approved batch were already pinned.
+
+**Deployment:** this session also did the routine pull + `sync_system_data.py`
++ frontend rebuild (node-20 via `node_modules/vite/bin/vite.js` directly — the
+`npm` wrapper still spawns the box's node-18) + `kanji-backend` restart for
+commits `99d57b3..232de2a` (autocomplete wired into parts search, 5 stroke
+primitives, 5 primitive images, WAL sidecars untracked). All then re-synced
+together with the fixes above.

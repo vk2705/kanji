@@ -21,7 +21,8 @@ kangxi47:巛:curving river,Radical 47,flood,river
 kangxi55:廾:two hands
 kangxi58:彑:pig's head,Radical 58,pig snout,mutual difficulties,two walls
 kangxi64:扌:finger
-kangxi170:阝:leftside beta,beta,pinnacle,city walls
+kangxi170:阝:pinnacle,leftside beta,beta
+kangxi163:⻏:walls,city walls,rightside beta,ozato
 prim-winter-cow:㐄:winter cow
 
 kangxi61:忄:heart,valentine,state of mind
@@ -556,7 +557,7 @@ rtk504:複:duplicate:初,日,夂
 rtk505:欠:lack:
 rtk506:吹:blow:欠,口
 rtk507:炊:cook:火,欠
-rtk508:歌:song:丁,欠,口
+rtk508:歌:song:可,可,欠
 rtk509:軟:soft:欠,車
 rtk510:次:next:欠,冫
 rtk511:茨:briar:艹,次
@@ -1823,7 +1824,7 @@ rtk1771:快:cheerful:人,大,二,state of mind,ユ
 rtk1772:偉:admirable:亻,韋
 rtk1773:違:difference:辶,韋
 rtk1774:緯:horizontal:糸,韋
-rtk1775:衛:defense:口,行,彳,韋
+rtk1775:衛:defense:行,韋
 rtk1776:韓:korea:韋,𠦝
 rtk1777:干:dry:十,一
 rtk1778:肝:liver:干,月
@@ -2032,18 +2033,18 @@ rtk1980:浦:bay:十,水,用,丶
 rtk1981:蒲:bullrush:浦,艹
 rtk1982:舗:shop:舎,十,用,丶
 rtk1983:補:supplement:十,初,用,丶
-rtk1984:邸:residence:氏,邦
-rtk1985:郭:enclosure:口,邦,亅,亠,子
-rtk1986:郡:county:君,邦
-rtk1987:郊:outskirts:交,邦
-rtk1988:部:section:口,邦,立
-rtk1989:都:metropolis:者,邦
-rtk1990:郵:mail:垂,邦
-rtk1991:邦:home country:丰,阝
-rtk1992:那:what?:刀,邦,二
-rtk1993:郷:home town:艮,邦,幺
+rtk1984:邸:residence:氏,⻏
+rtk1985:郭:enclosure:口,⻏,亅,亠,子
+rtk1986:郡:county:君,⻏
+rtk1987:郊:outskirts:交,⻏
+rtk1988:部:section:口,⻏,立
+rtk1989:都:metropolis:者,⻏
+rtk1990:郵:mail:垂,⻏
+rtk1991:邦:home country:丰,⻏
+rtk1992:那:what?:刀,⻏,二
+rtk1993:郷:home town:艮,⻏,幺
 rtk1994:響:echo:郷,音
-rtk1995:郎:son:艮,邦
+rtk1995:郎:son:艮,⻏
 rtk1996:廊:corridor:郎,广
 rtk1997:盾:shield:斤,十,目,厂
 rtk1998:循:sequential:盾,彳
@@ -2057,7 +2058,7 @@ rtk2005:后:empress:ノ,一,斤,口,亅,厂
 rtk2006:幻:phantasm:幺
 rtk2007:司:director:一,口,亅
 rtk2008:伺:pay respects:亻,司
-rtk2009:詞:part of speech:司,言
+rtk2009:詞:part of speech:言,司
 rtk2010:飼:domesticate:口,艮,亅,个,食
 rtk2011:嗣:heir:｜,司,冂
 rtk2012:舟:boat:
@@ -2103,7 +2104,7 @@ rtk2051:函:box (archaic):一,水,凵
 rtk2052:極:extreme:口,又,木,一
 rtk2053:牙:tusk:
 rtk2054:芽:bud:牙,艹
-rtk2055:邪:wicked:牙,邦
+rtk2055:邪:wicked:牙,⻏
 rtk2056:雅:gracious:牙,隹
 rtk2057:釈:explanation:尺,釆
 rtk2058:番:turn:田,釆
@@ -2470,7 +2471,7 @@ rtk2419:濡:get wet:水,需
 rtk2420:淀:pool:定,水
 rtk2421:涅:black soil:水,土,日
 rtk2422:斧:ax:斤,父
-rtk2423:爺:old man:耳,父,邦
+rtk2423:爺:old man:耳,父,⻏
 rtk2424:猾:crafty:犭,骨
 rtk2425:猥:obscene:犭,畏
 rtk2426:狡:cunning:犭,交
@@ -2550,7 +2551,7 @@ rtk2499:遼:distant:尞,辶
 rtk2500:逼:urge:畐,辶
 rtk2501:迄:until:乞,辶
 rtk2502:逗:stop:辶,豆
-rtk2503:鄭:an ancient chinese province:酋,大,阝
+rtk2503:鄭:an ancient chinese province:酋,大,⻏
 rtk2504:隕:fall:員,阝
 rtk2505:隈:corner:阝,畏
 rtk2506:憑:depend:心,馬,冫
@@ -2631,7 +2632,7 @@ rtk2580:樋:water pipe:木,通
 rtk2581:橇:sled:毛,木
 rtk2582:槃:tub:木,般
 rtk2583:栞:bookmark:干,木
-rtk2584:椰:coconut tree:耳,邦,木
+rtk2584:椰:coconut tree:耳,⻏,木
 rtk2585:檀:cedar:一,口,日,木,亠
 rtk2586:樗:japanese bead tree:雨,木,二,勹
 rtk2587:槻:zelkova tree:木,規
@@ -2766,7 +2767,7 @@ rtk2716:聯:party:耳,幺
 rtk2717:聡:wise:耳,心,八,厶
 rtk2718:聘:invite:｜,耳,日,一,勹
 rtk2719:耽:addicted:耳,尢,冖
-rtk2720:耶:question mark:耳,阝
+rtk2720:耶:question mark:耳,⻏
 rtk2721:蚤:flea:叉,虫
 rtk2722:蟹:crab:虫,解
 rtk2723:蛋:barbarian:虫,疋
@@ -3012,7 +3013,7 @@ rtk2962:薩:salvation:艹,阝,産
 rtk2963:菩:kind of grass:咅,艹
 rtk2964:唖:mute:亜,口
 rtk2965:牟:pupil (eye):牛,厶
-rtk2966:迦:(used phonetically):加,辶
+rtk2966:迦:(used phonetically):辶,加
 rtk2967:珈:ornamental hairpin:加,王
 rtk2968:琲:string of many pearls:王,非
 rtk2969:檜:japanese cypress:日,木,个,一

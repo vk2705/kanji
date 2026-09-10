@@ -67,6 +67,15 @@ UNRENDERABLE_RANGES = (
     (0x20000, 0x3FFFF),    # CJK Ext B and beyond — effectively absent everywhere
 )
 
+# Individual codepoints outside those ranges that still need a picture. Not a
+# rendering problem — a *disambiguation* one. `kangxi170` (left-side 阝, "pinnacle")
+# and `kangxi163` (right-side 阝, "walls") are the same shape and, in most fonts,
+# the same glyph at U+961D; giving them one codepoint each would make a literal `阝`
+# in a decomposition resolve ambiguously. So `kangxi163` gets U+2ECF (⻏, CJK RADICAL
+# CITY) — a distinct codepoint that resolves cleanly — and an image, because the CJK
+# Radicals Supplement block is itself patchy on Android (same reason Ext A is above).
+FORCE_IMAGE = frozenset({0x2ECF})
+
 # Mincho, to match App.css's glyph surfaces. HanaMinA covers the BMP extensions,
 # HanaMinB the supplementary planes; listing both lets fontconfig pick per glyph.
 FONT_STACK = "'HanaMinA', 'HanaMinB', 'Noto Serif CJK JP', serif"
@@ -86,6 +95,8 @@ def needs_image(character: str | None) -> bool:
     if not character or len(character) != 1:
         return False
     cp = ord(character)
+    if cp in FORCE_IMAGE:
+        return True
     return any(lo <= cp <= hi for lo, hi in UNRENDERABLE_RANGES)
 
 
@@ -103,7 +114,7 @@ def _page(character: str) -> str:
     return f"""<!DOCTYPE html>
 <html><head><meta charset="utf-8">
 <style>
-  html, body {{ margin: 0; padding: 0; background: transparent; }}
+  html, body {{ margin: 0; padding: 0; background: transparent; overflow: hidden; }}
   .glyph {{
     width: {CANVAS}px; height: {CANVAS}px;
     font-family: {FONT_STACK};
