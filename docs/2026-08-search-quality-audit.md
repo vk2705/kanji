@@ -7751,3 +7751,37 @@ remaining gap, and its head is the seven rejected above plus cjkvi's unencoded
 ①-⑦ placeholders. Those need a source for Heisig's names that the CSV components
 column doesn't provide — the book itself, or the `tools/heisig-google-check/`
 route. Worth an owner conversation before guessing.
+
+## 2026-09-10 — autocomplete was missing from the one input that matters most
+
+Owner report: *"я проверил, подсказки при поиске частей не всплывают. ни в вебе
+ни в приложении"* — no suggestions when searching by parts, in either the web
+app or the Android one.
+
+Not a backend fault: `/search/suggest` answers correctly (`mou` → mould, mount,
+mouse, mouth, mountain, …). The autocomplete built on 2026-09-04 was simply
+never wired into the **parts-search form**. `AutocompleteInput` had exactly two
+callers, both inside `KanjiDetail.jsx` — the alias-add field and
+`DecompositionForm`'s parts field. `App.jsx`'s three search fields, which are
+the primary place anyone types a primitive name in this app, stayed plain
+`<input>`s. Both surfaces the owner tried are the same React build, so one fix
+covers them.
+
+The component's defaults (`getQuery = v => v`, `applySuggestion = (_, s) => s`)
+already suit a whole-value field, so the swap needed no new props — only a CSS
+change: `.parts-inputs` sizes its flex children, and the flex child is now the
+`.autocomplete-wrap` wrapper rather than the `<input>`, so `flex: 1;
+min-width: 120px` had to apply to the wrapper or the fields collapse to content
+width.
+
+Verified by driving the real page in a headless browser, not by inspection:
+typing "mou" opens the dropdown with all ten suggestions, clicking "mouth" fills
+the field, and a "mouth" + "moon" search then returns its 2 results (喩, 絹).
+Screenshot confirms the dropdown overlays the depth selector correctly and the
+three fields keep equal widths.
+
+Worth noting as a process point: the 2026-09-04 entry recorded this feature as
+built and the CLAUDE.md line listed its callers accurately — the gap was that
+nobody asked whether the *obvious* input had been covered. A feature can be
+correctly implemented, correctly documented, and still absent from the place
+users meet it.

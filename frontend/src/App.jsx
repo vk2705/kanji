@@ -6,6 +6,7 @@ import AuthBar from "./components/AuthBar";
 import AboutPage from "./components/AboutPage";
 import CreateKanji from "./components/CreateKanji";
 import MyContributions from "./components/MyContributions";
+import AutocompleteInput from "./components/AutocompleteInput";
 import { t } from "./i18n";
 import "./App.css";
 
@@ -334,15 +335,15 @@ export default function App() {
                   <p className="search-hint">{tt("partsHint")}</p>
                   <div className="parts-inputs">
                     {parts.map((p, i) => (
-                      <input
+                      <AutocompleteInput
                         key={i}
                         className="input"
                         placeholder={tt("partsPlaceholder", i + 1)}
                         aria-label={tt("partsPlaceholder", i + 1)}
                         value={p}
-                        onChange={(e) => {
+                        onChange={(v) => {
                           const next = [...parts];
-                          next[i] = e.target.value;
+                          next[i] = v;
                           setParts(next);
                         }}
                       />

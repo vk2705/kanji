@@ -384,7 +384,12 @@ textarea {
   flex-wrap: wrap;
 }
 
-.parts-inputs .input {
+/* Each parts field is an AutocompleteInput, so the flex item is the wrapper, not
+   the <input> inside it — the sizing has to sit on the wrapper or the fields
+   collapse to their content width. The bare .input rule stays for any plain input
+   that ends up in this row. */
+.parts-inputs .input,
+.parts-inputs .autocomplete-wrap {
   flex: 1;
   min-width: 120px;
 }
