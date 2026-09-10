@@ -2,6 +2,10 @@
 # cache. Excluded from git only because it's a binary blob; back it up separately
 # (see the kanji-db-backup systemd timer) before ever touching it by hand.
 backend/kanji.db
+# SQLite WAL sidecars — regenerated whenever the DB is opened, and committed by
+# accident on 2026-09-10 by a `git add -A` while a dev server held the DB open.
+backend/kanji.db-shm
+backend/kanji.db-wal
 backend/backups/
 
 # User-uploaded images (glyph-less primitives). backup_db.py snapshots these
