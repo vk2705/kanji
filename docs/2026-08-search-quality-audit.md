@@ -7785,3 +7785,89 @@ built and the CLAUDE.md line listed its callers accurately — the gap was that
 nobody asked whether the *obvious* input had been covered. A feature can be
 correctly implemented, correctly documented, and still absent from the place
 users meet it.
+
+## 2026-09-10 (daily check-in) — 12 more primitives, and two more wrong carriers
+
+Yesterday's note said the remaining gap needed a source for Heisig's names that
+`heisig-kanjis.csv` doesn't provide, and that it was worth an owner conversation
+before guessing. That was too pessimistic: I had only checked the dozen
+highest-frequency components by eye. Running the structural namer over the
+**whole** tail found **75** unregistered components with a name that resolves
+strictly to them.
+
+### Sharpening the criterion
+
+The first pass over the tail was too loose — it accepted any name whose host
+intersection merely *contained* the candidate, which credits 𠃌 with "sabre"
+because every 刀 host contains 𠃌. The strict rule is the one from the previous
+batch: the intersection must lie entirely inside the candidate's own subtree, so
+the candidate is the most specific thing every listing kanji shares. Then drop
+any name that already belongs to a registered row — that alone rejected 6
+(乍/"saw" is 挽, 夹/"scissors" is 鋏, 耂/"old man" is 老).
+
+Registered 12: `𠃌` clothes hanger, `㦮` float, `圣` spool/clod/toilet paper,
+`𡗗` bonsai, `枼` Tarzan, `喬` angel, `臤` loincloth, `敝` shredder, `龷` salad,
+`㐮` grass skirt, `夆` Segway/Macbeth, `关` golden calf. Three more were rejected
+at the rendering step and are worth recording as *near misses*:
+
+- **䒑** — the loose scan offered "mountain goat", but its own hosts (首, 前) are
+  glossed "horns" in the CSV and "horns" already belongs to 丷; "mountain goat"
+  came from 岡, whose top is not this shape. Registering it would have been
+  inventing a name.
+- **电** — only 2 CSV hosts back "eels", and 电 is the *simplified Chinese* form
+  of 電. Weak name plus a suspect carrier is exactly the combination this audit
+  has been burned by.
+- **𮥶** — could not be told apart from 雚 with confidence, and "pegasus" is
+  uncertain.
+
+### Two wrong lookalike carriers, both systemic
+
+**込 was standing in for 辶 in 67 rows.** 込 (rtk843) is a real, different kanji —
+"crowded", 辶 + 入 — and 辶 has been correctly registered as `kangxi162` "road"
+the whole time. cjkvi is unambiguous: of the 67 rows listing 込 as a part, **zero**
+actually contain 込 and 65 contain 辶. Rendering confirms it instantly — 込 has an
+入 inside the road sweep that 道/辻/迫/逃 plainly do not. Swapped all 67, which
+then unlocked 13 further collapses that had been blocked on "込 is nowhere in the
+tree". Search effect: `road` 2 → **69**, `crowded` 67 → **1**.
+
+**ハ was standing in for 八 in another 67 rows.** `prim-katakana-ha` held the
+alias "animal legs" on the *katakana letter* ハ. The CSV gives it away: it lists
+"animal legs; eight" as one component's two names, everywhere it appears (共, 黄,
+益, 醸 …). Rendering settles it — 八's left stroke curves and its right flares,
+katakana ハ is two straight strokes, 丷 is two inward dots, and the bottom of
+共/黄/益/具 is unmistakably 八. So "animal legs" moved onto **rtk8 (八)** itself,
+all 67 tokens were swapped, and `prim-katakana-ha` is gone. `animal legs` and
+`eight` now both return 64 — one shape, two of Heisig's names, which is exactly
+what the ambiguity fix from 2026-09-09 is for.
+
+That makes this alias's third and final home: `rad2.8` (an orphaned placeholder
+with no glyph) → `prim-katakana-ha` (a lookalike letter) → `rtk8` (the real
+glyph). Both earlier moves were recorded as consolidations at the time; neither
+asked whether the *carrier* was right.
+
+### Where the generic gate stops, and what was done instead
+
+Registering an *atomic* primitive doesn't help its hosts automatically: with
+nothing below it in either tree, the safety gate can never vouch for the strokes
+a host spelled it with, so all 35 candidates were refused. That is the gate doing
+its job — it cannot distinguish "a token finer-grained than cjkvi knows" from "a
+token that is simply wrong", and both look identical to it.
+
+Rather than override it, the CSV settles those cases directly, because Heisig's
+own component list names the primitive: 春 is "bonsai; sun; day", 幣 is
+"shredder; small; little; belt; taskmaster; towel", 送 is "escort; golden calf;
+horns; heavens; road". **17** collapses were applied on that basis, each requiring
+the CSV to independently list the primitive's name for that host; 7 were skipped
+because the CSV had no components for them (beyond its frame coverage) or the
+target still needs an unregistered component.
+
+**Result: exact match against cjkvi top level 60.5% → 62.9%.** `mouth` 210 → 205,
+`sun` 143 → 142. 40 regression pins rewritten (the two carrier swaps repoint
+`rtk843`→`kangxi162` and `prim-katakana-ha`→`rtk8` across the suite). Verified:
+detector 0, dead tokens 0, self-references 0, 1300 pins with only the 4 known
+hanzi-scope non-issues, 62 pytest.
+
+**Next**: 63 of the 75 strictly-named components are still unregistered — the
+same method applies and needs no new source, just more batches with a render
+check each. The genuinely blocked remainder is cjkvi's unencoded ①-⑦ placeholders
+and components like ⺼/𠮛/乀/𠄌 that need their own registration first.

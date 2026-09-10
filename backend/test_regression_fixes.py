@@ -158,7 +158,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1388": {"character": "鍋", "keyword": "pot",
                 "expected_part_ids": {"prim-jawbone", "rtk287"}},
     "rtk1389": {"character": "過", "keyword": "overdo",
-                "expected_part_ids": {"prim-jawbone", "rtk843"}},
+                "expected_part_ids": {"kangxi162", "prim-jawbone"}},
     # Was 日,木,冫,艾 -- render-confirmed the middle/bottom is 楽(rtk1872)'s own
     # shape (白,木,冫), not a bare 日; owner-disputed via the review queue.
     "rtk1873": {"character": "薬", "keyword": "medicine",
@@ -184,12 +184,18 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"prim-snare", "rtk137"}},
     "rtk1209": {"character": "祈", "keyword": "pray",
                 "expected_part_ids": {"rtk1206", "kangxi113"}},
-    # rad2.8 ("animal legs") was an orphaned legacy placeholder (character='?', never
-    # linked to its real glyph) that duplicated prim-katakana-ha (ハ) -- session
-    # 2026-08-30 re-homed rtk6's part onto prim-katakana-ha and retired rad2.8, same
-    # consolidation pattern as kangxi94/kangxi122 earlier in the audit.
+    # "animal legs" has now been re-homed twice, and this is the end of it. It began
+    # as rad2.8, an orphaned legacy placeholder (character='?', never linked to a real
+    # glyph); 2026-08-30 moved it onto prim-katakana-ha (ハ) and retired rad2.8. But
+    # ハ is *katakana* — the same lookalike-carrier mistake as ツ standing in for 𭕄,
+    # and heisig-kanjis.csv gives it away by listing "animal legs; eight" as one
+    # component's two names everywhere it appears (共, 黄, 益, 醸 …). Rendering ハ
+    # beside 八 confirms it: 八's left stroke curves and its right flares, katakana ハ
+    # is two straight strokes, and the bottom of 共/黄/益/具 is unmistakably 八.
+    # 2026-09-10 moved the alias onto rtk8 (八) itself, swapped all 67 host tokens,
+    # and deleted prim-katakana-ha. The name now lives on the glyph it always meant.
     "rtk6": {"character": "六", "keyword": "six",
-             "expected_part_ids": {"kangxi8", "prim-katakana-ha"}},
+             "expected_part_ids": {"kangxi8", "rtk8"}},
     # Was ｜,一,日,木,田 -- redundant flattening (｜+一 = 日's own strokes double-counted)
     # plus an erroneous, unrelated 田 -- CSV lists 東 as just "sun; day; tree; wood"
     # (session 2026-08-30, found via cross-checking tools/heisig-google-check/results.jsonl).
@@ -382,7 +388,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk2319": {"character": "嬉", "keyword": "glad",
                 "expected_part_ids": {"rtk102", "rtk1553"}},
     "rtk2502": {"character": "逗", "keyword": "stop",
-                "expected_part_ids": {"rtk843", "rtk1548"}},
+                "expected_part_ids": {"kangxi162", "rtk1548"}},
     "rtk2978": {"character": "燈", "keyword": "lamp",
                 "expected_part_ids": {"rtk173", "rtk1838"}},
     # 新-family fix (2026-08-25): heisig-kanjis.csv wording ("red pepper;
@@ -448,7 +454,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1596": {"character": "平", "keyword": "even",
                 "expected_part_ids": {"rtk1777", "kangxi12"}},
     "rtk287": {"character": "金", "keyword": "gold",
-               "expected_part_ids": {"rtk271", "prim-katakana-ha", "prim-umbrella", "kangxi12"}},
+               "expected_part_ids": {"kangxi12", "prim-umbrella", "rtk271", "rtk8"}},
     "rtk1725": {"character": "鎌", "keyword": "sickle",
                 "expected_part_ids": {"rtk287", "rtk1723"}},
     "rtk2785": {"character": "鋲", "keyword": "rivet",
@@ -472,7 +478,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk2911": {"character": "叛", "keyword": "disobey",
                 "expected_part_ids": {"rtk1286", "rtk779"}},
     "rtk473": {"character": "適", "keyword": "suitable",
-               "expected_part_ids": {"rtk843", "prim-teki"}},
+               "expected_part_ids": {"kangxi162", "prim-teki"}},
     # 業/撲/僕 reconstruction (2026-08-27): flagged three sessions ago as
     # needing more than a 并->丷 token swap -- their old 王/羊 tokens don't
     # match either character's real IDS structure at all. Rebuilt around
@@ -667,7 +673,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk2068": {"character": "偽", "keyword": "falsehood",
                 "expected_part_ids": {"kangxi9", "rtk2067"}},  # 亻 + 為 (person radical added 2026-09-05)
     "rtk2089": {"character": "誉", "keyword": "reputation",
-                "expected_part_ids": {"prim-katakana-ha", "prim-owl", "rtk1", "rtk357"}},
+                "expected_part_ids": {"prim-owl", "rtk1", "rtk357", "rtk8"}},
     "rtk2695": {"character": "糞", "keyword": "shit",
                 "expected_part_ids": {"rtk1936", "rtk987"}},
     # Frame-ordered sweep (2026-08-29): with the 并 investigation closed, started
@@ -725,7 +731,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk780": {"character": "坂", "keyword": "slope",
                "expected_part_ids": {"rtk161", "rtk779"}},
     "rtk782": {"character": "返", "keyword": "return",
-               "expected_part_ids": {"rtk843", "rtk779"}},
+               "expected_part_ids": {"kangxi162", "rtk779"}},
     "rtk783": {"character": "販", "keyword": "marketing",
                "expected_part_ids": {"rtk56", "rtk779"}},
     "rtk933": {"character": "賀", "keyword": "congratulations",
@@ -803,7 +809,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk249": {"character": "苗", "keyword": "seedling",
                 "expected_part_ids": {"prim-mugwort", "rtk14"}},
     "rtk243": {"character": "葉", "keyword": "leaf",
-                "expected_part_ids": {"prim-mugwort", "rtk207", "rtk28"}},
+                "expected_part_ids": {"prim-mugwort", "prim-tarzan"}},
     "rtk241": {"character": "寛", "keyword": "tolerant",
                 "expected_part_ids": {"kangxi40", "prim-mugwort", "rtk61"}},
     # 模/漠/墓/暮/膜/幕/慕 all flattened 大,日,艹 (or a subset alongside
@@ -907,7 +913,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk294": {"character": "鎮", "keyword": "tranquillize",
                 "expected_part_ids": {"rtk287", "rtk79"}},
     "rtk301": {"character": "逃", "keyword": "escape",
-                "expected_part_ids": {"rtk250", "rtk843"}},
+                "expected_part_ids": {"kangxi162", "rtk250"}},
     # 2026-09-07 worklist loop, day 5 batch:
     # 前 had a spurious extra 一 and was missing 刀(刂) entirely.
     "rtk309": {"character": "前", "keyword": "in front",
@@ -970,7 +976,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk310": {"character": "煎", "keyword": "roast",
                 "expected_part_ids": {"prim-fire-radical", "rtk309"}},
     "rtk325": {"character": "運", "keyword": "carry",
-                "expected_part_ids": {"rtk323", "rtk843"}},
+                "expected_part_ids": {"kangxi162", "rtk323"}},
     # Corrected 2026-09-07 (worklist loop, day 5): 塾/熟 both flattened
     # 丸(round, rtk44 = 九+丶, already taught) into its own raw parts
     # instead of referencing it directly, alongside 享(receive, rtk330,
@@ -1133,7 +1139,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1272": {"character": "措", "keyword": "set aside",
                 "expected_part_ids": {"kangxi64", "rtk1268"}},
     "rtk1276": {"character": "遮", "keyword": "intercept",
-                "expected_part_ids": {"rtk1", "rtk1275", "rtk843"}},
+                "expected_part_ids": {"kangxi162", "rtk1", "rtk1275"}},
     "rtk1298": {"character": "版", "keyword": "printing block",
                 "expected_part_ids": {"rtk1297", "rtk779"}},
     "rtk1300": {"character": "乏", "keyword": "destitution",
@@ -1165,13 +1171,13 @@ EXPECTED_DECOMPOSITIONS = {
     # Was redundantly re-listing 骨(rtk1383)'s own 冖 alongside referencing it
     # directly -- 2026-09-05, audit_direct_ref_overlap.py
     "rtk1385": {"character": "髄", "keyword": "marrow",
-                "expected_part_ids": {"rtk1383", "rtk83", "rtk843"}},
+                "expected_part_ids": {"kangxi162", "rtk1383", "rtk83"}},
     "rtk1390": {"character": "阪", "keyword": "heights",
                 "expected_part_ids": {"kangxi170", "rtk779"}},
     "rtk1393": {"character": "障", "keyword": "hinder",
                 "expected_part_ids": {"kangxi170", "rtk464"}},
     "rtk1395": {"character": "随", "keyword": "follow",
-                "expected_part_ids": {"kangxi170", "rtk83", "rtk843"}},
+                "expected_part_ids": {"kangxi162", "kangxi170", "rtk83"}},
     "rtk1404": {"character": "墜", "keyword": "crash",
                 "expected_part_ids": {"rtk1403", "rtk161"}},
     "rtk1406": {"character": "階", "keyword": "story",
@@ -1185,7 +1191,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1422": {"character": "搾", "keyword": "squeeze",
                 "expected_part_ids": {"kangxi64", "rtk2660"}},
     "rtk1429": {"character": "兵", "keyword": "soldier",
-                "expected_part_ids": {"prim-katakana-ha", "rtk1427"}},
+                "expected_part_ids": {"rtk1427", "rtk8"}},
     "rtk1434": {"character": "縮", "keyword": "shrink",
                 "expected_part_ids": {"rtk1070", "rtk1431"}},
     "rtk1435": {"character": "繁", "keyword": "luxuriant",
@@ -1328,7 +1334,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk2184": {"character": "雰", "keyword": "atmosphere",
                 "expected_part_ids": {"rtk451", "rtk844"}},
     "rtk2187": {"character": "遵", "keyword": "abide by",
-                "expected_part_ids": {"rtk1547", "rtk843"}},
+                "expected_part_ids": {"kangxi162", "rtk1547"}},
     # 境 fixed (2026-08-29, owner-reported): old 音,土,日,立,儿 redundantly
     # listed 音 alongside its own already-flattened 日,立 sub-parts side by
     # side. cjkvi-ids confirms 境 = 土+竟, 竟 = 音+儿 -- added 竟 as a new
@@ -1515,7 +1521,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1544": {"character": "配", "keyword": "distribute",
                 "expected_part_ids": {"rtk1534", "rtk564"}},
     "rtk1737": {"character": "遷", "keyword": "transition",
-                "expected_part_ids": {"rtk843", "rtk1728", "rtk112", "rtk564"}},
+                "expected_part_ids": {"kangxi162", "rtk112", "rtk1728", "rtk564"}},
     # 港 was 水,ハ,已,井 -- neither ハ nor 井 have any connection to the real
     # glyph. cjkvi-ids: 港 = 氵+巷, 巷 = 共+己 (Japanese variant); flattened
     # past 巷 (not itself a taught frame, no Heisig citation for it) straight
@@ -1525,7 +1531,7 @@ EXPECTED_DECOMPOSITIONS = {
     # 選 was ｜,込,二,ハ,已 -- cjkvi-ids: 選 = 込+巽. Fixed to reference the new
     # prim-southeast primitive.
     "rtk1944": {"character": "選", "keyword": "elect",
-                "expected_part_ids": {"rtk843", "prim-southeast"}},
+                "expected_part_ids": {"kangxi162", "prim-southeast"}},
     # 倦 was 已,大,二,丷,卩,ハ -- a flattened mess re-copying 巻's own sub-parts
     # (大,二,丷) plus stray tokens. cjkvi-ids: 倦 = 亻+巻(J variant). Fixed to
     # reference the already-taught 巻 (rtk1292) directly.
@@ -1716,7 +1722,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk336": {"character": "景", "keyword": "scenery",
                 "expected_part_ids": {"rtk12", "rtk334"}},
     "rtk340": {"character": "週", "keyword": "week",
-                "expected_part_ids": {"rtk339", "rtk843"}},
+                "expected_part_ids": {"kangxi162", "rtk339"}},
     "rtk397": {"character": "歩", "keyword": "walk",
                 "expected_part_ids": {"rtk111", "rtk396"}},
     "rtk398": {"character": "渉", "keyword": "ford",
@@ -1907,8 +1913,9 @@ EXPECTED_DECOMPOSITIONS = {
     # all used 尚(esteem, box+口 shape) for their top -- but render shows
     # a plain 2-3-stroke ツ(katakana tsu) shape, no box/口 anywhere,
     # same mistake as the original 光 bug from day 2 (光/輝, fixed
-    # above). Registered ツ as prim-owl (same convention as the
-    # existing prim-katakana-ha/no/yo) and repointed all 7.
+    # above). Registered it as prim-owl and repointed all 7. (The carrier
+    # glyph was itself wrong at first — katakana ツ, corrected to the real
+    # 𭕄 on 2026-09-09; prim-katakana-ha went the same way on 2026-09-10.)
     "rtk1111": {"character": "営", "keyword": "occupation",
                 "expected_part_ids": {"kangxi14", "prim-owl", "rtk24"}},
     "rtk1113": {"character": "膳", "keyword": "dining tray",
@@ -1932,7 +1939,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1212": {"character": "哲", "keyword": "philosophy",
                 "expected_part_ids": {"rtk11", "rtk1211"}},
     "rtk1213": {"character": "逝", "keyword": "departed",
-                "expected_part_ids": {"rtk1211", "rtk843"}},
+                "expected_part_ids": {"kangxi162", "rtk1211"}},
     "rtk1214": {"character": "誓", "keyword": "vow",
                 "expected_part_ids": {"rtk1211", "rtk357"}},
     "rtk1221": {"character": "訴", "keyword": "accusation",
@@ -1942,7 +1949,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1253": {"character": "満", "keyword": "full",
                 "expected_part_ids": {"prim-mugwort", "rtk1252", "rtk137", "rtk2"}},
     "rtk1258": {"character": "遭", "keyword": "encounter",
-                "expected_part_ids": {"rtk1", "rtk1256", "rtk843"}},
+                "expected_part_ids": {"kangxi162", "rtk1257"}},
     "rtk1259": {"character": "漕", "keyword": "rowing",
                 "expected_part_ids": {"rtk1257", "rtk137"}},
     "rtk1309": {"character": "智", "keyword": "wisdom",
@@ -1972,7 +1979,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1433": {"character": "繕", "keyword": "darning",
                 "expected_part_ids": {"rtk1112", "rtk1431"}},
     "rtk1443": {"character": "練", "keyword": "practice",
-                "expected_part_ids": {"prim-katakana-ha", "prim-pipe", "rtk14", "rtk1431", "rtk543"}},
+                "expected_part_ids": {"prim-pipe", "rtk14", "rtk1431", "rtk543", "rtk8"}},
     "rtk1445": {"character": "続", "keyword": "continue",
                 "expected_part_ids": {"rtk1431", "rtk345"}},
     "rtk1449": {"character": "給", "keyword": "salary",
@@ -1986,7 +1993,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1494": {"character": "孫", "keyword": "grandchild",
                 "expected_part_ids": {"rtk1492", "rtk99"}},
     "rtk1496": {"character": "遜", "keyword": "modest",
-                "expected_part_ids": {"rtk1494", "rtk843"}},
+                "expected_part_ids": {"kangxi162", "rtk1494"}},
     "rtk1497": {"character": "却", "keyword": "instead",
                 "expected_part_ids": {"kangxi26", "rtk812"}},
     "rtk1502": {"character": "命", "keyword": "fate",
@@ -2000,7 +2007,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1514": {"character": "擬", "keyword": "mimic",
                 "expected_part_ids": {"kangxi64", "rtk1513"}},
     "rtk1533": {"character": "興", "keyword": "entertain",
-                "expected_part_ids": {"prim-katakana-ha", "rtk1531", "rtk192"}},
+                "expected_part_ids": {"rtk1531", "rtk192", "rtk8"}},
     "rtk1538": {"character": "酵", "keyword": "fermentation",
                 "expected_part_ids": {"rtk1342", "rtk1534"}},
     "rtk1540": {"character": "酬", "keyword": "repay",
@@ -2043,7 +2050,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1691": {"character": "椿", "keyword": "camellia",
                 "expected_part_ids": {"rtk1690", "rtk207"}},
     "rtk1693": {"character": "奏", "keyword": "play music",
-                "expected_part_ids": {"kangxi115", "rtk1023", "rtk457"}},
+                "expected_part_ids": {"prim-bonsai", "rtk457"}},
     "rtk1718": {"character": "陰", "keyword": "shade",
                 "expected_part_ids": {"kangxi170", "kangxi28", "rtk1711", "rtk2"}},
     "rtk1745": {"character": "閲", "keyword": "review",
@@ -2051,7 +2058,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1752": {"character": "閣", "keyword": "tower",
                 "expected_part_ids": {"rtk1743", "rtk311"}},
     "rtk1799": {"character": "速", "keyword": "quick",
-                "expected_part_ids": {"rtk1793", "rtk843"}},
+                "expected_part_ids": {"kangxi162", "rtk1793"}},
     "rtk1800": {"character": "整", "keyword": "organize",
                 "expected_part_ids": {"kangxi66", "rtk1793", "rtk405"}},
     # Was 合,人 (人 not 亻, and 合/"fit" is a wrong reference -- render-confirmed
@@ -2067,7 +2074,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1908": {"character": "貴", "keyword": "precious",
                 "expected_part_ids": {"rtk1", "rtk39", "rtk56"}},
     "rtk1910": {"character": "遣", "keyword": "dispatch",
-                "expected_part_ids": {"rtk1", "rtk39", "rtk843"}},
+                "expected_part_ids": {"kangxi162", "rtk1", "rtk39"}},
     "rtk1937": {"character": "翼", "keyword": "wing",
                 "expected_part_ids": {"rtk1936", "rtk615"}},
     "rtk1972": {"character": "婚", "keyword": "marriage",
@@ -2097,7 +2104,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk2110": {"character": "塑", "keyword": "model",
                 "expected_part_ids": {"rtk161", "rtk2862"}},
     "rtk2111": {"character": "遡", "keyword": "go upstream",
-                "expected_part_ids": {"rtk2862", "rtk843"}},
+                "expected_part_ids": {"kangxi162", "rtk2862"}},
     # Was redundantly re-listing 尤(rtk2232)'s own 丶,尢 alongside referencing it
     # directly -- 2026-09-05, audit_direct_ref_overlap.py
     "rtk2121": {"character": "就", "keyword": "concerning",
@@ -2136,7 +2143,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1065": {"character": "使", "keyword": "use",
                 "expected_part_ids": {"kangxi9", "rtk748"}},
     "rtk1359": {"character": "追", "keyword": "chase",
-                "expected_part_ids": {"prim-maestro", "rtk843"}},
+                "expected_part_ids": {"kangxi162", "prim-maestro"}},
     "rtk1361": {"character": "師", "keyword": "expert",
                 "expected_part_ids": {"prim-maestro", "prim-noren"}},
     "rtk1362": {"character": "帥", "keyword": "commander",
@@ -2358,7 +2365,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk2853": {"character": "塵", "keyword": "dust",
                 "expected_part_ids": {"rtk2154", "rtk161"}},
     "rtk2854": {"character": "麒", "keyword": "chinese unicorn",
-                "expected_part_ids": {"rtk1894", "prim-katakana-ha", "rtk2154"}},
+                "expected_part_ids": {"rtk1894", "rtk2154", "rtk8"}},
     # Owner report (2026-09-04): searching "tree, mouth" surfaced wrong
     # results, and 保("protect") specifically was "missing left part".
     # 保 was 口,木 -- entirely missing 亻("person"), the literal left
@@ -2435,7 +2442,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1491": {"character": "磁", "keyword": "magnet",
                 "expected_part_ids": {"rtk118", "rtk1", "kangxi12", "kangxi52"}},
     "rtk1903": {"character": "碁", "keyword": "go",
-                "expected_part_ids": {"rtk118", "rtk1894", "prim-katakana-ha"}},
+                "expected_part_ids": {"rtk118", "rtk1894", "rtk8"}},
     "rtk2204": {"character": "砦", "keyword": "fort",
                 "expected_part_ids": {"rtk118", "rtk2201"}},
     "rtk2577": {"character": "柘", "keyword": "wild mulberry",
@@ -2515,7 +2522,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1379": {"character": "躍", "keyword": "leap",
                "expected_part_ids": {"prim-futon", "rtk1372"}},
     "rtk1380": {"character": "践", "keyword": "tread",
-               "expected_part_ids": {"kangxi62", "rtk1", "rtk1372"}},
+               "expected_part_ids": {"prim-float", "rtk1372"}},
     "rtk1381": {"character": "踏", "keyword": "step",
                "expected_part_ids": {"rtk12", "rtk137", "rtk1372"}},
     "rtk1382": {"character": "踪", "keyword": "trail",
@@ -2537,7 +2544,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1457": {"character": "紡", "keyword": "spinning",
                "expected_part_ids": {"rtk1431", "rtk529"}},
     "rtk1460": {"character": "経", "keyword": "sutra",
-               "expected_part_ids": {"rtk1431", "rtk161", "rtk752"}},
+               "expected_part_ids": {"prim-spool", "rtk1431"}},
     "rtk1461": {"character": "紳", "keyword": "sire",
                "expected_part_ids": {"prim-pipe", "rtk12", "rtk14", "rtk1431"}},
     "rtk1463": {"character": "細", "keyword": "dainty",
@@ -2577,7 +2584,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1473": {"character": "網", "keyword": "netting",
                "expected_part_ids": {"kangxi12", "kangxi13", "rtk1431", "rtk524"}},
     "rtk1474": {"character": "緊", "keyword": "tense",
-               "expected_part_ids": {"rtk1431", "rtk752", "rtk911"}},
+               "expected_part_ids": {"prim-loincloth", "rtk1431"}},
     # Was redundantly re-listing 亀(rtk573)'s own 乙,勹 alongside referencing it
     # directly -- 2026-09-05, audit_direct_ref_overlap.py
     "rtk1477": {"character": "縄", "keyword": "straw rope",
@@ -2707,7 +2714,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk2812": {"character": "頌", "keyword": "accolade",
                "expected_part_ids": {"rtk64", "rtk847"}},
     "rtk2813": {"character": "頚", "keyword": "neck and throat",
-               "expected_part_ids": {"rtk161", "rtk64", "rtk752"}},
+               "expected_part_ids": {"prim-spool", "rtk64"}},
     "rtk2826": {"character": "鰻", "keyword": "eel",
                "expected_part_ids": {"rtk183", "rtk2240"}},
     "rtk2827": {"character": "鯛", "keyword": "sea bream",
@@ -2961,7 +2968,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1964": {"character": "偏", "keyword": "partial",
                "expected_part_ids": {"kangxi9", "prim-fishfinger"}},
     "rtk1965": {"character": "遍", "keyword": "everywhere",
-               "expected_part_ids": {"prim-fishfinger", "rtk843"}},
+               "expected_part_ids": {"kangxi162", "prim-fishfinger"}},
     "rtk1994": {"character": "響", "keyword": "echo",
                "expected_part_ids": {"rtk1993", "rtk518"}},
     "rtk2277": {"character": "哨", "keyword": "scout",
@@ -3055,11 +3062,11 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk2459": {"character": "芥", "keyword": "mustard",
                "expected_part_ids": {"prim-mugwort", "rtk265"}},
     "rtk2492": {"character": "迪", "keyword": "way",
-               "expected_part_ids": {"rtk1186", "rtk843"}},
+               "expected_part_ids": {"kangxi162", "rtk1186"}},
     "rtk2875": {"character": "歪", "keyword": "warped",
                "expected_part_ids": {"rtk1302", "rtk405"}},
     "rtk2975": {"character": "邁", "keyword": "pass through",
-               "expected_part_ids": {"rtk2974", "rtk843"}},
+               "expected_part_ids": {"kangxi162", "rtk2974"}},
     "rtk2988": {"character": "慾", "keyword": "longing (old)",
                "expected_part_ids": {"rtk639", "rtk855"}},
     # Continuing the results.jsonl mining into the noisier 622 "PARTIAL"
@@ -3131,7 +3138,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk2561": {"character": "桔", "keyword": "used in plant names",     # was 口,士,木 (士+口 = shattered 吉)
                "expected_part_ids": {"rtk207", "rtk342"}},              # 木 + 吉
     "rtk460": {"character": "橋", "keyword": "bridge",                   # was ノ,口,木,冂 — missing 大 + a 口 vs siblings 嬌/矯
-               "expected_part_ids": {"kangxi13", "prim-katakana-no", "rtk11", "rtk112", "rtk207"}},
+               "expected_part_ids": {"prim-angel", "rtk207"}},
     "rtk2903": {"character": "麿", "keyword": "i",                       # was 口,木,广,麻,ノ — 麻 double-counted w/ its own 广,木; spurious ノ
                "expected_part_ids": {"rtk24", "rtk637"}},               # 麻 + 呂
     "rtk24": {"character": "呂", "keyword": "spine",                     # was 口,ノ — missing the second 口 entirely (ノ = KRADFILE proxy)
@@ -3224,7 +3231,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk2664": {"character": "颯", "keyword": "sudden",
                "expected_part_ids": {"rtk462", "rtk563"}},
     "rtk2127": {"character": "逸", "keyword": "deviate",
-               "expected_part_ids": {"prim-katakana-no", "rtk2126", "rtk843"}},
+               "expected_part_ids": {"kangxi162", "rtk2126"}},
     "rtk2128": {"character": "晩", "keyword": "nightfall",
                "expected_part_ids": {"rtk12", "rtk2126"}},
     "rtk2129": {"character": "勉", "keyword": "exertion",
@@ -3254,7 +3261,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk2120": {"character": "鬱", "keyword": "gloom",
                "expected_part_ids": {"kangxi14", "kangxi192", "kangxi59", "rtk207", "rtk2116"}},
     "rtk1786": {"character": "余", "keyword": "too much",
-               "expected_part_ids": {"kangxi6", "prim-katakana-ha", "prim-umbrella", "rtk1", "rtk1167"}},
+               "expected_part_ids": {"kangxi6", "prim-umbrella", "rtk1", "rtk1167", "rtk8"}},
     # Corrected 2026-09-06 (worklist loop, day 3): both 暦 and 歴 had
     # 麻(hemp, rtk637) where render clearly shows 厂+林 instead (cliff
     # enclosing two 木 trees) -- 麻's own bottom is a full 木木 pair under
@@ -3284,7 +3291,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk980": {"character": "秀", "keyword": "excel",
                "expected_part_ids": {"kangxi115", "rtk741"}},
     "rtk981": {"character": "透", "keyword": "transparent",
-               "expected_part_ids": {"kangxi115", "rtk741", "rtk843"}},
+               "expected_part_ids": {"kangxi162", "rtk980"}},
     "rtk2320": {"character": "孕", "keyword": "become pregnant",
                "expected_part_ids": {"rtk741", "rtk99"}},
     # 2026-09-05: corrected -- the earlier 矢-family cleanup wrongly collapsed 鉄 to
@@ -3295,7 +3302,7 @@ EXPECTED_DECOMPOSITIONS = {
     # 2026-09-05: same correction as rtk909 -- ⿺辶失 / CSV "transfer; lose; drop;
     # husband; road" -> 失(rtk908), not 矢(dart).
     "rtk910": {"character": "迭", "keyword": "transfer",
-               "expected_part_ids": {"rtk843", "rtk908"}},
+               "expected_part_ids": {"kangxi162", "rtk908"}},
     # 2026-09-05: the whole 雚-family (歓/権/観/勧) carried a spurious 矢(dart) from
     # the earlier 矢-family cleanup. cjkvi-ids and heisig-kanjis.csv's own component
     # lists ("pegasus; horse; ...; turkey") name 隹(turkey) with a 丷/horns top, no
@@ -3309,7 +3316,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk928": {"character": "勧", "keyword": "persuade",
                "expected_part_ids": {"kangxi12", "kangxi172", "rtk922"}},
     "rtk1306": {"character": "矯", "keyword": "rectify",
-               "expected_part_ids": {"kangxi13", "rtk11", "rtk112", "rtk1305"}},
+               "expected_part_ids": {"prim-angel", "rtk1305"}},
     "rtk1129": {"character": "物", "keyword": "thing",
                "expected_part_ids": {"rtk1128", "rtk260"}},
     "rtk1130": {"character": "易", "keyword": "easy",
@@ -3327,7 +3334,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1615": {"character": "宰", "keyword": "superintend",
                "expected_part_ids": {"kangxi40", "rtk1612"}},
     "rtk1618": {"character": "避", "keyword": "evade",
-               "expected_part_ids": {"kangxi44", "rtk11", "rtk1612", "rtk843"}},
+               "expected_part_ids": {"kangxi162", "prim-heki"}},
     "rtk1622": {"character": "幸", "keyword": "happiness",
                "expected_part_ids": {"kangxi8", "rtk1612"}},
     "rtk1624": {"character": "摯", "keyword": "gift",
@@ -3337,11 +3344,11 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk2936": {"character": "睾", "keyword": "testicles",
                "expected_part_ids": {"kangxi8", "rtk15", "rtk161", "rtk1612"}},
     "rtk1645": {"character": "寒", "keyword": "cold",
-               "expected_part_ids": {"kangxi3", "kangxi40", "prim-katakana-ha", "rtk1946"}},
+               "expected_part_ids": {"kangxi3", "kangxi40", "rtk1946", "rtk8"}},
     "rtk1936": {"character": "異", "keyword": "uncommon",
-               "expected_part_ids": {"prim-katakana-ha", "rtk14", "rtk1946"}},
+               "expected_part_ids": {"rtk14", "rtk1946", "rtk8"}},
     "rtk1941": {"character": "暴", "keyword": "outburst",
-               "expected_part_ids": {"prim-katakana-ha", "rtk12", "rtk137", "rtk1946"}},
+               "expected_part_ids": {"rtk12", "rtk137", "rtk1946", "rtk8"}},
     "rtk1942": {"character": "爆", "keyword": "bomb",
                "expected_part_ids": {"rtk173", "rtk1941"}},
     "rtk1947": {"character": "丼", "keyword": "bowl",
