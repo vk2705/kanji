@@ -8014,3 +8014,108 @@ maps to no filter (`suggestScope` in `KanjiDetail.jsx`, since `/search/suggest`
 only accepts the three study-language values).
 
 4 new pytest cases; frontend rebuilt + redeployed (`index-CITChwsA.js`).
+
+## 2026-09-11 (daily check-in) — 15 more primitives, and a retracted "dead term" verdict
+
+Picked up after three commits from a separate session (right-side 阝 / ozato,
+the "beta" alias on both 阝, and the text-search bracket + script-aware-suggest
+fixes). Verified that base first: clean rebuild, 1304 pins with only the 4 known
+hanzi-scope non-issues, 66 pytest, 0 dead tokens — plus **2 collapses** the 阝
+registration had left unlocked (爺/椰 → 耶), applied. Review queue empty.
+
+### The batch
+
+Same method, fourth time: strict name resolution against
+`heisig-kanjis.csv`, reject any name already owned by a registered row, then
+render the glyph beside real hosts before believing it.
+
+`卆` ninety, `亢` whirlwind, `夭` sapling, `戠` kazoo, `㔾` fingerprint,
+`𦰩` scarecrow, `爰` migrating ducks, `俞` meeting of butchers, `录` dustpan,
+`甬` pogo stick, `夬` guillotine, `卬` stamp album, `冓` funnel, `侖` post-it
+note, `㐬` lifebelt.
+
+`䒑`, `电` and `𮥶` came back through the automatic filter again and were
+rejected again, for the same reasons as yesterday — worth noting that the filter
+cannot remember a judgement call, so each batch has to re-make them.
+
+25 collapses followed directly, and the 卬 family (抑/仰/迎/昂) also gained a
+*missing* component: each had only 卩, never the left half.
+
+### "ninety" was not a dead term after all
+
+`rtk212`'s pin carried a note from 2026-09-05 recording that 枠 had fallen
+through to the CSV's raw component text, which "includes 'ninety' (a dead,
+alias-less term — CSV's own gloss for 卆's 九+十 combination, **not a real
+primitive name**)". That verdict is now disproven: "ninety" resolves strictly to
+卆 across all 4 of its CSV hosts, and 卆 renders as exactly the right side of
+砕/粋/酔/枠. It was only "dead" because nothing held it — the same shape as
+"animal legs" sitting on a phantom row before it landed on 八 yesterday. Both
+pins (rtk121 砕, rtk212 枠) now reference `prim-ninety` instead of spelling it
+九,十, and the note is corrected in place rather than deleted, since the reasoning
+that produced it is worth keeping visible.
+
+This is the third time a term this audit filed as "dead//invented/legacy" turned
+out to be Heisig's real name waiting for a row to live on. The pattern is
+consistent enough to be worth stating: **an alias with no home looks identical to
+an alias with no meaning**, and only the structural check tells them apart.
+
+### The atomic-primitive follow-up
+
+As established yesterday, registering a primitive that is atomic in both trees
+never helps its hosts on its own — the safety gate cannot vouch for the strokes
+they spelled it with. The CSV settles those, and **21** more collapses were
+applied on that basis (輸/諭 → 俞, 硫/流 → 㐬, 録/緑 → 录, 通/踊/痛 → 甬,
+犯/氾/厄 → 㔾, 決/快 → 夬, 講/購/構/溝 → 冓, 論/倫/輪 → 侖), each requiring the
+CSV to independently name the primitive for that host. 11 were skipped: 9 are
+past the CSV's frame coverage (empty components), 2 need a component that is
+itself still unregistered. One skip is worth recording as the check working:
+愉 lists "meeting; umbrella; butchers" — 俞 split into its *parts* rather than
+named — so the strict test correctly declined it.
+
+**Result: exact match against cjkvi top level 62.9% → 64.5%.** `mouth` 205 → 202.
+18 regression pins rewritten across the two passes. Verified: detector 0, dead
+tokens 0, self-references 0, 1304 pins with only the 4 known hanzi-scope
+non-issues, 66 pytest.
+
+**Next**: ~42 strictly-named components remain, same method, no new source
+needed. The head of what is left is the recurring rejects (䒑/电/𮥶) plus `コ`
+(cjkvi's own katakana shorthand for a rake shape, which should never be
+registered as-is) and components needing their own prerequisites (`乀`, `𫩠`,
+`亍`).
+
+### Addendum: the primitive images were being drawn in the wrong font
+
+Re-running `make_primitive_images.py` modified `kangxi163.png` — a file the other
+session had committed the day before. Worth stopping for, since silently
+overwriting another session's work is exactly the kind of thing that goes
+unnoticed. Rendering both side by side against 郡/邦 showed **theirs was right and
+mine was wrong**: the committed ⻏ has the straight descender the hosts have, mine
+had a hooked tail.
+
+The cause is a font-priority bug I introduced on 2026-09-09 and then half-fixed.
+`make_primitive_images.py` listed `'HanaMinA', 'HanaMinB', 'Noto Serif CJK JP'`
+— HanaMin *first*. HanaMin is there because it is the only free face covering CJK
+Ext A–G, but it is Chinese-leaning, so for any glyph a Japanese face also has, it
+silently supplied its own variant shape. `render_glyphs.py` got exactly this fix
+on 2026-09-10 (Japanese faces first, HanaMin as fallback); the image generator
+never did. The other session's container simply didn't have HanaMin installed, so
+it fell through to Noto and got the right answer by accident.
+
+Fixed the order, and installed `fonts-noto-cjk` here — this container had **no
+Japanese Mincho face at all**, which means every primitive image generated in it
+so far came from HanaMin regardless of ordering.
+
+Then checked all 19 glyphs one at a time, Noto vs HanaMin vs their real hosts,
+rather than assuming the reorder was globally right. It nearly is: Noto wins or
+ties everywhere except **𧘇**, which Noto draws small and raised like a
+superscript where the shape actually fills the bottom of 衣/表. That one gets a
+`FONT_OVERRIDES` entry, and the mechanism is documented as "add an entry only
+after rendering the candidate beside a real host and seeing the default get it
+wrong". Its regenerated file came out byte-identical to the committed one, which
+is a decent check that the override does what it claims.
+
+All 19 images are now consistent — one face, one documented exception — where
+before they were a mix of whatever each container happened to have installed.
+That last part is the real lesson: **the output of this script depended on the
+machine it ran on, and nothing said so.** The docstring now names both font
+packages and warns that a missing Noto is not an error anyone will see.

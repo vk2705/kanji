@@ -248,7 +248,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk2691": {"character": "糟", "keyword": "lees",
                 "expected_part_ids": {"rtk987", "rtk1257"}},
     "rtk2014": {"character": "航", "keyword": "navigate",
-                "expected_part_ids": {"rtk2012", "kangxi8", "kangxi16"}},
+                "expected_part_ids": {"prim-whirlwind", "rtk2012"}},
     "rtk580": {"character": "家", "keyword": "house",
                "expected_part_ids": {"kangxi40", "kangxi152"}},
     # "sun" used to resolve to hanzi-5b6b (孫, grandchild) via an unrelated pinyin
@@ -574,7 +574,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1356": {"character": "狭", "keyword": "cramped",
                 "expected_part_ids": {"kangxi94", "rtk1023", "rtk112", "rtk2", "kangxi12", "kangxi3", "kangxi8"}},
     "rtk1517": {"character": "犯", "keyword": "crime",
-                "expected_part_ids": {"kangxi94", "rtk75", "kangxi26"}},
+                "expected_part_ids": {"kangxi94", "prim-fingerprint"}},
     # Further-collapsed 2026-08-29 (sweep batch 3 follow-up), same as 狩
     # above: 猶's 酉,丷 flattened 酋 (chieftain, rtk2915) in place.
     "rtk1546": {"character": "猶", "keyword": "furthermore",
@@ -2107,9 +2107,9 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk2086": {"character": "厳", "keyword": "stern",
                 "expected_part_ids": {"kangxi27", "prim-owl", "rtk889"}},
     "rtk2099": {"character": "暖", "keyword": "warmth",
-                "expected_part_ids": {"rtk12", "rtk760", "rtk784"}},
+                "expected_part_ids": {"prim-migrating-ducks", "rtk12"}},
     "rtk2101": {"character": "援", "keyword": "abet",
-                "expected_part_ids": {"kangxi64", "rtk760", "rtk784"}},
+                "expected_part_ids": {"kangxi64", "prim-migrating-ducks"}},
     "rtk2110": {"character": "塑", "keyword": "model",
                 "expected_part_ids": {"rtk161", "rtk2862"}},
     "rtk2111": {"character": "遡", "keyword": "go upstream",
@@ -2332,7 +2332,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk904": {"character": "規", "keyword": "standard",
                "expected_part_ids": {"rtk901", "rtk61"}},
     "rtk1701": {"character": "漢", "keyword": "sino-",
-                "expected_part_ids": {"rtk137", "prim-mugwort", "rtk11", "rtk901"}},
+                "expected_part_ids": {"prim-scarecrow", "rtk137"}},
     "rtk1877": {"character": "央", "keyword": "center",
                 "expected_part_ids": {"kangxi14", "rtk112"}},
     "rtk2659": {"character": "窺", "keyword": "lie in wait",
@@ -2430,7 +2430,7 @@ EXPECTED_DECOMPOSITIONS = {
     #    approximation from the 麒 fix, also dropped a stray "一"), 柘,
     #    碧, 硯, 碓.
     "rtk121": {"character": "砕", "keyword": "smash",
-               "expected_part_ids": {"rtk118", "rtk9", "rtk10"}},
+               "expected_part_ids": {"prim-ninety", "rtk118"}},
     "rtk609": {"character": "確", "keyword": "assurance",
                "expected_part_ids": {"rtk118", "kangxi14", "kangxi172"}},
     "rtk610": {"character": "午", "keyword": "noon",
@@ -2446,7 +2446,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk750": {"character": "硬", "keyword": "stiff",
                "expected_part_ids": {"rtk118", "rtk749"}},
     "rtk825": {"character": "硫", "keyword": "sulphur",
-               "expected_part_ids": {"rtk118", "rtk134", "kangxi8", "kangxi28"}},
+               "expected_part_ids": {"prim-lifebelt", "rtk118"}},
     "rtk832": {"character": "岩", "keyword": "boulder",
                "expected_part_ids": {"rtk830", "rtk118"}},
     "rtk869": {"character": "破", "keyword": "rend",
@@ -2540,7 +2540,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1382": {"character": "踪", "keyword": "trail",
                "expected_part_ids": {"rtk1181", "rtk1372"}},
     "rtk1432": {"character": "織", "keyword": "weave",
-               "expected_part_ids": {"kangxi62", "rtk1431", "rtk518"}},
+               "expected_part_ids": {"prim-kazoo", "rtk1431"}},
     "rtk1437": {"character": "緻", "keyword": "fine",
                "expected_part_ids": {"rtk1431", "rtk818"}},
     "rtk1440": {"character": "締", "keyword": "tighten",
@@ -2590,7 +2590,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1470": {"character": "継", "keyword": "inherit",
                "expected_part_ids": {"prim-pipe", "rtk1431", "rtk987"}},
     "rtk1471": {"character": "緑", "keyword": "green",
-               "expected_part_ids": {"kangxi171", "prim-katakana-yo", "rtk137", "rtk1431"}},
+               "expected_part_ids": {"prim-dustpan", "rtk1431"}},
     "rtk1472": {"character": "縁", "keyword": "affinity",
                "expected_part_ids": {"kangxi152", "prim-katakana-yo", "rtk1431"}},
     "rtk1473": {"character": "網", "keyword": "netting",
@@ -2606,7 +2606,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1493": {"character": "係", "keyword": "person in charge",
                "expected_part_ids": {"kangxi9", "rtk1492"}},  # 亻 + 系 (person radical added 2026-09-05)
     "rtk1512": {"character": "踊", "keyword": "jump",
-               "expected_part_ids": {"kangxi26", "rtk1265", "rtk1372"}},
+               "expected_part_ids": {"prim-pogo-stick", "rtk1372"}},
     "rtk1609": {"character": "純", "keyword": "genuine",
                "expected_part_ids": {"rtk1431", "rtk2189"}},
     "rtk1610": {"character": "頓", "keyword": "immediate",
@@ -2646,7 +2646,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk2025": {"character": "繭", "keyword": "cocoon",
                "expected_part_ids": {"kangxi13", "prim-mugwort", "rtk1431", "rtk563"}},
     "rtk2102": {"character": "緩", "keyword": "slacken",
-               "expected_part_ids": {"prim-katakana-no", "rtk1", "rtk1431", "rtk752", "rtk784"}},
+               "expected_part_ids": {"prim-migrating-ducks", "rtk1431"}},
     "rtk2114": {"character": "綱", "keyword": "hawser",
                "expected_part_ids": {"rtk1431", "rtk2112"}},
     "rtk2211": {"character": "鱗", "keyword": "scaled",
@@ -2916,7 +2916,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk519": {"character": "暗", "keyword": "darkness",
                "expected_part_ids": {"rtk12", "rtk518"}},
     "rtk521": {"character": "識", "keyword": "discriminating",
-               "expected_part_ids": {"kangxi62", "rtk357", "rtk518"}},
+               "expected_part_ids": {"prim-kazoo", "rtk357"}},
     "rtk522": {"character": "鏡", "keyword": "mirror",
                "expected_part_ids": {"prim-finally", "rtk287"}},
     "rtk654": {"character": "意", "keyword": "idea",
@@ -2938,7 +2938,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk864": {"character": "掌", "keyword": "manipulate",
                "expected_part_ids": {"rtk196", "rtk687"}},
     "rtk887": {"character": "職", "keyword": "post",
-               "expected_part_ids": {"kangxi62", "rtk518", "rtk881"}},
+               "expected_part_ids": {"prim-kazoo", "rtk881"}},
     "rtk1058": {"character": "億", "keyword": "hundred million",
                "expected_part_ids": {"kangxi9", "rtk654"}},
     "rtk1060": {"character": "償", "keyword": "reparation",
@@ -2986,7 +2986,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk2277": {"character": "哨", "keyword": "scout",
                "expected_part_ids": {"rtk11", "rtk119"}},
     "rtk2340": {"character": "幟", "keyword": "pennant",
-               "expected_part_ids": {"kangxi62", "rtk432", "rtk518"}},
+               "expected_part_ids": {"prim-kazoo", "rtk432"}},
     "rtk2448": {"character": "蓉", "keyword": "lotus blossom",
                "expected_part_ids": {"prim-mugwort", "rtk853"}},
     "rtk2450": {"character": "芦", "keyword": "hollow reed",
@@ -3402,11 +3402,11 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk2629": {"character": "眩", "keyword": "faint",
                "expected_part_ids": {"rtk1484", "rtk15"}},
     "rtk1961": {"character": "論", "keyword": "argument",
-               "expected_part_ids": {"prim-umbrella", "rtk1967", "rtk357"}},
+               "expected_part_ids": {"prim-post-it-note", "rtk357"}},
     "rtk1962": {"character": "倫", "keyword": "ethics",
-               "expected_part_ids": {"kangxi9", "prim-umbrella", "rtk1967"}},
+               "expected_part_ids": {"kangxi9", "prim-post-it-note"}},
     "rtk1963": {"character": "輪", "keyword": "wheel",
-               "expected_part_ids": {"prim-umbrella", "rtk1967", "rtk304"}},
+               "expected_part_ids": {"prim-post-it-note", "rtk304"}},
     "rtk1968": {"character": "柵", "keyword": "stockade",  # was ｜,一,木,亅,冂,冊,廾 -- IDS ⿰木冊 has no 侖
                "expected_part_ids": {"rtk1967", "rtk207"}},  # (亼); dropped the spurious 亼-shape parts too
     "rtk2614": {"character": "珊", "keyword": "coral",  # was ｜,一,王,亅,冂,冊,廾 -- IDS ⿰王冊 has no 侖 either
@@ -3430,15 +3430,19 @@ EXPECTED_DECOMPOSITIONS = {
                                                                 # taught; 氏 is the established stand-in per
                                                                 # 低/抵/底's own convention).
     "rtk212": {"character": "枠", "keyword": "frame",  # had NO data.txt override at all -- fell through to
-               "expected_part_ids": {"rtk9", "rtk10", "rtk207"}},  # heisig-kanjis.csv's raw components text
-                                                                     # verbatim, which includes "ninety" (a dead,
-                                                                     # alias-less term -- CSV's own gloss for 卆's
-                                                                     # 九+十 combination, not a real primitive
-                                                                     # name) plus a legacy orphaned rad4.16 row.
-                                                                     # Added an override: render-confirmed 枠 =
-                                                                     # 木 + 卆(=九,十). Closed the last multi-char
-                                                                     # gap in the same check -- 0 undefined terms
-                                                                     # dataset-wide as of 2026-09-05.
+               "expected_part_ids": {"prim-ninety", "rtk207"}},  # heisig-kanjis.csv's raw components text
+                                                                     # verbatim, which includes "ninety" -- judged
+                                                                     # then to be a dead, alias-less term, "CSV's
+                                                                     # own gloss for 卆's 九+十 combination, not a
+                                                                     # real primitive name", plus a legacy orphaned
+                                                                     # rad4.16 row. The "ninety" half of that was
+                                                                     # wrong: 2026-09-11 it resolves strictly to 卆
+                                                                     # across all 4 of its CSV hosts, and 卆 renders
+                                                                     # as exactly the right side of 砕/粋/酔/枠. It
+                                                                     # was only "dead" because no row held it, the
+                                                                     # same shape as "animal legs" before it landed
+                                                                     # on 八. It now lives on prim-ninety, and this
+                                                                     # pin references that instead of 九,十.
 
     # 2026-09-10 — decomposition-review-queue disputes (vitaly.kroivets), each
     # render-verified against heisig-kanjis.csv's components column:

@@ -27,14 +27,18 @@ plausibly sees tofu:
 ## What it produces
 
 `primitive_images/{kanji_id}.png`, committed to the repo (unlike `uploads/`,
-which is gitignored user content). Rendered with HanaMin — a Mincho face, which
-is what `App.css` already asks for on every glyph surface (`"Noto Serif CJK JP",
-"Yu Mincho", serif`), so an image chip sits beside a real glyph chip without
-looking like a different typeface — in `--kanji-color` (#f0c060) on transparent,
-at 4x the largest display size (`.detail-char-img`, 4rem) so it stays crisp.
+which is gitignored user content). Rendered in Mincho, which is what `App.css`
+asks for on every glyph surface (`"Noto Serif CJK JP", "Yu Mincho", serif`), so
+an image chip sits beside a real glyph chip without looking like a different
+typeface — in `--kanji-color` (#f0c060) on transparent, at 4x the largest display
+size (`.detail-char-img`, 4rem) so it stays crisp.
 
-Install the font first if it is missing: `apt-get install fonts-hanazono`.
-Requires the same headless Chromium `render_glyphs.py` uses; no new dependency.
+Needs BOTH font packages: `apt-get install fonts-noto-cjk fonts-hanazono`. Noto
+Serif CJK JP supplies the Japanese shapes and is the default; HanaMin covers what
+it lacks and is the documented per-glyph exception (see FONT_OVERRIDES). Missing
+Noto is not an error you will see — the stack just falls through to HanaMin and
+quietly produces Chinese-variant shapes. Requires the same headless Chromium
+`render_glyphs.py` uses; no new Python dependency.
 
 ## Usage
 
@@ -76,9 +80,32 @@ UNRENDERABLE_RANGES = (
 # Radicals Supplement block is itself patchy on Android (same reason Ext A is above).
 FORCE_IMAGE = frozenset({0x2ECF})
 
-# Mincho, to match App.css's glyph surfaces. HanaMinA covers the BMP extensions,
-# HanaMinB the supplementary planes; listing both lets fontconfig pick per glyph.
-FONT_STACK = "'HanaMinA', 'HanaMinB', 'Noto Serif CJK JP', serif"
+# Mincho, to match App.css's glyph surfaces.
+#
+# Order matters, and this had it backwards until 2026-09-11. HanaMin is here because
+# it is the only free face covering CJK Ext A–G, but it is a Chinese-leaning design,
+# and for a glyph that a Japanese face *also* has it can draw a different shape: ⻏
+# (U+2ECF) comes out with a hooked tail under HanaMin, where 郡/邦/都 plainly have a
+# straight descender. Putting HanaMin first silently applied that variant to every
+# glyph it happened to cover. So the Japanese Mincho faces come first and HanaMin
+# fills only the gaps they genuinely cannot — the same ordering render_glyphs.py
+# adopted on 2026-09-10, for the same reason.
+#
+# Generating these needs a Japanese Mincho face installed (`apt-get install
+# fonts-noto-cjk`), not just fonts-hanazono; without one, "serif" falls through to
+# HanaMin and reintroduces exactly the bug above.
+FONT_STACK = ("'Noto Serif CJK JP', 'Source Han Serif JP', 'IPAMincho', "
+              "'HanaMinA', 'HanaMinB', serif")
+
+# ...and no single stack is right for every glyph, which is why this script tells you
+# to look at what it produced. Checked all 19 of these one by one against their hosts
+# on 2026-09-11: Noto wins or ties everywhere except 𧘇, which it draws small and
+# raised like a superscript, where the shape actually fills the bottom of 衣/表 —
+# HanaMin draws it at full size. Add an entry only after rendering the candidate
+# beside a real host and seeing the default get it wrong.
+FONT_OVERRIDES = {
+    0x27607: "'HanaMinA', 'HanaMinB', serif",   # 𧘇 scarf
+}
 GLYPH_COLOR = "#f0c060"   # --kanji-color
 CANVAS = 256              # 4x .detail-char-img's 4rem, so it stays crisp scaled down
 
@@ -111,13 +138,14 @@ def system_primitives(conn):
 
 def _page(character: str) -> str:
     """One glyph, centred on a transparent canvas, no chrome of any kind."""
+    stack = FONT_OVERRIDES.get(ord(character), FONT_STACK)
     return f"""<!DOCTYPE html>
 <html><head><meta charset="utf-8">
 <style>
   html, body {{ margin: 0; padding: 0; background: transparent; overflow: hidden; }}
   .glyph {{
     width: {CANVAS}px; height: {CANVAS}px;
-    font-family: {FONT_STACK};
+    font-family: {stack};
     font-size: {CANVAS}px;
     line-height: {CANVAS}px;
     text-align: center;
