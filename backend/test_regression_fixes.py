@@ -566,7 +566,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk561": {"character": "独", "keyword": "single",
                "expected_part_ids": {"kangxi94", "rtk556"}},
     "rtk757": {"character": "獲", "keyword": "seize",
-               "expected_part_ids": {"kangxi94", "rtk752", "prim-mugwort", "kangxi172"}},
+               "expected_part_ids": {"kangxi94", "prim-radio-caroline"}},
     # Further-collapsed 2026-08-29 (sweep batch 3 follow-up), same as 狩
     # above: 猪's 日,老 flattened 者 (someone, rtk1345) in place.
     "rtk1352": {"character": "猪", "keyword": "boar",
@@ -873,7 +873,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk789": {"character": "将", "keyword": "leader",
                 "expected_part_ids": {"prim-half-turtle", "rtk45", "rtk784"}},
     "rtk1233": {"character": "寝", "keyword": "lie down",
-                "expected_part_ids": {"kangxi14", "kangxi40", "prim-half-turtle", "prim-katakana-yo", "rtk752"}},
+                "expected_part_ids": {"kangxi40", "prim-french-maid", "prim-half-turtle"}},
     "rtk2774": {"character": "醤", "keyword": "soy sauce",
                 "expected_part_ids": {"rtk1534", "rtk789"}},
     "rtk2878": {"character": "鼎", "keyword": "tripod",
@@ -1574,10 +1574,14 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk312": {"character": "格", "keyword": "status",
                "expected_part_ids": {"rtk207", "rtk311"}},
     # 燥 was 火,口,木,品 -- the 口 duplicated what 品(goods, rtk23, itself
-    # already just 口) already covers; cjkvi-ids: 燥 = ⿰火喿, 喿 = 品+木
-    # (喿 itself not independently taught, flattened one level).
+    # already just 口) already covers; cjkvi-ids: 燥 = ⿰火喿, 喿 = 品+木.
+    # That fix flattened one level past 喿 on the grounds that 喿 "itself
+    # [is] not independently taught". Wrong, like "ninety" and "animal
+    # legs" before it: heisig-kanjis.csv names 喿 "furniture" (strictly
+    # resolving across all 3 of its hosts), so 2026-09-11 registered it as
+    # prim-furniture and this pin references it instead of 品,木.
     "rtk228": {"character": "燥", "keyword": "parch",
-               "expected_part_ids": {"rtk173", "rtk23", "rtk207"}},
+               "expected_part_ids": {"prim-furniture", "rtk173"}},
     # 礎 was 口,石,疋,木 -- a stray 口 plus an incomplete 木 standing in for
     # 林(grove, rtk208, itself 木+木). cjkvi-ids: 礎 = ⿰石楚, 楚 = 林+疋
     # (楚 not independently taught, flattened one level; 疋="critters",
@@ -1824,7 +1828,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk720": {"character": "拾", "keyword": "pick up",
                 "expected_part_ids": {"kangxi64", "rtk269"}},
     "rtk756": {"character": "護", "keyword": "safeguard",
-                "expected_part_ids": {"prim-mugwort", "rtk357", "rtk755"}},
+                "expected_part_ids": {"prim-radio-caroline", "rtk357"}},
     "rtk759": {"character": "怒", "keyword": "angry",
                 "expected_part_ids": {"rtk639", "rtk758"}},
     "rtk767": {"character": "殻", "keyword": "husk",
@@ -1885,7 +1889,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk970": {"character": "秘", "keyword": "secret",
                 "expected_part_ids": {"kangxi115", "rtk685"}},
     "rtk974": {"character": "穫", "keyword": "harvest",
-                "expected_part_ids": {"kangxi115", "prim-mugwort", "rtk755"}},
+                "expected_part_ids": {"kangxi115", "prim-radio-caroline"}},
     "rtk976": {"character": "稲", "keyword": "rice plant",
                 "expected_part_ids": {"kangxi115", "rtk35", "rtk784"}},
     "rtk982": {"character": "誘", "keyword": "entice",
@@ -2396,7 +2400,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1072": {"character": "保", "keyword": "protect",
                 "expected_part_ids": {"kangxi9", "rtk2297"}},
     "rtk724": {"character": "操", "keyword": "maneuver",
-               "expected_part_ids": {"kangxi64", "rtk23", "rtk207"}},
+               "expected_part_ids": {"kangxi64", "prim-furniture"}},
     "rtk2480": {"character": "藁", "keyword": "straw",
                 "expected_part_ids": {"prim-mugwort", "rtk329", "rtk207"}},
     # Owner report (2026-09-04): "search for stone+mouth brings mistakes".
@@ -2566,7 +2570,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1465": {"character": "索", "keyword": "cord",
                "expected_part_ids": {"kangxi14", "rtk10", "rtk1431"}},
     "rtk1467": {"character": "綿", "keyword": "cotton",
-               "expected_part_ids": {"rtk1431", "rtk37", "rtk432"}},
+               "expected_part_ids": {"prim-napkin", "rtk1431"}},
     "rtk1468": {"character": "絹", "keyword": "silk",
                "expected_part_ids": {"rtk11", "rtk13", "rtk1431"}},
     # Owner asked to search "goods" (2026-09-04) -- checked all 8 results
@@ -2580,7 +2584,7 @@ EXPECTED_DECOMPOSITIONS = {
     # approximates 臣+𠂉 per cjkvi-ids ⿰臣⿱𠂉品; 癌's "疔" is an existing
     # alias for kangxi104/疒, not a separate error).
     "rtk1469": {"character": "繰", "keyword": "winding",
-               "expected_part_ids": {"rtk1431", "rtk207", "rtk23"}},
+               "expected_part_ids": {"prim-furniture", "rtk1431"}},
     "rtk918": {"character": "臨", "keyword": "look to",
                "expected_part_ids": {"prim-katakana-no", "rtk1", "rtk1023", "rtk23", "rtk911"}},
     "rtk2191": {"character": "藻", "keyword": "seaweed",

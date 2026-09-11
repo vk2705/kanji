@@ -8119,3 +8119,55 @@ before they were a mix of whatever each container happened to have installed.
 That last part is the real lesson: **the output of this script depended on the
 machine it ran on, and nothing said so.** The docstring now names both font
 packages and warns that a missing Noto is not an error anyone will see.
+
+## 2026-09-11 (continued) — 12 more primitives, and a second superseded "not taught" verdict
+
+Fifth batch, same method. Registered: `喿` furniture, `帛` napkin, `复` fold
+back, `壬` porter, `蒦` radio caroline, `𠫓` infant, `㕣` gully, `夗` mailbox,
+`劦` triceps, `賁` pitchfork, `帚` feather duster, `𠬶` French maid.
+
+**`𠂆` was rejected at the render step** and is worth recording with the other
+near-misses. "drag" resolves to it strictly, and it genuinely is a distinct
+codepoint — but rendered, it is indistinguishable from `厂` (kangxi27, "cliff"),
+which is already registered. cjkvi separates them; a reader cannot. Registering
+it would create a distinction that exists only in the data, which is the mirror
+image of the lookalike-carrier mistake: instead of one row standing in for two
+shapes, two rows would stand for one visible shape.
+
+35 collapses followed (17 from the detector, 18 CSV-confirmed for the atomic
+ones). Two of those families repaired real errors rather than just flattening:
+
+- **脇/脅/協 each listed a single `力`** where the component is `劦`, three of
+  them. Heisig's name for it — "triceps" — is a joke about exactly that, which is
+  a nice check that the name and the structure agree.
+- **妊/廷/任 listed `王`** where the component is `壬`. These are different
+  characters (壬's top stroke is slanted, 王's is level), and the CSV says
+  "porter; drop; samurai" for all three. This is the error I noticed in passing on
+  2026-09-10 while reviewing 賃 and could not fix then, because 壬 had no row to
+  point at.
+
+### The "not independently taught" verdict, again
+
+`rtk228`'s pin recorded that 燥 was flattened one level past 喿 because "喿 itself
+[is] not independently taught". Same class as yesterday's "ninety": the CSV names
+喿 **"furniture"**, strictly resolving across all 3 of its hosts. Corrected in
+place, and the pin now references `prim-furniture`.
+
+That is now **four** terms filed as dead, invented, or untaught that turned out to
+be Heisig's own names with nowhere to live — "animal legs", "ninety", "furniture",
+and (inverted) the ツ/𭕄 carrier. The rule stated yesterday holds up: an alias with
+no home is indistinguishable from an alias with no meaning, and the structural
+check is what separates them. Worth applying to any similar note still in the
+suite rather than waiting to trip over them one at a time.
+
+**Result: exact match against cjkvi top level 64.5% → 65.7%.** `mouth` 202 → 200,
+`sun` 142 → 140. 8 pins rewritten. Verified: detector 0, dead tokens 0,
+self-references 0, 1304 pins with only the 4 known hanzi-scope non-issues, 66
+pytest.
+
+One note on the new images: `𠬶` renders noticeably thinner than its neighbours.
+Checked rather than assumed — **HanaMinB is the only installed face that has
+U+20B36 at all**, Noto Serif CJK JP does not cover it, so the fallback is already
+picking the only option and there is nothing for `FONT_OVERRIDES` to improve.
+
+**Next**: ~27 strictly-named components remain.
