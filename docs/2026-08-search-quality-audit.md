@@ -8232,3 +8232,73 @@ Structure is untouched (exact match stays 65.7%) and no search broadened:
 name-resolution tooling now has three guards on it (strict subtree, ≥3 hosts,
 ≥0.5 coverage) and could be pointed at the `zh-*` rows, which have never had a
 Heisig-name pass at all.
+
+## 2026-09-12 (continued) — checking against Heisig's list, not cjkvi's; and ⺌ is not 小
+
+### A better error detector
+
+The over-flatten detector only catches decompositions that are *flatter* than
+cjkvi. Asked to keep checking kanji, the obvious next question is where our parts
+**contradict** ground truth. Running that against cjkvi first gave 439 hits and
+was near-useless: it is dominated by notation and segmentation differences, not
+mistakes (`肖` ours 小,月 vs cjkvi ⺌,月; `黙` where ours references 黒 and cjkvi
+flattens it — ours is *better*).
+
+Against **`heisig-kanjis.csv`** instead it works, because that file is Heisig's
+own answer, and because every real component error this audit has found (込/辶,
+ハ/八, 王/壬, 矢/失) was caught by it rather than by cjkvi. Using the
+three-guard name resolver built this morning, 330 CSV component names map
+confidently to a glyph; comparing those against each kanji's parts gives **197
+kanji where Heisig names a component we do not have anywhere**. Excluding the
+false positives where the kanji *is* the component (九, 言, 雨 …), that splits
+into 110 where the named component is already registered — fixable now — and 43
+occurrences needing a component that is still unregistered.
+
+**64 applied**, targeting cjkvi's top level with CSV corroboration that the
+missing component is real: 栽/載/裁 → 𢦏, 曜/濯 → 翟, 湯 → 昜, 抽/油/宙/届/笛/軸 →
+由 (all six had spelled it 日+｜), 刈/凶 → 㐅, 会 → 云, 崎 → 奇. `込` itself was in
+the list, still missing its own 辶 — the row whose 67 *hosts* were fixed two days
+ago had never been fixed itself.
+
+Two pinned notes closed as superseded:
+
+- **悩** carried a standing open question about whether it shares 脳/巣/単's
+  𭕄-prefixed structure. Its own pin quoted cjkvi as `⿰忄⿱𭕄凶` — the 𭕄 was in
+  the evidence all along; the original fix swapped 尚,凵 for 凶 and never added the
+  marker sitting in its own citation. 悩 now matches 脳's 月,𭕄,凶.
+- **倹/験** wanted "the same 僉 shape as 剣/険" referenced directly; that shape has
+  been registered as `prim-awl` since 2026-09-09, so they now do.
+
+### ⺌ is not 小 (owner call)
+
+While reviewing the cjkvi-contradiction list I described `肖` ours 小,月 vs cjkvi
+⺌,月 as a notation difference. Owner: *"cjkvi is better"*. Rendering settles it and
+they are right — **小 has a hooked centre stroke and a long vertical; ⺌ is three
+short strokes with neither**, and 肖/光/尚/当/常/掌 all plainly draw ⺌. Same class
+as 込/辶 and ハ/八, not notation.
+
+The pin on 尚 spelled out the original reasoning: the top "match[es] 小's top
+portion closely enough to reuse 小 directly (same pragmatic-approximation
+precedent as 个 for 'person')". Both halves are retracted — the 个 precedent it
+leans on was this audit's *first* lookalike-carrier undo (个 is "umbrella" and
+carries a stroke the host shape lacks), so it never supported anything.
+
+Registered as `prim-small-radical` (U+2E8C), following the established
+variant-form convention — descriptive keyword, Heisig's names as aliases, exactly
+like `prim-fire-radical` and `prim-eight-radical`. The wrinkle here is that Heisig
+calls ⺌ and 小 **the same thing**: "small; little" for both. He distinguishes them
+visually, not verbally. So both names stay on both rows and a search for "small"
+returns 24 — every host of either shape — which is precisely what the ambiguity
+union built on 2026-09-09 is for. Added to `FORCE_IMAGE` for the same reason ⻏ is
+there: CJK Radicals Supplement is patchy on Android.
+
+**Result: exact match against cjkvi top level 65.7% → 68.0%**, the largest
+single-session jump since the bulk pass. `mouth` 200 → 191, `sun` 140 → 126,
+`soil` 131 → 124. 10 pins rewritten. Verified: detector 0, dead tokens 0,
+self-references 0, 1316 checks with only the 4 known hanzi-scope non-issues, 66
+pytest.
+
+**Next**: the CSV-contradiction detector still lists 46 kanji whose target needs a
+component that is itself unregistered, and 43 occurrences over 13 such components
+(𠮷, 亦, 乍, 坴, 卉 …). Those are the same registration workstream, now with a
+concrete demand list attached rather than a frequency ranking.

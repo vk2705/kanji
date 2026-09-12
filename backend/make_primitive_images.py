@@ -72,13 +72,18 @@ UNRENDERABLE_RANGES = (
 )
 
 # Individual codepoints outside those ranges that still need a picture. Not a
-# rendering problem — a *disambiguation* one. `kangxi170` (left-side 阝, "pinnacle")
-# and `kangxi163` (right-side 阝, "walls") are the same shape and, in most fonts,
-# the same glyph at U+961D; giving them one codepoint each would make a literal `阝`
-# in a decomposition resolve ambiguously. So `kangxi163` gets U+2ECF (⻏, CJK RADICAL
-# CITY) — a distinct codepoint that resolves cleanly — and an image, because the CJK
-# Radicals Supplement block is itself patchy on Android (same reason Ext A is above).
-FORCE_IMAGE = frozenset({0x2ECF})
+# rendering problem — a *disambiguation* one, and both live in the CJK Radicals
+# Supplement block, which is itself patchy on Android (same reason Ext A is above).
+#
+#   U+2ECF ⻏ — `kangxi170` (left-side 阝, "pinnacle") and `kangxi163` (right-side 阝,
+#     "walls") are the same shape and, in most fonts, the same glyph at U+961D; one
+#     codepoint for both would make a literal `阝` in a decomposition resolve
+#     ambiguously, so kangxi163 gets ⻏ (CJK RADICAL CITY) instead.
+#   U+2E8C ⺌ — `prim-small-radical`. Heisig names this and 小 identically ("small;
+#     little"), but they are not the same shape: 小 has a hooked centre stroke and a
+#     long vertical, ⺌ is three short strokes with neither, and 肖/光/尚/当/常/掌 all
+#     plainly draw the latter (owner call, 2026-09-12, confirmed by rendering).
+FORCE_IMAGE = frozenset({0x2ECF, 0x2E8C})
 
 # Mincho, to match App.css's glyph surfaces.
 #

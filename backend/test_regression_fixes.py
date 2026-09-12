@@ -77,10 +77,11 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"rtk119", "rtk87"}},
     # 2026-09-05 decomposition_worklist.json batch, day 2 (built from
     # google_decompositions.json cross-check + cjkvi-ids + render):
-    # 光 had a spurious 一+尚 where render shows a plain 小 top (no box/口
-    # shape at all -- 尚 doesn't belong here) over 儿.
+    # 光 had a spurious 一+尚 where render shows a plain 小-like top (no
+    # box/口 shape at all -- 尚 doesn't belong here) over 儿. The top is
+    # ⺌ rather than 小 as of 2026-09-12 -- see the rtk196 note below.
     "rtk125": {"character": "光", "keyword": "ray",
-               "expected_part_ids": {"kangxi10", "rtk110"}},
+               "expected_part_ids": {"kangxi10", "prim-small-radical"}},
     # 器 used 大 for the center element; render clearly shows 犬(with its
     # extra dot stroke), not plain 大, surrounded by four 口 (deduped to one
     # per the established "no duplicate primitive" convention).
@@ -858,8 +859,12 @@ EXPECTED_DECOMPOSITIONS = {
     # (脳/巣/単 share a similar-looking 𭕄-prefixed structure per cjkvi-ids
     # and may have the same 尚-vs-凶 mixup -- left as a standing open
     # question, same as this project's existing note on that marker.)
+    # Closed 2026-09-11/12: 𭕄 was registered as prim-owl, and 悩's own
+    # cjkvi string quoted above (⿰忄⿱𭕄凶) has the 𭕄 in it -- the original
+    # fix swapped 尚,凵 for 凶 but never added the marker sitting right
+    # there in its own evidence. 悩 now matches 脳's 月,𭕄,凶 shape.
     "rtk2085": {"character": "悩", "keyword": "trouble",
-                "expected_part_ids": {"kangxi61", "rtk1603"}},
+                "expected_part_ids": {"kangxi61", "prim-owl", "rtk1603"}},
     "rtk683": {"character": "慕", "keyword": "pining",
                 "expected_part_ids": {"rtk2242", "rtk639"}},
     # 壮/将/寝/醤/鼎/燕/乖/淵 (plus 状, pinned separately above) all used
@@ -952,7 +957,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk2096": {"character": "鳩", "keyword": "pigeon",
                 "expected_part_ids": {"rtk2091", "rtk9"}},
     "rtk2097": {"character": "鶏", "keyword": "chicken",
-                "expected_part_ids": {"rtk1023", "rtk112", "rtk161", "rtk2", "rtk2091", "rtk784"}},
+                "expected_part_ids": {"rtk2091", "rtk784", "rtk901"}},
     "rtk2268": {"character": "鳳", "keyword": "phoenix",
                 "expected_part_ids": {"kangxi16", "rtk2091"}},
     "rtk2344": {"character": "鷹", "keyword": "hawk",
@@ -1674,7 +1679,7 @@ EXPECTED_DECOMPOSITIONS = {
     # The rest of the 馬-family redundant-灬 fix (see the rtk2137 comment
     # above for the full account) -- one pin per remaining host.
     "rtk2134": {"character": "験", "keyword": "verification",
-                "expected_part_ids": {"prim-umbrella", "rtk1023", "rtk11", "rtk2132"}},
+                "expected_part_ids": {"prim-awl", "rtk2132"}},
     "rtk2135": {"character": "騎", "keyword": "equestrian",
                 "expected_part_ids": {"rtk133", "rtk2132"}},
     "rtk2138": {"character": "駅", "keyword": "station",
@@ -2069,9 +2074,11 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1800": {"character": "整", "keyword": "organize",
                 "expected_part_ids": {"kangxi66", "rtk1793", "rtk405"}},
     # Was 合,人 (人 not 亻, and 合/"fit" is a wrong reference -- render-confirmed
-    # the right side is the same 僉 shape as 剣/険, not 合-shaped) -- 2026-09-05
+    # the right side is the same 僉 shape as 剣/険, not 合-shaped) -- 2026-09-05.
+    # That shape is now registered (㑒 = prim-awl, 2026-09-09), so this and
+    # 験 reference it directly instead of spelling out 亼,口,人.
     "rtk1804": {"character": "倹", "keyword": "frugal",
-                "expected_part_ids": {"kangxi9", "rtk11", "rtk1023", "prim-umbrella"}},
+                "expected_part_ids": {"kangxi9", "prim-awl"}},
     "rtk1857": {"character": "惨", "keyword": "wretched",
                 "expected_part_ids": {"kangxi61", "rtk1856"}},
     "rtk1897": {"character": "謀", "keyword": "conspire",
@@ -2268,12 +2275,22 @@ EXPECTED_DECOMPOSITIONS = {
     # small-variant + 冂 + 口 (尚 = ⿱⺌冋, 冋 = ⿵冂口). Render-confirmed 尚's
     # top two strokes match 小's top portion closely enough to reuse 小
     # directly (same pragmatic-approximation precedent as 个 for "person").
+    # Both halves of that reasoning are now retracted. The 个-for-"person"
+    # precedent was itself this audit's first lookalike-carrier undo (个 is
+    # "umbrella" and has a stroke the host shape lacks), so it never
+    # supported anything; and rendering 小 beside ⺌ shows they are plainly
+    # different — 小 has a hooked centre stroke and a long vertical, ⺌ is
+    # three short strokes with neither, and 肖/光/尚/当/常/掌 all draw ⺌.
+    # Owner call, 2026-09-12: use cjkvi's ⺌. Registered as
+    # prim-small-radical, keeping Heisig's own names ("small", "little")
+    # as aliases since he uses the same words for both shapes — so a
+    # search for "small" correctly returns both.
     # The "small" alias had been pointing at an orphaned rad3.13:?  row
     # instead of rtk110 -- same orphaned-placeholder bug class as rad1.1/
     # rad2.8/rad4.17 fixed earlier in this audit. Retargeted "small" to
     # rtk110 and deleted the orphan.
     "rtk196": {"character": "尚", "keyword": "esteem",
-               "expected_part_ids": {"kangxi13", "rtk11", "rtk110"}},
+               "expected_part_ids": {"kangxi13", "prim-small-radical", "rtk11"}},
     # Continuing the common-primitive audit (2026-09-02, interactive
     # follow-up): 天(rtk457, "heavens") itself had a stray "二"("two") that
     # doesn't appear anywhere in cjkvi-ids's ⿱一大 or the render -- 天 is
@@ -2562,7 +2579,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1460": {"character": "経", "keyword": "sutra",
                "expected_part_ids": {"prim-spool", "rtk1431"}},
     "rtk1461": {"character": "紳", "keyword": "sire",
-               "expected_part_ids": {"prim-pipe", "rtk12", "rtk14", "rtk1431"}},
+               "expected_part_ids": {"rtk1198", "rtk1431"}},
     "rtk1463": {"character": "細", "keyword": "dainty",
                "expected_part_ids": {"rtk14", "rtk1431"}},
     "rtk1464": {"character": "累", "keyword": "accumulate",
@@ -2640,7 +2657,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1928": {"character": "顕", "keyword": "appear",
                "expected_part_ids": {"rtk12", "rtk64"}},
     "rtk1929": {"character": "繊", "keyword": "slender",
-               "expected_part_ids": {"kangxi62", "rtk1431", "rtk161", "rtk1880"}},
+               "expected_part_ids": {"prim-harvest-festival", "prim-upside-down-row", "rtk1431"}},
     "rtk1966": {"character": "編", "keyword": "compilation",
                "expected_part_ids": {"prim-fishfinger", "rtk1431"}},
     "rtk1971": {"character": "紙", "keyword": "paper",
@@ -2914,7 +2931,7 @@ EXPECTED_DECOMPOSITIONS = {
     #    and should reference 意 directly (cjkvi-ids ⿰亻意, same
     #    missing-component class again).
     "rtk119": {"character": "肖", "keyword": "resemblance",
-               "expected_part_ids": {"rtk110", "rtk13"}},
+               "expected_part_ids": {"prim-small-radical", "rtk13"}},
     "rtk464": {"character": "章", "keyword": "badge",
                "expected_part_ids": {"rtk26", "rtk462"}},
     "rtk519": {"character": "暗", "keyword": "darkness",
@@ -3362,7 +3379,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1645": {"character": "寒", "keyword": "cold",
                "expected_part_ids": {"kangxi3", "kangxi40", "rtk1946", "rtk8"}},
     "rtk1936": {"character": "異", "keyword": "uncommon",
-               "expected_part_ids": {"rtk14", "rtk1946", "rtk8"}},
+               "expected_part_ids": {"rtk14", "rtk1934"}},
     "rtk1941": {"character": "暴", "keyword": "outburst",
                "expected_part_ids": {"rtk12", "rtk137", "rtk1946", "rtk8"}},
     "rtk1942": {"character": "爆", "keyword": "bomb",
