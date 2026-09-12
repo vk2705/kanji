@@ -8171,3 +8171,64 @@ U+20B36 at all**, Noto Serif CJK JP does not cover it, so the fallback is alread
 picking the only option and there is nothing for `FONT_OVERRIDES` to improve.
 
 **Next**: ~27 strictly-named components remain.
+
+## 2026-09-12 (daily check-in) — Heisig's own names for primitives we already had
+
+Acting on the note from yesterday: rather than keep tripping over individual
+"this term is dead/invented/not taught" verdicts one batch at a time, generalise
+the check. The four already-retracted ones ("animal legs", "ninety", "furniture",
+and the inverted ツ/𭕄 carrier) all shared one shape — **a name with no row to
+live on looks exactly like a name with no meaning** — so the systematic question
+is: which of Heisig's component names resolve to a glyph we *already have*, on a
+row that simply doesn't carry the name?
+
+### Sharpening the resolver a second time
+
+The first run said **513**, and was wrong. The strict rule from the previous
+batches ("the intersection must lie inside the candidate's own subtree") has a
+blind spot for atoms: `jewel` came back as `一`, because 一 sits inside nearly
+everything, so it survives as the only shared component of all 38 "jewel" hosts —
+and since 一 has no parts, nothing is *more* specific, so the test passes it.
+Same for `ball`→一, `vase`→丷, `samurai`→十.
+
+The fix is a coverage test, and it is the obvious question in hindsight: **if the
+name really means that glyph, the kanji listing the name should be most of the
+kanji containing the glyph.** `water droplets` covers 128 of the 200 kanji
+containing 水 (0.64); `jewel` covers 38 of the 1444 containing 一 (0.03). A 0.5
+floor kills every degenerate case. Combined with a ≥3-host floor — with one host
+there is no intersection at all, which is how `'sale'→読` and `'a'→惑` got in —
+the list drops to **85 additions across 70 rows**, and those read as
+unmistakably Heisig: `spiderman`→糸, `Freud`→忄, `parthenon`/`acropolis`→阝,
+`keitai`→言, `water pistol`→水, `glue`→寸, `turkey`→隹, `Arnold`→力, `Nelson`→彳,
+`cruise missile`→殳, `whiskey bottle`→酉, `Billy Connolly`→文.
+
+These are the names a reader of the book actually remembers. Nobody thinks "糸",
+or even "thread" — they think "spiderman". Searching for any of them returned
+nothing at all until today.
+
+### A bug I introduced and caught before committing
+
+The first application padded every 3-field `data.txt` line to 4 fields to write
+the alias back. An empty 4th field is not the same as an absent one: it is an
+explicit "this kanji is atomic" override, so 16 rows silently gained one. The
+import line gave it away — 3078 parts overrides where the baseline was 3062.
+Re-applied preserving each line's original field count; the count is back to
+3062 exactly. Worth recording because the failure was invisible in the diff
+(a trailing `:`) and only showed up in a number printed by an unrelated step.
+
+### Pinned
+
+`check_heisig_primitive_names_present` in `test_regression_fixes.py` pins twelve
+representative names, asserting both that each still resolves to its row *and*
+that a parts search for it returns something — resolution alone is not enough,
+since the 2026-09-09 ambiguity bug broke exactly the second half for "owl" while
+the alias sat intact on the row. Verified the guard by breaking it deliberately.
+Check count 1304 → 1316.
+
+Structure is untouched (exact match stays 65.7%) and no search broadened:
+`mouth` 200, `sun` 140, `soil` 131, `road` 69, `owl` 18, all unchanged.
+
+**Next**: ~27 strictly-named unregistered components remain. The same
+name-resolution tooling now has three guards on it (strict subtree, ≥3 hosts,
+≥0.5 coverage) and could be pointed at the `zh-*` rows, which have never had a
+Heisig-name pass at all.

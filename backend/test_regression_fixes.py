@@ -3697,6 +3697,47 @@ def check_wild_dog_radical_present(conn) -> list[str]:
     return failures
 
 
+# Heisig's own mnemonic names for common primitives, added 2026-09-12 after a sweep
+# found 85 of them strictly resolving to rows that simply didn't carry them. These are
+# the names a reader of the book actually remembers — nobody thinks "糸" or even
+# "thread", they think "spiderman" — so losing them is a silent, large usability
+# regression that no structural check would catch. One representative per row.
+HEISIG_PRIMITIVE_NAMES = {
+    "spiderman": "rtk1431",      # 糸
+    "freud": "kangxi61",         # 忄
+    "parthenon": "kangxi170",    # 阝 (left)
+    "keitai": "rtk357",          # 言
+    "water pistol": "rtk137",    # 水
+    "glue": "rtk45",             # 寸
+    "turkey": "kangxi172",       # 隹
+    "arnold": "rtk922",          # 力
+    "nelson": "kangxi60",        # 彳
+    "cruise missile": "kangxi79",  # 殳
+    "whiskey bottle": "rtk1534",   # 酉
+    "billy connolly": "rtk1861",   # 文
+}
+
+
+def check_heisig_primitive_names_present(conn) -> list[str]:
+    """Each name must still resolve to the row it names, and still find that row's hosts.
+
+    Resolution alone isn't enough: an alias can survive on the row while the parts
+    search stops returning anything for it (that is exactly what the 2026-09-09
+    ambiguity bug did to "owl"), so this also asserts the search is non-empty."""
+    failures = []
+    for name, expected_id in HEISIG_PRIMITIVE_NAMES.items():
+        ids = database._self_identity_kanji_ids(conn, name, viewer_id=None, script_scope=None)
+        if expected_id not in ids:
+            failures.append(f"Heisig name {name!r} no longer resolves to {expected_id} "
+                            f"(got {sorted(ids) or 'nothing'})")
+            continue
+        hits = database.search_by_parts(conn, [name], viewer_id=None, depth=1)
+        if not hits:
+            failures.append(f"Heisig name {name!r} resolves to {expected_id} but a parts "
+                            f"search for it returns nothing")
+    return failures
+
+
 def check_no_self_reference(conn) -> list[str]:
     failures = []
     variant_rows = conn.execute("SELECT id, character FROM kanji WHERE variant_of = id").fetchall()
@@ -3855,6 +3896,7 @@ def main():
     all_failures += check_person_radical_present(conn)
     all_failures += check_net_radical_present(conn)
     all_failures += check_wild_dog_radical_present(conn)
+    all_failures += check_heisig_primitive_names_present(conn)
     all_failures += check_alias_visibility_boundary(conn)
     conn.close()
 
@@ -3862,7 +3904,8 @@ def main():
 
     total_checks = (len(EXPECTED_DECOMPOSITIONS) + len(EXPECTED_HANZI_PRESENT)
                     + len(EXPECTED_ATOMIC) + len(PERSON_RADICAL_HOSTS)
-                    + len(NET_RADICAL_HOSTS) + len(WILD_DOG_RADICAL_HOSTS) + 4)
+                    + len(NET_RADICAL_HOSTS) + len(WILD_DOG_RADICAL_HOSTS)
+                    + len(HEISIG_PRIMITIVE_NAMES) + 4)
     if all_failures:
         print(f"FAILED: {len(all_failures)} problem(s) found across {total_checks} checks:\n")
         for f in all_failures:
@@ -3872,6 +3915,7 @@ def main():
         print(f"PASSED: all {total_checks} regression checks OK "
               f"({len(EXPECTED_DECOMPOSITIONS)} pinned decompositions, "
               f"{len(EXPECTED_HANZI_PRESENT)} hanzi presence spot-checks, "
+              f"{len(HEISIG_PRIMITIVE_NAMES)} Heisig primitive names, "
               f"KRADFILE-proxy + self-reference + alias-visibility-boundary + "
               f"migration-atomicity invariants).")
         sys.exit(0)
