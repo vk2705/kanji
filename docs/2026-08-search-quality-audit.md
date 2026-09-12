@@ -8302,3 +8302,57 @@ pytest.
 component that is itself unregistered, and 43 occurrences over 13 such components
 (𠮷, 亦, 乍, 坴, 卉 …). Those are the same registration workstream, now with a
 concrete demand list attached rather than a frequency ranking.
+
+## 2026-09-12 (third pass) — registering by demand, and 𮥶 after two wrong rejections
+
+The CSV-contradiction detector left a **demand list**: not "which components are
+frequent" but "which components are blocking a fix on a real kanji". 13 of them,
+each with Heisig's own name attached. That is a better queue than frequency,
+because every entry pays off immediately.
+
+Registered all 13: `𠮷` earthenware jar, `𮥶` pegasus, `坴` mini-tractor, `卉`
+haystack, `兹` double-mysterious, `𦰌` cabbage, `𠀐` purse, `尹` mop, `亲` red
+pepper, `𠀎` celery, `乍` saw, `夹` scissors, `亦` apple.
+
+Three of those had been excluded by the "name already belongs to a registered
+row" filter — `saw` is 挽's alias, `scissors` is 鋏's keyword, `apple` is 檎's.
+Checking the CSV settles it: 昨 is "sun; day; **saw**", 峡 is "mountain;
+**scissors**; husband; horns", 変 is "**apple**; walking legs". Heisig genuinely
+uses each word twice, exactly like "awl" (錐 and 㑒) and "mist" (靄 and 𠦝). The
+filter is a useful default but not a verdict; ambiguity is handled.
+
+### 𮥶, on the third attempt
+
+I rejected `𮥶` on 2026-09-10 and again on 2026-09-11, both times for being
+indistinguishable from 雚 with "pegasus" uncertain. Both rejections were wrong,
+and rendering all three side by side shows why: **雚 carries 艹 + 吅 above its 隹;
+𮥶 is just a single stroke over 隹**, and 歓/権/観/勧 plainly draw the latter. The
+CSV agrees independently — 歓 is "pegasus; horse; …; turkey; lack; yawn".
+
+The pin on 歓 had already described the shape correctly — "the Joyo forms use an
+abbreviated 雚, drawn 丷 over 隹" — it just had no row to point at. Worth noting
+that "I can't tell these apart" twice meant "I have not rendered them side by
+side", not "they are alike".
+
+### A fifth superseded verdict
+
+`rtk1619` 新 recorded that the CSV's "red pepper; stand up; vase" wording "was
+noise here, not a real shared concept", because rendering showed 新's left is
+立+木, not 辛+并. The render was right; the dismissal was not. "red pepper"
+resolves strictly to **亲** (U+4EB2), which *is* 立 over 木 — Heisig was naming the
+compound one level up, and there was no row for it. Half-retracted in place.
+
+That makes five: "animal legs", "ninety", "furniture", "red pepper", and (as a
+shape rather than a name) the ツ/𭕄 carrier. The failure mode is stable enough to
+state as a rule — **before concluding a CSV name is noise, check whether it names
+a compound one level above what you were looking at.**
+
+32 fixes followed (11 detector, 21 CSV-confirmed): 歓/権/観/勧 → 𮥶, 昨/詐/作/酢 →
+乍, 峡/狭/挟 → 夹, 謹/僅/勤 → 𦰌, 新/親 → 亲, 伊/君 → 尹, 変/跡/蛮/恋 → 亦,
+滋/慈/磁 → 兹, 陸/睦 → 坴, 貴/潰 → 𠀐, 舎 → 𠮷.
+
+**Result: exact match against cjkvi top level 68.0% → 69.1%** (65.7% at the start
+of the day). `mouth` 191 → 187, `soil` 124 → 119. 11 pins rewritten, 2 notes
+corrected. Verified: detector 0, dead tokens 0, self-references 0, 1316 checks
+with only the 4 known hanzi-scope non-issues, 66 pytest. 28 primitive images, all
+five new ones checked against their hosts.

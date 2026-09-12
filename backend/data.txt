@@ -387,7 +387,7 @@ rtk334:京:capital:口,小,亠
 rtk335:涼:refreshing:水,京
 rtk336:景:scenery:京,日
 rtk337:鯨:whale:魚,京
-rtk338:舎:cottage:口,土,个
+rtk338:舎:cottage:人,𠮷
 rtk339:周:circumference,running track:口,土,冂
 rtk340:週:week:周,辶
 rtk341:士:gentleman:
@@ -661,9 +661,9 @@ rtk608:奪:rob:寸,大,隹
 rtk609:確:assurance:石,冖,隹
 rtk610:午:noon:ノ,干
 rtk611:許:permit:午,言
-rtk612:歓:delight:欠,丷,隹
-rtk613:権:authority:木,丷,隹
-rtk614:観:outlook:見,丷,隹
+rtk612:歓:delight:欠,𮥶
+rtk613:権:authority:木,𮥶
+rtk614:観:outlook:見,𮥶
 rtk615:羽:feathers,wings:
 rtk616:習:learn:羽,白
 rtk617:翌:the following:羽,立
@@ -977,7 +977,7 @@ rtk924:労:labor:𭕄,力,冖
 rtk925:募:recruit:力,莫
 rtk926:劣:inferiority:少,力
 rtk927:功:achievement:工,力
-rtk928:勧:persuade:力,丷,隹
+rtk928:勧:persuade:力,𮥶
 rtk929:努:toil:奴,力
 rtk930:勃:suddenness:子,十,力,冖
 rtk931:励:encourage:力,厂,万
@@ -1271,9 +1271,9 @@ rtk1218:断:severance:斤,米,｜,一
 rtk1219:質:substance:貝,斤
 rtk1220:斥:reject:斤,丶
 rtk1221:訴:accusation:斥,言
-rtk1222:昨:yesterday:｜,ノ,日
-rtk1223:詐:lie:｜,ノ,言
-rtk1224:作:make:亻,｜,一
+rtk1222:昨:yesterday:乍,日
+rtk1223:詐:lie:乍,言
+rtk1224:作:make:乍,亻
 rtk1225:雪:snow:ヨ,雨
 rtk1226:録:record:录,金
 rtk1227:剥:come off:ヨ,水
@@ -1294,8 +1294,8 @@ rtk1241:唐:t'ang:｜,ヨ,一,口,广
 rtk1242:糖:sugar:唐,米
 rtk1243:康:ease:ヨ,水,广,隶
 rtk1244:逮:apprehend:ヨ,辶,水,隶
-rtk1245:伊:italy:亻,｜,ヨ
-rtk1246:君:mister:一,口,ノ,ヨ
+rtk1245:伊:italy:亻,尹
+rtk1246:君:mister:口,尹
 rtk1247:群:flock:君,羊
 rtk1248:耐:-proof:而,寸
 rtk1249:需:demand:雨,而
@@ -1329,7 +1329,7 @@ rtk1276:遮:intercept:一,辶,庶
 rtk1277:席:seat:巾,广,廿
 rtk1278:度:degrees:又,广,廿
 rtk1279:渡:transit:度,水
-rtk1280:奔:run:ノ,一,十,大,廾
+rtk1280:奔:run:卉,大
 rtk1281:噴:erupt:口,賁
 rtk1282:墳:tomb:土,賁
 rtk1283:憤:aroused:忄,賁
@@ -1404,10 +1404,10 @@ rtk1351:諸:various:言,者
 rtk1352:猪:boar:犭,者
 rtk1353:渚:strand:水,者
 rtk1354:賭:gamble:貝,者
-rtk1355:峡:gorge:山,人,大,二,丷,亠
-rtk1356:狭:cramped:犭,人,大,二,丷,丶,亠
-rtk1357:挟:pinch:人,大,二,丷,丶,亠,扌
-rtk1358:頬:cheeks:人,頁,二,丷,大
+rtk1355:峡:gorge:夹,山
+rtk1356:狭:cramped:夹,犭
+rtk1357:挟:pinch:夹,扌
+rtk1358:頬:cheeks:夹,頁
 rtk1359:追:chase:辶,𠂤
 rtk1360:阜:hill:𠂤,十
 rtk1361:師:expert:𠂤,帀
@@ -1538,9 +1538,9 @@ rtk1485:畜:livestock:田,玄
 rtk1486:蓄:amass:艹,畜
 rtk1487:弦:bowstring:弓,玄
 rtk1488:擁:hug:玄,推
-rtk1489:滋:nourishing:一,水,丷,幺
-rtk1490:慈:mercy:一,心,丷,幺
-rtk1491:磁:magnet:石,一,丷,幺
+rtk1489:滋:nourishing:兹,水
+rtk1490:慈:mercy:兹,心
+rtk1491:磁:magnet:兹,石
 rtk1492:系:lineage:ノ,糸
 rtk1493:係:person in charge:亻,系
 rtk1494:孫:grandchild:系,子
@@ -1591,7 +1591,7 @@ rtk1538:酵:fermentation:孝,酉
 rtk1539:酷:cruel:ノ,口,土,酉
 rtk1540:酬:repay:｜,州,酉
 rtk1541:酪:dairy products:各,酉
-rtk1542:酢:vinegar:｜,ノ,酉
+rtk1542:酢:vinegar:乍,酉
 rtk1543:酔:drunk:卆,酉
 rtk1544:配:distribute:酉,己
 rtk1545:酸:acid:夋,酉
@@ -1668,9 +1668,9 @@ rtk1615:宰:superintend:宀,辛
 rtk1616:壁:wall:辟,土
 rtk1617:璧:sphere:玉,辟
 rtk1618:避:evade:辟,辶
-rtk1619:新:new:立,木,斤
+rtk1619:新:new:亲,斤
 rtk1620:薪:fuel:艹,新
-rtk1621:親:parent:見,立,木
+rtk1621:親:parent:亲,見
 rtk1622:幸:happiness:亠,辛
 rtk1623:執:tenacious:幸,丸
 rtk1624:摯:gift:ノ,九,手,丶,辛
@@ -1680,8 +1680,8 @@ rtk1627:糾:twist:｜,糸,十
 rtk1628:収:income:｜,又
 rtk1629:卑:lowly:十,田
 rtk1630:碑:tombstone:卑,石
-rtk1631:陸:land:土,儿,阝
-rtk1632:睦:intimate:土,目,儿
+rtk1631:陸:land:坴,阝
+rtk1632:睦:intimate:坴,目
 rtk1633:勢:forces:土,力,丶,儿,九
 rtk1634:熱:heat:土,丸,儿,灬
 rtk1635:菱:diamond (shape):夌,艹
@@ -1747,9 +1747,9 @@ rtk1694:実:reality:宀,𡗗
 rtk1695:奉:observance:二,｜,𡗗
 rtk1696:俸:stipend:亻,奉
 rtk1697:棒:rod:木,奉
-rtk1698:謹:discreet:言,土,艹,口,二
-rtk1699:僅:a wee bit:亻,土,艹,口,二,一
-rtk1700:勤:diligence:土,力,艹,口,二,一
+rtk1698:謹:discreet:言,𦰌
+rtk1699:僅:a wee bit:亻,𦰌
+rtk1700:勤:diligence:力,𦰌
 rtk1701:漢:sino-:水,𦰩
 rtk1702:嘆:sigh:口,𦰩
 rtk1703:難:difficult:隹,𦰩
@@ -1931,10 +1931,10 @@ rtk1878:英:england:艹,央
 rtk1879:映:reflect:ノ,日,大,冖
 rtk1880:赤:red:土
 rtk1881:赦:pardon:攵,赤
-rtk1882:変:unusual:亠,夂
-rtk1883:跡:tracks:足,亠
-rtk1884:蛮:barbarian:虫,亠
-rtk1885:恋:romance:心,八,亠
+rtk1882:変:unusual:亦,夂
+rtk1883:跡:tracks:亦,足
+rtk1884:蛮:barbarian:亦,虫
+rtk1885:恋:romance:亦,心
 rtk1886:湾:gulf:弓,水,亠
 rtk1887:黄:yellow:八,由,龷
 rtk1888:横:sideways:｜,黄,田,二,日,八,木,廾
@@ -1957,10 +1957,10 @@ rtk1904:基:fundamentals:一,甘,土,八
 rtk1905:甚:tremendously:一,甘,儿
 rtk1906:勘:intuition:力,甚
 rtk1907:堪:withstand:土,甚
-rtk1908:貴:precious,takanohana:中,一,貝
+rtk1908:貴:precious,takanohana:貝,𠀐
 rtk1909:遺:bequeath:貴,辶
 rtk1910:遣:dispatch:中,一,辶
-rtk1911:潰:crush:貝,水,十,口,｜,一
+rtk1911:潰:crush:水,貴
 rtk1912:舞:dance:舛,二,夕,無
 rtk1913:無:nothingness:｜,ノ,一,灬
 rtk1914:組:association:且,糸
@@ -3228,3 +3228,22 @@ prim-triceps:劦:triceps:
 prim-pitchfork:賁:pitchfork:
 prim-feather-duster:帚:feather duster:
 prim-french-maid:𠬶:french maid,tickle:
+# Sixth batch, 2026-09-12 — driven by demand rather than frequency: each of these
+# was blocking a CSV-confirmed fix on real kanji. Same method (strict name
+# resolution with the >=3-host and >=0.5-coverage guards, then rendered beside
+# real hosts). "saw", "scissors" and "apple" are deliberate homonyms: Heisig uses
+# each word both as a kanji keyword (挽/鋏/檎) and as this component's name, the
+# same situation as "awl" and "mist".
+prim-earthenware-jar:𠮷:earthenware jar,lidded crock:口,土
+prim-pegasus:𮥶:pegasus:一,隹,𠂉
+prim-mini-tractor:坴:mini-tractor,rice seedlings:
+prim-haystack:卉:haystack:十,廾
+prim-double-mysterious:兹:double-mysterious,mothballs:
+prim-cabbage:𦰌:cabbage:
+prim-purse:𠀐:purse:一,中
+prim-mop:尹:mop:
+prim-red-pepper:亲:red pepper:
+prim-celery:𠀎:celery:一,井
+prim-saw:乍:saw:
+prim-scissors:夹:scissors:丷,夫
+prim-apple:亦:apple:

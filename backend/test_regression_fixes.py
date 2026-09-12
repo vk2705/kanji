@@ -395,17 +395,21 @@ EXPECTED_DECOMPOSITIONS = {
     # 新-family fix (2026-08-25): heisig-kanjis.csv wording ("red pepper;
     # stand up; vase") looked like it belonged to the still-open 帝-family
     # "vase" cluster, but rendering showed 新's left side is 立+木, not
-    # 辛(spicy)+并 -- CSV's wording was noise here, not a real shared
-    # concept; see docs/2026-08-search-quality-audit.md for the full story.
+    # 辛(spicy)+并 -- so the CSV wording was dismissed as "noise here, not a
+    # real shared concept". Half-retracted 2026-09-12: the render was right
+    # (立+木, not 辛+并) but the CSV was not noise. "red pepper" resolves
+    # strictly to 亲 (U+4EB2), which *is* 立 over 木 -- Heisig was naming the
+    # compound one level up, and there was simply no row for it. Registered
+    # as prim-red-pepper; 新/親 now reference it.
     "rtk1619": {"character": "新", "keyword": "new",
-                "expected_part_ids": {"rtk462", "rtk207", "rtk1206"}},
+                "expected_part_ids": {"prim-red-pepper", "rtk1206"}},
     # Further-collapsed 2026-08-29 (sweep batch 3 follow-up): 薪's old
     # 艾,立,木,斤 flattened 新 (new, rtk1619) in place instead of
     # referencing it -- same iterative-convergence discovery as rtk711.
     "rtk1620": {"character": "薪", "keyword": "fuel",
                 "expected_part_ids": {"prim-mugwort", "rtk1619"}},
     "rtk1621": {"character": "親", "keyword": "parent",
-                "expected_part_ids": {"rtk61", "rtk462", "rtk207"}},
+                "expected_part_ids": {"prim-red-pepper", "rtk61"}},
     # 弟-family fix (2026-08-25): all four re-flattened 弟 (younger brother,
     # rtk1328) into its own raw strokes using the stale 并 token instead of
     # referencing 弟 directly (which itself already correctly uses 丷, from
@@ -573,7 +577,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1352": {"character": "猪", "keyword": "boar",
                 "expected_part_ids": {"kangxi94", "rtk1345"}},
     "rtk1356": {"character": "狭", "keyword": "cramped",
-                "expected_part_ids": {"kangxi94", "rtk1023", "rtk112", "rtk2", "kangxi12", "kangxi3", "kangxi8"}},
+                "expected_part_ids": {"kangxi94", "prim-scissors"}},
     "rtk1517": {"character": "犯", "keyword": "crime",
                 "expected_part_ids": {"kangxi94", "prim-fingerprint"}},
     # Further-collapsed 2026-08-29 (sweep batch 3 follow-up), same as 狩
@@ -2086,7 +2090,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1898": {"character": "媒", "keyword": "mediator",
                 "expected_part_ids": {"rtk102", "rtk1896"}},
     "rtk1908": {"character": "貴", "keyword": "precious",
-                "expected_part_ids": {"rtk1", "rtk39", "rtk56"}},
+                "expected_part_ids": {"prim-purse", "rtk56"}},
     "rtk1910": {"character": "遣", "keyword": "dispatch",
                 "expected_part_ids": {"kangxi162", "rtk1", "rtk39"}},
     "rtk1937": {"character": "翼", "keyword": "wing",
@@ -2473,7 +2477,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk869": {"character": "破", "keyword": "rend",
                "expected_part_ids": {"rtk118", "rtk865"}},
     "rtk1491": {"character": "磁", "keyword": "magnet",
-                "expected_part_ids": {"rtk118", "rtk1", "kangxi12", "kangxi52"}},
+                "expected_part_ids": {"prim-double-mysterious", "rtk118"}},
     "rtk1903": {"character": "碁", "keyword": "go",
                 "expected_part_ids": {"rtk118", "rtk1894", "rtk8"}},
     "rtk2204": {"character": "砦", "keyword": "fort",
@@ -2547,7 +2551,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1333": {"character": "顎", "keyword": "chin",
                "expected_part_ids": {"kangxi20", "rtk11", "rtk2", "rtk64"}},
     "rtk1358": {"character": "頬", "keyword": "cheek",
-               "expected_part_ids": {"kangxi12", "rtk1023", "rtk112", "rtk2", "rtk64"}},
+               "expected_part_ids": {"prim-scissors", "rtk64"}},
     "rtk1373": {"character": "促", "keyword": "stimulate",
                "expected_part_ids": {"kangxi9", "rtk1372"}},
     "rtk1374": {"character": "捉", "keyword": "nab",
@@ -3208,7 +3212,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1768": {"character": "喉", "keyword": "throat",  # was 口,矢 -- dropped ユ(ktakana-yu) entirely instead of
                "expected_part_ids": {"rtk11", "rtk1767"}},  # referencing 侯(rtk1767), which is already taught
     "rtk1883": {"character": "跡", "keyword": "tracks",  # was 亦,足,亠 -- 亦 has no defining row anywhere in
-               "expected_part_ids": {"kangxi8", "rtk1372"}},  # data.txt, silently dropped; aligned with its own
+               "expected_part_ids": {"prim-apple", "rtk1372"}},  # data.txt, silently dropped; aligned with its own
                                                                 # siblings (変/蛮/恋/湾), which all use 亠 for this same
                                                                 # primitive. Closed the last single-glyph gap in
                                                                 # audit_radicals.py's undefined-terms check.
@@ -3339,15 +3343,18 @@ EXPECTED_DECOMPOSITIONS = {
     # 2026-09-05: the whole 雚-family (歓/権/観/勧) carried a spurious 矢(dart) from
     # the earlier 矢-family cleanup. cjkvi-ids and heisig-kanjis.csv's own component
     # lists ("pegasus; horse; ...; turkey") name 隹(turkey) with a 丷/horns top, no
-    # 矢 anywhere. The Joyo forms use an abbreviated 雚, drawn 丷 over 隹.
+    # 矢 anywhere. The Joyo forms use an abbreviated 雚, drawn 丷 over 隹 --
+    # that abbreviated form is 𮥶 (U+2E976), registered 2026-09-12 as
+    # prim-pegasus after rendering confirmed it against 雚 (which carries an
+    # extra 艹+吅 the Joyo shape plainly lacks). These four now reference it.
     "rtk612": {"character": "歓", "keyword": "delight",
-               "expected_part_ids": {"kangxi12", "kangxi172", "rtk505"}},
+               "expected_part_ids": {"prim-pegasus", "rtk505"}},
     "rtk613": {"character": "権", "keyword": "authority",
-               "expected_part_ids": {"kangxi12", "kangxi172", "rtk207"}},
+               "expected_part_ids": {"prim-pegasus", "rtk207"}},
     "rtk614": {"character": "観", "keyword": "outlook",
-               "expected_part_ids": {"kangxi12", "kangxi172", "rtk61"}},
+               "expected_part_ids": {"prim-pegasus", "rtk61"}},
     "rtk928": {"character": "勧", "keyword": "persuade",
-               "expected_part_ids": {"kangxi12", "kangxi172", "rtk922"}},
+               "expected_part_ids": {"prim-pegasus", "rtk922"}},
     "rtk1306": {"character": "矯", "keyword": "rectify",
                "expected_part_ids": {"prim-angel", "rtk1305"}},
     "rtk1129": {"character": "物", "keyword": "thing",
