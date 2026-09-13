@@ -8356,3 +8356,85 @@ of the day). `mouth` 191 → 187, `soil` 124 → 119. 11 pins rewritten, 2 notes
 corrected. Verified: detector 0, dead tokens 0, self-references 0, 1316 checks
 with only the 4 known hanzi-scope non-issues, 66 pytest. 28 primitive images, all
 five new ones checked against their hosts.
+
+## 2026-09-13 (daily check-in) — a lost-work scare, and following Heisig instead of cjkvi
+
+### The container came back stale
+
+`git log` opened on **b340a19** — 2026-09-11's commit. Yesterday's three were
+gone, `git cat-file` didn't know them, and the reflog showed a single clone at
+2026-09-12 09:06 with nothing after it. `git pull` then failed with a 503.
+
+Resisting the urge to redo the work was the whole job here: re-applying three
+commits' worth of edits on top of a stale base would have produced divergent
+history that conflicts the moment the remote comes back. The question to answer
+first is *"is it on origin?"*, not *"how fast can I rebuild it?"*.
+
+Plain `curl` to `github.com` worked (400 on the root, 200 on `api.github.com`),
+so the 503 was git's transport, not connectivity — and the same observation gives
+the answer directly:
+
+```
+curl -sS "https://github.com/vk2705/kanji.git/info/refs?service=git-upload-pack"
+  9d7182b6a931ea6bbbc9d6b10655cc6b44ac6198  refs/heads/master
+```
+
+`9d7182b` is exactly yesterday's last commit. Nothing was lost; the clone was
+simply older than the work. `git ls-remote` then succeeded on retry (the 503 was
+transient) and a fast-forward restored everything.
+
+Worth keeping as a habit: **`info/refs` over plain HTTPS answers "did my push
+land?" even when git itself is failing**, and it is read-only, so it cannot make
+things worse.
+
+The container also came back without Python deps, without `/tmp/ids.txt`, and
+without either font package; `bcrypt` additionally needed `cffi` force-reinstalled
+before the suites would run. All restored, baseline re-verified before touching
+anything: detector 0, dead tokens 0, 1316 checks with only the 4 known
+hanzi-scope non-issues, 66 pytest.
+
+### The demand list emptied, and the target changed
+
+Yesterday's 13 registrations cleared the blockers completely: of the kanji still
+disagreeing with Heisig, **every one now needs only components we already have**.
+
+But targeting cjkvi's top level no longer works for them, and the reason is
+interesting. All 58 were rejected with "target needs an unregistered component" —
+47 distinct ones (袁, 睘, 埶, 尭, 离 …), and **not one has a Heisig name**. These
+are cjkvi's own intermediate nodes. Heisig decomposes 遠 as 辶 + 衣 + 𠮷; cjkvi
+groups the last two into 袁 and stops. Registering 袁 would mean inventing a name,
+which is precisely the failure this audit keeps undoing.
+
+So the target changed: **follow Heisig, not cjkvi**. This is an RTK app; when the
+two sources disagree about the intermediate level, the book wins. Implemented as a
+minimal edit rather than a rewrite — swap exactly the tokens that spell out the
+missing component for the component itself, leave everything else alone — which
+keeps each change small enough to check by eye. 30 proposed, all 30 reviewed, 28
+applied as generated and 2 corrected by hand:
+
+- **淫** was `ノ,士,水,爪,王`. The automation dropped ノ+士 into 壬 and left the 王
+  sitting there, because 王 isn't part of 壬's decomposition — but the CSV says
+  "water; claw; **porter**", so the 王 was simply wrong. Third appearance of the
+  王/壬 confusion. Fixed to 水,爪,壬.
+- **懸** listed every component *twice*, once as a glyph and once as its English
+  name: `県,prefecture,糸,thread,心,heart`. Set to the CSV's own answer, 県,系,心.
+
+Also a real single-token substitution caught in passing: **戚 and 叔 both carried
+卜 (divination) where the CSV says "above" — 上.** Same class as 王-for-壬 and
+矢-for-失.
+
+### Two metrics, and which one matters
+
+Exact match against cjkvi's top level **did not move** (69.1%), while kanji
+disagreeing with Heisig went **58 → 28**. That is not a failure, it is the two
+metrics measuring different things — and for this app Heisig's is the one that
+counts. Worth tracking both from here on, with the cjkvi number understood as a
+structural sanity check rather than the goal.
+
+`soil` 119 → 111, `mouth` 187 → 183.
+
+**Next**: the remaining 28 are blocked differently — the missing component (罒, 龷,
+㐅, 业, 㔾 …) is atomic in our data, so there is nothing in the host's parts to
+swap out. The host is genuinely *missing* a component rather than flattening it,
+and appending a token is a larger claim than collapsing one; those want per-case
+review rather than another automated pass.

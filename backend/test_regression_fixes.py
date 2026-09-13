@@ -323,7 +323,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk588": {"character": "洋", "keyword": "ocean",
                "expected_part_ids": {"rtk137", "rtk586"}},
     "rtk691": {"character": "義", "keyword": "righteousness",
-               "expected_part_ids": {"rtk1", "rtk586", "kangxi6", "kangxi62", "rtk687"}},
+               "expected_part_ids": {"rtk1", "rtk586", "rtk690"}},
     "rtk1591": {"character": "養", "keyword": "foster",
                 "expected_part_ids": {"rtk1582", "rtk586"}},
     "rtk2622": {"character": "痒", "keyword": "itch",
@@ -539,9 +539,11 @@ EXPECTED_DECOMPOSITIONS = {
     # instead (no extra stroke) -- registered as prim-parade (per CSV's
     # own keyword for this exact primitive at frame 385). 蔑 was also
     # missing 罒(net) and 十 entirely -- was undersplit to just 2 tokens
-    # when the real structure has 4.
+    # when the real structure has 4. Separately, 2026-09-13: 戚 and 叔 both
+    # carried 卜(divination) where heisig-kanjis.csv says "above" -- 上. Same
+    # single-token substitution class as 王-for-壬 and 矢-for-失.
     "rtk385": {"character": "戚", "keyword": "relatives",
-               "expected_part_ids": {"kangxi25", "prim-parade", "rtk110"}},
+               "expected_part_ids": {"prim-parade", "rtk110", "rtk50"}},
     "rtk390": {"character": "滅", "keyword": "destroy",
                "expected_part_ids": {"prim-parade", "rtk137", "rtk173"}},
     "rtk392": {"character": "蔑", "keyword": "revile",
@@ -567,7 +569,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk2943": {"character": "赳", "keyword": "bold",
                "expected_part_ids": {"prim-pipe", "rtk410"}},
     "rtk430": {"character": "猿", "keyword": "monkey",
-               "expected_part_ids": {"kangxi94", "rtk423", "rtk11", "rtk161"}},
+               "expected_part_ids": {"kangxi94", "prim-earthenware-jar", "rtk423"}},
     "rtk561": {"character": "独", "keyword": "single",
                "expected_part_ids": {"kangxi94", "rtk556"}},
     "rtk757": {"character": "獲", "keyword": "seize",
@@ -1282,7 +1284,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1776": {"character": "韓", "keyword": "korea",
                 "expected_part_ids": {"kangxi178", "prim-mist"}},
     "rtk1783": {"character": "幹", "keyword": "tree trunk",
-                "expected_part_ids": {"prim-umbrella", "rtk1777", "rtk26"}},
+                "expected_part_ids": {"prim-mist", "prim-umbrella", "rtk1777"}},
     # Further-collapsed 2026-08-29, same iterative-convergence discovery
     # as rtk643 above: fixing 人,冂 -> 内 left 一,内 in place, which fully
     # matches 丙 (third class, rtk1096)'s own parts.
@@ -2068,7 +2070,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1693": {"character": "奏", "keyword": "play music",
                 "expected_part_ids": {"prim-bonsai", "rtk457"}},
     "rtk1718": {"character": "陰", "keyword": "shade",
-                "expected_part_ids": {"kangxi170", "kangxi28", "rtk1711", "rtk2"}},
+                "expected_part_ids": {"kangxi170", "rtk1711", "rtk2241"}},
     "rtk1745": {"character": "閲", "keyword": "review",
                 "expected_part_ids": {"prim-devil", "rtk1743"}},
     "rtk1752": {"character": "閣", "keyword": "tower",
@@ -2092,7 +2094,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1908": {"character": "貴", "keyword": "precious",
                 "expected_part_ids": {"prim-purse", "rtk56"}},
     "rtk1910": {"character": "遣", "keyword": "dispatch",
-                "expected_part_ids": {"kangxi162", "rtk1", "rtk39"}},
+                "expected_part_ids": {"kangxi162", "prim-purse"}},
     "rtk1937": {"character": "翼", "keyword": "wing",
                 "expected_part_ids": {"rtk1936", "rtk615"}},
     "rtk1972": {"character": "婚", "keyword": "marriage",
@@ -2609,7 +2611,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk918": {"character": "臨", "keyword": "look to",
                "expected_part_ids": {"prim-katakana-no", "rtk1", "rtk1023", "rtk23", "rtk911"}},
     "rtk2191": {"character": "藻", "keyword": "seaweed",
-                "expected_part_ids": {"prim-mugwort", "rtk137", "rtk207", "rtk23"}},
+                "expected_part_ids": {"prim-furniture", "prim-mugwort", "rtk137"}},
     "rtk2626": {"character": "癌", "keyword": "cancer",
                 "expected_part_ids": {"kangxi104", "rtk23", "rtk830"}},
     "rtk1470": {"character": "継", "keyword": "inherit",
@@ -2993,7 +2995,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1420": {"character": "窟", "keyword": "cavern",
                "expected_part_ids": {"rtk1140", "rtk1413"}},
     "rtk1421": {"character": "窪", "keyword": "depression",
-               "expected_part_ids": {"rtk137", "rtk1413", "rtk161"}},
+               "expected_part_ids": {"rtk137", "rtk1413", "rtk167"}},
     "rtk1423": {"character": "窯", "keyword": "kiln",
                "expected_part_ids": {"prim-fire-radical", "rtk1413", "rtk586"}},
     "rtk1424": {"character": "窮", "keyword": "hard up",
@@ -3240,7 +3242,7 @@ EXPECTED_DECOMPOSITIONS = {
     # Was redundantly re-listing 勿(rtk1128)'s own ノ,勹 alongside referencing
     # it directly -- 2026-09-05, audit_direct_ref_overlap.py
     "rtk1071": {"character": "傷", "keyword": "wound",
-               "expected_part_ids": {"kangxi9", "rtk1", "rtk1128", "rtk12"}},
+               "expected_part_ids": {"kangxi9", "prim-piggy-bank", "rtk1", "rtk12"}},
     "rtk1106": {"character": "似", "keyword": "becoming",
                "expected_part_ids": {"kangxi9", "rtk1105"}},
     "rtk2260": {"character": "做", "keyword": "make",
@@ -3384,7 +3386,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk2936": {"character": "睾", "keyword": "testicles",
                "expected_part_ids": {"kangxi8", "rtk15", "rtk161", "rtk1612"}},
     "rtk1645": {"character": "寒", "keyword": "cold",
-               "expected_part_ids": {"kangxi3", "kangxi40", "rtk1946", "rtk8"}},
+               "expected_part_ids": {"kangxi3", "kangxi40", "prim-celery", "rtk8"}},
     "rtk1936": {"character": "異", "keyword": "uncommon",
                "expected_part_ids": {"rtk14", "rtk1934"}},
     "rtk1941": {"character": "暴", "keyword": "outburst",
