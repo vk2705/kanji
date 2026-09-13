@@ -476,7 +476,7 @@ rtk423:衣:garment:
 rtk424:裁:tailor:衣,𢦏
 rtk425:装:attire:衣,壮
 rtk426:裏:back:衣,里
-rtk427:壊:demolition:衣,十,土
+rtk427:壊:demolition:土,十,罒,衣
 rtk428:哀:pathetic:衣,口
 rtk429:遠:distant:衣,辶,𠮷
 rtk430:猿:monkey:犭,衣,𠮷
@@ -869,7 +869,7 @@ rtk816:室:room:至,宀
 rtk817:到:arrival:至,刀
 rtk818:致:doth:至,攵
 rtk819:互:mutually:ヨ,一,彑
-rtk820:棄:abandon:一,木,亠,凵,厶
+rtk820:棄:abandon:𠫓,丗,木
 rtk821:育:bring up:月,𠫓
 rtk822:撤:remove:育,扌,攵
 rtk823:充:allot:儿,𠫓
@@ -884,7 +884,7 @@ rtk831:拙:bungling:出,扌
 rtk832:岩:boulder:山,石
 rtk833:炭:charcoal:灰,山
 rtk834:岐:branch off:山,支
-rtk835:峠:mountain peak:下,山
+rtk835:峠:mountain peak:山,上,下
 rtk836:崩:crumble:山,朋
 rtk837:密:secrecy:必,山,丶,宀
 rtk838:蜜:honey:必,虫,丶,宀
@@ -940,16 +940,16 @@ rtk887:職:post:戠,耳
 rtk888:聖:holy:王,口,耳
 rtk889:敢:daring:耳,攵
 rtk890:聴:listen:耳,十,罒,心
-rtk891:懐:feelings:衣,十,state of mind,亠
+rtk891:懐:feelings:state of mind,十,罒,衣
 rtk892:慢:ridicule:曼,忄
 rtk893:漫:cartoon:水,曼
 rtk894:買:buy:罒,貝
 rtk895:置:placement:直,罒
 rtk896:罰:penalty:罒,言
-rtk897:寧:rather:丁,心,宀,皿
-rtk898:濁:voiced:水,虫,勹
-rtk899:環:ring:衣,王,口,一
-rtk900:還:send back:衣,口,辶,一
+rtk897:寧:rather:宀,心,罒,丁
+rtk898:濁:voiced:水,罒,勹,虫
+rtk899:環:ring:王,罒,一,口,衣
+rtk900:還:send back:罒,一,口,衣,辶
 rtk901:夫:husband:一,大
 rtk902:扶:aid:夫,扌
 rtk903:渓:mountain stream:水,爪,夫
@@ -1322,7 +1322,7 @@ rtk1269:錯:confused:昔,金
 rtk1270:借:borrow:亻,昔
 rtk1271:惜:pity:昔,忄
 rtk1272:措:set aside:昔,扌
-rtk1273:散:scatter:月,攵,廾,二
+rtk1273:散:scatter:龷,月,攵
 rtk1274:廿:twenty:凵,一
 rtk1275:庶:commoner:广,灬
 rtk1276:遮:intercept:一,辶,庶
@@ -1565,11 +1565,11 @@ rtk1512:踊:jump:甬,足
 rtk1513:疑:doubt:疋,矢,匕,マ
 rtk1514:擬:mimic:疑,扌
 rtk1515:凝:congeal:冫,疑
-rtk1516:範:pattern:乙,車,竹,卩
+rtk1516:範:pattern:竹,車,㔾
 rtk1517:犯:crime:㔾,犭
 rtk1518:氾:spread out:㔾,水
 rtk1519:厄:unlucky:㔾,厂
-rtk1520:危:dangerous:勹,厂,卩
+rtk1520:危:dangerous:勹,厂,㔾
 rtk1521:宛:address:夗,宀
 rtk1522:腕:arm:月,宛
 rtk1523:苑:garden:夗,艹
@@ -1650,14 +1650,14 @@ rtk1597:呼:call:口,平
 rtk1598:坪:two-mat area:土,平
 rtk1599:評:evaluate:言,平
 rtk1600:刈:reap:㐅,刀
-rtk1601:刹:temple:木,ノ,丶
+rtk1601:刹:temple:㐅,木,刀
 rtk1602:希:hope:㐅,布
 rtk1603:凶:villain:㐅,凵
-rtk1604:胸:bosom:月,凵,勹,ノ,丶
-rtk1605:離:detach:亠,凵,禹,隹
-rtk1606:璃:glassy:王,亠,凵,禹
+rtk1604:胸:bosom:月,勹,凶
+rtk1605:離:detach:亠,凶,禹,隹
+rtk1606:璃:glassy:王,亠,凶,禹
 rtk1607:殺:kill:㐅,木,殳
-rtk1608:爽:refreshing:大,乂
+rtk1608:爽:refreshing:大,㐅
 rtk1609:純:genuine:糸,屯
 rtk1610:頓:suddenly:頁,屯
 rtk1611:鈍:dull:金,屯
@@ -1682,8 +1682,8 @@ rtk1629:卑:lowly:十,田
 rtk1630:碑:tombstone:卑,石
 rtk1631:陸:land:坴,阝
 rtk1632:睦:intimate:坴,目
-rtk1633:勢:forces:土,力,丶,儿,九
-rtk1634:熱:heat:土,丸,儿,灬
+rtk1633:勢:forces:坴,丸,力
+rtk1634:熱:heat:坴,丸,灬
 rtk1635:菱:diamond (shape):夌,艹
 rtk1636:陵:mausoleum:夌,阝
 rtk1637:亥:sign of the hog,acorn:人,亠,ノ,丶
@@ -1861,13 +1861,13 @@ rtk1808:勲:meritorious deed:動,灬
 rtk1809:働:work:亻,動
 rtk1810:種:species:禾,重
 rtk1811:衝:collide:｜,行,日,彳,ノ,重
-rtk1812:薫:send forth fragrance:｜,灬,艹,日,ノ,一
+rtk1812:薫:send forth fragrance:艹,重,灬
 rtk1813:病:ill:丙,疒
 rtk1814:痴:stupid:知,疔
 rtk1815:痘:pox:豆,疔
 rtk1816:症:symptoms:正,疒
 rtk1817:瘍:swelling:一,日,疔,勿
-rtk1818:痩:get thin:又,疔
+rtk1818:痩:get thin:疔,申,又
 rtk1819:疾:rapidly:矢,疔
 rtk1820:嫉:jealous:女,疾
 rtk1821:痢:diarrhea:禾,疔
@@ -1935,7 +1935,7 @@ rtk1882:変:unusual:亦,夂
 rtk1883:跡:tracks:亦,足
 rtk1884:蛮:barbarian:亦,虫
 rtk1885:恋:romance:亦,心
-rtk1886:湾:gulf:弓,水,亠
+rtk1886:湾:gulf:水,亦,弓
 rtk1887:黄:yellow:八,由,龷
 rtk1888:横:sideways:｜,黄,田,二,日,八,木,廾
 rtk1889:把:grasp:巴,扌
@@ -1976,10 +1976,10 @@ rtk1923:畳:tatami mat:田,冖,且
 rtk1924:並:row:｜,一,二,丷
 rtk1925:普:universal:日,並
 rtk1926:譜:musical score:言,普
-rtk1927:湿:damp:｜,水,日
-rtk1928:顕:appear:日,頁
+rtk1927:湿:damp:水,日,业
+rtk1928:顕:appear:日,业,頁
 rtk1929:繊:slender:业,糸,𢦏
-rtk1930:霊:spirits:｜,一,雨,二
+rtk1930:霊:spirits:雨,二,业
 rtk1931:業:business:业,丷,一,木
 rtk1932:撲:slap:扌,业,丷,夫
 rtk1933:僕:me:亻,业,丷,夫
@@ -1990,11 +1990,11 @@ rtk1937:翼:wing:異,羽
 rtk1938:戴:be crowned with:異,𢦏
 rtk1939:洪:deluge:共,水
 rtk1940:港:harbor:水,共,己
-rtk1941:暴:outburst:水,日,八,井
+rtk1941:暴:outburst:日,共,水
 rtk1942:爆:bomb:暴,火
-rtk1943:恭:respect:心,八,井
+rtk1943:恭:respect:共,忄
 rtk1944:選:elect:辶,巽
-rtk1945:殿:mr.:｜,一,二,八,尸,殳,几,又
+rtk1945:殿:mr.:尸,共,殳
 rtk1946:井:well:｜,ノ,一,二
 rtk1947:丼:bowl:丶,廾,井
 rtk1948:囲:surround:囗,井
@@ -2124,7 +2124,7 @@ rtk2071:張:counter for bows & stringed instruments:弓,長
 rtk2072:帳:notebook:巾,長
 rtk2073:脹:dilate:月,長
 rtk2074:髪:hair of the head:友,髟
-rtk2075:展:unfold:｜,衣,一,二,尸
+rtk2075:展:unfold:尸,龷,衣
 rtk2076:喪:miss:｜,衣,一,口,亠
 rtk2077:巣:nest:𭕄,果
 rtk2078:単:simple:𭕄,甲,一

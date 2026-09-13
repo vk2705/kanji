@@ -8438,3 +8438,32 @@ structural sanity check rather than the goal.
 swap out. The host is genuinely *missing* a component rather than flattening it,
 and appending a token is a larger claim than collapsing one; those want per-case
 review rather than another automated pass.
+
+### Same day — every kanji now agrees with Heisig's component list
+
+Owner: *"добавь все компоненты"* — add all the components. Done: the 28
+remaining disagreements are closed, and the detector reports **0**, from 197 when
+it was first written this morning.
+
+These resisted the automated minimal edit because the missing component is atomic
+in our data, so there was nothing to collapse — but that framing was wrong for
+about half of them. They are not all "missing a component"; several were carrying
+a **lookalike substitute**, which only became visible once the CSV was consulted
+per-kanji:
+
+| kanji | had | Heisig says |
+|---|---|---|
+| 寧 | 皿 (dish) | 罒 (net) |
+| 範, 危 | 卩 | 㔾 (fingerprint) |
+| 爽 | 乂 | 㐅 (sheaf) |
+
+That is the same single-token substitution class as 王-for-壬, 矢-for-失 and
+卜-for-上 — four more instances, all found by the same method.
+
+So each of the 28 got an explicit target composed from its own CSV components
+string rather than an automated rewrite. Worth being plain about why: the generic
+"keep tokens Heisig's set doesn't account for" rule produced 危 = `㔾,勹,卩,厂`
+and 爽 = `㐅,乂,大`, keeping both the substitute *and* its replacement, because a
+component that is atomic in both trees has no descendant set to test against.
+With 28 cases and the CSV printed beside each, writing the targets out was
+simply more reliable than another guard.
