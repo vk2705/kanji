@@ -2640,10 +2640,17 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"rtk2189", "rtk64"}},
     "rtk1627": {"character": "糾", "keyword": "twist",
                "expected_part_ids": {"prim-pipe", "rtk10", "rtk1431"}},
+    # 素 and 潔 used to pin 亠+土+二 — three parts spelling out one shape that
+    # nothing in the glyph actually draws separately. Heisig names that shape
+    # "grow up" in 36 CSV rows and this project had no row for it at all until
+    # 2026-09-13. The two are *different* characters despite the shared name:
+    # 素's is 龶 (U+9FB6), whose vertical stops at the bottom bar, and 潔's is 丰
+    # (U+4E30), whose vertical runs through it — rendered side by side to settle
+    # it, since no amount of reading the keyword "grow up" distinguishes them.
     "rtk1652": {"character": "素", "keyword": "elementary",
-               "expected_part_ids": {"kangxi8", "rtk1431", "rtk161", "rtk2"}},
+               "expected_part_ids": {"prim-grow-up", "rtk1431"}},
     "rtk1668": {"character": "潔", "keyword": "undefiled",
-               "expected_part_ids": {"kangxi8", "rtk137", "rtk1431", "rtk161", "rtk2", "rtk87"}},
+               "expected_part_ids": {"prim-bushes", "rtk137", "rtk1431", "rtk87"}},
     "rtk1685": {"character": "縫", "keyword": "sew",
                "expected_part_ids": {"rtk1431", "rtk2497"}},
     "rtk1774": {"character": "緯", "keyword": "horizontal",

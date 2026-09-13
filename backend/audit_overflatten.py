@@ -63,6 +63,13 @@ RADICAL_VARIANTS = {
     # 𧾷 is the combining form of 足, which this project already uses in every
     # one of its hosts (促/路/踊 …).
     "𧾷": "足",
+    # ⺊ is 卜 sitting on top of something: rendered side by side the only
+    # difference is that the free-standing 卜 slants its side stroke down and
+    # ⺊ keeps it horizontal, which is what 占/卓/貞 actually draw. Unicode names
+    # it CJK RADICAL DIVINATION, heisig-kanjis.csv calls both "divining rod",
+    # and this project already spells every one of those hosts with 卜 — so
+    # cjkvi-ids writing ⺊ was making 16 hosts of "magic wand" look unsupported.
+    "⺊": "卜",
 }
 
 

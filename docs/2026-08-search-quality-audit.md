@@ -8515,3 +8515,125 @@ Verified: detector 0, dead tokens 0, self-references 0, 1316 checks with only th
 unused. The 411 blocking components have no Heisig name, so they would need
 descriptive ones — worth doing, but the flat tail means the payoff is per-kanji
 rather than per-batch.
+
+---
+
+## 2026-09-13 — the book's own vocabulary was unsearchable, and a new bug class
+
+Started on the queued "register non-Heisig names" work and abandoned it within
+the hour, because checking the first blocking component turned up something much
+larger: **Heisig had already named most of them, and we were not carrying his
+names.** 龶 was on the blocker list as an anonymous shape needing an invented
+name. `heisig-kanjis.csv` calls it "grow up", in 36 rows. It had no row here at
+all.
+
+Sweeping the whole components column: **299 of its 1156 distinct names resolved
+to nothing** in this database. "wood" (169 rows), "part of the body" (105),
+"flowers" (95), "crotch" (93), "brains" (88). Every one of those is someone
+reading along with the book, typing what the book says, and getting an empty
+result. No existing detector could see it — `audit_radicals.py` reports terms we
+*use* that resolve to nothing, and these are terms we never used.
+
+### A second detector: phantom parts
+
+The same look found a different bug. `rtk1997:盾:shield:斤,十,目,厂` lists an ax.
+盾 has no ax in it — cjkvi-ids expands it to 𠂇+目+十 and the CSV's own components
+read "drag; ten; needle; eye". Rendering 斤 beside 盾 派 脈 后 栃 蛎 settled it:
+all six carry a stray 斤 next to the 厂 they already list, and none draws an ax.
+
+A phantom part is pure search noise — it can only ever make a search for a
+primitive return a kanji that does not contain it — and nothing caught the class.
+`audit_csv_regressions.py` looks for concepts we *dropped* relative to the CSV,
+the opposite direction; `audit_flattening*.py` and `audit_overflatten.py` both
+reason about parts that *are* in the glyph, just spelled at the wrong level. A
+part that is simply not there falls through all of them. `audit_phantom_parts.py`
+now covers it: a part is reported only when cjkvi-ids cannot reach it *and* the
+CSV does not name it.
+
+Getting its false-positive rate down was most of the work, and every round was a
+real modelling error rather than a threshold tweak:
+
+- cjkvi-ids bottoms out at mid-level components (左 is `⿸𠂇工`, 𠂇 atomic), so it
+  reported every stroke primitive Heisig legitimately teaches. Fixed by
+  continuing the expansion through our own decompositions.
+- 衣 never appears in 裏's expansion because cjkvi spells it 亠+𧘇. Fixed by also
+  clearing a part when all of *its* pieces are in the tree.
+- A part's name may canonicalise to the wrong row — 衣 lists "lid", which
+  resolves to the kanji 蓋, not 亠 — which made 衣's own pieces look absent from
+  every host containing 衣. Fixed by carrying every claimant of a name, the same
+  rule search already uses for ambiguous terms.
+
+1034 → 281. The remainder is a worklist, not a verdict; each entry still needs
+rendering.
+
+### suggest_heisig_aliases.py
+
+Committed rather than thrown away, because 268 names still remain. The algorithm
+that works is almost embarrassingly simple: Heisig's expansion emits *all* of a
+primitive's names every time, so two names for one shape have **exactly the same
+host set**. Grouping by host set checks itself — most groups already contain two
+names we can resolve, and they agree ("moon" and "flesh" both land on rtk13;
+"pinnacle", "acropolis" and "parthenon" all on kangxi170).
+
+The first version instead intersected our own decomposition trees over a name's
+hosts. It needed three separate guards to suppress degenerate matches (it
+"proved" jewel meant 一), it leaned on our decompositions being right — the thing
+under audit — and it still missed "wood", because 3 of 166 hosts happen to lack
+木 in our tree. Host-set identity needs none of that.
+
+A vouch is only as good as the vouching name, so each one is cross-checked
+against cjkvi-ids, and that caught three mis-attributions the vouching alone
+would have propagated:
+
+| arrived as | actually belongs on | how it was caught |
+|---|---|---|
+| church, gravestone → 碑 "tombstone" | 古 (0.94) | 碑 is in none of 個古固嫡居据摘故敵枯 |
+| cloth, clothes → 服 "clothing" | 衣 (1.00) | every host is a 衣 kanji, not a 服 one |
+| piglet's tail → 浬 "nautical mile" | 勿 (1.00) | "knot" is a homograph — the nautical unit |
+
+### Applied
+
+30 of Heisig's names onto 23 rows, each verified individually against cjkvi-ids
+(wood→木, part of the body→月, flowers→艹, crotch→又, st. bernard→大, footprint→止,
+wheat/cereal→禾, metal→金, vulture→爪, samurai→士, barbecue/oven-fire→灬, pent
+in→囗, hood→冂, dove→白, zoo→疋, and the three corrected above). Left alone at
+0.7–0.8 support rather than guessed: brains, vase, fishhook, spike, fiesta, belt,
+computer, rake, shovel.
+
+Two of them are not translations but *encoding*: "by one's side" and "piglet's
+tail" are spelled with a curly apostrophe in the CSV and a straight one here, so
+17 and 4 hosts were unreachable for a typographic reason.
+
+Registered 龶 as `prim-grow-up`, left atomic on purpose — cjkvi-ids has no
+decomposition for it either, and Heisig teaches it as a primitive. Then recut the
+12 hosts that had been spelling it out as 土+亠+二.
+
+**This is where the session nearly made the mistake it exists to prevent.** Four
+of those hosts do not contain 龶 at all. 潔 契 彗 draw 丰 (U+4E30), whose vertical
+runs *through* the bottom bar, where 龶's stops at it — and Heisig gives both
+shapes the same name, "grow up", so the CSV cannot tell them apart and neither
+can the keyword. Only the render does. 丰 was already registered as
+`prim-bushes`, so those three point there and it carries "grow up" as an alias
+too; searching the name now returns both readings, which is the behaviour the
+owner asked for on ambiguous terms.
+
+Also mapped ⺊→卜 in `RADICAL_VARIANTS`. Rendered side by side the only difference
+is that free-standing 卜 slants its side stroke down and ⺊ keeps it horizontal,
+which is what 占 卓 貞 draw; Unicode calls it CJK RADICAL DIVINATION and the CSV
+calls both "divining rod". cjkvi writing ⺊ was making all 16 hosts of "magic
+wand" look structurally unsupported.
+
+Search: soil 111→99, two →69, lid →63, ax 23→17. Phantom parts 320→281 across
+191 kanji. Unsearchable Heisig names 299→268.
+
+Verified: over-flattening 0, dead tokens 0, self-references 0, 1316 checks with
+only the 4 known hanzi-scope non-issues, 66 pytest, frontend lint + build clean.
+Two pins (素, 潔) updated in place rather than deleted, with the 龶/丰 distinction
+written into the comment so the next session does not re-merge them.
+
+**Next**: 268 names remain, and the tool now sorts them — `--all` separates the
+ones a registered sibling vouches for from the ones where no name in the group
+resolves at all (wheat/cereal was the latter, and turned out to be 禾 under a
+name we lacked). The genuinely missing rows in that second bucket — "rake",
+"brains", "belt", "computer" — are the real "register a component" work, and
+unlike the 411 blockers they come with Heisig's own name attached.
