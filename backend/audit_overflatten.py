@@ -144,7 +144,11 @@ def read_data_txt(path):
             fields = stripped.split(":")
             if len(fields) < 4 or not fields[0].startswith("rtk"):
                 continue
-            kid, ch, parts = fields[0], fields[1], [p for p in fields[3].split(",") if p]
+            # Only the PRIMARY decomposition is audited. A ";" introduces alternative
+            # readings (added 2026-09-13), and the structural cjkvi one in particular
+            # would trivially "match cjkvi's top level" and mask the primary's state.
+            kid, ch = fields[0], fields[1]
+            parts = [p for p in fields[3].split(";")[0].split(",") if p]
             if len(ch) != 1:
                 continue
             rows[kid] = (stripped, ch, parts)
@@ -316,8 +320,13 @@ def main():
         fixes.append((kid, ch, line, parts, new_parts, info))
 
     def rebuilt(line, new_parts):
+        # Preserve any alternative decompositions after the ";" — this rewrites the
+        # PRIMARY only. Before 2026-09-13 it rebuilt the line from the first three
+        # fields and would have silently deleted them.
         head = line.split(":")
-        return f"{head[0]}:{head[1]}:{head[2]}:{','.join(new_parts)}"
+        tail = head[3].split(";", 1)[1] if len(head) > 3 and ";" in head[3] else None
+        primary = ",".join(new_parts)
+        return f"{head[0]}:{head[1]}:{head[2]}:{primary}" + (f";{tail}" if tail else "")
 
     if args.emit:
         for kid, ch, line, parts, new_parts, info in fixes:

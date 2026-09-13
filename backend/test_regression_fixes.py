@@ -1150,7 +1150,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1272": {"character": "措", "keyword": "set aside",
                 "expected_part_ids": {"kangxi64", "rtk1268"}},
     "rtk1276": {"character": "遮", "keyword": "intercept",
-                "expected_part_ids": {"kangxi162", "rtk1", "rtk1275"}},
+                "expected_part_ids": {"kangxi162", "rtk1275"}},
     "rtk1298": {"character": "版", "keyword": "printing block",
                 "expected_part_ids": {"rtk1297", "rtk779"}},
     "rtk1300": {"character": "乏", "keyword": "destitution",

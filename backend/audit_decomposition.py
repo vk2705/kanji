@@ -145,7 +145,8 @@ def trace_origins() -> dict[str, tuple[str, int]]:
                     continue
                 cols = line.split(":")
                 pid = cols[0].strip().lower()
-                parts_str = cols[3].strip() if len(cols) > 3 else ""
+                # primary decomposition only; ";" introduces alternatives (2026-09-13)
+                parts_str = cols[3].split(";")[0].strip() if len(cols) > 3 else ""
                 if pid and parts_str:
                     origins[pid] = (path.name, lineno)
 

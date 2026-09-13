@@ -8467,3 +8467,51 @@ and 爽 = `㐅,乂,大`, keeping both the substitute *and* its replacement, beca
 component that is atomic in both trees has no descendant set to test against.
 With 28 cases and the CSV printed beside each, writing the targets out was
 simply more reliable than another guard.
+
+### Same day — alternative decompositions, which turned out not to exist
+
+Owner: *"you may register non heisig names and elements. you may add alternative
+decompositions"*. The second half unblocks the tension from 2026-09-13's first
+entry: where cjkvi and Heisig disagree about the intermediate level, the app need
+not choose — the schema has always allowed several decompositions per kanji, the
+detail page renders them all, and search already matches through any of them.
+
+Except the importer didn't. `_load_parts_file` did `parts_str.replace(";", ",")`,
+so the `;alt_decomp` syntax CLAUDE.md has documented since the beginning **silently
+merged alternatives into one flat list**, and `_backfill_decompositions` created
+exactly one system decomposition per kanji. Nothing in `data.txt` used a `;`, so
+nobody had noticed. Implemented for real: `_load_parts_file` returns a list of
+lists, and `import_data` inserts one `decompositions` row per alternative, the
+first unlabelled (Heisig's, so it renders plain) and later ones labelled
+`structural (cjkvi-ids)` — `KanjiDetail`'s tab strip falls back to `#N` otherwise,
+which would tell a reader nothing about provenance.
+
+Then added cjkvi's top level as a second decomposition for the **269** kanji where
+it differs from ours *and* every component is already registered — no new
+components, no invented names, nothing replaced. (620 more differ but need one of
+411 unregistered components; that tail is very flat, the most-needed reaching only
+9 kanji, so it is a poor next lever.)
+
+Two latent bugs this exposed, both found by running the tools rather than reasoning:
+
+- `audit_overflatten.py`'s `read_data_txt` split field 3 on `,` alone, so a line
+  with a `;` produced a mangled token (`工;𠂇`) and the detector jumped to 27 false
+  positives. Now takes `split(";")[0]` — the primary is what it audits, and the
+  structural alternative would trivially "already match cjkvi" and mask it.
+- Worse, `--apply` rebuilt each line from its first three fields, which would have
+  **deleted every alternative** the first time it ran. Now preserves the tail.
+  `audit_decomposition.py` had the same reader and got the same fix.
+
+Verified in the browser rather than from the docs, since this is user-facing: 左's
+detail page shows "SYSTEM" (ノ, 一, 工 — Heisig's) and "STRUCTURAL (CJKVI-IDS)"
+(craft, by one's side) as separate labelled blocks, the 𠂇 chip rendering its
+image. Search reaches kanji through either: `by one's side` returns 左右有布友,
+none of which their primary decomposition mentions.
+
+Verified: detector 0, dead tokens 0, self-references 0, 1316 checks with only the
+4 known hanzi-scope non-issues, 66 pytest, frontend lint + build clean.
+
+**Next**: the "register non-Heisig names" half of the owner's message is still
+unused. The 411 blocking components have no Heisig name, so they would need
+descriptive ones — worth doing, but the flat tail means the payoff is per-kanji
+rather than per-batch.

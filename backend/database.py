@@ -380,6 +380,13 @@ def record_page_view(conn, visitor_id: str, path: str | None):
     conn.commit()
 
 
+# Label for the second and later decompositions a data.txt line declares with ";".
+# The primary (Heisig's own breakdown) stays unlabelled so the detail page renders it
+# plain; alternatives are labelled because KanjiDetail's tab strip falls back to "#N"
+# otherwise, which tells a reader nothing about where the alternative came from.
+ALT_DECOMPOSITION_LABEL = "structural (cjkvi-ids)"
+
+
 def _backfill_decompositions(conn):
     """
     Ensure every kanji_id present in `parts` has a system decomposition row, and every
@@ -427,9 +434,20 @@ def _load_parts_file(path: Path) -> dict[str, list[str]]:
             if not pid or len(cols) < 4:
                 continue
             parts_str = cols[3].strip()
-            raw = [p.strip() for p in parts_str.replace(";", ",").split(",") if p.strip()]
-            normalised = [p.lower() if p.isascii() else p for p in raw]
-            result[pid] = normalised
+            # A line may carry several alternative decompositions separated by ";"
+            # ("口,土;吉" = taught two ways). Each becomes its own decompositions row,
+            # which is what the schema, search and the detail UI have always expected
+            # — until 2026-09-13 this parser did `parts_str.replace(";", ",")` and
+            # silently merged them into one flat list, so the syntax CLAUDE.md
+            # documented had never actually worked.
+            alts = []
+            for chunk in parts_str.split(";"):
+                raw = [p.strip() for p in chunk.split(",") if p.strip()]
+                alts.append([p.lower() if p.isascii() else p for p in raw])
+            # "" and "a,b;" both mean one (possibly empty) decomposition, not two.
+            while len(alts) > 1 and not alts[-1]:
+                alts.pop()
+            result[pid] = alts
     return result
 
 
@@ -646,7 +664,7 @@ def import_data():
     char_lookup = _build_char_lookup(conn)
 
     overrides_applied = 0
-    for pid, parts in merged_parts_override.items():
+    for pid, alternates in merged_parts_override.items():
         canonical = resolve_alias(conn, pid)
         if not canonical:
             continue
@@ -654,14 +672,29 @@ def import_data():
         # parts may legitimately be [] here — an explicit "this is atomic" override
         # (see _load_parts_file) — in which case we still clear any fallback parts,
         # just insert nothing.
-        expanded_terms = expand_part_terms(conn, parts, char_lookup, script_group="ja") if parts else []
-
         conn.execute("DELETE FROM parts WHERE kanji_id = ?", (canonical,))
-        if expanded_terms:
-            conn.executemany(
-                "INSERT INTO parts (kanji_id, part_term, position) VALUES (?, ?, ?)",
-                [(canonical, term, pos) for pos, term in enumerate(expanded_terms)]
+        conn.execute("DELETE FROM decompositions WHERE kanji_id = ? AND owner_id = 1",
+                     (canonical,))
+        for index, parts in enumerate(alternates):
+            expanded_terms = (expand_part_terms(conn, parts, char_lookup, script_group="ja")
+                              if parts else [])
+            if not expanded_terms and index:
+                continue          # never create an empty *alternative*
+            # The first list is the primary (Heisig) reading and stays unlabelled, so
+            # the detail page shows it plain; any further one is labelled, since the
+            # UI's tab strip falls back to "#N" without a label.
+            cur = conn.execute(
+                "INSERT INTO decompositions (kanji_id, owner_id, visibility, label) "
+                "VALUES (?, 1, 'public', ?)",
+                (canonical, None if index == 0 else ALT_DECOMPOSITION_LABEL)
             )
+            if expanded_terms:
+                conn.executemany(
+                    "INSERT INTO parts (kanji_id, part_term, position, decomposition_id) "
+                    "VALUES (?, ?, ?, ?)",
+                    [(canonical, term, pos, cur.lastrowid)
+                     for pos, term in enumerate(expanded_terms)]
+                )
         overrides_applied += 1
 
     _backfill_decompositions(conn)
