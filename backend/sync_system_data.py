@@ -47,12 +47,18 @@ against the live DB's, and applies only the difference:
   - aliases: add what the source now has, remove what it no longer does.
     Scoped to owner_id=1 rows on ja-kanji kanji only — a user's own alias on
     a system kanji (a different owner_id) is untouched.
-  - decompositions/parts: for each kanji's *system* decomposition
+  - decompositions/parts: for each kanji's *system* decomposition(s)
     (owner_id=1) specifically — never a user's alternate decomposition on
-    the same kanji_id — replaces its parts list if the source's differs,
-    creates the decomposition row if the source now wants one where there
-    was none, deletes it if the source now wants none (an atomic primitive
-    with no listed parts, same convention as e.g. rtk1743 門).
+    the same kanji_id. A kanji can carry more than one system decomposition
+    (data.txt's ";" syntax — a primary, label NULL, plus labelled
+    alternatives like "structural (cjkvi-ids)"; see ALT_DECOMPOSITION_LABEL
+    in database.py); each is matched to its live counterpart by
+    (kanji_id, label), not kanji_id alone, so gaining or losing one
+    alternative doesn't disturb the others. Replaces a decomposition's
+    parts list if the source's differs, creates the row if the source now
+    wants one where there was none, deletes it if the source now wants
+    none (an atomic primitive with no listed parts, same convention as
+    e.g. rtk1743 門).
 
 Explicitly out of scope: zh-* hanzi rows (seeded separately by the one-off
 import_hanzi.py from cjkvi-ids IDS data, not from these three files — this
@@ -172,29 +178,47 @@ def sync_aliases(shadow: sqlite3.Connection, live: sqlite3.Connection, dry_run: 
 
 
 def sync_decompositions(shadow: sqlite3.Connection, live: sqlite3.Connection, dry_run: bool) -> dict:
-    decomp_q = f"""SELECT d.id, d.kanji_id FROM decompositions d JOIN kanji k ON k.id = d.kanji_id
-                   WHERE d.{SYSTEM_JA_KANJI}"""
+    """Reconcile system decompositions per kanji — plural, since a kanji can carry
+    several (a primary, label NULL, plus one or more labelled alternatives; see
+    ALT_DECOMPOSITION_LABEL / the ";" syntax in data.txt). Matched by (kanji_id,
+    label) rather than kanji_id alone: two rows on the same kanji with different
+    labels are different decompositions, not duplicates.
 
-    shadow_decomp = {r["kanji_id"]: r["id"] for r in shadow.execute(decomp_q)}
+    Fixed 2026-09-14 — the original version keyed by kanji_id only
+    (`{kanji_id: decomposition_id}`), which silently collapsed a kanji's list of
+    system decompositions down to whichever one a dict comprehension happened to
+    keep last. Once import_data() started emitting more than one system
+    decomposition per kanji (the ";" alternate-decomposition fix), every sync
+    from a data.txt with such a kanji quietly dropped its primary (Heisig)
+    reading and kept an arbitrary alternative mislabelled as primary — live
+    was compared against itself, so `sync_system_data.py --dry-run` reported
+    it as a no-op. Caught only by checking a known ";" kanji's detail page and
+    finding one decomposition where two were expected."""
+    decomp_q = f"""SELECT d.id, d.kanji_id, d.label FROM decompositions d
+                   JOIN kanji k ON k.id = d.kanji_id WHERE d.{SYSTEM_JA_KANJI}"""
+
+    shadow_rows = list(shadow.execute(decomp_q))
+    shadow_by_key = {(r["kanji_id"], r["label"]): r["id"] for r in shadow_rows}
     shadow_parts = {
-        kid: [r["part_term"] for r in shadow.execute(
+        key: [r["part_term"] for r in shadow.execute(
             "SELECT part_term FROM parts WHERE decomposition_id = ? ORDER BY position", (did,))]
-        for kid, did in shadow_decomp.items()
+        for key, did in shadow_by_key.items()
     }
 
-    live_decomp_rows = list(live.execute(decomp_q))
-    live_decomp: dict[str, int] = {}
+    live_rows = list(live.execute(decomp_q))
+    live_by_key: dict[tuple[str, str | None], int] = {}
     dupes = []
-    for r in live_decomp_rows:
-        if r["kanji_id"] in live_decomp:
-            dupes.append(r["kanji_id"])
+    for r in live_rows:
+        key = (r["kanji_id"], r["label"])
+        if key in live_by_key:
+            dupes.append(key)
         else:
-            live_decomp[r["kanji_id"]] = r["id"]
+            live_by_key[key] = r["id"]
 
     created, replaced, removed = [], [], []
-    for kid in sorted(set(shadow_parts) | set(live_decomp)):
-        target_terms = shadow_parts.get(kid, [])
-        live_did = live_decomp.get(kid)
+    for key in sorted(set(shadow_parts) | set(live_by_key), key=lambda k: (k[0], k[1] or "")):
+        target_terms = shadow_parts.get(key, [])
+        live_did = live_by_key.get(key)
         live_terms = []
         if live_did is not None:
             live_terms = [r["part_term"] for r in live.execute(
@@ -207,27 +231,29 @@ def sync_decompositions(shadow: sqlite3.Connection, live: sqlite3.Connection, dr
             if not dry_run:
                 live.execute("DELETE FROM parts WHERE decomposition_id = ?", (live_did,))
                 live.execute("DELETE FROM decompositions WHERE id = ?", (live_did,))
-            removed.append(kid)
+            removed.append(key)
         elif live_did is None:
             if not dry_run:
+                kid, label = key
                 cur = live.execute(
                     "INSERT INTO decompositions (kanji_id, owner_id, visibility, label) "
-                    "VALUES (?, 1, 'public', NULL)", (kid,)
+                    "VALUES (?, 1, 'public', ?)", (kid, label)
                 )
                 new_did = cur.lastrowid
                 live.executemany(
                     "INSERT INTO parts (kanji_id, part_term, position, decomposition_id) VALUES (?, ?, ?, ?)",
                     [(kid, term, pos, new_did) for pos, term in enumerate(target_terms)]
                 )
-            created.append(kid)
+            created.append(key)
         else:
             if not dry_run:
+                kid, _ = key
                 live.execute("DELETE FROM parts WHERE decomposition_id = ?", (live_did,))
                 live.executemany(
                     "INSERT INTO parts (kanji_id, part_term, position, decomposition_id) VALUES (?, ?, ?, ?)",
                     [(kid, term, pos, live_did) for pos, term in enumerate(target_terms)]
                 )
-            replaced.append(kid)
+            replaced.append(key)
 
     return {"created": created, "replaced": replaced, "removed": removed, "duplicate_system_decomps": dupes}
 
@@ -279,9 +305,11 @@ def main():
     print(f"decompositions: {len(decomp_result['created'])} created, "
           f"{len(decomp_result['replaced'])} replaced, {len(decomp_result['removed'])} removed (now atomic)")
     if decomp_result["duplicate_system_decomps"]:
-        print(f"  ! found more than one owner_id=1 decomposition on the same kanji_id for: "
-              f"{', '.join(decomp_result['duplicate_system_decomps'])} — only the first was reconciled, "
-              f"the rest were left alone; this shouldn't normally happen, worth a manual look.")
+        dupe_desc = ', '.join(f"{kid} ({label or 'primary'})"
+                              for kid, label in decomp_result["duplicate_system_decomps"])
+        print(f"  ! found more than one owner_id=1 decomposition with the same (kanji_id, label) for: "
+              f"{dupe_desc} — only the first was reconciled, the rest were left alone; this shouldn't "
+              f"normally happen, worth a manual look.")
 
     total_changes = (
         len(kanji_result["inserted"]) + len(kanji_result["updated"])

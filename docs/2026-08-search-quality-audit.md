@@ -8772,3 +8772,52 @@ aliases, so no decomposition moved.
 stroke-shape name over several codepoints, the 龶/丰 pattern again but wider.
 `belt`(28), `rake`(18), `broom`(15) and `acupuncturist` still have no plausible
 registered row and are the genuinely-missing entries to register next.
+
+---
+
+## 2026-09-14 (deploy) — `sync_system_data.py` was silently dropping every
+kanji's primary decomposition when it gained an alternative
+
+Routine `git pull` + `sync_system_data.py` + restart for the four days of work
+above. The deploy itself surfaced a real bug in the sync script, not the data.
+
+`sync_decompositions()` still keyed its shadow/live comparison by `kanji_id`
+alone — `{r["kanji_id"]: r["id"] for r in ...}`, a plain dict — which was
+correct back when a kanji had at most one system decomposition. It stopped
+being correct the moment 2026-09-13's `;`-syntax fix made `import_data()`
+emit **two** rows for a kanji with an alternative (primary + `"structural
+(cjkvi-ids)"`): the dict comprehension silently kept whichever row SQLite
+happened to iterate last for that `kanji_id` and discarded the other. Applying
+this sync to the live DB collapsed **all 269** kanji with a `;` alternative
+down to one decomposition each — always the *second* one (the structural
+alternative), always with its label dropped, so it displayed as if it were
+the primary. 左's live page showed craft + "by one's side" as its only,
+unlabelled reading; the actual primary (ノ,一,工) was gone.
+
+Caught by spot-checking 左's detail page after the sync the doc above
+describes as verified — the *previous* session had verified it correctly
+against a freshly-built shadow DB (where `import_data()` runs directly and is
+unaffected by this bug), but nobody had re-checked it after running
+`sync_system_data.py` against a real accumulated live DB, which is the only
+path a deployed instance actually uses to pick up a `data.txt` change. The
+shadow-DB test and the sync-script code path exercise different functions
+(`import_data()` vs `sync_decompositions()`), and only one of them was fixed.
+
+Rewrote `sync_decompositions()` to key by `(kanji_id, label)` instead —
+matches `import_data()`'s own model (index 0 primary/label-NULL, later
+indices labelled), so gaining or losing one alternative no longer disturbs
+the others sharing the same `kanji_id`. Verified via dry-run before/after:
+**269 decompositions "created"** (exactly the count of `;`-bearing source
+lines) on the first run with the fix, 0 on a second consecutive run
+(idempotent). 左 spot-checked directly — both decompositions present again,
+correctly labelled.
+
+Verified: 66 pytest, full regression suite (1316 checks, only the 4 known
+hanzi-scope non-issues). No frontend changes in this pull, so no rebuild —
+backend restarted only. `kanji.db.bak-20260914-125538` is the pre-fix backup.
+
+**Lesson for next time a sync-affecting schema/import change lands**: a
+shadow-DB check (`import_data()` against an empty temp file) is not a
+substitute for running `sync_system_data.py --dry-run` against a real
+populated DB — they are different code paths, and this project's actual
+deploy mechanism is the second one.
