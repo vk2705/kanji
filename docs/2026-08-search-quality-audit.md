@@ -8708,3 +8708,67 @@ obvious candidate (田 立 乙 丁 戈 里) — high enough to be real, too low 
 without looking, and the 蔑 case is the reason to take that seriously rather than
 rounding up. `belt`(28) `rake`(18) `broom`(15) have no plausible registered row
 at all and are probably genuinely missing entries.
+
+---
+
+## 2026-09-14 (second chunk) — exact host-set identity was too strong
+
+Went back to the 0.6–0.8-support candidates the last entry flagged, and the
+first one explained why they were all stuck in the no-evidence bucket.
+
+`brains` (88 hosts) had no registered name to vouch for it. But 田 is **"rice
+field" in 83 CSV rows and "brains" in 88** — and 83 of those are the same rows.
+The two sets differ by five entries, so grouping by *exact* host-set identity
+put the single largest unmatched name in the bucket marked "no evidence at all",
+with the answer sitting next to it in 94% of its own rows.
+
+Added `--near`, which scores Jaccard overlap against every resolvable name
+instead of demanding equality. The threshold does not need to be delicate:
+names that mean different shapes do not co-occur 80% of the time, and the ones
+that came out are unambiguous — vase/立 at **0.99**, mexican bandit/匂 at 1.00,
+brains/田 at 0.94, spike/丁 at 0.90.
+
+It also earns its keep by disagreeing with itself. `spike` scores 0.94 against
+"nail" (→ 釘) and 0.90 against "street" (→ 丁); the cjkvi cross-check gives 釘
+0.00 and 丁 0.77, because 釘 is a kanji that *contains* 丁 rather than being it.
+The higher overlap is the wrong answer, and only the second channel says so.
+
+### Applied
+
+11 rows. brains→田, vase→立, spike→丁, computer→里, shovel→凵, fiesta→戈,
+measuring cup→斗, mexican bandit/muchacho/siesta→匂, john cleese/ministry of
+silly walks→夋, breasts→母 *and* 毋.
+
+The three that rest on structure alone — fiesta, computer, shovel — were
+rendered rather than rounded up, since their support sat at 0.67–0.79. In each
+case the shortfall turned out to be cjkvi stopping early rather than a different
+glyph: 我 is atomic in cjkvi but visibly carries 戈, 重 carries 里, 凶 carries 凵.
+Confirmed and applied.
+
+`breasts` deliberately lands on two rows. Heisig names 母 and 毋 alike — 侮 悔 敏
+梅 毒 draw one, 慣 貫 the other — exactly as he does with 龶/丰 "grow up", so the
+same treatment applies and the term returns both readings.
+
+### Left alone, with reasons
+
+- `acupuncturist` — overlap 1.00 with "specialty" (→ 専), cjkvi support 0.00.
+  Its hosts 博 簿 縛 薄 carry 尃 (甫+寸), not 専 (𤰔+寸). Another homograph; the
+  row it wants does not exist yet.
+- `monocle` / `sunglasses with one lens missing` — 0.83 against "locket" (→ 韋),
+  but 降 is among the hosts and has no 韋 in it. The shared shape is more likely
+  the 舛 "two feet" than 韋, and "sunglasses" separately points at 舛 with a
+  different host set. Not guessed at.
+- `sign of the horse` (0.82 / cjkvi 0.18) and `pantomime horse` (0.88 with
+  "horse" / cjkvi **0.00** — not one of 勧 午 卸 御 権 歓 観 許 contains 馬). Both
+  are horse-themed mnemonics attached to a shape that is not the horse.
+
+Unsearchable Heisig names 256→243. Over-flattening 0, dead tokens 0,
+self-references 0, 1316 checks with only the 4 known hanzi-scope non-issues, 66
+pytest, frontend lint + build clean. No pin changes — this chunk only added
+aliases, so no decomposition moved.
+
+**Next**: `fishhook`(39) is the instructive one left. Its hosts spread across 乙,
+乚 and 𠃊 — 心 and 必 are in the list and cjkvi treats 心 as atomic — so it is a
+stroke-shape name over several codepoints, the 龶/丰 pattern again but wider.
+`belt`(28), `rake`(18), `broom`(15) and `acupuncturist` still have no plausible
+registered row and are the genuinely-missing entries to register next.

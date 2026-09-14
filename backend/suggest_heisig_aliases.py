@@ -157,6 +157,31 @@ def corpus_breadth(ids, chars):
     return counts
 
 
+def nearest_names(hosts_of_name, name, resolvable, min_overlap):
+    """Resolvable names whose host set nearly coincides with this one, best first.
+
+    Exact host-set identity is the strong signal, but it is *too* strong on its
+    own. 田 is "rice field" in 83 CSV rows and "brains" in 88 — the same five
+    extra rows keep the two sets from being equal, so grouping by identity put
+    "brains" (the single largest unmatched name after the first pass) in the
+    no-evidence bucket even though "rice field" is sitting right next to it in 83
+    of those rows. Jaccard overlap catches that without loosening the idea:
+    names that mean different shapes do not co-occur 94% of the time.
+    """
+    mine = hosts_of_name[name]
+    scored = []
+    for other in resolvable:
+        theirs = hosts_of_name[other]
+        union = mine | theirs
+        if not union:
+            continue
+        overlap = len(mine & theirs) / len(union)
+        if overlap >= min_overlap:
+            scored.append((overlap, other))
+    scored.sort(reverse=True)
+    return scored
+
+
 def classify(conn, groups):
     matched, ambiguous, unregistered = [], [], []
     for host_set, names in groups:
@@ -180,6 +205,14 @@ def main():
     )
     ap.add_argument("--all", action="store_true", help="also show ambiguous and unregistered groups")
     ap.add_argument("--min-hosts", type=int, default=MIN_HOSTS)
+    ap.add_argument(
+        "--near",
+        type=float,
+        default=None,
+        metavar="OVERLAP",
+        help="also report names whose host set merely *nearly* coincides with a "
+             "registered name's, at this Jaccard overlap or better (try 0.8)",
+    )
     args = ap.parse_args()
 
     conn = database.get_db()
@@ -198,6 +231,28 @@ def main():
         if char and char not in ("?", "??"):
             by_char.setdefault(char, kid)
     breadth = corpus_breadth(ids, [c for c in by_char if c in ids])
+
+    if args.near is not None:
+        hosts_of_name = collections.defaultdict(set)
+        for ch, names in csv_rows():
+            for n in set(names):
+                hosts_of_name[n].add(ch)
+        resolvable = {n for n in hosts_of_name if database.resolve_alias(conn, n)}
+        unresolved = sorted(
+            (n for n in hosts_of_name
+             if n not in resolvable and len(hosts_of_name[n]) >= args.min_hosts),
+            key=lambda n: -len(hosts_of_name[n]),
+        )
+        print(f"near-identical host sets (overlap >= {args.near}):\n")
+        for name in unresolved:
+            for overlap, other in nearest_names(hosts_of_name, name, resolvable, args.near)[:2]:
+                kid = database.resolve_alias(conn, other)
+                support = structural_support(ids, char_of.get(kid), sorted(hosts_of_name[name]))
+                shown = "n/a" if support is None else f"{support:.2f}"
+                print(f"  {name:<24} -> {labels.get(kid, kid):<26} "
+                      f"overlap {overlap:.2f} with \"{other}\", cjkvi {shown}, "
+                      f"{len(hosts_of_name[name])} hosts")
+        print()
 
     print(f"{len(matched)} group(s) where already-registered names vouch for the row:\n")
     for missing, kid, resolved, hosts in matched:

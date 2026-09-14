@@ -30,7 +30,7 @@ kangxi90:爿:turtle,radical 90,half of a tree trunk,split wood
 kangxi122:罒:net,eye radical,cross-eyed
 kangxi94:犭:pack of wild dogs,dog radical,chihuahua
 kangxi113:礻:leftside altar,altar
-kangxi80:毋:mother,do not
+kangxi80:毋:mother,do not,breasts
 
 
 
@@ -70,7 +70,7 @@ rtk10:十:ten:
 rtk11:口:mouth:
 rtk12:日:day,sun,tongue wagging in mouth:
 rtk13:月:month,moon,flesh,part of the body:
-rtk14:田:rice field:
+rtk14:田:rice field,brains:
 rtk15:目:eye:
 rtk22:晶:sparkle:日
 rtk23:品:goods:口
@@ -144,7 +144,7 @@ rtk90:召:seduce,summon:口,刀
 rtk92:則:rule:貝,刀
 rtk93:副:vice-:畐,刀
 rtk94:別:separate:口,力,刀
-rtk95:丁:street:一,亅
+rtk95:丁:street,spike:一,亅
 rtk96:町:town:田,丁
 rtk97:可:can:丁,口
 rtk98:頂:place on the head:丁,頁
@@ -154,7 +154,7 @@ rtk101:了:complete:一,亅
 rtk102:女:woman:
 rtk103:好:fond:子,女
 rtk104:如:likeness:口,女
-rtk105:母:mother:毋
+rtk105:母:mother,breasts:毋
 rtk106:貫:pierce:母,貝
 rtk107:兄:elder brother:口,儿
 rtk108:呪:spell:兄,口
@@ -234,7 +234,7 @@ rtk181:点:spot:占,灬
 rtk182:照:illuminate:昭,灬
 rtk183:魚:fish:𠂊,田,灬
 rtk184:漁:fishing:水,魚
-rtk185:里:ri:;一,甲
+rtk185:里:ri,computer:;一,甲
 rtk186:黒:black:里,灬
 rtk187:墨:black ink:土,黒
 rtk188:鯉:carp:魚,里
@@ -511,7 +511,7 @@ rtk458:妖:attractive:夭,女
 rtk459:沃:fertility:夭,水
 rtk460:橋:bridge:喬,木
 rtk461:嬌:attractive:喬,女
-rtk462:立:stand up:;一,丷,亠
+rtk462:立:stand up,vase:;一,丷,亠
 rtk463:泣:cry:水,立
 rtk464:章:badge:立,早
 rtk465:競:emulate:兄,立
@@ -527,7 +527,7 @@ rtk474:滴:drip:水,啇
 rtk475:敵:enemy:啇,攵
 rtk476:匕:spoon:;ノ,乙
 rtk477:叱:scold:口,匕
-rtk478:匂:fragrant:勹,匕
+rtk478:匂:fragrant,mexican bandit,muchacho,siesta:勹,匕
 rtk479:頃:time:頁,匕
 rtk480:北:north:匕,prim-sitting-on-the-ground
 rtk481:背:stature:月,北
@@ -1310,7 +1310,7 @@ rtk1257:曹:office:一,曲,日
 rtk1258:遭:encounter:曹,辶
 rtk1259:漕:rowing:曹,水
 rtk1260:槽:vat:曹,木
-rtk1261:斗:big dipper,the plough:
+rtk1261:斗:big dipper,the plough,measuring cup:
 rtk1262:料:fee:斗,米
 rtk1263:科:department:禾,斗
 rtk1264:図:map:斗,囗
@@ -3058,13 +3058,13 @@ kangxi13:冂:border,down box,hood
 kangxi14:冖:cover,cloth cover,birdcage,birdhouse
 kangxi6:亅:hook
 kangxi44:尸:corpse
-kangxi62:戈:spear,halberd
+kangxi62:戈:spear,halberd,fiesta
 kangxi115:禾:grain,wheat,cereal
 kangxi172:隹:short-tailed bird,turkey
 kangxi66:攵:rap,knock,taskmaster
 kangxi53:广:cave,dotted cliff,caverns
 kangxi16:几:table,stool
-kangxi17:凵:container,open box
+kangxi17:凵:container,open box,shovel
 kangxi60:彳:step,go,nelson
 kangxi31:囗:enclosure,pent in
 kangxi138:艮:stopping,retracing
@@ -3158,7 +3158,7 @@ prim-bushel-basket:其:bushel basket,hamper:
 prim-piggy-bank:昜:piggy bank,piglets:旦,勿
 prim-dog-tag:甫:dog-tag,arrowhead:十,月,丶
 prim-harvest-festival:𢦏:harvest festival,thanksgiving:十,戈
-prim-streetwalker:夋:streetwalker:允,夂
+prim-streetwalker:夋:streetwalker,john cleese,ministry of silly walks:允,夂
 prim-devil:兑:devil:丷,兄
 prim-futon:翟:futon:羽,隹
 prim-talking-cricket:禺:talking cricket:
