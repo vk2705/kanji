@@ -4,8 +4,8 @@ prim-dollar-sign:弗:dollar sign:弓,｜
 prim-snare:丂:snare:一,勹
 kangxi3:丶:dot,tick,drop
 kangxi9:亻:person
-kangxi10:儿:human legs,legs
-kangxi12:丷:horns
+kangxi10:儿:human legs,legs,teenager
+kangxi12:丷:horns,animal horns
 kangxi15:冫:ice
 kangxi20:勹:bound up
 kangxi25:卜:divining rod,augury,divination,magic wand
@@ -76,7 +76,7 @@ rtk22:晶:sparkle:日
 rtk23:品:goods:口
 rtk24:呂:spine:口,口;ノ,口
 rtk25:昌:prosperous:日
-rtk26:早:early:十,日
+rtk26:早:early,sunflower:十,日
 rtk27:旭:rising sun:日,九
 rtk28:世:generation:廿,一
 rtk29:胃:stomach:月,田
@@ -438,9 +438,9 @@ rtk385:戚:grieve:小,戊,上
 rtk386:成:turn into:ノ,戈;戊,𠃌
 rtk387:城:castle:土,成
 rtk388:誠:sincerity:言,成
-rtk389:威:intimidate:女,厂,成
-rtk390:滅:destroy:火,水,戊
-rtk391:減:dwindle:口,水,亅,戈
+rtk389:威:intimidate:女,戌
+rtk390:滅:destroy:水,戌,火
+rtk391:減:dwindle:水,戌,口
 rtk392:蔑:ignore:艹,罒,十,戊
 rtk393:桟:scaffold:㦮,木
 rtk394:銭:coin:㦮,金
@@ -600,7 +600,7 @@ rtk547:廷:courts:壬,廴
 rtk548:染:dye:九,水,木
 rtk549:燃:burn:火,然
 rtk550:賓:v.i.p.:少,貝,宀,一
-rtk551:歳:year-end:ノ,止,小,戈
+rtk551:歳:year-end:止,小,戌
 rtk552:県:prefecture:小,目
 rtk553:栃:horse chestnut:木,厂
 rtk554:地:ground:土,也
@@ -711,7 +711,7 @@ rtk658:憩:recess:自,心,舌
 rtk659:恵:favor:十,心,田
 rtk660:恐:fear:工,心,凡
 rtk661:惑:beguile:心,或
-rtk662:感:emotion:ノ,口,心,戈
+rtk662:感:emotion:戌,口,心
 rtk663:憂:melancholy:一,自,心,冖,夂,白
 rtk664:寡:widow:一,自,刀,八,宀
 rtk665:忙:busy:忄,亡
@@ -1339,13 +1339,13 @@ rtk1286:半:half:｜,二,丷,十;丷,二,｜
 rtk1287:伴:consort:亻,半
 rtk1288:畔:paddy ridge:田,半
 rtk1289:判:judgement:半,刀
-rtk1290:拳:fist:一,手,丷,大,二
-rtk1291:券:ticket:一,人,大,刀,二,丷
-rtk1292:巻:scroll:大,二,丷,己
+rtk1290:拳:fist:龹,手
+rtk1291:券:ticket:龹,刀
+rtk1292:巻:scroll:龹,己
 rtk1293:圏:sphere:囗,巻
-rtk1294:勝:victory:月,人,大,二,丷,力
-rtk1295:藤:wisteria:｜,一,月,水,艹,二,大,丷
-rtk1296:謄:mimeograph:｜,一,月,言,二,大,丷
+rtk1294:勝:victory:月,龹,力
+rtk1295:藤:wisteria:艹,月,龹,水
+rtk1296:謄:mimeograph:言,月,龹
 rtk1297:片:one-sided:
 rtk1298:版:printing block:片,反
 rtk1299:之:of,zorro,building blocks,zig-zag:乙,丶,亠,廴
@@ -1421,7 +1421,7 @@ rtk1368:交:mingle:父,亠
 rtk1369:効:merit:交,力
 rtk1370:較:contrast:車,交
 rtk1371:校:exam:交,木
-rtk1372:足:leg:口,止
+rtk1372:足:leg,wooden leg:口,止
 rtk1373:促:stimulate:亻,足
 rtk1374:捉:catch:扌,足
 rtk1375:距:long-distance:足,巨
@@ -1826,7 +1826,7 @@ rtk1773:違:difference:辶,韋
 rtk1774:緯:horizontal:糸,韋
 rtk1775:衛:defense:行,韋
 rtk1776:韓:korea:韋,𠦝
-rtk1777:干:dry:十,一
+rtk1777:干:dry,clothesline:十,一
 rtk1778:肝:liver:干,月
 rtk1779:刊:publish:干;刀,干
 rtk1780:汗:sweat:干,水
@@ -2046,15 +2046,15 @@ rtk1993:郷:home town:艮,⻏,幺
 rtk1994:響:echo:郷,音
 rtk1995:郎:son:艮,⻏
 rtk1996:廊:corridor:郎,广
-rtk1997:盾:shield:十,目,厂
+rtk1997:盾:shield:𠂆,十,目
 rtk1998:循:sequential:盾,彳
-rtk1999:派:faction:水,厂
-rtk2000:脈:vein:月,厂
+rtk1999:派:faction:水,𠂆
+rtk2000:脈:vein:月,𠂆
 rtk2001:衆:masses:血,皿,糸
-rtk2002:逓:relay:巾,辶,厂,二,｜
+rtk2002:逓:relay:巾,辶,𠂆,｜
 rtk2003:段:grade:｜,殳,几,又,ノ,一
 rtk2004:鍛:forge:段,金
-rtk2005:后:empress:ノ,一,口,亅,厂
+rtk2005:后:empress:𠂆,一,口
 rtk2006:幻:phantasm:幺;幺,𠃌
 rtk2007:司:director,ken russel:一,口,亅
 rtk2008:伺:pay respects:亻,司
@@ -2193,7 +2193,7 @@ rtk2140:駄:burdensome:太,馬
 rtk2141:驚:wonder:敬,馬
 rtk2142:篤:fervent:竹,馬
 rtk2143:罵:abuse:罒,馬
-rtk2144:騰:leaping up:月,馬,丷,一,人,大,二
+rtk2144:騰:leaping up:馬,月,龹
 rtk2145:虎:tiger:卜,儿,匕,厂,虍;儿,虍
 rtk2146:虜:captive:男,卜,匕,厂,虍;男,虍
 rtk2147:膚:skin:胃,卜,匕,厂,虍;胃,虍
@@ -3055,14 +3055,14 @@ rtk3000:鼈:snapping turtle:小,尚,冂,攵,黽;敝,黽
 # not Heisig book text.
 kangxi8:亠:lid,primitive_lid,top hat
 kangxi13:冂:border,down box,hood
-kangxi14:冖:cover,cloth cover
+kangxi14:冖:cover,cloth cover,birdcage,birdhouse
 kangxi6:亅:hook
 kangxi44:尸:corpse
 kangxi62:戈:spear,halberd
 kangxi115:禾:grain,wheat,cereal
 kangxi172:隹:short-tailed bird,turkey
 kangxi66:攵:rap,knock,taskmaster
-kangxi53:广:cave,dotted cliff
+kangxi53:广:cave,dotted cliff,caverns
 kangxi16:几:table,stool
 kangxi17:凵:container,open box
 kangxi60:彳:step,go,nelson
@@ -3156,7 +3156,7 @@ prim-parade:戊:parade
 # top level needs a component we cannot yet register.
 prim-bushel-basket:其:bushel basket,hamper:
 prim-piggy-bank:昜:piggy bank,piglets:旦,勿
-prim-dog-tag:甫:dog-tag:十,月,丶
+prim-dog-tag:甫:dog-tag,arrowhead:十,月,丶
 prim-harvest-festival:𢦏:harvest festival,thanksgiving:十,戈
 prim-streetwalker:夋:streetwalker:允,夂
 prim-devil:兑:devil:丷,兄
@@ -3258,3 +3258,16 @@ rtk2238:疋:critters,zoo
 # hosts spelled it out as 土,亠,二 instead. Left atomic on purpose: cjkvi-ids
 # has no decomposition for it either, and Heisig teaches it as a primitive.
 prim-grow-up:龶:grow up:
+
+# --- 2026-09-14: three primitives Heisig names that had no row here.
+# 𠂆 'drag' is NOT 厂 'cliff'. The book keeps them apart (6 hosts vs 42, no
+# overlap) and the render agrees: 厂 is a plain corner, 𠂆 is a 丿 crossed
+# lower down by a 一, so the slash sticks out above the bar. cjkvi-ids
+# spells both 𠂆, which is why this went unnoticed — it is the one place
+# the structural source is less precise than Heisig, not more.
+prim-drag:𠂆:drag:
+# 龹 'quarter' and 戌 'march' were each spelled out in every host instead
+# (一+大+二+丷 and 厂+成). Both take cjkvi-ids' own decomposition, so a
+# deeper search still reaches the pieces.
+prim-quarter:龹:quarter:丷,夫
+prim-march:戌:march:戊,一

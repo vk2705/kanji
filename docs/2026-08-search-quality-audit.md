@@ -8637,3 +8637,74 @@ resolves at all (wheat/cereal was the latter, and turned out to be 禾 under a
 name we lacked). The genuinely missing rows in that second bucket — "rake",
 "brains", "belt", "computer" — are the real "register a component" work, and
 unlike the 411 blockers they come with Heisig's own name attached.
+
+---
+
+## 2026-09-14 — three primitives Heisig names, and a shape the structural source gets wrong
+
+Worked the un-vouched half of `suggest_heisig_aliases.py`'s output — the groups
+where no name resolves at all, so there is no registered sibling to point at the
+right row and structure is the only evidence. The vouched half is now down to two
+uncertain entries; this is where the remaining work is.
+
+Eight names went on straight, each at 0.9+ cjkvi support: teenager→儿, animal
+horns→丷, wooden leg→足, clothesline→干, sunflower→早, arrowhead→甫,
+birdcage/birdhouse→冖, caverns→广.
+
+### 𠂆 is not 厂, and this is the first time cjkvi-ids has been the less precise source
+
+"drag" (6 hosts) sat next to "cliff" (42 hosts) in the CSV with **no overlap** —
+Heisig keeps them apart. Our data spelled both 厂, and cjkvi-ids was no help: it
+writes 𠂆 for *both* groups, so the structural source flatly does not distinguish
+them. Support for 厂 across the drag hosts came out 0.00, which looked like a
+tooling artefact rather than a finding.
+
+Rendering the two groups together settles it, and the difference is consistent
+across all of them: 厚 原 反 石 draw a plain corner — a bar whose left end *is*
+the top of the descender — while 后 盾 脈 逓 draw a 丿 crossed lower down by a 一,
+so the slash sticks out above the bar. Two shapes, not one.
+
+Registered 𠂆 as `prim-drag` and repointed 盾 派 脈 后 逓 (循 already goes through
+盾). Worth recording that this is the *one* case so far where cjkvi-ids is coarser
+than Heisig — every previous disagreement went the other way, with the book
+flattening what cjkvi resolves. It means "cjkvi says X" is not on its own a
+reason to overrule the components column, only to go and look.
+
+### 龹 "quarter" and 戌 "march"
+
+Both were spelled out in every host rather than referenced: 拳 券 巻 勝 藤 謄 騰
+each carried 一+大+二+丷, and 威 感 歳 減 carried 厂+成 or a bare 戈. cjkvi-ids
+confirms 龹 in all 8 quarter hosts and 戌 in 6 of the 7 march hosts directly.
+Both registered with cjkvi's own decomposition under them (龹 = 丷+夫, 戌 = 戊+一)
+so a depth>1 search still reaches the pieces — unlike 龶 last session, which is
+atomic in cjkvi too and so was left atomic here.
+
+**The seventh march host is the interesting one.** 蔑 is "march" in the CSV, but
+cjkvi reads it ⿱𦭝**戍** — U+620D, a *third* glyph in this family: 戊 has an empty
+frame, 戌 a bar across it, 戍 a dot. The render backs cjkvi. So 蔑 was reverted to
+exactly what it had and claims nothing new, and its pin now carries a comment
+saying why it is the one host in its own name's list that does not get the name.
+
+This is the same trap 龶/丰 set last session, and it is now clearly a pattern
+rather than an accident: **Heisig names by mnemonic role, not by glyph**, so one
+of his names can cover two or three genuinely different characters. His
+components column is authoritative about *which kanji share a shape* and not
+about *which codepoint that shape is*. Every name that lands on a new row needs
+the render before it lands.
+
+### Numbers
+
+Unsearchable Heisig names 268→256. Phantom parts 281→267 across 182 kanji.
+`two` 69→61, `cliff` settles at 40.
+
+Verified: over-flattening 0, dead tokens 0, self-references 0, 1316 checks with
+only the 4 known hanzi-scope non-issues, 66 pytest, frontend lint + build clean.
+Six pins updated in place (藤 謄 巻 騰 滅, plus 蔑's deliberate non-change), each
+carrying the reason rather than just the new value.
+
+**Next**: the same bucket, working down. `brains`(88) `vase`(68) `fishhook`(39)
+`spike`(31) `fiesta`(29) `computer`(24) all sit at 0.6–0.8 support against an
+obvious candidate (田 立 乙 丁 戈 里) — high enough to be real, too low to apply
+without looking, and the 蔑 case is the reason to take that seriously rather than
+rounding up. `belt`(28) `rake`(18) `broom`(15) have no plausible registered row
+at all and are probably genuinely missing entries.

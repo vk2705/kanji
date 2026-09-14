@@ -346,12 +346,14 @@ EXPECTED_DECOMPOSITIONS = {
     # matching heisig-kanjis.csv's own components list, but data.txt's
     # override silently dropped it while keeping the sibling frames
     # 1290-1294 (拳/券/巻/圏/勝) correct.
+    # The 龹 family (拳 券 巻 勝 藤 謄 騰) each used to pin 一+大+二+丷 — four
+    # parts spelling out one shape Heisig names "quarter" and cjkvi-ids spells
+    # 龹 (U+9FB9) in all eight hosts. Registered 2026-09-14 as prim-quarter with
+    # cjkvi's own 丷+夫 underneath, so a depth>1 search still reaches the pieces.
     "rtk1295": {"character": "藤", "keyword": "wisteria",
-                "expected_part_ids": {"prim-pipe", "rtk1", "rtk13", "rtk137",
-                                       "prim-mugwort", "rtk2", "rtk112", "kangxi12"}},
+                "expected_part_ids": {"prim-mugwort", "prim-quarter", "rtk13", "rtk137"}},
     "rtk1296": {"character": "謄", "keyword": "mimeograph",
-                "expected_part_ids": {"prim-pipe", "rtk1", "rtk13", "rtk357",
-                                       "rtk2", "rtk112", "kangxi12"}},
+                "expected_part_ids": {"prim-quarter", "rtk13", "rtk357"}},
     # 豆-family fix (2026-08-25): 17 kanji re-flattened 豆 (and, for the
     # drum/bend/ascend sub-cluster, 鼓/曲/登) into their own already-atomic
     # parts alongside a stray, unexplained 并 token that no CSV or PDF
@@ -544,8 +546,15 @@ EXPECTED_DECOMPOSITIONS = {
     # single-token substitution class as 王-for-壬 and 矢-for-失.
     "rtk385": {"character": "戚", "keyword": "relatives",
                "expected_part_ids": {"prim-parade", "rtk110", "rtk50"}},
+    # 滅 pinned 戊 "parade" (U+620A, empty frame). What it draws is 戌 (U+620C),
+    # the same frame with a bar across the top — cjkvi-ids reads 滅 as ⿰氵烕 and
+    # 烕 as ⿵戌火, and Heisig's components column calls it "march". Registered
+    # 2026-09-14 as prim-march. 蔑 deliberately still pins 戊 and not 戌: Heisig
+    # calls it "march" too, but cjkvi-ids reads it ⿱𦭝戍 — 戍 (U+620D) is a third
+    # near-identical glyph with a *dot* in the frame, and the render backs cjkvi.
+    # Heisig conflating three shapes under one name is the same trap 龶/丰 set.
     "rtk390": {"character": "滅", "keyword": "destroy",
-               "expected_part_ids": {"prim-parade", "rtk137", "rtk173"}},
+               "expected_part_ids": {"prim-march", "rtk137", "rtk173"}},
     "rtk392": {"character": "蔑", "keyword": "revile",
                "expected_part_ids": {"kangxi122", "prim-mugwort", "prim-parade", "rtk10"}},
     # 武 used 弋(stake, a simple cross, no hook) where render shows 戈
@@ -1526,7 +1535,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk644": {"character": "忌", "keyword": "mourning",
                "expected_part_ids": {"rtk564", "rtk639"}},
     "rtk1292": {"character": "巻", "keyword": "scroll",
-                "expected_part_ids": {"rtk112", "rtk2", "kangxi12", "rtk564"}},
+                "expected_part_ids": {"prim-quarter", "rtk564"}},
     "rtk1454": {"character": "紀", "keyword": "chronicle",
                 "expected_part_ids": {"rtk1431", "rtk564"}},
     "rtk1544": {"character": "配", "keyword": "distribute",
@@ -1697,7 +1706,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk2143": {"character": "罵", "keyword": "insult",
                 "expected_part_ids": {"kangxi122", "rtk2132"}},
     "rtk2144": {"character": "騰", "keyword": "inflation",
-                "expected_part_ids": {"kangxi12", "rtk1", "rtk1023", "rtk112", "rtk13", "rtk2", "rtk2132"}},
+                "expected_part_ids": {"prim-quarter", "rtk13", "rtk2132"}},
     "rtk2216": {"character": "駿", "keyword": "steed",
                 "expected_part_ids": {"prim-streetwalker", "rtk2132"}},
     "rtk2506": {"character": "憑", "keyword": "possessed",
