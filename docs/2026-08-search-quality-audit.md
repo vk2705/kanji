@@ -8821,3 +8821,90 @@ shadow-DB check (`import_data()` against an empty temp file) is not a
 substitute for running `sync_system_data.py --dry-run` against a real
 populated DB — they are different code paths, and this project's actual
 deploy mechanism is the second one.
+
+---
+
+## 2026-09-15 — ヨ was carrying two characters, and its name belonged to a third
+
+Went after the "no plausible registered row" names — `belt`, `rake`, `broom`,
+`acupuncturist`. Reading Heisig's components column for their hosts rather than
+guessing at the shape turned out to answer all four, because the column
+*decomposes* the hosts: 内 is "person; belt", 制 is "cow; belt; sword", 争 is
+"bound up; rake", 尋 is "broom; craft; mouth; glue". The name sits right next to
+the parts it is not.
+
+### The ヨ carrier
+
+`rake` and `broom` both pointed at the same place — a row registered as
+`prim-katakana-yo:ヨ:elbow`, used in 17 kanji. Three separate things were wrong
+with it.
+
+**It was two characters.** cjkvi-ids spells its hosts two different ways —
+`⿻コ一` (its own shorthand) for 争 妻 唐 兼 帚 𠬶 彗, plain `彐` for 尋 当 雪 录 —
+and rendering them confirms a real difference: 争 妻 帚 婦 draw a middle stroke
+that protrudes past the left edge, 尋 当 雪 do not. Those are ⺕ (U+2E95) and 彐
+(U+5F50), and katakana ヨ is neither.
+
+**Heisig's split is not the same split.** "rake" (18 hosts) lands only on ⺕, but
+"broom" (15) covers *both* — 帚 and 𠬶 are broom-group and protrude, 尋 and 当 are
+broom-group and do not. So ⺕ carries both names and 彐 carries one, and "broom"
+is an ambiguous term that answers to two rows on purpose. Third time this
+pattern has come up (龶/丰 "grow up", 戌/戍 "march", 母/毋 "breasts"): Heisig
+names by mnemonic role, so his names are not a partition of the glyphs.
+
+**Its keyword belonged elsewhere.** Heisig's "elbow" is 厶 — 71 hosts (仏 会 伝
+公 台 去 参 …), 0.96 structural support, no overlap at all with rake or broom.
+ヨ had simply been given a name that is not its own, and "elbow" resolved to 肘,
+the *kanji* for elbow, which is the same homograph accident as "knot"→浬 and
+"tombstone"→碑. ヨ keeps its row and is now named `katakana yo`, the way
+`prim-katakana-no` already is; 5 hosts still legitimately use it (羞 擢 捷 燿 繍,
+all outside Heisig's lists and left for later).
+
+### 尃 is not 専
+
+`acupuncturist` (4 hosts: 博 簿 縛 薄) scored 1.00 overlap with "specialty" but
+0.00 structural support — the signature of a homograph, and this time an
+expensive one. All four spelled the component 専 (U+5C02, 𤰔+寸) plus a stray 丶;
+what they draw is 尃 (U+5C03, 甫+寸). cjkvi reads every one as `⿱⿺𤰔丶寸`. 博 was
+worse than the others — its decomposition carried 月, which is in neither.
+
+### Applied
+
+Registered ⺕ `prim-rake` (rake, broom), 彐 `prim-broom` (broom), 尃
+`prim-acupuncturist` (甫+寸). Repointed 28 decompositions: 11 to ⺕, 8 to 彐, 4 to
+尃, and 5 that were flattening a component they *already referenced* alongside it
+(互 康 逮 隷 粛 each listed ヨ+水 next to a 隶 that is exactly ヨ+水). Added
+elbow→厶, hood→冂, tail feathers→灬.
+
+`audit_overflatten.py` immediately caught two lines this created — giving 录 its
+decomposition (彐+水) made 剥 and 禄 over-flattened, since they spelled 录 out
+rather than referencing it. Collapsed both, which also retired two now-duplicate
+`;` alternates. Worth noting the detector found this on the first run after the
+change rather than a session later.
+
+### Also found, not acted on
+
+`kangxi58` holds 彑 (U+5F51). Unicode's `CJKRadicals.txt` says `58; 2F39; 5F50` —
+radical 58 is 彐, and 彑 is a variant. So the id is misassigned under this
+project's own `kangxi{n}` rule. Left alone deliberately: renaming an id moves
+every pin and alias that references it, and 彑 is correctly *used* (互 draws it),
+so nothing is broken today. Worth its own pass.
+
+Unsearchable Heisig names 243→239. Phantom parts 267→251 across 173 kanji.
+Over-flattening 0, dead tokens 0, self-references 0, 1316 checks with only the 4
+known hanzi-scope non-issues, 66 pytest, frontend lint + build clean. Five pins
+updated in place with the reasoning.
+
+Note on the deploy check: `sync_system_data.py --dry-run` runs clean here, but
+that is against a DB this session rebuilt from the same `data.txt`, so it is
+comparing the file with itself. It is **not** the check the 2026-09-14 deploy
+entry asks for — that one needs a real accumulated live DB, which this sandbox
+does not have. Whoever deploys this should run the dry-run on the live DB first
+and expect a large `decompositions: replaced` count.
+
+**Next**: `belt`→冂 came out at only 0.61 support and was left; 冂 already took
+`hood` at 0.92, and belt's hosts (丙 両 内 再 制 刺 南 …) may be the taller 𠔼
+rather than 冂. `fishhook`(39) spreads across 乙/乚/𠃊 — the widest version of the
+one-name-many-glyphs pattern so far. `grains of rice`(15) is 氺, distinct from 水
+in Heisig and worth its own row, but 氺 is currently a RADICAL_VARIANTS notation
+alias for 水 and that interaction needs thinking through first.

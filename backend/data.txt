@@ -11,7 +11,7 @@ kangxi20:勹:bound up
 kangxi25:卜:divining rod,augury,divination,magic wand
 kangxi26:卩:stamp,seal
 kangxi27:厂:cliff
-prim-katakana-yo:ヨ:elbow
+prim-katakana-yo:ヨ:katakana yo
 prim-hooked-hand:𠂊:bound up
 kangxi162:辶:road:prim130
 kangxi34:夂:walking legs,go slowly
@@ -98,7 +98,7 @@ rtk44:丸:round:九,丶
 rtk45:寸:measurement,glue:十,丶
 rtk46:肘:elbow:月,寸
 rtk47:専:specialty:十,寸,田
-rtk48:博:dr.:十,月,丶,寸
+rtk48:博:dr.:十,尃
 rtk49:占:fortune-telling:口,卜
 rtk50:上:above:一,卜
 rtk51:下:below:一,卜
@@ -291,7 +291,7 @@ rtk238:草:grass:早,艹
 rtk239:苦:suffering:艹,古
 rtk240:苛:torment:可,艹
 rtk241:寛:tolerant:見,宀,艹
-rtk242:薄:dilute:専,水,丶,艹
+rtk242:薄:dilute:艹,水,尃
 rtk243:葉:leaf:枼,艹
 rtk244:模:imitation:木,莫
 rtk245:漠:vague:水,莫
@@ -868,7 +868,7 @@ rtk815:至:climax:一,土,厶
 rtk816:室:room:至,宀
 rtk817:到:arrival:至,刀
 rtk818:致:doth:至,攵
-rtk819:互:mutually:ヨ,一,彑;一,彑
+rtk819:互:mutually:一,彑;一,彑
 rtk820:棄:abandon:𠫓,丗,木
 rtk821:育:bring up:月,𠫓
 rtk822:撤:remove:育,扌,攵
@@ -1069,7 +1069,7 @@ rtk1016:等:etc.:寺,竹
 rtk1017:算:calculate:竹,目,廾
 rtk1018:答:solution:合,竹
 rtk1019:策:scheme:｜,巾,竹,八,木,亅,冂
-rtk1020:簿:register:専,水,竹,丶
+rtk1020:簿:register:竹,水,尃
 rtk1021:築:fabricate:木,筑
 rtk1022:篭:seclude oneself:竜,竹
 rtk1023:人:person:
@@ -1274,26 +1274,26 @@ rtk1221:訴:accusation:斥,言
 rtk1222:昨:yesterday:乍,日
 rtk1223:詐:lie:乍,言
 rtk1224:作:make:乍,亻
-rtk1225:雪:snow:ヨ,雨
+rtk1225:雪:snow:彐,雨
 rtk1226:録:record:录,金
-rtk1227:剥:come off:ヨ,水;刀,录
-rtk1228:尋:inquire:ヨ,口,工,寸
-rtk1229:急:hurry:ヨ,心,勹
-rtk1230:穏:calm:ヨ,禾,心,爪
+rtk1227:剥:come off:录,刀
+rtk1228:尋:inquire:彐,口,工,寸
+rtk1229:急:hurry:彐,心,勹
+rtk1230:穏:calm:⺕,禾,心,爪
 rtk1231:侵:encroach:亻,𠬶
 rtk1232:浸:immersed:水,𠬶
 rtk1233:寝:lie down:丬,宀,𠬶
 rtk1234:婦:lady:女,帚
 rtk1235:掃:sweep:帚,扌
-rtk1236:当:hit:ヨ,尚
+rtk1236:当:hit:彐,尚
 rtk1237:彙:same kind:冖,彑,果
-rtk1238:争:contend:ヨ,一,亅,勹
+rtk1238:争:contend:⺕,一,亅,勹
 rtk1239:浄:clean:水,争
-rtk1240:事:matter:一,口,亅,ヨ
-rtk1241:唐:t'ang:｜,ヨ,一,口,广
+rtk1240:事:matter:一,口,亅,⺕
+rtk1241:唐:t'ang:｜,⺕,一,口,广
 rtk1242:糖:sugar:唐,米
-rtk1243:康:ease:ヨ,水,广,隶;广,隶
-rtk1244:逮:apprehend:ヨ,辶,水,隶;辶,隶
+rtk1243:康:ease:水,广,隶;广,隶
+rtk1244:逮:apprehend:辶,水,隶;辶,隶
 rtk1245:伊:italy:亻,尹
 rtk1246:君:mister:口,尹
 rtk1247:群:flock:君,羊
@@ -1315,7 +1315,7 @@ rtk1262:料:fee:斗,米
 rtk1263:科:department:禾,斗
 rtk1264:図:map:斗,囗
 rtk1265:用:utilize,utilise:;二,冂,｜
-rtk1266:庸:commonplace:ヨ,用,广,聿
+rtk1266:庸:commonplace:⺕,用,广,聿
 rtk1267:備:equip:亻,用,厂,艹
 rtk1268:昔:once upon a time,storyteller:日,龷
 rtk1269:錯:confused:昔,金
@@ -1459,7 +1459,7 @@ rtk1406:階:storey:皆,阝
 rtk1407:陛:highness:土,比,阝
 rtk1408:隣:neighboring:舛,米,夕,阝
 rtk1409:隔:isolate:阝,鬲
-rtk1410:隠:conceal:ノ,ヨ,尚,心,阝
+rtk1410:隠:conceal:ノ,⺕,尚,心,阝
 rtk1411:堕:degenerate:有,土,阝
 rtk1412:陥:collapse:旧,勹,阝;旧,阝,𠂊
 rtk1413:穴:hole:八,宀,儿;八,宀
@@ -1521,11 +1521,11 @@ rtk1468:絹:silk:月,口,糸
 rtk1469:繰:winding:喿,糸
 rtk1470:継:inherit:｜,糸,米
 rtk1471:緑:green:录,糸
-rtk1472:縁:affinity:ヨ,糸,豕
+rtk1472:縁:affinity:彐,糸,豕
 rtk1473:網:netting:亡,糸,丷,冂
 rtk1474:緊:tense:糸,臤
 rtk1475:紫:purple:此,糸
-rtk1476:縛:truss:糸,専,丶
+rtk1476:縛:truss:糸,尃
 rtk1477:縄:straw rope:糸,田,亀
 rtk1478:幼:infancy:力,幺
 rtk1479:後:behind:夂,幺,彳
@@ -1772,7 +1772,7 @@ rtk1719:予:beforehand:マ,一,亅
 rtk1720:序:preface:子,广,亅,マ,一;予,广
 rtk1721:預:deposit:欠,予,頁;予,頁
 rtk1722:野:plains:矛,里,亅;予,里
-rtk1723:兼:concurrently:｜,ヨ,一,八,丷
+rtk1723:兼:concurrently:｜,⺕,一,八,丷
 rtk1724:嫌:dislike:兼,女
 rtk1725:鎌:sickle:金,兼
 rtk1726:謙:self-effacing:兼,言
@@ -1919,7 +1919,7 @@ rtk1866:斉:adjusted:｜,ノ,文,廾;ノ,二,文,｜
 rtk1867:剤:dose:斉,刀
 rtk1868:済:settle (debt  etc.):水,斉
 rtk1869:斎:purification:斉,示
-rtk1870:粛:solemn:｜,ノ,ヨ,米,隶
+rtk1870:粛:solemn:｜,ノ,米,隶
 rtk1871:塁:bases:田,土,冫;丷,八,土,田
 rtk1872:楽:music:白,木,冫;丷,八,木,白
 rtk1873:薬:medicine:艹,楽
@@ -2084,7 +2084,7 @@ rtk2031:汽:vapor:水,气
 rtk2032:飛:fly:
 rtk2033:沈:sink:水,尢,冖
 rtk2034:枕:pillow:ノ,乙,木,冖,尢
-rtk2035:妻:wife:｜,ヨ,一,女
+rtk2035:妻:wife:｜,⺕,一,女
 rtk2036:凄:uncanny:冫,妻
 rtk2037:衰:decline:衣,一,亠;一,亠,口,𧘇
 rtk2038:衷:inmost:衣,十,口;十,口,𧘇
@@ -2241,7 +2241,7 @@ rtk2188:罷:quit:罒,能
 rtk2189:屯:barracks,earthworm:ノ,乙,凵
 rtk2190:且:moreover,my bookshelves:一,目
 rtk2191:藻:seaweed:水,艹,喿
-rtk2192:隷:slave:ヨ,士,水,隶,示;士,示,隶
+rtk2192:隷:slave:士,水,隶,示;士,示,隶
 rtk2193:癒:healing:愈,疒
 rtk2194:璽:emperor's seal:爾,玉
 rtk2195:潟:lagoon:臼,水,勹,灬
@@ -2695,7 +2695,7 @@ rtk2644:祷:pray:ノ,寸,礼,土,亠,二;寿,礻
 rtk2645:祐:help:ノ,一,口,礼;右,礻
 rtk2646:祇:national or local god:氏,礼;氏,示
 rtk2647:祢:ancestral shrine:ノ,小,礼
-rtk2648:禄:fief:ヨ,水,礼,隶;录,礻
+rtk2648:禄:fief:礻,录
 rtk2649:禎:happiness:貝,卜,礼;礻,貞
 rtk2650:秤:balances:禾,平
 rtk2651:黍:millet:禾,水;人,水,禾
@@ -2912,7 +2912,7 @@ rtk2861:坐:sit:｜,土,人
 rtk2862:朔:conjunction (astronomy):月,丷,屮
 rtk2863:曳:pull:乙,日
 rtk2864:洩:leak:曳,水
-rtk2865:彗:comet:丰,ヨ
+rtk2865:彗:comet:丰,⺕
 rtk2866:慧:wise:彗,心
 rtk2867:爾:you:｜,一,八,冂,爻
 rtk2868:嘉:applaud:口,士,力
@@ -3095,7 +3095,7 @@ prim-mugwort:艹:mugwort,flowers,cabbage
 prim-thirty:丗:thirty,buckle,apron
 kangxi52:幺:tiny,short thread
 kangxi40:宀:roof,primitive_roof
-kangxi28:厶:cocoon
+kangxi28:厶:cocoon,elbow
 
 # Remaining Finding-1 single-glyph terms (session 4, 2026-08-14). Two groups:
 # - rad1043-1046: KRADFILE JIS-substitute glyphs, same mechanism as the 5 proxies
@@ -3113,7 +3113,7 @@ prim-eight-radical:并:eight radical,puzzle
 prim-hand-radical:扎:hand radical
 prim-mound-radical:阡:mound radical
 prim-small-radical:⺌:small radical,small,little:
-prim-fire-radical:灬:fire radical,barbecue,oven-fire
+prim-fire-radical:灬:fire radical,barbecue,oven-fire,tail feathers
 kangxi104:疒:sickness radical,疔,sickness,hospital
 prim-track-radical:禹:track radical
 prim-katakana-no:ノ:katakana no
@@ -3207,7 +3207,7 @@ prim-fingerprint:㔾:fingerprint:
 prim-scarecrow:𦰩:scarecrow:口,夫,艹
 prim-migrating-ducks:爰:migrating ducks:一,友,爪
 prim-meeting-of-butchers:俞:meeting of butchers:
-prim-dustpan:录:dustpan:
+prim-dustpan:录:dustpan:彐,水
 prim-pogo-stick:甬:pogo stick:
 prim-guillotine:夬:guillotine:
 prim-stamp-album:卬:stamp album,stamps:
@@ -3226,8 +3226,8 @@ prim-gully:㕣:gully:八,口
 prim-mailbox:夗:mailbox:㔾,夕
 prim-triceps:劦:triceps:
 prim-pitchfork:賁:pitchfork:
-prim-feather-duster:帚:feather duster:
-prim-french-maid:𠬶:french maid,tickle:
+prim-feather-duster:帚:feather duster:⺕,冖,巾
+prim-french-maid:𠬶:french maid,tickle:⺕,冖,又
 # Sixth batch, 2026-09-12 — driven by demand rather than frequency: each of these
 # was blocking a CSV-confirmed fix on real kanji. Same method (strict name
 # resolution with the >=3-host and >=0.5-coverage guards, then rendered beside
@@ -3271,3 +3271,12 @@ prim-drag:𠂆:drag:
 # deeper search still reaches the pieces.
 prim-quarter:龹:quarter:丷,夫
 prim-march:戌:march:戊,一
+
+# --- 2026-09-15: ヨ (katakana) was standing in for two real characters.
+# Heisig calls the protruding-middle-stroke one both 'rake' and 'broom'
+# depending on the frame, and the flush one 'broom' — so 'broom' is an
+# ambiguous term and deliberately answers to both rows.
+prim-rake:⺕:rake,broom:
+prim-broom:彐:broom:
+# 尃 is not 専. Its four hosts spelled it 専 plus a stray 丶.
+prim-acupuncturist:尃:acupuncturist:甫,寸

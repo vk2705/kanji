@@ -706,8 +706,14 @@ EXPECTED_DECOMPOSITIONS = {
     # 田 cross-grid. 甫 isn't itself a registered primitive, so it's
     # flattened to its own real parts (十,月,丶), deduping the 十 that's
     # also the host's separate standalone left radical.
+    # 博 簿 縛 薄 all pinned 専 (rtk47) plus a stray 丶. What they draw is 尃
+    # (U+5C03) = 甫+寸, not 専 (U+5C02) = 𤰔+寸 — cjkvi-ids reads every one of the
+    # four as ⿱⿺𤰔丶寸 and Heisig's components column calls it "acupuncturist",
+    # a name that resolved to nothing here. Registered 2026-09-15 as
+    # prim-acupuncturist. 博 was worse still: its pin carried 月, which is in
+    # neither 尃 nor 専.
     "rtk48": {"character": "博", "keyword": "dr.",
-              "expected_part_ids": {"rtk10", "rtk13", "kangxi3", "rtk45"}},
+              "expected_part_ids": {"prim-acupuncturist", "rtk10"}},
     "rtk60": {"character": "貼", "keyword": "stick",
               "expected_part_ids": {"rtk56", "rtk49"}},
     "rtk171": {"character": "時", "keyword": "time",
@@ -1227,7 +1233,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1448": {"character": "絞", "keyword": "strangle",
                 "expected_part_ids": {"rtk1368", "rtk1431"}},
     "rtk1476": {"character": "縛", "keyword": "truss",
-                "expected_part_ids": {"kangxi3", "rtk1431", "rtk47"}},
+                "expected_part_ids": {"prim-acupuncturist", "rtk1431"}},
     "rtk1488": {"character": "擁", "keyword": "hug",
                 "expected_part_ids": {"rtk1484", "rtk716"}},
     "rtk1498": {"character": "脚", "keyword": "shins",
@@ -1665,7 +1671,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk240": {"character": "苛", "keyword": "bullying",
                 "expected_part_ids": {"prim-mugwort", "rtk97"}},
     "rtk242": {"character": "薄", "keyword": "dilute",
-                "expected_part_ids": {"kangxi3", "prim-mugwort", "rtk137", "rtk47"}},
+                "expected_part_ids": {"prim-acupuncturist", "prim-mugwort", "rtk137"}},
     "rtk264": {"character": "洗", "keyword": "wash",
                 "expected_part_ids": {"rtk137", "rtk263"}},
     "rtk270": {"character": "塔", "keyword": "pagoda",
@@ -1925,7 +1931,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1018": {"character": "答", "keyword": "solution",
                 "expected_part_ids": {"rtk1007", "rtk269"}},
     "rtk1020": {"character": "簿", "keyword": "register",
-                "expected_part_ids": {"kangxi3", "rtk1007", "rtk137", "rtk47"}},
+                "expected_part_ids": {"prim-acupuncturist", "rtk1007", "rtk137"}},
     "rtk1088": {"character": "荷", "keyword": "baggage",
                 "expected_part_ids": {"prim-mugwort", "rtk1087"}},
     "rtk1097": {"character": "柄", "keyword": "design",
@@ -2627,8 +2633,14 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"prim-pipe", "rtk1431", "rtk987"}},
     "rtk1471": {"character": "緑", "keyword": "green",
                "expected_part_ids": {"prim-dustpan", "rtk1431"}},
+    # katakana ヨ was a lookalike carrier for two different real characters:
+    # ⺕ (U+2E95), whose middle stroke protrudes left, and 彐 (U+5F50), which is
+    # flush. cjkvi-ids spells them apart (⿻コ一 vs 彐) and the render agrees —
+    # 争 妻 帚 婦 protrude, 尋 当 雪 do not. 縁 is a 彐. Heisig calls the first
+    # shape both "rake" and "broom" depending on the frame and the second
+    # "broom", so "broom" is ambiguous on purpose and answers to both rows.
     "rtk1472": {"character": "縁", "keyword": "affinity",
-               "expected_part_ids": {"kangxi152", "prim-katakana-yo", "rtk1431"}},
+               "expected_part_ids": {"kangxi152", "prim-broom", "rtk1431"}},
     "rtk1473": {"character": "網", "keyword": "netting",
                "expected_part_ids": {"kangxi12", "kangxi13", "rtk1431", "rtk524"}},
     "rtk1474": {"character": "緊", "keyword": "tense",
