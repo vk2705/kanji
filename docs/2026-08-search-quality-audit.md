@@ -9142,3 +9142,74 @@ kanji the search already reached by another part.
 are hosts with no alternative to promote, so they need the component identified
 first, one at a time. The 236 unsearchable names are unchanged and still mostly
 1-2-host mnemonics. `kangxi58` still holds 彑 where `CJKRadicals.txt` says 彐.
+
+---
+
+## Standing rule (owner, 2026-09-16) — one bounded chunk per firing
+
+This project now runs from a daily scheduled firing on a limited AI budget.
+**Every firing does exactly one bounded chunk of work, then stops** — even with
+context/capacity to spare. A bounded chunk is sized like "reconcile ~10-15
+undefined radicals" or "one proxy/phantom primitive's replacement across its
+hosts," not "as much as fits in the session." Never try to clear a whole
+finding/phase in one sitting, and "I still have room" is not a reason to keep
+going. Each firing: pull, read this log, do one chunk, verify (rebuild
+`kanji.db`, `rtk.py` spot-check, relevant `audit_*.py`), commit, push, write
+what's done and what the next bounded chunk is, then stop.
+
+### 2026-09-16 (third chunk) — 8 of the 16 `尚`-as-phantom hosts
+
+First firing under the new one-chunk-per-day rule. Environment note: the
+container this ran in had no repo cloned and no record of which one — had to
+get the URL from the owner before anything else could start; recorded so the
+next session doesn't waste a firing rediscovering it if it recurs.
+
+`audit_phantom_parts.py` (no scope flag, i.e. all 3000 kanji, not just the
+`--in-csv-range` ~2200 this log has mostly quoted) currently reports **317
+phantom parts across 224 kanji** — bigger than the "149 across 105" this log
+last quoted because that number was always the `--in-csv-range` figure
+(`heisig-kanjis.csv` stops around frame 2200; verified today that
+`--in-csv-range` alone still reads exactly 149/105, unchanged). Past frame
+2200 there's no CSV column to score against, so `audit_primary_choice.py`
+silently skips those rows entirely (`heisig.get(char)` is `None`) even when
+they carry the exact same "right answer parked in an unused `;` alternate"
+bug its 2026-09-17 run fixed for 76 kanji in-range. **The full-range number is
+the real backlog; 149/105 was only ever the visible part of it.**
+
+Grouped the 317 by which part they blame: `尚` led at 16 occurrences (`｜`,
+`一`, `ノ` etc. still lead the un-owned-stroke tail as before). Pulled cjkvi-ids
+top-level splits for all 16 `尚`-hosts (賞 堂 掌 当 隠 鎖 屑 箪 蝋 蛸 蝉 鞘 騨
+嘗 瞥 鼈) and found `尚` is not one mistake but a lookalike carrier for at
+least four unrelated real components across them.
+
+**8 were a mechanical fix**: 屑, 箪, 蛸, 蝉, 鞘, 騨, 瞥, 鼈 already had a
+`;`-alternate with the correct answer sitting unused — `肖` (屑/蛸/鞘, already
+rtk119 "resemblance"), `単` (箪/蝉/騨, already rtk2078 "simple"), and `敝`
+(瞥/鼈, already prim-shredder). Same shape as the 76-kanji fix: replaced the
+phantom-carrying primary outright rather than reordering, per that session's
+own rule (a primary with unaccounted parts is dropped, not demoted).
+
+**8 are not done** — 賞/堂/掌/嘗 want `𫩠` (cjkvi's abbreviated top of `尚`,
+not `尚` itself — needs a registration/name decision, not just a swap); 当
+(shinjitai, cjkvi gives it `⺌,彐` with no `尚` at all — the `尚` here may be a
+stray leftover, not even a stand-in) and 隠/鎖/蝋 (`𢚩`/`𧴪`/`鼡` under their
+top-level split, none investigated yet) all need their own look. Left alone
+this session — that's the next chunk, or the one after.
+
+Verified: rebuilt `kanji.db` clean from the 8-line `data.txt` change, `rtk.py
+detail` on all 8 touched ids shows the new parts and no more `尚`, `rtk.py
+parts shredder`/`simple`+虫 return the expected sets. Full-range phantom
+317→309 across 224→216 (`--in-csv-range` unchanged at 149/105, as expected —
+none of the 8 are in CSV range). 0 over-flattening, 0 self-references, 66
+pytest. Frontend untouched this session (data-only change), not re-linted.
+
+**Next chunk**: pick up the remaining 8 `尚` hosts — start with 賞/堂/掌/嘗
+(`𫩠`, one shape, four hosts, same investigation as a single proxy character)
+since it's the same size class as this session's work; 当/隠/鎖/蝋 are looser
+ends after that. Longer-term backlog this session surfaced: the *entire*
+past-frame-2200 tail of `data.txt` (roughly `rtk2200`–`rtk3000`, the "old
+forms" and supplementary kanji) has no `heisig-kanjis.csv` coverage, so every
+audit script that scores against it — not just `audit_primary_choice.py` — is
+structurally blind there. Worth its own note/decision later: either extend
+scoring to work from cjkvi-ids alone past frame 2200, or accept that range
+gets cjkvi-only verification permanently.
