@@ -2378,7 +2378,7 @@ rtk2326:宋:dwell:木,宀
 rtk2327:宍:muscles:六,宀
 rtk2328:屠:slaughter:尸,者
 rtk2329:屁:fart:比,尸
-rtk2330:屑:rubbish:月,尚,尸;尸,肖
+rtk2330:屑:rubbish:尸,肖
 rtk2331:屡:often:女,米,尸
 rtk2332:屍:corpse:尸,死
 rtk2333:屏:wall:｜,ノ,二,并,尸,廾,一;尸,并
@@ -2722,7 +2722,7 @@ rtk2671:襖:opaque sliding door:初,大,米,冂,釆;奥,衣
 rtk2672:笙:a reed instrument:生,竹
 rtk2673:筏:raft:伐,竹
 rtk2674:簾:bamboo screen:廉,竹
-rtk2675:箪:bamboo rice basket:十,尚,竹,田;単,竹
+rtk2675:箪:bamboo rice basket:単,竹
 rtk2676:竿:pole:干,竹
 rtk2677:箆:spatula:竹,比,冂
 rtk2678:箔:foil:泊,竹
@@ -2776,9 +2776,9 @@ rtk2725:蝿:fly:虫,田,亀
 rtk2726:蟻:ant:義,虫
 rtk2727:蝋:wax:｜,一,尚,虫,用,几
 rtk2728:蝦:shrimp:虫,又
-rtk2729:蛸:octopus:月,尚,虫;肖,虫
+rtk2729:蛸:octopus:肖,虫
 rtk2730:螺:small  edible  helical fresh-water mollusk:累,虫
-rtk2731:蝉:cicada:十,尚,虫,田;単,虫
+rtk2731:蝉:cicada:単,虫
 rtk2732:蛙:frog:圭,虫
 rtk2733:蛾:moth:我,虫
 rtk2734:蛤:clam:口,虫,个,一;合,虫
@@ -2852,7 +2852,7 @@ rtk2801:翰:letter:羽,十,日,个;人,羽,𠦝
 rtk2802:斡:go around:十,斗,日,个;人,斗,𠦝
 rtk2803:鞍:saddle:安,革
 rtk2804:鞭:whip:ノ,一,革,日,田;便,革
-rtk2805:鞘:sheath:革,月,尚;肖,革
+rtk2805:鞘:sheath:肖,革
 rtk2806:鞄:suitcase:革,包
 rtk2807:靭:soft:刃,革
 rtk2808:鞠:ball:革,米,勹
@@ -2866,7 +2866,7 @@ rtk2815:饗:banquet:郷,食
 rtk2816:蝕:eclipse:食,虫
 rtk2817:飴:rice jelly:台,食
 rtk2818:駕:vehicle:加,馬
-rtk2819:騨:dappled grey horse:十,尚,田,馬;単,馬
+rtk2819:騨:dappled grey horse:単,馬
 rtk2820:馳:run:馬,也
 rtk2821:騙:deceive:馬,扁
 rtk2822:馴:get used to:川,馬
@@ -2982,7 +2982,7 @@ rtk2931:膏:fat:月,高
 rtk2932:魁:charging ahead of others:斗,鬼
 rtk2933:馨:fragrant:禾,香,士,日,又,几,殳,尸
 rtk2934:牒:label:枼,片
-rtk2935:瞥:glance at:｜,巾,尚,丷,目,冂,攵;敝,目
+rtk2935:瞥:glance at:敝,目
 rtk2936:睾:testicles:土,目,亠,辛
 rtk2937:巫:sorcerer:工,人
 rtk2938:敦:industry:享,攵
@@ -3047,7 +3047,7 @@ rtk2996:壽:longevity:一,口,工,士,寸
 rtk2997:躊:hesitate:壽,足
 rtk2998:饅:bean-jam dumpling:曼,食
 rtk2999:嘔:vomit:口,匚,品
-rtk3000:鼈:snapping turtle:小,尚,冂,攵,黽;敝,黽
+rtk3000:鼈:snapping turtle:敝,黽
 
 # Official Kangxi-radical entries added to fill previously-unnamed primitives
 # (Finding 1, 2026-08 search-quality audit). Names are the standard public-domain
