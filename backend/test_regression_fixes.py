@@ -350,8 +350,13 @@ EXPECTED_DECOMPOSITIONS = {
     # parts spelling out one shape Heisig names "quarter" and cjkvi-ids spells
     # 龹 (U+9FB9) in all eight hosts. Registered 2026-09-14 as prim-quarter with
     # cjkvi's own 丷+夫 underneath, so a depth>1 search still reaches the pieces.
+    # 藤 and 暴 pinned 水 "water" (rtk137) for a shape that is 氺 "grains of
+    # rice" — a separate primitive in Heisig, whose host list does not intersect
+    # water's at all. 漆 is the proof: its CSV components name both, because it
+    # really is 氵 + 桼. Registered 2026-09-16 as prim-grains-of-rice.
     "rtk1295": {"character": "藤", "keyword": "wisteria",
-                "expected_part_ids": {"prim-mugwort", "prim-quarter", "rtk13", "rtk137"}},
+                "expected_part_ids": {"prim-grains-of-rice", "prim-mugwort",
+                                      "prim-quarter", "rtk13"}},
     "rtk1296": {"character": "謄", "keyword": "mimeograph",
                 "expected_part_ids": {"prim-quarter", "rtk13", "rtk357"}},
     # 豆-family fix (2026-08-25): 17 kanji re-flattened 豆 (and, for the
@@ -3417,8 +3422,9 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"kangxi3", "kangxi40", "prim-celery", "rtk8"}},
     "rtk1936": {"character": "異", "keyword": "uncommon",
                "expected_part_ids": {"rtk14", "rtk1934"}},
+    # Same 水/氺 correction as 藤 above — see the note on rtk1295.
     "rtk1941": {"character": "暴", "keyword": "outburst",
-               "expected_part_ids": {"rtk12", "rtk137", "rtk1934"}},
+               "expected_part_ids": {"prim-grains-of-rice", "rtk12", "rtk1934"}},
     "rtk1942": {"character": "爆", "keyword": "bomb",
                "expected_part_ids": {"rtk173", "rtk1941"}},
     "rtk1947": {"character": "丼", "keyword": "bowl",

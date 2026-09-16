@@ -125,7 +125,7 @@ rtk71:旬:decameron:日,勹
 rtk72:勺:ladle:丶,勹
 rtk73:的:bull's eye:白,勺
 rtk74:首:neck:自,丷
-rtk75:乙:the latter:
+rtk75:乙:the latter,fishhook:
 rtk76:乱:riot:乙,舌
 rtk77:直:straightaway:十,目,一
 rtk78:具:tool:一,八,目
@@ -1050,10 +1050,10 @@ rtk997:奥:heart:大,米,冂;ノ,冂,大,米
 rtk998:数:number:女,米,攵
 rtk999:楼:watchtower:女,米,木
 rtk1000:類:sort:大,米,頁
-rtk1001:漆:lacquer:水,木,个
-rtk1002:膝:knee:月,水,木,个
-rtk1003:様:esq.:水,木,羊
-rtk1004:求:request:一,水,丶
+rtk1001:漆:lacquer:水,木,个,氺
+rtk1002:膝:knee:月,木,个,氺
+rtk1003:様:esq.:木,羊,氺
+rtk1004:求:request:一,氺,丶
 rtk1005:球:ball:王,求
 rtk1006:救:salvation:攵,求
 rtk1007:竹:bamboo:
@@ -1292,8 +1292,8 @@ rtk1239:浄:clean:水,争
 rtk1240:事:matter:一,口,亅,⺕
 rtk1241:唐:t'ang:｜,⺕,一,口,广
 rtk1242:糖:sugar:唐,米
-rtk1243:康:ease:水,广,隶;广,隶
-rtk1244:逮:apprehend:辶,水,隶;辶,隶
+rtk1243:康:ease:广,隶
+rtk1244:逮:apprehend:辶,隶
 rtk1245:伊:italy:亻,尹
 rtk1246:君:mister:口,尹
 rtk1247:群:flock:君,羊
@@ -1344,7 +1344,7 @@ rtk1291:券:ticket:龹,刀
 rtk1292:巻:scroll:龹,己
 rtk1293:圏:sphere:囗,巻
 rtk1294:勝:victory:月,龹,力
-rtk1295:藤:wisteria:艹,月,龹,水
+rtk1295:藤:wisteria:艹,月,龹,氺
 rtk1296:謄:mimeograph:言,月,龹
 rtk1297:片:one-sided:
 rtk1298:版:printing block:片,反
@@ -1741,7 +1741,7 @@ rtk1688:鋳:casting:ノ,亠,土,金,寸;寿,金
 rtk1689:籍:enroll:｜,一,竹,土,八,木,亠,耒,二,ノ,昔
 rtk1690:春:springtime:日,𡗗
 rtk1691:椿:camellia:春,木
-rtk1692:泰:peaceful:水,𡗗
+rtk1692:泰:peaceful:氺,𡗗
 rtk1693:奏:play music:天,𡗗
 rtk1694:実:reality:宀,𡗗
 rtk1695:奉:observance:二,｜,𡗗
@@ -1990,7 +1990,7 @@ rtk1937:翼:wing:異,羽
 rtk1938:戴:be crowned with:異,𢦏
 rtk1939:洪:deluge:共,水
 rtk1940:港:harbor:水,共,己
-rtk1941:暴:outburst:日,共,水
+rtk1941:暴:outburst:日,共,氺
 rtk1942:爆:bomb:暴,火
 rtk1943:恭:respect:共,忄
 rtk1944:選:elect:辶,巽
@@ -2241,7 +2241,7 @@ rtk2188:罷:quit:罒,能
 rtk2189:屯:barracks,earthworm:ノ,乙,凵
 rtk2190:且:moreover,my bookshelves:一,目
 rtk2191:藻:seaweed:水,艹,喿
-rtk2192:隷:slave:士,水,隶,示;士,示,隶
+rtk2192:隷:slave:士,示,隶
 rtk2193:癒:healing:愈,疒
 rtk2194:璽:emperor's seal:爾,玉
 rtk2195:潟:lagoon:臼,水,勹,灬
@@ -3054,7 +3054,7 @@ rtk3000:鼈:snapping turtle:小,尚,冂,攵,黽;敝,黽
 # Kangxi radical English names (or, for 艹/厶, the established primitive meaning);
 # not Heisig book text.
 kangxi8:亠:lid,primitive_lid,top hat
-kangxi13:冂:border,down box,hood
+kangxi13:冂:border,down box,hood,belt
 kangxi14:冖:cover,cloth cover,birdcage,birdhouse
 kangxi6:亅:hook
 kangxi44:尸:corpse
@@ -3078,7 +3078,7 @@ kangxi54:廴:long stride
 kangxi141:虍:tiger
 kangxi105:癶:footsteps,back-to-back feet,teepee,wigwam
 kangxi165:釆:distinguish,claw print,animal tracks
-kangxi171:隶:reach,slave,sieve
+kangxi171:隶:reach,slave,sieve:⺕,氺
 kangxi129:聿:brush
 kangxi136:舛:oppose,dance
 kangxi178:韋:tanned leather,locket
@@ -3207,7 +3207,7 @@ prim-fingerprint:㔾:fingerprint:
 prim-scarecrow:𦰩:scarecrow:口,夫,艹
 prim-migrating-ducks:爰:migrating ducks:一,友,爪
 prim-meeting-of-butchers:俞:meeting of butchers:
-prim-dustpan:录:dustpan:彐,水
+prim-dustpan:录:dustpan:彐,氺
 prim-pogo-stick:甬:pogo stick:
 prim-guillotine:夬:guillotine:
 prim-stamp-album:卬:stamp album,stamps:
@@ -3280,3 +3280,8 @@ prim-rake:⺕:rake,broom:
 prim-broom:彐:broom:
 # 尃 is not 専. Its four hosts spelled it 専 plus a stray 丶.
 prim-acupuncturist:尃:acupuncturist:甫,寸
+
+# --- 2026-09-16: 氺 is not 水. Heisig calls it 'grains of rice' and the two
+# names share no host at all; 漆 carries both (氵 + 桼) and proves they are
+# separate. Atomic, as it is in cjkvi-ids.
+prim-grains-of-rice:氺:grains of rice:

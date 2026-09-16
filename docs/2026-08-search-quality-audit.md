@@ -8908,3 +8908,68 @@ rather than 冂. `fishhook`(39) spreads across 乙/乚/𠃊 — the widest versi
 one-name-many-glyphs pattern so far. `grains of rice`(15) is 氺, distinct from 水
 in Heisig and worth its own row, but 氺 is currently a RADICAL_VARIANTS notation
 alias for 水 and that interaction needs thinking through first.
+
+---
+
+## 2026-09-16 — 氺 is not 水, and what an honest partial answer looks like
+
+Took the three remaining items with actual search impact.
+
+### 氺 "grains of rice"
+
+Heisig names 水 "water" and 氺 "grains of rice", and **their host lists do not
+intersect at all**. The clinching case is 漆: its components column reads "water;
+water droplets; water pistol; tree; wood; umbrella; grains of rice", because 漆
+really is 氵 + 桼 and carries both. 膝 is the same 桼 without the 氵, and its
+column never says water — which is exactly what our data got wrong, spelling the
+桼 half 水 in both.
+
+Registered 氺 as `prim-grains-of-rice` and corrected 12 decompositions. Two of
+them are structural rather than cosmetic: 隶 ("sieve" = rake + grains of rice)
+was atomic and is now ⺕+氺, and 录 ("dustpan" = broom + grains of rice) moved
+from 彐+水 to 彐+氺. Three more (康 逮 隷) were listing 水 *beside* the 隶 that
+contains it, with a `;` alternative that already said the right thing — those
+collapsed to the alternative and the duplicate tail went away.
+
+Then removed `氺: 水` from `RADICAL_VARIANTS`. That table is for notation — the
+same primitive at two codepoints — and 氺 has just stopped qualifying. Checked
+rather than assumed: over-flattening 0 and phantom parts 244 both before and
+after the removal, so nothing was leaning on the fold.
+
+`water` drops 189→179.
+
+### belt → 冂, on the CSV's decomposition rather than its support score
+
+`belt` scored only 0.61 structurally, which last session was the reason to leave
+it. The components column settles it directly, though, because it decomposes the
+host: 内 is "person; belt" and 内 is 冂+人; 制 is "cow; belt; sword" and 制 is
+牛+冂+刂; 南 is "ten; needle; belt; …" and 南 is 十+冂+𢆉. The 0.61 is cjkvi not
+expanding 禺 禹 朿 冉 肉, not a disagreement. 冂 already carries "hood" (0.92), so
+this is another two-names-one-row case.
+
+### fishhook — deliberately a partial answer
+
+`fishhook` is the widest instance yet of one Heisig name over many glyphs: 39
+hosts spanning 乙/乚 (乙 乞 乱 乳 乾 孔 屯 札 礼 純 荒 鈍 頓), 𠃊 (亡 妄 忘 忙 望
+盲 直 値 植 殖 置 県), 心 (心 必 懸), and singletons (氏 気 汽 瓦 瓶 迅 網). No
+candidate scores above 0.46.
+
+Added it to 乙 only, and the limit is worth stating plainly rather than hiding in
+a score: searching "fishhook" now returns 23 kanji, the 乙/乚 family. It does not
+return the 亡/直 family, whose stroke is 𠃊 — a real second row that would need
+registering and ~14 hosts repointed. That is a bigger change than an alias and
+belongs in its own pass; what is here is correct as far as it goes, and returns
+nothing it should not.
+
+Also added `sieve`→隶 (1.00 over its 3 hosts).
+
+Unsearchable Heisig names 239→236. Phantom parts 251→244 across 169 kanji.
+Over-flattening 0, dead tokens 0, self-references 0, 1316 checks with only the 4
+known hanzi-scope non-issues, 66 pytest, frontend lint + build clean. Two pins
+(藤 暴) updated with the 水/氺 reasoning.
+
+**Next**: register 𠃊 and finish `fishhook` — the half this session left. After
+that the remaining 236 names are mostly single-frame mnemonics (3-6 hosts each),
+so the per-name payoff drops sharply and `--near`/`--all` output is the way to
+pick rather than working down by host count. `kangxi58` still holds 彑 where
+`CJKRadicals.txt` says 彐; unchanged and still worth its own pass.

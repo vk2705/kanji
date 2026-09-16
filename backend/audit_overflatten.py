@@ -37,7 +37,13 @@ IDS_OPS = set("⿰⿱⿲⿳⿴⿵⿶⿷⿸⿹⿺⿻")
 # audit. Same primitive, different codepoint — mapping them is notation, not a
 # judgement call, so it stays a flat table rather than anything inferred.
 RADICAL_VARIANTS = {
-    "氵": "水", "氺": "水",
+    "氵": "水",
+    # 氺 is deliberately NOT mapped to 水. It was, until 2026-09-16, on the
+    # "same primitive, different codepoint" reasoning below — but Heisig names
+    # it "grains of rice" and 水 "water", their host lists do not intersect at
+    # all, and 漆 carries both (氵 + 桼). It is now its own row, so folding the
+    # two together here would hide exactly the confusions that registering it
+    # was meant to expose.
     "糹": "糸", "纟": "糸",
     "刂": "刀",
     "衤": "衣",
