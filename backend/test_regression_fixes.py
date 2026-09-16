@@ -54,6 +54,21 @@ import database  # noqa: E402
 # regression suite into a guard against the fix. Each rewritten pin was checked
 # against cjkvi-ids' top level, and a sample re-checked by render, before the
 # rewrite; the pins now hold the collapsed form.
+# 24 of these were re-pinned on 2026-09-16 by audit_primary_choice.py, which
+# compares a kanji's primary decomposition against its own ";" alternatives. The
+# structural alternatives added in bulk on 2026-09-13 never checked whether the
+# primary they landed beside was any good, and in 76 cases it was not — the right
+# answer had simply been parked in the second slot while the reader was shown the
+# stroke soup. Where the primary carried parts neither cjkvi-ids nor Heisig can
+# account for, it was dropped outright rather than demoted; that is what actually
+# takes it out of search.
+#
+# Three worth knowing about, because each looks like a regression and is not:
+#   武 moved 戈 -> 弋. cjkvi reads it ⿹⿶弋一止 and the CSV says "arrow", which is 弋.
+#   令 moved 卩 -> ｜,𠃌, which reads as flattening a named component into strokes.
+#   It is the opposite: rendering 令 冷 鈴 beside 印 shows 令's foot is the
+#   abbreviated shape, not the 卩 that 印 plainly draws, so 卩 was the lookalike.
+#   夜 lost 夕 for 丶. cjkvi (⿱亠⿰亻⿴夂丶) and the CSV ("walking legs; drop") agree.
 EXPECTED_DECOMPOSITIONS = {
     # 2026-09-05: five wrong-left-component bugs surfaced by the LLM re-read of
     # the full results.jsonl Google cross-check, each then confirmed against
@@ -168,7 +183,7 @@ EXPECTED_DECOMPOSITIONS = {
     # results.jsonl's DISJOINT flags (triage_google_check.py) directly, per the owner's
     # explicit instruction -- each confirmed by cjkvi-ids/render before fixing.
     "rtk1189": {"character": "袖", "keyword": "sleeve",  # was ｜,一,初,田 -- flattened
-               "expected_part_ids": {"rtk1186", "rtk431"}},  # instead of referencing 由 directly
+               "expected_part_ids": {"rtk1186", "rtk423"}},  # instead of referencing 由 directly
     "rtk1239": {"character": "浄", "keyword": "clean",  # was 水,亅,勹,ヨ -- flattened
                "expected_part_ids": {"rtk1238", "rtk137"}},  # instead of referencing 争 directly
     "rtk1325": {"character": "沸", "keyword": "seethe",  # was ｜,ノ,弓,水 -- a botched partial
@@ -282,7 +297,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk549": {"character": "燃", "keyword": "burn",
                "expected_part_ids": {"rtk173", "rtk256"}},
     "rtk1115": {"character": "夜", "keyword": "night",
-                "expected_part_ids": {"kangxi8", "kangxi9", "kangxi34", "rtk114"}},
+                "expected_part_ids": {"kangxi3", "kangxi34", "kangxi8", "kangxi9"}},
     # Was 扌,𠂊,央 (rtk1877, "center") -- render-confirmed 換's right side is the
     # SAME 奐 shape as 喚(rtk1121)'s own right side (they're siblings, ⿰口奐 vs
     # ⿰扌奐), not remotely 央-shaped; the pre-fix pin baked the bug in. Fixed
@@ -565,7 +580,7 @@ EXPECTED_DECOMPOSITIONS = {
     # 武 used 弋(stake, a simple cross, no hook) where render shows 戈
     # (spear, with the hook) instead, and was missing the top 一 entirely.
     "rtk403": {"character": "武", "keyword": "warrior",
-               "expected_part_ids": {"kangxi62", "rtk1", "rtk396"}},
+               "expected_part_ids": {"kangxi56", "rtk1", "rtk396"}},
     # 走 was missing its own bottom 止(stop, already taught) entirely --
     # which then meant 超/赴/越/趣/徒/趨/赳 (all built on 走) needed the
     # redundant-overlap fix (drop 土, which 走 already includes) rather
@@ -1021,7 +1036,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk489": {"character": "謁", "keyword": "audience",
                 "expected_part_ids": {"rtk12", "rtk357", "rtk478"}},
     "rtk490": {"character": "褐", "keyword": "brown",
-                "expected_part_ids": {"rtk12", "rtk431", "rtk478"}},
+                "expected_part_ids": {"rtk12", "rtk423", "rtk478"}},
     "rtk491": {"character": "喝", "keyword": "hoarse",
                 "expected_part_ids": {"rtk11", "rtk12", "rtk478"}},
     "rtk492": {"character": "葛", "keyword": "kudzu",
@@ -1160,7 +1175,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1170": {"character": "祝", "keyword": "celebrate",
                 "expected_part_ids": {"kangxi113", "rtk107"}},
     "rtk1180": {"character": "襟", "keyword": "collar",
-                "expected_part_ids": {"rtk1179", "rtk431"}},
+                "expected_part_ids": {"rtk1179", "rtk423"}},
     "rtk1182": {"character": "崇", "keyword": "adore",
                 "expected_part_ids": {"rtk1181", "rtk830"}},
     "rtk1197": {"character": "挿", "keyword": "insert",
@@ -1262,7 +1277,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1564": {"character": "鑑", "keyword": "specimen",
                 "expected_part_ids": {"rtk1562", "rtk287"}},
     "rtk1565": {"character": "藍", "keyword": "indigo",
-                "expected_part_ids": {"prim-katakana-no", "prim-mugwort", "rtk1562"}},
+                "expected_part_ids": {"prim-mugwort", "rtk1562"}},
     "rtk1583": {"character": "飯", "keyword": "meal",
                 "expected_part_ids": {"rtk1582", "rtk779"}},
     "rtk1586": {"character": "餓", "keyword": "starve",
@@ -1288,7 +1303,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1716": {"character": "捻", "keyword": "wrench",
                 "expected_part_ids": {"kangxi64", "rtk1715"}},
     "rtk1721": {"character": "預", "keyword": "deposit",
-                "expected_part_ids": {"rtk1719", "rtk505", "rtk64"}},
+                "expected_part_ids": {"rtk1719", "rtk64"}},
     "rtk1731": {"character": "腰", "keyword": "loins",
                 "expected_part_ids": {"rtk13", "rtk1730"}},
     "rtk1733": {"character": "漂", "keyword": "drift",
@@ -1351,7 +1366,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk2137": {"character": "駆", "keyword": "drive",
                 "expected_part_ids": {"rtk1831", "rtk2132"}},
     "rtk2147": {"character": "膚", "keyword": "skin",
-                "expected_part_ids": {"kangxi141", "kangxi25", "kangxi27", "rtk29", "rtk476"}},
+                "expected_part_ids": {"kangxi141", "rtk29"}},
     "rtk2150": {"character": "虞", "keyword": "uneasiness",
                 "expected_part_ids": {"kangxi141", "kangxi25", "kangxi27", "rtk2046", "rtk476"}},
     "rtk2151": {"character": "慮", "keyword": "prudence",
@@ -1846,7 +1861,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk671": {"character": "慌", "keyword": "disconcerted",
                 "expected_part_ids": {"kangxi61", "rtk527"}},
     "rtk672": {"character": "悔", "keyword": "repent",
-                "expected_part_ids": {"kangxi61", "prim-katakana-no", "rtk1", "rtk1023", "rtk497"}},
+                "expected_part_ids": {"kangxi61", "rtk497"}},
     "rtk676": {"character": "惰", "keyword": "lazy",
                 "expected_part_ids": {"kangxi61", "rtk13", "rtk81"}},
     "rtk677": {"character": "慎", "keyword": "humility",
@@ -2022,7 +2037,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1433": {"character": "繕", "keyword": "darning",
                 "expected_part_ids": {"rtk1112", "rtk1431"}},
     "rtk1443": {"character": "練", "keyword": "practice",
-                "expected_part_ids": {"prim-pipe", "rtk14", "rtk1431", "rtk543", "rtk8"}},
+                "expected_part_ids": {"rtk1431", "rtk543"}},
     "rtk1445": {"character": "続", "keyword": "continue",
                 "expected_part_ids": {"rtk1431", "rtk345"}},
     "rtk1449": {"character": "給", "keyword": "salary",
@@ -2054,7 +2069,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1538": {"character": "酵", "keyword": "fermentation",
                 "expected_part_ids": {"rtk1342", "rtk1534"}},
     "rtk1540": {"character": "酬", "keyword": "repay",
-                "expected_part_ids": {"prim-pipe", "rtk135", "rtk1534"}},
+                "expected_part_ids": {"rtk135", "rtk1534"}},
     "rtk1541": {"character": "酪", "keyword": "dairy products",
                 "expected_part_ids": {"rtk1534", "rtk311"}},
     "rtk1559": {"character": "盗", "keyword": "steal",
@@ -2356,11 +2371,11 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk269": {"character": "合", "keyword": "fit",
                "expected_part_ids": {"rtk11", "prim-meeting"}},
     "rtk1503": {"character": "令", "keyword": "orders",
-                "expected_part_ids": {"prim-meeting", "kangxi26"}},
+                "expected_part_ids": {"prim-clothes-hanger", "prim-meeting", "prim-pipe"}},
     "rtk1711": {"character": "今", "keyword": "now",
                 "expected_part_ids": {"prim-meeting", "rtk1"}},
     "rtk1758": {"character": "倉", "keyword": "godown",
-                "expected_part_ids": {"prim-katakana-no", "rtk11", "prim-meeting", "kangxi44", "rtk1"}},
+                "expected_part_ids": {"kangxi44", "prim-meeting", "rtk1", "rtk11"}},
     # Re-running audit_flattening.py after the 天 fix above surfaced 3 more
     # hosts sharing 天's exact old bug signature (a stray "二" alongside
     # "一,大") -- the classic iterative-convergence pattern: fixing one
@@ -2486,7 +2501,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk609": {"character": "確", "keyword": "assurance",
                "expected_part_ids": {"rtk118", "kangxi14", "kangxi172"}},
     "rtk610": {"character": "午", "keyword": "noon",
-               "expected_part_ids": {"prim-katakana-no", "rtk1777"}},
+               "expected_part_ids": {"prim-reclining", "rtk10"}},
     "rtk1686": {"character": "拝", "keyword": "worship",
                 "expected_part_ids": {"kangxi64", "rtk1", "prim-bushes"}},
     "rtk1740": {"character": "南", "keyword": "south",
@@ -2506,7 +2521,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1491": {"character": "磁", "keyword": "magnet",
                 "expected_part_ids": {"prim-double-mysterious", "rtk118"}},
     "rtk1903": {"character": "碁", "keyword": "go",
-                "expected_part_ids": {"rtk118", "rtk1894", "rtk8"}},
+                "expected_part_ids": {"prim-bushel-basket", "rtk118"}},
     "rtk2204": {"character": "砦", "keyword": "fort",
                 "expected_part_ids": {"rtk118", "rtk2201"}},
     "rtk2577": {"character": "柘", "keyword": "wild mulberry",
@@ -2634,7 +2649,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1469": {"character": "繰", "keyword": "winding",
                "expected_part_ids": {"prim-furniture", "rtk1431"}},
     "rtk918": {"character": "臨", "keyword": "look to",
-               "expected_part_ids": {"prim-katakana-no", "rtk1", "rtk1023", "rtk23", "rtk911"}},
+               "expected_part_ids": {"prim-reclining", "rtk23", "rtk911"}},
     "rtk2191": {"character": "藻", "keyword": "seaweed",
                 "expected_part_ids": {"prim-furniture", "prim-mugwort", "rtk137"}},
     "rtk2626": {"character": "癌", "keyword": "cancer",
@@ -3362,7 +3377,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk855": {"character": "欲", "keyword": "longing",
                "expected_part_ids": {"rtk505", "rtk851"}},
     "rtk856": {"character": "裕", "keyword": "abundant",
-               "expected_part_ids": {"rtk431", "rtk851"}},
+               "expected_part_ids": {"rtk423", "rtk851"}},
     "rtk742": {"character": "携", "keyword": "portable",
                "expected_part_ids": {"kangxi172", "kangxi64", "rtk741"}},
     "rtk980": {"character": "秀", "keyword": "excel",
@@ -3465,7 +3480,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1487": {"character": "弦", "keyword": "bowstring",
                "expected_part_ids": {"rtk1317", "rtk1484"}},
     "rtk1874": {"character": "率", "keyword": "ratio",
-               "expected_part_ids": {"kangxi15", "rtk10", "rtk1484"}},
+               "expected_part_ids": {"kangxi12", "rtk10", "rtk1484", "rtk8"}},
     "rtk2015": {"character": "舷", "keyword": "gunwale",
                "expected_part_ids": {"rtk1484", "rtk2012"}},
     "rtk2629": {"character": "眩", "keyword": "faint",

@@ -9058,3 +9058,87 @@ so `--near`/`--all` output is the way to pick. `kangxi58` still holds 彑 where
 stands: `sync_system_data.py --dry-run` here compares the file with itself, so
 the live run needs doing on the real DB — this time it will move `image_url` for
 all 30 primitives as well as the decompositions.
+
+---
+
+## 2026-09-17 — the right answer was in the second slot
+
+`audit_primary_choice.py`, a new detector for a bug the `;` syntax created on the
+day it landed.
+
+When the structural alternatives went in in bulk (2026-09-13), nothing checked
+whether the primary they were added *beside* was any good. Often it was not, and
+the correct decomposition had simply been parked in the second slot while the
+reader was shown the stroke soup:
+
+    左  ノ,一,工;工,𠂇      heisig: "by one's side; craft"
+    右  ノ,一,口;口,𠂇      heisig: "by one's side; mouth"
+    乞  ノ,一,乙,人;乙,𠂉    heisig: "reclining; lying down; fishhook"
+
+**76 of 141** multi-chunk kanji were like this.
+
+### Scoring, and the trap it had to survive
+
+Two numbers per chunk, both from outside this project: **unaccounted** (parts
+`audit_phantom_parts`' two-channel test cannot explain) and **covered** (CSV
+component names the parts answer to). A chunk displaces the primary only when it
+is no worse on both and better on one.
+
+The first version ranked by coverage alone and wanted to promote 黙's `灬,犬,里`
+over its `犬,黒` — but 黒 *is* 里+灬, so the flatter chunk scored higher precisely
+by being flatter, and taking that advice would have made the thing this script
+exists to fix worse. The fix is to count coverage **recursively**: the CSV's
+components column is itself a recursive expansion, so crediting a part with what
+it contains puts the two level and the flatter one stops winning. 黙, 裏 and 哀
+dropped out of the list on that change alone.
+
+### Replace, not just reorder
+
+Swapping the order would have changed nothing about search — `search_by_parts`
+consults *every* visible decomposition, so a demoted flattening still matches.
+So where the primary carried unaccounted parts (59 of the 76) the flattened
+chunk is **dropped**, not demoted. The other 17 are clean readings and only
+change order.
+
+That leaves the strokes reachable where they genuinely are: 𠂇 and 𠂉 are
+two-stroke glyphs, atomic in cjkvi-ids as well as here, so they were given the
+`ノ,一` they plainly have. Searching "one" at depth 1 no longer returns 左; at
+depth 2 it still does. Depth 1 is the frontend default, which is the point.
+
+### What it turned up beyond the flattening
+
+- **列 利 刊 幻 庶 were missing components outright.** 列's primary was `歹` — no
+  sword at all. Same for 利 (`禾`), 刊 (`干`), 幻 (`幺`), and 庶 was missing 廿.
+- **初 was standing in for 衣** in 袖 褐 襟 裕 被 裾 — a whole kanji ("first time")
+  doing duty for the cloak radical, which also dragged a spurious 刀 into six
+  decompositions.
+- **武 draws 弋, not 戈.** cjkvi reads it ⿹⿶弋一止 and the CSV says "arrow".
+- **令's foot is not 卩.** This one looked like a regression — a named component
+  replaced by two strokes, the exact direction this audit works against — and I
+  nearly reverted it. Rendering 令 冷 鈴 零 beside 印 settles it: 印 draws the full
+  卩, 令 draws the abbreviated shape, so 卩 was the lookalike carrier here and
+  cjkvi's ⿱𠃌丨 is right.
+- **"sparkler" is 丷+八**, per 塁 楽 率 渋 摂 函's CSV and cjkvi alike. Six hosts had
+  it as 冫 ("ice"), which is in neither source. Corrected to 丷,八 — but the shape
+  has no codepoint of its own, so the name stays unsearchable. That is the honest
+  state, not an oversight.
+
+All six "possible regression" cases were checked one at a time against both
+sources before anything was kept; 令 was the only one that needed the render.
+
+### Numbers
+
+**Phantom parts 243 → 149, across 168 → 105 kanji.** The new detector reports 0.
+Over-flattening 0, dead tokens 0, self-references 0, 1316 checks with only the 4
+known hanzi-scope non-issues, 66 pytest, frontend lint + build clean. 24 pins
+re-pinned, with the three counter-intuitive ones (武, 令, 夜) explained in the
+table's header comment rather than left to look like mistakes.
+
+Depth-1 search: `one` 197→185, `mouth` 184→182, `soil` 99→96. Smaller than the
+phantom drop suggests, because most of what was removed was a *second* path to a
+kanji the search already reached by another part.
+
+**Next**: the phantom list is now 149, still led by ノ(31-ish) 一 ｜ — but those
+are hosts with no alternative to promote, so they need the component identified
+first, one at a time. The 236 unsearchable names are unchanged and still mostly
+1-2-host mnemonics. `kangxi58` still holds 彑 where `CJKRadicals.txt` says 彐.
