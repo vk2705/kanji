@@ -8973,3 +8973,88 @@ that the remaining 236 names are mostly single-frame mnemonics (3-6 hosts each),
 so the per-name payoff drops sharply and `--near`/`--all` output is the way to
 pick rather than working down by host count. `kangxi58` still holds 彑 where
 `CJKRadicals.txt` says 彐; unchanged and still worth its own pass.
+
+---
+
+## 2026-09-16 (second chunk) — finished `fishhook`, and corrected a mistake I made
+
+Set out to register 𠃊 and close the half of `fishhook` the last entry left open.
+Did that, and found two things on the way — one of them my own error from two
+days ago.
+
+### 𠃊, the other fishhook
+
+Heisig's "fishhook" covers two different strokes. 乙/乚 curve and hook (乙 乞 乱
+乳 孔 札 礼); 𠃊 is a plain right-angle corner with no hook at all, and it is what
+亡 直 県 断 継 draw. cjkvi-ids spells them apart (亡 = ⿱亠𠃊, 直 = ⿱十⿺𠃊目, 継 =
+⿰糸⿺𠃊米) and the render agrees.
+
+Registered `prim-fishhook` and repointed those five. Two of them were not
+flattening the stroke but **missing it entirely**: 亡 was just `亠`, and 県 was
+`小,目`. 直 and 継 had 一 and ｜ standing in. `fishhook` now returns both families.
+
+The rest of the 39 hosts reach it through 亡/直/県 or have the hook inside an
+atomic glyph (心 必 氏 瓦 気), where there is no separable part to list. Correctly
+out of scope rather than forced.
+
+### 𠂆 was the wrong codepoint for "drag" — my error, corrected
+
+On 2026-09-14 I registered `prim-drag` as 𠂆 (U+20086) and wrote that cjkvi-ids
+"spells both groups 𠂆". **That was wrong on both counts.** cjkvi is not
+consistent across this family at all — 后 is ⿸𠂋口, 盾 is ⿸𠂆𥃭, 石 is ⿸丆口, 厚 is
+⿸厂㫗 — and I had generalised from the two examples I happened to look at. And
+𠂆 rendered on its own is indistinguishable from 厂, so registering it created
+exactly the lookalike carrier this audit exists to remove.
+
+The cliff/drag distinction itself holds up: rendering the two host groups at
+150px side by side, 厚 原 反 石 崖 draw a plain corner and 后 盾 脈 派 逓 draw a
+short 丿 whose top rises above the bar crossing it. The character that actually
+draws that is **𠂋 (U+2008B)**, which is what cjkvi gives 后. Corrected the row
+and its five hosts, and left the history in the `data.txt` comment rather than
+quietly rewriting it.
+
+The lesson is narrow and worth keeping: cjkvi-ids picking a codepoint for *one*
+host does not make it the right codepoint for the primitive. Render the candidate
+on its own, not just its hosts — 𠂆 beside 厂 would have shown this immediately.
+
+### Every primitive image was being painted into two thirds of its canvas
+
+`prim-fishhook.png` came out as a bare vertical — the bottom stroke simply gone.
+A plausible-looking glyph that is not the character, which is the failure the
+script's own "now LOOK at them" warning is about.
+
+It was not the font. Decoding the PNGs row by row, **every** image's ink stopped
+at exactly y=168 in a 256px file: headless Chromium paints a viewport 88px
+shorter than `--window-size` asks for and pads the screenshot with transparency.
+Not fixable with `--headless=new` or `--hide-scrollbars`; all three truncate
+identically. Glyphs whose ink happened to fit above row 168 looked fine and
+nobody had measured.
+
+So this was silently breaking the one-em invariant the whole file is built on: an
+em painted into 168 of 256 rows renders about a third small beside a real glyph,
+which is the exact defect the canvas sizing exists to prevent. `render_one` now
+renders `CANVAS + VIEWPORT_TRIM` tall and crops back to the em square — with a
+hand-rolled PNG crop, since the script's premise is that it needs nothing but the
+Chromium already on the box.
+
+All 30 images re-rendered and looked at as a contact sheet: every one now
+complete and filling its box. I also added and then removed a `SIZE_OVERRIDES`
+table on the way — it was a misdiagnosis of this same truncation, and shrinking
+the type "fixed" nothing while making two glyphs render small. The empty table
+stays with a note, because the two failures look identical from the outside.
+
+### Numbers
+
+Unsearchable Heisig names 236 (unchanged — `fishhook` and `drag` were already
+counted). Phantom parts 244→243 across 168 kanji. Over-flattening 0 after
+collapsing 后 (its `一` became redundant once 𠂋 carried it), dead tokens 0,
+self-references 0, 1316 checks with only the 4 known hanzi-scope non-issues, 66
+pytest, frontend lint + build clean. Three pins updated (直 継, plus the two
+from the earlier chunk).
+
+**Next**: the remaining 236 names are mostly single-frame mnemonics at 3-6 hosts,
+so `--near`/`--all` output is the way to pick. `kangxi58` still holds 彑 where
+`CJKRadicals.txt` says 彐. And the deploy caveat from the earlier entry still
+stands: `sync_system_data.py --dry-run` here compares the file with itself, so
+the live run needs doing on the real DB — this time it will move `image_url` for
+all 30 primitives as well as the decompositions.

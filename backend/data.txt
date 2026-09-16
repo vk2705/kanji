@@ -127,7 +127,7 @@ rtk73:的:bull's eye:白,勺
 rtk74:首:neck:自,丷
 rtk75:乙:the latter,fishhook:
 rtk76:乱:riot:乙,舌
-rtk77:直:straightaway:十,目,一
+rtk77:直:straightaway:十,目,𠃊
 rtk78:具:tool:一,八,目
 rtk79:真:true:具,十
 rtk80:工:craft:
@@ -573,7 +573,7 @@ rtk520:韻:rhyme:音,員
 rtk521:識:discriminating:戠,言
 rtk522:鏡:mirror:竟,金
 rtk523:境:boundary:土,竟
-rtk524:亡:deceased,perish:亠
+rtk524:亡:deceased,perish:亠,𠃊
 rtk525:盲:blind:亡,目
 rtk526:妄:delusion:亡,女
 rtk527:荒:laid waste:川,艹,亡
@@ -601,7 +601,7 @@ rtk548:染:dye:九,水,木
 rtk549:燃:burn:火,然
 rtk550:賓:v.i.p.:少,貝,宀,一
 rtk551:歳:year-end:止,小,戌
-rtk552:県:prefecture:小,目
+rtk552:県:prefecture:小,目,𠃊
 rtk553:栃:horse chestnut:木,厂
 rtk554:地:ground:土,也
 rtk555:池:pond:水,也
@@ -1267,7 +1267,7 @@ rtk1214:誓:vow:折,言
 rtk1215:斬:beheading,executioner:斤,車
 rtk1216:暫:temporarily:斬,日
 rtk1217:漸:steadily:斬,水
-rtk1218:断:severance:斤,米,｜,一
+rtk1218:断:severance:斤,米,𠃊
 rtk1219:質:substance:貝,斤
 rtk1220:斥:reject:斤,丶
 rtk1221:訴:accusation:斥,言
@@ -1519,7 +1519,7 @@ rtk1466:総:general:糸,心,公
 rtk1467:綿:cotton:帛,糸
 rtk1468:絹:silk:月,口,糸
 rtk1469:繰:winding:喿,糸
-rtk1470:継:inherit:｜,糸,米
+rtk1470:継:inherit:糸,米,𠃊
 rtk1471:緑:green:录,糸
 rtk1472:縁:affinity:彐,糸,豕
 rtk1473:網:netting:亡,糸,丷,冂
@@ -2046,15 +2046,15 @@ rtk1993:郷:home town:艮,⻏,幺
 rtk1994:響:echo:郷,音
 rtk1995:郎:son:艮,⻏
 rtk1996:廊:corridor:郎,广
-rtk1997:盾:shield:𠂆,十,目
+rtk1997:盾:shield:𠂋,十,目
 rtk1998:循:sequential:盾,彳
-rtk1999:派:faction:水,𠂆
-rtk2000:脈:vein:月,𠂆
+rtk1999:派:faction:水,𠂋
+rtk2000:脈:vein:月,𠂋
 rtk2001:衆:masses:血,皿,糸
-rtk2002:逓:relay:巾,辶,𠂆,｜
+rtk2002:逓:relay:巾,辶,𠂋,｜
 rtk2003:段:grade:｜,殳,几,又,ノ,一
 rtk2004:鍛:forge:段,金
-rtk2005:后:empress:𠂆,一,口
+rtk2005:后:empress:𠂋,口
 rtk2006:幻:phantasm:幺;幺,𠃌
 rtk2007:司:director,ken russel:一,口,亅
 rtk2008:伺:pay respects:亻,司
@@ -3260,12 +3260,17 @@ rtk2238:疋:critters,zoo
 prim-grow-up:龶:grow up:
 
 # --- 2026-09-14: three primitives Heisig names that had no row here.
-# 𠂆 'drag' is NOT 厂 'cliff'. The book keeps them apart (6 hosts vs 42, no
-# overlap) and the render agrees: 厂 is a plain corner, 𠂆 is a 丿 crossed
-# lower down by a 一, so the slash sticks out above the bar. cjkvi-ids
-# spells both 𠂆, which is why this went unnoticed — it is the one place
-# the structural source is less precise than Heisig, not more.
-prim-drag:𠂆:drag:
+# 𠂋 'drag' is NOT 厂 'cliff'. The book keeps them apart (6 hosts vs 42, no
+# overlap) and rendering the two host groups at size agrees: 厚 原 反 draw a
+# plain corner, 后 盾 脈 派 逓 draw a short 丿 whose top rises above the bar
+# that crosses it.
+#
+# Registered as 𠂆 (U+20086) on 2026-09-14 and corrected to 𠂋 (U+2008B) on
+# 2026-09-16. 𠂆 was picked because cjkvi-ids writes it for 盾 — but cjkvi is
+# not consistent across this family (后 is ⿸𠂋口, 石 is ⿸丆口, 厚 is ⿸厂㫗),
+# and 𠂆 rendered on its own is indistinguishable from 厂. 𠂋 is the one that
+# actually draws the raised stroke, and it is what cjkvi gives 后.
+prim-drag:𠂋:drag:
 # 龹 'quarter' and 戌 'march' were each spelled out in every host instead
 # (一+大+二+丷 and 厂+成). Both take cjkvi-ids' own decomposition, so a
 # deeper search still reaches the pieces.
@@ -3285,3 +3290,9 @@ prim-acupuncturist:尃:acupuncturist:甫,寸
 # names share no host at all; 漆 carries both (氵 + 桼) and proves they are
 # separate. Atomic, as it is in cjkvi-ids.
 prim-grains-of-rice:氺:grains of rice:
+
+# --- 2026-09-16: 𠃊, the other half of Heisig's 'fishhook'. A plain
+# right-angle corner with no hook at the end, which is what 亡 直 県 断 継
+# draw — 乙/乚 curve and hook, and cjkvi-ids spells the two apart. Both rows
+# answer to 'fishhook', as 母/毋 both answer to 'breasts'.
+prim-fishhook:𠃊:fishhook:

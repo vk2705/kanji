@@ -1470,8 +1470,13 @@ EXPECTED_DECOMPOSITIONS = {
     # a genuine extra wide 一 at the very bottom (visibly wider than
     # 目's own bottom stroke) -- no separate pipe, and no fishhook shape
     # (Google's "乚" suggestion doesn't match the render here).
+    # 直 and 継 had a stand-in (一 / ｜) where the glyph draws 𠃊 — the other
+    # half of Heisig's "fishhook", a plain right-angle corner with no hook, as
+    # against the curving-and-hooked 乙/乚. cjkvi-ids spells them apart (直 is
+    # ⿱十⿺𠃊目, 継 is ⿰糸⿺𠃊米) and the render agrees. Registered 2026-09-16 as
+    # prim-fishhook; both rows answer to the name, as 母/毋 both do to "breasts".
     "rtk77": {"character": "直", "keyword": "straightaway",
-              "expected_part_ids": {"rtk1", "rtk10", "rtk15"}},
+              "expected_part_ids": {"prim-fishhook", "rtk10", "rtk15"}},
     # 則/副/別 were all missing their 刂(sword radical) side entirely, or
     # (別) substituting the wrong shape for it: 則 had only 貝; 副 had
     # only 一,口,田; 別 had 勹 where render shows a 刂 shape instead (刂
@@ -2635,7 +2640,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk2626": {"character": "癌", "keyword": "cancer",
                 "expected_part_ids": {"kangxi104", "rtk23", "rtk830"}},
     "rtk1470": {"character": "継", "keyword": "inherit",
-               "expected_part_ids": {"prim-pipe", "rtk1431", "rtk987"}},
+               "expected_part_ids": {"prim-fishhook", "rtk1431", "rtk987"}},
     "rtk1471": {"character": "緑", "keyword": "green",
                "expected_part_ids": {"prim-dustpan", "rtk1431"}},
     # katakana ヨ was a lookalike carrier for two different real characters:

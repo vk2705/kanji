@@ -52,6 +52,7 @@ the database.
 """
 import argparse
 import html
+import zlib
 import subprocess
 import sys
 import tempfile
@@ -111,8 +112,30 @@ FONT_STACK = ("'Noto Serif CJK JP', 'Source Han Serif JP', 'IPAMincho', "
 FONT_OVERRIDES = {
     0x27607: "'HanaMinA', 'HanaMinB', serif",   # 𧘇 scarf
 }
+
+# Per-glyph type size, for a face whose glyph genuinely overflows the em square.
+# Empty on purpose: the two entries that lived here on 2026-09-16 were a
+# misdiagnosis of the viewport truncation described under VIEWPORT_TRIM, and
+# shrinking the type "fixed" nothing while making those two render small. Add one
+# only after rendering the glyph in an outlined box and seeing its ink leave the
+# square — and re-read VIEWPORT_TRIM first, because that looks identical.
+SIZE_OVERRIDES: dict[int, int] = {}
 GLYPH_COLOR = "#f0c060"   # --kanji-color
 CANVAS = 256              # 4x .detail-char-img's 4rem, so it stays crisp scaled down
+
+# Headless Chromium paints a viewport 88px shorter than --window-size asks for and
+# pads the screenshot with transparency, so every image rendered here before
+# 2026-09-16 was a 256x168 painting inside a 256x256 file. Glyphs whose ink
+# happened to fit above row 168 looked fine and nobody measured; 𠃊 lost its
+# entire bottom stroke and came out a bare vertical — a plausible-looking glyph
+# that is simply not the character.
+#
+# It also quietly broke the one-em invariant this file is built on (see below):
+# an em painted into 168 of 256 rows renders ~34% small beside a real glyph,
+# which is the exact defect the canvas sizing exists to prevent. So render tall
+# and crop back to the em square. Not a mode --headless=new or --hide-scrollbars
+# fixes; all three truncate identically.
+VIEWPORT_TRIM = 88
 
 # The canvas is exactly one em, and the glyph is set at exactly that font size, so the
 # PNG's box *is* the em square. That matters: the CSS sizes these with max-width /
@@ -144,6 +167,7 @@ def system_primitives(conn):
 def _page(character: str) -> str:
     """One glyph, centred on a transparent canvas, no chrome of any kind."""
     stack = FONT_OVERRIDES.get(ord(character), FONT_STACK)
+    size = SIZE_OVERRIDES.get(ord(character), CANVAS)
     return f"""<!DOCTYPE html>
 <html><head><meta charset="utf-8">
 <style>
@@ -151,7 +175,7 @@ def _page(character: str) -> str:
   .glyph {{
     width: {CANVAS}px; height: {CANVAS}px;
     font-family: {stack};
-    font-size: {CANVAS}px;
+    font-size: {size}px;
     line-height: {CANVAS}px;
     text-align: center;
     color: {GLYPH_COLOR};
@@ -159,6 +183,63 @@ def _page(character: str) -> str:
 </style></head>
 <body><div class="glyph">{html.escape(character)}</div></body></html>
 """
+
+
+def _crop_png_height(path: Path, height: int) -> None:
+    """Truncate an RGBA PNG to its first `height` rows, in place.
+
+    Deliberately hand-rolled rather than pulling in Pillow: this script's whole
+    premise is that it needs nothing but the headless Chromium already on the
+    box (see the module docstring), and re-encoding at filter 0 is a dozen lines.
+    """
+    raw = path.read_bytes()
+    if raw[:8] != b"\x89PNG\r\n\x1a\n":
+        raise ValueError(f"{path} is not a PNG")
+    idat, width, full, offset = b"", None, None, 8
+    while offset < len(raw):
+        length = int.from_bytes(raw[offset:offset + 4], "big")
+        kind, body = raw[offset + 4:offset + 8], raw[offset + 8:offset + 8 + length]
+        if kind == b"IHDR":
+            width, full = int.from_bytes(body[:4], "big"), int.from_bytes(body[4:8], "big")
+            if body[8] != 8 or body[9] != 6:
+                raise ValueError("expected 8-bit RGBA")
+        elif kind == b"IDAT":
+            idat += body
+        offset += 12 + length
+    if full <= height:
+        return
+    stride = width * 4
+    data, prev, pos, rows = zlib.decompress(idat), bytearray(stride), 0, []
+    for _ in range(height):
+        filt = data[pos]
+        pos += 1
+        line = bytearray(data[pos:pos + stride])
+        pos += stride
+        for x in range(stride):
+            a = line[x - 4] if x >= 4 else 0
+            b = prev[x]
+            c = prev[x - 4] if x >= 4 else 0
+            if filt == 1:
+                line[x] = (line[x] + a) & 0xFF
+            elif filt == 2:
+                line[x] = (line[x] + b) & 0xFF
+            elif filt == 3:
+                line[x] = (line[x] + (a + b) // 2) & 0xFF
+            elif filt == 4:
+                pa, pb, pc = abs(b - c), abs(a - c), abs(a + b - 2 * c)
+                pred = a if (pa <= pb and pa <= pc) else (b if pb <= pc else c)
+                line[x] = (line[x] + pred) & 0xFF
+        rows.append(bytes(line))
+        prev = line
+
+    def chunk(kind: bytes, body: bytes) -> bytes:
+        return (len(body).to_bytes(4, "big") + kind + body
+                + zlib.crc32(kind + body).to_bytes(4, "big"))
+
+    ihdr = width.to_bytes(4, "big") + height.to_bytes(4, "big") + bytes([8, 6, 0, 0, 0])
+    packed = zlib.compress(b"".join(b"\x00" + r for r in rows), 9)
+    path.write_bytes(b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", ihdr)
+                     + chunk(b"IDAT", packed) + chunk(b"IEND", b""))
 
 
 def render_one(character: str, out_path: Path) -> None:
@@ -170,10 +251,11 @@ def render_one(character: str, out_path: Path) -> None:
             [chrome, "--headless", "--disable-gpu", "--no-sandbox",
              "--default-background-color=00000000",   # keep the PNG's alpha
              f"--screenshot={out_path}",
-             f"--window-size={CANVAS},{CANVAS}",
+             f"--window-size={CANVAS},{CANVAS + VIEWPORT_TRIM}",
              f"file://{page}"],
             capture_output=True, check=True, timeout=60,
         )
+        _crop_png_height(out_path, CANVAS)
 
 
 def main():
