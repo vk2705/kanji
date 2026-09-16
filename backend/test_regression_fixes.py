@@ -1744,8 +1744,11 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"kangxi15", "rtk2132", "rtk639"}},
     "rtk2818": {"character": "駕", "keyword": "stretcher",
                 "expected_part_ids": {"rtk2132", "rtk932"}},
+    # 騨 was 十,尚,田,馬 — the 尚 a phantom, the rest a flattening of 単, which its
+    # own unused alternate already named. Re-pinned with the 尚-hosts chunk; the
+    # sibling fixes (屑 箪 蛸 蝉 鞘 瞥 鼈) had no pin to update.
     "rtk2819": {"character": "騨", "keyword": "piebald",
-                "expected_part_ids": {"rtk10", "rtk14", "rtk196", "rtk2132"}},
+                "expected_part_ids": {"rtk2078", "rtk2132"}},
     "rtk2820": {"character": "馳", "keyword": "rush",
                 "expected_part_ids": {"rtk2132", "rtk2236"}},
     "rtk2822": {"character": "馴", "keyword": "tame",
