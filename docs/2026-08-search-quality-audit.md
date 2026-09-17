@@ -9213,3 +9213,120 @@ audit script that scores against it — not just `audit_primary_choice.py` — i
 structurally blind there. Worth its own note/decision later: either extend
 scoring to work from cjkvi-ids alone past frame 2200, or accept that range
 gets cjkvi-only verification permanently.
+
+---
+
+## 2026-09-17 (fourth chunk) — 𫩠 "outhouse", the other 4 of the 8 remaining 尚 hosts
+
+Picked up where the third chunk left off: `賞 堂 掌 嘗` (`当 隠 鎖 蝋` are the
+looser ends still not done, per that chunk's own note).
+
+Environment note, since the last firing broke on exactly this: this container
+also came up with the repo already cloned at `/home/user/kanji` but in a
+**detached HEAD** one commit behind `origin/master` (`git checkout master` was
+on `b340a19`, 17 commits stale) — `git pull` refused with "not currently on a
+branch". Fixed with `git checkout master && git merge --ff-only origin/master`,
+then confirmed with `git push --dry-run origin master` before touching
+anything, per the standing instruction. Also had to `pip install -r
+requirements.txt -r requirements-dev.txt` and `apt-get install fonts-noto-cjk
+fonts-hanazono` from scratch (neither survives a fresh container), and hit a
+Rust-panic import crash on `cryptography` (a stale Debian `dist-packages` copy
+shadowing pip's) — fixed with `pip install --upgrade --ignore-installed
+cryptography`, not previously documented here.
+
+### cjkvi confirms one shape for all four, distinct from 尚 itself
+
+`ids.txt`: `賞 ⿱𫩠貝`, `堂 ⿱𫩠土`, `掌 ⿱𫩠手`, `嘗 ⿱𫩠旨` — all four top with
+𫩠 (U+2BA60), not 尚. `𫩠` itself is `⿱龸口`, and `龸` is `⿱⺌冖` — so the real
+top is small/little (⺌) + crown (冖) + mouth (口), exactly
+`suggest_heisig_aliases.py --all`'s "outhouse" group ("every host contains: ⺌
+… 冖 … 口 …", 7 hosts: 償党堂常掌裳賞).
+
+Rendered 𫩠 beside 龸, 尚, and all seven hosts (賞堂掌常裳嘗 plus 尚 itself) at
+`render_glyphs.py 𫩠 龸 尚 賞 堂 掌 常 裳 嘗`. 尚's own render is visibly
+different from the rest — its box has a horizontal crossbar and legs that
+splay outward at the bottom (⿱⺌冋, 冋 = ⿵冂口, a wider "borders" shape). 𫩠 and
+all six hosts draw a tighter closed rectangle directly under ⺌ with no
+crossbar. This settles it the same way the 2026-09-16 (second-chunk) 后/盾 cliff-
+vs-drag case did: two shapes that read alike in a keyword or codepoint table
+turn out visually distinct the moment they're rendered side by side.
+
+### Six hosts fixed, not four — the audit's own detector has a blind spot here
+
+The 8-host list `audit_phantom_parts.py` reported for 尚 never included 常
+("usual") or 裳 ("skirt"), even though both already carried the exact same
+phantom `尚,X` shape in `data.txt` (`尚,巾` and `尚,衣`). Checked why: the
+detector's `_spelled_out` structural-evidence check does a BFS closure over
+*everything* reachable from the host through cjkvi-ids and this project's own
+decompositions, not just the direct path — and for 常/裳 specifically, that
+closure happens to wander into a completely unrelated part of the tree that
+contains `冂` (kangxi13), which is close enough to satisfy 尚's own
+`⺌,冂,口` breakdown by coincidence. For `掌` the same closure does *not*
+reach `冂`, so it alone got flagged. This is a false negative in the audit
+tool, not evidence the bug isn't there — confirmed independently via
+`suggest_heisig_aliases.py`'s host list (which found all 7 "outhouse" hosts
+by a completely different method: keyword-name matching, not structural
+closure) and via `rtk.py detail`, which showed `常`/`裳` both listing `尚` as
+a part before this session's fix. Fixed both alongside the four the detector
+did report, since it's the same root cause and the same size of change — not
+scope creep, just the detector undercounting its own finding. Left a note
+for whoever eventually touches `_spelled_out` again: the closure's blast
+radius can clear a part that was never really connected to the host, and this
+is now a second confirmed instance of it (after the 后/盾 cliff-vs-drag
+session), so a future session should consider tightening it rather than
+trusting a "0 findings" result there as complete.
+
+`党` (⿱龸兄, no 口 — it never had 尚) and `償` (⿰亻賞, nests through 賞) were
+in the same 7-host "outhouse" group from `suggest_heisig_aliases.py` but
+needed no line change: 党's real top is 龸 without a mouth, a different,
+narrower fix outside this chunk's scope, and 償 already correctly references
+賞 rather than repeating its top.
+
+### What was done
+
+Registered `prim-outhouse:𫩠:outhouse:⺌,冖,口` (flat, matching how this
+project already flattens other multi-morpheme Heisig primitives like 冠's
+`寸,冖,元`, rather than nesting through cjkvi's own intermediate 龸 — no
+reason to introduce an extra reference hop cjkvi itself doesn't name
+separately). Rendered its image via `make_primitive_images.py` (U+2BA60 is
+Plane 2, so it's in `UNRENDERABLE_RANGES` and needs one) — only
+`prim-outhouse.png` came out new/changed, the other 30 re-rendered
+byte-identical, so nothing else in that directory needed re-verifying.
+Replaced `尚` with `outhouse` (→ `prim-outhouse`) on `rtk859`(賞) `rtk861`
+(堂) `rtk862`(常) `rtk863`(裳) `rtk864`(掌) `rtk2883`(嘗) — outright
+replacement, not an added alternate, since 尚 was pure noise on all six with
+nothing else in the primary worth keeping alongside it.
+
+### Verified
+
+Rebuilt `kanji.db` clean from source. `rtk.py detail` on all 6 touched ids
+plus `prim-outhouse` shows the new part and no more `尚`; `rtk.py parts
+outhouse` returns exactly the 6 fixed hosts, `rtk.py parts esteem` (尚's own
+keyword) now returns only the 4 still-phantom hosts (`当 隠 鎖 蝋`) instead of
+mixing them with the fixed six. `test_regression_fixes.py`: 6 pins corrected
+in place (`rtk196` → `prim-outhouse` in each of the six `expected_part_ids`
+sets, with a comment explaining why), 1316 checks with only the 4 known
+hanzi-scope non-issues. 66 pytest. `audit_overflatten.py` 0,
+`audit_self_reference.py` 0, `audit_radicals.py` 0/0, `audit_primary_choice.py`
+0. Phantom parts (`--in-csv-range`) 149→146 across 105→102 (賞/堂/掌, the
+three of the six that are in CSV range); full-range 309→305 across 216→212
+(all six, since 嘗/常/裳 are past frame 2200 or were the detector's own blind
+spot and so weren't counted in the "216" to begin with — see above). Frontend
+`npm run lint` and `npm run build` both clean (data-only change, but run
+anyway per the standing verification list).
+
+**Next chunk**: `当`(hit) `隠`(conceal) `鎖`(chain) `蝋`(wax) are the four
+still-phantom 尚 hosts, and they are **not** the same fix — third-chunk's
+notes already worked out that 当 is shinjitai with cjkvi giving `⺌,彐` and no
+尚 at all (so 尚 there may be a stray leftover, not even a stand-in — check
+whether it should just be dropped rather than replaced), while 隠/鎖/蝋 want
+`𢚩`/`𧴪`/`鼡` respectively under their cjkvi top-level split — none of the
+three has been looked at yet, so each needs its own render-and-compare before
+deciding. That's a natural next bounded chunk (4 hosts, but 3 different
+shapes to identify rather than 1 shared one, so budget more time per host
+than this session's did). Beyond that: the 236 unsearchable Heisig names is
+unchanged, `kangxi58` still holds 彑 where `CJKRadicals.txt` says 彐, and the
+deploy caveat (`sync_system_data.py --dry-run` here only compares the file
+with itself — the live run on the real DB still needs doing, and will now
+also need to move `image_url` for `prim-outhouse` along with everything
+queued from the third chunk) still stands.

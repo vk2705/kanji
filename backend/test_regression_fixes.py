@@ -3008,18 +3008,22 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"kangxi28", "rtk1413", "rtk639"}},
     "rtk853": {"character": "容", "keyword": "contain",
                "expected_part_ids": {"kangxi40", "rtk851"}},
+    # 2026-09-17: 尚(rtk196) replaced with prim-outhouse(𫩠) on these 6 --
+    # cjkvi-ids gives 賞/堂/常/裳/掌/嘗 the compact top 𫩠 (⿱龸口), not the
+    # taller, crossbarred 尚 itself; see data.txt's own 2026-09-17 note and
+    # audit_phantom_parts.py, which flagged 尚 as unaccounted on these hosts.
     "rtk859": {"character": "賞", "keyword": "prize",
-               "expected_part_ids": {"rtk196", "rtk56"}},
+               "expected_part_ids": {"prim-outhouse", "rtk56"}},
     "rtk860": {"character": "党", "keyword": "party",
                "expected_part_ids": {"rtk107", "rtk110"}},
     "rtk861": {"character": "堂", "keyword": "hall",
-               "expected_part_ids": {"rtk161", "rtk196"}},
+               "expected_part_ids": {"rtk161", "prim-outhouse"}},
     "rtk862": {"character": "常", "keyword": "usual",
-               "expected_part_ids": {"rtk196", "rtk432"}},
+               "expected_part_ids": {"prim-outhouse", "rtk432"}},
     "rtk863": {"character": "裳", "keyword": "skirt",
-               "expected_part_ids": {"rtk196", "rtk423"}},
+               "expected_part_ids": {"prim-outhouse", "rtk423"}},
     "rtk864": {"character": "掌", "keyword": "manipulate",
-               "expected_part_ids": {"rtk196", "rtk687"}},
+               "expected_part_ids": {"prim-outhouse", "rtk687"}},
     "rtk887": {"character": "職", "keyword": "post",
                "expected_part_ids": {"prim-kazoo", "rtk881"}},
     "rtk1058": {"character": "億", "keyword": "hundred million",
@@ -3088,8 +3092,9 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"prim-fishfinger", "rtk1007"}},
     "rtk2821": {"character": "騙", "keyword": "cheat",
                "expected_part_ids": {"prim-fishfinger", "rtk2132"}},
+    # 2026-09-17: same prim-outhouse swap as rtk859/861/862/863/864 above.
     "rtk2883": {"character": "嘗", "keyword": "lick",
-               "expected_part_ids": {"rtk196", "rtk493"}},
+               "expected_part_ids": {"prim-outhouse", "rtk493"}},
     "rtk2902": {"character": "肇", "keyword": "founding",
                "expected_part_ids": {"kangxi129", "kangxi66", "rtk1157"}},
     # Owner asked to cross-check the live DB against the owner's own Google

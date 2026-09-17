@@ -908,12 +908,12 @@ rtk855:欲:longing:欠,谷
 rtk856:裕:abundant:衣,谷
 rtk857:鉛:lead:㕣,金
 rtk858:沿:run alongside:㕣,水
-rtk859:賞:prize:尚,貝
+rtk859:賞:prize:outhouse,貝
 rtk860:党:party:小,兄
-rtk861:堂:public chamber:尚,土
-rtk862:常:usual:尚,巾
-rtk863:裳:skirt:尚,衣
-rtk864:掌:palm of hand:尚,手
+rtk861:堂:public chamber:outhouse,土
+rtk862:常:usual:outhouse,巾
+rtk863:裳:skirt:outhouse,衣
+rtk864:掌:palm of hand:outhouse,手
 rtk865:皮:pelt:又
 rtk866:波:waves:水,皮
 rtk867:婆:old woman:女,波
@@ -2930,7 +2930,7 @@ rtk2879:鹵:salt:十,囗
 rtk2880:鹸:saltiness:口,十,人,个,囗,鹵;㑒,鹵
 rtk2881:虔:respect:文,卜,匕,厂,虍;文,虍
 rtk2882:燕:swallow (bird):口,匕,灬,丬,艹;北,口,廿,灬
-rtk2883:嘗:once:尚,旨
+rtk2883:嘗:once:outhouse,旨
 rtk2884:殆:almost:台,歹
 rtk2885:牌:label:卑,片
 rtk2886:覗:peep:司,見
@@ -3296,3 +3296,16 @@ prim-grains-of-rice:氺:grains of rice:
 # draw — 乙/乚 curve and hook, and cjkvi-ids spells the two apart. Both rows
 # answer to 'fishhook', as 母/毋 both answer to 'breasts'.
 prim-fishhook:𠃊:fishhook:
+
+# --- 2026-09-17: 尚 was a phantom on 6 of its former hosts (賞 堂 常 掌 裳
+# 嘗). cjkvi-ids gives all 7 of Heisig's "outhouse" hosts (賞 党 堂 常 掌 裳
+# 償, per suggest_heisig_aliases.py) the compact top 𫩠 (U+2BA60), not 尚 —
+# 尚 itself (rtk196) is a real, separate kanji whose own render has a taller
+# box with a crossbar and splayed legs; 𫩠 and the hosts all draw a tighter
+# closed rectangle with no crossbar. Registered flat as its CSV components
+# (small/little, crown, mouth) rather than nested through cjkvi's own
+# intermediate 龸, matching how this project already flattens other
+# multi-morpheme Heisig primitives (e.g. 冠 above). 党's "outhouse" is
+# ⿱龸兄 (no 口 — it never had 尚 to begin with) and 償 nests through 賞
+# (⿰亻賞), so neither needed a line change here.
+prim-outhouse:𫩠:outhouse:⺌,冖,口
