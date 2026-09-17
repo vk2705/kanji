@@ -1285,7 +1285,7 @@ rtk1232:浸:immersed:水,𠬶
 rtk1233:寝:lie down:丬,宀,𠬶
 rtk1234:婦:lady:女,帚
 rtk1235:掃:sweep:帚,扌
-rtk1236:当:hit:彐,尚
+rtk1236:当:hit:⺌,彐
 rtk1237:彙:same kind:冖,彑,果
 rtk1238:争:contend:⺕,一,亅,勹
 rtk1239:浄:clean:水,争
@@ -1459,7 +1459,7 @@ rtk1406:階:storey:皆,阝
 rtk1407:陛:highness:土,比,阝
 rtk1408:隣:neighboring:舛,米,夕,阝
 rtk1409:隔:isolate:阝,鬲
-rtk1410:隠:conceal:ノ,⺕,尚,心,阝
+rtk1410:隠:conceal:阝,爪,⺕,心
 rtk1411:堕:degenerate:有,土,阝
 rtk1412:陥:collapse:旧,勹,阝;旧,阝,𠂊
 rtk1413:穴:hole:八,宀
@@ -2136,7 +2136,7 @@ rtk2083:獣:animal:犬,口,𭕄,田
 rtk2084:脳:brain:月,𭕄,凶
 rtk2085:悩:trouble:凶,忄,𭕄
 rtk2086:厳:stern:敢,𭕄,厂
-rtk2087:鎖:chain:貝,金,尚
+rtk2087:鎖:chain:金,小,貝
 rtk2088:挙:raise:手,𭕄,八,一
 rtk2089:誉:reputation:言,𭕄,八,一
 rtk2090:猟:game-hunting:犭,𭕄,用,几
@@ -2774,7 +2774,7 @@ rtk2723:蛋:barbarian:虫,疋
 rtk2724:蟄:hibernation of insects:執,虫
 rtk2725:蝿:fly:虫,田,亀
 rtk2726:蟻:ant:義,虫
-rtk2727:蝋:wax:｜,一,尚,虫,用,几
+rtk2727:蝋:wax:虫,𭕄,用,几
 rtk2728:蝦:shrimp:虫,又
 rtk2729:蛸:octopus:肖,虫
 rtk2730:螺:small  edible  helical fresh-water mollusk:累,虫

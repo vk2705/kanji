@@ -9330,3 +9330,128 @@ deploy caveat (`sync_system_data.py --dry-run` here only compares the file
 with itself — the live run on the real DB still needs doing, and will now
 also need to move `image_url` for `prim-outhouse` along with everything
 queued from the third chunk) still stands.
+
+---
+
+## 2026-09-17 (fifth chunk) — the last 4 尚 hosts: 当/隠/鎖/蝋
+
+Second firing today; picked up exactly where the fourth chunk's notes left
+off: `当`(hit) `隠`(conceal) `鎖`(chain) `蝋`(wax), the four remaining
+phantom-`尚` hosts, each wanting a different real shape rather than one
+shared fix.
+
+Environment note, same shape as the fourth chunk's: container came up with
+the repo cloned at `/home/user/kanji` but `HEAD` detached one commit behind
+`origin/master` — fixed with `git checkout master && git merge --ff-only
+origin/master`, confirmed with `git push --dry-run origin master` before
+touching anything. No `venv/` and no CJK fonts either; rebuilt both
+(`python3 -m venv venv && ./venv/bin/pip install -r requirements.txt -r
+requirements-dev.txt`, `apt-get install fonts-noto-cjk fonts-hanazono`) —
+unlike the fourth chunk, `cryptography` imported cleanly this time, so
+whatever caused that one's Rust-panic didn't recur.
+
+### 当 (hit) — `⺌,彐`, no new registration
+
+cjkvi: `当 ⿱⺌彐`. `heisig-kanjis.csv`'s own `components` column for frame
+1236 says `small; broom` — confirms the top is "small" (⺌), not 尚, and the
+bottom is 彐 ("broom", already correctly present). `⺌` was already
+registered (`prim-small-radical`, used flat inside `prim-outhouse` itself
+from the fourth chunk), so this was a straight swap, no new primitive
+needed. Replaced `彐,尚` → `⺌,彐`.
+
+### 鎖 (chain) — `金,小,貝`, no new registration
+
+cjkvi: `鎖 ⿰金𧴪`, `𧴪 ⿱小貝`. CSV components for frame 2087: `metal; gold;
+small; shellfish; clam; oyster; eye; animal legs; eight` — a 9-synonym
+bundle for what's structurally only 3 real shapes (this project's CSV
+components column bundles every per-edition Heisig synonym into one
+semicolon list with no grouping, confirmed by checking a few other entries
+the same way; not itself new info but worth a note for whoever next tries to
+machine-parse that column expecting one term per real component). `小`
+("small") is the CSV's own explicit synonym for the missing piece and is
+already a plain registered kanji (`rtk110`) — no reason to mint a primitive
+for `𧴪` itself, especially since it doesn't recur anywhere else in this
+database (checked every other cjkvi host of `𧴪`: none of them are Heisig
+frames or already-registered rows here, unlike `𫩠`'s 7-host "outhouse"
+group last chunk). Replaced `貝,金,尚` → `金,小,貝`.
+
+### 蝋 (wax) — reused 猟's own already-established `鼡` split, no new registration
+
+cjkvi: `蝋 ⿰虫鼡`, `鼡 ⿱𭕄𠂡`. `𭕄` is already `prim-owl` ("owl crown", the
+Ext-B unrenderable primitive with its own PNG). `𠂡` (`⿵几⿻二丨`) isn't
+registered and doesn't render reliably in this font stack, but this project
+already has a live, phantom-clean precedent for exactly this shape: `rtk2090`
+猟 ("game-hunting", cjkvi `⿰犭鼡` — the *same* `鼡` component) already spells
+it `犭,𭕄,用,几` and audits clean. Rendered `鼡`/`用`/`几` side by side
+(`render_glyphs.py 鼡 用 几`) to sanity-check that `用,几` is a plausible
+stand-in for `𠂡`'s box-plus-legs shape before trusting the precedent — it
+is (几's splayed legs visibly match the bottom of 鼡; 用's box-with-crossbars
+sits where 𠂡's enclosed 二/丨 would be) — but the real justification is that
+`猟` already made this call and it's held up clean since. Matched `蝋`'s
+order to `猟`'s: replaced `｜,一,尚,虫,用,几` (the `｜,一` was pure noise, not
+even a mismatched real shape) → `虫,𭕄,用,几`.
+
+### 隠 (conceal) — `阝,爪,⺕,心`, reused 穏's own established split
+
+cjkvi: `隠 ⿰阝𢚩`, `𢚩 ⿱𪺍心`, `𪺍 ⿱爫⿻コ一`. CSV components for frame 1410:
+`pinnacle; parthenon; acropolis; hideaway; claw; vulture; broom; heart` — 8
+tokens for 4 real shapes once the synonym-bundling above is accounted for:
+`pinnacle`/`parthenon`/`acropolis` are already registered together as
+aliases on `kangxi170` (阝, "leftside beta"), so `hideaway` is a 4th
+Heisig-edition synonym for the same mound radical, not a separate shape;
+`claw`/`vulture` are `rtk784`'s existing alias pair (爪); `broom` is either
+`prim-broom` (彐) or `prim-rake` (⺕); `heart` is 心. Rather than guess which
+broom variant, checked `rtk1230` 穏 ("calm", `⺕,禾,心,爪`) — it shares the
+exact same `𢚩` component (cjkvi doesn't list 穏 directly but its keyword and
+CSV both point at the same top-right shape as 隠's) and already spells it
+`爪` + `⺕` + `心` with 0 phantom flags, so reused that split verbatim rather
+than inventing a fourth version. This also meant normalizing 隠's own `ノ`
+(a bare stroke, presumably an old stand-in for claw) to the full `爪` 穏
+already uses, for the same shape — consistency across the two hosts, not
+just phantom-clearing. Replaced `ノ,⺕,尚,心,阝` → `阝,爪,⺕,心`.
+
+### Verified
+
+Rebuilt `kanji.db` clean from source. `rtk.py detail` on all 4 touched ids
+shows the new parts and no more `尚`; `audit_phantom_parts.py --term esteem`
+(尚's own keyword) now returns 0 hosts, down from the 4 this chunk started
+with (the other 4 of the original 8 were the fourth chunk's). One pin
+needed correcting: `test_regression_fixes.py`'s `rtk2087` entry expected
+`rtk196` (尚) as a part; replaced with `rtk110` (小) with a comment
+explaining the cjkvi/CSV basis, same pattern as every other pin fix this
+audit has done. 1316 checks, only the 4 known hanzi-scope non-issues. 66
+pytest. `audit_overflatten.py` 0, `audit_self_reference.py` 0,
+`audit_radicals.py` 0/0, `audit_primary_choice.py` 0. Phantom parts:
+full-range 305→301 across 212→209 kanji (all 4 fixed hosts, 1 phantom each);
+`--in-csv-range` 146→143 across 102→99 (当/隠/鎖 are ≤frame 2200, 蝋 at frame
+2727 is not, matching the 3-of-4 drop). Frontend `npm install` (no
+`node_modules` in this fresh container either), `npm run lint` and `npm run
+build` both clean.
+
+No new primitives registered this chunk (unlike the fourth chunk's
+`prim-outhouse`) — all four fixes resolved to shapes already present in the
+database, either as plain kanji (⺌, 小, 爪) or as an established multi-part
+precedent on a sibling host (蝋 reusing 猟's `鼡` split, 隠 reusing 穏's `𢚩`
+split). No `make_primitive_images.py` run needed as a result — nothing
+changed under `primitive_images/`.
+
+**Next**: the `尚`-hosts thread that ran across three chunks today and
+yesterday is now fully closed — `audit_phantom_parts.py --term esteem`
+confirms 0. Two backlog items are next in line, per the fourth chunk's own
+notes: `suggest_heisig_aliases.py --near 0.8 --all` (~236 unsearchable
+Heisig names, flat tail — 0 names with 20+ hosts, so pick from `--near`
+rather than by host count) and `kangxi58` holding 彑 where
+`CJKRadicals.txt` says radical 58 is 彐 (a rename, so every pin referencing
+`kangxi58` moves with it — budget for that ripple, not just the id swap).
+The stroke-primitive tail of `audit_phantom_parts.py`'s full list (ノ/一/｜
+on hosts with no alternative to promote — this chunk's own `蝋` had exactly
+this shape as noise before the real fix) is the other standing pile; still
+not started, still needs each host looked at individually rather than in
+bulk. The past-frame-2200 CSV-blind-spot note from the third/fourth chunk
+(everything past `rtk2200` has no `heisig-kanjis.csv` row to score against)
+is unchanged and still just a note, not a decision. `sync_system_data.py`
+against the live server is still not something this session can do (no
+server access) — a deployer still needs to run it, and as of this chunk
+there's nothing new queued for it beyond what the fourth chunk already
+flagged (this chunk registered no new primitives, so no new `image_url`
+values to propagate).

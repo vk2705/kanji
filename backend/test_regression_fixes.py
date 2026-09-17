@@ -287,7 +287,10 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1049": {"character": "側", "keyword": "side",
                 "expected_part_ids": {"kangxi9", "rtk92"}},  # 亻 + 則 (person radical added 2026-09-05)
     "rtk2087": {"character": "鎖", "keyword": "chain",
-                "expected_part_ids": {"rtk56", "rtk287", "rtk196"}},
+                # cjkvi: 鎖 = ⿰金𧴪, 𧴪 = ⿱小貝 -- 金("metal")+小("small")+貝("shellfish"),
+                # matching the CSV components column. rtk196 (尚) was a phantom part
+                # fixed 2026-09-17 (the 隠/鎖/蝋/当 尚-hosts chunk); rtk110 is 小.
+                "expected_part_ids": {"rtk56", "rtk287", "rtk110"}},
     "rtk1909": {"character": "遺", "keyword": "bequeath",
                 "expected_part_ids": {"rtk1908", "kangxi162"}},
     "rtk407": {"character": "政", "keyword": "politics",
