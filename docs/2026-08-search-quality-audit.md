@@ -11427,3 +11427,162 @@ aliases, `armour` and `roots`) from this chunk. Also worth a future look:
 this container coming up in a detached-HEAD state on `master` (fixed
 easily this time, but worth remembering as a possible recurring
 environment quirk alongside the missing venv/node_modules/fonts/ids.txt).
+
+## 2026-09-18 (twenty-second chunk) — `receipt` resolves for 4 of 5 CSV
+hosts via a new primitive; `卵` deliberately left open
+
+Second firing today (the twenty-first chunk landed ~5 minutes before this
+one started — same date, apparently a second scheduled run). Fresh
+container again: no `venv/`, no `node_modules/`, no CJK fonts, no
+`/tmp/ids.txt`, and local `master` was again in a detached-HEAD state,
+this time already sitting on the same commit as `origin/master` (34
+commits ahead of the previous container's stale ref) — `git checkout
+master && git merge --ff-only origin/master` was a true no-op fast-forward
+this time, then `git push --dry-run origin master` confirmed clean before
+touching anything, per the standing container-recovery drill. Rebuilt
+venv/node_modules/fonts/ids.txt from scratch as usual.
+
+Picked up the twenty-first chunk's own "Next": `receipt` (5 hosts:
+卵柳瑠留貿, "nothing common to every host — likely a missing row").
+
+### Investigation
+
+`heisig-kanjis.csv` components for the 5 hosts:
+- 柳(1525,willow): tree; wood; blown eggs; sign of the hare; receipt; stamp
+- 卵(1526,egg,itself): sign of the hare; receipt; stamp; drops
+- 留(1527,detain): receipt; sword; dagger; rice field; brains
+- 瑠(1528,marine blue): king; jewel; ball; detain; receipt; dagger; sword;
+  rice field; brains
+- 貿(1529,trade): receipt; sword; dagger; shellfish; clam; oyster; eye;
+  animal legs; eight
+
+`data.txt` before this chunk:
+```
+rtk1525:柳:willow:卯,木
+rtk1526:卵:egg:ノ,卜,丶,卩
+rtk1527:留:detain:田,刀,厶
+rtk1528:瑠:lapis lazuli:王,留
+rtk1529:貿:trade:貝,刀,厶
+```
+`data_from_pdf.txt` (the 4th-edition-derived source `data.txt` overrides)
+had, for the same three frames: `卵:egg:receipt,stamp`,
+`留:detain:receipt,dagger,rice field`, `貿:trade:receipt,dagger,shells` —
+i.e. the *original* import already carried "receipt" as a literal part
+name for all three, and whatever hand-edit produced the current
+`data.txt` lines silently dropped it, replacing it with `厶` in 留/貿 and
+with a 4-stroke flatten in 卵.
+
+`/tmp/ids.txt` (cjkvi-ids): `卯 = ⿰𠂎卩`, `留 = ⿱⿰③刀田`,
+`貿 = ⿱⿰③刀貝`, `卵 = ⿰𠂑卪`. The `③` in 留/貿 is cjkvi's own
+stroke-count placeholder for a shape it doesn't index by name — same
+"cjkvi can't see this one" gap the previous `genie`/存/在 chunk hit — so
+`audit_phantom_parts.py`'s cjkvi-reachability check couldn't flag the `厶`
+substitution; `heisig-kanjis.csv`'s own component lists could, though
+(neither 留 nor 貿 ever names "cocoon" — both name "receipt" instead).
+
+Rendered `厶`, `𠂎`, `卯`, `留`, `貿`, `𠂑`, `卩`, `卪` (`render_glyphs.py`,
+cropped with Pillow for a closer look). `厶` is a two-stroke open wedge
+with nothing resembling a hook — nothing like the shape in 留/貿's top-left
+corner. `𠂎` (the codepoint cjkvi gives for 卯's own left half) renders as
+exactly that hooked 3-stroke shape, matching 卯's, 留's, and 貿's top-left
+corners at a side-by-side zoom — confirms the `厶` in the current `留`/`貿`
+lines was a wrong lookalike substitution, not a defensible reading, and
+confirms `𠂎` is the right codepoint to register it under (not just "close
+enough" — cjkvi already names it this for 卯, an existing host in the same
+family). `卯`'s own line (`卩` alone) was additionally missing this stroke
+group entirely, not just mislabelling it — a separate small bug this
+chunk's fix also closes.
+
+`卵` needed its own check since it visually looks like `卯` plus something
+extra. Rendered `卯` and `卵` zoomed side by side: the extra material is in
+the *right-hand* box, not the left hook — `卯`'s right side is plain `卩`
+(kangxi26, already aliased "stamp"), `卵`'s right side has a diagonal
+stroke through the box that `卩` doesn't have. `/tmp/ids.txt` confirms with
+an entirely different codepoint pair for `卵` (`⿰𠂑卪`, both distinct from
+`卯`'s `⿰𠂎卩`) — rendering `𠂎` vs `𠂑` and `卩` vs `卪` side by side shows
+`𠂑`/`卪` each carry one genuine extra diagonal stroke their `卯`-side
+counterparts lack. So `卵`'s existing 4-stroke flattened split isn't the
+same kind of clear-cut wrong-substitution `留`/`貿`'s `厶` was — forcing it
+onto `prim-receipt`/`卩` (or inventing a second, unverified "receipt"
+primitive for `𠂑`) on "looks similar" alone would repeat the opposite
+mistake this project has also made before (collapsing two really-different
+shapes together). Left `卵` untouched.
+
+### Change
+
+Registered a new primitive and fixed the three hosts that render evidence
+clearly supports:
+```
+rtk2199:卯:sign of the hare or rabbit:prim-receipt,卩
+rtk1527:留:detain:刀,田,prim-receipt
+rtk1529:貿:trade:prim-receipt,刀,貝
+...
+prim-receipt:𠂎:receipt
+```
+`柳` (`卯,木`) and `瑠` (`王,留`) needed no edit — both already reference
+`卯`/`留` literally as whole units, so "receipt" reaches them transitively
+once `卯`/`留` carry it directly, matching how the CSV lists "receipt" for
+`柳` alongside "sign of the hare" (`卯` itself) rather than as a literal
+top-level part of `柳`'s own mnemonic.
+
+### Verified
+
+Rebuilt `kanji.db` clean from source (3000 CSV-sourced kanji rows, 3088
+parts overrides — unchanged totals; one new primitive row plus three
+edited parts lines, no CSV-sourced row count change).
+`test_regression_fixes.py`: 1321 checks, only the 4 known hanzi-scope
+non-issues, no pin breakage (`rtk1528`'s existing pin only checks it
+references `rtk1527`/`rtk271` directly, unaffected by `rtk1527`'s own
+parts changing). 66 pytest. `audit_overflatten.py` 0, `audit_self_reference.py`
+0, `audit_radicals.py` 0/0, `audit_primary_choice.py` 1 (unchanged `rtk265`
+deviation, untouched by this chunk).
+
+`audit_phantom_parts.py --in-csv-range`: **127/89** (down from 129/91) —
+the two `厶` phantom flags on 留/貿 (real primitive, but neither cjkvi nor
+the CSV baseline ever named "cocoon" for either host) are gone now that
+both list `prim-receipt` instead. `audit_csv_regressions.py`: 1235 flagged
+kanji, unchanged in total (confirmed by re-running and checking each
+touched host directly, not just the count) — `rtk2199`/`rtk1525` drop off
+the flagged list entirely (both now fully covered); `rtk1527`/`rtk1529`
+remain flagged but only for pre-existing, unrelated gaps ("dagger" doesn't
+resolve as an alias for `刀` yet, "clam"/"oyster" for `貝` — neither is
+`receipt` any longer, confirmed by reading each entry's own `dropped:`
+line before and after); `rtk1528`/`瑠` similarly stays flagged only for
+"jewel"/"ball"/"dagger", not `receipt`. `rtk1526`/`卵` remains flagged for
+both "sign of the hare" and "receipt", as expected since it was
+deliberately left untouched.
+
+Directly queried `search_by_parts(['receipt'], depth=1)`: returns
+`prim-receipt rtk1527 rtk1529 rtk2199` (self plus the three directly-fixed
+hosts, no more no less). `depth=2` adds `rtk1525` (柳, via 卯), `rtk1528`
+(瑠, via 留), plus two unrelated pre-existing hosts that already literally
+contain 卯/留 (`rtk2415`/溜 "cumulation", `rtk2513`/昴) — no false
+positives, all real literal-`卯`/`留` hosts. `suggest_heisig_aliases.py
+--near 0.8 --all`: `receipt` group gone (31 → 30 unresolved groups).
+Frontend `npm install`, `npm run lint`, `npm run build` all clean.
+
+**Next**: `receipt` closed for 4 of its 5 CSV-cited hosts (`卯`/`留`/`貿`
+directly, `柳`/`瑠` transitively); `卵`'s own right-hand `卪`-vs-`卩`
+question (does Heisig's "stamp" name for `卵`'s half mean the same
+database row as kangxi26's "stamp", or a distinct one worth its own
+primitive row?) is recorded above for whoever picks it up, not folded into
+this verdict. `cornucopia` (5 hosts: e.g. 卑収叫碑糾, "nothing common to
+every host — likely a missing row") is now the top-ranked group in that
+bucket and is entirely unstarted; `gnats` (4 hosts) is next after it.
+`chop-seal, hanko` (14 hosts) and `hairpin, safety-pin` (12 hosts) remain
+the top two by host count but are still the same weak
+single-common-primitive signal shape flagged as unpromising in multiple
+prior chunks. `stick`'s collision with `rtk60`'s unrelated "post a bill"
+alias is still an open minor oddity. `audit_phantom_parts.py`'s 127/89
+pile (led by bare stroke primitives ノ/一/｜ with no alternative host to
+promote from) remains the larger standing item if the `--near` queue runs
+dry. `sync_system_data.py` against the live server is still not something
+this session can do — a deployer running it will see one new `kanji` row
+(`prim-receipt`) and its one alias/keyword ("receipt"), plus three changed
+`parts` rows (`rtk1527`/`rtk1529`/`rtk2199`) from this chunk. Also: this is
+the second firing today, ~5 minutes after the last one finished and
+pushed — worth a note for whoever reviews the scheduler, since "one
+bounded chunk per firing" compounds if firings double up on the same day;
+no action taken here beyond flagging it, since the standing brief grants
+full autonomy for routine work and today's second chunk is well-evidenced
+and independently verified same as the first.

@@ -1577,9 +1577,9 @@ rtk1523:苑:garden:夗,艹
 rtk1524:怨:grudge:夗,心
 rtk1525:柳:willow:卯,木
 rtk1526:卵:egg:ノ,卜,丶,卩
-rtk1527:留:detain:田,刀,厶
+rtk1527:留:detain:刀,田,prim-receipt
 rtk1528:瑠:lapis lazuli:王,留
-rtk1529:貿:trade:貝,刀,厶
+rtk1529:貿:trade:prim-receipt,刀,貝
 rtk1530:印:stamp:｜,卩
 rtk1531:臼:mortar:
 rtk1532:毀:break:土,殳,臼
@@ -2249,7 +2249,7 @@ rtk2195:潟:lagoon:臼,水,勹,灬
 rtk2196:丹:rust-colored:ノ,一,丶,亅
 rtk2197:丑:sign of the ox or cow:｜,ノ,一
 rtk2198:羞:feel ashamed:ノ,ヨ,羊
-rtk2199:卯:sign of the hare or rabbit:卩
+rtk2199:卯:sign of the hare or rabbit:prim-receipt,卩
 rtk2200:巳:sign of the snake or serpent:
 rtk2201:此:this:止,匕
 rtk2202:柴:brush:木,此
@@ -3558,4 +3558,58 @@ kangxi145:衤:cloak
 # breaking every other 人 host) or finds a different resolution. Not
 # reverting the "walking cane" alias itself -- that part is unaffected
 # and still closes cleanly (verified below).
+
+# --- 2026-09-18 (twenty-second chunk): "receipt" (5 CSV hosts:
+# 柳卵瑠留貿) -- 4 of 5 resolved via one new primitive (卯/留/貿 directly,
+# 柳/瑠 transitively through them); 卵 deliberately left open.
+# render_glyphs.py on 卯/留/貿's shared top-left stroke group
+# confirmed it is one consistent 3-stroke hook shape (U+2008E, 𠂎, the
+# same codepoint cjkvi-ids already gives for 卯's own left half in
+# ⿰𠂎卩) -- and NOT 厶 (cocoon, kangxi28), which data.txt's existing
+# 留/貿 lines had substituted for it (`田,刀,厶` / `貝,刀,厶`). Rendered
+# 厶 side by side: it is a completely different two-stroke wedge with an
+# open bottom, no resemblance to the hooked 𠂎 shape at any zoom level --
+# this was a wrong lookalike-codepoint substitution, the exact mistake
+# class this project's audit keeps having to undo, just not one flagged
+# by any existing audit script (cjkvi's own IDS for 留/貿 spells this
+# corner as a bare "③" stroke-count placeholder, not a named child, so
+# audit_phantom_parts.py's cjkvi-reachability check can't see the swap;
+# heisig-kanjis.csv corroborates directly instead -- 留 and 貿's own CSV
+# component lists both name "receipt" and never once name "cocoon").
+# data_from_pdf.txt's original (pre-override) lines for 卵/留/貿 already
+# spelled these as "receipt,stamp" / "receipt,dagger,rice field" /
+# "receipt,dagger,shells" -- data.txt's override didn't just fail to
+# register "receipt", it silently replaced a correct PDF-sourced reading
+# with a wrong one.
+#
+# Registered prim-receipt = 𠂎 and fixed 卯 (rtk2199, `卩` ->
+# `prim-receipt,卩`, its own decomposition was missing this stroke
+# group entirely, not just mislabelling it) and 留/貿 (`厶` ->
+# `prim-receipt`). 柳 (rtk1525: `卯,木`, unchanged) and 瑠 (rtk1528:
+# `王,留`, unchanged) both already reference 卯/留 literally as whole
+# units, so "receipt" reaches them at depth 2 without any edit -- exactly
+# matching how Heisig's own CSV lists "receipt" for 柳 alongside "sign of
+# the hare" (=卯 itself), i.e. as the fully-expanded union of 卯's own
+# components, not a literal top-level part of 柳's mnemonic.
+#
+# 卵 (rtk1526, `ノ,卜,丶,卩`) deliberately left untouched. Its CSV
+# components list both "receipt" and "stamp", and it visually looks like
+# 卯 with an extra stroke -- but rendering 卵 zoomed against 卯 shows the
+# extra stroke sits inside the RIGHT-hand box, not the left hook: 卯's
+# right half is plain 卩 (kangxi26, already "stamp"), 卵's right half has
+# a diagonal stroke through the box that 卩 doesn't have. cjkvi-ids
+# confirms with a different pair of codepoints entirely for 卵
+# (⿰𠂑卪, both distinct from 卯's ⿰𠂎卩) -- rendering 𠂎 vs 𠂑 and 卩 vs
+# 卪 side by side shows 𠂑/卪 each carry one extra diagonal stroke their
+# 卯-side counterparts lack, a real stroke-count difference, not a font
+# rendering artifact. So 卵's existing 4-stroke flattened split isn't
+# obviously wrong the way 留/貿's 厶 substitution was, but forcing it
+# onto prim-receipt/卩 (or inventing a second "receipt" primitive for
+# 𠂑) without a clearer signal than "looks similar" would repeat the
+# opposite mistake this project has also made before (collapsing two
+# really-different shapes together). Left for a future chunk with
+# budget to determine whether Heisig's "stamp" name for 卵's right half
+# is meant to be the same database row as kangxi26's "stamp" (which
+# would make 卩/卪 a mnemonic-role pair like 龶/丰) or a separate one.
+prim-receipt:𠂎:receipt
 
