@@ -3171,7 +3171,7 @@ prim-calling-card:氐:calling card:氏,一
 # name shares exactly this glyph) and by rendering it beside real hosts. Four of
 # the five are supplementary-plane codepoints no common font draws, which is what
 # had blocked registering them — make_primitive_images.py renders each a picture.
-prim-reclining:𠂉:reclining,lying down,pantomime horse:ノ,一
+prim-reclining:𠂉:reclining,lying down,pantomime horse,sign of the horse:ノ,一
 prim-scarf:𧘇:scarf:
 prim-sheaf:㐅:sheaf:
 prim-by-ones-side:𠂇:by one's side,by one’s side:ノ,一
