@@ -2732,8 +2732,12 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"rtk1431", "rtk2189"}},
     "rtk1610": {"character": "頓", "keyword": "immediate",
                "expected_part_ids": {"rtk2189", "rtk64"}},
+    # Was spelling its shared "cornucopia" component (丩, CSV-cited on
+    # 叫/糾/収/卑/碑) as raw strokes prim-pipe+rtk10 (｜+十) -- render_glyphs.py
+    # confirms 丩's curled-hook shape renders identically as 糾's right half,
+    # matching cjkvi-ids' 糾=⿰糸丩 -- 2026-09-18, suggest_heisig_aliases.py
     "rtk1627": {"character": "糾", "keyword": "twist",
-               "expected_part_ids": {"prim-pipe", "rtk10", "rtk1431"}},
+               "expected_part_ids": {"prim-cornucopia", "rtk1431"}},
     # 素 and 潔 used to pin 亠+土+二 — three parts spelling out one shape that
     # nothing in the glyph actually draws separately. Heisig names that shape
     # "grow up" in 36 CSV rows and this project had no row for it at all until

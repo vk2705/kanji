@@ -11586,3 +11586,159 @@ bounded chunk per firing" compounds if firings double up on the same day;
 no action taken here beyond flagging it, since the standing brief grants
 full autonomy for routine work and today's second chunk is well-evidenced
 and independently verified same as the first.
+
+## 2026-09-18 (twenty-third chunk) — `cornucopia` resolves for 3 of 5 CSV
+hosts via a new primitive; `卑`/`碑` deliberately left open
+
+Third firing today. Fresh container again: no `venv/`, no `node_modules/`,
+no CJK fonts, no `/tmp/ids.txt`. This time `master` was in a detached-HEAD
+state sitting on the exact commit `origin/master` was already at (no
+divergence at all — the previous two chunks today had already landed) —
+`git checkout master && git merge --ff-only origin/master` was a true
+no-op, then `git push --dry-run origin master` confirmed clean before any
+work, per the standing container-recovery drill. Rebuilt
+venv/node_modules/fonts/ids.txt from scratch as usual.
+
+Picked up the twenty-second chunk's own "Next": `cornucopia` (5 hosts:
+叫収収卑碑 per the suggestion tool's example list; resolved via
+`heisig-kanjis.csv` lookup to 叫(rtk1626)/糾(rtk1627)/収(rtk1628)/
+卑(rtk1629)/碑(rtk1630) — "nothing common to every host — likely a
+missing row").
+
+### Investigation
+
+`heisig-kanjis.csv` components for the 5 hosts:
+- 叫(1626,shout): mouth; cornucopia
+- 糾(1627,twist): thread; spiderman; cornucopia
+- 収(1628,income): cornucopia; crotch
+- 卑(1629,lowly,itself): Wayne Slob; drop; rice field; brains; cornucopia;
+  ten; needle
+- 碑(1630,tombstone): stone; rock; lowly; Wayne Slob; drop; rice field;
+  brains; cornucopia; ten; needle
+
+`data.txt` before this chunk:
+```
+rtk1626:叫:shout:｜,口,十
+rtk1627:糾:twist:｜,糸,十
+rtk1628:収:income:｜,又
+rtk1629:卑:lowly:十,田
+rtk1630:碑:tombstone:卑,石
+```
+碑 already spells 卑 literally, so `cornucopia` would reach it transitively
+once 卑 carries it directly — same as 柳/瑠 inheriting `receipt` via 卯/留
+last chunk. That leaves 叫/糾/収/卑 as the four rows needing an actual fix.
+
+`/tmp/ids.txt` (cjkvi-ids): `叫 = ⿰口丩`, `糾 = ⿰糸丩`, `収 = ⿰丩又`,
+`卑 = ⿻白丿十` (an overlay, not a clean split). Three of the four
+directly share `丩` (U+4E29) as a literal named component; `卑`'s own IDS
+names no `丩` at all. `audit_phantom_parts.py` already independently
+flagged the same wrong split from a different angle: `叫`/`糾` each
+carried a phantom `十` (→`rtk10`) neither cjkvi nor the CSV's own concept
+list for those two rows ever names, and all three of `叫`/`糾`/`収`
+carried `｜` (→`prim-pipe`) standing in for `丩`.
+
+Rendered `卑 白 田 十 丩 叫 糾 収 又 口 糸 石 碑` side by side
+(`render_glyphs.py ... --out`, cropped with Pillow for close comparison).
+`丩` renders as a distinctive curled-hook shape (a vertical stroke curving
+into a hook, crossed by a diagonal) — that exact shape appears, pixel-for-
+pixel identical at this font size, as the right half of `叫`, the right
+half of `糾`, and the left half of `収`. Confirms the prior `｜`(+`十`)
+split was a wrong raw-stroke flattening of one real, nameable shape, not a
+defensible reading — the same "resolved but misleads" class this audit
+keeps finding, just via literal stroke names this time instead of a
+lookalike codepoint. `丩` is not one of the 214 Kangxi radicals (absent
+from `CJKRadicals.txt`), so per the `data.txt` id convention this needed a
+`prim-{slug}` id, not `kangxi{n}`.
+
+`卑` needed its own check since "cornucopia" is CSV-cited there too, and
+because a lazy "the CSV says so, force it in" edit here would repeat the
+opposite mistake (collapsing two really-different shapes together) this
+audit has also made before. Rendered `卑` next to `丩` directly: `卑`'s
+overall shape — a `白`-like box on top whose left stroke runs straight
+down through a crossing horizontal near the bottom — shows no trace of
+`丩`'s curl/hook anywhere. This matches cjkvi's `⿻白丿十` overlay reading
+(白 overlaid with 丿 and 十, no 丩 component at all) and rules out forcing
+`丩` onto `卑`'s decomposition. Heisig evidently uses "cornucopia" as a
+mnemonic label for some part of `卑`'s own overlay-shape that just isn't
+this codepoint — the same mnemonic-role-vs-glyph split CLAUDE.md already
+documents for 龶/丰, 戌/戍, 母/毋, ⺕/彐. `卑`'s current `十,田` split is
+also visibly wrong on its own terms (no full `田` box appears anywhere in
+`卑`'s render, only a `白`-like partial box), but untangling what `卑`'s
+real ⿻-overlay decomposition should be is a separate, unstarted problem
+from `cornucopia` itself and was left alone rather than guessed at under
+this chunk's budget.
+
+### Change
+
+Registered a new primitive and fixed the three hosts the render clearly
+supports:
+```
+prim-cornucopia:丩:cornucopia
+rtk1626:叫:shout:口,prim-cornucopia
+rtk1627:糾:twist:糸,prim-cornucopia
+rtk1628:収:income:prim-cornucopia,又
+```
+`卑`/`碑` untouched, with the render evidence above recorded so the next
+chunk doesn't re-derive it from scratch.
+
+Corrected the one regression pin this exposed: `test_regression_fixes.py`
+pinned `rtk1627`'s old `{"prim-pipe", "rtk10", "rtk1431"}` split. Updated
+in place to `{"prim-cornucopia", "rtk1431"}` with a comment recording why
+the new value is right (render + cjkvi evidence, not just "the audit
+found something").
+
+### Verified
+
+Rebuilt `kanji.db` clean from source (3000 CSV-sourced kanji rows, 3088
+parts overrides — unchanged totals; one new primitive row plus three
+edited parts lines, no CSV-sourced row count change).
+`test_regression_fixes.py`: first run surfaced the `rtk1627` pin mismatch
+above (5 problems instead of the usual 4); after correcting the pin,
+1321 checks, only the 4 known hanzi-scope non-issues, no other pin
+breakage. 66 pytest. `audit_overflatten.py` 0, `audit_self_reference.py`
+0, `audit_radicals.py` 0/0, `audit_primary_choice.py` 1 (unchanged `rtk265`
+deviation, untouched by this chunk).
+
+`audit_phantom_parts.py --in-csv-range`: **122/86** (down from 127/89) —
+all 5 phantom flags on `叫`/`糾`/`収` (two each on `叫`/`糾` for `｜`+`十`,
+one on `収` for `｜`) are gone now that all three reference
+`prim-cornucopia` instead. `audit_csv_regressions.py`: 1235 flagged kanji,
+unchanged in total (confirmed by full before/after diff) — `rtk1626`/
+`rtk1627`/`rtk1628` drop off the flagged list entirely (all three now
+fully covered, no other CSV concept left dangling on any of them);
+`rtk1629`/`rtk1630` (卑/碑) remain flagged, expected since neither was
+touched.
+
+Directly queried `search_by_parts(['cornucopia'], depth=1)`: returns
+`prim-cornucopia rtk1626 rtk1627 rtk1628` (self plus exactly the three
+fixed hosts, no more no less). `depth=2` identical — no host needed
+recursion to reach it, confirming no false positives. `suggest_heisig_
+aliases.py --near 0.8 --all`: `cornucopia` group gone (30 → 29 unresolved
+groups). Frontend `npm install`, `npm run lint`, `npm run build` all
+clean.
+
+**Next**: `cornucopia` closed for 3 of its 5 CSV-cited hosts (`叫`/`糾`/
+`収`); `卑`'s real `⿻白丿十` overlay decomposition (and by extension
+`碑`, which only inherits from it) is recorded above as its own open
+problem for a future chunk — the current `十,田` split is already known
+wrong on render grounds (no `田` box actually appears in `卑`), not just
+missing `cornucopia`, so this is worth more than a one-line alias fix.
+`cornstalk` (5 hosts, every host contains 二/｜/一 at 1.00 — a real shared
+signal, unlike the "nothing common" groups) is now the top-ranked
+unstarted group by the `--near 0.8` overlap heuristic; `cabers, fenceposts`
+(5 hosts, sharing 文/乂/亠/丶 at 0.80) is a similar shape. `chop-seal,
+hanko` (14 hosts) and `hairpin, safety-pin` (12 hosts) remain the top two
+by host count but are still the same weak single-common-primitive signal
+flagged as unpromising in multiple prior chunks. `stick`'s collision with
+`rtk60`'s unrelated "post a bill" alias is still an open minor oddity.
+`audit_phantom_parts.py`'s 122/86 pile (led by bare stroke primitives
+ノ/一/｜ with no alternative host to promote from) remains the larger
+standing item if the `--near` queue runs dry. `sync_system_data.py`
+against the live server is still not something this session can do — a
+deployer running it will see one new `kanji` row (`prim-cornucopia`) and
+its one alias/keyword ("cornucopia"), plus three changed `parts` rows
+(`rtk1626`/`rtk1627`/`rtk1628`) from this chunk. Also: this is the third
+firing today (following the twenty-first and twenty-second chunks above,
+each independently evidenced and verified) — same scheduler-doubling note
+as the previous chunk applies, now tripled; still no action taken beyond
+flagging it again, per the standing full-autonomy brief.

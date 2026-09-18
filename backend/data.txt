@@ -1676,9 +1676,9 @@ rtk1622:幸:happiness:亠,辛
 rtk1623:執:tenacious:幸,丸
 rtk1624:摯:gift:ノ,九,手,丶,辛;執,手
 rtk1625:報:report:幸,卩,又
-rtk1626:叫:shout:｜,口,十
-rtk1627:糾:twist:｜,糸,十
-rtk1628:収:income:｜,又
+rtk1626:叫:shout:口,prim-cornucopia
+rtk1627:糾:twist:糸,prim-cornucopia
+rtk1628:収:income:prim-cornucopia,又
 rtk1629:卑:lowly:十,田
 rtk1630:碑:tombstone:卑,石
 rtk1631:陸:land:坴,阝
@@ -3612,4 +3612,23 @@ kangxi145:衤:cloak
 # is meant to be the same database row as kangxi26's "stamp" (which
 # would make 卩/卪 a mnemonic-role pair like 龶/丰) or a separate one.
 prim-receipt:𠂎:receipt
+
+# cornucopia: heisig-kanjis.csv names "cornucopia" as a shared component of
+# 叫/糾/収/卑/碑. cjkvi-ids (/tmp/ids.txt) gives 叫=⿰口丩, 糾=⿰糸丩,
+# 収=⿰丩又 — all three literally share 丩 (U+4E29). The prior data.txt
+# split it into raw strokes (｜ plus a spurious 十 on 叫/糾) instead of
+# naming it; render_glyphs.py confirms 丩's curled-hook shape renders
+# identically as the right half of 叫, the right half of 糾, and the left
+# half of 収. Not one of the 214 Kangxi radicals (absent from
+# CJKRadicals.txt), hence prim- rather than kangxi{n}.
+# 卑/碑 deliberately NOT resolved to this primitive: cjkvi gives 卑 as
+# ⿻白丿十 (白 overlaid with 丿 and 十, no 丩 anywhere), and a render of 卑
+# next to 丩 shows no trace of 丩's hook/curl in 卑's shape at all — Heisig
+# apparently uses "cornucopia" as a mnemonic label for a different part of
+# 卑's own overlay-shape, not for this codepoint (same
+# mnemonic-role-not-glyph trap CLAUDE.md warns about, e.g. 龶/丰). Left 卑
+# (and 碑, which only inherits from 卑) open for a future chunk with
+# render budget to work out what 卑's own ⿻白丿十 overlay should really be
+# split into.
+prim-cornucopia:丩:cornucopia
 
