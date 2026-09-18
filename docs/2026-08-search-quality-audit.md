@@ -9688,3 +9688,95 @@ the next `suggest_heisig_aliases`/`audit_csv_regressions` pass touches 缶's
 neighborhood again). `sync_system_data.py` against the live server is still
 not something this session can do — a deployer running it will see one new
 `aliases: added` pair (`prim-winter-cow` +2) from this chunk, nothing else.
+
+---
+
+## 2026-09-18 (eighth chunk) — `缶`'s `凵,山` parts were a stale gap, not a verified override
+
+Fourth firing today. Picked up the previous chunk's own deferred item: whether
+`rtk2116` (缶, "tin can")'s existing `凵,山` parts were a deliberate override
+or a stale gap.
+
+Environment note, same shape as every recent chunk's: container had the repo
+(fast-forwardable 21 commits from local, no detached-HEAD issue once
+`git checkout master` ran) but no `venv/`, no `node_modules/`, no CJK fonts,
+no `/tmp/ids.txt`. Rebuilt all four and confirmed `git push --dry-run origin
+master` succeeded before touching anything, per the standing container-safety
+rule.
+
+### Investigation
+
+`git log -S "rtk2116:缶"` shows the line has never been touched since the
+single commit (`58c28b9`, Sep 5) that created `data.txt` wholesale from the
+pre-rewrite Perl app's data — i.e. it predates every audit session, not a
+verified call made along the way. It doesn't appear in `data_from_pdf.txt`
+either, so it isn't even attributable to the 4th-edition PDF extraction —
+just inherited, unexamined, original import data.
+
+`heisig-kanjis.csv`'s own components column for frame 2116 says `noon; sign
+of the horse; shovel` — and row 611 (frame 610, 午 itself) lists those same
+first two names as *its own* alternate names ("horse; pantomime horse; sign
+of the horse" for the "noon" row), confirming "noon"/"sign of the horse"
+here both mean 午, not two separate primitives. "shovel" already resolves to
+`kangxi17` (凵) via an existing alias registered on that row. So Heisig's own
+breakdown of 缶 is two primitives, 午 (top) + 凵 (bottom) — and the current
+`凵,山` has the right *second* part but the wrong first one: 山 (mountain)
+has no textual or structural relationship to "noon"/"sign of the horse" at
+all.
+
+cjkvi's `ids.txt` treats 缶 as atomic (`U+7F36 缶 缶`, no further IDS) — no
+structural signal either way, expected for an old radical-class shape, so
+this one had to be settled by rendering, per the standing rule.
+`render_glyphs.py 缶 午 凵 山` (`/tmp/kan2.png`) confirmed it visually: 缶's
+top is a compressed but clearly recognizable 午 (the same hooked
+vertical-through-horizontal stroke, just shorter), and its bottom is a
+two-sided open box matching 凵 (vertical left, horizontal bottom, vertical
+right, open top) — not 山's three-peaked structure, which doesn't appear
+anywhere in 缶 at all. Changed `rtk2116:缶:tin can:凵,山` to
+`rtk2116:缶:tin can:午,凵` (top-to-bottom order, matching the render).
+
+Checked `陶`(rtk2117)'s own parts (`缶,勹,阝` — tin can + bound up + pinnacle)
+for knock-on effects: CSV's components column for 陶 repeats 缶's own
+sub-names (noon/sign-of-the-horse/shovel) alongside 缶 itself, but that's CSV
+recursively flattening 缶's constituents into 陶's list, not a signal that 陶
+needs 午 as a *direct* part — 陶 already reaches "noon"/"sign of the horse"
+transitively once 缶 itself carries 午, at depth 2. Left 陶 untouched.
+
+Checked `test_regression_fixes.py` for pins on `rtk2116`'s own decomposition:
+only one hit, the `rtk2120`(鬱) pin, which checks that `rtk2116` appears as
+one of 鬱's *own* direct parts (unaffected by what rtk2116 itself decomposes
+into) — no pin needed correcting.
+
+### Verified
+
+Rebuilt `kanji.db` clean from source. 1316 checks, only the 4 known
+hanzi-scope non-issues (unaffected — this fix never touches the hanzi
+self-reference path). 66 pytest. `audit_overflatten.py` 0,
+`audit_self_reference.py` 0, `audit_radicals.py` 0/0, `audit_primary_choice.py`
+0. `audit_phantom_parts.py` unchanged at 301/209 full-range, 143/99
+`--in-csv-range` (expected — 缶's problem was a CSV-regression, not a phantom
+part, so this list was never going to move). `audit_csv_regressions.py` no
+longer flags 缶 at all (previously `dropped: noon (-> rtk610)`), confirming
+the fix closed the gap the notes flagged. Frontend `npm install`,
+`npm run lint`, and `npm run build` all clean.
+
+**Next**: the two backlog items from the sixth/seventh chunks are still
+open and still the largest identified piles: `suggest_heisig_aliases.py
+--near 0.8 --all`'s `--all` "unregistered" list (`chop-seal/hanko`, 14 hosts,
+only "one" in common — weak signal; `glass canopy`, 12 hosts, no common
+structural signal — possibly a genuinely missing primitive, worth a render
+pass; `hairpin/safety-pin`, 12 hosts, common only to ノ/一, same shape as the
+stroke-primitive backlog below); and the still-deferred `horse`-cluster
+names (`sign of the horse`/`pantomime horse` bundled by Heisig across 11
+hosts that actually split across 午/𮥶/𦈢 — see seventh chunk's writeup) whose
+`卸`(frame 1499)/`𦈢` sub-thread now has one more concrete lead: this chunk's
+render of `缶`'s own compressed-午 top is a good visual reference for judging
+whether `卸`'s `ノ` stand-in is *also* a compressed 午 or a genuinely distinct
+shape (𦈢's cjkvi IDS `⿱𠂉⿻一③` has a different top, `𠂉`, not 午's `十+𠂉`
+combination, so probably not — but this wasn't re-rendered this chunk and is
+worth confirming before promoting `ノ`→anything there). The stroke-primitive
+tail of `audit_phantom_parts.py`'s full list (ノ/一/｜ on hosts with no
+alternative to promote) is otherwise unchanged. `sync_system_data.py` against
+the live server is still not something this session can do — a deployer
+running it will see one changed `parts` row (`rtk2116`: `凵,山` → `午,凵`)
+from this chunk, nothing else.

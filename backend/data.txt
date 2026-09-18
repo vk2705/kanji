@@ -2165,7 +2165,7 @@ rtk2112:岡:mount:丷,冂,一,山
 rtk2113:鋼:steel:金,岡
 rtk2114:綱:hawser:糸,岡
 rtk2115:剛:sturdy:岡,刀
-rtk2116:缶:tin can:凵,山
+rtk2116:缶:tin can:午,凵
 rtk2117:陶:pottery:缶,勹,阝
 rtk2118:揺:swing:干,爪,凵,扌
 rtk2119:謡:song:干,言,爪,凵
