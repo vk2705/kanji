@@ -10560,3 +10560,125 @@ signal, likely not a quick win. `sync_system_data.py` against the live
 server is still not something this session can do — a deployer running
 it will see one new primitive row (`kangxi145`) and 10 changed `parts`
 rows (初袖被裕補裸裾複褐襟) from this chunk.
+
+## 2026-09-18 (fifteenth chunk) — "walking cane" closed, and a REPLACE
+proposal that looked right but wasn't
+
+Tenth firing today. Same environment drill as every chunk this cycle:
+fresh container, repo present and fast-forwarded cleanly (28 commits
+behind, no divergence), but no `venv/`, no `node_modules/`, no CJK
+fonts, no `/tmp/ids.txt` — all four rebuilt from scratch, and `git push
+--dry-run origin master` confirmed clean before touching anything.
+
+Picked up the fourteenth chunk's own "Next": `walking cane` (7 hosts:
+介垂睡角解触錘), left open by the thirteenth chunk with 3 of the 7
+(角解触) already understood to resolve elsewhere via `用`'s
+alt-decomposition, and the remaining 4 (介垂睡錘) flagged as needing
+their own check.
+
+### Investigation
+
+`heisig-kanjis.csv`'s components column: 265(介) is "umbrella; stick;
+walking cane", 1705(垂) is "drop; silage; walking cane; stick; one;
+floor" (1707/睡, 1708/錘 inherit 垂's components plus their own). 睡/錘
+both already carry literal `垂` in their own `data.txt` parts, so the
+whole 4-host question reduces to one: does 介 or 垂 itself carry a
+literal `｜`? Checked `data.txt` directly — yes to both already: 介's
+existing alt-decomposition is `ノ,人,｜`, 垂's primary is `｜,ノ,一`.
+Cross-checked against `ids.txt` (介 `⿱人⿰丿丨`, 垂 `⿳丿⑥一`) and rendered
+both large (`render_glyphs.py`, cropped/zoomed with a one-off `Pillow`
+install for closer inspection — not saved anywhere, just for this
+session's own eyes): both show a plain straight vertical stroke,
+matching the same `｜` already confirmed elsewhere in this project as
+`prim-pipe` (the 2026-08-30 由/甲/申 entry). `prim-pipe`'s existing alias
+list is "pipe, walking stick, cane, line, prim28.1" — it already covers
+this exact shape under close synonyms, just not Heisig's own two-word
+CSV phrasing. `resolve_alias`/`get_all_aliases_for_term` confirmed
+"walking cane" resolved to nothing before this chunk.
+
+### Change
+
+Added `walking cane` to `prim-pipe`'s alias list. No `data.txt` parts
+changes needed for any of the 4 hosts — both 介 and 垂 already literally
+contain `｜`, so search reachability was only ever gated by the missing
+alias text, not a missing decomposition. `角`/`解`/`触` needed nothing
+further either — the thirteenth chunk's own finding (their `walking
+cane` is `｜` inside `用`'s alt-decomposition, reached via the
+pre-existing `stick`→rtk60 ambiguity) is unaffected by this alias
+addition.
+
+**A REPLACE proposal investigated and rejected.** Adding the alias
+changed `audit_primary_choice.py`'s scoring for `rtk265`/介: its primary
+(`八,个`, Heisig's own mnemonic chunking) came back unaccounted-1/
+covered-1 against its own existing #2 alt `ノ,人,｜` (unaccounted-0/
+covered-1, from the 2026-09-13 structural-alt bulk add) — the primary
+left "walking cane" uncovered while the alt covers it, so the tool
+proposed the usual REPLACE move used for 左/右/乞. Applied it, then
+checked `audit_csv_regressions.py` before keeping it, per the
+"verify before committing" habit this audit has learned the hard way
+to apply to every step, not just the final one: swapping to `ノ,人,｜`
+as the sole decomposition drops "umbrella" from 介's own CSV-baseline
+coverage entirely, because the old primary's `个` (`prim-umbrella`) was
+the *only* thing in either chunk carrying that name — `人` alone
+doesn't resolve to "umbrella", and must not: `prim-umbrella`/个 is a
+distinct, separately-verified codepoint (the 2026-08-23 entry that
+started this whole render-driven-verification practice) already used
+as a literal part in roughly 100 other kanji, so aliasing "umbrella"
+onto bare `人` would wrongly pull every plain-人 kanji into an "umbrella"
+search. This is not the same shape as the 左/右/乞 REPLACE cases, where
+the dropped primary was pure stroke-spelling with nothing else at
+stake — here the "flattened" primary was carrying a real, otherwise-
+uncovered CSV name. `audit_primary_choice.py`'s own scoring metric
+(built from cjkvi structural reachability, not literal alias
+resolution) can't see this distinction, because cjkvi's own IDS for `个`
+is `⿱人丨` — it flattens 个 to a bare-人 root, the same root 介's own
+`⿱人⿰丿丨` uses, so the metric can't tell "介's top is genuinely the
+umbrella primitive" from "介's top structurally reduces to person" the
+way a reader relying on the CSV name can. Reverted the swap — `rtk265`
+is back to `八,个;ノ,人,｜`, byte-for-byte what it was before this
+chunk. A dated comment block in `data.txt` (above `kangxi145`, this
+chunk's own section) records this so a future chunk that reruns
+`audit_primary_choice.py` and sees this same proposal doesn't have to
+redo the investigation — and so it doesn't get applied by a future
+`--emit`-and-apply pass without rereading this reasoning first.
+
+### Verified
+
+Rebuilt `kanji.db` clean from source (3000 kanji, 3088 parts overrides,
+unchanged counts — this chunk added one alias and made, then reverted,
+one primary/alt reordering, so no net `data.txt` structural change).
+`test_regression_fixes.py`: 1321 checks, only the 4 known hanzi-scope
+non-issues, unchanged, no pin needed. 66 pytest. `audit_overflatten.py`
+0, `audit_self_reference.py` 0, `audit_radicals.py` 0/0.
+`audit_phantom_parts.py --in-csv-range`: 137/95, unchanged (matches the
+pre-chunk baseline exactly, confirming the revert left no residue).
+`audit_primary_choice.py`: **1** (not 0) — the investigated-and-rejected
+`rtk265` proposal above, left open deliberately rather than force-fit
+to 0; this is a known, permanent deviation from the "expect 0" baseline
+for the reason recorded in `data.txt`'s own comment, the same way
+`hairpin/safety-pin` permanently reappears in `suggest_heisig_aliases.py`
+because no codepoint exists for it. `audit_csv_regressions.py`:
+confirmed directly — `rtk265`/`rtk1705`/`rtk1707`/`rtk1708` no longer
+list "walking cane" as dropped (only pre-existing, separately-documented
+gaps remain: "umbrella"/"stick" for 介 via the unresolved ambiguity
+above, "drop"/"stick" for 垂/睡/錘, none of them new). Directly queried
+`search_by_parts(['walking cane'], depth=1)`: includes `rtk265` and
+`rtk1705` (both carry `｜` literally); `depth=2` additionally includes
+`rtk1707`/`rtk1708` (reached through `垂`). `suggest_heisig_aliases.py
+--near 0.8 --all` no longer lists "walking cane" at all. Frontend
+`npm install`, `npm run lint`, and `npm run build` all clean.
+
+**Next**: `walking cane` is closed (with the one documented open
+sub-question on `rtk265`'s primary choice, not expected to resolve
+until the global alias model can express a per-kanji rename — not
+attempted here since every option tried either under- or over-reaches).
+The two candidates the fourteenth chunk surfaced, still unstarted:
+`screwdriver` (7 hosts: 備庸捕浦舗蒲補 — every host contains 月 0.86/十
+1.00, and `補` is one of `cloak`'s already-resolved 10 hosts, so this
+cluster may partly resolve through inheritance once checked) and
+`tongue wagging` (8 hosts: 唱宴智書替潜音響 — every host contains 日
+1.00). `chop-seal/hanko` (14 hosts) remains flagged repeatedly as a
+weak signal, likely not a quick win. `sync_system_data.py` against the
+live server is still not something this session can do — a deployer
+running it will see one changed `aliases` row (`prim-pipe` +1, "walking
+cane") from this chunk; no `parts` rows changed.

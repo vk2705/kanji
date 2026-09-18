@@ -1,4 +1,4 @@
-prim-pipe:｜:pipe, walking stick, cane, line, prim28.1
+prim-pipe:｜:pipe, walking stick, cane, line, walking cane, prim28.1
 prim-jawbone:咼:jawbone:口,冂
 prim-dollar-sign:弗:dollar sign:弓,｜
 prim-snare:丂:snare:一,勹
@@ -3448,4 +3448,54 @@ prim-scrapbook:𠕁:scrapbook,glass canopy
 # reconciles -- 水/氵 was never flagged by any audit script or CSV
 # mismatch the way 衣/衤 just was).
 kangxi145:衤:cloak
+
+# --- 2026-09-18 (fifteenth chunk): "walking cane" (7 hosts) closed --
+# heisig-kanjis.csv names "walking cane" as a component of exactly
+# 介垂睡角解触錘. The thirteenth chunk already closed 角/解/触 (their own
+# "walking cane" is the ｜ inside 用's alt-decomposition, reachable via
+# the existing rtk60 "stick" ambiguity documented there -- left alone).
+# The other four (介垂睡錘, where 睡/錘 both inherit literal 垂 from their
+# own data.txt parts) reduce to one question: does 介 or 垂 itself carry
+# a literal ｜? Yes to both already -- 介's alt-decomposition is ノ,人,｜
+# and 垂's primary is ｜,ノ,一. render_glyphs.py on 介/垂 zoomed confirms
+# the straight vertical stroke in each (bottom-right of 介, the
+# mid-to-lower descender of 垂) is the same plain vertical line already
+# rendered and confirmed as prim-pipe/｜ elsewhere (the 2026-08-30 由/甲/
+# 申 entry). prim-pipe already carries "cane" and "walking stick" as
+# separate aliases -- this is the same primitive under Heisig's exact
+# two-word CSV phrasing, not a new codepoint, so no render-driven ID
+# question here, just a missing alias. Added "walking cane" to
+# prim-pipe's alias list (no data.txt parts changes needed for any of
+# the 4 hosts -- both 介 and 垂 already literally contain ｜).
+#
+# Side effect caught by audit_primary_choice.py after the alias landed:
+# with "walking cane" now resolving, rtk265/介's primary (八,个, Heisig's
+# own mnemonic chunking) scored unaccounted-1/covered-1 against its own
+# existing #2 alt ノ,人,｜ (unaccounted-0/covered-1, already present from
+# the 2026-09-13 structural-alt bulk add), so the tool proposed the
+# usual REPLACE-the-flattened-primary move (as for 左/右/乞). Tried it
+# and checked audit_csv_regressions.py before keeping it: swapping to
+# ノ,人,｜ as sole primary drops "umbrella" from 介's own CSV-baseline
+# coverage entirely (its old primary's 个 -- prim-umbrella -- was the
+# *only* thing carrying that name; 人 alone doesn't resolve to
+# "umbrella", nor should it globally, since prim-umbrella/个 is a
+# distinct, already-verified codepoint used as a literal part in ~100
+# other kanji, per the 2026-08-23 个 entry -- aliasing "umbrella" onto
+# bare 人 would wrongly pull in every kanji containing plain 人). So
+# this is not the same shape as the 左/右/乞 REPLACE cases, where the
+# dropped primary was pure stroke-spelling with nothing else to lose:
+# here the "flattened" primary is carrying a real, otherwise-uncovered
+# CSV name, and the scoring metric's "covered" set (built from cjkvi
+# structural reachability, not literal alias resolution) doesn't see
+# that loss because 个's top *is* structurally just 人 in cjkvi's own
+# IDS (⿱人丨) -- the metric can't tell "umbrella" and "person" apart
+# once cjkvi flattens 个 to its own person-shaped root. Left rtk265's
+# primary/alt pairing exactly as it was (`八,个;ノ,人,｜`, unchanged) --
+# audit_primary_choice.py will keep reporting 1 candidate here until a
+# future chunk either confirms "umbrella" really is Heisig's own
+# in-story rename of plain 人 for this one frame (which the current
+# global, per-primitive alias model has no way to express without
+# breaking every other 人 host) or finds a different resolution. Not
+# reverting the "walking cane" alias itself -- that part is unaffected
+# and still closes cleanly (verified below).
 
