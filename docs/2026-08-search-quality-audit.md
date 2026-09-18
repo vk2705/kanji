@@ -11742,3 +11742,165 @@ firing today (following the twenty-first and twenty-second chunks above,
 each independently evidenced and verified) — same scheduler-doubling note
 as the previous chunk applies, now tripled; still no action taken beyond
 flagging it again, per the standing full-autonomy brief.
+
+## 2026-09-18 (twenty-fourth chunk) — `cornstalk` resolves for 3 of 5 CSV
+hosts via a new codepoint-less primitive; `猟`/`逓` left open on a font-
+coverage question
+
+Fourth firing today. Fresh container again: no `venv/`, no
+`node_modules/`, no CJK fonts, no `/tmp/ids.txt`. `master` was a detached
+HEAD sitting on the exact commit the local `master` branch ref was 37
+commits behind (three same-day chunks landed since this container's base
+image), so `git checkout master` first, then `git pull --ff-only` (clean
+fast-forward), then `git push --dry-run origin master` confirmed clean
+before any work — per the standing container-recovery drill. Rebuilt
+venv/node_modules/fonts/ids.txt from scratch as usual.
+
+Picked up the twenty-third chunk's own "Next": `cornstalk` (5 hosts:
+俸奉棒猟逓, resolved via `heisig-kanjis.csv` to 奉(rtk1695,"observance"
+— our own alias, CSV's `keyword_6th_ed` says "dedicate")/俸(rtk1696,
+"stipend")/棒(rtk1697,"rod")/猟(rtk2090,"game hunting")/逓(rtk2002,
+"parcel post") — "every host contains 二/｜/一 at 1.00", a real shared-
+stroke signal per the suggestion tool's own overlap heuristic).
+
+### Investigation
+
+`data.txt` before this chunk:
+```
+rtk1695:奉:observance:二,｜,𡗗
+rtk1696:俸:stipend:亻,奉
+rtk1697:棒:rod:木,奉
+rtk2002:逓:relay:巾,辶,𠂋,｜
+rtk2090:猟:game-hunting:犭,𭕄,用,几
+```
+俸/棒 already reference 奉 literally, so `cornstalk` reaches them
+transitively once 奉 itself carries it directly — same pattern as
+柳/瑠←卯/留 and 碑←卑 in the last two chunks. That leaves 奉/猟/逓 as the
+three rows needing an actual look.
+
+`/tmp/ids.txt`: `奉 = ⿱𡗗⿻二丨` (𡗗 "bonsai", already a registered
+primitive, on top; `⿻二丨` — two short horizontal strokes overlaid by one
+vertical stroke — underneath). `二,｜` in the current split is literally
+that same overlay, just spelled as two raw strokes instead of one named
+shape — the exact same flattening pattern already fixed for `cornucopia`
+last chunk, just via bare-stroke names instead of a lookalike codepoint.
+Rendered `奉 二 ｜ 𡗗` together (`render_glyphs.py`): the ⿻二丨 overlay is
+clearly visible as 奉's own bottom section, distinct from the 𡗗 top —
+confirms this is a real, nameable shape, not noise.
+
+Checked whether `⿻二丨` has a Unicode codepoint of its own by grepping
+`ids.txt` for any entry whose *entire* IDS is exactly `⿻二丨` — none
+exists; it only ever appears as a sub-component inside other characters
+(半 羊 丰 用 奉 击 周 etc.). So unlike `cornucopia`(丩) or `receipt`(𠂎),
+there's no real glyph to cite. Used the same "?" placeholder convention
+this database already has for other codepoint-less primitives
+(`prim-sitting-on-the-ground`, `prim-antlers`, `prim-screwdriver`) rather
+than inventing or borrowing a codepoint — consistent with the existing
+precedent, not a new pattern.
+
+`猟`(rtk2090) and `逓`(rtk2002) both needed their own check since
+`cornstalk` is CSV-cited on both directly, not just inherited. `猟`'s
+cjkvi split is `⿰犭鼡`, `鼡 = ⿱𭕄𠂡` (owl crown on top, already correctly
+present in the current split), and `𠂡`(U+200A1) `= ⿵几⿻二丨` — so `𠂡`
+*does* contain the same `⿻二丨` overlay, wrapped in `几` rather than the
+bare shape. The current split already has `用,几` standing in for that
+`𠂡`, and `用` itself is `⿵冂⿻二丨` per cjkvi — same overlay, but wrapped
+in `冂` (a plain box) instead of `几` (which has a distinctive hooked leg
+stroke, confirmed by rendering `冂`/`几` side by side — visibly different
+shapes in this font). Rendering `𠂡` alone came back **pixel-identical**
+to `用`'s own render, with no trace of `几`'s hook. That result cuts both
+ways rather than resolving anything: it could mean this font family
+genuinely draws `𠂡` and `用` as unified/identical shapes, or it could
+mean the installed fonts are silently falling back to `用`'s glyph for a
+rare Ext-B codepoint they don't actually have artwork for — precisely the
+failure mode CLAUDE.md already documents for other rare codepoints
+(`㑒`/`㐄` patchy on Android). Rendering harder against one font isn't
+enough to tell these apart; it would need a second font family or a
+coverage-table check, neither of which this chunk had budget for. Left
+`猟` untouched rather than force a call on ambiguous render evidence — the
+opposite mistake (declaring two genuinely-different codepoints identical
+because one font drew them the same) is exactly as costly as the
+lookalike-substitution mistake this audit keeps guarding against.
+
+`逓`'s current split (`巾,辶,𠂋,｜`) doesn't reference `乕`(cjkvi:
+`⿸𠂆⿻⿻二丨冂`, `= ⿸辶乕` at the top level) at all — the `⿻二丨` overlay is
+real inside `逓` too, but it's nested two levels down inside a character
+(`乕`, an old-form "tiger") the current split has already flattened away
+entirely. Fixing this would mean re-deriving `逓`'s whole decomposition,
+not adding one alias — separate, deeper problem, left untouched.
+
+### Change
+
+```
+prim-cornstalk:?:cornstalk
+rtk1695:奉:observance:prim-cornstalk,𡗗
+```
+`俸`/`棒` needed no edit — both already reference `奉` literally.
+`猟`/`逓` left untouched, with the render evidence and the open
+font-coverage question recorded in `data.txt` itself (a comment right
+above `prim-cornstalk`) so the next chunk doesn't re-derive any of this
+from scratch.
+
+### Verified
+
+Rebuilt `kanji.db` clean from source (3000 CSV-sourced kanji rows, 3088
+parts overrides — unchanged totals; one new primitive row plus one edited
+parts line, no CSV-sourced row count change). `test_regression_fixes.py`:
+1321 checks, only the 4 known hanzi-scope non-issues, no pin breakage
+(the two existing pins mentioning `rtk1695` — on `俸`/`棒` — only check
+that they reference `rtk1695` directly, unaffected by `rtk1695`'s own
+parts changing). 66 pytest. `audit_overflatten.py` 0,
+`audit_self_reference.py` 0, `audit_radicals.py` 0/0,
+`audit_primary_choice.py` 1 (unchanged `rtk265` deviation, untouched by
+this chunk).
+
+`audit_phantom_parts.py --in-csv-range`: **122/86**, unchanged — `二`/`｜`
+were real resolvable codepoints before this edit too (not phantoms), so
+this audit was never going to move on this fix; it targets a different
+bug shape (parts that don't resolve at all).
+
+`audit_csv_regressions.py`: `rtk1695`/`rtk1696`/`rtk1697` all drop off the
+flagged list entirely (confirmed by grepping each id before/after —
+`rtk1695` needed both `bonsai` and `cornstalk` and now has both;
+`rtk1696`/`rtk1697` were already unflagged, unaffected). `rtk2002`/
+`rtk2090` remain flagged, each `dropped:` line confirming they're missing
+only `cornstalk` (plus, for `rtk2090`, a pre-existing unrelated "wind"
+gap) — exactly the two hosts left deliberately untouched, nothing else
+regressed.
+
+Directly queried `search_by_parts(['cornstalk'], depth=1)`: returns
+`prim-cornstalk rtk1695` (self plus exactly the one directly-fixed host).
+`depth=2` adds `rtk1696`(俸), `rtk1697`(棒), and `rtk2364`(捧, "lift up" —
+an unrelated-to-this-chunk kanji that already literally references `奉`
+in its own parts, a genuine host, not a false positive). `suggest_heisig_
+aliases.py --near 0.8 --all`: `cornstalk` group gone (29 → 28 unresolved
+groups). Frontend `npm install`, `npm run lint`, `npm run build` all
+clean.
+
+**Next**: `cornstalk` closed for 3 of its 5 CSV-cited hosts (`奉` directly,
+`俸`/`棒` transitively); `猟`'s `用`-vs-`𠂡` font-coverage question (does
+this font family really draw them the same, or is `𠂡` an unrendered
+fallback?) and `逓`'s buried `乕`-nested overlay are both recorded above
+for whoever picks them up next, not folded into this verdict — a
+same-day future chunk should check a second font (or the installed fonts'
+own glyph-coverage tables) for `𠂡`/`𠂋`/other rare Ext-B/C codepoints
+before trusting any render of them at face value, since this chunk
+couldn't resolve that ambiguity within its own budget. `cabers, fenceposts`
+(5 hosts, sharing 文/乂/亠/丶 at 0.80) is now the top-ranked unstarted
+group by the `--near 0.8` overlap heuristic with an actual shared-stroke
+signal; `chop-seal, hanko` (14 hosts) and `hairpin, safety-pin` (12 hosts)
+remain the top two by host count but are still the same weak
+single-common-primitive signal shape flagged as unpromising in multiple
+prior chunks. `stick`'s collision with `rtk60`'s unrelated "post a bill"
+alias is still an open minor oddity. `audit_phantom_parts.py`'s 122/86
+pile (led by bare stroke primitives ノ/一/｜ with no alternative host to
+promote from) remains the larger standing item if the `--near` queue runs
+dry. `sync_system_data.py` against the live server is still not something
+this session can do — a deployer running it will see one new `kanji` row
+(`prim-cornstalk`) and its one alias/keyword ("cornstalk"), plus one
+changed `parts` row (`rtk1695`) from this chunk. Also: this is the fourth
+firing today (following the twenty-first through twenty-third chunks
+above, each independently evidenced and verified) — same
+scheduler-doubling note as the previous three chunks applies, now
+quadrupled; still no action taken beyond flagging it again, per the
+standing full-autonomy brief.
