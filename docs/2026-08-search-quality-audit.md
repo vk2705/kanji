@@ -11170,3 +11170,120 @@ remains the larger standing item if the `--near` queue runs dry.
 `sync_system_data.py` against the live server is still not something this
 session can do — a deployer running it will see one changed `aliases` row
 (`rtk1` +1 alias, `silage`) from this chunk.
+
+## 2026-09-18 (twentieth chunk) — `genie` resolves as an alias on rtk736
+(才), plus an over-flattening fix on its two flattened hosts
+
+Fifteenth firing today. Same environment drill as every chunk this cycle:
+fresh container, repo present and fast-forwarded cleanly (aefb137, no
+divergence), but no `venv/`, no `node_modules/`, no CJK fonts, no
+`/tmp/ids.txt` — all four rebuilt from scratch, `git push --dry-run origin
+master` confirmed clean before touching anything.
+
+Picked up the nineteenth chunk's own "Next": `genie` (6 hosts:
+在存才材財閉, flagged by `suggest_heisig_aliases --near 0.8 --all` as
+"nothing common to every host — likely a missing row", the top-ranked
+group in that bucket).
+
+### Investigation
+
+`heisig-kanjis.csv` components for the 6 hosts:
+- 才(736,genius, itself): genie
+- 財(737,property): shellfish; clam; oyster; eye; animal legs; eight; genie
+- 材(738,lumber): tree; wood; genie
+- 存(739,suppose): genie; child
+- 在(740,exist): genie; soil; dirt; ground
+- 閉(1751,closed): gates; genie
+
+`genius` already resolved to `rtk736` (才 itself); `genie` resolved to
+nothing. Same shape as `silage`/rtk1 in the previous chunk: one primitive,
+two Heisig names depending on context (his own name for the standalone
+kanji vs. his name for it as a component elsewhere).
+
+`data.txt` before this chunk:
+```
+rtk736:才:genius:
+rtk737:財:property:才,貝
+rtk738:材:lumber:才,木
+rtk739:存:exist:｜,ノ,一,子
+rtk740:在:exist:｜,ノ,一,土
+```
+財/材/閉 already spell 才 literally as a part — only `financial gap` was
+the missing alias, not a decomposition bug, for those three. But 存/在
+flatten the same shape into its three raw strokes (`｜,ノ,一`) instead of
+referencing 才 — an over-flattening `audit_overflatten.py` can't catch
+here: its ground truth is cjkvi-ids' top-level split, and cjkvi-ids itself
+encodes 存/在 as `⿸③子`/`⿸③土` — a numeric stroke-count placeholder
+instead of a named child, since cjkvi has no separate entry for this
+corner shape at that position. That leaves the tool with nothing to
+compare our three-stroke split against, so it can't flag the collapse —
+exactly the kind of case `audit_phantom_parts.py`'s own docstring already
+warns is structurally invisible to the top-level-diff class of audit.
+
+Rendered 才/存/在/財/材/閉 side by side (`render_glyphs.py ... --out`,
+read the PNG directly). 才's own vertical-stroke-plus-crossbar-plus-hook
+shape is drawn identically, unchanged, as the top-left component of both
+存 and 在 — confirms cjkvi's "one atomic 3-stroke corner" reading is the
+same physical shape as the free-standing 才, and confirms 財/材/閉's
+existing literal `才` part was already correct.
+
+### Change
+
+Added `genie` as a second alias on `rtk736` (才), alongside `genius`
+(`data.txt:789`, alias-only, same pattern as `silage`). Fixed 存/在's own
+decompositions to reference `才` directly instead of its three raw
+strokes:
+```
+rtk736:才:genius,genie:
+rtk739:存:exist:才,子
+rtk740:在:exist:才,土
+```
+
+### Verified
+
+Rebuilt `kanji.db` clean from source (3000 CSV-sourced kanji rows, 3088
+parts overrides — unchanged totals; this chunk edited one alias line and
+two parts lines, no new kanji/primitive rows). `test_regression_fixes.py`:
+1321 checks, only the 4 known hanzi-scope non-issues, no pin breakage
+(nothing pinned 存/在's old `｜,ノ,一` split). 66 pytest.
+`audit_overflatten.py` 0, `audit_self_reference.py` 0, `audit_radicals.py`
+0/0, `audit_primary_choice.py` 1 (unchanged `rtk265` deviation).
+
+`audit_phantom_parts.py --in-csv-range`: **129/91** (down from 134/93) —
+the 存/在 stroke-split phantom flags (`｜`/`ノ`/`一` against hosts whose
+CSV concepts none of those stroke names could reach) are gone now that
+both hosts list `才` instead. `audit_csv_regressions.py`'s flagged-kanji
+count is unchanged at 1235 (diffed the full before/after output directly):
+`rtk739` (存) drops out of the list entirely (previously not flagged
+either — its old stroke split already happened to satisfy the script's
+reachability check by a different path); `rtk737`/`rtk740`'s remaining
+flagged drops (`clam`/`oyster` on 財, `dirt`/`ground` on 在) are pre-existing
+gaps unrelated to `genie`, confirmed unchanged before/after.
+
+Directly queried `search_by_parts(['genie'], depth=1)`: returns exactly
+the 6 targeted hosts (`rtk736 rtk737 rtk738 rtk739 rtk740 rtk1751`) — no
+more, no less, both at depth 1 and depth 2 (identical set, confirming no
+false positives were pulled in and none of the 6 needed recursion to
+reach). `suggest_heisig_aliases.py --near 0.8 --all`: `genie` no longer
+listed (34 → 33 unresolved groups). Frontend `npm install`, `npm run
+lint`, `npm run build` all clean.
+
+**Next**: `genie` closed for all 6 hosts, plus the 存/在 over-flattening
+fix it exposed. `roots` (5 hosts: 岬押挿概甲, "nothing common to every
+host — likely a missing row") is now the top-ranked group in that bucket
+and is entirely unstarted; `receipt`/`cornucopia` (5 hosts each) are the
+next candidates after it if `roots` doesn't pan out, then `gnats` (4
+hosts). `chop-seal, hanko` (14 hosts) and `hairpin, safety-pin` (12 hosts,
+its phantom-part issue already fixed in an earlier chunk today, but the
+name itself still doesn't resolve) remain the top two by host count but
+are both the same weak single-common-primitive signal shape flagged as
+unpromising in multiple prior chunks — still not attempted. `stick`'s
+collision with `rtk60`'s unrelated "post a bill" alias is still an open
+minor oddity, unrelated to this chunk. `audit_phantom_parts.py`'s 129/91
+pile (led by bare stroke primitives ノ/一/｜ with no alternative host to
+promote from) remains the larger standing item if the `--near` queue runs
+dry. `sync_system_data.py` against the live server is still not something
+this session can do — a deployer running it will see one changed
+`aliases` row (`rtk736` +1 alias, `genie`) and two changed `parts` rows
+(`rtk739`/`rtk740`, both stroke-split primaries replaced by a literal `才`
+part) from this chunk.

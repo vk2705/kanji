@@ -786,11 +786,11 @@ rtk732:械:contraption:戒,木
 rtk733:鼻:nose:自,田,廾
 rtk734:刑:punish:廾,ノ,二,一
 rtk735:型:mould:土,刑
-rtk736:才:genius:
+rtk736:才:genius,genie:
 rtk737:財:property:才,貝
 rtk738:材:lumber:才,木
-rtk739:存:exist:｜,ノ,一,子
-rtk740:在:exist:｜,ノ,一,土
+rtk739:存:exist:才,子
+rtk740:在:exist:才,土
 rtk741:乃:from:｜,ノ,一
 rtk742:携:portable:扌,隹,乃
 rtk743:及:reach out:丶,乃
