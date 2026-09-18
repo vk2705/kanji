@@ -1244,7 +1244,7 @@ rtk1190:宙:mid-air:宀,由
 rtk1191:届:deliver:尸,由
 rtk1192:笛:flute:由,竹
 rtk1193:軸:axis:由,車
-rtk1194:甲:armor:田,｜
+rtk1194:甲:armor,armour,roots:田,｜
 rtk1195:押:push:扌,甲;｜,日,扌,田
 rtk1196:岬:headland:山,甲
 rtk1197:挿:insert:｜,千,日,扌,田

@@ -11287,3 +11287,143 @@ this session can do — a deployer running it will see one changed
 `aliases` row (`rtk736` +1 alias, `genie`) and two changed `parts` rows
 (`rtk739`/`rtk740`, both stroke-split primaries replaced by a literal `才`
 part) from this chunk.
+
+## 2026-09-18 (twenty-first chunk) — `roots`/`armour` resolve as aliases on
+rtk1194 (甲); 挿/概 deliberately left unresolved
+
+Daily firing. Fresh container again: no `venv/`, no `node_modules/`, no CJK
+fonts, no `/tmp/ids.txt`, and this container also came up with local `master`
+in a detached-HEAD state 34 commits behind `origin/master` — `git checkout
+master && git merge --ff-only origin/master` fixed it before the mandated
+`git push --dry-run origin master` check, which came back clean once the
+branch itself was current. Rebuilt everything else from scratch per usual.
+
+Picked up the twentieth chunk's own "Next": `roots` (5 hosts: 岬押挿概甲,
+"nothing common to every host — likely a missing row").
+
+### Investigation
+
+`heisig-kanjis.csv` components for the 5 hosts (looked up by `id_6th_ed`,
+which is what becomes the `rtk{frame}` id — the CSV's `kanji`/`id_6th_ed`
+pair, not `id_5th_ed`, which numbers these five differently and briefly
+pointed this session at the wrong rows):
+
+- 甲(1194,armor, itself): armour; roots
+- 押(1195,push): finger; fingers; armour; armor; roots
+- 岬(1196,headland): mountain; armour; armor; roots
+- 挿(1197,insert): finger; fingers; thousand; armour; armor; roots
+- 概(1594,outline): roots; tree; wood; silver; waitress; previously
+
+`armor` (no `u`) already resolved to `rtk1194` (甲's own keyword); `armour`
+(British spelling) and `roots` did not resolve to anything. `data.txt`
+before this chunk:
+```
+rtk1194:甲:armor:田,｜
+rtk1195:押:push:扌,甲;｜,日,扌,田
+rtk1196:岬:headland:山,甲
+rtk1197:挿:insert:｜,千,日,扌,田
+rtk1594:概:outline:既,木
+```
+押/岬 already spell 甲 literally in their primary decomposition — same
+shape as `genie`/`genius` last chunk, just missing the second alias. `git
+push --dry-run` before touching anything, per the container-recovery drill
+above, was clean, confirming the write path before spending render/audit
+time on the investigation itself.
+
+挿 and 概 needed the render check before deciding whether to force them
+onto the same fix. `挿`'s primary (`｜,千,日,扌,田`) already contains `田`
+and `｜` — literally the same two tokens `甲`'s own primary decomposes
+into — plus a spare `日` neither `甲` nor `挿`'s CSV components account
+for, so this looked at first like the same over-flattened-甲 pattern
+`存`/`在` had last chunk. Rendered `甲 由 臿`(`render_glyphs.py`) and
+cropped/zoomed the bottom box of `臿` (挿's right-hand component) against
+`甲`'s own box at matching scale: `甲`'s box has one internal divider (two
+cells) and a stick punching straight through top to bottom; `臿`'s lower
+box has an extra diagonal stroke plus a second divider (three cells) that
+`甲` does not have — consistent with `cjkvi-ids` (`/tmp/ids.txt`) giving
+`臿`'s IDS as `⿻千臼`/`⿻干臼` (thousand/dry-pole overlaid on `臼`, mortar),
+not anything built from `甲`. The spare `日` in `挿`'s current primary
+isn't a mistake, then — it's tracking a real third cell `甲` doesn't have.
+Heisig's own CSV component list still calls this shape "armour/armor/roots"
+for `挿` (he teaches primitives mnemonically, not etymologically, so a
+"looks like armor with an extra line" reading is plausible for him even
+where `臿` isn't etymologically `甲`), but with the render showing a
+genuine structural difference and no independent second source (no host
+of `挿`'s literally list `甲`, and cjkvi disagrees), forcing `甲` onto
+`挿`'s primary would be exactly the "assumed-identity" mistake this
+project's audit has undone repeatedly — just aimed the opposite direction
+from a normal lookalike-substitution (forcing two DIFFERENT shapes
+together as the same primitive, rather than fixing a wrong codepoint).
+Left it alone.
+
+`概`'s "roots" component doesn't trace to anything renderable at all:
+its current primary is `既,木` (tree/wood + previously), and `既`'s own
+row (`rtk1593:既:previously,waitress:牙,艮`) already reworked its
+breakdown away from any "roots"/"silver"-named parts in an earlier chunk
+(not this one — `git log -S` on this exact line pointed at commit
+f138097, "Eradicate over-flattening in bulk", from a shallow-clone repo
+with no earlier history to inspect further). Neither `既` nor `木` nor
+their own sub-parts render as anything resembling `甲`/`臿`. Rather than
+guess at a fourth codepoint for one CSV mention with no supporting render
+evidence, left `概` unresolved too and noted it for a future chunk with
+budget to dig into what `既`'s left-hand component (`牙`/`艮` in the
+current split) actually corresponds to in Heisig's own text.
+
+### Change
+
+Added `armour` and `roots` as further aliases on `rtk1194` (甲), alongside
+its existing `armor` keyword — same alias-only pattern as `genie`/`genius`
+on `rtk736`:
+```
+rtk1194:甲:armor,armour,roots:田,｜
+```
+No `parts` changes this chunk — unlike `存`/`在` last chunk, nothing here
+needed a decomposition fix, since 押/岬 already referenced `甲` literally.
+
+### Verified
+
+Rebuilt `kanji.db` clean from source (3000 CSV-sourced kanji rows, 3088
+parts overrides — unchanged, this chunk only added two alias words to one
+existing line). `test_regression_fixes.py`: 1321 checks, only the 4 known
+hanzi-scope non-issues, no pin breakage. 66 pytest. `audit_overflatten.py`
+0, `audit_self_reference.py` 0, `audit_radicals.py` 0/0,
+`audit_primary_choice.py` 1 (unchanged `rtk265` deviation).
+`audit_phantom_parts.py --in-csv-range`: 129/91, unchanged — this chunk
+never touched a phantom-flagged line. `audit_csv_regressions.py`: 1235
+flagged kanji, unchanged (confirmed by full-output diff before/after;
+`挿`/`概` remain on the list, as expected since they weren't touched).
+
+Directly queried `search_by_parts(['roots'|'armour'|'armor'], depth=1)`:
+all three return the identical 3-host core (`rtk1194 rtk1195 rtk1196`,
+plus the same 3 pre-existing unrelated homograph hits `rtk185 rtk2078
+rtk2850` that already matched `armor` before this chunk) — confirms
+`roots`/`armour` now behave exactly like the pre-existing `armor` keyword,
+no more, no less; `depth=2` identical growth across all three, confirming
+no term picked up extra reach the others didn't. `suggest_heisig_aliases.py
+--near 0.8 --all`: both `roots` and `armour` groups gone (33 → 31
+unresolved groups — two groups closed by one alias edit, since they were
+the same underlying gap on the same row). Frontend `npm install`, `npm run
+lint`, `npm run build` all clean.
+
+**Next**: `roots`/`armour` closed for 3 of their 5 CSV-cited hosts
+(`甲`/`押`/`岬`); `挿`/`概` deliberately left open, with the render
+evidence above recorded so the next chunk doesn't re-derive it from
+scratch — `概` in particular needs `既`'s real primitive breakdown looked
+at before any further move, not just another render of `概` itself.
+`receipt` (5 hosts: 卵柳瑠留貿, "nothing common to every host — likely a
+missing row") is now the top-ranked group in that more-promising bucket
+and is entirely unstarted; `cornucopia` (5 hosts) is the next candidate
+after it, then `gnats` (4 hosts). `chop-seal, hanko` (14 hosts) and
+`hairpin, safety-pin` (12 hosts) remain the top two by host count but are
+still the same weak single-common-primitive signal shape flagged as
+unpromising in multiple prior chunks. `stick`'s collision with `rtk60`'s
+unrelated "post a bill" alias is still an open minor oddity.
+`audit_phantom_parts.py`'s 129/91 pile (led by bare stroke primitives
+ノ/一/｜ with no alternative host to promote from) remains the larger
+standing item if the `--near` queue runs dry. `sync_system_data.py`
+against the live server is still not something this session can do — a
+deployer running it will see one changed `aliases` row (`rtk1194` +2
+aliases, `armour` and `roots`) from this chunk. Also worth a future look:
+this container coming up in a detached-HEAD state on `master` (fixed
+easily this time, but worth remembering as a possible recurring
+environment quirk alongside the missing venv/node_modules/fonts/ids.txt).
