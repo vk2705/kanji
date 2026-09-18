@@ -10422,3 +10422,141 @@ resolves-elsewhere non-issue rather than a genuine gap). `sync_system_data.py`
 against the live server is still not something this session can do — a
 deployer running it will see one changed `aliases` row (`kangxi13` +1,
 "glass canopy") and one changed `parts` row (`rtk1953`) from this chunk.
+
+---
+
+## 2026-09-18 (fourteenth chunk) — "cloak" resolved: kangxi145/衤, a fourth
+"positional left-side variant" split
+
+Another firing today (8 commits already on `master` for 2026-09-18 as of
+this chunk's start, though the thirteenth chunk's own count of "ninth
+firing" implies at least one earlier firing today did no committable
+work — exact firing count not independently verifiable from git history
+alone). Same environment drill as every chunk this cycle:
+fresh container, repo present and fast-forwarded cleanly, but no `venv/`,
+no `node_modules/`, no CJK fonts, no `/tmp/ids.txt` — all four rebuilt
+from scratch, and `git push --dry-run origin master` confirmed clean
+before touching anything.
+
+Picked up the thirteenth chunk's own "Next": `cloak` (10 hosts:
+初袖被裕補裸裾複褐襟), flagged for two chunks running as "every host
+contains 衣/𧘇/亠/丶, a real structural signal, worth checking whether
+it's a genuine missing primitive or an existing one under a name this DB
+can't search by."
+
+### Investigation
+
+`heisig-kanjis.csv`'s components column confirmed "cloak" is the CSV's
+*first*-listed component for exactly these 10 frames and no others
+(`components` for a stand-alone `cloak` search across the whole CSV
+returns exactly this set). All 10 already carry a literal `衣` ("garment",
+`rtk423`'s own keyword) in their `data.txt` parts, so on paper this
+looked like it might already resolve and simply be Heisig's second name
+for `rtk423` — the same "same shape, two names" pattern as `glass
+canopy`/`hood` two chunks ago.
+
+It isn't, and `/tmp/ids.txt` said so directly: all 10 hosts are given as
+`⿰衤X` — `U+8864` (衤), not `U+8863` (衣) — e.g. `U+88D5 裕 ⿰衤谷`, `U+8896
+袖 ⿰衤由`, `U+521D 初 ⿰衤刀`. Rendered `衣`/`衤`/four of the hosts together
+(`render_glyphs.py`) to confirm this wasn't a font-serif illusion the way
+`冂`/`囗` was last chunk: `衤` is visibly the narrow, dotted left-margin
+radical form, missing `衣`'s distinguishing bottom stroke-splay entirely
+— a real, different glyph, not a rendering artifact.
+
+This is the exact "positional left-side variant" bug class this project
+has already fixed three times before and has a standing template for
+(2026-08-27/28 entries): `心`/`忄` → `rtk639`/`kangxi61`, `手`/`扌` →
+`rtk687`/`kangxi64`, `示`/`礻` → `rtk1167`/`kangxi113`. In each case
+Unicode's `CJKRadicals.txt` officially maps the radical number's
+"ideograph" column to the *full* standalone form, but the commonly-used
+*bound* left-margin form is a distinct real Unicode codepoint that never
+stands alone as a taught kanji frame, so it gets its own `kangxi{n}` row
+rather than folding into the full-form kanji's id. Radical 145's own
+`CJKRadicals.txt` row (`145; 2F90; 8863`) fits the same shape: ideograph
+column is `衣`, but `衤` (`U+8864`) is the real bound form actually drawn
+in all 10 hosts. One asymmetry worth recording so a future chunk doesn't
+"fix" it by mistake: `水`/`氵` does *not* get this treatment anywhere in
+`data.txt` — every host using the water radical stores literal `水`
+regardless of whether the glyph position is bound (`氵`) or standalone.
+That's pre-existing and was never flagged by any audit script or a CSV
+component-name mismatch the way `衣`/`衤` just was, so it's being left
+alone rather than "fixed" to match — a name-driven signal (CSV calling
+it "cloak", not "garment") is what justified this split, and `水`/`氵`
+has no equivalent signal since Heisig's own CSV never uses a name for
+the water radical distinct from "water" itself.
+
+One existing `test_regression_fixes.py` pin (`rtk431`) had already
+called this out by name in its own comment — `# was 刀 alone — missing
+衣 (the clothing radical 衤), which then silently propagated...` — a
+previous chunk correctly diagnosed the shape but pinned it to `rtk423`
+anyway rather than splitting a new primitive row, so the comment's own
+observation sat unactioned until this chunk gave it a codepoint.
+
+### Change
+
+New primitive `kangxi145:衤:cloak` (no further aliases — CSV never gives
+this shape a second name the way `glass canopy`/`hood` had). All 10
+hosts' `data.txt` parts changed from `衣` to `衤`: `rtk431`(初) `衣,刀` →
+`衤,刀`; `rtk490`(褐) `匂,日,衣` → `匂,日,衤`; `rtk504`(複) `复,衣` →
+`复,衤`; `rtk856`(裕) `衣,谷` → `衤,谷`; `rtk870`(被) `皮,衣` → `皮,衤`;
+`rtk1145`(裾) `居,衣` → `居,衤`; `rtk1180`(襟) `禁,衣` → `禁,衤`;
+`rtk1189`(袖) `由,衣` → `由,衤`; `rtk1205`(裸) `果,衣` → `果,衤`;
+`rtk1983`(補) `甫,衣` → `甫,衤`. `rtk1073`(褒, "praise") was checked and
+deliberately left alone — its CSV components list "protect" as the name
+covering its own `衣`, not "cloak," and its own structure is `⿱衣保`
+(top-bottom, full `衣`, not the left-margin bound form) per `ids.txt` —
+a different, correctly-coded situation that happens to also reference
+`rtk423`.
+
+Corrected 5 `test_regression_fixes.py` pins that referenced `rtk423` for
+five of the ten hosts (`rtk1189`, `rtk490`, `rtk1180`, `rtk431`,
+`rtk856`) to `kangxi145`, each with an inline comment explaining the
+`rtk423`→`kangxi145` split and pointing at `data.txt`'s dated comment
+block for the full reasoning. `rtk1073`'s existing pin (`kangxi8,
+rtk1072, rtk423`) was left untouched — confirmed above it's a genuinely
+different, correctly-coded case.
+
+### Verified
+
+Rebuilt `kanji.db` clean from source (3000 CSV-sourced kanji rows, 3088
+parts overrides — same totals as the previous chunk, since this chunk
+edited 10 existing lines and added one bare-alias primitive row rather
+than any CSV-baseline change; total `kanji` table row count 3186,
++1 for `kangxi145`). `test_regression_fixes.py`: 1321 checks, only the 4
+known hanzi-scope non-issues after the 5 pin corrections above (the
+uncorrected run failed exactly those 5 plus the 4 known ones, confirming
+the pins — not the fix — were stale). 66 pytest. `audit_overflatten.py`
+0, `audit_self_reference.py` 0, `audit_radicals.py` 0/0,
+`audit_primary_choice.py` 0. `audit_phantom_parts.py --in-csv-range`:
+138/96, unchanged (none of the 10 hosts or `kangxi145` were ever on that
+list — this was a wrong-codepoint bug, not a phantom-part one).
+`audit_csv_regressions.py`: directly confirmed `cloak` no longer appears
+as dropped for any of the 7 hosts it previously flagged (e.g. `rtk431`
+now shows `current parts: 衤, cloak, 刀, sword`, only the unrelated
+`dagger (-> rtk2790)` still dropped). Directly queried
+`search_by_parts(['cloak'], depth=1)`: returns exactly the 10 hosts plus
+`kangxi145` itself (self-identity), and `search_by_parts(['garment'],
+depth=1)` returns a disjoint 28-id set with no overlap — confirmed the
+split doesn't collide with `rtk423`'s own resolution. `suggest_heisig_
+aliases.py --near 0.8 --all` no longer lists `cloak` at all (fully
+resolved, same drop-out behavior documented for `glass canopy` two
+chunks ago). Frontend `npm install`, `npm run lint`, and `npm run build`
+all clean.
+
+**Next**: `cloak` is closed. `walking cane` (7 hosts: 介垂睡角解触錘) is
+still open exactly as the thirteenth chunk left it — its "nothing common
+to every host" structural read is unchanged by this chunk, since 角's
+own `walking cane` component resolves via `｜`/`stick` inside `用`'s alt-
+decomposition rather than under the name "walking cane" itself; the
+other four hosts (介垂睡錘) still need their own check. Two new
+candidates surfaced by this chunk's `--near 0.8 --all` re-run worth
+checking next, both with real structural signal:  `screwdriver` (7
+hosts: 備庸捕浦舗蒲補 — every host contains 月 0.86/十 1.00, and note
+`補` is itself one of `cloak`'s 10 hosts, now resolved, so this cluster
+may partly resolve through inheritance once checked) and `tongue
+wagging` (8 hosts: 唱宴智書替潜音響 — every host contains 日 1.00).
+`chop-seal/hanko` (14 hosts) remains flagged twice before as a weak
+signal, likely not a quick win. `sync_system_data.py` against the live
+server is still not something this session can do — a deployer running
+it will see one new primitive row (`kangxi145`) and 10 changed `parts`
+rows (初袖被裕補裸裾複褐襟) from this chunk.

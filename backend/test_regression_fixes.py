@@ -183,7 +183,7 @@ EXPECTED_DECOMPOSITIONS = {
     # results.jsonl's DISJOINT flags (triage_google_check.py) directly, per the owner's
     # explicit instruction -- each confirmed by cjkvi-ids/render before fixing.
     "rtk1189": {"character": "袖", "keyword": "sleeve",  # was ｜,一,初,田 -- flattened
-               "expected_part_ids": {"rtk1186", "rtk423"}},  # instead of referencing 由 directly
+               "expected_part_ids": {"rtk1186", "kangxi145"}},  # instead of referencing 由 directly; rtk423(衣)->kangxi145(衤) 2026-09-18, "cloak" bound left-side form, see data.txt
     "rtk1239": {"character": "浄", "keyword": "clean",  # was 水,亅,勹,ヨ -- flattened
                "expected_part_ids": {"rtk1238", "rtk137"}},  # instead of referencing 争 directly
     "rtk1325": {"character": "沸", "keyword": "seethe",  # was ｜,ノ,弓,水 -- a botched partial
@@ -1039,7 +1039,8 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk489": {"character": "謁", "keyword": "audience",
                 "expected_part_ids": {"rtk12", "rtk357", "rtk478"}},
     "rtk490": {"character": "褐", "keyword": "brown",
-                "expected_part_ids": {"rtk12", "rtk423", "rtk478"}},
+                # rtk423(衣)->kangxi145(衤) 2026-09-18, "cloak" bound left-side form, see data.txt
+                "expected_part_ids": {"rtk12", "kangxi145", "rtk478"}},
     "rtk491": {"character": "喝", "keyword": "hoarse",
                 "expected_part_ids": {"rtk11", "rtk12", "rtk478"}},
     "rtk492": {"character": "葛", "keyword": "kudzu",
@@ -1178,7 +1179,8 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1170": {"character": "祝", "keyword": "celebrate",
                 "expected_part_ids": {"kangxi113", "rtk107"}},
     "rtk1180": {"character": "襟", "keyword": "collar",
-                "expected_part_ids": {"rtk1179", "rtk423"}},
+                # rtk423(衣)->kangxi145(衤) 2026-09-18, "cloak" bound left-side form, see data.txt
+                "expected_part_ids": {"rtk1179", "kangxi145"}},
     "rtk1182": {"character": "崇", "keyword": "adore",
                 "expected_part_ids": {"rtk1181", "rtk830"}},
     "rtk1197": {"character": "挿", "keyword": "insert",
@@ -3294,9 +3296,13 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk2994": {"character": "祓", "keyword": "exorcise",   # was ノ,一,礼,丶 — a byte-level flatten of 礼's strokes,
                "expected_part_ids": {"kangxi113", "rtk253"}},   # not a real reference; render shows 犬, not 礼-shaped
     "rtk431": {"character": "初", "keyword": "first time",  # was 刀 alone — missing 衣 (the clothing radical 衤), which
-               "expected_part_ids": {"rtk423", "rtk87"}},   # then silently propagated through every kanji that
+               "expected_part_ids": {"kangxi145", "rtk87"}},   # then silently propagated through every kanji that
                                                               # correctly *referenced* 初 (裕/被/裾/襟/袖/裸/補/... — 15
                                                               # kanji total, all auto-fixed by this one root fix)
+                                                              # rtk423(衣)->kangxi145(衤) 2026-09-18: the "clothing
+                                                              # radical" this comment already named turned out to be
+                                                              # its own distinct codepoint, not just a loose synonym
+                                                              # for 衣 itself -- see data.txt's "cloak" comment block
     "rtk1073": {"character": "褒", "keyword": "praise",  # was 衣,口,小,亠 -- flattened 保(rtk1072)'s own 呆 with a
                "expected_part_ids": {"kangxi8", "rtk1072", "rtk423"}},  # wrong 小 for 木; CSV names "protect" directly
     "rtk1304": {"character": "杯", "keyword": "counter for cupfuls",  # was ｜,ノ,一,木,礼 -- render-confirmed the
@@ -3420,7 +3426,8 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk855": {"character": "欲", "keyword": "longing",
                "expected_part_ids": {"rtk505", "rtk851"}},
     "rtk856": {"character": "裕", "keyword": "abundant",
-               "expected_part_ids": {"rtk423", "rtk851"}},
+               # rtk423(衣)->kangxi145(衤) 2026-09-18, "cloak" bound left-side form, see data.txt
+               "expected_part_ids": {"kangxi145", "rtk851"}},
     "rtk742": {"character": "携", "keyword": "portable",
                "expected_part_ids": {"kangxi172", "kangxi64", "rtk741"}},
     "rtk980": {"character": "秀", "keyword": "excel",
