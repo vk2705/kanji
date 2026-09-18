@@ -1,5 +1,6 @@
 prim-pipe:｜:pipe, walking stick, cane, line, walking cane, prim28.1
-prim-jawbone:咼:jawbone:口,冂
+prim-joint:冎:joint
+prim-jawbone:咼:jawbone:口,冂;口,冎
 prim-dollar-sign:弗:dollar sign:弓,｜
 prim-snare:丂:snare:一,勹
 kangxi3:丶:dot,tick,drop
@@ -1432,7 +1433,7 @@ rtk1379:躍:leap:翟,足
 rtk1380:践:tread:㦮,足
 rtk1381:踏:step:水,足,日
 rtk1382:踪:remains:足,宗
-rtk1383:骨:skeleton:月,冖,冂
+rtk1383:骨:skeleton:月,冎;月,冖,冂
 rtk1384:滑:slippery:水,骨
 rtk1385:髄:marrow:有,辶,骨
 rtk1386:禍:calamity:礻,咼

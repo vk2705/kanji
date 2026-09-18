@@ -10925,3 +10925,116 @@ the larger standing item if the `--near` queue runs dry.
 `sync_system_data.py` against the live server is still not something
 this session can do — a deployer running it will see one changed
 `aliases` row (`rtk12` +1 alias, `tongue wagging`) from this chunk.
+
+## 2026-09-18 (eighteenth chunk) — `joint` resolves via a new `冎` primitive, shared by 骨's and 咼's own top shape
+
+Thirteenth firing today. Same environment drill as every chunk this cycle:
+fresh container, repo present and fast-forwarded cleanly (31 commits behind,
+no divergence), but no `venv/`, no `node_modules/`, no CJK fonts, no
+`/tmp/ids.txt` — all four rebuilt from scratch, `git push --dry-run origin
+master` confirmed clean before touching anything.
+
+Picked up the seventeenth chunk's own "Next": `joint` (8 hosts:
+渦滑禍過鍋骨骸髄, flagged by `suggest_heisig_aliases --near 0.8 --all` as
+"nothing common to every host — likely a missing row", the more promising
+signal shape flagged over `chop-seal/hanko`).
+
+### Investigation
+
+`heisig-kanjis.csv`'s components column: 骨 (rtk1383, "skeleton") lists
+"joint; moon; month; flesh; part of the body" — one new term ("joint")
+plus 月'а own synonym set. The four 咼-based frames (禍渦鍋過, all reached
+via 咼's own primitive keyword "jawbone") each list "jawbone; joint; hood;
+mouth" — 咼's own recursive sub-expansion is "joint; hood; mouth", three
+terms. 滑/髄/骸 all cite "skeleton" (骨's own keyword) recursively expanded
+the same way as 骨's own row, confirming "joint" belongs to 骨's own top
+shape specifically, not to 月.
+
+Rendered 骨/咼/冎 side by side, first at the standard comparison size, then
+custom-built at 500px per glyph (`render_glyphs.py`'s fixed 110px wasn't
+enough to be sure) via the same headless-Chromium method the script uses
+internally. Confirmed visually: the portion of 骨 above 月 is stroke-for-
+stroke identical to the standalone character 冎 (U+518E, "gua"), and the
+portion of 咼 above 口 is the same shape again. `/tmp/ids.txt` independently
+agrees: 咼's own entry is `⿵冎口` — literally 冎 wrapping 口 — while 骨's
+entry (`⿱⑤月[G]`) uses cjkvi's own placeholder notation for an unencoded
+component of the same stroke complexity, i.e. cjkvi can't spell 骨's top
+directly but doesn't contradict it either.
+
+Checked whether this was already covered under a different string — it
+wasn't; `冎` had never been registered as a primitive or part of any
+existing line in `data.txt`/`data_from_pdf.txt`.
+
+### Change
+
+New primitive `prim-joint:冎:joint` — a real, distinct Unicode codepoint
+matching the rendered shape exactly, registered atomic (no parts; nothing
+here confirms a further sub-decomposition, and the CSV's inconsistent
+granularity between 骨's row, just "joint", and 咼's row, "joint; hood;
+mouth", isn't something a render can settle — recorded, not guessed at).
+Not a Kangxi radical (checked against the 214 official list — 冎 isn't
+among them), hence `prim-` not `kangxi{n}`.
+
+Added `冎` to both existing hosts as a **new alt**, per the project's
+established add-alt-then-let-the-tools-decide workflow (same shape as the
+sixteenth chunk's `screwdriver`/甫 fix):
+- `prim-jawbone` (咼): `口,冂` primary unchanged, `;口,冎` alt added
+  (matches cjkvi's `⿵冎口` exactly).
+- `rtk1383` (骨): `月,冎` alt added alongside the existing `月,冖,冂`
+  primary.
+
+`audit_primary_choice.py` then flagged `rtk1383` itself (0 unaccounted vs
+2, covering 5 of the Heisig-named concepts vs 4) — the old primary's
+`冖`/`冂` split isn't actually named anywhere in 骨's own CSV row, it was a
+plausible-looking but CSV-unsupported reading. Applied the suggested
+REPLACE: `月,冎` promoted to primary, `月,冖,冂` demoted to the (now
+auto-labelled `structural (cjkvi-ids)`) alt.
+
+### Verified
+
+Rebuilt `kanji.db` clean from source (3000 CSV-sourced kanji rows, 3088
+parts overrides — unchanged totals; this chunk added one primitive row and
+edited two `data.txt` lines' decomposition/alt structure, no new kanji).
+`test_regression_fixes.py`: 1321 checks, only the 4 known hanzi-scope
+non-issues, no pin breakage (nothing pinned `rtk1383`'s or `prim-jawbone`'s
+old parts). 66 pytest. `audit_overflatten.py` 0, `audit_self_reference.py`
+0, `audit_radicals.py` 0/0, `audit_primary_choice.py` back to 1 (the same
+documented `rtk265` deviation, confirmed unaffected by this chunk — the
+`rtk1383` candidate it flagged mid-chunk is resolved by the primary swap
+above, not left open).
+
+`audit_phantom_parts.py --in-csv-range`: **135/94** (down from 137/95) —
+diffed the full before/after output directly (stashed this chunk's change,
+rebuilt, re-ran, compared): the two entries that dropped were `rtk1383`'s
+own `冖 -> kangxi14` and `冂 -> kangxi13` phantom flags, which only existed
+because the old primary literally listed them as top-level parts that
+neither cjkvi's tree nor 骨's own CSV row name — independent confirmation,
+from a tool that wasn't the one used to find or apply this fix, that the
+primary swap is a real improvement and not just a `primary_choice`-metric
+artifact.
+
+Directly queried `search_by_parts(['joint'], depth=1)`: returns
+`prim-joint`/`prim-jawbone`/`rtk1383` — every host that lists `冎` literally.
+`depth=2` additionally reaches `rtk1384` `rtk1385` `rtk1386` `rtk1387`
+`rtk1388` `rtk1389` `rtk1641` — all 8 originally targeted hosts — plus
+`rtk2424` (猾, "sly"), a legitimate bonus match the `--near` clustering
+never listed (it contains 骨 directly, 犭+骨) rather than an error.
+`depth=3` unchanged from `depth=2`. `suggest_heisig_aliases.py --near 0.8
+--all` no longer lists `joint` in its unresolved group. Frontend `npm
+install`, `npm run lint`, `npm run build` all clean.
+
+**Next**: `joint` closed for all 8 original hosts plus one bonus (猾).
+`silage` (8 hosts: 乗剰唾垂睡華郵錘, "nothing common to every host — likely
+a missing row", same promising shape as `joint` was) is now
+`suggest_heisig_aliases`'s top unresolved item in that bucket and is
+entirely unstarted. `chop-seal, hanko` (14 hosts, one common weak-signal
+primitive across otherwise-unrelated hosts) remains flagged repeatedly and
+still looks like the same low-value signal it has in every prior chunk.
+`audit_phantom_parts.py`'s 135/94 pile (led by bare stroke primitives
+ノ/一/｜ with no alternative host to promote from) remains the larger
+standing item if the `--near` queue runs dry. `sync_system_data.py`
+against the live server is still not something this session can do — a
+deployer running it will see one new primitive row (`prim-joint`), one
+changed `decompositions` row (`prim-jawbone` +1 alt), and one changed
+`parts`/primary structure (`rtk1383`, `月,冎` promoted to primary, old
+`月,冖,冂` demoted to alt) from this chunk.
