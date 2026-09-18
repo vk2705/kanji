@@ -2118,14 +2118,14 @@ rtk2065:宅:home:ノ,一,乙,宀
 rtk2066:託:consign:ノ,一,乙,言
 rtk2067:為:do:ノ,灬,ユ,丶,勹
 rtk2068:偽:falsehood:亻,為
-rtk2069:畏:fear:衣,一,田
+rtk2069:畏:fear:一,田
 rtk2070:長:long:
 rtk2071:張:counter for bows & stringed instruments:弓,長
 rtk2072:帳:notebook:巾,長
 rtk2073:脹:dilate:月,長
 rtk2074:髪:hair of the head:友,髟
-rtk2075:展:unfold:尸,龷,衣
-rtk2076:喪:miss:｜,衣,一,口,亠
+rtk2075:展:unfold:尸,龷
+rtk2076:喪:miss:土,口
 rtk2077:巣:nest:𭕄,果
 rtk2078:単:simple:𭕄,甲,一
 rtk2079:戦:war:単,戈
@@ -3309,3 +3309,34 @@ prim-fishhook:𠃊:fishhook:
 # ⿱龸兄 (no 口 — it never had 尚 to begin with) and 償 nests through 賞
 # (⿰亻賞), so neither needed a line change here.
 prim-outhouse:𫩠:outhouse:⺌,冖,口
+
+# --- 2026-09-18: closing out the "hairpin/safety-pin" bundle
+# (suggest_heisig_aliases.py --near 0.8 --all had kept resurfacing it as
+# "worth a render pass" across several chunks) with a final verdict, not a
+# new primitive. cjkvi-ids confirms the shape is real and recurs
+# identically — ⿰𠄌⿺乀丿, three IDS-atomic CJK strokes (𠄌 + 乀 + 丿), self-
+# referencing in cjkvi-ids so there's nowhere further to expand — across
+# 26 characters in cjkvi-ids' whole corpus, including all of this cluster's
+# hosts (辰 長 展 喪 畏 and, through 辰, 辱 震 振 娠 唇 農 濃). That's the
+# same fine-stroke-level remainder the 2026-09-02 chunk already found and
+# declined to invent a primitive for on 辰 itself ("no clean citable
+# primitive for the remainder... rather than invent a shaky one-off
+# primitive for a single stroke detail") — this chunk's cjkvi-ids sweep
+# across the full 26-host family confirms that restraint was right rather
+# than overturning it: no single Unicode codepoint anywhere represents
+# just this compound, so a prim- row for it would have no real character
+# to render, unlike every other prim-* row in this file. What *was* fixed:
+# 畏/展/喪 each additionally carried a phantom 衣 ("clothing") copy-pasted
+# in alongside their real parts (render-confirmed: none of the three
+# glyphs contain it) — dropped, same redundant-flattening pattern 辰's own
+# fix already cleaned up on its downstream hosts. 喪's remaining
+# ｜,一,亠 were also flattened noise with no cjkvi-ids basis
+# (⿱⿻土吅[remainder] — 土 overlapping 吅, i.e. "soil" over doubled
+# "mouth"); replaced with 土,口. 畏 keeps 一,田 (⿳田一[remainder], both
+# already correct) and 展 keeps 尸,龷 (⿸尸⿱龷[remainder], both already
+# correct) — only the phantom part is gone from either. 長 (blank parts;
+# CSV components "hair; hairpin; safety-pin") is NOT fixed here — cjkvi-ids
+# itself can't cleanly resolve 長's top stroke (⿳④一⿰𠄌⿺乀丿, the ④ is
+# cjkvi's own placeholder for an unclear component), so "hair"'s real
+# identity is still an open question, not a render-confirmed one; left
+# blank rather than guessed.

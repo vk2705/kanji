@@ -10021,3 +10021,141 @@ starting a fresh render pass from scratch. `sync_system_data.py` against
 the live server is still not something this session can do — a deployer
 running it will see one changed `aliases` row (`prim-reclining` +1, "sign
 of the horse") from this chunk, nothing else.
+
+---
+
+## 2026-09-18 (eleventh chunk) — closing the `hairpin/safety-pin` bundle with a verdict, not a fix
+
+Seventh firing today. Same environment drill as every recent chunk: this
+container had the repo (fast-forwarded cleanly, no divergence to reconcile)
+but no `venv/`, no `node_modules/`, no CJK fonts, no `/tmp/ids.txt` — all
+four rebuilt, and `git push --dry-run origin master` confirmed clean before
+touching anything.
+
+Picked up the tenth chunk's own "Next": `hairpin/safety-pin` (12 hosts:
+唇喪娠展振濃畏辰辱農長震 — `suggest_heisig_aliases.py --near 0.8 --all` keeps
+listing it, common only to ノ/一, flagged repeatedly across the last four-plus
+chunks as "worth a render pass").
+
+### Investigation
+
+Before rendering anything, checked whether this exact item had already been
+investigated — it had. `test_regression_fixes.py`'s `rtk2164` comment block
+(2026-09-02 chunk) documents fixing 辰 itself from `衣,厂` to `厂,二` and
+explicitly declining to invent a primitive for the remainder: *"cjkvi-ids's
+real fine-stroke structure has no clean citable primitive for the
+remainder... rather than invent a shaky one-off primitive for a single
+stroke detail."* That's the exact same bundle `suggest_heisig_aliases.py`
+has kept resurfacing since — the later chunks that re-flagged it as "worth
+investigating" weren't aware of (or didn't cross-reference) this earlier,
+deliberate decision. Per the standing brief ("trust the notes over your own
+assumptions"), the job here was to check whether that decision still holds
+up, not to silently re-decide it from scratch.
+
+Pulled `cjkvi-ids` decompositions for all 5 of the bundle's *directly*
+distinct hosts (the other 7 — 辱震振娠唇農濃 — all route through `辰` itself,
+confirmed by their `data.txt` lines, so fixing `辰` alone cascades to them):
+
+| host | cjkvi-ids IDS |
+|---|---|
+| 辰 (rtk2164) | `⿸厂⿱二⿰𠄌⿺乀丿` |
+| 長 (rtk2070) | `⿳④一⿰𠄌⿺乀丿` |
+| 展 (rtk2075) | `⿸尸⿱龷⿰𠄌⿺乀丿` |
+| 喪 (rtk2076) | `⿱⿻土吅⿰𠄌⿺乀丿` |
+| 畏 (rtk2069) | `⿳田一⿰𠄌⿺乀丿` |
+
+Every one ends in the identical tail `⿰𠄌⿺乀丿` — `𠄌`, `乀`, `丿` are each
+IDS-atomic (self-referencing, confirmed by grepping `ids.txt` directly: no
+further expansion). Searched the whole `ids.txt` corpus (88,939 lines) for
+any character containing that exact substring: 26 hits, all drawn from the
+辰/辱/長 radical family (`丧` `喪` `展` `畏` `辰` `䘮` `𠂽` `𠅕` `𣌪` etc.) —
+confirming this is a real, stable, recurring compound shape (matching
+Heisig's own naming it consistently across the CSV's components column —
+"hairpin; safety-pin" appears verbatim on 辰/長/展/喪/畏/辱/震/振/娠/唇/農/濃,
+always as the last two names in the list), not a one-off. But the search
+also confirmed the negative: **zero** characters in the whole corpus
+decompose to *exactly* that tail on its own — nothing (not even an obscure
+CJK Extension codepoint) stands for just those 3 strokes independent of a
+host. Every existing `prim-*` row in `data.txt` has a real, if sometimes
+obscure, codepoint behind it (`prim-fishhook` → `𠃊`, `prim-rake` → `⺕`,
+`prim-bushes` → `丰`, ...); a `prim-hairpin` row here would be the first
+with nothing to put in the `character` column at all — genuinely different
+from "hard to render" (the `primitive_images/` cases) or "hard to find"
+(most of the audit's other fixes), and the 2026-09-02 chunk's restraint
+about not inventing "a shaky one-off primitive for a single stroke detail"
+turns out to describe this exactly, now confirmed dataset-wide rather than
+on 辰 alone. Verdict: leave it unfixed, on purpose, and say so clearly
+enough that it stops being re-flagged as an open question.
+
+That said, three of the five hosts had a real, independent, fixable bug
+sitting right next to this non-issue: `audit_phantom_parts.py` had flagged
+`畏`, `展`, and `喪` each carrying a phantom `衣` ("clothing") — render-
+confirmed none of the three glyphs contain it (`render_glyphs.py`, compared
+against real 衣 and against each host at full size). This was likely a
+copy-paste artifact from the same family of fixes as 辰's own old `衣,厂` —
+`衣` never belonged on any of them. Dropped it from all three, and for `喪`
+also replaced the remaining flattened noise (`｜,一,亠`, none of which
+`cjkvi-ids` supports either) with its real parts, `土,口` (`⿱⿻土吅[...]` —
+soil overlapping a doubled mouth shape; Heisig's own CSV names it "soil;
+dirt; ground; mouth", matching). `畏` keeps its already-correct `一,田`
+(`⿳田一[...]`, both present) and `展` keeps its already-correct `尸,龷`
+(`⿸尸⿱龷[...]`, both present) — only the phantom `衣` is gone from either.
+`長` (rtk2070) stays blank, deliberately: unlike the other four, `cjkvi-ids`
+itself can't cleanly resolve its top stroke (`④` is cjkvi's own placeholder
+for something it doesn't have a clean atomic breakdown for), so the CSV's
+"hair" component is still genuinely unidentified here, not just
+unreachable — guessing at it would violate "render it, don't reason about
+it" since there's nothing concrete to render yet. Left as a specific,
+narrow open question rather than folded into the same verdict as the rest.
+
+### Change
+
+`data.txt`: `rtk2069`(畏) `衣,一,田` → `一,田`; `rtk2075`(展) `尸,龷,衣` →
+`尸,龷`; `rtk2076`(喪) `｜,衣,一,口,亠` → `土,口`. No new primitive row. A
+dated comment block at the end of the file records the cjkvi-ids evidence
+and the "no codepoint exists" reasoning in full, so the next chunk that
+finds this bundle in `suggest_heisig_aliases.py`'s output can check the
+comment instead of re-running the same investigation.
+
+`test_regression_fixes.py`: 3 new pins (`rtk2069`, `rtk2075`, `rtk2076`),
+none pre-existing so nothing to correct in place.
+
+### Verified
+
+Rebuilt `kanji.db` clean from source. 1319 checks (+3 from the new pins),
+only the 4 known hanzi-scope non-issues. 66 pytest. `audit_overflatten.py`
+0, `audit_self_reference.py` 0, `audit_radicals.py` 0/0, `audit_primary_choice.py`
+0. `audit_phantom_parts.py`: 138/96 (down from 143/99 — the 5 phantom `衣`
+occurrences across the 3 hosts are gone, `畏`/`展`/`喪` no longer appear in
+the list at all). `audit_csv_regressions.py`: `畏` no longer flagged at all;
+`展` still shows `flag` as dropped (pre-existing, unrelated ambiguity —
+`flag` already resolves to `rtk1901`/旗 elsewhere, a separate "one Heisig
+name, two codepoints" case not touched this chunk); `喪` still shows
+`dirt`/`ground` as dropped (same pre-existing synonym-ambiguity non-issue
+pattern documented elsewhere in this audit). Neither shows `hairpin` or
+`safety-pin` as dropped, on any of the 12 hosts — confirming the tool
+correctly doesn't flag a CSV name that resolves nowhere in the whole
+database, only ones that resolve somewhere else. `suggest_heisig_aliases.py
+--near 0.8 --all` still lists `hairpin, safety-pin` (12 hosts) — expected
+and, per the investigation above, not actionable; future chunks should
+treat this as closed rather than re-opening it. Frontend `npm install`,
+`npm run lint`, and `npm run build` all clean.
+
+**Next**: with `hairpin/safety-pin` closed out, the two next largest
+`--near 0.8 --all` entries are `cloak` (10 hosts: 初袖被裕補裸裾複褐襟 — every
+host contains 衣/𧘇/亠/丶, a real structural signal this time, unlike
+hairpin — worth checking whether that's a genuine missing primitive or an
+existing one under a name this DB can't search by) and `glass canopy` (12
+hosts: 倫偏嗣尚岡編角解触論輪遍 — no common structural signal per `--all`,
+flagged as "possibly a genuinely missing primitive, still worth a render
+pass" for several chunks now without anyone actually doing that render
+pass — do that before flagging it again). `長`(rtk2070)'s blank parts are a
+narrow, separate open question from this chunk: `cjkvi-ids` can't cleanly
+resolve its top stroke either, so identifying "hair" needs either a closer
+render of just that top portion or an outside source on what Heisig
+actually teaches there — don't guess without one. The stroke-primitive tail
+of `audit_phantom_parts.py`'s full list (now 138/96) is otherwise
+unchanged. `sync_system_data.py` against the live server is still not
+something this session can do — a deployer running it will see three
+changed `parts` rows (`rtk2069`, `rtk2075`, `rtk2076`, all phantom-`衣`
+removals) from this chunk, nothing else.

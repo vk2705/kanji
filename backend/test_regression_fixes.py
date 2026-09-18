@@ -2322,6 +2322,20 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"rtk13", "rtk2170"}},
     "rtk2767": {"character": "賑", "keyword": "bustling",
                "expected_part_ids": {"rtk2164", "rtk56"}},
+    # 2026-09-18: closing the "hairpin/safety-pin" bundle suggest_heisig_
+    # aliases.py --near 0.8 --all kept resurfacing (data.txt has the full
+    # writeup) — no primitive added (cjkvi-ids' remainder is 3 atomic CJK
+    # strokes with no codepoint of their own, same restraint as 辰's own
+    # 2026-09-02 fix above), but 畏/展/喪 each had 衣("clothing") phantom-
+    # copy-pasted in alongside their real parts; render confirmed none of
+    # the three glyphs contain it, dropped. 喪's remaining flattened noise
+    # (｜,一,亠) replaced with its real cjkvi-ids-confirmed parts, 土,口.
+    "rtk2069": {"character": "畏", "keyword": "fear",
+               "expected_part_ids": {"rtk1", "rtk14"}},
+    "rtk2075": {"character": "展", "keyword": "unfold",
+               "expected_part_ids": {"kangxi44", "prim-salad"}},
+    "rtk2076": {"character": "喪", "keyword": "miss",
+               "expected_part_ids": {"rtk161", "rtk11"}},
     # Same audit, same session: 尚(rtk196, "esteem") used 49x as a component --
     # was missing a real component entirely (口,冂 only). cjkvi-ids: 尚 =
     # small-variant + 冂 + 口 (尚 = ⿱⺌冋, 冋 = ⿵冂口). Render-confirmed 尚's
