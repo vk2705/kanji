@@ -19,7 +19,7 @@ kangxi43:尢:chihuahua with one human leg,lame
 kangxi45:屮:mountain goat with horns missing,sprout,Radical 45
 kangxi47:巛:curving river,Radical 47,flood,river
 kangxi55:廾:two hands
-kangxi58:彑:pig's head,Radical 58,pig snout,mutual difficulties,two walls
+prim-pigs-head:彑:pig's head,pig snout,mutual difficulties,two walls
 kangxi64:扌:finger,fingers
 kangxi170:阝:pinnacle,leftside beta,beta,parthenon,acropolis
 kangxi163:⻏:walls,city walls,rightside beta,ozato,beta
@@ -3282,7 +3282,7 @@ prim-march:戌:march:戊,一
 # depending on the frame, and the flush one 'broom' — so 'broom' is an
 # ambiguous term and deliberately answers to both rows.
 prim-rake:⺕:rake,broom:
-prim-broom:彐:broom:
+kangxi58:彐:broom,Radical 58:
 # 尃 is not 専. Its four hosts spelled it 専 plus a stray 丶.
 prim-acupuncturist:尃:acupuncturist:甫,寸
 

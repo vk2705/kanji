@@ -9455,3 +9455,93 @@ server access) — a deployer still needs to run it, and as of this chunk
 there's nothing new queued for it beyond what the fourth chunk already
 flagged (this chunk registered no new primitives, so no new `image_url`
 values to propagate).
+
+---
+
+## 2026-09-18 (sixth chunk) — `kangxi58` id swap: 彑 vs 彐
+
+Picked up the standing housekeeping item from the fourth/fifth chunks' notes
+(itself flagged, but deliberately left alone, back in the session that
+registered `prim-broom`/`prim-rake`): `kangxi58` held 彑 (U+5F51), but
+Unicode's `CJKRadicals.txt` (`58; 2F39; 5F50`) says radical 58 is 彐
+(U+5F50), which this project already had registered separately as
+`prim-broom` — two ids for two really-distinct shapes, but the *official
+radical number* id was sitting on the wrong one.
+
+Environment note, same shape as the last several chunks': container had the
+repo but no `venv/`, no `node_modules/`, no CJK fonts, and no
+`/tmp/ids.txt`. Rebuilt all four (`python3 -m venv venv && ./venv/bin/pip
+install -r requirements.txt -r requirements-dev.txt`, `npm install`,
+`apt-get install fonts-noto-cjk fonts-hanazono`, `curl` for cjkvi's
+`ids.txt`) before touching anything, and confirmed push access with
+`git push --dry-run origin master` per the standing container-safety rule —
+this container came up in a detached `HEAD` one commit *ahead* of the local
+`master` ref (`origin/master` had moved on since `master` was last updated
+locally), fixed with a plain `git checkout master && git merge --ff-only
+origin/master` after confirming `master` was a strict ancestor of the
+detached commit (no risk of discarding anything).
+
+### Confirmed with data, then rendered anyway
+
+`CJKRadicals.txt` is unambiguous: `58; 2F39; 5F50` names U+5F50 (彐) as
+radical 58's real codepoint; U+5F51 (彑) doesn't appear anywhere in that
+file under any radical number, so it's a variant shape, not itself one of
+the 214 officially-numbered radicals. cjkvi-ids backs this up structurally:
+`互` (U+4E92) decomposes as `⿱一彑` and `彙` (U+5F59) as `⿳彑冖果` — both
+真 use 彑, matching `data.txt`'s existing (correct) parts for `rtk819`/
+`rtk1237` — while `雪`/`尋`/`急`/`当`/`縁` all use 彐, matching `prim-broom`'s
+existing hosts. So the *shapes* were never confused in this database; only
+the *id* was swapped relative to which one is the numbered radical.
+
+Rendered both (`render_glyphs.py 彐 彑`) anyway per the standing rule, plus
+`互`/`彙` alongside them: 彐 (U+5F50) draws as an open three-stroke shape
+(㇕㇐㇐ stacked, bottom open), 彑 (U+5F51) draws with the bottom stroke
+closing the shape into a snout — visibly distinct, and 互's top and 彙's
+middle component both clearly match 彑's closed-bottom form, not 彐's.
+
+### Applied
+
+Swapped the two ids in `data.txt`: `kangxi58:彑:...` → `prim-pigs-head:彑:
+pig's head,pig snout,mutual difficulties,two walls` (dropped the `Radical
+58` alias, since that claim was simply false for this glyph), and
+`prim-broom:彐:broom:` → `kangxi58:彐:broom,Radical 58:` (the true claim
+moved to where it belongs). Checked first for any other file referencing
+either id string directly (as opposed to referencing the character 彐/彑,
+which resolves through `resolve_alias` and needed no changes) — only one
+hit, `test_regression_fixes.py`'s `rtk1472` pin (`expected_part_ids`
+containing `"prim-broom"`), corrected in place to `"kangxi58"` with a
+comment explaining the swap. No other pin, audit script, or doc (other than
+this running log, left untouched — it's a historical record) hardcodes
+either id.
+
+### Verified
+
+Rebuilt `kanji.db` clean from source. `rtk.py char 彑`/`彐` now show
+`prim-pigs-head`/`kangxi58` respectively; `rtk.py detail` on `rtk819`
+(互)/`rtk1237` (彙)/`rtk1472` (縁) all show unchanged parts, just resolving
+through the corrected ids. 1316 checks, only the 4 known hanzi-scope
+non-issues. 66 pytest. `audit_overflatten.py` 0, `audit_self_reference.py`
+0, `audit_radicals.py` 0/0, `audit_primary_choice.py` 0. Phantom parts
+(`--in-csv-range`) unchanged at 143 across 99 (neither 彑 nor 彐 was ever a
+phantom part — this was a pure id-identity fix, not a decomposition
+change), confirming nothing else moved. Frontend `npm install`, `npm run
+lint`, and `npm run build` all clean.
+
+No `make_primitive_images.py` run needed — neither glyph is one of the
+unrenderable-primitive exceptions, and neither `image_url` changed.
+`sync_system_data.py` against the live server is still not something this
+session can do (no server access); a deployer running it will now see one
+more `kanji: id changed` / `parts: repointed` pair than usual for this one
+swap, which is expected and safe (the underlying glyphs and decompositions
+are identical — only the two ids traded places).
+
+**Next**: the `kangxi58` housekeeping item that's been on the backlog since
+the `prim-broom`/`prim-rake` session is now closed. Two items remain from
+the standing backlog, both unchanged by this chunk: `suggest_heisig_aliases.py
+--near 0.8 --all` (~236 unsearchable Heisig names, flat tail — 0 names with
+20+ hosts, so pick from `--near` output rather than by host count), and the
+stroke-primitive tail of `audit_phantom_parts.py`'s full list (ノ/一/｜ on
+hosts with no alternative to promote, each needing its own host-by-host
+identification rather than a bulk fix). The past-frame-2200 CSV-blind-spot
+note is unchanged and still just a note. `sync_system_data.py` against the
+live server is still not something this session can do.

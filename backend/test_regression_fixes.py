@@ -2670,8 +2670,11 @@ EXPECTED_DECOMPOSITIONS = {
     # 争 妻 帚 婦 protrude, 尋 当 雪 do not. 縁 is a 彐. Heisig calls the first
     # shape both "rake" and "broom" depending on the frame and the second
     # "broom", so "broom" is ambiguous on purpose and answers to both rows.
+    # 彐 is id'd kangxi58, not prim-broom -- CJKRadicals.txt (58; 2F39; 5F50)
+    # confirms 彐 (U+5F50) is the real official radical 58, not 彑 (U+5F51,
+    # now prim-pigs-head), which used to squat on that id.
     "rtk1472": {"character": "縁", "keyword": "affinity",
-               "expected_part_ids": {"kangxi152", "prim-broom", "rtk1431"}},
+               "expected_part_ids": {"kangxi152", "kangxi58", "rtk1431"}},
     "rtk1473": {"character": "網", "keyword": "netting",
                "expected_part_ids": {"kangxi12", "kangxi13", "rtk1431", "rtk524"}},
     "rtk1474": {"character": "緊", "keyword": "tense",
