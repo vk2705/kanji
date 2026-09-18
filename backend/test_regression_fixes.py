@@ -3541,8 +3541,11 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"rtk14", "rtk1484"}},
     "rtk1487": {"character": "弦", "keyword": "bowstring",
                "expected_part_ids": {"rtk1317", "rtk1484"}},
-    "rtk1874": {"character": "率", "keyword": "ratio",
-               "expected_part_ids": {"kangxi12", "rtk10", "rtk1484", "rtk8"}},
+    "rtk1874": {"character": "率", "keyword": "ratio",  # kangxi12(horns)+rtk8(eight) collapsed
+               # into prim-sparkler 2026-09-18: cjkvi-ids (⿱⿻玄⿱丷八十) and a
+               # render of 塁楽率渋摂函 all show the same ⿱丷八 splay as one
+               # distinct top-of-glyph shape, not two independent strokes.
+               "expected_part_ids": {"prim-sparkler", "rtk10", "rtk1484"}},
     "rtk2015": {"character": "舷", "keyword": "gunwale",
                "expected_part_ids": {"rtk1484", "rtk2012"}},
     "rtk2629": {"character": "眩", "keyword": "faint",

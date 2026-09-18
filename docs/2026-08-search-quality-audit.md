@@ -12047,3 +12047,143 @@ the previous four chunks applies, now quintupled. Given the pattern is now
 five same-day firings in a row rather than the intended one-per-day cadence,
 this session is flagging it to the owner directly (outside this log) rather
 than only noting it here again.
+
+## 2026-09-18 (twenty-sixth chunk) — `sparkler` resolves for all 7 CSV hosts
+via a new `prim-sparkler`
+
+Sixth firing today. Fresh container again: no `venv/`, no `node_modules/`,
+no CJK fonts, no `/tmp/ids.txt`. `master` was a detached HEAD sitting on
+the exact commit the local `master` branch ref was 39 commits behind (five
+same-day chunks landed since this container's base image), so `git
+checkout master` first, then `git pull --ff-only` (clean fast-forward),
+then `git push --dry-run origin master` confirmed clean before any work —
+per the standing container-recovery drill. Rebuilt venv/node_modules/
+fonts/ids.txt from scratch as usual.
+
+Picked up the twenty-fifth chunk's own "Next": `sparkler` (7 hosts:
+塁楽率渋摂函 directly cited in `heisig-kanjis.csv`, plus 薬 which inherits
+it only through 楽 — "every host contains 八(eight)/丷(horns) at 1.00" per
+the suggestion tool's overlap heuristic).
+
+### Investigation
+
+`data.txt` before this chunk: all six directly-cited hosts already had
+`丷,八` (horns, eight) as two separate flattened strokes in their parts —
+`rtk1871:塁:bases:丷,八,土,田`, `rtk1872:楽:music:丷,八,木,白`,
+`rtk1874:率:ratio:丷,八,十,玄`, `rtk1875:渋:astringent:丷,八,止,水`,
+`rtk1876:摂:vicarious:丷,八,扌,耳`, `rtk2051:函:box (archaic):丂,丷,八,凵`.
+`rtk1873`(薬) already references `rtk1872`(楽) literally
+(`艹,楽`), so it needed no edit of its own — same transitive pattern as
+`俸`/`棒`←`奉` and `剤`/`済`/`斎`←`斉` in the last two chunks.
+
+`/tmp/ids.txt` confirms `⿱丷八` (horns over eight) as one consistent
+sub-shape across every directly-cited host: `塁=⿳田⿱丷八土`,
+`楽=⿱⿴⿱丷八白木`, `率=⿱⿻玄⿱丷八十`, `渋=⿰氵⿱止⿱丷八`,
+`摂=⿰扌⿱耳⿱丷八`, `函=⿶凵⿻了⿱丷八[GTV]`/`⿶凵⿻丂⿱丷八[JK]` — the
+current flattened `丷,八` split was spelling the same compound as two raw
+strokes on every single host, the same over-flattening pattern already
+fixed for `cornstalk`/`fenceposts` in the prior two chunks. Rendered all
+seven kanji plus `丷`/`八` alone (`render_glyphs.py`): every host shows the
+identical splay-over-eight shape at the top of the glyph, clearly one
+visual unit, not scattered noise — confirms this is real, not a
+coincidental IDS grouping.
+
+Checked the CSV components column for each of the seven hosts (line
+`heisig-kanjis.csv:1872-1877,2052`): none separately cites "eight" or
+"horns" on top of "sparkler" — so, unlike the `斉`/"two" case two chunks
+ago, folding them into a compound primitive carried no risk of breaking a
+separately-cited sub-stroke name. Still gave `prim-sparkler` its own
+`丷,八` sub-decomposition rather than leaving it atomic, matching the
+`prim-fenceposts` precedent, so "horns"/"eight" stay reachable at depth 2
+regardless.
+
+Checked for a Unicode codepoint covering exactly `⿱丷八`: grepped
+`ids.txt` for any entry whose whole IDS is that string — none; it only
+ever appears as a sub-component inside these same seven characters plus a
+handful of others (塁 楽 率 渋 摂 函 薬 etc.), same "no citable codepoint"
+situation as `cornstalk`/`fenceposts`. Used the same `?` placeholder
+convention.
+
+### Change
+
+```
+prim-sparkler:?:sparkler:丷,八
+rtk1871:塁:bases:prim-sparkler,土,田
+rtk1872:楽:music:prim-sparkler,木,白
+rtk1874:率:ratio:prim-sparkler,十,玄
+rtk1875:渋:astringent:prim-sparkler,止,水
+rtk1876:摂:vicarious:prim-sparkler,扌,耳
+rtk2051:函:box (archaic):丂,prim-sparkler,凵
+```
+`薬`(rtk1873) needed no edit — already references `楽` literally.
+
+`rtk1874`'s regression pin in `test_regression_fixes.py` named the old
+flattened form (`kangxi12`(horns), `rtk8`(eight)) directly, so it broke on
+rebuild as expected; corrected in place to `prim-sparkler`, with a comment
+recording why (cjkvi-ids + the seven-way render, same evidence as above) —
+not just swapping the id. No other host in this chunk had a pin naming
+`丷`/`八`/`kangxi12`/`rtk8` directly (checked by grepping each of the six
+touched ids across the whole pin file; `rtk1873`'s existing pin only names
+`prim-mugwort`/`rtk1872`, unaffected).
+
+### Verified
+
+Rebuilt `kanji.db` clean from source (3000 CSV-sourced kanji rows, 3090
+parts overrides — one more than the prior chunk's 3089, from the one new
+`prim-sparkler` decomposition row; unchanged CSV-sourced row count).
+`test_regression_fixes.py`: first run surfaced exactly the one expected
+pin break (`rtk1874`, see above); after correcting it, 1321 checks, only
+the 4 known hanzi-scope non-issues, no other pin breakage. 66 pytest.
+`audit_overflatten.py` 0, `audit_self_reference.py` 0, `audit_radicals.py`
+0/0, `audit_primary_choice.py` 1 (unchanged `rtk265` deviation, untouched
+by this chunk). `audit_phantom_parts.py --in-csv-range`: **122/86**,
+unchanged — `丷`/`八` were real resolvable codepoints before this edit
+too, so this audit was never going to move on this fix.
+
+`audit_csv_regressions.py`: `rtk1871`/`rtk1874` remain flagged but only
+for pre-existing, unrelated gaps (`dirt`/`ground` on `塁`, `question
+mark`/`cocoon`/`needle` on `率` — Heisig's own alternate names for other
+parts of the same compound, both untouched by this chunk and present
+before it); `sparkler` itself does not appear in any host's `dropped:`
+line, confirming the fix landed cleanly with no new gaps opened. Directly
+queried `search_by_parts(['sparkler'], depth=1)`: returns all six
+directly-cited hosts (`rtk1871`, `rtk1872`, `rtk1874`, `rtk1875`,
+`rtk1876`, `rtk2051`) plus `prim-sparkler` itself (self-identity).
+`depth=2` adds `rtk1873`(薬), the one transitive host — seven of seven CSV
+citations covered. `search_by_parts(['horns'], depth=2)` still returns 213
+kanji including `rtk1874`; `search_by_parts(['eight'], depth=2)` still
+returns 265 including `rtk1871` — confirming both names stayed reachable
+through `prim-sparkler`'s own sub-decomposition, not orphaned by the fold.
+`suggest_heisig_aliases.py --near 0.8 --all`: `sparkler` group gone (27 →
+26 unresolved groups). Frontend `npm install`, `npm run lint`, `npm run
+build` all clean.
+
+**Next**: `sparkler` fully closed, all 7 CSV-cited hosts covered (6
+directly, `薬` transitively). `schoolhouse` (6 hosts, `𭕄`/`冖` at 1.00) and
+`catapult, slingshot` (6 hosts, `一` at 0.83) are now the top-ranked
+unstarted groups by the `--near 0.8` overlap heuristic with a real
+shared-primitive signal; `sunglasses`/`ballerina, dancing legs` (5 and 4
+hosts, sharing `舛`/`㐄`/`夕`/`𠂊` at 0.80-1.00, both centered on the same
+host set — 傑瞬舞隣 plus 官 for the larger group — worth checking together)
+and `maestro without baton` (5 hosts, `官`/`宀` at 0.80) are next after
+those. `chop-seal, hanko` (14 hosts) and `hairpin, safety-pin` (12 hosts)
+remain the top two by raw host count but are still the same weak
+single-common-primitive signal shape flagged as unpromising in multiple
+prior chunks. `粛`'s own top/bottom structure (open since the twenty-fifth
+chunk, no cjkvi IDS decomposition available for it or `肅`), `猟`'s
+`用`-vs-`𠂡` font-coverage question, and `逓`'s buried `乕`-nested overlay
+(both open since the twenty-fourth chunk) are all still unresolved.
+`stick`'s collision with `rtk60`'s unrelated "post a bill" alias is still
+an open minor oddity. `audit_phantom_parts.py`'s 122/86 pile (led by bare
+stroke primitives ノ/一/｜ with no alternative host to promote from)
+remains the larger standing item if the `--near` queue runs dry.
+`sync_system_data.py` against the live server is still not something this
+session can do — a deployer running it will see one new `kanji` row
+(`prim-sparkler`) and its one alias/keyword ("sparkler"), plus six changed
+`parts` rows (`rtk1871`, `rtk1872`, `rtk1874`, `rtk1875`, `rtk1876`,
+`rtk2051`) from this chunk. Also: this is the **sixth** firing today
+(following the twenty-first through twenty-fifth chunks above, each
+independently evidenced and verified) — the scheduler-doubling issue
+flagged to the owner directly after the fifth firing is still ongoing;
+this session is notifying the owner again since the count grew rather than
+stopped.

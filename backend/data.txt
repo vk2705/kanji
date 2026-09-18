@@ -1921,12 +1921,20 @@ rtk1867:剤:dose:斉,刀
 rtk1868:済:settle (debt  etc.):水,斉
 rtk1869:斎:purification:斉,示
 rtk1870:粛:solemn:｜,ノ,米,隶
-rtk1871:塁:bases:丷,八,土,田
-rtk1872:楽:music:丷,八,木,白
+# prim-sparkler = ⿱丷八 (horns splayed over eight), confirmed by cjkvi-ids
+# on all six directly-cited hosts (塁楽率渋摂函) plus rendering: the same
+# distinct top-of-glyph shape in every one, not a coincidental IDS grouping.
+# No Unicode codepoint covers exactly ⿱丷八 (checked ids.txt for an exact
+# match, none); kept atomic with its own 丷,八 sub-decomposition, same
+# pattern as prim-fenceposts, so "horns"/"eight" stay reachable at depth 2
+# since neither is separately CSV-cited on any of these hosts.
+prim-sparkler:?:sparkler:丷,八
+rtk1871:塁:bases:prim-sparkler,土,田
+rtk1872:楽:music:prim-sparkler,木,白
 rtk1873:薬:medicine:艹,楽
-rtk1874:率:ratio:丷,八,十,玄
-rtk1875:渋:astringent:丷,八,止,水
-rtk1876:摂:vicarious:丷,八,扌,耳
+rtk1874:率:ratio:prim-sparkler,十,玄
+rtk1875:渋:astringent:prim-sparkler,止,水
+rtk1876:摂:vicarious:prim-sparkler,扌,耳
 rtk1877:央:center:冖,大
 rtk1878:英:england:艹,央
 rtk1879:映:reflect:央,日;ノ,日,大,冖
@@ -2101,7 +2109,7 @@ rtk2047:娯:recreation:呉,女
 rtk2048:誤:mistake:言,呉
 rtk2049:蒸:steam:丞,灬,艹
 rtk2050:承:acquiesce:ノ,二,亅,手
-rtk2051:函:box (archaic):丂,丷,八,凵
+rtk2051:函:box (archaic):丂,prim-sparkler,凵
 rtk2052:極:extreme:口,又,木,一
 rtk2053:牙:tusk:
 rtk2054:芽:bud:牙,艹
