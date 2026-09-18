@@ -1916,7 +1916,7 @@ rtk1862:対:vis-a-vis:寸,文
 rtk1863:紋:family crest:糸,文
 rtk1864:蚊:mosquito:虫,文
 rtk1865:斑:spot:王,文
-rtk1866:斉:adjusted:ノ,二,文,｜;｜,ノ,文,廾
+rtk1866:斉:adjusted:prim-fenceposts,文;｜,ノ,文,廾
 rtk1867:剤:dose:斉,刀
 rtk1868:済:settle (debt  etc.):水,斉
 rtk1869:斎:purification:斉,示
@@ -3660,4 +3660,33 @@ prim-cornucopia:丩:cornucopia
 # that is a separate, deeper re-decomposition, not a one-line alias add.
 # Left both open for a future chunk.
 prim-cornstalk:?:cornstalk
+
+# fenceposts, cabers: heisig-kanjis.csv names these as a shared component of
+# 斉(rtk1866)/剤(rtk1867)/済(rtk1868)/斎(rtk1869)/粛(rtk1870). cjkvi-ids gives
+# 斉 = ⿱文⿲丿二丨 -- 文("sentence", already rtk1861's own alias) on top, a
+# side-by-side ⿲丿二丨 arrangement (丿, 二, ｜) on the bottom. The prior
+# data.txt split that bottom into three raw stroke names (ノ,二,｜) instead
+# of naming the compound shape; render_glyphs.py on 斉 alone confirms the
+# three strokes read as one visually distinct unit under 文, not scattered
+# noise. Like prim-cornstalk, this shape has no Unicode codepoint of its
+# own -- ⿲丿二丨 never appears as a whole IDS entry in cjkvi-ids, only as a
+# sub-component (斉 齊 𠂁 𠄷 𠫼 etc.) -- so it gets a "?" character. Unlike
+# prim-cornstalk (left atomic, no CSV name for any of its own sub-strokes),
+# this row keeps its own `ノ,二,｜` decomposition -- 斉 itself separately
+# cites "two" (CSV) for the middle stroke, and folding it into an atomic
+# leaf broke that resolution in a first pass of this fix (confirmed via
+# audit_csv_regressions.py) until this parts list was added back.
+# 剤/済/斎 all already reference 斉 literally in their own parts (剤:
+# `斉,刀`, 済: `水,斉`, 斎: `斉,示`), so they inherit "fenceposts"/"cabers"
+# transitively once 斉 itself carries it -- no edit needed on any of them.
+# 粛 deliberately NOT touched: cjkvi-ids has no decomposition for either 粛
+# or its traditional form 肅 (both map to themselves), and a direct render
+# of 粛 shows a fan/rake shape on top and a 米-like grid on the bottom with
+# no visually obvious ⿲丿二丨 three-stroke-in-a-row arrangement matching
+# 斉's -- its current `｜,ノ,米,隶` split may or may not be right, but
+# forcing it onto this primitive on a "looks like it could be related"
+# guess without a clearer signal would repeat the mistake this audit keeps
+# guarding against. Left open for a future chunk with render budget to
+# work out what 粛's own top/bottom sections actually are.
+prim-fenceposts:?:fenceposts,cabers:ノ,二,｜
 

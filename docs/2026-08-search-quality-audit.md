@@ -11904,3 +11904,146 @@ above, each independently evidenced and verified) — same
 scheduler-doubling note as the previous three chunks applies, now
 quadrupled; still no action taken beyond flagging it again, per the
 standing full-autonomy brief.
+
+## 2026-09-18 (twenty-fifth chunk) — `fenceposts, cabers` resolves for 4 of
+5 CSV hosts via a new `prim-fenceposts`; `粛` left open
+
+Fifth firing today. Fresh container again: no `venv/`, no `node_modules/`,
+no CJK fonts, no `/tmp/ids.txt`. `master` was a detached HEAD sitting on
+the exact commit the local `master` branch ref was 38 commits behind (four
+same-day chunks landed since this container's base image), so `git
+checkout master` first, then `git pull --ff-only` (clean fast-forward),
+then `git push --dry-run origin master` confirmed clean before any work —
+per the standing container-recovery drill. Rebuilt venv/node_modules/
+fonts/ids.txt from scratch as usual.
+
+Picked up the twenty-fourth chunk's own "Next": `cabers, fenceposts` (5
+hosts: 剤斉斎済粛, resolved via `heisig-kanjis.csv` to 斉(rtk1866,
+"adjusted")/剤(rtk1867,"dose")/済(rtk1868,"finish")/斎(rtk1869,
+"purification")/粛(rtk1870,"solemn") — "every host contains 文/乂/亠/丶 at
+0.80" per the suggestion tool's overlap heuristic, though that particular
+signal turned out to be a red herring, see below).
+
+### Investigation
+
+`data.txt` before this chunk: `rtk1866:斉:adjusted:ノ,二,文,｜;｜,ノ,文,廾`.
+`剤`/`済`/`斎` already reference `斉` literally (`斉,刀` / `水,斉` /
+`斉,示`), so — same pattern as `俸`/`棒`←`奉` and `柳`/`瑠`←`卯`/`留` in
+prior chunks — fixing `斉` itself was the one real edit needed to reach
+three of the five hosts transitively. `粛`'s own split (`｜,ノ,米,隶`) does
+not reference `斉` at all, so it needed its own separate look.
+
+`/tmp/ids.txt`: `斉 = ⿱文⿲丿二丨` — `文`("sentence", already `rtk1861`'s
+own alias, unrelated to this chunk) on top, a side-by-side `⿲丿二丨`
+arrangement (丿, 二, ｜) on the bottom. The prior split already had all
+three of those raw strokes (`ノ,二,｜` interleaved with `文`) but as three
+separate flattened names rather than one compound shape — same
+over-flattening pattern already fixed for `cornucopia`/`cornstalk` in the
+last two chunks. Rendered `斉` alone (`render_glyphs.py`): the bottom
+three-stroke arrangement reads clearly as one visually distinct unit under
+`文`, not scattered noise, confirming this is a real, nameable shape.
+
+Checked for a Unicode codepoint covering exactly `⿲丿二丨`: grepped
+`ids.txt` for any entry whose whole IDS is that string — none; it only
+ever appears as a sub-component (斉 齊 𠂁 𠄷 𠫼 etc.), same "no citable
+codepoint" situation as `cornstalk`. Used the same `?` placeholder
+convention.
+
+First pass registered `prim-fenceposts` as a fully atomic leaf (no parts
+of its own, matching how `prim-cornstalk`/`prim-cornucopia`/`prim-receipt`
+are all registered) — but `audit_csv_regressions.py` immediately flagged a
+new regression this introduced: `斉`'s CSV baseline separately cites "two"
+(Heisig's alternate name for the middle `二` stroke on its own, distinct
+from "fenceposts"/"cabers" naming the whole three-stroke group), and
+folding `二` into an atomic primitive with no sub-parts broke that
+resolution (`二` was previously reachable as `斉`'s own literal part;
+after the first-pass edit it wasn't reachable at any depth). None of the
+three prior atomic-leaf primitives had this problem because none of their
+own sub-strokes were separately CSV-cited by name on the same host. Fixed
+by giving `prim-fenceposts` its own `ノ,二,｜` decomposition instead of
+leaving it atomic — `二`/"two" is then reachable at depth 2 through it,
+confirmed directly (`search_by_parts(['two'], depth=2)` now includes
+`rtk1866`).
+
+`粛`: cjkvi-ids has no decomposition for either `粛` or its traditional
+form `肅` (both map to themselves in `ids.txt`), so this couldn't be
+checked against a source-of-truth IDS the way `斉` could. Rendered `粛`
+directly: top is a fan/rake-like splay of strokes, middle a horizontal
+bar, bottom a `米`-like grid with a vertical stroke through it — no
+visually obvious `⿲丿二丨` three-in-a-row arrangement matching `斉`'s
+matching shape anywhere in it. Its current `｜,ノ,米,隶` split may or may
+not be correct on its own terms, but forcing it onto `prim-fenceposts` on
+a "shares two of the three CSV names" signal without a clearer render
+match would repeat the mistake this audit keeps guarding against (the
+`猟`/`用`-vs-`𠂡` ambiguity from the previous chunk was left alone for
+exactly the same reason). Left `粛` untouched, with a comment in `data.txt`
+saying so.
+
+### Change
+
+```
+prim-fenceposts:?:fenceposts,cabers:ノ,二,｜
+rtk1866:斉:adjusted:prim-fenceposts,文;｜,ノ,文,廾
+```
+`剤`/`済`/`斎` needed no edit — all three already reference `斉` literally.
+`粛` left untouched, with the render evidence and the open question
+recorded in `data.txt` itself (a comment right above `prim-fenceposts`).
+
+### Verified
+
+Rebuilt `kanji.db` clean from source (3000 CSV-sourced kanji rows, 3089
+parts overrides — one more than the prior chunk's 3088, from the one new
+`prim-fenceposts` decomposition row; unchanged CSV-sourced row count).
+`test_regression_fixes.py`: 1321 checks, only the 4 known hanzi-scope
+non-issues, no pin breakage. 66 pytest. `audit_overflatten.py` 0,
+`audit_self_reference.py` 0, `audit_radicals.py` 0/0,
+`audit_primary_choice.py` 1 (unchanged `rtk265` deviation, untouched by
+this chunk). `audit_phantom_parts.py --in-csv-range`: **122/86**,
+unchanged — `ノ`/`二`/`｜` were real resolvable codepoints before this
+edit too, so this audit was never going to move on this fix.
+
+`audit_csv_regressions.py`: `rtk1866`/`rtk1868` drop off the flagged list
+entirely; `rtk1867`/`rtk1869` remain flagged but only for pre-existing,
+unrelated gaps (`sabre`/`saber` on `剤`, `altar` on `斎` — both untouched
+by this chunk); `rtk1870`(粛) remains flagged, its `dropped:` line now
+showing only `fenceposts`/`cabers` — confirming both the fix landed
+cleanly on the four intended hosts and `粛` is exactly the one host left
+deliberately open. Directly queried `search_by_parts(['fenceposts'],
+depth=1)`: returns `prim-fenceposts rtk1866` (self plus the one directly-
+fixed host). `depth=2` adds `rtk1867`(剤), `rtk1868`(済), `rtk1869`(斎) —
+exactly the three transitive hosts, no more no less. `search_by_parts(
+['two'], depth=2)` includes `rtk1866`, confirming the atomic-leaf
+regression caught mid-chunk is actually fixed, not just no-longer-flagged
+by one audit script. `suggest_heisig_aliases.py --near 0.8 --all`:
+`cabers, fenceposts` group gone (28 → 27 unresolved groups). Frontend
+`npm install`, `npm run lint`, `npm run build` all clean.
+
+**Next**: `fenceposts, cabers` closed for 4 of its 5 CSV-cited hosts (`斉`
+directly, `剤`/`済`/`斎` transitively); `粛`'s own top/bottom structure is
+recorded above as an open problem for a future chunk with cjkvi giving no
+help on this one (no IDS decomposition at all for `粛` or `肅`) — whoever
+picks it up will need to render it fresh and reason from stroke shapes
+alone, not from cjkvi cross-checking. `sparkler` (7 hosts, 八/丷 at 1.00),
+`schoolhouse` (6 hosts, 𭕄/冖 at 1.00), and `catapult, slingshot` (6 hosts,
+一 at 0.83) are now the top-ranked unstarted groups by the `--near 0.8`
+overlap heuristic and host count, all with real shared-primitive signals
+rather than the weak single-stroke kind. `chop-seal, hanko` (14 hosts) and
+`hairpin, safety-pin` (12 hosts) remain the top two by raw host count but
+are still the same weak single-common-primitive signal shape flagged as
+unpromising in multiple prior chunks. `猟`'s `用`-vs-`𠂡` font-coverage
+question and `逓`'s buried `乕`-nested overlay (both from the previous
+chunk) are still open too. `stick`'s collision with `rtk60`'s unrelated
+"post a bill" alias is still an open minor oddity. `audit_phantom_parts.
+py`'s 122/86 pile (led by bare stroke primitives ノ/一/｜ with no
+alternative host to promote from) remains the larger standing item if the
+`--near` queue runs dry. `sync_system_data.py` against the live server is
+still not something this session can do — a deployer running it will see
+one new `kanji` row (`prim-fenceposts`) and its one alias/keyword
+("fenceposts", with "cabers" as a second alias), plus one changed `parts`
+row (`rtk1866`) from this chunk. Also: this is the fifth firing today
+(following the twenty-first through twenty-fourth chunks above, each
+independently evidenced and verified) — same scheduler-doubling note as
+the previous four chunks applies, now quintupled. Given the pattern is now
+five same-day firings in a row rather than the intended one-per-day cadence,
+this session is flagging it to the owner directly (outside this log) rather
+than only noting it here again.
