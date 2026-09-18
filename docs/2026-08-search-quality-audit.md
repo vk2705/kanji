@@ -10159,3 +10159,120 @@ unchanged. `sync_system_data.py` against the live server is still not
 something this session can do — a deployer running it will see three
 changed `parts` rows (`rtk2069`, `rtk2075`, `rtk2076`, all phantom-`衣`
 removals) from this chunk, nothing else.
+
+---
+
+## 2026-09-18 (twelfth chunk) — "glass canopy": a real render pass, and a split verdict
+
+Eighth firing today. Same environment drill: fresh container, repo present
+and fast-forwarded cleanly, but no `venv/`, no `node_modules/`, no CJK
+fonts, no `/tmp/ids.txt` — all rebuilt, `git push --dry-run origin master`
+confirmed clean before any edits.
+
+Picked up the eleventh chunk's own "Next": `glass canopy` (12 hosts:
+倫偏嗣尚岡編角解触論輪遍, `suggest_heisig_aliases.py --near 0.8 --all` reporting
+"nothing common to every host") had been flagged as "possibly a genuinely
+missing primitive, still worth a render pass" for several chunks running
+without anyone actually doing the render. This chunk did it.
+
+### Investigation
+
+`render_glyphs.py` on all 12 hosts plus candidate sub-glyphs (冂, 卄, 𠕁,
+冋, 侖, 扁, 用) showed the 12 are not one shape. 7 of them — 倫論輪偏遍編,
+plus 嗣 — route through 侖 ("post-it note") or 扁 ("fishfinger"), and
+their lower portion renders as a real, distinct codepoint: `𠕁` (U+20541,
+cjkvi-ids `⿵冂卄`) — confirmed directly against 嗣's own IDS line
+(`⿰⿱口𠕁司`), and visually confirmed *different* from both bare `冂`
+(kangxi13, "hood": no internal grid) and from `冊` (U+518A: similar but
+with strokes protruding past the frame, a different codepoint entirely).
+CSV corroborates: "scrapbook" is its own 7-host name (`suggest_heisig_
+aliases.py`'s own output: 倫偏嗣編論輪遍) whose host set is an exact
+subset of "glass canopy"'s 12 — consistent with both being Heisig's names
+for the same `𠕁` shape, used inconsistently across frames (as many
+already-registered multi-alias primitives in this project's data.txt are).
+
+The other 5 hosts (尚岡角解触) do **not** show this shape. cjkvi-ids gives
+尚 as `⺌` over plain `冋` (`冂`+`口`, no grid) and 岡 as `冂` wrapping
+`䒑`+`山` (no grid either). 角 has no cjkvi-ids entry at all (cjkvi treats
+it as atomic), but renders with a `用`-like box-with-crossbar shape that
+is visibly distinct from both `𠕁` and bare `冂` — unconfirmed against any
+specific registered codepoint this session. This is the same "one Heisig
+name, several codepoints" trap CLAUDE.md already documents for 龶/丰
+("grow up") and 母/毋 ("breasts"): registering one row for all 12 hosts
+would have been exactly the mistake the standing brief warns against, so
+only the well-evidenced 7-host family was fixed this chunk.
+
+### Change
+
+New primitive `prim-scrapbook` (`𠕁`), aliases `scrapbook` + `glass
+canopy`. Wired into the two previously-atomic hosts rather than left
+orphaned: `侖` (prim-post-it-note, parts field was empty) → `亼,𠕁`; `扁`
+(prim-fishfinger, same) → `戸,𠕁` (戸/"door" is the existing rtk1157).
+`rtk2011` (嗣) was also fixed directly rather than left to inherit only
+via depth: its old parts `｜,司,冂` passed `audit_phantom_parts.py` clean
+(both strokes are genuinely cjkvi-reachable *somewhere* inside 嗣 via
+`𠕁`'s own sub-structure) but were a coarser approximation than the real
+thing — replaced with cjkvi's own `⿰⿱口𠕁司` read literally: `口,𠕁,司`.
+This gives "glass canopy"/"scrapbook" direct (depth-1) reachability on
+`嗣`, `侖`, and `扁`, and depth-2 reachability on 倫論輪偏遍編 — the same
+depth-based tradeoff every other nested primitive in this project already
+has, not a new limitation. 尚岡角解触 are deliberately untouched. Full
+reasoning is in a dated comment block in `data.txt` above the new
+`prim-scrapbook` row, so a future chunk that re-encounters any of this
+doesn't have to redo the investigation.
+
+One side effect worth flagging explicitly so it doesn't read as a bug
+later: once "glass canopy" resolves to *anything*, `suggest_heisig_
+aliases.py` treats the whole name as handled and drops it from its
+unregistered-names listing entirely — it checks whether a name resolves
+at all, not whether it resolves on every one of its CSV hosts. So 尚岡角
+解触 will **not** resurface there on their own; they're only recorded
+here and in the data.txt comment, not rediscoverable by re-running that
+tool. `audit_csv_regressions.py` doesn't flag any of the 5 either (a term
+that resolves *somewhere* in the database isn't "dropped" by that tool's
+definition) — so this open question is only visible in the audit trail,
+not from any tool's output. Future chunks: check here, not just the
+scripts.
+
+### Verified
+
+Rebuilt `kanji.db` clean from source (3000 kanji, 3088 parts overrides,
++1 from the eleventh chunk's baseline). `test_regression_fixes.py`: 1321
+checks (+2 from baseline 1319 — one corrected pin on `rtk2011`, two new
+pins added for `prim-post-it-note` and `prim-fishfinger`'s first-ever
+sub-decomposition), only the 4 known hanzi-scope non-issues. 66 pytest.
+`audit_overflatten.py` 0, `audit_self_reference.py` 0, `audit_radicals.py`
+0/0, `audit_primary_choice.py` 0. `audit_phantom_parts.py --in-csv-range`:
+138/96, unchanged (neither the fixed hosts nor the untouched ones were
+flagged before or after — this class of gap was invisible to that tool
+either way, per the write-up above). `audit_csv_regressions.py`: no new
+flags on any of the 7 fixed hosts or the 5 untouched ones. Confirmed by
+direct query that `search_by_parts(["glass canopy"], depth=1)` now
+returns `prim-fishfinger, prim-post-it-note, prim-scrapbook, rtk2011` and
+`depth=2` additionally returns `rtk1961-rtk1966` (論倫輪偏遍編) plus three
+kanji outside the 6th-edition CSV range that also use 侖/扁. Frontend
+`npm install`, `npm run lint`, and `npm run build` all clean.
+
+**Next**: 尚岡角解触's "glass canopy" is still open — 尚/岡 look like they
+may just be bare `冂` (hood) reused under a second Heisig name (cjkvi
+shows no grid for either), which if confirmed by render would be a
+same-primitive-two-aliases fix no bigger than adding "glass canopy" to
+kangxi13's alias list; 角 (and by inheritance 解/触) is the harder one — a
+`用`-like box with no cjkvi-ids entry to lean on and no confirmed
+codepoint match this chunk, worth its own render-and-compare pass against
+`用` specifically before concluding anything. Also worth checking while
+there: `rtk1953` (角)'s *current* parts (`勹,月,｜`) use `月` for the same
+box position — given `用`'s own CSV components ("moon; month; flesh...")
+also lean on a moon-shape, this might not be a bug so much as a second,
+independently-plausible reading; don't assume either way without
+rendering. Beyond that, `suggest_heisig_aliases.py --near 0.8 --all`'s
+next-largest entries after `glass canopy` drops out are `cloak` (10
+hosts: 初袖被裕補裸裾複褐襟 — every host contains 衣/𧘇/亠/丶, flagged last
+chunk as "a real structural signal, worth checking whether it's a genuine
+missing primitive or an existing one under a new name") and `hairpin/
+safety-pin`-style closed items now behind us. `sync_system_data.py`
+against the live server is still not something this session can do — a
+deployer running it will see one new kanji-adjacent primitive row
+(`prim-scrapbook`), two changed `parts` rows on previously-atomic
+primitives (`prim-post-it-note`, `prim-fishfinger`), and one changed
+`parts` row (`rtk2011`) from this chunk.

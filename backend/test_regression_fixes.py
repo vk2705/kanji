@@ -1350,8 +1350,23 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"kangxi53", "rtk1995"}},
     "rtk1998": {"character": "循", "keyword": "sequential",
                 "expected_part_ids": {"kangxi60", "rtk1997"}},
+    # Corrected 2026-09-18 (twelfth chunk, "glass canopy" investigation):
+    # ｜/冂 were a coarse approximation that happened to pass audit_phantom_parts.py
+    # (both strokes are cjkvi-reachable somewhere inside 嗣) but weren't the real
+    # structure. cjkvi-ids' own line for 嗣 is ⿰⿱口𠕁司 — 口 (mouth, rtk11) stacked
+    # over 𠕁 (new prim-scrapbook, the "glass canopy"/"scrapbook" shape shared with
+    # 侖/扁), beside 司 (rtk2007). See the data.txt comment block above prim-scrapbook.
     "rtk2011": {"character": "嗣", "keyword": "heir",
-                "expected_part_ids": {"kangxi13", "prim-pipe", "rtk2007"}},
+                "expected_part_ids": {"rtk11", "prim-scrapbook", "rtk2007"}},
+    # prim-post-it-note (侖) and prim-fishfinger (扁) were previously atomic (no
+    # parts at all) -- given a real sub-decomposition here for the first time,
+    # same 2026-09-18 chunk, so "glass canopy"/"scrapbook" reach 倫論輪偏遍編 at
+    # search depth 2 and 侖/扁 themselves at depth 1. See data.txt's comment
+    # block above prim-scrapbook.
+    "prim-post-it-note": {"character": "侖", "keyword": "post-it note",
+                "expected_part_ids": {"prim-meeting", "prim-scrapbook"}},
+    "prim-fishfinger": {"character": "扁", "keyword": "fishfinger",
+                "expected_part_ids": {"rtk1157", "prim-scrapbook"}},
     "rtk2017": {"character": "盤", "keyword": "tray",
                 "expected_part_ids": {"rtk1555", "rtk2016"}},
     "rtk2049": {"character": "蒸", "keyword": "steam",

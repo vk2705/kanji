@@ -2060,7 +2060,7 @@ rtk2007:司:director,ken russel:一,口,亅
 rtk2008:伺:pay respects:亻,司
 rtk2009:詞:part of speech:言,司
 rtk2010:飼:domesticate:司,食
-rtk2011:嗣:heir:｜,司,冂
+rtk2011:嗣:heir:口,𠕁,司
 rtk2012:舟:boat:
 rtk2013:舶:liner:舟,白
 rtk2014:航:navigate:亢,舟
@@ -3142,7 +3142,7 @@ prim-noren:帀:noren:一,巾
 prim-bushes:丰:bushes,grow up
 prim-meeting:亼:meeting
 prim-antlers:?:antlers
-prim-fishfinger:扁:fishfinger
+prim-fishfinger:扁:fishfinger:戸,𠕁
 prim-muzzle:咅:muzzle
 prim-wealth:畐:wealth
 prim-half-turtle:丬:turtle
@@ -3212,7 +3212,7 @@ prim-pogo-stick:甬:pogo stick:
 prim-guillotine:夬:guillotine:
 prim-stamp-album:卬:stamp album,stamps:
 prim-funnel:冓:funnel,cone:
-prim-post-it-note:侖:post-it note:
+prim-post-it-note:侖:post-it note:亼,𠕁
 prim-lifebelt:㐬:lifebelt:
 # Fifth batch, 2026-09-11. Method unchanged (strict CSV name resolution, name not
 # already owned by a registered row, rendered beside real hosts first).
@@ -3340,3 +3340,40 @@ prim-outhouse:𫩠:outhouse:⺌,冖,口
 # cjkvi's own placeholder for an unclear component), so "hair"'s real
 # identity is still an open question, not a render-confirmed one; left
 # blank rather than guessed.
+
+# --- 2026-09-18 (twelfth chunk): "glass canopy" — split verdict, not a
+# single fix. suggest_heisig_aliases.py --near 0.8 --all listed "glass
+# canopy" as a 12-host unregistered name (倫偏嗣尚岡編角解触論輪遍) with
+# "nothing common to every host" per its own structural check — flagged
+# for several chunks as "worth a render pass" without anyone doing it.
+# Rendering (render_glyphs.py) shows the 12 hosts are NOT one shape: 7 of
+# them (倫論輪偏遍編, plus 嗣) route through 侖 ("post-it note") or 扁
+# ("fishfinger"), whose lower portion is cjkvi-ids' 𠕁 (U+20541, ⿵冂卄—
+# confirmed against 嗣's own IDS line ⿰⿱口𠕁司) — a real, distinct
+# codepoint, visually confirmed different from both bare 冂 (kangxi13,
+# "hood") and 冊 (U+518A, similar but with strokes protruding past the
+# frame). The CSV evidence agrees: "scrapbook" is a 7-host name (exactly
+# 倫偏嗣編論輪遍) whose host set is a strict subset of "glass canopy"'s 12,
+# consistent with both being Heisig's names for this same 𠕁 shape. The
+# other 5 hosts (尚岡角解触) do NOT show this shape: cjkvi-ids gives 尚 as
+# ⺌ over plain 冋 (冂+口, no grid) and 岡 as 冂 wrapping 䒑+山 (no grid
+# either); 角 is cjkvi-atomic (no IDS entry at all) but renders with a
+# 用-like box+crossbar shape, visibly different from both 𠕁 and bare 冂 —
+# the exact "one Heisig name, several codepoints" trap CLAUDE.md documents
+# for 龶/丰 ("grow up") and 母/毋 ("breasts"). Registering one row for all
+# 12 would have been wrong; only the well-evidenced 7-host family was
+# fixed. New primitive prim-scrapbook (𠕁), aliases scrapbook + glass
+# canopy. Wired in as an added sub-decomposition on 侖 and 扁 (both
+# previously atomic, parts field empty — pure addition, nothing removed):
+# 侖 -> 亼,𠕁 and 扁 -> 戸,𠕁 (戸/door already an existing row, rtk1157).
+# rtk2011 (嗣) also fixed directly, not just left to inherit: its old
+# parts ｜,司,冂 passed audit_phantom_parts.py (both strokes are
+# genuinely cjkvi-reachable somewhere inside 嗣) but were a coarser
+# approximation than the real structure; replaced with cjkvi's own
+# ⿰⿱口𠕁司 read literally (口,𠕁,司) so "glass canopy"/"scrapbook" resolve
+# on 嗣 directly at depth 1, not only through 侖/扁's depth-2 reachability
+# for the other six. 尚岡角解触 are deliberately NOT touched — their real
+# identity (bare 冂 for the first two, a 用-like box structurally
+# unconfirmed against a specific codepoint for 角/解/触) is a separate,
+# still-open question, not folded into this verdict.
+prim-scrapbook:𠕁:scrapbook,glass canopy
