@@ -23,7 +23,7 @@ prim-pigs-head:彑:pig's head,pig snout,mutual difficulties,two walls
 kangxi64:扌:finger,fingers
 kangxi170:阝:pinnacle,leftside beta,beta,parthenon,acropolis
 kangxi163:⻏:walls,city walls,rightside beta,ozato,beta
-prim-winter-cow:㐄:winter cow
+prim-winter-cow:㐄:winter cow,monocle,sunglasses with one lens missing
 
 kangxi61:忄:heart,valentine,state of mind,freud
 kangxi90:爿:turtle,radical 90,half of a tree trunk,split wood

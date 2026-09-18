@@ -9545,3 +9545,146 @@ hosts with no alternative to promote, each needing its own host-by-host
 identification rather than a bulk fix). The past-frame-2200 CSV-blind-spot
 note is unchanged and still just a note. `sync_system_data.py` against the
 live server is still not something this session can do.
+
+---
+
+## 2026-09-18 (seventh chunk) — `㐄` gets its other two Heisig names; the "horse" cluster investigated and deferred
+
+Third firing today. Picked up the first of the sixth chunk's two backlog
+items: `suggest_heisig_aliases.py --near 0.8 --all`.
+
+Environment note, same shape as recent chunks': container had the repo (already
+fast-forwardable to `origin/master`, no detached-HEAD this time) but no `venv/`,
+no `node_modules/`, no CJK fonts, no `/tmp/ids.txt`. Rebuilt all four and
+confirmed push access with `git push --dry-run origin master` before touching
+anything, per the standing container-safety rule.
+
+### What `--near 0.8` found
+
+Only 4 unresolved names clear the 0.8 Jaccard-overlap bar against an
+already-registered name's host set: `sign of the horse` (11 hosts, nearest to
+"noon"), `pantomime horse` (8 hosts, nearest to "horse"), and a matched pair,
+`sunglasses with one lens missing`/`monocle` (6 hosts each, both nearest to
+"locket"). The tool's own `--near` docstring already warns overlap alone is
+"too strong on its own" and not "matched" — `structural_support` (cjkvi
+backing) is printed alongside for exactly this reason, and it split this batch
+cleanly in two.
+
+### `monocle` / `sunglasses with one lens missing` → `prim-winter-cow` (㐄), not `kangxi178` (韋)
+
+The tool's own nearest-name pointer said "locket" (→ `kangxi178` 韋), cjkvi
+0.83. Rendering and cross-checking anyway (per the standing rule) turned up
+that the pointer, while not wrong that 韋 is involved, names the wrong
+*sub*-shape: `韋`'s own cjkvi split is `⿳𫝀口㐄` (three stacked parts), and the
+6 hosts' CSV rows (`降 偉 違 緯 衛 韓`) already separately carry `mouth` (→
+`rtk11`, i.e. 口, the middle third) and `locket`/`stick`/`key` (→ `kangxi178`/
+`rtk60`/`rtk418`, the top third) alongside `monocle`/`sunglasses with one lens
+missing` — so those two names are Heisig's remaining synonyms for the
+*bottom* third, 㐄, not another name for the whole compound. Cross-checked
+against `降`, the one host of the 6 that doesn't contain 韋 at all
+(cjkvi `降 ⿰阝夅`, `夅 ⿱夂㐄`) but still carries both names in its CSV row —
+only explicable if the names track 㐄 directly, confirming the split rather
+than depending on it. `㐄` was already registered as `prim-winter-cow` with
+exactly one alias, "winter cow" — the same "one shape, several Heisig-edition
+names" pattern this audit has fixed before (`kangxi170`'s
+pinnacle/parthenon/acropolis, `kangxi58`'s Radical 58 swap last chunk). Added
+`monocle,sunglasses with one lens missing` to that line in `data.txt`. Pure
+alias addition — no `parts` field touched, so no decomposition, phantom-parts,
+or pin fallout expected or found.
+
+### `sign of the horse` / `pantomime horse` — investigated, left alone
+
+Both have `cjkvi` support near 0 against the tool's own nearest-name pointer
+(0.18 and 0.00 respectively) — the strongest possible signal to render before
+trusting, so that's what this chunk did, and it uncovered something more
+tangled than a simple mis-pointed alias:
+
+- `許` (frame 611, the one host among the 11-strong "sign of the horse"
+  group that CSV also tags "horse") already has `午,言` as its parts — cjkvi
+  confirms `許 ⿰言午`, so 午 genuinely is there, and it's already searchable
+  via 午's own "noon" alias. Nothing to fix here.
+- `歓/権/観/勧` (frames 612/613/614/928) already use a *different*,
+  already-registered primitive, `𮥶` (no Heisig name of its own currently),
+  for the shape CSV calls `horse`/`pantomime horse`/`noon`/`sign of the
+  horse`/`turkey` bundled together — confirmed by cjkvi (`歓 ⿰𮥶欠`, `𮥶
+  ⿱𠂉⿻一隹`: a `𠂉` top, matching 午's own `⿱𠂉十` top, sitting over `一`
+  crossing `隹` — visually horse-topped, literally not 午). This DB already
+  got that distinction right in an earlier session (data.txt's `rtk612` etc.
+  already read `欠,𮥶`, not `欠,午`) — good, no regression to fix, but it
+  means "sign of the horse"/"pantomime horse" can't safely alias onto 午
+  here without also being wrong for these 4 hosts.
+- `年` (frame 1114) already has `午` as a part directly (`ノ,午`) — cjkvi
+  has no decomposition for 年 at all (Heisig's own pedagogical split, not
+  real etymology), so this is presumably deliberate and pre-existing, not
+  something this chunk touched.
+- `卸/御` (frames 1499/1500) use `ノ,止,卩`/`卸,彳` — cjkvi says
+  `卸 ⿰𦈢卩`, `𦈢 ⿱𠂉⿻一③` — another `𠂉`-topped shape, a *third* distinct
+  codepoint (not 午, not 𮥶) that CSV also folds into the same
+  horse/noon/pantomime-horse name bundle. The current `ノ` is presumably a
+  bare-stroke stand-in for this unregistered top shape — same shape of
+  problem as the standing stroke-primitive backlog (see below), not
+  something to guess a fix for in this chunk.
+- `缶` (frame 2116) is the strangest one: CSV's own row for 缶 itself lists
+  `noon, sign of the horse, shovel` as *its* components, implying Heisig
+  decomposes 缶 too (top "horse"-shaped, bottom "shovel") — but cjkvi has no
+  IDS for 缶 at all (it's atomic in real script), and this DB's current
+  parts, `凵,山` ("container"+"mountain"), are a third, unrelated reading
+  that predates this chunk. `audit_csv_regressions.py` flags this (`dropped:
+  noon (-> rtk610)`) but that script's 1238 flags are overwhelmingly
+  redundant-synonym noise (confirmed by spot-checking several: `rtk10` 十
+  "dropped" `needle`, which is just another name for `ten`, already covered)
+  — not a usable signal on its own for which of these are real bugs. 缶's
+  case might be a real one, or `凵,山` might be a deliberately-verified
+  override from a session predating this log's start; distinguishing the two
+  needs its own render-and-source-check, which this chunk didn't have budget
+  for after the 韋/㐄 research above.
+- `馬` itself (rtk2132, keyword "horse") is a separate, correctly-registered
+  kanji, and CSV's `horse` name resolves there already — confirmed
+  independently by `audit_csv_regressions.py` showing `許`/`歓`/`勧` all
+  "dropping" `horse (-> rtk2132)`, i.e. none of them literally contain 馬,
+  matching the `pantomime horse -> 馬` suggestion's 0.00 cjkvi score. So
+  `horse` (→ 馬) and `pantomime horse`/`sign of the horse`/`noon` (→ 午, or
+  the 𮥶/𦈢 shapes in some hosts) are two different things that CSV bundles
+  together across all 11 hosts regardless — the classic "one Heisig name
+  wave covering multiple real shapes" trap the standing brief warns about,
+  just running in the opposite direction from the usual case (here it's
+  *not* one name covering multiple shapes, it's Heisig listing multiple
+  near-synonymous names together even when only *one* of the shapes is
+  actually present in a given host, and the reader is expected to recognize
+  which). Registering `sign of the horse`/`pantomime horse` as new aliases
+  on any single row would be right for at most 1 of 11 hosts and wrong or
+  misleading for the rest. Left both unaliased.
+
+### Verified
+
+Rebuilt `kanji.db` clean from source. `resolve_alias` confirms `monocle` and
+`sunglasses with one lens missing` now both resolve to `prim-winter-cow`.
+1316 checks, only the 4 known hanzi-scope non-issues — no pin needed since no
+`parts` field changed. 66 pytest. `audit_overflatten.py` 0,
+`audit_self_reference.py` 0, `audit_radicals.py` 0/0, `audit_primary_choice.py`
+0. Phantom parts unchanged at 301/209 full-range, 143/99 `--in-csv-range` (as
+expected — this chunk touched only `aliases`, never `parts`). Frontend
+`npm install`, `npm run lint`, and `npm run build` all clean.
+
+**Next**: `suggest_heisig_aliases.py --near 0.8 --all`'s 4-item near-list is
+now down to the 2 deferred `horse`/`pantomime horse`/`sign of the horse`/𮥶/𦈢
+names above — genuinely unresolved, not just unworked; a future session
+would need to either track down 𦈢's/缶's correct primitive registrations
+first (which would make the CSV bundle resolvable per-host instead of as one
+group) or decide the ambiguity is inherent to Heisig's own vocabulary and
+leave it. The `--all` "unregistered"/45-groups list (checked this chunk,
+not yet worked) still has substantial entries above these two:
+`chop-seal/hanko` (14 hosts, `every host contains: 一 (one)` only — no real
+missing-row signal), `glass canopy` (12 hosts, nothing structurally common —
+possibly a genuinely missing primitive), `hairpin/safety-pin` (12 hosts,
+common only to ノ/一, same stroke-primitive shape as the standing backlog
+below). Two other standing items, both unchanged: the stroke-primitive tail
+of `audit_phantom_parts.py`'s full list (ノ/一/｜ on hosts with no alternative
+to promote — this chunk's own `卸`/`𦈢` finding is exactly this shape of
+problem, one more data point that this pile and the horse-cluster above may
+partly overlap); and the still-unexamined question of whether `缶`'s `凵,山`
+parts are a verified override or a stale gap (worth a dedicated look before
+the next `suggest_heisig_aliases`/`audit_csv_regressions` pass touches 缶's
+neighborhood again). `sync_system_data.py` against the live server is still
+not something this session can do — a deployer running it will see one new
+`aliases: added` pair (`prim-winter-cow` +2) from this chunk, nothing else.
