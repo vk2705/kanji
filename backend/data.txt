@@ -68,7 +68,7 @@ rtk5:五:five:
 rtk9:九:nine,baseball:
 rtk10:十:ten:
 rtk11:口:mouth:
-rtk12:日:day,sun,tongue wagging in mouth:
+rtk12:日:day,sun,tongue wagging,tongue wagging in mouth:
 rtk13:月:month,moon,flesh,part of the body:
 rtk14:田:rice field,brains:
 rtk15:目:eye:

@@ -10832,3 +10832,96 @@ primitive row (`prim-screwdriver`), one changed `decompositions` row
 (`prim-dog-tag` +1 alt), and 7 changed `parts` rows (捕哺浦舗輔圃鋪, each
 collapsed from a 4-part raw-stroke primary to a 2-part `甫,X` primary)
 from this chunk.
+
+## 2026-09-18 (seventeenth chunk) — `tongue wagging` resolves to the
+already-taught 日 (day/sun), no new primitive needed
+
+Twelfth firing today. Same environment drill: fresh container, repo
+present and fast-forwarded cleanly (30 commits behind, no divergence),
+but no `venv/`, no `node_modules/`, no CJK fonts, no `/tmp/ids.txt` —
+all four rebuilt from scratch, `git push --dry-run origin master`
+confirmed clean before touching anything.
+
+Picked up the sixteenth chunk's own "Next": `tongue wagging` (8 hosts:
+唱宴智書替潜音響, every host contains 日 1.00 per `suggest_heisig_aliases
+--near 0.8 --all`, in the "no name in the group resolves" bucket).
+
+### Investigation
+
+`heisig-kanjis.csv`'s components column is a full recursive flatten
+(confirmed by cross-checking against 嘲/潮, which list both `朝`'s own
+name — "morning" — and its entire sub-expansion in one row), so a
+compound kanji's row names every ancestor primitive down to the leaves
+in sequence. Checked what "tongue wagging" sits next to in all 8 rows —
+always immediately after "sun; day", e.g. 唱: "mouth; prosperous; sun;
+day; tongue wagging", 音: "vase; stand up; sun; day; tongue wagging".
+昌 itself (rtk25, "prosperous") has its own CSV row list exactly "sun;
+day" and nothing more — no third term — which rules out "tongue
+wagging" being a name for the *compound* 昌 (two stacked 日). It also
+has to attach to a bare, single 日: five of the eight hosts (音 ⿱立日,
+智 ⿱知日, 替 ⿱㚘日, 書 ⿱⿱𦘒一日, and 昌 itself only inside 唱) have only
+one 日 in their `cjkvi-ids` entry, not two, so whatever "tongue
+wagging" names has to be satisfiable by a single plain 日, not a
+two-日 compound.
+
+Rendered 唱/昌/音/智/書/替/日 side by side
+(`render_glyphs.py ... --out /tmp/tongue_wagging.png`) per the standing
+"render it, don't reason about it" rule — confirmed every one of those
+bottom/single 日 shapes is a plain, unmodified 日 with no extra stroke
+hiding in it; nothing here needed a new primitive or codepoint.
+
+Checked whether this term was already covered under a different
+string: `rtk12` (日, "day") already carries `sun` and a legacy alias
+`tongue wagging in mouth` (`data.txt:71`), added in session 25
+(2026-08-22, restoring an alias an out-of-band cleanup had collaterally
+deleted) — but that string is *not* what the CSV actually says (it says
+exactly "tongue wagging", never "in mouth"), so it never matched. This
+was a plain exact-string gap, not a missing concept — the concept
+("day"/"sun" reused as a mnemonic image the eight later frames call
+"tongue wagging") was already sitting one word away from resolving.
+
+### Change
+
+Added `tongue wagging` as a third alias on `rtk12` (日), alongside the
+existing `sun`/`tongue wagging in mouth` — left the older string in
+place rather than replacing it (nothing showed it was actively wrong,
+just incomplete, and removing it risks breaking whatever originally
+motivated session 25 to restore it). `data.txt:71` line is now
+`rtk12:日:day,sun,tongue wagging,tongue wagging in mouth:`.
+
+### Verified
+
+Rebuilt `kanji.db` clean from source (3000 CSV-sourced kanji rows, 3088
+parts overrides — unchanged totals, this was an alias-only edit).
+`test_regression_fixes.py`: 1321 checks, only the 4 known hanzi-scope
+non-issues, no new pin breakage (nothing pins by this exact alias
+string). 66 pytest. `audit_overflatten.py` 0, `audit_self_reference.py`
+0, `audit_radicals.py` 0/0, `audit_primary_choice.py` 1 (unchanged
+rtk265 deviation), `audit_phantom_parts.py --in-csv-range` 137/95
+(unchanged — an alias addition touches no `parts` rows). Directly
+queried `resolve_alias(conn, 'tongue wagging')` → `rtk12`.
+`search_by_parts(['tongue wagging'], depth=1)` returns 宴(rtk203)
+書(rtk349) 音(rtk518) 替(rtk905) 智(rtk1309) plus `rtk12` itself, all
+five hosts that list 日 literally; `depth=2` additionally reaches
+唱(rtk21, via 昌→日), 潜(rtk907, via 替→日), 響(rtk1994, via 音→日) — all
+8 targeted hosts now reachable, split across depth 1/2 exactly as their
+own decomposition chains predict, nothing forced. `suggest_heisig_aliases.py
+--near 0.8 --all` no longer lists `tongue wagging` in its unresolved
+group. Frontend `npm install`, `npm run lint`, `npm run build` clean.
+
+**Next**: `tongue wagging` closed for all 8 original hosts. `chop-seal,
+hanko` (14 hosts: 令冷凝勇擬湧疑痛踊通鈴零, every host contains 一 1.00) is
+now `suggest_heisig_aliases`' top-ranked unresolved group but remains
+the same weak/likely-not-a-quick-win signal flagged in prior chunks
+(one common primitive alone across 14 unrelated hosts, no obvious
+attachment point yet). `joint` (8 hosts: 渦滑禍過鍋骨骸髄) and `silage` (8
+hosts: 乗剰唾垂睡華郵錘) are both flagged "nothing common to every host —
+likely a missing row" rather than "one strong common primitive" —
+different, more promising signal shape than `chop-seal`'s (a per-host
+missing-part bug, not a single misnamed shared primitive), worth trying
+next. `audit_phantom_parts.py`'s 137/95 pile (led by bare stroke
+primitives ノ/一/｜ with no alternative host to promote from) remains
+the larger standing item if the `--near` queue runs dry.
+`sync_system_data.py` against the live server is still not something
+this session can do — a deployer running it will see one changed
+`aliases` row (`rtk12` +1 alias, `tongue wagging`) from this chunk.
