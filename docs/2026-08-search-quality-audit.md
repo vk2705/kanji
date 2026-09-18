@@ -9780,3 +9780,122 @@ alternative to promote) is otherwise unchanged. `sync_system_data.py` against
 the live server is still not something this session can do — a deployer
 running it will see one changed `parts` row (`rtk2116`: `凵,山` → `午,凵`)
 from this chunk, nothing else.
+
+---
+
+## 2026-09-18 (ninth chunk) — `卸`'s `ノ` was a compressed `𠂉` ("pantomime horse"), not 午 or a bare stroke
+
+Fifth firing today. Picked up the eighth chunk's own deferred lead: whether
+`卸`(rtk1499)'s `ノ` stand-in is a compressed 午 (like `缶`'s top, fixed last
+chunk) or something else.
+
+Environment note, same shape as recent chunks: container had the repo
+(fast-forwardable from a stale local `master`, plus a stray detached HEAD
+already sitting at `origin/master`'s tip — `git checkout master` then
+`git merge --ff-only origin/master` cleared both) but no `venv/`, no
+`node_modules/`, no CJK fonts, no `/tmp/ids.txt`. Rebuilt all four and
+confirmed `git push --dry-run origin master` succeeded before touching
+anything.
+
+### Investigation
+
+cjkvi's `ids.txt` gives `卸` = `⿰𦈢卩` (left `𦈢`, right `卩` — a left-right
+split, not `ノ`'s top-bottom framing at all) and `𦈢` itself = `⿱𠂉⿻一止`
+(top `𠂉`, bottom `止` with an extra overlapping stroke). So `𦈢`'s top is
+`𠂉` — the *same* top `午` has (`午` = `⿱𠂉十`) — not the full `十+𠂉`
+combination the eighth chunk's question was checking for. That answers last
+chunk's question directly: `卸`'s stand-in is not a compressed `午`, because
+`𦈢` never had `午`'s bottom `十` to begin with — it only ever shared `午`'s
+top component.
+
+That top component, `𠂉`, already has its own row: `prim-reclining`
+(aliased "reclining, lying down"). `suggest_heisig_aliases.py --near 0.8
+--all` had a live, well-supported group sitting exactly on this shape:
+`pantomime horse`, 8 hosts (勧午卸御権歓観許), *every one* of which already
+contains `𠂉` at 1.00 overlap — the strongest possible signal, and one that
+happens to name-check `卸` directly (`heisig-kanjis.csv`'s own components
+column for frame 1499 is "horseshoe; horse; pantomime horse; noon; sign of
+the horse; stop; footprint; stamp" — "pantomime horse" is right there).
+Checked all 8 hosts' own `parts` rows individually: `rtk610`(午) already has
+`𠂉` directly; `rtk611`(許) reaches it via `午` at depth 2; `rtk612/613/614`
+(歓/権/観) and `rtk928`(勧) all reach it via `𮥶`(prim-pegasus, itself
+`一,隹,𠂉`) at depth 2; `rtk1500`(御) reaches it via `卸` at depth 2. `卸`
+itself was the only one of the 8 with no path to `𠂉` at all — its own
+direct parts said `ノ,止,卩` (a bare diagonal stroke, not the tick-topped
+`𠂉`), which is why the group as a whole still showed up unresolved despite
+7/8 hosts already being fine.
+
+Rendered `卸`, `𠂉` (prim-reclining), `ノ` (the current stand-in), `午`, and
+`御` side by side (`/tmp/kan_卸_check.png`) per the standing rule before
+touching anything: `卸`'s top-left has the same short horizontal tick above
+the hook that `𠂉` and `午`'s top both have — visibly a different, more
+complex shape than the single unbroken diagonal stroke `ノ` renders as.
+Confirms the swap.
+
+Made two changes:
+1. `data.txt`: `rtk1499:卸:wholesale:ノ,止,卩` → `rtk1499:卸:wholesale:𠂉,止,卩`
+   (the `止`/`卩` parts were already correct — `止`'s aliases already cover
+   CSV's "stop"/"footprint" names and `kangxi26`(卩)'s already cover
+   "stamp", so only the first part needed fixing).
+2. `data.txt`: added `pantomime horse` to `prim-reclining`'s alias list
+   (now `reclining,lying down,pantomime horse`).
+
+Left CSV's remaining names for frame 1499 — `horseshoe`, `horse`, `noon`,
+`sign of the horse` — untouched: `horse` resolves to `馬`(rtk2132), which
+`卸` genuinely doesn't contain (confirmed by `audit_csv_regressions.py`
+still listing it as legitimately dropped, same "Heisig lists a whole
+near-synonym cluster even when only one member's shape is actually present"
+pattern the seventh chunk documented for this same 午/𠂉/𮥶 neighborhood),
+and `sign of the horse`/`noon` are the still-open, more complex bundle
+(11 hosts, splits across 午/𮥶/𦈢) that chunk explicitly deferred — this
+chunk only had budget to settle the narrower, fully-resolved
+`pantomime horse` sub-piece of it, not the whole cluster.
+
+Checked `test_regression_fixes.py` for pins touching either changed row:
+one hit, `rtk1500`'s pin (`expected_part_ids: {kangxi60, rtk1499}`), which
+checks that `御`'s own *direct* parts include `rtk1499` — unaffected by what
+`rtk1499` itself decomposes into. No pin needed correcting.
+
+### Verified
+
+Rebuilt `kanji.db` clean from source. 1316 checks, only the 4 known
+hanzi-scope non-issues. 66 pytest. `audit_overflatten.py` 0,
+`audit_self_reference.py` 0, `audit_radicals.py` 0/0, `audit_primary_choice.py`
+0. `audit_phantom_parts.py` unchanged at 301/209 full-range, 143/99
+`--in-csv-range` (expected — `ノ` was a valid primitive elsewhere, just the
+wrong one here, so it never showed up as *phantom*; this was a
+`suggest_heisig_aliases`-shaped bug, not a phantom-parts-shaped one).
+`audit_csv_regressions.py` no longer lists `pantomime horse` as dropped for
+`rtk1499` (confirmed by direct re-run); `suggest_heisig_aliases.py --near
+0.8 --all` no longer lists `pantomime horse` in either the near-list or the
+unresolved-groups list, and `resolve_alias(..., "pantomime horse")` now
+returns `prim-reclining` directly. Frontend `npm install`, `npm run lint`,
+and `npm run build` all clean.
+
+**Next**: the `sign of the horse`/`noon` bundle (11 hosts: 勧午卸年御権歓缶
+観許陶) is untouched by this chunk's fix and still shows the same 0.82
+overlap/11 hosts as before — confirmed by re-running
+`suggest_heisig_aliases.py --near 0.8 --all` after the `卸` fix landed.
+That's expected, not a miss: `卸`'s corrected parts (`𠂉,止,卩`) give it the
+shared *top* of `午`, not `午` itself, so `卸` (and, transitively, `御` via
+`卸`) still doesn't reach `午` at any depth — this bundle is a genuinely
+different, harder problem than `pantomime horse` was, not the same fix
+applying twice. `年`(rtk1114)'s own parts already are `ノ,午` — it *does*
+reach `午` directly and isn't part of what's blocking this bundle; the
+gap is elsewhere (worth checking which of 勧/卸/缶/観/許/陶 the "nothing
+common to every host" really means one-by-one, the way this chunk did for
+`pantomime horse`, before assuming the whole group is a single fix). Otherwise the two other
+standing items are unchanged: `glass canopy` (12 hosts, no common
+structural signal per `--all` — possibly a genuinely missing primitive,
+still worth a render pass) and `hairpin/safety-pin` (12 hosts, common only
+to ノ/一 — same shape as the stroke-primitive backlog). The stroke-primitive
+tail of `audit_phantom_parts.py`'s full list (ノ/一/｜ on hosts with no
+alternative to promote) is otherwise unchanged — though this chunk is a
+reminder that some of that tail may be mis-resolved stand-ins like `卸`'s
+rather than truly unresolvable, and worth re-checking against
+`suggest_heisig_aliases`'s output rather than assuming every `ノ`/`一`/`｜`
+entry there is a dead end. `sync_system_data.py` against the live server is
+still not something this session can do — a deployer running it will see
+one changed `parts` row (`rtk1499`: `ノ,止,卩` → `𠂉,止,卩`) and one changed
+`aliases` row (`prim-reclining` +1, "pantomime horse") from this chunk,
+nothing else.
