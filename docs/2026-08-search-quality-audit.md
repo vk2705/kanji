@@ -10276,3 +10276,149 @@ deployer running it will see one new kanji-adjacent primitive row
 (`prim-scrapbook`), two changed `parts` rows on previously-atomic
 primitives (`prim-post-it-note`, `prim-fishfinger`), and one changed
 `parts` row (`rtk2011`) from this chunk.
+
+---
+
+## 2026-09-18 (thirteenth chunk) — closing 尚岡角解触's "glass canopy" question
+
+Ninth firing today. Same environment drill as every recent chunk: fresh
+container, repo present and fast-forwarded cleanly (26 commits behind,
+no divergence), but no `venv/`, no `node_modules/`, no CJK fonts, no
+`/tmp/ids.txt` — all four rebuilt from scratch, and `git push --dry-run
+origin master` confirmed clean before touching anything.
+
+Picked up the twelfth chunk's own "Next": the 5 hosts (尚岡角解触) left
+out of the `prim-scrapbook` fix, flagged as "尚/岡 look like they may just
+be bare 冂 (hood) reused under a second Heisig name... worth a render
+pass; 角 (and by inheritance 解/触) is the harder one — a `用`-like box
+with no cjkvi-ids entry to lean on."
+
+### Investigation
+
+`render_glyphs.py` on 尚, 岡, 角, 解, 触 plus candidates (冂, 冋, 囗, 用,
+月, 𠕁). Two independent findings:
+
+**尚/岡 are just "hood" under a second name.** Both already list 冂
+literally in their own (already-flattened) `data.txt` parts (尚:
+`⺌,冂,口`; 岡: `丷,冂,一,山`). Checked `ids.txt` directly rather than
+trust the render alone: `U+5C1A 尚 ⿱⺌冋` (尚 = ⺌ over 冋/U+518B, itself
+⿷冂口 — 冂 with 口 inside, matching 尚's flattened parts) and `U+5CA1 岡
+⿵冂⿱䒑山` — the `⿵` operator itself means "enclosed by a three-sided box
+open at the bottom," i.e. real 冂, not the closed 囗/U+56D7 the Mincho
+render's bottom serifs make it look like at a glance (rendered 冂 vs 囗
+side by side to check this specifically — 囗 closes flush at all four
+corners, 冂's render only looks that way because of stroke serifs, cjkvi's
+own IDS operator is the tie-breaker here, not the raster). So for these
+two hosts "glass canopy" in the CSV is just Heisig's alternate name for
+the same "hood" shape they already correctly decompose into, not a
+different codepoint — same situation as `prim-scrapbook`'s own family,
+just a different real shape.
+
+**角 (and by inheritance 解/触) really is `用`, not `月`.** The current
+`rtk1953` parts (`勹,月,｜`) were flagged last chunk as "might not be a
+bug, given `用`'s own CSV components also lean on a moon-shape... don't
+assume either way without rendering." Rendered 角 against both `用` and
+`月` at matched size and cropped the box portion of each for direct
+comparison: 角's lower box is visibly **wide**, matching `用`'s
+proportions, not `月`'s narrower/taller ones. Ran a pixel diff between
+`用` and `月` renders to confirm they're not just the same glyph read
+differently under fatigue — 7,059 of 92,800 compared pixels (~7.6%)
+differ, a real, non-trivial distinction in this font, not a coin flip.
+`cjkvi-ids` corroborates independently: `U+7528 用 ⿵冂⿻二丨` (hood + two +
+stick) is *exactly* Heisig's own CSV chain for 角 — "bound up[=勹, already
+correct via kangxi20]; glass canopy; hood; walking cane[=stick]; two" —
+read as naming `用`'s own sub-parts, with "glass canopy" a second name
+for the "hood" link in that same chain (same situation as 尚/岡, not a
+third shape). The CSV never lists "moon" as one of 角's components at
+all, across any of its three names for the kanji — confirming the old
+`月` wasn't a defensible second reading, just wrong. `用` is already a
+real primitive in this database (rtk1265, itself decomposing as
+`二,冂,｜` per an existing alt-decomposition) and already used as a
+literal part elsewhere (`rtk1266`/庸, `rtk1267`/備, `rtk1978`/捕, ...), so
+this isn't a new codepoint either.
+
+### Change
+
+`data.txt`: `kangxi13` (冂) gains a fifth alias, `glass canopy`, alongside
+its existing `border,down box,hood,belt`. `rtk1953`(角) parts changed
+from `勹,月,｜` to `勹,用`. No new primitive row, no edits needed to
+`rtk1954`(触)/`rtk1955`(解) — both already list `角` itself as a literal
+part (`角,虫` and `角,牛,刀` respectively), so they inherit the fix
+automatically at depth 3 (触/解 → 角 → 用 → 冂) once 角's own decomposition
+is corrected, the same "fix the shared ancestor, not every descendant"
+pattern used throughout this audit.
+
+Checked before writing this that a second alias row for the same term
+text doesn't create a resolution conflict: `get_all_aliases_for_term`
+(added 2026-09-09 for exactly the "owl"/"heart"/"finger" — one word,
+two real primitives — situation) unions every kanji_id a search term
+names, specifically so `search_by_parts` brings both meanings rather
+than silently picking one. `resolve_alias`'s single-pick behavior (used
+for decomposition-chip resolution and write-path visibility gates) is
+irrelevant here since none of the 5 hosts' own `parts.part_term` values
+literally store the text "glass canopy" — they store the character 冂 or
+角 — so no decomposition chip has to choose between the two meanings.
+The one visible side effect: `audit_csv_regressions.py`'s diagnostic
+"dropped X (-> Y)" line for the `prim-scrapbook` family (倫論輪偏遍編)
+now shows "glass canopy (-> kangxi13)" instead of "(-> prim-scrapbook)",
+since `resolve_alias` (a single arbitrary pick among now-two candidates)
+happens to return whichever alias row SQLite's unindexed scan visits
+first. This is a cosmetic display artifact of the tool showing one
+target for an inherently two-meaning term, not a functional regression —
+`search_by_parts`, which is what actually matters, still returns both
+sets of hosts correctly (confirmed below). A dated comment block above
+`prim-scrapbook` in `data.txt` records the reasoning above so a future
+chunk that re-encounters any of this doesn't have to redo the
+investigation.
+
+`test_regression_fixes.py`: no pin needed correcting — `rtk1953` had no
+existing pin (the "correct" answer changed but nothing was pinned to the
+old, wrong one).
+
+### Verified
+
+Rebuilt `kanji.db` clean from source (3000 kanji, 3088 parts overrides,
+unchanged counts — this chunk edited two existing lines, added no new
+primitive rows). `test_regression_fixes.py`: 1321 checks, only the 4
+known hanzi-scope non-issues (unchanged — no new pin needed). 66 pytest.
+`audit_overflatten.py` 0, `audit_self_reference.py` 0, `audit_radicals.py`
+0/0, `audit_primary_choice.py` 0. `audit_phantom_parts.py --in-csv-range`:
+138/96, unchanged (neither 角 nor 尚/岡 were ever on that list — this was
+a reachability/naming gap, not a phantom-part one). `audit_csv_regressions.py`:
+confirmed directly — `rtk1953`(角) now shows `current parts: 勹, bound up,
+用, utilize` with only `stick (-> rtk60)` dropped (a separate, pre-existing
+synonym-ambiguity non-issue, same pattern documented elsewhere in this
+audit); `glass canopy` and `hood` no longer appear as dropped for 角 at
+all. Directly queried `search_by_parts`: `["glass canopy"]` at depth 1
+now includes both `rtk196`(尚) and `rtk2112`(岡) (previously absent);
+depth 2 additionally includes `rtk1953`(角); depth 3 additionally
+includes `rtk1954`(触) and `rtk1955`(解) — all five hosts now reachable
+at the depth their own decomposition tree actually puts them, nothing
+force-fit to depth 1. `suggest_heisig_aliases.py --near 0.8 --all` no
+longer lists "glass canopy" at all (fully resolved, as expected — it
+already dropped out once *any* resolution existed, per the twelfth
+chunk's own note about this tool's behavior). Frontend `npm install`,
+`npm run lint`, and `npm run build` all clean.
+
+**Next**: this closes the "glass canopy" investigation completely — no
+open sub-question remains for any of the 12 original hosts. The next
+largest `--near 0.8 --all` entries, in order: `chop-seal/hanko` (14
+hosts, weak signal — only "one" in common, flagged twice before as
+likely not a quick win); `hairpin/safety-pin` (12 hosts — closed, verdict
+recorded in the eleventh chunk, expected to keep appearing here forever
+since no codepoint exists for it); `cloak` (10 hosts: 初袖被裕補裸裾複褐襟
+— every host contains 衣/𧘇/亠/丶, a real structural signal, flagged as
+"worth checking whether it's a genuine missing primitive or an existing
+one under a name this DB can't search by" for two chunks now without a
+render pass); and a new one worth flagging since it surfaced directly
+from this chunk's own investigation: `walking cane` (7 hosts, e.g.
+介垂睡角解触錘 — "nothing common to every host" per the tool's own
+structural check, but note 角/解/触 are three of the seven and this
+chunk just confirmed their own "walking cane"/stick component is `｜`
+inside `用`'s alt-decomposition, resolved elsewhere as `stick` (`->
+rtk60`) rather than under the name "walking cane" itself — worth checking
+the other four hosts (介垂睡錘) before assuming this is the same
+resolves-elsewhere non-issue rather than a genuine gap). `sync_system_data.py`
+against the live server is still not something this session can do — a
+deployer running it will see one changed `aliases` row (`kangxi13` +1,
+"glass canopy") and one changed `parts` row (`rtk1953`) from this chunk.

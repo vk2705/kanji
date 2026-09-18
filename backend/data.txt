@@ -2002,7 +2002,7 @@ rtk1949:耕:till:土,木,耒,井;井,耒
 rtk1950:亜:asia:｜,一,口
 rtk1951:悪:bad:亜,心
 rtk1952:円:circle:冂,亠,一,｜
-rtk1953:角:angle:勹,月,｜
+rtk1953:角:angle:勹,用
 rtk1954:触:contact:角,虫
 rtk1955:解:unravel:角,牛,刀
 rtk1956:再:again:｜,一,冂,王
@@ -3054,7 +3054,7 @@ rtk3000:鼈:snapping turtle:敝,黽
 # Kangxi radical English names (or, for 艹/厶, the established primitive meaning);
 # not Heisig book text.
 kangxi8:亠:lid,primitive_lid,top hat
-kangxi13:冂:border,down box,hood,belt
+kangxi13:冂:border,down box,hood,belt,glass canopy
 kangxi14:冖:cover,cloth cover,birdcage,birdhouse
 kangxi6:亅:hook
 kangxi44:尸:corpse
@@ -3377,3 +3377,50 @@ prim-outhouse:𫩠:outhouse:⺌,冖,口
 # unconfirmed against a specific codepoint for 角/解/触) is a separate,
 # still-open question, not folded into this verdict.
 prim-scrapbook:𠕁:scrapbook,glass canopy
+
+# --- 2026-09-18 (thirteenth chunk): closing out 尚岡角解触's "glass
+# canopy" — the open question the twelfth chunk left after the
+# prim-scrapbook split. Two independent renders this chunk:
+#
+# 1. 尚 and 岡 both already list 冂 literally in their own (flattened)
+#    parts (尚: ⺌,冂,口; 岡: 丷,冂,一,山), and cjkvi-ids confirms both
+#    genuinely contain it (尚 = ⺌ over 冋/U+518B which is itself 冂+口;
+#    岡 = ⿵冂⿱䒑山, the ⿵ operator itself meaning "enclosed by a
+#    three-sided box open at the bottom" i.e. real 冂, not the closed
+#    囗/U+56D7 the Mincho render's serifs make it look like at a glance —
+#    checked directly against both 冂 and 囗 renders side by side).
+#    So for these two hosts "glass canopy" is just Heisig's alternate name
+#    for the same "hood" shape (kangxi13) they already correctly list, not
+#    a different codepoint at all. Added "glass canopy" as a further alias
+#    on kangxi13 alongside its existing border/down box/hood/belt. This
+#    does NOT collide with prim-scrapbook also owning "glass canopy" for
+#    the other 7-host family: get_all_aliases_for_term (added 2026-09-09,
+#    the "owl"/"heart"/"finger" precedent) unions every kanji_id a search
+#    term names rather than picking one, specifically for this "one word,
+#    two real primitives" situation — resolve_alias's single-pick behavior
+#    is untouched and irrelevant here since neither host's own parts field
+#    literally stores the text "glass canopy" (they store the character
+#    冂), so decomposition-chip resolution never has to choose between the
+#    two meanings.
+#
+# 2. 角 (rtk1953) was the harder one flagged last chunk as "cjkvi-atomic,
+#    unconfirmed against a specific codepoint." Rendered 角 against both
+#    用 and 月 (its old part) at matched size: 角's lower box is visibly
+#    WIDE, matching 用's proportions, not 月's narrower/taller ones (a
+#    pixel diff between 用 and 月 renders confirms they really are
+#    distinct glyphs in this font, ~7.6% of the glyph-area pixels differ,
+#    not a wash). cjkvi-ids corroborates: 用 = ⿵冂⿻二丨 (hood + two +
+#    stick), which is exactly Heisig's own CSV chain for 角 --
+#    "bound up[=勹, already correct]; glass canopy; hood; walking cane
+#    [=stick]; two" -- read as naming 用's own sub-parts, with "glass
+#    canopy" a second name for the "hood" link in that same chain (same
+#    situation as 尚/岡, not a third shape). The CSV never lists "moon" as
+#    one of 角's components at all, confirming the old 月 was simply
+#    wrong, not a defensible second reading. Fixed rtk1953 角 from
+#    勹,月,｜ to 勹,用 -- 用 is an existing primitive (rtk1265, already used
+#    as a literal part elsewhere, e.g. rtk1266/庸, rtk1267/備), so this
+#    also gives 角 depth-2 reachability to "hood"/"glass canopy"/"two"/
+#    "stick" through 用's own alt decomposition, and 触/解 (which already
+#    list 角 itself as a literal part, unchanged) inherit the same fix at
+#    depth-3 automatically -- no edit needed on either.
+
