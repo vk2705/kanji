@@ -11038,3 +11038,135 @@ deployer running it will see one new primitive row (`prim-joint`), one
 changed `decompositions` row (`prim-jawbone` +1 alt), and one changed
 `parts`/primary structure (`rtk1383`, `月,冎` promoted to primary, old
 `月,冖,冂` demoted to alt) from this chunk.
+
+## 2026-09-18 (nineteenth chunk) — `silage` resolves as a new alias on
+rtk1 (一), not a new primitive
+
+Fourteenth firing today. Same environment drill as every chunk this cycle:
+fresh container, repo present and fast-forwarded cleanly (32 commits behind,
+no divergence), but no `venv/`, no `node_modules/`, no CJK fonts, no
+`/tmp/ids.txt` — all four rebuilt from scratch, `git push --dry-run origin
+master` confirmed clean before touching anything.
+
+Picked up the eighteenth chunk's own "Next": `silage` (8 hosts:
+乗剰唾垂睡華郵錘, flagged by `suggest_heisig_aliases --near 0.8 --all` as
+"nothing common to every host — likely a missing row").
+
+### Investigation
+
+`heisig-kanjis.csv` components for the 8 hosts:
+- 乗(1709,ride): wheat; cereal; silage
+- 剰(1710,surplus): ride; wheat; cereal; silage; sword; sabre; saber
+- 唾(1706,saliva): mouth; droop; drop; silage; one; floor
+- 垂(1705,droop, itself): drop; silage; walking cane; stick; one; floor
+- 睡(1707,drowsy): eye; droop; drop; silage; walking cane; stick; one; floor
+- 華(1704,splendor): flowers; silage; ten; needle
+- 郵(1990,mail): droop; silage; city walls
+- 錘(1708,spindle): metal; gold; droop; drop; silage; walking cane; stick; one; floor
+
+`drop` already resolves to `kangxi3` (丶) and `walking cane` already resolves
+to `prim-pipe` (｜) — both pre-existing. `stick` resolves to `rtk60` (貼,
+"post a bill"'s alias, an unrelated verb-sense collision, not this shape) —
+noted but out of scope for this chunk, same "leave the adjacent-but-different
+oddity for later" call the eighteenth chunk made for `rtk1383`'s own
+`primary_choice` flag. Only `silage` itself was actually unresolved.
+
+Rendered 乗/垂/唾/睡/華/郵/錘/剰 side by side at the standard comparison
+size, then 垂 alone at 1600px and 乗/郵/華 at 700px
+(`render_glyphs.py ... --out` plus a custom large-font HTML screenshotted
+directly via the pre-installed headless Chromium, same method the
+`冎`/`骨` investigation in the previous chunk used, since `render_glyphs.py`'s
+fixed comparison size wasn't enough to read 垂's internal stroke structure).
+
+垂's own body (below its diagonal cap) is a vertical stem crossing three
+plain horizontal bars, each drawn identically to the standalone `一` (same
+flat stroke with the same right-end serif, confirmed by placing `一` next to
+them at matching scale) — this is the same stacked-bar shape already
+familiar from `丰`/`龶` ("grow up"), just with 3 bars instead of 丰's 3
+(丰 has its own separate registration and wasn't reused here since 垂's
+stem is capped by the diagonal `drop` stroke, not 丰's own short hook-top).
+Comparing 乗 to 禾 (grain, already `wheat`/`cereal` per its own aliases)
+confirmed 乗 = 禾 plus exactly one extra horizontal bar inserted between
+禾's own bar and its diverging bottom legs — again a plain `一`-shaped
+stroke, matching the CSV's "wheat; cereal; silage" (no `drop`, since 乗's
+cap differs from 垂's and doesn't include that stroke). 華's own structure
+below its `艹` (flowers) top is the same multi-bar-plus-stem shape as 垂's,
+consistent with "flowers; silage; ten; needle".
+
+This matches `rtk1` (一)'s existing pattern exactly: Heisig already gives
+this one shape four different context-dependent mnemonic names in this
+data (`one, floor, ceiling, minus`, `data.txt:66`) rather than one fixed
+name, and verified this is already how the app treats them —
+`search_by_parts(['floor'])` and `search_by_parts(['ceiling'])` return the
+identical 183-kanji set at depth 1 (every kanji with a literal `一` part),
+confirming these are non-restrictive alternate names for the same shape,
+not host-specific tags. `silage` fits the same pattern: one more narrative
+name Heisig hangs on a plain `一` stroke, this time in the context of a
+stacked-bars primitive.
+
+The exact recursive split of `walking cane`/`stick`/`one`/`floor` as 4
+separate names for what looks like one continuous vertical-plus-3-bars
+shape (and why 唾's own CSV row recursively expands `droop` into only 4 of
+垂's 6 sub-tokens while 睡/錘 expand into all 6) is CSV-inconsistent in a
+way a render can't settle on its own — left unresolved, same call as the
+eighteenth chunk's punt on 骨/咼's exact internal granularity and the
+sixteenth chunk's punt on 庸/備. `stick`'s collision with `rtk60` is also
+left open — a naming collision to revisit, not a blocker for `silage`.
+
+### Change
+
+Added `silage` as a fifth alias on `rtk1` (一), alongside the existing
+`one`/`floor`/`ceiling`/`minus`. `data.txt:66` line is now
+`rtk1:一:one,floor,ceiling,minus,silage:`. No decomposition/parts rows
+touched — alias-only edit.
+
+### Verified
+
+Rebuilt `kanji.db` clean from source (3000 CSV-sourced kanji rows, 3088
+parts overrides — unchanged totals, alias-only edit). `test_regression_fixes.py`:
+1321 checks, only the 4 known hanzi-scope non-issues, no new pin breakage.
+66 pytest. `audit_overflatten.py` 0, `audit_self_reference.py` 0,
+`audit_radicals.py` 0/0, `audit_primary_choice.py` 1 (unchanged `rtk265`
+deviation).
+
+`audit_phantom_parts.py --in-csv-range`: **134/93** (down from 135/94) —
+diffed the full before/after output directly (stashed this chunk's change,
+rebuilt, re-ran, compared): the one dropped entry was `rtk1704`'s (華) own
+`一 -> rtk1` phantom flag — 華's existing primary decomposition
+(`｜,一,艹`, unchanged by this chunk) already listed `一` literally as a
+part, and the audit couldn't previously connect that literal part to any
+of 華's own CSV concepts (`flowers; silage; ten; needle`) since none of
+一's old names (`one`/`floor`/`ceiling`/`minus`) appear in that list.
+Independent confirmation, from a tool that wasn't the one used to find or
+apply this fix, that `silage` really is the same `一` shape 華 already
+carries as a literal part, not a guess.
+
+Directly queried `search_by_parts(['silage'], depth=1)`: matches
+rtk1704(華)/rtk1705(垂)/rtk1709(乗) — the 3 hosts that list `一` literally
+in their own primary — plus all 183 pre-existing hosts with a literal `一`
+part (same broad set `floor`/`ceiling` already return, confirming `silage`
+behaves identically to its alias-siblings). `depth=2` additionally reaches
+rtk1706(唾) rtk1707(睡) rtk1708(錘) rtk1710(剰) rtk1990(郵) via their own
+decomposition trees (口/目/金/乗/⻏ + 垂 or 乗) — all 8 originally targeted
+hosts reachable, none forced. `audit_csv_regressions.py`: none of the 8
+hosts appear in its output (no dropped CSV concepts). `suggest_heisig_aliases.py
+--near 0.8 --all`: `silage` no longer listed (35 → 34 unresolved groups).
+Frontend `npm install`, `npm run lint`, `npm run build` all clean.
+
+**Next**: `silage` closed for all 8 original hosts. `genie` (6 hosts:
+在存才材財閉, "nothing common to every host — likely a missing row") is now
+the top-ranked group in that more-promising bucket and is entirely
+unstarted; `roots`/`receipt`/`cornucopia` (5 hosts each, same bucket) are
+the next candidates after it if `genie` doesn't pan out. `chop-seal, hanko`
+(14 hosts) and the newly-surfaced `hairpin, safety-pin` (12 hosts) remain
+the top two by host count but are both the same weak single-common-primitive
+signal shape (`一`/`ノ`+`一` respectively) flagged as unpromising in
+multiple prior chunks — still not attempted. `stick`'s collision with
+`rtk60`'s unrelated "post a bill" alias (noticed while investigating
+`silage`) is a minor naming-oddity worth a future look but wasn't required
+to close this chunk's target. `audit_phantom_parts.py`'s 134/93 pile (led
+by bare stroke primitives ノ/一/｜ with no alternative host to promote from)
+remains the larger standing item if the `--near` queue runs dry.
+`sync_system_data.py` against the live server is still not something this
+session can do — a deployer running it will see one changed `aliases` row
+(`rtk1` +1 alias, `silage`) from this chunk.

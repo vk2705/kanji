@@ -63,7 +63,7 @@ rtk91:?::日,召
 
 rtk2636:砥:grindstone:氐,石
 # --- Imported from kanjidic2 + KRADFILE ---
-rtk1:一:one,floor,ceiling,minus:
+rtk1:一:one,floor,ceiling,minus,silage:
 rtk2:二:two:;一
 rtk5:五:five:
 rtk9:九:nine,baseball:
