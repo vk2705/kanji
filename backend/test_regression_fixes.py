@@ -2164,8 +2164,16 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk102", "rtk2526"}},
     "rtk1977": {"character": "眠", "keyword": "sleep",
                 "expected_part_ids": {"rtk15", "rtk1976"}},
+    # 2026-09-18 (sixteenth chunk): was 丶+十+用+舎 (raw-stroke spelling of 甫,
+    # dog-tag/arrowhead, plus 舎/cottage) -- an over-flattening audit_overflatten.py
+    # could not see until prim-dog-tag (甫) gained a registered 用,screwdriver
+    # alt-decomposition this chunk, which taught the tool that 用 genuinely is one
+    # of 甫's own recognized sub-readings. Collapsed to 甫+舎 (--apply, own diff
+    # checked before keeping it), matching 舗's cjkvi-ids top level (⿰甫舎)
+    # directly and the already-existing "structural (cjkvi-ids)" alt this line
+    # carried since 2026-09-13, which was identical and is now redundant.
     "rtk1982": {"character": "舗", "keyword": "shop",
-                "expected_part_ids": {"kangxi3", "rtk10", "rtk1265", "rtk338"}},
+                "expected_part_ids": {"prim-dog-tag", "rtk338"}},
     # 2026-09-10 (dispute review): the right-side 阝 (ozato, Kangxi 163, "walls")
     # was proxied by the whole kanji 邦(rtk1991, "home country" = 丰+阝) across 15
     # kanji — same KRADFILE-substitution class as 扎→扌 and 阡→阝(left). data.txt

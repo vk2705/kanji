@@ -2027,11 +2027,11 @@ rtk1974:抵:resist:扌,氐
 rtk1975:底:bottom:广,氐
 rtk1976:民:people:口,氏,尸
 rtk1977:眠:sleep:民,目
-rtk1978:捕:catch:十,用,丶,扌;扌,甫
-rtk1979:哺:nurse:口,十,用,丶;口,甫
-rtk1980:浦:bay:十,水,用,丶;水,甫
+rtk1978:捕:catch:扌,甫
+rtk1979:哺:nurse:口,甫
+rtk1980:浦:bay:水,甫
 rtk1981:蒲:bullrush:浦,艹
-rtk1982:舗:shop:舎,十,用,丶;甫,舎
+rtk1982:舗:shop:甫,舎
 rtk1983:補:supplement:甫,衤
 rtk1984:邸:residence:氐,阝
 rtk1985:郭:enclosure:口,⻏,亅,亠,子;享,阝
@@ -2808,7 +2808,7 @@ rtk2757:諜:spy out:枼,言
 rtk2758:註:notes:主,言
 rtk2759:譬:illustrate:言,辟
 rtk2760:轟:roar:車
-rtk2761:輔:help:車,十,用,丶;甫,車
+rtk2761:輔:help:甫,車
 rtk2762:輻:spoke (wheel):畐,車
 rtk2763:輯:gather:口,耳,車
 rtk2764:豹:leopard:勺,豸
@@ -2973,7 +2973,7 @@ rtk2922:琶:lute:王,巴
 rtk2923:叉:fork in road:又,丶
 rtk2924:乖:oppose:ノ,十,匕,丬;北,千
 rtk2925:畠:field:田,白
-rtk2926:圃:garden:十,用,丶,囗;囗,甫
+rtk2926:圃:garden:囗,甫
 rtk2927:丞:help:ノ,一,亅
 rtk2928:亮:clear:口,亠,儿,冖
 rtk2929:胤:descendent:月,儿,幺;ノ,乙,幺,月
@@ -3028,7 +3028,7 @@ rtk2977:逞:sturdy:呈,辶
 rtk2978:燈:lamp:火,登
 rtk2979:裡:reverse:初,里;衣,里
 rtk2980:薗:garden:艹,園
-rtk2981:鋪:shop:金,十,用,丶;甫,金
+rtk2981:鋪:shop:甫,金
 rtk2982:嶋:island:山,鳥
 rtk2983:峯:peak:夆,山
 rtk2984:埜:open country:土,林
@@ -3156,7 +3156,66 @@ prim-parade:戊:parade
 # top level needs a component we cannot yet register.
 prim-bushel-basket:其:bushel basket,hamper:
 prim-piggy-bank:昜:piggy bank,piglets:旦,勿
-prim-dog-tag:甫:dog-tag,arrowhead:十,月,丶
+# --- 2026-09-18 (sixteenth chunk): "screwdriver" gets a home on 甫's alt --
+# heisig-kanjis.csv names "screwdriver" as a component of exactly 7 hosts
+# (備庸捕浦舗蒲補), always immediately beside "utilize"/"utilise" (用's own
+# keyword) in the fully-expanded components column, e.g. 1978/捕: "finger;
+# fingers; dog-tag; arrowhead; screwdriver; utilize; utilise" -- dog-tag/
+# arrowhead is prim-dog-tag's own alias pair for 甫, and its own two
+# sub-components per the CSV are screwdriver + utilize, nothing else (no
+# "moon"/"month"/"flesh" the way 用's own components column lists when it
+# gets expanded standalone -- 甫 chunks at the 用-level, not decomposed
+# further). render_glyphs.py confirms this directly: 甫 zoomed next to 用
+# is 用's exact box shape (same top bar, center divider, two internal
+# bars, curved bottom-right foot) plus one extra short diagonal stroke
+# poking up past the top-right corner that plain 用 does not have --
+# cjkvi's own ids.txt entry for 甫 (⿺⿻十月丶) independently agrees a real
+# stroke-level difference exists there, spelling it as 十 overlapping 月
+# plus a trailing 丶. Heisig's own chunking calls that same extra stroke
+# "screwdriver" and treats the box below it as 用 itself (not further
+# decomposed into 月), a coarser split than cjkvi's atomic one -- the same
+# "Heisig chunks higher than cjkvi's stroke-level IDS tree" gap already
+# documented for rtk265/介's "umbrella" two entries above.
+#
+# Checked whether "screwdriver" could just be a second alias on an
+# existing primitive instead of a new row, the way "walking cane" landed
+# on prim-pipe last chunk -- rejected. Both raw strokes 甫's extra tick is
+# built from (十/"ten", kangxi3/丶 "dot,tick,drop") are each already used
+# as a literal part in ~65-70 other data.txt lines for their own
+# unrelated raw meanings (十 as the actual digit "ten", 丶 as a bare stroke
+# in dozens of unrelated glyphs) -- aliasing "screwdriver" onto either
+# would make that search term return dozens of false positives for a
+# concept that's real in exactly 7 frames. No existing bare primitive
+# already covers "十 topped with a short diagonal tick" as its own
+# distinct shape either. So: new bare-alias primitive `prim-screwdriver`
+# with character `?` (no separate Unicode codepoint represents this exact
+# compound tick distinct from plain 十 -- same "no real glyph, register by
+# name only" pattern already used for prim-sitting-on-the-ground and
+# prim-antlers above), added as an alt-decomposition on prim-dog-tag
+# (甫) alongside its existing cjkvi-derived primary, not replacing it:
+# `十,月,丶;用,screwdriver`. Labelled alt, so 甫's detail page shows both
+# readings; search reaches "screwdriver" via 甫 at depth>=2 for every host
+# that already carries literal 甫 or the raw 十,用,丶 spelling (捕 rtk1978,
+# 浦 rtk1980, 舗 rtk1982 both directly and via their own 甫 alt; 補 rtk1983
+# via its sole 甫,衤 decomposition; 蒲 rtk1981 via its own 浦,艹 -> 浦's 甫
+# alt, one level further).
+#
+# 庸 (rtk1266, currently ⺕,用,广,聿) and 備 (rtk1267, currently 亻,用,厂,艹)
+# are NOT touched by this chunk. Both list "screwdriver" in their own CSV
+# components too, but render_glyphs.py zoomed on both was inconclusive on
+# whether their own 用-adjacent portion actually carries the same extra
+# tick 甫 has, or whether what looks like a third internal bar there is
+# fully accounted for by 聿 (庸, already a literal part) or is genuinely
+# plain 用 with no tick (備, where cjkvi's own ⿸厂用 IDS for that portion
+# never mentions 十/丶/甫 at all) -- changing either host's literal parts
+# on that reading would risk exactly the "substituted a lookalike from
+# reasoning instead of a confirmed render" mistake this audit exists to
+# catch, not fix it. Left open for a future chunk with a cleaner side-by-
+# side render pass (ids.txt gives 庸's own inner shape as ⿻肀月 or ⿻聿冂,
+# neither of which is 甫 or 用 literally, which is the concrete thing that
+# render pass needs to either confirm or rule out).
+prim-dog-tag:甫:dog-tag,arrowhead:十,月,丶;用,screwdriver
+prim-screwdriver:?:screwdriver
 prim-harvest-festival:𢦏:harvest festival,thanksgiving:十,戈
 prim-streetwalker:夋:streetwalker,john cleese,ministry of silly walks:允,夂
 prim-devil:兑:devil:丷,兄

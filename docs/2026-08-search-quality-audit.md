@@ -10682,3 +10682,153 @@ weak signal, likely not a quick win. `sync_system_data.py` against the
 live server is still not something this session can do — a deployer
 running it will see one changed `aliases` row (`prim-pipe` +1, "walking
 cane") from this chunk; no `parts` rows changed.
+
+## 2026-09-18 (sixteenth chunk) — `screwdriver` gets a home on 甫's own
+alt, and an over-flattening bug it exposed in 7 more hosts
+
+Eleventh firing today. Same environment drill as every chunk this
+cycle: fresh container, repo present and fast-forwarded cleanly (29
+commits behind, no divergence), but no `venv/`, no `node_modules/`, no
+CJK fonts, no `/tmp/ids.txt` — all four rebuilt from scratch, and `git
+push --dry-run origin master` confirmed clean before touching anything.
+
+Picked up the fifteenth chunk's own "Next": `screwdriver` (7 hosts:
+備庸捕浦舗蒲補).
+
+### Investigation
+
+`heisig-kanjis.csv`'s components column always pairs "screwdriver" with
+"utilise; utilize" (用's own keyword) as adjacent siblings, e.g.
+1978/捕: "finger; fingers; dog-tag; arrowhead; screwdriver; utilize;
+utilise" — dog-tag/arrowhead is `prim-dog-tag`'s own alias pair for 甫,
+and per this row its own two sub-components are screwdriver + utilize,
+nothing else (no "moon"/"month"/"flesh", which is what 用's own
+components column lists whenever it *does* get expanded further, as
+happened for 庸/備 below). `render_glyphs.py` on 甫 zoomed beside 用
+confirms a real stroke-level difference: 甫 is 用's exact box (same top
+bar, center divider, two internal bars, curved bottom-right foot) plus
+one extra short diagonal stroke poking up past the top-right corner
+that plain 用 does not draw. `/tmp/ids.txt` independently agrees a real
+difference exists there (甫: `⿺⿻十月丶`, spelling it as 十 overlapping
+月 plus a trailing 丶) — Heisig's own chunking just calls that same
+extra stroke "screwdriver" and stops at 用 itself rather than
+decomposing further into 月, a coarser split than cjkvi-ids' atomic one
+(the same "Heisig chunks higher than cjkvi's own stroke-level tree" gap
+already documented for rtk265/介's "umbrella" two entries above).
+
+Checked whether "screwdriver" could just be a second alias on an
+existing primitive, the way "walking cane" landed on `prim-pipe` last
+chunk — rejected. Both raw strokes the extra tick is built from (`十`/
+"ten", `kangxi3`/丶 "dot,tick,drop") are each already a literal part in
+roughly 65-70 other `data.txt` lines for their own unrelated raw
+meanings (十 as the actual digit, 丶 as a bare stroke in dozens of
+unrelated glyphs) — aliasing "screwdriver" onto either would make that
+search term return dozens of false positives for a concept that is
+real in only a handful of frames. No existing bare primitive already
+covers "十 topped with a short diagonal tick" as its own distinct shape
+either.
+
+### Change
+
+New bare-alias primitive `prim-screwdriver:?:screwdriver` — character
+`?`, no parts, same "no real glyph, register by name only" pattern
+already used for `prim-sitting-on-the-ground`/`prim-antlers` (no
+separate Unicode codepoint represents this exact compound tick distinct
+from plain 十). Added as an alt-decomposition on `prim-dog-tag` (甫)
+alongside its existing cjkvi-derived primary, not replacing it:
+`十,月,丶;用,screwdriver`.
+
+**A side effect this exposed, caught by `audit_overflatten.py` going
+from 0 to 7 immediately after that edit — not before committing, per
+the "verify before committing" habit this audit keeps needing to
+apply.** `audit_overflatten.py`'s own-tree "second opinion" (see its
+module docstring) aggregates a registered character's part glyphs
+across *all* its decompositions, not just the primary; adding 用 to
+甫's alt meant the tool could now see that 用 is a genuine child of 甫,
+which in turn meant 7 hosts spelling out 甫's raw strokes directly in
+their own primary (`十,用,丶,X` for various X) — 捕(rtk1978),
+哺(rtk1979), 浦(rtk1980), 舗(rtk1982), 輔(rtk2761), 圃(rtk2926),
+鋪(rtk2981) — were flagged as over-flattened against cjkvi-ids' own top
+level for each of them (捕 `⿰扌甫`, etc., all direct 甫 splits). This
+is the exact bug class the tool targets: those 7 primaries were
+diluting "ten"/"utilize"/"dot" searches with hosts that are really just
+甫 spelled out letter by letter. All 7 already carried a `甫,X`
+alt-decomposition too (from the 2026-09-13 structural-alt bulk add) —
+identical to what the collapse proposed — so `--apply` (checked with
+`--term 甫` first, diffed against a copy before touching the real file)
+correctly collapsed each primary to match, and the now-redundant
+duplicate alt it left behind (`--apply` preserves the tail rather than
+rewriting the whole line, per this doc's own tooling notes) was removed
+by hand in all 7, leaving a single decomposition per host rather than a
+primary/alt pair repeating the same six characters.
+
+One `test_regression_fixes.py` pin (`rtk1982`) had frozen the old
+flattened primary (`{kangxi3, rtk10, rtk1265, rtk338}`); corrected to
+`{prim-dog-tag, rtk338}` with an inline comment pointing at this entry.
+The other 6 collapsed hosts had no existing pins to update.
+
+**庸(rtk1266) and 備(rtk1267) were deliberately left untouched.** Both
+list "screwdriver" in their own CSV components too, but
+`render_glyphs.py` zoomed on both was inconclusive on whether their own
+用-adjacent portion actually carries the same extra tick 甫 has, or
+whether what looks like a third internal bar there is fully accounted
+for by 聿 (庸, already a literal part) or is genuinely plain 用 with no
+tick (備, whose own `⿸厂用` cjkvi entry never mentions 十/丶/甫 at all).
+Changing either host's literal parts on that reading would risk
+exactly the "substituted a lookalike from reasoning instead of a
+confirmed render" mistake this audit exists to catch, not fix it — left
+open for a future chunk with a cleaner side-by-side render pass (庸's
+own inner shape per `ids.txt` is `⿻肀月` or `⿻聿冂`, neither of which is
+甫 or 用 literally, which is the concrete thing that pass needs to
+either confirm or rule out).
+
+### Verified
+
+Rebuilt `kanji.db` clean from source (3000 CSV-sourced kanji rows, 3088
+parts overrides — same totals as the fifteenth chunk, since the CSV
+baseline is unchanged; total `kanji` table row count 3187, +1 for
+`prim-screwdriver`). `test_regression_fixes.py`: 1321 checks, only the
+4 known hanzi-scope non-issues after the `rtk1982` pin correction (the
+uncorrected run failed exactly that one plus the 4 known ones,
+confirming the pin — not the fix — was stale). 66 pytest.
+`audit_overflatten.py` 0 (was 7 immediately after the `prim-dog-tag`
+edit, closed by the collapse above), `audit_self_reference.py` 0,
+`audit_radicals.py` 0/0, `audit_primary_choice.py` 1 (the same
+documented `rtk265` deviation, unaffected by this chunk — 79 of 82
+previous multi-chunk kanji remain multi-chunk, the 3-count drop being
+an incidental consequence of removing 7 kanji's now-redundant
+duplicate alt down to 4 net changes in that particular metric, not a
+regression). `audit_phantom_parts.py --in-csv-range`: 137/95,
+unchanged (none of the 8 touched ids were ever on that list). Directly
+queried `audit_csv_regressions.py`'s output: 舗 no longer lists
+"screwdriver" among its dropped CSV concepts (only pre-existing,
+unrelated gaps remain), and 捕/哺/浦/補/輔/圃/鋪 now show *zero* dropped
+CSV concepts at all (full lines absent from the report). 庸/備 still
+correctly show "screwdriver" as dropped, confirming the deliberate
+non-fix left them exactly where they were. Directly queried
+`search_by_parts(['screwdriver'], depth=2)`: returns exactly 8 hosts
+(捕 哺 浦 舗 補 輔 圃 鋪) plus `prim-dog-tag`/`prim-screwdriver`
+themselves and `prim-acupuncturist` (尃, a pre-existing, unrelated
+`甫,寸` primitive correctly picking up the new resolution through its
+own already-literal 甫); `depth=3` additionally reaches 蒲(rtk1981) via
+浦, plus several unrelated hosts reachable only at that broader depth
+(expected — depth 3 is user-selectable, not the default). 庸/備 do not
+appear at any depth, as expected. `suggest_heisig_aliases.py --near
+0.8 --all` no longer lists "screwdriver" at all. Frontend `npm
+install`, `npm run lint`, and `npm run build` all clean.
+
+**Next**: `screwdriver` is closed for 8 of its original 7-and-then-some
+hosts (the over-flattening fix pulled in 哺/輔/圃/鋪 too, which the
+fourteenth/fifteenth chunks' host count never listed since they were
+found via `--near`'s coarser cluster, not the full CSV scan), with 庸/備
+left open and specifically scoped (does their own 用-adjacent portion
+carry 甫's extra tick or not — needs a side-by-side render, not a
+reasoning-only call). `tongue wagging` (8 hosts: 唱宴智書替潜音響, every
+host contains 日 1.00) is next and entirely unstarted. `chop-seal/hanko`
+(14 hosts) remains flagged repeatedly as a weak signal, likely not a
+quick win. `sync_system_data.py` against the live server is still not
+something this session can do — a deployer running it will see one new
+primitive row (`prim-screwdriver`), one changed `decompositions` row
+(`prim-dog-tag` +1 alt), and 7 changed `parts` rows (捕哺浦舗輔圃鋪, each
+collapsed from a 4-part raw-stroke primary to a 2-part `甫,X` primary)
+from this chunk.
