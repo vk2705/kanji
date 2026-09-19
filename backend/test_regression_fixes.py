@@ -971,19 +971,24 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk327": {"character": "夢", "keyword": "dream",
                 "expected_part_ids": {"kangxi122", "kangxi14", "prim-mugwort", "rtk114"}},
     # 学/覚/栄/蛍/労/営/鴬 -- see the rtk1111 comment below for the full
-    # ツ/prim-owl account.
+    # ツ/prim-owl account. Corrected again 2026-09-19: the flattened
+    # kangxi14(冖)+prim-owl(𭕄) pair on each of these was itself an
+    # over-flattening of one compound Heisig calls "schoolhouse" (see the
+    # prim-schoolhouse comment in data.txt) -- folded into that single
+    # primitive on all seven hosts, "cover"/"crown"/"owl" all still
+    # reachable at depth 2 through prim-schoolhouse's own sub-decomposition.
     "rtk346": {"character": "学", "keyword": "study",
-                "expected_part_ids": {"kangxi14", "prim-owl", "rtk99"}},
+                "expected_part_ids": {"prim-schoolhouse", "rtk99"}},
     "rtk347": {"character": "覚", "keyword": "memorize",
-                "expected_part_ids": {"kangxi14", "prim-owl", "rtk61"}},
+                "expected_part_ids": {"prim-schoolhouse", "rtk61"}},
     "rtk348": {"character": "栄", "keyword": "flourish",
-                "expected_part_ids": {"kangxi14", "prim-owl", "rtk207"}},
+                "expected_part_ids": {"prim-schoolhouse", "rtk207"}},
     "rtk557": {"character": "蛍", "keyword": "lightning bug",
-                "expected_part_ids": {"kangxi14", "prim-owl", "rtk556"}},
+                "expected_part_ids": {"prim-schoolhouse", "rtk556"}},
     "rtk924": {"character": "労", "keyword": "labor",
-                "expected_part_ids": {"kangxi14", "prim-owl", "rtk922"}},
+                "expected_part_ids": {"prim-schoolhouse", "rtk922"}},
     "rtk2916": {"character": "鴬", "keyword": "nightingale",
-                "expected_part_ids": {"kangxi14", "prim-owl", "rtk2091"}},
+                "expected_part_ids": {"prim-schoolhouse", "rtk2091"}},
     # The whole 鳥-family had the exact same redundant-灬 bug as the
     # 馬-family fix on day 4 -- 鳥(rtk2091) is itself taught with 灬 as
     # its one listed part, so every other 鳥-containing kanji that also
@@ -1997,8 +2002,10 @@ EXPECTED_DECOMPOSITIONS = {
     # above). Registered it as prim-owl and repointed all 7. (The carrier
     # glyph was itself wrong at first — katakana ツ, corrected to the real
     # 𭕄 on 2026-09-09; prim-katakana-ha went the same way on 2026-09-10.)
+    # Corrected again 2026-09-19: see the rtk346 comment above -- the
+    # flattened kangxi14+prim-owl pair folded into prim-schoolhouse.
     "rtk1111": {"character": "営", "keyword": "occupation",
-                "expected_part_ids": {"kangxi14", "prim-owl", "rtk24"}},
+                "expected_part_ids": {"prim-schoolhouse", "rtk24"}},
     "rtk1113": {"character": "膳", "keyword": "dining tray",
                 "expected_part_ids": {"rtk1112", "rtk13"}},
     "rtk1121": {"character": "喚", "keyword": "yell",

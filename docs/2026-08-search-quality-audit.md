@@ -12187,3 +12187,189 @@ independently evidenced and verified) — the scheduler-doubling issue
 flagged to the owner directly after the fifth firing is still ongoing;
 this session is notifying the owner again since the count grew rather than
 stopped.
+
+## 2026-09-19 (twenty-seventh chunk) — `schoolhouse` resolves for all 7 hosts,
+plus the wider `crown` alias fix it exposed
+
+First firing today (2026-09-18's scheduler-doubling problem did not recur —
+no other commits landed between the twenty-sixth chunk and this one). Fresh
+container as usual: no `venv/`, `node_modules/`, CJK fonts, or `/tmp/ids.txt`.
+`master` was a detached HEAD sitting exactly on `origin/master`'s tip (no
+lag this time), so `git checkout master` fast-forwarded with nothing to
+pull; `git push --dry-run origin master` confirmed clean before any work,
+per the standing container-recovery drill.
+
+Picked up the twenty-sixth chunk's own "Next": `schoolhouse` (6 CSV-cited
+hosts: 学覚栄蛍労営, `𭕄`/`冖` at 1.00 overlap).
+
+### Investigation
+
+`data.txt` before this chunk: all six hosts already had `𭕄`(owl) and
+`冖`(cover) as two separate flattened strokes — `rtk346:学:study:子,𭕄,冖`,
+`rtk347:覚:memorize:見,𭕄,冖`, `rtk348:栄:flourish:𭕄,木,冖`,
+`rtk557:蛍:lightning-bug:𭕄,虫,冖`, `rtk924:労:labor:𭕄,力,冖`,
+`rtk1111:営:camp:呂,𭕄,冖`. `rtk1873`(薬) already references `rtk1872`(楽)
+literally, so no edit needed there — same transitive pattern as the last
+three chunks' `俸`/`棒`, `剤`/`済`/`斎`, `薬`(via `楽`) cases.
+
+`/tmp/ids.txt` confirms `𭕄`+`冖` sit together at every host, always under
+a ternary (`⿳`) top node with a third, host-specific bottom component:
+`学=⿳𭕄冖子`, `覚=⿳𭕄冖見`, `栄=⿳𭕄冖木[GJK]`/`⿳𭕄冖朩[T]`, `蛍=⿳𭕄冖虫`,
+`労=⿳𭕄冖力`, `営=⿳𭕄冖吕[G]`/`⿳𭕄冖呂[TJK]` — the same over-flattening
+shape already fixed for `cornstalk`/`fenceposts`/`sparkler` in the
+preceding three chunks. Rendered all six plus `𭕄`/`冖`/`冠` alone
+(`render_glyphs.py`): every host shows the identical small-hook-over-
+flat-roof shape at the top, clearly one visual unit. No exact-match
+codepoint for `⿱𭕄冖` exists in `ids.txt` (only ever a sub-component of
+larger `⿳` shapes: 学覚栄蛍労営 plus 喾峃泶蛍(again)觉鲎鴬鸴黉 and a few
+unencoded ones) — same "no citable codepoint" situation as the three prior
+chunks, `?` placeholder. Gave `prim-schoolhouse` its own `𭕄,冖`
+sub-decomposition (not atomic) so "owl" and "cover"/"crown" both stay
+reachable at depth 2, matching the `prim-fenceposts`/`prim-sparkler`
+precedent.
+
+While grepping for other real hosts of this exact shape, found `鴬`
+(rtk2916, "nightingale") already carrying the identical flattened
+`𭕄,鳥,冖` split, and `ids.txt` confirms `⿳𭕄冖鳥` — same shape, seventh
+host. Its own CSV row (frame 2916) has an empty `components` column
+entirely (one of the sparse late-book entries, not unique to this kanji —
+several frames past ~2900 have no CSV component data), so it was never
+going to surface via the CSV-component-name matching this audit's tooling
+uses. Included it anyway on render evidence alone: `test_regression_fixes.
+py`'s own `rtk1111` comment already documents `鴬` as grouped with this
+same `学`/`覚`/`栄`/`蛍`/`労`/`営` family from three earlier chunks
+(2026-09-07 day-5 worklist, the 2026-09-09 katakana-ツ→𭕄 correction, and
+2026-09-10's `prim-katakana-ha` sibling fix) — this chunk is not
+introducing a new claim about `鴬`, just finishing folding a fix that had
+already been applied to it twice before into the same compound its
+siblings got today.
+
+**The `crown` alias bug found along the way.** Heisig's own CSV component
+list for `学` reads "schoolhouse; owl; crown; child" — "owl" already
+resolved correctly (`prim-owl`'s own alias list), but a direct lookup
+showed `crown` resolving only to `rtk326` (冠, the actual kanji "crown"),
+*not* to `冖`(kangxi14) at all, despite Heisig using "crown" as an
+alternate name for that exact primitive shape in 57 separate CSV component
+lists (冗 冥 軍 輝 運 夢 亭 売 学 覚 栄 読 帯 滞 帝 諦 壱 蛍 豪 憂 揮 殻 受 授
+愛 曖 賞 党 堂 常 裳 掌 瞬 労 勃 穀 停 償 優 傍 営 塚 侵 浸 寝 婦 掃 彙 帰 写
+締 続 索 畳 沈 枕 慶). This is exactly the "vouching name can itself
+resolve to the wrong row" trap `suggest_heisig_aliases.py`'s own cross-
+check exists for, except the tool never flagged it: because `crown`
+*does* resolve (just to the wrong thing), it doesn't show up in either
+the "no name resolves" or "ambiguous — registered members disagree"
+buckets the tool checks for. It was found only by reading `schoolhouse`'s
+own CSV component list by hand while working this chunk, not by any
+automated signal.
+
+Checked all 57 hosts' current parts (direct DB query, not just CSV text)
+before touching anything: 冖 is reachable in every single one, either
+directly (25 of them) or transitively through an intermediate primitive
+that itself already correctly carries `冖` — `prim-outhouse`(`⺌,冖,口`),
+`prim-feather-duster`(`⺕,冖,巾`, matching cjkvi's own `帚=⿳彐冖巾`),
+`prim-french-maid`(`⺕,冖,又`) among others. Rendered `冗`/`冥`/`軍`/`冠`
+individually to spot-check the pattern beyond the six schoolhouse hosts:
+all four show the identical flat-roof `冖` stroke at the top, matching
+cjkvi's `⿱冖几`/`⿱冖昗`/`⿱冖車`/`⿱冖㝴`. "cover" and "crown" never
+co-occur in the same host's CSV component list across any of the 3000
+rows — consistent with them being Heisig's two alternate names for one
+shape, chosen per-host for mnemonic reasons, not two different shapes.
+Added `crown` as an alias to `kangxi14` alongside its existing `cover`.
+The 2026-09-09 ambiguous-term-union fix (`get_all_aliases_for_term`
+returning every visible claimant, guarded against chaining through an
+unrelated synonym) already handles a primitive/real-kanji name clash like
+this correctly — `crown` now returns both `rtk326` and every `冖`-drawing
+host, no further backend change needed, confirmed by direct query.
+
+### Change
+
+```
+prim-schoolhouse:?:schoolhouse:𭕄,冖
+rtk346:学:study:子,prim-schoolhouse
+rtk347:覚:memorize:見,prim-schoolhouse
+rtk348:栄:flourish:prim-schoolhouse,木
+rtk557:蛍:lightning-bug:prim-schoolhouse,虫
+rtk924:労:labor:prim-schoolhouse,力
+rtk1111:営:camp:呂,prim-schoolhouse
+rtk2916:鴬:nightingale:prim-schoolhouse,鳥
+kangxi14:冖:cover,cloth cover,birdcage,birdhouse,crown   (added "crown")
+```
+`薬`(rtk1873) needed no edit — already references `楽`(rtk1872) literally.
+
+Seven regression pins named the old flattened `kangxi14`/`prim-owl` pair
+directly (`rtk346`, `rtk347`, `rtk348`, `rtk557`, `rtk924`, `rtk1111`,
+`rtk2916`), so all seven broke on rebuild as expected; corrected in place
+to `prim-schoolhouse`, with a comment on the first one explaining why and
+cross-referencing it from the rest, rather than repeating the reasoning
+seven times or just swapping the ids silently.
+
+### Verified
+
+Rebuilt `kanji.db` clean from source (3000 CSV-sourced kanji rows, 3091
+parts overrides — one more than the prior chunk's 3090, from the one new
+`prim-schoolhouse` decomposition row; unchanged CSV-sourced row count).
+`test_regression_fixes.py`: first run surfaced exactly the seven expected
+pin breaks (see above) plus the 4 known hanzi-scope non-issues; after
+correcting the seven pins, 1321 checks, only the 4 known non-issues, no
+other pin breakage. 66 pytest. `audit_overflatten.py` 0,
+`audit_self_reference.py` 0, `audit_radicals.py` 0/0,
+`audit_primary_choice.py` 1 (unchanged `rtk265` deviation, untouched by
+this chunk). `audit_phantom_parts.py --in-csv-range`: **122/86 → 118/85**
+— `𭕄` and `冖` had been showing up as phantom parts on some of these
+hosts before (both are real resolvable codepoints, so this wasn't the
+main lever, but folding them into `prim-schoolhouse` incidentally cleared
+a few phantom-part occurrences too).
+
+`audit_csv_regressions.py`: `rtk346`/`rtk347`/`rtk348`/`rtk557`/`rtk2916`
+no longer appear in the flagged list at all (zero drops now); `rtk924`'s
+`dropped:` line now shows only the pre-existing, unrelated `muscle` gap;
+`rtk1111`'s `dropped:` line is gone entirely — confirming the fix landed
+cleanly on all seven intended hosts with no new gaps opened, and that
+`crown` no longer shows up as a drop on any of the other 51 hosts that
+cite it either (spot-checked `rtk930`(勃), which keeps `冖` as a direct,
+unflattened part and was never touched by this chunk's edits — its
+`dropped:` line shows only its own pre-existing `needle`/`muscle` gaps,
+not `crown`). Direct queries: `search_by_parts(['schoolhouse'], depth=1)`
+returns all seven hosts plus `prim-schoolhouse` itself (self-identity);
+`depth=2` is identical (no further transitive hosts beyond `薬`, which
+resolves through `楽` at any depth ≥1 already). `search_by_parts(
+['crown'], depth=1)` returns 47 kanji including both `rtk326`(冠) and
+`kangxi14` itself, and directly confirmed `rtk321`(冗) — a host with no
+transitive relationship to `schoolhouse` at all — is among them.
+`suggest_heisig_aliases.py --near 0.8 --all`: `schoolhouse` group gone
+(26 → 25 unresolved groups). Frontend `npm install`, `npm run lint`,
+`npm run build` all clean.
+
+**Next**: `schoolhouse` fully closed (6 CSV-cited hosts directly, `薬`
+transitively, `鴬` on render evidence alone), and the `crown` alias fix
+it surfaced now covers 57 CSV component-list citations in one alias
+addition, verified with zero exceptions across all of them. `catapult,
+slingshot` (6 hosts, `一` at 0.83) and `sunglasses`/`ballerina, dancing
+legs` (5 and 4 hosts, sharing `舛`/`㐄`/`夕`/`𠂊` at 0.80-1.00, same host
+set — 傑瞬舞隣 plus 官 for the larger group) are the next-ranked
+`--near 0.8` groups with a real shared-primitive signal, followed by
+`maestro without baton` (5 hosts, `官`/`宀` at 0.80). `chop-seal, hanko`
+(14 hosts) and `hairpin, safety-pin` (12 hosts) remain the top two by raw
+host count but are still the same weak single-common-primitive signal
+shape flagged as unpromising in multiple prior chunks. Worth noting for
+whoever picks up the next `--near` group: this chunk's `crown` finding
+came from reading a CSV component list by hand, not from any audit
+script's output — `suggest_heisig_aliases.py`'s "already resolves" check
+only distinguishes "resolves to nothing" from "resolves to something,"
+not "resolves to something *correct*," so a name that quietly points at
+the wrong row (a same-spelling real kanji, as here, or an unrelated
+primitive) won't surface on its own; it's worth a skim of each group's own
+CSV component text for other names in the same list that already "resolve"
+before assuming everything's fine. `粛`'s own top/bottom structure (no
+cjkvi IDS decomposition available for it or `肅`, open since the twenty-
+fifth chunk), `猟`'s `用`-vs-`𠂡` font-coverage question, and `逓`'s
+buried `乕`-nested overlay (both open since the twenty-fourth chunk) are
+all still unresolved. `stick`'s collision with `rtk60`'s unrelated "post a
+bill" alias is still an open minor oddity. `audit_phantom_parts.py`'s
+118/85 pile (led by bare stroke primitives ノ/一/｜ with no alternative
+host to promote from) remains the larger standing item if the `--near`
+queue runs dry. `sync_system_data.py` against the live server is still
+not something this session can do — a deployer running it will see one
+new `kanji` row (`prim-schoolhouse`) and its one alias/keyword
+("schoolhouse"), one changed alias row (`kangxi14` gaining "crown"), and
+seven changed `parts` rows (`rtk346`, `rtk347`, `rtk348`, `rtk557`,
+`rtk924`, `rtk1111`, `rtk2916`) from this chunk.

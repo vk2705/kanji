@@ -396,9 +396,9 @@ rtk342:吉:good luck:口,士
 rtk343:壮:robust:士,丬
 rtk344:荘:villa:艹,壮
 rtk345:売:sell:士,儿,冖
-rtk346:学:study:子,𭕄,冖
-rtk347:覚:memorize:見,𭕄,冖
-rtk348:栄:flourish:𭕄,木,冖
+rtk346:学:study:子,prim-schoolhouse
+rtk347:覚:memorize:見,prim-schoolhouse
+rtk348:栄:flourish:prim-schoolhouse,木
 rtk349:書:write:日,聿
 rtk350:津:haven:水,聿
 rtk351:牧:breed:牛,攵
@@ -607,7 +607,7 @@ rtk553:栃:horse chestnut:木,厂
 rtk554:地:ground:土,也
 rtk555:池:pond:水,也
 rtk556:虫:insect:
-rtk557:蛍:lightning-bug:𭕄,虫,冖
+rtk557:蛍:lightning-bug:prim-schoolhouse,虫
 rtk558:蛇:snake:虫,匕,宀
 rtk559:虹:rainbow:工,虫
 rtk560:蝶:butterfly:枼,虫
@@ -974,7 +974,7 @@ rtk920:巨:gigantic:
 rtk921:拒:repel:扌,巨
 rtk922:力:power,arnold:;ノ,𠃌
 rtk923:男:male:田,力
-rtk924:労:labor:𭕄,力,冖
+rtk924:労:labor:prim-schoolhouse,力
 rtk925:募:recruit:力,莫
 rtk926:劣:inferiority:少,力
 rtk927:功:achievement:工,力
@@ -1161,7 +1161,7 @@ rtk1107:併:join:亻,并
 rtk1108:瓦:tile:一
 rtk1109:瓶:bottle:并,瓦
 rtk1110:宮:shinto shrine:呂,宀
-rtk1111:営:camp:呂,𭕄,冖
+rtk1111:営:camp:呂,prim-schoolhouse
 rtk1112:善:virtuous:王,口,丷,羊
 rtk1113:膳:small low table:善,月
 rtk1114:年:year:ノ,午
@@ -2972,7 +2972,7 @@ rtk2912:尖:be pointed:小,大
 rtk2913:壷:jar:｜,一,口,士,冖
 rtk2914:叡:intelligence:八,卜,又,目,冖
 rtk2915:酋:chieftain,molotov cocktail:酉,丷
-rtk2916:鴬:nightingale:𭕄,鳥,冖
+rtk2916:鴬:nightingale:prim-schoolhouse,鳥
 rtk2917:赫:suddenly:赤
 rtk2918:臥:bend down:臣,人
 rtk2919:甥:nephew:生,男
@@ -3064,7 +3064,22 @@ rtk3000:鼈:snapping turtle:敝,黽
 # not Heisig book text.
 kangxi8:亠:lid,primitive_lid,top hat
 kangxi13:冂:border,down box,hood,belt,glass canopy
-kangxi14:冖:cover,cloth cover,birdcage,birdhouse
+# "crown" added 2026-09-19: Heisig's OWN alternate name for this exact glyph,
+# used in 57 CSV component lists (冗,冥,軍,冠,帝,... plus every host that
+# transitively contains 冖 through an already-decomposed compound like
+# prim-outhouse/prim-feather-duster/prim-french-maid) -- distinct from
+# "cover", which he uses for the same shape in other hosts, but the two
+# names never co-occur on one host's component list. Previously "crown"
+# resolved only to rtk326 (冠, the actual kanji "crown"), silently hiding
+# every one of those 57 primitive-level citations. Verified by rendering
+# 冗/冥/軍/冠 (render_glyphs.py) -- all four show the identical flat roof
+# stroke cjkvi already puts at the top of each (⿱冖几, ⿱冖昗, ⿱冖車,
+# ⿱冖㝴) -- and by checking that 冖 is reachable (directly or via an
+# already-correct sub-decomposition) in every one of the 57 hosts' own
+# trees; zero exceptions found. The existing ambiguous-term-union fix
+# (2026-09-09, "owl") already handles a primitive/real-kanji name clash
+# like this one correctly with no further backend change needed.
+kangxi14:冖:cover,cloth cover,birdcage,birdhouse,crown
 kangxi6:亅:hook
 kangxi44:尸:corpse
 kangxi62:戈:spear,halberd,fiesta
@@ -3697,4 +3712,30 @@ prim-cornstalk:?:cornstalk
 # guarding against. Left open for a future chunk with render budget to
 # work out what 粛's own top/bottom sections actually are.
 prim-fenceposts:?:fenceposts,cabers:ノ,二,｜
+
+# `schoolhouse` (2026-09-19 chunk): 学/覚/栄/蛍/労/営 all previously spelled
+# their shared top shape as two flattened strokes (𭕄 owl, 冖 crown/cover)
+# instead of the one compound Heisig names "schoolhouse" (CSV components:
+# "schoolhouse; owl; crown; ..." on every one of the six) -- same
+# over-flattening pattern as prim-sparkler/prim-fenceposts/prim-cornstalk.
+# cjkvi-ids confirms 𭕄+冖 sit together at every one of these six hosts
+# (⿳𭕄冖子, ⿳𭕄冖見, ⿳𭕄冖木[GJK], ⿳𭕄冖虫, ⿳𭕄冖力, ⿳𭕄冖呂[TJK]) --
+# always the same two-component group under a ternary top node, never 𭕄
+# or 冖 paired with anything else at that position. Rendered all six plus
+# 𭕄/冖/冠 alone (render_glyphs.py): every host shows the identical
+# small-hook-over-flat-roof shape at the top, clearly one visual unit, not
+# coincidental noise. No exact-match codepoint for ⿱𭕄冖 exists in
+# ids.txt (only ever a sub-component of larger ⿳ shapes, e.g. 学 覚 栄 蛍
+# 労 営 喾 峃 etc.) -- same "no citable codepoint" situation as
+# prim-cornstalk/prim-fenceposts, so `?` placeholder. Given its own
+# `𭕄,冖` sub-decomposition (not left atomic) so "owl" and "cover"/"crown"
+# both stay reachable at depth 2, matching the prim-fenceposts precedent.
+# 薬 (rtk1873) needed no edit -- already references 楽 (rtk1872) literally,
+# inherits transitively. 鴬(rtk2916) added too: its CSV row has no
+# components column at all (frame 2916, one of the sparse late entries),
+# but cjkvi shows the identical ⿳𭕄冖鳥 and it was already grouped with
+# this same family by three earlier chunks (2026-09-07/09/10, tracked in
+# test_regression_fixes.py's rtk1111 comment) -- the render evidence carries
+# it even without a CSV name to cite.
+prim-schoolhouse:?:schoolhouse:𭕄,冖
 
