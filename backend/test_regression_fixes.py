@@ -2446,8 +2446,12 @@ EXPECTED_DECOMPOSITIONS = {
     # itself rather than flattening, so the fix cascades automatically.
     "rtk269": {"character": "合", "keyword": "fit",
                "expected_part_ids": {"rtk11", "prim-meeting"}},
+    # 2026-09-20: the ｜,𠃌 half of this was the Japanese print form spelled in
+    # strokes. Heisig's own row is "meeting; chop-seal; hanko", so the primary
+    # now names chop-seal (龴, registered this session) and the stroke spelling
+    # moved to the labelled alternative -- it is cjkvi's own [JK] reading.
     "rtk1503": {"character": "令", "keyword": "orders",
-                "expected_part_ids": {"prim-clothes-hanger", "prim-meeting", "prim-pipe"}},
+                "expected_part_ids": {"prim-meeting", "prim-chop-seal"}},
     "rtk1711": {"character": "今", "keyword": "now",
                 "expected_part_ids": {"prim-meeting", "rtk1"}},
     "rtk1758": {"character": "倉", "keyword": "godown",

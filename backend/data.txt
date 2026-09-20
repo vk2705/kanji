@@ -1553,17 +1553,17 @@ rtk1499:卸:wholesale:𠂉,止,卩
 rtk1500:御:honorable:卸,彳
 rtk1501:服:clothing:月,又,卩
 rtk1502:命:fate:合,卩;亼,叩
-rtk1503:令:orders:亼,｜,𠃌
+rtk1503:令:orders:亼,龴;亼,｜,𠃌
 rtk1504:零:zero:雨,令
 rtk1505:齢:age:歯,令
 rtk1506:冷:cool:令,冫
 rtk1507:領:jurisdiction:頁,令
 rtk1508:鈴:small bell:金,令
-rtk1509:勇:courage:男,マ
+rtk1509:勇:courage:男,龴
 rtk1510:湧:boil:水,勇
 rtk1511:通:traffic:甬,辶
 rtk1512:踊:jump:甬,足
-rtk1513:疑:doubt:疋,矢,匕,マ
+rtk1513:疑:doubt:疋,矢,匕,龴
 rtk1514:擬:mimic:疑,扌
 rtk1515:凝:congeal:冫,疑
 rtk1516:範:pattern:竹,車,㔾
@@ -1769,7 +1769,7 @@ rtk1715:念:wish:今,心
 rtk1716:捻:twirl:念,扌
 rtk1717:琴:harp:王,今
 rtk1718:陰:shade:今,阝,云
-rtk1719:予:beforehand,halberd with stroke missing:マ,一,亅
+rtk1719:予:beforehand,halberd with stroke missing:龴,一,亅
 rtk1720:序:preface:予,广
 rtk1721:預:deposit:予,頁
 rtk1722:野:plains:矛,里,亅;予,里
@@ -2647,7 +2647,7 @@ rtk2586:樗:japanese bead tree:雨,木,二,勹
 rtk2587:槻:zelkova tree:木,規
 rtk2588:椙:japanese cedar:昌,木
 rtk2589:彬:refined:彡,林
-rtk2590:桶:tub:木,用,マ;木,甬
+rtk2590:桶:tub:木,甬
 rtk2591:楕:ellipse:左,月,木
 rtk2592:樒:tree whose branches are placed on buddhist graves:密,木
 rtk2593:毬:burr:水,毛,丶,亠;毛,求
@@ -3141,7 +3141,6 @@ prim-fire-radical:灬:fire radical,barbecue,oven-fire,tail feathers
 kangxi104:疒:sickness radical,疔,sickness,hospital
 prim-track-radical:禹:track radical
 prim-katakana-no:ノ:katakana no
-prim-katakana-ma:マ:katakana ma
 prim-katakana-yu:ユ:katakana yu
 
 # 辟/啇 clusters flagged session 5 (docs/2026-08-search-quality-audit.md),
@@ -3291,7 +3290,7 @@ prim-scarecrow:𦰩:scarecrow:口,夫,艹
 prim-migrating-ducks:爰:migrating ducks:一,友,爪
 prim-meeting-of-butchers:俞:meeting of butchers:
 prim-dustpan:录:dustpan:彐,氺
-prim-pogo-stick:甬:pogo stick:
+prim-pogo-stick:甬:pogo stick:龴,用
 prim-guillotine:夬:guillotine:
 prim-stamp-album:卬:stamp album,stamps:
 prim-funnel:冓:funnel,cone:
@@ -3776,3 +3775,21 @@ prim-silver-grain:皀:silver:白,匕
 # non-Heisig name (owner-permitted). Unicode makes 无 (U+65E0) radical 71 and
 # 旡 (U+65E1) its variant, which is why this is not kangxi71.
 prim-turned-back-person:旡:turned back person:
+
+# --- 2026-09-20: 龴 'chop-seal/hanko', the マ-shaped element on top of 甬,
+# 疑 and 予. It was carried by the katakana マ (U+30DE) -- the same
+# lookalike-carrier pattern as ツ for 𭕄 or 爿 for 丬, and prim-katakana-ma
+# had exactly these four hosts and no others, so the carrier row is gone and
+# マ survives as a searchable alias on the real codepoint. cjkvi-ids makes 龴
+# atomic and spells 甬 ⿱龴用, 予 ⿱龴𠄐, 疑 ⿰𠤕⿱龴疋, 勇[JK] ⿱⿱龴田力.
+# 甬 (prim-pogo-stick) was atomic here and now carries Heisig's own reading
+# of it, 通's CSV row: "pogo stick; chop-seal; hanko; utilise; utilize".
+# 令 is the one host whose glyph argues back. Rendered, the Japanese print
+# form draws ⿱𠃌丨 under the 亼 -- a hook and a separate stem, not マ's single
+# descending stroke -- and cjkvi-ids agrees, giving 令 ⿱亼⿱𠃌丨[JK] against
+# ⿱亽龴[G]/⿱亼龴[TV]. But the primary slot in this file is Heisig's own
+# breakdown, not the structural one, and his components column for 令 reads
+# "meeting; chop-seal; hanko" -- he teaches the J glyph *as* chop-seal, the
+# way it is handwritten. So 亼,龴 is primary and the stroke spelling stays as
+# the labelled structural alternative, which is exactly cjkvi's [JK] reading.
+prim-chop-seal:龴:chop-seal,hanko,マ:

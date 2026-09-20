@@ -12792,3 +12792,53 @@ Verified: 1324 checks with only the 4 known hanzi-scope non-issues, 66 pytest,
 over-flattening 0, dead tokens 0, self-references 0, primary-choice 0, frontend
 lint + build clean. **Phantom parts 112→106 across 80→76 kanji.** No pin moved.
 Both new glyphs are BMP, so no primitive image was needed.
+
+## 2026-09-20 — chunk 9: "chop-seal/hanko" was a katakana standing in for 龴
+
+`suggest_heisig_aliases.py --all`'s largest unresolved group, 14 hosts
+(令冷凝勇擬湧疑痛踊通鈴零), and the reason it was unresolved turned out to be the
+lookalike-carrier pattern one more time. The shape is the マ-like element on top
+of 甬, 疑 and 予, and this database was holding it as the **katakana マ**
+(U+30DE) under the invented name "katakana ma" — a name Heisig never uses
+(`grep -o 'katakana [a-z]*' heisig-kanjis.csv` returns nothing), so the row
+existed only to carry a shape it was not.
+
+`prim-katakana-ma` had exactly four hosts (勇 疑 予 桶) and no others, which made
+the swap total rather than partial. Registered **龴** (U+9FB4) as
+`prim-chop-seal` with Heisig's own two names, and kept `マ` on it as a searchable
+alias — the inverse of the anti-pattern: the name that looks like the shape now
+points at the correct codepoint instead of a lookalike glyph carrying the name.
+The old carrier row is gone.
+
+cjkvi-ids makes 龴 atomic and backs every host: 甬 `⿱龴用`, 予 `⿱龴𠄐`,
+疑 `⿰𠤕⿱龴疋`, 勇[JK] `⿱⿱龴田力`. 甬 itself (`prim-pogo-stick`) had been left
+atomic here; it now carries Heisig's own reading of it, straight off 通's CSV row
+— "pogo stick; chop-seal; hanko; utilise; utilize; road" — as `龴,用`, which is
+what puts 通 踊 痛 within reach of a chop-seal search too. 桶 dropped its
+flattened `木,用,マ` primary for plain `木,甬`.
+
+**令 is the one host whose glyph argues back, and it is worth recording why it
+still moved.** Rendered, the Japanese print form draws `⿱𠃌丨` under the 亼 — a
+hook and a separate stem, not マ's single descending stroke — and cjkvi-ids
+agrees, giving 令 `⿱亼⿱𠃌丨[JK]` against `⿱亽龴[G]`/`⿱亼龴[TV]`. So the stroke
+spelling this file already had was not wrong. But the primary slot in `data.txt`
+is *Heisig's* breakdown, not the structural one, and his components column for
+令 reads "meeting; chop-seal; hanko": he teaches the J glyph as chop-seal, the
+way it is handwritten. `audit_primary_choice.py` reached the same conclusion on
+its own (covered 1 → 3, unaccounted 0 either way, so "reorder", not "replace").
+Primary is now `亼,龴`; the stroke spelling stays as the labelled structural
+alternative, where it is literally cjkvi's own [JK] reading. The `rtk1503` pin
+moved with it, with that reasoning written next to it.
+
+Verified: 1324 checks with only the 4 known hanzi-scope non-issues, 66 pytest,
+over-flattening 0, dead tokens 0, self-references 0, primary-choice 0, frontend
+lint + build clean. **Phantom parts 106→103 across 76→74 kanji; unsearchable
+Heisig names 183→181, 97.71% of all name-occurrences now resolve; unresolved
+groups 11→10.** 龴 is BMP and Noto draws it, so no primitive image was needed.
+
+**Next** — the remaining headline group is "hairpin, safety-pin" (12 hosts,
+唇喪娠展振濃畏辰辱農長震). Chunk 6 established it names a shape 辰 and 長 *share*;
+cjkvi spells that shape `⿰𠄌⿺乀丿` in 辰 長 展 喪 while writing 𧘇 (already here
+as `prim-scarf`) for the visually-adjacent bottom of 衣 and 衷. Whether those are
+one shape under two Heisig names or two shapes is exactly a render question, and
+it is the next one to answer.
