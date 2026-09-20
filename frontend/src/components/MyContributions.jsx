@@ -3,22 +3,27 @@ import { getMyContributions, setKanjiVisibility, setRowVisibility } from "../api
 import { displayChar } from "../utils";
 import { t } from "../i18n";
 
-function VisibilityToggle({ visibility, onToggle, lang }) {
+function VisibilityToggle({ visibility, onToggle, lang, busy, error }) {
   const isPublic = visibility === "public";
   return (
-    <button
-      type="button"
-      className={`visibility-btn ${isPublic ? "is-public" : ""}`}
-      onClick={onToggle}
-    >
-      {isPublic ? t(lang, "visibilityPublicLabel") : t(lang, "visibilityPrivateLabel")}
-    </button>
+    <span className="visibility-toggle-wrap">
+      <button
+        type="button"
+        className={`visibility-btn ${isPublic ? "is-public" : ""}`}
+        onClick={onToggle}
+        disabled={busy}
+      >
+        {isPublic ? t(lang, "visibilityPublicLabel") : t(lang, "visibilityPrivateLabel")}
+      </button>
+      {error && <span className="status error visibility-toggle-error">{t(lang, "errorPrefix", error)}</span>}
+    </span>
   );
 }
 
-export default function MyContributions({ lang, onSelectKanji }) {
+export default function MyContributions({ lang, onSelectKanji, onBack }) {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
+  const [rowState, setRowState] = useState({}); // key -> { busy, error }
 
   function load() {
     getMyContributions().then(setData).catch((e) => setError(e.message));
@@ -27,18 +32,39 @@ export default function MyContributions({ lang, onSelectKanji }) {
   useEffect(load, []);
 
   async function toggleKanji(row) {
+    const key = `kanji:${row.id}`;
     const next = row.visibility === "public" ? "private" : "public";
-    await setKanjiVisibility(row.id, next);
-    load();
+    setRowState((s) => ({ ...s, [key]: { busy: true, error: null } }));
+    try {
+      await setKanjiVisibility(row.id, next);
+      setRowState((s) => ({ ...s, [key]: { busy: false, error: null } }));
+      load();
+    } catch (e) {
+      setRowState((s) => ({ ...s, [key]: { busy: false, error: e.message } }));
+    }
   }
 
   async function toggleRow(table, row) {
+    const key = `${table}:${row.id}`;
     const next = row.visibility === "public" ? "private" : "public";
-    await setRowVisibility(table, row.id, next);
-    load();
+    setRowState((s) => ({ ...s, [key]: { busy: true, error: null } }));
+    try {
+      await setRowVisibility(table, row.id, next);
+      setRowState((s) => ({ ...s, [key]: { busy: false, error: null } }));
+      load();
+    } catch (e) {
+      setRowState((s) => ({ ...s, [key]: { busy: false, error: e.message } }));
+    }
   }
 
-  if (error) return <div className="status error">{t(lang, "errorPrefix", error)}</div>;
+  if (error) {
+    return (
+      <div className="form-view">
+        {onBack && <button className="back-btn" onClick={onBack}>{t(lang, "backBtn")}</button>}
+        <div className="status error">{t(lang, "errorPrefix", error)}</div>
+      </div>
+    );
+  }
   if (!data) return <div className="status">{t(lang, "loading")}</div>;
 
   const isEmpty = !data.kanji.length && !data.decompositions.length
@@ -50,6 +76,7 @@ export default function MyContributions({ lang, onSelectKanji }) {
 
   return (
     <div className="form-view">
+      {onBack && <button className="back-btn" onClick={onBack}>{t(lang, "backBtn")}</button>}
       <h2>{t(lang, "myContributionsHeading")}</h2>
 
       {isEmpty && <p className="login-hint">{t(lang, "noContributions")}</p>}
@@ -66,6 +93,8 @@ export default function MyContributions({ lang, onSelectKanji }) {
                 visibility={row.visibility}
                 onToggle={() => toggleKanji(row)}
                 lang={lang}
+                busy={rowState[`kanji:${row.id}`]?.busy}
+                error={rowState[`kanji:${row.id}`]?.error}
               />
             </div>
           ))}
@@ -84,6 +113,8 @@ export default function MyContributions({ lang, onSelectKanji }) {
                 visibility={row.visibility}
                 onToggle={() => toggleRow("decompositions", row)}
                 lang={lang}
+                busy={rowState[`decompositions:${row.id}`]?.busy}
+                error={rowState[`decompositions:${row.id}`]?.error}
               />
             </div>
           ))}
@@ -102,6 +133,8 @@ export default function MyContributions({ lang, onSelectKanji }) {
                 visibility={row.visibility}
                 onToggle={() => toggleRow("aliases", row)}
                 lang={lang}
+                busy={rowState[`aliases:${row.id}`]?.busy}
+                error={rowState[`aliases:${row.id}`]?.error}
               />
             </div>
           ))}
@@ -120,6 +153,8 @@ export default function MyContributions({ lang, onSelectKanji }) {
                 visibility={row.visibility}
                 onToggle={() => toggleRow("stories", row)}
                 lang={lang}
+                busy={rowState[`stories:${row.id}`]?.busy}
+                error={rowState[`stories:${row.id}`]?.error}
               />
             </div>
           ))}

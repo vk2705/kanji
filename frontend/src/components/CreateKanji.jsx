@@ -5,7 +5,7 @@ import { ImageUpload, DecompositionForm } from "./KanjiDetail";
 
 const SCRIPTS = ["ja-kanji", "zh-Hans", "zh-Hant", "zh-Hani"];
 
-export default function CreateKanji({ lang, onDone }) {
+export default function CreateKanji({ lang, onDone, onBack }) {
   const [keyword, setKeyword] = useState("");
   const [character, setCharacter] = useState("");
   const [script, setScript] = useState("ja-kanji");
@@ -37,6 +37,7 @@ export default function CreateKanji({ lang, onDone }) {
   if (created) {
     return (
       <div className="form-view">
+        {onBack && <button className="back-btn" onClick={onBack}>{t(lang, "backBtn")}</button>}
         <h2>{t(lang, "createKanjiHeading")}</h2>
         <p className="login-hint">{t(lang, "createdKanjiNote")}</p>
 
@@ -61,6 +62,7 @@ export default function CreateKanji({ lang, onDone }) {
 
   return (
     <div className="form-view">
+      {onBack && <button className="back-btn" onClick={onBack}>{t(lang, "backBtn")}</button>}
       <h2>{t(lang, "createKanjiHeading")}</h2>
       <form className="story-form" onSubmit={handleSubmit}>
         <input

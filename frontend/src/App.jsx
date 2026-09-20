@@ -52,11 +52,18 @@ export default function App() {
   const resultsRef = useRef(null);
   const [selectedId, setSelectedId] = useState(null);
   const [user, setUser] = useState(null);
+  const [authResolved, setAuthResolved] = useState(false);
   const [uiLang, setUiLang] = useState(() => readLocal("ui_language", "en"));
   const [studyScript, setStudyScript] = useState(() => readLocal("study_script", ""));
   const [sources, setSources] = useState(() => new Set(SOURCE_SCOPES.map((s) => s.value)));
 
   const tt = (key, ...args) => t(uiLang, key, ...args);
+
+  // index.html hardcodes lang="en"; keep the document's declared language in sync
+  // with the active UI language so screen readers pronounce Russian text correctly.
+  useEffect(() => {
+    document.documentElement.lang = uiLang;
+  }, [uiLang]);
 
   useEffect(() => {
     getMe()
@@ -71,7 +78,8 @@ export default function App() {
           setUser(null);
         }
       })
-      .catch(() => setUser(null));
+      .catch(() => setUser(null))
+      .finally(() => setAuthResolved(true));
   }, []);
 
   useEffect(() => {
@@ -106,8 +114,11 @@ export default function App() {
 
   // "mine" is meaningless while logged out; drop it so an anonymous session never
   // silently searches an empty scope after a logged-in tab logs out mid-session.
+  // Gated on authResolved so a returning logged-in user doesn't lose "mine" from
+  // the default set during the brief window before /auth/me responds (user is
+  // still null then, indistinguishable from actually-logged-out without this flag).
   useEffect(() => {
-    if (user) return;
+    if (!authResolved || user) return;
     setSources((prev) => {
       if (!prev.has("mine")) return prev;
       const next = new Set(prev);
@@ -278,11 +289,11 @@ export default function App() {
             sources={activeSources}
           />
         ) : view === "create" ? (
-          <CreateKanji lang={uiLang} onDone={selectKanji} />
+          <CreateKanji lang={uiLang} onDone={selectKanji} onBack={() => setView("search")} />
         ) : view === "contributions" ? (
-          <MyContributions lang={uiLang} onSelectKanji={selectKanji} />
+          <MyContributions lang={uiLang} onSelectKanji={selectKanji} onBack={() => setView("search")} />
         ) : view === "about" ? (
-          <AboutPage lang={uiLang} />
+          <AboutPage lang={uiLang} onBack={() => setView("search")} />
         ) : (
           <>
             <div className="study-language">

@@ -107,10 +107,16 @@ export default function AuthBar({ user, setUser, lang = "en", uiLang, studyScrip
 
   async function handleLogout() {
     setBusy(true);
+    setError("");
     try {
       await logout();
-    } finally {
       setUser(null);
+    } catch (err) {
+      // Only clear local state once the server confirms the session is gone —
+      // otherwise a network failure would make logout look like it worked while
+      // the cookie/session is still live server-side, and a refresh logs back in.
+      setError(err.message);
+    } finally {
       setBusy(false);
     }
   }
@@ -122,6 +128,7 @@ export default function AuthBar({ user, setUser, lang = "en", uiLang, studyScrip
         <button className="auth-link-btn" onClick={handleLogout} disabled={busy}>
           {t(lang, "logoutBtn")}
         </button>
+        {error && <span className="status error auth-logout-error">{t(lang, "errorPrefix", error)}</span>}
       </div>
     );
   }

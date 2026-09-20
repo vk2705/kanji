@@ -10,6 +10,8 @@ import { useSuggestions } from "../useSuggestions";
 // segment after the last comma, picking a suggestion replaces only that segment and
 // leaves the rest of the list alone) — `getQuery`/`applySuggestion` let each caller
 // supply that logic instead of this component guessing at it.
+let idCounter = 0;
+
 export default function AutocompleteInput({
   value,
   onChange,
@@ -25,6 +27,8 @@ export default function AutocompleteInput({
   const ownInputRef = useRef(null);
   const inputRef = externalRef ?? ownInputRef;
   const suggestions = useSuggestions(open ? getQuery(value) : "", script);
+  const listboxId = useRef(`autocomplete-listbox-${++idCounter}`).current;
+  const optionId = (i) => `${listboxId}-option-${i}`;
 
   useEffect(() => {
     setActiveIndex(-1);
@@ -77,13 +81,16 @@ export default function AutocompleteInput({
         role="combobox"
         aria-expanded={showDropdown}
         aria-autocomplete="list"
+        aria-controls={listboxId}
+        aria-activedescendant={activeIndex >= 0 ? optionId(activeIndex) : undefined}
         autoComplete="off"
       />
       {showDropdown && (
-        <div className="autocomplete-suggestions" role="listbox">
+        <div className="autocomplete-suggestions" role="listbox" id={listboxId}>
           {suggestions.map((s, i) => (
             <button
               key={s}
+              id={optionId(i)}
               type="button"
               role="option"
               aria-selected={i === activeIndex}

@@ -9,7 +9,17 @@ PDF_PATH  = Path(__file__).parent / "data_from_pdf.txt"
 
 
 def get_db():
-    conn = sqlite3.connect(DB_PATH)
+    # check_same_thread=False: FastAPI/Starlette runs a sync generator dependency's
+    # yield and its finally-block teardown as two separate anyio.to_thread calls,
+    # which are not guaranteed to land on the same threadpool worker thread — this
+    # connection is created in db_conn() and only ever used/closed within that same
+    # request's dependency lifecycle (never shared across requests or stored), so
+    # relaxing sqlite3's same-thread check is safe here. Without this, some requests
+    # (observed on POST /analytics/pageview, but not specific to that endpoint) hit
+    # "SQLite objects created in a thread can only be used in that same thread" on
+    # conn.close() if FastAPI happened to run the teardown on a different worker
+    # thread than the one that opened the connection.
+    conn = sqlite3.connect(DB_PATH, check_same_thread=False)
     conn.row_factory = sqlite3.Row
     conn.execute("PRAGMA foreign_keys = ON")
     conn.execute("PRAGMA journal_mode = WAL")
@@ -1165,7 +1175,7 @@ def suggest_terms(conn, q: str, limit: int = 10, script: str | None = None) -> l
             UNION
             SELECT a.alias AS term FROM aliases a
             JOIN kanji k ON k.id = a.kanji_id
-            WHERE a.visibility = 'public'{script_cond}
+            WHERE a.visibility = 'public' AND k.visibility = 'public'{script_cond}
         )
         WHERE LOWER(term) LIKE ?
         """,

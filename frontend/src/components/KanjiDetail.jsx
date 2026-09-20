@@ -35,18 +35,20 @@ function AliasAdder({ targetId, lang, script = null }) {
   const [value, setValue] = useState("");
   const [added, setAdded] = useState(null);
   const [busy, setBusy] = useState(false);
+  const [error, setError] = useState(null);
 
   async function handleSubmit(e) {
     e.preventDefault();
     if (!value.trim()) return;
     setBusy(true);
+    setError(null);
     try {
       const res = await addAlias(targetId, value.trim(), "private");
       setAdded(res.alias);
       setValue("");
       setOpen(false);
-    } catch {
-      // silently ignore — this is a minor inline affordance, not worth a modal error
+    } catch (err) {
+      setError(err.message);
     } finally {
       setBusy(false);
     }
@@ -70,10 +72,12 @@ function AliasAdder({ targetId, lang, script = null }) {
         script={suggestScope(script)}
         placeholder={t(lang, "addNamePlaceholder")}
         aria-label={t(lang, "addNamePlaceholder")}
+        disabled={busy}
       />
       <button className="btn-primary part-add-submit" type="submit" disabled={busy}>
         {t(lang, "addBtn")}
       </button>
+      {error && <span className="part-add-error status error">{t(lang, "errorPrefix", error)}</span>}
     </form>
   );
 }
@@ -240,15 +244,17 @@ function PartChip({ part, lang, user, onSelectPart, kanjiScript = null }) {
 // queue — see backend/review_queue.py for how a maintainer works through both.
 function DecompositionReview({ decompositionId, myReview, lang, onReviewed }) {
   const [busy, setBusy] = useState(false);
+  const [error, setError] = useState(null);
 
   async function vote(verdict) {
     if (busy || myReview === verdict) return;
     setBusy(true);
+    setError(null);
     try {
       await reviewDecomposition(decompositionId, verdict);
       onReviewed(decompositionId, verdict);
-    } catch {
-      // minor inline affordance, same pattern as AliasAdder — not worth a modal error
+    } catch (err) {
+      setError(err.message);
     } finally {
       setBusy(false);
     }
@@ -274,6 +280,7 @@ function DecompositionReview({ decompositionId, myReview, lang, onReviewed }) {
       >
         ✗ {t(lang, "reviewDisputeBtn")}
       </button>
+      {error && <span className="decomposition-review-error status error">{t(lang, "errorPrefix", error)}</span>}
     </div>
   );
 }

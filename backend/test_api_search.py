@@ -294,6 +294,20 @@ def test_suggest_excludes_private_terms(conn, client):
     assert "hiddenword" not in r.json()["suggestions"]
 
 
+def test_suggest_excludes_public_alias_on_private_kanji(conn, client):
+    """A public alias attached to a private kanji must not leak through --
+    visibility is a property of the whole row a suggestion points back to, not
+    just the alias text itself. Regression test for the bug where the alias
+    branch of suggest_terms's UNION checked a.visibility but not the parent
+    kanji's visibility, surfacing private kanji's public aliases to anyone."""
+    _seed_kanji(conn, "k_privhost", "秘", "secrethost", visibility="private")
+    _seed_alias(conn, "k_privhost", "hiddenalias", visibility="public")
+    conn.commit()
+    r = client.get("/search/suggest", params={"q": "hiddenalias"})
+    assert r.status_code == 200, r.text
+    assert "hiddenalias" not in r.json()["suggestions"]
+
+
 def test_suggest_requires_nonempty_query(conn, client):
     r = client.get("/search/suggest", params={"q": ""})
     assert r.status_code == 422
