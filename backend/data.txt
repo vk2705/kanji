@@ -1,7 +1,7 @@
 prim-pipe:｜:pipe, walking stick, cane, line, walking cane, prim28.1
 prim-joint:冎:joint
 prim-jawbone:咼:jawbone:口,冂;口,冎
-prim-dollar-sign:弗:dollar sign:弓,｜
+prim-dollar-sign:弗:dollar sign,dollar:弓,｜
 prim-snare:丂:snare,slingshot,catapult:一,勹
 kangxi3:丶:dot,tick,drop
 kangxi9:亻:person
@@ -1150,10 +1150,10 @@ rtk1096:丙:third class:一,内
 rtk1097:柄:design:木,丙
 rtk1098:肉:meat:内
 rtk1099:腐:rot:府,肉
-rtk1100:座:squat:｜,庄,人;坐,广
+rtk1100:座:squat:坐,广
 rtk1101:挫:crush:坐,扌
-rtk1102:卒:graduate:十,人,亠
-rtk1103:傘:umbrella:十,人,𠆢
+rtk1102:卒:graduate:亠,从,十
+rtk1103:傘:umbrella:𠆢,从,十
 rtk1104:匁:monme:乂,勹
 rtk1105:以:by means of:｜,人,丶
 rtk1106:似:becoming:亻,以
@@ -1377,8 +1377,8 @@ rtk1323:弱:weak:弓,冫
 rtk1324:溺:drown:弱,水
 rtk1325:沸:seethe:水,弗
 rtk1326:費:expense:貝,弗
-rtk1327:第:no.:弓,竹
-rtk1328:弟:younger brother:｜,ノ,弓,丷
+rtk1327:第:no.:竹,弗
+rtk1328:弟:younger brother:丷,弗
 rtk1329:巧:adroit:工,丂
 rtk1330:号:nickname:口,丂
 rtk1331:朽:decay:木,丂
@@ -2917,7 +2917,7 @@ rtk2857:鑿:chisel:臼,干,金,丷,殳,几,又
 rtk2858:艘:counter for small boats:舟,日,支
 rtk2859:瞑:sleep:冥,目
 rtk2860:暝:dark:冥,日
-rtk2861:坐:sit:｜,土,人
+rtk2861:坐:sit:从,土
 rtk2862:朔:conjunction (astronomy):月,丷,屮
 rtk2863:曳:pull:乙,日
 rtk2864:洩:leak:曳,水
@@ -2993,7 +2993,7 @@ rtk2933:馨:fragrant:禾,香,士,日,又,几,殳,尸
 rtk2934:牒:label:枼,片
 rtk2935:瞥:glance at:敝,目
 rtk2936:睾:testicles:土,目,亠,辛
-rtk2937:巫:sorcerer:工,人
+rtk2937:巫:sorcerer:工,从
 rtk2938:敦:industry:享,攵
 rtk2939:奎:star:圭,大
 rtk2940:翔:soar:羽,羊
@@ -3755,3 +3755,7 @@ prim-schoolhouse:?:schoolhouse:𭕄,冖
 
 # --- 2026-09-20: 卌 'tub', the grid in 無/舞 that both spelled out.
 prim-tub:卌:tub:
+
+# --- 2026-09-20: 从 'assembly line', two 人 side by side. 1.00 over its
+# four hosts (傘 卒 座 挫); 座/挫 reach it through 坐.
+prim-assembly-line:从:assembly line:人,人

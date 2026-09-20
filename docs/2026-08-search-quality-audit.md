@@ -12594,3 +12594,39 @@ roof-bearing.
 
 A deployer will see `prim-umbrella`'s `character` and `image_url` change plus 40
 `parts` rows.
+
+---
+
+## 2026-09-20 (chunk 3) — 从 "assembly line", and 弗 that was already there
+
+The `--near 0.8` queue is empty; 22 unresolved groups remain, all in the flat
+tail. Two of them resolved cleanly.
+
+**`dollar` (弟 沸 第 費).** The row already existed — 弗 as `prim-dollar-sign` —
+it just did not answer to "dollar", and half its hosts were not using it: 沸 and
+費 referenced 弗, while 弟 spelled it `｜,ノ,弓,丷` and 第 `弓,竹`. Added the alias
+and pointed both at 弗 (`丷,弗` and `竹,弗`), matching cjkvi's 𢎨 and the CSV's
+"dollar; bow; stick".
+
+**`assembly line` (傘 卒 座 挫)** — 从, two 人 side by side, **1.00** across all
+four, unregistered. Rendering 卒 and 坐 shows it plainly. Registered as
+`prim-assembly-line` with cjkvi's 人+人 under it; 座 and 挫 reach it through 坐,
+which was itself spelling it `｜,土,人`.
+
+Registering it immediately surfaced two more, each caught by a different
+detector on the first run after:
+
+- `audit_overflatten`: **巫** was `工,人` where cjkvi reads `⿻工从` — one person
+  where the glyph draws two.
+- `audit_primary_choice`: **座**'s primary `｜,庄,人` finally lost to its own
+  long-parked alternate `坐,广`, which only became clean once 坐 resolved.
+
+`alien` (向 商 尚 高) was looked at and left: 冋 scores only 0.5, cjkvi spells the
+four three different ways (`⿵⿱丿冂口`, `冏`, `冋`, `冋`), and the CSV lists
+"alien" *alongside* both "hood" (冂) and "mouth" (口), so it is a third thing in
+those glyphs rather than the 冂+口 pair. Not guessed at.
+
+Verified: 1324 checks with only the 4 known hanzi-scope non-issues, 66 pytest,
+over-flattening 0, dead tokens 0, self-references 0, primary-choice 0, frontend
+lint + build clean. Phantom parts 112→112 (this chunk moved names and
+structure, not phantoms). One pin (座) re-pinned.

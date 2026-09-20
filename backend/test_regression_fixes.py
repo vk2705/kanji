@@ -2012,8 +2012,11 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk1096", "rtk207"}},
     "rtk1099": {"character": "腐", "keyword": "rot",
                 "expected_part_ids": {"rtk1077", "rtk1098"}},
+    # 座 pinned ｜,庄,人. It is 广 + 坐, and 坐 is 从 ("assembly line", two 人
+    # side by side) over 土 — registered 2026-09-20, which is what finally let
+    # 座's own long-parked alternate 坐,广 win on audit_primary_choice.
     "rtk1100": {"character": "座", "keyword": "sit",
-                "expected_part_ids": {"prim-pipe", "rtk1023", "rtk2345"}},
+                "expected_part_ids": {"kangxi53", "rtk2861"}},
     "rtk1110": {"character": "宮", "keyword": "shinto shrine",
                 "expected_part_ids": {"kangxi40", "rtk24"}},
     # Corrected 2026-09-07 (worklist loop, day 5): 学/覚/栄/蛍/労/営/鴬
