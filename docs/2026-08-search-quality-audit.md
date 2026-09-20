@@ -13088,3 +13088,42 @@ set removed**, which is the number worth working from now.
 
 **Next** — the 58 double-checked ones. 心 in 慕/添 and 亠 in 替/賛 are in the
 blind set; the solid list is led by 一 (9), 八 (6) and ノ (6).
+
+## 2026-09-20 — chunk 16: 于 is not 干, 朩 is not 木
+
+Eleven of the 58 double-checked phantoms were one chain of frames, 芋 宇 余
+(1784–1786) and what hangs off it, plus two strays that turn on the same kind of
+one-stroke difference.
+
+**于 (U+4E8E) is not 干 (U+5E72)** — its third stroke hooks, 干's runs straight
+down. 芋 and 宇 are 艹/宀 over 于 (cjkvi `⿱艹于`, `⿱宀于`) and both were written
+as 干 plus loose strokes. Heisig names 于 "potato" in 宇's row ("house; potato")
+and throughout the 余 family after it; 芋's own row says only "flowers", because
+芋 is where he introduces the shape as a kanji rather than as a primitive.
+
+**朩 (U+6729) is not 木 (U+6728)** — its legs are two short flicks, not full
+diagonals. 茶 is `艹,𠆢,朩` (cjkvi `⿳艹人朩`), and Heisig names the shape
+outright: "flowers; umbrella; **wooden pole**". That is the only row in the book
+that uses the name, which is why it had nowhere to live until now.
+
+**余 is where the two ground truths part company**, and it is worth saying which
+won. cjkvi reads it `⿱亼朩`; Heisig reads it "umbrella; potato; small", treating
+the hook as shared between 于 and 小 — the same overlap he uses in 走 = 土 + 龰.
+Heisig's reading is followed, because it is what 除 徐 叙 途 斜 塗 all inherit
+from him, and because either reading drops the **示 ("altar")** that was sitting
+in 余's parts list and is in no part of the glyph. Its pin moved with that
+written next to it.
+
+Two strays on the same theme: **司** is 𠃌 wrapping 一 + 口 (cjkvi `⿹𠃌𠮛`),
+which is precisely Heisig's "clothes hanger; coat hanger; one; mouth" — the 亅
+there was the hanger drawn as a bare hook. **予** loses its 一, because cjkvi has
+`⿱龴𠄐` and 𠄐 is `⿱乛亅`, a hooked horizontal rather than a flat one. 塗 drops
+a 木 it was carrying alongside the 余 that already contains it.
+
+Verified: 1324 checks with only the 4 known hanzi-scope non-issues, 66 pytest,
+over-flattening 0, dead tokens 0, self-references 0, primary-choice 0, frontend
+lint + build clean. One pin moved (rtk1786). **Phantom parts 84→73 across 58→51
+kanji; the double-checked set 58→47 across 41→34.**
+
+**Next** — 尢 in 沈/枕, 禹 in 離/璃, 尸 in 声/眉, 爪 in 懇/墾: four more pairs
+where one glyph is standing in for a neighbour.

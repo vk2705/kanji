@@ -3478,8 +3478,11 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"rtk14", "rtk556", "rtk573"}},
     "rtk2120": {"character": "鬱", "keyword": "gloom",
                "expected_part_ids": {"kangxi14", "kangxi192", "kangxi59", "rtk207", "rtk2116"}},
+    # 2026-09-20: 示 ("altar", rtk1167) is in no part of 余, and the 一/亅/八
+    # around it were 于 and 小 spelled in strokes. Heisig's row is exactly three
+    # names -- "umbrella; potato; small" -- and 除 徐 叙 途 斜 塗 all inherit it.
     "rtk1786": {"character": "余", "keyword": "too much",
-               "expected_part_ids": {"kangxi6", "prim-umbrella", "rtk1", "rtk1167", "rtk8"}},
+               "expected_part_ids": {"prim-umbrella", "prim-potato-stalk", "rtk110"}},
     # Corrected 2026-09-06 (worklist loop, day 3): both 暦 and 歴 had
     # 麻(hemp, rtk637) where render clearly shows 厂+林 instead (cliff
     # enclosing two 木 trees) -- 麻's own bottom is a full 木木 pair under

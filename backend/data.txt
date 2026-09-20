@@ -317,7 +317,7 @@ rtk263:先:before:ノ,土,儿
 rtk264:洗:wash:先,水
 rtk265:介:jammed in:𠆢,ノ,｜;ノ,人,｜
 rtk266:界:world:田,介
-rtk267:茶:tea:𠆢,艹,木
+rtk267:茶:tea:艹,𠆢,朩
 rtk268:脊:stature:丷,人,八,月
 rtk269:合:fit:口,亼
 rtk270:塔:pagoda:合,土,艹
@@ -1769,7 +1769,7 @@ rtk1715:念:wish:今,心
 rtk1716:捻:twirl:念,扌
 rtk1717:琴:harp:王,今
 rtk1718:陰:shade:今,阝,云
-rtk1719:予:beforehand,halberd with stroke missing:龴,一,亅
+rtk1719:予:beforehand,halberd with stroke missing:龴,亅
 rtk1720:序:preface:予,广
 rtk1721:預:deposit:予,頁
 rtk1722:野:plains:矛,里,亅;予,里
@@ -1834,15 +1834,15 @@ rtk1780:汗:sweat:干,水
 rtk1781:軒:flats:干,車
 rtk1782:岸:beach:干,山,厂
 rtk1783:幹:tree trunk:干,𠆢,𠦝
-rtk1784:芋:taro:一,艹,干
-rtk1785:宇:eaves:干,亅,宀
-rtk1786:余:too much,scales:一,八,𠆢,亅,示
+rtk1784:芋:taro:艹,于
+rtk1785:宇:eaves:宀,于
+rtk1786:余:too much,scales:𠆢,于,小
 rtk1787:除:exclude:余,阝
 rtk1788:徐:gradually:余,彳
 rtk1789:叙:confer:余,又
 rtk1790:途:route:余,辶
 rtk1791:斜:diagonal:余,斗
-rtk1792:塗:paint:水,土,木,余
+rtk1792:塗:paint:水,余,土
 rtk1793:束:bundle,chaplin:｜,一,口,八,木
 rtk1794:頼:trust:束,頁
 rtk1795:瀬:rapids:水,頼
@@ -2065,7 +2065,7 @@ rtk2003:段:grade:｜,殳,几,又,ノ,一
 rtk2004:鍛:forge:段,金
 rtk2005:后:empress:𠂋,口
 rtk2006:幻:phantasm:幺,𠃌;幺
-rtk2007:司:director,ken russel:一,口,亅
+rtk2007:司:director,ken russel:𠃌,一,口
 rtk2008:伺:pay respects:亻,司
 rtk2009:詞:part of speech:言,司
 rtk2010:飼:domesticate:司,食
@@ -3870,3 +3870,25 @@ prim-mend-barred:𤴓:mend:一,龰
 # vertical, and there the slash is a 丿. So a second shape shares the name and
 # still has no row. It needs the render pass the other name-splits got; what is
 # fixed here is that the name no longer points at a kanji meaning "post a bill".
+
+# --- 2026-09-20: the 芋/宇/余 chain and two glyphs it kept mistaking.
+# 于 (U+4E8E) is not 干 (U+5E72): its third stroke hooks, 干's runs straight
+# down. 芋 and 宇 are 艹/宀 over 于 (cjkvi ⿱艹于, ⿱宀于) and both were written
+# with 干 plus loose strokes. Heisig names 于 "potato" in 宇's row ("house;
+# potato") and in the whole 余 family after it; 芋's own row says only
+# "flowers", because 芋 is where he introduces it as a kanji.
+# 朩 (U+6729) is not 木 (U+6728): its legs are two short flicks, not the full
+# diagonals. 茶 is 艹 + 𠆢 + 朩 (cjkvi ⿳艹人朩) and Heisig names the shape
+# outright, "flowers; umbrella; wooden pole" -- the only row in the book that
+# does, which is why the name had nowhere to live until now.
+# 余 is the one place the two readings part company. cjkvi says ⿱亼朩; Heisig
+# says "umbrella; potato; small", reading the hook as shared between 于 and 小,
+# which is the kind of overlap he uses freely (走 = 土 + 龰 does the same).
+# His reading is followed here because it is what 除 徐 叙 途 斜 塗 all inherit,
+# and it drops the 示 that was sitting in this row and is in no part of 余.
+# 司 is 𠃌 wrapping 一 + 口 (cjkvi ⿹𠃌𠮛), which is exactly Heisig's "clothes
+# hanger; coat hanger; one; mouth" -- the 亅 here was the hanger drawn as a
+# bare hook. 予 loses its 一 for the same reason: cjkvi has ⿱龴𠄐 and 𠄐 is
+# ⿱乛亅, a hooked horizontal, not a flat one.
+prim-potato-stalk:于:potato:
+prim-wooden-pole:朩:wooden pole:
