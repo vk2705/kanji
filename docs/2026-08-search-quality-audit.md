@@ -13200,3 +13200,40 @@ double-checked set 40→33.**
 
 **Next** — 幸 (`亠,辛` where the glyph is 土 over 干-ish), 述/術 (a 十 that is
 really 朮's), and 宅/託 (a stray 一).
+
+## 2026-09-20 — chunk 19: two named primitives this file had never written down
+
+Both turned up the same way — a Heisig name with exactly two hosts and no row,
+so both hosts were spelling the shape out and getting it wrong.
+
+**乇 (U+4E47, cjkvi `⿱丿七`) is "lock of hair"**, a name that appears in 宅 and
+託 and nowhere else in the book. Both were writing it `ノ,一,乙`, which puts an
+乙 ("fish guts") into two kanji that have none. Now `宀,乇` and `言,乇`.
+
+**朮 (U+672E, cjkvi `⿺𣎳丶`) is 木 with a dot at the upper right.** Heisig emits
+"resin; pole" as an adjacent pair in both 述 and 術, which by the rule this log
+has been using throughout is one primitive's whole name set. "Pole" is also
+rtk2676's keyword — the same collision shape as chunk 12's "mend"→綴 and chunk
+14's "stick"→貼 — and both names are kept on the row anyway, on the standing
+observation that a primitive name equalling some frame's keyword happens 28
+times already in this database and is ordinary in Heisig. 術 also dropped a 彳
+it was carrying beside the 行 that contains it.
+
+Two rows were simply carrying a part: **塩** had a 人 that is in no piece of it
+(it is `土,𠂉,口,皿`, exactly Heisig's "soil; reclining; lying down; mouth;
+dish"), and **寡** had 頁 spelled out as `一,自,八` with a stray 自 left over.
+寡 is `宀,頁,刀`, and the stroke counts agree exactly: 3 + 9 + 2 = 14.
+
+One deliberate non-fix: **羊** is still reported for its 王. Rendered, 丷 + 王 is
+6 strokes and so is 羊, and the vertical does run through all three bars — the
+finding is the tool being strict about cjkvi's `⿱䒑⿻二丨` rather than a real
+error, and it is left alone rather than argued with.
+
+Verified: 1324 checks with only the 4 known hanzi-scope non-issues, 66 pytest,
+over-flattening 0, dead tokens 0, self-references 0, primary-choice 0, frontend
+lint + build clean. No pin moved. **Phantom parts 59→53 across 42→36 kanji; the
+double-checked set 33→27.**
+
+**Next** — 幸 (`亠,辛`, where cjkvi has `⿱土𢆉` and Heisig reads "ten; stand up;
+ten"), 衆 and 猟, both of which need a name that is still unresolved (乑's "rag",
+鼡's "anemometer").

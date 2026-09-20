@@ -714,7 +714,7 @@ rtk660:恐:fear:工,心,凡
 rtk661:惑:beguile:心,或
 rtk662:感:emotion:戌,口,心
 rtk663:憂:melancholy:一,自,心,冖,夂,白
-rtk664:寡:widow:一,自,刀,八,宀
+rtk664:寡:widow:宀,頁,刀
 rtk665:忙:busy:忄,亡
 rtk666:悦:ecstasy:兑,忄
 rtk667:恒:constancy:亘,state of mind
@@ -1618,7 +1618,7 @@ rtk1564:鑑:specimen:金,監
 rtk1565:藍:indigo:監,艹
 rtk1566:猛:fierce:犭,皿,子
 rtk1567:盛:boom:成,皿
-rtk1568:塩:salt:口,皿,土,ノ,一,人
+rtk1568:塩:salt:土,𠂉,口,皿
 rtk1569:銀:silver:金,艮
 rtk1570:恨:regret:艮,state of mind
 rtk1571:根:root:艮,木
@@ -1693,8 +1693,8 @@ rtk1639:刻:engrave:亥,刀
 rtk1640:該:above-stated:言,亥
 rtk1641:骸:bone:骨,亥
 rtk1642:劾:censure:亥,力
-rtk1643:述:mention:辶,十,丶,木
-rtk1644:術:art:行,十,丶,彳,木
+rtk1643:述:mention:辶,朮
+rtk1644:術:art:行,朮
 rtk1645:寒:cold:八,宀,丶,𠀎
 rtk1646:塞:close:土,八,宀,𠀎
 rtk1647:醸:brew:㐮,酉
@@ -2123,8 +2123,8 @@ rtk2061:藩:clan:水,米,艹,番
 rtk2062:毛:fur:;ノ,乙,二
 rtk2063:耗:decrease:毛,耒
 rtk2064:尾:tail:毛,尸
-rtk2065:宅:home:ノ,一,乙,宀
-rtk2066:託:consign:ノ,一,乙,言
+rtk2065:宅:home:宀,乇
+rtk2066:託:consign:言,乇
 rtk2067:為:do:ノ,灬,ユ,丶,勹
 rtk2068:偽:falsehood:亻,為
 rtk2069:畏:fear:田,一,𧘇
@@ -3930,3 +3930,22 @@ prim-garter:冘:garter:冖,儿
 # entirely. Written out as 木 + 冂 rather than as a new row, because that is how
 # Heisig names it and 朿 has no name of its own in the book.
 prim-flagpole:𠃜:flagpole:尸,一
+
+# --- 2026-09-20: two primitives Heisig names and this file had never written
+# down, each with exactly two hosts, plus two rows carrying a part outright.
+# 乇 (U+4E47, cjkvi ⿱丿七) is Heisig's "lock of hair" -- the name appears in
+# 宅 and 託 and nowhere else, and both were spelling it ノ,一,乙, which puts a
+# 乙 in two kanji that have none.
+# 朮 (U+672E, cjkvi ⿺𣎳丶) is 木 with a dot at the upper right. Heisig emits
+# "resin; pole" as a pair in both 述 and 術, which by the adjacency rule is one
+# primitive's whole name set; "pole" also happens to be rtk2676's keyword, the
+# same kind of collision as chunk 12's "mend" and chunk 14's "stick", and both
+# names are kept here on the 28-way precedent that a primitive name equalling
+# some frame's keyword is ordinary in this book. 術 also dropped a 彳 it was
+# carrying beside the 行 that contains it.
+# 塩 had a 人 that is in no part of it; it is 土 + 𠂉 + 口 + 皿, exactly Heisig's
+# "soil; reclining; lying down; mouth; dish". 寡 was 頁 spelled out as 一,自,八
+# with a stray 自 left over -- it is 宀 + 頁 + 刀, and the stroke counts agree
+# exactly (3 + 9 + 2 = 14).
+prim-lock-of-hair:乇:lock of hair:ノ,七
+prim-resin:朮:resin,pole:木,丶
