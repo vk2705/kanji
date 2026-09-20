@@ -1,4 +1,4 @@
-prim-pipe:｜:pipe, walking stick, cane, line, walking cane, prim28.1
+prim-pipe:｜:pipe, walking stick, cane, line, walking cane, stick, prim28.1
 prim-joint:冎:joint
 prim-jawbone:咼:jawbone:口,冂;口,冎
 prim-dollar-sign:弗:dollar sign,dollar:弓,｜
@@ -111,7 +111,7 @@ rtk56:貝:shellfish:目,八
 rtk57:唄:song:貝,口
 rtk58:貞:upright:貝,卜
 rtk59:員:employee:貝,口
-rtk60:貼:stick:貝,占
+rtk60:貼:affix:貝,占
 rtk61:見:see,telescope:目,儿
 rtk62:児:newborn babe:旧,儿
 rtk63:元:beginning:二,儿
@@ -3852,3 +3852,21 @@ prim-mend-barred:𤴓:mend:一,龰
 # ｜ and 一 already inside 王), 妻 十,⺕,女 ("ten; needle; rake; woman" -- the
 # 十 was missing outright while its two strokes sat there loose), 幽 山,幺,幺
 # ("cocoon; mountain"; the ｜ and 凵 are 山 drawn apart).
+
+# --- 2026-09-20: "stick" is Heisig's name for ｜ in 62 component rows, and it
+# was resolving to 貼 (rtk60) the whole time, because this file had given 貼 the
+# single alias "stick" -- the adhesive verb, from its 5th-edition keyword.
+# 貼 keeps a search path under that edition's actual word, "affix"
+# (heisig-kanjis.csv's own keyword_5th_ed column), and "stick" moves to
+# prim-pipe, where the adjacency evidence puts it: "walking cane; stick" is
+# emitted as one pair six times (介 垂 角 瓦 ...), and prim-pipe already carried
+# "walking cane", "walking stick", "cane" and "line". Heisig never writes
+# "pipe" anywhere, so the keyword this row has always had is the project's, not
+# his; it is left alone rather than churned.
+# NOT all 62 are this shape, and that is recorded rather than papered over.
+# "flag; stick" is emitted as a pair ten times (尺 尽 沢 訳 択 昼 声 眉 釈 駅),
+# and 尺 is 尸 plus a single sweeping ㇏ with no vertical anywhere; 必 ("heart;
+# stick; drop; fishhook") and 系 ("stick; drop; thread") likewise have no
+# vertical, and there the slash is a 丿. So a second shape shares the name and
+# still has no row. It needs the render pass the other name-splits got; what is
+# fixed here is that the name no longer points at a kanji meaning "post a bill".

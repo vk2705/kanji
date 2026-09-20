@@ -12999,3 +12999,42 @@ over-flattening 0, dead tokens 0, self-references 0, primary-choice 0, frontend
 lint + build clean. No pin moved. **Phantom parts 93→86 across 64→59 kanji.**
 
 **Next** — "stick", properly: which hosts draw a vertical and which do not.
+
+## 2026-09-20 — chunk 14: "stick" pointed at a kanji meaning "post a bill"
+
+Chunk 13 flagged this; here is the investigation and the fix.
+
+"stick" is one of the largest primitive names in the book — **62 component
+rows** — and `resolve_alias` answered 貼 (rtk60) for every one of them. The
+cause was one line in this repo: `data.txt` gave 貼 the single alias "stick",
+the adhesive verb, taken from its 5th-edition keyword. A primitive name used
+62 times was being swallowed by an unrelated English sense of the same word.
+
+The adjacency evidence puts the name on `prim-pipe`: **"walking cane; stick"
+is emitted as one adjacent pair six times** (介 垂 角 瓦 …), which is Heisig
+printing one primitive's whole name set, and `prim-pipe` already carried
+"walking cane", "walking stick", "cane" and "line". Worth noting while there:
+Heisig never writes "pipe" *anywhere* in the components column — the keyword
+this row has always had is the project's own word, not his. Left alone rather
+than churned, but it is not a citation.
+
+貼 keeps a search path for the adhesive sense under that edition's actual
+keyword, **"affix"**, which is citable straight from `heisig-kanjis.csv`'s
+`keyword_5th_ed` column.
+
+**Not all 62 are this shape, and that is recorded rather than papered over.**
+"flag; stick" is emitted as a pair ten times — 尺 尽 沢 訳 択 昼 声 眉 釈 駅 —
+and 尺 is 尸 plus a single sweeping ㇏ with no vertical anywhere in it. 必
+("heart; stick; drop; fishhook") and 系 ("stick; drop; thread") have no vertical
+either; there the slash is a 丿. So a second shape shares the name and still has
+no row of its own. What is fixed here is that the name no longer resolves to a
+kanji meaning "post a bill"; splitting the two shapes needs the render pass the
+other name-splits in this log got.
+
+Verified: 1324 checks with only the 4 known hanzi-scope non-issues, 66 pytest,
+over-flattening 0, dead tokens 0, self-references 0, primary-choice 0, frontend
+lint + build clean. No pin moved. **Phantom parts 86→84 across 59→58 kanji**
+(兼 and 眉 clear on the CSV-name channel), **97.93% of name-occurrences resolve.**
+
+**Next** — the "staples" family (印 暇 興) and "staple gun" (段), where cjkvi
+writes the left halves as unencoded placeholders.
