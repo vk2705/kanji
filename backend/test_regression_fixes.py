@@ -2360,8 +2360,10 @@ EXPECTED_DECOMPOSITIONS = {
     # 丰,⻏ → {prim-bushes, kangxi163}.
     "rtk1991": {"character": "邦", "keyword": "home country",
                "expected_part_ids": {"kangxi163", "prim-bushes"}},
+    # 2026-09-20: the bottom this pin used to leave out is 𧘇 (prim-scarf) —
+    # see the retraction note on rtk2069 below for the evidence.
     "rtk2164": {"character": "辰", "keyword": "sign of the dragon",
-               "expected_part_ids": {"kangxi27", "rtk2"}},
+               "expected_part_ids": {"kangxi27", "rtk2", "prim-scarf"}},
     "rtk2165": {"character": "辱", "keyword": "embarrass",
                "expected_part_ids": {"rtk2164", "rtk45"}},
     "rtk2166": {"character": "震", "keyword": "quake",
@@ -2386,12 +2388,21 @@ EXPECTED_DECOMPOSITIONS = {
     # copy-pasted in alongside their real parts; render confirmed none of
     # the three glyphs contain it, dropped. 喪's remaining flattened noise
     # (｜,一,亠) replaced with its real cjkvi-ids-confirmed parts, 土,口.
+    # 2026-09-20: the "no codepoint of their own" half of that is retracted,
+    # and so is the same restraint in 辰's 2026-09-02 fix above. cjkvi-ids
+    # writes this shape two ways that never mix — 𧘇 in 188 entries (衣 表 睘
+    # 袁 哀 嚢 ...) and ⿰𠄌⿺乀丿 in 26 (辰 長 展 喪 畏 ...) — which is what made
+    # it look codepoint-less from the 辰 side. 农, the simplified 農, is the
+    # bridge: cjkvi gives it ⿻冖𧘇, and the piece it keeps from 農 is exactly
+    # 辰's bottom. Rendering 农 beside 辰, 衣 and bare 𧘇 confirms one shape.
+    # So "hairpin"/"safety-pin" are Heisig's second name for "scarf" (𧘇),
+    # the 宀 house/mansion pattern, and all four hosts gain prim-scarf.
     "rtk2069": {"character": "畏", "keyword": "fear",
-               "expected_part_ids": {"rtk1", "rtk14"}},
+               "expected_part_ids": {"rtk1", "rtk14", "prim-scarf"}},
     "rtk2075": {"character": "展", "keyword": "unfold",
-               "expected_part_ids": {"kangxi44", "prim-salad"}},
+               "expected_part_ids": {"kangxi44", "prim-salad", "prim-scarf"}},
     "rtk2076": {"character": "喪", "keyword": "miss",
-               "expected_part_ids": {"rtk161", "rtk11"}},
+               "expected_part_ids": {"rtk161", "rtk11", "prim-scarf"}},
     # Same audit, same session: 尚(rtk196, "esteem") used 49x as a component --
     # was missing a real component entirely (口,冂 only). cjkvi-ids: 尚 =
     # small-variant + 冂 + 口 (尚 = ⿱⺌冋, 冋 = ⿵冂口). Render-confirmed 尚's

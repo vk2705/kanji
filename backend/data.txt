@@ -2127,14 +2127,14 @@ rtk2065:宅:home:ノ,一,乙,宀
 rtk2066:託:consign:ノ,一,乙,言
 rtk2067:為:do:ノ,灬,ユ,丶,勹
 rtk2068:偽:falsehood:亻,為
-rtk2069:畏:fear:一,田
-rtk2070:長:long,hair:
+rtk2069:畏:fear:田,一,𧘇
+rtk2070:長:long,hair:𧘇
 rtk2071:張:counter for bows & stringed instruments:弓,長
 rtk2072:帳:notebook:巾,長
 rtk2073:脹:dilate:月,長
 rtk2074:髪:hair of the head:友,髟
-rtk2075:展:unfold:尸,龷
-rtk2076:喪:miss:土,口
+rtk2075:展:unfold:尸,龷,𧘇
+rtk2076:喪:miss:土,口,𧘇
 rtk2077:巣:nest:𭕄,果
 rtk2078:単:simple:𭕄,甲,一
 rtk2079:戦:war:単,戈
@@ -2222,7 +2222,7 @@ rtk2160:能:ability:月,匕,厶,prim-sitting-on-the-ground
 rtk2161:態:attitude:能,心
 rtk2162:寅:sign of the tiger:一,八,宀,由
 rtk2163:演:performance:水,寅
-rtk2164:辰:sign of the dragon:厂,二
+rtk2164:辰:sign of the dragon:厂,二,𧘇
 rtk2165:辱:embarrass:辰,寸
 rtk2166:震:quake:辰,雨
 rtk2167:振:shake:辰,扌
@@ -3254,7 +3254,7 @@ prim-calling-card:氐:calling card:氏,一
 # the five are supplementary-plane codepoints no common font draws, which is what
 # had blocked registering them — make_primitive_images.py renders each a picture.
 prim-reclining:𠂉:reclining,lying down,pantomime horse,sign of the horse:ノ,一
-prim-scarf:𧘇:scarf:
+prim-scarf:𧘇:scarf,hairpin,safety-pin:
 prim-sheaf:㐅:sheaf:
 prim-by-ones-side:𠂇:by one's side,by one’s side:ノ,一
 prim-mist:𠦝:mist:十,早
@@ -3793,3 +3793,19 @@ prim-turned-back-person:旡:turned back person:
 # way it is handwritten. So 亼,龴 is primary and the stroke spelling stays as
 # the labelled structural alternative, which is exactly cjkvi's [JK] reading.
 prim-chop-seal:龴:chop-seal,hanko,マ:
+
+# --- 2026-09-20: 'hairpin'/'safety-pin' is 𧘇, the same shape Heisig calls
+# 'scarf' under 衣 -- one shape, two mnemonic names, like 宀 house/mansion and
+# 丸 round/fat man. cjkvi-ids hides this behind two notations that never mix:
+# 188 entries write 𧘇 (衣 表 睘 袁 哀 嚢 ...) and 26 write ⿰𠄌⿺乀丿
+# (辰 長 展 喪 畏 ...). What settles it is 农, the simplified 農: cjkvi gives it
+# ⿻冖𧘇, and the shape it keeps from 農 is precisely 辰's bottom, which the same
+# file spells ⿰𠄌⿺乀丿. Rendering 农 beside 辰, 衣 and bare 𧘇 confirms it.
+# All five base hosts were simply *missing* the component -- 畏 was 一,田,
+# 展 尸,龷, 喪 土,口, 辰 厂,二, 長 atomic -- so this adds it rather than
+# repointing anything. 辱 震 振 娠 唇 農 濃 already reference 辰 and inherit.
+# 長 gets 𧘇 alone on purpose: its CSV row is "hair; hairpin; safety-pin",
+# where "hair" is 長's own primitive name, so Heisig's reading of it is the
+# self-name plus this one component. Its top is unencoded (cjkvi writes the
+# placeholder ④ for it) and naming it would mean inventing a primitive for a
+# single host, so it stays unnamed rather than spelled out in strokes.

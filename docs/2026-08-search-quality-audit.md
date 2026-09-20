@@ -12842,3 +12842,56 @@ cjkvi spells that shape `⿰𠄌⿺乀丿` in 辰 長 展 喪 while writing 𧘇
 as `prim-scarf`) for the visually-adjacent bottom of 衣 and 衷. Whether those are
 one shape under two Heisig names or two shapes is exactly a render question, and
 it is the next one to answer.
+
+## 2026-09-20 — chunk 10: "hairpin/safety-pin" is 𧘇, and two earlier sessions were wrong to hold back
+
+The last big unresolved group, 12 hosts (唇喪娠展振濃畏辰辱農長震). Two earlier
+sessions had already looked at it and deliberately declined to act: 辰's
+2026-09-02 fix and the 2026-09-18 bundle both recorded that cjkvi-ids' remainder
+for these glyphs is "3 atomic CJK strokes with no codepoint of their own", and
+chose restraint over inventing a primitive. **That reasoning is retracted here,
+with the evidence that overturns it.**
+
+cjkvi-ids writes this shape two ways that never appear together:
+
+* `𧘇` in 188 entries — 衣 表 睘 袁 哀 嚢 衰 衷 裏 …
+* `⿰𠄌⿺乀丿` in 26 — 辰 長 展 喪 畏 丧 䘮 𧆝 …
+
+From inside the 辰 family the second notation looks like bare strokes, which is
+exactly how it read on 09-02 and again on 09-18. The bridge is **农**, the
+simplified 農: cjkvi gives it `⿻冖𧘇`, and the piece 农 keeps from 農 is
+precisely 辰's bottom — which the same file spells `⿰𠄌⿺乀丿`. One file, one
+shape, two notations. Rendering 农 beside 辰, 衣 and bare 𧘇 settles it visually:
+the same 𠄌 on the left, the same 乀 crossed by 丿 on the right.
+
+So "hairpin" and "safety-pin" are Heisig's second name for the thing he calls
+"scarf" under 衣 — the 宀 house/mansion, 丸 round/fat man, 田 rice-field/brains
+pattern, not a new primitive. Both names go on `prim-scarf` as aliases.
+
+The five base hosts were then not mis-pointed but **missing the component
+outright**: 畏 was `一,田`, 展 `尸,龷`, 喪 `土,口`, 辰 `厂,二`, 長 atomic. All five
+gain 𧘇; 辱 震 振 娠 唇 農 濃 already reference 辰 and inherit it.
+
+**長 gets 𧘇 and nothing else, on purpose.** Its CSV row is "hair; hairpin;
+safety-pin", where "hair" is 長's *own* primitive name — so Heisig's reading of
+長 is the self-name plus this one component, and a self-reference is exactly what
+`audit_self_reference.py` forbids. Its top is genuinely unencoded (cjkvi writes
+the placeholder ④ there), and naming it would mean inventing a primitive with a
+single host. It stays unnamed rather than spelled out in strokes.
+
+Verified: 1324 checks with only the 4 known hanzi-scope non-issues, 66 pytest,
+over-flattening 0, dead tokens 0, self-references 0, primary-choice 0, frontend
+lint + build clean. Four pins moved (畏 展 喪 辰), each with the retraction
+written next to it. **Unsearchable Heisig names 181→179, 97.89% of all
+name-occurrences now resolve; unresolved groups 10→9.** Phantom parts unchanged
+at 103 across 74 kanji — this chunk added missing parts rather than removing
+wrong ones.
+
+**Next** — the remaining 9 groups are all small and none is a single obvious
+shape: `maestro without baton` (5 hosts, 官棺管遣館), `alien` (4, 向商尚高),
+`miss world`/`paper punch` (4, 売探深読), `rag` (4, 旅派脈衆), `mountain goat`
+(4, 塑岡逆遡), `sherpa` (3, 微徴懲), `fred astaire` (3, 修候悠), and two with
+nothing common to every host at all — `drops` (卵州心) and `staples` (印暇興),
+which the tool itself flags as "likely a missing row". The 103 remaining phantom
+parts are now the larger seam, led by `｜` (11), `一` (9), `八` (6) and `ノ` (6)
+— all stroke primitives, i.e. the flattening complaint in its last hiding place.
