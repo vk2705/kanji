@@ -49,7 +49,7 @@ prim28.2:':a drop of, drop
 rtk3:?:3,three:one,two
 rtk4:?:4,four:囗,儿
 rtk6:六:six,6:top hat,八
-rtk7:七:seven: 
+rtk7:七:seven,diced: 
 rtk8:?:eight,8,infinity,animal legs
 rtk16:?:old,church,gravestone:mouth,ten
 rtk17:?:I:five,mouth
@@ -1646,7 +1646,7 @@ rtk1592:飽:sated:食,包
 rtk1593:既:previously,waitress:牙,艮
 rtk1594:概:outline:既,木
 rtk1595:慨:rue:既,忄
-rtk1596:平:even:干,丷
+rtk1596:平:even,lily pad,water-lily:干,丷
 rtk1597:呼:call:口,平
 rtk1598:坪:two-mat area:土,平
 rtk1599:評:evaluate:言,平
@@ -3087,7 +3087,7 @@ kangxi115:禾:grain,wheat,cereal
 kangxi172:隹:short-tailed bird,turkey
 kangxi66:攵:rap,knock,taskmaster
 kangxi53:广:cave,dotted cliff,caverns
-kangxi16:几:table,stool
+kangxi16:几:table,stool,gnats
 kangxi17:凵:container,open box,shovel
 kangxi60:彳:step,go,nelson
 kangxi31:囗:enclosure,pent in

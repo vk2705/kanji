@@ -12658,3 +12658,35 @@ their half through 罙, so the shape is not simply 冗. Needs its own look.
 Verified: 1324 checks with only the 4 known hanzi-scope non-issues, 66 pytest,
 over-flattening 0, dead tokens 0, self-references 0, primary-choice 0, phantom
 parts 112, frontend lint + build clean. **Unsearchable Heisig names 206→203.**
+
+---
+
+## 2026-09-20 (chunk 5) — three names sitting in their own primitive's CSV row
+
+The cheapest evidence there is, and it had been walked past: for `diced` and
+`lily pad`/`water-lily`, the name is in the **primitive's own** components row.
+七's row reads exactly "diced". 平's reads exactly "water-lily; lily pad". No
+intersection or overlap reasoning needed.
+
+- **diced → 七** (rtk7). 切 confirms it from the other side: "seven; diced;
+  sword; dagger" for 七+刀.
+- **lily pad, water-lily → 平** (rtk1596). 坪 and 評 both read "...even;
+  water-lily; lily pad" for 土/言 + 平.
+
+Both score 0.75 rather than 1.00 only because one host each spells the shape
+another way (虎 for 七, 呼's 乎 for 平) — not a disagreement about what the name
+means.
+
+**gnats → 几**, deliberately partial. 風's row is "gnats; drop; insect" and 風 is
+几 + ノ + 虫 — an exact three-for-three match, and the render confirms 風's outer
+frame is 几. 嵐 follows through 風. But its other two hosts, 属 and 嘱, reach the
+name through 禹, and rendering 禹 beside 几 shows no 几 in it. So searching
+"gnats" returns the 几 family and not 属/嘱, and what the name means inside 禹 is
+still open — same shape of answer as `fishhook` and `sunglasses`.
+
+`rag` (旅 派 脈 衆) was looked at and left: its hosts reach it through three
+different shapes (𠂢, 乑, and 旅's own right half) and nothing scores above 0.75.
+
+Verified: 1324 checks with only the 4 known hanzi-scope non-issues, 66 pytest,
+over-flattening 0, dead tokens 0, self-references 0, primary-choice 0, phantom
+parts 112, frontend lint + build clean. Unsearchable Heisig names 203→199.
