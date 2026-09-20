@@ -13660,3 +13660,54 @@ where Heisig's row describes the traditional 屬 and says nothing about this
 glyph.
 
 **Next** — 衆 and the "rag" group it belongs to.
+
+## 2026-09-20 — chunk 30: 衆, and why "rag" stays unresolved
+
+**衆 was `血,皿,糸`** — the 皿 is already inside the 血 sitting beside it, and the
+糸 is in no part of the glyph. cjkvi gives `⿱血乑` and the render agrees: under
+the 血 is **乑 (U+4E51)**, a 丿 over two splayed pairs of strokes. Heisig never
+names it as a unit — he reads it "person; rag" — so **"crowd" is a descriptive
+non-Heisig name** (owner-permitted), picked because that is what the shape means
+in every host and because it collides with nothing.
+
+**"rag" stays unresolved, and this is the third chunk to look at it.** Its four
+hosts are 旅 派 脈 衆, and in every one the thing Heisig calls "person; rag" is
+the same pair of splayed strokes. In 派 and 旅 that pair is an **unencoded
+placeholder** in cjkvi — `⿸𠂆④` and `⿰方⿱𠂉④` — which is exactly the blind spot
+`audit_phantom_parts.py` grew a section for in chunk 15. There is no codepoint
+to register, so there is nothing honest to point the name at. Recording that is
+the finding.
+
+---
+
+### Where chunks 21–30 leave the audit
+
+This run started from a hunch in chunk 20 — that some names *resolve to the
+wrong row*, which no check asking "does this resolve" can see — and ended with
+that class closed.
+
+| | start of chunk 21 | now |
+|---|---|---|
+| anachronistic names | 44 (of 1,156) | **1** |
+| unsearchable Heisig names | 179 | **167** |
+| name-occurrences that resolve | 97.9 % | **98.15 %** |
+| unresolved name groups | 9 | **4** |
+| phantom parts | 40 across 28 kanji | **28 across 18** |
+| …double-checked (not cjkvi-blind) | 14 across 11 | **3 across 2** |
+| over-flattened decompositions | 0 | **0** (11 found and fixed on the way) |
+| regression suite | 4 permanent fake failures, not in CI | **1325 checks, exit 0, in CI** |
+
+Two new tools (`audit_anachronistic_names.py`, and the blind-spot split in
+`audit_phantom_parts.py`), one new invariant (`check_primitive_images`), and
+roughly **1,150 component-row occurrences** that now resolve to the primitive
+Heisig meant instead of to a later kanji that happens to share the English word.
+
+The three phantoms left that both channels actually examined are all
+explainable: 羊's 王 is the tool being strict about cjkvi's `⿱䒑⿻二丨` where the
+render says 丷 + 王 (chunk 19), and 属's two sit on a glyph whose Heisig row
+describes the *traditional* 屬 instead. The 25 others are in hosts cjkvi cannot
+see into at all.
+
+**Standing next steps**, unchanged and unstarted: this sandbox cannot deploy —
+`sync_system_data.py` against the live DB still has to be run by someone with
+server access, and every chunk above is data-only until that happens.

@@ -2059,7 +2059,7 @@ rtk1997:盾:shield:𠂋,十,目
 rtk1998:循:sequential:盾,彳
 rtk1999:派:faction:水,𠂋
 rtk2000:脈:vein:月,𠂋
-rtk2001:衆:masses:血,皿,糸
+rtk2001:衆:masses:血,乑
 rtk2002:逓:relay:巾,辶,𠂋,｜
 rtk2003:段:grade:｜,殳,几,又,ノ,一
 rtk2004:鍛:forge:段,金
@@ -4102,3 +4102,18 @@ prim-staples:𦥑:staples:
 # rest of 鼡 is left as 几 rather than guessed at: Heisig's row names an
 # "anemometer" and a "cornstalk" in there, and neither has a row here yet.
 prim-parade-hooked:戉:parade:
+
+# --- 2026-09-20: 衆 was 血 + 皿 + 糸 -- the 皿 is already inside the 血 beside
+# it, and the 糸 is in no part of the glyph. cjkvi gives 衆 ⿱血乑, and the
+# render agrees: under the 血 is 乑 (U+4E51), a 丿 over two splayed pairs of
+# strokes. Heisig does not name it as a unit -- he reads it "person; rag" --
+# so "crowd" here is a descriptive non-Heisig name (owner-permitted), chosen
+# because that is what the shape means in every host and because it collides
+# with nothing.
+# "rag" itself stays unresolved, and this is the third chunk to look at it.
+# Its four hosts are 旅 派 脈 衆, and in every one the thing Heisig calls
+# "person; rag" is the same pair of splayed strokes -- 派's and 旅's are an
+# *unencoded placeholder* in cjkvi (⿸𠂆④, ⿰方⿱𠂉④), which is the blind spot
+# audit_phantom_parts.py grew a section for on 2026-09-20. There is no
+# codepoint to register, so there is nothing honest to point the name at.
+prim-crowd:乑:crowd:
