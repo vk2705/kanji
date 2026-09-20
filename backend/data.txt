@@ -95,7 +95,7 @@ rtk40:千:thousand:ノ,十
 rtk41:舌:tongue:千,口
 rtk42:升:measuring box:千,廾;ノ,廾
 rtk43:昇:rise up:升,日
-rtk44:丸:round:九,丶
+rtk44:丸:round,fat man,musashimaru:九,丶
 rtk45:寸:measurement,glue:十,丶
 rtk46:肘:elbow:月,寸
 rtk47:専:specialty:十,寸,田
@@ -1718,8 +1718,8 @@ rtk1664:債:bond:亻,責
 rtk1665:漬:pickling:責,水
 rtk1666:表:surface:龶,𧘇
 rtk1667:俵:bag:亻,表
-rtk1668:潔:undefiled:水,丰,刀,糸
-rtk1669:契:pledge:丰,刀,大
+rtk1668:潔:undefiled:水,㓞,糸
+rtk1669:契:pledge:㓞,大
 rtk1670:喫:consume:口,契
 rtk1671:害:harm:宀,龶,口
 rtk1672:轄:control:害,車
@@ -3118,7 +3118,7 @@ kangxi205:黽:frog,toad
 prim-mugwort:艹:mugwort,flowers,cabbage
 prim-thirty:丗:thirty,buckle,apron
 kangxi52:幺:tiny,short thread
-kangxi40:宀:roof,primitive_roof
+kangxi40:宀:roof,primitive_roof,mansion
 kangxi28:厶:cocoon,elbow
 
 # Remaining Finding-1 single-glyph terms (session 4, 2026-08-14). Two groups:
@@ -3759,3 +3759,7 @@ prim-tub:卌:tub:
 # --- 2026-09-20: 从 'assembly line', two 人 side by side. 1.00 over its
 # four hosts (傘 卒 座 挫); 座/挫 reach it through 坐.
 prim-assembly-line:从:assembly line:人,人
+
+# --- 2026-09-20: 㓞 'flick knife' = 丰 + 刀, the top of 契 and the
+# middle of 潔's 絜. 1.00 over its three hosts.
+prim-flick-knife:㓞:flick knife:丰,刀

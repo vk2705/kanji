@@ -2782,8 +2782,11 @@ EXPECTED_DECOMPOSITIONS = {
     # it, since no amount of reading the keyword "grow up" distinguishes them.
     "rtk1652": {"character": "素", "keyword": "elementary",
                "expected_part_ids": {"prim-grow-up", "rtk1431"}},
+    # 潔 spelled 丰 and 刀 separately. They are one shape: 㓞 "flick knife",
+    # registered 2026-09-20 — 潔's 絜 minus its 糸, and the whole top of 契. The
+    # 丰-not-龶 note above still holds, since 㓞 contains 丰 and depth 2 reaches it.
     "rtk1668": {"character": "潔", "keyword": "undefiled",
-               "expected_part_ids": {"prim-bushes", "rtk137", "rtk1431", "rtk87"}},
+               "expected_part_ids": {"prim-flick-knife", "rtk137", "rtk1431"}},
     "rtk1685": {"character": "縫", "keyword": "sew",
                "expected_part_ids": {"rtk1431", "rtk2497"}},
     "rtk1774": {"character": "緯", "keyword": "horizontal",

@@ -12727,3 +12727,33 @@ This is the largest single drop yet: **unsearchable Heisig names 199→187.**
 Verified: 1324 checks with only the 4 known hanzi-scope non-issues, 66 pytest,
 over-flattening 0, dead tokens 0, self-references 0, primary-choice 0, phantom
 parts 112, frontend lint + build clean. No decomposition moved.
+
+---
+
+## 2026-09-20 (chunk 7) — mansion, musashimaru, and 㓞
+
+Three from the remaining 14 groups; the rest were looked at and left.
+
+- **mansion → 宀** (1.00). 害's row reads "mansion; house; grow up; mouth" — two
+  names for the one roof, the 田 pattern again.
+- **fat man, musashimaru → 丸** (1.00). 執 is 幸+丸 and its row reads
+  "happiness; ten; needle; stand up; vase; fat man; musashimaru". A sumo
+  wrestler for the round shape.
+- **flick knife → 㓞** (U+34DE, 1.00), registered as `prim-flick-knife`. It is
+  丰+刀, confirmed by render: it is the entire top of 契 and the middle of 潔's
+  絜. Both hosts had been spelling it out as two parts. Ext A, so it got a
+  primitive image; checked.
+
+**Left, with reasons.** `mountain goat` (塑 岡 逆 遡) looks like 屰 at 0.75, but
+岡 is 冂+丷+山 with no 屰 in it, so Heisig's name spans 丷+屮 *and* 丷+山 and
+picking one would be a guess. `fred astaire` → 攸 scores 0.33, `sherpa` 0.00,
+`staples` 0.33 — all name a piece their hosts reach three different ways.
+`chop-seal`/`hanko` (14 hosts) and `hairpin`/`safety-pin` (12) remain the top two
+by host count and remain the weak "every host contains 一" signal; chunk 6
+established that hairpin is a shape 辰 and 長 *share*, which is progress on
+knowing what it is not.
+
+Verified: 1324 checks with only the 4 known hanzi-scope non-issues, 66 pytest,
+over-flattening 0, dead tokens 0, self-references 0, primary-choice 0, phantom
+parts 112, frontend lint + build clean. One pin (潔) re-pinned. **Unsearchable
+Heisig names 187→183.**
