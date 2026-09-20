@@ -12922,3 +12922,38 @@ lint + build clean. One pin moved (rtk430) with the reason next to it.
 **Phantom parts 103→98 across 74→69 kanji.**
 
 **Next** — the stroke-primitive phantoms (`｜` 11, `一` 9, `八` 6, `ノ` 6).
+
+## 2026-09-20 — chunk 12: "mend" was resolving to a frame 1,800 numbers too late
+
+`走 足 定 是 従` accounted for five phantoms between them: 走 and 足 claimed 止,
+定 是 従 claimed 疋. Neither is in the glyph. Rendered together, the tell is one
+stroke — 止 lays a flat foot, and every one of these five sweeps its
+bottom-right out into a ㇏. That shape is **龰** (U+9FB0), and 定/是/従 carry it
+under a flat bar as **𤴓** (U+24D13, cjkvi `⿱一龰`), which is what makes 𤴓 look
+like 疋 until you notice 疋's top stroke hooks down and 𤴓's does not.
+
+Heisig's name for it is "mend", and it had no row at all — so `resolve_alias`
+was quietly answering **綴 (rtk2222)**, a kanji whose *keyword* happens to be
+"mend" and whose frame number is 1,800 past 走, the first host that needs the
+primitive. A primitive cannot be introduced by a frame that comes later than its
+first use; the resolution was a pure keyword collision, and the kind that reads
+as success to every tool that only asks "does this name resolve".
+
+Two rows rather than one, on the 艮/皀 "silver" precedent from chunk 8: 走 and 足
+sit directly on 龰 (`⿱土龰`, `⿱口龰`), 定 是 従 on 𤴓 (`⿱宀𤴓`, `⿱日𤴓`,
+`⿰彳⿱丷𤴓`), and Heisig calls both "mend" — his rows for 定/是/従 name no "one",
+so the bar belongs to the primitive there rather than to the host. 足's and 促's
+rows hand the primitive two names at once ("mouth; mending; mend"), which is
+Heisig emitting a primitive's whole name set, so 龰 carries both.
+
+疋 (rtk2238, "critters") keeps its frame and stays atomic — the point is that it
+was never these three kanji's component, not that it isn't real.
+
+Verified: 1324 checks with only the 4 known hanzi-scope non-issues, 66 pytest,
+over-flattening 0, dead tokens 0, self-references 0, primary-choice 0, frontend
+lint + build clean. One pin moved (rtk410). **Phantom parts 98→93 across 69→64
+kanji.** 超 赴 越 起 趣 徒 題 堤 提 錠 綻 縦 促 捉 all reference 走/足/定/是/従
+directly and inherited the fix.
+
+**Next** — 卵/州/心 ("drops") and 印/暇/興 ("staples"), the two groups
+`suggest_heisig_aliases.py` flags as having nothing common to every host.

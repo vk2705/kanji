@@ -458,13 +458,13 @@ rtk404:賦:levy:貝,武
 rtk405:正:correct:一,止
 rtk406:証:evidence:正,言
 rtk407:政:politics:攵,正
-rtk408:定:determine:疋,宀
+rtk408:定:determine:宀,𤴓
 rtk409:錠:lock:金,定
-rtk410:走:run:土,止
+rtk410:走:run:土,龰
 rtk411:超:transcend:召,走
 rtk412:赴:proceed:走,卜
 rtk413:越:surpass:走,戈
-rtk414:是:just so:日,疋
+rtk414:是:just so:日,𤴓
 rtk415:題:topic:頁,是
 rtk416:堤:dike:土,是
 rtk417:建:build:廴,聿
@@ -992,7 +992,7 @@ rtk938:行:going:彳
 rtk939:律:rhythm:彳,聿
 rtk940:復:restore:复,彳
 rtk941:得:gain:寸,日,彳,一
-rtk942:従:accompany:丷,疋,彳
+rtk942:従:accompany:彳,丷,𤴓
 rtk943:徒:on foot:走,彳
 rtk944:待:wait:寺,彳
 rtk945:往:journey:主,彳
@@ -1422,7 +1422,7 @@ rtk1368:交:mingle:父,亠
 rtk1369:効:merit:交,力
 rtk1370:較:contrast:車,交
 rtk1371:校:exam:交,木
-rtk1372:足:leg,wooden leg:口,止
+rtk1372:足:leg,wooden leg:口,龰
 rtk1373:促:stimulate:亻,足
 rtk1374:捉:catch:扌,足
 rtk1375:距:long-distance:足,巨
@@ -3822,3 +3822,22 @@ prim-chop-seal:龴:chop-seal,hanko,マ:
 # names it "trampoline" (only those two rows use the word); cjkvi-ids gives
 # ⿳罒𠮛𧘇, and 𠮛 is the 一+口 his expansion calls "one; ceiling; mouth".
 prim-trampoline:睘:trampoline:罒,一,口,𧘇
+
+# --- 2026-09-20: Heisig's "mend" had no row at all, so it was resolving to
+# 綴 (rtk2222), whose *keyword* is "mend" -- a frame 1800 places after the
+# first host that needs the primitive, i.e. a pure collision. The shape is
+# 龰: 止 with its bottom-right stroke swept out into a ㇏ instead of laid flat.
+# Rendered, 走 足 定 是 従 all show the swept stroke and none of them shows 止's
+# flat foot, which is why 走/足 were phantom-flagged for 止 and 定/是/従 for 疋.
+# 足's and 促's rows give the primitive two names at once ("mouth; mending;
+# mend"), which is Heisig emitting a primitive's whole name set; 走 定 是 従
+# give only "mend".
+# Two rows, not one, on the 艮/皀 "silver" precedent: 走 and 足 sit directly on
+# 龰 (cjkvi ⿱土龰, ⿱口龰) while 定 是 従 sit on 𤴓 = ⿱一龰 (cjkvi ⿱宀𤴓,
+# ⿱日𤴓, ⿰彳⿱丷𤴓), and Heisig calls both "mend" -- his rows for 定/是/従 name
+# no "one", so the bar belongs to the primitive there, not to the host.
+# 疋 (rtk2238, "critters") keeps its own frame and is left atomic: its top is a
+# hooked 𠃍, not 𤴓's flat bar, which is the confusion that put it in these
+# three rows in the first place.
+prim-mending:龰:mending,mend:
+prim-mend-barred:𤴓:mend:一,龰

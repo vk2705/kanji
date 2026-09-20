@@ -609,8 +609,12 @@ EXPECTED_DECOMPOSITIONS = {
     # which then meant 超/赴/越/趣/徒/趨/赳 (all built on 走) needed the
     # redundant-overlap fix (drop 土, which 走 already includes) rather
     # than the missing-component fix.
+    # 2026-09-20: that bottom is not 止. Rendered, 走's last stroke sweeps out
+    # into a ㇏ where 止 lays a flat foot -- it is 龰, Heisig's "mend"/"mending",
+    # which had no row here and was resolving to 綴 (rtk2222) on a keyword
+    # collision. 足 moved the same way; 定/是/従 moved from 疋 to 𤴓 = ⿱一龰.
     "rtk410": {"character": "走", "keyword": "run",
-               "expected_part_ids": {"rtk161", "rtk396"}},
+               "expected_part_ids": {"rtk161", "prim-mending"}},
     "rtk412": {"character": "赴", "keyword": "proceed",
                "expected_part_ids": {"kangxi25", "rtk410"}},
     "rtk413": {"character": "越", "keyword": "surpass",
