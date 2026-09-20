@@ -1,11 +1,20 @@
 # Deploy README — syncing `data.txt` fixes to the live server
 
-For whoever (human or agent) operates the actual production box
-(`srv.alteon.help`, systemd service `kanji-backend.service`). Written to be
-followed mechanically, step by step, without needing the rest of this
-repo's history for context. If anything below doesn't match what you see on
-the server, stop and report the mismatch rather than improvising — this
-procedure touches a database that holds real user accounts.
+For whoever (human or agent) operates production. **As of 2026-09-20,
+production is `kanji.alteon.help`, a dedicated Oracle Cloud VM
+(161.153.96.217) running nothing but this app** (repo checked out at
+`/opt/kanji`, backend under `/opt/kanji/backend`, frontend built to
+`/opt/kanji/frontend/dist`). `srv.alteon.help` (this repo's original EC2
+host) is **dev-only now** — it's a shared box that also runs other
+projects, and its own copy of `kanji-backend.service`/`kanji.db` holds only
+dev data, never real user accounts. Everywhere below that says "the server"
+means the prod VM unless a step says otherwise. See `deploy/nginx/README.md`
+for the full dev-vs-prod layout differences (path prefix, nginx config
+shape, frontend build command). Written to be followed mechanically, step
+by step, without needing the rest of this repo's history for context. If
+anything below doesn't match what you see on the server, stop and report
+the mismatch rather than improvising — this procedure touches a database
+that holds real user accounts.
 
 ## Why this exists (read once, then skip to Steps)
 
@@ -35,7 +44,7 @@ detail; you don't need to read it to run this procedure.
 ## Step 1 — pull
 
 ```bash
-cd /path/to/kanji     # wherever this repo is checked out on the server
+cd /opt/kanji     # prod checkout on the dedicated VM (161.153.96.217)
 git pull
 ```
 
@@ -101,7 +110,7 @@ python3 rtk.py detail rtk355
 or hit the live API directly:
 
 ```bash
-curl -s "https://srv.alteon.help/kanji/api/kanji/rtk355" | python3 -m json.tool
+curl -s "https://kanji.alteon.help/kanji/api/kanji/rtk355" | python3 -m json.tool
 ```
 
 ## Scheduled backup and tested restore
@@ -137,7 +146,7 @@ cd backend
   --target-dir . --confirm
 sqlite3 kanji.db 'PRAGMA integrity_check;'
 sudo systemctl start kanji-backend.service
-curl -fsS 'https://srv.alteon.help/kanji/api/search/text?q=one' >/dev/null
+curl -fsS 'https://kanji.alteon.help/kanji/api/search/text?q=one' >/dev/null
 ```
 
 Practice this restore into a temporary directory periodically. A backup is not
@@ -173,58 +182,53 @@ removes the identity information needed to reconstruct real accounts, and it exc
 credentials, sessions, and upload files. Restore production from the encrypted raw
 database/upload backups described above.
 
-## SEO / getting Google to find the site (added 2026-09-01, owner request)
+## SEO / getting Google to find the site (added 2026-09-01, owner request; updated 2026-09-20 for the prod VM move)
 
-The frontend build now ships `/kanji/robots.txt` and `/kanji/sitemap.xml`
-automatically (`frontend/public/robots.txt` / `sitemap.xml`, copied to
-`dist/` by the normal `npm run build` step) — no extra action needed beyond
-the usual frontend rebuild-and-copy-to-`/usr/share/nginx/html/kanji/` deploy
-step described in `CLAUDE.md`'s Deployment section. `index.html` also now
-has a real `<title>`/`<meta description>`/canonical URL/Open Graph tags
-instead of the bare `RTK Kanji Search` title it shipped with before.
+The frontend build ships `robots.txt` and `sitemap.xml` automatically
+(`frontend/public/robots.txt` / `sitemap.xml`, copied to `dist/` by the
+normal build step) — no extra action needed beyond the usual frontend
+rebuild-and-deploy step (`npm run build:prod` on the dedicated VM; see
+`CLAUDE.md`'s Deployment section and `deploy/nginx/README.md`). `index.html`
+also has a real `<title>`/`<meta description>`/canonical URL/Open Graph
+tags. Since prod (`kanji.alteon.help`) is now a **dedicated** VM serving the
+app from the domain root (not a `/kanji/` path prefix on a shared box), both
+files already sit at the real domain root — `https://kanji.alteon.help/robots.txt`
+and `.../sitemap.xml` — with no path-prefix rewriting and no other project's
+config to coordinate with. That resolves what used to be the hard part of
+this section on the old shared srv.alteon.help box (a domain-root
+`robots.txt` that repo's nginx config didn't own); it's a non-issue now.
 
-That covers everything reachable from *this* repo. Three more steps need
+That covers everything reachable from *this* repo. Two more steps need
 someone with server access and/or the owner's Google account — none of them
 are things this repo (or an AI session without server/Google credentials)
 can do on its own:
 
-1. **Domain-root `robots.txt`.** Crawlers check `https://srv.alteon.help/robots.txt`
-   at the domain root by default — a path this repo's nginx config doesn't
-   own (the box is shared with other projects; see `deploy/nginx/README.md`).
-   Check whether a root `robots.txt` already exists (`curl -s
-   https://srv.alteon.help/robots.txt`). If it doesn't exist yet, or exists
-   and doesn't already disallow `/kanji/`, add (coordinate with whoever owns
-   the other projects on this box before overwriting an existing one):
-   ```
-   User-agent: *
-   Allow: /kanji/
-   Sitemap: https://srv.alteon.help/kanji/sitemap.xml
-   ```
-   If a root `robots.txt` already exists and disallows everything (or
-   disallows `/kanji/` specifically), that alone would fully block Google
-   regardless of anything else here — check this first.
-2. **Google Search Console.** Needs the owner's Google account, so has to be
+1. **Google Search Console.** Needs the owner's Google account, so has to be
    done by a human:
-   - console.google.com/search-console → Add property → URL prefix →
-     `https://srv.alteon.help/kanji/`.
+   - console.google.com/search-console → Add property → Domain (or URL
+     prefix) → `kanji.alteon.help`.
    - Verify ownership — easiest is the "HTML tag" method: paste the
      `<meta name="google-site-verification" content="...">` tag Search
      Console gives you into `frontend/index.html`'s `<head>` (ask a future
      session to add it and redeploy, or add it directly) and reload the
-     verification page. The "HTML file upload" method also works if Search
-     Console accepts a subpath property served from `/kanji/<file>` (drop
-     the given file into `frontend/public/`) — if it insists on a
-     domain-root path instead, that needs the same shared-box coordination
-     as the robots.txt step above.
-   - Once verified: Sitemaps → submit `https://srv.alteon.help/kanji/sitemap.xml`.
-   - URL Inspection tool → paste `https://srv.alteon.help/kanji/` → "Request
+     verification page. The "HTML file upload" method also works too now
+     that the app owns the whole domain root (drop the given file into
+     `frontend/public/`).
+   - Once verified: Sitemaps → submit `https://kanji.alteon.help/sitemap.xml`.
+   - URL Inspection tool → paste `https://kanji.alteon.help/` → "Request
      Indexing" — this is the fastest way to get the first crawl to happen,
      rather than waiting for Google to discover the site organically.
-3. **Known limitation: only one URL exists to index.** The frontend is a
+   - If Search Console already had a verified property for the old
+     `srv.alteon.help/kanji/` URL prefix from before the move, that
+     property is now stale (dev-only) — add `kanji.alteon.help` as a new
+     property rather than trying to migrate the old one; Search Console
+     doesn't have a clean "this site moved to a different domain" flow
+     for a URL-prefix property, only for a Domain property.
+2. **Known limitation: only one URL exists to index.** The frontend is a
    single-page app with no client-side routing (`App.jsx` has no
    react-router or URL-based state) — every kanji search happens without
    the URL ever changing, so Google can only ever index
-   `https://srv.alteon.help/kanji/` itself, not individual kanji. That's
+   `https://kanji.alteon.help/` itself, not individual kanji. That's
    fine for "can people find the site at all", but it means there's no way
    to rank for e.g. a specific kanji search term, and the sitemap above is
    necessarily a single `<url>` entry. Giving each kanji (or at least the
@@ -253,17 +257,25 @@ Needs the owner's own Google account — can't be done by an AI session:
 
 1. [Google Cloud Console](https://console.cloud.google.com/apis/credentials)
    → Create OAuth client ID → Web application → Authorized JavaScript
-   origins: `https://srv.alteon.help` (and `http://localhost:5173` for local
-   dev). No redirect URI needed (this uses Google Identity Services'
-   client-side token flow, not a server redirect).
+   origins: **both** `https://kanji.alteon.help` (prod) and
+   `https://srv.alteon.help` (dev), plus `http://localhost:5173` for local
+   dev — one OAuth client, three origins, since dev and prod deliberately
+   share the same client id (see `deploy/nginx/README.md`'s "Google OAuth
+   client ID is shared across both machines"). No redirect URI needed (this
+   uses Google Identity Services' client-side token flow, not a server
+   redirect).
 2. The resulting Client ID is a public identifier, not a secret — set the
-   *same* value in two places:
+   *same* value in two places, **on each machine you want it working on**:
    - Backend: `sudo systemctl edit kanji-backend.service` → add
      `Environment=GOOGLE_CLIENT_ID=<id>` under `[Service]` → restart.
    - Frontend: `frontend/.env` → `VITE_GOOGLE_CLIENT_ID=<id>`.
-3. Rebuild the frontend (`npm run build`) and copy `dist/` to
-   `/usr/share/nginx/html/kanji/` — a `.env` edit alone does not take
-   effect without this step.
+3. Rebuild the frontend and redeploy: `npm run build:prod` on the prod VM
+   (copy `dist/` to `/opt/kanji/frontend/dist`) or `npm run build:dev` on
+   the shared dev box (copy `dist/` to `/usr/share/nginx/html/kanji/`) — a
+   `.env` edit alone does not take effect without this step, and using the
+   wrong build script on either machine reintroduces the same "blank page"
+   asset-path bug the 2026-09-20 prod migration hit (see git history on
+   `frontend/vite.config.js`/`package.json`).
 4. Verify: reload the live site, open the login popover, confirm the
    Google button now renders. If it renders but sign-in itself fails,
    that's a *different* problem (client ID mismatch between frontend/
@@ -285,19 +297,36 @@ that's easy to skip or get wrong:
 
 1. **Rebuild, don't just `git pull`.** `git pull` only updates the source
    files on the server; it does **not** regenerate `frontend/dist/`. You
-   must run `cd frontend && npm install && npm run build` after pulling,
-   then copy the *new* `dist/` output to wherever nginx serves it from
-   (per `CLAUDE.md`'s Deployment section: `/usr/share/nginx/html/kanji/`)
-   — copying the whole directory (overwriting old files), not merging.
-   The single most common cause of "I redeployed but nothing changed" is
-   this step being skipped or copying to the wrong path.
-2. **Verify the copy actually landed** before blaming the browser: `ls -la
-   /usr/share/nginx/html/kanji/assets/` on the server and check the
+   must run `cd frontend && npm install` after pulling, then the build
+   command for **that specific machine** — they are not interchangeable
+   (see `deploy/nginx/README.md`):
+   - Prod (`kanji.alteon.help`, dedicated VM): `npm run build:prod`, then
+     copy `dist/` to `/opt/kanji/frontend/dist`.
+   - Dev (`srv.alteon.help`, shared box): `npm run build:dev`, then copy
+     `dist/` to `/usr/share/nginx/html/kanji/`.
+
+   Copy the whole directory (overwriting old files), not merging. The
+   single most common cause of "I redeployed but nothing changed" is this
+   step being skipped or copying to the wrong path — and running the
+   *other* machine's build script is a second, sneakier variant of the
+   same mistake: the page loads but renders completely blank, because the
+   built `index.html` references asset paths (`/assets/...` vs.
+   `/kanji/assets/...`) that don't match where nginx actually serves them
+   on that machine. That exact bug took prod down on 2026-09-20 right
+   after the move off the shared box, before `build:dev`/`build:prod`
+   existed as separate scripts.
+2. **Verify the copy actually landed** before blaming the browser:
+   `ls -la /opt/kanji/frontend/dist/assets/` (prod) or
+   `ls -la /usr/share/nginx/html/kanji/assets/` (dev) and check the
    filenames/timestamps are from *just now*, not from an earlier deploy.
    Vite fingerprints each JS/CSS file's name with a content hash, so a
    real rebuild always produces different filenames — if the filenames
    in that directory match what a previous deploy already had, the build
-   either didn't run or didn't get copied.
+   either didn't run or didn't get copied. Also load the site itself and
+   view-source on `index.html`: its `<script src=...>`/`<link
+   rel="stylesheet" href=...>` paths should start with `/assets/` on prod
+   or `/kanji/assets/` on dev — the wrong prefix means the wrong build
+   script ran.
 3. **Then, and only then, suspect the browser.** A hard refresh
    (Ctrl+Shift+R / Cmd+Shift+R) or a private/incognito window rules out
    stale cached `index.html`/JS in one step. If the deployed files are

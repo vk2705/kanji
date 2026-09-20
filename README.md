@@ -146,7 +146,7 @@ Every read is visibility-aware: anonymous users see public rows; authenticated u
 
 ```bash
 cd backend && ./venv/bin/pytest -v
-cd frontend && npm run lint && npm run build
+cd frontend && npm run lint && npm run build:prod
 ```
 
 CI runs the isolated temporary-database API suite plus frontend lint/build. Local database and upload backups are created together by `backend/backup_db.py`; `backend/offsite_backup.py` copies new artifacts to an operator-configured encrypted `rclone` remote, and `backend/restore_backup.py` performs a staged, integrity-checked restore. See `DEPLOY_README.md` for the production procedure.
