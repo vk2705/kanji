@@ -2,7 +2,7 @@ prim-pipe:｜:pipe, walking stick, cane, line, walking cane, prim28.1
 prim-joint:冎:joint
 prim-jawbone:咼:jawbone:口,冂;口,冎
 prim-dollar-sign:弗:dollar sign:弓,｜
-prim-snare:丂:snare:一,勹
+prim-snare:丂:snare,slingshot,catapult:一,勹
 kangxi3:丶:dot,tick,drop
 kangxi9:亻:person
 kangxi10:儿:human legs,legs,teenager
@@ -1382,16 +1382,16 @@ rtk1328:弟:younger brother:｜,ノ,弓,丷
 rtk1329:巧:adroit:工,丂
 rtk1330:号:nickname:口,丂
 rtk1331:朽:decay:木,丂
-rtk1332:誇:boast:言,大,二,勹
-rtk1333:顎:jaw:口,頁,二,勹
+rtk1332:誇:boast:言,大,一,丂
+rtk1333:顎:jaw:口,頁,一,丂
 rtk1334:汚:dirty:水,丂
-rtk1335:与:bestow:勹,一,卜
+rtk1335:与:bestow:丂,一
 rtk1336:写:copy:与,冖
 rtk1337:身:somebody:
 rtk1338:射:shoot:身,寸
 rtk1339:謝:apologize:言,射
 rtk1340:老:old man:匕
-rtk1341:考:consider:老,勹
+rtk1341:考:consider:老,丂
 rtk1342:孝:filial piety:子,老
 rtk1343:教:teach:孝,攵
 rtk1344:拷:torture:扌,考

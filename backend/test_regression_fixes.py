@@ -198,6 +198,27 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"prim-snare", "rtk207"}},
     "rtk1334": {"character": "汚", "keyword": "dirty",
                "expected_part_ids": {"prim-snare", "rtk137"}},
+    # 2026-09-20: Heisig renames 丂("snare") to "slingshot"/"catapult" starting
+    # here (frame 1335) and keeps using it under the new name through at least
+    # frame 1344 -- prim-snare gained both as extra aliases. 誇/顎 above already
+    # had the same 丂 shape (via 亏=⿱一丂) misread as 勹/二; render + cjkvi-ids
+    # confirm 与's own "slingshot;catapult;one" components are 丂+一 too (was
+    # 勹,一,卜, none of which match the CSV's stated components at all), and
+    # 考's "old man;slingshot" is 老("old man", the DB's standing stand-in for
+    # 耂 -- see rtk1345/者) + 丂 (was 老,勹). data_from_pdf.txt's own 4th-ed
+    # extraction independently agrees: "slingshot,one" for 与, "old man,
+    # slingshot" for 考. 写(与,冖) and 拷(扌,考) already reference 与/考
+    # literally so need no edit -- they pick up the family at depth>=2.
+    # 薦/襲 also list "slingshot;catapult" in their CSV components but their
+    # current data.txt overrides (広,灬,艹 and 衣,龍) don't obviously route
+    # through 丂 and the glyphs are too complex to place it confidently by
+    # render alone -- left open, see docs/2026-08-search-quality-audit.md.
+    "rtk1332": {"character": "誇", "keyword": "boast",
+               "expected_part_ids": {"rtk357", "rtk112", "rtk1", "prim-snare"}},
+    "rtk1335": {"character": "与", "keyword": "bestow",
+               "expected_part_ids": {"prim-snare", "rtk1"}},
+    "rtk1341": {"character": "考", "keyword": "consider",
+               "expected_part_ids": {"rtk1340", "prim-snare"}},
     "rtk1209": {"character": "祈", "keyword": "pray",
                 "expected_part_ids": {"rtk1206", "kangxi113"}},
     # "animal legs" has now been re-homed twice, and this is the end of it. It began
@@ -2642,8 +2663,12 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"rtk112", "rtk64", "rtk987"}},
     "rtk1086": {"character": "傾", "keyword": "lean",
                "expected_part_ids": {"kangxi9", "rtk479"}},  # 亻 + 頃 (person radical added 2026-09-05)
+    # Was 口,頁,二,勹 -- the 亏("one"+"snare") shape inside 咢 was misread as
+    # 勹("bound up") and a doubled 一("one"); render + cjkvi (亏=⿱一丂) confirm
+    # it's 一+丂, part of the same "slingshot/catapult" = 丂("snare") family
+    # fixed dataset-wide this chunk (see 与/考/誇/prim-snare below).
     "rtk1333": {"character": "顎", "keyword": "chin",
-               "expected_part_ids": {"kangxi20", "rtk11", "rtk2", "rtk64"}},
+               "expected_part_ids": {"prim-snare", "rtk11", "rtk1", "rtk64"}},
     "rtk1358": {"character": "頬", "keyword": "cheek",
                "expected_part_ids": {"prim-scissors", "rtk64"}},
     "rtk1373": {"character": "促", "keyword": "stimulate",

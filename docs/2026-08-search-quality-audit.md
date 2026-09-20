@@ -12373,3 +12373,139 @@ new `kanji` row (`prim-schoolhouse`) and its one alias/keyword
 ("schoolhouse"), one changed alias row (`kangxi14` gaining "crown"), and
 seven changed `parts` rows (`rtk346`, `rtk347`, `rtk348`, `rtk557`,
 `rtk924`, `rtk1111`, `rtk2916`) from this chunk.
+
+## Chunk: `catapult, slingshot` (`--near 0.8`) and the `丂`/`亏` wrong-part bug it led to (2026-09-20)
+
+Picked up the queued `catapult, slingshot` group (6 CSV hosts sharing "一" at
+0.83): `与`(rtk1335, "bestow"), `写`(rtk1336, "copy"), `考`(rtk1341,
+"consider"), `拷`(rtk1344, "torture"), `薦`(rtk2156, "recommend"), `襲`
+(rtk2181, "attack").
+
+**Identifying the real primitive.** `考`'s own CSV components are "old man;
+slingshot; catapult" — two primitives. Render-confirmed (`render_glyphs.py`
+考 丂 勹 老 耂) and cross-checked against `cjkvi-ids` (`考 = ⿸耂丂`): the
+bottom-right hook in 考 is exactly `丂`, not `勹` — the two are easy to
+confuse from description alone (both small hooked shapes) but render
+completely differently (丂: one stroke + a simple hook; 勹: a wide,
+continuously-curving wrap). `丂` already had a row — `prim-snare`, aliased
+only "snare" — but it was an orphan: nothing in `data.txt` actually
+referenced it, even though 4 CSV frames (巧/号/朽/汚, `rtk1329`/`1330`/
+`1331`/`1334`) already correctly use the literal character `丂` in their
+overrides and had regression pins from an earlier chunk (`test_regression_
+fixes.py`'s own comment there already flags "the whole 丂('snare') family").
+`data_from_pdf.txt` (the untouched 4th-edition extraction, always superseded
+by `data.txt` but still readable as ground truth from the book) independently
+confirms the renaming: `rtk1335:与:bestow:slingshot,one` and `rtk1341:考:
+consider:old man,slingshot` — Heisig switches from calling this shape "snare"
+to "slingshot"/"catapult" right at frame 1335, without changing the glyph.
+Added `slingshot` and `catapult` as aliases on `prim-snare` alongside the
+existing `snare`.
+
+**The hosts, fixed to route through `丂`:**
+- `rtk1335` (与, own CSV components "slingshot; catapult; one"): was
+  `勹,一,卜` — none of `勹`("bound up"), `卜`("divining rod") match anything
+  in the CSV list at all; this looks like a stale guess predating the audit.
+  Render shows 与's lower stroke is a hooked shape consistent with `丂`, and
+  the PDF's own `slingshot,one` two-part breakdown corroborates it exactly.
+  Changed to `丂,一`.
+- `rtk1341` (考, "old man; slingshot"): was `老,勹` — `老`("old man") is the
+  DB's standing convention for the abbreviated 耂 radical (same pattern as
+  `rtk1345`/者's `日,老`), so that half was already right; only `勹`→`丂`
+  needed fixing. Changed to `老,丂`.
+- `rtk1336` (写, "crown; bestow") and `rtk1344` (拷, "old man; slingshot")
+  already reference `与`/`考` literally (`与,冖` and `扌,考`) — no edit
+  needed, they pick up "slingshot"/"catapult"/"snare" at `depth=2` once `与`
+  and `考` themselves route through `丂`. Confirmed directly:
+  `search_by_parts(['slingshot'], depth=2)` returns both, `depth=1` doesn't.
+
+**The `誇`/`顎` bug found along the way.** Skimmed the CSV component text for
+every other frame citing "snare" (the pre-existing `丂` name, still in use in
+parallel with "slingshot"/"catapult" elsewhere in the book) the way the
+`crown` finding two chunks ago suggested, and `audit_csv_regressions.py`
+confirmed it: `rtk1332`(誇, "boast") and `rtk1333`(顎, "chin"/"jaw") both cite
+"snare" in their CSV baseline but had it listed as `dropped`. Both go through
+`亏`(U+4E8F, simplified 于/"mound"): `誇 = 言+夸`, `夸 = ⿱大亏` (cjkvi), and
+`顎 = 咢+頁`, `咢 = ⿱吅亏` (cjkvi) — and `亏` itself is `⿱一丂` per cjkvi,
+i.e. "one" stacked on "snare", not "two" stacked on "bound up". Both hosts'
+overrides had `二,勹` where they needed `一,丂` — a double error (wrong count
+*and* wrong shape) that happened to read as plausible without a render.
+Render-confirmed (`亏` beside `丂`/`一`/`勹`/`二`) before touching them.
+Changed `rtk1332`: `言,大,二,勹` → `言,大,一,丂`. Changed `rtk1333`: `口,頁,
+二,勹` → `口,頁,一,丂`.
+
+**Left open, deliberately not touched.** `薦`(rtk2156) and `襲`(rtk2181) also
+list "slingshot; catapult" in their (fully-flattened) CSV components, and
+`data_from_pdf.txt` even has a `与`/`考`-style corroborating line for 薦
+(`flowers,deer,slingshot`) — but `data.txt`'s current override for 薦
+(`广,灬,艹`) doesn't go through `廌`("deer") at all, taking a different,
+more-flattened route that doesn't obviously place `丂` anywhere, and 襲's
+`龍`("dragon") is too visually dense to place a 2-stroke primitive inside by
+render alone at any confident zoom level. Forcing either to route through
+`丂` without being able to actually see it there would repeat exactly the
+"reasoned from text, not the render" mistake this project's standing brief
+exists to prevent. Left as-is; a future chunk with more time to zoom into
+`廌`/`龍` stroke-by-stroke (or a working `cjkvi-ids` path through `厂`-style
+partial IDS matches) could revisit.
+
+### Change
+
+```
+prim-snare:丂:snare:一,勹   →   prim-snare:丂:snare,slingshot,catapult:一,勹
+rtk1332:誇:boast:言,大,二,勹   →   rtk1332:誇:boast:言,大,一,丂
+rtk1333:顎:jaw:口,頁,二,勹   →   rtk1333:顎:jaw:口,頁,一,丂
+rtk1335:与:bestow:勹,一,卜   →   rtk1335:与:bestow:丂,一
+rtk1341:考:consider:老,勹   →   rtk1341:考:consider:老,丂
+```
+
+One pre-existing pin named the old wrong parts directly (`rtk1333`, the only
+one of the five with a prior pin at all) and broke on rebuild as expected;
+corrected in place with a comment. Added three new pins (`rtk1332`,
+`rtk1335`, `rtk1341`) to lock in the fix, following the same family's
+existing `rtk1329`/`1330`/`1331`/`1334` pins.
+
+### Verified
+
+Rebuilt `kanji.db` clean from source: unchanged 3000 CSV-sourced kanji rows,
+unchanged 3091 parts overrides (all edits this chunk were in-place changes to
+existing rows, no new rows added). `test_regression_fixes.py`: 1324 checks
+(1321 + 3 new pins), only the 4 known hanzi-scope non-issues, no other pin
+breakage after correcting `rtk1333`. 66 pytest. `audit_overflatten.py` 0,
+`audit_self_reference.py` 0, `audit_radicals.py` 0/0, `audit_primary_choice.py`
+1 (unchanged `rtk265` deviation, untouched by this chunk).
+`audit_phantom_parts.py --in-csv-range`: **118/85 → 116/84** — removing the
+phantom `勹` from `rtk1332`/`rtk1333` cleared two occurrences on one kanji
+(顎 had listed two: the wrong-count `二` was a real resolvable term so wasn't
+itself phantom, but `勹` was).
+
+`audit_csv_regressions.py`: `rtk1332`/`rtk1333` no longer show "snare" in
+their `dropped:` line (only their own pre-existing, unrelated gaps — "mouth"
+for 誇, "head"/"drop"/"clam"/"oyster" for 顎, all from `頁`'s own deeper CSV
+expansion, untouched by this chunk). Direct queries: `search_by_parts(
+['slingshot'|'catapult'|'snare'], depth=1)` all return the identical 10-kanji
+set (`prim-snare`, `rtk1329`, `rtk1330`, `rtk1331`, `rtk1332`, `rtk1333`,
+`rtk1334`, `rtk1335`, `rtk1341`, `rtk2051`); `depth=2` adds `rtk1336`(写) and
+`rtk1344`(拷) as expected. `suggest_heisig_aliases.py --near 0.8 --all`:
+`catapult, slingshot` group gone (25 → 24 unresolved groups). Frontend
+`npm install`, `npm run lint`, `npm run build` all clean.
+
+**Next**: `sunglasses` (5 hosts, e.g. 傑年瞬舞隣) and `ballerina, dancing
+legs` (4 hosts, e.g. 傑瞬舞隣 — a strict subset of `sunglasses`'s host set)
+share `舛`/`㐄`/`夕`/`𠂊` at 0.80–1.00 and are the next-ranked `--near 0.8`
+groups, followed by `maestro without baton` (5 hosts, `官`/`宀` at 0.80) and
+`diced` (4 hosts, `七`/`乙`/`ノ` at 0.75–1.00). `chop-seal, hanko` (14 hosts)
+and `hairpin, safety-pin` (12 hosts) remain the top two by raw host count but
+are still the same weak single-common-primitive ("一"/"ノ") signal shape
+flagged as unpromising in multiple prior chunks. `薦`(rtk2156)/`襲`(rtk2181)
+are now the standing open item for whoever next has time to trace `丂`
+through `廌`/`龍` render-by-stroke rather than guessing from CSV text alone.
+`粛`'s top/bottom structure, `猟`'s `用`-vs-`𠂡` font-coverage question, and
+`逓`'s buried `乕`-nested overlay (all open since the twenty-fourth/twenty-
+fifth chunks) are all still unresolved. `stick`'s collision with `rtk60`'s
+unrelated "post a bill" alias is still an open minor oddity.
+`audit_phantom_parts.py`'s 116/84 pile (led by bare stroke primitives ノ/一/
+｜ with no alternative host to promote from) remains the larger standing item
+if the `--near` queue runs dry. `sync_system_data.py` against the live server
+is still not something this session can do — a deployer running it will see
+one changed alias row (`prim-snare` gaining "slingshot"/"catapult") and four
+changed `parts` rows (`rtk1332`, `rtk1333`, `rtk1335`, `rtk1341`) from this
+chunk.
