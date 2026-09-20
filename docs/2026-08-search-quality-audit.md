@@ -13436,3 +13436,50 @@ them now resolve to the primitive Heisig meant rather than to a later kanji that
 shares the word.
 
 **Next** — the five above, one glyph at a time.
+
+## 2026-09-20 — chunk 24: four of the five, and five missing pictures
+
+**wall → 厶.** The reason it looked wrong in chunk 23 is that 至's row scrambles
+the order ("wall; one; ceiling; elbow; soil"). But 転 芸 雲 曇 伝 魂 all read
+"rising cloud; two; elbow; wall" — **"elbow; wall" adjacent six times**, which
+is Heisig emitting 厶's whole name set, and 厶 already carried "elbow". 17 hosts.
+The lesson is the one this log keeps relearning: a single anomalous row is not
+evidence against six consistent ones.
+
+**eel → 电** (U+7535), the 日-with-a-hook that 電 竜 奄 all end in (cjkvi `⿻日乚`,
+with 電 = `⿱雨⿻日乚` and 竜 = `⿱立⿻日乚`). This file had been spelling it 乙 + 日
+— the strokes rather than the shape. Yes, 电 is also the simplified Chinese form
+of 電 and has its own `zh-Hans` row; a glyph shared across scripts is the normal
+arrangement here, ~2,628 of them, not a collision.
+
+**banner → 㫃** (U+3AC3), 方 with 𠂉 over its right shoulder. cjkvi never writes
+the unit, spelling all six hosts `⿰方⿱𠂉X`, but Heisig names it, and 旅's row
+shows the nesting exactly: "banner; direction; compass; direction; reclining;
+lying down; …" — the name, then 方's names, then 𠂉's. 施 旋 遊 旅 族 旗 all take
+it in place of the loose 方 (and, in 旋's case, of nothing at all — it had lost
+the 𠂉 entirely).
+
+**deluge → 巡**, the first word of its own row. 港's row also opens with
+"deluge" and 港 contains no 巡; that row is simply wrong, like 寡's dropped 頁
+(chunk 19) and 至's scrambled 厶 above.
+
+**"question mark" is still unplaced and stays that way.** 呼 is "mouth; even;
+water-lily; lily pad; question mark" and 率 is "mysterious; question mark; top
+hat; cocoon; …". 乎 and 率 share no shape, and in 率 the name sits *between* 玄
+and 玄's own parts, which fits no pattern in the book. One name out of 1,156.
+
+**Five primitives had no picture.** Registering 㫃 (Ext A) sent
+`make_primitive_images.py` looking, and it turned out `prim-flagpole` (𠃜, Ext B,
+chunk 18) and `prim-mend-barred` (𤴓, Ext B, chunk 12) had been registered
+without ever running it — plus `prim-receipt` and `prim-scrapbook`, older rows
+in the same state. All five rendered and eyeballed on a contact sheet, as that
+script demands: real glyphs, no tofu. **Registering a primitive above the BMP
+means running `make_primitive_images.py` in the same chunk**; that was missed
+twice today.
+
+Verified: 1324 checks with only the 4 known hanzi-scope non-issues, 66 pytest,
+over-flattening 0, dead tokens 0, self-references 0, primary-choice 0, phantom
+parts unchanged at 40, frontend lint + build clean. No pin moved.
+**Anachronistic names 5→1 — 44→1 across chunks 21–24.**
+
+**Next** — back to the phantom list, and the 9 remaining unresolved name groups.

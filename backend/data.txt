@@ -353,7 +353,7 @@ rtk299:造:create:告,辶
 rtk300:迫:urge:辶,白
 rtk301:逃:escape:辶,兆
 rtk302:辺:environs:辶,刀
-rtk303:巡:patrol:辶,巛
+rtk303:巡:patrol,deluge:辶,巛
 rtk304:車:car,vehicle:
 rtk305:連:take along:辶,車
 rtk306:軌:rut:車,九
@@ -624,8 +624,8 @@ rtk570:胞:placenta:月,包
 rtk571:砲:cannon:石,包
 rtk572:泡:bubbles:水,包
 rtk573:亀:tortoise:日,勹,乙
-rtk574:電:electricity:乙,日,雨
-rtk575:竜:dragon:乙,日,立
+rtk574:電:electricity:雨,电
+rtk575:竜:dragon:立,电
 rtk576:滝:waterfall:水,竜
 rtk577:豚:pork:月,豕
 rtk578:逐:pursue:辶,豕
@@ -1174,10 +1174,10 @@ rtk1120:弊:abuse:廾,敝
 rtk1121:喚:yell:四,大,冂,勹
 rtk1122:換:interchange:扌,四,大,冂,勹
 rtk1123:融:dissolve:虫,鬲
-rtk1124:施:give:ノ,方,一,也
-rtk1125:旋:rotation:疋,方
-rtk1126:遊:play:辶,子,方
-rtk1127:旅:trip:ノ,方
+rtk1124:施:give:㫃,也
+rtk1125:旋:rotation:㫃,疋
+rtk1126:遊:play:㫃,子,辶
+rtk1127:旅:trip:㫃
 rtk1128:勿:not,piglet’s tail,knot:ノ,勹
 rtk1129:物:thing:牛,勿
 rtk1130:易:easy:日,勿
@@ -1357,7 +1357,7 @@ rtk1303:否:negate:不,口
 rtk1304:杯:counter for cupfuls:木,不
 rtk1305:矢:dart:ノ,天;大,𠂉
 rtk1306:矯:rectify:喬,矢
-rtk1307:族:tribe:方,矢;方,矢,𠂉
+rtk1307:族:tribe:㫃,矢
 rtk1308:知:know:口,矢
 rtk1309:智:wisdom:知,日
 rtk1310:挨:approach:矢,厶,扌
@@ -1959,7 +1959,7 @@ rtk1897:謀:conspire:某,言
 rtk1898:媒:mediator:某,女
 rtk1899:欺:deceit:其,欠
 rtk1900:棋:chess piece:其,木
-rtk1901:旗:flag:其,方,𠂉
+rtk1901:旗:flag:㫃,其
 rtk1902:期:period:其,月
 rtk1903:碁:go:其,石
 rtk1904:基:fundamentals:其,土
@@ -2270,7 +2270,7 @@ rtk2208:憐:pity:舛,米,state of mind,夕
 rtk2209:燐:phosphorus:火,舛,米,夕
 rtk2210:麟:chinese unicorn:鹿,米,舛
 rtk2211:鱗:scales (fish):魚,舛,米,夕
-rtk2212:奄:cover:乙,大,日
+rtk2212:奄:cover:大,电
 rtk2213:庵:hermitage:田,广,大;奄,广
 rtk2214:掩:cover:奄,扌
 rtk2215:悛:amend:夋,state of mind
@@ -3119,7 +3119,7 @@ prim-mugwort:艹:mugwort,flowers,cabbage
 prim-thirty:丗:thirty,buckle,apron
 kangxi52:幺:tiny,short thread
 kangxi40:宀:roof,primitive_roof,mansion,house
-kangxi28:厶:cocoon,elbow
+kangxi28:厶:cocoon,elbow,wall
 
 # Remaining Finding-1 single-glyph terms (session 4, 2026-08-14). Two groups:
 # - rad1043-1046: KRADFILE JIS-substitute glyphs, same mechanism as the 5 proxies
@@ -4013,3 +4013,29 @@ prim-resin:朮:resin,pole:木,丶
 # "wall" (転/芸/雲, emitted *after* 云's parts rather than before them, which
 # does not fit the pattern the others follow), "question mark" (呼/率) and
 # "deluge" (巡/港, where two unrelated kanji each seem to self-name it).
+
+# --- 2026-09-20: four of the five names chunk 23 left standing, now placed.
+# wall -> 厶. The reason it looked wrong is that 至's row scrambles the order
+# ("wall; one; ceiling; elbow; soil"), but 転 芸 雲 曇 伝 魂 all read
+# "rising cloud; two; elbow; wall" -- "elbow; wall" adjacent six times, which is
+# Heisig emitting 厶's whole name set, and 厶 already carried "elbow".
+# eel -> 电 (U+7535), the 日-with-a-hook that 電 竜 奄 all end in (cjkvi ⿻日乚,
+# and 電 = ⿱雨⿻日乚, 竜 = ⿱立⿻日乚). This file had been spelling it 乙 + 日,
+# which is the strokes rather than the shape. Yes, 电 is also the simplified
+# Chinese form of 電 and has its own zh-Hans row -- a glyph shared across scripts
+# is the normal arrangement here, ~2,628 of them, not a collision.
+# banner -> 㫃 (U+3AC3), 方 with 𠂉 over its right shoulder. cjkvi never writes
+# the unit, spelling all six hosts ⿰方⿱𠂉X instead, but Heisig names it: 旅's
+# row is "banner; direction; compass; direction; reclining; lying down; ..."
+# -- the name, then 方's names, then 𠂉's. 施 旋 遊 旅 族 旗 all take it.
+# 㫃 is CJK Ext A, so make_primitive_images.py picks it up automatically.
+# deluge -> 巡, the first word of its own row, Heisig's primitive name for a
+# kanji whose keyword is "patrol". 港's row also opens with "deluge" and 港
+# contains no 巡; that row is simply wrong, the same way 寡's dropped a 頁 and
+# 至's scrambled 厶 above.
+# Still unplaced: "question mark" (呼 = "mouth; even; water-lily; lily pad;
+# question mark", 率 = "mysterious; question mark; top hat; cocoon; ..."). 乎
+# and 率 share no shape, and in 率 the name sits between 玄 and 玄's own parts,
+# which fits nothing. Left alone.
+prim-eel:电:eel:日,乙
+prim-banner:㫃:banner:方,𠂉
