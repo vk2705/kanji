@@ -315,9 +315,9 @@ rtk261:特:special:牛,寺
 rtk262:告:revelation:牛,口
 rtk263:先:before:ノ,土,儿
 rtk264:洗:wash:先,水
-rtk265:介:jammed in:八,个;ノ,人,｜
+rtk265:介:jammed in:𠆢,ノ,｜;ノ,人,｜
 rtk266:界:world:田,介
-rtk267:茶:tea:个,艹,木
+rtk267:茶:tea:𠆢,艹,木
 rtk268:脊:stature:丷,人,八,月
 rtk269:合:fit:口,亼
 rtk270:塔:pagoda:合,土,艹
@@ -331,13 +331,13 @@ rtk277:狂:lunatic:犭,王
 rtk278:旺:flourishing:王,日
 rtk279:皇:emperor:王,白
 rtk280:呈:display:王,口
-rtk281:全:whole:王,八,个;人,王
+rtk281:全:whole:王,八,𠆢;人,王
 rtk282:栓:plug:木,全
 rtk283:理:logic:王,里
 rtk284:主:lord,candlestick:王,丶;亠,土
 rtk285:注:pour:主,水
 rtk286:柱:pillar:木,主
-rtk287:金:gold,metal:王,八,个,丷;丷,人,王
+rtk287:金:gold,metal:王,八,𠆢,丷;丷,人,王
 rtk288:銑:pig iron:先,金
 rtk289:鉢:bowl:本,金
 rtk290:銅:copper:金,同
@@ -358,7 +358,7 @@ rtk304:車:car:
 rtk305:連:take along:辶,車
 rtk306:軌:rut:車,九
 rtk307:輸:transport:俞,車
-rtk308:喩:metaphor:月,口,个,一
+rtk308:喩:metaphor:月,口,𠆢,一
 rtk309:前:in front:丷,月,刀
 rtk310:煎:broil:前,灬
 rtk311:各:each:口,夂
@@ -451,7 +451,7 @@ rtk397:歩:walk:少,止
 rtk398:渉:ford:歩,水
 rtk399:頻:repeatedly:歩,頁
 rtk400:肯:agreement:月,止
-rtk401:企:undertake:止,个;人,止
+rtk401:企:undertake:止,𠆢;人,止
 rtk402:歴:curriculum:厂,林,止
 rtk403:武:warrior:一,弋,止
 rtk404:賦:levy:貝,武
@@ -725,7 +725,7 @@ rtk671:慌:disconcerted:荒,忄
 rtk672:悔:repent:忄,毎
 rtk673:憎:hate:曽,忄
 rtk674:慣:accustomed:state of mind,貫
-rtk675:愉:pleasure:月,state of mind,个,一;俞,忄
+rtk675:愉:pleasure:月,state of mind,𠆢,一;俞,忄
 rtk676:惰:lazy:左,月,忄
 rtk677:慎:humility:真,忄
 rtk678:憾:remorse:感,忄
@@ -901,7 +901,7 @@ rtk847:公:public,elbows:八,厶
 rtk848:松:pine tree:公,木
 rtk849:翁:venerable old man:羽,公
 rtk850:訟:sue:言,公
-rtk851:谷:valley:口,八,个
+rtk851:谷:valley:口,八,𠆢
 rtk852:浴:bathe:水,谷
 rtk853:容:contain:宀,谷
 rtk854:溶:melt:容,水
@@ -1051,8 +1051,8 @@ rtk997:奥:heart:大,米,冂;ノ,冂,大,米
 rtk998:数:number:女,米,攵
 rtk999:楼:watchtower:女,米,木
 rtk1000:類:sort:大,米,頁
-rtk1001:漆:lacquer:水,木,个,氺
-rtk1002:膝:knee:月,木,个,氺
+rtk1001:漆:lacquer:水,木,𠆢,氺
+rtk1002:膝:knee:月,木,𠆢,氺
 rtk1003:様:esq.:木,羊,氺
 rtk1004:求:request:一,氺,丶
 rtk1005:球:ball:王,求
@@ -1153,7 +1153,7 @@ rtk1099:腐:rot:府,肉
 rtk1100:座:squat:｜,庄,人;坐,广
 rtk1101:挫:crush:坐,扌
 rtk1102:卒:graduate:十,人,亠
-rtk1103:傘:umbrella:十,人,个
+rtk1103:傘:umbrella:十,人,𠆢
 rtk1104:匁:monme:乂,勹
 rtk1105:以:by means of:｜,人,丶
 rtk1106:似:becoming:亻,以
@@ -1233,7 +1233,7 @@ rtk1179:禁:prohibition:林,示
 rtk1180:襟:collar:禁,衤
 rtk1181:宗:religion:示,宀
 rtk1182:崇:adore:山,宗
-rtk1183:祭:ritual:示,个,癶
+rtk1183:祭:ritual:示,𠆢,癶
 rtk1184:察:guess:宀,祭
 rtk1185:擦:grate:察,扌
 rtk1186:由:wherefore:田,｜
@@ -1763,7 +1763,7 @@ rtk1709:乗:ride:｜,ノ,一,禾,八
 rtk1710:剰:surplus:乗,刀
 rtk1711:今:now,clock:亼,一
 rtk1712:含:contain:口,今
-rtk1713:貪:covet:貝,个,一;今,貝
+rtk1713:貪:covet:貝,𠆢,一;今,貝
 rtk1714:吟:versify:口,今
 rtk1715:念:wish:今,心
 rtk1716:捻:twirl:念,扌
@@ -1809,7 +1809,7 @@ rtk1755:潤:wet:王,水,門
 rtk1756:欄:column:木,門,東
 rtk1757:闘:fight:門,豆,寸
 rtk1758:倉:godown:一,亼,口,尸
-rtk1759:創:genesis:倉,刀;口,个,一
+rtk1759:創:genesis:倉,刀;口,𠆢,一
 rtk1760:非:un-,jail cell,prison bars:
 rtk1761:俳:haiku:亻,非
 rtk1762:排:repudiate:非,扌
@@ -1833,10 +1833,10 @@ rtk1779:刊:publish:刀,干;干
 rtk1780:汗:sweat:干,水
 rtk1781:軒:flats:干,車
 rtk1782:岸:beach:干,山,厂
-rtk1783:幹:tree trunk:干,个,𠦝
+rtk1783:幹:tree trunk:干,𠆢,𠦝
 rtk1784:芋:taro:一,艹,干
 rtk1785:宇:eaves:干,亅,宀
-rtk1786:余:too much,scales:一,八,个,亅,示
+rtk1786:余:too much,scales:一,八,𠆢,亅,示
 rtk1787:除:exclude:余,阝
 rtk1788:徐:gradually:余,彳
 rtk1789:叙:confer:余,又
@@ -1909,8 +1909,8 @@ rtk1855:膨:swell:月,鼓,彡
 rtk1856:参:nonplussed:厶,大,彡
 rtk1857:惨:wretched:参,忄
 rtk1858:修:discipline:亻,｜,彡,攵
-rtk1859:珍:rare:王,个,彡
-rtk1860:診:checkup:言,个,彡
+rtk1859:珍:rare:王,𠆢,彡
+rtk1860:診:checkup:言,𠆢,彡
 rtk1861:文:sentence,plaid,kilt,billy connolly:;乂,亠
 rtk1862:対:vis-a-vis:寸,文
 rtk1863:紋:family crest:糸,文
@@ -2264,7 +2264,7 @@ rtk2202:柴:brush:木,此
 rtk2203:些:a little bit:二,此
 rtk2204:砦:fort:石,此
 rtk2205:髭:beard:止,長,匕,彡,髟;此,髟
-rtk2206:禽:bird:个,亠,冂,凵,厶,禹,丶,ノ
+rtk2206:禽:bird:𠆢,亠,冂,凵,厶,禹,丶,ノ
 rtk2207:檎:apple:木,禽
 rtk2208:憐:pity:舛,米,state of mind,夕
 rtk2209:燐:phosphorus:火,舛,米,夕
@@ -2434,12 +2434,12 @@ rtk2373:抉:gouge:人,大,二,扌,ユ;夬,扌
 rtk2374:怯:cowardice:去,state of mind
 rtk2375:惟:consider:state of mind,隹
 rtk2376:惚:fall in love with:state of mind,忽
-rtk2377:怜:wise:state of mind,个,卩,一;令,忄
+rtk2377:怜:wise:state of mind,𠆢,卩,一;令,忄
 rtk2378:惇:sincere:享,state of mind
-rtk2379:恰:just as:口,state of mind,个,一;合,忄
+rtk2379:恰:just as:口,state of mind,𠆢,一;合,忄
 rtk2380:恢:wide:state of mind,灰
 rtk2381:悌:serving our elders:弟,state of mind
-rtk2382:澪:water route:雨,水,个,卩,一;水,零
+rtk2382:澪:water route:雨,水,𠆢,卩,一;水,零
 rtk2383:洸:sparkling water:水,光
 rtk2384:滉:deep and broad (water):水,晃
 rtk2385:漱:gargle:水,束,欠
@@ -2514,7 +2514,7 @@ rtk2453:蕉:banana:焦,艹
 rtk2454:蕎:buckwheat:喬,艹
 rtk2455:蕗:butterbur:艹,路
 rtk2456:茄:eggplant:加,艹
-rtk2457:蔭:shade:二,个,厶,艹,阝,一;艹,陰
+rtk2457:蔭:shade:二,𠆢,厶,艹,阝,一;艹,陰
 rtk2458:蓬:sagebrush:艹,逢
 rtk2459:芥:mustard:艹,介
 rtk2460:萌:show symptoms of:明,艹
@@ -2522,7 +2522,7 @@ rtk2461:葡:wild grape:十,用,勹,艹,丶
 rtk2462:萄:grape vine:缶,勹,艹
 rtk2463:蘇:be resuscitated:禾,魚,艹
 rtk2464:蕃:grow luxuriously:番,艹
-rtk2465:苓:plant:个,卩,艹,一;令,艹
+rtk2465:苓:plant:𠆢,卩,艹,一;令,艹
 rtk2466:菰:reed used for matting:孤,艹
 rtk2467:蒙:ignorance:冖,艹,豕
 rtk2468:茅:miscanthus reed:矛,艹
@@ -2536,7 +2536,7 @@ rtk2475:茸:mushroom:耳,艹
 rtk2476:蒔:sow (seeds):時,艹
 rtk2477:芹:parsley:斤,艹
 rtk2478:苫:rush matting:占,艹
-rtk2479:蒼:blue:ノ,口,个,艹,一;倉,艹
+rtk2479:蒼:blue:ノ,口,𠆢,艹,一;倉,艹
 rtk2480:藁:straw:艹,高,木
 rtk2481:蕪:turnip:艹,無
 rtk2482:藷:potato:艹,諸
@@ -2568,7 +2568,7 @@ rtk2507:惹:attract:心,若
 rtk2508:悉:all:心,釆
 rtk2509:忽:in a moment:心,勿
 rtk2510:惣:all:心,物
-rtk2511:愈:be superior:月,心,个,一;俞,心
+rtk2511:愈:be superior:月,心,𠆢,一;俞,心
 rtk2512:恕:excuse:如,心
 rtk2513:昴:the pleiades:卯,日
 rtk2514:晋:advance:一,日
@@ -2633,7 +2633,7 @@ rtk2572:棉:cotton:帛,木
 rtk2573:楯:shield:木,盾
 rtk2574:榎:lotus tree:木,夏
 rtk2575:樺:birch:木,華
-rtk2576:槍:spear:口,木,个,一;倉,木
+rtk2576:槍:spear:口,木,𠆢,一;倉,木
 rtk2577:柘:wild mulberry:石,木
 rtk2578:梱:pack:困,木
 rtk2579:枇:loquat:比,木
@@ -2676,12 +2676,12 @@ rtk2615:瑚:ancestral offering receptacle:王,胡
 rtk2616:瑞:congratulations:王,山,而
 rtk2617:玖:beautiful black jewel:久,王
 rtk2618:瑛:sparkle of jewelry:ノ,王,艹,大,冖;王,英
-rtk2619:玲:sound of jewels:王,个,卩,一;令,王
+rtk2619:玲:sound of jewels:王,𠆢,卩,一;令,王
 rtk2620:畢:the end:｜,一,田
 rtk2621:畦:rice paddy ridge:圭,田
 rtk2622:痒:itchy:羊,疔;疒,羊
 rtk2623:痰:sputum:火,疔;炎,疒
-rtk2624:疹:measles:个,彡,疔
+rtk2624:疹:measles:𠆢,彡,疔
 rtk2625:痔:piles:寸,土,疔;寺,疒
 rtk2626:癌:cancer:山,疔,品
 rtk2627:痺:palsy:十,田,疔;卑,疒
@@ -2724,8 +2724,8 @@ rtk2664:颯:sudden:立,風
 rtk2665:站:stop:占,立
 rtk2666:靖:peaceful:立,青
 rtk2667:妾:concubine:女,立
-rtk2668:衿:neck:初,个,一;今,衣
-rtk2669:袷:lined (kimono):口,初,个,一;合,衣
+rtk2668:衿:neck:初,𠆢,一;今,衣
+rtk2669:袷:lined (kimono):口,初,𠆢,一;合,衣
 rtk2670:袴:men's formal divided skirt:初,大,二,勹
 rtk2671:襖:opaque sliding door:初,大,米,冂,釆;奥,衣
 rtk2672:笙:a reed instrument:生,竹
@@ -2754,7 +2754,7 @@ rtk2694:糠:rice bran:康,米
 rtk2695:糞:shit:異,米
 rtk2696:粟:millet:西,米
 rtk2697:繋:tie:糸,車,殳,几,又
-rtk2698:綸:thread:糸,个,冊;侖,糸
+rtk2698:綸:thread:糸,𠆢,冊;侖,糸
 rtk2699:絨:wool cloth:ノ,一,糸,戈
 rtk2700:絆:bonds:糸,半
 rtk2701:緋:scarlet:糸,非
@@ -2790,7 +2790,7 @@ rtk2730:螺:small  edible  helical fresh-water mollusk:累,虫
 rtk2731:蝉:cicada:単,虫
 rtk2732:蛙:frog:圭,虫
 rtk2733:蛾:moth:我,虫
-rtk2734:蛤:clam:口,虫,个,一;合,虫
+rtk2734:蛤:clam:口,虫,𠆢,一;合,虫
 rtk2735:蛭:leech:至,虫
 rtk2736:蛎:oyster:虫,厂
 rtk2737:罫:ruled line:罒,土,卜
@@ -2808,7 +2808,7 @@ rtk2748:訊:request:ノ,言,几
 rtk2749:訣:separation:言,人,大,二,ユ;夬,言
 rtk2750:詫:apologize:宅,言
 rtk2751:誼:friendship:宜,言
-rtk2752:謬:mistake:羽,言,个,彡
+rtk2752:謬:mistake:羽,言,𠆢,彡
 rtk2753:訝:doubt:牙,言
 rtk2754:諺:proverb:言,彦
 rtk2755:誹:ridicule:言,非
@@ -2854,11 +2854,11 @@ rtk2794:鍾:spindle:｜,金,日,里,ノ;重,金
 rtk2795:鋏:scissors:金,人,大
 rtk2796:閃:flash:人,門
 rtk2797:悶:be in agony:心,門
-rtk2798:閤:small side gate:口,門,个,一;合,門
+rtk2798:閤:small side gate:口,門,𠆢,一;合,門
 rtk2799:雫:drop:雨,丶,一,｜;下,雨
 rtk2800:霞:be hazy:雨,又
-rtk2801:翰:letter:羽,十,日,个;人,羽,𠦝
-rtk2802:斡:go around:十,斗,日,个;人,斗,𠦝
+rtk2801:翰:letter:羽,十,日,𠆢;人,羽,𠦝
+rtk2802:斡:go around:十,斗,日,𠆢;人,斗,𠦝
 rtk2803:鞍:saddle:安,革
 rtk2804:鞭:whip:ノ,一,革,日,田;便,革
 rtk2805:鞘:sheath:肖,革
@@ -2936,7 +2936,7 @@ rtk2876:翠:green:卒,羽
 rtk2877:黛:blackened eyebrows:代,黒
 rtk2878:鼎:three legged kettle:｜,一,片,目,丬
 rtk2879:鹵:salt:十,囗
-rtk2880:鹸:saltiness:口,十,人,个,囗,鹵;㑒,鹵
+rtk2880:鹸:saltiness:口,十,人,𠆢,囗,鹵;㑒,鹵
 rtk2881:虔:respect:文,卜,匕,厂,虍;文,虍
 rtk2882:燕:swallow (bird):口,匕,灬,丬,艹;北,口,廿,灬
 rtk2883:嘗:once:outhouse,旨
@@ -2965,7 +2965,7 @@ rtk2905:肴:accompaniment for drinks:ノ,一,月,丶;㐅,有
 rtk2906:斐:beautiful:非,文
 rtk2907:卿:you:艮,卩
 rtk2908:翫:take pleasure in:元,習
-rtk2909:於:at:方,个
+rtk2909:於:at:方,𠆢
 rtk2910:套:accumulate:大,長,厶
 rtk2911:叛:disobey:半,反
 rtk2912:尖:be pointed:小,大
@@ -3025,7 +3025,7 @@ rtk2965:牟:pupil (eye):牛,厶
 rtk2966:迦:(used phonetically):辶,加
 rtk2967:珈:ornamental hairpin:加,王
 rtk2968:琲:string of many pearls:王,非
-rtk2969:檜:japanese cypress:日,木,个,一
+rtk2969:檜:japanese cypress:日,木,𠆢,一
 rtk2970:轡:bit (horse):口,糸,車
 rtk2971:淵:abyss:｜,一,水,丬,片
 rtk2972:伍:five:亻,五
@@ -3132,7 +3132,7 @@ kangxi28:厶:cocoon,elbow
 #   substitution artifact) — named literally by their katakana identity rather
 #   than guessing a Heisig-specific meaning; the owner will attach the book's
 #   actual primitive name as a personal alias on top of these.
-prim-umbrella:个:primitive_umbrella,umbrella
+prim-umbrella:𠆢:primitive_umbrella,umbrella
 prim-eight-radical:并:eight radical,puzzle
 prim-hand-radical:扎:hand radical
 prim-mound-radical:阡:mound radical
@@ -3581,6 +3581,20 @@ kangxi145:衤:cloak
 # breaking every other 人 host) or finds a different resolution. Not
 # reverting the "walking cane" alias itself -- that part is unaffected
 # and still closes cleanly (verified below).
+#
+# --- 2026-09-20 RESOLVED, and not by either branch that entry expected.
+# "umbrella" is neither 个 nor plain 人: it is 𠆢 (U+201A2), the bare roof
+# with nothing under it. Its 62 CSV hosts score 0.00 against 个 and 0.89
+# against 人, and rendering 茶 全 企 谷 傘 settles which -- every one draws
+# a clean roof, and 个's vertical stroke is simply not there. So the row
+# was right to exist and right to be called "umbrella"; only its codepoint
+# was wrong, the same extra-stroke mistake caught on this character once
+# before (2026-08-23, when it stopped being a "person radical"), fixed
+# then only as far as the name. prim-umbrella now holds 𠆢 and all 40
+# part-field occurrences moved with it; the id is unchanged, so nothing
+# that referenced it had to move. 介 becomes 𠆢,ノ,｜ -- which keeps the
+# "umbrella" coverage the entry above was right to refuse to lose, without
+# aliasing anything onto bare 人.
 
 # --- 2026-09-18 (twenty-second chunk): "receipt" (5 CSV hosts:
 # 柳卵瑠留貿) -- 4 of 5 resolved via one new primitive (卯/留/貿 directly,

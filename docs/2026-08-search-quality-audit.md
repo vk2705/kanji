@@ -12551,3 +12551,46 @@ the 無/舞 distinction written into it.
 
 `audit_primary_choice.py` reports 1 — `rtk265` 介, untouched by this chunk and
 inherited from the preceding days' work. Next chunk.
+
+---
+
+## 2026-09-20 (chunk 2) — "umbrella" was the right name on the wrong codepoint
+
+`audit_primary_choice.py` was reporting one candidate, 介, inherited from the
+preceding chunk. The entry that left it there did the reasoning properly and
+declined to act, framing the open question as: either "umbrella" is Heisig's
+in-story rename of plain 人 for this one frame, or a future chunk finds a
+different resolution.
+
+It is the different resolution, and it is bigger than 介.
+
+**"umbrella" is 𠆢 (U+201A2)** — the bare roof, nothing under it. Its 62 CSV
+hosts score **0.00 against 个** and 0.89 against 人, and rendering 茶 全 企 谷 傘
+settles which: every one draws a clean roof, and 个's vertical stroke is simply
+not there. `prim-umbrella` was right to exist and right to be called umbrella;
+only its glyph was wrong, in **40 part fields**.
+
+This is the same extra-stroke mistake this project already caught on this exact
+character on 2026-08-23, when 个 stopped being a "person radical" — that pass
+fixed the *name* and left the codepoint, so the carrier survived under a correct
+label for another month. Worth remembering: renaming a row does not re-verify
+its glyph.
+
+The fix needs no id change, so nothing referencing `prim-umbrella` had to move:
+the row now holds 𠆢 and the 40 occurrences moved with it. 介 becomes `𠆢,ノ,｜`,
+which keeps the "umbrella" coverage the previous entry was right to refuse to
+lose, without aliasing anything onto bare 人 — the thing it correctly feared,
+since that would have pulled in all 157 person-hosts. `audit_primary_choice`
+back to 0.
+
+𠆢 is Plane 2, so it got a primitive image; checked, it draws the bare roof.
+The previous entry's reasoning is left in `data.txt` intact with the resolution
+appended under it, rather than rewritten — it was correct on what it knew.
+
+Verified: 1324 checks with only the 4 known hanzi-scope non-issues, 66 pytest,
+over-flattening 0, dead tokens 0, self-references 0, primary-choice 0, frontend
+lint + build clean. Phantom parts 113→112. `umbrella` now returns 41 kanji, all
+roof-bearing.
+
+A deployer will see `prim-umbrella`'s `character` and `image_url` change plus 40
+`parts` rows.
