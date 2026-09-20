@@ -9,8 +9,10 @@ auth, everything) with no backend changes at all.
 
 ## What it does
 
-- Loads `https://srv.alteon.help/kanji/` (release build) — see
-  `BuildConfig.APP_URL` in `app/build.gradle.kts`.
+- Loads `https://kanji.alteon.help/kanji/` (release build, prod as of
+  2026-09-20) — see `BuildConfig.APP_URL` in `app/build.gradle.kts`. The old
+  EC2 box (`srv.alteon.help`) is now dev/legacy; the `legacy` build type
+  points there instead — see Building below.
 - Persists cookies across app restarts (`CookieManager`), so the existing
   cookie-session auth (`backend/auth.py`) just works, same as a browser tab.
 - Supports the image-upload feature (`ImageUpload` in `KanjiDetail.jsx`) via
@@ -30,7 +32,8 @@ automatically; from a bare CLI, install the `platform-tools`,
 ```bash
 cd android
 ./gradlew :app:assembleDebug     # debug/ — points at a local dev server, see below
-./gradlew :app:assembleRelease   # release/ — points at the live deployed site, unsigned
+./gradlew :app:assembleRelease   # release/ — points at the live prod site (kanji.alteon.help), unsigned
+./gradlew :app:assembleLegacy    # legacy/ — points at the old EC2 box (srv.alteon.help), unsigned
 ```
 
 The release APK is unsigned (no signing config is checked into this repo,

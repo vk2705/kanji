@@ -130,6 +130,12 @@ export const translations = {
     aboutDownloadNote: "Self-signed, not on the Play Store — you'll need to allow \"install from unknown sources\". See the android/ folder in the repo for build-from-source instructions.",
     aboutPrivacyHeading: "Privacy",
     aboutPrivacyLinkLabel: "Privacy Policy",
+    aboutWhatsNewHeading: "What's new — v1.1 (2026-09-20)",
+    aboutWhatsNewItems: [
+      "Production moved to a new server (kanji.alteon.help) — the old host is now used for development only. The Android app now defaults to the new address.",
+      "Ongoing decomposition-quality audit: dozens of primitive/decomposition fixes across the RTK dataset.",
+    ],
+    aboutChangelogLinkLabel: "Full changelog",
   },
 
   ru: {
@@ -255,6 +261,12 @@ export const translations = {
     aboutDownloadNote: "Самоподписанный APK, вне Google Play — потребуется разрешить «установку из неизвестных источников». Инструкции по сборке из исходников — в папке android/ в репозитории.",
     aboutPrivacyHeading: "Конфиденциальность",
     aboutPrivacyLinkLabel: "Политика конфиденциальности",
+    aboutWhatsNewHeading: "Что нового — v1.1 (2026-09-20)",
+    aboutWhatsNewItems: [
+      "Прод переехал на новый сервер (kanji.alteon.help) — старый хост теперь используется только для разработки. Android-приложение теперь по умолчанию использует новый адрес.",
+      "Продолжается аудит качества разборов кандзи: десятки исправлений примитивов/разборов по всей базе RTK.",
+    ],
+    aboutChangelogLinkLabel: "Полный список изменений",
   },
 };
 
