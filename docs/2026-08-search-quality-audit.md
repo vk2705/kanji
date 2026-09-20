@@ -13344,3 +13344,51 @@ known hanzi-scope non-issues, 66 pytest. Documented in `CLAUDE.md` beside the
 other audit tooling.
 
 **Next** — work the 44 down, biggest host count first.
+
+## 2026-09-20 — chunk 22: twenty names, ~900 component rows, one line each
+
+The first pass of the new detector's list, taking the biggest host counts. Every
+one of these is the same thing: Heisig gives a primitive two or three names, this
+file recorded one, and the others quietly resolved to whatever later kanji
+happens to have that English word as its keyword.
+
+| name | hosts | was answering | now |
+|---|---|---|---|
+| needle | 134 | 針 (292) | 十 |
+| dirt / ground | 117 / 116 | 垢 (2302) / 地 (554) | 土 |
+| clam / oyster | 80 / 80 | 蛤 (2734) / 蛎 (2736) | 貝 |
+| house | 78 | 家 (580) | 宀 |
+| flag | 55 | 旗 (1901) | 尸 |
+| sabre / saber / dagger | 41 / 40 / 38 | 剣 (1801) / 鋒 (2790) | 刀 |
+| jewel / ball | 38 / 37 | 玉 (272) / 球 (1005) | 王 |
+| wind / muscle | 34 / 34 | 風 (563) / 筋 (1012) | 几 / 力 |
+| nail | 29 | 釘 (2788) | 丁 |
+| head | 26 | 頭 (1549) | 頁 |
+| column | 23 | 欄 (1756) | 彳 |
+| rock | 18 | 磐 (2632) | 石 |
+| shape | 15 | 形 (1847) | 彡 |
+| arrow | 11 | 箭 (2680) | 弋 |
+| clothing | 10 | 服 (1501) | 衣 |
+| boulevard | 5 | 街 (955) | 行 |
+
+Each is confirmed by adjacency, not by plausibility: Heisig emits a primitive's
+whole name set together, so 十's own components row is the single word "needle",
+土's is "dirt; ground", 貝's is "clam; oyster" followed by its parts, 力's is
+"muscle; arnold", 行's is "boulevard", and in every host the pair or triple sits
+side by side. All twenty were *appended*, so every row's keyword is unchanged.
+
+**Two judgement calls worth recording.** "Sabre"/"saber" belong to 刂 and
+"dagger" to 刀 in the book — 刀's own row is "dagger" while 則's is "sword;
+sabre; saber" — but this file has always written 刂 as 刀 (則 副 別 刺 all do),
+so all four names go on the one row rather than inventing a split the rest of
+the data does not make. And **"arrow" is 弋, not 矢**: 式 is "arrow; craft" and
+武 is "one; arrow; stop". Heisig calls 矢 "dart". Getting that one backwards
+would have been easy and would have poisoned eleven rows.
+
+Verified: 1324 checks with only the 4 known hanzi-scope non-issues, 66 pytest,
+over-flattening 0, dead tokens 0, self-references 0, primary-choice 0, phantom
+parts unchanged at 40, frontend lint + build clean. No pin moved.
+**Anachronistic names 44→22; unsearchable names 177→173, 97.98% of
+name-occurrences resolve.**
+
+**Next** — the other half of the detector's list.

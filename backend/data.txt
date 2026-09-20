@@ -67,7 +67,7 @@ rtk1:一:one,floor,ceiling,minus,silage:
 rtk2:二:two:;一
 rtk5:五:five:
 rtk9:九:nine,baseball:
-rtk10:十:ten,cross:
+rtk10:十:ten,cross,needle:
 rtk11:口:mouth:
 rtk12:日:day,sun,tongue wagging,tongue wagging in mouth:
 rtk13:月:month,moon,flesh,part of the body,edam:
@@ -107,7 +107,7 @@ rtk52:卓:eminent:卜,早
 rtk53:朝:morning:月,𠦝
 rtk54:嘲:ridicule:口,朝
 rtk55:只:only:口,八
-rtk56:貝:shellfish:目,八
+rtk56:貝:shellfish,clam,oyster:目,八
 rtk57:唄:song:貝,口
 rtk58:貞:upright:貝,卜
 rtk59:員:employee:貝,口
@@ -115,7 +115,7 @@ rtk60:貼:affix:貝,占
 rtk61:見:see,telescope:目,儿
 rtk62:児:newborn babe:旧,儿
 rtk63:元:beginning:二,儿
-rtk64:頁:page:一,貝
+rtk64:頁:page,head:一,貝
 rtk65:頑:stubborn:頁,元
 rtk66:凡:commonplace:丶,几
 rtk67:負:defeat:貝,勹;貝,𠂊
@@ -138,14 +138,14 @@ rtk83:有:possess:月,𠂇
 rtk84:賄:bribe:有,貝
 rtk85:貢:tribute:貝,工
 rtk86:項:paragraph:工,頁
-rtk87:刀:sword:;ノ,𠃌
+rtk87:刀:sword,dagger,sabre,saber:;ノ,𠃌
 rtk88:刃:blade:刀,丶
 rtk89:切:cut:七,刀
 rtk90:召:seduce,summon:口,刀
 rtk92:則:rule:貝,刀
 rtk93:副:vice-:畐,刀
 rtk94:別:separate:口,力,刀
-rtk95:丁:street,spike:一,亅
+rtk95:丁:street,spike,nail:一,亅
 rtk96:町:town:田,丁
 rtk97:可:can:丁,口
 rtk98:頂:place on the head:丁,頁
@@ -168,7 +168,7 @@ rtk114:夕:evening:;丶,𠂊
 rtk115:汐:eventide:水,夕
 rtk116:外:outside:卜,夕
 rtk117:名:name:口,夕
-rtk118:石:stone:厂,口
+rtk118:石:stone,rock:厂,口
 rtk119:肖:resemblance,spark,candle:⺌,月
 rtk120:硝:nitrate:石,肖
 rtk121:砕:smash:卆,石
@@ -211,7 +211,7 @@ rtk157:河:river:可,水
 rtk158:泊:overnight stay:水,白
 rtk159:湖:lake:水,胡
 rtk160:測:fathom:水,則
-rtk161:土:soil:;一,十
+rtk161:土:soil,dirt,ground:;一,十
 rtk162:吐:spit:口,土
 rtk163:圧:pressure:土,厂
 rtk164:埼:cape:土,奇
@@ -321,7 +321,7 @@ rtk267:茶:tea:艹,𠆢,朩
 rtk268:脊:stature:丷,人,八,月
 rtk269:合:fit:口,亼
 rtk270:塔:pagoda:合,土,艹
-rtk271:王:king:;一,土
+rtk271:王:king,jewel,ball:;一,土
 rtk272:玉:jewel,earring:王,丶
 rtk273:宝:treasure:玉,宀
 rtk274:珠:pearl:王,朱
@@ -473,7 +473,7 @@ rtk419:延:prolong:ノ,廴,止
 rtk420:誕:nativity:延,言
 rtk421:礎:cornerstone:石,林,疋
 rtk422:婿:bridegroom:月,女,疋
-rtk423:衣:garment,cloth,clothes:;亠,𧘇
+rtk423:衣:garment,cloth,clothes,clothing:;亠,𧘇
 rtk424:裁:tailor:衣,𢦏
 rtk425:装:attire:衣,壮
 rtk426:裏:back:衣,里;亠,里,𧘇
@@ -972,7 +972,7 @@ rtk918:臨:look to:品,臣,𠂉
 rtk919:覧:perusal:一,臣,見,𠂉;ノ,見,臣,二
 rtk920:巨:gigantic,fafner:
 rtk921:拒:repel:扌,巨
-rtk922:力:power,arnold:;ノ,𠃌
+rtk922:力:power,arnold,muscle:;ノ,𠃌
 rtk923:男:male:田,力
 rtk924:労:labor:prim-schoolhouse,力
 rtk925:募:recruit:力,莫
@@ -988,7 +988,7 @@ rtk934:架:erect:加,木
 rtk935:脇:armpit:劦,月
 rtk936:脅:threaten:劦,月
 rtk937:協:co-:劦,十
-rtk938:行:going:彳
+rtk938:行:going,boulevard:彳
 rtk939:律:rhythm:彳,聿
 rtk940:復:restore:复,彳
 rtk941:得:gain:寸,日,彳,一
@@ -3081,23 +3081,23 @@ kangxi13:冂:border,down box,hood,belt,glass canopy
 # like this one correctly with no further backend change needed.
 kangxi14:冖:cover,cloth cover,birdcage,birdhouse,crown
 kangxi6:亅:hook
-kangxi44:尸:corpse
+kangxi44:尸:corpse,flag
 kangxi62:戈:spear,halberd,fiesta
 kangxi115:禾:grain,wheat,cereal
 kangxi172:隹:short-tailed bird,turkey
 kangxi66:攵:rap,knock,taskmaster
 kangxi53:广:cave,dotted cliff,caverns
-kangxi16:几:table,stool,gnats
+kangxi16:几:table,stool,gnats,wind
 kangxi17:凵:container,open box,shovel
-kangxi60:彳:step,go,nelson
+kangxi60:彳:step,go,nelson,column
 kangxi31:囗:enclosure,pent in
 kangxi138:艮:stopping,retracing
-kangxi59:彡:bristle,hair strands
+kangxi59:彡:bristle,hair strands,shape
 kangxi79:殳:weapon,lance,cruise missile,missile
 kangxi22:匚:box,receptacle
 kangxi152:豕:pig,sow
 kangxi78:歹:death,bad,bones
-kangxi56:弋:stake,shoot
+kangxi56:弋:stake,shoot,arrow
 kangxi54:廴:long stride
 kangxi141:虍:tiger
 kangxi105:癶:footsteps,back-to-back feet,teepee,wigwam
@@ -3118,7 +3118,7 @@ kangxi205:黽:frog,toad
 prim-mugwort:艹:mugwort,flowers,cabbage
 prim-thirty:丗:thirty,buckle,apron
 kangxi52:幺:tiny,short thread
-kangxi40:宀:roof,primitive_roof,mansion
+kangxi40:宀:roof,primitive_roof,mansion,house
 kangxi28:厶:cocoon,elbow
 
 # Remaining Finding-1 single-glyph terms (session 4, 2026-08-14). Two groups:
@@ -3971,3 +3971,24 @@ prim-resin:朮:resin,pole:木,丶
 # but cjkvi writes 属 ⿸尸禹 specifically, and 禹 is 禸 under a slash. Heisig's
 # row for it ("flag; gnats; drop; insect; belt") describes the traditional 屬,
 # 尸 + 蜀, so on this glyph his channel has nothing to say either way.
+
+# --- 2026-09-20: twenty of Heisig's names that this file had only recorded one
+# member of, found by audit_anachronistic_names.py. Each was resolving to some
+# later kanji whose keyword happens to be the same English word, so typing
+# Heisig's own word for a primitive handed back a kanji instead:
+#   needle -> 針, dirt/ground -> 垢/地, clam/oyster -> 蛤/蛎, house -> 家,
+#   flag -> 旗, dagger/sabre/saber -> 鋒/剣, jewel/ball -> 玉/球, nail -> 釘,
+#   head -> 頭, column -> 欄, muscle -> 筋, wind -> 風, rock -> 磐,
+#   arrow -> 箭, clothing -> 服, shape -> 形, boulevard -> 街.
+# Every one is confirmed by adjacency: Heisig emits a primitive's whole name set
+# together, so 十's own row is the single word "needle", 土's is "dirt; ground",
+# 貝's is "clam; oyster" followed by its parts, 力's is "muscle; arnold", 行's is
+# "boulevard", and in every host the pair or triple appears side by side.
+# The keyword field is untouched -- these are appended, so the first alias (and
+# therefore the keyword) stays what it was.
+# Two notes. "sabre"/"saber" belong to 刂 and "dagger" to 刀 in the book (刀's
+# own row is "dagger", 則's is "sword; sabre; saber"), but this file has always
+# written 刂 as 刀 -- 則 副 別 刺 all do -- so all four names go on the one row
+# rather than inventing a split the rest of the data does not make.
+# "arrow" is 弋 (式 = "arrow; craft", 武 = "one; arrow; stop"), not 矢, which
+# Heisig calls "dart". Getting that backwards would have been easy.
