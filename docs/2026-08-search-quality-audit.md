@@ -13632,3 +13632,31 @@ moved (金, 翰). **Phantom parts 38→34; the double-checked set 13→9.**
 
 **Next** — 蔵 (戈/厂/ノ), 衆 (糸), 猟 (用), and the "rag"/"sherpa"/"fred astaire"
 name groups.
+
+## 2026-09-20 — chunk 29: 戈, 戊, 戉 are three glyphs, not one
+
+This file had been collapsing them. Rendered side by side the difference is
+plain: **戈** has no long left descender at all; **戊** has one but leaves the
+bottom-left corner open; **戉** closes that corner with a hook.
+
+cjkvi gives 越 `⿺走戉`, and Heisig calls it "parade" — **the same name he gives
+戊** in 茂 戚 成. One name, two glyphs, which is by now a familiar shape in this
+log: silver (艮/皀), mend (龰/𤴓), grow up (龶/丰), march (戌/戍). Both rows carry
+the name and the glyphs stay distinct.
+
+**蔵 was 戊 spelled in strokes.** Its `ノ` + `厂` + `戈` are the three pieces of
+the 戊 that wraps 臣, and Heisig reads it "flowers; parade; retainer; slave" —
+`艹,戊,臣`, which is now what the row says. 臓 references 蔵 and inherited it.
+
+**猟** drops a 用 that is in no part of it (cjkvi `⿰犭鼡`, 鼡 = `⿱𭕄𠂡`). What is
+left of 鼡 stays as plain 几 rather than being guessed at: Heisig's row names an
+"anemometer" and a "cornstalk" in there and neither has a row here yet.
+
+Verified: 1325 checks exit 0, 66 pytest, over-flattening 0, dead tokens 0,
+self-references 0, primary-choice 0, frontend lint + build clean. Two pins moved
+(越, 猟). **Phantom parts 34→29; the double-checked set is down to 4 across 3
+kanji** — 羊's 王 (a tool false positive, see chunk 19), 衆's 糸, and 属's two,
+where Heisig's row describes the traditional 屬 and says nothing about this
+glyph.
+
+**Next** — 衆 and the "rag" group it belongs to.

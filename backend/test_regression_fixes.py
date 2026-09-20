@@ -625,8 +625,11 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"rtk161", "prim-mending"}},
     "rtk412": {"character": "赴", "keyword": "proceed",
                "expected_part_ids": {"kangxi25", "rtk410"}},
+    # 2026-09-20: cjkvi has 越 ⿺走戉, and 戉 is neither 戈 (no long left
+    # descender) nor 戊 (empty at the bottom left where 戉 hooks closed).
+    # Heisig calls both 戉 and 戊 "parade"; the glyphs stay distinct.
     "rtk413": {"character": "越", "keyword": "surpass",
-               "expected_part_ids": {"kangxi62", "rtk410"}},
+               "expected_part_ids": {"prim-parade-hooked", "rtk410"}},
     "rtk943": {"character": "徒", "keyword": "junior",
                "expected_part_ids": {"kangxi60", "rtk410"}},
     "rtk2231": {"character": "趨", "keyword": "scurry",
@@ -657,8 +660,9 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"kangxi94", "rtk1555", "rtk99"}},
     "rtk1917": {"character": "狙", "keyword": "aim at",
                 "expected_part_ids": {"kangxi94", "rtk2190"}},
+    # 2026-09-20: rtk1265 (用) is in no part of 猟 (cjkvi ⿰犭鼡, 鼡 = ⿱𭕄𠂡).
     "rtk2090": {"character": "猟", "keyword": "game-hunting",
-                "expected_part_ids": {"kangxi16", "kangxi94", "prim-owl", "rtk1265"}},
+                "expected_part_ids": {"kangxi16", "kangxi94", "prim-owl"}},
     # Owner-approved via the review queue (2026-08-27), confirmed correct
     # against cjkvi-ids before pinning: 警 = ⿱敬言, 特 = ⿰牛寺 (寺 was
     # flattened to 土,寸 elsewhere in data.txt at the time).

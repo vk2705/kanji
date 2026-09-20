@@ -463,7 +463,7 @@ rtk409:錠:lock:金,定
 rtk410:走:run:土,龰
 rtk411:超:transcend:召,走
 rtk412:赴:proceed:走,卜
-rtk413:越:surpass:走,戈
+rtk413:越:surpass:走,戉
 rtk414:是:just so:日,𤴓
 rtk415:題:topic:頁,是
 rtk416:堤:dike:土,是
@@ -963,7 +963,7 @@ rtk909:鉄:iron:金,失
 rtk910:迭:transfer:辶,失
 rtk911:臣:retainer:
 rtk912:姫:princess:女,臣
-rtk913:蔵:storehouse:ノ,臣,戈,艹,厂
+rtk913:蔵:storehouse:艹,戊,臣
 rtk914:臓:entrails:蔵,月
 rtk915:賢:intelligent:臤,貝
 rtk916:腎:kidney:月,臤
@@ -2148,7 +2148,7 @@ rtk2086:厳:stern:敢,𭕄,厂
 rtk2087:鎖:chain:金,小,貝
 rtk2088:挙:raise:手,𭕄,八,一
 rtk2089:誉:reputation:言,𭕄,八,一
-rtk2090:猟:game-hunting:犭,𭕄,用,几
+rtk2090:猟:game-hunting:犭,𭕄,几
 rtk2091:鳥:bird:灬
 rtk2092:鳴:chirp:口,鳥
 rtk2093:鶴:crane:鳥,隹,宀,冖
@@ -4087,3 +4087,18 @@ prim-staples:𦥑:staples:
 # canopy" (already here) in the other twelve; cjkvi writes 周 ⿵⺆𠮷, but ⺆ is
 # 月's frame -- rendered, its left leg is a 丿 where 周's and 冂's run straight
 # down. The row was right and only the name was missing.
+
+# --- 2026-09-20: the 戈 family, which this file had collapsed into one glyph.
+# 戉 (U+6209) is not 戈 and not 戊: rendered side by side, 戈 has no long left
+# descender at all, 戊 has one but is empty at the bottom left, and 戉 closes
+# that corner with a hook. cjkvi gives 越 ⿺走戉, and Heisig calls it "parade" --
+# the same name he gives 戊 in 茂 戚 成, which is the one-name-two-glyphs
+# pattern this audit has hit for silver (艮/皀), mend (龰/𤴓) and grow up (龶/丰).
+# Both rows carry the name; the glyphs stay distinct.
+# 蔵 was 戊 spelled in strokes: its ノ + 厂 + 戈 are the three pieces of the 戊
+# that wraps 臣, and Heisig reads it "flowers; parade; retainer; slave" --
+# 艹 + 戊 + 臣, which is now what the row says. 臓 references 蔵 and inherits.
+# 猟 drops a 用 that is in no part of it (cjkvi 猟 = ⿰犭鼡, 鼡 = ⿱𭕄𠂡). The
+# rest of 鼡 is left as 几 rather than guessed at: Heisig's row names an
+# "anemometer" and a "cornstalk" in there, and neither has a row here yet.
+prim-parade-hooked:戉:parade:
