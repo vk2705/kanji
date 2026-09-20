@@ -930,7 +930,7 @@ rtk876:裂:split:列,衣
 rtk877:烈:ardent:列,灬
 rtk878:死:death:匕,歹
 rtk879:葬:interment:廾,死,艹
-rtk880:瞬:wink:牛,舛,爪,目,夕,冖
+rtk880:瞬:wink:目,爪,冖,舛
 rtk881:耳:ear:
 rtk882:取:take:耳,又
 rtk883:趣:purport:取,走
@@ -1124,7 +1124,7 @@ rtk1070:宿:inn:白,宀
 rtk1071:傷:wound:亻,日,一,昜
 rtk1072:保:protect:亻,呆
 rtk1073:褒:praise:亠,保,衣;亠,保,𧘇
-rtk1074:傑:greatness:亻,舛,木,夕
+rtk1074:傑:greatness:亻,舛,木
 rtk1075:付:adhere,sellotape:亻,寸
 rtk1076:符:token:付,竹
 rtk1077:府:borough:付,广
@@ -1458,7 +1458,7 @@ rtk1404:墜:crash:土,隊
 rtk1405:降:descend:阝,夂,㐄
 rtk1406:階:storey:皆,阝
 rtk1407:陛:highness:土,比,阝
-rtk1408:隣:neighboring:舛,米,夕,阝
+rtk1408:隣:neighboring:阝,米,舛
 rtk1409:隔:isolate:阝,鬲
 rtk1410:隠:conceal:阝,爪,⺕,心
 rtk1411:堕:degenerate:有,土,阝
@@ -1970,8 +1970,8 @@ rtk1908:貴:precious,takanohana:貝,𠀐
 rtk1909:遺:bequeath:貴,辶
 rtk1910:遣:dispatch:辶,𠀐
 rtk1911:潰:crush:水,貴
-rtk1912:舞:dance:舛,二,夕,無
-rtk1913:無:nothingness:｜,ノ,一,灬
+rtk1912:舞:dance:𠂉,卌,一,舛
+rtk1913:無:nothingness:𠂉,卌,一,灬
 rtk1914:組:association:且,糸
 rtk1915:粗:coarse:且,米
 rtk1916:租:tariff:且,禾
@@ -3104,7 +3104,7 @@ kangxi105:癶:footsteps,back-to-back feet,teepee,wigwam
 kangxi165:釆:distinguish,claw print,animal tracks
 kangxi171:隶:reach,slave,sieve:⺕,氺
 kangxi129:聿:brush
-kangxi136:舛:oppose,dance
+kangxi136:舛:oppose,dance,ballerina,dancing legs,sunglasses:夕,㐄
 kangxi178:韋:tanned leather,locket
 kangxi127:耒:plow,christmas tree
 kangxi153:豸:badger,legless insect,skunk
@@ -3739,3 +3739,5 @@ prim-fenceposts:?:fenceposts,cabers:ノ,二,｜
 # it even without a CSV name to cite.
 prim-schoolhouse:?:schoolhouse:𭕄,冖
 
+# --- 2026-09-20: 卌 'tub', the grid in 無/舞 that both spelled out.
+prim-tub:卌:tub:

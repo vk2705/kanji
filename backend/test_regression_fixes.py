@@ -3435,8 +3435,14 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"rtk1866", "rtk87"}},
     "rtk1868": {"character": "済", "keyword": "settle (debt etc.)",
                "expected_part_ids": {"rtk137", "rtk1866"}},
+    # 舞 pinned 無 (rtk1913) as a part. 舞 is not made of 無 — the two share
+    # their top (𠂉 + 卌 + 一) and then diverge, 無 taking 灬 and 舞 taking 舛.
+    # cjkvi reads them ⿱⿳𠂉卌一灬 and ⿱⿳𠂉卌一舛, and Heisig's columns say
+    # "reclining; tub; oven-fire" vs "reclining; tub; ...; dancing legs".
+    # 卌 "tub" registered 2026-09-20; the 夕 that sat beside 舛 in all four of
+    # its hosts is 舛's own left half and now reachable through it.
     "rtk1912": {"character": "舞", "keyword": "dance",
-               "expected_part_ids": {"kangxi136", "rtk114", "rtk1913", "rtk2"}},
+                "expected_part_ids": {"kangxi136", "prim-reclining", "prim-tub", "rtk1"}},
     "rtk2368": {"character": "撫", "keyword": "stroke",
                "expected_part_ids": {"kangxi64", "rtk1913"}},
     "rtk2481": {"character": "蕪", "keyword": "turnip",

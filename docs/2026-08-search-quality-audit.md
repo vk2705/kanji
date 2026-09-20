@@ -12509,3 +12509,45 @@ is still not something this session can do — a deployer running it will see
 one changed alias row (`prim-snare` gaining "slingshot"/"catapult") and four
 changed `parts` rows (`rtk1332`, `rtk1333`, `rtk1335`, `rtk1341`) from this
 chunk.
+
+---
+
+## 2026-09-20 (chunk 1 of a 10-chunk run) — 舛 "ballerina", and the 夕 beside it
+
+`ballerina` and `dancing legs` have **identical** host sets (傑 瞬 舞 隣) and
+1.00 structural support on 舛 (`kangxi136`, already registered as "oppose").
+Aliased both onto it, plus `sunglasses`, which is the same three-name group on
+those four hosts — see the caveat below.
+
+The four hosts all listed 舛 **and** 夕 side by side. That is not a phantom: 夕
+is 舛's own left half (cjkvi `⿰夕㐄`, and the CSV's recursive expansion prints
+"evening" for exactly that reason). It is redundancy, and it was invisible to
+`audit_overflatten` because 舛 had no decomposition here to collapse against.
+Gave 舛 cjkvi's 夕+㐄 and dropped the four stray 夕; they stay reachable at
+depth 2.
+
+Two real phantoms fell out on the way, both confirmed by `audit_phantom_parts`:
+
+- **瞬 listed 牛.** 瞬 is 目 + 舜, and 舜 is 爫+冖+舛. There is no cow in it, and
+  the CSV ("eye; Rose of Sharon; birdhouse; claw; ...; dancing legs; evening")
+  never mentions one.
+- **舞 listed 無.** 舞 is not made of 無 — they share their top (𠂉 + 卌 + 一) and
+  then diverge, 無 taking 灬 and 舞 taking 舛. Registered 卌 as `prim-tub`
+  ("tub", Heisig's name for it, 1.00 over its 2 hosts) so both can spell the
+  shared top properly; 無 itself had been spelling it ｜,ノ,一.
+
+**The `sunglasses` caveat, stated rather than buried.** Its host set is those
+four *plus 年*, and 年 contains no 舛 (support 0.80, and the render agrees — 年
+is 𠂉 over a 干-like body). Heisig's column for 年 reads "sign of the horse;
+sunglasses", so if 午 is the horse then his "sunglasses" there is something
+else again. Added to 舛 anyway, because it names the same shape as its two
+group-mates on 4 of 5 hosts; searching it will not return 年, and that is the
+honest partial answer rather than a guess at what 年's fifth reading is.
+
+Verified: 1324 checks with only the 4 known hanzi-scope non-issues, 66 pytest,
+over-flattening 0, dead tokens 0, self-references 0, frontend lint + build
+clean. Phantom parts 116→113 across 84→81 kanji. One pin (舞) re-pinned with
+the 無/舞 distinction written into it.
+
+`audit_primary_choice.py` reports 1 — `rtk265` 介, untouched by this chunk and
+inherited from the preceding days' work. Next chunk.
