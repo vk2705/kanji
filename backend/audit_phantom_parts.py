@@ -52,6 +52,25 @@ that the Heisig channel is silent and the structural one is carrying the whole
 check alone. `--in-csv-range` restricts the run to hosts where both channels
 actually have something to say.
 
+## The structural channel's blind spot (2026-09-20)
+
+cjkvi-ids writes a component it has no codepoint for as a circled number, and
+**those numbers are per-entry placeholders, not identifiers** — ③ is the bottom
+of 不 in `⿱一③`, the left of 北 in `⿰③匕`, the left of 印 in `⿰③卩` and a 止
+variant in 此's second reading `⿰③匕`, all different shapes. ⑤ is 皀 in 即
+(`⿰⑤卩`), something else entirely in 叚 (`⿰⑤⿱コ又`), and the top of 其. So a
+placeholder is a hole, and nothing may ever be inferred from two entries sharing
+one. The closure treats them as opaque glyphs, which is safe — they match
+nothing — but it means that for a host whose expansion contains one, the
+structural channel cannot clear *anything* that lives inside the hole, and the
+Heisig name channel is silently carrying the check alone.
+
+Those findings are reported in their own section rather than mixed in, because
+"cjkvi-ids cannot reach it" is not the same claim as "it is not in the glyph",
+and this is exactly the set where the difference bites. 16 of the 58
+phantom-carrying kanji were in that state when this was added, so it is not a
+corner case.
+
 This deliberately does not auto-fix. Every hit still has to be rendered and
 looked at (`render_glyphs.py`) before anything is edited — the standing method
 for this audit, and the reason several confident-looking verdicts in its history
@@ -70,6 +89,10 @@ import database
 from audit_overflatten import IDS_OPS, RADICAL_VARIANTS, _raw_ids
 
 CSV_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "heisig-kanjis.csv")
+
+# cjkvi-ids' marks for a component with no codepoint. Per entry, not per shape —
+# see "The structural channel's blind spot" above before reading anything into one.
+PLACEHOLDERS = frozenset("①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳")
 
 
 def normalise(ch):
@@ -285,7 +308,8 @@ def findings(conn, ids, ours, heisig, identities, claims, term=None, in_csv_rang
             if term and term.lower() not in part_names:
                 continue
             seen |= candidates
-            out.append((host["id"], host["character"], host["keyword"], part, char, resolved))
+            out.append((host["id"], host["character"], host["keyword"], part, char, resolved,
+                        bool(tree & PLACEHOLDERS)))
     return out
 
 
@@ -296,6 +320,12 @@ def main():
         "--in-csv-range",
         action="store_true",
         help="only hosts heisig-kanjis.csv covers, so both channels are speaking",
+    )
+    ap.add_argument(
+        "--hide-blind",
+        action="store_true",
+        help="drop the findings whose host has an unencoded cjkvi-ids placeholder in "
+             "its expansion, leaving only the ones both channels actually examined",
     )
     args = ap.parse_args()
 
@@ -316,10 +346,22 @@ def main():
         args.in_csv_range,
     )
 
-    for kid, char, keyword, part, part_char, resolved in hits:
-        shown = f"{part} ({part_char})" if part_char and part_char != part else part
-        print(f"{kid}\t{char}\t{keyword}\tphantom part: {shown} -> {resolved}")
-    print(f"\n{len(hits)} phantom part(s) across {len({h[0] for h in hits})} kanji")
+    def show(rows):
+        for kid, char, keyword, part, part_char, resolved, _blind in rows:
+            shown = f"{part} ({part_char})" if part_char and part_char != part else part
+            print(f"{kid}\t{char}\t{keyword}\tphantom part: {shown} -> {resolved}")
+
+    solid = [h for h in hits if not h[6]]
+    blind = [] if args.hide_blind else [h for h in hits if h[6]]
+    show(solid)
+    if blind:
+        print("\n-- cjkvi-ids cannot see inside these hosts (unencoded placeholder in the\n"
+              "   expansion), so only the Heisig name channel is speaking. Weaker evidence:\n")
+        show(blind)
+    shown = solid + blind
+    tail = (f" — {len(blind)} of them across {len({h[0] for h in blind})} kanji rest on the"
+            f" Heisig channel alone") if blind else ""
+    print(f"\n{len(shown)} phantom part(s) across {len({h[0] for h in shown})} kanji{tail}")
     return 0
 
 

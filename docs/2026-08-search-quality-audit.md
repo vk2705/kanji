@@ -13038,3 +13038,53 @@ lint + build clean. No pin moved. **Phantom parts 86→84 across 59→58 kanji**
 
 **Next** — the "staples" family (印 暇 興) and "staple gun" (段), where cjkvi
 writes the left halves as unencoded placeholders.
+
+## 2026-09-20 — chunk 15: cjkvi-ids' circled numbers are holes, not components
+
+Chunks 13 and 14 both ended by parking 印 and 段 because "cjkvi writes their left
+halves as unencoded placeholders". That kept happening, so this chunk went and
+looked at what a placeholder actually is — and the answer changes how a quarter
+of the remaining findings should be read.
+
+cjkvi-ids writes a component it has no codepoint for as a circled number, and
+**those numbers are per-entry placeholders, not identifiers**:
+
+```
+U+4E0D  不  ⿱一③      the three strokes under 不's lid
+U+5317  北  ⿰③匕      the left half of 北
+U+5370  印  ⿰③卩      the left half of 印
+U+6B64  此  ⿰③匕      a 止 variant
+U+5373  即  ⿰⑤卩      皀 (chunk 8 established this one by rendering)
+U+53DA  叚  ⿰⑤⿱コ又   something else entirely
+U+5176  其  ⿱⿱⑤一八   the top of 其
+```
+
+Four different shapes share ③; three share ⑤. Nothing may ever be inferred from
+two entries carrying the same number. Worth stating plainly because the opposite
+assumption is the natural one, and this project's whole structural channel is
+built on cjkvi-ids.
+
+The closure already treated them as opaque glyphs, which is safe — they match
+nothing — but the consequence had never been made visible: **for a host whose
+expansion contains a placeholder, the structural channel cannot clear anything
+that lives inside the hole, and the Heisig name channel is silently carrying the
+check alone.** That is 26 of the 84 remaining phantom findings, across 17 kanji
+— 祭 之 不 縄 印 興 甚 郷 段 繭 鶴 劇 慕 添 替 賛 and 縄's neighbours — not a
+corner case, and exactly the set that has been resurfacing chunk after chunk.
+
+`audit_phantom_parts.py` now reports them in their own section under a header
+that says so, with `--hide-blind` to drop them, and the reasoning is written into
+its docstring and `CLAUDE.md`. "cjkvi-ids cannot reach it" and "it is not in the
+glyph" are different claims, and the tool now stops printing them as if they
+were the same one.
+
+No data changed this chunk. Verified: 1324 checks with only the 4 known
+hanzi-scope non-issues, 66 pytest, over-flattening 0, dead tokens 0,
+self-references 0, primary-choice 0, frontend lint + build clean;
+`audit_primary_choice.py` and `suggest_heisig_aliases.py` both import helpers
+from this module and were re-run to confirm the tuple change did not reach them.
+**Phantom parts unchanged at 84 across 58 kanji — 58 across 41 with the blind
+set removed**, which is the number worth working from now.
+
+**Next** — the 58 double-checked ones. 心 in 慕/添 and 亠 in 替/賛 are in the
+blind set; the solid list is led by 一 (9), 八 (6) and ノ (6).
