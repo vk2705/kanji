@@ -621,8 +621,10 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"rtk2229", "rtk410"}},
     "rtk2943": {"character": "赳", "keyword": "bold",
                "expected_part_ids": {"prim-pipe", "rtk410"}},
+    # 2026-09-20: rtk423 (衣) was a phantom here — 袁 has no 亠 over its 𧘇, and
+    # Heisig's row for 猿 says "scarf", not "clothing". Same for 遠 園 環 還.
     "rtk430": {"character": "猿", "keyword": "monkey",
-               "expected_part_ids": {"kangxi94", "prim-earthenware-jar", "rtk423"}},
+               "expected_part_ids": {"kangxi94", "prim-earthenware-jar", "prim-scarf"}},
     "rtk561": {"character": "独", "keyword": "single",
                "expected_part_ids": {"kangxi94", "rtk556"}},
     "rtk757": {"character": "獲", "keyword": "seize",

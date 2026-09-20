@@ -12895,3 +12895,30 @@ nothing common to every host at all — `drops` (卵州心) and `staples` (印�
 which the tool itself flags as "likely a missing row". The 103 remaining phantom
 parts are now the larger seam, led by `｜` (11), `一` (9), `八` (6) and `ノ` (6)
 — all stroke primitives, i.e. the flattening complaint in its last hiding place.
+
+## 2026-09-20 — chunk 11: the 袁/睘 family was carrying whole 衣 for 衣's bottom
+
+Five of the remaining phantoms were one family: 遠 猿 園 環 還 all listed 衣
+("clothing") as a part. The glyph does not contain it — 袁 and 睘 have no 亠 over
+their 𧘇, and the 亠 is precisely what makes 衣 衣. Heisig says so outright and
+was simply not being read: 遠 猿 園 all end "...; mouth; **scarf**" and 環 還 end
+"...; ceiling; mouth; **scarf**". Rendered side by side with 衣 and bare 𧘇 it is
+not a close call. All five now take 𧘇, which chunk 10 had just finished
+establishing the identity of.
+
+`prim-earthenware-jar` (𠮷 = 土+口) was checked and left alone, because the
+tempting move here is to promote it to 袁 and that would be wrong: 舎's row
+expands "earthenware jar" to "soil; dirt; ground; mouth" and nothing more, so
+the name sits one level *below* 袁, not on it. 遠 is 𠮷 + 𧘇 + 辶, not 袁 + 辶.
+
+睘 is registered as `prim-trampoline` because 環 and 還 were spelling it out in
+four parts each. "Trampoline" is Heisig's own word and appears in exactly those
+two rows; cjkvi-ids gives 睘 = `⿳罒𠮛𧘇`, and 𠮛 is the 一+口 his expansion calls
+"one; ceiling; mouth".
+
+Verified: 1324 checks with only the 4 known hanzi-scope non-issues, 66 pytest,
+over-flattening 0, dead tokens 0, self-references 0, primary-choice 0, frontend
+lint + build clean. One pin moved (rtk430) with the reason next to it.
+**Phantom parts 103→98 across 74→69 kanji.**
+
+**Next** — the stroke-primitive phantoms (`｜` 11, `一` 9, `八` 6, `ノ` 6).

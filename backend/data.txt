@@ -479,8 +479,8 @@ rtk425:装:attire:衣,壮
 rtk426:裏:back:衣,里;亠,里,𧘇
 rtk427:壊:demolition:土,十,罒,衣
 rtk428:哀:pathetic:衣,口;亠,口,𧘇
-rtk429:遠:distant:衣,辶,𠮷
-rtk430:猿:monkey:犭,衣,𠮷
+rtk429:遠:distant:𠮷,𧘇,辶
+rtk430:猿:monkey:犭,𠮷,𧘇
 rtk431:初:first time:衤,刀
 rtk432:巾:towel:冂,｜
 rtk433:布:linen:巾,𠂇;ノ,一,巾
@@ -679,7 +679,7 @@ rtk625:団:group:寸,囗
 rtk626:因:cause:大,囗
 rtk627:姻:matrimony:女,因
 rtk628:咽:throat:口,因
-rtk629:園:park:衣,囗,𠮷
+rtk629:園:park:囗,𠮷,𧘇
 rtk630:回:-times:口,囗
 rtk631:壇:podium:旦,口,土,亠,囗
 rtk632:店:store:占,广
@@ -949,8 +949,8 @@ rtk895:置:placement:直,罒
 rtk896:罰:penalty:罒,言
 rtk897:寧:rather:宀,心,罒,丁
 rtk898:濁:voiced:水,罒,勹,虫
-rtk899:環:ring:王,罒,一,口,衣
-rtk900:還:send back:罒,一,口,衣,辶
+rtk899:環:ring:王,睘
+rtk900:還:send back:睘,辶
 rtk901:夫:husband:一,大;二,人
 rtk902:扶:aid:夫,扌
 rtk903:渓:mountain stream:水,爪,夫
@@ -3809,3 +3809,16 @@ prim-chop-seal:龴:chop-seal,hanko,マ:
 # self-name plus this one component. Its top is unencoded (cjkvi writes the
 # placeholder ④ for it) and naming it would mean inventing a primitive for a
 # single host, so it stays unnamed rather than spelled out in strokes.
+
+# --- 2026-09-20: the 袁/睘 family was carrying 衣 ("clothing") where the glyph
+# only ever has 衣's bottom. Heisig says so outright -- 遠 猿 園 all read
+# "earthenware jar; lidded crock; soil; dirt; ground; mouth; *scarf*", and
+# 環 還 read "... one; ceiling; mouth; *scarf*" -- and the render agrees: 袁 and
+# 睘 have no 亠 over the 𧘇, which is exactly what makes 衣 衣 rather than 𧘇.
+# The already-registered prim-earthenware-jar (𠮷 = 土+口) stays where it is:
+# 舎's row expands "earthenware jar" to just "soil; dirt; ground; mouth", so
+# the name belongs one level below 袁, not on it.
+# 睘 is registered here because 環/還 were spelling it out in four parts. Heisig
+# names it "trampoline" (only those two rows use the word); cjkvi-ids gives
+# ⿳罒𠮛𧘇, and 𠮛 is the 一+口 his expansion calls "one; ceiling; mouth".
+prim-trampoline:睘:trampoline:罒,一,口,𧘇
