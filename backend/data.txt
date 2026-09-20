@@ -3,7 +3,7 @@ prim-joint:冎:joint
 prim-jawbone:咼:jawbone:口,冂;口,冎
 prim-dollar-sign:弗:dollar sign,dollar:弓,｜
 prim-snare:丂:snare,slingshot,catapult:一,勹
-kangxi3:丶:dot,tick,drop
+kangxi3:丶:dot,tick,drop,drops
 kangxi9:亻:person
 kangxi10:儿:human legs,legs,teenager
 kangxi12:丷:horns,animal horns
@@ -1583,7 +1583,7 @@ rtk1529:貿:trade:prim-receipt,刀,貝
 rtk1530:印:stamp:｜,卩
 rtk1531:臼:mortar,back to back staples:
 rtk1532:毀:break:土,殳,臼
-rtk1533:興:entertain:臼,同,八
+rtk1533:興:entertain:𦥑,同,一,八
 rtk1534:酉:west,whiskey bottle:
 rtk1535:酒:sake:水,酉
 rtk1536:酌:bar-tending:酉,勺
@@ -4058,3 +4058,23 @@ prim-banner:㫃:banner:方,𠂉
 # 丿-topped box, not 㠯's stacked pair. The row stays as it is.
 prim-alien:冋:alien:冂,口
 prim-mountain-goat:屰:mountain goat:丷,屮
+
+# --- 2026-09-20: two more of the name groups, and one deliberately left open.
+# drops -> 丶. Heisig uses the plural for a repeated drop rather than for a
+# different shape: 州 is "stream; flood; drops" (川 + 丶丶丶), 心 is "drops;
+# fishhook", 卵 is "sign of the hare; receipt; stamp; drops". Same primitive,
+# counted, so the name goes on the row it is the plural of.
+# staples -> 𦥑 (U+26951), 興's top (cjkvi ⿶⿳𦥑一八同). 興 had 臼, which Heisig
+# calls "back to back staples" -- a different name for a different codepoint,
+# and the one this row was using. Said plainly: 𦥑 and 臼 render
+# indistinguishably in the fonts available here, so this distinction rests on
+# cjkvi-ids plus Heisig having two names, not on the render. That is weaker
+# evidence than most entries in this file and is recorded as such.
+# NOT placed: "miss world"/"paper punch" (売 読 探 深). In 売 the pair expands to
+# "crown; human legs" = 冖 + 儿; in 探 to "hole; house; human legs; tree" =
+# 穴 + 木. Two different shapes -- ⿱冖儿 and 穴 -- under one name, which is a
+# pattern this audit knows well, except that ⿱冖儿 has no codepoint that fits:
+# 冗 (U+5197) is 冖 over 几, and rendered beside 売 the bottom-left stroke is a
+# vertical drop where 売's is a plain 丿. Naming 冗 would resolve the term and
+# point it at a row none of the four hosts uses. Left unresolved on purpose.
+prim-staples:𦥑:staples:

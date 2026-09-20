@@ -2131,8 +2131,11 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"kangxi15", "rtk1503"}},
     "rtk1514": {"character": "擬", "keyword": "mimic",
                 "expected_part_ids": {"kangxi64", "rtk1513"}},
+    # 2026-09-20: 興's top is 𦥑 (cjkvi ⿶⿳𦥑一八同), Heisig's "staples"; 臼 is
+    # his "back to back staples", a different codepoint. The two render alike
+    # here, so this rests on cjkvi plus the two names, not on the render.
     "rtk1533": {"character": "興", "keyword": "entertain",
-                "expected_part_ids": {"rtk1531", "rtk192", "rtk8"}},
+                "expected_part_ids": {"prim-staples", "rtk192", "rtk8", "rtk1"}},
     "rtk1538": {"character": "酵", "keyword": "fermentation",
                 "expected_part_ids": {"rtk1342", "rtk1534"}},
     "rtk1540": {"character": "酬", "keyword": "repay",

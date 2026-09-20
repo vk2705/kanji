@@ -13552,3 +13552,41 @@ frontend lint + build clean. Two pins moved (向, 尚). **Unresolved name groups
 
 **Next** — the remaining six groups: "miss world/paper punch", "rag", "drops",
 "sherpa", "fred astaire", "staples".
+
+## 2026-09-20 — chunk 27: drops, staples, and one name left unresolved on purpose
+
+**drops → 丶.** Heisig uses the plural for a *repeated* drop, not a different
+shape: 州 is "stream; flood; drops" (川 + 丶丶丶), 心 is "drops; fishhook", 卵 is
+"sign of the hare; receipt; stamp; drops". Same primitive, counted. The name
+goes on the row it is the plural of.
+
+**staples → 𦥑 (U+26951)**, 興's top (cjkvi `⿶⿳𦥑一八同`). 興 had 臼, which
+Heisig calls "back to back **staples**" — a different name for a different
+codepoint, and the one this row was using. Stated plainly, because it matters:
+**𦥑 and 臼 render indistinguishably in the fonts available here.** This
+distinction rests on cjkvi-ids plus Heisig having two names for the two shapes,
+not on the render, which is weaker evidence than most entries in this log and is
+recorded as such. The rendered PNG does show 𦥑's bottom open where 臼's closes,
+but only at four times the size anyone will see it at.
+
+**"miss world" / "paper punch" is left unresolved, and that is the finding.**
+In 売 the pair expands to "crown; human legs" = 冖 + 儿; in 探 to "hole; house;
+human legs; tree" = 穴 + 木. Two shapes under one name is a pattern this audit
+knows well — except that ⿱冖儿 has no codepoint that fits. **冗 (U+5197) is 冖
+over 几**, and rendered beside 売 its bottom-left stroke is a vertical drop
+where 売's is a plain 丿; Heisig says "human legs" too. Naming 冗 would resolve
+the term and point it at a row none of the four hosts uses — the exact
+"resolved but misleads" shape this whole audit exists to undo. One unresolved
+name is cheaper.
+
+**The new CI check earned its keep immediately.** Registering 𦥑 without
+rendering it failed `test_regression_fixes.py` on the very next run, by name,
+with the command to fix it. That is the mistake chunks 12 and 18 both made
+silently.
+
+Verified: 1325 checks exit 0, 66 pytest, over-flattening 0, dead tokens 0,
+self-references 0, primary-choice 0, frontend lint + build clean. One pin moved
+(興). **Unresolved name groups 6→4; phantom parts 39→38.**
+
+**Next** — the last four groups: "rag", "sherpa", "fred astaire", "staples"
+(印/暇, whose left halves cjkvi cannot write).
