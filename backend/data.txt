@@ -1622,8 +1622,8 @@ rtk1568:塩:salt:口,皿,土,ノ,一,人
 rtk1569:銀:silver:金,艮
 rtk1570:恨:regret:艮,state of mind
 rtk1571:根:root:艮,木
-rtk1572:即:instant:艮,卩
-rtk1573:爵:baron:爪,罒,艮,寸
+rtk1572:即:instant:皀,卩
+rtk1573:爵:baron:爪,罒,皀,寸
 rtk1574:節:node:即,竹
 rtk1575:退:retreat:辶,艮
 rtk1576:限:limit:艮,阝
@@ -1643,7 +1643,7 @@ rtk1589:館:building:官,食
 rtk1590:餅:mochi rice cake:并,食
 rtk1591:養:foster:食,羊
 rtk1592:飽:sated:食,包
-rtk1593:既:previously,waitress:牙,艮
+rtk1593:既:previously,waitress:皀,旡
 rtk1594:概:outline:既,木
 rtk1595:慨:rue:既,忄
 rtk1596:平:even,lily pad,water-lily:干,丷
@@ -2051,9 +2051,9 @@ rtk1989:都:metropolis:者,⻏;者,阝
 rtk1990:郵:mail:垂,⻏;垂,阝
 rtk1991:邦:home country:丰,⻏;丰,阝
 rtk1992:那:what?:刀,⻏,二;二,刀,阝
-rtk1993:郷:home town:艮,⻏,幺
+rtk1993:郷:home town:幺,皀,⻏
 rtk1994:響:echo:郷,音
-rtk1995:郎:son:艮,⻏
+rtk1995:郎:son:良,⻏
 rtk1996:廊:corridor:郎,广
 rtk1997:盾:shield:𠂋,十,目
 rtk1998:循:sequential:盾,彳
@@ -2963,7 +2963,7 @@ rtk2903:麿:i:麻,呂
 rtk2904:叢:plexus:耳,又,羊
 rtk2905:肴:accompaniment for drinks:ノ,一,月,丶;㐅,有
 rtk2906:斐:beautiful:非,文
-rtk2907:卿:you:艮,卩
+rtk2907:卿:you:皀,卩
 rtk2908:翫:take pleasure in:元,習
 rtk2909:於:at:方,𠆢
 rtk2910:套:accumulate:大,長,厶
@@ -3763,3 +3763,16 @@ prim-assembly-line:从:assembly line:人,人
 # --- 2026-09-20: 㓞 'flick knife' = 丰 + 刀, the top of 契 and the
 # middle of 潔's 絜. 1.00 over its three hosts.
 prim-flick-knife:㓞:flick knife:丰,刀
+
+# --- 2026-09-20: 皀 and 旡, both of which 艮/牙 had been standing in for.
+# Heisig calls 艮 and 皀 alike 'silver' (恨 = Freud + silver, 即 = silver +
+# stamp), so the name is ambiguous on purpose — but the glyphs are not: 艮
+# flares bottom-right and has no top dot, 皀 is 白 over 匕. Rendering 銀
+# beside 即 and 既 settles it. cjkvi-ids writes an unencoded placeholder for
+# this shape rather than 皀, so the codepoint is the best available match
+# rather than a citation; the render is what it rests on.
+prim-silver-grain:皀:silver:白,匕
+# 旡 is 既's right half. Heisig names it nothing, so this is a descriptive
+# non-Heisig name (owner-permitted). Unicode makes 无 (U+65E0) radical 71 and
+# 旡 (U+65E1) its variant, which is why this is not kangxi71.
+prim-turned-back-person:旡:turned back person:

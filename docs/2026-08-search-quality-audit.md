@@ -12757,3 +12757,38 @@ Verified: 1324 checks with only the 4 known hanzi-scope non-issues, 66 pytest,
 over-flattening 0, dead tokens 0, self-references 0, primary-choice 0, phantom
 parts 112, frontend lint + build clean. One pin (潔) re-pinned. **Unsearchable
 Heisig names 187→183.**
+
+---
+
+## 2026-09-20 (chunk 8) — "silver" is two glyphs, and 艮 was doing both jobs
+
+Switched to the phantom pile now that the `--near` queue is thin. `艮` was
+flagged on **即 爵 既 郷 郎 卿** — which is not the 銀 恨 限 根 眼 family, where 艮
+is genuinely right. Two different shapes under one name again.
+
+Heisig calls both "silver": 恨 reads "Freud; state of mind; silver" (忄+艮) and
+即 reads "silver; stamp". So the *name* is ambiguous on purpose, as with "grow
+up" and "breasts". The *glyphs* are not, and the render is unambiguous: 艮 flares
+bottom-right and has no top dot; 皀 is 白 over 匕. Put 銀 beside 即 and 既 and it
+is plain.
+
+Registered **皀** as `prim-silver-grain` (白+匕) carrying "silver" alongside 艮,
+and repointed 即 爵 既 郷 卿. 郎 went to **良** instead — its row reads "halo;
+good; drop; silver; city walls", and "good" is 良, whose own expansion supplies
+the drop and the silver.
+
+**One honest caveat.** cjkvi-ids writes an *unencoded placeholder* for this shape
+rather than 皀, so the codepoint is the best available match rather than a
+citation. The render is what this rests on, and that is recorded in `data.txt`
+next to the row.
+
+Two more fixed on the way: 既 was carrying **牙**, which is not in it — its right
+half is 旡, registered as `prim-turned-back-person` with a descriptive
+non-Heisig name (owner-permitted; Heisig names it nothing). Noted there that
+Unicode makes 无 radical 71 and 旡 its variant, which is why the id is not
+`kangxi71`.
+
+Verified: 1324 checks with only the 4 known hanzi-scope non-issues, 66 pytest,
+over-flattening 0, dead tokens 0, self-references 0, primary-choice 0, frontend
+lint + build clean. **Phantom parts 112→106 across 80→76 kanji.** No pin moved.
+Both new glyphs are BMP, so no primitive image was needed.
