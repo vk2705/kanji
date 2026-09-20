@@ -12630,3 +12630,31 @@ Verified: 1324 checks with only the 4 known hanzi-scope non-issues, 66 pytest,
 over-flattening 0, dead tokens 0, self-references 0, primary-choice 0, frontend
 lint + build clean. Phantom parts 112→112 (this chunk moved names and
 structure, not phantoms). One pin (座) re-pinned.
+
+---
+
+## 2026-09-20 (chunk 4) — three renames Heisig makes for a handful of frames
+
+All three are the 田 = "rice field"/"brains" pattern: one shape the book renames
+for a few frames, so the name's host set is tiny next to the shape's and
+`--near` cannot see it. The evidence is the CSV's own decomposition of the host,
+same reasoning as `belt`→冂.
+
+- **children → 子** (1.00). 享's components read "tall; top hat; mouth;
+  children", and 享 is 亠+口+子. 塾 熟 郭 reach it through 享.
+- **cross → 十** (1.00). 辻 reads "cross; ten; needle; road" and is 辶+十 —
+  road is 辶, so cross, ten and needle are all the one 十.
+- **edam → 月** (1.00). 勝 藤 謄 騰 all carry 月 on the *left*, which is unusual,
+  and Heisig names that round wheel of cheese. Its host set is exactly those
+  four.
+
+Pure alias additions — no decomposition moved, so nothing could regress.
+
+**`miss world` / `paper punch`** (売 探 深 読) was looked at and left. The two
+names share a host set so they are one shape, but 冗 scores 0.00 and the CSV
+lists them *alongside* "crown" (冖) and "human legs" (儿) in 売 while 探/深 reach
+their half through 罙, so the shape is not simply 冗. Needs its own look.
+
+Verified: 1324 checks with only the 4 known hanzi-scope non-issues, 66 pytest,
+over-flattening 0, dead tokens 0, self-references 0, primary-choice 0, phantom
+parts 112, frontend lint + build clean. **Unsearchable Heisig names 206→203.**

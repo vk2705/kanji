@@ -67,10 +67,10 @@ rtk1:一:one,floor,ceiling,minus,silage:
 rtk2:二:two:;一
 rtk5:五:five:
 rtk9:九:nine,baseball:
-rtk10:十:ten:
+rtk10:十:ten,cross:
 rtk11:口:mouth:
 rtk12:日:day,sun,tongue wagging,tongue wagging in mouth:
-rtk13:月:month,moon,flesh,part of the body:
+rtk13:月:month,moon,flesh,part of the body,edam:
 rtk14:田:rice field,brains:
 rtk15:目:eye:
 rtk22:晶:sparkle:日
@@ -149,7 +149,7 @@ rtk95:丁:street,spike:一,亅
 rtk96:町:town:田,丁
 rtk97:可:can:丁,口
 rtk98:頂:place on the head:丁,頁
-rtk99:子:child:
+rtk99:子:child,children:
 rtk100:孔:cavity:乙,子
 rtk101:了:complete:一,亅
 rtk102:女:woman:
