@@ -13392,3 +13392,47 @@ parts unchanged at 40, frontend lint + build clean. No pin moved.
 name-occurrences resolve.**
 
 **Next** — the other half of the detector's list.
+
+## 2026-09-20 — chunk 23: seventeen more, and five left standing
+
+The smaller half of the detector's list. Same class, placed the same way — by
+where Heisig emits the name, not by what it sounds like.
+
+Four are componential, and the adjacency is what identifies them:
+
+* **comb → 而** — 耐 is "comb; glue" (而 + 寸) and 需 is "rain; comb".
+* **helmet → 冂** — 向 is "alien; drop; helmet; hood; mouth"; "helmet; hood" run
+  together, and 冂 already carried "hood".
+* **stretch → 廴** — 建 is "brush; stretch", 延 is "drop; stop; stretch".
+* **tripod → 鬲** — 融 is "tripod" followed by 鬲's own pieces, then 虫.
+* **vehicle → 車**, **nose → 自** (臭 is "nose; drop; eye; large", and 自 *is*
+  drop + eye), **truth → 真** ("true; truth" adjacent in 鎮 and 慎),
+  **tombstone → 古** (whose own row is "tombstone; gravestone; church" and then
+  its parts — this file already had the other two).
+
+Nine more are the self-named pattern chunk 6 built a mode for: the first word of
+a kanji's *own* components row is Heisig's primitive name for it, distinct from
+its keyword. **rumor → 説, increase → 曽, moat → 堀, food → 食, rabbit → 免,
+knot → 勿, horse → 午, halo → 良, strung together → 共.**
+
+**Five are left standing on purpose**, because each fails the pattern the others
+fit and guessing would just move the error somewhere harder to find:
+
+* **eel** (電, 竜) appears to be 电, which has no row here at all.
+* **banner** (施, 旋, 遊) is the 方 + 𠂉 unit, 㫃 — a compound this file has
+  never named.
+* **wall** (転, 芸, 雲) is emitted *after* 云's own parts rather than before
+  them, which is backwards from how every other name in this chunk behaves.
+* **question mark** (呼, 率) and **deluge** (巡, 港), where two unrelated kanji
+  each look like they self-name it.
+
+Verified: 1324 checks with only the 4 known hanzi-scope non-issues, 66 pytest,
+over-flattening 0, dead tokens 0, self-references 0, primary-choice 0, phantom
+parts unchanged at 40, frontend lint + build clean. No pin moved.
+**Anachronistic names 22→5.**
+
+Across chunks 21–23: **44 → 5**, and the ~1,150 component-row occurrences behind
+them now resolve to the primitive Heisig meant rather than to a later kanji that
+shares the word.
+
+**Next** — the five above, one glyph at a time.

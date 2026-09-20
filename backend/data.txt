@@ -51,7 +51,7 @@ rtk4:?:4,four:囗,儿
 rtk6:六:six,6:top hat,八
 rtk7:七:seven,diced: 
 rtk8:?:eight,8,infinity,animal legs
-rtk16:?:old,church,gravestone:mouth,ten
+rtk16:?:old,church,gravestone,tombstone:mouth,ten
 rtk17:?:I:five,mouth
 rtk18:?:risk:sun,eye
 rtk19:?:companion:flesh
@@ -87,7 +87,7 @@ rtk32:亘:span:一,旦
 rtk33:凹:concave:
 rtk34:凸:convex:
 rtk35:旧:old times:｜,日
-rtk36:自:oneself:丶,目
+rtk36:自:oneself,nose:丶,目
 rtk37:白:white,dove:丶,日
 rtk38:百:hundred:一,白
 rtk39:中:in:｜,口
@@ -130,7 +130,7 @@ rtk75:乙:the latter,fishhook:
 rtk76:乱:riot:乙,舌
 rtk77:直:straightaway:十,目,𠃊
 rtk78:具:tool:一,八,目
-rtk79:真:true:具,十
+rtk79:真:true,truth:具,十
 rtk80:工:craft,artificial:
 rtk81:左:left:工,𠂇
 rtk82:右:right:口,𠂇
@@ -354,7 +354,7 @@ rtk300:迫:urge:辶,白
 rtk301:逃:escape:辶,兆
 rtk302:辺:environs:辶,刀
 rtk303:巡:patrol:辶,巛
-rtk304:車:car:
+rtk304:車:car,vehicle:
 rtk305:連:take along:辶,車
 rtk306:軌:rut:車,九
 rtk307:輸:transport:俞,車
@@ -588,9 +588,9 @@ rtk534:訪:call on:言,方
 rtk535:放:set free:方,攵
 rtk536:激:violent:水,白,方,攵
 rtk537:脱:undress:兑,月
-rtk538:説:opinion:兑,言
+rtk538:説:opinion,rumor:兑,言
 rtk539:鋭:pointed:兑,金
-rtk540:曽:formerly:田,日,丷
+rtk540:曽:formerly,increase:田,日,丷
 rtk541:増:increase:曽,土
 rtk542:贈:presents:貝,曽
 rtk543:東:east:日,木
@@ -660,7 +660,7 @@ rtk606:準:semi-:十,水,隹
 rtk607:奮:stirred up:大,田,隹
 rtk608:奪:rob:寸,大,隹
 rtk609:確:assurance:石,冖,隹
-rtk610:午:noon:十,𠂉
+rtk610:午:noon,horse:十,𠂉
 rtk611:許:permit:午,言
 rtk612:歓:delight:欠,𮥶
 rtk613:権:authority:木,𮥶
@@ -1178,7 +1178,7 @@ rtk1124:施:give:ノ,方,一,也
 rtk1125:旋:rotation:疋,方
 rtk1126:遊:play:辶,子,方
 rtk1127:旅:trip:ノ,方
-rtk1128:勿:not,piglet’s tail:ノ,勹
+rtk1128:勿:not,piglet’s tail,knot:ノ,勹
 rtk1129:物:thing:牛,勿
 rtk1130:易:easy:日,勿
 rtk1131:賜:grant:易,貝
@@ -1192,7 +1192,7 @@ rtk1138:屋:roof:至,尸
 rtk1139:握:grip:屋,扌
 rtk1140:屈:yield:出,尸
 rtk1141:掘:dig:屈,扌
-rtk1142:堀:ditch:屈,土
+rtk1142:堀:ditch,moat:屈,土
 rtk1143:居:reside:尸,古
 rtk1144:据:set:扌,居
 rtk1145:裾:cuff:居,衤
@@ -1628,11 +1628,11 @@ rtk1574:節:node:即,竹
 rtk1575:退:retreat:辶,艮
 rtk1576:限:limit:艮,阝
 rtk1577:眼:eyeball:艮,目
-rtk1578:良:good:丶,艮;艮,｜
+rtk1578:良:good,halo:丶,艮;艮,｜
 rtk1579:朗:melodious:月,良
 rtk1580:浪:wandering:水,良
 rtk1581:娘:daughter:女,良
-rtk1582:食:eat:;人,良
+rtk1582:食:eat,food:;人,良
 rtk1583:飯:meal:食,反
 rtk1584:飲:drink:欠,食
 rtk1585:飢:hungry:食,几
@@ -1992,7 +1992,7 @@ rtk1930:霊:spirits:雨,二,业
 rtk1931:業:business:业,丷,一,木
 rtk1932:撲:slap:扌,业,丷,夫
 rtk1933:僕:me:亻,业,丷,夫
-rtk1934:共:together:八,龷
+rtk1934:共:together,strung together:八,龷
 rtk1935:供:submit:亻,共
 rtk1936:異:uncommon:共,田
 rtk1937:翼:wing:異,羽
@@ -2184,7 +2184,7 @@ rtk2122:蹴:kick:就,足
 rtk2123:懇:sociable:豸,艮,心
 rtk2124:墾:ground-breaking:豸,艮,土
 rtk2125:貌:form:白,儿,豸
-rtk2126:免:excuse,village stocks:｜,一,勹,儿
+rtk2126:免:excuse,village stocks,rabbit:｜,一,勹,儿
 rtk2127:逸:deviate:免,辶
 rtk2128:晩:nightfall:日,免
 rtk2129:勉:exertion:力,免
@@ -2300,7 +2300,7 @@ rtk2239:菫:the violet:艹,口,龶
 rtk2240:曼:wide:日,罒,又
 rtk2241:云:say,rising cloud:二,厶
 rtk2242:莫:must not,graveyard:大,日,艹
-rtk2243:而:and yet:
+rtk2243:而:and yet,comb:
 rtk2244:倭:yamato:亻,委
 rtk2245:侠:tomboy:亻,大,二,丷,亠;亻,夹
 rtk2246:倦:lose interest in:亻,巻
@@ -3063,7 +3063,7 @@ rtk3000:鼈:snapping turtle:敝,黽
 # Kangxi radical English names (or, for 艹/厶, the established primitive meaning);
 # not Heisig book text.
 kangxi8:亠:lid,primitive_lid,top hat
-kangxi13:冂:border,down box,hood,belt,glass canopy
+kangxi13:冂:border,down box,hood,belt,glass canopy,helmet
 # "crown" added 2026-09-19: Heisig's OWN alternate name for this exact glyph,
 # used in 57 CSV component lists (冗,冥,軍,冠,帝,... plus every host that
 # transitively contains 冖 through an already-decomposed compound like
@@ -3098,7 +3098,7 @@ kangxi22:匚:box,receptacle
 kangxi152:豕:pig,sow
 kangxi78:歹:death,bad,bones
 kangxi56:弋:stake,shoot,arrow
-kangxi54:廴:long stride
+kangxi54:廴:long stride,stretch
 kangxi141:虍:tiger
 kangxi105:癶:footsteps,back-to-back feet,teepee,wigwam
 kangxi165:釆:distinguish,claw print,animal tracks
@@ -3110,7 +3110,7 @@ kangxi127:耒:plow,christmas tree
 kangxi153:豸:badger,legless insect,skunk
 kangxi89:爻:trigrams,diagram
 kangxi179:韭:leek
-kangxi193:鬲:cauldron
+kangxi193:鬲:cauldron,tripod
 kangxi84:气:steam,air
 kangxi190:髟:long hair
 kangxi192:鬯:sacrificial wine
@@ -3992,3 +3992,24 @@ prim-resin:朮:resin,pole:木,丶
 # rather than inventing a split the rest of the data does not make.
 # "arrow" is 弋 (式 = "arrow; craft", 武 = "one; arrow; stop"), not 矢, which
 # Heisig calls "dart". Getting that backwards would have been easy.
+
+# --- 2026-09-20: seventeen more names from audit_anachronistic_names.py, the
+# same class as the twenty above but with smaller host counts. Each is placed by
+# where Heisig emits it, not by what it sounds like:
+#   tombstone -> 古 (its own row is "tombstone; gravestone; church" then its parts)
+#   nose -> 自      (臭 = "nose; drop; eye; large", and 自 = drop + eye)
+#   truth -> 真     ("true; truth" adjacent in 鎮 and 慎)
+#   vehicle -> 車   (軍 = "chariot; crown; vehicle; car")
+#   rumor -> 説, increase -> 曽, moat -> 堀, food -> 食, rabbit -> 免,
+#   knot -> 勿, horse -> 午, halo -> 良, strung together -> 共
+#                   (each the first word of its own row, Heisig's primitive name
+#                    for a kanji whose keyword is something else)
+#   comb -> 而      (耐 = "comb; glue" = 而 + 寸; 需 = "rain; comb")
+#   helmet -> 冂    (向 = "alien; drop; helmet; hood; mouth"; "helmet; hood" adjacent)
+#   stretch -> 廴   (建 = "brush; stretch"; 延 = "drop; stop; stretch")
+#   tripod -> 鬲    (融 = "tripod; one; ceiling; mouth; hood; human legs; ..." + 虫)
+# Left for a closer look rather than guessed at: "eel" (電/竜, apparently 电,
+# which this file has no row for), "banner" (施/旋/遊, the 方+𠂉 unit 㫃),
+# "wall" (転/芸/雲, emitted *after* 云's parts rather than before them, which
+# does not fit the pattern the others follow), "question mark" (呼/率) and
+# "deluge" (巡/港, where two unrelated kanji each seem to self-name it).
