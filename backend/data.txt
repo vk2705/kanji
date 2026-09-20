@@ -1655,8 +1655,8 @@ rtk1601:刹:temple:㐅,木,刀
 rtk1602:希:hope:㐅,布
 rtk1603:凶:villain:㐅,凵
 rtk1604:胸:bosom:月,勹,凶
-rtk1605:離:detach:亠,凶,禹,隹
-rtk1606:璃:glassy:王,亠,凶,禹
+rtk1605:離:detach:亠,凶,禸,隹
+rtk1606:璃:glassy:王,亠,凶,禸
 rtk1607:殺:kill:㐅,木,殳
 rtk1608:爽:refreshing:大,㐅
 rtk1609:純:genuine:糸,屯
@@ -2091,8 +2091,8 @@ rtk2029:来:come:｜,二,米,亠,木
 rtk2030:気:spirit:㐅,气
 rtk2031:汽:vapor:水,气
 rtk2032:飛:fly:
-rtk2033:沈:sink:水,尢,冖
-rtk2034:枕:pillow:ノ,乙,木,冖,尢
+rtk2033:沈:sink:水,冘
+rtk2034:枕:pillow:木,冘
 rtk2035:妻:wife:十,⺕,女
 rtk2036:凄:uncanny:冫,妻
 rtk2037:衰:decline:一,亠,口,𧘇;衣,一,亠
@@ -2161,7 +2161,7 @@ rtk2099:暖:warmth:日,爰
 rtk2100:媛:beautiful woman:女,爰
 rtk2101:援:abet:扌,爰
 rtk2102:緩:slacken:爰,糸
-rtk2103:属:belong:尸,禹
+rtk2103:属:belong:尸,禸
 rtk2104:嘱:entrust:口,属
 rtk2105:偶:accidentally:亻,禺
 rtk2106:遇:meet:禺,辶
@@ -2181,8 +2181,8 @@ rtk2119:謡:song:干,言,爪,凵
 rtk2120:鬱:gloom:冖,彡,木,缶,鬯
 rtk2121:就:concerning:京,尤
 rtk2122:蹴:kick:就,足
-rtk2123:懇:sociable:艮,心,爪,豸
-rtk2124:墾:ground-breaking:艮,爪,土,豸
+rtk2123:懇:sociable:豸,艮,心
+rtk2124:墾:ground-breaking:豸,艮,土
 rtk2125:貌:form:白,儿,豸
 rtk2126:免:excuse,village stocks:｜,一,勹,儿
 rtk2127:逸:deviate:免,辶
@@ -2264,7 +2264,7 @@ rtk2202:柴:brush:木,此
 rtk2203:些:a little bit:二,此
 rtk2204:砦:fort:石,此
 rtk2205:髭:beard:止,長,匕,彡,髟;此,髟
-rtk2206:禽:bird:𠆢,亠,冂,凵,厶,禹,丶,ノ
+rtk2206:禽:bird:𠆢,亠,凶,禸
 rtk2207:檎:apple:木,禽
 rtk2208:憐:pity:舛,米,state of mind,夕
 rtk2209:燐:phosphorus:火,舛,米,夕
@@ -2380,7 +2380,7 @@ rtk2319:嬉:glad:女,喜
 rtk2320:孕:become pregnant:子,乃
 rtk2321:孜:industriousness:子,攵
 rtk2322:宥:soothe:宀,有
-rtk2323:寓:temporary abode:田,冂,厶,宀,禹;宀,禺
+rtk2323:寓:temporary abode:宀,禺
 rtk2324:宏:wide:ノ,一,厶,宀
 rtk2325:牢:prison:牛,宀
 rtk2326:宋:dwell:木,宀
@@ -3030,7 +3030,7 @@ rtk2970:轡:bit (horse):口,糸,車
 rtk2971:淵:abyss:｜,一,水,丬,片
 rtk2972:伍:five:亻,五
 rtk2973:什:utensil:亻,十
-rtk2974:萬:ten thousand:田,日,冂,禹,艹;禺,艹
+rtk2974:萬:ten thousand:艹,禺
 rtk2975:邁:go:辶,萬
 rtk2976:燭:light:火,虫,勹
 rtk2977:逞:sturdy:呈,辶
@@ -3139,7 +3139,7 @@ prim-mound-radical:阡:mound radical
 prim-small-radical:⺌:small radical,small,little:
 prim-fire-radical:灬:fire radical,barbecue,oven-fire,tail feathers
 kangxi104:疒:sickness radical,疔,sickness,hospital
-prim-track-radical:禹:track radical
+kangxi114:禸:track radical:冂,厶
 prim-katakana-no:ノ:katakana no
 prim-katakana-yu:ユ:katakana yu
 
@@ -3243,7 +3243,7 @@ prim-harvest-festival:𢦏:harvest festival,thanksgiving:十,戈
 prim-streetwalker:夋:streetwalker,john cleese,ministry of silly walks:允,夂
 prim-devil:兑:devil:丷,兄
 prim-futon:翟:futon:羽,隹
-prim-talking-cricket:禺:talking cricket:
+prim-talking-cricket:禺:talking cricket:田,禸
 prim-mao:夌:mao:
 prim-pup-tent:尞:pup tent:
 prim-awl:㑒:awl:亼,口,人
@@ -3892,3 +3892,22 @@ prim-mend-barred:𤴓:mend:一,龰
 # ⿱乛亅, a hooked horizontal, not a flat one.
 prim-potato-stalk:于:potato:
 prim-wooden-pole:朩:wooden pole:
+
+# --- 2026-09-20: 禸 was being carried by 禹, and 冘 by 尢.
+# 禸 (U+79B8) is Kangxi radical 114 -- verified against Unicode's own
+# CJKRadicals.txt, "114; 2F71; 79B8" -- and the row that meant it has always
+# been keyworded "track radical", radical 114's meaning. It just held the wrong
+# glyph: 禹 (U+79B9) is the kanji for Yu the Great, 禸 plus a top, and rendering
+# the two side by side shows the extra strokes plainly. Re-ided prim-track-
+# radical -> kangxi114 per this project's id convention and given its real
+# parts, 冂 + 厶 (cjkvi ⿻冂厶), which is also Heisig's "belt; elbow" in 離/璃.
+# Its six hosts move with it: 離 璃 属 禽 寓 萬. 寓 and 萬 collapse to 宀,禺 and
+# 艹,禺 (cjkvi ⿱宀禺, ⿱艹禺) -- their old primaries spelled 禺 out *and* named
+# it in the alternate, so the alternate was the primary all along -- and 禺
+# itself stops being atomic here: 甶 over 禸, rendered.
+# 冘 (U+5198) is 冖 over 儿, and 沈/枕 had 尢 (U+5C22), which is 尤 without its
+# dot -- a bent leg, not a crown over two legs. Heisig names the shape "garter"
+# ("water; garter; crown; human legs") and it had no row.
+# 懇/墾 simply carried a 爪 that is in neither glyph: both are 豸 + 艮 over
+# 心/土 (cjkvi ⿱貇心, ⿱貇土, 貇 = ⿰豸艮), which is Heisig's "skunk; silver".
+prim-garter:冘:garter:冖,儿

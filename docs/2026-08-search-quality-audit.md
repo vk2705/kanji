@@ -13127,3 +13127,44 @@ kanji; the double-checked set 58→47 across 41→34.**
 
 **Next** — 尢 in 沈/枕, 禹 in 離/璃, 尸 in 声/眉, 爪 in 懇/墾: four more pairs
 where one glyph is standing in for a neighbour.
+
+## 2026-09-20 — chunk 17: 禹 was standing in for a Kangxi radical, 尢 for 冘
+
+Two more lookalike carriers, and one row that was simply carrying a part that is
+in neither of its glyphs.
+
+**禸 (U+79B8) is Kangxi radical 114** — verified against Unicode's own
+`CJKRadicals.txt`, line `114; 2F71; 79B8` — and the row that means it has always
+been keyworded "track radical", which is radical 114's meaning. It just held the
+wrong glyph: **禹 (U+79B9)** is the kanji for Yu the Great, 禸 with a top added,
+and rendering the two beside each other shows the extra strokes plainly. So the
+row was right about what it *was* and wrong about what it *looked like* — the
+same shape as ツ-for-𭕄 and マ-for-龴, just caught from the other direction.
+
+Re-ided `prim-track-radical` → `kangxi114` per this project's id convention (no
+pin referenced the old id), and given its real parts, 冂 + 厶 (cjkvi `⿻冂厶`),
+which is also Heisig's "belt; elbow" in 離 and 璃. Its six hosts moved with it:
+離 璃 属 禽 寓 萬. Two of those turned out to be answering their own question —
+寓 and 萬 spelled 禺 out in their primary *and* named it in the alternate
+(`田,冂,厶,宀,禹;宀,禺`), so the alternate had been the right primary all along;
+both are now `宀,禺` / `艹,禺` (cjkvi `⿱宀禺`, `⿱艹禺`). 禺 itself stops being
+atomic here: rendered, it is 甶 over 禸.
+
+**冘 (U+5198) is 冖 over 儿**, and 沈/枕 had **尢 (U+5C22)**, which is 尤 without
+its dot — a bent leg, not a crown over two legs. Heisig names the shape
+"garter" ("water; garter; crown; human legs") and it had no row at all, so 枕
+was carrying ノ and 乙 as well to make up the strokes. Both are now `水,冘` /
+`木,冘`.
+
+**懇 and 墾** carried a 爪 that is in neither glyph. Both are 豸 + 艮 over 心/土
+(cjkvi `⿱貇心`, `⿱貇土`, 貇 = `⿰豸艮`), which is exactly Heisig's "skunk;
+silver" — and the 艮 is the right one of the 艮/皀 pair chunk 8 split.
+
+Verified: 1324 checks with only the 4 known hanzi-scope non-issues, 66 pytest,
+over-flattening 0, dead tokens 0, self-references 0, primary-choice 0, frontend
+lint + build clean. No pin moved. **Phantom parts 73→66 across 51→46 kanji; the
+double-checked set 47→40.**
+
+**Next** — 𠃜, the shape 声 and 眉 share (cjkvi `⿱士𠃜`, `⿸𠃜目`), which both
+currently write as 尸. That is the same "flag; stick" pair chunk 14 could not
+place, so it is the thread to pull.
