@@ -245,8 +245,8 @@ rtk191:埋:bury:土,里
 rtk192:同:same,monks:口,冂,一
 rtk193:洞:den:水,同
 rtk194:胴:trunk:月,同
-rtk195:向:yonder:口,冂,ノ
-rtk196:尚:esteem:⺌,冂,口
+rtk195:向:yonder:ノ,冋
+rtk196:尚:esteem:⺌,冋
 rtk197:字:character:子,宀
 rtk198:守:guard:寸,宀
 rtk199:完:perfect:宀,元
@@ -379,7 +379,7 @@ rtk325:運:carry:辶,軍
 rtk326:冠:crown:寸,冖,元
 rtk327:夢:dream:艹,罒,冖,夕
 rtk328:坑:pit:亢,土
-rtk329:高:tall:口,亠,冂
+rtk329:高:tall:亠,口,冋
 rtk330:享:enjoy:口,子,亠
 rtk331:塾:cram school:丸,享,土
 rtk332:熟:mellow:丸,享,灬
@@ -2167,7 +2167,7 @@ rtk2105:偶:accidentally:亻,禺
 rtk2106:遇:meet:禺,辶
 rtk2107:愚:foolish:心,禺
 rtk2108:隅:corner:禺,阝
-rtk2109:逆:inverted:辶,丷,屮
+rtk2109:逆:inverted:屰,辶
 rtk2110:塑:model:朔,土
 rtk2111:遡:go upstream:朔,辶
 rtk2112:岡:mount:丷,冂,一,山
@@ -2918,7 +2918,7 @@ rtk2858:艘:counter for small boats:舟,日,支
 rtk2859:瞑:sleep:冥,目
 rtk2860:暝:dark:冥,日
 rtk2861:坐:sit:从,土
-rtk2862:朔:conjunction (astronomy):月,丷,屮
+rtk2862:朔:conjunction (astronomy):屰,月
 rtk2863:曳:pull:乙,日
 rtk2864:洩:leak:曳,水
 rtk2865:彗:comet:丰,⺕
@@ -3160,7 +3160,7 @@ prim-sitting-on-the-ground:?:sitting on the ground
 prim-upside-down-row:业:upside down in a row
 prim-tucked-under-the-arm:乂:tucked under the arm
 prim-southeast:巽:southeast:己,共
-prim-maestro:𠂤:maestro
+prim-maestro:𠂤:maestro,maestro without baton
 prim-noren:帀:noren:一,巾
 prim-bushes:丰:bushes,grow up
 prim-meeting:亼:meeting
@@ -4039,3 +4039,22 @@ prim-resin:朮:resin,pole:木,丶
 # which fits nothing. Left alone.
 prim-eel:电:eel:日,乙
 prim-banner:㫃:banner:方,𠂉
+
+# --- 2026-09-20: three of the nine name groups suggest_heisig_aliases.py has
+# been reporting, all of them a compound this file spelled out instead of naming.
+# alien -> 冋 (U+518B), 冂 with 口 inside. 尚 is ⿱⺌冋 and 高 is ⿳亠口冋 in
+# cjkvi, 向 is ⿵⿱丿冂口 (the same shape spelled out), and Heisig's rows agree:
+# 尚 reads "small; little; alien; glass canopy; hood; mouth" -- the name, then
+# 冂's names, then 口's. 商 is deliberately not moved: cjkvi gives it 冏
+# (⿵冂⿱儿口), a different inner, and the render backs that up.
+# mountain goat -> 屰 (U+5C70), 䒑 over 屮; 逆 is ⿺辶屰 and 朔 is ⿰屰月, and
+# both were carrying 丷 + 屮 loose. 屮 itself already sat here under Heisig's
+# own "mountain goat with horns missing", which is as good a confirmation of
+# what 屰 is as the book offers. 岡 is left alone -- cjkvi has ⿵冂⿱䒑山, 山 and
+# not 屮, so it is a near-miss rather than the same unit.
+# maestro without baton -> the existing prim-maestro (𠂤); only the name was
+# missing. Worth noting that cjkvi writes 官 as ⿱宀㠯, and 㠯 is a different
+# glyph -- rendered beside each other, 官's lower half is plainly 𠂤, the
+# 丿-topped box, not 㠯's stacked pair. The row stays as it is.
+prim-alien:冋:alien:冂,口
+prim-mountain-goat:屰:mountain goat:丷,屮

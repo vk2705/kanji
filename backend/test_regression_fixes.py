@@ -159,8 +159,10 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk187": {"character": "墨", "keyword": "black ink",
                "expected_part_ids": {"rtk161", "rtk186"}},
     # 向 was missing its top-left diagonal stroke entirely.
+    # 2026-09-20: the 冂 + 口 pair is Heisig's "alien" (冋), now its own row —
+    # 尚 is ⿱⺌冋 and 高 is ⿳亠口冋 in cjkvi, and 向 spells the same shape out.
     "rtk195": {"character": "向", "keyword": "yonder",
-               "expected_part_ids": {"kangxi13", "prim-katakana-no", "rtk11"}},
+               "expected_part_ids": {"prim-alien", "prim-katakana-no"}},
     # 咼 ("jawbone") was flattened as bare 口,冂 independently in all four hosts
     # (禍/渦/鍋/過) via the original KRADFILE import -- heisig-kanjis.csv's own
     # components column already named it "jawbone; joint; hood; mouth" but that
@@ -2433,8 +2435,9 @@ EXPECTED_DECOMPOSITIONS = {
     # instead of rtk110 -- same orphaned-placeholder bug class as rad1.1/
     # rad2.8/rad4.17 fixed earlier in this audit. Retargeted "small" to
     # rtk110 and deleted the orphan.
+    # 2026-09-20: same 冂 + 口 -> 冋 ("alien") as rtk195 above.
     "rtk196": {"character": "尚", "keyword": "esteem",
-               "expected_part_ids": {"kangxi13", "prim-small-radical", "rtk11"}},
+               "expected_part_ids": {"prim-alien", "prim-small-radical"}},
     # Continuing the common-primitive audit (2026-09-02, interactive
     # follow-up): 天(rtk457, "heavens") itself had a stray "二"("two") that
     # doesn't appear anywhere in cjkvi-ids's ⿱一大 or the render -- 天 is

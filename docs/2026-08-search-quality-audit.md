@@ -13518,3 +13518,37 @@ self-references 0, primary-choice 0, phantom parts 40, frontend lint + build
 clean.
 
 **Next** — back to the 9 unresolved name groups and the phantom list.
+
+## 2026-09-20 — chunk 26: three name groups, three compounds that were never named
+
+`suggest_heisig_aliases.py` has been reporting nine groups for several chunks.
+Three of them turn out to be the same thing: a compound Heisig names, spelled
+out here instead of named.
+
+**alien → 冋 (U+518B)**, 冂 with 口 inside. cjkvi has 尚 = `⿱⺌冋` and 高 =
+`⿳亠口冋`, and 向 = `⿵⿱丿冂口`, which is the same shape written out. Heisig's
+rows nest exactly as expected: 尚 reads "small; little; **alien**; glass canopy;
+hood; mouth" — the name, then 冂's names, then 口's. **商 is deliberately not
+moved**: cjkvi gives it 冏 (`⿵冂⿱儿口`), a different inner, and the render backs
+that up. Its row still says "alien", which the name now resolves for anyway.
+
+**mountain goat → 屰 (U+5C70)**, 䒑 over 屮. 逆 is `⿺辶屰` and 朔 is `⿰屰月`, and
+both were carrying 丷 + 屮 loose. The confirmation is pleasing: 屮 already sat in
+this database under Heisig's own name for it, **"mountain goat with horns
+missing"** — which says what 屰 is about as plainly as the book ever does. 岡 is
+left alone; cjkvi has `⿵冂⿱䒑山`, 山 and not 屮, so it is a near-miss rather than
+the same unit.
+
+**maestro without baton** needed no new row at all — `prim-maestro` (𠂤) existed
+and only the name was missing. Worth recording the thing that nearly went wrong
+here: cjkvi writes 官 as `⿱宀㠯`, and **㠯 is a different glyph**. Rendered side
+by side, 官's lower half is plainly 𠂤, the 丿-topped box, not 㠯's stacked pair.
+The row stays as it is and the cjkvi spelling is the one that is off.
+
+Verified: 1325 checks, exit 0 (the suite is clean now — see chunk 25), 66
+pytest, over-flattening 0, dead tokens 0, self-references 0, primary-choice 0,
+frontend lint + build clean. Two pins moved (向, 尚). **Unresolved name groups
+9→6; phantom parts 40→39.**
+
+**Next** — the remaining six groups: "miss world/paper punch", "rag", "drops",
+"sherpa", "fred astaire", "staples".
