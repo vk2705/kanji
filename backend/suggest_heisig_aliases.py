@@ -157,6 +157,32 @@ def corpus_breadth(ids, chars):
     return counts
 
 
+def self_named(conn, path=CSV_PATH):
+    """[(glyph, kanji id, [names])] for rows whose components are ALL unresolved.
+
+    The cheapest signal in the file, and it went unused for weeks. Heisig gives
+    an *atomic* primitive a mnemonic name by putting it in that character's own
+    components row and nothing else: 七's row is exactly "diced", 円's is "yen",
+    予's is "halberd with stroke missing". When every name in a row is
+    unresolved here, they are names for the character itself, not for parts of
+    it — there are no parts.
+
+    The caveat is rows that name the whole *and* a piece: 長's reads "hair;
+    hairpin; safety-pin", and 辰's row ("cliff; two; hairpin; safety-pin")
+    proves the last two are a shape 長 merely contains. So this reports, and the
+    structural check still decides — a name for the character scores 1.00
+    against it, a name for a piece does not.
+    """
+    out = []
+    for char, names in csv_rows(path):
+        kid = database.resolve_alias(conn, char)
+        if not kid:
+            continue
+        if all(database.resolve_alias(conn, n) is None for n in names):
+            out.append((char, kid, names))
+    return out
+
+
 def nearest_names(hosts_of_name, name, resolvable, min_overlap):
     """Resolvable names whose host set nearly coincides with this one, best first.
 
@@ -206,6 +232,12 @@ def main():
     ap.add_argument("--all", action="store_true", help="also show ambiguous and unregistered groups")
     ap.add_argument("--min-hosts", type=int, default=MIN_HOSTS)
     ap.add_argument(
+        "--self-named",
+        action="store_true",
+        help="report characters whose own components row is entirely unresolved "
+             "names — Heisig's mnemonic for an atomic primitive (see self_named)",
+    )
+    ap.add_argument(
         "--near",
         type=float,
         default=None,
@@ -231,6 +263,16 @@ def main():
         if char and char not in ("?", "??"):
             by_char.setdefault(char, kid)
     breadth = corpus_breadth(ids, [c for c in by_char if c in ids])
+
+    if args.self_named:
+        rows = self_named(conn)
+        print(f"{len(rows)} character(s) whose own components row is all-unresolved:\n")
+        for char, kid, names in rows:
+            support = structural_support(ids, char, [char])
+            print(f"  {char}  {kid:<22} {', '.join(names)}"
+                  f"   (support {support:.2f})" if support is not None else "")
+        print()
+        return 0
 
     if args.near is not None:
         hosts_of_name = collections.defaultdict(set)

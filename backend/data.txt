@@ -131,7 +131,7 @@ rtk76:乱:riot:乙,舌
 rtk77:直:straightaway:十,目,𠃊
 rtk78:具:tool:一,八,目
 rtk79:真:true:具,十
-rtk80:工:craft:
+rtk80:工:craft,artificial:
 rtk81:左:left:工,𠂇
 rtk82:右:right:口,𠂇
 rtk83:有:possess:月,𠂇
@@ -151,7 +151,7 @@ rtk97:可:can:丁,口
 rtk98:頂:place on the head:丁,頁
 rtk99:子:child,children:
 rtk100:孔:cavity:乙,子
-rtk101:了:complete:一,亅
+rtk101:了:complete,child with arms wrapped up:一,亅
 rtk102:女:woman:
 rtk103:好:fond:子,女
 rtk104:如:likeness:口,女
@@ -970,7 +970,7 @@ rtk916:腎:kidney:月,臤
 rtk917:堅:strict:土,臤
 rtk918:臨:look to:品,臣,𠂉
 rtk919:覧:perusal:一,臣,見,𠂉;ノ,見,臣,二
-rtk920:巨:gigantic:
+rtk920:巨:gigantic,fafner:
 rtk921:拒:repel:扌,巨
 rtk922:力:power,arnold:;ノ,𠃌
 rtk923:男:male:田,力
@@ -1347,7 +1347,7 @@ rtk1293:圏:sphere:囗,巻
 rtk1294:勝:victory:月,龹,力
 rtk1295:藤:wisteria:艹,月,龹,氺
 rtk1296:謄:mimeograph:言,月,龹
-rtk1297:片:one-sided:
+rtk1297:片:one-sided,waiter with wine on tray:
 rtk1298:版:printing block:片,反
 rtk1299:之:of,zorro,building blocks,zig-zag:乙,丶,亠,廴
 rtk1300:乏:destitution:ノ,之
@@ -1581,7 +1581,7 @@ rtk1527:留:detain:刀,田,prim-receipt
 rtk1528:瑠:lapis lazuli:王,留
 rtk1529:貿:trade:prim-receipt,刀,貝
 rtk1530:印:stamp:｜,卩
-rtk1531:臼:mortar:
+rtk1531:臼:mortar,back to back staples:
 rtk1532:毀:break:土,殳,臼
 rtk1533:興:entertain:臼,同,八
 rtk1534:酉:west,whiskey bottle:
@@ -1769,7 +1769,7 @@ rtk1715:念:wish:今,心
 rtk1716:捻:twirl:念,扌
 rtk1717:琴:harp:王,今
 rtk1718:陰:shade:今,阝,云
-rtk1719:予:beforehand:マ,一,亅
+rtk1719:予:beforehand,halberd with stroke missing:マ,一,亅
 rtk1720:序:preface:予,广
 rtk1721:預:deposit:予,頁
 rtk1722:野:plains:矛,里,亅;予,里
@@ -2010,7 +2010,7 @@ rtk1948:囲:surround:囗,井
 rtk1949:耕:till:土,木,耒,井;井,耒
 rtk1950:亜:asia:｜,一,口
 rtk1951:悪:bad:亜,心
-rtk1952:円:circle:冂,亠,一,｜
+rtk1952:円:circle,yen:冂,亠,一,｜
 rtk1953:角:angle:勹,用
 rtk1954:触:contact:角,虫
 rtk1955:解:unravel:角,牛,刀
@@ -2128,7 +2128,7 @@ rtk2066:託:consign:ノ,一,乙,言
 rtk2067:為:do:ノ,灬,ユ,丶,勹
 rtk2068:偽:falsehood:亻,為
 rtk2069:畏:fear:一,田
-rtk2070:長:long:
+rtk2070:長:long,hair:
 rtk2071:張:counter for bows & stringed instruments:弓,長
 rtk2072:帳:notebook:巾,長
 rtk2073:脹:dilate:月,長
@@ -2254,11 +2254,11 @@ rtk2192:隷:slave:士,示,隶
 rtk2193:癒:healing:愈,疒
 rtk2194:璽:emperor's seal:爾,玉
 rtk2195:潟:lagoon:臼,水,勹,灬
-rtk2196:丹:rust-colored:ノ,一,丶,亅
+rtk2196:丹:rust-colored,rust colored,ship´s funnel,ship's funnel:ノ,一,丶,亅
 rtk2197:丑:sign of the ox or cow:｜,ノ,一
 rtk2198:羞:feel ashamed:ノ,ヨ,羊
-rtk2199:卯:sign of the hare or rabbit:prim-receipt,卩
-rtk2200:巳:sign of the snake or serpent:
+rtk2199:卯:sign of the hare or rabbit,blown eggs:prim-receipt,卩
+rtk2200:巳:sign of the snake or serpent,mosaic with bit missing:
 rtk2201:此:this:止,匕
 rtk2202:柴:brush:木,此
 rtk2203:些:a little bit:二,此

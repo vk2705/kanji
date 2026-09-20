@@ -12690,3 +12690,40 @@ different shapes (𠂢, 乑, and 旅's own right half) and nothing scores above 
 Verified: 1324 checks with only the 4 known hanzi-scope non-issues, 66 pytest,
 over-flattening 0, dead tokens 0, self-references 0, primary-choice 0, phantom
 parts 112, frontend lint + build clean. Unsearchable Heisig names 203→199.
+
+---
+
+## 2026-09-20 (chunk 6) — the signal that was in the file all along
+
+Chunk 5 resolved `diced` and `lily pad` by noticing the name sat in the
+*primitive's own* components row. That is not a one-off: it is how Heisig names
+an **atomic** primitive — there are no parts to list, so the row holds the
+mnemonic and nothing else.
+
+Added it to the tool as `--self-named`, because doing it by hand is how it got
+missed for a month. It reports every character whose entire components row is
+unresolved here. **12 of them**, and eleven applied:
+
+    工 artificial            了 child with arms wrapped up   巨 fafner
+    片 waiter with wine on tray   臼 back to back staples    予 halberd with stroke missing
+    円 yen                   丹 rust colored / ship's funnel  卯 blown eggs
+    巳 mosaic with bit missing     長 hair
+
+All at 1.00 structural support except `hair`, whose 0.50 is cjkvi declining to
+expand 髟 (髪 = 髟+犮, 髟 = 長+彡) rather than a disagreement.
+
+**Two left out, and why.** `staples` → 印 scores 0.33: its other hosts 暇 and 興
+contain no 印, so it names a piece of 印 rather than 印 itself. And 長's row
+reads "hair; hairpin; safety-pin" — but 辰's row is "cliff; two; hairpin;
+safety-pin", which proves the last two are a shape 長 merely *contains*. So only
+"hair" went on 長. That caveat is written into the new function's docstring: the
+mode reports, and the structural check still decides.
+
+The CSV spells 丹's second name with an acute accent (U+00B4) that nobody types,
+so both forms are aliased — same reason "by one's side" needed two.
+
+This is the largest single drop yet: **unsearchable Heisig names 199→187.**
+
+Verified: 1324 checks with only the 4 known hanzi-scope non-issues, 66 pytest,
+over-flattening 0, dead tokens 0, self-references 0, primary-choice 0, phantom
+parts 112, frontend lint + build clean. No decomposition moved.
