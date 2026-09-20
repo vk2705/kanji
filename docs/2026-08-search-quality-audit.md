@@ -13168,3 +13168,35 @@ double-checked set 47→40.**
 **Next** — 𠃜, the shape 声 and 眉 share (cjkvi `⿱士𠃜`, `⿸𠃜目`), which both
 currently write as 尸. That is the same "flag; stick" pair chunk 14 could not
 place, so it is the thread to pull.
+
+## 2026-09-20 — chunk 18: 𠃜 is not 尸, and stroke counts prove it
+
+声 and 眉 both wrote 尸 for a shape that is one stroke longer. cjkvi-ids has
+声 `⿱士𠃜` and 眉 `⿸𠃜目`, and this one does not even need the render to settle:
+**声 is 7 strokes and 士 is 3; 眉 is 9 and 目 is 5. The shared piece is 4 strokes
+where 尸 is 3.** Rendered, the extra one is a long horizontal that 尸 does not
+have.
+
+Heisig reads the shape "flag; stick" — his two words for its two pieces, which
+is exactly why neither of them names the whole, and why chunk 14 could not place
+that pair. Registered as `prim-flagpole` with parts 尸 + 一, so "flag" still
+reaches it; "flagpole" is a descriptive non-Heisig name (owner-permitted),
+picked to keep both of his words legible without claiming either is his name for
+the unit. Only 声 and 眉 need it among RTK kanji — cjkvi's other 𠃜 hosts are all
+extension-block characters.
+
+**朿 (U+673F) is 木 with a 冂 across it** — precisely Heisig's "tree; wood; belt"
+in both 刺 and 策. Neither said so. Both carried 巾, 八 and 亅, none of which is
+in the glyph, and 刺 was missing its 刀 ("sword; sabre; saber") outright, so the
+kanji for "thorn" did not list the blade. Written out as 木 + 冂 rather than
+given a row of its own, because that is how Heisig names it and 朿 has no name
+in the book. (刀 rather than 刂 follows this file's existing convention — 則 副
+別 all use 刀.)
+
+Verified: 1324 checks with only the 4 known hanzi-scope non-issues, 66 pytest,
+over-flattening 0, dead tokens 0, self-references 0, primary-choice 0, frontend
+lint + build clean. No pin moved. **Phantom parts 66→59 across 46→42 kanji; the
+double-checked set 40→33.**
+
+**Next** — 幸 (`亠,辛` where the glyph is 土 over 干-ish), 述/術 (a 十 that is
+really 朮's), and 宅/託 (a stray 一).

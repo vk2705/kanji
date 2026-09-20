@@ -496,7 +496,7 @@ rtk442:姉:elder sister:市,女
 rtk443:肺:lungs:市,月
 rtk444:帯:sash:丗,冖,巾
 rtk445:滞:stagnate:帯,水
-rtk446:刺:thorn:巾,八,木,亅,冂
+rtk446:刺:thorn:木,冂,刀
 rtk447:制:system:冂,刀,牛
 rtk448:製:made in...:制,衣
 rtk449:転:revolve:云,車
@@ -1069,7 +1069,7 @@ rtk1015:筒:cylinder:同,竹
 rtk1016:等:etc.:寺,竹
 rtk1017:算:calculate:竹,目,廾
 rtk1018:答:solution:合,竹
-rtk1019:策:scheme:｜,巾,竹,八,木,亅,冂
+rtk1019:策:scheme:竹,木,冂
 rtk1020:簿:register:竹,水,尃
 rtk1021:築:fabricate:木,筑
 rtk1022:篭:seclude oneself:竜,竹
@@ -2102,8 +2102,8 @@ rtk2040:麺:noodles:面,麦
 rtk2041:革:leather:廾,口,十
 rtk2042:靴:shoes:化,革
 rtk2043:覇:hegemony:革,月,西
-rtk2044:声:voice:士,尸
-rtk2045:眉:eyebrow:目,尸,｜
+rtk2044:声:voice:士,𠃜
+rtk2045:眉:eyebrow:𠃜,目
 rtk2046:呉:give:口,八
 rtk2047:娯:recreation:呉,女
 rtk2048:誤:mistake:言,呉
@@ -3911,3 +3911,22 @@ prim-wooden-pole:朩:wooden pole:
 # 懇/墾 simply carried a 爪 that is in neither glyph: both are 豸 + 艮 over
 # 心/土 (cjkvi ⿱貇心, ⿱貇土, 貇 = ⿰豸艮), which is Heisig's "skunk; silver".
 prim-garter:冘:garter:冖,儿
+
+# --- 2026-09-20: 𠃜, the shape 声 and 眉 share, and 朿, which 刺/策 spelled in
+# strokes.
+# 𠃜 (U+200DC) is not 尸. cjkvi-ids has 声 ⿱士𠃜 and 眉 ⿸𠃜目, and the stroke
+# counts settle it without any appeal to the render: 声 is 7 and 士 is 3, 眉 is
+# 9 and 目 is 5, so the shared piece is 4 strokes where 尸 is 3. Rendered, the
+# extra one is a long horizontal 尸 does not have. Heisig reads it "flag; stick"
+# -- his two words for its two pieces, which is why neither of them is a name
+# for the whole and why chunk 14 could not place the pair. "flagpole" is a
+# descriptive non-Heisig name (owner-permitted) chosen to keep both of his words
+# legible without claiming either; its parts are 尸 + 一 so "flag" still reaches.
+# Only 声 and 眉 need it among rtk kanji (cjkvi's other 𠃜 hosts are all
+# extension-block characters).
+# 朿 (U+673F) is 木 with a 冂 across it, exactly Heisig's "tree; wood; belt" in
+# both 刺 and 策. Neither of them said so: they carried 巾, 八 and 亅, none of
+# which is in the glyph, and 刺 was missing its 刀 ("sword; sabre; saber")
+# entirely. Written out as 木 + 冂 rather than as a new row, because that is how
+# Heisig names it and 朿 has no name of its own in the book.
+prim-flagpole:𠃜:flagpole:尸,一
