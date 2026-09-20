@@ -13237,3 +13237,59 @@ double-checked set 33→27.**
 **Next** — 幸 (`亠,辛`, where cjkvi has `⿱土𢆉` and Heisig reads "ten; stand up;
 ten"), 衆 and 猟, both of which need a name that is still unresolved (乑's "rag",
 鼡's "anemometer").
+
+## 2026-09-20 — chunk 20: 幸 is not 辛, and nine more
+
+The last bounded sweep of the double-checked set.
+
+**幸 is not 辛.** cjkvi has 幸 `⿱土𢆉` with 𢆉 = `⿱丷干`, against 辛 = `⿱立十`,
+and the render is not close. Heisig reads 幸 as "ten; needle; stand up; vase;
+ten; needle", and it is worth saying why that was not followed: **it cannot be a
+partition.** 十 + 立 is 7 strokes and 十 + 立 + 十 is 9, where 幸 is 8. His
+reading overlaps somewhere and the CSV does not say where, so the structural
+土 + 丷 + 干 is used rather than a guess dressed up as his.
+
+執 and 報 already referenced 幸 and were fine. **摯** was the one still carrying
+辛 — in a flattened primary (`ノ,九,手,丶,辛`) whose own labelled alternate
+(`執,手`) was already correct, exactly the shape `audit_primary_choice.py` exists
+to catch, except that 摯's CSV components column is empty so the tool skips it.
+The alternate is now the row.
+
+The rest, each a Heisig reading buried under loose strokes:
+
+| | was | now | Heisig |
+|---|---|---|---|
+| 了 | `一,亅` | atomic | two-stroke character, cjkvi `⿱乛亅`; the 一 is really 乛 |
+| 先 | `ノ,土,儿` | `牛,儿` | "cow; human legs" |
+| 看 | `ノ,一,手,二,目` | `手,目` | "hand; eye" |
+| 籍 | 11 parts | `竹,耒,昔` | it named 耒 and 昔 *and* spelled both out again |
+| 卵 | `ノ,卜,丶,卩` | `卯,丶,丶` | "sign of the hare; receipt; stamp; drops" |
+| 挿 | `｜,千,日,扌,田` | `扌,千,日` | cjkvi `⿰扌𢆍`, 𢆍 = `⿻千日` — the 田 was the 日 with 千's vertical read into it |
+| 弥 | `ノ,弓,亅,小` | `弓,𠂉,小` | "bow; reclining; lying down; small" |
+
+**One self-correction.** Chunk 17 moved 属 to 禸 along with the rest of the 禹
+family. That was wrong for this one kanji: cjkvi writes 属 `⿸尸禹` specifically,
+and 禹 is 禸 under a slash. 属 gets its ノ back. Heisig's row for it ("flag;
+gnats; drop; insect; belt") describes the *traditional* 屬 = 尸 + 蜀, so on the
+simplified glyph his channel has nothing to say either way, which is why it
+still reports.
+
+Verified: 1324 checks with only the 4 known hanzi-scope non-issues, 66 pytest,
+over-flattening 0, dead tokens 0, self-references 0, primary-choice 0, frontend
+lint + build clean. Four pins moved (看, 挿, 幸, 摯), each with its reason.
+**Phantom parts 53→40 across 36→28 kanji; the double-checked set 27→14 across
+11 kanji.**
+
+### Where this leaves the audit
+
+Ten chunks today. Phantom parts **243 → 40**, and of those 40, **26 sit in hosts
+where cjkvi-ids cannot see (chunk 15) and 14 are genuinely double-checked** —
+down from 168 kanji to 28. Unsearchable Heisig names **299 → ~177**, with
+97.9% of all name-occurrences resolving. Unresolved name groups **14 → 9**.
+
+Three of today's findings were not bad data but *names pointing at the wrong
+row* — "mend"→綴, "stick"→貼, and the 62 and 70 component rows behind them —
+which no check that asks only "does this resolve" can see. That class deserves
+its own detector: a name used in the CSV's components column that resolves to a
+kanji whose frame number is *later than its first host* cannot be the primitive
+Heisig means. That is a mechanical test, and it is the next tool to build.

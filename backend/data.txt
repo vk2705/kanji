@@ -151,7 +151,7 @@ rtk97:可:can:丁,口
 rtk98:頂:place on the head:丁,頁
 rtk99:子:child,children:
 rtk100:孔:cavity:乙,子
-rtk101:了:complete,child with arms wrapped up:一,亅
+rtk101:了:complete,child with arms wrapped up:
 rtk102:女:woman:
 rtk103:好:fond:子,女
 rtk104:如:likeness:口,女
@@ -313,7 +313,7 @@ rtk259:猫:cat:犭,苗
 rtk260:牛:cow:
 rtk261:特:special:牛,寺
 rtk262:告:revelation:牛,口
-rtk263:先:before:ノ,土,儿
+rtk263:先:before:牛,儿
 rtk264:洗:wash:先,水
 rtk265:介:jammed in:𠆢,ノ,｜;ノ,人,｜
 rtk266:界:world:田,介
@@ -738,7 +738,7 @@ rtk684:添:annexed:水,天,心
 rtk685:必:invariably:ノ,心
 rtk686:泌:ooze:必,水,丶;必,水
 rtk687:手:hand:
-rtk688:看:watch over:ノ,一,手,二,目
+rtk688:看:watch over:手,目
 rtk689:摩:chafe:手,麻
 rtk690:我:ego:亅,戈,手
 rtk691:義:righteousness:一,羊,我
@@ -1247,7 +1247,7 @@ rtk1193:軸:axis:由,車
 rtk1194:甲:armor,armour,roots:田,｜
 rtk1195:押:push:扌,甲;｜,日,扌,田
 rtk1196:岬:headland:山,甲
-rtk1197:挿:insert:｜,千,日,扌,田
+rtk1197:挿:insert:扌,千,日
 rtk1198:申:have the honor to:田,｜
 rtk1199:伸:expand:亻,申
 rtk1200:神:gods:礻,申
@@ -1372,7 +1372,7 @@ rtk1318:引:pull:｜,弓
 rtk1319:弔:condolences:｜,弓
 rtk1320:弘:vast:弓,厶
 rtk1321:強:strong:弓,虫,厶
-rtk1322:弥:all the more:ノ,弓,亅,小
+rtk1322:弥:all the more:弓,𠂉,小
 rtk1323:弱:weak:弓,冫
 rtk1324:溺:drown:弱,水
 rtk1325:沸:seethe:水,弗
@@ -1576,7 +1576,7 @@ rtk1522:腕:arm:月,宛
 rtk1523:苑:garden:夗,艹
 rtk1524:怨:grudge:夗,心
 rtk1525:柳:willow:卯,木
-rtk1526:卵:egg:ノ,卜,丶,卩
+rtk1526:卵:egg:卯,丶,丶
 rtk1527:留:detain:刀,田,prim-receipt
 rtk1528:瑠:lapis lazuli:王,留
 rtk1529:貿:trade:prim-receipt,刀,貝
@@ -1672,9 +1672,9 @@ rtk1618:避:evade:辟,辶
 rtk1619:新:new:亲,斤
 rtk1620:薪:fuel:艹,新
 rtk1621:親:parent:亲,見
-rtk1622:幸:happiness:亠,辛
+rtk1622:幸:happiness:土,丷,干
 rtk1623:執:tenacious:幸,丸
-rtk1624:摯:gift:ノ,九,手,丶,辛;執,手
+rtk1624:摯:gift:執,手
 rtk1625:報:report:幸,卩,又
 rtk1626:叫:shout:口,prim-cornucopia
 rtk1627:糾:twist:糸,prim-cornucopia
@@ -1739,7 +1739,7 @@ rtk1685:縫:sew:糸,逢
 rtk1686:拝:worship:扌,一,丰
 rtk1687:寿:longevity:丰,寸;ノ,一,寸,二
 rtk1688:鋳:casting:寿,金
-rtk1689:籍:enroll:｜,一,竹,土,八,木,亠,耒,二,ノ,昔
+rtk1689:籍:enroll:竹,耒,昔
 rtk1690:春:springtime:日,𡗗
 rtk1691:椿:camellia:春,木
 rtk1692:泰:peaceful:氺,𡗗
@@ -2161,7 +2161,7 @@ rtk2099:暖:warmth:日,爰
 rtk2100:媛:beautiful woman:女,爰
 rtk2101:援:abet:扌,爰
 rtk2102:緩:slacken:爰,糸
-rtk2103:属:belong:尸,禸
+rtk2103:属:belong:尸,ノ,禸
 rtk2104:嘱:entrust:口,属
 rtk2105:偶:accidentally:亻,禺
 rtk2106:遇:meet:禺,辶
@@ -3949,3 +3949,25 @@ prim-flagpole:𠃜:flagpole:尸,一
 # exactly (3 + 9 + 2 = 14).
 prim-lock-of-hair:乇:lock of hair:ノ,七
 prim-resin:朮:resin,pole:木,丶
+
+# --- 2026-09-20: the last bounded sweep of double-checked phantoms.
+# 幸 is not 辛. cjkvi has 幸 ⿱土𢆉 with 𢆉 = ⿱丷干, against 辛 = ⿱立十, and the
+# render is unambiguous. Heisig reads 幸 as "ten; needle; stand up; vase; ten;
+# needle", which cannot be a partition -- 十 + 立 is 7 strokes and 十 + 立 + 十
+# is 9, where 幸 is 8 -- so the structural reading 土 + 丷 + 干 is used and his
+# overlap is not guessed at. 執 and 報 already referenced 幸 and were fine; 摯
+# was the one that had 辛 in it, in a flattened primary whose own labelled
+# alternate (執,手) was already right, so the alternate becomes the row.
+# 了 is a two-stroke character (cjkvi ⿱乛亅) and is now atomic, like 乃 in the
+# 2026-09-20 pipe sweep; the 一 it carried is really 乛.
+# 先 牛,儿 ("cow; human legs"), 看 手,目 ("hand; eye") -- both were Heisig's
+# own two-part readings buried under loose strokes. 籍 竹,耒,昔 ("bamboo;
+# christmas tree; wood; once upon a time") already named 耒 and 昔 and then
+# spelled them both out again alongside. 卵 卯,丶,丶 ("sign of the hare;
+# receipt; stamp; drops"). 挿 扌,千,日 (cjkvi ⿰扌𢆍, 𢆍 = ⿻千日) -- the 田 was
+# the 日 with the vertical of 千 read into it. 弥 弓,𠂉,小 (cjkvi ⿰弓尓,
+# 尓 = ⿱𠂉小) = "bow; reclining; lying down; small".
+# 属 gets its ノ back: chunk 17 moved it to 禸 with the rest of the 禹 family,
+# but cjkvi writes 属 ⿸尸禹 specifically, and 禹 is 禸 under a slash. Heisig's
+# row for it ("flag; gnats; drop; insect; belt") describes the traditional 屬,
+# 尸 + 蜀, so on this glyph his channel has nothing to say either way.

@@ -303,8 +303,10 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"kangxi40", "rtk32"}},
     "rtk1809": {"character": "働", "keyword": "work",
                 "expected_part_ids": {"kangxi9", "rtk1806"}},
+    # 2026-09-20: ノ, 一 and 二 were 手's own strokes doubled up beside it.
+    # Heisig's row is exactly two names, "hand; eye".
     "rtk688": {"character": "看", "keyword": "watch over",
-               "expected_part_ids": {"prim-katakana-no", "rtk1", "rtk687", "rtk2", "rtk15"}},
+               "expected_part_ids": {"rtk687", "rtk15"}},
     "rtk1049": {"character": "側", "keyword": "side",
                 "expected_part_ids": {"kangxi9", "rtk92"}},  # 亻 + 則 (person radical added 2026-09-05)
     "rtk2087": {"character": "鎖", "keyword": "chain",
@@ -1215,8 +1217,10 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk1179", "kangxi145"}},
     "rtk1182": {"character": "崇", "keyword": "adore",
                 "expected_part_ids": {"rtk1181", "rtk830"}},
+    # 2026-09-20: cjkvi has 挿 ⿰扌𢆍 with 𢆍 = ⿻千日 -- the 田 was the 日 with
+    # 千's vertical read into it, and the ｜ was that same stroke again.
     "rtk1197": {"character": "挿", "keyword": "insert",
-                "expected_part_ids": {"kangxi64", "prim-pipe", "rtk12", "rtk14", "rtk40"}},
+                "expected_part_ids": {"kangxi64", "rtk12", "rtk40"}},
     "rtk1271": {"character": "惜", "keyword": "pity",
                 "expected_part_ids": {"kangxi61", "rtk1268"}},
     "rtk1272": {"character": "措", "keyword": "set aside",
@@ -3560,10 +3564,15 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"kangxi40", "rtk1612"}},
     "rtk1618": {"character": "避", "keyword": "evade",
                "expected_part_ids": {"kangxi162", "prim-heki"}},
+    # 2026-09-20: 幸 is not 辛. cjkvi has 幸 ⿱土𢆉 (𢆉 = ⿱丷干) against
+    # 辛 = ⿱立十, and the render agrees. Heisig's "ten; stand up; ten" cannot be
+    # a partition of 8 strokes, so the structural reading is used.
     "rtk1622": {"character": "幸", "keyword": "happiness",
-               "expected_part_ids": {"kangxi8", "rtk1612"}},
+               "expected_part_ids": {"rtk161", "kangxi12", "rtk1777"}},
+    # 2026-09-20: same 辛-for-幸 error, inside a flattened primary whose own
+    # labelled alternate (執,手) was already right; cjkvi has 摯 ⿱執手.
     "rtk1624": {"character": "摯", "keyword": "gift",
-               "expected_part_ids": {"kangxi3", "prim-katakana-no", "rtk1612", "rtk687", "rtk9"}},
+               "expected_part_ids": {"rtk1623", "rtk687"}},
     "rtk2724": {"character": "蟄", "keyword": "hibernation of insects",
                "expected_part_ids": {"rtk1623", "rtk556"}},
     "rtk2936": {"character": "睾", "keyword": "testicles",
