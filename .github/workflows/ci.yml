@@ -7,7 +7,7 @@ on:
 
 jobs:
   backend-tests:
-    name: Backend tests (pytest, isolated temp-DB)
+    name: Backend tests (pytest isolated temp-DB, plus pinned decompositions)
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -24,14 +24,27 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt -r requirements-dev.txt
 
-      # Only the isolated API suite (test_api_*.py) — each test gets its own
+      # The isolated API suite (test_api_*.py) — each test gets its own
       # throwaway temp-file DB via conftest.py, so this never touches a real
-      # kanji.db and needs no seed data checked in. test_regression_fixes.py and
-      # the audit_*.py scripts are a separate, deliberately live-kanji.db-only
-      # convention (see CLAUDE.md) and don't apply here — there is no kanji.db in
-      # a fresh CI checkout for them to read.
+      # kanji.db and needs no seed data checked in.
       - name: Run pytest
         run: python -m pytest -v
+
+      # The pinned-decomposition suite. This used to be skipped here on the
+      # grounds that "there is no kanji.db in a fresh CI checkout for it to
+      # read", which was true and beside the point: data.txt, data_from_pdf.txt
+      # and heisig-kanjis.csv are all checked in, so CI can seed one in a few
+      # seconds exactly the way an audit session does. Leaving it out cost a
+      # real regression — a 2026-09-19 change landed with a stale rtk2819 pin
+      # and nothing noticed until someone ran the script by hand the next day.
+      # No network needed: it reads only the seeded DB and primitive_images/.
+      - name: Seed a throwaway kanji.db from the checked-in source files
+        run: |
+          python -c "import database; database.init_db(); c = database.get_db(); \
+                     database.migrate_schema(c); c.close(); database.import_data()"
+
+      - name: Run pinned-decomposition regression checks
+        run: python test_regression_fixes.py
 
   frontend:
     name: Frontend lint + build

@@ -36,6 +36,7 @@ Usage:
 
 Exits non-zero on any failure.
 """
+import os
 import sys
 from pathlib import Path
 
@@ -3767,12 +3768,59 @@ def check_decompositions(conn) -> list[str]:
 
 
 def check_hanzi_present(conn) -> list[str]:
+    """Spot-check that the hanzi import's self-reference rows are still there.
+
+    Skipped entirely when the DB has no `zh-*` rows at all. `import_data()` seeds
+    only `ja-kanji`; the Chinese rows come from the separate one-off
+    `import_hanzi.py`, so a DB rebuilt from `data.txt` + the CSV — which is what
+    every audit chunk and every CI run works with — has none of them by
+    construction. Reporting four failures for that is not a regression signal,
+    it is noise, and until 2026-09-20 this script printed those same four on
+    every single run, which is exactly how a failing check stops being read.
+    """
+    if conn.execute(
+        "SELECT 1 FROM kanji WHERE script LIKE 'zh-%' LIMIT 1"
+    ).fetchone() is None:
+        return []
     failures = []
     for ch, expected_id in EXPECTED_HANZI_PRESENT.items():
         row = conn.execute("SELECT id FROM kanji WHERE id = ?", (expected_id,)).fetchone()
         if row is None:
             failures.append(f"{ch} ({expected_id}) missing again — the Unihan "
                              f"self-reference backfill regressed")
+    return failures
+
+
+def check_primitive_images(conn) -> list[str]:
+    """Every system row whose glyph needs a picture must actually have one.
+
+    Registering a primitive above the BMP without running
+    `make_primitive_images.py` leaves a row whose character most fonts — and
+    Android in particular — draw as a tofu box. It happened twice on
+    2026-09-20 alone (`prim-flagpole` 𠃜 and `prim-mend-barred` 𤴓, both CJK
+    Ext B), and nothing caught it, because the row is perfectly valid in every
+    other respect. `make_primitive_images.needs_image` already knows which
+    codepoints qualify; this just holds the data to it, and checks the file is
+    really on disk rather than trusting `image_url`.
+    """
+    import make_primitive_images as mpi
+
+    failures = []
+    for row in conn.execute(
+        "SELECT id, character, image_url FROM kanji WHERE owner_id = 1 AND character IS NOT NULL"
+    ):
+        if not mpi.needs_image(row["character"]):
+            continue
+        if not row["image_url"]:
+            failures.append(f"{row['id']} ({row['character']}, "
+                             f"U+{ord(row['character']):04X}) needs a primitive image "
+                             f"and has none — run make_primitive_images.py")
+            continue
+        name = os.path.basename(row["image_url"])
+        if not os.path.exists(os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                            "primitive_images", name)):
+            failures.append(f"{row['id']} ({row['character']}) points at "
+                             f"primitive_images/{name}, which is not on disk")
     return failures
 
 
@@ -4112,6 +4160,7 @@ def main():
     all_failures = []
     all_failures += check_decompositions(conn)
     all_failures += check_hanzi_present(conn)
+    all_failures += check_primitive_images(conn)
     all_failures += check_no_kradfile_proxy(conn)
     all_failures += check_atomic(conn)
     all_failures += check_no_self_reference(conn)
@@ -4127,7 +4176,7 @@ def main():
     total_checks = (len(EXPECTED_DECOMPOSITIONS) + len(EXPECTED_HANZI_PRESENT)
                     + len(EXPECTED_ATOMIC) + len(PERSON_RADICAL_HOSTS)
                     + len(NET_RADICAL_HOSTS) + len(WILD_DOG_RADICAL_HOSTS)
-                    + len(HEISIG_PRIMITIVE_NAMES) + 4)
+                    + len(HEISIG_PRIMITIVE_NAMES) + 5)
     if all_failures:
         print(f"FAILED: {len(all_failures)} problem(s) found across {total_checks} checks:\n")
         for f in all_failures:
@@ -4139,7 +4188,7 @@ def main():
               f"{len(EXPECTED_HANZI_PRESENT)} hanzi presence spot-checks, "
               f"{len(HEISIG_PRIMITIVE_NAMES)} Heisig primitive names, "
               f"KRADFILE-proxy + self-reference + alias-visibility-boundary + "
-              f"migration-atomicity invariants).")
+              f"primitive-image + migration-atomicity invariants).")
         sys.exit(0)
 
 

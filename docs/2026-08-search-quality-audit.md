@@ -13483,3 +13483,38 @@ parts unchanged at 40, frontend lint + build clean. No pin moved.
 **Anachronistic names 5→1 — 44→1 across chunks 21–24.**
 
 **Next** — back to the phantom list, and the 9 remaining unresolved name groups.
+
+## 2026-09-20 — chunk 25: the regression suite now runs in CI, and passes clean
+
+Two things this log has flagged repeatedly, closed together.
+
+**`test_regression_fixes.py` reported four failures on every single run.** 报 万
+个 丰 — hanzi spot-checks that cannot pass on a DB seeded from `data.txt` and
+the CSV, because the Chinese rows come from the separate one-off
+`import_hanzi.py`. Twenty-four chunks today each ended by reading "FAILED: 4
+problem(s)" and deciding it was fine. That is precisely how a failing check
+stops being read, and it was also the thing blocking CI. `check_hanzi_present`
+now skips itself when the DB has no `zh-*` rows at all — absence of an import is
+not a regression — and the suite **exits 0** on a fresh seed.
+
+**So it runs in CI now.** The old workflow comment said it was skipped because
+"there is no kanji.db in a fresh CI checkout for it to read", which was true and
+beside the point: `data.txt`, `data_from_pdf.txt` and `heisig-kanjis.csv` are
+all checked in, so the job seeds one in a few seconds exactly the way an audit
+session does. No network, no committed DB. Leaving it out had already cost a
+real regression — the 2026-09-19 rescued commits landed with a stale `rtk2819`
+pin and nothing noticed until it was run by hand the next day.
+
+**And a new invariant, from a mistake made twice today.** `check_primitive_images`
+holds the data to `make_primitive_images.needs_image`: every system row whose
+codepoint needs a picture must have an `image_url`, and the file must actually
+be on disk. Chunk 18 registered 𠃜 and chunk 12 registered 𤴓, both CJK Ext B,
+without running the renderer — rows that are valid in every other respect and
+draw as a tofu box for the reader. Chunk 24 caught it by accident; this catches
+it by construction, in CI, on the same push.
+
+1325 checks, exit 0. 66 pytest, over-flattening 0, dead tokens 0,
+self-references 0, primary-choice 0, phantom parts 40, frontend lint + build
+clean.
+
+**Next** — back to the 9 unresolved name groups and the phantom list.
