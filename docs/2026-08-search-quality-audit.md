@@ -12957,3 +12957,45 @@ directly and inherited the fix.
 
 **Next** — 卵/州/心 ("drops") and 印/暇/興 ("staples"), the two groups
 `suggest_heisig_aliases.py` flags as having nothing common to every host.
+
+## 2026-09-20 — chunk 13: five of the eleven stray ｜, and a name that resolves to a bill
+
+`｜` ("pipe") was the single most common phantom token left, 11 occurrences
+across 11 unrelated kanji — the over-flattening complaint in its last hiding
+place. They are not one bug; each is a different real component spelled in
+strokes. Five are unambiguous once rendered, and those are done here:
+
+* **乃** — a *two-stroke* character (cjkvi `⿹𠄎丿`) that was carrying three
+  strokes, none of which is in it. Now atomic, and it gains Heisig's name for
+  it as a primitive: its CSV row is the single word "fist", and 携 及 秀 all
+  emit "fist; from" together, which is Heisig printing 乃's whole name set.
+* **果** → `田,木` — the ｜ was 木's own trunk.
+* **再** → `王,冂` — "king; jewel; ball; belt"; the ｜ and 一 were already inside
+  the 王 that was sitting right beside them.
+* **妻** → `十,⺕,女` — "ten; needle; rake; woman". The 十 was missing outright
+  while its two strokes lay loose in the list.
+* **幽** → `山,幺,幺` — "cocoon; mountain"; the ｜ and 凵 are 山 drawn apart.
+
+**A finding worth its own line: `stick` resolves to 貼, "post a bill."** Heisig
+uses "stick" in some seventy component rows, and `resolve_alias` answers rtk60
+every time, because 貼's alias list carries "stick" in the *adhesive* sense.
+Same class as chunk 12's "mend"→綴 and just as invisible to any check that only
+asks whether a name resolves. It is **not** fixed here, deliberately: the
+obvious repair is to alias "stick" onto `prim-pipe`, and that is right for 中 旧
+引 曲 申 介 垂 角 兼 (where Heisig emits "stick" adjacent to "walking cane",
+which `prim-pipe` already carries) but wrong for 尺 丈 系 必, which contain no
+vertical stroke at all. Two shapes under one name again, and it needs the render
+pass the other name-splits in this log got, not a bulk alias.
+
+Left alone for the same reason: **不** (its ｜ and ノ are really there — Heisig's
+"person" is his mnemonic reading of two strokes that are not 人, and writing 人
+in would be the retracted `个`-for-person approximation all over again), and
+**印** and **段**, whose left halves cjkvi writes as *unencoded placeholders*
+(`⿰③卩`, `⿰⑤殳`) — the "staples"/"staple gun" family, which needs its own
+chunk.
+
+Verified: 1324 checks with only the 4 known hanzi-scope non-issues, 66 pytest,
+over-flattening 0, dead tokens 0, self-references 0, primary-choice 0, frontend
+lint + build clean. No pin moved. **Phantom parts 93→86 across 64→59 kanji.**
+
+**Next** — "stick", properly: which hosts draw a vertical and which do not.

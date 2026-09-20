@@ -791,7 +791,7 @@ rtk737:財:property:才,貝
 rtk738:材:lumber:才,木
 rtk739:存:exist:才,子
 rtk740:在:exist:才,土
-rtk741:乃:from:｜,ノ,一
+rtk741:乃:from,fist:
 rtk742:携:portable:扌,隹,乃
 rtk743:及:reach out:丶,乃
 rtk744:吸:suck:及,口
@@ -1252,7 +1252,7 @@ rtk1198:申:have the honor to:田,｜
 rtk1199:伸:expand:亻,申
 rtk1200:神:gods:礻,申
 rtk1201:捜:search:日,又,扌,申
-rtk1202:果:fruit:｜,田,木;日,木
+rtk1202:果:fruit:田,木;日,木
 rtk1203:菓:candy:果,艹
 rtk1204:課:chapter:果,言
 rtk1205:裸:naked:果,衤
@@ -1530,7 +1530,7 @@ rtk1476:縛:truss:糸,尃
 rtk1477:縄:straw rope:糸,田,亀
 rtk1478:幼:infancy:力,幺
 rtk1479:後:behind:夂,幺,彳
-rtk1480:幽:seclude:｜,凵,幺
+rtk1480:幽:seclude:山,幺,幺
 rtk1481:幾:how many:ノ,幺,戈,丶
 rtk1482:機:loom:幾,木
 rtk1483:畿:capital:田,幺,戈,丶,ノ
@@ -2014,7 +2014,7 @@ rtk1952:円:circle,yen:冂,亠,一,｜
 rtk1953:角:angle:勹,用
 rtk1954:触:contact:角,虫
 rtk1955:解:unravel:角,牛,刀
-rtk1956:再:again:｜,一,冂,王
+rtk1956:再:again:王,冂
 rtk1957:講:lecture:冓,言
 rtk1958:購:subscription:冓,貝
 rtk1959:構:posture:冓,木
@@ -2093,7 +2093,7 @@ rtk2031:汽:vapor:水,气
 rtk2032:飛:fly:
 rtk2033:沈:sink:水,尢,冖
 rtk2034:枕:pillow:ノ,乙,木,冖,尢
-rtk2035:妻:wife:｜,⺕,一,女
+rtk2035:妻:wife:十,⺕,女
 rtk2036:凄:uncanny:冫,妻
 rtk2037:衰:decline:一,亠,口,𧘇;衣,一,亠
 rtk2038:衷:inmost:衣,十,口;十,口,𧘇
@@ -3841,3 +3841,14 @@ prim-trampoline:睘:trampoline:罒,一,口,𧘇
 # three rows in the first place.
 prim-mending:龰:mending,mend:
 prim-mend-barred:𤴓:mend:一,龰
+
+# --- 2026-09-20: five of the eleven stray ｜ ("pipe") parts, each a different
+# way of spelling a real component in strokes. Render-checked one by one.
+# 乃 is a two-stroke character (cjkvi ⿹𠄎丿) and was carrying three strokes
+# that are not in it. Now atomic, and it picks up Heisig's name for it as a
+# primitive: its CSV row is the single word "fist", and 携/及/秀 emit
+# "fist; from" together, which is Heisig printing 乃's whole name set.
+# 果 田,木 (the ｜ was 木's own trunk), 再 王,冂 ("king; jewel; ball; belt", the
+# ｜ and 一 already inside 王), 妻 十,⺕,女 ("ten; needle; rake; woman" -- the
+# 十 was missing outright while its two strokes sat there loose), 幽 山,幺,幺
+# ("cocoon; mountain"; the ｜ and 凵 are 山 drawn apart).
