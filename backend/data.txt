@@ -2434,12 +2434,12 @@ rtk2373:抉:gouge:人,大,二,扌,ユ;夬,扌
 rtk2374:怯:cowardice:去,state of mind
 rtk2375:惟:consider:state of mind,隹
 rtk2376:惚:fall in love with:state of mind,忽
-rtk2377:怜:wise:state of mind,𠆢,卩,一;令,忄
+rtk2377:怜:wise:令,忄;state of mind,𠆢,卩,一
 rtk2378:惇:sincere:享,state of mind
 rtk2379:恰:just as:合,state of mind
 rtk2380:恢:wide:state of mind,灰
 rtk2381:悌:serving our elders:弟,state of mind
-rtk2382:澪:water route:雨,水,𠆢,卩,一;水,零
+rtk2382:澪:water route:水,零;雨,水,𠆢,卩,一
 rtk2383:洸:sparkling water:水,光
 rtk2384:滉:deep and broad (water):水,晃
 rtk2385:漱:gargle:水,束,欠
@@ -2676,7 +2676,7 @@ rtk2615:瑚:ancestral offering receptacle:王,胡
 rtk2616:瑞:congratulations:王,山,而
 rtk2617:玖:beautiful black jewel:久,王
 rtk2618:瑛:sparkle of jewelry:ノ,王,艹,大,冖;王,英
-rtk2619:玲:sound of jewels:王,𠆢,卩,一;令,王
+rtk2619:玲:sound of jewels:令,王;王,𠆢,卩,一
 rtk2620:畢:the end:｜,一,田
 rtk2621:畦:rice paddy ridge:圭,田
 rtk2622:痒:itchy:羊,疔

@@ -13711,3 +13711,27 @@ see into at all.
 **Standing next steps**, unchanged and unstarted: this sandbox cannot deploy —
 `sync_system_data.py` against the live DB still has to be run by someone with
 server access, and every chunk above is data-only until that happens.
+
+## 2026-09-20 — chunk 31: three more 令-flattenings, a shape chunk 28 missed
+
+Owner flagged that 怜 (rtk2377) wasn't showing 令 (orders) as a part, only
+"state of mind, 𠆢, 卩, 一" — 令 itself broken into its own primitive pieces,
+with 忄 dropped from the row entirely. `render_glyphs.py` on 怜/令/忄 confirms
+the glyph is plainly 忄 + 令, and the row already had that exact decomposition
+— just as the unlabelled *alternate*, behind the flattened one.
+
+`grep '𠆢,卩,一' data.txt` found two more with the identical shape: 澪
+(rtk2382, `雨,水,𠆢,卩,一` primary vs. `水,零` alt — 零 itself being 雨+令) and
+玲 (rtk2619, `王,𠆢,卩,一` primary vs. `令,王` alt). All three rendered and
+confirmed. This is the same bug class chunk 28's `RADICAL_VARIANTS` line
+flushed out (a compound already named correctly in the labelled alternate,
+buried behind a flattened primary) but a different literal string (`𠆢,卩,一`
+rather than `𠆢,一,X`), so `audit_overflatten.py`'s existing pass over
+`RADICAL_VARIANTS` didn't catch it — 令 wasn't in that mapping. Fixed by hand
+(swap primary ↔ alt) rather than teaching the tool a three-token special case
+for what turned out to be exactly 3 rows.
+
+Applied via `sync_system_data.py` (dry-run first, then for real, DB backed up
+immediately before). All three now show the correct compound as their primary,
+unlabelled decomposition; the flattened version survives as the
+`structural (cjkvi-ids)` alternate rather than being deleted.
