@@ -69,6 +69,15 @@ RADICAL_VARIANTS = {
     # 𧾷 is the combining form of 足, which this project already uses in every
     # one of its hosts (促/路/踊 …).
     "𧾷": "足",
+    # Same class as 丿/ノ above: cjkvi-ids writes the roof form of "person" as
+    # plain 人 (全 ⿱人王, 傘 ⿱人⿻十𠈌, 茶 ⿳艹人朩, 禽 ⿱人离, 冘 ⿱冖人), while
+    # this project registered it as 𠆢 — which is what those hosts actually
+    # draw, a wide low roof rather than 人's splayed pair, and what chunk 2 of
+    # the 2026-09-20 audit swapped 40 part fields onto. Folding them together
+    # here only affects *evidence*: it stops cjkvi's spelling from making a
+    # correct 𠆢 look unsupported. 傘 was the case that surfaced it — Heisig
+    # names its roof "person" too, and the glyph is plainly 𠆢.
+    "人": "𠆢",
     # ⺊ is 卜 sitting on top of something: rendered side by side the only
     # difference is that the free-standing 卜 slants its side stroke down and
     # ⺊ keeps it horizontal, which is what 占/卓/貞 actually draw. Unicode names

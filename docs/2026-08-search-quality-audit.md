@@ -13590,3 +13590,45 @@ self-references 0, primary-choice 0, frontend lint + build clean. One pin moved
 
 **Next** — the last four groups: "rag", "sherpa", "fred astaire", "staples"
 (印/暇, whose left halves cjkvi cannot write).
+
+## 2026-09-20 — chunk 28: one line in RADICAL_VARIANTS, eleven over-flattenings
+
+**全 and 金 were each carrying an 八 that is in neither glyph.** cjkvi gives
+`⿱人王` and `⿱人⿻王丷`, Heisig reads "umbrella; king; jewel; ball" and "metal;
+umbrella; drop; king; …", and the two marks under 金's roof are the 丷 the row
+already carried beside the stray 八.
+
+**"glass hood" → 冂.** Heisig uses it in 周 and 彫 where he uses "glass canopy"
+(already here) in the other twelve. The reason to record it: cjkvi writes 周
+`⿵⺆𠮷`, and **⺆ is 月's frame, not 冂** — rendered, ⺆'s left leg is a 丿 where
+周's and 冂's run straight down. The row was right and only the name was
+missing; mapping ⺆ to 冂 in `RADICAL_VARIANTS` would have been the easy wrong
+answer, and would have quietly equated 月's frame with 冂 everywhere.
+
+**One line that was worth adding, and what it flushed out.** cjkvi-ids writes
+the *roof* form of "person" as plain 人 — 全 `⿱人王`, 傘 `⿱人⿻十𠈌`, 茶
+`⿳艹人朩`, 禽 `⿱人离`, 冘 `⿱冖人` — where this project registered it as 𠆢,
+which is what those hosts actually draw and what chunk 2 swapped 40 part fields
+onto. `"人": "𠆢"` in `audit_overflatten.RADICAL_VARIANTS` folds them together
+**as evidence only**, exactly like the existing 丿/ノ and 丨/｜ lines.
+
+The moment it landed, `audit_overflatten.py` went from 0 to **11 findings** —
+all real, all pre-existing, all the same shape: `𠆢 + 一 + X` sitting where a
+compound this database already has belongs. 愉/愈 → 俞, 恰/蛤/閤 → 合, 貪 → 今,
+槍 → 倉, 蔭 → 陰, 翰/斡 → 𠦝, 鹸 → 㑒. Every one of those rows **already named
+the right compound in its own labelled alternate** and showed the reader the
+letters. Applied with `--apply`.
+
+**And a defect nobody had looked for.** Collapsing those left several rows whose
+alternate was now identical to their primary, so the detail page would render
+the same decomposition twice. Sweeping `data.txt` for that found **17**, and
+only six were from this chunk — the other eleven (rtk819, rtk1276, the whole
+疒/疔 family at 1814/1815/1819/1822/1826/2622) had been duplicating themselves
+in the UI for some time, in two spellings of the same parts.
+
+Verified: 1325 checks exit 0, 66 pytest, over-flattening back to 0, dead tokens
+0, self-references 0, primary-choice 0, frontend lint + build clean. Two pins
+moved (金, 翰). **Phantom parts 38→34; the double-checked set 13→9.**
+
+**Next** — 蔵 (戈/厂/ノ), 衆 (糸), 猟 (用), and the "rag"/"sherpa"/"fred astaire"
+name groups.

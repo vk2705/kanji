@@ -509,8 +509,11 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"prim-pipe", "rtk2", "kangxi12", "rtk10"}},
     "rtk1596": {"character": "平", "keyword": "even",
                 "expected_part_ids": {"rtk1777", "kangxi12"}},
+    # 2026-09-20: the 八 is in neither 金 nor 全. cjkvi gives ⿱人⿻王丷 and
+    # Heisig reads "metal; umbrella; drop; king; jewel; ball"; the two marks
+    # under the roof are the 丷 this row already carried beside it.
     "rtk287": {"character": "金", "keyword": "gold",
-               "expected_part_ids": {"kangxi12", "prim-umbrella", "rtk271", "rtk8"}},
+               "expected_part_ids": {"kangxi12", "prim-umbrella", "rtk271"}},
     "rtk1725": {"character": "鎌", "keyword": "sickle",
                 "expected_part_ids": {"rtk287", "rtk1723"}},
     "rtk2785": {"character": "鋲", "keyword": "rivet",
@@ -2347,8 +2350,11 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"rtk1160", "rtk173"}},
     "rtk2752": {"character": "謬", "keyword": "fallible",
                "expected_part_ids": {"kangxi59", "prim-umbrella", "rtk357", "rtk615"}},
+    # 2026-09-20: 十 + 日 is 𠦝 ("mist"), already a row here, and cjkvi gives
+    # 翰 ⿰𠦝⿱人羽. audit_overflatten.py only saw it once cjkvi's 人 and this
+    # file's 𠆢 were folded together as evidence.
     "rtk2801": {"character": "翰", "keyword": "quill",
-               "expected_part_ids": {"prim-umbrella", "rtk10", "rtk12", "rtk615"}},
+               "expected_part_ids": {"prim-umbrella", "prim-mist", "rtk615"}},
     "rtk2876": {"character": "翠", "keyword": "jade green",
                "expected_part_ids": {"rtk1102", "rtk615"}},
     # Was redundantly re-listing 元(rtk63)'s own 儿 alongside referencing it

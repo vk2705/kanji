@@ -331,13 +331,13 @@ rtk277:狂:lunatic:犭,王
 rtk278:旺:flourishing:王,日
 rtk279:皇:emperor:王,白
 rtk280:呈:display:王,口
-rtk281:全:whole:王,八,𠆢;人,王
+rtk281:全:whole:𠆢,王;人,王
 rtk282:栓:plug:木,全
 rtk283:理:logic:王,里
 rtk284:主:lord,candlestick:王,丶;亠,土
 rtk285:注:pour:主,水
 rtk286:柱:pillar:木,主
-rtk287:金:gold,metal:王,八,𠆢,丷;丷,人,王
+rtk287:金:gold,metal:𠆢,王,丷;丷,人,王
 rtk288:銑:pig iron:先,金
 rtk289:鉢:bowl:本,金
 rtk290:銅:copper:金,同
@@ -725,7 +725,7 @@ rtk671:慌:disconcerted:荒,忄
 rtk672:悔:repent:忄,毎
 rtk673:憎:hate:曽,忄
 rtk674:慣:accustomed:state of mind,貫
-rtk675:愉:pleasure:月,state of mind,𠆢,一;俞,忄
+rtk675:愉:pleasure:俞,state of mind
 rtk676:惰:lazy:左,月,忄
 rtk677:慎:humility:真,忄
 rtk678:憾:remorse:感,忄
@@ -869,7 +869,7 @@ rtk815:至:climax:一,土,厶
 rtk816:室:room:至,宀
 rtk817:到:arrival:至,刀
 rtk818:致:doth:至,攵
-rtk819:互:mutually:一,彑;一,彑
+rtk819:互:mutually:一,彑
 rtk820:棄:abandon:𠫓,丗,木
 rtk821:育:bring up:月,𠫓
 rtk822:撤:remove:育,扌,攵
@@ -1326,7 +1326,7 @@ rtk1272:措:set aside:昔,扌
 rtk1273:散:scatter:龷,月,攵
 rtk1274:廿:twenty:凵,一
 rtk1275:庶:commoner:广,廿,灬;广,灬
-rtk1276:遮:intercept:庶,辶;庶,辶
+rtk1276:遮:intercept:庶,辶
 rtk1277:席:seat:巾,广,廿
 rtk1278:度:degrees:又,广,廿
 rtk1279:渡:transit:度,水
@@ -1763,7 +1763,7 @@ rtk1709:乗:ride:｜,ノ,一,禾,八
 rtk1710:剰:surplus:乗,刀
 rtk1711:今:now,clock:亼,一
 rtk1712:含:contain:口,今
-rtk1713:貪:covet:貝,𠆢,一;今,貝
+rtk1713:貪:covet:今,貝
 rtk1714:吟:versify:口,今
 rtk1715:念:wish:今,心
 rtk1716:捻:twirl:念,扌
@@ -1864,19 +1864,19 @@ rtk1810:種:species:禾,重
 rtk1811:衝:collide:｜,行,日,彳,ノ,重
 rtk1812:薫:send forth fragrance:艹,重,灬
 rtk1813:病:ill:丙,疒
-rtk1814:痴:stupid:知,疔;疒,知
-rtk1815:痘:pox:豆,疔;疒,豆
+rtk1814:痴:stupid:知,疔
+rtk1815:痘:pox:豆,疔
 rtk1816:症:symptoms:正,疒
 rtk1817:瘍:swelling:一,日,疔,勿;昜,疒
 rtk1818:痩:get thin:疔,申,又
-rtk1819:疾:rapidly:矢,疔;疒,矢
+rtk1819:疾:rapidly:矢,疔
 rtk1820:嫉:jealous:女,疾
 rtk1821:痢:diarrhea:利,疒;禾,疔
-rtk1822:痕:mark:艮,疔;疒,艮
+rtk1822:痕:mark:艮,疔
 rtk1823:疲:exhausted:皮,又,疔;疒,皮
 rtk1824:疫:epidemic:殳,疔,几,又;殳,疒
 rtk1825:痛:pain:甬,疒
-rtk1826:癖:mannerism:疔,辟;疒,辟
+rtk1826:癖:mannerism:疔,辟
 rtk1827:匿:hide:匚,若
 rtk1828:匠:artisan:斤,匚
 rtk1829:医:doctor:矢,匚
@@ -2436,7 +2436,7 @@ rtk2375:惟:consider:state of mind,隹
 rtk2376:惚:fall in love with:state of mind,忽
 rtk2377:怜:wise:state of mind,𠆢,卩,一;令,忄
 rtk2378:惇:sincere:享,state of mind
-rtk2379:恰:just as:口,state of mind,𠆢,一;合,忄
+rtk2379:恰:just as:合,state of mind
 rtk2380:恢:wide:state of mind,灰
 rtk2381:悌:serving our elders:弟,state of mind
 rtk2382:澪:water route:雨,水,𠆢,卩,一;水,零
@@ -2514,7 +2514,7 @@ rtk2453:蕉:banana:焦,艹
 rtk2454:蕎:buckwheat:喬,艹
 rtk2455:蕗:butterbur:艹,路
 rtk2456:茄:eggplant:加,艹
-rtk2457:蔭:shade:二,𠆢,厶,艹,阝,一;艹,陰
+rtk2457:蔭:shade:艹,陰
 rtk2458:蓬:sagebrush:艹,逢
 rtk2459:芥:mustard:艹,介
 rtk2460:萌:show symptoms of:明,艹
@@ -2568,7 +2568,7 @@ rtk2507:惹:attract:心,若
 rtk2508:悉:all:心,釆
 rtk2509:忽:in a moment:心,勿
 rtk2510:惣:all:心,物
-rtk2511:愈:be superior:月,心,𠆢,一;俞,心
+rtk2511:愈:be superior:俞,心
 rtk2512:恕:excuse:如,心
 rtk2513:昴:the pleiades:卯,日
 rtk2514:晋:advance:一,日
@@ -2633,7 +2633,7 @@ rtk2572:棉:cotton:帛,木
 rtk2573:楯:shield:木,盾
 rtk2574:榎:lotus tree:木,夏
 rtk2575:樺:birch:木,華
-rtk2576:槍:spear:口,木,𠆢,一;倉,木
+rtk2576:槍:spear:倉,木
 rtk2577:柘:wild mulberry:石,木
 rtk2578:梱:pack:困,木
 rtk2579:枇:loquat:比,木
@@ -2679,7 +2679,7 @@ rtk2618:瑛:sparkle of jewelry:ノ,王,艹,大,冖;王,英
 rtk2619:玲:sound of jewels:王,𠆢,卩,一;令,王
 rtk2620:畢:the end:｜,一,田
 rtk2621:畦:rice paddy ridge:圭,田
-rtk2622:痒:itchy:羊,疔;疒,羊
+rtk2622:痒:itchy:羊,疔
 rtk2623:痰:sputum:火,疔;炎,疒
 rtk2624:疹:measles:𠆢,彡,疔
 rtk2625:痔:piles:寸,土,疔;寺,疒
@@ -2790,7 +2790,7 @@ rtk2730:螺:small  edible  helical fresh-water mollusk:累,虫
 rtk2731:蝉:cicada:単,虫
 rtk2732:蛙:frog:圭,虫
 rtk2733:蛾:moth:我,虫
-rtk2734:蛤:clam:口,虫,𠆢,一;合,虫
+rtk2734:蛤:clam:合,虫
 rtk2735:蛭:leech:至,虫
 rtk2736:蛎:oyster:虫,厂
 rtk2737:罫:ruled line:罒,土,卜
@@ -2854,11 +2854,11 @@ rtk2794:鍾:spindle:｜,金,日,里,ノ;重,金
 rtk2795:鋏:scissors:金,人,大
 rtk2796:閃:flash:人,門
 rtk2797:悶:be in agony:心,門
-rtk2798:閤:small side gate:口,門,𠆢,一;合,門
+rtk2798:閤:small side gate:合,門
 rtk2799:雫:drop:雨,丶,一,｜;下,雨
 rtk2800:霞:be hazy:雨,又
-rtk2801:翰:letter:羽,十,日,𠆢;人,羽,𠦝
-rtk2802:斡:go around:十,斗,日,𠆢;人,斗,𠦝
+rtk2801:翰:letter:羽,𠆢,𠦝;人,羽,𠦝
+rtk2802:斡:go around:斗,𠆢,𠦝;人,斗,𠦝
 rtk2803:鞍:saddle:安,革
 rtk2804:鞭:whip:ノ,一,革,日,田;便,革
 rtk2805:鞘:sheath:肖,革
@@ -2936,7 +2936,7 @@ rtk2876:翠:green:卒,羽
 rtk2877:黛:blackened eyebrows:代,黒
 rtk2878:鼎:three legged kettle:｜,一,片,目,丬
 rtk2879:鹵:salt:十,囗
-rtk2880:鹸:saltiness:口,十,人,𠆢,囗,鹵;㑒,鹵
+rtk2880:鹸:saltiness:㑒,鹵
 rtk2881:虔:respect:文,卜,匕,厂,虍;文,虍
 rtk2882:燕:swallow (bird):口,匕,灬,丬,艹;北,口,廿,灬
 rtk2883:嘗:once:outhouse,旨
@@ -3063,7 +3063,7 @@ rtk3000:鼈:snapping turtle:敝,黽
 # Kangxi radical English names (or, for 艹/厶, the established primitive meaning);
 # not Heisig book text.
 kangxi8:亠:lid,primitive_lid,top hat
-kangxi13:冂:border,down box,hood,belt,glass canopy,helmet
+kangxi13:冂:border,down box,hood,belt,glass canopy,glass hood,helmet
 # "crown" added 2026-09-19: Heisig's OWN alternate name for this exact glyph,
 # used in 57 CSV component lists (冗,冥,軍,冠,帝,... plus every host that
 # transitively contains 冖 through an already-decomposed compound like
@@ -4078,3 +4078,12 @@ prim-mountain-goat:屰:mountain goat:丷,屮
 # vertical drop where 売's is a plain 丿. Naming 冗 would resolve the term and
 # point it at a row none of the four hosts uses. Left unresolved on purpose.
 prim-staples:𦥑:staples:
+
+# --- 2026-09-20: 全 and 金 were each carrying an 八 that is in neither glyph.
+# Heisig reads 全 "umbrella; king; jewel; ball" and 金 "metal; umbrella; drop;
+# king; ...", and cjkvi gives ⿱人王 and ⿱人⿻王丷 -- no 八 in either, and the
+# render shows 金's two marks are 丷, which this file already had alongside.
+# "glass hood" added to 冂. Heisig uses it in 周 and 彫 where he uses "glass
+# canopy" (already here) in the other twelve; cjkvi writes 周 ⿵⺆𠮷, but ⺆ is
+# 月's frame -- rendered, its left leg is a 丿 where 周's and 冂's run straight
+# down. The row was right and only the name was missing.
