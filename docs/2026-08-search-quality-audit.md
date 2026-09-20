@@ -13293,3 +13293,54 @@ which no check that asks only "does this resolve" can see. That class deserves
 its own detector: a name used in the CSV's components column that resolves to a
 kanji whose frame number is *later than its first host* cannot be the primitive
 Heisig means. That is a mechanical test, and it is the next tool to build.
+
+## 2026-09-20 — chunk 21: a detector for names that point at the wrong row
+
+Chunks 12 and 14 each found the same shape by accident: a Heisig component name
+that *resolves*, and resolves to something impossible. "mend" answered 綴 at
+frame 2222 for a primitive first needed at frame 410; "stick" answered 貼 for
+one first needed at frame 35. Every check in this directory asks whether a name
+resolves. Neither asked whether the answer could be true.
+
+`audit_anachronistic_names.py` asks. For each name in the components column it
+takes the **lowest frame among its hosts** — the first kanji in the book that
+needs the primitive — and compares it to the frames of every row answering to
+the name. A `prim-*`/`kangxi*` claimant clears it immediately (a primitive is
+not taught at a frame).
+
+**The first draft was wrong, and the way it was wrong is the interesting part.**
+Frame order alone accused 世 (frame 28) of an anachronism for naming "twenty",
+which resolves to 廿 at frame 1274. That accusation is nonsense: 廿 *is* 世's
+top, and Heisig routinely teaches a shape as a primitive long before its own
+kanji frame — a 1,246-frame gap is the normal arrangement in the book, not a
+symptom. What separates 廿 from 綴 is not arithmetic but the glyph. So the
+second test asks whether the claimant's character is reachable in the first
+host, through cjkvi-ids and through this project's own decompositions —
+*including the host's own row*, which `audit_phantom_parts.py` deliberately
+excludes. That exclusion is right there (the decomposition is the claim under
+test) and wrong here (the name is the claim; the decomposition is evidence).
+With both halves, the false positives went from 84 findings to 44.
+
+The 44 are not a long tail. They are overwhelmingly **Heisig's synonym sets,
+where this database only ever recorded one member**:
+
+```
+'dagger'    38 hosts   first used by 刀  (87)  → only answer 鋒 (2790)
+'needle'   134 hosts   first used by 十  (10)  → only answer 針  (292)
+'dirt'     117 hosts   first used by 土 (161)  → only answer 垢 (2302)
+'clam'      80 hosts   first used by 貝  (56)  → only answer 蛤 (2734)
+'house'     78 hosts   first used by 字 (197)  → only answer 家  (580)
+'flag'      55 hosts   first used by 尿 (1132) → only answer 旗 (1901)
+'sabre'     41 hosts   first used by 則  (92)  → only answer 剣 (1801)
+```
+
+"Needle" alone is 134 component rows in which a user typing Heisig's own word
+for 十 is handed 針 instead. None of this is bad decomposition data — the
+decompositions are fine. It is the *names* that point at the wrong row, which is
+why 20 chunks of decomposition work never touched it.
+
+Tool only this chunk; no data changed. Verified: 1324 checks with only the 4
+known hanzi-scope non-issues, 66 pytest. Documented in `CLAUDE.md` beside the
+other audit tooling.
+
+**Next** — work the 44 down, biggest host count first.
