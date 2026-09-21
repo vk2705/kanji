@@ -29,6 +29,37 @@ over-counting (a kanji with zero data.txt edits since the audit began has
 definitely never been individually fixed, even if someone eyeballed it and
 decided it was already fine — there's no record of that either way).
 
+## The record is cumulative, not recomputed (fixed 2026-09-21)
+
+This script died the moment the repo's history was rewritten. `AUDIT_START_COMMIT`
+is a short hash, and `git log <hash>^..HEAD` on a hash that no longer exists
+exits 128 — so every run since the anonymized export has crashed, silently
+leaving the TSV frozen at whatever it said on 2026-09-12 while nine days of
+audit work went unrecorded.
+
+Recomputing coverage from git was the wrong shape to begin with. The current
+history's oldest `data.txt` commit is 2026-09-05, weeks *after* the audit began,
+so everything before that is simply gone and no anchor can bring it back. So the
+**TSV is now the record** and each run unions into it: a kanji marked reviewed
+stays reviewed. That makes the count monotonic, immune to the next history
+rewrite, and matches what this file's own docstring said from the start — the
+coverage state has to live in the repo, not in any one session's memory.
+
+If the anchor commit does resolve, it is still used to narrow the git scan. If
+it does not, the scan starts *after* the oldest surviving `data.txt` commit.
+That exclusion is the whole point, and the first attempt at this fix got it
+wrong: under a truncated history the oldest commit adds the entire file, so
+scanning it counts all ~3,000 ids as "+rtk…" additions and cheerfully reports
+100% reviewed. The bulk import was never a review — that was true of the
+original anchor and it is true of whatever commit now stands in its place.
+
+Because the record is cumulative, a bad scan is **permanent**: the first run of
+this fix wrote 3000/3000 and the union then preserved it, and it took a
+`git checkout` to undo. So there is a guard — if the git scan on its own claims
+more than `SUSPICIOUS_SCAN_SHARE` of all rows, the run refuses to write and
+says what it thinks went wrong. A loud failure is recoverable; a silent 100%
+is not.
+
 ## Usage
 
     python3 coverage_status.py [--out ../docs/kanji_review_coverage.tsv]
@@ -49,6 +80,11 @@ import database  # noqa: E402
 
 AUDIT_START_COMMIT = "0a46e3d"  # first Finding-1-phase content-fix commit
 
+# A git scan that claims this share of every row has been individually reviewed
+# is not reporting coverage, it is reporting a bulk import it failed to exclude.
+# See "The record is cumulative" in the docstring for how that gets baked in.
+SUSPICIOUS_SCAN_SHARE = 0.95
+
 
 def build_shadow_db() -> Path:
     tmp_dir = Path(tempfile.mkdtemp(prefix="kanji_coverage_"))
@@ -62,12 +98,52 @@ def build_shadow_db() -> Path:
     return tmp_db
 
 
+def previously_reviewed(path: Path) -> set[str]:
+    """Ids the persisted TSV already marks reviewed.
+
+    The record is cumulative: a kanji someone looked at in August stays looked
+    at, whatever git can still see. See the module docstring.
+    """
+    if not path.exists():
+        return set()
+    ids = set()
+    for line in path.read_text(encoding="utf-8").splitlines()[1:]:
+        cols = line.split("\t")
+        if len(cols) >= 5 and cols[4].strip() == "yes":
+            ids.add(cols[0])
+    return ids
+
+
+def _log_range() -> str:
+    """`<anchor>^..HEAD` when the anchor still resolves, else the whole history.
+
+    A rewritten history drops the anchor, and `git log <gone>^..HEAD` exits 128.
+    Falling back to everything git can see is safe here: the oldest surviving
+    data.txt commit is already after the audit started, so the scan can only
+    under-report, and the TSV union above makes up the difference.
+    """
+    probe = subprocess.run(
+        ["git", "rev-parse", "--verify", "--quiet", f"{AUDIT_START_COMMIT}^{{commit}}"],
+        cwd=Path(__file__).parent, capture_output=True, text=True,
+    )
+    if probe.returncode == 0:
+        return f"{AUDIT_START_COMMIT}^..HEAD"
+    oldest = subprocess.run(
+        ["git", "log", "--format=%H", "--reverse", "--", "data.txt"],
+        cwd=Path(__file__).parent, capture_output=True, text=True, check=True,
+    ).stdout.split("\n", 1)[0].strip()
+    print(f"note: {AUDIT_START_COMMIT} is not in this history (it was rewritten); "
+          f"scanning data.txt commits after {oldest[:7]}, the oldest one left — "
+          f"that commit adds the whole file and is the bulk import, not a review",
+          flush=True)
+    return f"{oldest}..HEAD"
+
+
 def reviewed_ids() -> set[str]:
-    """Every rad*/rtk* id whose data.txt line was added or changed by a commit
-    after (and including) AUDIT_START_COMMIT — see module docstring for why
-    that's the cutoff, not the repo's full history."""
+    """Every rad*/rtk* id whose data.txt line was added or changed in the scan
+    range — see module docstring for why that range can be the whole history."""
     result = subprocess.run(
-        ["git", "log", f"{AUDIT_START_COMMIT}^..HEAD", "-p", "--", "data.txt"],
+        ["git", "log", _log_range(), "-p", "--", "data.txt"],
         cwd=Path(__file__).parent, capture_output=True, text=True, check=True
     )
     ids = set()
@@ -96,7 +172,16 @@ def main():
     ).fetchall()
     conn.close()
 
-    reviewed = reviewed_ids()
+    scanned = reviewed_ids()
+    scanned_here = {r["id"] for r in rows} & scanned
+    if rows and len(scanned_here) > SUSPICIOUS_SCAN_SHARE * len(rows):
+        sys.exit(
+            f"refusing to write: the git scan alone marks {len(scanned_here)}/{len(rows)} "
+            f"rows reviewed, which means it is counting a commit that adds data.txt "
+            f"wholesale rather than editing it. Fix the scan range (see _log_range) "
+            f"before re-running — this file is cumulative, so a bad run sticks."
+        )
+    reviewed = scanned | previously_reviewed(args.out)
 
     lines = ["id\tcharacter\tkeyword\tframe\treviewed"]
     reviewed_count = 0
@@ -111,8 +196,8 @@ def main():
 
     total = len(rows)
     pct = 100 * reviewed_count / total if total else 0
-    print(f"{reviewed_count}/{total} rtk kanji reviewed ({pct:.1f}%) since the audit began "
-          f"({AUDIT_START_COMMIT}). Written to {args.out}")
+    print(f"{reviewed_count}/{total} rtk kanji reviewed ({pct:.1f}%) since the audit began. "
+          f"Written to {args.out}")
 
 
 if __name__ == "__main__":

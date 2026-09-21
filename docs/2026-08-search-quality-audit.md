@@ -13935,3 +13935,46 @@ Registering 齒 as an unrelated `prim-*` row would lose that.
 Verified: 1325 checks exit 0, 67 pytest, over-flattening 0, dead tokens 0,
 self-references 0, primary-choice 0 in both modes, frontend lint + both builds
 clean. One pin moved (赳). **Phantom parts (non-blind) 29→24 across 21→17 kanji.**
+
+## 2026-09-21 — chunk 38: `coverage_status.py` has been dead since the history rewrite
+
+Ran it for the first time in this batch. It crashes:
+
+```
+subprocess.CalledProcessError: Command '['git', 'log', '0a46e3d^..HEAD', '-p',
+'--', 'data.txt']' returned non-zero exit status 128
+```
+
+`AUDIT_START_COMMIT` is a short hash, and **that commit is not in this repo any
+more** — the anonymized git export rewrote the history, and the oldest surviving
+`data.txt` commit is 2026-09-05. So every run since has exited non-zero, leaving
+`docs/kanji_review_coverage.tsv` frozen at what it said on **2026-09-12** while
+weeks of audit work went unrecorded. Nothing noticed, because nothing runs it.
+
+Two changes:
+
+**The record is now cumulative.** Recomputing coverage from git was the wrong
+shape to begin with: the pre-rewrite commits are simply gone and no anchor can
+bring them back. The TSV *is* the record, and each run unions into it — a kanji
+marked reviewed stays reviewed. That is also what this file's own docstring said
+from the start ("that coverage state has to live in the repo, not in any one
+session's memory"); it just wasn't built that way.
+
+**The fallback scan starts after the oldest surviving commit.** And the first
+attempt at this got it wrong in a way worth recording: I fell back to scanning
+`HEAD`, wrote that the whole history "can only under-report", and the run
+printed **3000/3000, 100% reviewed**. Under a truncated history the oldest
+commit *adds the entire file*, so every id shows up as a `+rtk…` addition. The
+bulk import was never a review — that was the original anchor's whole purpose,
+and I had reasoned my way past it.
+
+Worse, the cumulative union then **baked the bad answer in**; undoing it took a
+`git checkout` of the TSV. So there is now a guard: if the git scan alone claims
+more than 95% of rows, the run **refuses to write** and says what it thinks went
+wrong. A loud failure is recoverable; a silent 100% is not.
+
+Real number, first since 2026-09-12: **2566/3000 (85.5%)**, up from 1891
+(63.0%).
+
+Verified: 1325 checks exit 0, 67 pytest, frontend lint clean. No data changed —
+this chunk is the tool and the record it writes.
