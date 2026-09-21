@@ -12,7 +12,6 @@ kangxi20:勹:bound up
 kangxi25:卜:divining rod,augury,divination,magic wand
 kangxi26:卩:stamp,seal
 kangxi27:厂:cliff
-prim-katakana-yo:ヨ:katakana yo
 prim-hooked-hand:𠂊:bound up
 kangxi162:辶:road:prim130
 kangxi34:夂:walking legs,go slowly
@@ -2256,7 +2255,7 @@ rtk2194:璽:emperor's seal:爾,玉
 rtk2195:潟:lagoon:臼,水,勹,灬
 rtk2196:丹:rust-colored,rust colored,ship´s funnel,ship's funnel:ノ,一,丶,亅
 rtk2197:丑:sign of the ox or cow:｜,ノ,一
-rtk2198:羞:feel ashamed:ノ,ヨ,羊
+rtk2198:羞:feel ashamed:羊,丑
 rtk2199:卯:sign of the hare or rabbit,blown eggs:prim-receipt,卩
 rtk2200:巳:sign of the snake or serpent,mosaic with bit missing:
 rtk2201:此:this:止,匕
@@ -2427,9 +2426,9 @@ rtk2366:挺:bravely volunteer:廷,扌
 rtk2367:擾:disturb:憂,扌
 rtk2368:撫:stroke:扌,無
 rtk2369:撒:scatter:扌,散
-rtk2370:擢:excel in:ヨ,扌,隹;扌,翟
+rtk2370:擢:excel in:扌,翟
 rtk2371:摺:rub:扌,習
-rtk2372:捷:victory:疋,扌,ヨ
+rtk2372:捷:victory:扌,彐,龰
 rtk2373:抉:gouge:人,大,二,扌,ユ;夬,扌
 rtk2374:怯:cowardice:去,state of mind
 rtk2375:惟:consider:state of mind,隹
@@ -2651,7 +2650,7 @@ rtk2590:桶:tub:木,甬
 rtk2591:楕:ellipse:左,月,木
 rtk2592:樒:tree whose branches are placed on buddhist graves:密,木
 rtk2593:毬:burr:水,毛,丶,亠;毛,求
-rtk2594:燿:shine:ヨ,火,隹;火,翟
+rtk2594:燿:shine:火,翟
 rtk2595:燎:burn:火,小,大,日,丷,亠;尞,火
 rtk2596:炬:torch:火,匚,巨;巨,火
 rtk2597:焚:burn:林,火
@@ -2763,7 +2762,7 @@ rtk2703:紐:string:丑,糸
 rtk2704:紘:large:ノ,一,糸,厶
 rtk2705:纏:wear:糸,土,里,儿,广
 rtk2706:絢:brilliant fabric design:旬,糸
-rtk2707:繍:sew:｜,ノ,ヨ,糸,水,隶;粛,糸
+rtk2707:繍:sew:粛,糸
 rtk2708:紬:pongee (a knotted silk cloth):｜,糸,日,田;由,糸
 rtk2709:綺:figured cloth:奇,糸
 rtk2710:綾:design:夌,糸
@@ -3364,7 +3363,7 @@ prim-march:戌:march:戊,一
 # depending on the frame, and the flush one 'broom' — so 'broom' is an
 # ambiguous term and deliberately answers to both rows.
 prim-rake:⺕:rake,broom:
-kangxi58:彐:broom,Radical 58:
+kangxi58:彐:broom,Radical 58,ヨ:
 # 尃 is not 専. Its four hosts spelled it 専 plus a stray 丶.
 prim-acupuncturist:尃:acupuncturist:甫,寸
 
@@ -4147,3 +4146,19 @@ prim-crowd:乑:crowd:
 # the 東 case -- but 柬 has no row here, no Heisig name (frame 2449 is past the
 # CSV), and one host. Inventing a mnemonic name for it is worse than leaving
 # the row spelled out, so it stays.
+
+# --- 2026-09-21: the katakana ヨ retired, the same way マ was on 2026-09-20.
+# prim-katakana-yo had five hosts and every one of them was a different real
+# shape it was standing in for:
+#   擢 燿  -> 翟 (prim-futon), cjkvi ⿰扌翟 / ⿰火翟 -- 翟 is 羽 over 隹, and both
+#            rows already said so in their own labelled alternate
+#   繍    -> 粛, likewise already in its alternate
+#   羞    -> 丑 (cjkvi ⿸𦍌丑). Rendered, 丑's vertical crosses all three bars
+#            and protrudes; ヨ's does not touch them on the left at all
+#   捷    -> 彐 + 龰. cjkvi has 捷 ⿰扌疌 with 疌 atomic, so the structural
+#            channel cannot confirm the inside; what the render shows is a
+#            flush-right 彐 over the swept 龰 registered on 2026-09-20, and the
+#            疋 this row also carried is simply not there
+# The row is gone and ヨ survives as a searchable alias on 彐 (kangxi58), which
+# is the flush-right one it actually resembles -- ⺕ ("rake") protrudes to the
+# left, and that is the distinction the 2026-09-15 entry above drew.

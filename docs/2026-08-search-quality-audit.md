@@ -13809,3 +13809,32 @@ running, and there is no bare `npm run build` any more). No pin moved.
 **Phantom parts (non-blind) 75→63 across 49→44 kanji.**
 
 **Next** — the remaining out-of-range families.
+
+## 2026-09-21 — chunk 34: the katakana ヨ retired
+
+Same shape as マ in chunk 9. `prim-katakana-yo` had five hosts, and **every one
+of them was a different real shape it was standing in for**:
+
+| host | really | evidence |
+|---|---|---|
+| 擢, 燿 | 翟 (`prim-futon`) | cjkvi `⿰扌翟` / `⿰火翟`; both rows already said so in their own labelled alternate |
+| 繍 | 粛 | likewise already in its alternate |
+| 羞 | 丑 | cjkvi `⿸𦍌丑`; rendered, 丑's vertical crosses all three bars and protrudes, ヨ's does not reach them on the left at all |
+| 捷 | 彐 + 龰 | see below |
+
+捷 is the one with no structural confirmation available: cjkvi has `⿰扌疌` with
+**疌 atomic**, so nothing can be said about its inside from that direction. What
+the render shows is a flush-right 彐 over the swept 龰 that chunk 12 registered
+as "mend" — and the 疋 this row also carried is simply not in the glyph.
+
+The row is gone, and **ヨ survives as a searchable alias on 彐 (kangxi58)**,
+which is the flush-right one it actually resembles. ⺕ ("rake") protrudes to the
+left, and that is exactly the distinction the 2026-09-15 entry in `data.txt`
+drew when it split those two apart — a lookalike name pointing at the correct
+codepoint, which is the inverse of the pattern being undone.
+
+Verified: 1325 checks exit 0, 67 pytest, over-flattening 0, dead tokens 0,
+self-references 0, primary-choice 0, frontend lint + both builds clean. One pin
+moved (繍). **Phantom parts (non-blind) 63→61 across 44→42 kanji.**
+
+**Next** — 齟/齬 (歯 where the glyph has 齒), and the 亠 cluster in 毬 燎 麹.

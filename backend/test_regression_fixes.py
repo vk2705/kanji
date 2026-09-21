@@ -2899,8 +2899,10 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"kangxi10", "kangxi53", "rtk1431", "rtk161", "rtk185"}},
     "rtk2706": {"character": "絢", "keyword": "gorgeous",
                "expected_part_ids": {"rtk1431", "rtk71"}},
+    # 2026-09-21: 粛 spelled in strokes, with a katakana ヨ standing in for the
+    # 彐 inside it. The row's own labelled alternate was already 粛,糸.
     "rtk2707": {"character": "繍", "keyword": "embroidery",
-               "expected_part_ids": {"kangxi171", "prim-katakana-no", "prim-katakana-yo", "prim-pipe", "rtk137", "rtk1431"}},
+               "expected_part_ids": {"rtk1870", "rtk1431"}},
     "rtk2708": {"character": "紬", "keyword": "pongee",
                "expected_part_ids": {"prim-pipe", "rtk12", "rtk14", "rtk1431"}},
     "rtk2709": {"character": "綺", "keyword": "ornate",
