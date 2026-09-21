@@ -43,7 +43,6 @@ kangxi80:毋:mother,do not,breasts
 
 
 
-prim28.2:':a drop of, drop
 
 rtk3:?:3,three:one,two
 rtk4:?:4,four:囗,儿
@@ -74,7 +73,7 @@ rtk14:田:rice field,brains:
 rtk15:目:eye:
 rtk22:晶:sparkle:日
 rtk23:品:goods:口
-rtk24:呂:spine:口,口;ノ,口
+rtk24:呂:spine:口,ノ,口
 rtk25:昌:prosperous:日
 rtk26:早:early,sunflower:十,日
 rtk27:旭:rising sun:日,九
@@ -1046,7 +1045,7 @@ rtk993:粋:chic:卆,米
 rtk994:謎:riddle:言,迷
 rtk995:糧:provisions:米,量
 rtk996:菊:chrysanthemum:米,勹,艹
-rtk997:奥:heart:大,米,冂;ノ,冂,大,米
+rtk997:奥:heart:ノ,冂,大,米
 rtk998:数:number:女,米,攵
 rtk999:楼:watchtower:女,米,木
 rtk1000:類:sort:大,米,頁
@@ -1605,7 +1604,7 @@ rtk1552:鼓:drum:士,豆,支
 rtk1553:喜:rejoice:鼓,口
 rtk1554:樹:timber:木,鼓,寸
 rtk1555:皿:dish:
-rtk1556:血:blood:皿;ノ,皿
+rtk1556:血:blood:ノ,皿
 rtk1557:盆:basin:皿,分
 rtk1558:盟:alliance:明,皿
 rtk1559:盗:steal:次,皿
@@ -3139,7 +3138,7 @@ prim-small-radical:⺌:small radical,small,little:
 prim-fire-radical:灬:fire radical,barbecue,oven-fire,tail feathers
 kangxi104:疒:sickness radical,疔,sickness,hospital
 kangxi114:禸:track radical:冂,厶
-prim-katakana-no:ノ:katakana no
+prim-katakana-no:ノ:katakana no,drop
 prim-katakana-yu:ユ:katakana yu
 
 # 辟/啇 clusters flagged session 5 (docs/2026-08-search-quality-audit.md),
@@ -4217,3 +4216,17 @@ prim-thorn-stalk:朿:thorn stalk:木,冂
 #   strict), and 齟/齬, whose 歯 should be the traditional 齒: that is a
 #   genuine simplified/traditional pair rather than an error, and this schema
 #   has a variant_of column for exactly that relationship, unused so far.
+
+# --- 2026-09-21: two things audit_csv_regressions.py surfaced once it stopped
+# resolving every name to a single arbitrary row.
+# prim28.2 deleted. Its "character" was an ASCII apostrophe, it had zero hosts,
+# and it is a leftover of the rad{n}.{m} numbering CLAUDE.md records as
+# migrated away. It mattered because it also answered to "drop", so Heisig's
+# commonest stroke name had three claimants, one of them a placeholder.
+# "drop" added to ノ. Heisig uses the word for both 丶 and 丿: 千 is "drop; ten;
+# needle" and its top stroke is a 丿, and so are 呂's middle and 頁's second.
+# Same one-name-two-glyphs pattern as silver (艮/皀), mend (龰/𤴓) and parade
+# (戊/戉); 丶 keeps it too, as "dot" remains its keyword.
+# Three rows moved straight away as a result, all of them Heisig's own
+# reading: 呂 口,ノ,口 ("drop; mouth", and it has two mouths, which neither
+# of its two old chunks managed between them), 奥 ノ,冂,大,米, 血 ノ,皿.

@@ -3390,8 +3390,10 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"prim-angel", "rtk207"}},
     "rtk2903": {"character": "麿", "keyword": "i",                       # was 口,木,广,麻,ノ — 麻 double-counted w/ its own 广,木; spurious ノ
                "expected_part_ids": {"rtk24", "rtk637"}},               # 麻 + 呂
+    # 2026-09-21: Heisig's row is "drop; mouth" and 呂's middle stroke is a
+    # 丿, which this file spells ノ — see the "drop" alias added that day.
     "rtk24": {"character": "呂", "keyword": "spine",                     # was 口,ノ — missing the second 口 entirely (ノ = KRADFILE proxy)
-               "expected_part_ids": {"rtk11"}},                          # 口,口 (dedupes to one id, order-independent)
+               "expected_part_ids": {"rtk11", "prim-katakana-no"}},                          # 口,口 (dedupes to one id, order-independent)
     # Six more single-instance radical-omission bugs found via the same cjkvi-ids
     # presence check (2026-09-05, continued), each real (confirmed the old value
     # didn't carry the radical even transitively, unlike two other candidates —

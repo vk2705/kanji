@@ -39,6 +39,34 @@ concept that genuinely doesn't appear anywhere in the override, at any
 depth) while treating "the override just correctly relies on recursion" as
 the non-issue it now architecturally is.
 
+## One name, several rows (fixed 2026-09-21)
+
+The version above resolved each CSV term to **one** id — a `UNION ... LIMIT 1`,
+whose row order SQLite does not even define — and then asked whether that one id
+was reachable. Names are not one-to-one with rows and never have been: 貝 is
+"shellfish" *and* "clam" *and* "oyster", and 蛤 and 蛎 are kanji whose keywords
+are "clam" and "oyster". Pick the wrong claimant and a perfectly good
+decomposition looks like it dropped a concept.
+
+That is not hypothetical. After 2026-09-20's chunk 22 put twenty of Heisig's
+synonym names onto the primitives they belong to, this script reported **926 of
+3,000 kanji** — nearly all of them because "clam" now resolves to 蛤, or "drop"
+to something other than 丶, rather than because anything was dropped.
+
+So a term is satisfied if **any** row answering to it is reachable, and a term
+that names the host itself is satisfied outright. Same rule
+`audit_phantom_parts.py` uses (`claimants()`), and for the same reason: for
+*evidence*, every claimant counts, even when search has to canonicalise to one.
+**926 flagged → 718**, and two data fixes the corrected report then made visible
+(deleting the `prim28.2` orphan, which answered to "drop" with an ASCII
+apostrophe for a glyph, and putting "drop" on ノ as well as 丶, which is how
+Heisig uses it in 千 呂 頁) took it to **661**.
+
+661 is still not a clean report, and the largest single cause is worth naming:
+**言 is atomic here** while the CSV reads "words; keitai; mouth", so every one of
+its ~90 hosts is recorded as having dropped 口. Whether 言 should decompose is a
+judgement call about search noise, not a bug this script can settle.
+
 This still deliberately only catches *loss* of a resolvable concept — it
 does NOT flag overrides that only *add* extra terms beyond the CSV baseline
 (session 11's 産 bug was exactly that shape — padded with three extra terms,
@@ -112,13 +140,29 @@ def main():
     prim_parts = database._load_parts_file(database.PRIM_PATH)
     merged_overrides = {**pdf_parts, **prim_parts}
 
+    claim_cache: dict[str, frozenset[str]] = {}
+
+    def claimants(term: str) -> frozenset[str]:
+        """Every row that answers to `term` — not one canonical pick.
+
+        See "One name, several rows" in the docstring: 貝 answers to "clam" and
+        so does 蛤, and which one a `LIMIT 1` returned decided whether this
+        script called a correct decomposition a regression.
+        """
+        if term not in claim_cache:
+            rows = conn.execute(
+                "SELECT kanji_id AS id FROM aliases WHERE alias = ? "
+                "UNION SELECT id FROM kanji WHERE id = ? OR character = ?",
+                (term, term, term)
+            ).fetchall()
+            claim_cache[term] = frozenset(r["id"] for r in rows)
+        return claim_cache[term]
+
     def resolve(term: str) -> str | None:
-        row = conn.execute(
-            "SELECT kanji_id FROM aliases WHERE alias = ? "
-            "UNION SELECT id FROM kanji WHERE id = ? OR character = ? LIMIT 1",
-            (term, term, term)
-        ).fetchone()
-        return row[0] if row else None
+        """One id, for walking the decomposition tree — any claimant will do
+        there, since the walk is about structure rather than about naming."""
+        ids = claimants(term)
+        return min(ids) if ids else None
 
     own_parts_cache: dict[str, list[str]] = {}
 
@@ -164,9 +208,12 @@ def main():
 
         dropped = []
         for t in csv_terms:
-            cid = resolve(t)
-            if cid is not None and cid not in reachable and cid != kid:
-                dropped.append((t, cid))
+            cids = claimants(t)
+            if not cids:
+                continue  # suggest_heisig_aliases.py owns the unnameable class
+            if cids & reachable or kid in cids:
+                continue  # some row answering to this name is in there, or is it
+            dropped.append((t, "/".join(sorted(cids))))
 
         if dropped:
             row = conn.execute("SELECT character, keyword FROM kanji WHERE id = ?", (kid,)).fetchone()

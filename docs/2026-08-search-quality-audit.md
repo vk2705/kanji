@@ -13978,3 +13978,52 @@ Real number, first since 2026-09-12: **2566/3000 (85.5%)**, up from 1891
 
 Verified: 1325 checks exit 0, 67 pytest, frontend lint clean. No data changed —
 this chunk is the tool and the record it writes.
+
+## 2026-09-21 — chunk 39: `audit_csv_regressions.py` was resolving names with a coin flip
+
+Ran it for the first time in this batch too. **926 of 3,000 kanji flagged** — a
+number so large it had clearly stopped meaning anything.
+
+The cause is one line. It resolved each CSV component name to a single id with
+
+```sql
+SELECT kanji_id FROM aliases WHERE alias = ?
+UNION SELECT id FROM kanji WHERE id = ? OR character = ? LIMIT 1
+```
+
+— a `LIMIT 1` over a `UNION`, whose row order SQLite does not define — and then
+asked whether *that* id was reachable. Names have never been one-to-one with
+rows: 貝 answers to "shellfish" **and** "clam" **and** "oyster", and 蛤 and 蛎
+are kanji whose keywords are "clam" and "oyster". Pick the wrong claimant and a
+perfectly good decomposition reads as a regression. Chunk 22, which put twenty
+of Heisig's synonym names onto the primitives they belong to, is what tipped
+this from bad to useless.
+
+Fixed the way `audit_phantom_parts.py` was built: a term is satisfied if **any**
+row answering to it is reachable, and a term naming the host itself is satisfied
+outright. **926 → 718.**
+
+The corrected report then showed two real things:
+
+* **`prim28.2` deleted.** Its "character" was an **ASCII apostrophe**, it had
+  zero hosts, and it is a leftover of the `rad{n}.{m}` numbering `CLAUDE.md`
+  records as migrated away. It mattered because it answered to **"drop"** — so
+  Heisig's commonest stroke name had three claimants, one of them a placeholder.
+* **"drop" added to ノ.** Heisig uses the word for both 丶 and 丿: 千 is "drop;
+  ten; needle" and its top stroke is a 丿, and so are 呂's middle and 頁's
+  second. Same one-name-two-glyphs pattern as silver (艮/皀), mend (龰/𤴓) and
+  parade (戊/戉). **718 → 661.**
+
+That alias immediately gave `audit_primary_choice.py` three proposals, all
+Heisig's own reading: 呂 `口,ノ,口` — it has **two** mouths, which neither of its
+old chunks managed between them — 奥 `ノ,冂,大,米`, 血 `ノ,皿`.
+
+**661 is still not a clean report, and the largest single cause is worth
+naming: 言 is atomic here** while the CSV reads "words; keitai; mouth", so every
+one of its ~90 hosts records a dropped 口. Whether 言 should decompose is a
+judgement call about search noise, not something this script can settle. Left
+for a chunk that can weigh it.
+
+Verified: 1325 checks exit 0, 67 pytest, over-flattening 0, dead tokens 0,
+self-references 0, primary-choice 0 in both modes, frontend lint + both builds
+clean. One pin moved (呂). **Phantom parts (non-blind) 24→23.**
