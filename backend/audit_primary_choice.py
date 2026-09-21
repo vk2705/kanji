@@ -42,12 +42,30 @@ that advice would have made the thing this script exists to fix worse. Counting
 unaccounted parts alongside coverage is what stops that: flattening a compound
 does not reduce unaccounted parts, so it cannot win on its own.
 
+## Above frame 2,200 (`--past-csv`, added 2026-09-21)
+
+`heisig-kanjis.csv` stops at the 6th edition's ~2,200 frames, so for anything
+past that there is no `components` column and the coverage half of the score has
+nothing to say. That is why this script skipped those rows entirely — and it
+meant the one bug shape it exists for went unexamined in ~800 kanji, where
+chunks 31-34 kept finding it by hand (毬 燎 炬 雀 夷 肴 擢 燿 繍 犀 煉 …, every
+one a stroke-soup primary sitting in front of a labelled alternate that was
+already right).
+
+`--past-csv` runs those hosts on the **structural half alone**: a chunk
+displaces the primary only if it leaves strictly fewer parts unaccounted for.
+That is a weaker rule and deliberately so — with no coverage term it cannot tell
+two equally-accounted readings apart, so it proposes nothing in that case rather
+than guessing. Every proposal still wants reading, and `--emit` still only
+prints; nothing here writes.
+
 Reports only. Swapping a primary changes what every reader sees for that kanji,
 and the pairs still want reading one by one.
 
 Usage:
-    ./venv/bin/python3 audit_primary_choice.py          # proposed swaps
-    ./venv/bin/python3 audit_primary_choice.py --all    # every multi-chunk kanji
+    ./venv/bin/python3 audit_primary_choice.py             # proposed swaps
+    ./venv/bin/python3 audit_primary_choice.py --all       # every multi-chunk kanji
+    ./venv/bin/python3 audit_primary_choice.py --past-csv  # the same, above frame 2,200
 """
 import argparse
 import os
@@ -152,6 +170,12 @@ def main():
     )
     ap.add_argument("--all", action="store_true", help="show every multi-chunk kanji")
     ap.add_argument(
+        "--past-csv",
+        action="store_true",
+        help="hosts heisig-kanjis.csv does not cover, scored on unaccounted parts "
+             "alone (no components column means no coverage term) -- see the docstring",
+    )
+    ap.add_argument(
         "--emit",
         action="store_true",
         help="print the corrected data.txt parts field for each proposal, one per "
@@ -173,7 +197,11 @@ def main():
     proposals, examined = [], 0
     for kid, char, chunks in multi_chunk_lines():
         names = heisig.get(char)
-        if not names or char not in ids:
+        if args.past_csv:
+            if names or char not in ids:
+                continue
+            names = set()
+        elif not names or char not in ids:
             continue
         examined += 1
         tree = accounted_glyphs(ids, closure, char)
@@ -181,8 +209,13 @@ def main():
         primary = scored[0]
         best_i, best = None, primary
         for i, s in enumerate(scored[1:], start=1):
-            no_worse = s[0] <= best[0] and s[1] >= best[1]
-            better = s[0] < best[0] or s[1] > best[1]
+            if args.past_csv:
+                # No coverage term to weigh, so only a strict drop in unaccounted
+                # parts counts. Ties are left alone rather than guessed at.
+                no_worse, better = True, s[0] < best[0]
+            else:
+                no_worse = s[0] <= best[0] and s[1] >= best[1]
+                better = s[0] < best[0] or s[1] > best[1]
             if no_worse and better:
                 best_i, best = i, s
         if best_i is not None:
@@ -205,7 +238,8 @@ def main():
               f"(unaccounted {primary[0]}, covered {primary[1]})")
         print(f"  {'':<9}     -> #{i} {','.join(chunks[i])}   "
               f"(unaccounted {best[0]}, covered {best[1]})")
-        print(f"  {'':<9}     heisig: {'; '.join(names)}")
+        if names:
+            print(f"  {'':<9}     heisig: {'; '.join(names)}")
     print(f"\n{replaced} to replace (primary carries unaccounted parts), "
           f"{len(proposals) - replaced} to reorder only")
     return 0

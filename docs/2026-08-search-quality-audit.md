@@ -13838,3 +13838,50 @@ self-references 0, primary-choice 0, frontend lint + both builds clean. One pin
 moved (繍). **Phantom parts (non-blind) 63→61 across 44→42 kanji.**
 
 **Next** — 齟/齬 (歯 where the glyph has 齒), and the 亠 cluster in 毬 燎 麹.
+
+## 2026-09-21 — chunk 35: teach `audit_primary_choice.py` to work past the CSV
+
+Chunks 31–34 kept finding the same thing by hand: a stroke-soup primary sitting
+in front of a labelled alternate that was already right. 毬 燎 炬 雀 夷 肴 擢 燿
+繍 犀 煉 — eleven in four chunks, all above frame 2,200.
+
+`audit_primary_choice.py` exists precisely to find those, and it was skipping
+every one of them, because its score needs `heisig-kanjis.csv`'s components
+column for the coverage half and the CSV stops at ~2,200 frames. **`--past-csv`
+runs those hosts on the structural half alone**: a chunk displaces the primary
+only if it leaves *strictly fewer* parts unaccounted for. Weaker on purpose —
+with no coverage term it cannot separate two equally-accounted readings, so it
+proposes nothing there rather than guessing.
+
+It found **35 of 70**, and every one was the same bug: 出 `｜,山,凵` → `凵,屮`,
+髭 → `此,髟`, 洲 → `州,水`, 浩 → `告,水`, 苓 → `令,艹`, 琉 → `㐬,王`, 銚 → `兆,金`,
+鞭 → `便,革`, 燕 → `北,口,廿,灬`, 皓 → `告,白`, 甦 → `更,生`, 粁 → `千,米` …
+
+**Five rows also had 初 where 衤 belongs.** 初 is a whole kanji — 衤 + 刀, "first
+time"; 衤 (kangxi145, "cloak") is the left-side clothing radical alone. Exactly
+the 礼/礻 mistake of chunk 32, one radical over: 衿 袷 袴 襖 裡. Four of them had
+an alternate saying 衣, the *free-standing* form, so those were promoted **and**
+corrected rather than just promoted.
+
+### The proposal that had to be overruled
+
+The in-range run, which had been at zero for fifteen chunks, suddenly had three
+— knock-on from the ⻏/阝 and 人/𠆢 evidence lines added in chunks 33 and 34.
+横 and 丼 are their own alternates and went in as written. **郭 did not.** Its
+alternate said `享,阝` — the *left-side* 阝, where 郭's beta is on the right —
+and the ⻏/阝 normalisation I had added one chunk earlier is exactly what made
+that alternate score clean. It went in as `享,⻏`.
+
+Worth writing down plainly: **the tool suggests, it does not know which side of
+the kanji a component sits on.** An evidence-normalisation line that is correct
+for finding errors can, one chunk later, make a wrong answer look right in a
+different tool. That is the cost of folding two codepoints together, and it is
+why `--emit` prints rather than writes.
+
+Verified: 1325 checks exit 0, 67 pytest, over-flattening 0, dead tokens 0,
+self-references 0, primary-choice 0 in **both** modes, frontend lint + both
+builds clean. Six pins moved (燕 乖 麒 綸 侠 丼), each with its reason.
+**Phantom parts (non-blind) 61→41 across 42→25 kanji.**
+
+**Next** — 齟/齬 (歯 where the glyph has 齒, which has no row here), and the
+remaining singles.

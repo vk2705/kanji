@@ -966,10 +966,18 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk1534", "rtk789"}},
     "rtk2878": {"character": "鼎", "keyword": "tripod",
                 "expected_part_ids": {"prim-half-turtle", "prim-pipe", "rtk1", "rtk1297", "rtk15"}},
+    # 2026-09-21: promoted from each row's own labelled alternate by
+    # audit_primary_choice.py --past-csv, the mode added that day for hosts
+    # heisig-kanjis.csv does not cover. Every one was stroke soup in front of
+    # a correctly-named compound.
     "rtk2882": {"character": "燕", "keyword": "swallow",
-                "expected_part_ids": {"prim-fire-radical", "prim-half-turtle", "prim-mugwort", "rtk11", "rtk476"}},
+                "expected_part_ids": {"prim-fire-radical", "rtk11", "rtk1274", "rtk480"}},
+    # 2026-09-21: promoted from each row's own labelled alternate by
+    # audit_primary_choice.py --past-csv, the mode added that day for hosts
+    # heisig-kanjis.csv does not cover. Every one was stroke soup in front of
+    # a correctly-named compound.
     "rtk2924": {"character": "乖", "keyword": "disobey",
-                "expected_part_ids": {"prim-half-turtle", "prim-katakana-no", "rtk10", "rtk476"}},
+                "expected_part_ids": {"rtk40", "rtk480"}},
     "rtk2971": {"character": "淵", "keyword": "abyss (old)",
                 "expected_part_ids": {"prim-half-turtle", "prim-pipe", "rtk1", "rtk1297", "rtk137"}},
     "rtk213": {"character": "梢", "keyword": "treetops",
@@ -2561,8 +2569,12 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk137", "rtk2154"}},
     "rtk2853": {"character": "塵", "keyword": "dust",
                 "expected_part_ids": {"rtk2154", "rtk161"}},
+    # 2026-09-21: promoted from each row's own labelled alternate by
+    # audit_primary_choice.py --past-csv, the mode added that day for hosts
+    # heisig-kanjis.csv does not cover. Every one was stroke soup in front of
+    # a correctly-named compound.
     "rtk2854": {"character": "麒", "keyword": "chinese unicorn",
-                "expected_part_ids": {"rtk1894", "rtk2154", "rtk8"}},
+                "expected_part_ids": {"prim-bushel-basket", "rtk2154"}},
     # Owner report (2026-09-04): searching "tree, mouth" surfaced wrong
     # results, and 保("protect") specifically was "missing left part".
     # 保 was 口,木 -- entirely missing 亻("person"), the literal left
@@ -2881,8 +2893,12 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"kangxi16", "kangxi79", "rtk1431", "rtk304", "rtk752"}},
     # Was redundantly re-listing 冊(rtk1967)'s own ｜,一,亅,廾 alongside
     # referencing it directly -- 2026-09-05, audit_direct_ref_overlap.py
+    # 2026-09-21: promoted from each row's own labelled alternate by
+    # audit_primary_choice.py --past-csv, the mode added that day for hosts
+    # heisig-kanjis.csv does not cover. Every one was stroke soup in front of
+    # a correctly-named compound.
     "rtk2698": {"character": "綸", "keyword": "twine",
-               "expected_part_ids": {"prim-umbrella", "rtk1431", "rtk1967"}},
+               "expected_part_ids": {"prim-post-it-note", "rtk1431"}},
     "rtk2699": {"character": "絨", "keyword": "carpet yarn",
                "expected_part_ids": {"kangxi62", "prim-katakana-no", "rtk1", "rtk1431"}},
     "rtk2700": {"character": "絆", "keyword": "ties",
@@ -3425,8 +3441,12 @@ EXPECTED_DECOMPOSITIONS = {
     # confirmed by rendering the left-side shape before fixing (matches 保's 亻, not
     # standalone 人). 倹 additionally had a wrong non-亻 reference (合/"fit" instead
     # of the real 僉 shape shared with 剣/険) found the same way.
+    # 2026-09-21: promoted from each row's own labelled alternate by
+    # audit_primary_choice.py --past-csv, the mode added that day for hosts
+    # heisig-kanjis.csv does not cover. Every one was stroke soup in front of
+    # a correctly-named compound.
     "rtk2245": {"character": "侠", "keyword": "tomboy",
-               "expected_part_ids": {"kangxi12", "kangxi8", "kangxi9", "rtk112", "rtk2"}},
+               "expected_part_ids": {"kangxi9", "prim-scissors"}},
     "rtk2259": {"character": "倅", "keyword": "son",
                "expected_part_ids": {"kangxi9", "rtk1102"}},
     "rtk1036": {"character": "伝", "keyword": "transmit",
@@ -3605,8 +3625,9 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"prim-grains-of-rice", "rtk12", "rtk1934"}},
     "rtk1942": {"character": "爆", "keyword": "bomb",
                "expected_part_ids": {"rtk173", "rtk1941"}},
+    # 2026-09-21: the 廾 was 井's own two lower strokes counted twice.
     "rtk1947": {"character": "丼", "keyword": "bowl",
-               "expected_part_ids": {"kangxi3", "kangxi55", "rtk1946"}},
+               "expected_part_ids": {"kangxi3", "rtk1946"}},
     "rtk1949": {"character": "耕", "keyword": "till",
                "expected_part_ids": {"kangxi127", "rtk161", "rtk1946", "rtk207"}},
     "rtk769": {"character": "技", "keyword": "skill",
