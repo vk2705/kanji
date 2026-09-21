@@ -100,17 +100,21 @@ unsure; `migrate_schema()` re-running is always safe/idempotent.)
 
 ## Step 4 — verify
 
-Pick one or two kanji the pulled commit's changelog mentions and spot-check
-them, e.g.:
+Run the required smoke test on the production VM. It confirms the systemd
+service is active, Japanese character/detail/parts lookup works, and Chinese
+hanzi search returns the expected `finger` entry:
 
 ```bash
-python3 rtk.py detail rtk355
+cd /opt/kanji/backend
+./venv/bin/python3 deploy_smoke_test.py --service kanji-backend.service
 ```
 
-or hit the live API directly:
+The test exits nonzero on any failure. To check the public nginx route as well,
+run the same test against the production API:
 
 ```bash
-curl -s "https://kanji.alteon.help/kanji/api/kanji/rtk355" | python3 -m json.tool
+./venv/bin/python3 deploy_smoke_test.py \
+  --base-url https://kanji.alteon.help/kanji/api
 ```
 
 ## Scheduled backup and tested restore
