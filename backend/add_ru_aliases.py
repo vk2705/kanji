@@ -181,6 +181,7 @@ TRANSLATIONS = {
     "place on the head": "класть на голову",
     "child": "ребёнок",
     "cavity": "полость",
+    "tree": "дерево",
     # Spot-fixed after the 2026-09-20 bulk auto-translation pass: argos-translate
     # gave the adjective "горный" (mountainous) for this common, high-traffic
     # primitive instead of the noun a learner would actually type.
