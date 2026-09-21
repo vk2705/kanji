@@ -382,6 +382,24 @@ def _migrate_v7(conn):
 _register(7, _migrate_v7)
 
 
+def _migrate_v8(conn):
+    """Make every comma-separated system keyword searchable term by term.
+
+    Unihan glosses such as ``woman, girl`` used to be inserted as one alias, even
+    though autocomplete showed each comma-separated word independently. Parts
+    search resolves aliases exactly, so typing ``woman`` could not find 女. Keep
+    the original phrase and add its individual terms for existing databases.
+    """
+    rows = conn.execute(
+        "SELECT id, keyword FROM kanji WHERE owner_id = 1 AND keyword LIKE '%,%'"
+    ).fetchall()
+    for row in rows:
+        _insert_gloss_aliases(conn, row["id"], row["keyword"])
+
+
+_register(8, _migrate_v8)
+
+
 def record_page_view(conn, visitor_id: str, path: str | None):
     conn.execute(
         "INSERT INTO page_views (visitor_id, path) VALUES (?, ?)",
@@ -623,7 +641,7 @@ def import_data():
     )
 
     for r in rows_to_insert:
-        _insert_alias(conn, r["id"], r["keyword"])
+        _insert_gloss_aliases(conn, r["id"], r["keyword"])
         _insert_alias(conn, r["id"], str(r["frame"]))
         if r["char"]:
             _insert_alias(conn, r["id"], r["char"])
@@ -724,6 +742,17 @@ def _insert_alias(conn, kanji_id: str, alias: str, owner_id: int = 1, visibility
             "INSERT OR IGNORE INTO aliases (kanji_id, alias, owner_id, visibility) VALUES (?, ?, ?, ?)",
             (kanji_id, alias, owner_id, visibility)
         )
+
+
+def _insert_gloss_aliases(conn, kanji_id: str, gloss: str):
+    """Insert a system gloss as both its full text and individual comma terms."""
+    _insert_alias(conn, kanji_id, gloss)
+    for term in gloss.split(","):
+        term = term.strip()
+        # Bracketed fragments are explanatory context, not names (for example,
+        # ``molybdenum (element 42, mo)``).
+        if term and not any(bracket in term for bracket in "()[]"):
+            _insert_alias(conn, kanji_id, term)
 
 
 # ── Query helpers ─────────────────────────────────────────────────────────────

@@ -34,7 +34,7 @@ import urllib.request
 import zipfile
 from pathlib import Path
 
-from database import get_db, _insert_alias, _build_char_lookup, expand_part_terms
+from database import get_db, _insert_alias, _insert_gloss_aliases, _build_char_lookup, expand_part_terms
 
 UNIHAN_URL = "https://www.unicode.org/Public/UCD/latest/ucd/Unihan.zip"
 IDS_URL = "https://raw.githubusercontent.com/cjkvi/cjkvi-ids/master/ids.txt"
@@ -243,7 +243,7 @@ def main():
         )
         _insert_alias(conn, cid, ch)
         if keyword != ch:
-            _insert_alias(conn, cid, keyword)
+            _insert_gloss_aliases(conn, cid, keyword)
         mandarin = readings.get(ch, {}).get("mandarin")
         if mandarin:
             _insert_alias(conn, cid, _strip_pinyin_tones(mandarin))

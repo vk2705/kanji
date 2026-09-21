@@ -100,6 +100,49 @@ def test_self_identity_match_independent_of_depth(conn, client):
     assert "k_atomic" in ids
 
 
+def test_component_alias_finds_compound_kanji(conn, client):
+    """A learner's name for a visible component finds compounds containing it.
+
+    Real case: 案 contains RTK 安 ("relax"), which Russian learners recognize as
+    "спокойный". The alias must therefore find both 安 and 案 in a parts search.
+    """
+    _seed_kanji(conn, "k_calm", "安", "relax")
+    _seed_kanji(conn, "k_bench", "案", "bench")
+    _seed_alias(conn, "k_calm", "спокойный")
+    _seed_alias(conn, "k_calm", "安")
+    _seed_decomposition(conn, "k_bench", 1, ["peaceful, tranquil, quiet", "安", "tree"])
+    conn.commit()
+
+    r = client.post("/search/parts", json={"parts": ["спокойный"], "depth": 1})
+    assert r.status_code == 200, r.text
+    assert {row["id"] for row in r.json()["results"]} == {"k_calm", "k_bench"}
+
+
+def test_individual_comma_separated_gloss_term_finds_compound(conn, client):
+    """Each word in a system gloss is usable as a primitive name.
+
+    Real case: Chinese 女 is glossed ``woman, girl`` and 案 contains 安, which
+    contains 女. A learner typing woman + tree should reach 案 at depth two.
+    """
+    _seed_kanji(conn, "k_woman", "女", "woman, girl", script="zh-Hani")
+    _seed_kanji(conn, "k_calm", "安", "peaceful", script="zh-Hani")
+    _seed_kanji(conn, "k_bench", "案", "bench", script="zh-Hani")
+    _seed_alias(conn, "k_woman", "woman")
+    _seed_alias(conn, "k_woman", "girl")
+    _seed_alias(conn, "k_woman", "女")
+    _seed_alias(conn, "k_calm", "安")
+    _seed_decomposition(conn, "k_calm", 1, ["女"])
+    _seed_decomposition(conn, "k_bench", 1, ["安", "tree"])
+    conn.commit()
+
+    r = client.post(
+        "/search/parts",
+        json={"parts": ["woman", "tree"], "script": "zh-Hans", "depth": 2},
+    )
+    assert r.status_code == 200, r.text
+    assert "k_bench" in {row["id"] for row in r.json()["results"]}
+
+
 def test_script_filter_excludes_other_scripts(conn, client):
     """script='ja-kanji' excludes zh-Hans/zh-Hant rows even if they'd otherwise match."""
     _seed_kanji(conn, "k_ja", "日", "sun-ja", script="ja-kanji")

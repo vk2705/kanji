@@ -60,6 +60,11 @@ Usage:
 Safe to re-run: every alias insert is INSERT OR IGNORE against the
 UNIQUE(kanji_id, alias, owner_id) constraint, so a repeat run with an
 unchanged translation set adds nothing new.
+
+Comma-separated translations are stored as separate aliases. Unihan glosses often
+list alternatives (for example, ``peaceful, tranquil, quiet``); keeping the Russian
+translation as one alias made individual names such as ``спокойный`` unusable in a
+parts search for compounds containing that component.
 """
 import argparse
 import json
@@ -187,6 +192,9 @@ TRANSLATIONS = {
     # gave the adjective "горный" (mountainous) for this common, high-traffic
     # primitive instead of the noun a learner would actually type.
     "mountain": "гора",
+    # RTK 安 is named "relax", but learners recognize it in compounds such as 案
+    # as "calm" and naturally search for this adjective.
+    "relax": "спокойный",
 }
 
 
@@ -206,6 +214,11 @@ def load_all_translations() -> dict[str, str]:
     if AUTO_CACHE_PATH.exists():
         auto = json.loads(AUTO_CACHE_PATH.read_text(encoding="utf-8"))
     return {**auto, **TRANSLATIONS}
+
+
+def aliases_for_translation(translation: str) -> set[str]:
+    """Return each searchable Russian name represented by a translated gloss."""
+    return {part.strip().lower() for part in translation.split(",") if part.strip()}
 
 
 def refresh_translations(conn) -> None:
@@ -302,11 +315,8 @@ def main():
     skipped_empty = 0
     replaced_stale = 0
     for row in rows:
-        # _insert_alias() always does alias.strip().lower() before storing/comparing,
-        # so match that here too -- otherwise a capitalized MT translation looks
-        # "not yet present" forever even after its lowered form was already inserted.
-        ru = translations[row["keyword"]].strip().lower()
-        if not ru:
+        aliases = aliases_for_translation(translations[row["keyword"]])
+        if not aliases:
             # argos-translate returns "" for input it can't handle at all (mostly
             # obscure hanzi whose own "keyword" is a raw CJK character, not English,
             # because Unihan had no kDefinition gloss for it) -- _insert_alias()
@@ -314,27 +324,31 @@ def main():
             # reported count reflects what actually landed in the aliases table.
             skipped_empty += 1
             continue
+        placeholders = ",".join("?" * len(aliases))
         stale = conn.execute(
-            "SELECT COUNT(*) FROM aliases WHERE kanji_id = ? AND owner_id = ? AND alias != ?",
-            (row["id"], owner_id, ru),
+            f"SELECT COUNT(*) FROM aliases WHERE kanji_id = ? AND owner_id = ? "
+            f"AND alias NOT IN ({placeholders})",
+            (row["id"], owner_id, *aliases),
         ).fetchone()[0]
         if stale and not args.dry_run:
             conn.execute(
-                "DELETE FROM aliases WHERE kanji_id = ? AND owner_id = ? AND alias != ?",
-                (row["id"], owner_id, ru),
+                f"DELETE FROM aliases WHERE kanji_id = ? AND owner_id = ? "
+                f"AND alias NOT IN ({placeholders})",
+                (row["id"], owner_id, *aliases),
             )
         replaced_stale += stale
-        existing = conn.execute(
-            "SELECT 1 FROM aliases WHERE kanji_id = ? AND alias = ? AND owner_id = ?",
-            (row["id"], ru, owner_id),
-        ).fetchone()
-        if existing:
-            skipped_existing += 1
-            continue
-        print(f"  {row['id']} {row['character']} ({row['keyword']}) -> {ru}")
-        if not args.dry_run:
-            database.create_alias(conn, row["id"], owner_id, ru, "public")
-        inserted += 1
+        for alias in sorted(aliases):
+            existing = conn.execute(
+                "SELECT 1 FROM aliases WHERE kanji_id = ? AND alias = ? AND owner_id = ?",
+                (row["id"], alias, owner_id),
+            ).fetchone()
+            if existing:
+                skipped_existing += 1
+                continue
+            print(f"  {row['id']} {row['character']} ({row['keyword']}) -> {alias}")
+            if not args.dry_run:
+                database.create_alias(conn, row["id"], owner_id, alias, "public")
+            inserted += 1
 
         print(f"\n{'Would insert' if args.dry_run else 'Inserted'} {inserted} alias(es), "
             f"{replaced_stale} stale alias(es) replaced, {skipped_existing} already present, "
