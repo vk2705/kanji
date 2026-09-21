@@ -13735,3 +13735,38 @@ Applied via `sync_system_data.py` (dry-run first, then for real, DB backed up
 immediately before). All three now show the correct compound as their primary,
 unlabelled decomposition; the flattened version survives as the
 `structural (cjkvi-ids)` alternate rather than being deleted.
+## 2026-09-21 — chunk 32: 礼 is a kanji, 礻 is the radical
+
+*(Numbered 32, not 31: another session landed its own chunk 31 — the
+怜/澪/玲 entry directly above — while this one was being written.)*
+
+The last thirty chunks all worked inside `--in-csv-range`, where both ground
+truths speak. Outside it — frames above 2,200, where `heisig-kanjis.csv` stops
+and only cjkvi-ids is left — `audit_phantom_parts.py` has **81 findings across
+53 kanji** that are not cjkvi-blind, and they have never been looked at.
+
+The first systematic family in there: **祷 祐 祇 祢 禎 all listed 礼**. 礼
+(rtk1168) is a whole kanji — 礻 + 乚, "salutation". 礻 (kangxi113) is the
+left-side altar radical by itself. cjkvi writes every one of the five as `⿰礻X`
+(`⿰礻寿`, `⿰礻右`, `⿰礻氏`, `⿰礻尔`, `⿰礻貞`), and rendered together not one of
+them carries 礼's 乚.
+
+**Four of the five already had the right answer sitting in their own labelled
+alternate** (`寿,礻`, `右,礻`, `礻,貞`) while showing the reader the wrong
+primary — the same shape as 寓 and 萬 in chunk 17, and one `audit_primary_choice.py`
+cannot catch above frame 2,200 because it needs a CSV components column to
+score against.
+
+Two details kept rather than smoothed over: 祇 keeps `示,氏` as its alternate,
+because cjkvi gives `⿰示氏` for the `[JK]` region even though this font draws
+礻; and 祢's 尔 stays spelled `𠂉 + 小`, matching how 弥 already writes the same
+shape rather than inventing a row for it.
+
+Verified: 1325 checks exit 0, 66 pytest, over-flattening 0, dead tokens 0,
+self-references 0, primary-choice 0, frontend lint + build clean. No pin moved.
+**Phantom parts (non-blind, all frames) 81→75 across 53→49 kanji.**
+
+**Next** — the other systematic families out there: `⻏` in 鄭/耶 (a
+normalisation gap, not a data error — cjkvi writes 阝 where this project
+deliberately uses ⻏ for the right-side form), and the loose strokes in 犀 迂
+煉 蘭.

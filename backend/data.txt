@@ -2700,12 +2700,12 @@ rtk2640:磯:seashore:石,幾
 rtk2641:砺:whetstone:石,厂,万
 rtk2642:碓:pestle:石,隹
 rtk2643:禦:defend:御,示
-rtk2644:祷:pray:ノ,寸,礼,土,亠,二;寿,礻
-rtk2645:祐:help:ノ,一,口,礼;右,礻
-rtk2646:祇:national or local god:氏,礼;氏,示
-rtk2647:祢:ancestral shrine:ノ,小,礼
+rtk2644:祷:pray:礻,寿
+rtk2645:祐:help:礻,右
+rtk2646:祇:national or local god:礻,氏;示,氏
+rtk2647:祢:ancestral shrine:礻,𠂉,小
 rtk2648:禄:fief:礻,录
-rtk2649:禎:happiness:貝,卜,礼;礻,貞
+rtk2649:禎:happiness:礻,貞
 rtk2650:秤:balances:禾,平
 rtk2651:黍:millet:禾,水;人,水,禾
 rtk2652:禿:become bald:禾,儿
@@ -4117,3 +4117,14 @@ prim-parade-hooked:戉:parade:
 # audit_phantom_parts.py grew a section for on 2026-09-20. There is no
 # codepoint to register, so there is nothing honest to point the name at.
 prim-crowd:乑:crowd:
+
+# --- 2026-09-21: five kanji were listing 礼 where the glyph has only 礻.
+# 礼 (rtk1168) is a whole kanji, 礻 + 乚 ("salutation"); 礻 (kangxi113) is the
+# left-side altar radical on its own. cjkvi writes all five as ⿰礻X -- 祷 ⿰礻寿,
+# 祐 ⿰礻右, 祇 ⿰礻氏, 祢 ⿰礻尔, 禎 ⿰礻貞 -- and the render agrees: none of the
+# five carries 礼's 乚. Four of them already had the right answer sitting in
+# their own labelled alternate (寿,礻 / 右,礻 / 礻,貞), the same
+# "the alternate was the primary all along" shape as 寓 and 萬 on 2026-09-20.
+# 祇 keeps its 示 reading as the alternate, since cjkvi gives ⿰示氏 for [JK]
+# even though this font draws 礻; 祢's 尔 stays spelled 𠂉 + 小, matching how
+# 弥 (rtk1322) already writes the same shape.
