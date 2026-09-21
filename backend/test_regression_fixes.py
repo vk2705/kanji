@@ -634,8 +634,10 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"kangxi60", "rtk410"}},
     "rtk2231": {"character": "趨", "keyword": "scurry",
                "expected_part_ids": {"rtk2229", "rtk410"}},
+    # 2026-09-21: cjkvi has 赳 ⿺走丩, and 丩 is already here as
+    # prim-cornucopia (from 叫). The ｜ was that shape flattened.
     "rtk2943": {"character": "赳", "keyword": "bold",
-               "expected_part_ids": {"prim-pipe", "rtk410"}},
+               "expected_part_ids": {"prim-cornucopia", "rtk410"}},
     # 2026-09-20: rtk423 (衣) was a phantom here — 袁 has no 亠 over its 𧘇, and
     # Heisig's row for 猿 says "scarf", not "clothing". Same for 遠 園 環 還.
     "rtk430": {"character": "猿", "keyword": "monkey",

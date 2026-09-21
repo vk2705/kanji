@@ -2024,7 +2024,7 @@ rtk1963:輪:wheel:侖,車
 rtk1964:偏:partial:亻,扁
 rtk1965:遍:everywhere:辶,扁
 rtk1966:編:compilation:糸,扁
-rtk1967:冊:tome:｜,一,亅,冂,廾
+rtk1967:冊:tome:冂,廾
 rtk1968:柵:stockade:木,冊
 rtk1969:典:code:曲,八
 rtk1970:氏:family name:
@@ -2415,11 +2415,11 @@ rtk2355:捺:press:扌,奈
 rtk2356:掻:scratch:虫,又,扌
 rtk2357:撰:composing:扌,巽
 rtk2358:揃:be complete:扌,前
-rtk2359:捌:handle:口,力,扌,勹
+rtk2359:捌:handle:扌,別
 rtk2360:按:hold:安,扌
 rtk2361:播:plant:扌,番
 rtk2362:揖:bow with arms folded:口,耳,扌
-rtk2363:托:requesting:ノ,一,乙,扌
+rtk2363:托:requesting:扌,乇
 rtk2364:捧:lift up:奉,扌
 rtk2365:撚:twist:扌,然
 rtk2366:挺:bravely volunteer:廷,扌
@@ -2444,7 +2444,7 @@ rtk2384:滉:deep and broad (water):水,晃
 rtk2385:漱:gargle:水,束,欠
 rtk2386:洲:continent:州,水
 rtk2387:洵:alike:旬,水
-rtk2388:滲:imbued with:水,大,厶,彡
+rtk2388:滲:imbued with:水,参
 rtk2389:洒:wash:水,西
 rtk2390:沐:wash:水,木
 rtk2391:泪:tears:水,目
@@ -2920,7 +2920,7 @@ rtk2861:坐:sit:从,土
 rtk2862:朔:conjunction (astronomy):屰,月
 rtk2863:曳:pull:乙,日
 rtk2864:洩:leak:曳,水
-rtk2865:彗:comet:丰,⺕
+rtk2865:彗:comet:丰,丰,彐
 rtk2866:慧:wise:彗,心
 rtk2867:爾:you:｜,一,八,冂,爻
 rtk2868:嘉:applaud:口,士,力
@@ -2998,7 +2998,7 @@ rtk2939:奎:star:圭,大
 rtk2940:翔:soar:羽,羊
 rtk2941:皓:white:告,白
 rtk2942:黎:dark:禾,勿,人,氺
-rtk2943:赳:strong and brave:｜,走
+rtk2943:赳:strong and brave:走,丩
 rtk2944:已:stop short:
 rtk2945:棘:thorn:朿,朿
 rtk2946:祟:curse:示,出
@@ -4198,3 +4198,22 @@ prim-crowd:乑:crowd:
 # found in 摯 -- 辛 is ⿱立十, 幸 is ⿱土𢆉 -- and this row is past the CSV range
 # that chunk worked in.
 prim-thorn-stalk:朿:thorn stalk:木,冂
+
+# --- 2026-09-21: six more compounds spelled in strokes, all past the CSV.
+# 托 扌,乇 -- the same 乇 ("lock of hair") registered on 2026-09-20 for 宅 and
+#   託; 托 was writing it ノ + 一 + 乙, which puts an 乙 in a kanji with none.
+# 捌 扌,別 (別 = ⿰另刂, 另 = ⿱口力). The row had 口 + 力 + 勹, i.e. 別 flattened
+#   with a 勹 standing where the blade goes.
+# 滲 水,参 (cjkvi ⿰氵參, and 参 = ⿳厶大彡 here) -- the row was 参 flattened, and
+#   the 大 inside it is what the phantom check was objecting to.
+# 彗 丰,丰,彐 (cjkvi ⿱⿰丰丰彐). Two 丰, not one, and 彐 rather than ⺕: the
+#   2026-09-15 split put the protruding-middle one under "rake" and the flush
+#   one under "broom", and 彗's is flush.
+# 赳 走,丩 -- 丩 is already here as prim-cornucopia, from 叫.
+# 冊 冂,廾, dropping ｜ + 一 + 亅 (cjkvi ⿻冂卄; 卄 has no row here and 廾 is the
+#   same two-hands shape this file already uses everywhere else).
+# Left alone: 侃 (cjkvi ⿰亻⿱口𫶧 -- its 川 is plainly in the glyph and 𫶧 is an
+#   extension-block character with no row, so the finding is the tool being
+#   strict), and 齟/齬, whose 歯 should be the traditional 齒: that is a
+#   genuine simplified/traditional pair rather than an error, and this schema
+#   has a variant_of column for exactly that relationship, unused so far.

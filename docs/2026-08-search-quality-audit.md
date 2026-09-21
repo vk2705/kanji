@@ -13912,3 +13912,26 @@ self-references 0, primary-choice 0 in both modes, frontend lint + both builds
 clean. One pin moved (睾). **Phantom parts (non-blind) 41→29 across 25→21 kanji.**
 
 **Next** — 齟/齬, where the glyph has 齒 and this database only has 歯.
+
+## 2026-09-21 — chunk 37: six more, and two the tool is wrong about
+
+| host | was | now | why |
+|---|---|---|---|
+| 托 | `ノ,一,乙,扌` | `扌,乇` | the 乇 ("lock of hair") registered in chunk 19 for 宅/託; 托 was writing it in strokes, putting an 乙 in a kanji with none |
+| 捌 | `口,力,扌,勹` | `扌,別` | 別 = `⿰另刂`, 另 = `⿱口力`; the row was 別 flattened with a 勹 where the blade goes |
+| 滲 | `水,大,厶,彡` | `水,参` | cjkvi `⿰氵參`, and 参 is `⿳厶大彡` here — the row was 参 flattened, and its 大 was what the check objected to |
+| 彗 | `丰,⺕` | `丰,丰,彐` | cjkvi `⿱⿰丰丰彐`: **two** 丰, and the flush 彐 rather than the protruding ⺕ |
+| 赳 | `｜,走` | `走,丩` | cjkvi `⿺走丩`, and 丩 is already here as `prim-cornucopia` from 叫 |
+| 冊 | `｜,一,亅,冂,廾` | `冂,廾` | cjkvi `⿻冂卄` |
+
+**Two are left, because the tool is the one that is wrong.** 侃's 川 is plainly
+in the glyph; cjkvi writes `⿰亻⿱口𫶧` and 𫶧 is an extension-block character
+with no row here, so the finding is strictness, not an error. And 齟/齬 carry
+歯 where the glyph has the **traditional 齒** — that is a simplified/traditional
+pair, not a mistake, and this schema has had a `variant_of` column for exactly
+that relationship since the hanzi import, never yet used for a Japanese pair.
+Registering 齒 as an unrelated `prim-*` row would lose that.
+
+Verified: 1325 checks exit 0, 67 pytest, over-flattening 0, dead tokens 0,
+self-references 0, primary-choice 0 in both modes, frontend lint + both builds
+clean. One pin moved (赳). **Phantom parts (non-blind) 29→24 across 21→17 kanji.**
