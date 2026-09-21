@@ -495,7 +495,7 @@ rtk442:姉:elder sister:市,女
 rtk443:肺:lungs:市,月
 rtk444:帯:sash:丗,冖,巾
 rtk445:滞:stagnate:帯,水
-rtk446:刺:thorn:木,冂,刀
+rtk446:刺:thorn:朿,刀
 rtk447:制:system:冂,刀,牛
 rtk448:製:made in...:制,衣
 rtk449:転:revolve:云,車
@@ -1068,7 +1068,7 @@ rtk1015:筒:cylinder:同,竹
 rtk1016:等:etc.:寺,竹
 rtk1017:算:calculate:竹,目,廾
 rtk1018:答:solution:合,竹
-rtk1019:策:scheme:竹,木,冂
+rtk1019:策:scheme:竹,朿
 rtk1020:簿:register:竹,水,尃
 rtk1021:築:fabricate:木,筑
 rtk1022:篭:seclude oneself:竜,竹
@@ -2706,7 +2706,7 @@ rtk2647:祢:ancestral shrine:礻,𠂉,小
 rtk2648:禄:fief:礻,录
 rtk2649:禎:happiness:礻,貞
 rtk2650:秤:balances:禾,平
-rtk2651:黍:millet:禾,水;人,水,禾
+rtk2651:黍:millet:禾,人,氺
 rtk2652:禿:become bald:禾,儿
 rtk2653:稔:harvest:念,禾
 rtk2654:稗:humble:卑,禾
@@ -2991,16 +2991,16 @@ rtk2932:魁:charging ahead of others:斗,鬼
 rtk2933:馨:fragrant:禾,香,士,日,又,几,殳,尸
 rtk2934:牒:label:枼,片
 rtk2935:瞥:glance at:敝,目
-rtk2936:睾:testicles:土,目,亠,辛
+rtk2936:睾:testicles:血,幸
 rtk2937:巫:sorcerer:工,从
 rtk2938:敦:industry:享,攵
 rtk2939:奎:star:圭,大
 rtk2940:翔:soar:羽,羊
 rtk2941:皓:white:告,白
-rtk2942:黎:dark:黍,勿,禾,水
+rtk2942:黎:dark:禾,勿,人,氺
 rtk2943:赳:strong and brave:｜,走
 rtk2944:已:stop short:
-rtk2945:棘:thorn:｜,巾,八,木,亠,冂
+rtk2945:棘:thorn:朿,朿
 rtk2946:祟:curse:示,出
 rtk2947:甦:be resuscitated:更,生
 rtk2948:剪:clip:前,刀
@@ -4181,3 +4181,20 @@ prim-crowd:乑:crowd:
 # and the ⻏/阝 evidence line added a chunk earlier made that alternate score
 # clean. Promoted as 享,⻏, not as the alternate was written. The tool suggests;
 # it does not know which side of the kanji a component sits on.
+
+# --- 2026-09-21: 朿 gets a row after all, and the 氺 family.
+# Chunk 18 (2026-09-20) deliberately wrote 朿 out as 木 + 冂 in 刺 and 策 rather
+# than registering it, on the grounds that Heisig names it that way and never
+# names the unit. 棘 (⿰朿朿) is the reason to revisit that: it is two of them
+# side by side, and the only way to spell it without a row is 木,冂,木,冂 --
+# a duplicated pair that says nothing a reader can use. With three hosts and
+# one of them unwritable, the row is worth its keep. The name is descriptive
+# and not Heisig's (owner-permitted), and "thorn" stays 刺's keyword.
+# 黍 and 黎 had 水 where the glyph has 氺 -- the "grains of rice" form split off
+# on 2026-09-16 precisely because the two share no host. cjkvi gives 黍 ⿱禾⿱人氺
+# and 黎 ⿱𥝢⿱人氺 (𥝢 = 禾 + 勿), and the render shows the four separate drops.
+# 黎 also listed 黍 *and* 禾 *and* 水, i.e. the compound and two of its pieces.
+# 睾 is 血 + 幸 (cjkvi ⿱血幸), not 土 + 目 + 亠 + 辛. Same 幸/辛 confusion chunk 20
+# found in 摯 -- 辛 is ⿱立十, 幸 is ⿱土𢆉 -- and this row is past the CSV range
+# that chunk worked in.
+prim-thorn-stalk:朿:thorn stalk:木,冂

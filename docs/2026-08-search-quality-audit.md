@@ -13885,3 +13885,30 @@ builds clean. Six pins moved (燕 乖 麒 綸 侠 丼), each with its reason.
 
 **Next** — 齟/齬 (歯 where the glyph has 齒, which has no row here), and the
 remaining singles.
+
+## 2026-09-21 — chunk 36: 朿 gets a row after all
+
+Chunk 18 deliberately wrote 朿 out as `木 + 冂` in 刺 and 策 rather than
+registering it, on the grounds that Heisig names it that way and never names
+the unit. **棘 is the reason to revisit that.** It is `⿰朿朿` — two of them side
+by side — and the only way to spell it without a row is `木,冂,木,冂`, a
+duplicated pair that tells a reader nothing. With three hosts and one of them
+unwritable, the row earns its keep. The name is descriptive and not Heisig's
+(owner-permitted); "thorn" stays 刺's keyword. 棘 had been carrying ｜ 巾 八 亠
+— six phantoms in one kanji, the most of any row left.
+
+**黍 and 黎 had 水 where the glyph has 氺.** That split was made on 2026-09-16
+precisely because the two share no host at all; cjkvi gives 黍 `⿱禾⿱人氺` and
+黎 `⿱𥝢⿱人氺`, and the render shows four separate drops, not 水's hooked
+centre. 黎 was additionally listing 黍 *and* 禾 *and* 水 — the compound and two
+of its own pieces at once.
+
+**睾 is 血 + 幸** (cjkvi `⿱血幸`), not `土,目,亠,辛`. Same 幸/辛 confusion chunk 20
+found in 摯 — 辛 is `⿱立十`, 幸 is `⿱土𢆉` — in a row past the frame that chunk
+could reach.
+
+Verified: 1325 checks exit 0, 67 pytest, over-flattening 0, dead tokens 0,
+self-references 0, primary-choice 0 in both modes, frontend lint + both builds
+clean. One pin moved (睾). **Phantom parts (non-blind) 41→29 across 25→21 kanji.**
+
+**Next** — 齟/齬, where the glyph has 齒 and this database only has 歯.

@@ -3614,8 +3614,11 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"rtk1623", "rtk687"}},
     "rtk2724": {"character": "蟄", "keyword": "hibernation of insects",
                "expected_part_ids": {"rtk1623", "rtk556"}},
+    # 2026-09-21: 睾 is 血 + 幸 (cjkvi ⿱血幸), not 土 + 目 + 亠 + 辛 — the same
+    # 幸/辛 confusion chunk 20 found in 摯 (辛 is ⿱立十, 幸 is ⿱土𢆉), in a row
+    # past the CSV range that chunk could reach.
     "rtk2936": {"character": "睾", "keyword": "testicles",
-               "expected_part_ids": {"kangxi8", "rtk15", "rtk161", "rtk1612"}},
+               "expected_part_ids": {"rtk1556", "rtk1622"}},
     "rtk1645": {"character": "寒", "keyword": "cold",
                "expected_part_ids": {"kangxi3", "kangxi40", "prim-celery", "rtk8"}},
     "rtk1936": {"character": "異", "keyword": "uncommon",
