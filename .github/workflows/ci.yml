@@ -67,5 +67,14 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      # The production build generates crawlable kanji pages from the database.
+      # CI starts from a clean checkout, so seed a disposable database from the
+      # checked-in sources before that generation step.
+      - name: Seed database for SEO build
+        run: |
+          cd ../backend
+          python3 -c "import database; database.init_db(); c = database.get_db(); \
+                     database.migrate_schema(c); c.close(); database.import_data()"
+
       - name: Build
         run: npm run build:prod
