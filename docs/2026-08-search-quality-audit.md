@@ -14090,3 +14090,44 @@ found *by* the repaired tools.
 **Standing, unchanged**: this sandbox still cannot deploy. Another session is
 running `sync_system_data.py` against the live DB — the 怜/澪/玲 entry above is
 theirs — so the data here reaches the site by their hand, not this one's.
+
+## 2026-09-21 — chunk 41: 亼 was atomic, and a `?` row that looked like an orphan
+
+With `audit_csv_regressions.py` finally readable (chunks 39–40), its biggest
+single causes are visible. Two of them, fixed here.
+
+**亼 was atomic.** It is `⿱人一` in cjkvi, and Heisig reads 合 as "meeting;
+umbrella; one; mouth" — the name, then 亼's own two pieces. Giving it `𠆢,一` is
+his reading, not an invention, and it was the single largest source of "dropped
+umbrella" (34 hosts) plus a good share of "dropped one".
+
+**"sitting on the ground" is 匕's own second name.** 匕's *own* components row is
+that phrase and nothing else — the self-named pattern chunk 6 built a mode for —
+and 叱 匂 頃 北 比 能 all print it immediately after "spoon". Now an alias on
+rtk476.
+
+### The part I got wrong, and what caught it
+
+The row that had been holding that name, `prim-sitting-on-the-ground`, looked
+like an orphan: character `?`, and `grep` for the phrase found only its own
+line. I deleted it, the way `prim28.2` went in chunk 39. **Three pinned tests
+failed on the next run** — 北 比 能 reference it by **id**, not by glyph, which
+is why the grep missed it.
+
+And it is real. Rendered, 北's left half is a 匕 **mirrored**, hook going the
+other way, and cjkvi writes it as an unencoded placeholder (`北 = ⿰③匕`). So the
+row stays, with its `?`, renamed **`prim-mirrored-spoon`** — a descriptive
+non-Heisig name, because Heisig does not name the mirror separately; he calls
+both halves of 北 "spoon".
+
+That is the third time in two days a "cleanup" has been caught by something
+other than my own reading of the data: the primitive-image invariant in chunk
+27, the 100%-reviewed guard in chunk 38, and the pins here.
+
+Also tidied: `prim-umbrella`'s keyword was **"primitive_umbrella"**, an import
+artifact sitting in front of the real name. Reordered so the row reads
+"umbrella"; the old token stays as an alias.
+
+Verified: 1325 checks exit 0, 67 pytest, over-flattening 0, dead tokens 0,
+self-references 0, primary-choice 0 in both modes, frontend lint + both builds
+clean. Four pins moved (id rename only). **`audit_csv_regressions` 572 → 537.**

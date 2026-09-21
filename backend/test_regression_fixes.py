@@ -733,7 +733,7 @@ EXPECTED_DECOMPOSITIONS = {
     # "name it even without a real glyph" convention as the many other
     # uncharactered primitives already in data.txt) for the mirrored element.
     "rtk480": {"character": "北", "keyword": "north",
-               "expected_part_ids": {"rtk476", "prim-sitting-on-the-ground"}},
+               "expected_part_ids": {"rtk476", "prim-mirrored-spoon"}},
     # Final 5 并 hosts (2026-08-29), closing out the multi-session 并 investigation:
     # none of these five relate to 丷/horns at all (unlike everywhere else 并 turned
     # out to be), each was its own distinct bug. 為/偽's 并 was pure unexplained
@@ -2558,7 +2558,7 @@ EXPECTED_DECOMPOSITIONS = {
     # comparison that it wasn't touched -- left as a separate, still-open
     # question rather than guess.
     "rtk482": {"character": "比", "keyword": "compare",
-               "expected_part_ids": {"rtk476", "prim-sitting-on-the-ground"}},
+               "expected_part_ids": {"rtk476", "prim-mirrored-spoon"}},
     "rtk2154": {"character": "鹿", "keyword": "deer",
                 "expected_part_ids": {"kangxi53", "prim-antlers", "rtk482"}},
     "rtk2155": {"character": "麓", "keyword": "foot of a mountain",
@@ -3340,7 +3340,7 @@ EXPECTED_DECOMPOSITIONS = {
     #    -- it's missing a stroke 鳥 has (render-confirmed), so CSV's
     #    real component list ("drop; mouth; one; tail feathers") was
     #    used instead of flattening via the too-similar 鳥.
-    #  - 能 was missing "prim-sitting-on-the-ground" (the same
+    #  - 能 was missing "prim-mirrored-spoon" (the same
     #    spoon/sitting-on-the-ground pair from 北/比 found earlier this
     #    audit -- CSV confirms "spoon; sitting on the ground" for 能 too).
     #  - 雲/腸/恵 were each flattening an already-taught compound's own
@@ -3376,7 +3376,7 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk2098": {"character": "島", "keyword": "island",
                "expected_part_ids": {"rtk2091", "rtk830"}},
     "rtk2160": {"character": "能", "keyword": "ability",
-               "expected_part_ids": {"kangxi28", "prim-sitting-on-the-ground", "rtk13", "rtk476"}},
+               "expected_part_ids": {"kangxi28", "prim-mirrored-spoon", "rtk13", "rtk476"}},
     # Five owner-disputed decompositions (review_queue.py #9-13, 2026-09-04), all
     # KRADFILE over-fragmentation from the original import_rtk.py pass: a whole RTK
     # primitive shattered into stray strokes because heisig-kanjis.csv had no

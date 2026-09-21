@@ -524,13 +524,13 @@ rtk472:嫡:legitimate wife:女,啇
 rtk473:適:suitable:辶,啇
 rtk474:滴:drip:水,啇
 rtk475:敵:enemy:啇,攵
-rtk476:匕:spoon:;ノ,乙
+rtk476:匕:spoon,sitting on the ground:;ノ,乙
 rtk477:叱:scold:口,匕
 rtk478:匂:fragrant,mexican bandit,muchacho,siesta:勹,匕
 rtk479:頃:time:頁,匕
-rtk480:北:north:匕,prim-sitting-on-the-ground
+rtk480:北:north:prim-mirrored-spoon,匕
 rtk481:背:stature:月,北
-rtk482:比:compare:匕,prim-sitting-on-the-ground
+rtk482:比:compare:匕,prim-mirrored-spoon
 rtk483:昆:descendants:日,比
 rtk484:皆:all:白,比
 rtk485:楷:square character style:木,皆
@@ -2216,7 +2216,7 @@ rtk2156:薦:recommend:广,灬,艹
 rtk2157:慶:jubilation:心,冖,夂,广
 rtk2158:麗:lovely:一,冂,鹿
 rtk2159:熊:bear:能,灬
-rtk2160:能:ability:月,匕,厶,prim-sitting-on-the-ground
+rtk2160:能:ability:月,匕,厶,prim-mirrored-spoon
 rtk2161:態:attitude:能,心
 rtk2162:寅:sign of the tiger:一,八,宀,由
 rtk2163:演:performance:水,寅
@@ -3130,7 +3130,7 @@ kangxi28:厶:cocoon,elbow,wall
 #   substitution artifact) — named literally by their katakana identity rather
 #   than guessing a Heisig-specific meaning; the owner will attach the book's
 #   actual primitive name as a personal alias on top of these.
-prim-umbrella:𠆢:primitive_umbrella,umbrella
+prim-umbrella:𠆢:umbrella,primitive_umbrella
 prim-eight-radical:并:eight radical,puzzle
 prim-hand-radical:扎:hand radical
 prim-mound-radical:阡:mound radical
@@ -3154,14 +3154,13 @@ prim-katakana-yu:ユ:katakana yu
 prim-heki:辟:heki,ketchup:尸,口,辛
 prim-finally:竟:finally:音,儿
 prim-teki:啇:teki,antique
-prim-sitting-on-the-ground:?:sitting on the ground
 prim-upside-down-row:业:upside down in a row
 prim-tucked-under-the-arm:乂:tucked under the arm
 prim-southeast:巽:southeast:己,共
 prim-maestro:𠂤:maestro,maestro without baton
 prim-noren:帀:noren:一,巾
 prim-bushes:丰:bushes,grow up
-prim-meeting:亼:meeting
+prim-meeting:亼:meeting:𠆢,一
 prim-antlers:?:antlers
 prim-fishfinger:扁:fishfinger:戸,𠕁
 prim-muzzle:咅:muzzle
@@ -4230,3 +4229,27 @@ prim-thorn-stalk:朿:thorn stalk:木,冂
 # Three rows moved straight away as a result, all of them Heisig's own
 # reading: 呂 口,ノ,口 ("drop; mouth", and it has two mouths, which neither
 # of its two old chunks managed between them), 奥 ノ,冂,大,米, 血 ノ,皿.
+
+# --- 2026-09-21: three rows audit_csv_regressions.py pointed at once it could
+# be read at all (see its own docstring for the two bugs fixed that day).
+# 亼 was atomic. It is ⿱人一 in cjkvi and Heisig reads 合 as "meeting; umbrella;
+# one; mouth" -- the name, then 亼's own two pieces -- so giving it 𠆢,一 is his
+# reading, not an invention. It was the single largest cause of "dropped
+# umbrella" (34 hosts) and a good share of "dropped one".
+# "sitting on the ground" is 匕's own second name: 匕's *own* components row is
+# that phrase and nothing else (the self-named pattern), and 叱 匂 頃 北 比 能
+# all print it immediately after "spoon", which is Heisig emitting one
+# primitive's whole name set. It is now an alias on rtk476.
+# The row that had been holding it needed care rather than deletion, and the
+# first pass here got that wrong. `prim-sitting-on-the-ground` looked like an
+# orphan -- character `?`, and a grep for the phrase found only its own line --
+# but 北 比 能 reference it by *id*, not by glyph, and the pinned tests caught
+# that immediately. Rendered, it is real: 北's left half is a 匕 mirrored, hook
+# going the other way, and cjkvi writes it as an unencoded placeholder (北 =
+# ⿰③匕). So the row stays, with its `?`, and is renamed prim-mirrored-spoon --
+# a descriptive non-Heisig name, because Heisig does not name the mirror
+# separately; he calls both halves of 北 "spoon".
+prim-mirrored-spoon:?:mirrored spoon
+# prim-umbrella's keyword was "primitive_umbrella", an import artifact sitting
+# in front of the real name. Reordered so the row reads "umbrella"; the old
+# token stays as an alias so nothing that searched for it breaks.
