@@ -143,6 +143,39 @@ def test_individual_comma_separated_gloss_term_finds_compound(conn, client):
     assert "k_bench" in {row["id"] for row in r.json()["results"]}
 
 
+def test_script_filter_keeps_glyph_alias_shared_with_japanese(conn, client):
+    """A Japanese duplicate must not suppress a Chinese component glyph alias.
+
+    Chinese 女 and 木 also have Japanese rows. The Simplified filter must resolve
+    their Russian names to the Chinese glyph aliases so woman + tree reaches 案.
+    """
+    _seed_kanji(conn, "k_ja_woman", "女", "woman", script="ja-kanji")
+    _seed_kanji(conn, "k_ja_tree", "木", "tree", script="ja-kanji")
+    _seed_kanji(conn, "k_zh_woman", "女", "woman, girl", script="zh-Hani")
+    _seed_kanji(conn, "k_zh_tree", "木", "tree", script="zh-Hani")
+    _seed_kanji(conn, "k_zh_calm", "安", "calm", script="zh-Hani")
+    _seed_kanji(conn, "k_zh_bench", "案", "bench", script="zh-Hani")
+    for kid, aliases in {
+        "k_ja_woman": ["woman", "女"],
+        "k_ja_tree": ["tree", "木"],
+        "k_zh_woman": ["женщина", "女"],
+        "k_zh_tree": ["дерево", "木"],
+        "k_zh_calm": ["安"],
+    }.items():
+        for alias in aliases:
+            _seed_alias(conn, kid, alias)
+    _seed_decomposition(conn, "k_zh_calm", 1, ["女"])
+    _seed_decomposition(conn, "k_zh_bench", 1, ["安", "木"])
+    conn.commit()
+
+    r = client.post(
+        "/search/parts",
+        json={"parts": ["дерево", "женщина"], "script": "zh-Hans", "depth": 2},
+    )
+    assert r.status_code == 200, r.text
+    assert "k_zh_bench" in {row["id"] for row in r.json()["results"]}
+
+
 def test_script_filter_excludes_other_scripts(conn, client):
     """script='ja-kanji' excludes zh-Hans/zh-Hant rows even if they'd otherwise match."""
     _seed_kanji(conn, "k_ja", "日", "sun-ja", script="ja-kanji")

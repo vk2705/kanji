@@ -959,11 +959,16 @@ def get_all_aliases_for_term(conn, term: str, viewer_id: int | None = None,
     # otherwise it is dropped and only its owner's unambiguous names are kept.
     ambiguous = set()
     for alias in aliases - ids - {term}:
+        script_sql = ""
+        script_params = []
+        if script_scope:
+            script_sql = f" AND k.script IN ({','.join('?' * len(script_scope))})"
+            script_params = list(script_scope)
         claimants = {r["kanji_id"] for r in conn.execute(
             "SELECT DISTINCT a.kanji_id FROM aliases a JOIN kanji k ON k.id = a.kanji_id "
             "WHERE a.alias = ? AND (a.visibility = 'public' OR a.owner_id = ?) "
-            "AND (k.visibility = 'public' OR k.owner_id = ?)",
-            (alias, viewer_id, viewer_id)
+            "AND (k.visibility = 'public' OR k.owner_id = ?)" + script_sql,
+            (alias, viewer_id, viewer_id, *script_params)
         )}
         if claimants - ids:
             ambiguous.add(alias)
