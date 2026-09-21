@@ -3087,9 +3087,9 @@ kangxi66:攵:rap,knock,taskmaster
 kangxi53:广:cave,dotted cliff,caverns
 kangxi16:几:table,stool,gnats,wind
 kangxi17:凵:container,open box,shovel
-kangxi60:彳:step,go,nelson,column
+kangxi60:彳:step,go,nelson,column,going,line
 kangxi31:囗:enclosure,pent in
-kangxi138:艮:stopping,retracing
+kangxi138:艮:stopping,retracing,silver
 kangxi59:彡:bristle,hair strands,shape
 kangxi79:殳:weapon,lance,cruise missile,missile
 kangxi22:匚:box,receptacle
@@ -3153,7 +3153,7 @@ prim-katakana-yu:ユ:katakana yu
 # evidence for naming it, not as evidence for its internal structure.
 prim-heki:辟:heki,ketchup:尸,口,辛
 prim-finally:竟:finally:音,儿
-prim-teki:啇:teki,antique
+prim-teki:啇:teki,antique:立,冂,古
 prim-upside-down-row:业:upside down in a row
 prim-tucked-under-the-arm:乂:tucked under the arm
 prim-southeast:巽:southeast:己,共
@@ -4253,3 +4253,20 @@ prim-mirrored-spoon:?:mirrored spoon
 # prim-umbrella's keyword was "primitive_umbrella", an import artifact sitting
 # in front of the real name. Reordered so the row reads "umbrella"; the old
 # token stays as an alias so nothing that searched for it breaks.
+
+# --- 2026-09-21: three more families audit_csv_regressions.py named, same shape
+# as 亼 and 匕 above -- a name Heisig gives a primitive that this file put
+# somewhere else, or a compound left atomic so its pieces were unreachable.
+# silver -> 艮. Chunk 8 (2026-09-20) split 艮 and 皀 apart because Heisig calls
+# both "silver", and gave the name to 皀 -- but never put it back on 艮, so
+# 恨 ("regret; Freud; state of mind; silver") and its 25 relatives recorded a
+# dropped concept. Both rows carry it now, which is what that chunk intended.
+# going, line -> 彳. Heisig emits "Nelson; column; going; line" as one adjacent
+# set in 律 復 得 and every other 彳 kanji; chunk 22 added "column" and stopped.
+# "going" is also 行's keyword and "line" is 線's -- the ordinary collision this
+# file already has 28 of.
+# 啇 was atomic, so 立 was unreachable from 嫡 適 摘 滴 敵 and the rest. cjkvi
+# gives ⿱⿱亠丷⿵冂古 and Heisig reads 嫡 as "woman; antique; vase; stand up;
+# hood; old; ..." -- 啇(antique) then 立 + 冂 + 古, which is what the row says
+# now. His 立 absorbs the bar the 冂 below it supplies; that is his reading, not
+# a stroke count.

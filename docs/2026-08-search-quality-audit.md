@@ -14131,3 +14131,27 @@ artifact sitting in front of the real name. Reordered so the row reads
 Verified: 1325 checks exit 0, 67 pytest, over-flattening 0, dead tokens 0,
 self-references 0, primary-choice 0 in both modes, frontend lint + both builds
 clean. Four pins moved (id rename only). **`audit_csv_regressions` 572 → 537.**
+
+## 2026-09-21 — chunk 42: three more families the CSV check named
+
+Same shape as chunk 41's 亼 and 匕 — a name Heisig gives a primitive that this
+file put somewhere else, or a compound left atomic so its pieces were
+unreachable.
+
+* **silver → 艮.** Chunk 8 split 艮 and 皀 apart *because* Heisig calls both
+  "silver", gave the name to 皀 — and never put it back on 艮. So 恨 ("regret;
+  Freud; state of mind; silver") and 25 relatives recorded a dropped concept for
+  a fortnight. Both rows carry it now, which is what that chunk intended.
+* **going, line → 彳.** Heisig emits "Nelson; column; going; line" as one
+  adjacent set in 律 復 得 and every other 彳 kanji. Chunk 22 added "column" and
+  stopped. "Going" is also 行's keyword and "line" is 線's — the ordinary
+  collision this file already has 28 of.
+* **啇 was atomic**, so 立 was unreachable from 嫡 適 摘 滴 敵 and the rest.
+  cjkvi gives `⿱⿱亠丷⿵冂古` and Heisig reads 嫡 as "woman; antique; vase; stand
+  up; hood; old; …" — 啇 ("antique") then 立 + 冂 + 古, which is what the row
+  says now. His 立 absorbs the bar the 冂 below it supplies; that is his
+  reading, not a stroke count.
+
+Verified: 1325 checks exit 0, 67 pytest, over-flattening 0, dead tokens 0,
+self-references 0, primary-choice 0 in both modes, frontend lint + both builds
+clean. No pin moved. **`audit_csv_regressions` 537 → 502.**
