@@ -182,6 +182,7 @@ TRANSLATIONS = {
     "child": "ребёнок",
     "cavity": "полость",
     "tree": "дерево",
+    "a catty (approximately 600 g)": "цзинь (примерно 600 г)",
     # Spot-fixed after the 2026-09-20 bulk auto-translation pass: argos-translate
     # gave the adjective "горный" (mountainous) for this common, high-traffic
     # primitive instead of the noun a learner would actually type.
@@ -299,6 +300,7 @@ def main():
     inserted = 0
     skipped_existing = 0
     skipped_empty = 0
+    replaced_stale = 0
     for row in rows:
         # _insert_alias() always does alias.strip().lower() before storing/comparing,
         # so match that here too -- otherwise a capitalized MT translation looks
@@ -312,6 +314,16 @@ def main():
             # reported count reflects what actually landed in the aliases table.
             skipped_empty += 1
             continue
+        stale = conn.execute(
+            "SELECT COUNT(*) FROM aliases WHERE kanji_id = ? AND owner_id = ? AND alias != ?",
+            (row["id"], owner_id, ru),
+        ).fetchone()[0]
+        if stale and not args.dry_run:
+            conn.execute(
+                "DELETE FROM aliases WHERE kanji_id = ? AND owner_id = ? AND alias != ?",
+                (row["id"], owner_id, ru),
+            )
+        replaced_stale += stale
         existing = conn.execute(
             "SELECT 1 FROM aliases WHERE kanji_id = ? AND alias = ? AND owner_id = ?",
             (row["id"], ru, owner_id),
@@ -324,8 +336,9 @@ def main():
             database.create_alias(conn, row["id"], owner_id, ru, "public")
         inserted += 1
 
-    print(f"\n{'Would insert' if args.dry_run else 'Inserted'} {inserted} alias(es), "
-          f"{skipped_existing} already present, {skipped_empty} skipped (no usable "
+        print(f"\n{'Would insert' if args.dry_run else 'Inserted'} {inserted} alias(es), "
+            f"{replaced_stale} stale alias(es) replaced, {skipped_existing} already present, "
+            f"{skipped_empty} skipped (no usable "
           f"translation). {len(rows)} row(s) matched {len(translations)} translated "
           f"keyword(s).")
 
