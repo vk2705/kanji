@@ -13770,3 +13770,42 @@ self-references 0, primary-choice 0, frontend lint + build clean. No pin moved.
 normalisation gap, not a data error — cjkvi writes 阝 where this project
 deliberately uses ⻏ for the right-side form), and the loose strokes in 犀 迂
 煉 蘭.
+
+## 2026-09-21 — chunk 33: four more compounds spelled in strokes, and one 阝 too many
+
+All from outside the CSV range, where only cjkvi speaks.
+
+* **迂** is `辶,于`, not `辶,干,二,亅` (cjkvi `⿺辶于`). Same 于/干 distinction as
+  芋 and 宇 in chunk 16 — 于's third stroke hooks, 干's runs straight down — and
+  迂 was simply outside the range that chunk worked in. Checked the rest: it is
+  the **only** other row in this file that made the mistake. 肝 刊 汗 軒 岸 幹 旱
+  栞 竿 鼾 all genuinely have 干.
+* **煉** is `火,東` (cjkvi `⿰火東` for `[J]`) — its own alternate already said so.
+* **犀** is `尸,｜,丷,八,牛` (cjkvi `⿸尸⿱⿻丨⿱丷八牛`) — again its own alternate,
+  behind a primary that had 二 and 十 and **no 牛 at all**, in the kanji for
+  "rhinoceros".
+* **耶** loses its alternate. `耳,阝` claims the *left-side* 阝 where 耶's is on
+  the right; cjkvi writes 阝 for both sides and cannot tell them apart.
+
+**And one line of evidence normalisation.** cjkvi's single 阝 for both sides is
+exactly why this project uses two codepoints — kangxi170 (left, "pinnacle") is
+阝 and kangxi163 (right, "walls") is ⻏, so a literal 阝 in a decomposition
+resolves to one row instead of ambiguously. `"⻏": "阝"` in
+`audit_overflatten.RADICAL_VARIANTS` folds them **for evidence only**: it stops
+a correct ⻏ from looking unsupported in 鄭 and 耶, both past the frame where
+Heisig's "walls" would have cleared them. The data keeps the distinction; only
+the audit stops insisting on it.
+
+**One left undone on purpose: 蘭** (`⿱艹闌`, 闌 = `⿵門柬`). Its inner is **柬**
+(U+67EC), which renders with two marks inside where 東 has a clean 日 — a real
+difference, and 煉 above is the 東 case. But 柬 has no row here, no Heisig name
+(frame 2449 is past the CSV) and exactly one host. Inventing a mnemonic name for
+it would be worse than leaving the row spelled out.
+
+Verified: 1325 checks exit 0, 67 pytest, over-flattening 0, dead tokens 0,
+self-references 0, primary-choice 0, frontend lint + **both** builds clean
+(`build:prod` and `build:dev` — another session split them while this batch was
+running, and there is no bare `npm run build` any more). No pin moved.
+**Phantom parts (non-blind) 75→63 across 49→44 kanji.**
+
+**Next** — the remaining out-of-range families.

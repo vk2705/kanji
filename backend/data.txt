@@ -2277,7 +2277,7 @@ rtk2215:悛:amend:夋,state of mind
 rtk2216:駿:a good horse:夋,馬
 rtk2217:峻:high:夋,山
 rtk2218:竣:end:夋,立
-rtk2219:犀:rhinoceros:尸,｜,二,十,ノ,一;丷,八,尸,牛,｜
+rtk2219:犀:rhinoceros:尸,｜,丷,八,牛
 rtk2220:皐:swamp:十,白,二
 rtk2221:畷:rice field ridge path:田,又
 rtk2222:綴:compose:糸,又
@@ -2552,7 +2552,7 @@ rtk2491:葦:reed:艹,韋
 rtk2492:迪:edify:辶,由
 rtk2493:辿:follow (road):辶,山
 rtk2494:這:crawl:言,辶
-rtk2495:迂:roundabout way:干,辶,二,亅
+rtk2495:迂:roundabout way:辶,于
 rtk2496:遁:flee:盾,辶
 rtk2497:逢:meeting:夆,辶
 rtk2498:遥:far off:干,辶,爪,凵
@@ -2658,7 +2658,7 @@ rtk2597:焚:burn:林,火
 rtk2598:灸:moxa cautery:久,火
 rtk2599:煽:fan:火,扇
 rtk2600:煤:soot:某,火
-rtk2601:煉:refine metals:｜,一,火,日,八,木,田;東,火
+rtk2601:煉:refine metals:火,東
 rtk2602:燦:brilliant:火,米,又,夕
 rtk2603:灼:miraculous:勺,火
 rtk2604:烙:burn:各,火
@@ -2776,7 +2776,7 @@ rtk2716:聯:party:耳,幺
 rtk2717:聡:wise:耳,心,八,厶
 rtk2718:聘:invite:｜,耳,日,一,勹
 rtk2719:耽:addicted:耳,尢,冖
-rtk2720:耶:question mark:耳,⻏;耳,阝
+rtk2720:耶:question mark:耳,⻏
 rtk2721:蚤:flea:叉,虫
 rtk2722:蟹:crab:虫,解
 rtk2723:蛋:barbarian:虫,疋
@@ -4128,3 +4128,22 @@ prim-crowd:乑:crowd:
 # 祇 keeps its 示 reading as the alternate, since cjkvi gives ⿰示氏 for [JK]
 # even though this font draws 礻; 祢's 尔 stays spelled 𠂉 + 小, matching how
 # 弥 (rtk1322) already writes the same shape.
+
+# --- 2026-09-21: four more from outside the CSV range, all of them a compound
+# this file spelled in strokes.
+# 迂 is 辶 + 于, not 辶 + 干 + 二 + 亅 (cjkvi ⿺辶于). Same 于/干 distinction as
+# 芋 and 宇 on 2026-09-20 -- 于's third stroke hooks, 干's runs straight down --
+# and 迂 was simply out of the CSV range that chunk worked in. It is the only
+# other row in this file that made the mistake; 肝 刊 汗 軒 岸 幹 旱 栞 竿 鼾 all
+# genuinely have 干.
+# 煉 is 火 + 東 (cjkvi ⿰火東 for [J]); its own alternate already said so.
+# 犀 is 尸 + ｜ + 丷 + 八 + 牛 (cjkvi ⿸尸⿱⿻丨⿱丷八牛) -- again its own
+# alternate, behind a primary that had 二 and 十 and no 牛 at all.
+# 耶 loses its alternate: 耳,阝 claims the *left-side* 阝, and 耶's is on the
+# right. cjkvi writes 阝 for both sides, so it could not tell them apart; the
+# ⻏ in the primary is this project's deliberate right-side codepoint.
+# NOT done: 蘭 (⿱艹闌, 闌 = ⿵門柬). Its inner is 柬 (U+67EC), which renders with
+# two marks inside where 東 has a clean 日 -- a real difference, and 煉 above is
+# the 東 case -- but 柬 has no row here, no Heisig name (frame 2449 is past the
+# CSV), and one host. Inventing a mnemonic name for it is worse than leaving
+# the row spelled out, so it stays.

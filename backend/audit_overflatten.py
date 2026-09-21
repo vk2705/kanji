@@ -85,6 +85,15 @@ RADICAL_VARIANTS = {
     # and this project already spells every one of those hosts with 卜 — so
     # cjkvi-ids writing ⺊ was making 16 hosts of "magic wand" look unsupported.
     "⺊": "卜",
+    # cjkvi-ids writes 阝 for both sides of the beta radical. This project
+    # deliberately does not: kangxi170 (left, "pinnacle") is 阝 and kangxi163
+    # (right, "walls") is ⻏, so that a literal 阝 in a decomposition resolves to
+    # one row rather than ambiguously — see make_primitive_images.FORCE_IMAGE.
+    # Folding them here is *evidence only*: it stops cjkvi's one-spelling-for-two
+    # from making a correct ⻏ look unsupported (鄭, 耶, both past the CSV range
+    # where Heisig's "walls" would otherwise clear them). The data keeps the
+    # distinction; only the audit stops insisting on it.
+    "⻏": "阝",
 }
 
 
