@@ -62,10 +62,31 @@ that names the host itself is satisfied outright. Same rule
 apostrophe for a glyph, and putting "drop" on ノ as well as 丶, which is how
 Heisig uses it in 千 呂 頁) took it to **661**.
 
-661 is still not a clean report, and the largest single cause is worth naming:
-**言 is atomic here** while the CSV reads "words; keitai; mouth", so every one of
-its ~90 hosts is recorded as having dropped 口. Whether 言 should decompose is a
-judgement call about search noise, not a bug this script can settle.
+A third cause, found the same day and bigger than either: **the "explicit
+atomic override is deliberate" skip had been dead since 2026-09-13.** It read
+`if not override_terms`, written when `_load_parts_file` returned one flat list
+per id. That function now returns a list of *chunks* (one per `;`-separated
+alternate), so an atomic row arrives as `[[]]` — truthy — and the skip stopped
+firing on the day alternates were implemented. Every deliberately atomic kanji
+has been reported as a regression ever since.
+
+That was the 言 question. 言's CSV row is "words; keitai; mouth" and this file
+marks it atomic, so all ~89 of its hosts recorded a dropped 口 — and the same
+for 心 虫 車 酉. Worth stating why *atomic is right* there and the script was
+wrong: **cjkvi-ids makes all five atomic too** (`言 言`, `車 車`, `虫 虫`,
+`酉 酉`, `心 心`). Decomposing them to quiet a report would contradict the
+structural source, invent phantom parts in ~230 hosts, and change what a reader
+sees for five of the commonest kanji in the book — to make a broken skip stop
+firing.
+
+But their *hosts* are a different matter, and fixing the skip barely touched the
+count (661 → 644) because 語 計 詮 … each have their own override and each
+genuinely cannot reach 口: the route runs through 言, and 言 stops. That is a
+true statement about a deliberate modelling choice, not about the override. So
+those are now split out under **"via a deliberately atomic part"** and counted
+separately. The headline number is overrides that dropped something on their
+own account; the second number is the price of keeping 言 心 虫 車 酉 atomic,
+stated once instead of smeared over hundreds of rows.
 
 This still deliberately only catches *loss* of a resolvable concept — it
 does NOT flag overrides that only *add* extra terms beyond the CSV baseline
@@ -128,6 +149,9 @@ def load_csv_baseline() -> dict[str, list[str]]:
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--max-depth", type=int, default=DEFAULT_MAX_DEPTH)
+    parser.add_argument("--via-atomic", action="store_true",
+                        help="list the hosts whose only 'dropped' concept stops at a "
+                             "deliberately atomic row (言 心 虫 車 酉 and the like)")
     args = parser.parse_args()
 
     print("Building shadow database from source files...", flush=True)
@@ -194,13 +218,31 @@ def main():
                 frontier.append((cid, depth + 1))
         return seen
 
-    flagged = []
+    # Rows this file deliberately marks atomic, mapped to the concepts Heisig's
+    # own components column says they contain. A host that "drops" one of those
+    # is not dropping anything itself -- the concept stops at the atomic row.
+    atomic_names: dict[str, frozenset[str]] = {}
+    for oid, chunks in merged_overrides.items():
+        if any(chunk for chunk in chunks):
+            continue
+        atomic_names[oid] = frozenset(baseline.get(oid, ()))
+
+    flagged, via_atomic = [], []
     for kid, csv_terms in baseline.items():
         if kid not in merged_overrides:
             continue  # no override at all -> CSV baseline is used as-is, nothing to compare
         override_terms = merged_overrides[kid]
-        if not override_terms:
-            continue  # explicit "atomic" override -- deliberate, not a regression
+        if not any(chunk for chunk in override_terms):
+            # Explicit "atomic" override -- deliberate, not a regression.
+            #
+            # This test used to be `if not override_terms`, written when
+            # _load_parts_file returned one flat list per id. Since 2026-09-13 it
+            # returns a list of *chunks* (one per `;`-separated alternate), so an
+            # atomic row comes back as [[]] -- which is truthy, and the skip
+            # silently stopped firing that day. Every deliberately atomic kanji
+            # has been reported as a regression ever since: 言 心 虫 車 酉 among
+            # them, and those five alone are ~230 hosts.
+            continue
 
         final_terms = own_parts(kid)
         reachable = {resolve(t) for t in final_terms} - {None}
@@ -216,15 +258,29 @@ def main():
             dropped.append((t, "/".join(sorted(cids))))
 
         if dropped:
+            part_ids = {resolve(t) for t in final_terms} - {None}
+            stopped_at = {oid for oid in part_ids if oid in atomic_names}
+            excused = {t for t, _ in dropped
+                       if any(t in atomic_names[oid] for oid in stopped_at)}
             row = conn.execute("SELECT character, keyword FROM kanji WHERE id = ?", (kid,)).fetchone()
-            flagged.append({
+            entry = {
                 "id": kid, "character": row["character"], "keyword": row["keyword"],
-                "csv_terms": csv_terms, "final_terms": final_terms, "dropped": dropped,
-            })
+                "csv_terms": csv_terms, "final_terms": final_terms,
+                "dropped": [d for d in dropped if d[0] not in excused],
+                "excused": sorted(excused),
+            }
+            (flagged if entry["dropped"] else via_atomic).append(entry)
 
     conn.close()
 
-    print(f"\n{len(flagged)} kanji flagged (dropped a concept unreachable even via recursion):\n")
+    print(f"\n{len(flagged)} kanji flagged (dropped a concept unreachable even via "
+          f"recursion); a further {len(via_atomic)} lose one only because the route "
+          f"runs through a deliberately atomic row -- pass --via-atomic to list them:\n")
+    if args.via_atomic:
+        for f in via_atomic:
+            print(f"- {f['id']} {f['character']} ({f['keyword']})  via atomic: "
+                  f"{', '.join(f['excused'])}")
+        print()
     for f in flagged:
         dropped_str = ", ".join(f"{t} (-> {cid})" for t, cid in f["dropped"])
         print(f"- {f['id']} {f['character']} ({f['keyword']})")

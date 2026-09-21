@@ -14027,3 +14027,66 @@ for a chunk that can weigh it.
 Verified: 1325 checks exit 0, 67 pytest, over-flattening 0, dead tokens 0,
 self-references 0, primary-choice 0 in both modes, frontend lint + both builds
 clean. One pin moved (呂). **Phantom parts (non-blind) 24→23.**
+
+## 2026-09-21 — chunk 40: the 言 question, answered by not decomposing 言
+
+Chunk 39 ended by naming 言 as the biggest remaining cause of
+`audit_csv_regressions.py`'s 661: it is atomic here while the CSV reads
+"words; keitai; mouth", so ~89 hosts record a dropped 口. The obvious move is to
+give 言 a decomposition. **That would have been wrong**, and checking why turned
+up two more bugs in the script instead.
+
+**First: cjkvi-ids makes 言 atomic too** — `言 言`, and the same for 車 虫 酉 心,
+the other four rows in this position. Decomposing them to quiet a report would
+contradict the structural source, invent phantom parts in ~230 hosts, and change
+what a reader sees for five of the commonest kanji in the book.
+
+**Second: the script's own "explicit atomic override is deliberate" skip had
+been dead since 2026-09-13.** It read `if not override_terms`, written when
+`_load_parts_file` returned one flat list per id. That function now returns a
+list of *chunks*, one per `;`-separated alternate — so an atomic row arrives as
+`[[]]`, which is truthy, and the skip stopped firing on the very day alternate
+decompositions were implemented. Every deliberately atomic kanji has been
+reported as a regression ever since.
+
+Fixing it moved the count barely at all (661 → 644), which is the interesting
+part: 語 計 詮 … each have their own override and each genuinely cannot reach 口,
+because the route runs through 言 and 言 stops. That is a true statement about a
+deliberate modelling choice, not about the override.
+
+So those are now **split out and counted separately**: 572 overrides that
+dropped something on their own account, and **72 that lose a concept only via a
+deliberately atomic part** (`--via-atomic` lists them). The price of keeping 言
+心 虫 車 酉 atomic is now stated once, as a number, instead of smeared across
+hundreds of rows where it looks like data damage.
+
+926 → 718 → 661 → **572**, across two chunks, without touching a single
+decomposition to get there.
+
+Verified: 1325 checks exit 0, 67 pytest, frontend lint clean. No data changed
+this chunk.
+
+---
+
+### Where chunks 32–40 leave the audit
+
+Nine chunks (the numbering skips 31 — another session landed its own that day).
+This batch left the CSV range for the first time and then turned on the tools.
+
+| | start of chunk 32 | now |
+|---|---|---|
+| phantom parts, non-blind, all frames | 81 across 53 | **23 across 17** |
+| `audit_primary_choice` (in range) | 0 | **0** |
+| `audit_primary_choice --past-csv` | *did not exist* | **0** of 70 |
+| `audit_csv_regressions` | 926 (meaningless) | **572** + 72 explained |
+| `coverage_status.py` | crashed since the history rewrite | **2566/3000 (85.5%)** |
+
+Three of the four tools touched were reporting numbers nobody could act on —
+926 flagged, 100% reviewed, exit 128 — and in each case the cause was a script
+written against an older shape of the data and never re-run afterwards. The
+data fixes in between (礼→礻, 初→衤, the katakana ヨ, 朿, 氺, 于, ⻏) were mostly
+found *by* the repaired tools.
+
+**Standing, unchanged**: this sandbox still cannot deploy. Another session is
+running `sync_system_data.py` against the live DB — the 怜/澪/玲 entry above is
+theirs — so the data here reaches the site by their hand, not this one's.
