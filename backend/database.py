@@ -942,7 +942,8 @@ def get_all_aliases_for_term(conn, term: str, viewer_id: int | None = None,
 
 
 def _kanji_with_part_terms(conn, terms: set[str], viewer_id: int | None,
-                            sources: set[str] | None) -> set[str]:
+                            sources: set[str] | None,
+                            script_scope: tuple[str, ...] | None) -> set[str]:
     """kanji ids that directly list any of `terms` as a part_term, in ANY decomposition
     visible to the viewer (not just one picked one) — one layer of the reverse
     decomposition graph used by _reachable_kanji_for_term below. Also checks the
@@ -954,30 +955,51 @@ def _kanji_with_part_terms(conn, terms: set[str], viewer_id: int | None,
     decomp_source_sql, decomp_source_params = _source_scope_sql("d.", sources, viewer_id)
     decomp_extra = f" AND {decomp_source_sql}" if decomp_source_sql else ""
     ph = ",".join("?" * len(terms))
+    script_sql = ""
+    script_params = []
+    if script_scope:
+        script_sql = f" AND k.script IN ({','.join('?' * len(script_scope))})"
+        script_params = list(script_scope)
     rows = conn.execute(
         f"SELECT DISTINCT p.kanji_id FROM parts p "
         f"JOIN decompositions d ON d.id = p.decomposition_id "
         f"JOIN kanji k ON k.id = p.kanji_id "
         f"WHERE p.part_term IN ({ph}) AND (d.visibility = 'public' OR d.owner_id = ?){decomp_extra} "
-        f"AND (k.visibility = 'public' OR k.owner_id = ?)",
-        [*terms, viewer_id, *decomp_source_params, viewer_id]
+        f"AND (k.visibility = 'public' OR k.owner_id = ?){script_sql}",
+        [*terms, viewer_id, *decomp_source_params, viewer_id, *script_params]
     ).fetchall()
     return {r["kanji_id"] for r in rows}
 
 
-def _terms_for_kanji_ids(conn, kanji_ids: set[str], viewer_id: int | None) -> set[str]:
-    """Every alias string, id, and character for the given kanji ids (public, or the
-    viewer's own) — i.e. every literal part_term string that could name one of these
-    kanji as a part, feeding the next BFS layer of _reachable_kanji_for_term."""
+def _terms_for_kanji_ids(conn, kanji_ids: set[str], viewer_id: int | None,
+                         script_scope: tuple[str, ...] | None) -> set[str]:
+    """Unambiguous aliases, ids, and characters for the given kanji ids.
+
+    A recursive step must not turn a keyword shared by unrelated kanji into a shape
+    identity: 喰 includes mouth but its ``eat`` alias must not make it stand for 食.
+    """
     if not kanji_ids:
         return set()
     ph = ",".join("?" * len(kanji_ids))
     result = set(kanji_ids)
-    for r in conn.execute(
+    aliases = {r["alias"] for r in conn.execute(
         f"SELECT alias FROM aliases WHERE kanji_id IN ({ph}) AND (visibility = 'public' OR owner_id = ?)",
         [*kanji_ids, viewer_id]
-    ).fetchall():
-        result.add(r["alias"])
+    ).fetchall()}
+    script_sql = ""
+    script_params = []
+    if script_scope:
+        script_sql = f" AND k.script IN ({','.join('?' * len(script_scope))})"
+        script_params = list(script_scope)
+    for alias in aliases:
+        claimants = {r["kanji_id"] for r in conn.execute(
+            "SELECT DISTINCT a.kanji_id FROM aliases a JOIN kanji k ON k.id = a.kanji_id "
+            "WHERE a.alias = ? AND (a.visibility = 'public' OR a.owner_id = ?) "
+            "AND (k.visibility = 'public' OR k.owner_id = ?)" + script_sql,
+            [alias, viewer_id, viewer_id, *script_params],
+        )}
+        if not claimants - kanji_ids:
+            result.add(alias)
     for r in conn.execute(
         f"SELECT character FROM kanji WHERE id IN ({ph}) AND (visibility = 'public' OR owner_id = ?)",
         [*kanji_ids, viewer_id]
@@ -1009,11 +1031,13 @@ def _reachable_kanji_for_term(conn, term: str, viewer_id: int | None,
     found_kanji: set[str] = set()
     depth = 0
     while frontier_terms and depth < max_depth:
-        new_kanji = _kanji_with_part_terms(conn, frontier_terms, viewer_id, sources) - found_kanji
+        new_kanji = _kanji_with_part_terms(
+            conn, frontier_terms, viewer_id, sources, script_scope
+        ) - found_kanji
         if not new_kanji:
             break
         found_kanji |= new_kanji
-        frontier_terms = _terms_for_kanji_ids(conn, new_kanji, viewer_id)
+        frontier_terms = _terms_for_kanji_ids(conn, new_kanji, viewer_id, script_scope)
         depth += 1
     return matched | found_kanji
 

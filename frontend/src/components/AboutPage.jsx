@@ -1,15 +1,16 @@
 import { t } from "../i18n";
+import ViewNavigation from "./ViewNavigation";
 
 const REPO_URL = "https://github.com/vk2705/kanji";
 const APK_URL = "https://github.com/vk2705/kanji/raw/master/android/releases/rtk-kanji-latest.apk";
 const PRIVACY_URL = "privacy.html";
 const CHANGELOG_URL = "https://github.com/vk2705/kanji/blob/master/CHANGELOG.md";
 
-export default function AboutPage({ lang, onBack }) {
+export default function AboutPage({ lang, onBack, onHome }) {
   const whatsNewItems = t(lang, "aboutWhatsNewItems");
   return (
     <div className="form-view">
-      {onBack && <button className="back-btn" onClick={onBack}>{t(lang, "backBtn")}</button>}
+      <ViewNavigation onBack={onBack} onHome={onHome} lang={lang} />
       <h2>{t(lang, "aboutHeading")}</h2>
       <p className="about-intro">{t(lang, "aboutIntro")}</p>
 

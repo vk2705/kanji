@@ -8,6 +8,7 @@ import CreateKanji from "./components/CreateKanji";
 import MyContributions from "./components/MyContributions";
 import AutocompleteInput from "./components/AutocompleteInput";
 import { t } from "./i18n";
+import { stateToParams, paramsToState, paramsToUrl } from "./urlState";
 import "./App.css";
 
 const STUDY_SCRIPTS = [
@@ -42,20 +43,33 @@ function writeLocal(key, value) {
   }
 }
 
+// Parsed once, outside the component, so the very first render (before any effect
+// runs) already reflects a shared/back-navigated URL instead of flashing the default
+// empty state first.
+const initialUrlState = paramsToState(window.location.search);
+
 export default function App() {
-  const [tab, setTab] = useState(0);
-  const [view, setView] = useState("search"); // "search" | "create" | "contributions" | "about"
+  const [tab, setTab] = useState(initialUrlState.tab ?? 0);
+  const [view, setView] = useState(initialUrlState.view || "search"); // "search" | "create" | "contributions" | "about"
   const [results, setResults] = useState(null);
   const [loading, setLoading] = useState(false);
   const [searchError, setSearchError] = useState("");
   const searchController = useRef(null);
   const resultsRef = useRef(null);
-  const [selectedId, setSelectedId] = useState(null);
+  const [selectedId, setSelectedId] = useState(initialUrlState.selectedId || null);
+  const [detailStack, setDetailStack] = useState([]);
   const [user, setUser] = useState(null);
   const [authResolved, setAuthResolved] = useState(false);
   const [uiLang, setUiLang] = useState(() => readLocal("ui_language", "en"));
-  const [studyScript, setStudyScript] = useState(() => readLocal("study_script", ""));
-  const [sources, setSources] = useState(() => new Set(SOURCE_SCOPES.map((s) => s.value)));
+  const [studyScript, setStudyScript] = useState(() => initialUrlState.studyScript || readLocal("study_script", ""));
+  const [sources, setSources] = useState(
+    () => new Set(initialUrlState.sources || SOURCE_SCOPES.map((s) => s.value))
+  );
+  // True while we're applying a URL (initial load or Back/Forward) rather than
+  // reacting to the user's own actions — suppresses the effect that would otherwise
+  // push a *new* history entry in response to state changes we just pulled *from*
+  // history, which would turn Back into a no-op loop.
+  const applyingUrlRef = useRef(true);
 
   const tt = (key, ...args) => t(uiLang, key, ...args);
 
@@ -71,9 +85,16 @@ export default function App() {
         if (me.authenticated) {
           setUser(me);
           // Account is the source of truth once logged in; falls back to whatever
-          // was already showing (this device's localStorage value) if unset.
-          if (me.ui_language) setUiLang(me.ui_language);
-          setStudyScript(me.study_script || "");
+          // was already showing (this device's localStorage value) if unset. A
+          // study-language carried in a shared/back-navigated URL wins over the
+          // account default, though — the whole point of sharing a link is that the
+          // recipient sees what was shared, not their own saved preference.
+          if (!initialUrlState.studyScript) {
+            if (me.ui_language) setUiLang(me.ui_language);
+            setStudyScript(me.study_script || "");
+          } else if (me.ui_language) {
+            setUiLang(me.ui_language);
+          }
         } else {
           setUser(null);
         }
@@ -85,6 +106,104 @@ export default function App() {
   useEffect(() => {
     recordPageView();
     return () => searchController.current?.abort();
+  }, []);
+
+  // Pushes a new history entry reflecting the given state, unless we're currently
+  // applying a URL ourselves (initial load or a Back/Forward-triggered restore) —
+  // otherwise restoring state from `popstate` would immediately re-push it, turning
+  // Back into a no-op.
+  function pushUrl(nextState) {
+    if (applyingUrlRef.current) return;
+    const url = paramsToUrl(stateToParams(nextState));
+    if (url !== window.location.pathname + window.location.search) {
+      window.history.pushState({ ...nextState, __kanjiNav: true }, "", url);
+    }
+  }
+
+  function replaceUrl(nextState) {
+    const url = paramsToUrl(stateToParams(nextState));
+    window.history.replaceState({ ...nextState, __kanjiNav: true }, "", url);
+  }
+
+  // Runs the search (or loads the detail view) implied by whatever URL we just
+  // landed on — the initial page load, and any later Back/Forward navigation
+  // (see the popstate listener below).
+  function applyUrlState(urlState) {
+    applyingUrlRef.current = true;
+    setView(urlState.view || "search");
+    if (urlState.view && urlState.view !== "search") {
+      applyingUrlRef.current = false;
+      return;
+    }
+    setTab(urlState.tab ?? 0);
+    setSelectedId(urlState.selectedId || null);
+    setStudyScript(urlState.studyScript || "");
+    if (urlState.sources) setSources(new Set(urlState.sources));
+    setResults(null);
+    setFallbackMsg("");
+    setSearchError("");
+
+    const script = urlState.studyScript || "";
+    const srcs = urlState.sources || null;
+
+    if (urlState.tab === 1) {
+      setTextQuery(urlState.q || "");
+      setCharQuery("");
+      setParts(["", "", ""]);
+      if (urlState.q) runTextSearch(urlState.q, script, srcs);
+    } else if (urlState.tab === 2) {
+      setCharQuery(urlState.q || "");
+      setTextQuery("");
+      setParts(["", "", ""]);
+      if (urlState.q) runCharSearch(urlState.q, script, srcs);
+    } else {
+      const filled = urlState.q ? urlState.q.split(",") : [];
+      setParts([...filled, "", "", ""].slice(0, Math.max(3, filled.length)));
+      setTextQuery("");
+      setCharQuery("");
+      if (urlState.searchDepth) setSearchDepth(urlState.searchDepth);
+      if (filled.length) runPartsSearch(filled, script, srcs, urlState.searchDepth || 1);
+    }
+    // Cleared on the next tick, after the state updates above have been applied —
+    // the effects that would otherwise treat these as fresh user actions and push a
+    // duplicate history entry run after this synchronous block.
+    setTimeout(() => {
+      applyingUrlRef.current = false;
+    }, 0);
+  }
+
+  // Restore state on Back/Forward. The initial load is handled by a separate effect
+  // below (it also needs to kick off the initial search, which this only does for
+  // later navigations to keep the two paths symmetric).
+  useEffect(() => {
+    function onPopState() {
+      applyUrlState(paramsToState(window.location.search));
+    }
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
+  }, []);
+
+  // Kick off whatever the initial URL asked for (a search, or a directly-linked
+  // kanji) once on mount. Doesn't wait for auth to resolve — an anonymous view of a
+  // shared link should work the same as a logged-in one, modulo "mine" (handled by
+  // the existing sources-cleanup effect above).
+  useEffect(() => {
+    if (initialUrlState.view && initialUrlState.view !== "search") {
+      applyingUrlRef.current = false;
+      return;
+    }
+    if (initialUrlState.hasSearch && initialUrlState.tab !== undefined) {
+      const script = initialUrlState.studyScript || "";
+      const srcs = initialUrlState.sources || null;
+      if (initialUrlState.tab === 1 && initialUrlState.q) {
+        runTextSearch(initialUrlState.q, script, srcs);
+      } else if (initialUrlState.tab === 2 && initialUrlState.q) {
+        runCharSearch(initialUrlState.q, script, srcs);
+      } else if (initialUrlState.tab === 0 && initialUrlState.q) {
+        runPartsSearch(initialUrlState.q.split(","), script, srcs, initialUrlState.searchDepth || 1);
+      }
+    }
+    applyingUrlRef.current = false;
   }, []);
 
   function changeUiLang(lang) {
@@ -131,22 +250,25 @@ export default function App() {
   // matches its own "no restriction" default instead of sending a redundant filter.
   const activeSources = sources.size >= SOURCE_SCOPES.length ? null : [...sources];
 
-  const [parts, setParts] = useState(["", "", ""]);
-  const [textQuery, setTextQuery] = useState("");
-  const [charQuery, setCharQuery] = useState("");
+  const initialParts = initialUrlState.tab === 0 && initialUrlState.q ? initialUrlState.q.split(",") : [];
+  const [parts, setParts] = useState(() => {
+    const p = [...initialParts, "", "", ""].slice(0, Math.max(3, initialParts.length));
+    return p;
+  });
+  const [textQuery, setTextQuery] = useState(() => (initialUrlState.tab === 1 ? initialUrlState.q || "" : ""));
+  const [charQuery, setCharQuery] = useState(() => (initialUrlState.tab === 2 ? initialUrlState.q || "" : ""));
   const [fallbackMsg, setFallbackMsg] = useState("");
   // How many decomposition levels parts-search recurses through — 1 (direct match
   // only) is the historical default; the backend can go deeper but a common primitive
   // matches a large fraction of the dataset at high depth, so this stays an explicit
   // user choice rather than a fixed default (see search_by_parts's docstring).
-  const [searchDepth, setSearchDepth] = useState(1);
+  const [searchDepth, setSearchDepth] = useState(initialUrlState.searchDepth || 1);
 
   async function runSearch(fn) {
     searchController.current?.abort();
     const controller = new AbortController();
     searchController.current = controller;
     setLoading(true);
-    setSelectedId(null);
     setFallbackMsg("");
     setSearchError("");
     // On a small screen the search form can fill the whole viewport, so the results
@@ -181,14 +303,11 @@ export default function App() {
     return false;
   }
 
-  async function handlePartsSearch(e) {
-    e.preventDefault();
-    const filled = parts.filter((p) => p.trim());
-    if (!filled.length || !canSearchSelectedSources()) return;
+  function runPartsSearch(filled, script, srcs, depth) {
     runSearch(async (signal) => {
-      const data = await searchByParts(filled, studyScript || null, activeSources, searchDepth, signal);
+      const data = await searchByParts(filled, script || null, srcs, depth, signal);
       if (data.results.length === 0 && filled.length === 1) {
-        const text = await searchByText(filled[0], studyScript || null, activeSources, signal);
+        const text = await searchByText(filled[0], script || null, srcs, signal);
         setResults(text.results);
         if (text.results.length > 0) {
           setFallbackMsg(tt("fallbackMsg", filled[0]));
@@ -199,22 +318,43 @@ export default function App() {
     });
   }
 
+  function runTextSearch(query, script, srcs) {
+    runSearch(async (signal) => {
+      const data = await searchByText(query, script || null, srcs, signal);
+      setResults(data.results);
+    });
+  }
+
+  function runCharSearch(query, script, srcs) {
+    runSearch(async (signal) => {
+      const data = await searchByChar(query, script || null, srcs, signal);
+      setResults(data ? [data] : []);
+    });
+  }
+
+  async function handlePartsSearch(e) {
+    e.preventDefault();
+    const filled = parts.filter((p) => p.trim());
+    if (!filled.length || !canSearchSelectedSources()) return;
+    setSelectedId(null);
+    pushUrl({ tab: 0, parts, textQuery, charQuery, searchDepth, studyScript, sources: [...sources], selectedId: null, view: "search" });
+    runPartsSearch(filled, studyScript, activeSources, searchDepth);
+  }
+
   async function handleTextSearch(e) {
     e.preventDefault();
     if (!textQuery.trim() || !canSearchSelectedSources()) return;
-    runSearch(async (signal) => {
-      const data = await searchByText(textQuery, studyScript || null, activeSources, signal);
-      setResults(data.results);
-    });
+    setSelectedId(null);
+    pushUrl({ tab: 1, parts, textQuery, charQuery, searchDepth, studyScript, sources: [...sources], selectedId: null, view: "search" });
+    runTextSearch(textQuery, studyScript, activeSources);
   }
 
   async function handleCharSearch(e) {
     e.preventDefault();
     if (!charQuery.trim() || !canSearchSelectedSources()) return;
-    runSearch(async (signal) => {
-      const data = await searchByChar(charQuery, studyScript || null, activeSources, signal);
-      setResults(data ? [data] : []);
-    });
+    setSelectedId(null);
+    pushUrl({ tab: 2, parts, textQuery, charQuery, searchDepth, studyScript, sources: [...sources], selectedId: null, view: "search" });
+    runCharSearch(charQuery, studyScript, activeSources);
   }
 
   function handleTabChange(i) {
@@ -226,13 +366,48 @@ export default function App() {
   }
 
   function selectKanji(id) {
+    if (selectedId && selectedId !== id) {
+      setDetailStack((stack) => [...stack, selectedId]);
+    }
     setSelectedId(id);
     setView("search");
+    pushUrl({ tab, parts, textQuery, charQuery, searchDepth, studyScript, sources: [...sources], selectedId: id, view: "search" });
   }
 
   function openView(v) {
     setView(v);
     setSelectedId(null);
+    pushUrl({ view: v });
+  }
+
+  // Each detail opened from another detail is retained explicitly, so Back follows
+  // the decomposition trail before returning to the still-preserved search results.
+  function goBackToSearch() {
+    const previousId = detailStack.at(-1);
+    if (previousId) {
+      setDetailStack((stack) => stack.slice(0, -1));
+      setSelectedId(previousId);
+      replaceUrl({ tab, parts, textQuery, charQuery, searchDepth, studyScript, sources: [...sources], selectedId: previousId, view: "search" });
+      return;
+    }
+    setSelectedId(null);
+    setView("search");
+    replaceUrl({ tab, parts, textQuery, charQuery, searchDepth, studyScript, sources: [...sources], selectedId: null, view: "search" });
+  }
+
+  function goHome() {
+    setTab(0);
+    setParts(["", "", ""]);
+    setTextQuery("");
+    setCharQuery("");
+    setSearchDepth(1);
+    setResults(null);
+    setFallbackMsg("");
+    setSearchError("");
+    setDetailStack([]);
+    setSelectedId(null);
+    setView("search");
+    replaceUrl({ tab: 0, parts: ["", "", ""], textQuery: "", charQuery: "", searchDepth: 1, studyScript, sources: [...sources], selectedId: null, view: "search" });
   }
 
   const TABS = [tt("tabParts"), tt("tabText"), tt("tabChar")];
@@ -283,17 +458,18 @@ export default function App() {
           <KanjiDetail
             kanjiId={selectedId}
             onSelectPart={selectKanji}
-            onBack={() => setSelectedId(null)}
+            onBack={goBackToSearch}
+            onHome={goHome}
             user={user}
             lang={uiLang}
             sources={activeSources}
           />
         ) : view === "create" ? (
-          <CreateKanji lang={uiLang} onDone={selectKanji} onBack={() => setView("search")} />
+          <CreateKanji lang={uiLang} onDone={selectKanji} onBack={goBackToSearch} onHome={goHome} />
         ) : view === "contributions" ? (
-          <MyContributions lang={uiLang} onSelectKanji={selectKanji} onBack={() => setView("search")} />
+          <MyContributions lang={uiLang} onSelectKanji={selectKanji} onBack={goBackToSearch} onHome={goHome} />
         ) : view === "about" ? (
-          <AboutPage lang={uiLang} onBack={() => setView("search")} />
+          <AboutPage lang={uiLang} onBack={goBackToSearch} onHome={goHome} />
         ) : (
           <>
             <div className="study-language">

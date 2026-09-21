@@ -45,21 +45,20 @@ textarea {
 
 /* Header */
 .app-header {
-  position: relative;
   text-align: center;
-  padding: 48px 0 32px;
+  padding: 18px 0 32px;
   border-bottom: 1px solid var(--border);
   margin-bottom: 32px;
 }
 
 /* Header controls (language toggle + auth) */
 .header-controls {
-  position: absolute;
-  top: 12px;
-  right: 0;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
   gap: 14px;
+  margin-bottom: 26px;
 }
 
 .lang-toggle {
@@ -574,29 +573,47 @@ textarea {
 }
 
 .back-btn {
-  /* Pinned to the actual left edge of the browser window, not just the left
-     edge of the centered .app column — on a wide viewport a plain in-flow
-     button here reads as floating near screen-center, since the whole
-     content column it sits in is itself horizontally centered. Fixed
-     positioning also means it stays reachable while scrolled down a long
-     detail page. */
+  background: #ffd166;
+  border: 1px solid #ffe3a2;
+  color: #312300;
+}
+
+.view-navigation {
   position: fixed;
   top: 20px;
   left: 20px;
   z-index: 10;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  color: var(--text-muted);
+  display: flex;
+  gap: 8px;
+}
+
+.back-btn,
+.home-btn {
   border-radius: 6px;
   padding: 7px 14px;
   font-size: 0.85rem;
+  font-weight: 700;
   cursor: pointer;
-  transition: color 0.15s, border-color 0.15s;
+  transition: background 0.15s, transform 0.15s;
+}
+
+.home-btn {
+  background: #58d68d;
+  border: 1px solid #9af0bd;
+  color: #082a17;
+}
+
+.back-btn:hover,
+.home-btn:hover {
+  transform: translateY(-1px);
 }
 
 .back-btn:hover {
-  color: var(--text);
-  border-color: var(--accent);
+  background: #ffe09a;
+}
+
+.home-btn:hover {
+  background: #85e9ab;
 }
 
 .detail-header {
@@ -1071,22 +1088,13 @@ textarea {
   }
 
   .app-header {
-    display: flex;
-    flex-direction: column;
     padding-top: 20px;
   }
 
   .header-controls {
-    position: static;
-    order: 2;
     justify-content: center;
-    flex-wrap: wrap;
-    margin-top: 18px;
+    margin-bottom: 18px;
     gap: 8px;
-  }
-
-  .subtitle {
-    order: 1;
   }
 
   .search-panel,
@@ -1098,8 +1106,13 @@ textarea {
     gap: 16px;
   }
 
-  .back-btn {
+  .view-navigation {
     position: static;
+    margin-bottom: 18px;
+  }
+
+  .back-btn,
+  .home-btn {
     margin-bottom: 18px;
   }
 

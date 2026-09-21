@@ -4,6 +4,7 @@ import { displayChar } from "../utils";
 import { t } from "../i18n";
 import AutocompleteInput from "./AutocompleteInput";
 import Glyph from "./Glyph";
+import ViewNavigation from "./ViewNavigation";
 
 // DecompositionForm's parts field is a single comma-separated input ("water, fire,
 // tree") rather than one box per part, so autocomplete only makes sense against the
@@ -285,7 +286,7 @@ function DecompositionReview({ decompositionId, myReview, lang, onReviewed }) {
   );
 }
 
-export default function KanjiDetail({ kanjiId, onSelectPart, onBack, user, lang = "en", sources = null }) {
+export default function KanjiDetail({ kanjiId, onSelectPart, onBack, onHome, user, lang = "en", sources = null }) {
   const [kanji, setKanji] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -354,7 +355,7 @@ export default function KanjiDetail({ kanjiId, onSelectPart, onBack, user, lang 
 
   return (
     <div className="detail-panel">
-      <button className="back-btn" onClick={onBack}>{t(lang, "backBtn")}</button>
+      <ViewNavigation lang={lang} onBack={onBack} onHome={onHome} />
 
       <div className="detail-header">
         <span className="detail-char">

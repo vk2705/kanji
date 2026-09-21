@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getMyContributions, setKanjiVisibility, setRowVisibility } from "../api";
 import { displayChar } from "../utils";
 import { t } from "../i18n";
+import ViewNavigation from "./ViewNavigation";
 
 function VisibilityToggle({ visibility, onToggle, lang, busy, error }) {
   const isPublic = visibility === "public";
@@ -20,7 +21,7 @@ function VisibilityToggle({ visibility, onToggle, lang, busy, error }) {
   );
 }
 
-export default function MyContributions({ lang, onSelectKanji, onBack }) {
+export default function MyContributions({ lang, onSelectKanji, onBack, onHome }) {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [rowState, setRowState] = useState({}); // key -> { busy, error }
@@ -60,7 +61,7 @@ export default function MyContributions({ lang, onSelectKanji, onBack }) {
   if (error) {
     return (
       <div className="form-view">
-        {onBack && <button className="back-btn" onClick={onBack}>{t(lang, "backBtn")}</button>}
+        <ViewNavigation onBack={onBack} onHome={onHome} lang={lang} />
         <div className="status error">{t(lang, "errorPrefix", error)}</div>
       </div>
     );
@@ -76,7 +77,7 @@ export default function MyContributions({ lang, onSelectKanji, onBack }) {
 
   return (
     <div className="form-view">
-      {onBack && <button className="back-btn" onClick={onBack}>{t(lang, "backBtn")}</button>}
+      <ViewNavigation onBack={onBack} onHome={onHome} lang={lang} />
       <h2>{t(lang, "myContributionsHeading")}</h2>
 
       {isEmpty && <p className="login-hint">{t(lang, "noContributions")}</p>}

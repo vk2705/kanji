@@ -2,10 +2,11 @@ import { useState } from "react";
 import { createKanji } from "../api";
 import { t } from "../i18n";
 import { ImageUpload, DecompositionForm } from "./KanjiDetail";
+import ViewNavigation from "./ViewNavigation";
 
 const SCRIPTS = ["ja-kanji", "zh-Hans", "zh-Hant", "zh-Hani"];
 
-export default function CreateKanji({ lang, onDone, onBack }) {
+export default function CreateKanji({ lang, onDone, onBack, onHome }) {
   const [keyword, setKeyword] = useState("");
   const [character, setCharacter] = useState("");
   const [script, setScript] = useState("ja-kanji");
@@ -37,7 +38,7 @@ export default function CreateKanji({ lang, onDone, onBack }) {
   if (created) {
     return (
       <div className="form-view">
-        {onBack && <button className="back-btn" onClick={onBack}>{t(lang, "backBtn")}</button>}
+        <ViewNavigation onBack={onBack} onHome={onHome} lang={lang} />
         <h2>{t(lang, "createKanjiHeading")}</h2>
         <p className="login-hint">{t(lang, "createdKanjiNote")}</p>
 
@@ -62,7 +63,7 @@ export default function CreateKanji({ lang, onDone, onBack }) {
 
   return (
     <div className="form-view">
-      {onBack && <button className="back-btn" onClick={onBack}>{t(lang, "backBtn")}</button>}
+      <ViewNavigation onBack={onBack} onHome={onHome} lang={lang} />
       <h2>{t(lang, "createKanjiHeading")}</h2>
       <form className="story-form" onSubmit={handleSubmit}>
         <input

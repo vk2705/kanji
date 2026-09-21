@@ -114,6 +114,50 @@ def test_script_filter_excludes_other_scripts(conn, client):
     assert ids == {"k_ja"}, f"script=ja-kanji should exclude k_zh, got {ids}"
 
 
+def test_script_filter_scopes_recursive_part_search(conn, client):
+    """A Japanese result must not be reached through a Chinese-only intermediate.
+
+    Without script scoping at every BFS layer, searching for mouth finds the Chinese
+    bridge first, then follows its alias to the Japanese target at depth two.
+    """
+    _seed_kanji(conn, "k_ja_target", "飯", "ja-target", script="ja-kanji")
+    _seed_kanji(conn, "k_zh_bridge", "吃", "zh-bridge", script="zh-Hans")
+    _seed_decomposition(conn, "k_ja_target", 1, ["shared-bridge"])
+    _seed_decomposition(conn, "k_zh_bridge", 1, ["mouth"])
+    _seed_alias(conn, "k_ja_target", "ja-target")
+    _seed_alias(conn, "k_zh_bridge", "shared-bridge")
+    conn.commit()
+
+    r = client.post(
+        "/search/parts",
+        json={"parts": ["ja-target", "mouth"], "script": "ja-kanji", "depth": 2},
+    )
+    assert r.status_code == 200, r.text
+    assert r.json()["results"] == []
+
+
+def test_recursive_search_does_not_chain_through_ambiguous_keyword(conn, client):
+    """A nested kanji's keyword must not stand in for a distinct primitive.
+
+    喰 is decomposed with mouth and shares the alias ``eat`` with 食. Reaching 飯
+    (which contains 食) through that shared word would be a semantic hop, not a
+    decomposition hop.
+    """
+    _seed_kanji(conn, "k_food", "食", "food")
+    _seed_kanji(conn, "k_mouth_eat", "喰", "mouth-eat")
+    _seed_kanji(conn, "k_meal", "飯", "meal")
+    _seed_decomposition(conn, "k_mouth_eat", 1, ["mouth"])
+    _seed_decomposition(conn, "k_meal", 1, ["eat"])
+    _seed_alias(conn, "k_food", "eat")
+    _seed_alias(conn, "k_mouth_eat", "eat")
+    _seed_alias(conn, "k_meal", "meal")
+    conn.commit()
+
+    r = client.post("/search/parts", json={"parts": ["meal", "mouth"], "depth": 2})
+    assert r.status_code == 200, r.text
+    assert r.json()["results"] == []
+
+
 def test_invalid_script_rejected(client):
     r = client.post("/search/parts", json={"parts": ["x"], "script": "not-a-real-script"})
     assert r.status_code == 400, r.text
