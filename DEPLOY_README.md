@@ -186,7 +186,7 @@ removes the identity information needed to reconstruct real accounts, and it exc
 credentials, sessions, and upload files. Restore production from the encrypted raw
 database/upload backups described above.
 
-## SEO / getting Google to find the site (added 2026-09-01, owner request; updated 2026-09-20 for the prod VM move)
+## SEO / getting Google to find the site (added 2026-09-01, owner request; updated 2026-09-21 for per-kanji pages)
 
 The frontend build ships `robots.txt` and `sitemap.xml` automatically
 (`frontend/public/robots.txt` / `sitemap.xml`, copied to `dist/` by the
@@ -201,6 +201,14 @@ and `.../sitemap.xml` — with no path-prefix rewriting and no other project's
 config to coordinate with. That resolves what used to be the hard part of
 this section on the old shared srv.alteon.help box (a domain-root
 `robots.txt` that repo's nginx config didn't own); it's a non-issue now.
+
+Every frontend build now runs `backend/generate_seo_pages.py` first. It writes a
+static, crawlable page for every public kanji/hanzi to `/kanji/{id}.html`, including
+its public decomposition, and regenerates the sitemap with those canonical URLs.
+For example, `https://kanji.alteon.help/kanji/rtk207.html` is the crawlable page for
+the RTK "tree" entry. The output is generated from the live database and deliberately
+is not committed. Rebuild the frontend after any public decomposition change to update
+Google's crawl surface.
 
 That covers everything reachable from *this* repo. Two more steps need
 someone with server access and/or the owner's Google account — none of them
