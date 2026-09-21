@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "generate:seo": "../backend/venv/bin/python3 ../backend/generate_seo_pages.py",
+    "generate:seo": "python3 ../backend/generate_seo_pages.py",
     "dev": "npm run generate:seo && vite",
     "build:dev": "npm run generate:seo && vite build --base=/kanji/",
     "build:prod": "npm run generate:seo && vite build --base=/",
