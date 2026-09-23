@@ -14824,3 +14824,49 @@ using a *combining form* of the glyph, not the glyph, and the source was right.
 One genuine defect remains (穴, chunk 47). The rule that came out of it: before
 concluding heisig-kanjis.csv is wrong about a family, check which form of the
 glyph the hosts actually contain.
+
+## 2026-09-23 — `audit_missing_children.py`
+
+The prospector chunk 58 built in a scratchpad is now a script in `backend/`
+alongside the other detectors, at the owner's request.
+
+It is `audit_phantom_parts.py`'s mirror image: that one finds parts we list that
+are not in the kanji, this one finds parts in the kanji that we do not list. The
+reason it earns its own file rather than staying a report-reading habit is the
+`via` column. `audit_csv_regressions.py` reports the symptom on every **host**,
+and a host is almost never where the fix goes — 欺 棋 旗 期 碁 基 all dropped
+"animal legs; eight" and all six were fine; the row that needed the 八 was 其.
+Working that out meant reading six near-identical blocks and finding what they
+had in common, once per family, which is most of what chunks 43–61 spent their
+time on. The script does it:
+
+```
+     6 host(s)  add 八  to 其 prim-bushel-basket    e.g. 基 旗 期 棋
+     5 host(s)  add 㐄 口  to 韋 kangxi178          e.g. 偉 緯 衛 違
+     4 host(s)  add 亠 八 六 𠀎 𧘇  to 㐮 prim-grass-skirt   e.g. 壌 嬢 譲 醸
+```
+
+Two design points worth recording, both learned the hard way in this run:
+
+* **Nothing is reported unless cjkvi-ids and the CSV agree** — cjkvi has to put
+  the shape inside the host *and* Heisig has to name it there. That is what
+  separates it from the chunk-54 adjacency prospector, which guessed a home for
+  a dropped name from its neighbours and was wrong about as often as right. One
+  source cannot corroborate itself. It also means the deliberately atomic rows
+  need no carve-out: 言 心 虫 車 酉 are atomic in cjkvi-ids too, so it never
+  offers their children and their ~230 hosts never appear.
+* **Its reachability check counts every system decomposition, labelled
+  alternates included.** Not an accident — `audit_csv_regressions.py` does the
+  same, and if the two disagreed about what "dropped" means they would disagree
+  about what is even a finding. 足 is the case in point after chunk 59: primary
+  口 + 龰, alternate 口 + 止, and the ten hosts that reach "stop" through the
+  alternate must not be reported.
+
+It reports only, like its siblings, and every hit still has to be rendered
+before `data.txt` is touched — cjkvi-ids is coarser than Heisig in places and
+wrong in others, and 敝's left half alone has three cjkvi spellings that
+disagree with each other.
+
+**Current state: 88 findings across 56 kanji — 18 shared rows to edit (33
+hosts) and 23 host rows.** That is the worklist for the next passes, already
+sorted by how many kanji each fix buys.
