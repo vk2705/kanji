@@ -14569,3 +14569,31 @@ self-references 0, primary-choice 0 in both modes, phantom unchanged at 28 (the
 new row clears on the Heisig channel, since its name is in every host's CSV
 row), anachronistic 1, frontend lint + both builds clean. No pin moved.
 **`audit_csv_regressions` 319 → 306.**
+
+## 2026-09-23 — chunk 56: 賁, 申's own name, four rows that lost their blade
+
+* **賁 (pitchfork) = 卉 + 貝.** cjkvi gives `⿱卉貝`, Heisig reads 噴 墳 憤 as
+  "pitchfork; haystack; ten; needle; shellfish; clam; oyster; eye; animal legs;
+  eight", and the render is 卉 sitting on 貝. Atomic until now, so those three
+  dropped eight concepts each.
+* **申 gains "monkey"**, its own primitive name — its CSV row is "monkey; sun;
+  day; stick" and all six hosts of the name (伸 神 捜 紳 痩) contain it. "Sun"
+  and "day" stay dropped **on purpose**: session 2026-08-30 settled that 申 甲 由
+  are 田 plus one stroke and removed the erroneous 日, and that pin still stands.
+  Adding the alias does not reopen it.
+* **刑 罰 刷 劇 all contain 刂 and none of them said so.** cjkvi is unambiguous —
+  `⿰开刂`, `⿱罒⿰言刂`, `⿰𡰯刂`, `⿰豦刂` — Heisig names "sword; sabre; saber" in
+  every one, and the render shows the two-stroke blade on the right of all four.
+  Written 刀 per this file's existing decision about 刂. 刑 also lost a bogus ノ
+  and 二 in the process: cjkvi's left half is 开 = `⿱一廾`, which is the 廾 and
+  the bar the row now carries, and nothing else.
+
+Four more sword hosts were looked at and left: 成 城 誠 (the stroke inside 戊 —
+Heisig calls it a sword, the glyph is a hook), 班 帰 赤 (cjkvi writes the piece
+in question as a bare stroke-count placeholder in all three, so only the Heisig
+channel speaks and the shape is not a blade). Those need their own pass.
+
+Verified: 1327 checks exit 0, 74 pytest, over-flattening 0, dead tokens 0,
+self-references 0, primary-choice 0 in both modes, phantom unchanged at 28,
+anachronistic 1, frontend lint + both builds clean. No pin moved.
+**`audit_csv_regressions` 306 → 297.**

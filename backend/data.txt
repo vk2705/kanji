@@ -782,7 +782,7 @@ rtk730:戒:commandment:廾,戈
 rtk731:弄:play with:王,廾
 rtk732:械:contraption:戒,木
 rtk733:鼻:nose:自,田,廾
-rtk734:刑:punish:廾,ノ,二,一
+rtk734:刑:punish:廾,一,刀
 rtk735:型:mould:土,刑
 rtk736:才:genius,genie:
 rtk737:財:property:才,貝
@@ -944,7 +944,7 @@ rtk892:慢:ridicule:曼,忄
 rtk893:漫:cartoon:水,曼
 rtk894:買:buy:罒,貝
 rtk895:置:placement:直,罒
-rtk896:罰:penalty:罒,言
+rtk896:罰:penalty:罒,言,刀
 rtk897:寧:rather:宀,心,罒,丁
 rtk898:濁:voiced:水,罒,勹,虫
 rtk899:環:ring:王,睘
@@ -1198,7 +1198,7 @@ rtk1146:層:stratum:曽,尸
 rtk1147:局:bureau:口,尸;口,尸,𠃌
 rtk1148:遅:slow:辶,羊,尸
 rtk1149:漏:leak:雨,水,尸
-rtk1150:刷:printing:巾,尸
+rtk1150:刷:printing:尸,巾,刀
 rtk1151:尺:shaku,shaku-hachi:尸,丶
 rtk1152:尽:exhaust:尺,丶
 rtk1153:沢:swamp:尺,水
@@ -1246,7 +1246,7 @@ rtk1194:甲:armor,armour,roots:田,｜
 rtk1195:押:push:扌,甲;｜,日,扌,田
 rtk1196:岬:headland:山,甲
 rtk1197:挿:insert:扌,千,日
-rtk1198:申:have the honor to:田,｜
+rtk1198:申:have the honor to,monkey:田,｜
 rtk1199:伸:expand:亻,申
 rtk1200:神:gods:礻,申
 rtk1201:捜:search:日,又,扌,申
@@ -2208,7 +2208,7 @@ rtk2148:虚:void:业,虍
 rtk2149:戯:frolic:戈,虚
 rtk2150:虞:fear:呉,卜,匕,厂,虍;呉,虍
 rtk2151:慮:prudence:思,卜,匕,厂,虍;思,虍
-rtk2152:劇:drama:卜,匕,厂,虍,豕
+rtk2152:劇:drama:卜,匕,厂,虍,豕,刀
 rtk2153:虐:tyrannize:一,匚,虍
 rtk2154:鹿:deer:广,prim-antlers,比
 rtk2155:麓:foot of a mountain:林,鹿
@@ -3304,7 +3304,7 @@ prim-infant:𠫓:infant,toddler:亠,厶
 prim-gully:㕣:gully:八,口
 prim-mailbox:夗:mailbox:㔾,夕
 prim-triceps:劦:triceps:
-prim-pitchfork:賁:pitchfork:
+prim-pitchfork:賁:pitchfork:卉,貝
 prim-feather-duster:帚:feather duster:⺕,冖,巾
 prim-french-maid:𠬶:french maid,tickle:⺕,冖,又
 # Sixth batch, 2026-09-12 — driven by demand rather than frequency: each of these
@@ -4485,3 +4485,20 @@ prim-mirrored-spoon:?:mirrored spoon
 # is not lost there, and rewriting a kanji's own decomposition to contain an
 # abbreviation of itself buys nothing.
 prim-tall:?:tall:亠,口
+
+# --- 2026-09-23 (chunk 56): 賁, 申's own name, and four rows that had simply
+# lost their blade.
+# 賁 (pitchfork) = 卉 + 貝. cjkvi gives ⿱卉貝, Heisig reads 噴 墳 憤 as
+# "pitchfork; haystack; ten; needle; shellfish; clam; oyster; eye; animal legs;
+# eight", and the render is 卉 sitting on 貝. Atomic until now, so those three
+# dropped eight concepts each.
+# 申 gains "monkey", its own primitive name -- its CSV row is "monkey; sun; day;
+# stick" and all six hosts of the name (伸 神 捜 紳 痩) contain it. "sun"/"day"
+# stay dropped on purpose: session 2026-08-30 settled that 申 甲 由 are 田 plus
+# one stroke and dropped the erroneous 日, and that pin still stands.
+# 刑 罰 刷 劇 all contain 刂 and none of them said so. cjkvi is unambiguous --
+# ⿰开刂, ⿱罒⿰言刂, ⿰𡰯刂, ⿰豦刂 -- Heisig names "sword; sabre; saber" in every
+# one, and the render shows the two-stroke blade on the right of all four.
+# Written 刀 per this file's existing decision about 刂. 刑 also lost its bogus
+# ノ and 二 in the process: cjkvi's left half is 开 = ⿱一廾, which is the 廾 and
+# the bar the row now carries, and nothing else.
