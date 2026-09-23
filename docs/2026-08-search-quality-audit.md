@@ -14155,3 +14155,50 @@ unreachable.
 Verified: 1325 checks exit 0, 67 pytest, over-flattening 0, dead tokens 0,
 self-references 0, primary-choice 0 in both modes, frontend lint + both builds
 clean. No pin moved. **`audit_csv_regressions` 537 → 502.**
+
+## 2026-09-23 — chunk 43: "cocoon" was on the wrong glyph
+
+Nineteen CSV rows name **cocoon** — 幼 後 幽 幾 機 畿 玄 畜 蓄 弦 擁 滋 慈 磁 率
+郷 響 幻 舷. Every one of them contains 幺, and not one of them contains 厶. Yet
+`kangxi28` (厶) carried the alias and `kangxi52` (幺) did not, so all nineteen
+recorded a dropped concept and a user searching "cocoon" was answered with an
+unrelated wedge.
+
+Rendered 幺 and 厶 side by side against 幼 玄 郷 幻 before touching anything: 幺 is
+the small stroke over a double loop that is visibly the left of 幼/郷/幻 and the
+bottom of 玄; 厶 is a two-stroke open wedge present in none of them. 厶's own
+name is **"elbow"** — 広 雄 台 去 私 弘 参 能 all say so — plus "wall", which
+Heisig emits adjacent to it in 転 芸 雲 会 伝 魂. Both of those stay; only the
+hijacked "cocoon" leaves. 幺's existing "tiny" and "short thread" are
+descriptive non-Heisig names and stay as aliases behind the real one.
+
+### What this unmasked, and why the number went *up*
+
+`audit_phantom_parts.py --hide-blind` went 24 → 28. That is not a regression,
+and the reason is worth writing down, because it is a property of the tool that
+will keep showing up.
+
+`claimants()` deliberately counts *every* row answering to a name, not
+`resolve_alias`'s single pick — the right rule for evidence. But a primitive's
+name is routinely also some frame's keyword, and the closure the phantom check
+builds then swallows that whole unrelated kanji. While 厶 answered to "cocoon",
+繭 (the kanji "cocoon", frame 2025) joined the closure of **every 厶 host** —
+and 繭's own pieces with it. That spurious evidence was accounting for four real
+findings: 斎/斉, 毅/豕, 疏/止, 疏/川. Removing the bad alias removed the bad
+evidence, and they surfaced.
+
+The same mechanism has simply changed hands rather than gone away: 厶's hosts now
+drag in 肘 ("elbow", frame 46) instead, and 幺's hosts drag in 繭. Diffing the
+closure before and after is what showed this — 44 hosts changed, all of them
+exactly `lost: 繭 / gained: 肘` or `gained: 繭`. Nothing about the check needs
+fixing; it is doing what its docstring says. Worth knowing that its count moves
+for reasons that are about *names* and not about *parts*, so a rise is not
+automatically something this chunk broke.
+
+The four newly-visible findings are left for a later chunk — 毅 and 疏 have empty
+CSV component rows, so only the structural channel speaks on them.
+
+Verified: 1325 checks exit 0, 74 pytest, over-flattening 0, dead tokens 0,
+self-references 0, anachronistic 1 (the known "question mark"), frontend lint +
+both builds clean. No pin moved. **`audit_csv_regressions` 502 → 489**;
+phantom 24 → 28 (unmasked, see above).

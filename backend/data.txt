@@ -3115,9 +3115,9 @@ kangxi192:鬯:sacrificial wine
 kangxi205:黽:frog,toad
 prim-mugwort:艹:mugwort,flowers,cabbage
 prim-thirty:丗:thirty,buckle,apron
-kangxi52:幺:tiny,short thread
+kangxi52:幺:cocoon,tiny,short thread
 kangxi40:宀:roof,primitive_roof,mansion,house
-kangxi28:厶:cocoon,elbow,wall
+kangxi28:厶:elbow,wall
 
 # Remaining Finding-1 single-glyph terms (session 4, 2026-08-14). Two groups:
 # - rad1043-1046: KRADFILE JIS-substitute glyphs, same mechanism as the 5 proxies
@@ -4270,3 +4270,16 @@ prim-mirrored-spoon:?:mirrored spoon
 # hood; old; ..." -- 啇(antique) then 立 + 冂 + 古, which is what the row says
 # now. His 立 absorbs the bar the 冂 below it supplies; that is his reading, not
 # a stroke count.
+
+# --- 2026-09-23 (chunk 43): "cocoon" was on the wrong row. All 19 CSV rows
+# that name it (幼 後 幽 幾 機 畿 玄 畜 蓄 弦 擁 滋 慈 磁 率 郷 響 幻 舷) contain
+# 幺 and not one of them contains 厶 -- yet 厶 carried the alias and 幺 did not,
+# so every one of those 19 recorded a dropped concept while a search for
+# "cocoon" answered with an unrelated wedge. Rendered 幺 and 厶 side by side
+# against 幼 玄 郷 幻: 幺 is the small stroke over a double loop that is visibly
+# the left of 幼/郷/幻 and the bottom of 玄; 厶 is a two-stroke open wedge that
+# appears in none of them. 厶's own name is "elbow" (広 雄 台 去 私 弘 参 能 all
+# say so) plus "wall", which Heisig emits adjacent to it in 転 芸 雲 会 伝 魂 --
+# both of those stay, only the hijacked "cocoon" leaves. 幺's existing "tiny"
+# and "short thread" are descriptive non-Heisig names and stay as aliases
+# behind the real one.
