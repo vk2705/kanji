@@ -4,9 +4,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this project is
 
-A web app for learners using **Remembering the Kanji (RTK)** by James W. Heisig. The method assigns each kanji a set of named visual "primitives" (building blocks) and a mnemonic story. This app lets you search kanji by those primitive names — e.g. type "sun" + "moon" to find 明 (bright).
+A **search tool for Japanese kanji and Chinese hanzi that works by shape**: every character is broken down into named building blocks, so a user can find one without knowing how to read it — type "sun" + "moon" to get 明 (bright), or look a character up by glyph or by an English/Russian keyword.
 
-It's grown beyond a personal RTK lookup tool into a community-editable reference: registered users can add their own kanji/hanzi, decompositions, aliases, and mnemonic stories (public or private), and the database also covers Chinese hanzi (simplified + traditional) alongside Japanese kanji. The UI supports English/Russian and a Japanese/Chinese (Simplified/Traditional) study-language filter.
+It began as a companion to **Remembering the Kanji (RTK)** by James W. Heisig and still serves that use well, but it is no longer scoped to that book or to Japanese. Registered users can add their own kanji/hanzi, decompositions, aliases, and mnemonic stories (public or private); the database covers Chinese hanzi (simplified + traditional) alongside ~3,000 Japanese kanji; and much of the decomposition data now comes from open structural sources (cjkvi-ids) rather than from any one method. The UI supports English/Russian and a Japanese/Chinese (Simplified/Traditional) study-language filter.
+
+**Data provenance matters here and is documented** — see `docs/DATA_SOURCES.md`. Most of the database is open data (kanjidic2, KRADFILE, Unihan, cjkvi-ids, `CJKRadicals.txt`) or this project's own work; the frame numbers, frame keywords and primitive names that come from Heisig's copyrighted book are enumerable in one command (`backend/provenance_report.py --list-heisig`). The book's mnemonic **stories** are deliberately not stored. Attribution for all of the above is on the About page and in the footer of every generated SEO page. When adding data, record where it came from; **never** attribute data to a source it did not come from.
 
 ## Stack
 
@@ -76,6 +78,7 @@ cd android
 ./venv/bin/python3 suggest_heisig_aliases.py --all  # Heisig component names that resolve to nothing here, and which row each belongs on
 ./venv/bin/python3 audit_anachronistic_names.py     # component names that resolve to a kanji taught *after* their first host (see Decomposition audit tooling)
 ./venv/bin/python3 audit_missing_children.py --summary  # parts cjkvi-ids AND Heisig both put in a kanji that its row omits, grouped by the row to edit
+./venv/bin/python3 provenance_report.py --list-heisig   # which names came from which source; the exact Heisig-derived set (see docs/DATA_SOURCES.md)
 ```
 `import_hanzi.py` refuses to run if any non-`ja-kanji` rows already exist (not safe to resume mid-run). `offsite_backup.py` requires `rclone` and an operator-configured `KANJI_BACKUP_REMOTE`; credentials belong in rclone's external config, never this repo. `backup_db.py`/`offsite_backup.py` and `prune_page_views.py` are meant to run on schedules (see Deployment). Maintenance scripts have shebangs pointing straight at `venv/bin/python3`, so they can be run directly.
 

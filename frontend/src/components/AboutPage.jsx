@@ -5,6 +5,8 @@ const REPO_URL = "https://github.com/vk2705/kanji";
 const APK_URL = "https://github.com/vk2705/kanji/raw/master/android/releases/rtk-kanji-latest.apk";
 const PRIVACY_URL = "privacy.html";
 const CHANGELOG_URL = "https://github.com/vk2705/kanji/blob/master/CHANGELOG.md";
+const BOOK_URL = "https://uhpress.hawaii.edu/title/remembering-the-kanji-1/";
+const PROVENANCE_URL = "https://github.com/vk2705/kanji/blob/master/docs/DATA_SOURCES.md";
 
 export default function AboutPage({ lang, onBack, onHome }) {
   const whatsNewItems = t(lang, "aboutWhatsNewItems");
@@ -13,6 +15,19 @@ export default function AboutPage({ lang, onBack, onHome }) {
       <ViewNavigation onBack={onBack} onHome={onHome} lang={lang} />
       <h2>{t(lang, "aboutHeading")}</h2>
       <p className="about-intro">{t(lang, "aboutIntro")}</p>
+      <p className="about-intro">{t(lang, "aboutIntro2")}</p>
+
+      <div className="contrib-section">
+        <h3>{t(lang, "aboutCreditsHeading")}</h3>
+        <p className="login-hint">{t(lang, "aboutCreditsBook")}</p>
+        <a className="about-link" href={BOOK_URL} target="_blank" rel="noreferrer">
+          {t(lang, "aboutCreditsBookLinkLabel")}
+        </a>
+        <p className="login-hint">{t(lang, "aboutCreditsData")}</p>
+        <a className="about-link" href={PROVENANCE_URL} target="_blank" rel="noreferrer">
+          {t(lang, "aboutCreditsProvenanceLinkLabel")}
+        </a>
+      </div>
 
       <div className="contrib-section">
         <h3>{t(lang, "aboutWhatsNewHeading")}</h3>

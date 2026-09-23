@@ -18,6 +18,21 @@ from urllib.parse import quote
 
 
 SITE_URL = "https://kanji.alteon.help"
+
+# These pages are the project's crawlable public surface, so the credit that
+# lives on the About page has to be on them too rather than one click away —
+# a crawler and a first-time visitor both land here, not there. See
+# docs/DATA_SOURCES.md for the full provenance.
+ATTRIBUTION = """      <p>Frame numbers and many building-block names follow
+        <a href="https://uhpress.hawaii.edu/title/remembering-the-kanji-1/">Remembering the
+        Kanji</a> by James W. Heisig (University of Hawai&#39;i Press). This is an unofficial
+        study aid, not affiliated with or endorsed by the author or publisher, and it does not
+        reproduce the book&#39;s mnemonic stories.</p>
+      <p>Structural decompositions from cjkvi-ids; readings and character data from kanjidic2
+        and KRADFILE (EDRDG, CC BY-SA) and from the Unicode Consortium&#39;s Unihan database.
+        <a href="https://github.com/vk2705/kanji/blob/master/docs/DATA_SOURCES.md">Full data
+        provenance</a>.</p>
+"""
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_OUTPUT_DIR = ROOT / "frontend" / "public" / "kanji"
 DEFAULT_SITEMAP = ROOT / "frontend" / "public" / "sitemap.xml"
@@ -97,6 +112,8 @@ def render_page(entry: dict) -> str:
 {chr(10).join(decomposition_sections) if decomposition_sections else '      <p>No public decomposition is listed.</p>'}
       <p><a href="/?kanji={quote(entry['id'], safe='')}">Open the interactive kanji page</a></p>
     </main>
+    <footer>
+{ATTRIBUTION}    </footer>
   </body>
 </html>
 """
