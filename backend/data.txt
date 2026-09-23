@@ -1231,7 +1231,7 @@ rtk1179:禁:prohibition:林,示
 rtk1180:襟:collar:禁,衤
 rtk1181:宗:religion:示,宀
 rtk1182:崇:adore:山,宗
-rtk1183:祭:ritual:示,𠆢,癶
+rtk1183:祭:ritual:月,又,示
 rtk1184:察:guess:宀,祭
 rtk1185:擦:grate:察,扌
 rtk1186:由:wherefore:田,｜
@@ -3091,7 +3091,7 @@ kangxi60:彳:step,go,nelson,column,going,line
 kangxi31:囗:enclosure,pent in
 kangxi138:艮:stopping,retracing,silver
 kangxi59:彡:bristle,hair strands,shape
-kangxi79:殳:weapon,lance,cruise missile,missile
+kangxi79:殳:weapon,lance,cruise missile,missile:几,又
 kangxi22:匚:box,receptacle
 kangxi152:豕:pig,sow
 kangxi78:歹:death,bad,bones:一,夕
@@ -4312,3 +4312,18 @@ prim-mirrored-spoon:?:mirrored spoon
 # full 示 rather than the left-side form recorded a dropped concept. 礻 keeps
 # its copy -- this is Heisig naming one shape and its variant the same thing,
 # the same arrangement as 艮/皀 "silver".
+
+# --- 2026-09-23 (chunk 46): 殳 was atomic, 祭 was wrong.
+# 殳 (weapon / cruise missile) = 几 + 又. cjkvi's J/K reading is ⿱几又 exactly,
+# Heisig reads 投 没 股 設 役 穀 and the rest as "...; cruise missile; missile;
+# wind; crotch", and the render shows the hooked 几 on top of a plain 又. It
+# had no parts field at all, so every one of those hosts dropped both "wind"
+# and "crotch".
+# 祭 (ritual) was 示,𠆢,癶 -- neither 𠆢 nor 癶 is in the glyph. 癶 is a
+# believable mistake (both are two strokes splayed over something) and a wrong
+# one: rendered side by side, 癶 is two bare outward strokes while 祭's top left
+# carries the two short interior dashes of the 月/flesh abbreviation, and its
+# top right is a 又. Heisig reads it "moon; month; flesh; part of the body;
+# crotch; altar; show; two; small" -- 月 + 又 + 示, which is what the row says
+# now. cjkvi spells the top as ⿰⿴𠂊冫② , all placeholders, so the structural
+# channel is blind here and the render plus the CSV are the evidence.

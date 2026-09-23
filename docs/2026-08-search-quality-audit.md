@@ -14252,3 +14252,28 @@ Verified: 1325 checks exit 0, 74 pytest, over-flattening 0, dead tokens 0,
 self-references 0, primary-choice 0 in both modes, phantom unchanged at 28,
 anachronistic 1 (the known "question mark"), frontend lint + both builds clean.
 One pin moved. **`audit_csv_regressions` 475 → 443.**
+
+## 2026-09-23 — chunk 46: 殳 was atomic, 祭 was wrong
+
+* **殳 (weapon / cruise missile) = 几 + 又.** cjkvi's J/K reading is `⿱几又`
+  exactly, Heisig reads 投 没 股 設 役 穀 and the rest as "…; cruise missile;
+  missile; wind; crotch", and the render shows the hooked 几 sitting on a plain
+  又. The row had no parts field at all, so every one of those hosts dropped
+  both "wind" and "crotch" at once — two of the top dropped concepts coming from
+  a single missing line.
+* **祭 (ritual) was `示,𠆢,癶`** — neither 𠆢 nor 癶 is in the glyph. 癶 is a
+  believable mistake, which is why it needed the render rather than an argument:
+  both are two strokes splayed over something, but 癶 is two bare outward
+  strokes, while 祭's top left carries the two short interior dashes of the
+  月/flesh abbreviation and its top right is a 又. Heisig reads it "moon; month;
+  flesh; part of the body; crotch; altar; show; two; small" — 月 + 又 + 示, which
+  is what the row says now, and it carries 察 擦 with it.
+
+cjkvi spells 祭's top as `⿰⿴𠂊冫②`, all placeholders, so the structural channel
+is blind on it and the render plus the CSV were the whole evidence — the case
+`audit_phantom_parts.py`'s split report exists to flag.
+
+Verified: 1325 checks exit 0, 74 pytest, over-flattening 0, dead tokens 0,
+self-references 0, primary-choice 0 in both modes, phantom unchanged at 28,
+anachronistic 1 (the known "question mark"), frontend lint + both builds clean.
+No pin moved. **`audit_csv_regressions` 443 → 426.**
