@@ -106,9 +106,26 @@ search engines indexing something confers no licence on it.
    Unicode and cjkvi-ids).
 2. **The Heisig-derived set is now enumerable** in one command, so a takedown
    would be a scripted edit.
-3. **The SEO pages are the open question.** Options, safest first: do not publish
-   them (the SPA works without them); publish them without the keyword in the
-   title and description; publish as now. This has not been decided.
+3. **The SEO pages keep the keyword off the search-result surface** (decided
+   2026-09-23, the middle of the three options that were on the table). The
+   `<title>`, `<meta description>` and `<h1>` of all 3,215 pages now carry the
+   character, its component **glyphs**, its stroke count and its readings —
+   cjkvi-ids, kanjidic2 and Unihan, all open — and no keyword and no component
+   names. `明 = 日 + 月 — components, readings, strokes` says as much to someone
+   scanning results as the keyword did, and is per-page distinctive rather than
+   boilerplate. The keyword stays in the page body, where it is what makes the
+   page worth reading; what changed is that Google can no longer serve it as the
+   answer without the visit. Each framed page also cites the book at its frame
+   number. A check over all 3,215 pages confirms no keyword or primitive name
+   appears in any title, description or `h1`.
+
+   Two traps that pass showed up and are worth keeping in mind for anything that
+   resolves a part term to a glyph: a term can be the glyph, its name, or a row
+   id, and the same part is usually stored twice (口 *and* "mouth"); and a name
+   is often claimed by several rows, so "lid" resolved to the kanji 蓋 and put a
+   component in 享's title that is not in the character. Ranking claimants —
+   primitives before framed kanji, earliest frame first — fixes it, which is the
+   same rule `audit_anachronistic_names.py` runs on.
 4. **A lawyer is worth an hour** before the site grows further or takes money.
    The question to ask: does the keyword index constitute a protected
    compilation, and does a searchable index plus static per-entry pages

@@ -23,8 +23,10 @@ SITE_URL = "https://kanji.alteon.help"
 # lives on the About page has to be on them too rather than one click away —
 # a crawler and a first-time visitor both land here, not there. See
 # docs/DATA_SOURCES.md for the full provenance.
-ATTRIBUTION = """      <p>Frame numbers and many building-block names follow
-        <a href="https://uhpress.hawaii.edu/title/remembering-the-kanji-1/">Remembering the
+BOOK_URL = "https://uhpress.hawaii.edu/title/remembering-the-kanji-1/"
+
+ATTRIBUTION = f"""      <p>Frame numbers and many building-block names follow
+        <a href="{BOOK_URL}">Remembering the
         Kanji</a> by James W. Heisig (University of Hawai&#39;i Press). This is an unofficial
         study aid, not affiliated with or endorsed by the author or publisher, and it does not
         reproduce the book&#39;s mnemonic stories.</p>
@@ -53,19 +55,50 @@ def part_label(part: dict) -> str:
 
 
 def render_page(entry: dict) -> str:
+    """One crawlable page.
+
+    The <title>, <meta description> and <h1> carry the character, its component
+    *glyphs*, its stroke count and its readings — structural and reading data
+    from cjkvi-ids, kanjidic2 and Unihan, all open. They deliberately do not
+    carry the keyword or the component names, which are the part of this
+    database that comes from Heisig's book (see docs/DATA_SOURCES.md). Those
+    stay in the body, where they are what makes the page worth reading, but
+    they are not served into a search result as the answer itself.
+    """
     character = display_character(entry["character"])
+    subject = character or entry["id"]
     keyword = entry["keyword"] or entry["id"]
-    title = f"{character} {keyword} kanji decomposition | RTK Kanji Search".strip()
-    decomposition_text = "; ".join(
-        " + ".join(part_label(part) for part in decomposition["parts_detail"])
-        for decomposition in entry["decompositions"]
-        if decomposition["parts_detail"]
-    )
-    description = f"{character} ({keyword}) decomposition: {decomposition_text or 'not listed'}."
+    components = " + ".join(entry.get("components") or [])
+    noun = "hanzi" if (entry.get("script") or "").startswith("zh") else "kanji"
+
+    headline = f"{subject} = {components}" if components else subject
+    title = f"{headline} — components, readings, strokes | RTK Kanji Search"
+
+    facts = []
+    if components:
+        facts.append(f"{subject} is written {components}")
+    if entry.get("stroke_count"):
+        strokes = entry["stroke_count"]
+        facts.append(f"{strokes} stroke" + ("" if strokes == 1 else "s"))
+    if entry.get("onyomi"):
+        facts.append(f"on'yomi {entry['onyomi']}")
+    if entry.get("kunyomi"):
+        facts.append(f"kun'yomi {entry['kunyomi']}")
+    if entry.get("pinyin"):
+        facts.append(f"pinyin {entry['pinyin']}")
+    description = (
+        ". ".join(facts) + ". " if facts else f"{subject}: a {noun} in this index. "
+    ) + "Look up kanji and hanzi by the shapes they are built from."
+
     alias_text = ", ".join(alias["alias"] for alias in entry["aliases"])
+    # The frame number and the keyword below it are the two things on this page
+    # that come from the book, so the frame cites it rather than just naming it.
+    frame_line = (
+        f'      <p>Frame {entry["frame"]} in <a href="{BOOK_URL}">Remembering the '
+        f"Kanji</a> by James W. Heisig.</p>\n"
+        if entry.get("frame") else ""
+    )
     metadata = []
-    if entry.get("frame"):
-        metadata.append(f"RTK frame {entry['frame']}")
     if entry.get("stroke_count"):
         metadata.append(f"{entry['stroke_count']} strokes")
     if entry.get("onyomi"):
@@ -104,8 +137,9 @@ def render_page(entry: dict) -> str:
   <body>
     <main>
       <p><a href="/">RTK Kanji Search</a></p>
-      <h1>{html.escape(f'{character} {keyword}'.strip())}</h1>
-      <p>Kanji ID: {html.escape(entry['id'])}</p>
+      <h1>{html.escape(headline)}</h1>
+      <p>Keyword: {html.escape(keyword)}</p>
+{frame_line}      <p>Kanji ID: {html.escape(entry['id'])}</p>
       {f'<p>{html.escape("; ".join(metadata))}</p>' if metadata else ''}
       {f'<p>Also known as: {html.escape(alias_text)}</p>' if alias_text else ''}
       <h2>Decomposition</h2>
@@ -117,6 +151,73 @@ def render_page(entry: dict) -> str:
   </body>
 </html>
 """
+
+
+def load_term_glyphs(conn: sqlite3.Connection) -> dict[str, str]:
+    """part_term -> the character it denotes, for every public row.
+
+    A `parts` row's term is sometimes the glyph, sometimes a name, sometimes an
+    id (`prim-tall`), and a decomposition usually stores the glyph *and* its
+    canonical name as two rows. All three forms have to resolve to the same
+    character so the caller can collapse them back to one component.
+    """
+    table: dict[str, str] = {}
+    for row in conn.execute(
+        "SELECT id, character FROM kanji WHERE visibility = 'public'"
+    ):
+        glyph = display_character(row["character"])
+        if not glyph:
+            continue
+        table[row["id"].lower()] = glyph
+        table[glyph.lower()] = glyph
+
+    # A name can be claimed by several rows, and picking the wrong one puts a
+    # component in the page that is not in the character: "lid" is 亠's name and
+    # also the keyword of the kanji 蓋, and the first draft of this rendered
+    # 享 as "亠 + 蓋 + 口 + 子". Rank the claimants — a row with no frame is a
+    # primitive and is what a decomposition means, and among real frames the
+    # earliest one wins, since Heisig introduces a shape at or before the frame
+    # that first needs it (the rule audit_anachronistic_names.py runs on).
+    candidates: dict[str, tuple] = {}
+    for row in conn.execute(
+        "SELECT a.alias, k.id, k.character, k.frame FROM aliases a "
+        "  JOIN kanji k ON k.id = a.kanji_id "
+        " WHERE k.visibility = 'public' AND a.visibility = 'public'"
+    ):
+        glyph = display_character(row["character"])
+        term = (row["alias"] or "").lower()
+        if not glyph or not term or term in table:
+            continue
+        rank = (1 if row["frame"] else 0, row["frame"] or 0, row["id"])
+        if term not in candidates or rank < candidates[term][0]:
+            candidates[term] = (rank, glyph)
+    for term, (_rank, glyph) in candidates.items():
+        table[term] = glyph
+    return table
+
+
+def component_glyphs(entry: dict, term_glyphs: dict[str, str]) -> list[str]:
+    """The component characters of the best-glyphed decomposition, in order.
+
+    Prefers a decomposition whose every part resolves to a real character:
+    享's own reading is prim-tall + 子, and "享 = 子" would be worse than
+    useless in a search result, while its cjkvi alternate 亠 + 口 + 子 is
+    complete. Returns [] when nothing resolves cleanly, and the page then says
+    nothing about components above the fold rather than something wrong.
+    """
+    for decomposition in entry["decompositions"]:
+        glyphs: list[str] = []
+        complete = True
+        for part in decomposition["parts_detail"]:
+            glyph = term_glyphs.get((part.get("keyword") or "").lower())
+            if not glyph:
+                complete = False
+                break
+            if glyph != entry.get("character") and glyph not in glyphs:
+                glyphs.append(glyph)
+        if complete and glyphs:
+            return glyphs
+    return []
 
 
 def write_sitemap(sitemap_path: Path, entries: list[dict]) -> None:
@@ -146,7 +247,8 @@ def generate(db_path: Path, output_dir: Path, sitemap_path: Path) -> int:
     conn.row_factory = sqlite3.Row
     try:
         entry_rows = conn.execute(
-            "SELECT id, character, keyword, frame, stroke_count, onyomi, kunyomi, pinyin "
+            "SELECT id, character, keyword, frame, stroke_count, onyomi, kunyomi, pinyin, "
+            "       script "
             "FROM kanji WHERE visibility = 'public' ORDER BY id"
         ).fetchall()
         entries = [
@@ -176,6 +278,9 @@ def generate(db_path: Path, output_dir: Path, sitemap_path: Path) -> int:
             entry = entries_by_id[row["kanji_id"]]
             if decomposition not in entry["decompositions"]:
                 entry["decompositions"].append(decomposition)
+        term_glyphs = load_term_glyphs(conn)
+        for entry in entries:
+            entry["components"] = component_glyphs(entry, term_glyphs)
         for entry in entries:
             (output_dir / f"{quote(entry['id'], safe='')}.html").write_text(
                 render_page(entry), encoding="utf-8"
