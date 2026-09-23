@@ -14202,3 +14202,26 @@ Verified: 1325 checks exit 0, 74 pytest, over-flattening 0, dead tokens 0,
 self-references 0, anachronistic 1 (the known "question mark"), frontend lint +
 both builds clean. No pin moved. **`audit_csv_regressions` 502 → 489**;
 phantom 24 → 28 (unmasked, see above).
+
+## 2026-09-23 — chunk 44: 歹 and 畐, two rows with no parts at all
+
+Both were atomic — no parts field — so every host that reached them stopped
+there. Between them that is three to five dropped concepts on each of ~30 kanji,
+and it is why "ceiling" sits so high in the dropped-concept counts: Heisig's name
+for a 一 sitting on top of something (with "floor" for one underneath), already
+on `rtk1` as an alias, unreachable because the 一 itself was not written down.
+
+* **歹 (bones) = 一 + 夕.** CSV reads 残 殉 殊 殖 列 裂 烈 死 as "bones; one;
+  ceiling; evening; …", and cjkvi gives `⿱一夕` exactly. Rendered: a bare
+  horizontal over a compressed 夕, which is what both sources say.
+* **畐 (wealth) = 一 + 口 + 田.** CSV reads 副 幅 福 as "wealth; one; ceiling;
+  mouth; rice field; brains"; cjkvi gives `⿱𠮛田` with 𠮛 = `⿱一口`. Rendered:
+  three stacked pieces, no ambiguity. Written as the three, not as 𠮛 + 田 —
+  Heisig names all three separately and never names 𠮛, so introducing a row for
+  it would put an unnamed intermediate between every host and the concepts the
+  CSV is asking for.
+
+Verified: 1325 checks exit 0, 74 pytest, over-flattening 0, dead tokens 0,
+self-references 0, primary-choice 0 in both modes, phantom unchanged at 28,
+anachronistic 1 (the known "question mark"), frontend lint + both builds clean.
+No pin moved. **`audit_csv_regressions` 489 → 475.**

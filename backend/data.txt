@@ -3094,7 +3094,7 @@ kangxi59:彡:bristle,hair strands,shape
 kangxi79:殳:weapon,lance,cruise missile,missile
 kangxi22:匚:box,receptacle
 kangxi152:豕:pig,sow
-kangxi78:歹:death,bad,bones
+kangxi78:歹:death,bad,bones:一,夕
 kangxi56:弋:stake,shoot,arrow
 kangxi54:廴:long stride,stretch
 kangxi141:虍:tiger
@@ -3164,7 +3164,7 @@ prim-meeting:亼:meeting:𠆢,一
 prim-antlers:?:antlers
 prim-fishfinger:扁:fishfinger:戸,𠕁
 prim-muzzle:咅:muzzle
-prim-wealth:畐:wealth
+prim-wealth:畐:wealth:一,口,田
 prim-half-turtle:丬:turtle
 prim-owl:𭕄:owl crown,owl-head,owl
 prim-parade:戊:parade
@@ -4283,3 +4283,16 @@ prim-mirrored-spoon:?:mirrored spoon
 # both of those stay, only the hijacked "cocoon" leaves. 幺's existing "tiny"
 # and "short thread" are descriptive non-Heisig names and stay as aliases
 # behind the real one.
+
+# --- 2026-09-23 (chunk 44): two atomic compounds whose pieces Heisig spells
+# out. Both were rows with no parts field at all, so every host that reached
+# them stopped there and recorded three to five dropped concepts.
+# 歹 (bones) -- CSV reads 残 殉 殊 殖 列 裂 烈 死 as "bones; one; ceiling;
+# evening; ..." and cjkvi gives ⿱一夕 exactly. Rendered: a bare horizontal over
+# a compressed 夕, which is what both sources say. "Ceiling" is Heisig's name
+# for a 一 sitting on top of something (and "floor" for one underneath); rtk1
+# already carries both aliases, so the concept only needed the part to exist.
+# 畐 (wealth) -- CSV reads 副 幅 福 as "wealth; one; ceiling; mouth; rice field;
+# brains", cjkvi gives ⿱𠮛田 with 𠮛 = ⿱一口. Rendered: 一 over 口 over 田,
+# three stacked pieces, no ambiguity. Spelled 一,口,田 rather than 𠮛,田 --
+# Heisig names all three separately and never names 𠮛.
