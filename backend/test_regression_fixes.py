@@ -3160,6 +3160,17 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"rtk518", "rtk639"}},
     "rtk811": {"character": "窓", "keyword": "window",
                "expected_part_ids": {"kangxi28", "rtk1413", "rtk639"}},
+    # 2026-09-23 (chunk 47): pinned to stop a *wrong* fix, not to record a
+    # right one. audit_csv_regressions reports "human legs" dropped on all 14
+    # hosts of 穴 (空 突 究 窒 窃 窟 窪 搾 窯 窮 探 深 窓 控), because the CSV
+    # expands 穴 inside a host as "house; human legs". The CSV's own row for
+    # 穴 says "house; EIGHT", and rendered, 穴's bottom is 八 -- 丿 then 乀,
+    # the same pair as 六's bottom -- not 儿, whose right stroke rises into a
+    # hook. Fourteen host rows disagree with one self row and with the glyph;
+    # the glyph wins. Inserting 儿 here would plant a phantom part in fourteen
+    # kanji to quiet a defect in the baseline.
+    "rtk1413": {"character": "穴", "keyword": "hole",
+                "expected_part_ids": {"kangxi40", "rtk8"}},
     "rtk853": {"character": "容", "keyword": "contain",
                "expected_part_ids": {"kangxi40", "rtk851"}},
     # 2026-09-17: 尚(rtk196) replaced with prim-outhouse(𫩠) on these 6 --

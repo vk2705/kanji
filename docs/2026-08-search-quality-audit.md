@@ -14277,3 +14277,36 @@ Verified: 1325 checks exit 0, 74 pytest, over-flattening 0, dead tokens 0,
 self-references 0, primary-choice 0 in both modes, phantom unchanged at 28,
 anachronistic 1 (the known "question mark"), frontend lint + both builds clean.
 No pin moved. **`audit_csv_regressions` 443 → 426.**
+
+## 2026-09-23 — chunk 47: "eye" onto 罒, and a pin that refuses a fix
+
+* **罒 gains "eye".** Heisig emits "eye; cross-eyed; net" as one adjacent run,
+  and every one of the 21 occurrences of "cross-eyed" in the CSV sits inside
+  exactly that run, no exceptions — so all three name 罒. Only "net" and
+  "cross-eyed" were on the row, so 夢 蔑 壊 聴 懐 慢 漫 罰 寧 and the rest each
+  recorded a dropped "eye" while containing one. Rendered against 目: the same
+  box squashed and laid on its side, two strokes inside instead of two bars
+  across. 目 keeps "eye" as well — the 示/礻 arrangement from chunk 45 again.
+
+### 穴: the first baseline defect this audit has had to refuse
+
+The same report wants "human legs" in all fourteen hosts of 穴 — 空 突 究 窒 窃
+窟 窪 搾 窯 窮 探 深 窓 控 — because the CSV expands 穴 inside a host as "house;
+human legs". But **the CSV's own row for 穴 says "house; eight"**, and rendered,
+穴's bottom is 八: 丿 then 乀, the same pair as 六's bottom, not 儿, whose right
+stroke rises into a hook. Fourteen host rows disagree with one self row and with
+the glyph, and the glyph wins.
+
+So nothing changed in `data.txt`, and `rtk1413` is now **pinned to 宀 + 八** with
+that reasoning written beside it. The pin is there to stop a *wrong* fix: the
+next pass over this report will see fourteen hosts asking for 儿, and without
+the pin the cheap way to quiet them is to plant a phantom part in fourteen
+kanji. This is the first entry in this document where the right answer to a
+flagged family is "the baseline is wrong" — the script's own docstring has
+always said that case exists ("some overrides are legitimate corrections of a
+CSV bug"); this is the first one the audit has actually hit.
+
+Verified: 1326 checks exit 0 (one new pin), 74 pytest, over-flattening 0, dead
+tokens 0, self-references 0, primary-choice 0 in both modes, phantom unchanged
+at 28, anachronistic 1 (the known "question mark"), frontend lint + both builds
+clean. **`audit_csv_regressions` 426 → 408.**
