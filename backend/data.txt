@@ -3138,7 +3138,7 @@ prim-small-radical:⺌:small radical,small,little:
 prim-fire-radical:灬:fire radical,barbecue,oven-fire,tail feathers
 kangxi104:疒:sickness radical,疔,sickness,hospital
 kangxi114:禸:track radical:冂,厶
-prim-katakana-no:ノ:katakana no,drop
+prim-katakana-no:ノ:katakana no,drop,stick
 prim-katakana-yu:ユ:katakana yu
 
 # 辟/啇 clusters flagged session 5 (docs/2026-08-search-quality-audit.md),
@@ -3241,7 +3241,7 @@ prim-streetwalker:夋:streetwalker,john cleese,ministry of silly walks:允,夂
 prim-devil:兑:devil:丷,兄
 prim-futon:翟:futon:羽,隹
 prim-talking-cricket:禺:talking cricket:田,禸
-prim-mao:夌:mao:
+prim-mao:夌:mao:土,儿,夂
 prim-pup-tent:尞:pup tent:
 prim-awl:㑒:awl:亼,口,人
 prim-calling-card:氐:calling card:氏,一
@@ -3315,7 +3315,7 @@ prim-french-maid:𠬶:french maid,tickle:⺕,冖,又
 # same situation as "awl" and "mist".
 prim-earthenware-jar:𠮷:earthenware jar,lidded crock:口,土
 prim-pegasus:𮥶:pegasus:一,隹,𠂉
-prim-mini-tractor:坴:mini-tractor,rice seedlings:
+prim-mini-tractor:坴:mini-tractor,rice seedlings:土,儿,土
 prim-haystack:卉:haystack:十,廾
 prim-double-mysterious:兹:double-mysterious,mothballs:
 prim-cabbage:𦰌:cabbage:艹,口,龶
@@ -4390,3 +4390,23 @@ prim-mirrored-spoon:?:mirrored spoon
 # and the rest dropped the first while containing it. 棚 (frame 214) keeps
 # "shelf" as its keyword -- an ordinary collision, and the earlier frame, so
 # nothing anachronistic about it.
+
+# --- 2026-09-23 (chunk 51): "stick" is a second name for ノ, not only for ｜.
+# ｜ has carried it since chunk 22, and that is right for 旧 中 虫 串 申 曲 引,
+# where Heisig writes "walking cane; stick" as one adjacent pair (角 垂 触 解
+# 睡 錘 all do). But 系's CSV row is "stick; drop; thread; spiderman" and cjkvi
+# gives 系 = ⿱丿糸 -- two parts, four names, so "stick; drop" is the pair that
+# names the 丿 and "thread; spiderman" the 糸. 必 (⿻心丿, "heart; stick; drop;
+# fishhook") reads the same way. Rendered both: the stroke on top of 系 and the
+# one struck through 必 are left-falling ノ, not the vertical ｜.
+# So the name sits on two glyphs, like "silver" on 艮/皀 and "heavens" on 天/夭.
+# Not touched: 丈 ("stick; tucked under the arm"), where the only unaccounted
+# part is the top 一 and giving 一 this name on one host's say-so would be a
+# guess, not a reading.
+# Same chunk, two more atomic rows: 坴 (mini-tractor) = 土 + 儿 + 土 and
+# 夌 (mao) = 土 + 儿 + 夂. cjkvi gives 坴 = ⿱圥土 and 夌 = ⿱圥夂 with 圥 = ⿱土儿,
+# and Heisig reads 陸 睦 勢 熱 as "mini-tractor; rice seedlings; soil; dirt;
+# ground; human legs" and 菱 陵 as "mao; soil; dirt; ground; human legs;
+# walking legs" -- term for term either way. Rendered: 圥 (土 over 儿) sits on
+# 土 in one and on 夂 in the other, and both are the right halves of 陸/陵.
+# Written flat rather than through 圥, which Heisig never names.

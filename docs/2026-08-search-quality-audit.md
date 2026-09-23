@@ -14404,3 +14404,32 @@ One case went the other way: 穴, where the baseline is wrong and the data is
 right, now pinned so a later pass cannot "fix" it. Expect more of those as the
 count falls — the cheap, well-evidenced families are mostly gone now, and what
 is left leans on judgement rather than on a second source agreeing.
+
+## 2026-09-23 — chunk 51: "stick" is also ノ; 坴 and 夌
+
+* **"stick" is a second name for ノ, not only for ｜.** ｜ has carried it since
+  chunk 22 and that is right for 旧 中 虫 串 申 曲 引, where Heisig writes
+  "walking cane; stick" as one adjacent pair (角 垂 触 解 睡 錘 all do). But 系's
+  CSV row is "stick; drop; thread; spiderman" and cjkvi gives 系 = `⿱丿糸` —
+  two parts, four names, so "stick; drop" is the pair naming the 丿 and "thread;
+  spiderman" the 糸. 必 (`⿻心丿`, "heart; stick; drop; fishhook") reads the same
+  way. Rendered both: the stroke on top of 系 and the one struck through 必 are
+  left-falling ノ, not a vertical. Name on two glyphs, like "silver" on 艮/皀.
+* **坴 (mini-tractor) = 土 + 儿 + 土** and **夌 (mao) = 土 + 儿 + 夂**, both atomic
+  until now. cjkvi gives `⿱圥土` and `⿱圥夂` with 圥 = `⿱土儿`; Heisig reads 陸
+  睦 勢 熱 as "mini-tractor; rice seedlings; soil; dirt; ground; human legs" and
+  菱 陵 as "mao; soil; dirt; ground; human legs; walking legs" — term for term
+  either way. Written flat rather than through 圥, which Heisig never names.
+
+**Left alone deliberately.** 丈 ("stick; tucked under the arm") has exactly one
+unaccounted part, the top 一; giving 一 this name on one host's say-so would be a
+guess rather than a reading. And the 尺 family (尺 尽 沢 訳 択 昼 釈 駅 声 眉, ten
+hosts) needs its own pass: Heisig writes "flag; stick" for both 尺 and 𠃜, but
+rendered they are different shapes — 𠃜 is 尸 with a bar inside, 尺 is 尸 with a
+long falling 乀 — and this file currently spells that 乀 as 丶, which is its own
+small lookalike problem. Not a thing to settle in passing.
+
+Verified: 1326 checks exit 0, 74 pytest, over-flattening 0, dead tokens 0,
+self-references 0, primary-choice 0 in both modes, phantom unchanged at 28,
+anachronistic 1, frontend lint + both builds clean. No pin moved.
+**`audit_csv_regressions` 365 → 355.**
