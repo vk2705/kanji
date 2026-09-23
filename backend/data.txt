@@ -3131,7 +3131,7 @@ kangxi28:厶:elbow,wall
 #   than guessing a Heisig-specific meaning; the owner will attach the book's
 #   actual primitive name as a personal alias on top of these.
 prim-umbrella:𠆢:umbrella,primitive_umbrella
-prim-eight-radical:并:eight radical,puzzle
+prim-eight-radical:并:eight radical,puzzle:丷,一,廾
 prim-hand-radical:扎:hand radical
 prim-mound-radical:阡:mound radical
 prim-small-radical:⺌:small radical,small,little:
@@ -3267,7 +3267,7 @@ prim-bonsai:𡗗:bonsai:三,人
 prim-tarzan:枼:tarzan:世,木
 prim-angel:喬:angel:夭,口,冂,口
 prim-loincloth:臤:loincloth:又,臣
-prim-shredder:敝:shredder:
+prim-shredder:敝:shredder:⺌,冂,巾,攵
 prim-salad:龷:salad:艹,一
 prim-grass-skirt:㐮:grass skirt:
 prim-segway:夆:segway,macbeth:丰,夂
@@ -3292,7 +3292,7 @@ prim-guillotine:夬:guillotine:
 prim-stamp-album:卬:stamp album,stamps:
 prim-funnel:冓:funnel,cone:𠀎,再
 prim-post-it-note:侖:post-it note:亼,𠕁
-prim-lifebelt:㐬:lifebelt:
+prim-lifebelt:㐬:lifebelt:𠫓,川;𠫓,儿,｜
 # Fifth batch, 2026-09-11. Method unchanged (strict CSV name resolution, name not
 # already owned by a registered row, rendered beside real hosts first).
 prim-furniture:喿:furniture,wooden goods:品,木
@@ -3303,7 +3303,7 @@ prim-radio-caroline:蒦:radio caroline:艹,隻
 prim-infant:𠫓:infant,toddler:亠,厶
 prim-gully:㕣:gully:八,口
 prim-mailbox:夗:mailbox:㔾,夕
-prim-triceps:劦:triceps:
+prim-triceps:劦:triceps:力,力,力
 prim-pitchfork:賁:pitchfork:卉,貝
 prim-feather-duster:帚:feather duster:⺕,冖,巾
 prim-french-maid:𠬶:french maid,tickle:⺕,冖,又
@@ -3317,7 +3317,7 @@ prim-earthenware-jar:𠮷:earthenware jar,lidded crock:口,土
 prim-pegasus:𮥶:pegasus:一,隹,𠂉
 prim-mini-tractor:坴:mini-tractor,rice seedlings:土,儿,土
 prim-haystack:卉:haystack:十,廾
-prim-double-mysterious:兹:double-mysterious,mothballs:
+prim-double-mysterious:兹:double-mysterious,mothballs:丷,一,幺,幺
 prim-cabbage:𦰌:cabbage:艹,口,龶
 prim-purse:𠀐:purse:一,中
 prim-mop:尹:mop:
@@ -3455,7 +3455,7 @@ prim-outhouse:𫩠:outhouse:⺌,冖,口
 # identity (bare 冂 for the first two, a 用-like box structurally
 # unconfirmed against a specific codepoint for 角/解/触) is a separate,
 # still-open question, not folded into this verdict.
-prim-scrapbook:𠕁:scrapbook,glass canopy
+prim-scrapbook:𠕁:scrapbook,glass canopy:冂,艹
 
 # --- 2026-09-18 (thirteenth chunk): closing out 尚岡角解触's "glass
 # canopy" — the open question the twelfth chunk left after the
@@ -4576,3 +4576,25 @@ prim-tall:?:tall:亠,口
 # alternate, so "hood" is still reachable; 冎 itself stays atomic, since its
 # inner stroke (cjkvi's 𠃍) has no row here and inventing one to hold a single
 # corner would be worse than the gap.
+
+# --- 2026-09-23 (chunk 60): six intermediate rows the chunk-58 prospector
+# named, all of them atomic or short, all confirmed by cjkvi and the render.
+# 𠕁 (scrapbook) = 冂 + 艹. cjkvi ⿵冂卄; Heisig reads 論 倫 輪 偏 遍 嗣 as
+# "...; scrapbook; glass canopy; hood; flowers". 卄 is the grass shape this
+# file already spells 艹 (see chunk 50's 龷).
+# 劦 (triceps) = 力 + 力 + 力. cjkvi ⿱力𠠴 with 𠠴 = ⿰力力; Heisig's 脇 脅 協
+# read "triceps; power; muscle; arnold". Rendered: three 力, nothing else.
+# 并 (puzzle) = 丷 + 一 + 廾. cjkvi ⿱丷开 with 开 = ⿱一廾; Heisig's 併 瓶 塀
+# read "puzzle; horns; two hands". The 一 is cjkvi's, unnamed by Heisig.
+# 敝 (shredder) = ⺌ + 冂 + 巾 + 攵. Heisig's 幣 蔽 弊 read "shredder; small;
+# little; belt; taskmaster; towel" -- all four named. cjkvi has three forms for
+# the left half and they disagree with each other (⿻丷⿻巾八, ⿻八⿻巾八,
+# ⿱⺌⿵冂小); the render matches the third, and Heisig's four names cover it.
+# 㐬 (lifebelt) = 𠫓 + 川. Heisig's 硫 流 read "lifebelt; infant; toddler; top
+# hat; elbow; stream; flood". cjkvi writes the bottom ⿴儿丨 rather than 川, and
+# that spelling is kept as the alternate -- rendered, the three descending
+# strokes really are drawn 儿-with-a-bar rather than as a clean 川, so this is
+# one where Heisig's name and the structure differ and both are worth keeping.
+# 兹 (double-mysterious) = 丷 + 一 + 幺 + 幺. cjkvi ⿱䒑𢆶; Heisig's 滋 慈 磁
+# read "double-mysterious; mothballs; horns; one; cocoon". The two 幺 are why
+# chunk 43's "cocoon" fix could not reach these three until now.

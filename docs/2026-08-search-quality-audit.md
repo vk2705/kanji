@@ -14748,3 +14748,33 @@ would be worse than the gap.
 Verified: 1327 checks exit 0, 74 pytest, over-flattening 0, dead tokens 0,
 self-references 0, primary-choice 0 in both modes, phantom 27, anachronistic 1,
 frontend lint + both builds clean. **`audit_csv_regressions` 288 → 278.**
+
+## 2026-09-23 — chunk 60: six intermediate rows, straight off the prospector
+
+All six were atomic or a level too shallow, all named by the chunk-58 cjkvi
+prospector, all confirmed against the render before being written.
+
+* **𠕁 (scrapbook) = 冂 + 艹** — cjkvi `⿵冂卄`; 論 倫 輪 偏 遍 嗣 read "…;
+  scrapbook; glass canopy; hood; flowers". 卄 is the grass shape this file
+  already spells 艹 (chunk 50's 龷 settled that).
+* **劦 (triceps) = 力 + 力 + 力** — cjkvi `⿱力𠠴` with 𠠴 = `⿰力力`; 脇 脅 協 read
+  "triceps; power; muscle; arnold". Rendered: three 力, nothing else.
+* **并 (puzzle) = 丷 + 一 + 廾** — cjkvi `⿱丷开` with 开 = `⿱一廾`; 併 瓶 塀 read
+  "puzzle; horns; two hands". The 一 is cjkvi's; Heisig does not name it.
+* **敝 (shredder) = ⺌ + 冂 + 巾 + 攵** — 幣 蔽 弊 read "shredder; small; little;
+  belt; taskmaster; towel", naming all four. cjkvi has *three* forms for the
+  left half and they disagree with each other (`⿻丷⿻巾八`, `⿻八⿻巾八`,
+  `⿱⺌⿵冂小`); the render matches the third, and Heisig's four names cover it.
+* **㐬 (lifebelt) = 𠫓 + 川** — 硫 流 read "lifebelt; infant; toddler; top hat;
+  elbow; stream; flood". cjkvi writes the bottom `⿴儿丨` rather than 川, and
+  that spelling is kept as the alternate: rendered, the three descending strokes
+  really are drawn as 儿-with-a-bar rather than a clean 川. One where the name
+  and the structure genuinely differ and both are worth having.
+* **兹 (double-mysterious) = 丷 + 一 + 幺 + 幺** — cjkvi `⿱䒑𢆶`; 滋 慈 磁 read
+  "double-mysterious; mothballs; horns; one; cocoon". The two 幺 are why chunk
+  43's "cocoon" fix could not reach these three until now.
+
+Verified: 1327 checks exit 0, 74 pytest, over-flattening 0, dead tokens 0,
+self-references 0, primary-choice 0 in both modes, phantom 27 → 25, anachronistic
+1, frontend lint + both builds clean. No pin moved.
+**`audit_csv_regressions` 278 → 257.**
