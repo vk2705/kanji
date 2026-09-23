@@ -113,7 +113,7 @@ rtk60:貼:affix:貝,占
 rtk61:見:see,telescope:目,儿
 rtk62:児:newborn babe:旧,儿
 rtk63:元:beginning:二,儿
-rtk64:頁:page,head:一,貝
+rtk64:頁:page,head:一,丶,貝
 rtk65:頑:stubborn:頁,元
 rtk66:凡:commonplace:丶,几
 rtk67:負:defeat:貝,勹;貝,𠂊
@@ -1215,7 +1215,7 @@ rtk1163:涙:tears:戻,水
 rtk1164:雇:employ:戸,隹
 rtk1165:顧:look back:雇,頁
 rtk1166:啓:disclose:戸,攵,口
-rtk1167:示:show:二,小
+rtk1167:示:show,altar:二,小
 rtk1168:礼:salute:礻,乙
 rtk1169:祥:auspicious:礻,羊
 rtk1170:祝:celebrate:礻,兄
@@ -4296,3 +4296,19 @@ prim-mirrored-spoon:?:mirrored spoon
 # brains", cjkvi gives ⿱𠮛田 with 𠮛 = ⿱一口. Rendered: 一 over 口 over 田,
 # three stacked pieces, no ambiguity. Spelled 一,口,田 rather than 𠮛,田 --
 # Heisig names all three separately and never names 𠮛.
+
+# --- 2026-09-23 (chunk 45): "drop" on 頁, "altar" on 示.
+# 頁 (page/head) was 一,貝 -- one stroke short of what both sources say. CSV
+# reads it "one; ceiling; drop; shellfish; clam; oyster; eye; animal legs;
+# eight", and the render shows the top is 丆 (a bar with a short falling stroke
+# at its left end), not a bare 一. cjkvi has no entry for 頁 at all, so the
+# render and the CSV are the whole evidence here. Written with 丶 rather than
+# ノ because rtk36 (自 = "drop; eye") already spells Heisig's "drop" that way
+# and both rows answer to the name; 頁 feeds 頑 項 頂 順 煩 and ~20 more, all of
+# which were recording the same dropped concept.
+# 示 gains "altar" as an alias. Heisig emits "altar; show" adjacent in 奈 尉 慰
+# 款 禁 襟 宗 崇 祭 察 and the rest, i.e. both names are 示's; only 礻
+# (kangxi113, "leftside altar") carried it, so every host that contains the
+# full 示 rather than the left-side form recorded a dropped concept. 礻 keeps
+# its copy -- this is Heisig naming one shape and its variant the same thing,
+# the same arrangement as 艮/皀 "silver".

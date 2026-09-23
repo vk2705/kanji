@@ -14225,3 +14225,30 @@ Verified: 1325 checks exit 0, 74 pytest, over-flattening 0, dead tokens 0,
 self-references 0, primary-choice 0 in both modes, phantom unchanged at 28,
 anachronistic 1 (the known "question mark"), frontend lint + both builds clean.
 No pin moved. **`audit_csv_regressions` 489 → 475.**
+
+## 2026-09-23 — chunk 45: the drop on 頁, the altar on 示
+
+* **頁 (page/head) = 一 + 丶 + 貝.** It was `一,貝` — one stroke short. CSV reads
+  it "one; ceiling; drop; shellfish; clam; oyster; eye; animal legs; eight", and
+  the render shows the top is 丆, a bar with a short falling stroke at its left
+  end, not a bare 一. cjkvi has no entry for 頁 at all (it is atomic there), so
+  the render and the CSV are the whole evidence. Written with 丶 rather than ノ
+  because `rtk36` (自 = "drop; eye") already spells Heisig's "drop" that way and
+  both rows answer to the name — a new spelling here would have split the
+  concept across two glyphs for no gain. 頁 feeds 頑 項 頂 順 煩 and about twenty
+  more, every one of which was recording the same dropped concept.
+* **示 gains "altar".** Heisig emits "altar; show" adjacent in 奈 尉 慰 款 禁 襟
+  宗 崇 祭 察 and the rest — both names are 示's. Only 礻 (`kangxi113`,
+  "leftside altar") carried it, so any host containing the full 示 rather than
+  the left-side form dropped the concept. 礻 keeps its copy; this is Heisig
+  naming a shape and its variant the same thing, the same arrangement as 艮/皀
+  "silver" in chunk 42.
+
+The pin for `rtk64` moved, with its reason written beside it: the comment there
+had said "render confirms 頁 = 一 + 貝", which is what a render of the *bar*
+confirms and not what a render of the whole top confirms.
+
+Verified: 1325 checks exit 0, 74 pytest, over-flattening 0, dead tokens 0,
+self-references 0, primary-choice 0 in both modes, phantom unchanged at 28,
+anachronistic 1 (the known "question mark"), frontend lint + both builds clean.
+One pin moved. **`audit_csv_regressions` 475 → 443.**

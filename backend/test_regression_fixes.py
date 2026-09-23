@@ -1526,8 +1526,13 @@ EXPECTED_DECOMPOSITIONS = {
               "expected_part_ids": {"kangxi3", "rtk15"}},
     # 頁 was missing its top horizontal stroke; render confirms 頁 = 一 + 貝
     # (matching CSV's "one; ceiling; ...(貝's own sub-components)").
+    # 2026-09-23 (chunk 45): 丶 added. That earlier reading stopped one stroke
+    # short -- CSV is "one; ceiling; DROP; shellfish; ...", and the render shows
+    # the top is 丆, a bar with a short falling stroke at its left end, not a
+    # bare 一. 丶 rather than ノ because rtk36 (自 = "drop; eye") already spells
+    # Heisig's "drop" that way and both rows answer to the name.
     "rtk64": {"character": "頁", "keyword": "page",
-              "expected_part_ids": {"rtk1", "rtk56"}},
+              "expected_part_ids": {"rtk1", "rtk56", "kangxi3"}},
     # 2026-09-05 decomposition_worklist.json batch (built from
     # google_decompositions.json cross-check + cjkvi-ids + render):
     # 白 had NO decomposition at all; render confirms 丶(drop) + 日(sun),
