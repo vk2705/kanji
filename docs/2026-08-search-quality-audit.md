@@ -14310,3 +14310,28 @@ Verified: 1326 checks exit 0 (one new pin), 74 pytest, over-flattening 0, dead
 tokens 0, self-references 0, primary-choice 0 in both modes, phantom unchanged
 at 28, anachronistic 1 (the known "question mark"), frontend lint + both builds
 clean. **`audit_csv_regressions` 426 → 408.**
+
+## 2026-09-23 — chunk 48: 咅, 喬, and the second name 夭 has always had
+
+* **咅 (muzzle) = 立 + 口.** cjkvi gives `⿱立口`, Heisig reads 賠 培 剖 倍 部 as
+  "muzzle; vase; stand up; mouth", and the render is 立 sitting on 口 with
+  nothing else in it. The row was atomic, so those hosts dropped "vase",
+  "stand up" and "mouth" together — three of the top dropped concepts from one
+  missing parts field.
+* **喬 (angel) = 夭 + 口 + 冂 + 口.** cjkvi gives `⿱呑冋`, i.e. `⿱⿱夭口⿵冂口`,
+  which is Heisig's "angel; heavens; mouth; hood; mouth" term for term, repeated
+  口 included. Written flat rather than through 呑 and 冋 because Heisig names
+  neither of those, and an unnamed intermediate is exactly what puts a concept
+  out of reach.
+* **夭 gains "heavens".** The top of 喬 is 夭, not 天 — rendered side by side, 夭's
+  first stroke slants where 天's is flat — so writing 天 would have been the
+  lookalike substitution this project keeps undoing. But Heisig calls that shape
+  "heavens" in 笑 ("bamboo; heavens") and in 喬, while calling the *same* shape
+  "sapling" in 妖 and 沃. Both names are his. The row carries both now and 天
+  keeps "heavens" as well, which is the only arrangement that gets the glyph and
+  the name right at once.
+
+Verified: 1326 checks exit 0, 74 pytest, over-flattening 0, dead tokens 0,
+self-references 0, primary-choice 0 in both modes, phantom unchanged at 28,
+anachronistic 1 (the known "question mark"), frontend lint + both builds clean.
+No pin moved. **`audit_csv_regressions` 408 → 399.**

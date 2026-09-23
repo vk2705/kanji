@@ -3163,7 +3163,7 @@ prim-bushes:丰:bushes,grow up
 prim-meeting:亼:meeting:𠆢,一
 prim-antlers:?:antlers
 prim-fishfinger:扁:fishfinger:戸,𠕁
-prim-muzzle:咅:muzzle
+prim-muzzle:咅:muzzle:立,口
 prim-wealth:畐:wealth:一,口,田
 prim-half-turtle:丬:turtle
 prim-owl:𭕄:owl crown,owl-head,owl
@@ -3265,7 +3265,7 @@ prim-float:㦮:float:二,戈
 prim-spool:圣:spool,clod,toilet paper:又,土
 prim-bonsai:𡗗:bonsai:三,人
 prim-tarzan:枼:tarzan:世,木
-prim-angel:喬:angel:
+prim-angel:喬:angel:夭,口,冂,口
 prim-loincloth:臤:loincloth:又,臣
 prim-shredder:敝:shredder:
 prim-salad:龷:salad:
@@ -3280,7 +3280,7 @@ prim-golden-calf:关:golden calf:丷,天
 # unregistered component.
 prim-ninety:卆:ninety:九,十
 prim-whirlwind:亢:whirlwind:亠,几
-prim-sapling:夭:sapling:ノ,大
+prim-sapling:夭:sapling,heavens:ノ,大
 prim-kazoo:戠:kazoo:戈,音
 prim-fingerprint:㔾:fingerprint:
 prim-scarecrow:𦰩:scarecrow:口,夫,艹
@@ -4340,3 +4340,20 @@ prim-mirrored-spoon:?:mirrored spoon
 # Not changed, deliberately: 穴. The same report wants "human legs" in its 14
 # hosts, and the CSV's own row for 穴 says "house; eight" -- see the pin on
 # rtk1413 in test_regression_fixes.py for the render and the reasoning.
+
+# --- 2026-09-23 (chunk 48): 咅 and 喬, two more atomic compounds, and the
+# second name 夭 has always answered to.
+# 咅 (muzzle) = 立 + 口. cjkvi gives ⿱立口, Heisig reads 賠 培 剖 倍 部 as
+# "muzzle; vase; stand up; mouth", and the render is 立 sitting on 口 with
+# nothing else in it. Atomic until now, so those hosts dropped "vase", "stand
+# up" and "mouth" together -- three of the top dropped concepts from one row.
+# 喬 (angel) = 夭 + 口 + 冂 + 口. cjkvi gives ⿱呑冋 = ⿱⿱夭口⿵冂口, which is
+# Heisig's "angel; heavens; mouth; hood; mouth" term for term, including the
+# repeated 口. Written flat rather than through 呑/冋 because Heisig names
+# neither of those.
+# 夭 gains "heavens". The top of 喬 is 夭, not 天 -- rendered side by side, 夭's
+# first stroke slants and 天's is flat -- so writing 天 here would have been the
+# lookalike substitution this file keeps having to undo. Heisig, though, calls
+# this shape "heavens" in 笑 ("bamboo; heavens") and in 喬, while calling the
+# same shape "sapling" in 妖 and 沃. Both names are his; the row carries both
+# now, and 天 keeps "heavens" too.
