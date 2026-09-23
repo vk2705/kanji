@@ -14504,3 +14504,37 @@ Verified: 1327 checks exit 0, 74 pytest, over-flattening 0, dead tokens 0,
 self-references 0, primary-choice 0 in both modes, phantom unchanged at 28,
 anachronistic 1, frontend lint + both builds clean. No pin moved.
 **`audit_csv_regressions` 342 → 325.**
+
+## 2026-09-23 — chunk 54: an adjacency prospector, and what survived it
+
+Built a throwaway prospector for this pass: for each dropped CSV concept, look
+at its **neighbour** names and propose the row they point at, since Heisig emits
+a primitive's whole name set together. 700 proposals. Most are noise — adjacency
+picks whichever side happens to resolve, and that is the wrong side about as
+often as the right one (its top hit was "mouth → 言", which is the deliberately
+atomic case the report already buckets separately; its next were "tall → 亠",
+"human legs → 宀" and "stop → 口", the last two being the 穴 and 足 baseline
+defects chunks 47 and 52 already refused). Three held up under the render.
+
+* **"chihuahua" moves from 犭 to 犬.** All eight CSV hosts write the run
+  "chihuahua; dog; large; drop", and 獄 — which contains *both* — names 犭 "pack
+  of wild dogs" and 犬 "chihuahua; dog" in the same row, so the two are
+  distinguished right there in the source. 犭 keeps its own names.
+* **皮 (pelt) was just 又**, a third of it. Heisig reads 波 婆 披 破 被 彼 疲 as
+  "pelt; branch; ten; needle; crotch; hook" — 皮 = 支 ("branch" = 十 + 又) plus
+  one more stroke — and rendered, 支 really is in there: the crossing bar with
+  the 又 beneath it. cjkvi makes 皮 atomic, so the glyph is the only structural
+  check available. **"hook" stays dropped on purpose**: the one row answering to
+  that name is 亅, and rendered, 亅 is a vertical with an upturn while 皮's
+  remaining stroke falls to the left. Naming it 亅 would be a lookalike
+  substitution for the sake of the count.
+* **卸** was `𠂉,止,卩`. Heisig reads it "horseshoe; horse; pantomime horse;
+  noon; sign of the horse; stop; footprint; stamp" — 午 + 止 + 卩 — and cjkvi
+  gives `⿰𦈢卩` with 𦈢 = `⿱𠂉⿻一止`. Both describe the same picture: 午's 十 and
+  止's top share strokes, which a flat parts list cannot show. Heisig's reading
+  is the primary now, cjkvi's spelling the labelled alternate.
+
+Verified: 1327 checks exit 0, 74 pytest, over-flattening 0, dead tokens 0,
+self-references 0, primary-choice 0 in both modes, phantom unchanged at 28,
+anachronistic 1, frontend lint + both builds clean. No pin moved.
+**`audit_csv_regressions` 325 → 319.**
