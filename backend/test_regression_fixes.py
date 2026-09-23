@@ -266,6 +266,18 @@ EXPECTED_DECOMPOSITIONS = {
     # 2026-08-30.
     "rtk1186": {"character": "由", "keyword": "wherefore",
                 "expected_part_ids": {"rtk14", "prim-pipe"}},
+    # 2026-09-23 (chunk 52): the second baseline defect, same shape as 穴 in
+    # chunk 47 and pinned for the same reason. audit_csv_regressions reports
+    # "stop" and "footprint" dropped on all ten hosts of 足 (距 路 露 跳 躍 践
+    # 踏 踊 跡 蹴), because the CSV expands 足 inside a host as "wooden leg;
+    # mouth; stop; footprint". The CSV's own row for 足 says "mouth; MENDING;
+    # MEND", cjkvi gives 足 = ⿱口龰, and rendered, 足's last stroke falls away
+    # to the right where 止's base is a flat horizontal -- it is 龰, which this
+    # project already calls prim-mending, and not 止. Ten host rows against one
+    # self row, the structural source and the glyph; the glyph wins. Spelling
+    # 止 here would plant a phantom part in ten kanji.
+    "rtk1372": {"character": "足", "keyword": "leg",
+                "expected_part_ids": {"rtk11", "prim-mending"}},
     "rtk1194": {"character": "甲", "keyword": "armor",
                 "expected_part_ids": {"rtk14", "prim-pipe"}},
     "rtk1198": {"character": "申", "keyword": "speaketh",

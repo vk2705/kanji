@@ -14433,3 +14433,35 @@ Verified: 1326 checks exit 0, 74 pytest, over-flattening 0, dead tokens 0,
 self-references 0, primary-choice 0 in both modes, phantom unchanged at 28,
 anachronistic 1, frontend lint + both builds clean. No pin moved.
 **`audit_csv_regressions` 365 → 355.**
+
+## 2026-09-23 — chunk 52: 由's own names, and baseline defect #2
+
+* **由 gains "sprout" and "shoot".** Heisig's CSV row for 由 is exactly "sprout;
+  shoot" — keyword "wherefore", primitive names those two — and 抽 油 袖 宙 届 笛
+  軸 all read "<other part>; sprout; shoot" with 由 as the only other component,
+  so the adjacency is unambiguous. 画 黄 横 寅 演 inherit it. Same shape as
+  又/"crotch" and 示/"altar": a name Heisig gives a kanji *as a building block*,
+  missing from the row that is the building block.
+
+### 足: the second one where the baseline is wrong
+
+The report wants "stop" and "footprint" in all ten hosts of 足 — 距 路 露 跳 躍
+践 踏 踊 跡 蹴 — because the CSV expands 足 inside a host as "wooden leg; mouth;
+stop; footprint". **The CSV's own row for 足 says "mouth; mending; mend"**,
+cjkvi gives `⿱口龰`, and rendered, 足's last stroke falls away to the right
+where 止's base is a flat horizontal. It is 龰 — what this project already calls
+`prim-mending` — and not 止.
+
+Ten host rows against one self row, the structural source *and* the glyph. Same
+verdict as 穴 in chunk 47, and `rtk1372` is now pinned to 口 + 龰 with the
+reasoning beside it, so the next pass cannot quiet those ten by spelling 止.
+
+Two of these in six chunks is worth noticing: both are a *self* row disagreeing
+with the expansion the same file emits inside hosts, and in both the self row
+was right. That is now a thing to check first when a family this size shows up
+— read the primitive's own CSV row before reading its hosts'.
+
+Verified: 1327 checks exit 0 (one new pin), 74 pytest, over-flattening 0, dead
+tokens 0, self-references 0, primary-choice 0, phantom unchanged at 28,
+anachronistic 1, frontend lint + both builds clean.
+**`audit_csv_regressions` 355 → 342.**

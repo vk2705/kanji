@@ -1234,7 +1234,7 @@ rtk1182:崇:adore:山,宗
 rtk1183:祭:ritual:月,又,示
 rtk1184:察:guess:宀,祭
 rtk1185:擦:grate:察,扌
-rtk1186:由:wherefore:田,｜
+rtk1186:由:wherefore,sprout,shoot:田,｜
 rtk1187:抽:pluck:扌,由
 rtk1188:油:oil:水,由
 rtk1189:袖:sleeve:由,衤
@@ -4410,3 +4410,12 @@ prim-mirrored-spoon:?:mirrored spoon
 # walking legs" -- term for term either way. Rendered: 圥 (土 over 儿) sits on
 # 土 in one and on 夂 in the other, and both are the right halves of 陸/陵.
 # Written flat rather than through 圥, which Heisig never names.
+
+# --- 2026-09-23 (chunk 52): 由 gains "sprout" and "shoot", its own primitive
+# names. Heisig's CSV row for 由 is exactly "sprout; shoot" -- keyword
+# "wherefore", primitive names those two -- and 抽 油 袖 宙 届 笛 軸 read as
+# "<other part>; sprout; shoot" with 由 as the only other component, so the
+# adjacency is unambiguous. 画 黄 横 寅 演 inherit it. Same shape as 又/"crotch"
+# and 示/"altar": a name Heisig gives the kanji as a building block, missing
+# from the row that is the building block.
+# Not changed: the 足 family. See the pin on rtk1372.
