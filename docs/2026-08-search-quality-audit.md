@@ -14538,3 +14538,34 @@ Verified: 1327 checks exit 0, 74 pytest, over-flattening 0, dead tokens 0,
 self-references 0, primary-choice 0 in both modes, phantom unchanged at 28,
 anachronistic 1, frontend lint + both builds clean. No pin moved.
 **`audit_csv_regressions` 325 → 319.**
+
+## 2026-09-23 — chunk 55: "tall", deferred twice, finally gets a row
+
+Heisig teaches 高 ("tall") and then uses an abbreviation of it — just the 亠 + 口
+top — as a primitive keeping the same name. 享 亭 京 豪 all read "tall; top hat;
+mouth; …", with "top hat; mouth" being that abbreviation's own two pieces, and
+once 塾 熟 郭 涼 景 鯨 影 就 蹴 停 are counted, **fourteen kanji** record the
+concept. None could reach it: the four direct hosts listed 亠 and 口 as separate
+parts and nothing tied the pair to the name.
+
+This was passed over in chunks 52 and 53 because the fix costs something. There
+is no codepoint for a bare 亠 over 口 — cjkvi has three characters containing
+that pair (𠕑 𠮸 𫲯) and all three wrap it in something else — so `prim-tall`
+carries `?` as its glyph and renders as a "·" chip, the same arrangement
+`prim-mirrored-spoon` has had since chunk 41. That is a real, visible cost on
+four common kanji, and it is still the honest model: the shape exists, Heisig
+names it, and the alternative was to leave fourteen kanji unable to answer to a
+name the book gives them.
+
+Two things keep the cost down. The flat `亠,口,…` spelling each row used to have
+is kept as the **labelled alternate**, so nothing that relied on reaching 亠 or
+口 directly loses it and the detail page shows both readings. And 高 itself is
+left as `亠,口,冋` — its keyword is already "tall", so nothing is lost there, and
+rewriting a kanji's own decomposition to contain an abbreviation of itself buys
+nothing.
+
+Verified: 1327 checks exit 0, 74 pytest, over-flattening 0, dead tokens 0,
+self-references 0, primary-choice 0 in both modes, phantom unchanged at 28 (the
+new row clears on the Heisig channel, since its name is in every host's CSV
+row), anachronistic 1, frontend lint + both builds clean. No pin moved.
+**`audit_csv_regressions` 319 → 306.**

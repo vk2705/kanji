@@ -378,11 +378,11 @@ rtk326:冠:crown:寸,冖,元
 rtk327:夢:dream:艹,罒,冖,夕
 rtk328:坑:pit:亢,土
 rtk329:高:tall:亠,口,冋
-rtk330:享:enjoy:口,子,亠
+rtk330:享:enjoy:prim-tall,子;亠,口,子
 rtk331:塾:cram school:丸,享,土
 rtk332:熟:mellow:丸,享,灬
-rtk333:亭:pavilion:丁,亠,冖,口
-rtk334:京:capital:口,小,亠
+rtk333:亭:pavilion:prim-tall,冖,丁;亠,口,冖,丁
+rtk334:京:capital:prim-tall,小;亠,口,小
 rtk335:涼:refreshing:水,京
 rtk336:景:scenery:京,日
 rtk337:鯨:whale:魚,京
@@ -630,7 +630,7 @@ rtk578:逐:pursue:辶,豕
 rtk579:遂:consummate:辶,丷,豕
 rtk580:家:house:宀,豕
 rtk581:嫁:marry into:女,家
-rtk582:豪:overpowering:口,亠,冖,豕
+rtk582:豪:overpowering:prim-tall,冖,豕;亠,口,冖,豕
 rtk583:腸:intestines:昜,月
 rtk584:場:location:土,昜
 rtk585:湯:hot water:昜,水
@@ -4465,3 +4465,23 @@ prim-mirrored-spoon:?:mirrored spoon
 # ⿰𦈢卩 with 𦈢 = ⿱𠂉⿻一止. Both describe the same picture: 午's 十 and 止's top
 # share strokes, which a flat parts list cannot show. Heisig's reading is the
 # primary now and cjkvi's spelling is kept as the alternate.
+
+# --- 2026-09-23 (chunk 55): "tall", deferred twice, now has a row.
+# Heisig teaches 高 ("tall") and then uses an abbreviation of it -- just the
+# 亠 + 口 top -- as a primitive keeping the same name: 享 亭 京 豪 all read
+# "tall; top hat; mouth; ...", with "top hat; mouth" being that abbreviation's
+# own two pieces. Fourteen kanji record the concept once 塾 熟 郭 涼 景 鯨 影 就
+# 蹴 停 are counted, and none of them could reach it, because the shape had no
+# row: the four direct hosts listed 亠 and 口 as separate parts and nothing
+# tied the pair to the name.
+# There is no codepoint for a bare 亠 over 口 -- checked cjkvi for one and the
+# three characters containing that pair (𠕑 𠮸 𫲯) all wrap it in something
+# else -- so the row carries "?" as its glyph, the same arrangement
+# prim-mirrored-spoon has had since chunk 41. The flat 亠,口,... spelling each
+# row used to have is kept as the labelled alternate, so nothing that relied on
+# reaching 亠 or 口 directly loses it, and the detail page still shows both
+# readings.
+# 高 itself is left as 亠,口,冋. Its keyword is already "tall", so the concept
+# is not lost there, and rewriting a kanji's own decomposition to contain an
+# abbreviation of itself buys nothing.
+prim-tall:?:tall:亠,口
