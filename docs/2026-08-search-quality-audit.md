@@ -14710,3 +14710,41 @@ Verified: 1327 checks exit 0, 74 pytest, over-flattening 0, dead tokens 0,
 self-references 0, primary-choice 0 in both modes, phantom unchanged at 28,
 anachronistic 1, frontend lint + both builds clean. No pin moved.
 **`audit_csv_regressions` 297 → 288.**
+
+## 2026-09-23 — chunk 59: chunk 52 was half wrong about 足
+
+The cjkvi prospector from chunk 58 caught it. Chunk 52 pinned 足 to 口 + 龰 and
+called the report's demand for "stop; footprint" in 距 路 露 跳 躍 践 踏 踊 跡 蹴
+a **baseline defect**, on the grounds that 足's last stroke falls away to the
+right where 止's base is flat. The pin is right. The label was not.
+
+**None of those ten hosts contains 足.** They contain 𧾷, the combining form,
+and cjkvi spells that `⿱口止`. Rendered side by side, 𧾷 is narrower and its
+last stroke *rises* — neither 龰's fall nor quite 止's flat base, but far closer
+to 止 than to 龰. Heisig's "wooden leg; mouth; stop; footprint" was defensible
+for those ten all along, and what chunk 52 actually found was one glyph being
+used to stand for two.
+
+The fix is a second decomposition on 足 — primary `口,龰`, alternate `口,止` —
+rather than a new 𧾷 row and ten repointed host rows. The primary still
+describes the glyph the row is for, the alternate carries the form every host
+uses, and both search and the report reach through either. The pin's comment now
+carries the correction beside the original reasoning rather than replacing it.
+
+That leaves **one** genuine baseline defect on the books, 穴 from chunk 47, not
+two. Worth restating the lesson chunk 52 drew, in its corrected form: when a
+primitive's self row disagrees with the expansion its hosts get, check *which
+form of the glyph the hosts actually contain* before concluding the source is
+wrong. A combining variant is the likelier explanation, and it is a data gap
+here, not an error there.
+
+Also this pass: **咼 (jawbone) = 冎 + 口**, cjkvi's `⿵冎口` and Heisig's
+"jawbone; joint; hood; mouth". The row went straight to `口,冂`, one level too
+deep, so 禍 渦 鍋 過 could not reach 冎 ("joint"). The old spelling stays as the
+alternate so "hood" is still reachable; 冎 itself stays atomic, since its inner
+stroke (cjkvi's 𠃍) has no row here and inventing one to hold a single corner
+would be worse than the gap.
+
+Verified: 1327 checks exit 0, 74 pytest, over-flattening 0, dead tokens 0,
+self-references 0, primary-choice 0 in both modes, phantom 27, anachronistic 1,
+frontend lint + both builds clean. **`audit_csv_regressions` 288 → 278.**

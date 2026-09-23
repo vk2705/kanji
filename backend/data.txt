@@ -1,6 +1,6 @@
 prim-pipe:｜:pipe, walking stick, cane, line, walking cane, stick, prim28.1
 prim-joint:冎:joint
-prim-jawbone:咼:jawbone:口,冂;口,冎
+prim-jawbone:咼:jawbone:冎,口;口,冂
 prim-dollar-sign:弗:dollar sign,dollar:弓,｜
 prim-snare:丂:snare,slingshot,catapult:一,勹
 kangxi3:丶:dot,tick,drop,drops
@@ -1420,7 +1420,7 @@ rtk1368:交:mingle:父,亠
 rtk1369:効:merit:交,力
 rtk1370:較:contrast:車,交
 rtk1371:校:exam:交,木
-rtk1372:足:leg,wooden leg:口,龰
+rtk1372:足:leg,wooden leg:口,龰;口,止
 rtk1373:促:stimulate:亻,足
 rtk1374:捉:catch:扌,足
 rtk1375:距:long-distance:足,巨
@@ -4555,3 +4555,24 @@ prim-tall:?:tall:亠,口
 # 甘 (one bar) whatever the stroke count suggests. Writing 其 as just 八 would
 # buy the concept back at the price of a decomposition that is two thirds
 # missing on the detail page.
+
+# --- 2026-09-23 (chunk 59): a correction to chunk 52, and 咼.
+# 足 now carries a second decomposition, 口 + 止, alongside its primary 口 + 龰.
+# Chunk 52 pinned the primary against the report's demand for "stop" and
+# "footprint" in 距 路 露 跳 躍 践 踏 踊 跡 蹴, on the grounds that 足's last
+# stroke falls away to the right where 止's base is flat. That is right about
+# the standalone glyph and wrong about those ten hosts, and the cjkvi
+# prospector built in chunk 58 is what caught it: none of them contains 足 at
+# all. They contain 𧾷, the combining form, and cjkvi spells that ⿱口止 --
+# rendered side by side, 𧾷 is narrower and its last stroke RISES, which is
+# neither 龰's fall nor exactly 止's flat base, but is much the closer to 止.
+# So Heisig's "wooden leg; mouth; stop; footprint" was defensible all along.
+# Kept as an alternate rather than repointing ten rows at a new 𧾷 row: the
+# primary still describes the glyph the row is for, the alternate carries the
+# form every host actually uses, and search reaches through both.
+# 咼 (jawbone) = 冎 + 口, cjkvi's ⿵冎口 and Heisig's "jawbone; joint; hood;
+# mouth" -- 禍 渦 鍋 過 could not reach 冎 ("joint") because the row went
+# straight to 口 + 冂, one level too deep. That old spelling stays as the
+# alternate, so "hood" is still reachable; 冎 itself stays atomic, since its
+# inner stroke (cjkvi's 𠃍) has no row here and inventing one to hold a single
+# corner would be worse than the gap.

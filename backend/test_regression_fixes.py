@@ -276,6 +276,15 @@ EXPECTED_DECOMPOSITIONS = {
     # project already calls prim-mending, and not 止. Ten host rows against one
     # self row, the structural source and the glyph; the glyph wins. Spelling
     # 止 here would plant a phantom part in ten kanji.
+    # 2026-09-23 (chunk 59) CORRECTION: the pin stands, that reasoning was half
+    # wrong, and calling this a "baseline defect" was wrong outright. None of
+    # those ten hosts contains 足 at all -- they contain 𧾷, the combining form,
+    # which cjkvi spells ⿱口止 and which renders narrower with a RISING last
+    # stroke: neither 龰's fall nor quite 止's flat base, but far closer to 止.
+    # Heisig's "stop; footprint" was defensible for them all along. 足 now
+    # carries 口 + 止 as a labelled alternate, which is what those hosts reach
+    # through. This pin still guards the PRIMARY, because the glyph this row is
+    # for is the standalone 足, and that one really is 口 + 龰.
     "rtk1372": {"character": "足", "keyword": "leg",
                 "expected_part_ids": {"rtk11", "prim-mending"}},
     "rtk1194": {"character": "甲", "keyword": "armor",
