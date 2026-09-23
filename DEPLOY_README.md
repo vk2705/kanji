@@ -100,22 +100,52 @@ unsure; `migrate_schema()` re-running is always safe/idempotent.)
 
 ## Step 4 — verify
 
-Run the required smoke test on the production VM. It confirms the systemd
-service is active, Japanese character/detail/parts lookup works, and Chinese
-hanzi search returns the expected `finger` entry:
+Run the smoke test. It is not optional and it is not a ping: it checks that
+**every seeding step actually ran**, because the 2026-09-20 prod move seeded the
+database from `data.txt` + the CSV and stopped there. `import_hanzi.py`,
+`backfill_readings.py` and `add_ru_aliases.py` never ran, the site came up,
+every page rendered, every Japanese search worked — and the Chinese
+study-language options returned zero results for *everything* until an owner
+searched for "finger" a day later and found nothing.
 
 ```bash
 cd /opt/kanji/backend
 ./venv/bin/python3 deploy_smoke_test.py --service kanji-backend.service
 ```
 
-The test exits nonzero on any failure. To check the public nginx route as well,
-run the same test against the production API:
+Thirteen checks, in four groups:
+
+| group | what it proves |
+|---|---|
+| service + API | the unit is active, `日` resolves, `明`'s detail loads |
+| Japanese seed | a common primitive returns 100+ kanji; `sun`+`moon` finds 明; the primitive *name* `finger` finds 扌; autocomplete offers it |
+| the one-off scripts | `zh-Hans` and `zh-Hant` each return a couple of dozen rows (`import_hanzi.py`), 日 has on'yomi and a hanzi has pinyin (`backfill_readings.py`), a primitive image is attached *and* served (`make_primitive_images.py`), a Russian term hits (`add_ru_aliases.py`) |
+| frontend | `index.html`'s asset paths match this target's Vite `base`, and the first one actually 200s |
+
+Every check runs even after one fails, so you get the whole list, and each
+failure prints the command that fixes it. Exits non-zero if anything failed.
+
+To check the public nginx route and the built frontend as well:
 
 ```bash
+# prod
 ./venv/bin/python3 deploy_smoke_test.py \
-  --base-url https://kanji.alteon.help/kanji/api
+  --base-url https://kanji.alteon.help/kanji/api \
+  --site-url https://kanji.alteon.help --expect-base /
+
+# the shared dev box
+./venv/bin/python3 deploy_smoke_test.py \
+  --base-url https://srv.alteon.help/kanji/api \
+  --site-url https://srv.alteon.help/kanji --expect-base /kanji/
 ```
+
+`--expect-base` is what catches the 2026-09-20 blank-page class: the right code
+built with the wrong `base` serves an `index.html` whose asset URLs 404, so the
+page loads, renders nothing, and every API-only check still passes.
+
+**As of 2026-09-23 prod fails two of the thirteen** — `backfill_readings.py` has
+never been run there, so the pronunciation panel is empty on every detail page.
+Run it on the prod VM and the run goes green (the dev box already passes all 13).
 
 ## Scheduled backup and tested restore
 
