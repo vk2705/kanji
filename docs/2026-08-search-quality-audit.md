@@ -14335,3 +14335,29 @@ Verified: 1326 checks exit 0, 74 pytest, over-flattening 0, dead tokens 0,
 self-references 0, primary-choice 0 in both modes, phantom unchanged at 28,
 anachronistic 1 (the known "question mark"), frontend lint + both builds clean.
 No pin moved. **`audit_csv_regressions` 408 → 399.**
+
+## 2026-09-23 — chunk 49: the umbrella family
+
+Chunk 41 established that Heisig's "umbrella" is 𠆢 and deliberately refused to
+alias the name onto bare 人. Five rows were still spelling that shape 人, so
+every host of theirs dropped the concept. Rendered all five tops beside 𠆢 and
+人 before changing anything: the splay in 食 会 舎 脊 俞 is the wide flat 𠆢, not
+the steeper, higher-crossing strokes of 人.
+
+* **食 (eat) = 𠆢 + 良.** Its primary decomposition was *empty*, so 飯 飲 飢 餓
+  飾 餌 館 餅 養 飽 飼 all stopped there — eleven hosts behind one blank field.
+  cjkvi's `⿱人良` says the same thing with the generic codepoint for the top;
+  that spelling stays on as the labelled alternate.
+* **会** was `云,人`, **舎** was `人,𠮷`, **脊** was `丷,人,八,月` — same swap,
+  nothing else touched.
+* **俞 (meeting of butchers) = 亼 + 月 + 刀.** cjkvi gives `⿱亼刖` = `⿱亼⿰月刂`,
+  and Heisig reads 輸 愉 諭 癒 as "meeting of butchers; umbrella; one; moon; …;
+  sword". 亼 is the 𠆢 + 一 row chunk 41 created, so "umbrella" and "one" both
+  come back by recursion, and "meeting" is the name Heisig himself uses for it
+  in 愉's row. Written 刀 rather than 刂 per this file's existing decision on 則
+  副 別 刺, where all four blade names live on the one 刀 row.
+
+Verified: 1326 checks exit 0, 74 pytest, over-flattening 0, dead tokens 0,
+self-references 0, primary-choice 0 in both modes, phantom unchanged at 28,
+anachronistic 1 (the known "question mark"), frontend lint + both builds clean.
+No pin moved. **`audit_csv_regressions` 399 → 380.**

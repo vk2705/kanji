@@ -316,7 +316,7 @@ rtk264:洗:wash:先,水
 rtk265:介:jammed in:𠆢,ノ,｜;ノ,人,｜
 rtk266:界:world:田,介
 rtk267:茶:tea:艹,𠆢,朩
-rtk268:脊:stature:丷,人,八,月
+rtk268:脊:stature:丷,𠆢,八,月
 rtk269:合:fit:口,亼
 rtk270:塔:pagoda:合,土,艹
 rtk271:王:king,jewel,ball:;一,土
@@ -386,7 +386,7 @@ rtk334:京:capital:口,小,亠
 rtk335:涼:refreshing:水,京
 rtk336:景:scenery:京,日
 rtk337:鯨:whale:魚,京
-rtk338:舎:cottage:人,𠮷
+rtk338:舎:cottage:𠆢,𠮷
 rtk339:周:circumference,running track:冂,𠮷
 rtk340:週:week:周,辶
 rtk341:士:gentleman,samurai:;一,十
@@ -862,7 +862,7 @@ rtk810:胎:womb:月,台
 rtk811:窓:window:穴,心,厶
 rtk812:去:gone:土,厶
 rtk813:法:method:水,去
-rtk814:会:meeting:云,人
+rtk814:会:meeting:𠆢,云
 rtk815:至:climax:一,土,厶
 rtk816:室:room:至,宀
 rtk817:到:arrival:至,刀
@@ -1630,7 +1630,7 @@ rtk1578:良:good,halo:丶,艮;艮,｜
 rtk1579:朗:melodious:月,良
 rtk1580:浪:wandering:水,良
 rtk1581:娘:daughter:女,良
-rtk1582:食:eat,food:;人,良
+rtk1582:食:eat,food:𠆢,良;人,良
 rtk1583:飯:meal:食,反
 rtk1584:飲:drink:欠,食
 rtk1585:飢:hungry:食,几
@@ -3285,7 +3285,7 @@ prim-kazoo:戠:kazoo:戈,音
 prim-fingerprint:㔾:fingerprint:
 prim-scarecrow:𦰩:scarecrow:口,夫,艹
 prim-migrating-ducks:爰:migrating ducks:一,友,爪
-prim-meeting-of-butchers:俞:meeting of butchers:
+prim-meeting-of-butchers:俞:meeting of butchers:亼,月,刀
 prim-dustpan:录:dustpan:彐,氺
 prim-pogo-stick:甬:pogo stick:龴,用
 prim-guillotine:夬:guillotine:
@@ -4357,3 +4357,21 @@ prim-mirrored-spoon:?:mirrored spoon
 # this shape "heavens" in 笑 ("bamboo; heavens") and in 喬, while calling the
 # same shape "sapling" in 妖 and 沃. Both names are his; the row carries both
 # now, and 天 keeps "heavens" too.
+
+# --- 2026-09-23 (chunk 49): the umbrella family. Chunk 41 established that
+# Heisig's "umbrella" is 𠆢 and refused to alias the name onto bare 人; five
+# rows were still spelling that shape 人, so every host of theirs dropped it.
+# Rendered all five tops next to 𠆢 and 人: the splay in 食 会 舎 脊 俞 is the
+# wide flat 𠆢, not the steeper crossing strokes of 人.
+# 食 (eat) = 𠆢 + 良, which is cjkvi's ⿱人良 with the right codepoint for the
+# top and Heisig's "food; umbrella; good; halo; drop; silver" exactly. Its
+# primary was empty, so 飯 飲 飢 餓 飾 餌 館 餅 養 飽 飼 all stopped at it.
+# cjkvi's own 人,良 stays as the labelled alternate.
+# 会 was 云,人 and 舎 was 人,𠮷 and 脊 was 丷,人,八,月 -- same swap, no other
+# change.
+# 俞 (meeting of butchers) = 亼 + 月 + 刀. cjkvi gives ⿱亼刖 = ⿱亼⿰月刂, and
+# Heisig reads 輸 愉 諭 癒 as "meeting of butchers; umbrella; one; moon; ...;
+# sword" -- 亼 is the 𠆢 + 一 chunk 41 created, which supplies "umbrella" and
+# "one" by recursion, and "meeting" is the name he uses for it in 愉's row.
+# Written 刀 rather than 刂 per this file's existing decision (see the note
+# above about 則 副 別 刺, where all four blade names live on the one 刀 row).
