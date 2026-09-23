@@ -2246,7 +2246,7 @@ rtk2186:錬:tempering:金,東
 rtk2187:遵:abide by:辶,尊
 rtk2188:罷:quit:罒,能
 rtk2189:屯:barracks,earthworm:ノ,乙,凵
-rtk2190:且:moreover,my bookshelves:一,目
+rtk2190:且:moreover,my bookshelves,shelf:一,目
 rtk2191:藻:seaweed:水,艹,喿
 rtk2192:隷:slave:士,示,隶
 rtk2193:癒:healing:愈,疒
@@ -3268,7 +3268,7 @@ prim-tarzan:枼:tarzan:世,木
 prim-angel:喬:angel:夭,口,冂,口
 prim-loincloth:臤:loincloth:又,臣
 prim-shredder:敝:shredder:
-prim-salad:龷:salad:
+prim-salad:龷:salad:艹,一
 prim-grass-skirt:㐮:grass skirt:
 prim-segway:夆:segway,macbeth:丰,夂
 prim-golden-calf:关:golden calf:丷,天
@@ -3318,7 +3318,7 @@ prim-pegasus:𮥶:pegasus:一,隹,𠂉
 prim-mini-tractor:坴:mini-tractor,rice seedlings:
 prim-haystack:卉:haystack:十,廾
 prim-double-mysterious:兹:double-mysterious,mothballs:
-prim-cabbage:𦰌:cabbage:
+prim-cabbage:𦰌:cabbage:艹,口,龶
 prim-purse:𠀐:purse:一,中
 prim-mop:尹:mop:
 prim-red-pepper:亲:red pepper:
@@ -4375,3 +4375,18 @@ prim-mirrored-spoon:?:mirrored spoon
 # "one" by recursion, and "meeting" is the name he uses for it in 愉's row.
 # Written 刀 rather than 刂 per this file's existing decision (see the note
 # above about 則 副 別 刺, where all four blade names live on the one 刀 row).
+
+# --- 2026-09-23 (chunk 50): two more atomic compounds and one more misplaced
+# name, the three shapes the CSV report was still asking about most.
+# 𦰌 (cabbage) = 艹 + 口 + 龶. cjkvi gives ⿱艹⿻口龶 and Heisig reads 謹 僅 勤 as
+# "cabbage; flowers; mouth; grow up", term for term. Rendered: 艹 on top, then
+# a 口 with 龶 written through it, which is what the ⿻ says.
+# 龷 (salad) = 艹 + 一. cjkvi gives ⿱卄一 -- 卄 is the same grass shape 艹 is,
+# and this file already spells it 艹 everywhere -- and Heisig reads 昔 as
+# "salad; flowers; one; floor; sun; day".
+# 且 gains "shelf". Heisig's own row for 且 is "shelf; my bookshelves", both of
+# them its names, and all 11 occurrences of "my bookshelves" in the CSV are
+# immediately preceded by "shelf". Only the second was here, so 組 粗 租 狙 祖
+# and the rest dropped the first while containing it. 棚 (frame 214) keeps
+# "shelf" as its keyword -- an ordinary collision, and the earlier frame, so
+# nothing anachronistic about it.

@@ -14361,3 +14361,46 @@ Verified: 1326 checks exit 0, 74 pytest, over-flattening 0, dead tokens 0,
 self-references 0, primary-choice 0 in both modes, phantom unchanged at 28,
 anachronistic 1 (the known "question mark"), frontend lint + both builds clean.
 No pin moved. **`audit_csv_regressions` 399 → 380.**
+
+## 2026-09-23 — chunk 50: 𦰌, 龷, and the shelf
+
+* **𦰌 (cabbage) = 艹 + 口 + 龶.** cjkvi gives `⿱艹⿻口龶`; Heisig reads 謹 僅 勤
+  as "cabbage; flowers; mouth; grow up", term for term. Rendered: 艹 on top,
+  then a 口 with 龶 written through it, which is what the `⿻` says.
+* **龷 (salad) = 艹 + 一.** cjkvi gives `⿱卄一` — 卄 is the same grass shape as
+  艹, which this file already spells 艹 everywhere — and Heisig reads 昔 as
+  "salad; flowers; one; floor; sun; day".
+* **且 gains "shelf".** Heisig's own row for 且 is "shelf; my bookshelves", both
+  of them its names, and all 11 occurrences of "my bookshelves" in the CSV are
+  immediately preceded by "shelf". Only the second was on the row, so 組 粗 租
+  狙 祖 and the rest dropped the first while containing it. 棚 (frame 214) keeps
+  "shelf" as its keyword — an ordinary collision, and the *earlier* frame, so
+  `audit_anachronistic_names.py` has nothing to say about it.
+
+Verified: 1326 checks exit 0, 74 pytest, over-flattening 0, dead tokens 0,
+self-references 0, primary-choice 0 in both modes, phantom unchanged at 28,
+anachronistic 1 (the known "question mark"), `suggest_heisig_aliases` 4
+unresolved groups, frontend lint + both builds clean. No pin moved.
+**`audit_csv_regressions` 380 → 365.**
+
+### Where chunks 41–50 leave the report
+
+**572 → 365 flagged**, a bit over a third of the backlog, and the shape of what
+remains has changed. The ten chunks found three recurring bug shapes and almost
+nothing else:
+
+1. **A name on the wrong row** — cocoon on 厶 instead of 幺, altar only on 礻,
+   eye only on 目, shelf only on 棚. Always caught by the CSV emitting a
+   primitive's names as one adjacent run, and always confirmed by rendering the
+   two candidate glyphs side by side before moving anything.
+2. **A compound left atomic** — 歹 畐 殳 咅 喬 俞 𦰌 龷, and 食 with an empty
+   primary that stopped eleven hosts. One blank parts field routinely costs
+   three to five concepts on every host that reaches it.
+3. **A lookalike in place of the real codepoint** — 癶 for 祭's flesh, 人 for 𠆢
+   in five rows, and 天 avoided in favour of 夭 in 喬. This is the shape that
+   keeps coming back, and the render is the only thing that reliably catches it.
+
+One case went the other way: 穴, where the baseline is wrong and the data is
+right, now pinned so a later pass cannot "fix" it. Expect more of those as the
+count falls — the cheap, well-evidenced families are mostly gone now, and what
+is left leans on judgement rather than on a second source agreeing.
