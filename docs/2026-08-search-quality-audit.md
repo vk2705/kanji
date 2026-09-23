@@ -14778,3 +14778,49 @@ Verified: 1327 checks exit 0, 74 pytest, over-flattening 0, dead tokens 0,
 self-references 0, primary-choice 0 in both modes, phantom 27 → 25, anachronistic
 1, frontend lint + both builds clean. No pin moved.
 **`audit_csv_regressions` 278 → 257.**
+
+## 2026-09-23 — chunk 61: 用, 宿, 冬, 气
+
+* **用** had an *empty* primary with cjkvi's `⿵冂⿻二丨` as the alternate — the
+  third row in three chunks with that shape, after 食 (chunk 49) and 衣 (chunk
+  58). Heisig reads 用 庸 備 as "moon; month; flesh; part of the body; walking
+  stick", i.e. 月 with a ｜ driven through it, so that is the primary now and
+  cjkvi's frame-and-two-bars spelling stays as the alternate. Rendered, they
+  are the same picture described from two directions.
+* **宿 (inn)** was `白,宀` — wrong character *and* a missing part. cjkvi gives
+  `⿱宀佰` with 佰 = `⿰亻百`, Heisig reads it "house; person; hundred; one;
+  ceiling; white; dove", and the render shows 亻 and 百 side by side under the
+  roof. 白 is in there only as part of 百. 縮 was stopping at the same gap.
+* **冬 (winter)** was `夂,丶` — one dot where there are two. cjkvi `⿱夂冫`,
+  Heisig "walking legs; ice", render confirms the pair. 終 was dropping "ice".
+* **气 (steam) = 𠂉 + 一 + 乙** — cjkvi `⿳𠂉一乁`; 気 汽 read "landed fish;
+  reclining; lying down; one; floor; fishhook; sheaf". Written 乙 rather than
+  cjkvi's 乁 because this file has a row for 乙 answering to "fishhook" and none
+  for 乁, and the render shows one sweeping stroke either way.
+
+**Three empty primaries in three chunks** (食, 衣, 用) is worth calling out as a
+pattern in its own right: a row whose only decomposition is the labelled cjkvi
+alternate reads as "deliberately atomic" to a human skimming the file and as "no
+primary claim" to the code, and in all three cases the right primary was sitting
+in the alternate all along. Anything else shaped like that is worth a look.
+
+Verified: 1327 checks exit 0, 74 pytest, over-flattening 0, dead tokens 0,
+self-references 0, primary-choice 0 in both modes, phantom 25, anachronistic 1,
+`suggest_heisig_aliases` 4 groups, frontend lint + both builds clean. No pin
+moved. **`audit_csv_regressions` 257 → 251.**
+
+### Where chunks 51–61 leave it
+
+**365 → 251** over this run (the 57 slot went to another session working the
+phantom-parts seam in parallel). Two prospectors were built along the way and
+the second one is the keeper: asking whether **cjkvi names a child the row omits
+that also answers a dropped name** requires two independent sources to agree
+before it reports anything, and its hit list has been nearly all real, where the
+adjacency prospector of chunk 54 was nearly all noise.
+
+The other thing this run changed is the standing of the "baseline defect"
+category. Chunk 52 opened one and chunk 59 closed it again — the ten hosts were
+using a *combining form* of the glyph, not the glyph, and the source was right.
+One genuine defect remains (穴, chunk 47). The rule that came out of it: before
+concluding heisig-kanjis.csv is wrong about a family, check which form of the
+glyph the hosts actually contain.

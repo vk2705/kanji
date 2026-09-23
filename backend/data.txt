@@ -504,7 +504,7 @@ rtk452:雲:cloud:雨,云
 rtk453:曇:cloudy weather:日,雲
 rtk454:雷:thunder:雨,田
 rtk455:霜:frost:雨,相
-rtk456:冬:winter:夂,丶
+rtk456:冬:winter:夂,冫
 rtk457:天:heavens:一,大
 rtk458:妖:attractive:夭,女
 rtk459:沃:fertility:夭,水
@@ -1118,7 +1118,7 @@ rtk1066:便:convenience:亻,更
 rtk1067:倍:double:亻,咅
 rtk1068:優:tenderness:亻,憂
 rtk1069:伐:fell:亻,戈
-rtk1070:宿:inn:白,宀
+rtk1070:宿:inn:宀,亻,百
 rtk1071:傷:wound:亻,日,一,昜
 rtk1072:保:protect:亻,呆
 rtk1073:褒:praise:亠,保,衣;亠,保,𧘇
@@ -1313,7 +1313,7 @@ rtk1261:斗:big dipper,the plough,measuring cup:
 rtk1262:料:fee:斗,米
 rtk1263:科:department:禾,斗
 rtk1264:図:map:斗,囗
-rtk1265:用:utilize,utilise:;二,冂,｜
+rtk1265:用:utilize,utilise:月,｜;二,冂,｜
 rtk1266:庸:commonplace:⺕,用,广,聿
 rtk1267:備:equip:亻,用,厂,艹
 rtk1268:昔:once upon a time,storyteller:日,龷
@@ -3109,7 +3109,7 @@ kangxi153:豸:badger,legless insect,skunk
 kangxi89:爻:trigrams,diagram
 kangxi179:韭:leek
 kangxi193:鬲:cauldron,tripod
-kangxi84:气:steam,air
+kangxi84:气:steam,air:𠂉,一,乙
 kangxi190:髟:long hair
 kangxi192:鬯:sacrificial wine
 kangxi205:黽:frog,toad
@@ -4598,3 +4598,21 @@ prim-tall:?:tall:亠,口
 # 兹 (double-mysterious) = 丷 + 一 + 幺 + 幺. cjkvi ⿱䒑𢆶; Heisig's 滋 慈 磁
 # read "double-mysterious; mothballs; horns; one; cocoon". The two 幺 are why
 # chunk 43's "cocoon" fix could not reach these three until now.
+
+# --- 2026-09-23 (chunk 61): four more from the chunk-58 prospector.
+# 用 had an EMPTY primary with cjkvi's ⿵冂⿻二丨 as the alternate -- the third
+# row in three chunks with that shape, after 食 (chunk 49) and 衣 (chunk 58).
+# Heisig reads 用 庸 備 as "moon; month; flesh; part of the body; walking
+# stick", i.e. 月 with a ｜ driven through it, so that is the primary now and
+# cjkvi's frame-and-two-bars spelling stays as the alternate. Rendered they are
+# the same picture described from two directions.
+# 宿 (inn) was 白,宀 -- wrong character and a missing part. cjkvi gives ⿱宀佰
+# with 佰 = ⿰亻百, Heisig reads it "house; person; hundred; one; ceiling;
+# white; dove", and the render shows 亻 and 百 side by side under the roof. 白
+# is in there only as part of 百; 縮 was stopping at the same gap.
+# 冬 (winter) was 夂,丶 -- one dot where there are two. cjkvi ⿱夂冫, Heisig
+# "walking legs; ice", render confirms the pair. 終 was dropping "ice" for it.
+# 气 (steam) = 𠂉 + 一 + 乙. cjkvi ⿳𠂉一乁; Heisig reads 気 汽 as "landed fish;
+# reclining; lying down; one; floor; fishhook; sheaf". 乙 rather than cjkvi's
+# 乁 because this file has a row for 乙 answering to "fishhook" and none for
+# 乁, and the render shows one sweeping stroke either way.
