@@ -14673,3 +14673,40 @@ flat tail, pick from `--near` output rather than by host count). `kangxi58`
 (holds 彑, Unicode's `CJKRadicals.txt` says radical 58 is 彐) is still
 untouched housekeeping — low urgency, but a rename that touches every pin
 referencing it, so budget a full chunk for it alone when picked up.
+## 2026-09-23 — chunk 58: a prospector that asks two sources at once
+
+(Renumbered from 57 on rebase — another session landed its own chunk 57, the
+phantom-parts pass on 羊, while this one was in flight.)
+
+Chunk 54's adjacency prospector was mostly noise because one source can agree
+with itself. This pass keyed on **cjkvi instead**: for every flagged host, does
+cjkvi name a child the row does not list, *and* does that child answer to one of
+the dropped names? Two independent sources have to agree before anything is
+reported, and the result is a different kind of list — **128 hits, nearly all
+real**. Four intermediate rows account for 21 of them.
+
+* **衣 (garment)** had an *empty* primary with cjkvi's `⿱亠𧘇` sitting there as
+  the alternate — the same arrangement 食 had in chunk 49, and worth noting as a
+  recurring shape in this file. Promoted: Heisig reads it "top hat; scarf;
+  cloth; clothes; clothing", which is 亠 + 𧘇 exactly, and 裁 装 裏 壊 哀 製 懐 褒
+  all stopped at it.
+* **尞 (pup tent) = 大 + 日 + 小.** Heisig reads 僚 瞭 寮 療 as "pup tent; large;
+  St. Bernard; sun; day; small; little" and the render is those three stacked.
+* **釆 (animal tracks) = ノ + 米**, cjkvi's `⿱丿米`, which Heisig writes as
+  "animal tracks; drop; rice" in 釈 番 審 翻.
+* **冓 (funnel) = 𠀎 + 再.** cjkvi gives `⿱𠀎冉` and Heisig "funnel; cone; celery;
+  again". His 再 and cjkvi's 冉 differ by one horizontal, which 𠀎 also claims —
+  that overlap is his reading, not a stroke count, and 冉 has no row here to
+  spell the alternate with.
+
+**Left for later: 其 (bushel basket, 6 hosts).** cjkvi writes its top as a bare
+five-stroke placeholder, so only Heisig speaks, and he names nothing in it but
+the 八. Rendered, the top is a box with *two* inner bars, which is not 甘 (one
+bar) whatever the stroke count suggests. Writing 其 as just 八 would buy the
+concept back at the price of a decomposition two thirds missing on the detail
+page.
+
+Verified: 1327 checks exit 0, 74 pytest, over-flattening 0, dead tokens 0,
+self-references 0, primary-choice 0 in both modes, phantom unchanged at 28,
+anachronistic 1, frontend lint + both builds clean. No pin moved.
+**`audit_csv_regressions` 297 → 288.**

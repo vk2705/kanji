@@ -471,7 +471,7 @@ rtk419:延:prolong:ノ,廴,止
 rtk420:誕:nativity:延,言
 rtk421:礎:cornerstone:石,林,疋
 rtk422:婿:bridegroom:月,女,疋
-rtk423:衣:garment,cloth,clothes,clothing:;亠,𧘇
+rtk423:衣:garment,cloth,clothes,clothing:亠,𧘇
 rtk424:裁:tailor:衣,𢦏
 rtk425:装:attire:衣,壮
 rtk426:裏:back:衣,里;亠,里,𧘇
@@ -3099,7 +3099,7 @@ kangxi56:弋:stake,shoot,arrow
 kangxi54:廴:long stride,stretch
 kangxi141:虍:tiger
 kangxi105:癶:footsteps,back-to-back feet,teepee,wigwam
-kangxi165:釆:distinguish,claw print,animal tracks
+kangxi165:釆:distinguish,claw print,animal tracks:ノ,米
 kangxi171:隶:reach,slave,sieve:⺕,氺
 kangxi129:聿:brush
 kangxi136:舛:oppose,dance,ballerina,dancing legs,sunglasses:夕,㐄
@@ -3242,7 +3242,7 @@ prim-devil:兑:devil:丷,兄
 prim-futon:翟:futon:羽,隹
 prim-talking-cricket:禺:talking cricket:田,禸
 prim-mao:夌:mao:土,儿,夂
-prim-pup-tent:尞:pup tent:
+prim-pup-tent:尞:pup tent:大,日,小
 prim-awl:㑒:awl:亼,口,人
 prim-calling-card:氐:calling card:氏,一
 # Second batch, 2026-09-09. Same method: Heisig's own name from
@@ -3290,7 +3290,7 @@ prim-dustpan:录:dustpan:彐,氺
 prim-pogo-stick:甬:pogo stick:龴,用
 prim-guillotine:夬:guillotine:
 prim-stamp-album:卬:stamp album,stamps:
-prim-funnel:冓:funnel,cone:
+prim-funnel:冓:funnel,cone:𠀎,再
 prim-post-it-note:侖:post-it note:亼,𠕁
 prim-lifebelt:㐬:lifebelt:
 # Fifth batch, 2026-09-11. Method unchanged (strict CSV name resolution, name not
@@ -4531,3 +4531,27 @@ prim-tall:?:tall:亠,口
 # CSV text, so every legitimate host of it will always read as a phantom to
 # this detector -- that is a property of the primitive, not evidence
 # against any one host. Not touched.
+# --- 2026-09-23 (chunk 58): wrote a second prospector, this one keyed on
+# cjkvi rather than on adjacency: for every flagged host, ask whether cjkvi
+# names a child the row does not list AND that child answers to one of the
+# dropped names. 128 hits, and unlike the adjacency pass they are nearly all
+# real, because two independent sources have to agree before anything is
+# reported. Four intermediate rows account for 21 of them.
+# 衣 (garment) had an EMPTY primary with cjkvi's ⿱亠𧘇 sitting there as the
+# alternate -- the same arrangement 食 had in chunk 49. Promoted: Heisig reads
+# it "top hat; scarf; cloth; clothes; clothing", which is 亠 + 𧘇 exactly, and
+# 裁 装 裏 壊 哀 製 懐 褒 all stopped at it.
+# 尞 (pup tent) = 大 + 日 + 小. Heisig reads 僚 瞭 寮 療 as "pup tent; large;
+# St. Bernard; sun; day; small; little" and the render is those three stacked.
+# 釆 (animal tracks) = ノ + 米, cjkvi's ⿱丿米, which Heisig writes as "animal
+# tracks; drop; rice" in 釈 番 審 翻.
+# 冓 (funnel) = 𠀎 + 再. cjkvi gives ⿱𠀎冉 and Heisig "funnel; cone; celery;
+# again"; his 再 and cjkvi's 冉 differ by one horizontal, which 𠀎 also claims.
+# That overlap is his reading, not a stroke count, and 冉 has no row here to
+# spell the alternate with.
+# Left for a later pass: 其 (bushel basket, 6 hosts). cjkvi writes its top as a
+# bare five-stroke placeholder, so only Heisig speaks, and he names nothing in
+# it but the 八 -- rendered, the top is a box with two inner bars, which is not
+# 甘 (one bar) whatever the stroke count suggests. Writing 其 as just 八 would
+# buy the concept back at the price of a decomposition that is two thirds
+# missing on the detail page.
