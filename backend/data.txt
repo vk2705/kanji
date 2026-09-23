@@ -634,7 +634,7 @@ rtk582:豪:overpowering:prim-tall,冖,豕;亠,口,冖,豕
 rtk583:腸:intestines:昜,月
 rtk584:場:location:土,昜
 rtk585:湯:hot water:昜,水
-rtk586:羊:sheep:王,丷
+rtk586:羊:sheep:丷
 rtk587:美:beauty:大,羊
 rtk588:洋:ocean:水,羊
 rtk589:詳:detailed:言,羊
@@ -4502,3 +4502,32 @@ prim-tall:?:tall:亠,口
 # Written 刀 per this file's existing decision about 刂. 刑 also lost its bogus
 # ノ and 二 in the process: cjkvi's left half is 开 = ⿱一廾, which is the 廾 and
 # the bar the row now carries, and nothing else.
+
+# --- 2026-09-23 (chunk 57): audit_phantom_parts.py's "strong evidence"
+# section (structural + CSV agree) had 4 hosts. One was a real bug; three
+# were the detector hitting its own blind spots, not this file's.
+# 羊 (sheep, rtk586) was 王,丷 -- but heisig-kanjis.csv's row for 586 lists
+# exactly one component, "horns", and cjkvi-ids' own split (⿱䒑⿻二丨) puts
+# one of the three horizontal bars inside the horns group, not the bottom
+# cluster, so the bottom is not a clean 王 either way. Nothing in the book
+# names a "king" here. Fixed to 丷 alone.
+# 斎 (rtk1869) still correctly reads 斉,示: cjkvi-ids spells the top 齐, the
+# Chinese-simplified sibling of 斉 (U+9F50 vs U+6589, one stroke apart) --
+# not a different shape, a different codepoint for the same one, and this
+# file already settled on 斉 as the right glyph for this family (see the
+# fenceposts/cabers note above, which explicitly has 斎 inheriting from 斉
+# on purpose). Not touched.
+# 属 (rtk2103) still correctly reads 尸,ノ,禸: cjkvi-ids has 属 = ⿸尸禹 (Yu
+# the Great, U+79B9), but rendered, the enclosed shape has a plain 田 grid
+# at the top and a hooked tail -- 禺 (U+79BA, "talking cricket"), the shape
+# 属's own kangxi114 fix already traced to 甶+禸 on 2026-09-20, not 禹's
+# more angular top. cjkvi's source data has the lookalike here, not this
+# file. Not touched.
+# 能 (rtk2160) still correctly reads 月,匕,厶,prim-mirrored-spoon: this is
+# the deliberately-invented placeholder for the flipped 匕 half of 北/比/能
+# (see prim-mirrored-spoon's own note above), already pinned in
+# test_regression_fixes.py with its own citation trail. A synthetic
+# primitive with no real codepoint can never resolve against cjkvi or the
+# CSV text, so every legitimate host of it will always read as a phantom to
+# this detector -- that is a property of the primitive, not evidence
+# against any one host. Not touched.

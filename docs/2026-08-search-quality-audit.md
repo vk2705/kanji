@@ -14597,3 +14597,79 @@ Verified: 1327 checks exit 0, 74 pytest, over-flattening 0, dead tokens 0,
 self-references 0, primary-choice 0 in both modes, phantom unchanged at 28,
 anachronistic 1, frontend lint + both builds clean. No pin moved.
 **`audit_csv_regressions` 306 → 297.**
+
+## 2026-09-23 — chunk 57: `audit_phantom_parts.py`'s strong-evidence section, one real bug and three of the detector's own blind spots
+
+`--in-csv-range`'s top section (structural channel *and* CSV both flag the
+same part) had shrunk to 4 hosts — small enough to work each one by hand
+rather than by pattern. Rendered all four before touching anything. Three
+turned out not to be bugs in this file at all.
+
+* **羊 (sheep, rtk586) was `王,丷`, fixed to `丷` alone.** heisig-kanjis.csv's
+  own row for frame 586 lists exactly one component, "horns" — no second
+  name, no "king". cjkvi-ids' `⿱䒑⿻二丨` agrees in its own way: 䒑 itself is
+  `⿱丷一`, so one of 羊's three horizontal bars sits inside the *horns* group
+  under cjkvi's own split, and the bottom cluster is `⿻二丨` — two bars, not
+  the three a real 王 would need. Nothing here — not the book, not the
+  structural source — actually calls the bottom "king"; something earlier
+  than this audit just assumed it from the resemblance. No pin referenced
+  rtk586's own parts, so this was a plain one-line fix.
+
+* **斎 (rtk1869) stays `斉,示` — not a bug.** cjkvi-ids spells the top `齐`
+  (U+9F50, the Chinese-simplified sibling of 斉/U+6589, one stroke apart),
+  which is why the detector can't match it against this row's `斉` — but
+  that's the same shape under a different regional codepoint, not a
+  different shape, and this file already settled on 斉 as the right glyph
+  for this whole family (the fenceposts/cabers note earlier in `data.txt`
+  has 斎 inheriting from 斉 *on purpose*, so it wouldn't need its own
+  fenceposts/cabers edit). Left alone.
+
+* **属 (rtk2103) stays `尸,ノ,禸` — not a bug.** cjkvi-ids has `属 = ⿸尸禹`
+  (Yu the Great, U+79B9), which doesn't decompose to 禸 at all — but
+  rendered, the shape enclosed in 属's 尸 has a plain 田 grid at the top and
+  a hooked tail, which is 禺 (U+79BA, "talking cricket"), not 禹's more
+  angular top. This is the same shape the kangxi114 fix on 2026-09-20 already
+  traced to 甶+禸 for this exact family (離 璃 属 禽 寓 萬). cjkvi's own
+  source data has the one-stroke lookalike here, not this file. Left alone.
+
+* **能 (rtk2160) stays `月,匕,厶,prim-mirrored-spoon` — not a bug, and can't
+  ever read as one.** `prim-mirrored-spoon` is the deliberately-invented
+  placeholder (character `?`) for the flipped 匕 half of 北/比/能, written up
+  in `data.txt`'s own 2026-09-21 note and separately pinned in
+  `test_regression_fixes.py` with a citation trail back to that day's
+  Google cross-check. A synthetic primitive with no real codepoint can never
+  resolve against cjkvi-ids or CSV text — every legitimate host of it will
+  read as a phantom to this detector forever, which is a property of the
+  primitive, not evidence against 能 specifically. Left alone.
+
+Net: `王` off 羊, three false positives documented (in `data.txt` itself, next
+to the row, so the next pass doesn't re-spend render budget on the same
+three). `audit_phantom_parts --in-csv-range`: 26 → 25 phantom parts, 19 → 18
+kanji (strong section 4 → 3).
+
+This chunk was worked and drafted against the tree at chunk 50 (26 phantom
+parts, `audit_csv_regressions` 365), then rebased four times on top of other
+sessions pushing concurrently — chunks 51-53, then 54, then 55, then 56 —
+before this could push, hence the renumber to 57. Several other sessions of
+this same routine were clearly running in parallel today; re-verified
+against the fully merged tree each time rather than trusting pre-rebase
+numbers:
+
+Verified: 1327 checks exit 0, 74 pytest, over-flattening 0, self-references 0,
+radicals 0 in both sections, primary-choice 0 (71 multi-chunk kanji, up from
+66 at chunk 50), `audit_phantom_parts --in-csv-range` unaffected by chunks
+51-56 (still 25/18 after every merge — none of the other sessions' fixes
+this run happened to touch the same strong-evidence set), `audit_csv_regressions`
+at 297 (chunk 56's number — this chunk's own fix is an over-specification,
+not a CSV drop, so it was never going to move that count either way),
+frontend lint + both builds clean.
+
+**Next** — the three false positives just documented mean `audit_phantom_parts.py`'s
+strong-evidence list is down to 0 real remaining candidates from this pass;
+next firing should go back to the weak-evidence list (22 phantom parts across
+15 kanji, Heisig-channel-only — 憂 之 段 as the multi-part hosts, worth doing
+first) or to `suggest_heisig_aliases.py --near 0.8 --all` (~236 names left,
+flat tail, pick from `--near` output rather than by host count). `kangxi58`
+(holds 彑, Unicode's `CJKRadicals.txt` says radical 58 is 彐) is still
+untouched housekeeping — low urgency, but a rename that touches every pin
+referencing it, so budget a full chunk for it alone when picked up.
