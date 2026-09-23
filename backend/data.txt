@@ -182,7 +182,7 @@ rtk130:妙:exquisite:少,女
 rtk131:省:government ministry:少,目
 rtk132:厚:thick:子,日,厂
 rtk133:奇:strange:大,可
-rtk134:川:stream:
+rtk134:川:stream,flood:
 rtk135:州:state:川,丶
 rtk136:順:obey:川,頁
 rtk137:水:water,water droplets,water pistol:
@@ -298,7 +298,7 @@ rtk246:墓:grave:莫,土
 rtk247:暮:evening:莫,日
 rtk248:膜:membrane:月,莫
 rtk249:苗:seedling:田,艹
-rtk250:兆:portent:
+rtk250:兆:portent,turtle:
 rtk251:桃:peach:木,兆
 rtk252:眺:stare:目,兆
 rtk253:犬:dog:大,丶
@@ -612,7 +612,7 @@ rtk560:蝶:butterfly:枼,虫
 rtk561:独:single:犭,虫
 rtk562:蚕:silkworm:天,虫
 rtk563:風:wind:几,虫,ノ
-rtk564:己:self:
+rtk564:己:self,snake:
 rtk565:起:rouse:走,己;巳,走
 rtk566:妃:queen:女,己
 rtk567:改:reformation:己,攵
@@ -959,7 +959,7 @@ rtk907:潜:submerge:替,水
 rtk908:失:lose:ノ,夫
 rtk909:鉄:iron:金,失
 rtk910:迭:transfer:辶,失
-rtk911:臣:retainer:
+rtk911:臣:retainer,slave:
 rtk912:姫:princess:女,臣
 rtk913:蔵:storehouse:艹,戊,臣
 rtk914:臓:entrails:蔵,月
@@ -4419,3 +4419,25 @@ prim-mirrored-spoon:?:mirrored spoon
 # and 示/"altar": a name Heisig gives the kanji as a building block, missing
 # from the row that is the building block.
 # Not changed: the 足 family. See the pin on rtk1372.
+
+# --- 2026-09-23 (chunk 53): four primitive names Heisig gives a kanji that
+# were missing from that kanji's own row. All four were found the same way:
+# a kanji whose *entire* CSV components column is unaccounted for by its parts
+# is a kanji whose components column is holding its own primitive names, not a
+# decomposition. (That is how 又/"crotch", 示/"altar" and 由/"sprout; shoot"
+# read too -- chunks 45, 47, 52.)
+# flood -> 川 (11 hosts; 州 順 災 巡 all write "stream; flood"). 巛 keeps
+#   "flood" as well; the two are the same river drawn two ways.
+# turtle -> 兆 (12 hosts; 桃 眺 逃 write "portent; turtle"). 丬 keeps it too --
+#   rendered they are nothing alike, and Heisig really does use the one name
+#   for both, 状 being "turtle; chihuahua; dog; large; drop".
+# snake -> 己 (20 hosts; 妃 改 記 起 all write "snake; self"). 蛇 keeps it as
+#   its keyword, and at frame 558 it is the earlier of the two, so nothing
+#   anachronistic.
+# slave -> 臣 (15 hosts; 姫 蔵 臓 賢 all write "retainer; slave").
+# Not added: "nose" to 身. Its own row says "nose", but every other host of
+# that name (首 臭 息 憩) contains 自, which already carries it, and 自 and 身
+# are different glyphs. One row's say-so against four is not enough here.
+# Not added: "staples" to 印. Its own row says so, but the name's other two
+# hosts (興 暇) do not contain 印, so what Heisig means by it is still open --
+# it is the group suggest_heisig_aliases.py has been reporting all along.

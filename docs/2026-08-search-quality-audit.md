@@ -14465,3 +14465,42 @@ Verified: 1327 checks exit 0 (one new pin), 74 pytest, over-flattening 0, dead
 tokens 0, self-references 0, primary-choice 0, phantom unchanged at 28,
 anachronistic 1, frontend lint + both builds clean.
 **`audit_csv_regressions` 355 → 342.**
+
+## 2026-09-23 — chunk 53: four names a kanji gives itself
+
+Chunks 45, 47 and 52 each found the same thing one family at a time, so this
+pass looked for the shape directly: **a kanji whose *entire* CSV components
+column is unaccounted for by its own parts is a kanji whose components column
+is holding its primitive names, not a decomposition.** Sixteen rows answer that
+description; four of them were plain missing names.
+
+* **flood → 川** (11 hosts; 州 順 災 巡 all write "stream; flood"). 巛 keeps
+  "flood" as well — the same river drawn two ways.
+* **turtle → 兆** (12 hosts; 桃 眺 逃 write "portent; turtle"). 丬 keeps it too:
+  rendered, the two are nothing alike, and Heisig really does use the one name
+  for both — 状 is "turtle; chihuahua; dog; large; drop".
+* **snake → 己** (20 hosts; 妃 改 記 起 write "snake; self"). 蛇 keeps it as its
+  keyword and at frame 558 is the *earlier* of the two, so
+  `audit_anachronistic_names` has nothing to say.
+* **slave → 臣** (15 hosts; 姫 蔵 臓 賢 write "retainer; slave").
+
+Two of the sixteen were deliberately left:
+
+* **"nose" on 身.** Its own row says "nose", but all four other hosts of that
+  name (首 臭 息 憩) contain 自, which already carries it, and 自 and 身 are
+  different glyphs. One row's say-so against four is not a reading.
+* **"staples" on 印.** Its own row says so, but the name's two other hosts (興
+  暇) do not contain 印 at all, so what Heisig means by it is still open. This
+  is the group `suggest_heisig_aliases.py` has been reporting all along, and it
+  stays open rather than being half-closed here.
+
+The rest of the sixteen are 車 虫 心 西 来 曰 氏 飛 面 承 — rows this project
+keeps atomic on purpose, where the CSV column really is a decomposition and the
+"via a deliberately atomic part" bucket already accounts for them. That bucket
+dropped 78 → 57 this chunk, because several of its routes now end at a row that
+answers to the name directly.
+
+Verified: 1327 checks exit 0, 74 pytest, over-flattening 0, dead tokens 0,
+self-references 0, primary-choice 0 in both modes, phantom unchanged at 28,
+anachronistic 1, frontend lint + both builds clean. No pin moved.
+**`audit_csv_regressions` 342 → 325.**
