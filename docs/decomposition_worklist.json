@@ -1894,10 +1894,10 @@
    "巾",
    "白"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-24"
  },
  {
   "id": "rtk445",
@@ -1927,10 +1927,10 @@
    "巾",
    "氵"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-24"
  },
  {
   "id": "rtk447",
@@ -1959,10 +1959,10 @@
    "刂",
    "牛"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-24"
  },
  {
   "id": "rtk466",
