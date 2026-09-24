@@ -45,10 +45,10 @@
    "丿",
    "口"
   ],
-    "status": "keep-ours",
+  "status": "keep-ours",
   "decision": null,
-    "reviewed_by": "claude",
-    "reviewed_at": "2026-09-24"
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-24"
  },
  {
   "id": "rtk32",
@@ -170,10 +170,10 @@
   "cjkvi_leaves": [
    "頁"
   ],
-    "status": "keep-ours",
+  "status": "keep-ours",
   "decision": null,
-    "reviewed_by": "claude",
-    "reviewed_at": "2026-09-24"
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-24"
  },
  {
   "id": "rtk76",
@@ -395,10 +395,10 @@
    "十",
    "口"
   ],
-    "status": "keep-ours",
+  "status": "keep-ours",
   "decision": null,
-    "reviewed_by": "claude",
-    "reviewed_at": "2026-09-24"
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-24"
  },
  {
   "id": "rtk172",
@@ -2448,39 +2448,6 @@
   "decision": null,
   "reviewed_by": "claude",
   "reviewed_at": "2026-09-24"
- },
- {
-  "id": "rtk553",
-  "char": "栃",
-  "keyword": "horse chestnut",
-  "our_parts": [
-   "木",
-   "厂"
-  ],
-  "google_parts": [
-   "木",
-   "厂",
-   "万"
-  ],
-  "google_primitive_names": {
-   "木": "tree/wood",
-   "厂": "cliff",
-   "万": "ten thousand"
-  },
-  "google_confidence": "high",
-  "google_note": "Current_parts (斤,木,厂) has 斤 instead of 万 - text clearly and repeatedly states the right-bottom primitive is 万 (ten thousand), not 斤. This looks like a discrepancy in current_parts worth double-checking (斤 vs 万 are visually different).",
-  "cjkvi_ids": "⿰木⿸𠂆万",
-  "cjkvi_leaves": [
-   "一",
-   "丿",
-   "木",
-   "𠂆",
-   "𠃌"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
  },
  {
   "id": "rtk557",
