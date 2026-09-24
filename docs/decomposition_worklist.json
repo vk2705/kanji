@@ -1170,10 +1170,10 @@
    "口",
    "子"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-24"
  },
  {
   "id": "rtk331",
@@ -1244,10 +1244,10 @@
    "口",
    "小"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-24"
  },
  {
   "id": "rtk339",
@@ -1276,10 +1276,10 @@
    "十",
    "口"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-24"
  },
  {
   "id": "rtk341",
