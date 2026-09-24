@@ -2507,10 +2507,10 @@
    "宀",
    "虫"
   ],
-    "status": "keep-ours",
+  "status": "keep-ours",
   "decision": null,
-    "reviewed_by": "claude",
-    "reviewed_at": "2026-09-24"
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-24"
  },
  {
   "id": "rtk560",
@@ -2538,38 +2538,10 @@
    "木",
    "虫"
   ],
-    "status": "keep-ours",
+  "status": "keep-ours",
   "decision": null,
-    "reviewed_by": "claude",
-    "reviewed_at": "2026-09-24"
- },
- {
-  "id": "rtk569",
-  "char": "包",
-  "keyword": "wrap",
-  "our_parts": [
-   "勹",
-   "己"
-  ],
-  "google_parts": [
-   "勹",
-   "巳"
-  ],
-  "google_primitive_names": {
-   "勹": "bound up",
-   "巳": "snake"
-  },
-  "google_confidence": "high",
-  "google_note": "Text specifically says the inner component is 巳 (sign of the snake, closed top) not 己 or 已. Current_parts uses 已 - likely the wrong one of the three lookalikes (己/已/巳).",
-  "cjkvi_ids": "⿹勹巳",
-  "cjkvi_leaves": [
-   "勹",
-   "巳"
-  ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-24"
  },
  {
   "id": "rtk575",
@@ -2597,10 +2569,10 @@
    "乚",
    "日"
   ],
-    "status": "keep-ours",
+  "status": "keep-ours",
   "decision": null,
-    "reviewed_by": "claude",
-    "reviewed_at": "2026-09-24"
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-24"
  },
  {
   "id": "rtk576",
@@ -2631,10 +2603,10 @@
    "日",
    "氵"
   ],
-  "status": "pending",
+    "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+    "reviewed_by": "claude",
+    "reviewed_at": "2026-09-24"
  },
  {
   "id": "rtk579",
@@ -2664,10 +2636,10 @@
    "辶",
    "𧰨"
   ],
-  "status": "pending",
+    "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+    "reviewed_by": "claude",
+    "reviewed_at": "2026-09-24"
  },
  {
   "id": "rtk582",
@@ -2698,10 +2670,10 @@
    "口",
    "𧰨"
   ],
-  "status": "pending",
+    "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+    "reviewed_by": "claude",
+    "reviewed_at": "2026-09-24"
  },
  {
   "id": "rtk583",
@@ -2731,10 +2703,10 @@
    "日",
    "月"
   ],
-  "status": "pending",
+    "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+    "reviewed_by": "claude",
+    "reviewed_at": "2026-09-24"
  },
  {
   "id": "rtk584",
