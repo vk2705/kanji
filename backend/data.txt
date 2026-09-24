@@ -3078,6 +3078,7 @@ kangxi13:冂:border,down box,hood,belt,glass canopy,glass hood,helmet
 # (2026-09-09, "owl") already handles a primitive/real-kanji name clash
 # like this one correctly with no further backend change needed.
 kangxi14:冖:cover,cloth cover,birdcage,birdhouse,crown
+kangxi4:丿:slash,left-falling stroke
 kangxi6:亅:hook
 kangxi44:尸:corpse,flag
 kangxi62:戈:spear,halberd,fiesta
@@ -3114,6 +3115,8 @@ kangxi190:髟:long hair:彡
 kangxi192:鬯:sacrificial wine
 kangxi205:黽:frog,toad
 prim-mugwort:艹:mugwort,flowers,cabbage:十
+prim-thicket:楚:thicket,bramble:林,疋
+prim-mutual:胥:mutual,each other:疋,月
 prim-thirty:丗:thirty,buckle,apron
 kangxi52:幺:cocoon,tiny,short thread
 kangxi40:宀:roof,primitive_roof,mansion,house

@@ -15018,4 +15018,69 @@ not a granularity decision.
 
 **包 (wrap) = 勹 + 巳**, was `勹 + 己`. Cjkvi-ids gives `⿹勹巳`, and the
 rendered lower component has 巳's closed upper form rather than 己's open one.
-This is a real glyph-identity correction, not a variant spelling.
+This is a real glyph-identity correction, not a variant spelling. Updated
+`test_regression_fixes.py`'s stale rtk569 pin (still expecting the old 己/
+rtk564) to rtk2200 in the same session this was caught, below.
+
+## 2026-09-24 — chunks 67-74, 77: Google-alternate review, all keep-ours
+
+Nine commits (chunks 67-74 and 77) worked through `docs/decomposition_worklist.json`
+rows comparing the current `data.txt` decomposition against a Google AI-Overview
+alternate (`google_decompositions.json`, see `tools/heisig-google-check/`). Every
+row in this stretch was decided `keep-ours` — the existing decomposition was judged
+correct or equally valid, so no `data.txt` line changed and there was nothing to
+document under the usual "what changed and why" framing. Recorded here instead, per
+the doc-per-commit rule, so a future session doesn't have to re-open each commit to
+learn that these are closed:
+
+* Chunk 67: rtk243 (葉/leaf), rtk256 (然/sort of thing), rtk331 (塾/cram school),
+  rtk339 (周/circumference) — Google's flattened alternates didn't improve on the
+  existing structural forms.
+* Chunk 68: rtk347 (覚/memorize), rtk348 (栄/flourish) — both already reference
+  `prim-schoolhouse` correctly; no change.
+* Chunk 69: rtk408 (定/determine), rtk414 (是/just so) — both share `𤴓`; Google's
+  suggested split didn't match the rendered glyph as well as the existing form.
+* Chunk 70: rtk429 (遠/distant), rtk430 (猿/monkey) — both keep the expanded
+  `𠮷,𧘇,辶`/`犭,𠮷,𧘇` forms over Google's flattened `袁`, since 袁 itself isn't a
+  taught primitive here and the expansion is already correct per cjkvi's own
+  `cjkvi_leaves`.
+* Chunk 71: rtk445 (滞/stagnate), rtk447 (制/system) — existing forms retained.
+* Chunk 72: rtk488 (渇/thirst), rtk490 (褐/brown), rtk492 (葛/arrowroot) — the
+  shared 匂 (曷-family) component was reviewed across all three hosts and kept as-is.
+* Chunk 77: rtk560 (蝶/butterfly), rtk575 (竜/dragon), rtk576 (滝/waterfall),
+  rtk579 (遂/consummate), rtk582 (豪/overpowering), rtk583 (腸/intestines) — all
+  six retained their current forms unchanged.
+
+The one commit in this range that *did* rewrite `docs/decomposition_worklist.json`
+wholesale (chunk 67's "record six verified decomposition decisions",
+650->972->650 rows across the session) was `build_decomp_worklist.py` refreshing
+still-pending rows and dropping ones that `data.txt` fixes elsewhere in this same
+session (chunks 62-66, 75-76 above) had already resolved — expected shrink-as-you-go
+behavior per that script's own docstring, not a data change in itself.
+
+## 2026-09-24 — correction to chunk 66: 楚 and 胥 need their own rows
+
+Chunk 66 changed `礎`(rtk421) to `石,楚` and `婿`(rtk422) to `女,胥`, matching
+cjkvi-ids (`⿰石楚`, `⿰女胥`) and confirmed by render — but neither `楚` nor `胥`
+had ever been given a resolvable row anywhere in `data.txt`/`data_from_pdf.txt`/
+`heisig-kanjis.csv`. Referencing them as bare glyphs left both parts unresolvable
+(silently dropped from search and rendered as a broken chip on the detail page) —
+caught by `audit_radicals.py` and a `test_regression_fixes.py` failure before this
+push (expected `{rtk118, rtk208, rtk2238}` for rtk421, got only `{rtk118}`).
+
+Fixed by giving each its own primitive row rather than reverting the (correct)
+top-level structure:
+
+* **prim-thicket (楚) = 林 + 疋** — cjkvi-ids: `⿱林疋`. Not an RTK frame or a
+  Kangxi radical, so `prim-` per the id scheme.
+* **prim-mutual (胥) = 疋 + 月** — cjkvi-ids: `⿱疋月` (⺼/肉 variant in some
+  regions, same rtk13 月 row either way).
+* **kangxi4 (丿) = slash, left-falling stroke** — also missing a row despite being
+  referenced as a part on 面 (rtk2039, chunk 64) and 禾/kangxi115 (chunk 63); it
+  is Kangxi radical #4 (Unicode `KANGXI RADICAL SLASH`, U+2F03), so it got a
+  `kangxi4` row rather than `prim-`.
+
+Updated `test_regression_fixes.py`'s rtk421/rtk422 pins to the new top-level part
+ids (`{rtk118, prim-thicket}` / `{rtk102, prim-mutual}`) and added a pin for
+rtk422 (previously unpinned). `audit_radicals.py` now reports zero undefined
+part terms; the full 1328-check regression suite passes.

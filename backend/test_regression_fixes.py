@@ -1663,8 +1663,11 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"rtk564", "kangxi66"}},
     "rtk568": {"character": "記", "keyword": "scribe",
                "expected_part_ids": {"rtk357", "rtk564"}},
+    # Updated 2026-09-24 (chunk 76): cjkvi-ids gives 包 = ⿹勹巳, and the
+    # rendered lower component has 巳's closed upper form, not 己's open one --
+    # was 勹,己 (rtk564).
     "rtk569": {"character": "包", "keyword": "wrap",
-               "expected_part_ids": {"kangxi20", "rtk564"}},
+               "expected_part_ids": {"kangxi20", "rtk2200"}},
     "rtk644": {"character": "忌", "keyword": "mourning",
                "expected_part_ids": {"rtk564", "rtk639"}},
     "rtk1292": {"character": "巻", "keyword": "scroll",
@@ -1736,11 +1739,19 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk228": {"character": "燥", "keyword": "parch",
                "expected_part_ids": {"prim-furniture", "rtk173"}},
     # 礎 was 口,石,疋,木 -- a stray 口 plus an incomplete 木 standing in for
-    # 林(grove, rtk208, itself 木+木). cjkvi-ids: 礎 = ⿰石楚, 楚 = 林+疋
-    # (楚 not independently taught, flattened one level; 疋="critters",
-    # rtk2238).
+    # 林(grove, rtk208, itself 木+木). cjkvi-ids: 礎 = ⿰石楚, 楚 = 林+疋.
+    # 楚 is not an RTK frame or Kangxi radical, so it got its own prim-thicket
+    # row (林,疋 sub-decomposition) rather than being flattened into 礎's own
+    # row -- referencing it as a bare, unregistered glyph left it unresolvable
+    # (caught by audit_radicals.py, 2026-09-24).
     "rtk421": {"character": "礎", "keyword": "cornerstone",
-               "expected_part_ids": {"rtk118", "rtk208", "rtk2238"}},
+               "expected_part_ids": {"rtk118", "prim-thicket"}},
+    # 婿 was 月,女,疋 -- 月 has no connection to the real glyph. cjkvi-ids:
+    # 婿 = ⿰女胥, 胥 = 疋+月. Same fix shape as 礎/楚 above: 胥 got its own
+    # prim-mutual row instead of being referenced unresolvably (also caught
+    # by audit_radicals.py, 2026-09-24).
+    "rtk422": {"character": "婿", "keyword": "bridegroom",
+               "expected_part_ids": {"rtk102", "prim-mutual"}},
     # 磨 was 口,石,木,广,麻 -- listed 麻(hemp, rtk637) *and* its own already-
     # flattened parts (木,广) side by side, plus a stray 口. cjkvi-ids:
     # 磨 = ⿸麻石, cleanly referencing 麻 as a whole compound.
