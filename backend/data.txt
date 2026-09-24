@@ -617,7 +617,7 @@ rtk565:起:rouse:走,己;巳,走
 rtk566:妃:queen:女,己
 rtk567:改:reformation:己,攵
 rtk568:記:scribe:言,己
-rtk569:包:wrap:勹,己
+rtk569:包:wrap:勹,巳
 rtk570:胞:placenta:月,包
 rtk571:砲:cannon:石,包
 rtk572:泡:bubbles:水,包

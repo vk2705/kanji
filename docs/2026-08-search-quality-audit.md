@@ -15013,3 +15013,9 @@ rows while making the top-level decomposition match cjkvi-ids.
 `⿰木⿸𠂆万`; the rendered glyph visibly has the 万 under its right-hand
 cliff. Google and the structural source agree, so this is a source-data fix,
 not a granularity decision.
+
+## 2026-09-24 — chunk 76: package uses 巳, not 己
+
+**包 (wrap) = 勹 + 巳**, was `勹 + 己`. Cjkvi-ids gives `⿹勹巳`, and the
+rendered lower component has 巳's closed upper form rather than 己's open one.
+This is a real glyph-identity correction, not a variant spelling.
