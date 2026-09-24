@@ -14870,3 +14870,81 @@ disagree with each other.
 **Current state: 88 findings across 56 kanji — 18 shared rows to edit (33
 hosts) and 23 host rows.** That is the worklist for the next passes, already
 sorted by how many kanji each fix buys.
+
+## 2026-09-24 — chunk 62: seven shared rows off `audit_missing_children`'s top
+
+Worked the top of the shared-row list left by the previous session, most
+hosts first, each confirmed against the render before being written.
+
+* **其 (bushel basket) = 甘 + 八** — cjkvi `⿱⿱⑤一八`, and rendering 甘 beside
+  其 shows the match directly: 其's upper half is stroke-for-stroke 甘, with
+  the 八 legs added below. This also settles a question chunk raised about
+  rtk1905 (below) in passing — the "combining variant" worry didn't apply,
+  甘 really is the shape in both places. 基 旗 期 棋 read "…animal legs;
+  eight" and were dropping it. The row was a documented empty primary (the
+  block comment above it already says "left blank where that top level needs
+  a component we cannot yet register") — 甘 and 八 are both long-registered,
+  so this fix is exactly what that comment was waiting for, not an exception
+  to it.
+* **甚 (tremendously) = 甘 + 匹**, was `一,甘,儿`. `audit_phantom_parts` has
+  flagged 甘 here for a while (neither cjkvi's placeholder-topped IDS nor the
+  CSV's "bushel basket; hamper" text for this frame name 甘 by that route),
+  and the CSV's own component text pointed at 其 instead. Rendered anyway:
+  甚's top is 甘 with no legs, and 5+4=9 strokes matches 甚's real stroke
+  count where 其(8)+匹(4)=12 does not — the CSV component list is reusing
+  "bushel basket/hamper" loosely for a visually-related shape, not naming a
+  different codepoint, and the render is what settles that, not the text.
+  匹 is the audited fix itself (甚's own row, not just a host of it) and
+  matches the bottom half exactly. `一` and `儿` were a stale partial spelling
+  of 匹 (which is itself `儿,匚`) sitting one level too shallow; dropped along
+  with the fix rather than left as over-flattened cruft beside the new 匹.
+  勘 堪 were the two dependent hosts, reading "…equal" before this.
+* **韋 (tanned leather) = 口 + 㐄**, was empty. cjkvi `⿳𫝀口㐄`; the top `𫝀`
+  has no Heisig name so stays unclaimed, but 口 and 㐄 both do and both
+  render clearly inside 偉 緯 衛 違, which were dropping "mouth" and the
+  already-registered `㐄` ("winter cow", used elsewhere at rtk1405/kangxi136).
+* **鬲 (cauldron/tripod) = 口 + 冂 + 儿**, was empty. cjkvi's JK variant reads
+  `⿳一口⿵冂⿱䒑丨`; 儿/冂/口 render inside 融 隔 as the box-and-legs shape below
+  the top bar, and are the three names cjkvi and the CSV ("mouth; hood; human
+  legs") agree on — the CSV's leading "one" wasn't independently confirmed by
+  the tool so it was left alone rather than guessed at.
+* **卉 (haystack) = 十 + 一 + 廾**, was `十,廾`. cjkvi gives 廾 itself as
+  `⿻一⿰丿丨` — the "一" the tool wants is 廾's own top bar, not a new sibling
+  shape, added flat rather than opening a fresh 廾 row, same call chunk 60
+  made for 并's cjkvi-only "一". 暁 焼 (via the unregistered intermediate 尭,
+  which these two rows already skip straight past) were the two hosts.
+* **亲 (red pepper) = 立 + 木**, was empty. cjkvi's JP variant is literally
+  `⿱立木`; renders as exactly that, 立 on top of a plain 木, inside both 新
+  and 親.
+* **㐮 (grass skirt) = 六 + 𠀎 + 𧘇**, was empty. cjkvi `⿳六𠀎𧘇`. The tool's
+  own report also offered 亠/八 (六's own two strokes, per `⿱亠八`) as a second
+  route to the same names, since 六 already carries `top hat,八` as its own
+  parts — adding both would have over-flattened 六 right back into its own
+  children on the same row, so 六 stayed a unit and only its two siblings
+  were added. 𠀎 and 𧘇 don't render in this sandbox (no glyph for either
+  codepoint here — the `make_primitive_images.py` unrenderable-primitive
+  problem), but both are long-established rows already used across a dozen
+  other hosts (衣 裏 哀 遠 猿 園 for 𧘇; 寒 塞 for 𠀎), so their identity here
+  rests on the cjkvi/CSV structural match rather than a fresh render. All
+  four hosts (壌 嬢 譲 醸) share one CSV component tail — "grass skirt; top
+  hat; eight; six; animal legs; celery; scarf" — that now maps onto this row
+  exactly, six-way (its own name, plus 六's two children, plus 六 itself, plus
+  the two siblings) with nothing left unaccounted.
+
+Verified: 1327 checks exit 0, 74 pytest, over-flattening 0, self-references 0,
+radicals 0 in both sections, primary-choice 0, phantom 25 (unchanged — the
+甚→甘 flag persists by design, per its entry above), frontend lint + prod
+build clean. No pin moved. **`audit_missing_children` 88→36 findings (56→31
+kanji, 18→10 shared rows). `audit_csv_regressions` 251→236.**
+
+### Next
+
+Continue down `audit_missing_children.py --summary`'s shared-row list — all
+ten remaining are now single-host: `禾`(kangxi115)+丿 via 科, `髟`(kangxi190)+彡
+via 髪, `𠂋`(prim-drag)+一 via 后, `夬`(prim-guillotine)+大 via 決,
+`艹`(prim-mugwort)+十 via 華, `郭`(rtk1985)+丶 via 図, `面`(rtk2039)+一,丿,囗
+via 麺, `筑`(rtk2681)+凡 via 築, `爾`(rtk2867)+巾 via 璽, `立`(rtk462)+丶 via
+産 — each buys only one kanji now, so it's the same per-item cost as the 22
+host-only rows below it in the report; work either list next.
+`suggest_heisig_aliases.py --near 0.8 --all` (~236 names, flat tail) is the
+fallback once this list stops paying for a full render-and-cross-check pass.

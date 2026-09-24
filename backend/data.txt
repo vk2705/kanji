@@ -1961,7 +1961,7 @@ rtk1901:旗:flag:㫃,其
 rtk1902:期:period:其,月
 rtk1903:碁:go:其,石
 rtk1904:基:fundamentals:其,土
-rtk1905:甚:tremendously:一,甘,儿
+rtk1905:甚:tremendously:甘,匹
 rtk1906:勘:intuition:力,甚
 rtk1907:堪:withstand:土,甚
 rtk1908:貴:precious,takanohana:貝,𠀐
@@ -3103,12 +3103,12 @@ kangxi165:釆:distinguish,claw print,animal tracks:ノ,米
 kangxi171:隶:reach,slave,sieve:⺕,氺
 kangxi129:聿:brush
 kangxi136:舛:oppose,dance,ballerina,dancing legs,sunglasses:夕,㐄
-kangxi178:韋:tanned leather,locket
+kangxi178:韋:tanned leather,locket:口,㐄
 kangxi127:耒:plow,christmas tree
 kangxi153:豸:badger,legless insect,skunk
 kangxi89:爻:trigrams,diagram
 kangxi179:韭:leek
-kangxi193:鬲:cauldron,tripod
+kangxi193:鬲:cauldron,tripod:口,冂,儿
 kangxi84:气:steam,air:𠂉,一,乙
 kangxi190:髟:long hair
 kangxi192:鬯:sacrificial wine
@@ -3174,7 +3174,7 @@ prim-parade:戊:parade
 # shares exactly this glyph. Sub-decompositions follow cjkvi-ids' top level (the
 # same ground truth audit_overflatten.py enforces), and are left blank where that
 # top level needs a component we cannot yet register.
-prim-bushel-basket:其:bushel basket,hamper:
+prim-bushel-basket:其:bushel basket,hamper:甘,八
 prim-piggy-bank:昜:piggy bank,piglets:旦,勿
 # --- 2026-09-18 (sixteenth chunk): "screwdriver" gets a home on 甫's alt --
 # heisig-kanjis.csv names "screwdriver" as a component of exactly 7 hosts
@@ -3269,7 +3269,7 @@ prim-angel:喬:angel:夭,口,冂,口
 prim-loincloth:臤:loincloth:又,臣
 prim-shredder:敝:shredder:⺌,冂,巾,攵
 prim-salad:龷:salad:艹,一
-prim-grass-skirt:㐮:grass skirt:
+prim-grass-skirt:㐮:grass skirt:六,𠀎,𧘇
 prim-segway:夆:segway,macbeth:丰,夂
 prim-golden-calf:关:golden calf:丷,天
 # Fourth batch, 2026-09-11. Method unchanged: Heisig's own name from
@@ -3316,12 +3316,12 @@ prim-french-maid:𠬶:french maid,tickle:⺕,冖,又
 prim-earthenware-jar:𠮷:earthenware jar,lidded crock:口,土
 prim-pegasus:𮥶:pegasus:一,隹,𠂉
 prim-mini-tractor:坴:mini-tractor,rice seedlings:土,儿,土
-prim-haystack:卉:haystack:十,廾
+prim-haystack:卉:haystack:十,一,廾
 prim-double-mysterious:兹:double-mysterious,mothballs:丷,一,幺,幺
 prim-cabbage:𦰌:cabbage:艹,口,龶
 prim-purse:𠀐:purse:一,中
 prim-mop:尹:mop:
-prim-red-pepper:亲:red pepper:
+prim-red-pepper:亲:red pepper:立,木
 prim-celery:𠀎:celery:一,井
 prim-saw:乍:saw:
 prim-scissors:夹:scissors:丷,夫
