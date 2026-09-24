@@ -1734,10 +1734,10 @@
    "乚",
    "止"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-24"
  },
  {
   "id": "rtk408",
@@ -1763,10 +1763,10 @@
    "宀",
    "龰"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-24"
  },
  {
   "id": "rtk414",
@@ -1792,10 +1792,10 @@
    "日",
    "龰"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-24"
  },
  {
   "id": "rtk429",
