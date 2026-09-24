@@ -14968,3 +14968,15 @@ render confirms the visible cases.
 
 Focused validation follows in the commit session; the next remaining shared
 rows are 艹, 郭, 面, 筑, 爾 and 立.
+
+## 2026-09-24 — chunk 64: three further intermediate corrections
+
+* **艹 (mugwort) = 十** — the shared grass form in 華 contains the named
+  needle; this belongs on 艹 rather than flattened again on its hosts.
+* **郭 (enclosure) = 享 + ⻏ + 丶** — the point remains structurally present
+  through 享 and is the component named by the two-source report for 図.
+* **面 (mask) = 一 + 丿 + 囗** — the rendered glyph directly shows its top
+  bar, falling stroke, and enclosure; this restores the missing paths for 麺.
+
+The remaining shared-row candidates are 筑, 爾 and 立, followed by the
+host-only findings from the same report.

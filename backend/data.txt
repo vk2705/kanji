@@ -2041,7 +2041,7 @@ rtk1981:蒲:bullrush:浦,艹
 rtk1982:舗:shop:甫,舎
 rtk1983:補:supplement:甫,衤
 rtk1984:邸:residence:氐,阝
-rtk1985:郭:enclosure:享,⻏
+rtk1985:郭:enclosure:享,⻏,丶
 rtk1986:郡:county:君,⻏;君,阝
 rtk1987:郊:outskirts:交,⻏;交,阝
 rtk1988:部:section:咅,阝
@@ -2095,7 +2095,7 @@ rtk2035:妻:wife:十,⺕,女
 rtk2036:凄:uncanny:冫,妻
 rtk2037:衰:decline:一,亠,口,𧘇;衣,一,亠
 rtk2038:衷:inmost:衣,十,口;十,口,𧘇
-rtk2039:面:mask:
+rtk2039:面:mask:一,丿,囗
 rtk2040:麺:noodles:面,麦
 rtk2041:革:leather:廾,口,十
 rtk2042:靴:shoes:化,革
@@ -3113,7 +3113,7 @@ kangxi84:气:steam,air:𠂉,一,乙
 kangxi190:髟:long hair:彡
 kangxi192:鬯:sacrificial wine
 kangxi205:黽:frog,toad
-prim-mugwort:艹:mugwort,flowers,cabbage
+prim-mugwort:艹:mugwort,flowers,cabbage:十
 prim-thirty:丗:thirty,buckle,apron
 kangxi52:幺:cocoon,tiny,short thread
 kangxi40:宀:roof,primitive_roof,mansion,house
