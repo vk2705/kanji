@@ -510,7 +510,7 @@ rtk458:妖:attractive:夭,女
 rtk459:沃:fertility:夭,水
 rtk460:橋:bridge:喬,木
 rtk461:嬌:attractive:喬,女
-rtk462:立:stand up,vase:;一,丷,亠
+rtk462:立:stand up,vase:丶;一,丷,亠
 rtk463:泣:cry:水,立
 rtk464:章:badge:立,早
 rtk465:競:emulate:兄,立
@@ -2735,7 +2735,7 @@ rtk2677:箆:spatula:竹,比,冂
 rtk2678:箔:foil:泊,竹
 rtk2679:笥:lunch box:司,竹
 rtk2680:箭:arrow:竹,前
-rtk2681:筑:an ancient musical instrument:工,竹,丶,几
+rtk2681:筑:an ancient musical instrument:工,竹,丶,几,凡
 rtk2682:篠:bamboo grass:｜,竹,木,攵
 rtk2683:纂:editing:糸,竹,目
 rtk2684:竺:bamboo:竹,二
@@ -2921,7 +2921,7 @@ rtk2863:曳:pull:乙,日
 rtk2864:洩:leak:曳,水
 rtk2865:彗:comet:丰,丰,彐
 rtk2866:慧:wise:彗,心
-rtk2867:爾:you:｜,一,八,冂,爻
+rtk2867:爾:you:｜,一,八,冂,爻,巾
 rtk2868:嘉:applaud:口,士,力
 rtk2869:兇:wickedness:儿,凶
 rtk2870:兜:helmet:白,儿

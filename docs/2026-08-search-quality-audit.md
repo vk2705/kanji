@@ -14980,3 +14980,17 @@ rows are 艹, 郭, 面, 筑, 爾 and 立.
 
 The remaining shared-row candidates are 筑, 爾 and 立, followed by the
 host-only findings from the same report.
+
+## 2026-09-24 — chunk 65: final shared intermediate rows
+
+* **筑 (ancient musical instrument)** gains **凡**: the rendered lower-right
+  shape in 築 is the registered wind/table form, alongside the retained stroke
+  spelling.
+* **爾 (you)** gains **巾**: the rendered lower central shape of 璽' component
+  is the registered cloth form.
+* **立 (stand up)** gains primary **丶**, while retaining its structural
+  `一,丷,亠` alternate: the named drop in 産 is now reachable without replacing
+  the useful expanded spelling.
+
+This exhausts the shared-row section of `audit_missing_children.py`; the
+remaining work is its host-only findings, each requiring an individual review.
