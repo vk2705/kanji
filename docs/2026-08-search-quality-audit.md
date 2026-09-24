@@ -15006,3 +15006,10 @@ their registered intermediate components:
 
 Both replacements preserve the same shapes through their existing component
 rows while making the top-level decomposition match cjkvi-ids.
+
+## 2026-09-24 — chunk 75: horse chestnut's missing component
+
+**栃 (horse chestnut) = 木 + 厂 + 万**, was `木 + 厂`. Cjkvi-ids gives
+`⿰木⿸𠂆万`; the rendered glyph visibly has the 万 under its right-hand
+cliff. Google and the structural source agree, so this is a source-data fix,
+not a granularity decision.

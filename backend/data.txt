@@ -601,7 +601,7 @@ rtk549:燃:burn:火,然
 rtk550:賓:v.i.p.:少,貝,宀,一
 rtk551:歳:year-end:止,小,戌
 rtk552:県:prefecture:小,目,𠃊
-rtk553:栃:horse chestnut:木,厂
+rtk553:栃:horse chestnut:木,厂,万
 rtk554:地:ground:土,也
 rtk555:池:pond:水,也
 rtk556:虫:insect:
