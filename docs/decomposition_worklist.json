@@ -778,10 +778,10 @@
    "口",
    "木"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-24"
  },
  {
   "id": "rtk243",
@@ -810,10 +810,10 @@
    "十",
    "木"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-24"
  },
  {
   "id": "rtk256",
@@ -1138,10 +1138,10 @@
    "冂",
    "口"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-24"
  },
  {
   "id": "rtk330",
