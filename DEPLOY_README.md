@@ -266,19 +266,6 @@ can do on its own:
      property rather than trying to migrate the old one; Search Console
      doesn't have a clean "this site moved to a different domain" flow
      for a URL-prefix property, only for a Domain property.
-2. **Known limitation: only one URL exists to index.** The frontend is a
-   single-page app with no client-side routing (`App.jsx` has no
-   react-router or URL-based state) — every kanji search happens without
-   the URL ever changing, so Google can only ever index
-   `https://kanji.alteon.help/` itself, not individual kanji. That's
-   fine for "can people find the site at all", but it means there's no way
-   to rank for e.g. a specific kanji search term, and the sitemap above is
-   necessarily a single `<url>` entry. Giving each kanji (or at least the
-   detail view) its own URL — e.g. `/kanji/k/明` — would be a real,
-   separate feature project (routing, server-side meta tags or
-   prerendering per kanji for the crawler to see actual content instead of
-   an empty `<div id="root">`) if deeper discoverability is wanted later;
-   not attempted here.
 
 `backend/visit_stats.py` (see `CLAUDE.md`'s Analytics section) is how to
 check afterward whether any of this actually brought real visitors — it

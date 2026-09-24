@@ -14948,3 +14948,23 @@ via 麺, `筑`(rtk2681)+凡 via 築, `爾`(rtk2867)+巾 via 璽, `立`(rtk462)+�
 host-only rows below it in the report; work either list next.
 `suggest_heisig_aliases.py --near 0.8 --all` (~236 names, flat tail) is the
 fallback once this list stops paying for a full render-and-cross-check pass.
+
+## 2026-09-24 — chunk 63: four single-host missing children
+
+Continued the remaining single-host rows from `audit_missing_children.py`.
+cjkvi-ids and the CSV independently name every added child; the supplied
+render confirms the visible cases.
+
+* **禾 (grain) = 丿** — the leading slash is visibly present in 科's left
+  component. Adding it repairs 科's missing “walking stick” path.
+* **髟 (long hair) = 彡** — the three bristles in 髪 are the rendered 彡
+  component, rather than an atomic hair-only shape.
+* **𠂋 (drag) = 一** — cjkvi writes 后 as `⿸𠂋口`; the CSV names the shared
+  horizontal stroke and the existing drag-family comment records why this is
+  the raised-stroke component, not 厂. The glyph itself is unavailable in this
+  renderer.
+* **夬 (guillotine) = 大** — rendering shows the large-person form within 決's
+  right component, matching the cjkvi/CSV finding.
+
+Focused validation follows in the commit session; the next remaining shared
+rows are 艹, 郭, 面, 筑, 爾 and 立.

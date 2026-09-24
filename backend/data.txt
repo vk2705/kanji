@@ -3081,7 +3081,7 @@ kangxi14:冖:cover,cloth cover,birdcage,birdhouse,crown
 kangxi6:亅:hook
 kangxi44:尸:corpse,flag
 kangxi62:戈:spear,halberd,fiesta
-kangxi115:禾:grain,wheat,cereal
+kangxi115:禾:grain,wheat,cereal:丿
 kangxi172:隹:short-tailed bird,turkey
 kangxi66:攵:rap,knock,taskmaster
 kangxi53:广:cave,dotted cliff,caverns
@@ -3110,7 +3110,7 @@ kangxi89:爻:trigrams,diagram
 kangxi179:韭:leek
 kangxi193:鬲:cauldron,tripod:口,冂,儿
 kangxi84:气:steam,air:𠂉,一,乙
-kangxi190:髟:long hair
+kangxi190:髟:long hair:彡
 kangxi192:鬯:sacrificial wine
 kangxi205:黽:frog,toad
 prim-mugwort:艹:mugwort,flowers,cabbage
@@ -3288,7 +3288,7 @@ prim-migrating-ducks:爰:migrating ducks:一,友,爪
 prim-meeting-of-butchers:俞:meeting of butchers:亼,月,刀
 prim-dustpan:录:dustpan:彐,氺
 prim-pogo-stick:甬:pogo stick:龴,用
-prim-guillotine:夬:guillotine:
+prim-guillotine:夬:guillotine:大
 prim-stamp-album:卬:stamp album,stamps:
 prim-funnel:冓:funnel,cone:𠀎,再
 prim-post-it-note:侖:post-it note:亼,𠕁
@@ -3349,7 +3349,7 @@ prim-grow-up:龶:grow up:
 # not consistent across this family (后 is ⿸𠂋口, 石 is ⿸丆口, 厚 is ⿸厂㫗),
 # and 𠂆 rendered on its own is indistinguishable from 厂. 𠂋 is the one that
 # actually draws the raised stroke, and it is what cjkvi gives 后.
-prim-drag:𠂋:drag:
+prim-drag:𠂋:drag:一
 # 龹 'quarter' and 戌 'march' were each spelled out in every host instead
 # (一+大+二+丷 and 厂+成). Both take cjkvi-ids' own decomposition, so a
 # deeper search still reaches the pieces.
