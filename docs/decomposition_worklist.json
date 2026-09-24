@@ -1361,10 +1361,10 @@
    "子",
    "𭕄"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-24"
  },
  {
   "id": "rtk347",
@@ -1393,10 +1393,10 @@
    "目",
    "𭕄"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-24"
  },
  {
   "id": "rtk348",
@@ -1423,10 +1423,10 @@
    "木",
    "𭕄"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-24"
  },
  {
   "id": "rtk356",
