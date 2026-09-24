@@ -469,8 +469,8 @@ rtk417:建:build:廴,聿
 rtk418:鍵:key:金,建
 rtk419:延:prolong:ノ,廴,止
 rtk420:誕:nativity:延,言
-rtk421:礎:cornerstone:石,林,疋
-rtk422:婿:bridegroom:月,女,疋
+rtk421:礎:cornerstone:石,楚
+rtk422:婿:bridegroom:女,胥
 rtk423:衣:garment,cloth,clothes,clothing:亠,𧘇
 rtk424:裁:tailor:衣,𢦏
 rtk425:装:attire:衣,壮

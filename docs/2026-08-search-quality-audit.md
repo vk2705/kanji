@@ -14994,3 +14994,15 @@ host-only findings from the same report.
 
 This exhausts the shared-row section of `audit_missing_children.py`; the
 remaining work is its host-only findings, each requiring an individual review.
+
+## 2026-09-24 — chunk 66: promote two verified host compounds
+
+`延` and `誕` were already in their cjkvi top-level forms; their stale worklist
+entries were not changes to make. The remaining two records render exactly as
+their registered intermediate components:
+
+* **礎 (cornerstone) = 石 + 楚**, replacing `石 + 林 + 疋`.
+* **婿 (bridegroom) = 女 + 胥**, replacing `女 + 月 + 疋`.
+
+Both replacements preserve the same shapes through their existing component
+rows while making the top-level decomposition match cjkvi-ids.
