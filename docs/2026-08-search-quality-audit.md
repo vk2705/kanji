@@ -15388,3 +15388,51 @@ Verified: 1328 checks exit 0, 74 pytest, over-flattening 0, dead tokens 0,
 self-references 0, primary-choice 0, anachronistic 1, csv regressions 237,
 phantom 20 (up from 15 — the reverts restore findings that were "fixed" by
 unverified changes, which is the honest number).
+
+## 2026-09-25 — chunk 83: the phantom backlog is mostly blind spots
+
+First pass run under the chunk-82 discipline: **cross-reference every open
+finding against `audit_weak_evidence.py` before touching anything.** Of the 20
+phantom findings across 16 kanji, the pre-screen quarantined 蝿, 鹵 and 淵 (×2)
+as overlay-IDS on sight — including the two this session got wrong yesterday.
+
+Hand-checking what was left produced no data fixes at all, and that is the
+finding:
+
+* **捷** (`扌,彐,龰`) is correct. 疌 really is 彐 over 龰; cjkvi just makes 疌
+  atomic, so it cannot see the pieces.
+* **蘭** (`｜,一,日,木,門,艹`) is correct. 柬 is 木 with a box across its middle,
+  so the 日 and 木 are genuinely there; cjkvi makes 柬 atomic.
+* 斎, 属, 能 were already documented as blind spots (chunk 57), 滲/齟/齬 as
+  codepoint variants (chunk 79), 祢 as cjkvi contradicting itself (chunk 80).
+
+So the seam is not a backlog of bugs, it is a backlog of **cases the structural
+channel cannot see**. That earned a third section in `audit_weak_evidence.py`:
+
+**`opaque-intermediate`** (23 rows) — cjkvi reaches a child it treats as atomic
+that has no row here, so anything of ours inside that shape reads as a phantom
+however real it is. It explains 捷, 蘭 and 毅 directly; 鹵 is caught by the
+overlay section instead. Keyed to hosts that actually carry a phantom finding,
+because unfiltered it is 310 rows of mostly harmless noise (別 "stops at" 刂 only
+because this file writes 刂 as 刀), and `normalise()` drops the 氵/刂 class since
+that is a convention rather than a hole.
+
+Net: **no rows changed**, one detector section added. A pass that changes nothing
+and explains why is a better outcome than yesterday's eight changes, three of
+which were wrong.
+
+### Scope note: none of this touches Chinese
+
+Worth recording plainly, since it has never been stated in this document. Every
+detector here is Japanese-only **by construction**: `audit_phantom_parts.py`
+filters `id LIKE 'rtk%'`, and `audit_csv_regressions.py`,
+`audit_missing_children.py`, `suggest_heisig_aliases.py` and
+`audit_anachronistic_names.py` all iterate `heisig-kanjis.csv`, which is ~2,200
+Japanese frames and no hanzi. On top of that, this sandbox's database has
+**3,219 `ja-kanji` rows and zero `zh-*` rows** — `import_hanzi.py` has never run
+here — so even a hanzi-aware detector would have nothing to look at.
+
+The ~2,600 Chinese rows on the live site come straight from Unihan + cjkvi-ids
+and **have never been audited by anything**. A hanzi audit needs a different
+ground truth: Heisig's book is not one for Chinese, so the Heisig channel — half
+the evidence every detector here relies on — simply does not exist for them.

@@ -50,6 +50,16 @@ either and gave 619. The readings that actually go wrong are the unnamed
 intermediates (𣶒, 𠂡, 疌), which is exactly the set with no row. Both of the
 2026-09-25 failures, 蝿 and 淵, are in the 177.
 
+**`opaque-intermediate`** (23 rows) — added the same day, after hand-checking
+the phantom backlog found that most of what was left was not wrong data. cjkvi
+reaches a child it treats as atomic and that has no row here, so it cannot see
+*inside* that shape, and anything of ours living there reads as a phantom
+however real it is. 捷's 疌 and 蘭's 柬 are both like this and both rows are
+correct. Keyed to hosts that actually carry a phantom finding: unfiltered it is
+310 rows, mostly harmless (別 "stops at" 刂 only because this file writes 刂 as
+刀), and `normalise()` drops the 氵/刂 class outright since that is a convention
+rather than a hole.
+
 Reports only, like its siblings, and **it does not say a row is wrong** — it
 says what kind of evidence a row rests on. Neither list is a queue to burn
 down; both are meant to be consulted with `--host` before changing a row, which
@@ -67,7 +77,10 @@ import csv
 import sys
 
 import database
-from audit_phantom_parts import CSV_PATH, part_identities
+from audit_phantom_parts import (
+    CSV_PATH, all_variant_ids, claimants, csv_components, findings as phantom_findings,
+    normalise, own_parts, part_identities,
+)
 from audit_overflatten import IDS_OPS, _raw_ids
 
 # The IDS operators whose children are not a flat list of the visible pieces.
@@ -107,12 +120,39 @@ def own_decompositions(conn, kid):
     return list(out.values())
 
 
+def opaque_children(raw, glyph, have_row, depth=2):
+    """Children cjkvi stops at and that have no row here, two levels down.
+
+    Two levels because the hole is usually not a direct child: 蘭 is ⿱艹闌 and
+    闌 is ⿵門柬, so the opaque shape is 柬. Descent only goes through children
+    that have no row, for the same reason the overlay check does — settled
+    shapes are not where readings go wrong.
+    """
+    out = set()
+    for body, _tags in raw.get(glyph, ()):
+        if body == glyph:
+            continue
+        for c in body:
+            # normalise() first: 氵 and 刂 have no row of their own because
+            # this file writes them 水 and 刀, which is a convention, not a
+            # hole in the source.
+            if c in IDS_OPS or c.isascii() or c in have_row or normalise(c) in have_row:
+                continue
+            variants = raw.get(c)
+            if not variants or all(b == c for b, _t in variants):
+                out.add(c)
+            elif depth > 0:
+                out |= opaque_children(raw, c, have_row, depth - 1)
+        break
+    return out
+
+
 def main():
     ap = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
     )
-    ap.add_argument("--kind", choices=("atomic", "overlay"),
-                    help="only one of the two sections")
+    ap.add_argument("--kind", choices=("atomic", "overlay", "opaque"),
+                    help="only one of the three sections")
     ap.add_argument("--host", help="only this character")
     args = ap.parse_args()
 
@@ -122,7 +162,10 @@ def main():
     raw = _raw_ids()
 
     have_row = {g for g, _n in identities.values() if g and g not in ("", "?", "??")}
-    atomic_hits, overlay_hits = [], []
+    phantom_hosts = {f[0] for f in phantom_findings(
+        conn, all_variant_ids(), own_parts(conn, identities, claimants(identities)),
+        csv_components(), identities, claimants(identities))}
+    atomic_hits, overlay_hits, opaque_hits = [], [], []
     for kid, (glyph, names) in sorted(identities.items()):
         if not glyph or glyph in ("", "?", "??"):
             continue
@@ -160,6 +203,21 @@ def main():
             overlay_hits.append((kid, glyph, reading, tags, primary))
             break
 
+        # A child cjkvi treats as atomic and that has no row here is a hole in
+        # the structural channel: anything of ours that lives *inside* it can
+        # never be reached, so it reads as a phantom no matter how real it is.
+        # 捷's 疌 and 蘭's 柬 are both like this, and both rows are correct.
+        #
+        # Reported only for hosts that actually carry a phantom finding. Without
+        # that filter it is 310 rows, most of them harmless: 別 "stops at" 刂
+        # only because this file deliberately writes 刂 as 刀, which is a
+        # documented convention rather than a hole. The point of the section is
+        # to explain a phantom, so it is keyed to the phantoms.
+        if kid in phantom_hosts:
+            opaque = opaque_children(raw, glyph, have_row)
+            if opaque:
+                opaque_hits.append((kid, glyph, "".join(sorted(opaque)), primary))
+
     if args.kind != "overlay":
         print("-- heisig-atomic: his components column is empty and he uses the "
               "character as a named whole elsewhere --")
@@ -175,7 +233,15 @@ def main():
         for kid, glyph, body, tags, primary in overlay_hits:
             print(f"  {glyph} {kid:12} cjkvi {body}{('[' + tags + ']') if tags else '':10} "
                   f"we read {','.join(primary)}")
-        print(f"  {len(overlay_hits)} row(s)")
+        print(f"  {len(overlay_hits)} row(s)\n")
+
+    if args.kind != "atomic" and args.kind != "overlay":
+        print("-- opaque-intermediate: cjkvi reaches a child it treats as atomic "
+              "and that has no row here, so it cannot see inside it --")
+        for kid, glyph, opaque, primary in opaque_hits:
+            print(f"  {glyph} {kid:12} cjkvi stops at {opaque:6} "
+                  f"we read {','.join(primary)}")
+        print(f"  {len(opaque_hits)} row(s)")
     return 0
 
 
