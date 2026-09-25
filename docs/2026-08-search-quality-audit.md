@@ -15319,3 +15319,72 @@ claim.
 Verified: 1328 checks exit 0, 74 pytest, over-flattening 0, dead tokens 0,
 self-references 0, primary-choice 0, anachronistic 1, csv regressions unchanged
 at 237, phantom unchanged at 16, frontend lint + both builds clean. No pin moved.
+
+## 2026-09-25 — chunk 82: three of eight were wrong, and why
+
+The owner caught three bad fixes in chunk 79's eight — 祢, 冊, 蝿 — and said the
+right thing about it: *that is a quarter of the results, the method needs
+revising, and I am not going to hand-check 8,000 characters.* Correct on all
+three counts. What follows is the diagnosis, the reverts, and the detector.
+
+### Three different category errors, not three slips
+
+Each mistake was a wrong belief about **what a source is saying**, not careless
+reading of it:
+
+1. **冊** — `heisig-kanjis.csv`'s components column for frame 1967 is *empty*,
+   and chunk 79's own note called that "nothing in the book argues either way".
+   That is backwards. An empty column is positive evidence of atomicity: he
+   names no pieces because he teaches the character whole, and then uses it
+   whole (柵 = "tree; wood; tome"). The chunk answered the detector's question
+   — 廾 or 卄? — without asking whether anything belongs in there at all.
+2. **蝿** — cjkvi's `⿰虫⿻日电` was read as a parts list. **⿻ is an overlay
+   operator**: it says two shapes share strokes. Rendered beside 黾, the visible
+   top box is divided by a vertical — a 田, which the original row had right and
+   which went out along with the genuinely phantom 亀.
+3. **祢** — the render was of the standalone codepoint 尔, not of the component
+   inside 祢. Its siblings 称 and 弥 spell that shape 𠂉 in this very file, and
+   cjkvi spells *them* `⿰禾尓`/`⿰弓尓`, contradicting its own 祢 entry. The
+   evidence to refute the change was already on disk.
+
+### Reverted, not defended
+
+Re-checking the other five under the corrected rule: **侃** and **訊** hold (侃's
+bottom matches 㐬's, which this file already spells 儿+｜ — the sibling check
+passing; 訊's right side matches 卂 with no 几 anywhere), **麹** holds (it was a
+removal of a second, wrong flattening of 麦 sitting beside 麦 itself). **淵** and
+**叡** do not: both rest on an ⿴ reading, and 叡's was a removal on "I do not see
+it", which is not evidence. Both reverted to their pre-chunk-79 state and the
+`rtk2971` pin restored. An unverifiable change does not get to stand because it
+is mine.
+
+Net from chunk 79: four fixes survive, four were withdrawn or corrected.
+
+### `audit_weak_evidence.py`
+
+Two of the three errors are mechanisable, so they are now mechanised rather than
+left as resolutions to be more careful:
+
+* **`heisig-atomic`** (128 rows) — we decompose a row whose CSV column is empty
+  and whose character Heisig uses as a named whole elsewhere. Would have flagged
+  冊.
+* **`not-a-parts-list`** (177 rows) — the host's cjkvi entry, or that of a child
+  it has no row for, uses ⿻ or ⿴. Would have flagged 蝿 *and* 淵.
+
+Both numbers are the product of narrowing that the first run earned. Including
+the other enclosure operators gave 441 rows of harmless road radical (⿺辶秀
+really is 辶 plus 秀). Recursing into children that already have rows gave 619,
+because 艹 is `⿻十丨` and 大 is `⿻一人` — descending into settled shapes flags
+every kanji containing either. The readings that go wrong are the *unnamed*
+intermediates, which is exactly the set with no row here.
+
+Neither list is a queue to burn down. Both are to be consulted with `--host`
+**before** changing a row, which is the moment all three mistakes were made. The
+third error is a rule rather than a check, now in CLAUDE.md beside the other
+two: **render the component inside its host, beside a sibling host of the same
+shape.**
+
+Verified: 1328 checks exit 0, 74 pytest, over-flattening 0, dead tokens 0,
+self-references 0, primary-choice 0, anachronistic 1, csv regressions 237,
+phantom 20 (up from 15 — the reverts restore findings that were "fixed" by
+unverified changes, which is the honest number).

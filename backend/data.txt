@@ -2779,7 +2779,7 @@ rtk2721:蚤:flea:叉,虫
 rtk2722:蟹:crab:虫,解
 rtk2723:蛋:barbarian:虫,疋
 rtk2724:蟄:hibernation of insects:執,虫
-rtk2725:蝿:fly:虫,日,电
+rtk2725:蝿:fly:虫,田,乙
 rtk2726:蟻:ant:義,虫
 rtk2727:蝋:wax:虫,𭕄,用,几
 rtk2728:蝦:shrimp:虫,又
@@ -2968,7 +2968,7 @@ rtk2910:套:accumulate:大,長,厶
 rtk2911:叛:disobey:半,反
 rtk2912:尖:be pointed:小,大
 rtk2913:壷:jar:｜,一,口,士,冖
-rtk2914:叡:intelligence:八,卜,又,目
+rtk2914:叡:intelligence:八,卜,又,目,冖
 rtk2915:酋:chieftain,molotov cocktail:酉,丷
 rtk2916:鴬:nightingale:prim-schoolhouse,鳥
 rtk2917:赫:suddenly:赤
@@ -3025,7 +3025,7 @@ rtk2967:珈:ornamental hairpin:加,王
 rtk2968:琲:string of many pearls:王,非
 rtk2969:檜:japanese cypress:日,木,𠆢,一
 rtk2970:轡:bit (horse):口,糸,車
-rtk2971:淵:abyss:水,片,爿,一
+rtk2971:淵:abyss:｜,一,水,丬,片
 rtk2972:伍:five:亻,五
 rtk2973:什:utensil:亻,十
 rtk2974:萬:ten thousand:艹,禺
@@ -4708,3 +4708,22 @@ prim-hammock:尓:hammock:𠂉,小
 # cjkvi's ⿻冂卄 is real structure and stays, as the labelled alternate, so a
 # search by shape still reaches it. The primary is Heisig's reading, which for
 # this row is that there is nothing to read.
+
+# --- 2026-09-25: 蝿 again. Owner-reported: the top right is a rice field, why
+# was it removed? It is, and it should not have been.
+# The row was 虫,田,亀. 亀 really is a phantom -- an 11-stroke kanji claimed by
+# a character that does not contain it, almost certainly a KRADFILE artifact
+# from the bottom hook resembling 亀's. But this morning's sweep replaced the
+# whole right side with 日,电 on the strength of cjkvi's ⿰虫⿻日电, and the 田
+# went out with the turtle. Rendered beside 黾 (U+9EFE), which is the shape
+# 蝿's right side draws, the top box is plainly divided by a vertical: 田, not
+# 日. cjkvi's ⿻ is an OVERLAY operator -- it is saying these two shapes share
+# strokes, not that the visible top box is a 日 -- and reading it as a parts
+# list is what produced the wrong row.
+# Now 虫,田,乙: the insect, the divided box the render shows, and the hook that
+# descends from it. Nothing claimed that is not visible.
+# Expect 田 to read as a phantom here: cjkvi's expansion of 蝿 reaches 日 and 电
+# but never names a 田, so the structural channel cannot clear a box it encodes
+# as an overlap. Frame 2725 is past the CSV, so the Heisig channel is silent
+# too and the render is the whole evidence -- which is the standing method's
+# answer, not a gap in it.

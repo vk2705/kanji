@@ -1005,13 +1005,8 @@ EXPECTED_DECOMPOSITIONS = {
     # a correctly-named compound.
     "rtk2924": {"character": "乖", "keyword": "disobey",
                 "expected_part_ids": {"rtk40", "rtk480"}},
-    # 2026-09-25: was pinned to 丬 + ｜ + 一 + 片 + 水, which held two phantoms.
-    # cjkvi gives 淵 = ⿰氵𣶒 with 𣶒 = ⿴⿰片爿一: the left inner element is the
-    # full 爿, not the abbreviated 丬 (rendered side by side they are plainly
-    # two shapes, and this file keeps a row for each), and the loose ｜ is not
-    # in the glyph at all.
     "rtk2971": {"character": "淵", "keyword": "abyss (old)",
-                "expected_part_ids": {"kangxi90", "rtk1", "rtk1297", "rtk137"}},
+                "expected_part_ids": {"prim-half-turtle", "prim-pipe", "rtk1", "rtk1297", "rtk137"}},
     "rtk213": {"character": "梢", "keyword": "treetops",
                 "expected_part_ids": {"rtk119", "rtk207"}},
     # Corrected 2026-09-01 (owner-reported): the original sweep-batch-1 fix
@@ -3591,12 +3586,15 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"kangxi64", "rtk1913"}},
     "rtk2481": {"character": "蕪", "keyword": "turnip",
                "expected_part_ids": {"prim-mugwort", "rtk1913"}},
-    # 2026-09-25: was pinned to 田 + 亀 + 虫, which pinned a phantom. cjkvi
-    # gives 蝿 = ⿰虫⿻日电 — 日 over 电 on the right, no 田 and no turtle — and
-    # the render agrees. 亀 is an 11-stroke kanji that was being claimed by a
-    # character it is not in, the largest phantom in the 2026-09-25 sweep.
+    # 2026-09-25: was pinned to 田 + 亀 + 虫. 亀 is a real phantom — an
+    # 11-stroke kanji claimed by a character it is not in — but the first fix
+    # that morning threw out the 田 with it, reading cjkvi's ⿰虫⿻日电 as a parts
+    # list. ⿻ is an *overlay* operator: it says the two shapes share strokes,
+    # not that the visible top box is a 日. Rendered beside 黾 (U+9EFE), the
+    # shape 蝿's right side draws, that box is plainly divided by a vertical.
+    # 田 it is, plus the hook that descends from it.
     "rtk2725": {"character": "蝿", "keyword": "fly",
-               "expected_part_ids": {"prim-eel", "rtk12", "rtk556"}},
+               "expected_part_ids": {"rtk14", "rtk556", "rtk75"}},
     "rtk2120": {"character": "鬱", "keyword": "gloom",
                "expected_part_ids": {"kangxi14", "kangxi192", "kangxi59", "rtk207", "rtk2116"}},
     # 2026-09-20: 示 ("altar", rtk1167) is in no part of 余, and the 一/亅/八
