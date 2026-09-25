@@ -15436,3 +15436,58 @@ The ~2,600 Chinese rows on the live site come straight from Unihan + cjkvi-ids
 and **have never been audited by anything**. A hanzi audit needs a different
 ground truth: Heisig's book is not one for Chinese, so the Heisig channel — half
 the evidence every detector here relies on — simply does not exist for them.
+
+## 2026-09-25 — chunk 84: rows both sources teach whole, and what removing them exposed
+
+New seam, opened by intersecting the two channels of yesterday's
+`audit_weak_evidence.py`: the character's CSV components column is empty **and**
+cjkvi has no decomposition for it either. That is the unambiguous subset of the
+128-row `heisig-atomic` list, and it is exactly four rows.
+
+Three were wrong, and the render says so without either source being consulted:
+
+* **巾 (towel)** was `冂,｜` — which misses the top horizontal entirely. Not just
+  un-Heisig, a stroke short. Every pin referencing 巾 (帝 帯 幅 幕 幌) already
+  treats it as a unit.
+* **井 (well)** was `｜,ノ,一,二` — two verticals crossing two horizontals, but
+  the row has a ノ that is not in it and three horizontals where there are two.
+  Stroke-shattering *and* over-claiming while it shatters.
+* **也 (scorpion)** was `｜,乙,匕` — three strokes, of which 匕 alone would be two,
+  and its hook-and-slant shape is nowhere in the glyph.
+
+**廿 was not touched**, and the distinction matters: it carries a pin whose
+comment records an actual render ("廿 = 凵 + a top horizontal stroke exactly").
+A source saying "taught whole" is about pedagogy; that pin is about what the
+glyph contains. The two do not conflict, and the pin wins on its own question.
+
+### The interesting part is what broke
+
+Phantom went **20 → 26** on those three edits. Not collateral: a wrong
+decomposition had been *clearing* parts in other rows through
+`_spelled_out` — a host listing 巾 was cleared because 巾's own pieces matched
+the host's tree. Removing the wrong reading removed the false clearing path,
+and what surfaced was real:
+
+* `audit_primary_choice` went 0 → 1 and named **耕**, whose primary was
+  `土,木,耒,井`: 耒 listed together with its own pieces. Heisig reads 耕 as
+  "christmas tree; well" — 耒 + 井 — which is what the row's own alternate
+  already said. Promoted; the flattening is gone rather than kept, since
+  nothing sourced it.
+* `--past-csv` then named **稀** (`ノ,一,禾,巾,丶` → `禾,希`) and **雫**
+  (`雨,丶,一,｜` → `雨,下`), the same shape again, each with a stray 丶 nothing
+  accounted for and a clean alternate already sitting behind it. cjkvi gives
+  `⿰禾希` and `⿱雨下` exactly.
+
+After those three promotions phantom settled at **23 across 18**, below where it
+started, and `audit_primary_choice` is back to 0 in both modes. Two of the six
+newly-surfaced findings remain open (逓's 巾, 爾's redundant 冂 and ｜ beside its
+own 巾) — 爾's cjkvi reading is `⿱一⿱八⿻巾㸚`, an overlay, so it goes to the
+quarantine rather than to a guess.
+
+Worth keeping: **a detector getting louder after a correct fix is a result, not
+a regression.** The count was being held down by a reading that was wrong.
+
+Verified: 1328 checks exit 0, 74 pytest, over-flattening 0, dead tokens 0,
+self-references 0, primary-choice 0 in both modes, anachronistic 1, csv
+regressions unchanged at 237, frontend lint + both builds clean. Two pins moved,
+each with its reason beside it.

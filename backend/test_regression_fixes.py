@@ -3707,8 +3707,13 @@ EXPECTED_DECOMPOSITIONS = {
     # 2026-09-21: the 廾 was 井's own two lower strokes counted twice.
     "rtk1947": {"character": "丼", "keyword": "bowl",
                "expected_part_ids": {"kangxi3", "rtk1946"}},
+    # 2026-09-25: 土 and 木 dropped. The row listed 耒 and then its own pieces
+    # beside it, which audit_primary_choice only surfaced once 井 went atomic
+    # and stopped supplying a false clearing path for the 土. Heisig reads 耕 as
+    # "christmas tree; well" — 耒 + 井 — which is what the row's own alternate
+    # already said.
     "rtk1949": {"character": "耕", "keyword": "till",
-               "expected_part_ids": {"kangxi127", "rtk161", "rtk1946", "rtk207"}},
+               "expected_part_ids": {"kangxi127", "rtk1946"}},
     "rtk769": {"character": "技", "keyword": "skill",
                "expected_part_ids": {"kangxi64", "rtk768"}},
     "rtk770": {"character": "枝", "keyword": "bough",

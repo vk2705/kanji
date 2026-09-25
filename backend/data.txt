@@ -480,7 +480,7 @@ rtk428:哀:pathetic:衣,口;亠,口,𧘇
 rtk429:遠:distant:𠮷,𧘇,辶
 rtk430:猿:monkey:犭,𠮷,𧘇
 rtk431:初:first time:衤,刀
-rtk432:巾:towel:冂,｜
+rtk432:巾:towel:
 rtk433:布:linen:巾,𠂇;ノ,一,巾
 rtk434:帆:sail:巾,凡
 rtk435:幅:hanging scroll:畐,巾
@@ -2002,10 +2002,10 @@ rtk1942:爆:bomb:暴,火
 rtk1943:恭:respect:共,忄
 rtk1944:選:elect:辶,巽
 rtk1945:殿:mr.:尸,共,殳
-rtk1946:井:well:｜,ノ,一,二
+rtk1946:井:well:
 rtk1947:丼:bowl:丶,井
 rtk1948:囲:surround:囗,井
-rtk1949:耕:till:土,木,耒,井;井,耒
+rtk1949:耕:till:耒,井
 rtk1950:亜:asia:｜,一,口
 rtk1951:悪:bad:亜,心
 rtk1952:円:circle,yen:冂,亠,一,｜
@@ -2292,7 +2292,7 @@ rtk2232:尤:reasonable:丶,尢
 rtk2233:厖:large:厂,彡,尤
 rtk2234:或:some:口,戈,一
 rtk2235:兎:rabbit:ノ,丶,儿,｜
-rtk2236:也:to be (classical),scorpion:｜,乙,匕
+rtk2236:也:to be (classical),scorpion:
 rtk2237:巴:comma-design,mosaic:
 rtk2239:菫:the violet:艹,口,龶
 rtk2240:曼:wide:日,罒,又
@@ -2711,7 +2711,7 @@ rtk2653:稔:harvest:念,禾
 rtk2654:稗:humble:卑,禾
 rtk2655:穣:good crops:衣,禾,八,亠;㐮,禾
 rtk2656:稜:angle:夌,禾
-rtk2657:稀:rare:ノ,一,禾,巾,丶;希,禾
+rtk2657:稀:rare:禾,希
 rtk2658:穆:respectful:禾,小,白,彡
 rtk2659:窺:lie in wait:穴,規
 rtk2660:窄:narrow:｜,ノ,穴;乍,穴
@@ -2853,7 +2853,7 @@ rtk2795:鋏:scissors:金,人,大
 rtk2796:閃:flash:人,門
 rtk2797:悶:be in agony:心,門
 rtk2798:閤:small side gate:合,門
-rtk2799:雫:drop:雨,丶,一,｜;下,雨
+rtk2799:雫:drop:雨,下
 rtk2800:霞:be hazy:雨,又
 rtk2801:翰:letter:羽,𠆢,𠦝;人,羽,𠦝
 rtk2802:斡:go around:斗,𠆢,𠦝;人,斗,𠦝
@@ -4727,3 +4727,37 @@ prim-hammock:尓:hammock:𠂉,小
 # as an overlap. Frame 2725 is past the CSV, so the Heisig channel is silent
 # too and the render is the whole evidence -- which is the standing method's
 # answer, not a gap in it.
+
+# --- 2026-09-25: three rows both sources teach whole, and this file split
+# anyway. Found by intersecting audit_weak_evidence.py's two channels -- the
+# character's CSV components column is empty AND cjkvi has no decomposition
+# for it either -- which is the unambiguous subset of that script's 128-row
+# heisig-atomic list. Exactly four rows are in it; three were wrong and the
+# render says so on its own, without either source being consulted:
+# 巾 (towel) was 冂,｜. The reading misses the top horizontal entirely -- 巾 is
+# a bar, then the frame, then the vertical -- so it was not just un-Heisig but
+# short a stroke. Every pin that references 巾 (帝 帯 幅 幕 幌) already treats it
+# as a unit.
+# 井 (well) was ｜,ノ,一,二. 井 is two verticals crossing two horizontals; the
+# row has a ノ that is not in it and 一 + 二 = three horizontals where there are
+# two. Stroke-shattering, and over-claiming while it shatters.
+# 也 (scorpion) was ｜,乙,匕. 也 is three strokes; 匕 alone is two and its
+# hook-plus-slant shape is nowhere in the glyph.
+# 廿 (twenty) is the fourth and is NOT touched: it carries a pin whose comment
+# records a render ("廿 = 凵 + a top horizontal stroke exactly", and the lone ｜
+# was dropped as redundant). A source saying "taught whole" is about pedagogy;
+# that pin is about what the glyph contains, and the two do not conflict.
+# No cjkvi alternate is parked for any of the three, because cjkvi has no
+# reading for them to park -- that is half of why they qualified.
+# 耕 (till) was 土,木,耒,井 with 井,耒 sitting behind it as an alternate. The
+# primary listed 耒 and then its own pieces beside it, which is why the 土 read
+# as a phantom the moment 井 stopped supplying a false clearing path. Heisig
+# reads 耕 as "christmas tree; well" -- 耒 + 井, exactly the alternate -- so the
+# alternate is the primary now and the flattened one is gone rather than kept,
+# since nothing sourced it.
+# 稀 and 雫, same shape as 耕 and surfaced by the same chain: each had a
+# flattened primary with a clean alternate already sitting behind it, and each
+# flattening carried a stray 丶 that nothing accounted for. cjkvi gives
+# 稀 = ⿰禾希 and 雫 = ⿱雨下, which are those alternates exactly, so they are the
+# primaries now. Both are past frame 2200, so cjkvi is the only source with an
+# opinion and it is unambiguous here.
