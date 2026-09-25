@@ -15238,3 +15238,46 @@ Verified: 1328 checks exit 0, 74 pytest, over-flattening 0, dead tokens 0,
 self-references 0, primary-choice 0 in both modes, anachronistic 1, csv
 regressions unchanged at 237, frontend lint + both builds clean.
 **`audit_phantom_parts --hide-blind` 25 → 15, across 19 → 12 kanji.**
+
+## 2026-09-25 — chunk 80: "hammock" gets a row, and chunk 79 gets a correction
+
+Owner-reported, hours after chunk 79 shipped: *isn't the right side of 祢 a
+known primitive?* It is, and the question caught a mistake.
+
+**The primitive.** Heisig reads 称 as "wheat; cereal; **hammock**; reclining;
+lying down; small; little" and 弥 as "bow; hammock; reclining; lying down;
+small; little". So 尓 is named "hammock" and its own pieces are 𠂉 and 小. The
+shape had no row here at all — 称 and 弥 each spelled it flat as `𠂉,小` — so the
+name resolved to nothing and a search for "hammock" returned silence.
+`prim-hammock:尓` now holds it and 称 弥 祢 all reference it. Searching "hammock"
+returns the primitive, and at depth 2 all three hosts.
+
+**The mistake.** Chunk 79 changed 祢 from 𠂉 to 𠂊 that morning, on the strength
+of cjkvi's `祢 = ⿰礻尔[GTJ]` plus a render of the standalone 尔. Both halves of
+that were traps:
+
+* cjkvi is **inconsistent inside this one family** — it spells 祢 with 尔
+  (U+5C14 = `⿱𠂊小`) while spelling 称 `⿰禾尓[J]` and 弥 `⿰弓尓[TJK]` with 尓
+  (U+5C13 = `⿱𠂉小`).
+* the render that was consulted was of **the codepoint**, not of the component
+  inside its host. Rendering 祢 称 弥 side by side settles it in one look: all
+  three draw the identical flat-bar-with-a-left-tick over 小. That is 尓, and
+  𠂉 was right before chunk 79 touched it.
+
+This is the exact failure mode the standing method exists to prevent, committed
+by the session that has been quoting that method for sixty chunks. Worth writing
+plainly: *render the component inside the host, beside its siblings* — a render
+of the lone codepoint is a Unicode table with extra steps, and chunk 79's note
+claiming "尔's top is the hook" was true of the glyph it rendered and irrelevant
+to the question.
+
+祢 will keep reading as a phantom for 尓, and that is expected: the detector
+cannot clear a part whose host line, in its source, uses the other codepoint.
+Same blind spot as 斎 (齐/斉), 滲 (參/参) and 齟/齬 (齒/歯) — except that here
+cjkvi contradicts itself within a single family, which is about as clear as the
+case gets. Noted next to the row.
+
+Verified: 1328 checks exit 0, 74 pytest, over-flattening 0, dead tokens 0,
+self-references 0, primary-choice 0, anachronistic 1, csv regressions unchanged
+at 237, frontend lint + both builds clean. Phantom 15 → 16, entirely the
+expected 祢 entry above. No pin moved.

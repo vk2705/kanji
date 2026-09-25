@@ -1019,7 +1019,7 @@ rtk967:愁:distress:秋,心
 rtk968:私:private:禾,厶
 rtk969:秩:regularity:失,禾
 rtk970:秘:secret:禾,必
-rtk971:称:appellation:ノ,禾,小,一,𠂉
+rtk971:称:appellation:禾,尓
 rtk972:利:profit:刀,禾;禾
 rtk973:梨:pear tree:利,木
 rtk974:穫:harvest:禾,蒦
@@ -1370,7 +1370,7 @@ rtk1318:引:pull:｜,弓
 rtk1319:弔:condolences:｜,弓
 rtk1320:弘:vast:弓,厶
 rtk1321:強:strong:弓,虫,厶
-rtk1322:弥:all the more:弓,𠂉,小
+rtk1322:弥:all the more:弓,尓
 rtk1323:弱:weak:弓,冫
 rtk1324:溺:drown:弱,水
 rtk1325:沸:seethe:水,弗
@@ -2701,7 +2701,7 @@ rtk2643:禦:defend:御,示
 rtk2644:祷:pray:礻,寿
 rtk2645:祐:help:礻,右
 rtk2646:祇:national or local god:礻,氏;示,氏
-rtk2647:祢:ancestral shrine:礻,𠂊,小
+rtk2647:祢:ancestral shrine:礻,尓
 rtk2648:禄:fief:礻,录
 rtk2649:禎:happiness:礻,貞
 rtk2650:秤:balances:禾,平
@@ -4663,3 +4663,29 @@ prim-tall:?:tall:亠,口
 # over-flattened (亠 inside 立, 几+又 beside 殳) -- one question, not two.
 # 鹵's top is ⺊, which has no row here and should not get one in passing.
 # 蝋 needs 𠂡 and 捷 needs 疌, both atomic in cjkvi. 蘭 needs 柬, likewise.
+
+# --- 2026-09-25: "hammock" gets its row, and a correction to the same day's
+# chunk 79. Owner-reported: 祢's right side is a known primitive.
+# It is. Heisig reads 称 as "wheat; cereal; HAMMOCK; reclining; lying down;
+# small; little" and 弥 as "bow; hammock; reclining; lying down; small;
+# little" -- so 尓 is named "hammock" and its own pieces are 𠂉 (reclining,
+# lying down) and 小. The name resolved to nothing here, because the shape had
+# no row: 称 and 弥 both spelled it flat as 𠂉 + 小, so every host recorded a
+# dropped concept and a search for "hammock" answered with silence.
+# prim-hammock:尓 now holds it and those two plus 祢 reference it.
+# The correction: chunk 79 changed 祢 from 𠂉 to 𠂊 a few hours ago, and that
+# was wrong. cjkvi spells 祢 = ⿰礻尔[GTJ] while spelling its siblings
+# 称 = ⿰禾尓[J] and 弥 = ⿰弓尓[TJK] -- 尔 (U+5C14) is ⿱𠂊小, 尓 (U+5C13) is
+# ⿱𠂉小, and cjkvi is simply inconsistent across the family. Chunk 79 read the
+# standalone codepoint 尔, saw the angled hook, and changed the row. Rendering
+# 祢 称 弥 side by side settles it in one look: all three draw the identical
+# flat-bar-with-a-left-tick over 小. That is 尓, and 𠂉 was right all along.
+# The mistake was rendering the codepoint instead of the component inside its
+# host, which is the one thing this file's standing method exists to prevent.
+# Expect 祢 to keep reading as a phantom for 尓: cjkvi's own entry for it
+# uses 尔 while its entries for 称 and 弥 use 尓, so the detector cannot
+# clear a part that the host's line spells with the other codepoint. Same
+# blind spot as 斎 (齐/斉), 滲 (參/参) and 齟/齬 (齒/歯) -- and here cjkvi
+# contradicts itself inside one family, which is about as clear as the
+# case gets.
+prim-hammock:尓:hammock:𠂉,小
