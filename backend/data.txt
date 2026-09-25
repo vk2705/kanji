@@ -2023,7 +2023,7 @@ rtk1963:輪:wheel:侖,車
 rtk1964:偏:partial:亻,扁
 rtk1965:遍:everywhere:辶,扁
 rtk1966:編:compilation:糸,扁
-rtk1967:冊:tome:冂,艹
+rtk1967:冊:tome:;冂,艹
 rtk1968:柵:stockade:木,冊
 rtk1969:典:code:曲,八
 rtk1970:氏:family name:
@@ -4689,3 +4689,22 @@ prim-tall:?:tall:亠,口
 # contradicts itself inside one family, which is about as clear as the
 # case gets.
 prim-hammock:尓:hammock:𠂉,小
+
+# --- 2026-09-25: 冊's primary goes back to empty. Owner-reported: should it be
+# split at all? No -- and chunk 79 asked the wrong question about it earlier
+# today, arguing over whether the interior is 廾 or 卄 when Heisig does not put
+# anything in there.
+# heisig-kanjis.csv's row for frame 1967 is empty: he names no components for
+# 冊, he teaches it whole. And he then uses it whole -- 柵 (1968) reads "tree;
+# wood; TOME", one building block, and this file's pins for 柵 and 珊 already
+# reference rtk1967 as a unit with their own notes saying the flattened 冂/廾
+# spelling there was spurious.
+# The 𠕁 comparison chunk 79 leaned on actually argues the other way. Heisig
+# does spell 𠕁 out -- 嗣 (2011) reads "mouth; scrapbook; glass canopy; HOOD;
+# FLOWERS; ..." -- so he distinguishes the two members of this shape family on
+# purpose: the one whose bar does not cross gets pieces, the one whose bar does
+# cross does not. Chunk 79 made the rows "agree" and in doing so harmonised
+# away a distinction the source makes.
+# cjkvi's ⿻冂卄 is real structure and stays, as the labelled alternate, so a
+# search by shape still reaches it. The primary is Heisig's reading, which for
+# this row is that there is nothing to read.

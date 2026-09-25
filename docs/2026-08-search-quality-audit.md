@@ -15281,3 +15281,41 @@ Verified: 1328 checks exit 0, 74 pytest, over-flattening 0, dead tokens 0,
 self-references 0, primary-choice 0, anachronistic 1, csv regressions unchanged
 at 237, frontend lint + both builds clean. Phantom 15 → 16, entirely the
 expected 祢 entry above. No pin moved.
+
+## 2026-09-25 — chunk 81: 冊 should not be split at all
+
+Second owner catch of the day on the same chunk-79 sweep, and a sharper one:
+*does 冊 need breaking into parts — isn't it a radical?*
+
+It is not one of the 214 (it has no `kangxi*` row here, and this file's kangxi
+ids were verified against Unicode's `CJKRadicals.txt`), but that is not the
+operative fact. **Heisig teaches it whole.** `heisig-kanjis.csv`'s row for frame
+1967 is *empty* — he names no components for 冊 — and he then uses it whole:
+柵 (1968) reads "tree; wood; **tome**", one building block. This file's own pins
+for 柵 and 珊 already reference `rtk1967` as a unit, with notes saying the
+flattened 冂/廾 spelling *there* was spurious. Everything pointed the same way
+and chunk 79 argued about the wrong thing: whether the interior is 廾 or 卄,
+when Heisig puts nothing in there at all.
+
+The 𠕁 comparison chunk 79 leaned on argues the opposite of what it was used
+for. Heisig *does* spell 𠕁 out — 嗣 (2011) reads "mouth; scrapbook; glass
+canopy; **hood**; **flowers**; …" — so he distinguishes the two members of this
+shape family deliberately: the one whose bar does not cross gets pieces, the one
+whose bar does cross does not. Chunk 79 made the two rows "agree" and in doing
+so harmonised away a distinction the source makes. Making two rows consistent is
+not evidence; it can be the opposite.
+
+The row is now `;冂,艹` — **empty primary, cjkvi's `⿻冂卄` as the labelled
+alternate**. That is the honest shape of the disagreement: Heisig reads nothing
+here, cjkvi reads two pieces, and shape search still reaches it through the
+alternate. Both the detail page (`nonEmptyDecompositions`) and the SEO generator
+already skip empty decompositions, so nothing renders an empty block.
+
+Worth separating from the three chunk-61 cases (食, 衣, 用), which were also
+empty primaries and were *promoted*. There the empty primary was an accident and
+Heisig's reading was sitting in the alternate. Here the empty primary is the
+claim.
+
+Verified: 1328 checks exit 0, 74 pytest, over-flattening 0, dead tokens 0,
+self-references 0, primary-choice 0, anachronistic 1, csv regressions unchanged
+at 237, phantom unchanged at 16, frontend lint + both builds clean. No pin moved.
