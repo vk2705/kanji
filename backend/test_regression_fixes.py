@@ -567,8 +567,12 @@ EXPECTED_DECOMPOSITIONS = {
     # 䒑(丷+一)+未, 撲/僕's 菐 = 业+䒑+夫) + already-taught 木/夫, confirmed
     # via render that 撲/僕's bottom-right clearly matches 夫 (husband,
     # rtk901), not 木.
+    # gained rtk229 (未, "not yet") 2026-09-25: audit_missing_children.py flagged
+    # it as a dropped CSV name ("business; upside down in a row; not yet; tree;
+    # wood") that cjkvi-ids also reaches; 未 is itself just 一+木, both already
+    # present here, so this only adds the name's reachability, not new shape.
     "rtk1931": {"character": "業", "keyword": "business",
-                "expected_part_ids": {"prim-upside-down-row", "kangxi12", "rtk1", "rtk207"}},
+                "expected_part_ids": {"prim-upside-down-row", "kangxi12", "rtk1", "rtk207", "rtk229"}},
     "rtk1932": {"character": "撲", "keyword": "slap",
                 "expected_part_ids": {"kangxi64", "prim-upside-down-row", "kangxi12", "rtk901"}},
     "rtk1933": {"character": "僕", "keyword": "me",
@@ -1135,8 +1139,17 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk357", "rtk642"}},
     "rtk648": {"character": "忠", "keyword": "loyalty",
                 "expected_part_ids": {"rtk39", "rtk639"}},
+    # primary changed 中(rtk39),心 -> 串(rtk649),心 2026-09-25: cjkvi-ids gives
+    # 患 as ⿱串心 (not ⿱中心), heisig-kanjis.csv's own components list for 650
+    # opens with "kebab" (matches 串's keyword "shish kebab") before "in", and
+    # the render shows 患's top is the full two-loop 串 shape, not a single
+    # 中 loop. Surfaced by audit_overflatten.py once 串 itself gained a
+    # resolvable 中 child (chunk adding it to 串's own row) made the existing
+    # 中,心 primary collapsible onto 串 -- the correct fix was promoting the
+    # already-present "串,心" structural alternate to primary, not reverting
+    # 串's own new child.
     "rtk650": {"character": "患", "keyword": "afflicted",
-                "expected_part_ids": {"rtk39", "rtk639"}},
+                "expected_part_ids": {"rtk649", "rtk639"}},
     "rtk670": {"character": "怖", "keyword": "dreadful",
                 "expected_part_ids": {"kangxi61", "rtk433"}},
     "rtk673": {"character": "憎", "keyword": "hate",
@@ -3509,8 +3522,12 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"kangxi9", "rtk622"}},
     # Was redundantly re-listing 勿(rtk1128)'s own ノ,勹 alongside referencing
     # it directly -- 2026-09-05, audit_direct_ref_overlap.py
+    # gained prim-reclining (𠂉) 2026-09-25: audit_missing_children.py flagged
+    # the CSV's "person; reclining; lying down; piggy bank; sun; day; piglets"
+    # names against cjkvi's ⿰亻𬀷 split -- "reclining"/"lying down" is exactly
+    # prim-reclining's own alias pair, already a taught primitive elsewhere.
     "rtk1071": {"character": "傷", "keyword": "wound",
-               "expected_part_ids": {"kangxi9", "prim-piggy-bank", "rtk1", "rtk12"}},
+               "expected_part_ids": {"kangxi9", "prim-piggy-bank", "prim-reclining", "rtk1", "rtk12"}},
     "rtk1106": {"character": "似", "keyword": "becoming",
                "expected_part_ids": {"kangxi9", "rtk1105"}},
     "rtk2260": {"character": "做", "keyword": "make",

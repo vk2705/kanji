@@ -15084,3 +15084,107 @@ Updated `test_regression_fixes.py`'s rtk421/rtk422 pins to the new top-level par
 ids (`{rtk118, prim-thicket}` / `{rtk102, prim-mutual}`) and added a pin for
 rtk422 (previously unpinned). `audit_radicals.py` now reports zero undefined
 part terms; the full 1328-check regression suite passes.
+
+## 2026-09-25 — chunk 78: host-only missing children, and the 己/巳 name trap
+
+Container came up on a stale shallow clone (`git fetch --unshallow` showed local
+`master` was a strict ancestor of `origin/master`, 107 commits behind, not a real
+divergence — the "no work lost" case, confirmed before touching anything, per the
+standing box-0 check). Set up a fresh `venv` (none existed in this container) and
+`fonts-noto-cjk`/`fonts-hanazono` (also missing) before any render work.
+
+Worked `audit_missing_children.py --summary`'s host-only section (the sibling list
+to the shared-row work chunks 62-66 finished).
+
+**Six single-part additions, each cross-checked against `heisig-kanjis.csv`'s own
+components column and rendered before editing:**
+
+* **串 (kebab) gains 中** — cjkvi: `⿻中口`. The render shows 串 is visibly two
+  stacked loops sharing one vertical stroke, i.e. 中 doubled.
+* **卑 (lowly) gains 丿** — the rendered top-left drop is real; this also silently
+  clears 碑 (tombstone)'s own same finding, since 碑 already lists 卑 as a part
+  and the audit's own `via` column named exactly this chain.
+* **称 (appellation) and 傷 (wound) both gain 𠂉** (`prim-reclining`, already a
+  taught primitive with aliases "reclining,lying down" — exactly the CSV names
+  both hosts were missing) — CSV: "...hammock; reclining; lying down..." (称),
+  "...person; reclining; lying down..." (傷). Reused the existing row, no new
+  primitive needed.
+* **業 (business) gains 未** and **極 (extreme) gains 丂** — both CSV-named
+  ("not yet" / "snare") and cjkvi-confirmed; both new parts are themselves built
+  from pieces already present on the host (未 = 一+木, 丂 = 一+勹), so this only
+  adds the *name's* reachability, not new shape — same "adds nothing but
+  vocabulary" case as chunk 62's `卉` fix.
+
+**Adding 中 to 串 surfaced a second, real bug via `audit_overflatten.py`:** 患
+(afflicted, rtk650) had been carrying `中,心` as primary with `串,心` already
+present as a labelled "structural (cjkvi-ids)" alternate. Once 串 itself resolved
+中 as a child, the primary became a collapsible over-flattening of the alternate
+— but checking `heisig-kanjis.csv`'s own components for 650 ("kebab; in; stick;
+mouth; heart") showed the *primary* was the one that had it backwards: "kebab" is
+listed before "in", matching 串's own keyword ("shish kebab"), and the render
+confirms 患's top is the whole two-loop 串 shape, not a single 中 loop. Promoted
+`串,心` to primary and dropped the now-redundant `中,心` alternate, rather than
+reverting 串's new child to silence the audit — the alternate had been sitting on
+the *correct* answer the whole time.
+
+**The 己/巳 trap, flagged and deliberately not taken:** `audit_missing_children`
+reports "add 己 to 包 (rtk569), e.g. 抱 泡 砲 胞" (+飽 via the same row) — 己 is
+where the term "self" currently resolves (`rtk564`'s own keyword), and
+`heisig-kanjis.csv`'s components for all six of 包/抱/泡/砲/胞/飽 list both
+"snake" *and* "self" for the same one component. But chunk 76 (2026-09-24)
+already render-verified that the real shape inside all six is 巳's closed-top
+form, not 己's open-top one — literally adding 己 as the tool suggests would
+silently re-introduce the exact glyph-identity bug that session fixed. Rendered
+all six again here (包 抱 泡 砲 胞 飽 己 巳 side by side) to confirm that verdict
+still holds before doing anything else with this finding.
+
+The actual bug is a name-resolution gap, not a missing shape: "self" needed to
+be reachable from 巳's own row, which already holds "snake" duty for this shape
+family (mirroring `rtk564`'s own row, which already bundles "self,snake" as
+synonyms for itself) — precisely the documented "Heisig names by mnemonic role,
+not by glyph" pattern the brief warns about, just with the ambiguity running
+through a *name* shared by two rows instead of a *glyph* shared by two names.
+Fixed by adding "self" as an additional alias on `rtk2200` (巳), landing it
+alongside 巳's existing aliases rather than touching 包's parts at all — the same
+"union multiple meanings" pattern `get_all_aliases_for_term` already uses for
+"owl"/"heart"/"finger" (see its docstring in `database.py`).
+
+`audit_missing_children.py` still reports this after the fix — it resolves each
+CSV name with a single `resolve_alias()` call (SQLite's own tie-break order
+between rtk564's and rtk2200's now-shared "self" alias, not the union-aware
+`get_all_aliases_for_term` the real search path uses), so it can't see a name
+landing on a *second* row as clearing anything. Verified the actual fix directly
+against `database.search_by_parts`, since the tool's own report couldn't be
+trusted here: `search_by_parts(["self"], depth=1)` now includes `rtk569` (包)
+where it didn't before, and `depth=2` adds `rtk570/571/572/697/1592` (胞 砲 泡 抱
+飽) — all six, exactly the set the CSV names. This is a real fix the audit tool
+itself is blind to; a future session re-running `--summary` should not
+"fix" this finding by adding 己 to 包 — that would undo both chunk 76 and this
+one.
+
+Verified: 1328 regression checks (2 pins corrected in place — rtk1931 gained
+rtk229, rtk1071 gained prim-reclining, both with reasoned comments; rtk650's
+primary-swap pin explained above), 74 pytest, overflatten/self-reference/
+radicals/primary-choice all 0, frontend lint+build clean (`build:prod`'s SEO
+generation step also picked up two sitemap entries — `kangxi4`, `prim-mutual` —
+that chunk 66's correction session added rows for but never had a sitemap
+rebuild run since; harmless, committed alongside).
+`audit_missing_children --summary` 25→18 findings (the 巳/self fix reads as
+still-open there for the reason above — treat it as closed, not as unresolved
+carry-over). `audit_phantom_parts --in-csv-range` unchanged at 25 (none of
+today's fixes touch that list).
+
+### Next
+
+Continue `audit_missing_children.py --summary`'s remaining host-only findings:
+克(+兄, clean — cjkvi's Japanese-variant IDS for 克 is literally `⿱十兄`, top=十
+bottom=兄), 党(+冖), 壇(+回), 寒(+冫), 得(+旦), 微(+儿), 敷(+甫), 虎(+七), 衰(+丨,
+via 亠/蓋/衣 — check which one first), 西(+一, but 西 is currently fully atomic —
+this one starts a decomposition from nothing rather than appending, worth an
+extra render pass), 雄(+𠂇), 首(+一). None of these were rendered this session;
+don't assume they're all as clean as today's batch (党/壇/寒/得/敷/衰 all rely on
+cjkvi expanding *past* the top IDS level to find the named part, unlike today's
+six which were direct top-level matches — check depth before trusting the
+suggestion). After that, `suggest_heisig_aliases.py --near 0.8 --all` (~236
+names, flat tail) is still the fallback once this list stops paying for a full
+render-and-cross-check pass.

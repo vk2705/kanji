@@ -697,8 +697,8 @@ rtk645:志:intention:士,心
 rtk646:誌:document:言,志
 rtk647:芯:wick:心,艹
 rtk648:忠:loyalty:中,心
-rtk649:串:spit:｜,口
-rtk650:患:afflicted:中,心;串,心
+rtk649:串:spit:｜,口,中
+rtk650:患:afflicted:串,心
 rtk651:思:think:心,田
 rtk652:恩:grace:心,因
 rtk653:応:apply:心,广
@@ -1019,7 +1019,7 @@ rtk967:愁:distress:秋,心
 rtk968:私:private:禾,厶
 rtk969:秩:regularity:失,禾
 rtk970:秘:secret:禾,必
-rtk971:称:appellation:ノ,禾,小,一
+rtk971:称:appellation:ノ,禾,小,一,𠂉
 rtk972:利:profit:刀,禾;禾
 rtk973:梨:pear tree:利,木
 rtk974:穫:harvest:禾,蒦
@@ -1119,7 +1119,7 @@ rtk1067:倍:double:亻,咅
 rtk1068:優:tenderness:亻,憂
 rtk1069:伐:fell:亻,戈
 rtk1070:宿:inn:宀,亻,百
-rtk1071:傷:wound:亻,日,一,昜
+rtk1071:傷:wound:亻,日,一,昜,𠂉
 rtk1072:保:protect:亻,呆
 rtk1073:褒:praise:亠,保,衣;亠,保,𧘇
 rtk1074:傑:greatness:亻,舛,木
@@ -1677,7 +1677,7 @@ rtk1625:報:report:幸,卩,又
 rtk1626:叫:shout:口,prim-cornucopia
 rtk1627:糾:twist:糸,prim-cornucopia
 rtk1628:収:income:prim-cornucopia,又
-rtk1629:卑:lowly:十,田
+rtk1629:卑:lowly:十,田,丿
 rtk1630:碑:tombstone:卑,石
 rtk1631:陸:land:坴,阝
 rtk1632:睦:intimate:坴,目
@@ -1987,7 +1987,7 @@ rtk1927:湿:damp:水,日,业
 rtk1928:顕:appear:日,业,頁
 rtk1929:繊:slender:业,糸,𢦏
 rtk1930:霊:spirits:雨,二,业
-rtk1931:業:business:业,丷,一,木
+rtk1931:業:business:业,丷,一,木,未
 rtk1932:撲:slap:扌,业,丷,夫
 rtk1933:僕:me:亻,业,丷,夫
 rtk1934:共:together,strung together:八,龷
@@ -2108,7 +2108,7 @@ rtk2048:誤:mistake:言,呉
 rtk2049:蒸:steam:丞,灬,艹
 rtk2050:承:acquiesce:ノ,二,亅,手
 rtk2051:函:box (archaic):丂,prim-sparkler,凵
-rtk2052:極:extreme:口,又,木,一
+rtk2052:極:extreme:口,又,木,一,丂
 rtk2053:牙:tusk:
 rtk2054:芽:bud:牙,艹
 rtk2055:邪:wicked:牙,⻏;牙,阝
@@ -2256,7 +2256,7 @@ rtk2196:丹:rust-colored,rust colored,ship´s funnel,ship's funnel:ノ,一,丶,�
 rtk2197:丑:sign of the ox or cow:｜,ノ,一
 rtk2198:羞:feel ashamed:羊,丑
 rtk2199:卯:sign of the hare or rabbit,blown eggs:prim-receipt,卩
-rtk2200:巳:sign of the snake or serpent,mosaic with bit missing:
+rtk2200:巳:sign of the snake or serpent,mosaic with bit missing,self:
 rtk2201:此:this:止,匕
 rtk2202:柴:brush:木,此
 rtk2203:些:a little bit:二,此
