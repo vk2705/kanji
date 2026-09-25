@@ -2023,7 +2023,7 @@ rtk1963:輪:wheel:侖,車
 rtk1964:偏:partial:亻,扁
 rtk1965:遍:everywhere:辶,扁
 rtk1966:編:compilation:糸,扁
-rtk1967:冊:tome:冂,廾
+rtk1967:冊:tome:冂,艹
 rtk1968:柵:stockade:木,冊
 rtk1969:典:code:曲,八
 rtk1970:氏:family name:
@@ -2310,7 +2310,7 @@ rtk2251:伽:nursing:亻,加
 rtk2252:儲:be profitable:亻,諸
 rtk2253:僑:expatriate:亻,喬
 rtk2254:倶:both:亻,具
-rtk2255:侃:strong:亻,口,川
+rtk2255:侃:strong:亻,口,儿,｜
 rtk2256:偲:recollect:亻,思
 rtk2257:侭:as it is:亻,尽
 rtk2258:脩:dried meat:亻,月,攵,｜
@@ -2701,7 +2701,7 @@ rtk2643:禦:defend:御,示
 rtk2644:祷:pray:礻,寿
 rtk2645:祐:help:礻,右
 rtk2646:祇:national or local god:礻,氏;示,氏
-rtk2647:祢:ancestral shrine:礻,𠂉,小
+rtk2647:祢:ancestral shrine:礻,𠂊,小
 rtk2648:禄:fief:礻,录
 rtk2649:禎:happiness:礻,貞
 rtk2650:秤:balances:禾,平
@@ -2779,7 +2779,7 @@ rtk2721:蚤:flea:叉,虫
 rtk2722:蟹:crab:虫,解
 rtk2723:蛋:barbarian:虫,疋
 rtk2724:蟄:hibernation of insects:執,虫
-rtk2725:蝿:fly:虫,田,亀
+rtk2725:蝿:fly:虫,日,电
 rtk2726:蟻:ant:義,虫
 rtk2727:蝋:wax:虫,𭕄,用,几
 rtk2728:蝦:shrimp:虫,又
@@ -2802,7 +2802,7 @@ rtk2744:讐:enemy:言,隹
 rtk2745:諌:admonish:言,東
 rtk2746:諒:fact:京,言
 rtk2747:讃:praise:言,賛
-rtk2748:訊:request:ノ,言,几
+rtk2748:訊:request:言,乙,十
 rtk2749:訣:separation:言,人,大,二,ユ;夬,言
 rtk2750:詫:apologize:宅,言
 rtk2751:誼:friendship:宜,言
@@ -2832,7 +2832,7 @@ rtk2774:醤:a kind of miso:将,酉
 rtk2775:醍:whey:是,酉
 rtk2776:醐:boiled butter:酉,胡
 rtk2777:醇:pure sake:享,酉
-rtk2778:麹:malt:土,麦,米,亠,勹,夂,二
+rtk2778:麹:malt:麦,勹,米
 rtk2779:釦:button:金,口
 rtk2780:銚:sake bottle:兆,金
 rtk2781:鋤:spade up:助,金
@@ -2968,7 +2968,7 @@ rtk2910:套:accumulate:大,長,厶
 rtk2911:叛:disobey:半,反
 rtk2912:尖:be pointed:小,大
 rtk2913:壷:jar:｜,一,口,士,冖
-rtk2914:叡:intelligence:八,卜,又,目,冖
+rtk2914:叡:intelligence:八,卜,又,目
 rtk2915:酋:chieftain,molotov cocktail:酉,丷
 rtk2916:鴬:nightingale:prim-schoolhouse,鳥
 rtk2917:赫:suddenly:赤
@@ -3025,7 +3025,7 @@ rtk2967:珈:ornamental hairpin:加,王
 rtk2968:琲:string of many pearls:王,非
 rtk2969:檜:japanese cypress:日,木,𠆢,一
 rtk2970:轡:bit (horse):口,糸,車
-rtk2971:淵:abyss:｜,一,水,丬,片
+rtk2971:淵:abyss:水,片,爿,一
 rtk2972:伍:five:亻,五
 rtk2973:什:utensil:亻,十
 rtk2974:萬:ten thousand:艹,禺
@@ -4619,3 +4619,47 @@ prim-tall:?:tall:亠,口
 # reclining; lying down; one; floor; fishhook; sheaf". 乙 rather than cjkvi's
 # 乁 because this file has a row for 乙 answering to "fishhook" and none for
 # 乁, and the render shows one sweeping stroke either way.
+
+# --- 2026-09-25: a phantom-parts sweep of the volume-3 range (frames 2200+),
+# where heisig-kanjis.csv has no components column at all and the structural
+# channel is carrying the check alone. Eight fixed, each rendered first.
+# 冊 (tome) was 冂,廾. cjkvi gives ⿻冂卄 and rendered, 冊's two interior
+# verticals are plain and straight where 廾's left stroke slants in -- it is
+# the 卄 shape, which this file already spells 艹 (chunk 50's 龷, chunk 60's
+# 𠕁). 𠕁 is ⿵冂卄, the same picture with the bar not crossing, and it says
+# 冂,艹; these two rows now agree. Heisig's own row for 1967 is empty, so
+# nothing in the book argues either way.
+# 侃 was 亻,口,川. cjkvi: ⿰亻⿱口𫶧 with 𫶧 = ⿴儿丨. Rendered, the bottom right
+# is a 儿 with a vertical driven through it, one connected shape -- not the
+# three free-standing strokes of 川. Same shape 㐬 carries (chunk 60), and the
+# same call: 儿 + ｜.
+# 訊 was ノ,言,几. cjkvi: ⿰言卂 with 卂 = ⿹⺄十, and rendered the right side is
+# a hooked stroke wrapped around a cross. No 几 anywhere. cjkvi's J variant
+# spells the inside 𠂇 (ノ+一) rather than 十; the render shows a vertical
+# crossing a horizontal, so 十 it is.
+# 蝿 was 虫,田,亀. cjkvi: ⿰虫⿻日电 -- 日 over 电, not 田, and no turtle at all.
+# 亀 was the worst phantom in this batch: a whole 11-stroke kanji claimed by a
+# character that does not contain it.
+# 叡 was 八,卜,又,目,冖. cjkvi: ⿰睿又 with 睿 = ⿳𣦵八𥃦. The 冖 is not in the
+# glyph and nothing supplies it; dropped, the rest left as it was.
+# 淵 was ｜,一,水,丬,片. cjkvi: ⿰氵𣶒 with 𣶒 = ⿴⿰片爿一. Two fixes in one row:
+# the left inner element is the full 爿, not the abbreviated 丬 (rendered side
+# by side they are clearly two shapes, and this file keeps both rows), and the
+# loose ｜ is not there at all.
+# 麹 was 土,麦,米,亠,勹,夂,二. cjkvi: ⿰麦匊 with 匊 = ⿹勹米. 麦 was already in
+# the row, so 土 亠 二 夂 were a second, wrong flattening of 麦's own top (龶)
+# sitting beside it. Now just 麦 + 勹 + 米.
+# 祢 was 礻,𠂉,小. cjkvi: ⿰礻尔 with 尔 = ⿱𠂊小. 𠂉 and 𠂊 are the lookalike
+# pair this file has been burned by before -- 𠂉 is a flat horizontal with a
+# short stroke at its left (年's top), 𠂊 is an angled hook (争's top).
+# Rendered, 尔's top is the hook.
+# Not touched, and why:
+# 滲 (參/参), 齟 and 齬 (齒/歯) are the codepoint-variant blind spot chunk 57
+# already documented for 斎 (齐/斉): cjkvi spells these with the Chinese form
+# and this file uses the Japanese one, which is the right glyph for a Japanese
+# kanji. Same shape, different codepoint, nothing to fix.
+# 毅, 蝋, 鹵, 捷, 蘭 are deferred rather than guessed. 毅's 豕 is the body of
+# 豕 without its top stroke (cjkvi 豙 = ⿱立𧰨) and the row is separately
+# over-flattened (亠 inside 立, 几+又 beside 殳) -- one question, not two.
+# 鹵's top is ⺊, which has no row here and should not get one in passing.
+# 蝋 needs 𠂡 and 捷 needs 疌, both atomic in cjkvi. 蘭 needs 柬, likewise.

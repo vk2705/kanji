@@ -15188,3 +15188,53 @@ six which were direct top-level matches — check depth before trusting the
 suggestion). After that, `suggest_heisig_aliases.py --near 0.8 --all` (~236
 names, flat tail) is still the fallback once this list stops paying for a full
 render-and-cross-check pass.
+
+## 2026-09-25 — chunk 79: a phantom sweep of the volume-3 range
+
+Picked this seam because a second session is working `audit_missing_children`
+and the two would have collided. Phantom parts run the other direction — a part
+*we list* that is not in the glyph — and the 25 outstanding findings were almost
+all above frame 2200, where `heisig-kanjis.csv` has no components column at all
+and the structural channel is carrying the check alone. Every one rendered
+before it was touched.
+
+**Eight fixed:**
+
+* **冊** was `冂,廾`. cjkvi gives `⿻冂卄`, and rendered, 冊's interior verticals
+  are plain and straight where 廾's left stroke slants in. This file already
+  spells 卄 as 艹, and 𠕁 (`⿵冂卄` — the same picture with the bar not crossing)
+  already says `冂,艹`. The two rows agree now.
+* **侃** was `亻,口,川`. cjkvi: `⿰亻⿱口𫶧` with 𫶧 = `⿴儿丨` — one connected
+  shape, a 儿 with a vertical through it, not the three free strokes of 川. Same
+  shape 㐬 carries from chunk 60, same call.
+* **訊** was `ノ,言,几`. cjkvi: `⿰言卂`, 卂 = `⿹⺄十`. No 几 anywhere.
+* **蝿** was `虫,田,亀` — the worst phantom in the batch, a whole 11-stroke kanji
+  claimed by a character that does not contain it. cjkvi: `⿰虫⿻日电`.
+* **叡** dropped its 冖, which nothing supplies.
+* **淵** was `｜,一,水,丬,片`: two phantoms in one row. The left inner element is
+  the full 爿, not the abbreviated 丬, and the loose ｜ is not there.
+* **麹** was `土,麦,米,亠,勹,夂,二`. 麦 was already in the row, so 土 亠 二 夂 were
+  a second and wrong flattening of 麦's own top sitting beside it.
+* **祢** was `礻,𠂉,小`. 𠂉/𠂊 is the lookalike pair this project keeps getting
+  caught by — flat horizontal with a left tick versus an angled hook. 尔's top
+  is the hook.
+
+**Three confirmed as detector blind spots, not bugs:** 滲 (參/参), 齟 and 齬
+(齒/歯). Same codepoint-variant case chunk 57 documented for 斎 — cjkvi spells
+them with the Chinese form, this file uses the Japanese one, which is the right
+glyph for a Japanese kanji.
+
+**Five deferred rather than guessed:** 毅 (its 豕 is 豕's body without the top
+stroke, and the row is separately over-flattened — one question, not two), 鹵
+(its top is ⺊, which has no row here and should not get one in passing), 蝋,
+捷 and 蘭 (need 𠂡, 疌 and 柬, all atomic in cjkvi).
+
+Two pins moved and both had pinned a phantom, which is worth noting about pins
+in general: `rtk2725` held 田 + 亀 and `rtk2971` held 丬 + ｜. A pin records that
+someone looked once; it does not make the answer right, and when a detector and
+a pin disagree the detector deserves the render.
+
+Verified: 1328 checks exit 0, 74 pytest, over-flattening 0, dead tokens 0,
+self-references 0, primary-choice 0 in both modes, anachronistic 1, csv
+regressions unchanged at 237, frontend lint + both builds clean.
+**`audit_phantom_parts --hide-blind` 25 → 15, across 19 → 12 kanji.**
