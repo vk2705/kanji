@@ -15491,3 +15491,71 @@ Verified: 1328 checks exit 0, 74 pytest, over-flattening 0, dead tokens 0,
 self-references 0, primary-choice 0 in both modes, anachronistic 1, csv
 regressions unchanged at 237, frontend lint + both builds clean. Two pins moved,
 each with its reason beside it.
+
+## 2026-09-26 — chunk 85: 蝋 inherited 猟's phantom 用 after 猟 itself was fixed
+
+Container recovery first: this container's local `master` branch ref was 50
+commits behind `origin/master` (a shallow clone, so `git merge-base` couldn't
+even find a common ancestor) — reset the branch ref to `origin/master` rather
+than trying to reconcile two shallow histories, confirmed with `git push
+--dry-run` before doing anything else, per the standing drill. Rebuilt
+venv/node_modules/fonts/`/tmp/ids.txt` from scratch as usual.
+
+Went looking for chunk 84's two explicitly-open items (逓's 巾, 爾's redundant
+冂/｜) and confirmed both are still genuinely open — 爾's cjkvi reading is an
+⿱/⿻ overlay (quarantined, nothing to act on) and 逓's fix needs re-deriving
+its whole decomposition around a buried 乕, recorded since chunk 24 as too
+deep for a single-line fix. Neither had new evidence to add today.
+
+While reading that same block of `data.txt` comments (the `prim-cornstalk`
+note), found something with a fix ready to hand: the comment still described
+猟's row as `犭,𭕄,用,几` and treated the 用-vs-𠂡 question as unresolved
+("needs a font-coverage check") — but chunk 29 (2026-09-20) had already
+settled it, rendering 猟 itself against cjkvi's 鼡 and dropping the phantom 用
+(current row: `犭,𭕄,几`). The comment was simply never updated after that
+fix landed.
+
+More than a stale comment, though: `audit_phantom_parts.py --hide-blind`
+still listed `rtk2727`(蝋, "wax") carrying that same phantom 用 in
+`虫,𭕄,用,几`. Checked why — 蝋 was given this split *by analogy to 猟* in an
+earlier chunk (2026-09-17, "reused 猟's own already-established 鼡 split"),
+which ran **before** chunk 29's correction. 蝋 was built from 猟's pre-fix
+row and never revisited once 猟's own copy was corrected three days later.
+
+cjkvi confirms the two share the component exactly: 蝋 = `⿰虫鼡`, 猟 =
+`⿰犭鼡`, same 鼡 (`⿱𭕄𠂡`) on the right in both. Rendered 蝋/猟/用/鼡/几 side
+by side (`render_glyphs.py`): 蝋's and 猟's right-hand shape are pixel-for-
+pixel identical — a small cap over a hook-legged frame — and neither matches
+用's plain box. `用` dropped from 蝋's row (`虫,𭕄,几`), the same call chunk 29
+already made for 猟, for the same reason: nothing here is guessing what's
+left of 鼡 stands for (Heisig's own row names an "anemometer" in there with
+no primitive of its own yet). Also rewrote the stale comment block to
+describe the current, corrected state of both rows instead of the
+already-resolved question, so a future chunk doesn't re-open it from
+scratch.
+
+No pin references `rtk2727` (checked `test_regression_fixes.py` directly),
+so nothing to correct there.
+
+Verified: 1328 checks exit 0 (no pin touched `rtk2727`), 74 pytest,
+over-flattening 0, self-references 0, radicals 0/0, primary-choice 0, csv
+regressions unchanged at 237 (蝋's CSV components column is blank — it was
+never on that list), frontend lint + both builds clean.
+`audit_phantom_parts.py --hide-blind` **23 → 22, across 18 → 17 kanji**;
+`--in-csv-range` unaffected (蝋 is frame 2727, outside CSV range) at 26/19.
+
+### Next
+
+逓's buried-乕 re-decomposition and 爾's overlay quarantine are still the two
+open items from chunk 84 — both need a render-budget session, not a
+one-line fix, so they keep getting carried forward rather than guessed at.
+Otherwise the same two seams as before: `audit_phantom_parts.py
+--hide-blind`'s remaining 22 findings (斎/属/能/滲/齟/齬/祢/捷/蘭/毅 are
+already-documented blind spots or confirmed-correct opaque-intermediates;
+淵/叡 are the chunk-82 reverts standing on unverifiable-evidence pins, not
+bugs to re-open without new evidence; 逓/爾 as above) are mostly exhausted of
+easy wins — worth a fresh pass over `data.txt`'s other analogy-copied rows
+(any row whose comment says "reused X's split" or "by analogy") for the
+same stale-comment-after-upstream-fix pattern that caught 蝋 today, before
+falling back to `suggest_heisig_aliases.py --near 0.8 --all`'s flat ~236-name
+tail.

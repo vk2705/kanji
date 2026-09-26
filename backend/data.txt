@@ -2781,7 +2781,7 @@ rtk2723:蛋:barbarian:虫,疋
 rtk2724:蟄:hibernation of insects:執,虫
 rtk2725:蝿:fly:虫,田,乙
 rtk2726:蟻:ant:義,虫
-rtk2727:蝋:wax:虫,𭕄,用,几
+rtk2727:蝋:wax:虫,𭕄,几
 rtk2728:蝦:shrimp:虫,又
 rtk2729:蛸:octopus:肖,虫
 rtk2730:螺:small  edible  helical fresh-water mollusk:累,虫
@@ -3679,22 +3679,29 @@ prim-cornucopia:丩:cornucopia
 # stroke pair that should stay flattened.
 #
 # CSV also cites "cornstalk" for 猟(rtk2090)/逓(rtk2002), but neither was
-# touched this chunk. 猟's own current 用 (in 犭,𭕄,用,几) stands in for
-# 𠂡(U+200A1, ⿵几⿻二丨) — 𠂡 does contain this same ⿻二丨 overlay, but
-# rendered directly it came back pixel-identical to 用, which is
-# ambiguous rather than confirming: it could mean the two are genuinely
-# unified in this font family, or it could mean the installed fonts are
-# silently falling back to 用's glyph for an Ext-B codepoint they don't
-# really cover (the exact CLAUDE.md-documented failure mode for rare
-# codepoints, e.g. 㑒/㐄 on Android) — 几 has a visibly hooked leg stroke
-# that plain 冂 (which 用 itself is built from, per cjkvi) lacks, so a
-# real render of 𠂡 should show that hook and didn't. Needs a font-
-# coverage check (e.g. a second font family, or checking the installed
-# fonts' own coverage tables) before trusting the render either way, not
-# a guess. 逓's own current 巾,辶,𠂋,｜ doesn't reference 乕(⿸𠂆⿻⿻二丨冂)
-# at all, let alone the ⿻二丨 buried two levels inside it — untangling
-# that is a separate, deeper re-decomposition, not a one-line alias add.
-# Left both open for a future chunk.
+# touched this chunk. 猟's own then-current 用 (in 犭,𭕄,用,几) was thought to
+# stand in for 𠂡(U+200A1, ⿵几⿻二丨), which does contain this same ⿻二丨
+# overlay — but a render of 𠂡 alone came back pixel-identical to 用, with no
+# trace of the hooked leg 几 has (per cjkvi 用 is built from plain 冂, which
+# lacks that hook), rather than resolving into a nameable "cornstalk" fragment.
+# A later chunk (2026-09-20, "戈, 戊, 戉 are three glyphs") settled this by
+# rendering 猟 itself against 鼡 (cjkvi ⿰犭鼡, 鼡 = ⿱𭕄𠂡): 用 is not in the
+# glyph at all — the 用-shaped box is only ever the top-heavy hooked shape
+# under 𭕄, not a free-standing 用 — so 猟 dropped it (犭,𭕄,几), leaving what's
+# left of 鼡 as plain 几 since Heisig's own row names an "anemometer" in there
+# that has no row here yet.
+#
+# 蝋(rtk2727) was given this same 犭,𭕄,用,几-shaped split by analogy (chunk
+# on 2026-09-17, before the above render), and never got the correction: its
+# right side is cjkvi's identical 鼡 (蝋 = ⿰虫鼡). Dropped 用 there too
+# (now: 虫,𭕄,几) — confirmed by rendering 蝋/猟/用/鼡/几 side by side, which
+# shows 蝋's and 猟's right-hand shape are pixel-for-pixel the same, and
+# neither carries 用's plain box.
+#
+# 逓's own current 巾,辶,𠂋,｜ doesn't reference 乕(⿸𠂆⿻⿻二丨冂) at all, let
+# alone the ⿻二丨 buried two levels inside it — untangling that is a separate,
+# deeper re-decomposition, not a one-line alias add. Left open for a future
+# chunk with render budget for it.
 prim-cornstalk:?:cornstalk
 
 # fenceposts, cabers: heisig-kanjis.csv names these as a shared component of
