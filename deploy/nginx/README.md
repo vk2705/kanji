@@ -40,6 +40,7 @@ existing one.
 | `dev/kanji-ratelimit.conf` | `/etc/nginx/conf.d/kanji-ratelimit.conf` | srv.alteon.help (shared dev box) |
 | `prod/kanji.conf` | `/etc/nginx/sites-available/kanji.conf` (symlinked from `sites-enabled/`) | kanji.alteon.help (dedicated prod VM) |
 | `prod/kanji-ratelimit.conf` | `/etc/nginx/conf.d/kanji-ratelimit.conf` | kanji.alteon.help (dedicated prod VM) |
+| `prod/kanjimcp.conf` | `/etc/nginx/sites-available/kanjimcp.conf` (symlinked from `sites-enabled/`) | kanjimcp.alteon.help (same prod VM — see DEPLOY_README.md's "MCP server" section) |
 
 `kanji-ratelimit.conf` on either machine declares the `limit_req_zone`s the
 matching `kanji.conf`'s `location` blocks reference, plus the

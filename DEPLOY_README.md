@@ -272,6 +272,73 @@ check afterward whether any of this actually brought real visitors — it
 already excludes bots that only ever hit URLs directly without running the
 frontend JS, so a genuine uptick there is a genuine uptick, not crawler noise.
 
+## MCP server — kanjimcp.alteon.help (added 2026-09-26)
+
+A public, read-only MCP (Model Context Protocol) server exposing kanji/hanzi
+shape search and decomposition lookup as MCP tools, so an MCP-capable client
+(Claude, another agent) can query this project's data directly instead of
+scraping the website. Lives at `backend/mcp_server.py`, importing
+`database.py` the same way `main.py` does, but as its **own process** on its
+**own subdomain** — deliberately separate from `kanji-backend.service` so an
+MCP protocol issue or client flood can't take down the main site, and so it
+can be restarted independently. No auth, same visibility rules as an
+anonymous website visitor (`viewer_id=None` everywhere — only public rows,
+never private user contributions).
+
+Tools exposed: `search_by_parts` (shape search — the site's parts-search tab),
+`get_decomposition` (a character's own breakdown, recursive), `search_by_text`
+(keyword/alias search — the site's text-search tab). See the module docstring
+and each tool's own docstring in `mcp_server.py` for exact parameters.
+
+**One-time setup on the prod VM** (161.153.96.217 — same dedicated machine as
+the main app; this is not a new server):
+
+1. **DNS**: point `kanjimcp.alteon.help` at 161.153.96.217 (same A/AAAA
+   records as `kanji.alteon.help`, different name) — needs whoever owns the
+   `alteon.help` DNS zone; not something done from this repo.
+2. **Install the new dependency**: `cd /opt/kanji/backend && source venv/bin/activate && pip install -r requirements.txt` (adds `mcp`, pinned in `requirements.txt`).
+3. **systemd unit** — create `/etc/systemd/system/kanji-mcp.service`:
+   ```ini
+   [Unit]
+   Description=Kanji MCP server
+   After=network.target
+
+   [Service]
+   Type=simple
+   WorkingDirectory=/opt/kanji/backend
+   Environment=KANJI_MCP_PORT=8100
+   ExecStart=/opt/kanji/backend/venv/bin/python3 mcp_server.py
+   Restart=on-failure
+   User=ec2-user
+
+   [Install]
+   WantedBy=multi-user.target
+   ```
+   Then `sudo systemctl daemon-reload && sudo systemctl enable --now kanji-mcp.service`.
+   Match `User=`/paths to however `kanji-backend.service` is actually configured
+   on the box (`systemctl cat kanji-backend.service` to check) — this should
+   mirror it, just on a different port and entry point.
+4. **nginx**: copy `deploy/nginx/prod/kanjimcp.conf` to
+   `/etc/nginx/sites-available/kanjimcp.conf`, symlink it into
+   `sites-enabled/`, same as the main `kanji.conf` (see
+   `deploy/nginx/README.md`'s file-mapping table).
+5. **TLS**: `sudo certbot --nginx -d kanjimcp.alteon.help` (same tool/flow
+   already used for `kanji.alteon.help`) — this fills in the
+   `ssl_certificate`/`ssl_certificate_key` paths `kanjimcp.conf` already
+   references and sets up the HTTP->HTTPS redirect block, same as Certbot did
+   for the main domain.
+6. `sudo nginx -t && sudo systemctl reload nginx`.
+7. **Verify**: `curl -s https://kanjimcp.alteon.help/mcp -X POST -H 'Content-Type: application/json' -H 'Accept: application/json, text/event-stream' -d '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-06-18","capabilities":{},"clientInfo":{"name":"smoketest","version":"1"}}}'`
+   should return a `200` with a JSON-RPC `result` (server info + capabilities),
+   not a connection error or 502.
+
+**Ongoing deploys**: a `data.txt`/`database.py` change that affects search or
+decomposition output needs `kanji-mcp.service` restarted too, same as
+`kanji-backend.service` (Step 3 above) — they read the same `kanji.db` but are
+two separate running processes with their own Python import state. A change to
+`mcp_server.py` itself only needs `kanji-mcp.service` restarted, not the main
+backend.
+
 ## Google Sign-In button not appearing (added 2026-09-02, owner report)
 
 If the "Sign in with Google" button doesn't show up on the login popover at

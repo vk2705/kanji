@@ -20,6 +20,7 @@ It began as a companion to **Remembering the Kanji (RTK)** by James W. Heisig an
 | Data | `heisig-kanjis.csv` + flat text overlays → SQLite (one-time seed); user contributions written directly to SQLite thereafter |
 | Auth | Cookie-based sessions, `bcrypt` password hashing — no external identity provider |
 | Android | Kotlin, WebView shell around `frontend/` — see `android/README.md` |
+| MCP server | Python 3 + the official `mcp` SDK, own process — `backend/mcp_server.py`, see below |
 
 `cgi-bin/` (Perl) and `html/` are the original legacy app — reference only, not part of the active stack.
 
@@ -59,6 +60,20 @@ cd android
 ./gradlew :app:assembleDebug    # points at a local dev server (10.0.2.2:5173)
 ./gradlew :app:assembleRelease  # points at the live deployed site, unsigned APK
 ```
+
+**MCP server** (port 8100, separate process from the main backend):
+```bash
+cd backend
+./venv/bin/python3 mcp_server.py    # KANJI_MCP_PORT env var overrides the port
+```
+Public, read-only, no auth — exposes `search_by_parts`/`get_decomposition`/`search_by_text`
+as MCP tools over Streamable HTTP (`/mcp`), reusing `database.py` with `viewer_id=None`
+throughout (same visibility as an anonymous website visitor — public rows only, never
+private user data). Deployed on prod as its own systemd unit (`kanji-mcp.service`) behind
+its own subdomain, `kanjimcp.alteon.help` — see `DEPLOY_README.md`'s "MCP server" section
+for the one-time setup and `deploy/nginx/prod/kanjimcp.conf` for its nginx block. A
+`data.txt`/`database.py` change needs this service restarted too, independently of
+`kanji-backend.service` (they're separate processes reading the same `kanji.db`).
 
 **One-off data/maintenance scripts** (`backend/`, not part of the app's runtime). These `import database` (`X | None` syntax, Python 3.10+), so they need the venv's Python — the box's system `python3` is 3.9.25 and `TypeError`s on import. Use the venv's interpreter explicitly, or `source venv/bin/activate` first:
 ```bash
