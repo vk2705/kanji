@@ -1981,8 +1981,15 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk357", "rtk610"}},
     "rtk624": {"character": "国", "keyword": "country",
                 "expected_part_ids": {"kangxi31", "rtk272"}},
+    # 2026-09-27: was 旦,口,土,亠,囗 -- cjkvi gives 壇 = 土+亶, 亶 = 㐭+旦,
+    # 㐭 = 亠+回, and 回 (rtk630, "-times") is itself already 囗+口. The row
+    # re-flattened 回 into its own two pieces instead of referencing the
+    # already-taught kanji, and heisig-kanjis.csv's own components column for
+    # 壇 runs "...top hat; -times; pent in; mouth..." -- "-times" (回's own
+    # keyword) sitting between "top hat" (亠) and "pent in; mouth" (回's own
+    # recursive names), which only makes sense if 回 is referenced whole.
     "rtk631": {"character": "壇", "keyword": "podium",
-                "expected_part_ids": {"kangxi31", "kangxi8", "rtk11", "rtk161", "rtk30"}},
+                "expected_part_ids": {"kangxi8", "rtk161", "rtk30", "rtk630"}},
     "rtk655": {"character": "臆", "keyword": "cowardice",
                 "expected_part_ids": {"rtk13", "rtk654"}},
     "rtk666": {"character": "悦", "keyword": "ecstasy",
@@ -3079,8 +3086,13 @@ EXPECTED_DECOMPOSITIONS = {
     #  - 自(rtk36=丶,目; used 9x) -- most hosts correctly referenced 自 but
     #    redundantly repeated its own "目". 嗅/榎/鼾 were flattening
     #    already-taught compounds (臭, 夏, 鼻) instead of referencing them.
+    # 2026-09-27: was 自,丷 -- cjkvi's top radical for 首 is 䒑 = ⿱丷一, not
+    # 丷 alone. Rendered, there is a plain horizontal stroke between the horns
+    # and the eye/自 box, and heisig-kanjis.csv names it directly: "horns;
+    # nose; one; ceiling; drop; eye" carries "one; ceiling" as its own names,
+    # not as 自's (自's own row is "drop; eye").
     "rtk74": {"character": "首", "keyword": "neck",
-               "expected_part_ids": {"kangxi12", "rtk36"}},
+               "expected_part_ids": {"kangxi12", "rtk1", "rtk36"}},
     "rtk128": {"character": "臭", "keyword": "stinking",
                "expected_part_ids": {"rtk112", "rtk36"}},
     "rtk129": {"character": "嗅", "keyword": "sniff",
@@ -3224,8 +3236,13 @@ EXPECTED_DECOMPOSITIONS = {
     # audit_phantom_parts.py, which flagged 尚 as unaccounted on these hosts.
     "rtk859": {"character": "賞", "keyword": "prize",
                "expected_part_ids": {"prim-outhouse", "rtk56"}},
+    # 2026-09-27: was 小,兄 -- cjkvi gives 党 = ⿱龸兄, 龸 = ⿱⺌冖 (⺌ over 冖,
+    # the same 龸 top used by prim-outhouse's 賞/堂/常/裳/掌/嘗, just without
+    # their 口). Rendered, there is a plain horizontal bar between the small-
+    # radical strokes and 兄's box that the row dropped; heisig-kanjis.csv
+    # names it directly ("...small; little; crown; mouth; human legs").
     "rtk860": {"character": "党", "keyword": "party",
-               "expected_part_ids": {"rtk107", "rtk110"}},
+               "expected_part_ids": {"kangxi14", "rtk107", "rtk110"}},
     "rtk861": {"character": "堂", "keyword": "hall",
                "expected_part_ids": {"rtk161", "prim-outhouse"}},
     "rtk862": {"character": "常", "keyword": "usual",
@@ -3695,8 +3712,13 @@ EXPECTED_DECOMPOSITIONS = {
     # past the CSV range that chunk could reach.
     "rtk2936": {"character": "睾", "keyword": "testicles",
                "expected_part_ids": {"rtk1556", "rtk1622"}},
+    # 2026-09-27: was 八,宀,丶,𠀎 -- cjkvi gives 寒 = 𡨄+⺀, ⺀ = ⿱丶丶, i.e. two
+    # dots at the bottom, not one. Rendered beside 冫 (ice) the two strokes
+    # match exactly, and heisig-kanjis.csv names it "ice" directly, not "dot"
+    # -- kangxi3 (丶, "dot, tick, drop, drops") is a different primitive with
+    # no "ice" sense of its own.
     "rtk1645": {"character": "寒", "keyword": "cold",
-               "expected_part_ids": {"kangxi3", "kangxi40", "prim-celery", "rtk8"}},
+               "expected_part_ids": {"kangxi15", "kangxi40", "prim-celery", "rtk8"}},
     "rtk1936": {"character": "異", "keyword": "uncommon",
                "expected_part_ids": {"rtk14", "rtk1934"}},
     # Same 水/氺 correction as 藤 above — see the note on rtk1295.

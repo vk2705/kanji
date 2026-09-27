@@ -15559,3 +15559,153 @@ easy wins — worth a fresh pass over `data.txt`'s other analogy-copied rows
 same stale-comment-after-upstream-fix pattern that caught 蝋 today, before
 falling back to `suggest_heisig_aliases.py --near 0.8 --all`'s flat ~236-name
 tail.
+
+## 2026-09-27 — chunk 86: `audit_missing_children.py`'s list, and two dead ends first
+
+Container recovery first, same drill as chunk 85: fresh container, no repo at
+`/home/user/kanji` to start from, so `git clone` + `git push --dry-run` before
+anything else. cjkvi-ids, `fonts-noto-cjk`/`fonts-hanazono`, the backend venv
+and `frontend/node_modules` all had to be rebuilt from scratch too — none of
+that persists between firings of this routine.
+
+Both leads named in yesterday's "Next" turned out to be dead ends, found
+quickly rather than late:
+
+* **The "reused X's split" grep.** Only one comment in `data.txt` uses that
+  language, and it is chunk 85's own 蝋 writeup — already fixed, already
+  rewritten to describe the corrected state. Nothing else to find with that
+  search.
+* **"miss world"/"paper punch"** (売 読 探 深, the largest `suggest_heisig_aliases
+  --near 0.8` group). `data.txt` already has a 2026-09-20 comment on this
+  exact name pair: it expands to two different shapes under one Heisig name
+  (⿱冖儿 in 売, 穴 in 探), and the codepoint that would resolve it (冗,
+  U+5197) renders with the wrong stroke at bottom-left when held up against
+  売's own. Already correctly left open; re-litigating it without new
+  evidence would just be guessing at what a past render already ruled out.
+
+So the session moved to `audit_missing_children.py`'s full list (19 findings
+across 19 kanji) instead — a finite, named list the standing brief asks for,
+and one the notes flagged as under-exploited. The discipline this chunk
+adds: **check `audit_weak_evidence.py --host <char>` for every finding before
+touching the row**, not just for changes that felt uncertain. It caught two
+false leads immediately:
+
+* **敷** ("spread") — cjkvi's own reading is
+  `⿰⿱⿺𤰔丶方攵`, and 𤰔 is `⿻一由`, an *overlay*. The tool's "+甫" finding
+  reads that overlay as a parts list, which is exactly the trap
+  `audit_weak_evidence.py` exists to catch. `--host 敷` confirms it under
+  `not-a-parts-list`. Skipped.
+* **衰** ("decline") — same shape of problem: cjkvi's `⿳亠⿻口一𧘇` has a `⿻`
+  overlay to make the "+丨" finding. `--host 衰` confirms it. Skipped.
+
+Both would have been wrong data.txt edits sourced from a tool that does not
+(and by design cannot) know about the overlay-operator trap on its own —
+exactly the class of mistake chunk 81's `audit_weak_evidence.py` was built to
+stop before it reaches a commit.
+
+Also **not** touched, for reasons specific to each rather than the overlay
+trap:
+
+* **包 (and its five dependents 胞/砲/泡/抱/飽)** — the tool's "+己" finding is
+  cjkvi's `[J]`-variant reading of 包 (`⿹勹己`), but chunk 76 already rendered
+  this exact question on 2026-09-24 and pinned the opposite answer: "the
+  rendered lower component has 巳's closed upper form, not 己's open one."
+  My own read of a fresh render of 己 vs 巳 side by side was genuinely
+  ambiguous to me at the font sizes available here, which is exactly the
+  situation where a documented, deliberate prior verdict should stand over a
+  fresh, less certain one — reversing a render-backed pin needs a clearer
+  render than the one being overturned, not just another look. Left as is.
+* **虎** (and, structurally, 虜/膚/虚/虞/慮/劇/驢) — the tool's "+七" finding
+  points at 虍's cjkvi reading (`⿸⿱⺊②七`, one circled placeholder and a
+  real 七). But `data.txt` already spells 虍 as `卜,匕,厂` consistently across
+  five kanji (虎 虞 慮 劇 驢), never once as `七`. Rendered close, 虎's
+  middle stroke is genuinely hard to call between 匕 and 七 in the available
+  serif font — nothing like the clean, unambiguous 己/巳 or 冫/丶 differences
+  below. Given the five-kanji blast radius of getting it wrong and the
+  render not being clean enough to trust, left for a session that can spend
+  real render budget on it (a stroke-order diagram rather than a static
+  glyph would settle it).
+* **逓** — already carried forward from chunk 84/85 as needing a full
+  re-decomposition around a buried 乕, not a one-line addition. Still true.
+
+What *did* get fixed, each confirmed by cjkvi structure, heisig-kanjis.csv's
+own recursive naming, and a render, in that order:
+
+* **首** (rtk74) "neck" — was `自,丷`. cjkvi's top radical is 䒑 = `⿱丷一`, not
+  丷 alone, and there is a plain horizontal stroke between the horns and the
+  eye/自 box in the render. heisig-kanjis.csv names it directly: "horns;
+  nose; one; ceiling; drop; eye" carries "one; ceiling" as 首's *own* names,
+  not 自's (自's own row is just "drop; eye"). Added 一 (rtk1).
+* **党** (rtk860) "party" — was `小,兄`. cjkvi gives `⿱龸兄`, 龸 = `⿱⺌冖` —
+  the same 龸 top `prim-outhouse` already uses for 賞/堂/常/裳/掌/嘗, just
+  without their 口. Rendered, there is a plain bar between the small-radical
+  strokes and 兄's box. Added 冖 (kangxi14).
+* **寒** (rtk1645) "cold" — was `八,宀,丶,𠀎` (one dot). cjkvi's `⺀` is
+  `⿱丶丶`, two dots, and rendered beside 冫 they match stroke for stroke.
+  heisig-kanjis.csv names "ice" directly, not "dot" — 丶 (kangxi3) is a
+  different primitive ("dot, tick, drop, drops") with no ice sense at all.
+  Replaced 丶 with 冫 (kangxi15).
+* **微** (rtk954) "delicate" — was `山,彳,攵`, dropping the bottom-left legs
+  entirely. `audit_missing_children` already named the fix directly ("+儿");
+  confirmed by rendering 徴/微/懲 side by side (the investigation that led
+  here started from `suggest_heisig_aliases --min-hosts 1`'s "sherpa" group,
+  which turned out to be a real name gap on 徴/懲's 㞷=山+王, not a bug — see
+  below). Added 儿 (kangxi10).
+* **克** (rtk109) "overcome" — was `古,儿`. Same four leaf strokes either
+  way, but heisig-kanjis.csv's own components column ("ten; needle; elder
+  brother; teenager; mouth; human legs") only parses as 十 + 兄 read as a
+  unit: "elder brother" is 兄's own keyword, and "teenager; mouth" right
+  after it are 兄's *own* recursive names (兄's row: "teenager; mouth; human
+  legs"), not 古's ("tombstone; gravestone; church; ten; needle; mouth"). A
+  render can't distinguish the two bracketings since the strokes are
+  identical; the CSV's recursive-naming evidence is what settles it, same
+  method as the 得/雄 fixes below. Replaced 古,儿 with 十,兄 (rtk10, rtk107).
+* **得** (rtk941) "gain" — was `寸,日,彳,一`, flattening 旦 (already
+  rtk30, "nightbreak") into its own two pieces instead of referencing it.
+  cjkvi: `得 = 彳+㝵`, `㝵 = 旦+寸`. heisig-kanjis.csv's "...bill posters;
+  nightbreak; sun; day; one; floor; glue" runs 旦's own names ("sun; one;
+  floor") right after "nightbreak", confirming the reference. Replaced
+  日,一 with 旦 (rtk30).
+* **西** (rtk1728) "west" — was atomic (no parts at all). cjkvi's top-level
+  split is `⿱一𠁤` — a plain `⿱`, not an overlay, and the render shows an
+  unambiguous horizontal stroke across the top separate from the frame below.
+  The *inner* `𠁤 = ⿻儿口` **is** an overlay (a real one, unlike the 包
+  question above — this one actually appears in cjkvi's string), so it was
+  deliberately left alone; heisig-kanjis.csv only asked for "one" here
+  anyway, not "four". Added 一 (rtk1).
+* **雄** (rtk804) "masculine" — was `ノ,一,厶,隹`, flattening `𠂇` (already a
+  registered primitive, `prim-by-ones-side` = ノ+一) into its own pieces.
+  cjkvi: `雄 = 厷+隹`, `厷 = 𠂇+厶`. heisig-kanjis.csv names "by one's side"
+  directly for 雄, which is 𠂇's own keyword. Replaced ノ,一 with 𠂇.
+
+Four pins needed correcting to match (壇/首/党/寒— 克/得/西/雄 had none, so
+nothing to fix there); each carries the same reasoning inline rather than a
+bare swapped id, per the standing rule.
+
+Verified: 1328 checks exit 0 (four pins corrected, none broken), 74 pytest,
+over-flattening 0, self-references 0, radicals 0/0, primary-choice 0, phantom
+26/19 in-csv-range and 22/17 hide-blind (both unchanged — none of tonight's
+fixes touch a phantom-causing row), frontend lint + both builds clean.
+`audit_missing_children.py`: **19 findings → 10** (the nine fixed above all
+cleared; the ten remaining are the 包-family six, 敷, 衰, 虎, and 逓 discussed
+above, all deliberately left). `audit_csv_regressions.py`'s dropped-concept
+count moved too, as a side effect rather than a target: **237 → 232**, since
+several of tonight's added parts (回, 一, 冖, 冫, 儿) were concepts that script
+had been separately reporting as dropped on these same hosts.
+
+### Next
+
+`audit_missing_children.py`'s remaining 10 findings are down to genuinely
+hard cases, not easy wins: 虎's 匕-vs-七 render needs more resolution than a
+static serif glyph gives (try a stroke-order diagram, or a different font, to
+settle 虍's `卜,匕,厂` reading one way or the other across all five hosts that
+share it); 逓 needs the buried-乕 re-decomposition already carried since
+chunk 84; 包's "+己" is chunk 76's already-adjudicated call and should only be
+revisited with a clearer render than the one that decided it, not a repeat
+look; 敷/衰 are closed (overlay artifacts, not real findings). Otherwise:
+`suggest_heisig_aliases.py --near 0.8 --all`'s remaining 3 groups (fred
+astaire: 修候悠; and the tail of `--min-hosts 1` results, ~180+ single/double-
+host names) are still sitting there, flat and low-value per name as chunk 85
+found, but unlike 86's other dead end (miss world/paper punch) they have not
+actually been checked against `audit_weak_evidence.py`/render yet — worth
+doing before writing the whole tail off as exhausted.

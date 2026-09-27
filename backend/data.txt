@@ -123,7 +123,7 @@ rtk70:肌:texture:月,几
 rtk71:旬:decameron:日,勹
 rtk72:勺:ladle:丶,勹
 rtk73:的:bull's eye:白,勺
-rtk74:首:neck:自,丷
+rtk74:首:neck:自,丷,一
 rtk75:乙:the latter,fishhook:
 rtk76:乱:riot:乙,舌
 rtk77:直:straightaway:十,目,𠃊
@@ -157,7 +157,7 @@ rtk105:母:mother,breasts:毋
 rtk106:貫:pierce:母,貝
 rtk107:兄:elder brother:口,儿
 rtk108:呪:spell:兄,口
-rtk109:克:overcome:古,儿
+rtk109:克:overcome:十,兄
 rtk110:小:little,small:
 rtk111:少:few:ノ,小
 rtk112:大:large,st. bernard:;一,人
@@ -679,7 +679,7 @@ rtk627:姻:matrimony:女,因
 rtk628:咽:throat:口,因
 rtk629:園:park:囗,𠮷,𧘇
 rtk630:回:-times:口,囗
-rtk631:壇:podium:旦,口,土,亠,囗
+rtk631:壇:podium:旦,土,亠,回
 rtk632:店:store:占,广
 rtk633:庫:warehouse:車,广
 rtk634:庭:courtyard:广,廷
@@ -852,7 +852,7 @@ rtk800:勾:be bent:勹,厶
 rtk801:拡:broaden:広,扌
 rtk802:鉱:mineral:金,広
 rtk803:弁:valve:厶,廾
-rtk804:雄:masculine:ノ,一,厶,隹
+rtk804:雄:masculine:𠂇,厶,隹
 rtk805:台:pedestal:口,厶
 rtk806:怠:neglect:台,心
 rtk807:治:reign:台,水
@@ -908,7 +908,7 @@ rtk856:裕:abundant:衤,谷
 rtk857:鉛:lead:㕣,金
 rtk858:沿:run alongside:㕣,水
 rtk859:賞:prize:outhouse,貝
-rtk860:党:party:小,兄
+rtk860:党:party:小,兄,冖
 rtk861:堂:public chamber:outhouse,土
 rtk862:常:usual:outhouse,巾
 rtk863:裳:skirt:outhouse,衣
@@ -989,7 +989,7 @@ rtk937:協:co-:劦,十
 rtk938:行:going,boulevard:彳
 rtk939:律:rhythm:彳,聿
 rtk940:復:restore:复,彳
-rtk941:得:gain:寸,日,彳,一
+rtk941:得:gain:寸,彳,旦
 rtk942:従:accompany:彳,丷,𤴓
 rtk943:徒:on foot:走,彳
 rtk944:待:wait:寺,彳
@@ -1002,7 +1002,7 @@ rtk950:徳:benevolence:彳,十,罒,心
 rtk951:徹:penetrate:育,彳,攵
 rtk952:徴:indications:王,山,彳,攵
 rtk953:懲:penal:徴,心
-rtk954:微:delicate:山,彳,攵
+rtk954:微:delicate:山,彳,攵,儿
 rtk955:街:boulevard:行,彳,圭
 rtk956:桁:beam:木,行
 rtk957:衡:equilibrium:行,大,田,彳,勹
@@ -1693,7 +1693,7 @@ rtk1641:骸:bone:骨,亥
 rtk1642:劾:censure:亥,力
 rtk1643:述:mention:辶,朮
 rtk1644:術:art:行,朮
-rtk1645:寒:cold:八,宀,丶,𠀎
+rtk1645:寒:cold:八,宀,冫,𠀎
 rtk1646:塞:close:土,八,宀,𠀎
 rtk1647:醸:brew:㐮,酉
 rtk1648:譲:defer:㐮,言
@@ -1776,7 +1776,7 @@ rtk1724:嫌:dislike:兼,女
 rtk1725:鎌:sickle:金,兼
 rtk1726:謙:self-effacing:兼,言
 rtk1727:廉:bargain:兼,广
-rtk1728:西:west,old west:
+rtk1728:西:west,old west:一
 rtk1729:価:value:亻,西
 rtk1730:要:need:女,西
 rtk1731:腰:loins:月,要
