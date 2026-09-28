@@ -15709,3 +15709,108 @@ host names) are still sitting there, flat and low-value per name as chunk 85
 found, but unlike 86's other dead end (miss world/paper punch) they have not
 actually been checked against `audit_weak_evidence.py`/render yet — worth
 doing before writing the whole tail off as exhausted.
+
+## 2026-09-28 — chunk 87: a font that lies, and 虎's 匕/七 finally settled
+
+Container recovery first, same drill as the last several firings: fresh
+container, no repo at `/home/user/kanji`, cjkvi-ids, `fonts-noto-cjk`/
+`fonts-hanazono`, the backend venv and `frontend/node_modules` all rebuilt
+from scratch before anything else. `git push --dry-run origin master` first,
+per the standing container-recovery drill, before any audit work.
+
+Started by finishing the `--near 0.8 --all` tail chunk 86 left open:
+
+* **"fred astaire" (修/候/悠)** — a dead end, but a clean one, and worth
+  recording as such since it closes the last unchecked group from that list.
+  `heisig-kanjis.csv`'s components column packs each atomic primitive's
+  *entire* alias set together in one run (confirmed against the already-
+  registered rows: 彳's "Nelson; column; going; line" and 王's "king; jewel;
+  ball" both appear verbatim and contiguous), so "person; stick; fred
+  astaire; taskmaster; shape" for 修 is four already-resolved atoms (亻, ｜,
+  攵, 彡) plus one that isn't. cjkvi confirms the shape it names: 修/候/悠 (via
+  攸) all share a literal `⿰亻丨` pair as a sub-tree, but across all ten
+  characters in cjkvi-ids that contain that exact pair, it is *always* the
+  left child of a further split, never a leaf on its own — there is no
+  codepoint anywhere that is just "person beside a stick." Heisig's "fred
+  astaire" (person leaning on a cane, presumably) is a mnemonic label over
+  two primitives this database already has separately and already finds by
+  either name; same shape of dead end as chunk 86's "sherpa" (山+王, also
+  named, also correctly left unregistered) — a real name gap, not a bug, and
+  not actionable without inventing a primitive with no glyph to point it at.
+  This closes out `--near 0.8 --all` entirely: all four groups it has ever
+  surfaced (miss world/paper punch, rag, sherpa, fred astaire) are now
+  checked and documented as non-actionable.
+
+That freed the chunk to spend its render budget on `audit_missing_children`'s
+longest-carried open item instead: **虎's 匕-vs-七**, sitting on the "Next"
+list since chunk 84 as needing more resolution than a static glyph gives.
+
+cjkvi's `虍 = ⿸⿱⺊②七` already names a real 七 leaf (not the ②-placeholder)
+inside 虍, and `heisig-kanjis.csv`'s own components column for 虎 (the
+introducing frame) reads "...cliff; hook; **diced; seven**; human legs" —
+"diced; seven" is rtk7's exact, already-registered alias pair, not
+rtk476/匕's ("spoon; sitting on the ground"). Two of three sources already
+agreed. The render was the holdout, and it turned out to be lying rather
+than genuinely ambiguous: `render_glyphs.py`'s default font stack puts Noto
+Sans CJK JP first, and Noto has no distinct outline for U+864D (虍) at
+all — it silently substitutes the *full* 虎 glyph, legs included, which is
+exactly why chunk 85's render looked inconclusive (虍 and 虎 rendered
+pixel-identical, so the internal stroke couldn't be isolated from the
+separate 儿 legs). Forcing the font to HanaMinA, and cross-checking against
+WenQuanYi independently, breaks the tie cleanly: both draw a legless 虍 with
+a vertical crossed by a diagonal that pokes out to the *left* of the
+vertical before flagging up-right — 七's cross-and-flag shape. 匕's own render
+(same fonts) has no such leftward protrusion: its diagonal starts flush at
+the top of the vertical and only runs down-right. Once the substitution bug
+is worked around, all three legs of the standing method agree, so 匕 →七 in
+the four rows that flatten 虍's inside stroke rather than referencing it
+whole: 虎 (rtk2145), 虞 (rtk2150), 慮 (rtk2151), 劇 (rtk2152), and 驢
+(rtk2825, outside the CSV range but sharing the identical `卜,匕,厂,虍`
+head). Three pins referenced rtk476 on these hosts (rtk2150, rtk2151,
+rtk2825) and were corrected to rtk7 with an inline comment pointing at
+data.txt's dated writeup rather than a bare swapped id.
+
+The methodological finding is worth carrying forward on its own: this is
+not a missing-glyph fallback (which would box or drop the character) but a
+*silent substitution* of a different, real, wrong character for one a font
+can't draw — the render looked clean and conclusive, it was just clean and
+conclusive about the wrong question. Any future render of U+864D or
+similar rare-radical codepoints should force a non-Noto font first (this
+session confirmed HanaMinA and WenQuanYi both draw it correctly) rather
+than trust the first hit in `render_glyphs.py`'s default `FONT_STACK`.
+
+`虎/虞/慮/劇/虐/驢`'s remaining structural question — that four of these five
+rows flatten 虍 into `卜,匕→七,厂` as siblings *alongside* 虍 itself, rather
+than either referencing 虍 whole (as 虜/膚/虚/虐/虔 already correctly do) or
+dropping the redundant flat spelling — was deliberately left alone this
+chunk. `audit_overflatten.py` doesn't flag it (0 findings both before and
+after today's fix), and unpicking which of two structurally-valid spellings
+five hosts should use is a separate, lower-urgency cleanup from the one
+factual error (匕 vs 七) this chunk actually came to fix.
+
+Verified: 1328 checks exit 0 (three pins corrected, matching the new part
+id), 74 pytest, over-flattening 0, self-references 0, radicals 0/0,
+primary-choice 0, phantom unchanged at 26/19 in-csv-range and 22/17
+hide-blind (虎's fix doesn't touch a phantom-flagged row), csv-regressions
+unchanged at 232, frontend lint + build clean.
+`audit_missing_children.py`: **10 findings → 9** (虎's "+七" cleared; the
+9 remaining are the 包-family six, 敷, 衰, and 逓, all previously-adjudicated
+dead ends or carries).
+
+### Next
+
+`audit_missing_children.py`'s remaining 9 are now all genuinely closed
+questions rather than open leads: 包's "+己" stands on chunk 76's own
+render-backed pin (needs a strictly better render to reopen, not a repeat
+look); 敷/衰 are overlay artifacts (`audit_weak_evidence.py`-confirmed, not
+real findings); 逓 still needs the buried-乕 re-decomposition carried since
+chunk 84 (a from-scratch structural rework, not a one-line add). With
+`--near 0.8 --all` now fully exhausted too, the next chunk should either
+(a) take on 逓's re-decomposition directly with real render budget set aside
+for it, since nothing else is going to dislodge it from the carry list, or
+(b) open `suggest_heisig_aliases.py --near 0.8 --min-hosts 1`'s long flat
+tail (~180+ single/double-host names) that both 85 and 86 declined to start
+on grounds of low value-per-name — worth a first pass now specifically to
+check whether any of it hides another font-substitution-shaped surprise
+like today's, rather than assuming the whole tail is exhausted on value
+grounds alone.

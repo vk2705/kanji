@@ -2201,14 +2201,14 @@ rtk2141:驚:wonder:敬,馬
 rtk2142:篤:fervent:竹,馬
 rtk2143:罵:abuse:罒,馬
 rtk2144:騰:leaping up:馬,月,龹
-rtk2145:虎:tiger:卜,儿,匕,厂,虍;儿,虍
+rtk2145:虎:tiger:卜,儿,七,厂,虍;儿,虍
 rtk2146:虜:captive:男,虍
 rtk2147:膚:skin:胃,虍
 rtk2148:虚:void:业,虍
 rtk2149:戯:frolic:戈,虚
-rtk2150:虞:fear:呉,卜,匕,厂,虍;呉,虍
-rtk2151:慮:prudence:思,卜,匕,厂,虍;思,虍
-rtk2152:劇:drama:卜,匕,厂,虍,豕,刀
+rtk2150:虞:fear:呉,卜,七,厂,虍;呉,虍
+rtk2151:慮:prudence:思,卜,七,厂,虍;思,虍
+rtk2152:劇:drama:卜,七,厂,虍,豕,刀
 rtk2153:虐:tyrannize:一,匚,虍
 rtk2154:鹿:deer:广,prim-antlers,比
 rtk2155:麓:foot of a mountain:林,鹿
@@ -2879,7 +2879,7 @@ rtk2821:騙:deceive:馬,扁
 rtk2822:馴:get used to:川,馬
 rtk2823:駁:refutation:馬,爻
 rtk2824:駈:run:丘,馬
-rtk2825:驢:donkey:皿,田,馬,卜,匕,厂,虍
+rtk2825:驢:donkey:皿,田,馬,卜,七,厂,虍
 rtk2826:鰻:eel:曼,魚
 rtk2827:鯛:sea bream:周,魚
 rtk2828:鰯:sardine:魚,弱
@@ -4768,3 +4768,33 @@ prim-hammock:尓:hammock:𠂉,小
 # 稀 = ⿰禾希 and 雫 = ⿱雨下, which are those alternates exactly, so they are the
 # primaries now. Both are past frame 2200, so cjkvi is the only source with an
 # opinion and it is unambiguous here.
+
+# --- 2026-09-28: 虎/虞/慮/劇/驢 all flattened 虍's own inside stroke as 匕
+# (spoon) instead of 七 (seven). This one needed all three legs of the
+# standing method before it would settle, because the first two disagreed:
+# cjkvi's IDS gives 虍 = ⿸⿱⺊②七 -- a real 七 leaf, not the ②-placeholder --
+# and heisig-kanjis.csv's own components column for 虎 (the introducing frame)
+# reads "...cliff; hook; diced; seven; human legs", where "diced; seven" is
+# already rtk7's exact registered alias pair, not 匕/rtk476's ("spoon; sitting
+# on the ground"). But the first render (default font stack, Noto Sans CJK JP
+# first) showed 虍 and 虎 as pixel-identical -- Noto has no distinct glyph for
+# U+864D and silently substitutes the full 虎 outline, legs included, which
+# made the internal stroke impossible to isolate and looked like it could go
+# either way. Forcing the font to HanaMinA (further down the stack, and also
+# confirmed independently by WenQuanYi) breaks the tie: both draw 虍 legless
+# and distinct from 虎, and the inner stroke is a vertical crossed by a
+# diagonal that pokes out to the *left* of the vertical before flagging up-
+# right -- 七's cross-and-flag shape, not 匕's single unbroken diagonal (no
+# leftward protrusion, confirmed side by side in the same font). All three
+# sources -- cjkvi, Heisig's own naming, and the render once the font bug was
+# worked around -- agree once the substitution is caught, so 匕 is replaced
+# with 七 in the four rows that flatten 虍's inside stroke (虎, and 呉/思/馬-
+# fronted 虞/慮/驢, plus 劇 which shares the same 卜,七,厂,虍 head): the
+# render alone would have stayed stuck exactly where chunk 85/86 left it
+# without noticing the font was lying about 虍's outline first.
+# Filed as its own entry because the failure mode -- one font in the stack
+# silently substituting a *different, wrong, but real* character for a
+# codepoint it can't draw, rather than boxing/dropping the glyph the way a
+# missing-glyph fallback usually would -- is one this audit had not hit
+# before, and any future render of U+864D-family shapes should force a
+# non-Noto font first rather than trust the default stack's first hit.

@@ -1477,10 +1477,15 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk1831", "rtk2132"}},
     "rtk2147": {"character": "膚", "keyword": "skin",
                 "expected_part_ids": {"kangxi141", "rtk29"}},
+    # Corrected 2026-09-28: 虞/慮 flattened 虍's inside stroke as rtk476 (匕,
+    # spoon) instead of rtk7 (七, seven) -- see data.txt's dated comment for
+    # the full three-source render/cjkvi/CSV writeup (Noto Sans CJK JP has no
+    # distinct glyph for 虍 and silently substitutes full 虎, which is what
+    # made the first render look inconclusive).
     "rtk2150": {"character": "虞", "keyword": "uneasiness",
-                "expected_part_ids": {"kangxi141", "kangxi25", "kangxi27", "rtk2046", "rtk476"}},
+                "expected_part_ids": {"kangxi141", "kangxi25", "kangxi27", "rtk2046", "rtk7"}},
     "rtk2151": {"character": "慮", "keyword": "prudence",
-                "expected_part_ids": {"kangxi141", "kangxi25", "kangxi27", "rtk476", "rtk651"}},
+                "expected_part_ids": {"kangxi141", "kangxi25", "kangxi27", "rtk7", "rtk651"}},
     "rtk2159": {"character": "熊", "keyword": "bear",
                 "expected_part_ids": {"prim-fire-radical", "rtk2160"}},
     "rtk2163": {"character": "演", "keyword": "performance",
@@ -1883,8 +1888,10 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"kangxi89", "rtk2132"}},
     "rtk2824": {"character": "駈", "keyword": "gallop",
                 "expected_part_ids": {"rtk1427", "rtk2132"}},
+    # Corrected 2026-09-28: same 虍-family rtk476->rtk7 fix as rtk2150/rtk2151
+    # above -- see data.txt's dated comment.
     "rtk2825": {"character": "驢", "keyword": "donkey",
-                "expected_part_ids": {"kangxi141", "kangxi25", "kangxi27", "rtk14", "rtk1555", "rtk2132", "rtk476"}},
+                "expected_part_ids": {"kangxi141", "kangxi25", "kangxi27", "rtk14", "rtk1555", "rtk2132", "rtk7"}},
     "rtk288": {"character": "銑", "keyword": "pig iron",
                 "expected_part_ids": {"rtk263", "rtk287"}},
     "rtk289": {"character": "鉢", "keyword": "bowl",
