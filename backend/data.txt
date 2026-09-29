@@ -2058,7 +2058,7 @@ rtk1998:循:sequential:盾,彳
 rtk1999:派:faction:水,𠂋
 rtk2000:脈:vein:月,𠂋
 rtk2001:衆:masses:血,乑
-rtk2002:逓:relay:巾,辶,𠂋,｜
+rtk2002:逓:relay:辶,𠂋,prim-cornstalk,冂
 rtk2003:段:grade:｜,殳,几,又,ノ,一
 rtk2004:鍛:forge:段,金
 rtk2005:后:empress:𠂋,口
@@ -3698,10 +3698,26 @@ prim-cornucopia:丩:cornucopia
 # shows 蝋's and 猟's right-hand shape are pixel-for-pixel the same, and
 # neither carries 用's plain box.
 #
-# 逓's own current 巾,辶,𠂋,｜ doesn't reference 乕(⿸𠂆⿻⿻二丨冂) at all, let
-# alone the ⿻二丨 buried two levels inside it — untangling that is a separate,
-# deeper re-decomposition, not a one-line alias add. Left open for a future
-# chunk with render budget for it.
+# 逓 — resolved 2026-09-29, carried open since chunk 84/24. Its prior split
+# (巾,辶,𠂋,｜) didn't reference 乕(⿸𠂆⿻⿻二丨冂) at all: "｜" alone stood in
+# for the buried ⿻二丨 overlay (missing its "二" half entirely, worse than the
+# raw-stroke flattening 奉 had), and "巾" turned out to be the wrong glyph for
+# the box beneath it. Rendering 逓 at 400px shows three stacked pieces inside
+# 乕, top to bottom: a diagonal+vertical drag stroke, a clearly separate
+# two-bar cornstalk overlay right below it, and a box at the bottom whose
+# center vertical continues past its open bottom edge — visually close to 巾,
+# but cjkvi's own IDS names that box 冂, not 巾, and heisig-kanjis.csv's
+# components column for 逓 itself confirms it: "drag; cornstalk; belt; road"
+# is four concepts, not three, and kangxi13 (冂) already carries "belt" as a
+# registered alias (from 内's own "person; belt" — 内 = 人,冂). The 巾-lookalike
+# read on 逓 would have been the same lookalike-substitution trap chunk 87's
+# 虎/七 fix guarded against, just by eye instead of by font. New split:
+# 辶(road),𠂋(drag),prim-cornstalk(cornstalk),冂(belt) — all four already
+# registered, matching every one of Heisig's own four names exactly.
+#
+# 猟(rtk2090)'s separate "cornstalk" citation is unrelated and stays as
+# chunk 24 left it (settled 2026-09-20 by dropping 用 entirely, see below) —
+# it never shared 逓's 乕 structure to begin with.
 prim-cornstalk:?:cornstalk
 
 # fenceposts, cabers: heisig-kanjis.csv names these as a shared component of

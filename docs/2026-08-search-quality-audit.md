@@ -15814,3 +15814,101 @@ on grounds of low value-per-name — worth a first pass now specifically to
 check whether any of it hides another font-substitution-shaped surprise
 like today's, rather than assuming the whole tail is exhausted on value
 grounds alone.
+
+## 2026-09-29 — chunk 88: 逓's buried-乕 re-decomposition, finally
+
+Container recovery first, same drill as every prior firing: fresh container,
+no repo at `/home/user/kanji`. Found `master` as a detached `HEAD` already
+sitting exactly on `origin/master`'s tip (9bdb778, chunk 87's own commit) —
+the previous firing's work was already pushed, just the local `master`
+branch ref itself was stale (pointing at the commit two chunks back). Reset
+`master` to `origin/master` (`git checkout -B master origin/master`) rather
+than fast-forwarding a branch that wasn't even checked out, then
+`git push --dry-run origin master` confirmed clean before any audit work,
+per the standing drill. Rebuilt `venv/`, `node_modules/`, `fonts-noto-cjk`/
+`fonts-hanazono`, and `/tmp/ids.txt` from scratch as usual.
+
+Picked up option (a) from chunk 87's "Next": 逓's re-decomposition, carried
+open since chunk 84/24 as needing a full re-derivation rather than a one-line
+add.
+
+### Investigation
+
+`data.txt` before this chunk: `rtk2002:逓:relay:巾,辶,𠂋,｜`. cjkvi-ids:
+`逓 = ⿺辶乕`, `乕(U+4E55, old-form "tiger") = ⿸𠂆⿻⿻二丨冂`. So the entire
+right/inner side of 逓 is 乕, and the current split doesn't reference 乕 at
+all — `巾` and the lone `｜` were both guesses standing in for pieces of it,
+neither confirmed against a render.
+
+Rendered `逓` alone at 400px (`render_glyphs.py`, extended to a bigger
+one-off HTML page for this since the tool's own fixed 110px row height was
+too small to make out the internal structure). Three stacked pieces are
+clearly visible inside 乕, top to bottom: a diagonal-plus-vertical drag
+stroke, a distinct two-horizontal-bar overlay right below it, and a box at
+the bottom whose center vertical continues past its own open bottom edge.
+That box reads visually close to `巾` (registered as rtk432 "towel") at a
+glance — worth flagging on its own, since chunk 87's whole methodological
+point was exactly this: a render that looks clean can still be answering
+the wrong question. Cross-checked against cjkvi's own IDS instead of trusting
+the eyeball match: the box in `乕`'s tree is `冂`, not `巾` — a different,
+already-registered primitive (`kangxi13`, aliases "border, down box, hood,
+**belt**, glass canopy, glass hood, helmet"). `heisig-kanjis.csv`'s own
+components column for 逓 settles which one is right without needing to
+adjudicate the render at all: "drag; cornstalk; belt; road" is **four**
+named concepts, not three, and "belt" is already `kangxi13`'s own registered
+alias — confirmed independently by 内(rtk1095)'s row, whose CSV components
+are "person; belt" and whose actual split is `人,冂` (not `人,巾`). The
+middle two-bar overlay is exactly `prim-cornstalk` (⿻二丨), registered two
+chunks back for 奉 and already-known (per that same chunk's own writeup) to
+also sit inside `乕` via `𠂡`/`用`'s family — this is the "buried two levels
+down" case that writeup predicted, just now actually unpicked. The top
+diagonal-plus-vertical is `𠂋` (`prim-drag`, registered 2026-09-14, already
+present in the old split). All four pieces were already registered
+primitives; nothing new needed adding, unlike `prim-cornstalk`/`prim-drag`
+themselves when each was first found.
+
+Checked whether the 敝-family hosts flagged alongside 逓 in an old
+`test_regression_fixes.py` comment (`幣`/`蔽`/`弊`/`瞥`, "already flagged as
+an open question") share this same bug — they don't: cjkvi gives
+`敝 = ⿰㡀攵`, and `㡀(U+3840) = ⿻丷⿻巾八` genuinely contains `巾` (not `冂`),
+an unrelated shape that happens to look similar. Confirms 逓's `巾` really
+was the lookalike-substitution trap CLAUDE.md warns about, not a case where
+`巾` is simply reused correctly elsewhere too — and this fix doesn't touch
+the 敝-family, which stays exactly as open as it was.
+
+### Change
+
+```
+rtk2002:逓:relay:辶,𠂋,prim-cornstalk,冂
+```
+(was `巾,辶,𠂋,｜`). Added a dated comment in `data.txt` next to
+`prim-cornstalk`'s own definition, replacing the stale "left open for a
+future chunk" note that chunk 24 wrote there, so the reasoning above doesn't
+need re-deriving from scratch again. No pin in `test_regression_fixes.py`
+referenced 逓's parts before this chunk, so nothing needed correcting there.
+
+### Verified
+
+Rebuilt `kanji.db` clean from source (3000 kanji rows, 3135 parts overrides
+— unchanged totals, one edited parts line). `test_regression_fixes.py`:
+1328 checks, all pass (no pin touched 逓, none broken). 74 pytest.
+over-flattening 0, self-references 0, radicals 0/0, primary-choice 0.
+`audit_phantom_parts.py --in-csv-range`: **26/19 → 25/18** (逓's phantom `巾`
+finding cleared, the only one this chunk touched).
+`audit_missing_children.py --summary`: **9 findings → 8** (逓 was the ninth;
+the remaining eight are the already-adjudicated 包-family six/敷/衰).
+`audit_csv_regressions.py`'s dropped-concept count also moved as a side
+effect: 逓's row now carries all four of its CSV-cited concepts instead of
+three, same pattern as chunk 86's fixes. Frontend lint + both builds
+(`build:prod`/`build:dev`) clean.
+
+### Next
+
+With 逓 closed, `audit_missing_children.py`'s remaining 8 are back to fully
+closed questions (see chunk 87's "Next" for why each of the 包-family/敷/衰
+findings is a dead end, not a lead). `suggest_heisig_aliases.py --near 0.8`
+is fully exhausted (chunk 87). The next chunk should open
+`suggest_heisig_aliases.py --near 0.8 --min-hosts 1`'s long flat tail
+(~180+ single/double-host names, still unchecked against
+`audit_weak_evidence.py`/render as chunk 87 flagged) — nothing else on the
+"Next" list from the last several chunks remains unstarted.
