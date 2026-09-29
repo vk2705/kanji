@@ -15912,3 +15912,46 @@ is fully exhausted (chunk 87). The next chunk should open
 (~180+ single/double-host names, still unchecked against
 `audit_weak_evidence.py`/render as chunk 87 flagged) — nothing else on the
 "Next" list from the last several chunks remains unstarted.
+
+## 2026-09-29 — chunk 89: the render now reports when the font is lying
+
+Chunk 87 found that `render_glyphs.py`'s own output can be false: a font may
+claim a codepoint in its charset and still have no distinct outline for it,
+drawing something else. That is the worst failure this tool can have. A missing
+glyph is visibly missing; a *substituted* one comes out pixel-identical to its
+neighbour and reads as "these are the same shape" — a confident wrong
+conclusion, which is exactly how chunk 85's 虍/虎 comparison came out
+"inconclusive". Since the render is the last word in this project's standing
+method, and the method is what caught three bad fixes last week, a silent lie
+there is worth more than any individual data fix. So: guarded, not just noted.
+
+**`fc-list` is no help.** `fc-list :charset=864D` lists Noto for 虍 — the charset
+table does claim the codepoint. Coverage and outline are different questions.
+
+**What works is a relative comparison.** Every run now hashes each pair of
+distinct requested codepoints in each face of the stack *separately*. If a pair
+is identical in one face and different in another, the first face is
+substituting, and the run says so loudly and names a face to re-render with. If
+a pair is identical in *every* face, they are simply near-identical shapes and
+it says that instead of crying wolf. Silence means nothing suspicious.
+
+```
+  !! FONT SUBSTITUTION: 者 (U+8005) and 者 (U+FA5B) render IDENTICALLY in
+     WenQuanYi Zen Hei, HanaMinB but differ in Noto Sans CJK JP, HanaMinA.
+```
+
+That pair is the demonstration the check was validated against, because —
+worth recording plainly — **the 虍 case does not reproduce in this container.**
+虍 and 虎 hash *differently* in all four faces here, Noto included. The font
+builds differ between containers, so chunk 87's Noto genuinely may have lacked
+the outline while this one has it. This does not put chunk 87's *data*
+conclusion in doubt: 匕→七 there rested on cjkvi's real 七 leaf in `⿸⿱⺊②七`
+and on the CSV's "diced; seven" being rtk7's exact alias pair, with the render
+only ever the third leg. But it does mean the check could not be validated
+against the case that motivated it, and had to be validated against one that
+reproduces.
+
+The check costs one extra headless Chromium launch per render and is always on.
+Deliberately: a check you have to remember to run is the one that was not run.
+
+No data changed. `test_regression_fixes` 1328 exit 0, 74 pytest.
