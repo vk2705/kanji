@@ -18,6 +18,7 @@ import os
 import database
 
 from mcp.server.mcpserver import MCPServer
+from mcp.server.transport_security import TransportSecuritySettings
 
 mcp = MCPServer(
     name="kanji",
@@ -125,7 +126,19 @@ def search_by_text(query: str, script: str | None = None) -> list[dict]:
         conn.close()
 
 
-app = mcp.streamable_http_app(stateless_http=True)
+# The SDK's Streamable HTTP transport enables DNS-rebinding protection by
+# default, which checks the inbound Host/Origin header against an allow-list
+# that otherwise only contains 127.0.0.1/localhost — so every request proxied
+# in by nginx from the public domain gets "Invalid Host header" unless that
+# domain is listed explicitly here too.
+PUBLIC_HOST = os.environ.get("KANJI_MCP_PUBLIC_HOST", "kanjimcp.alteon.help")
+app = mcp.streamable_http_app(
+    stateless_http=True,
+    transport_security=TransportSecuritySettings(
+        allowed_hosts=["127.0.0.1", "localhost", PUBLIC_HOST],
+        allowed_origins=[f"https://{PUBLIC_HOST}", f"http://{PUBLIC_HOST}"],
+    ),
+)
 
 
 if __name__ == "__main__":
