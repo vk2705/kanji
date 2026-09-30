@@ -15955,3 +15955,245 @@ The check costs one extra headless Chromium launch per render and is always on.
 Deliberately: a check you have to remember to run is the one that was not run.
 
 No data changed. `test_regression_fixes` 1328 exit 0, 74 pytest.
+
+## 2026-09-30 — chunk 90: `--near 0.8 --min-hosts 1`'s flat tail, and single-host groups are much weaker evidence than they look
+
+Container recovery first, same drill as every prior firing: fresh container,
+no repo at `/home/user/kanji`. `git fetch`/`checkout -B master origin/master`
+found local `HEAD` already detached exactly at `origin/master`'s tip
+(518e510, chunk 89's own commit) — same "branch ref stale, work already
+pushed" shape as chunk 88 found. `git push --dry-run origin master` confirmed
+clean before any audit work. Rebuilt `venv/`, `frontend/node_modules/`,
+`fonts-noto-cjk`/`fonts-hanazono`, and `/tmp/ids.txt` from scratch as usual.
+
+Picked up chunk 89's "Next": open `suggest_heisig_aliases.py --near 0.8
+--min-hosts 1`'s tail. It turned out much smaller than the ~180+ estimate in
+the notes — 28 groups total, not the long flat pile expected. (The ~236
+figure in older entries was the count of *unresolved names*, not
+`--near 0.8` *groups*; most of those names turned out to already be covered
+by the exact-host-set matching this same script does without `--near`,
+leaving only 28 groups where the near-match heuristic itself finds anything.)
+
+### First pass: trusted `cjkvi support 1.00` too broadly
+
+26 of the 28 groups showed `cjkvi support 1.00` — the script's own
+structural check confirming the vouching row's glyph is present somewhere in
+cjkvi-ids' decomposition tree of the CSV host(s) citing the missing name.
+The first pass added all 26 as straight alias additions, reasoning that
+`cjkvi support 1.00` rules out the "vouching name resolves to the wrong
+row" failure mode the same way it did for chunk 89's `mutual`→`prim-mutual`
+bug (see below). That reasoning is only sound when the host set has real
+size. It broke down badly on single-host groups, which turned out to be 18
+of the 26: for a single host, `structural_support` is a coin flip, not
+corroboration — cjkvi's decomposition tree of one complex kanji genuinely
+contains *many* real sub-primitives, and every single one of them will also
+score 1.00 for its own, already-correct alias. The vouching name and the
+missing name sharing one CSV cell says nothing about whether they name the
+*same* shape inside it.
+
+A closer look (checking, for each single-host add, whether the CSV host's
+own full component text puts the missing name next to the vouching name
+specifically, or next to some *other* already-registered name that's a
+better semantic fit) found **7 of the 26 were wrong**:
+
+- **`arrows`/`quiver` → `rtk379`(弐 "ii")**: wrong. 弐's own CSV row is just
+  "II; two; arrows; quiver" — `resolve_alias('ii')` hits `rtk379` only
+  because "ii" is *also* 弐's own registered keyword, a pure string
+  collision. 弐's real parts are `一,弋,二`; "arrows"/"quiver" are archery
+  words that belong next to 弋's already-registered "stake, shoot, arrow" —
+  moved there instead (`kangxi56`).
+- **`hat`/`made in…` → `rtk447`(制 "system")**: dropped entirely, not
+  reassigned. 製's own CSV row is "made in…; system; cow; belt; sword;
+  sabre; saber; hat; scarf; cloth; clothes; clothing; garment" — `made in…`
+  is a unicode-ellipsis spelling of 製's *own* keyword (already registered
+  as ASCII `made in...` on `rtk448`), a self-reference, not a name for its
+  sub-part 制 at all. `hat` has no second CSV occurrence anywhere to
+  corroborate a placement and no exact-keyword match the way the other
+  reroutes below have — genuinely unresolved, left open.
+- **`churchill` → `rtk630`(回 "-times")**: dropped, not reassigned. Both
+  `churchill` and its vouching name `-times` have exactly **one** CSV host
+  each, and it's the same host (壇) for both — the "exact host-set match"
+  signal that looks strong for a 2-host group is not a signal at all when
+  both sides are singletons; it's guaranteed to overlap 1.00 by
+  construction. 壇's flat component list interleaves at least four
+  different real sub-primitives in narrative order, and `churchill` sits
+  between two of them with no exact-keyword match anywhere to settle it.
+  Left open.
+- **`flag climax` → `rtk1138`(屋 "roof")**: wrong. 握's CSV row reads
+  "...roof; flag climax; wall..." — `flag climax` sits next to `roof` only
+  by narrative adjacency; 屋's own real sub-part 至 is *already* keyworded
+  "climax" (`rtk815`), an exact match `flag climax` elaborates on directly.
+  Moved there.
+- **`beginnings` → `rtk199`(完 "perfect")**: wrong, same shape. 院's CSV
+  row reads "...perfect; house; beginnings; two; human legs" — `house` (a
+  name for an unrelated kanji, `rtk580`) sits *between* `perfect` and
+  `beginnings`, and 完's own real sub-part 元 is already keyworded
+  "beginning" (singular) — an exact match. Moved to `rtk63`.
+- **`bulrush` → `rtk1980`(浦 "bay")**: wrong. 蒲's own CSV row starts
+  "bulrush; flowers; bay; water..." — `bulrush` (single L) is a spelling
+  variant of 蒲's *own* already-registered keyword `bullrush` (double L,
+  `rtk1981`), not a name for its sub-part 浦. Moved there as an added
+  spelling.
+- **`carol in rags person` → `rtk1556`(血 "blood")**: wrong. 衆's CSV row
+  is "blood; drop; dish; Carol in rags person; rag" — `blood; drop; dish`
+  is 血's *own* complete recursive expansion (`drop`→ノ, `dish`→rtk1555,
+  both already registered), fully accounted for before `Carol in rags
+  person` even appears; 衆's other real part `乑` is already keyworded
+  "crowd" — a crowd of people in rags fits it directly. Moved there, along
+  with `rag` (previously unregistered).
+
+One more, **`stitching`/`patchwork quilt` → `rtk2867`(爾 "you")**, was kept
+on reflection but at lower confidence than the others: 璽's row lists them
+after 爾's own six-part recursive expansion, right before `jewel; earring`
+(爾's sibling part 玉). 爾's own part 爻 is already keyworded "trigrams,
+diagram" (a crosshatched X pattern) — a strong semantic fit for
+"stitching"/"patchwork quilt" — so this was moved to `kangxi89` (爻) rather
+than left on 爾, same pattern as the others.
+
+The other **18 held up**: either genuine 2-host exact-set matches with
+clean adjacency in both hosts' CSV text and no self-reference risk
+(`origin`→`rtk224`, `determined`→`rtk408`, `wimbledon`→`rtk68`,
+`prince`→`rtk2201`, `little-thatch`→`rtk338`, `borstal`→`rtk821`,
+`adjust`→`rtk1866`, `centre`→`rtk1877`), or single-host adds where the
+missing name sits *immediately* next to the vouching name in the CSV text,
+the host is a genuinely different kanji from the target (no self-reference
+collision), and no better-fitting already-registered neighbour was found
+nearby (`zombie`→`rtk2537`, `contents`→`rtk853`, `favour`→`rtk659` —
+dropped its paired `ear (of a plant)`, see below — `facsimile`→`rtk1296`,
+`sky`→`rtk1414`, `abacus`→`rtk1481`, `teeth`→`rtk1255`,
+`courageous`→`rtk1509`, `wishbone`→`rtk1715`, `mother teresa`→`rtk1547`).
+
+`ear (of a plant)` (paired with `favour` on the `rtk659`/恵 group) turned
+out to be an eighth wrong one, same shape as the others: 穂's own CSV row
+starts "ear (of a plant); wheat; cereal; favour; favor; ten..." — `ear (of
+a plant)` is 穂's *own* keyword (already registered as `ear`, `rtk975`),
+not a name for its sub-part 恵. Dropped, not reassigned (`ear` already
+covers the concept on `rtk975`, and the exact phrase's marginal value is
+near zero).
+
+**Net: 17 kept as originally targeted, 7 moved to a better-fitting
+already-registered row, 3 dropped as unresolved** (`hat`/`made in…`,
+`churchill`, and `ear (of a plant)` since it's redundant with `rtk975`'s
+existing `ear`), out of the original 26.
+
+### The wrong-row vouch that started this: `mutual`/`broken broom`/`broom*`
+
+The one group that came in already flagged `cjkvi support 0.00` — the
+script's *own* structural check catching itself — was a real second
+instance of the `crown`→`rtk326` bug from two weeks ago: `mutual` already
+resolves, just to the wrong row (`prim-mutual`=胥, "each other"), so it
+never showed up in the "no name resolves"/"ambiguous" buckets, only in the
+low-support flag. `heisig-kanjis.csv`'s own row for 彙 reads "broken broom;
+mutual; crown; fruit; rice field; brains; tree; wood; broom*". `ids.txt`
+gives `彙 = ⿳彑冖果` — 彑 on top, 冖 in the middle, 果 (already correctly
+split out) on the bottom, matching `data.txt`'s existing
+`rtk1237:彙:same kind:冖,彑,果` exactly (already right, untouched). Rendered
+`彙 彑 胥 果 冖` side by side (`render_glyphs.py`) to confirm before touching
+anything: 彙's top stroke is 彑, unmistakably — 胥 (疋+月, a real, unrelated,
+much larger kanji) doesn't resemble any part of 彙 at all. The script's own
+`structural_candidates` fallback (shown for every `<-- CHECK` row) had
+already named 彑 directly as the 1.00-support alternative.
+
+`prim-pigs-head` (彑) already existed, aliased "pig's head, pig snout,
+mutual difficulties, two walls". Added `mutual`, `broken broom`, `broom*`
+to it instead of to `prim-mutual`, with a dated comment in `data.txt`
+recording the reasoning. `mutual` is now a deliberately ambiguous term
+across two unrelated rows (`prim-mutual`/胥 and `prim-pigs-head`/彑) —
+confirmed `get_all_aliases_for_term` returns the union of both and
+`search_by_parts` finds both 彙 and 胥's own hosts, same pattern as the
+`crown`/`kangxi14` fix handles it. This is what prompted the closer look at
+the other 26 in the first place — realizing it was a *second* instance of
+the same bug class made it worth checking whether any of the 26
+"cjkvi 1.00" adds were a quieter version of it. They were: seven of them.
+
+### Left open: `cutlass`/`spear` → 槍, and `hat`/`made in…`, `churchill`
+
+Three groups are left unresolved, each `cjkvi support 0.00` or effectively
+so (singleton-host, no exact-keyword corroboration found):
+
+- **`cutlass`/`spear` → `rtk2576`(槍 "lance")**, 2 hosts (班 帰). `spear` is
+  *already* ambiguous (`rtk2576` and `kangxi62`/戈 both claim it), and
+  neither is structurally plausible inside a 2-4-stroke sub-shape of 班/帰
+  — 槍 is a full multi-stroke kanji, far too complex to be a component
+  there. `ids.txt` gives `班 = ⿲王②王` — cjkvi has *no codepoint* for the
+  middle stroke (a `②` placeholder), and `data.txt`'s current
+  `rtk1315:班:squad:王` decomposition (parts `王`, `king`, both the same
+  primitive) drops that middle stroke entirely. 帰's Japanese-variant
+  reading (`⿰⿰丨丿帚[J]`) decomposes its own left side into exactly
+  `丨`+`丿` — and `data.txt`'s existing `rtk1316:帰:homecoming:ノ,帚,｜`
+  already matches that split correctly. So "sword; spear; cutlass" across
+  these two hosts looks like the same `丨+丿` combination already used
+  correctly, but un-named as its own primitive, in 帰 — and *missing
+  entirely* from 班's row, a real decomposition bug on top of the naming
+  question. Needs a dedicated chunk with real render budget (a possible new
+  primitive registration plus a 班 fix), not a rushed guess.
+- **`hat`/`made in…` → 制**, and **`churchill` → 回** — see above; both are
+  singleton-host groups with no second CSV occurrence and no exact-keyword
+  match to settle where they really belong. Left as genuinely unresolved
+  rather than guessed at.
+
+### Verified
+
+Rebuilt `kanji.db` clean from source (3000 CSV-sourced kanji rows, 3135
+parts overrides — unchanged from before this chunk throughout, including
+after the correction pass, since every edit here was an alias move, never a
+parts change). `test_regression_fixes.py`: 1328 checks, all pass, no pin
+touched (expected — no decomposition changed), both before and after the
+correction pass. 74 pytest. `audit_overflatten.py` 0,
+`audit_self_reference.py` 0, `audit_radicals.py` 0/0,
+`audit_primary_choice.py` 0. `audit_phantom_parts.py --in-csv-range`: 25/18,
+unchanged (this chunk never touched a decomposition). `audit_csv_
+regressions.py`'s flagged-kanji count moved as a side effect of the new
+aliases now resolving (at all — mid-fix or corrected, the concept resolves
+either way): **231 → 230**, confirmed by temporarily stashing this chunk's
+`data.txt` changes and re-running against the unmodified baseline, then
+restoring. Direct queries after the correction pass: `resolve_alias`
+confirmed all 17 unchanged adds, all 7 reroutes, and `mutual` each resolve
+to their final intended row, and that the 3 dropped names (`hat`,
+`made in…`, `churchill`, `ear (of a plant)`) resolve to nothing;
+`get_all_aliases_for_term(conn, 'mutual')` returns both `prim-mutual` and
+`prim-pigs-head` plus every alias on each; `search_by_parts(['mutual'],
+depth=1)` returns `prim-mutual`, `prim-pigs-head`, `rtk1237`(彙), `rtk422`,
+`rtk819` — both rows' hosts reachable, none lost. A fresh
+`suggest_heisig_aliases.py --near 0.8 --min-hosts 1` run after the
+correction pass re-flags exactly the 4 left-open groups (`cutlass`,
+`hat`/`made in…`, `churchill`, `ear (of a plant)`) — expected, since the
+tool has no way to know a group was deliberately investigated and declined;
+future runs should treat those 4 as already-considered, not unstarted.
+Frontend `npm install`, `npm run lint`, `build:prod`, `build:dev` all clean,
+run twice (before and after the correction pass).
+
+### Next
+
+The `--near 0.8` queue (at every `--min-hosts` level tried so far) is down
+to the 4 left-open groups above — the next chunk should either (a) take
+`cutlass`/`spear`/班/帰 on directly with real render budget set aside (a
+stroke-order comparison or a different font, per the same lesson 虎/匕
+needed), since a static serif render alone hasn't settled it, or (b) go
+back to `audit_phantom_parts.py --in-csv-range`'s 25/18 pile (bare stroke
+primitives ノ/一/｜ leading it, same standing item flagged since chunk 86)
+now that the alias-suggestion channel is mostly dry.
+
+The main lesson worth carrying forward, though, is methodological rather
+than any one row: **for `suggest_heisig_aliases.py`, a single-host group's
+`cjkvi support 1.00` is much weaker evidence than a multi-host group's** —
+it only confirms the vouching glyph is *somewhere* in the host's
+decomposition tree, not that it's the specific shape the missing name is
+narrating in Heisig's flat component-list text. 7 of 26 adds in this
+chunk's first pass were wrong for exactly that reason, all caught only by
+pulling each host's full CSV row and checking three things by hand: (1) is
+the host the *same character* as the target (self-reference — the missing
+name is probably describing the host's own keyword under a spelling/
+punctuation variant, not a sub-part); (2) does the missing name sit
+*immediately* next to the vouching name, or is something else's name in
+between; (3) does one of the host's *other* real parts already carry an
+exact-keyword match the missing name fits better. None of this is
+automated — `suggest_heisig_aliases.py` doesn't do it, and doing it by hand
+for every future single-host `--near` group (there may be more once
+`--min-hosts` is lowered further, or once other CSV-name tooling surfaces
+new candidates) is the standing discipline now, not just cjkvi support
+alone. Worth considering whether `structural_support`/`structural_
+candidates` could be extended to report *which* of a host's own real parts
+the candidate glyph sits under, rather than just whether it's present
+anywhere in the tree — that would make single-host groups checkable by the
+tool itself instead of by hand each time.
