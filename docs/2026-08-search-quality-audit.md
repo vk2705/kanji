@@ -16197,3 +16197,61 @@ candidates` could be extended to report *which* of a host's own real parts
 the candidate glyph sits under, rather than just whether it's present
 anywhere in the tree — that would make single-host groups checkable by the
 tool itself instead of by hand each time.
+
+## 2026-09-30: simplified/radical-shorthand hanzi rows with a radical number instead of a name
+
+Owner report: searching "words" should find 讠 (the simplified speech
+radical) the way "say"/"words" already finds 言 — instead 讠's row
+(`hanzi-8ba0`) carried the keyword "simplified kangxi radical 149", a number
+with no meaning attached. Checked where that came from: `import_hanzi.py`'s
+Unihan-derived seed gave several radical-*shorthand* glyphs (compressed
+forms used only as decomposition parts, not full independent characters —
+讠 钅 纟 饣 already had real keywords; the gap was in the less-common set)
+a bare radical number as the gloss instead of a meaning, because these
+either don't exist in traditional/Japanese script (so Heisig never named
+them and nothing in `data.txt` covers them) or, for 艮, simply never got
+the same name its same-glyph `kangxi138`/`rad1015` ja-kanji row already
+carries ("stopping").
+
+This isn't the `data.txt`/CSV pipeline — that's ja-kanji only
+(`sync_system_data.py`'s own docstring) — and `zh-*` rows have no resync
+tool at all since `import_hanzi.py` is one-time-only. Wrote
+`backend/fix_hanzi_radical_keywords.py`, a one-off, idempotent, `--dry-run`-
+able direct UPDATE (same convention as every other one-off script here),
+covering eleven rows: 亻(person) 夊(winter walk) 爫(claw) 牜(ox) 罒(net)
+耂(old) 艮(stopping) 覀(west) 訁(words, traditional) 讠(words, simplified,
+the reported case) 釒(gold, traditional). Every new keyword was chosen by
+matching an already-established full-character sibling already in this
+database (e.g. 讠/訁 → hanzi-8a00 言 "words, speech" and rtk357 "say"; 艮 →
+kangxi138 "stopping") rather than inventing fresh terms, and each shape was
+confirmed against its sibling with `render_glyphs.py` before writing
+(讠/訁/言, 钅/釒/金, 亻/人, 爫/爪, 牜/牛, 罒/网, 耂/老, 覀/西 all rendered
+matching, per CLAUDE.md's "render it, don't just reason about it").
+
+Also fixed the matching alias rows, which had inherited the same bad text
+twice: once as an English alias under `owner_id=1` (`_load_parts_file`
+takes the keyword's first comma-segment as the primary alias), and again as
+its Russian machine-translation under `owner_id=10` (`add_ru_aliases.py`'s
+`ru-aliases` pseudo-account — easy to miss since it's a different owner_id
+than the kanji/English-alias rows, which nearly happened here: the first
+script run only updated `owner_id=1` aliases and silently left every
+Russian alias stale, caught by re-querying rather than assuming the write
+succeeded). 牜's row also had two duplicate English alias fragments left
+over from comma-splitting the old "an ox, a cow radical 93" keyword — the
+extras were deleted rather than kept as synonyms, since they're artifacts
+of the old bad text, not real alternate names.
+
+Verified: `search/text?q=words` now returns both 讠 and 訁 alongside 言
+and its compounds; `search/parts` with `["words"]` on `script=zh-Hans`
+returns 283 kanji (up from what "yan"-only search could reach). No other
+mechanical "radical N" keywords remain in the DB (checked with a `LIKE
+'%radical%'` sweep — the only survivors are legitimate uses like kangxi104
+"sickness radical" and rtk797 "unclear", which are real descriptive names,
+not placeholders). Backed up `kanji.db` before writing (`backup_db.py`).
+99 pytest passed; `test_regression_fixes.py` unaffected (no pin references
+any of these eleven ids).
+
+This DB (srv.alteon.help, dev) is separate from prod's live `kanji.db` —
+`fix_hanzi_radical_keywords.py` needs a maintainer to re-run it against
+prod directly, same as any other direct-DB one-off script, since there's no
+sync tool for `zh-*` system rows.
