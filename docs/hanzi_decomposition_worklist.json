@@ -1,0 +1,8552 @@
+[
+ {
+  "id": "hanzi-4e03",
+  "char": "七",
+  "kind": "overlay",
+  "our_parts": [
+   "乚",
+   "hidden, mysterious, secret"
+  ],
+  "cjkvi_reading": "⿻㇀乚",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-4e0e",
+  "char": "与",
+  "kind": "overlay",
+  "our_parts": [
+   "一",
+   "one"
+  ],
+  "cjkvi_reading": "⿻②一",
+  "cjkvi_tags": "J",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-4e17",
+  "char": "丗",
+  "kind": "overlay",
+  "our_parts": [
+   "廿",
+   "twenty, twentieth",
+   "丨",
+   "(same as 〡 hangzhou numeral one) number one"
+  ],
+  "cjkvi_reading": "⿻廿丨",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-4e21",
+  "char": "両",
+  "kind": "overlay",
+  "our_parts": [
+   "一",
+   "one",
+   "冂",
+   "wide",
+   "山",
+   "mountain, hill, peak"
+  ],
+  "cjkvi_reading": "⿱一⿻冂山",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-4e24",
+  "char": "两",
+  "kind": "overlay",
+  "our_parts": [
+   "一",
+   "one",
+   "冂",
+   "wide",
+   "从",
+   "from, by, since, whence, through"
+  ],
+  "cjkvi_reading": "⿱一⿻冂从",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-4e27",
+  "char": "丧",
+  "kind": "overlay",
+  "our_parts": [
+   "土",
+   "soil, earth",
+   "丷",
+   "“ears-out” component used in some chinese characters (for example, 兑)",
+   "𠄌",
+   "乀",
+   "stretch",
+   "丿",
+   "line"
+  ],
+  "cjkvi_reading": "⿱⿻土丷⿰𠄌⿺乀丿",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-4e2d",
+  "char": "中",
+  "kind": "overlay",
+  "our_parts": [
+   "口",
+   "mouth",
+   "丨",
+   "(same as 〡 hangzhou numeral one) number one"
+  ],
+  "cjkvi_reading": "⿻口丨",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-4e2e",
+  "char": "丮",
+  "kind": "overlay",
+  "our_parts": [
+   "二",
+   "two",
+   "丨",
+   "(same as 〡 hangzhou numeral one) number one"
+  ],
+  "cjkvi_reading": "⿹⺄⿻二丨",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-4e2f",
+  "char": "丯",
+  "kind": "overlay",
+  "our_parts": [
+   "彡",
+   "hair",
+   "丨",
+   "(same as 〡 hangzhou numeral one) number one"
+  ],
+  "cjkvi_reading": "⿻彡丨",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-4e30",
+  "char": "丰",
+  "kind": "overlay",
+  "our_parts": [
+   "三",
+   "three",
+   "丨",
+   "(same as 〡 hangzhou numeral one) number one"
+  ],
+  "cjkvi_reading": "⿻三丨",
+  "cjkvi_tags": "GJK",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-4e32",
+  "char": "串",
+  "kind": "overlay",
+  "our_parts": [
+   "吕",
+   "surname",
+   "丨",
+   "(same as 〡 hangzhou numeral one) number one"
+  ],
+  "cjkvi_reading": "⿻吕丨",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-4e33",
+  "char": "丳",
+  "kind": "overlay",
+  "our_parts": [
+   "吕",
+   "surname",
+   "丿",
+   "line",
+   "丨",
+   "(same as 〡 hangzhou numeral one) number one"
+  ],
+  "cjkvi_reading": "⿻吕⿰丿丨",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-4e34",
+  "char": "临",
+  "kind": "overlay",
+  "our_parts": [
+   "𠂉",
+   "丶",
+   "dot",
+   "𫩏"
+  ],
+  "cjkvi_reading": "⿰〢⿱⿱𠂉丶𫩏 via 𫩏=⿴囗丨",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-4e38",
+  "char": "丸",
+  "kind": "overlay",
+  "our_parts": [
+   "九",
+   "nine",
+   "丶",
+   "dot"
+  ],
+  "cjkvi_reading": "⿻九丶",
+  "cjkvi_tags": "GJ",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-4e3c",
+  "char": "丼",
+  "kind": "overlay",
+  "our_parts": [
+   "井",
+   "well, mine shaft, pit",
+   "丶",
+   "dot"
+  ],
+  "cjkvi_reading": "⿴井丶",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-4e3e",
+  "char": "举",
+  "kind": "overlay",
+  "our_parts": [
+   "兴",
+   "thrive, prosper, flourish",
+   "二",
+   "two",
+   "丨",
+   "(same as 〡 hangzhou numeral one) number one"
+  ],
+  "cjkvi_reading": "⿱兴⿻二丨",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-4e42",
+  "char": "乂",
+  "kind": "overlay",
+  "our_parts": [
+   "丿",
+   "line",
+   "乀",
+   "stretch"
+  ],
+  "cjkvi_reading": "⿻丿乀",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-4e43",
+  "char": "乃",
+  "kind": "opaque",
+  "our_parts": [
+   "𠄎",
+   "丿",
+   "line"
+  ],
+  "opaque_children": "𠄎",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-4e55",
+  "char": "乕",
+  "kind": "overlay",
+  "our_parts": [
+   "𠂆",
+   "二",
+   "two",
+   "丨",
+   "(same as 〡 hangzhou numeral one) number one",
+   "冂",
+   "wide"
+  ],
+  "cjkvi_reading": "⿸𠂆⿻⿻二丨冂",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-4e56",
+  "char": "乖",
+  "kind": "overlay",
+  "our_parts": [
+   "千",
+   "thousand",
+   "北",
+   "north"
+  ],
+  "cjkvi_reading": "⿻千北",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-4e58",
+  "char": "乘",
+  "kind": "overlay",
+  "our_parts": [
+   "禾",
+   "grain still on stalk",
+   "北",
+   "north"
+  ],
+  "cjkvi_reading": "⿻禾北",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-4e80",
+  "char": "亀",
+  "kind": "overlay",
+  "our_parts": [
+   "𠂊",
+   "日",
+   "sun",
+   "电"
+  ],
+  "cjkvi_reading": "⿱𠂊⿻日电",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-4e89",
+  "char": "争",
+  "kind": "overlay",
+  "our_parts": [
+   "𠂊",
+   "一",
+   "one",
+   "亅",
+   "hook"
+  ],
+  "cjkvi_reading": "⿱𠂊⿻⿻コ一亅",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-4e90",
+  "char": "亐",
+  "kind": "overlay",
+  "our_parts": [
+   "一",
+   "one",
+   "𠀁"
+  ],
+  "cjkvi_reading": "⿱一𠀁 via 𠀁=⿻一㇉",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-4e94",
+  "char": "五",
+  "kind": "opaque",
+  "our_parts": [
+   "一",
+   "one",
+   "𫝀"
+  ],
+  "opaque_children": "𫝀",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-4e9f",
+  "char": "亟",
+  "kind": "overlay",
+  "our_parts": [
+   "了",
+   "complete",
+   "叹",
+   "sigh, admire",
+   "一",
+   "one"
+  ],
+  "cjkvi_reading": "⿱⿻了叹一",
+  "cjkvi_tags": "G",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-4eb4",
+  "char": "亴",
+  "kind": "overlay",
+  "our_parts": [
+   "亠",
+   "head",
+   "口",
+   "mouth",
+   "冖",
+   "cover",
+   "土",
+   "soil, earth",
+   "九",
+   "nine"
+  ],
+  "cjkvi_reading": "⿳⿳亠口冖⿻二丨九",
+  "cjkvi_tags": "T",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-4eb7",
+  "char": "亷",
+  "kind": "overlay",
+  "our_parts": [
+   "产",
+   "give birth, bring forth, produce",
+   "一",
+   "one"
+  ],
+  "cjkvi_reading": "⿸产⿻⿻コ一④",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-4f1e",
+  "char": "伞",
+  "kind": "overlay",
+  "our_parts": [
+   "人",
+   "man",
+   "丷",
+   "“ears-out” component used in some chinese characters (for example, 兑)",
+   "十",
+   "ten, tenth"
+  ],
+  "cjkvi_reading": "⿱人⿻丷十",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-4f40",
+  "char": "佀",
+  "kind": "opaque",
+  "our_parts": [
+   "亻",
+   "radical number 9",
+   "㠯"
+  ],
+  "opaque_children": "㠯",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-4f83",
+  "char": "侃",
+  "kind": "overlay",
+  "our_parts": [
+   "亻",
+   "radical number 9",
+   "口",
+   "mouth",
+   "𫶧"
+  ],
+  "cjkvi_reading": "⿰亻⿱口𫶧 via 𫶧=⿴儿丨",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-4f86",
+  "char": "來",
+  "kind": "overlay",
+  "our_parts": [
+   "木",
+   "tree",
+   "从"
+  ],
+  "cjkvi_reading": "⿻木从",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5009",
+  "char": "倉",
+  "kind": "overlay",
+  "our_parts": [
+   "亽",
+   "kwukyel",
+   "尸",
+   "一",
+   "one",
+   "口",
+   "mouth"
+  ],
+  "cjkvi_reading": "⿱亽⿸⿴尸一口",
+  "cjkvi_tags": "G",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-507c",
+  "char": "偼",
+  "kind": "overlay",
+  "our_parts": [
+   "亻",
+   "radical number 9",
+   "一",
+   "one",
+   "龰",
+   "龰"
+  ],
+  "cjkvi_reading": "⿰亻⿳⺊⿻コ一龰",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5098",
+  "char": "傘",
+  "kind": "overlay",
+  "our_parts": [
+   "人",
+   "man",
+   "十",
+   "ten, tenth",
+   "𠈌"
+  ],
+  "cjkvi_reading": "⿱人⿻十𠈌",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-509c",
+  "char": "傜",
+  "kind": "overlay",
+  "our_parts": [
+   "亻",
+   "radical number 9",
+   "䍃"
+  ],
+  "cjkvi_reading": "⿰亻䍃 via 䍃=⿱⿴𠂊冫缶",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-50bc",
+  "char": "傼",
+  "kind": "overlay",
+  "our_parts": [
+   "亻",
+   "radical number 9",
+   "廿",
+   "twenty, twentieth",
+   "口",
+   "mouth",
+   "夫",
+   "man, male adult, husband"
+  ],
+  "cjkvi_reading": "⿰亻⿱廿⿻口夫",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5148",
+  "char": "先",
+  "kind": "opaque",
+  "our_parts": [
+   "𠂒",
+   "儿"
+  ],
+  "opaque_children": "𠂒",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-514d",
+  "char": "免",
+  "kind": "overlay",
+  "our_parts": [
+   "𠂊"
+  ],
+  "cjkvi_reading": "⿳𠂊𫩏儿 via 𫩏=⿴囗丨",
+  "cjkvi_tags": "J",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5160",
+  "char": "兠",
+  "kind": "overlay",
+  "our_parts": [
+   "北",
+   "north",
+   "白",
+   "white",
+   "儿"
+  ],
+  "cjkvi_reading": "⿱⿴北白儿",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5167",
+  "char": "內",
+  "kind": "overlay",
+  "our_parts": [
+   "冂",
+   "wide",
+   "入",
+   "enter, come in(to), join"
+  ],
+  "cjkvi_reading": "⿻冂入",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5169",
+  "char": "兩",
+  "kind": "overlay",
+  "our_parts": [
+   "一",
+   "one",
+   "巾",
+   "kerchief",
+   "𠓜"
+  ],
+  "cjkvi_reading": "⿱一⿻巾𠓜",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5177",
+  "char": "具",
+  "kind": "overlay",
+  "our_parts": [
+   "且",
+   "moreover, also (post-subject)",
+   "一",
+   "one",
+   "八",
+   "eight"
+  ],
+  "cjkvi_reading": "⿱⿴且一八",
+  "cjkvi_tags": "GTKV",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-517c",
+  "char": "兼",
+  "kind": "overlay",
+  "our_parts": [
+   "䒑",
+   "一",
+   "one"
+  ],
+  "cjkvi_reading": "⿱䒑⿻⿻コ一④",
+  "cjkvi_tags": "GTJV",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5184",
+  "char": "冄",
+  "kind": "overlay",
+  "our_parts": [
+   "冂",
+   "wide",
+   "二",
+   "two"
+  ],
+  "cjkvi_reading": "⿻冂二",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5185",
+  "char": "内",
+  "kind": "overlay",
+  "our_parts": [
+   "冂",
+   "wide",
+   "人",
+   "man"
+  ],
+  "cjkvi_reading": "⿻冂人",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-518a",
+  "char": "冊",
+  "kind": "overlay",
+  "our_parts": [
+   "𦉫",
+   "一",
+   "one"
+  ],
+  "cjkvi_reading": "⿻𦉫一",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-518e",
+  "char": "冎",
+  "kind": "opaque",
+  "our_parts": [
+   "冂",
+   "wide",
+   "𠃍",
+   "冂",
+   "wide"
+  ],
+  "opaque_children": "𠃍",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-519c",
+  "char": "农",
+  "kind": "overlay",
+  "our_parts": [
+   "冖",
+   "cover",
+   "𧘇"
+  ],
+  "cjkvi_reading": "⿻冖𧘇",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-51fb",
+  "char": "击",
+  "kind": "overlay",
+  "our_parts": [
+   "二",
+   "two",
+   "丨",
+   "(same as 〡 hangzhou numeral one) number one",
+   "凵",
+   "receptacle"
+  ],
+  "cjkvi_reading": "⿱⿻二丨凵",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-51fd",
+  "char": "函",
+  "kind": "overlay",
+  "our_parts": [
+   "凵",
+   "receptacle",
+   "了",
+   "complete",
+   "丷",
+   "“ears-out” component used in some chinese characters (for example, 兑)",
+   "八",
+   "eight"
+  ],
+  "cjkvi_reading": "⿶凵⿻了⿱丷八",
+  "cjkvi_tags": "GTV",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-51fe",
+  "char": "凾",
+  "kind": "overlay",
+  "our_parts": [
+   "凵",
+   "receptacle",
+   "了",
+   "complete",
+   "叹",
+   "sigh, admire"
+  ],
+  "cjkvi_reading": "⿶凵⿻了叹",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5203",
+  "char": "刃",
+  "kind": "overlay",
+  "our_parts": [
+   "刀",
+   "knife",
+   "丿",
+   "line"
+  ],
+  "cjkvi_reading": "⿻刀丶",
+  "cjkvi_tags": "J",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5204",
+  "char": "刄",
+  "kind": "overlay",
+  "our_parts": [
+   "刀",
+   "knife",
+   "乀",
+   "stretch"
+  ],
+  "cjkvi_reading": "⿻刀乀",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5236",
+  "char": "制",
+  "kind": "overlay",
+  "our_parts": [
+   "牛",
+   "cow, ox, bull",
+   "冂",
+   "wide",
+   "刂",
+   "knife"
+  ],
+  "cjkvi_reading": "⿰⿻牛冂刂",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-529b",
+  "char": "力",
+  "kind": "overlay",
+  "our_parts": [
+   "丿",
+   "line",
+   "𠃌"
+  ],
+  "cjkvi_reading": "⿻丿𠃌",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-529e",
+  "char": "办",
+  "kind": "overlay",
+  "our_parts": [
+   "力",
+   "power, capability, influence",
+   "八",
+   "eight"
+  ],
+  "cjkvi_reading": "⿻力八",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5301",
+  "char": "匁",
+  "kind": "overlay",
+  "our_parts": [
+   "勹",
+   "wrap",
+   "乂",
+   "govern, control, manage"
+  ],
+  "cjkvi_reading": "⿻勹乂",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5306",
+  "char": "匆",
+  "kind": "overlay",
+  "our_parts": [
+   "勿",
+   "must not, do not",
+   "丶",
+   "dot"
+  ],
+  "cjkvi_reading": "⿻勿丶",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5316",
+  "char": "化",
+  "kind": "overlay",
+  "our_parts": [
+   "亻",
+   "radical number 9",
+   "𠤎"
+  ],
+  "cjkvi_reading": "⿰亻𠤎 via 𠤎=⿻乚丿",
+  "cjkvi_tags": "G",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5344",
+  "char": "卄",
+  "kind": "overlay",
+  "our_parts": [
+   "十",
+   "ten, tenth",
+   "丨",
+   "(same as 〡 hangzhou numeral one) number one"
+  ],
+  "cjkvi_reading": "⿻十丨",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5345",
+  "char": "卅",
+  "kind": "overlay",
+  "our_parts": [
+   "川",
+   "stream, river",
+   "一",
+   "one"
+  ],
+  "cjkvi_reading": "⿻川一",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-534a",
+  "char": "半",
+  "kind": "overlay",
+  "our_parts": [
+   "丷",
+   "“ears-out” component used in some chinese characters (for example, 兑)",
+   "二",
+   "two",
+   "丨",
+   "(same as 〡 hangzhou numeral one) number one"
+  ],
+  "cjkvi_reading": "⿱丷⿻二丨",
+  "cjkvi_tags": "GTJV",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5351",
+  "char": "卑",
+  "kind": "overlay",
+  "our_parts": [
+   "白",
+   "white",
+   "丿",
+   "line",
+   "十",
+   "ten, tenth"
+  ],
+  "cjkvi_reading": "⿱⿻白丿十",
+  "cjkvi_tags": "GTK",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5355",
+  "char": "单",
+  "kind": "overlay",
+  "our_parts": [
+   "丷",
+   "“ears-out” component used in some chinese characters (for example, 兑)",
+   "甲",
+   "armor, shell",
+   "一",
+   "one"
+  ],
+  "cjkvi_reading": "⿱丷⿻甲一",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5358",
+  "char": "単",
+  "kind": "overlay",
+  "our_parts": [
+   "𭕄",
+   "甲",
+   "armor, shell",
+   "一",
+   "one"
+  ],
+  "cjkvi_reading": "⿱𭕄⿻甲一",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-535a",
+  "char": "博",
+  "kind": "overlay",
+  "our_parts": [
+   "十",
+   "ten, tenth",
+   "尃",
+   "to state to, to announce"
+  ],
+  "cjkvi_reading": "⿰十⿱⿺𤰔丶寸 via 𤰔=⿻一由",
+  "cjkvi_tags": "J",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5365",
+  "char": "卥",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "丿",
+   "line",
+   "丿",
+   "line",
+   "丶",
+   "dot"
+  ],
+  "cjkvi_reading": "⿱⺊⿴囗⿻⿱丿丿丶",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-536a",
+  "char": "卪",
+  "kind": "overlay",
+  "our_parts": [
+   "卩",
+   "seal",
+   "丶",
+   "dot"
+  ],
+  "cjkvi_reading": "⿴卩丶",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5375",
+  "char": "卵",
+  "kind": "overlay",
+  "our_parts": [
+   "𠂑",
+   "卪",
+   "kwukyel"
+  ],
+  "cjkvi_reading": "⿰𠂑卪 via 𠂑=⿴𠂎丶",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5378",
+  "char": "卸",
+  "kind": "overlay",
+  "our_parts": [
+   "𦈢",
+   "卩",
+   "seal"
+  ],
+  "cjkvi_reading": "⿰𦈢卩 via 𦈢=⿱𠂉⿻一③",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-53c0",
+  "char": "叀",
+  "kind": "overlay",
+  "our_parts": [
+   "𤰔",
+   "厶",
+   "private, secret"
+  ],
+  "cjkvi_reading": "⿱𤰔厶 via 𤰔=⿻一由",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-53c9",
+  "char": "叉",
+  "kind": "overlay",
+  "our_parts": [
+   "又",
+   "and, also, again, in addition",
+   "丶",
+   "dot"
+  ],
+  "cjkvi_reading": "⿴又丶",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-53cd",
+  "char": "反",
+  "kind": "opaque",
+  "our_parts": [
+   "𠂆",
+   "又",
+   "and, also, again, in addition"
+  ],
+  "opaque_children": "𠂆",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-53cf",
+  "char": "叏",
+  "kind": "overlay",
+  "our_parts": [
+   "丨",
+   "(same as 〡 hangzhou numeral one) number one",
+   "又",
+   "and, also, again, in addition"
+  ],
+  "cjkvi_reading": "⿱⿻ユ丨又",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-53d3",
+  "char": "叓",
+  "kind": "overlay",
+  "our_parts": [
+   "一",
+   "one",
+   "中",
+   "central",
+   "又",
+   "and, also, again, in addition"
+  ],
+  "cjkvi_reading": "⿱⿻一中又",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-53df",
+  "char": "叟",
+  "kind": "overlay",
+  "our_parts": [
+   "臼",
+   "mortar",
+   "丨",
+   "(same as 〡 hangzhou numeral one) number one",
+   "又",
+   "and, also, again, in addition"
+  ],
+  "cjkvi_reading": "⿱⿻臼丨又",
+  "cjkvi_tags": "GJK",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-53f1",
+  "char": "叱",
+  "kind": "overlay",
+  "our_parts": [
+   "口",
+   "mouth",
+   "𠤎"
+  ],
+  "cjkvi_reading": "⿰口𠤎 via 𠤎=⿻乚丿",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-540f",
+  "char": "吏",
+  "kind": "overlay",
+  "our_parts": [
+   "一",
+   "one",
+   "史",
+   "history, chronicle, annals"
+  ],
+  "cjkvi_reading": "⿻一史",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5433",
+  "char": "吳",
+  "kind": "opaque",
+  "our_parts": [
+   "𠃑",
+   "大",
+   "big, great, vast, large, high",
+   "口",
+   "mouth"
+  ],
+  "opaque_children": "𠃑",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5449",
+  "char": "呉",
+  "kind": "opaque",
+  "our_parts": [
+   "𠃑",
+   "口",
+   "mouth",
+   "一",
+   "one",
+   "八",
+   "eight"
+  ],
+  "opaque_children": "𠃑",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-544a",
+  "char": "告",
+  "kind": "opaque",
+  "our_parts": [
+   "𠂒",
+   "口",
+   "mouth"
+  ],
+  "opaque_children": "𠂒",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5468",
+  "char": "周",
+  "kind": "overlay",
+  "our_parts": [
+   "𠮷"
+  ],
+  "cjkvi_reading": "⿵⺆⿱⿻二丨口",
+  "cjkvi_tags": "K",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5510",
+  "char": "唐",
+  "kind": "overlay",
+  "our_parts": [
+   "广",
+   "肀",
+   "pen",
+   "口",
+   "mouth"
+  ],
+  "cjkvi_reading": "⿸广⿱⿻⿻コ一丨口",
+  "cjkvi_tags": "J",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-556c",
+  "char": "啬",
+  "kind": "overlay",
+  "our_parts": [
+   "土",
+   "soil, earth",
+   "丷",
+   "“ears-out” component used in some chinese characters (for example, 兑)",
+   "回",
+   "-times"
+  ],
+  "cjkvi_reading": "⿱⿻土丷回",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-55aa",
+  "char": "喪",
+  "kind": "overlay",
+  "our_parts": [
+   "土",
+   "soil, earth",
+   "吅",
+   "吅",
+   "𠄌",
+   "乀",
+   "stretch",
+   "丿",
+   "line"
+  ],
+  "cjkvi_reading": "⿱⿻土吅⿰𠄌⿺乀丿",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-55ae",
+  "char": "單",
+  "kind": "overlay",
+  "our_parts": [
+   "吅",
+   "吅",
+   "甲",
+   "armor, shell",
+   "一",
+   "one"
+  ],
+  "cjkvi_reading": "⿱吅⿻甲一",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-55c2",
+  "char": "嗂",
+  "kind": "overlay",
+  "our_parts": [
+   "口",
+   "mouth",
+   "䍃"
+  ],
+  "cjkvi_reading": "⿰口䍃 via 䍃=⿱⿴𠂊冫缶",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-55c7",
+  "char": "嗇",
+  "kind": "overlay",
+  "our_parts": [
+   "土",
+   "soil, earth",
+   "从",
+   "回",
+   "-times"
+  ],
+  "cjkvi_reading": "⿱⿻土从回",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5606",
+  "char": "嘆",
+  "kind": "overlay",
+  "our_parts": [
+   "口",
+   "mouth",
+   "廿",
+   "twenty, twentieth",
+   "口",
+   "mouth",
+   "夫",
+   "man, male adult, husband"
+  ],
+  "cjkvi_reading": "⿰口⿱廿⿻口夫",
+  "cjkvi_tags": "GTKV",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5669",
+  "char": "噩",
+  "kind": "overlay",
+  "our_parts": [
+   "干",
+   "dry",
+   "㗊",
+   "一",
+   "one"
+  ],
+  "cjkvi_reading": "⿱⿻干㗊一",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-56a2",
+  "char": "嚢",
+  "kind": "overlay",
+  "our_parts": [
+   "一",
+   "one",
+   "中",
+   "central",
+   "冖",
+   "cover",
+   "八",
+   "eight",
+   "𠀎",
+   "𧘇"
+  ],
+  "cjkvi_reading": "⿳⿻一中冖⿳八𠀎𧘇",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-56ca",
+  "char": "囊",
+  "kind": "overlay",
+  "our_parts": [
+   "一",
+   "one",
+   "中",
+   "central",
+   "冖",
+   "cover",
+   "吅",
+   "吅",
+   "𠀎",
+   "𧘇"
+  ],
+  "cjkvi_reading": "⿳⿻一中冖⿱⿱吅𠀎𧘇",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-56cf",
+  "char": "囏",
+  "kind": "overlay",
+  "our_parts": [
+   "廿",
+   "twenty, twentieth",
+   "口",
+   "mouth",
+   "夫",
+   "man, male adult, husband",
+   "喜",
+   "like, love, enjoy"
+  ],
+  "cjkvi_reading": "⿰⿱廿⿻口夫喜",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-56d9",
+  "char": "囙",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud"
+  ],
+  "cjkvi_reading": "⿴囗コ",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-56da",
+  "char": "囚",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "人",
+   "man"
+  ],
+  "cjkvi_reading": "⿴囗人",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-56db",
+  "char": "四",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "儿"
+  ],
+  "cjkvi_reading": "⿴囗儿",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-56dc",
+  "char": "囜",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "厶",
+   "private, secret"
+  ],
+  "cjkvi_reading": "⿴囗厶",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-56dd",
+  "char": "囝",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "子",
+   "offspring, child"
+  ],
+  "cjkvi_reading": "⿴囗子",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-56de",
+  "char": "回",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "口",
+   "mouth"
+  ],
+  "cjkvi_reading": "⿴囗口",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-56df",
+  "char": "囟",
+  "kind": "overlay",
+  "our_parts": [
+   "丿",
+   "line",
+   "囗",
+   "erect, proud",
+   "㐅"
+  ],
+  "cjkvi_reading": "⿴⿱丿囗㐅",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-56e0",
+  "char": "因",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "大",
+   "big, great, vast, large, high"
+  ],
+  "cjkvi_reading": "⿴囗大",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-56e1",
+  "char": "囡",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "女",
+   "woman, girl"
+  ],
+  "cjkvi_reading": "⿴囗女",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-56e2",
+  "char": "团",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "才",
+   "genius"
+  ],
+  "cjkvi_reading": "⿴囗才",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-56e3",
+  "char": "団",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "寸",
+   "inch"
+  ],
+  "cjkvi_reading": "⿴囗寸",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-56e4",
+  "char": "囤",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "屯",
+   "village, hamlet"
+  ],
+  "cjkvi_reading": "⿴囗屯",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-56e5",
+  "char": "囥",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "亢",
+   "high, proud"
+  ],
+  "cjkvi_reading": "⿴囗亢",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-56e6",
+  "char": "囦",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "水",
+   "water, liquid, lotion, juice"
+  ],
+  "cjkvi_reading": "⿴囗水",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-56e7",
+  "char": "囧",
+  "kind": "overlay",
+  "our_parts": [
+   "四",
+   "four",
+   "冂",
+   "wide"
+  ],
+  "cjkvi_reading": "⿴四冂",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-56e8",
+  "char": "囨",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "不",
+   "no, not"
+  ],
+  "cjkvi_reading": "⿴囗不",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-56e9",
+  "char": "囩",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "云",
+   "quote"
+  ],
+  "cjkvi_reading": "⿴囗云",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-56ea",
+  "char": "囪",
+  "kind": "overlay",
+  "our_parts": [
+   "丿",
+   "line",
+   "囗",
+   "erect, proud",
+   "丿",
+   "line",
+   "丿",
+   "line",
+   "丶",
+   "dot"
+  ],
+  "cjkvi_reading": "⿴⿱丿囗⿻⿱丿丿丶",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-56eb",
+  "char": "囫",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "勿",
+   "must not, do not"
+  ],
+  "cjkvi_reading": "⿴囗勿",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-56ec",
+  "char": "囬",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud"
+  ],
+  "cjkvi_reading": "⿴囗④",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-56ed",
+  "char": "园",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "元",
+   "first"
+  ],
+  "cjkvi_reading": "⿴囗元",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-56ee",
+  "char": "囮",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "化",
+   "change, convert, reform"
+  ],
+  "cjkvi_reading": "⿴囗化",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-56ef",
+  "char": "囯",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "王",
+   "king, ruler"
+  ],
+  "cjkvi_reading": "⿴囗王",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-56f0",
+  "char": "困",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "木",
+   "tree"
+  ],
+  "cjkvi_reading": "⿴囗木",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-56f1",
+  "char": "囱",
+  "kind": "overlay",
+  "our_parts": [
+   "丿",
+   "line",
+   "囗",
+   "erect, proud",
+   "夂",
+   "go"
+  ],
+  "cjkvi_reading": "⿴⿱丿囗夂",
+  "cjkvi_tags": "G",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-56f2",
+  "char": "囲",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "井",
+   "well, mine shaft, pit"
+  ],
+  "cjkvi_reading": "⿴囗井",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-56f3",
+  "char": "図",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "乂",
+   "govern, control, manage"
+  ],
+  "cjkvi_reading": "⿴囗⿱⺀乂",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-56f4",
+  "char": "围",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "韦",
+   "tanned leather"
+  ],
+  "cjkvi_reading": "⿴囗韦",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-56f5",
+  "char": "囵",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "仑",
+   "logical reasons, logical order"
+  ],
+  "cjkvi_reading": "⿴囗仑",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-56f6",
+  "char": "囶",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "𡉀"
+  ],
+  "cjkvi_reading": "⿴囗𡉀",
+  "cjkvi_tags": "GJ",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-56f7",
+  "char": "囷",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "禾",
+   "grain still on stalk"
+  ],
+  "cjkvi_reading": "⿴囗禾",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-56f8",
+  "char": "囸",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "正",
+   "right, proper, correct"
+  ],
+  "cjkvi_reading": "⿴囗正",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-56f9",
+  "char": "囹",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "令",
+   "command, order"
+  ],
+  "cjkvi_reading": "⿴囗令",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-56fa",
+  "char": "固",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "古",
+   "old, classic, ancient"
+  ],
+  "cjkvi_reading": "⿴囗古",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-56fb",
+  "char": "囻",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "民",
+   "people, subjects, citizens"
+  ],
+  "cjkvi_reading": "⿴囗民",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-56fc",
+  "char": "囼",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "台",
+   "pedestal"
+  ],
+  "cjkvi_reading": "⿴囗台",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-56fd",
+  "char": "国",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "玉",
+   "jade, precious stone, gem"
+  ],
+  "cjkvi_reading": "⿴囗玉",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-56fe",
+  "char": "图",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "冬",
+   "winter, 11th lunar month"
+  ],
+  "cjkvi_reading": "⿴囗冬",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-56ff",
+  "char": "囿",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "有",
+   "have, own, possess"
+  ],
+  "cjkvi_reading": "⿴囗有",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5700",
+  "char": "圀",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "八",
+   "eight",
+   "方",
+   "a square, rectangle"
+  ],
+  "cjkvi_reading": "⿴囗⿱八方",
+  "cjkvi_tags": "G",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5701",
+  "char": "圁",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "言",
+   "words, speech"
+  ],
+  "cjkvi_reading": "⿴囗言",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5702",
+  "char": "圂",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "豕",
+   "a pig, boar"
+  ],
+  "cjkvi_reading": "⿴囗豕",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5703",
+  "char": "圃",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "甫",
+   "begin"
+  ],
+  "cjkvi_reading": "⿴囗甫",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5704",
+  "char": "圄",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "吾",
+   "i, my, our"
+  ],
+  "cjkvi_reading": "⿴囗吾",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5705",
+  "char": "圅",
+  "kind": "overlay",
+  "our_parts": [
+   "龴",
+   "囗",
+   "erect, proud",
+   "𢆉"
+  ],
+  "cjkvi_reading": "⿱龴⿴囗𢆉",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5706",
+  "char": "圆",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "员",
+   "member"
+  ],
+  "cjkvi_reading": "⿴囗员",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5707",
+  "char": "圇",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "侖",
+   "logical reasons, logical order"
+  ],
+  "cjkvi_reading": "⿴囗侖",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5708",
+  "char": "圈",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "卷"
+  ],
+  "cjkvi_reading": "⿴囗卷",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5709",
+  "char": "圉",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "幸",
+   "luck(ily), favor, fortunately"
+  ],
+  "cjkvi_reading": "⿴囗幸",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-570a",
+  "char": "圊",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "青",
+   "blue, green"
+  ],
+  "cjkvi_reading": "⿴囗青",
+  "cjkvi_tags": "GT",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-570b",
+  "char": "國",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "或",
+   "or, either, else"
+  ],
+  "cjkvi_reading": "⿴囗或",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-570c",
+  "char": "圌",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "耑",
+   "specialized"
+  ],
+  "cjkvi_reading": "⿴囗耑",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-570d",
+  "char": "圍",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "韋",
+   "tanned leather"
+  ],
+  "cjkvi_reading": "⿴囗韋",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-570e",
+  "char": "圎",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "貟",
+   "member"
+  ],
+  "cjkvi_reading": "⿴囗貟",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-570f",
+  "char": "圏",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "巻",
+   "scroll"
+  ],
+  "cjkvi_reading": "⿴囗巻",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5710",
+  "char": "圐",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "𬙙"
+  ],
+  "cjkvi_reading": "⿴囗𬙙",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5711",
+  "char": "圑",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "尃",
+   "to state to, to announce"
+  ],
+  "cjkvi_reading": "⿴囗尃",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5712",
+  "char": "園",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "袁",
+   "robe"
+  ],
+  "cjkvi_reading": "⿴囗袁",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5713",
+  "char": "圓",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "員",
+   "member"
+  ],
+  "cjkvi_reading": "⿴囗員",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5714",
+  "char": "圔",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "盍",
+   "what? why not?"
+  ],
+  "cjkvi_reading": "⿴囗盍",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5715",
+  "char": "圕",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "書",
+   "book, letter, document"
+  ],
+  "cjkvi_reading": "⿴囗書",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5716",
+  "char": "圖",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "啚",
+   "low, mean"
+  ],
+  "cjkvi_reading": "⿴囗啚",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5717",
+  "char": "圗",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "厶",
+   "private, secret",
+   "十",
+   "ten, tenth",
+   "囬",
+   "to return to or from"
+  ],
+  "cjkvi_reading": "⿴囗⿳厶十囬",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5718",
+  "char": "團",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "專",
+   "monopolize, take sole possession"
+  ],
+  "cjkvi_reading": "⿴囗專",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5719",
+  "char": "圙",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "八",
+   "eight",
+   "面",
+   "mask"
+  ],
+  "cjkvi_reading": "⿴囗⿱八面",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-571a",
+  "char": "圚",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "貴",
+   "expensive, costly, valuable"
+  ],
+  "cjkvi_reading": "⿴囗貴",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-571b",
+  "char": "圛",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "睪",
+   "spy on"
+  ],
+  "cjkvi_reading": "⿴囗睪",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-571c",
+  "char": "圜",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "睘",
+   "round"
+  ],
+  "cjkvi_reading": "⿴囗睘",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-571d",
+  "char": "圝",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "䜌"
+  ],
+  "cjkvi_reading": "⿴囗䜌",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-571e",
+  "char": "圞",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "欒",
+   "name of tree"
+  ],
+  "cjkvi_reading": "⿴囗欒",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-573a",
+  "char": "场",
+  "kind": "opaque",
+  "our_parts": [
+   "土",
+   "soil, earth",
+   "𠃓"
+  ],
+  "opaque_children": "𠃓",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5750",
+  "char": "坐",
+  "kind": "overlay",
+  "our_parts": [
+   "土",
+   "soil, earth",
+   "从"
+  ],
+  "cjkvi_reading": "⿻土从",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-57c0",
+  "char": "埀",
+  "kind": "overlay",
+  "our_parts": [
+   "丿",
+   "line",
+   "二",
+   "two",
+   "丨",
+   "(same as 〡 hangzhou numeral one) number one",
+   "北",
+   "north",
+   "一",
+   "one"
+  ],
+  "cjkvi_reading": "⿳丿⿻⿻二丨北一",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-57d3",
+  "char": "埓",
+  "kind": "overlay",
+  "our_parts": [
+   "土",
+   "soil, earth",
+   "寸",
+   "inch"
+  ],
+  "cjkvi_reading": "⿰土⿱⿴𠂊冫寸",
+  "cjkvi_tags": "T",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5807",
+  "char": "堇",
+  "kind": "overlay",
+  "our_parts": [
+   "廿",
+   "twenty, twentieth",
+   "口",
+   "mouth",
+   "龶"
+  ],
+  "cjkvi_reading": "⿱廿⿻口龶",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5880",
+  "char": "墀",
+  "kind": "overlay",
+  "our_parts": [
+   "土",
+   "soil, earth",
+   "犀",
+   "rhinoceros"
+  ],
+  "cjkvi_reading": "⿰土𫵠 via 𫵠=⿸尸⿱⿻丨⿱丷八㐄",
+  "cjkvi_tags": "K",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5913",
+  "char": "夓",
+  "kind": "overlay",
+  "our_parts": [
+   "𦥑",
+   "𦣻",
+   "八",
+   "eight",
+   "夂",
+   "go"
+  ],
+  "cjkvi_reading": "⿳⿴𦥑𦣻八夂",
+  "cjkvi_tags": "G",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5915",
+  "char": "夕",
+  "kind": "overlay",
+  "our_parts": [
+   "𠂊",
+   "丶",
+   "dot"
+  ],
+  "cjkvi_reading": "⿴𠂊丶",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-591c",
+  "char": "夜",
+  "kind": "overlay",
+  "our_parts": [
+   "亠",
+   "head",
+   "亻",
+   "radical number 9",
+   "夂",
+   "go",
+   "丶",
+   "dot"
+  ],
+  "cjkvi_reading": "⿱亠⿰亻⿴夂丶",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5927",
+  "char": "大",
+  "kind": "overlay",
+  "our_parts": [
+   "一",
+   "one",
+   "人",
+   "man"
+  ],
+  "cjkvi_reading": "⿻一人",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5928",
+  "char": "夨",
+  "kind": "opaque",
+  "our_parts": [
+   "𠃋",
+   "大",
+   "big, great, vast, large, high"
+  ],
+  "opaque_children": "𠃋",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-592b",
+  "char": "夫",
+  "kind": "overlay",
+  "our_parts": [
+   "二",
+   "two",
+   "人",
+   "man"
+  ],
+  "cjkvi_reading": "⿻二人",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-592c",
+  "char": "夬",
+  "kind": "overlay",
+  "our_parts": [
+   "𠃍",
+   "大",
+   "big, great, vast, large, high"
+  ],
+  "cjkvi_reading": "⿻𠃍大",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5937",
+  "char": "夷",
+  "kind": "overlay",
+  "our_parts": [
+   "大",
+   "big, great, vast, large, high",
+   "弓",
+   "bow"
+  ],
+  "cjkvi_reading": "⿻大弓",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5939",
+  "char": "夹",
+  "kind": "overlay",
+  "our_parts": [
+   "夫",
+   "man, male adult, husband",
+   "丷",
+   "“ears-out” component used in some chinese characters (for example, 兑)"
+  ],
+  "cjkvi_reading": "⿻夫丷",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-593e",
+  "char": "夾",
+  "kind": "overlay",
+  "our_parts": [
+   "大",
+   "big, great, vast, large, high",
+   "从"
+  ],
+  "cjkvi_reading": "⿻大从",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5949",
+  "char": "奉",
+  "kind": "overlay",
+  "our_parts": [
+   "𡗗",
+   "二",
+   "two",
+   "丨",
+   "(same as 〡 hangzhou numeral one) number one"
+  ],
+  "cjkvi_reading": "⿱𡗗⿻二丨",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-596d",
+  "char": "奭",
+  "kind": "overlay",
+  "our_parts": [
+   "大",
+   "big, great, vast, large, high",
+   "皕",
+   "two hundred"
+  ],
+  "cjkvi_reading": "⿻大皕",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-59bb",
+  "char": "妻",
+  "kind": "overlay",
+  "our_parts": [
+   "十",
+   "ten, tenth",
+   "一",
+   "one",
+   "女",
+   "woman, girl"
+  ],
+  "cjkvi_reading": "⿱⿻十⿻コ一女",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-59ca",
+  "char": "姊",
+  "kind": "overlay",
+  "our_parts": [
+   "女",
+   "woman, girl",
+   "𠂔"
+  ],
+  "cjkvi_reading": "⿰女𠂔 via 𠂔=⿹⿻⿱一㇉丨丿",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-59ec",
+  "char": "姬",
+  "kind": "opaque",
+  "our_parts": [
+   "女",
+   "woman, girl",
+   "𦣞"
+  ],
+  "opaque_children": "𦣞",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5a63",
+  "char": "婣",
+  "kind": "overlay",
+  "our_parts": [
+   "女",
+   "woman, girl",
+   "𣶒"
+  ],
+  "cjkvi_reading": "⿰女𣶒 via 𣶒=⿴⿰片爿一",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5aab",
+  "char": "媫",
+  "kind": "overlay",
+  "our_parts": [
+   "女",
+   "woman, girl",
+   "一",
+   "one",
+   "龰",
+   "龰"
+  ],
+  "cjkvi_reading": "⿰女⿳⺊⿻コ一龰",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5ab1",
+  "char": "媱",
+  "kind": "overlay",
+  "our_parts": [
+   "女",
+   "woman, girl",
+   "䍃"
+  ],
+  "cjkvi_reading": "⿰女䍃 via 䍃=⿱⿴𠂊冫缶",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5ae8",
+  "char": "嫨",
+  "kind": "overlay",
+  "our_parts": [
+   "女",
+   "woman, girl",
+   "廿",
+   "twenty, twentieth",
+   "口",
+   "mouth",
+   "夫",
+   "man, male adult, husband"
+  ],
+  "cjkvi_reading": "⿰女⿱廿⿻口夫",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5b0a",
+  "char": "嬊",
+  "kind": "overlay",
+  "our_parts": [
+   "廿",
+   "twenty, twentieth",
+   "北",
+   "north",
+   "口",
+   "mouth",
+   "女",
+   "woman, girl"
+  ],
+  "cjkvi_reading": "⿳廿⿴北口女",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5b98",
+  "char": "官",
+  "kind": "opaque",
+  "our_parts": [
+   "宀",
+   "primitive_roof",
+   "roof",
+   "㠯"
+  ],
+  "opaque_children": "㠯",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5ba7",
+  "char": "宧",
+  "kind": "opaque",
+  "our_parts": [
+   "宀",
+   "primitive_roof",
+   "roof",
+   "𦣞"
+  ],
+  "opaque_children": "𦣞",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5bbb",
+  "char": "宻",
+  "kind": "overlay",
+  "our_parts": [
+   "宀",
+   "primitive_roof",
+   "roof",
+   "又",
+   "and, also, again, in addition",
+   "丷",
+   "“ears-out” component used in some chinese characters (for example, 兑)",
+   "山",
+   "mountain, hill, peak"
+  ],
+  "cjkvi_reading": "⿳宀⿻又丷山",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5c02",
+  "char": "専",
+  "kind": "overlay",
+  "our_parts": [
+   "𤰔",
+   "寸",
+   "inch"
+  ],
+  "cjkvi_reading": "⿱𤰔寸 via 𤰔=⿻一由",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5c07",
+  "char": "將",
+  "kind": "overlay",
+  "our_parts": [
+   "爿",
+   "half of tree trunk",
+   "𠂊",
+   "冫",
+   "ice",
+   "寸",
+   "inch"
+  ],
+  "cjkvi_reading": "⿰爿⿱⿴𠂊冫寸",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5c27",
+  "char": "尧",
+  "kind": "overlay",
+  "our_parts": [
+   "𭠍",
+   "兀",
+   "to cut off the feet"
+  ],
+  "cjkvi_reading": "⿱𭠍兀 via 𭠍=⿻𫠠丿",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5c39",
+  "char": "尹",
+  "kind": "overlay",
+  "our_parts": [
+   "一",
+   "one",
+   "丿",
+   "line"
+  ],
+  "cjkvi_reading": "⿻⿻コ一丿",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5c55",
+  "char": "展",
+  "kind": "opaque",
+  "our_parts": [
+   "尸",
+   "龷",
+   "龷",
+   "𠄌",
+   "乀",
+   "stretch",
+   "丿",
+   "line"
+  ],
+  "opaque_children": "𠄌",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5c6c",
+  "char": "屬",
+  "kind": "overlay",
+  "our_parts": [
+   "尸",
+   "丨",
+   "(same as 〡 hangzhou numeral one) number one",
+   "丷",
+   "“ears-out” component used in some chinese characters (for example, 兑)",
+   "八",
+   "eight",
+   "蜀",
+   "one of the three kingdoms, established by liu bei"
+  ],
+  "cjkvi_reading": "⿸尸⿱⿻丨⿱丷八蜀",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5c6e",
+  "char": "屮",
+  "kind": "overlay",
+  "our_parts": [
+   "凵",
+   "receptacle",
+   "丨",
+   "(same as 〡 hangzhou numeral one) number one"
+  ],
+  "cjkvi_reading": "⿻凵丨",
+  "cjkvi_tags": "GTK",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5c6f",
+  "char": "屯",
+  "kind": "overlay",
+  "our_parts": [
+   "丿",
+   "line",
+   "𡳾"
+  ],
+  "cjkvi_reading": "⿻丿𡳾",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5cc4",
+  "char": "峄",
+  "kind": "overlay",
+  "our_parts": [
+   "山",
+   "mountain, hill, peak",
+   "𠬤"
+  ],
+  "cjkvi_reading": "⿰山𠬤 via 𠬤=⿱又⿻二丨",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5d57",
+  "char": "嵗",
+  "kind": "opaque",
+  "our_parts": [
+   "山",
+   "mountain, hill, peak",
+   "戌",
+   "eleventh earthly branch",
+   "𣥂"
+  ],
+  "opaque_children": "𣥂",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5ddb",
+  "char": "巛",
+  "kind": "opaque",
+  "our_parts": [
+   "𡿨",
+   "𡿨",
+   "𡿨"
+  ],
+  "opaque_children": "𡿨",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5ddc",
+  "char": "巜",
+  "kind": "opaque",
+  "our_parts": [
+   "𡿨",
+   "𡿨"
+  ],
+  "opaque_children": "𡿨",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5ddf",
+  "char": "巟",
+  "kind": "overlay",
+  "our_parts": [
+   "亡",
+   "death, destroyed",
+   "𫶧"
+  ],
+  "cjkvi_reading": "⿱亡𫶧 via 𫶧=⿴儿丨",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5dea",
+  "char": "巪",
+  "kind": "opaque",
+  "our_parts": [
+   "巨",
+   "large, great, enormous",
+   "𠃍"
+  ],
+  "opaque_children": "𠃍",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5deb",
+  "char": "巫",
+  "kind": "overlay",
+  "our_parts": [
+   "工",
+   "labor, work",
+   "从"
+  ],
+  "cjkvi_reading": "⿻工从",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5df8",
+  "char": "巸",
+  "kind": "opaque",
+  "our_parts": [
+   "𦣞",
+   "巳",
+   "sixth earthly branch"
+  ],
+  "opaque_children": "𦣞",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5dff",
+  "char": "巿",
+  "kind": "overlay",
+  "our_parts": [
+   "一",
+   "one",
+   "巾",
+   "kerchief"
+  ],
+  "cjkvi_reading": "⿻一巾",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5e07",
+  "char": "帇",
+  "kind": "overlay",
+  "our_parts": [
+   "一",
+   "one",
+   "巾",
+   "kerchief"
+  ],
+  "cjkvi_reading": "⿻⿻コ一巾",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5e1a",
+  "char": "帚",
+  "kind": "overlay",
+  "our_parts": [
+   "彐",
+   "snout",
+   "冖",
+   "cover",
+   "巾",
+   "kerchief"
+  ],
+  "cjkvi_reading": "⿳⿻コ一冖巾",
+  "cjkvi_tags": "HTJK",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5e73",
+  "char": "平",
+  "kind": "overlay",
+  "our_parts": [
+   "干",
+   "dry",
+   "丷",
+   "“ears-out” component used in some chinese characters (for example, 兑)"
+  ],
+  "cjkvi_reading": "⿻干丷",
+  "cjkvi_tags": "GTJV",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5e7d",
+  "char": "幽",
+  "kind": "overlay",
+  "our_parts": [
+   "山",
+   "mountain, hill, peak",
+   "𢆶"
+  ],
+  "cjkvi_reading": "⿻山𢆶",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5e7e",
+  "char": "幾",
+  "kind": "overlay",
+  "our_parts": [
+   "戈",
+   "halberd, spear, lance",
+   "𢆶",
+   "人",
+   "man"
+  ],
+  "cjkvi_reading": "⿹⿻戈𢆶人",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5e9a",
+  "char": "庚",
+  "kind": "overlay",
+  "our_parts": [
+   "广",
+   "一",
+   "one",
+   "人",
+   "man"
+  ],
+  "cjkvi_reading": "⿸广⿻⿻コ一人",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5eb8",
+  "char": "庸",
+  "kind": "overlay",
+  "our_parts": [
+   "广",
+   "𬎾"
+  ],
+  "cjkvi_reading": "⿸广𬎾 via 𬎾=⿻肀月",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5ecc",
+  "char": "廌",
+  "kind": "overlay",
+  "our_parts": [
+   "广",
+   "丨",
+   "(same as 〡 hangzhou numeral one) number one",
+   "丨",
+   "(same as 〡 hangzhou numeral one) number one",
+   "灬",
+   "fire"
+  ],
+  "cjkvi_reading": "⿸⿸广⿻コ⿰丨丨⿹②灬",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5efe",
+  "char": "廾",
+  "kind": "overlay",
+  "our_parts": [
+   "一",
+   "one",
+   "丿",
+   "line",
+   "丨",
+   "(same as 〡 hangzhou numeral one) number one"
+  ],
+  "cjkvi_reading": "⿻一⿰丿丨",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5f0b",
+  "char": "弋",
+  "kind": "overlay",
+  "our_parts": [
+   "𫠠",
+   "丶",
+   "dot"
+  ],
+  "cjkvi_reading": "⿺𫠠丶 via 𫠠=⿻一乚",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5f10",
+  "char": "弐",
+  "kind": "overlay",
+  "our_parts": [
+   "弍",
+   "number two",
+   "一",
+   "one"
+  ],
+  "cjkvi_reading": "⿻弍一",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5f14",
+  "char": "弔",
+  "kind": "overlay",
+  "our_parts": [
+   "弓",
+   "bow",
+   "丨",
+   "(same as 〡 hangzhou numeral one) number one"
+  ],
+  "cjkvi_reading": "⿻弓丨",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5f17",
+  "char": "弗",
+  "kind": "overlay",
+  "our_parts": [
+   "弓",
+   "bow",
+   "丿",
+   "line",
+   "丨",
+   "(same as 〡 hangzhou numeral one) number one"
+  ],
+  "cjkvi_reading": "⿻弓⿰丿丨",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5f2c",
+  "char": "弬",
+  "kind": "opaque",
+  "our_parts": [
+   "弓",
+   "bow",
+   "𦣝"
+  ],
+  "opaque_children": "𦣝",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5f3b",
+  "char": "弻",
+  "kind": "opaque",
+  "our_parts": [
+   "弓",
+   "bow",
+   "㐁",
+   "弓",
+   "bow"
+  ],
+  "opaque_children": "㐁",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5f56",
+  "char": "彖",
+  "kind": "opaque",
+  "our_parts": [
+   "彑",
+   "snout",
+   "𧰨"
+  ],
+  "opaque_children": "𧰨",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5f57",
+  "char": "彗",
+  "kind": "overlay",
+  "our_parts": [
+   "丰",
+   "丰",
+   "彐",
+   "snout"
+  ],
+  "cjkvi_reading": "⿱⿰丰丰⿻コ一",
+  "cjkvi_tags": "HTJKV",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5f5b",
+  "char": "彛",
+  "kind": "overlay",
+  "our_parts": [
+   "彐",
+   "snout",
+   "𪪷"
+  ],
+  "cjkvi_reading": "⿱⿻コ一𪪷",
+  "cjkvi_tags": "TJK",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5f67",
+  "char": "彧",
+  "kind": "overlay",
+  "our_parts": [
+   "或",
+   "or, either, else",
+   "丿",
+   "line",
+   "丿",
+   "line"
+  ],
+  "cjkvi_reading": "⿻或⿱丿丿",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5fad",
+  "char": "徭",
+  "kind": "overlay",
+  "our_parts": [
+   "彳",
+   "step with left foot",
+   "䍃"
+  ],
+  "cjkvi_reading": "⿰彳䍃 via 䍃=⿱⿴𠂊冫缶",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-5fc5",
+  "char": "必",
+  "kind": "overlay",
+  "our_parts": [
+   "心",
+   "heart",
+   "丿",
+   "line"
+  ],
+  "cjkvi_reading": "⿻心丿",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-603f",
+  "char": "怿",
+  "kind": "overlay",
+  "our_parts": [
+   "忄",
+   "heart",
+   "𠬤"
+  ],
+  "cjkvi_reading": "⿰忄𠬤 via 𠬤=⿱又⿻二丨",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-6075",
+  "char": "恵",
+  "kind": "overlay",
+  "our_parts": [
+   "𤰔",
+   "心",
+   "heart"
+  ],
+  "cjkvi_reading": "⿱𤰔心 via 𤰔=⿻一由",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-612e",
+  "char": "愮",
+  "kind": "overlay",
+  "our_parts": [
+   "忄",
+   "heart",
+   "䍃"
+  ],
+  "cjkvi_reading": "⿰忄䍃 via 䍃=⿱⿴𠂊冫缶",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-6172",
+  "char": "慲",
+  "kind": "overlay",
+  "our_parts": [
+   "忄",
+   "heart",
+   "㒼"
+  ],
+  "cjkvi_reading": "⿰忄㒼 via 㒼=⿱廿⿻巾𠓜",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-6176",
+  "char": "慶",
+  "kind": "overlay",
+  "our_parts": [
+   "广",
+   "丨",
+   "(same as 〡 hangzhou numeral one) number one",
+   "丨",
+   "(same as 〡 hangzhou numeral one) number one",
+   "乛",
+   "kwukyel",
+   "𢖻"
+  ],
+  "cjkvi_reading": "⿸⿸广⿻コ⿰丨丨⿱乛𢖻",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-6208",
+  "char": "戈",
+  "kind": "overlay",
+  "our_parts": [
+   "弋",
+   "catch, arrest",
+   "丿",
+   "line"
+  ],
+  "cjkvi_reading": "⿻弋丿",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-620b",
+  "char": "戋",
+  "kind": "overlay",
+  "our_parts": [
+   "戈",
+   "halberd, spear, lance",
+   "一",
+   "one"
+  ],
+  "cjkvi_reading": "⿻戈一",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-6265",
+  "char": "扥",
+  "kind": "overlay",
+  "our_parts": [
+   "扌",
+   "hand",
+   "丿",
+   "line",
+   "七",
+   "seven"
+  ],
+  "cjkvi_reading": "⿰扌⿻丿七",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-626c",
+  "char": "扬",
+  "kind": "opaque",
+  "our_parts": [
+   "扌",
+   "hand",
+   "𠃓"
+  ],
+  "opaque_children": "𠃓",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-62e3",
+  "char": "拣",
+  "kind": "opaque",
+  "our_parts": [
+   "扌",
+   "hand",
+   "𫠣"
+  ],
+  "opaque_children": "𫠣",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-62e9",
+  "char": "择",
+  "kind": "overlay",
+  "our_parts": [
+   "扌",
+   "hand",
+   "𠬤"
+  ],
+  "cjkvi_reading": "⿰扌𠬤 via 𠬤=⿱又⿻二丨",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-633f",
+  "char": "挿",
+  "kind": "overlay",
+  "our_parts": [
+   "扌",
+   "hand",
+   "𢆍"
+  ],
+  "cjkvi_reading": "⿰扌𢆍 via 𢆍=⿻千日",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-63f7",
+  "char": "揷",
+  "kind": "overlay",
+  "our_parts": [
+   "扌",
+   "hand",
+   "𢆍"
+  ],
+  "cjkvi_reading": "⿰扌𢆍 via 𢆍=⿻千日",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-6416",
+  "char": "搖",
+  "kind": "overlay",
+  "our_parts": [
+   "扌",
+   "hand",
+   "䍃"
+  ],
+  "cjkvi_reading": "⿰扌䍃 via 䍃=⿱⿴𠂊冫缶",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-6447",
+  "char": "摇",
+  "kind": "overlay",
+  "our_parts": [
+   "扌",
+   "hand",
+   "䍃"
+  ],
+  "cjkvi_reading": "⿰扌䍃 via 䍃=⿱⿴𠂊冫缶",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-6556",
+  "char": "敖",
+  "kind": "overlay",
+  "our_parts": [
+   "𫠤",
+   "攵",
+   "rap, tap"
+  ],
+  "cjkvi_reading": "⿰𫠤攵 via 𫠤=⿱⿻二丨万",
+  "cjkvi_tags": "G",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-655d",
+  "char": "敝",
+  "kind": "overlay",
+  "our_parts": [
+   "㡀",
+   "攵",
+   "rap, tap"
+  ],
+  "cjkvi_reading": "⿰㡀攵 via 㡀=⿻丷⿻巾八",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-6577",
+  "char": "敷",
+  "kind": "overlay",
+  "our_parts": [
+   "旉",
+   "to state to, to announce",
+   "攵",
+   "rap, tap"
+  ],
+  "cjkvi_reading": "⿰⿱⿺𤰔丶方攵 via 𤰔=⿻一由",
+  "cjkvi_tags": "J",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-65a4",
+  "char": "斤",
+  "kind": "opaque",
+  "our_parts": [
+   "𠂆",
+   "丅",
+   "under, underneath, below"
+  ],
+  "opaque_children": "𠂆",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-65a5",
+  "char": "斥",
+  "kind": "overlay",
+  "our_parts": [
+   "斤",
+   "a catty (approximately 600 g)",
+   "丶",
+   "dot"
+  ],
+  "cjkvi_reading": "⿻斤丶",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-65b2",
+  "char": "斲",
+  "kind": "opaque",
+  "our_parts": [
+   "𠁁",
+   "斤",
+   "a catty (approximately 600 g)"
+  ],
+  "opaque_children": "𠁁",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-65f8",
+  "char": "旸",
+  "kind": "opaque",
+  "our_parts": [
+   "日",
+   "sun",
+   "𠃓"
+  ],
+  "opaque_children": "𠃓",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-661a",
+  "char": "昚",
+  "kind": "overlay",
+  "our_parts": [
+   "𡗜",
+   "日",
+   "sun"
+  ],
+  "cjkvi_reading": "⿱𡗜日 via 𡗜=⿻大丷",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-665d",
+  "char": "晝",
+  "kind": "overlay",
+  "our_parts": [
+   "𦘒",
+   "一",
+   "one",
+   "旦",
+   "dawn"
+  ],
+  "cjkvi_reading": "⿱⿱𦘒一旦 via 𦘒=⿻肀一",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-669a",
+  "char": "暚",
+  "kind": "overlay",
+  "our_parts": [
+   "日",
+   "sun",
+   "䍃"
+  ],
+  "cjkvi_reading": "⿰日䍃 via 䍃=⿱⿴𠂊冫缶",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-66aa",
+  "char": "暪",
+  "kind": "overlay",
+  "our_parts": [
+   "日",
+   "sun",
+   "㒼"
+  ],
+  "cjkvi_reading": "⿰日㒼 via 㒼=⿱廿⿻巾𠓜",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-66b5",
+  "char": "暵",
+  "kind": "overlay",
+  "our_parts": [
+   "日",
+   "sun",
+   "廿",
+   "twenty, twentieth",
+   "口",
+   "mouth",
+   "夫",
+   "man, male adult, husband"
+  ],
+  "cjkvi_reading": "⿰日⿱廿⿻口夫",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-66f4",
+  "char": "更",
+  "kind": "overlay",
+  "our_parts": [
+   "一",
+   "one",
+   "日",
+   "sun",
+   "乂",
+   "govern, control, manage"
+  ],
+  "cjkvi_reading": "⿱一⿻日乂",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-66f8",
+  "char": "書",
+  "kind": "overlay",
+  "our_parts": [
+   "𦘒",
+   "一",
+   "one",
+   "日",
+   "sun"
+  ],
+  "cjkvi_reading": "⿱⿱𦘒一日 via 𦘒=⿻肀一",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-66f9",
+  "char": "曹",
+  "kind": "overlay",
+  "our_parts": [
+   "一",
+   "one",
+   "曲",
+   "bend",
+   "日",
+   "sun"
+  ],
+  "cjkvi_reading": "⿱⿻一曲日",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-66fa",
+  "char": "曺",
+  "kind": "overlay",
+  "our_parts": [
+   "𤰔",
+   "日",
+   "sun"
+  ],
+  "cjkvi_reading": "⿱𤰔日 via 𤰔=⿻一由",
+  "cjkvi_tags": "GJK",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-66fe",
+  "char": "曾",
+  "kind": "overlay",
+  "our_parts": [
+   "丷",
+   "“ears-out” component used in some chinese characters (for example, 兑)",
+   "𭥴"
+  ],
+  "cjkvi_reading": "⿱丷𭥴 via 𭥴=⿱⿴囗⺌日",
+  "cjkvi_tags": "GTV",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-6703",
+  "char": "會",
+  "kind": "overlay",
+  "our_parts": [
+   "亼",
+   "to assemble. to gather together",
+   "𭥴"
+  ],
+  "cjkvi_reading": "⿱亼𭥴 via 𭥴=⿱⿴囗⺌日",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-671b",
+  "char": "望",
+  "kind": "overlay",
+  "our_parts": [
+   "亡",
+   "death, destroyed",
+   "月",
+   "moon",
+   "王",
+   "king, ruler"
+  ],
+  "cjkvi_reading": "⿱⿰亡⿴𠂊⺀𡈼",
+  "cjkvi_tags": "TV",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-672e",
+  "char": "朮",
+  "kind": "opaque",
+  "our_parts": [
+   "𣎳",
+   "丶",
+   "dot"
+  ],
+  "opaque_children": "𣎳",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-6768",
+  "char": "杨",
+  "kind": "opaque",
+  "our_parts": [
+   "木",
+   "tree",
+   "𠃓"
+  ],
+  "opaque_children": "𠃓",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-679c",
+  "char": "果",
+  "kind": "overlay",
+  "our_parts": [
+   "日",
+   "sun",
+   "木",
+   "tree"
+  ],
+  "cjkvi_reading": "⿻日木",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-67f9",
+  "char": "柹",
+  "kind": "overlay",
+  "our_parts": [
+   "木",
+   "tree",
+   "𠂔"
+  ],
+  "cjkvi_reading": "⿰木𠂔 via 𠂔=⿹⿻⿱一㇉丨丿",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-6803",
+  "char": "栃",
+  "kind": "opaque",
+  "our_parts": [
+   "木",
+   "tree",
+   "𠂆",
+   "万",
+   "ten thousand"
+  ],
+  "opaque_children": "𠂆",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-6806",
+  "char": "栆",
+  "kind": "overlay",
+  "our_parts": [
+   "大",
+   "big, great, vast, large, high",
+   "口",
+   "mouth"
+  ],
+  "cjkvi_reading": "⿱⿻大口⺀",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-68c4",
+  "char": "棄",
+  "kind": "overlay",
+  "our_parts": [
+   "𠫓",
+   "廿",
+   "twenty, twentieth",
+   "木",
+   "tree"
+  ],
+  "cjkvi_reading": "⿱𠫓⿻廿木",
+  "cjkvi_tags": "GHT",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-68e9",
+  "char": "棩",
+  "kind": "overlay",
+  "our_parts": [
+   "木",
+   "tree",
+   "𣶒"
+  ],
+  "cjkvi_reading": "⿰木𣶒 via 𣶒=⿴⿰片爿一",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-697d",
+  "char": "楽",
+  "kind": "overlay",
+  "our_parts": [
+   "丷",
+   "“ears-out” component used in some chinese characters (for example, 兑)",
+   "八",
+   "eight",
+   "白",
+   "white",
+   "木",
+   "tree"
+  ],
+  "cjkvi_reading": "⿱⿴⿱丷八白木",
+  "cjkvi_tags": "GJK",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-69a3",
+  "char": "榣",
+  "kind": "overlay",
+  "our_parts": [
+   "木",
+   "tree",
+   "䍃"
+  ],
+  "cjkvi_reading": "⿰木䍃 via 䍃=⿱⿴𠂊冫缶",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-6a20",
+  "char": "樠",
+  "kind": "overlay",
+  "our_parts": [
+   "木",
+   "tree",
+   "㒼"
+  ],
+  "cjkvi_reading": "⿰木㒼 via 㒼=⿱廿⿻巾𠓜",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-6a50",
+  "char": "橐",
+  "kind": "overlay",
+  "our_parts": [
+   "一",
+   "one",
+   "中",
+   "central",
+   "冖",
+   "cover",
+   "䂞"
+  ],
+  "cjkvi_reading": "⿳⿻一中冖䂞",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-6a83",
+  "char": "檃",
+  "kind": "overlay",
+  "our_parts": [
+   "阝",
+   "place",
+   "𤔌",
+   "木",
+   "tree"
+  ],
+  "cjkvi_reading": "⿱⿰阝𤔌木 via 𤔌=⿳爫工⿻コ一",
+  "cjkvi_tags": "GJK",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-6adc",
+  "char": "櫜",
+  "kind": "overlay",
+  "our_parts": [
+   "一",
+   "one",
+   "中",
+   "central",
+   "冖",
+   "cover",
+   "咎",
+   "fault, defect",
+   "木",
+   "tree"
+  ],
+  "cjkvi_reading": "⿱⿳⿻一中冖咎木",
+  "cjkvi_tags": "GJK",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-6b2b",
+  "char": "欫",
+  "kind": "overlay",
+  "our_parts": [
+   "𦈢",
+   "欠",
+   "owe, lack, be deficient"
+  ],
+  "cjkvi_reading": "⿰𦈢欠 via 𦈢=⿱𠂉⿻一③",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-6b4e",
+  "char": "歎",
+  "kind": "overlay",
+  "our_parts": [
+   "廿",
+   "twenty, twentieth",
+   "口",
+   "mouth",
+   "夫",
+   "man, male adult, husband",
+   "欠",
+   "owe, lack, be deficient"
+  ],
+  "cjkvi_reading": "⿰⿱廿⿻口夫欠",
+  "cjkvi_tags": "GTKV",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-6b65",
+  "char": "步",
+  "kind": "opaque",
+  "our_parts": [
+   "止",
+   "stop, halt, desist",
+   "𣥂"
+  ],
+  "opaque_children": "𣥂",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-6b72",
+  "char": "歲",
+  "kind": "opaque",
+  "our_parts": [
+   "止",
+   "stop, halt, desist",
+   "戌",
+   "eleventh earthly branch",
+   "𣥂"
+  ],
+  "opaque_children": "𣥂",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-6b87",
+  "char": "殇",
+  "kind": "opaque",
+  "our_parts": [
+   "歹",
+   "bad, vicious, depraved, wicked",
+   "𠂉",
+   "𠃓"
+  ],
+  "opaque_children": "𠃓",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-6bb3",
+  "char": "殳",
+  "kind": "opaque",
+  "our_parts": [
+   "𠘧",
+   "又",
+   "and, also, again, in addition"
+  ],
+  "opaque_children": "𠘧",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-6bb7",
+  "char": "殷",
+  "kind": "opaque",
+  "our_parts": [
+   "㐆",
+   "殳",
+   "name of old weapon"
+  ],
+  "opaque_children": "㐆",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-6bdb",
+  "char": "毛",
+  "kind": "overlay",
+  "our_parts": [
+   "丿",
+   "line",
+   "二",
+   "two",
+   "乚",
+   "hidden, mysterious, secret"
+  ],
+  "cjkvi_reading": "⿱丿⿻二乚",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-6c37",
+  "char": "氷",
+  "kind": "overlay",
+  "our_parts": [
+   "水",
+   "water, liquid, lotion, juice",
+   "丶",
+   "dot"
+  ],
+  "cjkvi_reading": "⿻水丶",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-6c3a",
+  "char": "氺",
+  "kind": "overlay",
+  "our_parts": [
+   "亅",
+   "hook",
+   "丷",
+   "“ears-out” component used in some chinese characters (for example, 兑)",
+   "八",
+   "eight"
+  ],
+  "cjkvi_reading": "⿻亅⿱丷八",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-6c42",
+  "char": "求",
+  "kind": "overlay",
+  "our_parts": [
+   "一",
+   "one",
+   "氺",
+   "氺",
+   "丶",
+   "dot"
+  ],
+  "cjkvi_reading": "⿺⿻一氺丶",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-6c64",
+  "char": "汤",
+  "kind": "opaque",
+  "our_parts": [
+   "氵",
+   "water",
+   "𠃓"
+  ],
+  "opaque_children": "𠃓",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-6cf2",
+  "char": "泲",
+  "kind": "overlay",
+  "our_parts": [
+   "氵",
+   "water",
+   "𠂔"
+  ],
+  "cjkvi_reading": "⿰氵𠂔 via 𠂔=⿹⿻⿱一㇉丨丿",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-6cfd",
+  "char": "泽",
+  "kind": "overlay",
+  "our_parts": [
+   "氵",
+   "water",
+   "𠬤"
+  ],
+  "cjkvi_reading": "⿰氵𠬤 via 𠬤=⿱又⿻二丨",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-6d0d",
+  "char": "洍",
+  "kind": "opaque",
+  "our_parts": [
+   "氵",
+   "water",
+   "𦣞"
+  ],
+  "opaque_children": "𦣞",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-6df5",
+  "char": "淵",
+  "kind": "overlay",
+  "our_parts": [
+   "氵",
+   "water",
+   "𣶒"
+  ],
+  "cjkvi_reading": "⿰氵𣶒 via 𣶒=⿴⿰片爿一",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-6e84",
+  "char": "溄",
+  "kind": "overlay",
+  "our_parts": [
+   "氵",
+   "water",
+   "山",
+   "mountain, hill, peak",
+   "𡕖"
+  ],
+  "cjkvi_reading": "⿰氵⿱山𡕖 via 𡕖=⿱夂⿻二丨",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-6edb",
+  "char": "滛",
+  "kind": "overlay",
+  "our_parts": [
+   "氵",
+   "water",
+   "䍃"
+  ],
+  "cjkvi_reading": "⿰氵䍃 via 䍃=⿱⿴𠂊冫缶",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-6eff",
+  "char": "滿",
+  "kind": "overlay",
+  "our_parts": [
+   "氵",
+   "water",
+   "㒼"
+  ],
+  "cjkvi_reading": "⿰氵㒼 via 㒼=⿱廿⿻巾𠓜",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-6f22",
+  "char": "漢",
+  "kind": "overlay",
+  "our_parts": [
+   "氵",
+   "water",
+   "廿",
+   "twenty, twentieth",
+   "口",
+   "mouth",
+   "夫",
+   "man, male adult, husband"
+  ],
+  "cjkvi_reading": "⿰氵⿱廿⿻口夫",
+  "cjkvi_tags": "GTKV",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-7075",
+  "char": "灵",
+  "kind": "overlay",
+  "our_parts": [
+   "彐",
+   "snout",
+   "火",
+   "fire, flame"
+  ],
+  "cjkvi_reading": "⿱⿻コ一火",
+  "cjkvi_tags": "HTJK",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-7080",
+  "char": "炀",
+  "kind": "opaque",
+  "our_parts": [
+   "火",
+   "fire, flame",
+   "𠃓"
+  ],
+  "opaque_children": "𠃓",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-7099",
+  "char": "炙",
+  "kind": "overlay",
+  "our_parts": [
+   "𠂊",
+   "火",
+   "fire, flame"
+  ],
+  "cjkvi_reading": "⿱⿴𠂊⺀火",
+  "cjkvi_tags": "GJK",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-70bc",
+  "char": "炼",
+  "kind": "opaque",
+  "our_parts": [
+   "火",
+   "fire, flame",
+   "𫠣"
+  ],
+  "opaque_children": "𫠣",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-70bf",
+  "char": "炿",
+  "kind": "overlay",
+  "our_parts": [
+   "火",
+   "fire, flame",
+   "𠔾",
+   "丶",
+   "dot"
+  ],
+  "cjkvi_reading": "⿰火⿴𠔾丶",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-710f",
+  "char": "焏",
+  "kind": "overlay",
+  "our_parts": [
+   "了",
+   "complete",
+   "叹",
+   "sigh, admire",
+   "灬",
+   "fire"
+  ],
+  "cjkvi_reading": "⿱⿻了叹灬",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-7136",
+  "char": "然",
+  "kind": "overlay",
+  "our_parts": [
+   "𠂊",
+   "冫",
+   "ice",
+   "犬",
+   "dog",
+   "灬",
+   "fire"
+  ],
+  "cjkvi_reading": "⿱⿰⿴𠂊冫犬灬",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-718e",
+  "char": "熎",
+  "kind": "overlay",
+  "our_parts": [
+   "火",
+   "fire, flame",
+   "䍃"
+  ],
+  "cjkvi_reading": "⿰火䍃 via 䍃=⿱⿴𠂊冫缶",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-71af",
+  "char": "熯",
+  "kind": "overlay",
+  "our_parts": [
+   "火",
+   "fire, flame",
+   "廿",
+   "twenty, twentieth",
+   "口",
+   "mouth",
+   "夫",
+   "man, male adult, husband"
+  ],
+  "cjkvi_reading": "⿰火⿱廿⿻口夫",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-71d5",
+  "char": "燕",
+  "kind": "overlay",
+  "our_parts": [
+   "廿",
+   "twenty, twentieth",
+   "北",
+   "north",
+   "口",
+   "mouth",
+   "灬",
+   "fire"
+  ],
+  "cjkvi_reading": "⿳廿⿴北口灬",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-722d",
+  "char": "爭",
+  "kind": "overlay",
+  "our_parts": [
+   "爫",
+   "radical 87",
+   "一",
+   "one",
+   "亅",
+   "hook"
+  ],
+  "cjkvi_reading": "⿱爫⿻⿻コ一亅",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-723d",
+  "char": "爽",
+  "kind": "overlay",
+  "our_parts": [
+   "大",
+   "big, great, vast, large, high",
+   "㸚"
+  ],
+  "cjkvi_reading": "⿻大㸚",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-723e",
+  "char": "爾",
+  "kind": "overlay",
+  "our_parts": [
+   "一",
+   "one",
+   "八",
+   "eight",
+   "巾",
+   "kerchief",
+   "㸚"
+  ],
+  "cjkvi_reading": "⿱一⿱八⿻巾㸚",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-726c",
+  "char": "牬",
+  "kind": "overlay",
+  "our_parts": [
+   "牛",
+   "cow, ox, bull",
+   "𠂔"
+  ],
+  "cjkvi_reading": "⿰牛𠂔 via 𠂔=⿹⿻⿱一㇉丨丿",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-727d",
+  "char": "牽",
+  "kind": "overlay",
+  "our_parts": [
+   "亠",
+   "head",
+   "幺",
+   "one",
+   "冖",
+   "cover",
+   "牛",
+   "cow, ox, bull"
+  ],
+  "cjkvi_reading": "⿱⿱亠⿻幺冖牛",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-7280",
+  "char": "犀",
+  "kind": "overlay",
+  "our_parts": [
+   "尸",
+   "丨",
+   "(same as 〡 hangzhou numeral one) number one",
+   "丷",
+   "“ears-out” component used in some chinese characters (for example, 兑)",
+   "八",
+   "eight",
+   "牛",
+   "cow, ox, bull"
+  ],
+  "cjkvi_reading": "⿸尸⿱⿻丨⿱丷八牛",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-72ae",
+  "char": "犮",
+  "kind": "overlay",
+  "our_parts": [
+   "友",
+   "friend, companion",
+   "丶",
+   "dot"
+  ],
+  "cjkvi_reading": "⿻犬丿",
+  "cjkvi_tags": "TJK",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-72e6",
+  "char": "狦",
+  "kind": "overlay",
+  "our_parts": [
+   "犭",
+   "dog",
+   "𠕋"
+  ],
+  "cjkvi_reading": "⿰犭𠕋 via 𠕋=⿻𦉫二",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-733a",
+  "char": "猺",
+  "kind": "overlay",
+  "our_parts": [
+   "犭",
+   "dog",
+   "䍃"
+  ],
+  "cjkvi_reading": "⿰犭䍃 via 䍃=⿱⿴𠂊冫缶",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-7387",
+  "char": "率",
+  "kind": "overlay",
+  "our_parts": [
+   "玄",
+   "deep, profound, abstruse",
+   "丷",
+   "“ears-out” component used in some chinese characters (for example, 兑)",
+   "八",
+   "eight",
+   "十",
+   "ten, tenth"
+  ],
+  "cjkvi_reading": "⿱⿻玄⿱丷八十",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-739a",
+  "char": "玚",
+  "kind": "opaque",
+  "our_parts": [
+   "王",
+   "king, ruler",
+   "𠃓"
+  ],
+  "opaque_children": "𠃓",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-7464",
+  "char": "瑤",
+  "kind": "overlay",
+  "our_parts": [
+   "王",
+   "king, ruler",
+   "䍃"
+  ],
+  "cjkvi_reading": "⿰王䍃 via 䍃=⿱⿴𠂊冫缶",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-7476",
+  "char": "瑶",
+  "kind": "overlay",
+  "our_parts": [
+   "王",
+   "king, ruler",
+   "䍃"
+  ],
+  "cjkvi_reading": "⿰王䍃 via 䍃=⿱⿴𠂊冫缶",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-748a",
+  "char": "璊",
+  "kind": "overlay",
+  "our_parts": [
+   "王",
+   "king, ruler",
+   "㒼"
+  ],
+  "cjkvi_reading": "⿰王㒼 via 㒼=⿱廿⿻巾𠓜",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-750d",
+  "char": "甍",
+  "kind": "opaque",
+  "our_parts": [
+   "艹",
+   "罒",
+   "radical 122",
+   "冖",
+   "cover",
+   "瓦",
+   "tile"
+  ],
+  "opaque_children": "艹",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-7528",
+  "char": "用",
+  "kind": "overlay",
+  "our_parts": [
+   "冂",
+   "wide",
+   "二",
+   "two",
+   "丨",
+   "(same as 〡 hangzhou numeral one) number one"
+  ],
+  "cjkvi_reading": "⿵冂⿻二丨",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-7529",
+  "char": "甩",
+  "kind": "overlay",
+  "our_parts": [
+   "冂",
+   "wide",
+   "二",
+   "two",
+   "乚",
+   "hidden, mysterious, secret"
+  ],
+  "cjkvi_reading": "⿵冂⿻二乚",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-752b",
+  "char": "甫",
+  "kind": "overlay",
+  "our_parts": [
+   "十",
+   "ten, tenth",
+   "月",
+   "moon",
+   "丶",
+   "dot"
+  ],
+  "cjkvi_reading": "⿺⿻十月丶",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-7534",
+  "char": "甴",
+  "kind": "overlay",
+  "our_parts": [
+   "口",
+   "mouth",
+   "丄",
+   "above"
+  ],
+  "cjkvi_reading": "⿻口丄",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-7535",
+  "char": "电",
+  "kind": "overlay",
+  "our_parts": [
+   "日",
+   "sun",
+   "乚",
+   "hidden, mysterious, secret"
+  ],
+  "cjkvi_reading": "⿻日乚",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-7545",
+  "char": "畅",
+  "kind": "opaque",
+  "our_parts": [
+   "申",
+   "to state to a superior, report",
+   "𠃓"
+  ],
+  "opaque_children": "𠃓",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-754f",
+  "char": "畏",
+  "kind": "opaque",
+  "our_parts": [
+   "田",
+   "field, arable land, cultivated",
+   "一",
+   "one",
+   "𠄌",
+   "乀",
+   "stretch",
+   "丿",
+   "line"
+  ],
+  "opaque_children": "𠄌",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-755e",
+  "char": "畞",
+  "kind": "overlay",
+  "our_parts": [
+   "十",
+   "ten, tenth",
+   "畂",
+   "畂"
+  ],
+  "cjkvi_reading": "⿻十畂",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-7562",
+  "char": "畢",
+  "kind": "overlay",
+  "our_parts": [
+   "一",
+   "one"
+  ],
+  "cjkvi_reading": "⿻⑨一",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-756b",
+  "char": "畫",
+  "kind": "overlay",
+  "our_parts": [
+   "𦘒",
+   "一",
+   "one",
+   "田",
+   "field, arable land, cultivated",
+   "一",
+   "one"
+  ],
+  "cjkvi_reading": "⿳⿱𦘒一田一 via 𦘒=⿻肀一",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-7575",
+  "char": "畵",
+  "kind": "overlay",
+  "our_parts": [
+   "𦘒",
+   "一",
+   "one",
+   "凵",
+   "receptacle",
+   "田",
+   "field, arable land, cultivated"
+  ],
+  "cjkvi_reading": "⿱⿱𦘒一⿶凵田 via 𦘒=⿻肀一",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-757f",
+  "char": "畿",
+  "kind": "overlay",
+  "our_parts": [
+   "戈",
+   "halberd, spear, lance",
+   "𢆶",
+   "田",
+   "field, arable land, cultivated"
+  ],
+  "cjkvi_reading": "⿹⿻戈𢆶田",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-758e",
+  "char": "疎",
+  "kind": "opaque",
+  "our_parts": [
+   "𤴔",
+   "束",
+   "bind, control, restrain"
+  ],
+  "opaque_children": "𤴔",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-758f",
+  "char": "疏",
+  "kind": "opaque",
+  "our_parts": [
+   "𤴔",
+   "㐬"
+  ],
+  "opaque_children": "𤴔",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-759f",
+  "char": "疟",
+  "kind": "overlay",
+  "our_parts": [
+   "疒",
+   "sick",
+   "匚",
+   "box",
+   "一",
+   "one"
+  ],
+  "cjkvi_reading": "⿸疒⿻匚一",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-75a1",
+  "char": "疡",
+  "kind": "opaque",
+  "our_parts": [
+   "疒",
+   "sick",
+   "𠃓"
+  ],
+  "opaque_children": "𠃓",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-767a",
+  "char": "発",
+  "kind": "overlay",
+  "our_parts": [
+   "癶",
+   "legs",
+   "二",
+   "two",
+   "儿"
+  ],
+  "cjkvi_reading": "⿱癶⿻二儿",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-7690",
+  "char": "皐",
+  "kind": "overlay",
+  "our_parts": [
+   "白",
+   "white",
+   "𠦂"
+  ],
+  "cjkvi_reading": "⿱白𠦂 via 𠦂=⿻十⿱丷八",
+  "cjkvi_tags": "G",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-76e5",
+  "char": "盥",
+  "kind": "overlay",
+  "our_parts": [
+   "𦥑",
+   "水",
+   "water, liquid, lotion, juice",
+   "皿",
+   "shallow container"
+  ],
+  "cjkvi_reading": "⿱⿴𦥑水皿",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-76f4",
+  "char": "直",
+  "kind": "overlay",
+  "our_parts": [
+   "十",
+   "ten, tenth",
+   "且",
+   "moreover, also (post-subject)",
+   "一",
+   "one"
+  ],
+  "cjkvi_reading": "⿱十⿴且一",
+  "cjkvi_tags": "GT",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-76fe",
+  "char": "盾",
+  "kind": "opaque",
+  "our_parts": [
+   "𠂆",
+   "𥃭"
+  ],
+  "opaque_children": "𠂆",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-7718",
+  "char": "眘",
+  "kind": "overlay",
+  "our_parts": [
+   "𡗜",
+   "目",
+   "eye"
+  ],
+  "cjkvi_reading": "⿱𡗜目 via 𡗜=⿻大丷",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-779e",
+  "char": "瞞",
+  "kind": "overlay",
+  "our_parts": [
+   "目",
+   "eye",
+   "㒼"
+  ],
+  "cjkvi_reading": "⿰目㒼 via 㒼=⿱廿⿻巾𠓜",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-7800",
+  "char": "砀",
+  "kind": "opaque",
+  "our_parts": [
+   "石",
+   "stone, rock, mineral",
+   "𠃓"
+  ],
+  "opaque_children": "𠃓",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-78d8",
+  "char": "磘",
+  "kind": "overlay",
+  "our_parts": [
+   "石",
+   "stone, rock, mineral",
+   "䍃"
+  ],
+  "cjkvi_reading": "⿰石䍃 via 䍃=⿱⿴𠂊冫缶",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-796d",
+  "char": "祭",
+  "kind": "overlay",
+  "our_parts": [
+   "𠂊",
+   "冫",
+   "ice",
+   "示",
+   "show, manifest"
+  ],
+  "cjkvi_reading": "⿱⿰⿴𠂊冫②示",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-79b8",
+  "char": "禸",
+  "kind": "overlay",
+  "our_parts": [
+   "冂",
+   "wide",
+   "厶",
+   "private, secret"
+  ],
+  "cjkvi_reading": "⿻冂厶",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-79c9",
+  "char": "秉",
+  "kind": "overlay",
+  "our_parts": [
+   "禾",
+   "grain still on stalk",
+   "一",
+   "one"
+  ],
+  "cjkvi_reading": "⿻禾⿻コ一",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-79ed",
+  "char": "秭",
+  "kind": "overlay",
+  "our_parts": [
+   "禾",
+   "grain still on stalk",
+   "𠂔"
+  ],
+  "cjkvi_reading": "⿰禾𠂔 via 𠂔=⿹⿻⿱一㇉丨丿",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-7a6f",
+  "char": "穯",
+  "kind": "overlay",
+  "our_parts": [
+   "禾",
+   "grain still on stalk",
+   "土",
+   "soil, earth",
+   "吅",
+   "吅",
+   "回",
+   "-times"
+  ],
+  "cjkvi_reading": "⿰禾⿱⿻土吅回",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-7ab0",
+  "char": "窰",
+  "kind": "overlay",
+  "our_parts": [
+   "穴",
+   "cave, den, hole",
+   "䍃"
+  ],
+  "cjkvi_reading": "⿱穴䍃 via 䍃=⿱⿴𠂊冫缶",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-7ac3",
+  "char": "竃",
+  "kind": "overlay",
+  "our_parts": [
+   "穴",
+   "cave, den, hole",
+   "土",
+   "soil, earth",
+   "日",
+   "sun",
+   "电"
+  ],
+  "cjkvi_reading": "⿳穴土⿻日电",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-7adc",
+  "char": "竜",
+  "kind": "overlay",
+  "our_parts": [
+   "立",
+   "stand",
+   "日",
+   "sun",
+   "乚",
+   "hidden, mysterious, secret"
+  ],
+  "cjkvi_reading": "⿱立⿻日乚",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-7b1d",
+  "char": "笝",
+  "kind": "overlay",
+  "our_parts": [
+   "竹",
+   "bamboo",
+   "㘝"
+  ],
+  "cjkvi_reading": "⿱竹㘝 via 㘝=⿴囗又",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-7b2b",
+  "char": "笫",
+  "kind": "overlay",
+  "our_parts": [
+   "竹",
+   "bamboo",
+   "𠂔"
+  ],
+  "cjkvi_reading": "⿱竹𠂔 via 𠂔=⿹⿻⿱一㇉丨丿",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-7c3f",
+  "char": "簿",
+  "kind": "overlay",
+  "our_parts": [
+   "竹",
+   "bamboo",
+   "溥",
+   "big, great, vast, wide"
+  ],
+  "cjkvi_reading": "⿱竹⿰氵⿱⿺𤰔丶寸 via 𤰔=⿻一由",
+  "cjkvi_tags": "J",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-7ca4",
+  "char": "粤",
+  "kind": "overlay",
+  "our_parts": [
+   "丿",
+   "line",
+   "囗",
+   "erect, proud",
+   "米",
+   "hulled or husked uncooked rice",
+   "丂",
+   "obstruction of breath (qi) as it seeks release"
+  ],
+  "cjkvi_reading": "⿱⿴⿱丿囗米丂",
+  "cjkvi_tags": "GTJK",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-7cb5",
+  "char": "粵",
+  "kind": "overlay",
+  "our_parts": [
+   "丿",
+   "line",
+   "囗",
+   "erect, proud",
+   "釆",
+   "distinguish",
+   "丂",
+   "obstruction of breath (qi) as it seeks release"
+  ],
+  "cjkvi_reading": "⿱⿴⿱丿囗釆丂",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-7cf3",
+  "char": "糳",
+  "kind": "overlay",
+  "our_parts": [
+   "𣫞",
+   "米",
+   "hulled or husked uncooked rice"
+  ],
+  "cjkvi_reading": "⿱𣫞米 via 𣫞=⿰⿻丵臼殳",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-7e01",
+  "char": "縁",
+  "kind": "opaque",
+  "our_parts": [
+   "糹",
+   "silk",
+   "彐",
+   "snout",
+   "𧰨"
+  ],
+  "opaque_children": "𧰨",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-7e04",
+  "char": "縄",
+  "kind": "overlay",
+  "our_parts": [
+   "糹",
+   "silk",
+   "日",
+   "sun",
+   "电"
+  ],
+  "cjkvi_reading": "⿰糹⿻日电",
+  "cjkvi_tags": "GT",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-7e1b",
+  "char": "縛",
+  "kind": "overlay",
+  "our_parts": [
+   "糹",
+   "silk",
+   "尃",
+   "to state to, to announce"
+  ],
+  "cjkvi_reading": "⿰糸⿱⿺𤰔丶寸 via 𤰔=⿻一由",
+  "cjkvi_tags": "J",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-7e23",
+  "char": "縣",
+  "kind": "overlay",
+  "our_parts": [
+   "且",
+   "moreover, also (post-subject)",
+   "一",
+   "one",
+   "小",
+   "small, tiny, insignificant",
+   "系",
+   "lineage"
+  ],
+  "cjkvi_reading": "⿰⿱⿴且一小系",
+  "cjkvi_tags": "GTV",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-7e47",
+  "char": "繇",
+  "kind": "overlay",
+  "our_parts": [
+   "䍃",
+   "系",
+   "lineage"
+  ],
+  "cjkvi_reading": "⿰䍃系 via 䍃=⿱⿴𠂊冫缶",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-7e6d",
+  "char": "繭",
+  "kind": "overlay",
+  "our_parts": [
+   "艹",
+   "冂",
+   "wide",
+   "丨",
+   "(same as 〡 hangzhou numeral one) number one",
+   "𬗌"
+  ],
+  "cjkvi_reading": "⿱艹⿻⿵冂丨𬗌",
+  "cjkvi_tags": "GTJK",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-7ec3",
+  "char": "练",
+  "kind": "opaque",
+  "our_parts": [
+   "纟",
+   "silk",
+   "𫠣"
+  ],
+  "opaque_children": "𫠣",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-7ece",
+  "char": "绎",
+  "kind": "overlay",
+  "our_parts": [
+   "纟",
+   "silk",
+   "𠬤"
+  ],
+  "cjkvi_reading": "⿰纟𠬤 via 𠬤=⿱又⿻二丨",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-7f8a",
+  "char": "羊",
+  "kind": "overlay",
+  "our_parts": [
+   "䒑",
+   "二",
+   "two",
+   "丨",
+   "(same as 〡 hangzhou numeral one) number one"
+  ],
+  "cjkvi_reading": "⿱䒑⿻二丨",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-7f8b",
+  "char": "羋",
+  "kind": "overlay",
+  "our_parts": [
+   "卝",
+   "hair style",
+   "丨",
+   "(same as 〡 hangzhou numeral one) number one",
+   "二",
+   "two",
+   "丨",
+   "(same as 〡 hangzhou numeral one) number one"
+  ],
+  "cjkvi_reading": "⿱⿴卝丨⿻二丨",
+  "cjkvi_tags": "GJK",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-7f90",
+  "char": "羐",
+  "kind": "opaque",
+  "our_parts": [
+   "艹",
+   "土",
+   "soil, earth",
+   "久",
+   "long time (ago)"
+  ],
+  "opaque_children": "艹",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-7fb2",
+  "char": "羲",
+  "kind": "overlay",
+  "our_parts": [
+   "𦍌",
+   "禾",
+   "grain still on stalk",
+   "丂",
+   "obstruction of breath (qi) as it seeks release"
+  ],
+  "cjkvi_reading": "⿱𦍌⿻⿱禾丂③",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-8012",
+  "char": "耒",
+  "kind": "overlay",
+  "our_parts": [
+   "一",
+   "one",
+   "未",
+   "not yet"
+  ],
+  "cjkvi_reading": "⿻一未",
+  "cjkvi_tags": "G",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-801c",
+  "char": "耜",
+  "kind": "opaque",
+  "our_parts": [
+   "耒",
+   "handle of plow",
+   "㠯"
+  ],
+  "opaque_children": "㠯",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-807f",
+  "char": "聿",
+  "kind": "overlay",
+  "our_parts": [
+   "肀",
+   "pen",
+   "二",
+   "two"
+  ],
+  "cjkvi_reading": "⿻肀二",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-8080",
+  "char": "肀",
+  "kind": "overlay",
+  "our_parts": [
+   "一",
+   "one",
+   "丨",
+   "(same as 〡 hangzhou numeral one) number one"
+  ],
+  "cjkvi_reading": "⿻⿻コ一丨",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-80a0",
+  "char": "肠",
+  "kind": "opaque",
+  "our_parts": [
+   "月",
+   "moon",
+   "𠃓"
+  ],
+  "opaque_children": "𠃓",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-80cf",
+  "char": "胏",
+  "kind": "overlay",
+  "our_parts": [
+   "月",
+   "moon",
+   "𠂔"
+  ],
+  "cjkvi_reading": "⿰月𠂔 via 𠂔=⿹⿻⿱一㇉丨丿",
+  "cjkvi_tags": "GJK",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-810a",
+  "char": "脊",
+  "kind": "overlay",
+  "our_parts": [
+   "人",
+   "man",
+   "丷",
+   "“ears-out” component used in some chinese characters (for example, 兑)",
+   "八",
+   "eight",
+   "月",
+   "moon"
+  ],
+  "cjkvi_reading": "⿱⿻人⿱丷八月",
+  "cjkvi_tags": "GJK",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-81ef",
+  "char": "臯",
+  "kind": "overlay",
+  "our_parts": [
+   "自",
+   "self, private, personal",
+   "𠦂"
+  ],
+  "cjkvi_reading": "⿱自𠦂 via 𠦂=⿻十⿱丷八",
+  "cjkvi_tags": "G",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-81fe",
+  "char": "臾",
+  "kind": "overlay",
+  "our_parts": [
+   "臼",
+   "mortar",
+   "人",
+   "man"
+  ],
+  "cjkvi_reading": "⿻臼人",
+  "cjkvi_tags": "GT",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-81ff",
+  "char": "臿",
+  "kind": "overlay",
+  "our_parts": [
+   "千",
+   "thousand",
+   "臼",
+   "mortar"
+  ],
+  "cjkvi_reading": "⿻千臼",
+  "cjkvi_tags": "GK",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-8209",
+  "char": "舉",
+  "kind": "overlay",
+  "our_parts": [
+   "與",
+   "and",
+   "二",
+   "two",
+   "丨",
+   "(same as 〡 hangzhou numeral one) number one"
+  ],
+  "cjkvi_reading": "⿱與⿻二丨",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-821d",
+  "char": "舝",
+  "kind": "opaque",
+  "our_parts": [
+   "𫝀",
+   "巛",
+   "river",
+   "冖",
+   "cover",
+   "厶",
+   "private, secret",
+   "㐄"
+  ],
+  "opaque_children": "𫝀",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-8239",
+  "char": "船",
+  "kind": "opaque",
+  "our_parts": [
+   "舟",
+   "boat, ship",
+   "𠘧",
+   "口",
+   "mouth"
+  ],
+  "opaque_children": "𠘧",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-8271",
+  "char": "艱",
+  "kind": "overlay",
+  "our_parts": [
+   "廿",
+   "twenty, twentieth",
+   "口",
+   "mouth",
+   "夫",
+   "man, male adult, husband",
+   "艮",
+   "kangxi radical 138"
+  ],
+  "cjkvi_reading": "⿰⿱廿⿻口夫艮",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-8279",
+  "char": "艹",
+  "kind": "overlay",
+  "our_parts": [
+   "十",
+   "ten, tenth",
+   "丨",
+   "(same as 〡 hangzhou numeral one) number one"
+  ],
+  "cjkvi_reading": "⿻十丨",
+  "cjkvi_tags": "GJ",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-8288",
+  "char": "芈",
+  "kind": "overlay",
+  "our_parts": [
+   "艹",
+   "二",
+   "two",
+   "丨",
+   "(same as 〡 hangzhou numeral one) number one"
+  ],
+  "cjkvi_reading": "⿱艹⿻二丨",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-82b2",
+  "char": "芲",
+  "kind": "overlay",
+  "our_parts": [
+   "艹",
+   "grass",
+   "人",
+   "man",
+   "𠤎"
+  ],
+  "cjkvi_reading": "⿳艹人𠤎 via 𠤎=⿻乚丿",
+  "cjkvi_tags": "G",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-82e2",
+  "char": "苢",
+  "kind": "opaque",
+  "our_parts": [
+   "艹",
+   "grass",
+   "㠯"
+  ],
+  "opaque_children": "㠯",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-830d",
+  "char": "茍",
+  "kind": "opaque",
+  "our_parts": [
+   "艹",
+   "句",
+   "sentence"
+  ],
+  "opaque_children": "艹",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-831d",
+  "char": "茝",
+  "kind": "opaque",
+  "our_parts": [
+   "艹",
+   "grass",
+   "𦣞"
+  ],
+  "opaque_children": "𦣞",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-8330",
+  "char": "茰",
+  "kind": "overlay",
+  "our_parts": [
+   "艹",
+   "grass",
+   "日",
+   "sun",
+   "乂",
+   "govern, control, manage"
+  ],
+  "cjkvi_reading": "⿱艹⿻日乂",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-83eb",
+  "char": "菫",
+  "kind": "overlay",
+  "our_parts": [
+   "艹",
+   "grass",
+   "一",
+   "one",
+   "口",
+   "mouth",
+   "龶"
+  ],
+  "cjkvi_reading": "⿳艹一⿻口龶",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-8550",
+  "char": "蕐",
+  "kind": "overlay",
+  "our_parts": [
+   "艹",
+   "grass",
+   "一",
+   "one",
+   "二",
+   "two",
+   "丨",
+   "(same as 〡 hangzhou numeral one) number one",
+   "𠈌"
+  ],
+  "cjkvi_reading": "⿳艹一⿻⿻二丨𠈌",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-8584",
+  "char": "薄",
+  "kind": "overlay",
+  "our_parts": [
+   "艹",
+   "grass",
+   "溥",
+   "big, great, vast, wide"
+  ],
+  "cjkvi_reading": "⿱艹⿰氵⿱⿺𤰔丶寸 via 𤰔=⿻一由",
+  "cjkvi_tags": "JK",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-858e",
+  "char": "薎",
+  "kind": "opaque",
+  "our_parts": [
+   "艹",
+   "罒",
+   "radical 122",
+   "冖",
+   "cover",
+   "伐",
+   "cut down, subjugate, attack"
+  ],
+  "opaque_children": "艹",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-85a8",
+  "char": "薨",
+  "kind": "opaque",
+  "our_parts": [
+   "艹",
+   "罒",
+   "radical 122",
+   "冖",
+   "cover",
+   "死",
+   "die"
+  ],
+  "opaque_children": "艹",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-8650",
+  "char": "虐",
+  "kind": "overlay",
+  "our_parts": [
+   "虍",
+   "tiger",
+   "匚",
+   "box",
+   "一",
+   "one"
+  ],
+  "cjkvi_reading": "⿸虍⿻匚一",
+  "cjkvi_tags": "GTKV",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-8652",
+  "char": "虒",
+  "kind": "opaque",
+  "our_parts": [
+   "𠂆",
+   "虎",
+   "tiger"
+  ],
+  "opaque_children": "𠂆",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-8735",
+  "char": "蜵",
+  "kind": "overlay",
+  "our_parts": [
+   "虫",
+   "insect",
+   "𣶒"
+  ],
+  "cjkvi_reading": "⿰虫𣶒 via 𣶒=⿴⿰片爿一",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-8747",
+  "char": "蝇",
+  "kind": "overlay",
+  "our_parts": [
+   "虫",
+   "insect",
+   "黾"
+  ],
+  "cjkvi_reading": "⿰虫黾 via 黾=⿱口⿻日乚",
+  "cjkvi_tags": "TK",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-877f",
+  "char": "蝿",
+  "kind": "overlay",
+  "our_parts": [
+   "虫",
+   "insect",
+   "日",
+   "sun",
+   "电"
+  ],
+  "cjkvi_reading": "⿰虫⿻日电",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-87a4",
+  "char": "螤",
+  "kind": "overlay",
+  "our_parts": [
+   "蚉",
+   "(variant of 蚊) a mosquito, gnat",
+   "㬰"
+  ],
+  "cjkvi_reading": "⿰蚉㬰 via 㬰=⿻日人",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-87ce",
+  "char": "蟎",
+  "kind": "overlay",
+  "our_parts": [
+   "虫",
+   "insect",
+   "㒼"
+  ],
+  "cjkvi_reading": "⿰虫㒼 via 㒼=⿱廿⿻巾𠓜",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-87d7",
+  "char": "蟗",
+  "kind": "overlay",
+  "our_parts": [
+   "一",
+   "one",
+   "中",
+   "central",
+   "冖",
+   "cover",
+   "出",
+   "exit",
+   "虫",
+   "insect"
+  ],
+  "cjkvi_reading": "⿱⿳⿻一中冖出虫",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-8839",
+  "char": "蠹",
+  "kind": "overlay",
+  "our_parts": [
+   "一",
+   "one",
+   "中",
+   "central",
+   "冖",
+   "cover",
+   "石",
+   "stone, rock, mineral",
+   "䖵"
+  ],
+  "cjkvi_reading": "⿱⿳⿻一中冖石䖵",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-884b",
+  "char": "衋",
+  "kind": "overlay",
+  "our_parts": [
+   "聿",
+   "writing brush, pencil",
+   "皕",
+   "two hundred",
+   "血",
+   "blood"
+  ],
+  "cjkvi_reading": "⿳⿱𦘒一皕血 via 𦘒=⿻肀一",
+  "cjkvi_tags": "J",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-8858",
+  "char": "衘",
+  "kind": "overlay",
+  "our_parts": [
+   "彳",
+   "step with left foot",
+   "𦈢",
+   "亍",
+   "to take small steps"
+  ],
+  "cjkvi_reading": "⿲彳𦈢亍 via 𦈢=⿱𠂉⿻一③",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-8870",
+  "char": "衰",
+  "kind": "overlay",
+  "our_parts": [
+   "亠",
+   "head",
+   "口",
+   "mouth",
+   "一",
+   "one",
+   "𧘇"
+  ],
+  "cjkvi_reading": "⿳亠⿻口一𧘇",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-8877",
+  "char": "衷",
+  "kind": "overlay",
+  "our_parts": [
+   "亠",
+   "head",
+   "中",
+   "central",
+   "𧘇"
+  ],
+  "cjkvi_reading": "⿱⿻十口𧘇",
+  "cjkvi_tags": "JK",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-88eb",
+  "char": "裫",
+  "kind": "overlay",
+  "our_parts": [
+   "衤",
+   "clothes",
+   "𣶒"
+  ],
+  "cjkvi_reading": "⿰衤𣶒 via 𣶒=⿴⿰片爿一",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-8931",
+  "char": "褱",
+  "kind": "overlay",
+  "our_parts": [
+   "亠",
+   "head",
+   "眔",
+   "眔",
+   "𧘇"
+  ],
+  "cjkvi_reading": "⿳亠⿱罒⿻丨⿱丷八𧘇",
+  "cjkvi_tags": "JK",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-8954",
+  "char": "襔",
+  "kind": "overlay",
+  "our_parts": [
+   "衤",
+   "clothes",
+   "㒼"
+  ],
+  "cjkvi_reading": "⿰衤㒼 via 㒼=⿱廿⿻巾𠓜",
+  "cjkvi_tags": "G",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-897f",
+  "char": "西",
+  "kind": "overlay",
+  "our_parts": [
+   "一",
+   "one",
+   "𠁤"
+  ],
+  "cjkvi_reading": "⿱一𠁤 via 𠁤=⿻儿口",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-8980",
+  "char": "覀",
+  "kind": "overlay",
+  "our_parts": [
+   "一",
+   "one",
+   "口",
+   "mouth",
+   "丨",
+   "(same as 〡 hangzhou numeral one) number one",
+   "丨",
+   "(same as 〡 hangzhou numeral one) number one"
+  ],
+  "cjkvi_reading": "⿱一⿻口⿰丨丨",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-89de",
+  "char": "觞",
+  "kind": "opaque",
+  "our_parts": [
+   "角",
+   "horn",
+   "𠂉",
+   "𠃓"
+  ],
+  "opaque_children": "𠃓",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-8a67",
+  "char": "詧",
+  "kind": "overlay",
+  "our_parts": [
+   "𠂊",
+   "冫",
+   "ice",
+   "言",
+   "words, speech"
+  ],
+  "cjkvi_reading": "⿱⿰⿴𠂊冫②言",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-8b20",
+  "char": "謠",
+  "kind": "overlay",
+  "our_parts": [
+   "言",
+   "words, speech",
+   "䍃"
+  ],
+  "cjkvi_reading": "⿰言䍃 via 䍃=⿱⿴𠂊冫缶",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-8b21",
+  "char": "謡",
+  "kind": "overlay",
+  "our_parts": [
+   "言",
+   "words, speech",
+   "䍃"
+  ],
+  "cjkvi_reading": "⿰言䍃 via 䍃=⿱⿴𠂊冫缶",
+  "cjkvi_tags": "G",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-8b71",
+  "char": "譱",
+  "kind": "overlay",
+  "our_parts": [
+   "羊",
+   "sheep, goat",
+   "誩",
+   "to quarrel"
+  ],
+  "cjkvi_reading": "⿻羊誩",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-8bd1",
+  "char": "译",
+  "kind": "overlay",
+  "our_parts": [
+   "讠",
+   "simplified kangxi radical 149",
+   "𠬤"
+  ],
+  "cjkvi_reading": "⿰讠𠬤 via 𠬤=⿱又⿻二丨",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-8c23",
+  "char": "谣",
+  "kind": "overlay",
+  "our_parts": [
+   "讠",
+   "simplified kangxi radical 149",
+   "䍃"
+  ],
+  "cjkvi_reading": "⿰讠䍃 via 䍃=⿱⿴𠂊冫缶",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-8c4b",
+  "char": "豋",
+  "kind": "overlay",
+  "our_parts": [
+   "𠂊",
+   "冫",
+   "ice",
+   "豆",
+   "beans, peas"
+  ],
+  "cjkvi_reading": "⿱⿰⿴𠂊冫②豆",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-8c50",
+  "char": "豐",
+  "kind": "overlay",
+  "our_parts": [
+   "𠁳",
+   "豆",
+   "beans, peas"
+  ],
+  "cjkvi_reading": "⿱𠁳豆 via 𠁳=⿻山⿰丰丰",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-8c55",
+  "char": "豕",
+  "kind": "opaque",
+  "our_parts": [
+   "一",
+   "one",
+   "𧰨"
+  ],
+  "opaque_children": "𧰨",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-8c56",
+  "char": "豖",
+  "kind": "overlay",
+  "our_parts": [
+   "豕",
+   "a pig, boar",
+   "丶",
+   "dot"
+  ],
+  "cjkvi_reading": "⿻豕丶",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-8c59",
+  "char": "豙",
+  "kind": "opaque",
+  "our_parts": [
+   "立",
+   "stand",
+   "𧰨"
+  ],
+  "opaque_children": "𧰨",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-8c61",
+  "char": "象",
+  "kind": "overlay",
+  "our_parts": [
+   "𠂊",
+   "𫩏",
+   "𧰨"
+  ],
+  "cjkvi_reading": "⿳𠂊𫩏𧰨 via 𫩏=⿴囗丨",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-8c73",
+  "char": "豳",
+  "kind": "overlay",
+  "our_parts": [
+   "山",
+   "mountain, hill, peak",
+   "豩",
+   "豩"
+  ],
+  "cjkvi_reading": "⿻山豩",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-8cad",
+  "char": "貭",
+  "kind": "opaque",
+  "our_parts": [
+   "𠂆",
+   "十",
+   "ten, tenth",
+   "貝",
+   "sea shell"
+  ],
+  "opaque_children": "𠂆",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-8cd3",
+  "char": "賓",
+  "kind": "opaque",
+  "our_parts": [
+   "宀",
+   "primitive_roof",
+   "roof",
+   "一",
+   "one",
+   "𣥂",
+   "貝",
+   "sea shell"
+  ],
+  "opaque_children": "𣥂",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-8ceb",
+  "char": "賫",
+  "kind": "overlay",
+  "our_parts": [
+   "十",
+   "ten, tenth",
+   "从",
+   "冖",
+   "cover",
+   "貝",
+   "sea shell"
+  ],
+  "cjkvi_reading": "⿳⿻十从冖貝",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-8cf7",
+  "char": "賷",
+  "kind": "overlay",
+  "our_parts": [
+   "十",
+   "ten, tenth",
+   "吅",
+   "吅",
+   "冖",
+   "cover",
+   "貝",
+   "sea shell"
+  ],
+  "cjkvi_reading": "⿳⿻十吅冖貝",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-8cfe",
+  "char": "賾",
+  "kind": "opaque",
+  "our_parts": [
+   "𦣞",
+   "責",
+   "one's responsibility, duty"
+  ],
+  "opaque_children": "𦣞",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-8d28",
+  "char": "质",
+  "kind": "opaque",
+  "our_parts": [
+   "𠂆",
+   "十",
+   "ten, tenth",
+   "贝",
+   "sea shell"
+  ],
+  "opaque_children": "𠂆",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-8d4d",
+  "char": "赍",
+  "kind": "overlay",
+  "our_parts": [
+   "十",
+   "ten, tenth",
+   "从",
+   "冖",
+   "cover",
+   "贝",
+   "sea shell"
+  ],
+  "cjkvi_reading": "⿱⿱⿻十从冖贝",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-8d5c",
+  "char": "赜",
+  "kind": "opaque",
+  "our_parts": [
+   "𦣞",
+   "责",
+   "one's responsibility, duty"
+  ],
+  "opaque_children": "𦣞",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-8d80",
+  "char": "趀",
+  "kind": "overlay",
+  "our_parts": [
+   "走",
+   "walk, go on foot",
+   "𠂔"
+  ],
+  "cjkvi_reading": "⿺走𠂔 via 𠂔=⿹⿻⿱一㇉丨丿",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-8e63",
+  "char": "蹣",
+  "kind": "overlay",
+  "our_parts": [
+   "𧾷",
+   "㒼"
+  ],
+  "cjkvi_reading": "⿰𧾷㒼 via 㒼=⿱廿⿻巾𠓜",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-8fb0",
+  "char": "辰",
+  "kind": "opaque",
+  "our_parts": [
+   "厂",
+   "二",
+   "two",
+   "𠄌",
+   "乀",
+   "stretch",
+   "丿",
+   "line"
+  ],
+  "opaque_children": "𠄌",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-9059",
+  "char": "遙",
+  "kind": "overlay",
+  "our_parts": [
+   "辶",
+   "walk",
+   "䍃"
+  ],
+  "cjkvi_reading": "⿺辶䍃 via 䍃=⿱⿴𠂊冫缶",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-9065",
+  "char": "遥",
+  "kind": "overlay",
+  "our_parts": [
+   "辶",
+   "walk",
+   "䍃"
+  ],
+  "cjkvi_reading": "⿺辶䍃 via 䍃=⿱⿴𠂊冫缶",
+  "cjkvi_tags": "G",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-90a3",
+  "char": "那",
+  "kind": "overlay",
+  "our_parts": [
+   "刀",
+   "knife",
+   "二",
+   "two",
+   "阝",
+   "place"
+  ],
+  "cjkvi_reading": "⿰⿻刀二阝",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-91ca",
+  "char": "释",
+  "kind": "overlay",
+  "our_parts": [
+   "釆",
+   "distinguish",
+   "𠬤"
+  ],
+  "cjkvi_reading": "⿰釆𠬤 via 𠬤=⿱又⿻二丨",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-91cc",
+  "char": "里",
+  "kind": "overlay",
+  "our_parts": [
+   "甲",
+   "armor, shell",
+   "一",
+   "one",
+   "一",
+   "one"
+  ],
+  "cjkvi_reading": "⿱⿻甲一一",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-91d1",
+  "char": "金",
+  "kind": "overlay",
+  "our_parts": [
+   "人",
+   "man",
+   "王",
+   "king, ruler",
+   "丷",
+   "“ears-out” component used in some chinese characters (for example, 兑)"
+  ],
+  "cjkvi_reading": "⿱人⿻王丷",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-91dc",
+  "char": "釜",
+  "kind": "overlay",
+  "our_parts": [
+   "父",
+   "father",
+   "王",
+   "king, ruler",
+   "丷",
+   "“ears-out” component used in some chinese characters (for example, 兑)"
+  ],
+  "cjkvi_reading": "⿱父⿻王丷",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-923b",
+  "char": "鈻",
+  "kind": "opaque",
+  "our_parts": [
+   "金",
+   "gold",
+   "㠯"
+  ],
+  "opaque_children": "㠯",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-925b",
+  "char": "鉛",
+  "kind": "opaque",
+  "our_parts": [
+   "金",
+   "gold",
+   "𠘧",
+   "口",
+   "mouth"
+  ],
+  "opaque_children": "𠘧",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-9390",
+  "char": "鎐",
+  "kind": "overlay",
+  "our_parts": [
+   "金",
+   "gold",
+   "䍃"
+  ],
+  "cjkvi_reading": "⿰金䍃 via 䍃=⿱⿴𠂊冫缶",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-93cb",
+  "char": "鏋",
+  "kind": "overlay",
+  "our_parts": [
+   "金",
+   "gold",
+   "㒼"
+  ],
+  "cjkvi_reading": "⿰金㒼 via 㒼=⿱廿⿻巾𠓜",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-947f",
+  "char": "鑿",
+  "kind": "overlay",
+  "our_parts": [
+   "𣫞",
+   "金",
+   "gold"
+  ],
+  "cjkvi_reading": "⿱𣫞金 via 𣫞=⿰⿻丵臼殳",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-9496",
+  "char": "钖",
+  "kind": "opaque",
+  "our_parts": [
+   "钅",
+   "gold",
+   "𠃓"
+  ],
+  "opaque_children": "𠃓",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-94c5",
+  "char": "铅",
+  "kind": "opaque",
+  "our_parts": [
+   "钅",
+   "gold",
+   "𠘧",
+   "口",
+   "mouth"
+  ],
+  "opaque_children": "𠘧",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-94ce",
+  "char": "铎",
+  "kind": "overlay",
+  "our_parts": [
+   "钅",
+   "gold",
+   "𠬤"
+  ],
+  "cjkvi_reading": "⿰钅𠬤 via 𠬤=⿱又⿻二丨",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-9577",
+  "char": "長",
+  "kind": "opaque",
+  "our_parts": [
+   "一",
+   "one",
+   "𠄌",
+   "乀",
+   "stretch",
+   "丿",
+   "line"
+  ],
+  "opaque_children": "𠄌",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-9580",
+  "char": "門",
+  "kind": "opaque",
+  "our_parts": [
+   "𠁣",
+   "𠃛"
+  ],
+  "opaque_children": "𠁣𠃛",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-965d",
+  "char": "陝",
+  "kind": "overlay",
+  "our_parts": [
+   "阝",
+   "place",
+   "㚒"
+  ],
+  "cjkvi_reading": "⿰阝㚒 via 㚒=⿻大𠓜",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-96ba",
+  "char": "隺",
+  "kind": "overlay",
+  "our_parts": [
+   "冖",
+   "cover",
+   "隹",
+   "short-tailed bird"
+  ],
+  "cjkvi_reading": "⿻冖隹",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-96c8",
+  "char": "雈",
+  "kind": "opaque",
+  "our_parts": [
+   "艹",
+   "隹",
+   "short-tailed bird"
+  ],
+  "opaque_children": "艹",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-96e3",
+  "char": "難",
+  "kind": "overlay",
+  "our_parts": [
+   "廿",
+   "twenty, twentieth",
+   "口",
+   "mouth",
+   "夫",
+   "man, male adult, husband",
+   "隹",
+   "short-tailed bird"
+  ],
+  "cjkvi_reading": "⿰⿱廿⿻口夫隹",
+  "cjkvi_tags": "GTKV",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-96e8",
+  "char": "雨",
+  "kind": "overlay",
+  "our_parts": [
+   "一",
+   "one",
+   "𠕒"
+  ],
+  "cjkvi_reading": "⿱一𠕒 via 𠕒=⿻冂⿻丨⿱丷八",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-96fb",
+  "char": "電",
+  "kind": "overlay",
+  "our_parts": [
+   "雨",
+   "rain",
+   "日",
+   "sun",
+   "乚",
+   "hidden, mysterious, secret"
+  ],
+  "cjkvi_reading": "⿱雨⿻日乚",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-97cb",
+  "char": "韋",
+  "kind": "opaque",
+  "our_parts": [
+   "𫝀",
+   "口",
+   "mouth",
+   "㐄"
+  ],
+  "opaque_children": "𫝀",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-9824",
+  "char": "頤",
+  "kind": "opaque",
+  "our_parts": [
+   "𦣞",
+   "頁",
+   "page, sheet, leaf"
+  ],
+  "opaque_children": "𦣞",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-982f",
+  "char": "頯",
+  "kind": "overlay",
+  "our_parts": [
+   "𢌳",
+   "頁",
+   "page, sheet, leaf"
+  ],
+  "cjkvi_reading": "⿰𢌳頁 via 𢌳=⿱⿴𠂊⺀廾",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-9862",
+  "char": "顢",
+  "kind": "overlay",
+  "our_parts": [
+   "㒼",
+   "頁",
+   "page, sheet, leaf"
+  ],
+  "cjkvi_reading": "⿰㒼頁 via 㒼=⿱廿⿻巾𠓜",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-9890",
+  "char": "颐",
+  "kind": "opaque",
+  "our_parts": [
+   "𦣞",
+   "页",
+   "page, sheet, leaf"
+  ],
+  "opaque_children": "𦣞",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-98bb",
+  "char": "颻",
+  "kind": "overlay",
+  "our_parts": [
+   "䍃",
+   "風",
+   "wind"
+  ],
+  "cjkvi_reading": "⿰䍃風 via 䍃=⿱⿴𠂊冫缶",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-98cf",
+  "char": "飏",
+  "kind": "opaque",
+  "our_parts": [
+   "风",
+   "𠃓"
+  ],
+  "opaque_children": "𠃓",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-98d6",
+  "char": "飖",
+  "kind": "overlay",
+  "our_parts": [
+   "䍃",
+   "风"
+  ],
+  "cjkvi_reading": "⿰䍃风 via 䍃=⿱⿴𠂊冫缶",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-98ee",
+  "char": "飮",
+  "kind": "opaque",
+  "our_parts": [
+   "𩙿",
+   "欠",
+   "owe, lack, be deficient"
+  ],
+  "opaque_children": "𩙿",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-9967",
+  "char": "饧",
+  "kind": "opaque",
+  "our_parts": [
+   "饣",
+   "eat, food",
+   "𠃓"
+  ],
+  "opaque_children": "𠃓",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-9a7f",
+  "char": "驿",
+  "kind": "overlay",
+  "our_parts": [
+   "马",
+   "horse",
+   "𠬤"
+  ],
+  "cjkvi_reading": "⿰马𠬤 via 𠬤=⿱又⿻二丨",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-9b17",
+  "char": "鬗",
+  "kind": "overlay",
+  "our_parts": [
+   "髟",
+   "hair",
+   "㒼"
+  ],
+  "cjkvi_reading": "⿱髟㒼 via 㒼=⿱廿⿻巾𠓜",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-9b25",
+  "char": "鬥",
+  "kind": "opaque",
+  "our_parts": [
+   "𩰋",
+   "𩰊"
+  ],
+  "opaque_children": "𩰊𩰋",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-9c29",
+  "char": "鰩",
+  "kind": "overlay",
+  "our_parts": [
+   "魚",
+   "fish",
+   "䍃"
+  ],
+  "cjkvi_reading": "⿰魚䍃 via 䍃=⿱⿴𠂊冫缶",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-9cd0",
+  "char": "鳐",
+  "kind": "overlay",
+  "our_parts": [
+   "鱼",
+   "fish",
+   "䍃"
+  ],
+  "cjkvi_reading": "⿰鱼䍃 via 䍃=⿱⿴𠂊冫缶",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-9dc2",
+  "char": "鷂",
+  "kind": "overlay",
+  "our_parts": [
+   "䍃",
+   "鳥",
+   "bird"
+  ],
+  "cjkvi_reading": "⿰䍃鳥 via 䍃=⿱⿴𠂊冫缶",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-9df0",
+  "char": "鷰",
+  "kind": "overlay",
+  "our_parts": [
+   "廿",
+   "twenty, twentieth",
+   "北",
+   "north",
+   "口",
+   "mouth",
+   "鳥",
+   "bird"
+  ],
+  "cjkvi_reading": "⿳廿⿴北口鳥",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-9e5e",
+  "char": "鹞",
+  "kind": "overlay",
+  "our_parts": [
+   "䍃",
+   "鸟",
+   "bird"
+  ],
+  "cjkvi_reading": "⿰䍃鸟 via 䍃=⿱⿴𠂊冫缶",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-9e75",
+  "char": "鹵",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "𠂭"
+  ],
+  "cjkvi_reading": "⿱⺊⿴囗𠂭",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-9e7f",
+  "char": "鹿",
+  "kind": "overlay",
+  "our_parts": [
+   "广",
+   "丨",
+   "(same as 〡 hangzhou numeral one) number one",
+   "丨",
+   "(same as 〡 hangzhou numeral one) number one",
+   "比",
+   "to compare, liken"
+  ],
+  "cjkvi_reading": "⿸⿸广⿻コ⿰丨丨比",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-9ea5",
+  "char": "麥",
+  "kind": "overlay",
+  "our_parts": [
+   "來",
+   "come, coming",
+   "夂",
+   "go"
+  ],
+  "cjkvi_reading": "⿳⿻十从人夕",
+  "cjkvi_tags": "TV",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-9ef9",
+  "char": "黹",
+  "kind": "overlay",
+  "our_parts": [
+   "业",
+   "profession, business",
+   "㡀"
+  ],
+  "cjkvi_reading": "⿱业㡀 via 㡀=⿻丷⿻巾八",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-9f18",
+  "char": "鼘",
+  "kind": "overlay",
+  "our_parts": [
+   "鼓",
+   "drum",
+   "𣶒"
+  ],
+  "cjkvi_reading": "⿱鼓𣶒 via 𣶒=⿴⿰片爿一",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-9f21",
+  "char": "鼡",
+  "kind": "overlay",
+  "our_parts": [
+   "𭕄",
+   "𠂡"
+  ],
+  "cjkvi_reading": "⿱𭕄𠂡 via 𠂡=⿵几⿻二丨",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-9f99",
+  "char": "龙",
+  "kind": "overlay",
+  "our_parts": [
+   "尤",
+   "especially, particularly",
+   "丿",
+   "line"
+  ],
+  "cjkvi_reading": "⿻尤丿",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-9f9f",
+  "char": "龟",
+  "kind": "overlay",
+  "our_parts": [
+   "𠂊",
+   "日",
+   "sun",
+   "乚",
+   "hidden, mysterious, secret"
+  ],
+  "cjkvi_reading": "⿱𠂊⿻日乚",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-9fb1",
+  "char": "龱",
+  "kind": "overlay",
+  "our_parts": [
+   "囗",
+   "erect, proud",
+   "㐅"
+  ],
+  "cjkvi_reading": "⿴囗㐅",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ },
+ {
+  "id": "hanzi-9fc3",
+  "char": "鿃",
+  "kind": "overlay",
+  "our_parts": [
+   "目",
+   "eye",
+   "㚒"
+  ],
+  "cjkvi_reading": "⿰目㚒 via 㚒=⿻大𠓜",
+  "cjkvi_tags": "",
+  "status": "pending",
+  "decision": null,
+  "reviewed_by": null,
+  "reviewed_at": null
+ }
+]

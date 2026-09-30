@@ -16255,3 +16255,75 @@ This DB (srv.alteon.help, dev) is separate from prod's live `kanji.db` —
 `fix_hanzi_radical_keywords.py` needs a maintainer to re-run it against
 prod directly, same as any other direct-DB one-off script, since there's no
 sync tool for `zh-*` system rows.
+
+## 2026-09-30 — the hanzi decomposition audit, started: a worklist with no Heisig and no Google to check against
+
+Owner-requested: review all ~21,000 `zh-*` decompositions the way the kanji
+worklist reviews `rtk*` ones (`decomposition_worklist.json`,
+`audit_weak_evidence.py`, `worklist_next.py`). Couldn't just reuse that
+pipeline — it rests on two ground-truth sources hanzi doesn't have. The
+kanji worklist enters a row when *our* `data.txt` decomposition disagrees
+with Google's AI-Overview breakdown (`google_decompositions.json`, mined by
+`tools/heisig-google-check/`, which only runs on the owner's home computer
+since the server's IP gets CAPTCHA'd on the first request). There is no
+Heisig book for hanzi and no Google-check data for it either. Worse, "ours
+vs cjkvi-ids" would be close to vacuous as a check: `import_hanzi.py` wrote
+every hanzi row's decomposition *from* cjkvi-ids in the first place
+(`expand_part_terms` over its `ids.txt`), so the two agreeing is the normal
+case, not a finding.
+
+What can still be wrong, and is checked instead: cjkvi-ids' own IDS
+expression misread as a flat parts list — the exact class
+`audit_weak_evidence.py` already catalogs for kanji (⿻/⿴ operators whose
+children share strokes or overlap rather than sitting side by side; opaque
+intermediates cjkvi can't see inside, with no row here to fall back on). New
+script, not an extension of the existing one — different ground truth,
+different doc: `backend/audit_hanzi_weak_evidence.py`, keeping only those
+two sections (no "heisig-atomic" — there's no components column to be empty)
+and filtering hosts by `k.script LIKE 'zh-%'` instead of `id LIKE 'rtk%'`.
+Reuses `OVERLAY_OPS`, `IDS_OPS`, `opaque_children`, `_raw_ids` from the
+kanji-side modules rather than duplicating the logic.
+
+First run silently found **zero** rows in both sections, including on 蝿
+— the exact character CLAUDE.md cites as the canonical overlay-misread
+example (`⿰虫⿻日电` read as if 日 were a flat sibling, when the ⿻ means the
+box shares strokes and renders as 田). That's not "hanzi happens to be
+clean," it's a bug: `own_decompositions()` was filtering for `label IS
+NULL` to find the primary, copied straight from the kanji script — but
+`import_hanzi.py` labels its one system decomposition `'ids'`
+(`backend/import_hanzi.py:282`), never leaves it unlabelled. Every host's
+"primary" was silently coming back empty and skipping every check. Fixed to
+just take the first system decomposition instead of filtering by label.
+Re-ran: 蝿 flagged correctly, and the full pass found **410 overlay + 85
+opaque = 495 rows** — a worklist in the same ballpark as the kanji one (648
+rows) despite covering ~7x the hosts, which checks out given cjkvi-ids is
+also the source these rows were built from, not an independent cross-check.
+
+Built the parallel worklist tooling, same shapes as the kanji side:
+- `backend/build_hanzi_worklist.py` → `docs/hanzi_decomposition_worklist.json`,
+  seeded from the audit's `--json` output rather than a disagreement diff;
+  preserves decided rows across a rebuild the same way
+  `build_decomp_worklist.py` does, keyed by id.
+- `backend/hanzi_worklist_next.py` — same CLI as `worklist_next.py`
+  (`-n`, `--id`, `--decide`, `--pending-count`), plus `--kind overlay|opaque`
+  since this worklist has two distinct finding types where the kanji one has
+  one. Recording a decision only touches the worklist JSON, same contract as
+  before — applying a fix to `kanji.db` is a separate, deliberate step, and
+  for hanzi it has to be a direct DB write (`sync_system_data.py`'s pattern),
+  since there's no `data.txt` for hanzi rows to land in at all.
+
+Process going forward: ~20 hanzi/day via `hanzi_worklist_next.py`, same
+cadence and same rule as the kanji side — a worklist entry is not itself a
+verdict, only a flag that the row's evidence needs a render
+(`render_glyphs.py`, inside the host, beside a same-shape sibling) before
+anything is changed.
+
+The hanzi-specific coverage gap CLAUDE.md already documents — *"The audit is
+Japanese-only, by construction"* — still stands for the CSV-dependent
+scripts (`audit_phantom_parts.py`, `audit_csv_regressions.py`,
+`audit_missing_children.py`, `suggest_heisig_aliases.py`,
+`audit_anachronistic_names.py`). This is the first crack in that gap, not a
+close of it: it only covers the two failure modes that don't need a second
+source. A hanzi-side phantom-parts/missing-children equivalent would need
+its own ground truth, since there is still no Heisig CSV to check hanzi
+against — unstarted.
