@@ -16327,3 +16327,52 @@ close of it: it only covers the two failure modes that don't need a second
 source. A hanzi-side phantom-parts/missing-children equivalent would need
 its own ground truth, since there is still no Heisig CSV to check hanzi
 against — unstarted.
+
+## 2026-09-30 — hanzi worklist, chunk 1: first 20 (18 keep-ours, one real fix, one deferred)
+
+First daily chunk against `hanzi_decomposition_worklist.json`
+(`hanzi_worklist_next.py -n 20`), same ~20/day cadence as the kanji side.
+All 20 rendered via `render_glyphs.py` (batch of the 20 hosts, plus a second
+batch of every component glyph referenced in their cjkvi readings) before
+any decision, per the standing render-it rule.
+
+**18 keep-ours** (七 与 丗 両 两 丧 中 丮 丯 丰 串 丳 丸 丼 举 乂 乃 乖): in every
+one of these the overlay cjkvi flags is real (the components visibly share
+or cross strokes rather than sitting side by side), but this project's
+current parts list names only what's actually drawn, not an invented flat
+reading of the overlay — so the finding is correct about the *evidence*
+being weaker than a same-looking ⿰/⿱ case, without the *row* being wrong.
+丧 (`⿱⿻土丷⿰𠄌⿺乀丿`) is the most tangled of the batch — five parts for a
+genuinely nested overlay — and is the weakest of the eighteen, kept rather
+than rewritten because nothing in it reads as phantom, but worth a second
+look if a cleaner reading turns up later. 乃's `𠄎` and 与's `②` are both
+opaque/placeholder terms this project already can't resolve further and
+isn't claiming to; the finding correctly flags the evidence ceiling, not a
+bug.
+
+**One real fix: 乕 (hanzi-4e55)**, `⿸𠂆⿻⿻二丨冂`, old parts
+`𠂆,二,丨,冂`. This is the same glyph chunk 88 (2026-09-29) fully
+investigated while fixing 逓's decomposition — but that fix only touched
+逓's own `data.txt` line; 乕's *own* row (hanzi-only, no `rtk*` counterpart)
+was never revisited. Chunk 88 already established the correct reading,
+cross-checked against `heisig-kanjis.csv`'s components column for 逓 and
+confirmed via render: the box is `冂` (kangxi13, "belt" among its aliases),
+not the lookalike `巾`, and the middle two-stroke overlay is
+`prim-cornstalk` (registered for 奉), not a raw `二,丨` pair. Applied
+directly to `kanji.db` (no `data.txt` line exists for hanzi rows — see
+`build_hanzi_worklist.py`'s docstring) via `expand_part_terms(conn,
+['𠂋', 'prim-cornstalk', '冂'], ..., script_group='zh')`, replacing
+decomposition 3025's 7 old `parts` rows with 5 new ones. Backed up
+`kanji.db` first (`backup_db.py`). Verified with `get_kanji_detail`
+(resolves to drag/cornstalk/冂 cleanly) and the full pytest suite (99
+passed, unaffected).
+
+**One deferred: 临 (hanzi-4e34)**, `⿰〢⿱⿱𠂉丶𫩏`. Its innermost component
+`𫩏` (U+2BA4F) rendered as a tofu box on this machine's font stack — no
+installed font has a real outline for it, and it has no row here either, so
+there is no way to verify what it actually looks like with the tools
+available right now. Marked `needs-render` rather than guessed at; revisit
+with a font that covers this codepoint, or cjkvi's decomposition of
+whatever 𫩏 itself expands to, if it has one.
+
+495 → 475 pending after this chunk.
