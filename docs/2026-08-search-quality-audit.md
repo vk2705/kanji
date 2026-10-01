@@ -16664,3 +16664,88 @@ this doc entry. Flagging for the maintainer: please either commit or
 worth not losing), and commit `hanzi_worklist_daily_prompt.md`/
 `run_hanzi_worklist_review.sh` deliberately, so the next scheduled firing
 starts from a clean tree.
+
+## 2026-10-01 — hanzi worklist, chunk 2: next 20 (16 keep-ours, one real fix, three deferred)
+
+Third firing today (the two entries just above are a different routine and
+a stopped run of this same one against an unrelated dirty tree — by this
+firing `docs/hanzi_decomposition_worklist.json` and this doc were both
+clean, so proceeded). `hanzi_worklist_next.py -n 20` for the next 20 rows.
+`./venv/bin/pytest -v` passed (99 tests) before touching anything;
+`backup_db.py` taken first (`backups/kanji-20261001-193632.db`). All 20
+hosts rendered via `render_glyphs.py` (batches of hosts plus every
+component glyph in their cjkvi readings, with a couple of large standalone
+re-renders for the closer calls) before any decision, per the standing
+render-it rule.
+
+**16 keep-ours** (乘 亀 争 五 亟 亴 伞 佀 侃 來 倉 傘 傜 傼 先 兠): same pattern
+as chunk 1 — the overlay/opaque flag is real evidence-weakness, not a wrong
+row. A few worth noting specifically:
+- **亴 (hanzi-4eb4)**: cjkvi's reading ends `⿻二丨九` (二 overlaid with 丨
+  overlaid with 九) where the current row says `土,九`. These agree: `二`
+  (two horizontal strokes) overlaid with `丨` (one vertical through both) is
+  stroke-for-stroke how `土` is actually drawn, so `土` is a correct,
+  more-legible name for cjkvi's `⿻二丨`, not a flattening past it — `土,九`
+  describes the same drawn shape as `⿻二丨九`, just with the first overlay
+  pre-resolved into the character it draws.
+- **五 (hanzi-4e94), 佀 (hanzi-4f40), 侃 (hanzi-4f83), 傜 (hanzi-509c), 先
+  (hanzi-5148)**: all opaque-intermediate cases — cjkvi itself stops at an
+  atomic child (`𫝀`, `㠯`, `𫶧` via `儿丨`, `䍃` via `𠂊冫缶`, `𠂒`) and the
+  current row already stops at the same place rather than claiming to see
+  inside it. `𫝀`, `𫶧` and `𠂒` all render as tofu boxes in isolation on
+  this machine (no installed font has a real outline for them — confirmed
+  via `render_glyphs.py`'s own substitution check, not assumed), so there's
+  no way to verify their *internal* structure here either way; the point of
+  this pattern (CLAUDE.md's "opaque-intermediate" section) is that the
+  current row isn't claiming anything about that internal structure in the
+  first place, so the tofu rendering doesn't block the call.
+
+**One real fix: 免 (hanzi-514d)**, `⿳𠂊𫩏儿` via `𫩏=⿴囗丨` `[J]`. The
+existing row had exactly **one** part, `𠂊` — not a granularity mismatch
+with cjkvi, a genuinely incomplete decomposition missing the entire bottom
+two-thirds of the glyph. The render makes this obvious on its own (免 has
+unmistakable splayed `儿` legs at the bottom that `𠂊` alone can't cover),
+but rather than guess a reading for the box-shaped middle piece from the
+render alone, checked whether Heisig's own RTK breakdown of the *same
+glyph* already existed in this database — it does: `rtk2126` (frame 2126,
+keyword "excuse", `ja-kanji`, but literally the same character `免` as this
+`zh-Hani` row) has carried `｜,一,勹,儿` since the original CSV import,
+untouched by this audit. Cross-checking a hanzi row's missing structure
+against the Heisig breakdown of the identical glyph on the `rtk*` side is
+the same kind of cross-script corroboration this audit has used before
+(script-aware resolution groups a `ja-kanji` and `zh-*` row sharing one
+glyph), just not yet applied to a hanzi-worklist fix specifically. Applied
+directly to `kanji.db` via `expand_part_terms(conn, ['｜', '一', '勹', '儿'],
+..., script_group='zh')`, replacing decomposition 3738's single old `parts`
+row with the four new ones (keywords resolved to this database's own
+canonical rows for each primitive — "pipe", "one", "wrap", "son, child" —
+which don't all match the particular alias Heisig's own `rtk2126` line
+uses, e.g. "bound up" for `勹`, since `expand_part_terms` always appends a
+term's first canonical keyword rather than copying the alias from whichever
+row it was cross-checked against). Verified with `get_kanji_detail`
+(resolves cleanly, all four parts named) and the full pytest suite (99
+passed, unaffected).
+
+**Three deferred, all `needs-render`:**
+- **亐 (hanzi-4e90)**: `⿱一𠀁` via `𠀁=⿻一㇉`. `𠀁` (U+20001) renders as a
+  tofu box on this machine, and unlike the opaque-intermediate cases above,
+  the current row *uses* `𠀁` as one of only two parts for a very simple
+  two-stroke glyph — there's much less room here to be confident the atomic
+  placeholder is pulling its weight rather than hiding a real gap. Left
+  alone rather than guessed at.
+- **亷 (hanzi-4eb7)**: `⿸产⿻⿻コ一④`. The render clearly shows real
+  structure below `产` — multiple strokes resembling `兼`'s lower half, not
+  the single `一` the current row names — so this is likely a genuine
+  undercount, not just weak evidence. But cjkvi's own reading bottoms out in
+  an unresolvable `④` placeholder (a per-entry circled-number stand-in, not
+  a citable identifier — see CLAUDE.md's phantom-parts note), so there's no
+  source here, cjkvi or otherwise, offering a specific correct reading to
+  check the render against. Flagged rather than guessed.
+- **偼 (hanzi-507c)**: `⿰亻⿳⺊⿻コ一龰`, a three-way vertical stack (`⺊`,
+  overlay of `コ`/`一`, `龰`) on the right where the current row names only
+  two parts (`一`, `龰`). At this machine's render size it isn't possible to
+  tell confidently whether there's a real separate `⺊` stroke sitting above
+  the `龰` shape that the current row is missing, or whether `一` is already
+  covering it. Flagged rather than guessed.
+
+455 pending / 495 total after this chunk (475 before).
