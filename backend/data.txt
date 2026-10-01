@@ -676,7 +676,7 @@ rtk605:雌:feminine:此,隹
 rtk606:準:semi-:十,水,隹
 rtk607:奮:stirred up:大,田,隹
 rtk608:奪:rob:寸,大,隹
-rtk609:確:assurance:石,冖,隹
+rtk609:確:assurance:石,prim-turkey-house
 rtk610:午:noon,horse:十,𠂉
 rtk611:許:permit:午,言
 rtk612:歓:delight:欠,𮥶
@@ -730,7 +730,7 @@ rtk659:恵:favor,favour:十,心,田
 rtk660:恐:fear:工,心,凡
 rtk661:惑:beguile:心,或
 rtk662:感:emotion:戌,口,心
-rtk663:憂:melancholy:一,自,心,冖,夂,白
+rtk663:憂:melancholy:一,心,冖,夂,白
 rtk664:寡:widow:宀,頁,刀
 rtk665:忙:busy:忄,亡
 rtk666:悦:ecstasy:兑,忄
@@ -1374,7 +1374,7 @@ rtk1295:藤:wisteria:艹,月,龹,氺
 rtk1296:謄:mimeograph,facsimile:言,月,龹
 rtk1297:片:one-sided,waiter with wine on tray:
 rtk1298:版:printing block:片,反
-rtk1299:之:of,zorro,building blocks,zig-zag:乙,丶,亠,廴
+rtk1299:之:of,zorro,building blocks,zig-zag:
 rtk1300:乏:destitution:ノ,之
 rtk1301:芝:turf:艹,之
 rtk1302:不:negative:｜,ノ,一,丶
@@ -1552,7 +1552,7 @@ rtk1473:網:netting:亡,糸,丷,冂
 rtk1474:緊:tense:糸,臤
 rtk1475:紫:purple:此,糸
 rtk1476:縛:truss:糸,尃
-rtk1477:縄:straw rope:糸,田,亀
+rtk1477:縄:straw rope:糸,亀
 rtk1478:幼:infancy:力,幺
 rtk1479:後:behind:夂,幺,彳
 rtk1480:幽:seclude:山,幺,幺
@@ -2113,7 +2113,7 @@ rtk2021:艇:rowboat:廷,舟
 rtk2022:瓜:melon:厶
 rtk2023:弧:arc:瓜,弓
 rtk2024:孤:orphan:瓜,子
-rtk2025:繭:cocoon:艹,冂,糸,風
+rtk2025:繭:cocoon:艹,冂,｜,糸,虫
 rtk2026:益:benefit:一,皿,八,丷
 rtk2027:暇:spare time:日,又
 rtk2028:敷:spread:十,田,方,丶,攵
@@ -2181,7 +2181,7 @@ rtk2089:誉:reputation:言,𭕄,八,一
 rtk2090:猟:game-hunting:犭,𭕄,几
 rtk2091:鳥:bird:灬
 rtk2092:鳴:chirp:口,鳥
-rtk2093:鶴:crane:鳥,隹,宀,冖
+rtk2093:鶴:crane:鳥,prim-turkey-house
 rtk2094:烏:crow:丶,口,一,灬
 rtk2095:蔦:vine:鳥,艹
 rtk2096:鳩:pigeon:九,鳥
@@ -2240,7 +2240,7 @@ rtk2148:虚:void:业,虍
 rtk2149:戯:frolic:戈,虚
 rtk2150:虞:fear:呉,卜,七,厂,虍;呉,虍
 rtk2151:慮:prudence:思,卜,七,厂,虍;思,虍
-rtk2152:劇:drama:卜,七,厂,虍,豕,刀
+rtk2152:劇:drama:虍,豕,刀
 rtk2153:虐:tyrannize:一,匚,虍
 rtk2154:鹿:deer:广,prim-antlers,比
 rtk2155:麓:foot of a mountain:林,鹿
@@ -4872,3 +4872,64 @@ prim-hammock:尓:hammock:𠂉,小
 # missing-glyph fallback usually would -- is one this audit had not hit
 # before, and any future render of U+864D-family shapes should force a
 # non-Noto font first rather than trust the default stack's first hit.
+
+# --- 2026-10-01: five more of audit_phantom_parts.py's weak-evidence tail,
+# individually checked (the standing item since chunk 86).
+# 憂 (melancholy) was carrying both 自 and 白 for the same opaque top region
+# cjkvi has no codepoint for (㥑's own IDS is an unencoded placeholder over
+# 心). Stroke arithmetic settles which is real: 一+自+心+冖+夂+白 sums to 21
+# against 憂's real 15, exactly 6 over -- 自's own stroke count -- and
+# 一+白+冖+夂+心 sums to exactly 15. Rendered, 白's plain single-bar box also
+# matches the top region's gestalt better than 自's three-bar one. 自 dropped.
+# 之 (of) had four parts (乙,丶,亠,廴) for a character that is 3 strokes
+# total -- heisig-kanjis.csv's own components text for it ("Zorro; building
+# blocks; zig-zag") is exactly rtk1299's own alias list, not sub-part names,
+# the same self-reference pattern CLAUDE.md already flags for a missing name
+# probably describing the host's own keyword rather than a piece of it.
+# cjkvi agrees it has nothing to add either (⿱丶② is a dot over its own
+# unencoded placeholder). Made atomic (empty primary), matching the existing
+# 冊/柵 convention for a kanji Heisig teaches whole.
+# 縄 (straw rope) carried 田 beside 亀 (tortoise) as if they were separate
+# siblings. cjkvi's own reading is ⿰糸⿻日电 -- the right side is an *overlay*
+# of 日 and 电, not a flat 田 -- and rendered, that overlay is pixel-for-
+# pixel 亀 itself (U+4E80, the simplified tortoise this project already uses
+# whole in 竃). This is the ⿻-misread class CLAUDE.md names 蝿 for. 田 dropped;
+# 亀 alone already covers the shape (its own row further expands it to
+# 日,勹,乙).
+# 繭 (cocoon) carried 風 (wind) for its lower-right content, but cjkvi's IDS
+# (⿱艹⿻⿵冂丨𬗌, 𬗌 = ⿰糹虫) has no 風 in it at all, and 風 is not one of
+# heisig-kanjis.csv's five names for 繭 ("flowers; hood; stick; thread;
+# spiderman; insect") either -- "wind" isn't a name Heisig gives this kanji.
+# Stroke count settles it the same way as 憂: 艹(3)+冂(2)+丨(1)+糸(6)+虫(6) is
+# exactly 繭's real 18 strokes, and rendered, the frame is a plain 冂
+# rectangle with none of 風's hooked outer stroke. 風 replaced with 丨,糸,虫.
+# 鶴 (crane) and 確 (assurance) both carried 隹 beside *both* 宀 and 冖 --
+# redundant on its face, and wrong regardless, since 隺 (cjkvi: ⿻冖隹, an
+# overlay) renders with the flat 2-stroke 冖, not the 3-stroke-with-ticks 宀.
+# Both kanji's own CSV rows name this piece directly: 609's components read
+# "stone; rock; turkeyhouse; house; turkey", 2093's read "turkey house;
+# bird" -- a real two-part Heisig primitive this file had never registered,
+# so every host carrying it was flattening it into raw, partly-wrong
+# strokes instead. Registered prim-turkey-house (隺) below; both rows now
+# read as two top-level parts each, matching their CSV name counts exactly
+# and (609) matching the real stroke count: 石(5)+隺(2+8)=15.
+# 劇 (drama) carried 卜,七,厂 in addition to 虍 -- redundant restatements of
+# 虍's own internal strokes (cjkvi's deeper, unencoded expansion of 虍) once
+# 虍 is already a top-level sibling, and none of the three is named in
+# heisig-kanjis.csv's row for 劇 ("tiger; sow; pig; sword; sabre; saber").
+# 虍+豕+刀 alone sums to exactly 劇's real 15 strokes. All three dropped; 劇
+# does not inherit chunk 87's 匕->七 fix the way 虎/虞/慮/驢 do, because unlike
+# those four it never needed the flattened strokes at all.
+# Left open, lower confidence: 添 carries 天 ("heavens") where cjkvi's
+# Japan-tagged IDS (⿱夭㣺[J], against ⿱天㣺 for every other region) says 夭 --
+# real per the substitution check (the two codepoints do NOT render
+# identically in any installed face), but the stroke-proportion difference
+# between 天/夭 was too subtle for confident visual judgement in this font
+# stack, and swapping it has no search-behavior effect either way since
+# neither primitive's host set is affected. 慕/添's 心 phantom flags are both
+# the same variant-codepoint non-bug as 斎/斉 (cjkvi's 㣺 vs this file's 心
+# -- rendered, 㣺 is a real, legitimate, compact variant, not a different
+# shape). 替/賛 (亠 phantom, cjkvi's 㚘 = ⿰夫夫), 不/印/甚 (single opaque-
+# placeholder flags, likely already-right per the 属 pattern), and 段 (six
+# parts for cjkvi's two, ⑤+殳) are unexamined -- next chunk's material.
+prim-turkey-house:隺:turkeyhouse,turkey house:冖,隹

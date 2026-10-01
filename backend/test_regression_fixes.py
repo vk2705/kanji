@@ -1074,7 +1074,14 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk2092": {"character": "鳴", "keyword": "chirp",
                 "expected_part_ids": {"rtk11", "rtk2091"}},
     "rtk2093": {"character": "鶴", "keyword": "crane",
-                "expected_part_ids": {"kangxi14", "kangxi172", "kangxi40", "rtk2091"}},
+                # 2026-10-01: 鶴 flattened 隺 (cjkvi ⿻冖隹, an overlay) into raw
+                # strokes, and wrongly: it carried 宀 (3-stroke roof) alongside
+                # 冖 (2-stroke cover) when the overlay only has the latter,
+                # confirmed by render and by 確's already-correct 石,冖,隹. Both
+                # kanji's own CSV components name this piece directly
+                # ("turkeyhouse"/"turkey house"), so it is now its own
+                # registered primitive rather than re-flattened per host.
+                "expected_part_ids": {"prim-turkey-house", "rtk2091"}},
     "rtk2095": {"character": "蔦", "keyword": "vine",
                 "expected_part_ids": {"prim-mugwort", "rtk2091"}},
     "rtk2096": {"character": "鳩", "keyword": "pigeon",
@@ -2695,7 +2702,9 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk121": {"character": "砕", "keyword": "smash",
                "expected_part_ids": {"prim-ninety", "rtk118"}},
     "rtk609": {"character": "確", "keyword": "assurance",
-               "expected_part_ids": {"rtk118", "kangxi14", "kangxi172"}},
+               # 2026-10-01: grouped under the new prim-turkey-house (see
+               # rtk2093's note) rather than listed as flat kangxi14+kangxi172.
+               "expected_part_ids": {"rtk118", "prim-turkey-house"}},
     "rtk610": {"character": "午", "keyword": "noon",
                "expected_part_ids": {"prim-reclining", "rtk10"}},
     "rtk1686": {"character": "拝", "keyword": "worship",
@@ -2876,7 +2885,11 @@ EXPECTED_DECOMPOSITIONS = {
     # Was redundantly re-listing 亀(rtk573)'s own 乙,勹 alongside referencing it
     # directly -- 2026-09-05, audit_direct_ref_overlap.py
     "rtk1477": {"character": "縄", "keyword": "straw rope",
-               "expected_part_ids": {"rtk14", "rtk1431", "rtk573"}},
+               # 2026-10-01: dropped rtk14 (田) -- cjkvi's own reading is an
+               # overlay (⿻日电), not a flat 田 sibling, and rendered, the
+               # overlay is pixel-identical to 亀 (rtk573) itself, which this
+               # file already uses whole elsewhere (竃).
+               "expected_part_ids": {"rtk1431", "rtk573"}},
     "rtk1492": {"character": "系", "keyword": "lineage",
                "expected_part_ids": {"prim-katakana-no", "rtk1431"}},
     "rtk1493": {"character": "係", "keyword": "person in charge",
@@ -2934,7 +2947,13 @@ EXPECTED_DECOMPOSITIONS = {
     # Was partial-overlap re-listing 風(rtk563)'s own 虫 alongside referencing it
     # directly -- 2026-09-05, audit_direct_ref_overlap.py
     "rtk2025": {"character": "繭", "keyword": "cocoon",
-               "expected_part_ids": {"kangxi13", "prim-mugwort", "rtk1431", "rtk563"}},
+               # 2026-10-01: dropped rtk563 (風) -- not in cjkvi's IDS and not
+               # one of heisig-kanjis.csv's five names for this kanji. The
+               # real content (cjkvi: ⿻⿵冂丨𬗌, 𬗌=⿰糹虫) is prim-pipe (｜) +
+               # rtk556 (虫), confirmed by exact stroke-count arithmetic
+               # (3+2+1+6+6 = 繭's real 18) and by render (a plain 冂 frame,
+               # none of 風's hooked outer stroke).
+               "expected_part_ids": {"kangxi13", "prim-mugwort", "rtk1431", "prim-pipe", "rtk556"}},
     "rtk2102": {"character": "緩", "keyword": "slacken",
                "expected_part_ids": {"prim-migrating-ducks", "rtk1431"}},
     "rtk2114": {"character": "綱", "keyword": "hawser",
