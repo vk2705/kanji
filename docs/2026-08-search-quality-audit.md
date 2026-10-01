@@ -16376,3 +16376,77 @@ with a font that covers this codepoint, or cjkvi's decomposition of
 whatever 𫩏 itself expands to, if it has one.
 
 495 → 475 pending after this chunk.
+
+## 2026-10-01 — chunk 91: back to `audit_phantom_parts.py`'s weak-evidence tail
+
+Picked up the ja-kanji side rather than continuing the hanzi worklist this
+firing. Two reasons: this routine's own standing "where the work is" section
+points at `audit_phantom_parts.py`'s pile specifically (the standing item
+since chunk 86), and the hanzi worklist has a real persistence gap worth
+flagging rather than quietly working around — `hanzi_worklist_next.py`'s
+*decisions* live in the committed `hanzi_decomposition_worklist.json`, but
+the actual DB fixes from 2026-09-30's chunk 1 (`乕`'s re-decomposition,
+`fix_hanzi_radical_keywords.py`'s direct updates) were applied to a local
+`kanji.db` that cannot have survived this container being reclaimed between
+sessions — `kanji.db` is gitignored and this environment's own setup notes
+say nothing not committed survives a session boundary. Confirmed this
+session's own `kanji.db` didn't exist before the standard rebuild (a fresh
+`import_data()` only, no hanzi). Unlike the kanji side's `data.txt`, hanzi
+fixes have no file-based home to land in, so a hanzi chunk's "real fix" step
+either needs to end in a dedicated one-off script (the
+`fix_hanzi_radical_keywords.py` pattern) every time rather than a bare DB
+write, or the hanzi audit needs a different persistence story before
+resuming it as a daily routine item. Not solved today — flagged for whoever
+picks the hanzi thread back up, kanji-side owner included.
+
+Standard rebuild + verify (ja-kanji only, no `import_hanzi.py`, matching
+this routine's own documented process): `audit_phantom_parts.py
+--in-csv-range` 25/18 → **16/13** (9 phantom parts resolved across 5 kanji:
+憂, 之, 縄, 繭, 鶴/確). Full details and reasoning for each fix are in
+`backend/data.txt`'s own dated comment block (2026-10-01) rather than
+repeated here — stroke-count arithmetic (comparing a host's real
+`heisig-kanjis.csv` stroke count against its listed parts' summed stroke
+counts) turned out to be a fast, objective cross-check worth adding to the
+standing method: an exact match to a candidate phantom's own stroke count is
+strong corroborating evidence for removing it, on top of the usual
+cjkvi-ids/CSV-components/render triangle. One new registered primitive,
+`prim-turkey-house` (隺, cjkvi's `⿻冖隹`), shared by 鶴 and 確, which were
+both flattening it into raw strokes and one of them (鶴) had the wrong raw
+stroke (宀 instead of 冖) to show for it.
+
+Left open, lower confidence, in `data.txt`'s own note: 添's 天 vs cjkvi's
+Japan-tagged 夭 (real per the font-substitution check, but too subtle a
+stroke-proportion difference for confident visual judgement, and zero
+search-behavior impact either way); 慕/添's 心 phantom flags (same
+variant-codepoint non-bug as 斎/斉, confirmed not touched); 替/賛 (亠
+phantom, cjkvi's unexamined `㚘 = ⿰夫夫`); 不/印/甚 (single opaque-placeholder
+flags, likely already-right per the existing 属 pattern, not individually
+confirmed); 段 (six parts for cjkvi's two, `⑤+殳`, unexamined).
+
+Verified: full rebuild from source (3000 kanji, 3136 parts overrides, up
+from 3135 for the new primitive). `test_regression_fixes.py`: 1328/1328,
+two pins corrected (`rtk2093`/`rtk609` for the turkey-house regrouping,
+`rtk1477`/`rtk2025` for 縄/繭's new part sets), each with a dated comment
+explaining the new value. 74 pytest. `audit_overflatten.py` 0,
+`audit_self_reference.py` 0, `audit_radicals.py` 0/0, `audit_primary_
+choice.py` 0 (unchanged, no regression). Frontend `npm install`, `lint`,
+`build:prod` all clean; `sitemap.xml`'s one new line (`prim-turkey-house`)
+committed alongside.
+
+### Next
+
+Two threads, pick based on which this routine's standing brief still wants
+prioritized when next picked up:
+(a) **ja-kanji**: `audit_phantom_parts.py --in-csv-range`'s remaining 16/13
+— 替/賛 (`㚘`), 不/印/甚 (opaque placeholders, likely no-ops but unconfirmed
+individually), 段 (over-fragmented, 6 parts vs cjkvi's 2) are the
+unexamined remainder. 添's 天/夭 call is there too if a cleaner way to judge
+the stroke-proportion difference turns up (a different font face, or a
+side-by-side render inside two sibling hosts rather than the bare
+primitives).
+(b) **hanzi**: `hanzi_worklist_next.py` has 475 pending, but resuming it
+for real needs the persistence question above settled first — at minimum,
+every hanzi chunk's "real fix" step should end in its own dedicated,
+idempotent one-off script (committed, re-runnable against any `kanji.db`
+including prod's) rather than a bare direct-DB write that a session
+boundary silently discards.
