@@ -2603,10 +2603,10 @@
    "日",
    "氵"
   ],
-    "status": "keep-ours",
+  "status": "keep-ours",
   "decision": null,
-    "reviewed_by": "claude",
-    "reviewed_at": "2026-09-24"
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-24"
  },
  {
   "id": "rtk579",
@@ -2636,10 +2636,10 @@
    "辶",
    "𧰨"
   ],
-    "status": "keep-ours",
+  "status": "keep-ours",
   "decision": null,
-    "reviewed_by": "claude",
-    "reviewed_at": "2026-09-24"
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-24"
  },
  {
   "id": "rtk582",
@@ -2670,10 +2670,10 @@
    "口",
    "𧰨"
   ],
-    "status": "keep-ours",
+  "status": "keep-ours",
   "decision": null,
-    "reviewed_by": "claude",
-    "reviewed_at": "2026-09-24"
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-24"
  },
  {
   "id": "rtk583",
@@ -2703,10 +2703,10 @@
    "日",
    "月"
   ],
-    "status": "keep-ours",
+  "status": "keep-ours",
   "decision": null,
-    "reviewed_by": "claude",
-    "reviewed_at": "2026-09-24"
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-09-24"
  },
  {
   "id": "rtk584",
@@ -2738,10 +2738,10 @@
    "十",
    "日"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-01"
  },
  {
   "id": "rtk585",
@@ -2773,10 +2773,10 @@
    "日",
    "氵"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-01"
  },
  {
   "id": "rtk594",
@@ -2804,10 +2804,10 @@
    "丷",
    "目"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-01"
  },
  {
   "id": "rtk612",
@@ -2838,10 +2838,10 @@
    "隹",
    "𠂉"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-01"
  },
  {
   "id": "rtk613",
@@ -2872,10 +2872,10 @@
    "隹",
    "𠂉"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-01"
  },
  {
   "id": "rtk614",
@@ -2910,10 +2910,10 @@
    "隹",
    "𠂉"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-01"
  },
  {
   "id": "rtk618",
@@ -2943,10 +2943,10 @@
    "隹",
    "𠃌"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-01"
  },
  {
   "id": "rtk619",
@@ -2975,10 +2975,10 @@
    "隹",
    "𠃌"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-01"
  },
  {
   "id": "rtk629",
@@ -3011,10 +3011,10 @@
    "囗",
    "𧘇"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-01"
  },
  {
   "id": "rtk637",
@@ -3040,10 +3040,10 @@
    "广",
    "木"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-01"
  },
  {
   "id": "rtk650",
@@ -3071,10 +3071,13 @@
    "口",
    "心"
   ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "use-google",
+  "decision": [
+   "串",
+   "心"
+  ],
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-01"
  },
  {
   "id": "rtk661",
@@ -3107,10 +3110,10 @@
    "口",
    "心"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-01"
  },
  {
   "id": "rtk662",
@@ -3142,10 +3145,10 @@
    "心",
    "戊"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-01"
  },
  {
   "id": "rtk663",
@@ -3177,10 +3180,10 @@
    "夂",
    "心"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-01"
  },
  {
   "id": "rtk667",
@@ -3208,10 +3211,10 @@
    "忄",
    "日"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-01"
  },
  {
   "id": "rtk668",
@@ -3240,10 +3243,10 @@
    "忄",
    "日"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-01"
  },
  {
   "id": "rtk669",
@@ -3272,10 +3275,10 @@
    "忄",
    "𫝀"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-01"
  },
  {
   "id": "rtk675",
@@ -3307,10 +3310,10 @@
    "忄",
    "月"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-01"
  },
  {
   "id": "rtk681",
@@ -3340,10 +3343,10 @@
    "忄",
    "甲"
   ],
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-01"
  },
  {
   "id": "rtk686",
@@ -3370,10 +3373,13 @@
    "心",
    "氵"
   ],
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "use-google",
+  "decision": [
+   "必",
+   "水"
+  ],
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-01"
  },
  {
   "id": "rtk690",

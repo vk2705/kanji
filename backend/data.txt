@@ -753,7 +753,7 @@ rtk682:憬:yearn for:state of mind,景
 rtk683:慕:pining:心,莫
 rtk684:添:annexed:水,天,心
 rtk685:必:invariably:ノ,心
-rtk686:泌:ooze:必,水,丶;必,水
+rtk686:泌:ooze:必,水
 rtk687:手:hand:
 rtk688:看:watch over:手,目
 rtk689:摩:chafe:手,麻
