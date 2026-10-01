@@ -16615,3 +16615,52 @@ every hanzi chunk's "real fix" step should end in its own dedicated,
 idempotent one-off script (committed, re-runnable against any `kanji.db`
 including prod's) rather than a bare direct-DB write that a session
 boundary silently discards.
+
+## 2026-10-01 — hanzi worklist daily job: stopped, dirty working tree
+
+Second firing today, this one the actual `hanzi-worklist-review` timer job
+(the chunk-91 entry above was a different routine picking the ja-kanji
+thread instead). Did not review any rows. `git status` at the start of this
+session showed more than the "worklist JSON reflecting earlier decisions"
+exception the job's own guardrails allow for:
+
+- `frontend/public/sitemap.xml` — modified, **+21,276/-22** lines. Far too
+  large and unrelated to this job to be mine to resolve; looks like a
+  sitemap regeneration from some other session, mid-flight.
+- `docs/kanji_review_coverage.tsv` — modified, 50 lines changed, also not
+  something this job touches.
+- `backend/test_api_security.py`, `backend/export_public_data.py`,
+  `backend/public_data_export.jsonl` — untracked, unrelated to hanzi
+  decomposition work.
+- `docs/living-room-layout-{clean,overlay,revised}.{png,svg}` — untracked,
+  and not a kanji-project artifact at all; this box appears to have had an
+  unrelated task's output land in this working directory.
+- `review1` — untracked, dated Aug 31, plain text, origin unclear.
+- `backend/hanzi_worklist_daily_prompt.md` and
+  `backend/run_hanzi_worklist_review.sh` are also untracked but are *not*
+  stray — reading them, they're this very job's own prompt file and the
+  systemd-timer wrapper script that invokes it (`run_hanzi_worklist_review.sh`'s
+  header names `hanzi-worklist-review.timer`/`.service`). Worth a maintainer
+  committing these deliberately so the job's own infrastructure isn't
+  sitting as uncommitted state, but not this run's call to make.
+
+Per this job's own guardrails ("if git status shows unexpected uncommitted
+changes from a prior incomplete run ... stop and leave a note ... rather
+than proceeding or cleaning it up yourself"), stopping here rather than
+reviewing worklist rows against an uncertain tree state, and rather than
+touching any of the above. This also lines up with the persistence-gap
+finding in the chunk-91 entry just above: a hanzi chunk's "real fix" step
+writes directly to the local `kanji.db`, which is itself not obviously
+durable across sessions on this box, so running the review into an already-
+dirty tree compounds a question that isn't settled yet rather than resolving
+it.
+
+No worklist rows were touched; `hanzi_worklist_next.py --pending-count`
+still reports **475 pending / 495 total**, unchanged from the chunk-91 entry
+above. Nothing in `backend/` or elsewhere was modified by this run except
+this doc entry. Flagging for the maintainer: please either commit or
+`.gitignore` the stray files above (especially the large `sitemap.xml`/
+`kanji_review_coverage.tsv` diffs, which look like real in-progress work
+worth not losing), and commit `hanzi_worklist_daily_prompt.md`/
+`run_hanzi_worklist_review.sh` deliberately, so the next scheduled firing
+starts from a clean tree.
