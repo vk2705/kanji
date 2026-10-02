@@ -980,8 +980,8 @@ rtk901:夫:husband:一,大;二,人
 rtk902:扶:aid:夫,扌
 rtk903:渓:mountain stream:水,爪,夫
 rtk904:規:standard:夫,見
-rtk905:替:exchange:人,二,日,亠,夫
-rtk906:賛:approve:貝,人,二,亠,夫
+rtk905:替:exchange:夫,日
+rtk906:賛:approve:夫,貝
 rtk907:潜:submerge:替,水
 rtk908:失:lose:ノ,夫
 rtk909:鉄:iron:金,失
@@ -2091,7 +2091,7 @@ rtk1999:派:faction:水,𠂋
 rtk2000:脈:vein:月,𠂋
 rtk2001:衆:masses:血,乑
 rtk2002:逓:relay:辶,𠂋,prim-cornstalk,冂
-rtk2003:段:grade:｜,殳,几,又,ノ,一
+rtk2003:段:grade:prim-staple-gun,殳
 rtk2004:鍛:forge:段,金
 rtk2005:后:empress:𠂋,口
 rtk2006:幻:phantasm:幺,𠃌;幺
@@ -4933,3 +4933,47 @@ prim-hammock:尓:hammock:𠂉,小
 # placeholder flags, likely already-right per the 属 pattern), and 段 (six
 # parts for cjkvi's two, ⑤+殳) are unexamined -- next chunk's material.
 prim-turkey-house:隺:turkeyhouse,turkey house:冖,隹
+
+# --- 2026-10-02: the three unexamined entries from the note just above.
+# 替/賛 both carried 人,二,亠,夫 (or 貝,人,二,亠,夫) for a top that renders as
+# two 夫 side by side (cjkvi: 替 ⿱㚘日, 賛 ⿱㚘貝, 㚘 = ⿰夫夫) -- 人,二 is the
+# ⿻-overlay trap CLAUDE.md warns about (夫 itself is cjkvi's ⿻二人, shared
+# strokes, not two stackable parts), and 亠 doesn't correspond to any stroke
+# actually drawn in either glyph. heisig-kanjis.csv's own components read
+# "husband; sun; day; tongue wagging" (替) and "husband; shellfish; clam;
+# oyster; eye; animal legs; eight" (賛) -- in both cases a single "husband"
+# plus the full expansion of the other half, exactly the 林/森 pattern
+# (CSV names a doubled primitive once, not twice: 森's row reads "tree;
+# wood" too, not "tree; wood; tree; wood"). Both rows now read as two
+# top-level parts, 夫,日 and 夫,貝, matching Heisig's name count and the
+# render.
+# 不, 印, 甚 are all cjkvi opaque-placeholder cases (⿱一③, ⿰③卩, ⿱⑤匹) and
+# all three were already right:
+# - 不 (｜,ノ,一,丶) is a plain 4-stroke decomposition and matches the glyph
+#   stroke-for-stroke -- there is nothing left to name past that level.
+# - 印 (｜,卩) was already deliberately left as-is in chunk 53's note just
+#   above ("Not added: staples to 印" -- its own CSV row says "staples" but
+#   the name's other two hosts, 興/暇, don't contain 印, so the name's real
+#   referent is still open). Nothing new to add today.
+# - 甚 (甘,匹) renders as an exact match: the top is 甘's own proportions
+#   (box + crossbar), not 其's (bushel basket, which cjkvi and this file
+#   both register as 甘 *plus* a flared 八 that 甚 doesn't have below it).
+#   heisig-kanjis.csv's "bushel basket; hamper" for 甚 looks like it's
+#   naming 其, but rendered side by side 甚's top has no 八 -- the CSV name
+#   doesn't match the glyph here, and the glyph wins.
+# 段 (｜,殳,几,又,ノ,一) was a hand-flattened pile: 几,又 is 殳's own cjkvi
+# sub-parts restated redundantly beside 殳 itself (the same redundant-
+# restatement bug as 劇's 卜,七,厂 two entries up), and ｜,ノ,一 were an
+# attempt to spell cjkvi's unencoded left placeholder (⿰⑤殳) out of loose
+# strokes. heisig-kanjis.csv's own components read "staple gun; cruise
+# missile; missile; wind; crotch" -- "staple gun" is a real Heisig name,
+# just never registered, for the ⑤ shape; "cruise missile; missile; wind;
+# crotch" is 殳's own full expansion (its two aliases plus 几/又, the pieces
+# cjkvi's own reading further splits it into). Rendered beside 殷 (U+6BB7,
+# cjkvi ⿰㐆殳), 段's left half is pixel-for-pixel 㐆 (U+3406) -- the same
+# "flight of stairs" primitive both characters share on their left, not a
+# pile of unrelated strokes. Registered prim-staple-gun (㐆) below; 段 now
+# reads as two top-level parts, prim-staple-gun,殳, matching Heisig's two
+# names and cjkvi's own split exactly. 鍛 (forge) already used 段 whole and
+# needed no change.
+prim-staple-gun:㐆:staple gun:

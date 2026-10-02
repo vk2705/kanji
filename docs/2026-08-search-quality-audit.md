@@ -16833,3 +16833,112 @@ both times, unaffected).
 455 → 435 pending after this chunk.
 
 455 pending / 495 total after this chunk (475 before).
+
+## 2026-10-02 — chunk 92: closing out chunk 91's unexamined remainder (替/賛/段 fixed, 不/印/甚 confirmed)
+
+Daily `search-quality audit` firing. Container came up with no checkout at
+all this time (previous firings' `/home/user/kanji` didn't survive the
+container boundary) — cloned fresh, and `git push --dry-run origin master`
+confirmed push access before doing anything else, per this routine's own
+standing step 0. Also missing and rebuilt from scratch: `cjkvi-ids`
+(`/tmp/ids.txt`) and the CJK font stack (`fonts-noto-cjk`/`fonts-hanazono`,
+Noto first) — neither survives a container boundary either.
+
+Picked up the ja-kanji thread chunk 91 left open (the hanzi worklist thread
+is a separate scheduled job's territory, not this routine's "where the work
+is" list), working through the three remaining unexamined items in
+`audit_phantom_parts.py --in-csv-range`'s weak-evidence tail, one render at
+a time:
+
+**替/賛 (two real fixes).** Both carried `人,二,日,亠,夫` / `貝,人,二,亠,夫`
+for a top that cjkvi renders as `⿱㚘日` / `⿱㚘貝`, `㚘 = ⿰夫夫` — two 夫 side
+by side. `人,二` turned out to be exactly the ⿻-overlay trap CLAUDE.md
+warns about: 夫 itself is cjkvi's `⿻二人` (shared strokes, not two
+stackable pieces), so flattening it into `人,二` *beside* keeping `夫` itself
+double-counts the same shape two ways, and `亠` doesn't correspond to any
+stroke actually drawn in either glyph (rendered side by side with 夫/人/二/
+亠/㚘, the top of both kanji is unmistakably two plain 夫, nothing roof-
+shaped). `heisig-kanjis.csv`'s own components read "husband; sun; day;
+tongue wagging" (替) and "husband; shellfish; clam; oyster; eye; animal
+legs; eight" (賛) — one "husband" plus the other half's full expansion, in
+both cases, which is the same pattern 林/森 already established for this
+file (a doubled primitive gets named once in the CSV column, not twice —
+森's row reads "tree; wood", not the name pair repeated). Both rows now
+read as two top-level parts: `夫,日` and `夫,貝`.
+
+**不/印/甚 (confirmed, no change).** All three are cjkvi opaque-placeholder
+cases (`⿱一③`, `⿰③卩`, `⿱⑤匹`) carried in chunk 91 as "likely already-right,
+not individually confirmed" — rendered this chunk:
+- 不 (`｜,ノ,一,丶`) is a plain 4-stroke spelling that matches the glyph's
+  actual strokes exactly; there's nothing finer to name.
+- 印 (`｜,卩`) already has its own dedicated decision, from chunk 53: "Not
+  added: staples to 印" — its CSV row does say "staples", but the name's
+  other two hosts (興/暇) don't contain 印, so what Heisig means by the name
+  is still open (`suggest_heisig_aliases.py` territory, not a phantom-parts
+  fix). Nothing new to add today; this chunk's render didn't change that
+  call.
+- 甚 (`甘,匹`) renders as an exact match for `甘`'s own proportions (box +
+  crossbar) with no flared `八` below it — `heisig-kanjis.csv`'s "bushel
+  basket; hamper" looks on paper like it's naming `其` (bushel basket =
+  `甘` *plus* that flared `八`, already registered as `prim-bushel-basket`),
+  but rendered side by side 甚's top plainly lacks the `八`. The CSV name
+  doesn't match the glyph here; the glyph wins, per the standing method.
+
+**段 (one real fix, one new primitive).** Carried `｜,殳,几,又,ノ,一` — six
+parts against cjkvi's two (`⿰⑤殳`). `几,又` is `殳`'s own cjkvi sub-parts
+restated redundantly beside `殳` itself (the same redundant-restatement
+pattern as 劇's dropped `卜,七,厂`, two chunks ago), and `｜,ノ,一` was an
+attempt to spell cjkvi's unencoded left placeholder out of loose strokes.
+`heisig-kanjis.csv`'s components read "staple gun; cruise missile; missile;
+wind; crotch" — "cruise missile; missile; wind; crotch" is `殳`'s own full
+expansion (its two aliases plus the `几`/`又` cjkvi further splits it into),
+and "staple gun" is a real Heisig name for the left shape that this file had
+simply never registered (checked: it's a single-host name, 段 and 鍛 are the
+only two CSV rows that carry it, 鍛 only because it already contains 段
+whole). Rendered beside 殷 (U+6BB7, cjkvi `⿰㐆殳` — the same right-hand `殳`,
+different left half), 段's left half is pixel-for-pixel `㐆` (U+3406): both
+characters share this "flight of stairs" shape on the left, not a pile of
+unrelated strokes. Registered `prim-staple-gun` (㐆); `段` now reads as
+`prim-staple-gun,殳`, two top-level parts matching both Heisig's two names
+and cjkvi's own split. `鍛` already used `段` whole and needed no change.
+`㐆` is above the font stack's reliable-rendering line the same way
+`prim-turkey-house` wasn't (it's in CJK Ext A, not the BMP astral range that
+usually triggers this, but `make_primitive_images.needs_image` flagged it
+anyway and `test_regression_fixes.py`'s primitive-image check caught the
+missing render before it could ship) — ran `make_primitive_images.py`,
+confirmed the new PNG actually shows `㐆`'s stairs shape and not a tofu box,
+committed it alongside.
+
+Net: `audit_phantom_parts.py --in-csv-range` 16/13 → **11/10** (5 phantom
+parts resolved across 3 kanji: 替, 賛, 段). The remaining 11/10 is exactly
+chunk 91's previously-documented-and-left-open set (憂/慕/添's variant-
+codepoint non-bugs, 斎/属/能's font-substitution/synthetic-primitive non-
+bugs) plus the three confirmed-correct opaque-placeholder cases above
+(不/印/甚) — nothing left in `--in-csv-range`'s output that isn't already
+explained in `data.txt`'s own comments.
+
+Verified: full rebuild from source (3000 kanji frames, 3221 kanji rows
+total including primitives, 3137 parts overrides, up from 3136).
+`test_regression_fixes.py`: 1328/1328 (no pins needed correcting — nothing
+in `test_regression_fixes.py` referenced rtk905/906/2003's old part lists).
+74 pytest. `audit_overflatten.py` 0, `audit_self_reference.py` 0,
+`audit_radicals.py` 0/0, `audit_primary_choice.py` 0 (all unchanged, no
+regressions). Frontend `npm install`, `lint`, `build:prod` all clean;
+`sitemap.xml`'s one new line (`prim-staple-gun`) committed alongside.
+
+### Next
+
+`audit_phantom_parts.py --in-csv-range`'s remaining 11/10 is now fully
+accounted for in `data.txt`'s own comments (nothing left to individually
+confirm), so the next ja-kanji session should either widen scope (drop
+`--in-csv-range` and look at the hanzi-only and off-CSV findings
+`--hide-blind` was built to separate out) or move to the other standing
+thread: `suggest_heisig_aliases.py --near 0.8 --all`'s ~236 remaining
+names (flat tail, 0 names with 20+ hosts, pick from `--near` output rather
+than by host count — see chunk 90's notes on why host-count ordering
+stopped being useful). `kangxi58` (currently 彑, should be 彐 per
+`CJKRadicals.txt`) is still open housekeeping — low-urgency, but renaming an
+id moves every pin referencing it, so budget a full chunk for it rather
+than folding it into another one. The hanzi worklist thread (455 pending as
+of chunk-91's entry) belongs to the separate `hanzi-worklist-review`
+scheduled job, not this routine.
