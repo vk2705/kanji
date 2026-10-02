@@ -16748,4 +16748,88 @@ passed, unaffected).
   the `龰` shape that the current row is missing, or whether `一` is already
   covering it. Flagged rather than guessed.
 
+## 2026-10-02 — hanzi worklist, chunk 3: next 20 (16 keep-ours, two real fixes, two deferred)
+
+Unattended daily run. `git status` on the two tracked files
+(`docs/hanzi_decomposition_worklist.json`, this doc) was clean on arrival —
+no interrupted prior run. `./venv/bin/pytest -v` passed (99 tests) before
+touching anything; `backup_db.py` taken first
+(`backups/kanji-20261002-100702.db`). `hanzi_worklist_next.py -n 20` for the
+next 20 rows (455 pending going in). All 20 hosts rendered via
+`render_glyphs.py` (batches of hosts plus every component glyph in their
+cjkvi readings) before any decision, per the standing render-it rule.
+
+**16 keep-ours** (內 具 冄 内 冊 农 击 函 凾 刄 制 力 办 匁 匆 化): same pattern
+as the first two chunks — the overlay flag cjkvi raises is real (the named
+parts do technically share or cross strokes rather than sitting cleanly
+side by side), but the current row already names exactly the pieces
+actually drawn, at the right level. 具 (`⿱⿴且一八`, ours `且,一,八`) and 函/凾
+(`⿶凵⿻了⿱丷八` / `⿶凵⿻了叹`, ours matching all four / three named pieces)
+are the most nested of the batch, but every named part in each is visibly
+present in the render and nothing reads as invented or phantom. 𦉫 (冊's
+first part) and 𧘇 (农's second part) were each double-checked individually
+against `fc-match`, since both are rare codepoints — both resolve to a real
+CJK face (Noto Sans CJK JP), not a fallback, so they're genuine distinct
+glyphs on this machine, not a tofu substitution standing in for something
+else.
+
+**Two real fixes, both applied directly to `kanji.db`** (no `data.txt` line
+exists for hanzi rows):
+- **冎 (hanzi-518e)**: old parts `冂,𠃍,冂` (the keyword/char pairing made it
+  look like three parts, but it's really `冂`+`𠃍` with `冂` duplicated at
+  the end) — a plain data bug, not a cjkvi-overlay question. `𠃍` (U+200CD,
+  "turning hook stroke") has no `kanji` row of its own anywhere in this
+  database — confirmed by grepping every `parts` row containing it (three
+  hits total, hanzi-518e plus 夬/hanzi-592c and 巪/hanzi-5dea, all three
+  missing a keyword pairing for the same reason) — so `expand_part_terms`
+  can't attach a keyword to it and never could; this is a pre-existing,
+  wider gap in the primitive vocabulary, not something to invent a name for
+  in this one row. The fix here only removes the duplicate, leaving `𠃍`
+  bare exactly as its two sibling rows already do, which is the
+  database's existing (imperfect but consistent) convention for this
+  codepoint. Rendered `冎` and `𠃍` together to confirm: `冎` is visibly
+  `冂` (the open-bottom frame) with `𠃍`'s hook stroke forming the
+  lower-right corner — exactly cjkvi's own `⿻冂𠃍` reading (opaque at
+  `𠃍`, which it already was before this fix). Applied via
+  `expand_part_terms(conn, ['冂', '𠃍'], ..., script_group='zh')`,
+  replacing decomposition 3794's 5 old `parts` rows with 3 new ones.
+- **刃 (hanzi-5203)**: `丿` ("line") → `丶` ("dot"). Rendered `刃` next to
+  both `丿` and `丶` side by side: the extra mark on `刃`'s blade is a short
+  diagonal tick, matching `丶`'s length and shape, not `丿`'s long sweeping
+  stroke (confirmed further by rendering `刄`, hanzi-5204, alongside it —
+  `刄`'s own extra stroke is `乀`, visibly longer than `刃`'s, so the two
+  characters are genuinely different lengths of mark and `刃`'s was
+  mislabeled as the longer one). cjkvi's own reading already said `丶`
+  ([J] — a Japanese-source IDS); the render independently confirms it was
+  right. Applied via `expand_part_terms(conn, ['刀', '丶'], ...,
+  script_group='zh')`, replacing decomposition 3893's 4 old `parts` rows
+  with 4 new ones.
+
+Both fixes verified with the full pytest suite before and after (99 passed
+both times, unaffected).
+
+**Two deferred:**
+- **兩 (hanzi-5169)**: `⿱一⿻巾𠓜`. `𠓜` (U+204DC) renders as a box-with-X on
+  this machine — checked it isn't just a small/stylized glyph via
+  `fc-match :charset=204dc`, which falls back to plain "Noto Sans" (no CJK
+  face claims this codepoint at all), confirming a genuine `.notdef`
+  substitution rather than a real outline. The current row already uses
+  `𠓜` as one of its three parts, so this isn't a new problem introduced by
+  cjkvi's reading, but it means neither reading can be visually verified
+  against the glyph right now. Left as `needs-render`.
+- **兼 (hanzi-517c)**: `⿱䒑⿻⿻コ一④`. Same shape this audit already hit in
+  chunk 2's 亷 (hanzi-4eb7, `⿸产⿻⿻コ一④`) — the render clearly shows real
+  structure below `䒑`: two mirrored hook-like strokes (compared against
+  `彐`/U+5F50 rendered side by side, which is a plausible visual match for
+  one of them) crossed by a horizontal line, none of which the current
+  row's second part (`一`) covers on its own. So, as with 亷, this reads as
+  a likely real undercount rather than just weak overlay evidence — but
+  cjkvi's own reading bottoms out in the same unresolvable `④` placeholder
+  (a per-entry circled-number stand-in with no citable identity, per
+  CLAUDE.md's phantom-parts note), so there is still no source offering a
+  specific correct reading for the second mirrored stroke to check a guess
+  against. Flagged `needs-render` rather than guessed, same call as 亷.
+
+455 → 435 pending after this chunk.
+
 455 pending / 495 total after this chunk (475 before).
