@@ -2021,7 +2021,10 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk679": {"character": "憶", "keyword": "recollection",
                 "expected_part_ids": {"kangxi61", "rtk654"}},
     "rtk686": {"character": "泌", "keyword": "ooze",
-                "expected_part_ids": {"kangxi3", "rtk137", "rtk685"}},
+                # 2026-10-01: dropped a stray 丶 (kangxi3) that double-counted
+                # a stroke already inside 必 (rtk685) -- see the kanji worklist
+                # chunk-2 doc entry.
+                "expected_part_ids": {"rtk137", "rtk685"}},
     "rtk698": {"character": "搭", "keyword": "board",
                 "expected_part_ids": {"kangxi64", "prim-mugwort", "rtk269"}},
     "rtk714": {"character": "括", "keyword": "fasten",
