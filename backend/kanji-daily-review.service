@@ -1,0 +1,11 @@
+[Unit]
+Description=Daily kanji/hanzi decomposition review (audit scripts + worklist refresh)
+After=network.target
+
+[Service]
+Type=oneshot
+User=ec2-user
+Group=ec2-user
+WorkingDirectory=/home/ec2-user/apps/kanji/backend
+Environment=CJKVI_IDS=/tmp/ids.txt
+ExecStart=/home/ec2-user/apps/kanji/backend/venv/bin/python3 /home/ec2-user/apps/kanji/backend/daily_review.py

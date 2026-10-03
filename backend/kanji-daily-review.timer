@@ -1,0 +1,16 @@
+[Unit]
+Description=Run the daily kanji/hanzi review at 02:00, well before the 03:15 db backup
+
+[Timer]
+# Measured end-to-end runtime (2026-10-02, this box, unloaded, run sequentially
+# as this routine does): ~21 min for the first 13 of 16 steps, + audit_weak_evidence.py
+# alone at 6m31s, + audit_hanzi_weak_evidence.py alone at 5m13s -- realistic
+# total ~33 min. 02:00 leaves well over an hour of margin before
+# kanji-db-backup.timer fires at 03:15, so the two jobs never overlap and
+# compete for CPU/disk I/O.
+OnCalendar=*-*-* 02:00:00
+RandomizedDelaySec=60
+Persistent=true
+
+[Install]
+WantedBy=timers.target

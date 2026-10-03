@@ -81,6 +81,23 @@ from audit_phantom_parts import (
 DEFAULT_MAX_DEPTH = 4
 DEFAULT_EXPAND = 2
 
+_resolve_cache: dict[str, str | None] = {}
+
+
+def resolve_alias_cached(conn, term):
+    """Memoized database.resolve_alias(conn, term) -- this script never writes,
+    so the same term always resolves the same way for its whole run, and
+    resolve_alias is two uncached SQL queries per call. reachable()'s BFS calls
+    it once per (visited node, decomposition part) with no caching at all,
+    which is what actually made this script's runtime explode (found
+    2026-10-03 by timing each stage -- row_for_glyph's O(n) scan, fixed
+    earlier the same day, turned out not to be the dominant cost; this is).
+    """
+    key = term.strip().lower()
+    if key not in _resolve_cache:
+        _resolve_cache[key] = database.resolve_alias(conn, term)
+    return _resolve_cache[key]
+
 
 def cjkvi_children(ids, ch, depth=DEFAULT_EXPAND, _seen=None):
     """Every glyph cjkvi-ids puts inside `ch`, expanded `depth` levels.
@@ -104,13 +121,64 @@ def cjkvi_children(ids, ch, depth=DEFAULT_EXPAND, _seen=None):
     return out
 
 
-def row_for_glyph(identities, glyph):
+def build_glyph_index(identities):
+    """normalised character -> every system row with that character.
+
+    row_for_glyph used to linear-scan all of `identities` (every kanji+hanzi
+    row, ~25,000) per call, and findings() calls it once per (CSV row with a
+    dropped name) x (cjkvi_children glyph) -- easily tens of millions of
+    comparisons depending on the day's data, which is what made this script's
+    runtime wildly variable instead of just slow (found 2026-10-03, after it
+    hung for 30+ minutes in the nightly review routine with zero output).
+    Building this index once up front turns each lookup into O(1).
+    """
+    index = {}
+    for kid, (ch, _names) in identities.items():
+        if ch:
+            index.setdefault(normalise(ch), set()).add(kid)
+    return index
+
+
+def row_for_glyph(glyph_index, glyph):
     """Every system row whose character is `glyph`, RADICAL_VARIANTS applied."""
-    target = normalise(glyph)
-    return {
-        kid for kid, (ch, _names) in identities.items()
-        if ch and normalise(ch) == target
-    }
+    return glyph_index.get(normalise(glyph), set())
+
+
+_direct_children_cache: dict[str, set[str]] = {}
+
+
+def _direct_children(conn, claims, cur):
+    """Every id cur's own system decompositions name as a part, resolved.
+
+    Memoized by cur alone (module-level, persists across the whole run) --
+    reachable()'s BFS used to recompute this by re-querying the DB every time
+    it visited the same node from a *different* top-level kid, since its own
+    cache only covered the top-level kid, not intermediate frontier nodes.
+    Profiling (2026-10-03) showed this was the actual bottleneck: 300 CSV
+    rows alone issued 84,752 conn.execute() calls, 99% of total runtime --
+    far more than 300 top-level reachable() calls could produce without a lot
+    of redundant re-traversal of shared sub-trees (common primitives are
+    reachable from many different hosts across the ~2,200-row CSV). The
+    earlier resolve_alias_cached() fix was real but cheap by comparison
+    (resolve_alias itself totaled under a quarter-second across 266,075 calls
+    once cached) -- this is the one that actually mattered.
+    """
+    if cur in _direct_children_cache:
+        return _direct_children_cache[cur]
+    out = set()
+    for row in conn.execute(
+        """SELECT p.part_term FROM parts p
+             JOIN decompositions d ON d.id = p.decomposition_id
+            WHERE d.kanji_id = ? AND d.owner_id = 1""",
+        (cur,),
+    ).fetchall():
+        term = row["part_term"].strip().lower()
+        out |= set(claims.get(term, ()))
+        resolved = resolve_alias_cached(conn, row["part_term"])
+        if resolved:
+            out.add(resolved)
+    _direct_children_cache[cur] = out
+    return out
 
 
 def reachable(conn, claims, kid, max_depth=DEFAULT_MAX_DEPTH, _cache=None):
@@ -131,20 +199,9 @@ def reachable(conn, claims, kid, max_depth=DEFAULT_MAX_DEPTH, _cache=None):
         cur, depth = frontier.pop()
         if depth > max_depth:
             continue
-        for row in conn.execute(
-            """SELECT p.part_term FROM parts p
-                 JOIN decompositions d ON d.id = p.decomposition_id
-                WHERE d.kanji_id = ? AND d.owner_id = 1""",
-            (cur,),
-        ).fetchall():
-            term = row["part_term"].strip().lower()
-            candidates = set(claims.get(term, ()))
-            resolved = database.resolve_alias(conn, row["part_term"])
-            if resolved:
-                candidates.add(resolved)
-            for cid in candidates - seen - {cur}:
-                seen.add(cid)
-                frontier.append((cid, depth + 1))
+        for cid in _direct_children(conn, claims, cur) - seen - {cur}:
+            seen.add(cid)
+            frontier.append((cid, depth + 1))
     _cache[kid] = seen
     return seen
 
@@ -160,7 +217,7 @@ def own_part_ids(conn, claims, kid):
         (kid,),
     ).fetchall():
         out |= set(claims.get(row["part_term"].strip().lower(), ()))
-        resolved = database.resolve_alias(conn, row["part_term"])
+        resolved = resolve_alias_cached(conn, row["part_term"])
         if resolved:
             out.add(resolved)
     return out
@@ -168,10 +225,11 @@ def own_part_ids(conn, claims, kid):
 
 def findings(conn, identities, claims, ids, args):
     cache = {}
+    glyph_index = build_glyph_index(identities)
 
     def answers_to(name):
         candidates = set(claims.get(name, ()))
-        resolved = database.resolve_alias(conn, name)
+        resolved = resolve_alias_cached(conn, name)
         if resolved:
             candidates.add(resolved)
         return candidates
@@ -202,7 +260,7 @@ def findings(conn, identities, claims, ids, args):
                 continue
             parts = own_part_ids(conn, claims, kid)
             for glyph in sorted(cjkvi_children(ids, host, args.expand)):
-                rows = row_for_glyph(identities, glyph)
+                rows = row_for_glyph(glyph_index, glyph)
                 if not rows or rows & reach:
                     continue
                 hit = sorted({n for n in dropped if answers_to(n) & rows})
