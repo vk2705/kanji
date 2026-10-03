@@ -17039,3 +17039,126 @@ named parts present with correct keywords) and the full pytest suite before
 and after (99 passed both times, unaffected).
 
 435 → 415 pending after this chunk.
+
+## 2026-10-03 — chunk 93: two stale "Next" pointers, three real alias fixes
+
+Daily firing. Container had no checkout again — cloned fresh, `git fetch` +
+`git pull --ff-only` + `git push --dry-run origin master` confirmed push
+access before touching anything (step 0 of this routine). `cjkvi-ids` and
+the font stack (`fonts-noto-cjk` then `fonts-hanazono`) were also missing
+and rebuilt from scratch, same as every other recent firing — neither
+survives a container boundary.
+
+**Both of chunk 92's "Next" leads turned out to be already closed, not new
+work — checked before touching anything, since the point of step 0 and this
+section is "verify before committing," not "trust the last note":**
+
+* **`kangxi58`** — chunk 92 and the standing task brief both still say it
+  "holds 彑, should be 彐 per `CJKRadicals.txt`." It doesn't: the swap
+  happened on 2026-09-18 (the "sixth chunk" entry above) — `kangxi58` is
+  `彐`, `彑` lives at `prim-pigs-head`, both confirmed directly against
+  the live `data.txt`. The note just never got updated after the fix
+  shipped. No action needed; flagging here so the next firing doesn't
+  re-read the same stale line out of this log or the task prompt and spend
+  a chunk "fixing" something already fixed.
+* **"widen `audit_phantom_parts.py` scope by dropping `--in-csv-range`"**
+  — ran it. The 21-phantom/16-kanji set it surfaces beyond the CSV's frame
+  range (捷, 蘭, 祢, 蝿, 訊, 爾, 鹵, 齟, 齬, 毅, 叡, 淵, 滲, plus 斎/属/能
+  which are also in `--in-csv-range`'s own output) is not new — it is
+  *exactly* chunks 79–83's already-closed investigation (2026-09-25):
+  confirmed-correct opaque-intermediate cases (捷, 蘭), confirmed codepoint-
+  variant blind spots (祢, 滲, 齟, 齬), one `⿻`-overlay revert (蝿) and two
+  `⿴`-reading reverts (淵, 叡) already restored to their pre-chunk-79 state
+  with pins fixed. Chunk 83's own conclusion was "no rows changed, this is
+  a backlog of detector blind spots, not bugs" — still true today, nothing
+  in `data.txt` has touched any of these 13 kanji since. Re-litigating it
+  would have produced chunk 83's report a second time. Not touched.
+
+**Where the real work was: `suggest_heisig_aliases.py --near 0.8 --all`.**
+At the default `--min-hosts 3` this is now clean — 0 matched, 0 ambiguous,
+only the same 3 small unregistered groups chunk 92 already knew about
+(`--near 0.8` found no vouching candidate for any of them, confirming they
+really are new-primitive territory, not alias gaps — left alone rather than
+guessed at). Tried `--min-hosts 1` to see what the ~236-name estimate in
+earlier notes was actually counting: 113 unregistered groups (mostly 1-2
+hosts, matches the "flat tail" description) plus 4 "matched" groups the
+default threshold filters out. Checked all 4 by hand before trusting any of
+them, because 1-host groups are exactly the degenerate case
+`nearest_names()`'s own docstring warns about (two unrelated names can share
+a host set by sheer coincidence when both have only 1 host) — and two of the
+four were exactly that:
+* `rtk447`'s group (`hat`, `made in…` vouched by `system`) is a false
+  positive: all three names' real host sets are the single row `製`'s own
+  CSV line, coincidentally identical only because each has exactly one
+  occurrence in the whole file. Checked what `hat` actually names instead
+  of guessing: `heisig-kanjis.csv`'s own row for `製`'s components is
+  "made in…; system; cow; belt; sword; sabre; saber; **hat**; scarf; cloth;
+  clothes; clothing; garment" — "scarf"/"cloth"/"clothes"/"clothing"/
+  "garment" are all already-registered names for `衣` (`rtk423`), and
+  "top hat" (81 hosts, not 1) already resolves to `kangxi14`... no, to
+  `kangxi8` (`亠`, lid) elsewhere in the same CSV row for `衣` itself.
+  "hat" is almost certainly a one-off CSV shorthand for "top hat" used only
+  in this row, not a name for `rtk447` (`制`, "system"). Not added anywhere
+  — one-host, already-covered-by-"top hat", not worth guessing a second
+  home for.
+* `made in…` (the Unicode-ellipsis spelling) not resolving is just a
+  punctuation mismatch against `rtk448`'s stored keyword `made in...`
+  (three ASCII periods) — already effectively searchable under the ASCII
+  spelling, not a real gap. Left alone.
+* The other two **are** real, independently confirmed three ways each
+  (exact host-set match against an already-correct row, `cjkvi` structural
+  support 1.00 across every host, and a `render_glyphs.py` render of each
+  host beside the primitive):
+  - **`kangxi14` (冖, cover)** gains **miss world, paper punch** — host set
+    {売,探,深,読} exactly matches "crown"'s (already on this row), cjkvi
+    confirms 冖 present in all four at 1.00, and the render shows the
+    roof-with-legs stroke sitting under 士/扌/氵 in all four glyphs.
+  - **`kangxi60` (彳, step)** gains **sherpa** — host set {微,徴,懲} matches
+    "nelson"/"column"/"going"/"line" (all already on this row), cjkvi 1.00,
+    render confirms 彳 as the left-hand stroke in all three ("sherpa" fits
+    the mountain-climbing imagery already running through this frame
+    cluster's other names).
+  - **`prim-pipe` (｜, stick)** gains **fred astaire** — host set
+    {修,候,悠} matches "stick"/"cane"/"walking stick" (already on this
+    row — Astaire's own cane-and-top-hat routines fit the existing name
+    set), cjkvi 1.00, render confirms the vertical stroke in all three.
+
+No new primitive rows, no decomposition changes — three existing, already-
+correct rows picked up a name Heisig also uses for the same shape. `--near
+0.8 --all` at the default `--min-hosts 3` is clean after this (0/0/3, the 3
+being the genuine new-primitive candidates noted above, unchanged).
+
+Verified: full rebuild from source (3000 kanji frames, 3221 kanji rows,
+3137 parts overrides, unchanged counts — alias-only change touches no
+`parts` rows). `test_regression_fixes.py`: 1328/1328, no pin needed
+correcting (nothing pinned the old alias lists). 74 pytest.
+`audit_overflatten.py` 0, `audit_self_reference.py` 0, `audit_radicals.py`
+0/0, `audit_phantom_parts.py --in-csv-range` unchanged at 11/10,
+`audit_primary_choice.py` 0 — all unchanged, no regressions. Frontend
+`npm install`, `lint`, `build:prod` all clean (`npm run build` doesn't
+exist per `CLAUDE.md` — used `build:prod`, which also regenerated the 3221
+static SEO pages as a side effect of the build script, gitignored, not
+committed).
+
+### Next
+
+"Miss world"/"paper punch"/"sherpa"/"fred astaire" are fixed — they no
+longer show up in `suggest_heisig_aliases.py`'s output at all. What's left
+at the standard `--min-hosts 3` threshold is the same 3 unregistered groups
+chunk 92 already flagged ("miss world, paper punch" — wait, no: re-run
+fresh, don't trust this list by name, it rotates every time a group gets
+fixed). What's stable is the *shape* of what's left: groups with **no**
+vouching candidate at all (no existing row's host set matches), which means
+each is a genuinely new primitive, not an alias gap — every one needs a
+render before it gets an id, same as any other new row. Below
+`--min-hosts 3`, the `--min-hosts 1` tail (113 groups) is mostly the
+degenerate 1-2-host coincidence class this chunk burned time disproving
+twice (two of its four "matched" groups today were exactly that) — not
+worth mining further by lowering the threshold again. Trying `--near` at
+successively lower overlap (0.6–0.7) on the standard `--min-hosts 3` set is
+the more promising direction if this thread gets picked up again, since
+that is where today's three real fixes came from. Both of chunk 92's other
+leads are closed for real this time (`kangxi58` already correct since
+2026-09-18; phantom-parts widened scope already fully explained by chunks
+79–83) — don't re-open either without checking the live data the way this
+chunk did, not just the last "Next" paragraph.

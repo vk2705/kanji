@@ -1,4 +1,9 @@
-prim-pipe:｜:pipe, walking stick, cane, line, walking cane, stick, prim28.1
+# 2026-10-03: "fred astaire" is another Heisig name for ｜ (already "pipe",
+# "walking stick", "cane", "line", "stick" here -- Astaire's cane-and-top-hat
+# routines fit the existing nicknames) -- suggest_heisig_aliases.py --near
+# 0.8 --all's host set {修,候,悠} matches exactly, cjkvi support 1.00 for ｜
+# in all three. Rendered all three beside ｜ before adding.
+prim-pipe:｜:pipe, walking stick, cane, line, walking cane, stick, fred astaire, prim28.1
 prim-joint:冎:joint
 prim-jawbone:咼:jawbone:冎,口;口,冂
 prim-dollar-sign:弗:dollar sign,dollar:弓,｜
@@ -3109,7 +3114,13 @@ kangxi13:冂:border,down box,hood,belt,glass canopy,glass hood,helmet
 # trees; zero exceptions found. The existing ambiguous-term-union fix
 # (2026-09-09, "owl") already handles a primitive/real-kanji name clash
 # like this one correctly with no further backend change needed.
-kangxi14:冖:cover,cloth cover,birdcage,birdhouse,crown
+# 2026-10-03: "miss world"/"paper punch" are two more Heisig names for this
+# same 冖 shape, found via suggest_heisig_aliases.py --near 0.8 --all (host
+# set exactly {売,探,深,読}, cjkvi support 1.00 for 冖 in all four -- the
+# existing rows already decompose all four through 冖). Rendered the four
+# hosts beside 冖 to confirm the roof-with-legs stroke is really there
+# before adding (render_glyphs.py).
+kangxi14:冖:cover,cloth cover,birdcage,birdhouse,crown,miss world,paper punch
 kangxi4:丿:slash,left-falling stroke
 kangxi6:亅:hook
 kangxi44:尸:corpse,flag
@@ -3120,7 +3131,12 @@ kangxi66:攵:rap,knock,taskmaster
 kangxi53:广:cave,dotted cliff,caverns
 kangxi16:几:table,stool,gnats,wind
 kangxi17:凵:container,open box,shovel
-kangxi60:彳:step,go,nelson,column,going,line
+# 2026-10-03: "sherpa" is another Heisig name for 彳 (already "step", "go",
+# "nelson", "column", "going", "line" here) -- suggest_heisig_aliases.py
+# --near 0.8 --all's host set {微,徴,懲} matches exactly, cjkvi support 1.00
+# for 彳 in all three; 微/徴/懲 already decompose through 彳. Rendered all
+# three beside 彳 to confirm before adding.
+kangxi60:彳:step,go,nelson,column,going,line,sherpa
 kangxi31:囗:enclosure,pent in
 kangxi138:艮:stopping,retracing,silver
 kangxi59:彡:bristle,hair strands,shape
