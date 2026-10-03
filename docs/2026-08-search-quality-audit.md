@@ -16942,3 +16942,100 @@ id moves every pin referencing it, so budget a full chunk for it rather
 than folding it into another one. The hanzi worklist thread (455 pending as
 of chunk-91's entry) belongs to the separate `hanzi-worklist-review`
 scheduled job, not this routine.
+
+## 2026-10-03 — hanzi worklist, chunk 4: next 20 (18 keep-ours, two real fixes)
+
+Unattended daily run. `git status` on the two tracked files
+(`docs/hanzi_decomposition_worklist.json`, this doc) was clean on arrival —
+no interrupted prior run. `./venv/bin/pytest -v` passed (99 tests) before
+touching anything; `backup_db.py` taken first
+(`backups/kanji-20261003-100815.db`). `hanzi_worklist_next.py -n 20` for the
+next 20 rows (435 pending going in). All 20 hosts rendered via
+`render_glyphs.py` (batches of hosts plus every component glyph in their
+cjkvi readings, with a few individual zoomed re-renders for the closer
+calls) before any decision, per the standing render-it rule.
+
+**18 keep-ours** (卄 卅 半 卑 单 単 博 卪 卵 卸 叀 叉 反 叓 叟 叱 吏 吳): same
+pattern as every prior chunk — the overlay/opaque flag cjkvi raises is real
+(the named parts do technically share strokes, or cjkvi itself can't see
+past an atomic intermediate), but the current row already names exactly
+what's drawn, at a reasonable level. A few worth noting specifically:
+- **卄/卅 (hanzi-5344/5345)**: the simplest pair in the batch — `⿻十丨` and
+  `⿻川一` are both literally "this shape is these two strokes/characters
+  overlaid," and the render confirms the current two-part rows (`十,丨` /
+  `川,一`) name exactly those pieces, just via a flat list instead of the
+  overlay operator.
+- **単/单 (hanzi-5358/5355)**: a potential trap avoided — both kanji render
+  with very similar tops in this font (confirmed via a side-by-side
+  `単`/`单`/`𭕄` render), but the two rows already use *different* named
+  parts for that top (`丷` for 单, matching cjkvi's own `⿱丷⿻甲一`; `𭕄` for
+  単, matching cjkvi's own `⿱𭕄⿻甲一`) — the distinction tracks cjkvi's own
+  reading per character rather than being a copy-paste artifact, and `𭕄`
+  itself rendered as three distinct strokes (not the two-stroke "ツ"
+  look-alike CLAUDE.md warns this project substituted before), so no
+  lookalike-substitution concern here.
+- **叀 (hanzi-53c0)**: cjkvi resolves its opaque `𤰔` one level further,
+  `⿻一由` (a real, renderable overlay of `一` and `由`) — tempting to treat
+  as a "亴-style" resolved-overlay fix, promoting that pair into the row.
+  Checked first whether `𤰔` is this project's own established convention
+  rather than a one-off gap: it's used bare (no keyword, same as `𠃍`'s
+  precedent in chunk 3) as the first part of **four** rows — 叀 itself, 専
+  (hanzi-5c02), 恵 (hanzi-6075), 曾 (hanzi-66fa) — all sharing the same
+  top shape. Rewriting just this one row to `一,由` would desync it from its
+  three siblings for no real gain (the glyph itself doesn't change), so left
+  as-is; a `一,由` promotion, if ever done, belongs to all four rows via a
+  dedicated script, not a single-row edit here.
+- **卵/卸 (hanzi-5375/5378)**: both opaque at a term (`𠂑` and `𦈢`
+  respectively) that's already this project's own existing vocabulary for
+  that exact shape (`𠂑` bare, matching how `𤰔`/`𠃍` are handled elsewhere;
+  `𦈢` rendered and visually matched against 卸's actual left side — a clean
+  match, same stacked-stroke structure). `𠂑` itself renders as a tofu box
+  here (confirmed via the font-substitution check: identical to `𠂎`/`𤰔` in
+  *every* installed face, i.e. genuinely no outline anywhere on this
+  machine, not a one-font glitch), but neither our row nor cjkvi's own
+  reading claims anything about `𠂑`'s internal structure — it's used as an
+  atomic placeholder by both sides, so the tofu rendering doesn't block the
+  call.
+
+**Two real fixes, both applied directly to `kanji.db`** (no `data.txt` line
+exists for hanzi rows):
+- **卥 (hanzi-5365)**: `囗,丿,丿,丶` → `卜,囗,丿,丿,丶`. cjkvi's reading,
+  `⿱⺊⿴囗⿻⿱丿丿丶`, has a top `⺊` the old row dropped entirely — not a
+  granularity question, a missing stroke. A solo zoomed render of 卥 (crop
+  + 5x upscale, since `render_glyphs.py` has no size flag) makes this
+  unambiguous: there's a real vertical-plus-horizontal mark sticking up
+  above the box outline, absent from a plain `囗` rendered on its own.
+  `⺊` (U+2E8A, CJK Radicals Supplement) has no row or alias anywhere in
+  this database and rendered with a different stroke shape than `卜`
+  (U+535C) in this font (a plain cross vs. a diagonal hook) — but per
+  Unicode, `⺊` is simply the radical-presentation form of Kangxi radical 25
+  (`卜`), already in this database as `kangxi25`/`hanzi-535c` ("divining
+  rod"/"fortune telling"), and the font divergence is exactly the kind of
+  Radicals-Supplement-block rendering quirk this project has hit before
+  with other radical forms, not evidence of a different real character. Used
+  `卜` (resolving to `hanzi-535c`, zh-scoped) rather than registering a new
+  bare term for `⺊`, consistent with CLAUDE.md's own
+  kangxi-number-for-Kangxi-radicals convention. Applied via
+  `expand_part_terms(conn, ['卜','囗','丿','丿','丶'], ..., script_group='zh')`,
+  replacing decomposition 4218's 8 old `parts` rows with 10 new ones (the
+  doubled `丿` is preserved from the original row, matching cjkvi's own
+  stacked `⿱丿丿`).
+- **叏 (hanzi-53cf)**: `丨,又` → `ユ,丨,又`. cjkvi's reading, `⿱⿻ユ丨又`, has
+  an overlay of `ユ` and `丨` on top of `又`; the old row kept only `丨`,
+  dropping `ユ` (an entire visible stroke). A solo zoomed render of 叏 shows
+  the top clearly has *three* strokes — a horizontal, a diagonal hooking
+  down-left, and a vertical running down into `又` — not the single bare
+  vertical the old row implied; side-by-side against `支` (whose own top is
+  a clean, four-prong `十` cross with no extra diagonal) confirmed the
+  diagonal is real structure, not a rendering artifact of the plain cross.
+  `ユ` ("katakana yu") is already an established primitive in this database
+  (`prim-katakana-yu`/`rad1053`, used across five existing `rtk*` rows), so
+  this isn't a new term, just a previously-dropped one. Applied via
+  `expand_part_terms(conn, ['ユ','丨','又'], ..., script_group='zh')`,
+  replacing decomposition 4307's 4 old `parts` rows with 6 new ones.
+
+Both fixes verified with `get_kanji_detail` (both resolve cleanly, all
+named parts present with correct keywords) and the full pytest suite before
+and after (99 passed both times, unaffected).
+
+435 → 415 pending after this chunk.
