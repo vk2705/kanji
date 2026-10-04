@@ -17162,3 +17162,150 @@ leads are closed for real this time (`kangxi58` already correct since
 2026-09-18; phantom-parts widened scope already fully explained by chunks
 79–83) — don't re-open either without checking the live data the way this
 chunk did, not just the last "Next" paragraph.
+
+## 2026-10-04 — chunk 94: all three standing leads closed out, one new finding confirmed non-bug
+
+Daily `search-quality audit` firing. Container had no checkout again (same
+as every recent firing) — `/home/user/kanji` existed but was in a detached
+`HEAD` pointed at a merge commit that already matched `origin/master`
+content-wise, with the local `master` ref stale 13 commits behind; fixed
+non-destructively (`git merge-base --is-ancestor master origin/master`
+confirmed it was a pure fast-forward first, then `git fetch . HEAD:master`
+and `git checkout master` — no reset/force needed) before confirming
+`git push --dry-run origin master` succeeded. `cjkvi-ids` and the
+`fonts-noto-cjk`/`fonts-hanazono` stack were both missing and rebuilt from
+scratch, per the now-standard drill.
+
+Worked all three items this routine's own "where the work is" section
+names, in order. All three were already closed — but each one is closed on
+the record now, re-measured rather than taken on faith:
+
+**`suggest_heisig_aliases.py --near 0.8 --all`**: genuinely exhausted.
+Chunk 93 left this at "0 matched, 0 ambiguous, 3 unregistered" and pointed
+at trying lower `--near` thresholds next. Ran `--near` at 0.8, 0.7, 0.6 and
+0.5 (well past what chunk 93 suggested) at the standard `--min-hosts 3`:
+**0/0/0 at every threshold down to 0.5**, not 0/0/3 — whatever chunk 93's 3
+unregistered groups were, they are not reproducible against the current
+`data.txt`/CSV (the note itself warned the unregistered list "rotates every
+time a group gets fixed" and declined to name them by name, so there's
+nothing to diff against). Nothing added, nothing to add.
+
+**`audit_phantom_parts.py`**: both `--in-csv-range` (11/10) and the
+widened-scope `--hide-blind` (21/16) outputs are character-for-character
+the same sets chunks 91–93 already investigated and closed (斎/属/能's
+font-substitution/synthetic-primitive non-bugs, 不/印/甚's opaque-placeholder
+non-bugs, and the chunks-79–83 backlog of confirmed-correct
+opaque-intermediate/⿻-overlay/codepoint-variant cases: 捷 蘭 祢 蝿 訊 爾 鹵
+齟 齬 毅 叡 淵). Spot-checked a handful of the comment-block explanations in
+`data.txt` against the live rows to make sure nothing had silently drifted
+— all still match. Nothing to do here either.
+
+**`kangxi58`**: re-confirmed directly — `data.txt` line 3432 reads
+`kangxi58:彐:broom,Radical 58,ヨ:` and `prim-pigs-head` (line 36) holds `彑`.
+Already correct since 2026-09-18, as chunk 93 also found. Removing it from
+the task brief's own "where the work is" list is a maintainer edit, not
+mine to make from here — flagging again in "Next" instead.
+
+**One new, previously-unexamined finding, investigated and confirmed
+non-bug.** None of the three standing leads had anything live, so this
+chunk also ran `audit_missing_children.py` (same toolkit, not individually
+named in the brief's "where the work is" list, but a sibling of
+`audit_phantom_parts.py` and explicitly documented in `CLAUDE.md`) to check
+whether its 9-finding list was still the same already-adjudicated set chunk
+87 closed (包-family ×6 via 己, 敷, 衰). Eight of nine were — but the ninth,
+**終 (rtk1452, "end") +丶 ("drop") via 糸/冬**, has no prior mention
+anywhere in this log. Worked it to a conclusion rather than leaving it
+open:
+
+- `heisig-kanjis.csv`'s own components column for 終 reads "thread;
+  spiderman; winter; walking legs; ice; **drop**" — 糸's two names plus
+  冬's own keyword and both its component names, plus one extra name
+  ("drop") not present in 冬's own components column ("walking legs; ice")
+  or 糸's.
+- `audit_weak_evidence.py --host 終` returns 0 rows in all three existing
+  categories (heisig-atomic, not-a-parts-list, opaque-intermediate) — this
+  is a genuinely new blind-spot shape, not one of the three already
+  mechanised.
+- cjkvi-ids backs the "drop" reading structurally: 終's own entry is
+  `⿰糸冬[JK]`/`⿰糹冬[GTV]` (J = plain 糸, no extra stroke — ruled out the
+  糹-radical-variant theory directly); 冬's entry is `⿱夂⺀[GTJV]` (dots) /
+  `⿱夂冫[K]` (ice) — **Japan's own variant is the dots reading**, and `⺀`
+  itself is `⿱丶丶`, so cjkvi really does put a `丶` inside 冬's own bottom
+  for the Japan-tagged variant, which is where the "via 糸/冬" (and the
+  spurious "via 綸", debugged below) comes from.
+- **Stroke-count arithmetic settles it.** `heisig-kanjis.csv`'s own
+  `stroke_count`: 冬 = 5, 糸 = 6, 終 = 11 — an exact sum, zero strokes
+  unaccounted for. `冫` ("ice", `kangxi15`) is already registered as one
+  atomic 2-stroke primitive and already fully accounts for both of 冬's
+  bottom strokes as part of that 5. There is no room for `丶` to be an
+  *additional*, separately-countable stroke on top of what `冫` already
+  covers — cjkvi's `⺀ = ⿱丶丶` is a finer-grained description of the exact
+  same two strokes `冫` already represents as one unit, not evidence of a
+  stroke our decomposition is missing.
+- Rendered 終/糸/冬/綸/幺/丶/冫 side by side
+  (`render_glyphs.py 終 糸 冬 綸 幺 丶 冫`) and cropped/zoomed the PNG for a
+  close look: 終's left radical is stroke-for-stroke identical to
+  standalone 糸 (confirms the J no-extra-dot reading); 終's right half is
+  stroke-for-stroke identical to standalone 冬, which itself renders with
+  the same short-tick-then-longer-stroke shape as standalone `冫` — visibly
+  the same "ice" pair in both places, not a different shape hiding a third
+  stroke.
+- Checked whether "drop" is a Heisig naming collision across two different
+  shapes (the `龶`/`丰`/`戌`/`戍` trap `CLAUDE.md` warns about) before
+  trusting it means the same thing here as it does elsewhere: it's named on
+  213 CSV rows total (白 千 丸 寸 頁 首 少 太 玉 主 犬 金 風 国 必 鼻 生 食
+  良 ... and 終), which is exactly `kangxi3`'s (`丶`: "dot, tick, drop,
+  drops") existing host family — the single-stroke "extra tick" shape that
+  shows up as a genuine separate primitive across hundreds of kanji. Not a
+  collision; "drop" really is `kangxi3`'s shape wherever it appears,
+  including inside what we call "ice."
+- **Why not fix it anyway (add `丶` to 終, or split `冫` into `丶` + its own
+  remainder, or alias "drop" onto `kangxi15`):** every option was checked
+  and rejected. Adding `丶` as an *additional* top-level part on 終 would
+  put its stroke sum at 12 against an actual 11 (the exact
+  double-counting-a-stroke error the stroke-arithmetic check exists to
+  catch) and is the same "redundant restatement" anti-pattern already
+  rejected for 劇's dropped `卜,七,厂` and 段's `几,又` (chunk 92) — `丶` here
+  is not an *un*-represented stroke, it's an already-represented one named
+  twice. Splitting `冫` into `丶` + a remainder to match cjkvi's finer grain
+  would fix 終's one host at the cost of restructuring an atomic primitive
+  used cleanly, with no complaint, across 15 other hosts (次 凍 准 冶 弱 冷
+  凝 凄 冴 凋 凌 凛 憑 寒 然) — exactly the over-flattening
+  `audit_overflatten.py` exists to catch, for a single-host payoff.
+  Aliasing "drop" directly onto `kangxi15` was the one option that looked
+  cheap, but `resolve_alias` needs one canonical id per term and `kangxi3`
+  already legitimately owns "drop" across 213 hosts; making `kangxi15`
+  co-claim the same literal alias text would make that resolution
+  ambiguous for all of them to fix one. **Confirmed non-bug — a cjkvi
+  region-variant (`GTJV` dots vs `K` ice) describing the same two strokes
+  our `冫` primitive already covers as one unit, surfaced as Heisig naming
+  one of those strokes separately only in 終's own components line. No
+  `data.txt` change.**
+
+Verified: no `data.txt` changes this chunk, so the full-rebuild numbers
+from the start of the session stand unchanged throughout —
+`test_regression_fixes.py` 1328/1328, 74 pytest, `audit_overflatten.py` 0,
+`audit_self_reference.py` 0, `audit_radicals.py` 0/0,
+`audit_phantom_parts.py --in-csv-range` 11/10 (unchanged),
+`audit_primary_choice.py` 0. Frontend `lint`/`build:prod` not re-run since
+nothing frontend-relevant changed and nothing is being pushed to the
+working tree beyond this doc entry.
+
+### Next
+
+All three of this routine's named leads are closed as of today, confirmed
+against live data rather than carried forward as notes. Worth the
+maintainer updating the task brief's "where the work is" section itself —
+`kangxi58` in particular has now been reported fixed by three consecutive
+chunks (91, 93, 94) and shouldn't need a fourth. For whoever picks this up
+next: `audit_missing_children.py`'s own list is otherwise still the
+already-closed 包-family/敷/衰 set (chunk 87) plus 終 (today, also closed) —
+exhausted too, as far as this routine's three-tool toolkit goes.
+Un-mined ground that hasn't been worked by *this specific routine* before:
+`audit_csv_regressions.py`'s full dropped-concept list (spot-checked a few
+entries today — e.g. rtk2181 襲, rtk2194 璽, rtk2197 丑 — while hunting for
+chunk material; none investigated to a conclusion, this is a bigger list
+than one chunk should take head-on) is the most promising next thread, same
+"find the shared `via` row, not the symptom on every host" method
+`audit_missing_children.py` already proved out. Budget a full chunk to it
+rather than folding it into a leftover-thread session like this one.
