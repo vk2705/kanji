@@ -17309,3 +17309,104 @@ than one chunk should take head-on) is the most promising next thread, same
 "find the shared `via` row, not the symptom on every host" method
 `audit_missing_children.py` already proved out. Budget a full chunk to it
 rather than folding it into a leftover-thread session like this one.
+
+## 2026-10-04 — hanzi worklist chunk 2 (daily automation): 18 keep-ours, 2 real fixes
+
+Second automated daily chunk against `hanzi_decomposition_worklist.json`
+(`hanzi_worklist_next.py -n 20`). All 20 hosts rendered via
+`render_glyphs.py` (one batch of the 20 hosts, a second batch of every
+component glyph referenced in their cjkvi readings) before any decision, per
+the standing render-it rule. 17 opaque/overlay findings resolved as
+`keep-ours`, 2 as real `custom` fixes applied directly to `kanji.db`. Split
+by kind: 2 opaque (呉, 告), 18 overlay/enclosure.
+
+**18 keep-ours** (呉 告 唐 啬 喪 單 嗂 嗇 嘆 噩 嚢 囊 囏 囚 四 囜 囝 回): in each of
+these the render confirmed the current parts already name what's actually
+drawn, at the right level — including the four plain-enclosure rows (囚 四 囜
+囝) where cjkvi's `⿴囗X` reading and our row agree term-for-term, and 回,
+whose `⿴囗口` is literally what's drawn (box around a smaller box). 呉's and
+告's opaque terms (`𠃑`, `𠂒`) are this chunk's version of chunk 1's `𠄎`/`②`:
+cjkvi itself can't see past them either, and our rows already match cjkvi at
+that same ceiling, not inventing a reading. 告's `𠂒` is also worth flagging
+by name: it rendered as a true tofu box on this machine (see below) — but
+since it's a term this row *already* used before today, not something being
+newly adopted on the strength of an unrenderable glyph, the same precedent
+chunk 1 set for `𠄎`/`②` applies: keep it rather than guess a replacement.
+
+Two of the eighteen needed a closer look than a first glance suggested
+before landing on keep-ours, both worth recording since they show the method
+working as intended rather than as a rubber stamp:
+
+- **啬 vs 嗇** (U+556C / U+55C7, simplified/traditional pair): at the render
+  size this script normally uses, the two looked pixel-identical, and 嗇's
+  row names `从` for a mark that looked at that size like 啬's own `丷` — an
+  apparent cross-row inconsistency for what looked like the same stroke.
+  `render_glyphs.py`'s own substitution check *didn't* flag the pair as
+  identical in any face, which was the tell to look closer rather than
+  trust the thumbnail: a custom 400px side-by-side (bypassing the script's
+  fixed 110px row height) showed them as genuinely different glyphs — 啬's
+  top is two short separated strokes (matches `丷`), 嗇's is two longer
+  curved strokes crossing like legs (matches `从`). Both rows were already
+  right; the thumbnail just wasn't detailed enough to show why.
+- **呉** (U+5449, opaque): the render needed lining up against each of the
+  four current parts individually (`𠃑`, `口`, `一`, `八`) rather than
+  judged as a whole, since 呉's lower section is a single fused shape — the
+  hook (`𠃑`), crossbar (`一`) and splayed legs (`八`) are all genuinely
+  present once isolated, confirming the row rather than just failing to
+  contradict it.
+
+**Two real fixes, both applied directly to `kanji.db`** (no `data.txt` line
+exists for hanzi rows — see `build_hanzi_worklist.py`'s docstring):
+
+- **周 (hanzi-5468, decomposition 4443)**: old parts `𠮷` (a single part —
+  `prim-earthenware-jar`, itself registered as `土`+`口`, whose own PNG is
+  exactly a free-standing 土 stacked over 口 with open sides). Rendered
+  beside 用/甩 (chosen for the comparison because they share 周's enclosing
+  frame), 周 plainly has continuous left/right strokes joining its top to
+  its bottom — an enclosing frame `吉`/`𠮷` does not have — which the old
+  single-part row dropped entirely; cjkvi's own reading (`⿵⺆⿱⿻二丨口`)
+  names exactly this frame as its outer layer. Fixed to `冂, 𠮷`
+  (`expand_part_terms(conn, ['冂', '𠮷'], ..., script_group='zh')`, which
+  correctly picked the `zh-Hani` row for 冂, keyword "wide", over the
+  `ja-kanji` kangxi13 "border" — script-aware resolution working as
+  documented) — frame outside, the already-correct inner 土-over-口 nested
+  inside it, matching what's drawn at both layers now instead of only the
+  inner one. Decomposition 4443's 1 old `parts` row replaced with 2 new
+  ones.
+- **囙 (hanzi-56d9, decomposition 5060)**: old parts `囗` alone (no inner
+  content at all). Rendered beside 囗 (empty) and 回 (口 inside), 囙 clearly
+  has a small open-bottomed box offset toward the upper-left inside the
+  outer 囗 — not empty, and not the 人/儿/厶/子 inner shapes the sibling rows
+  in this same cjkvi-enclosure family correctly name (see 囚 四 囜 囝 above).
+  cjkvi's own reading (`⿴囗コ`) names this as `コ`, a shape with no existing
+  row in this database (checked `kanji`/`aliases` directly — no match).
+  Fixed to `囗, コ`. The bare `コ` term won't render as its own chip in
+  `KanjiDetail` — `get_kanji_detail`'s `_resolve_parts_detail` silently
+  drops any part term that doesn't resolve to a kanji row, confirmed by
+  checking 喪's own existing (kept) row the same way: its stored `𠄌` term
+  is in `parts` but absent from `parts_detail` — so today's fix is a
+  correctness improvement in the stored data (an audit re-run now sees
+  `コ` accounted for) without a visible UI change, exactly the same
+  trade-off this project already accepted for `𠄌`/`𠀎`/`𠂒`/`②` elsewhere.
+  Decomposition 5060's 2 old `parts` rows replaced with 3 new ones.
+
+Two components were confirmed as true tofu boxes on this machine (no real
+outline in any installed font, verified both via the normal render and the
+script's own font-substitution check): `𠂒` (U+20092, already discussed
+above — 告's existing opaque term) and `𠀎` (U+2000E, used in both 嚢's and
+囊's existing, kept rows). Neither blocked a decision today because both
+were already-accepted existing terms, not something being newly proposed —
+same precedent as chunk 1's 临/`𫩏` deferral, just not triggered this time
+since nothing here depended on seeing inside them. `𧘇` (U+27607, also used
+in 嚢/囊) is a real glyph, not tofu — small and raised, matching the known
+`FONT_OVERRIDES` note in `make_primitive_images.py`'s docstring.
+
+Verified: `./venv/bin/pytest -v` passed before (99) and after (99, 21–23s)
+the two `kanji.db` edits; `get_kanji_detail` checked directly for both fixed
+rows to confirm the new parts resolve and display as expected. `kanji.db`
+backed up first via `backup_db.py`
+(`backups/kanji-20261004-101524.db`) before either edit, per the task's
+guardrails.
+
+495 total, 395 pending after this chunk (415 before —
+`hanzi_worklist_next.py --pending-count`).
