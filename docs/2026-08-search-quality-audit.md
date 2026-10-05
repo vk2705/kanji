@@ -17410,3 +17410,86 @@ guardrails.
 
 495 total, 395 pending after this chunk (415 before —
 `hanzi_worklist_next.py --pending-count`).
+
+## 2026-10-05 — hanzi worklist chunk 3 (daily automation): 18 keep-ours, 1 real fix, 1 deferred
+
+Third automated daily chunk against `hanzi_decomposition_worklist.json`
+(`hanzi_worklist_next.py -n 20`). All 20 hosts rendered via
+`render_glyphs.py` (one batch of the 20 hosts, follow-up batches for
+individual component glyphs on the three rows that needed a closer look)
+before any decision. All 20 findings in this chunk were `[overlay]` kind —
+19 of the 20 are the `⿴囗X`/`⿴⺆X` enclosure-radical family (U+56DF through
+U+56F2, the "nation/garden" block), which turned out to be the cleanest
+batch so far: an enclosing 囗 drawn around a visibly distinct inner shape is
+about as unambiguous as an "overlay" finding gets, since nothing is actually
+sharing or crossing strokes.
+
+**18 keep-ours** (囟 因 囡 团 団 囤 囥 囦 囧 囨 囩 囫 园 囮 囯 困 囱 囲): in each,
+the render confirmed the current parts already name exactly what's drawn.
+16 of these are the plain `⿴囗X` case where cjkvi's reading and our row
+agree term-for-term (因→囗+大, 囡→囗+女, 団→囗+寸, etc.) — a box with a
+single clearly-separated shape inside it, no reading to second-guess. Two
+needed more than a glance:
+
+- **囟** (U+56DF, `⿴⿱丿囗㐅`): a box with a short stroke poking above its
+  top edge and an X-cross inside. Rendered the two X-shaped candidates
+  (`乂` U+4E42 and `㐅` U+3405) side by side to make sure the row's `㐅` was
+  actually the one drawn rather than a lookalike mixup between near-
+  identical codepoints — confirmed `㐅` matches, `乂`'s strokes sit at a
+  visibly different angle. Row's `丿, 囗, 㐅` (3 parts) already matches the
+  shape at the right granularity.
+- **囧** (U+56E7, `⿴四冂`): the odd one structurally — cjkvi's reading names
+  `四` as the *enclosing* shape and `冂` as what's inside, backwards from
+  every other row in this batch. Rendered 囧 beside `四`, `冂`, `八`, and `口`
+  individually: 囧's interior (two raised diagonal strokes over a small open
+  box, the shape that gives 囧 its internet-meme "shocked face" reading)
+  resembles 四's own inner structure more than any single simple primitive,
+  which is consistent with cjkvi treating 囧 as a stylistic variant of 四's
+  historical form rather than a literal "四 containing 冂." The row already
+  stores exactly cjkvi's own two terms in cjkvi's own order (`四, 冂`) — not
+  a flattening or substitution, just an inherently odd shape — so kept
+  rather than second-guessed past what the render can actually settle.
+
+**One real fix, applied directly to `kanji.db`** (no `data.txt` line exists
+for hanzi rows — see `build_hanzi_worklist.py`'s docstring):
+
+- **囬 (hanzi-56ec, decomposition 5078)**: old parts `囗` alone — no inner
+  content at all, same missing-content shape as chunk 2's 囙. cjkvi's own
+  reading (`⿴囗④`) stops at an opaque placeholder it can't resolve, which
+  is exactly why this row never picked up an inner part from the seed
+  import. Rendered 囬 beside 回 (empty 口 inside) and, once the render
+  showed a single horizontal divider rather than an empty box, beside 日
+  and 目 to pin down which one: 囬's interior is unmistakably 日 (one bar,
+  two cells) — not 回's empty box, not 目's three-bar pattern. Fixed to
+  `囗, 日` via `expand_part_terms(conn, ['囗', '日'], ..., script_group='zh')`
+  → `囗, erect, proud, 日, sun`, replacing decomposition 5078's 2 old
+  `parts` rows with 4 new ones. This is a case the opaque cjkvi marker
+  genuinely couldn't see past, but this project's own render tooling could
+  — the same gap the opaque-intermediate section of
+  `audit_hanzi_weak_evidence.py` is explicit about not being able to check
+  automatically.
+
+**One deferred: 囪 (hanzi-56ea)**, `⿴⿱丿囗⿻⿱丿丿丶` — cjkvi gives this a
+5-stroke lattice interior (two crossing diagonals plus a dot), distinct
+from its near-twin 囱's simpler `⿴⿱丿囗夂` reading. Rendered side by side:
+on this machine's font stack 囪 and 囱 come out **pixel-identical** — both
+show the same box-plus-夂-shaped interior, with no trace of 囪's claimed
+extra strokes. `render_glyphs.py`'s own cross-face substitution check
+didn't fire (unlike the 啬/嗇 case in chunk 2, where the check's *silence*
+was the tell to look closer and a larger render then showed them as
+genuinely different) — here every face available renders them the same,
+which per CLAUDE.md's "the render itself can lie" section reads as "near-
+identical shapes" rather than a confirmed substitution, but still leaves no
+way to visually verify 囪's own 5-part breakdown independent of 囱's. Marked
+`needs-render` rather than guessed at; revisit with a font that actually
+distinguishes the traditional 囪 glyph from the simplified 囱 one, or by
+cross-checking a source other than this machine's installed fonts.
+
+Verified: `./venv/bin/pytest -v` passed before (99) and after (99, ~21s) the
+`kanji.db` edit; `get_kanji_detail` checked directly for 囬 to confirm the
+new parts resolve and display (`囗` + `日`) as expected. `kanji.db` backed
+up first via `backup_db.py` (`backups/kanji-20261005-100645.db`) before the
+edit, per the task's guardrails.
+
+495 total, 375 pending after this chunk (395 before —
+`hanzi_worklist_next.py --pending-count`).

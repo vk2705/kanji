@@ -1805,10 +1805,10 @@
   ],
   "cjkvi_reading": "⿴⿱丿囗㐅",
   "cjkvi_tags": "",
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-05"
  },
  {
   "id": "hanzi-56e0",
@@ -1822,10 +1822,10 @@
   ],
   "cjkvi_reading": "⿴囗大",
   "cjkvi_tags": "",
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-05"
  },
  {
   "id": "hanzi-56e1",
@@ -1839,10 +1839,10 @@
   ],
   "cjkvi_reading": "⿴囗女",
   "cjkvi_tags": "",
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-05"
  },
  {
   "id": "hanzi-56e2",
@@ -1856,10 +1856,10 @@
   ],
   "cjkvi_reading": "⿴囗才",
   "cjkvi_tags": "",
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-05"
  },
  {
   "id": "hanzi-56e3",
@@ -1873,10 +1873,10 @@
   ],
   "cjkvi_reading": "⿴囗寸",
   "cjkvi_tags": "",
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-05"
  },
  {
   "id": "hanzi-56e4",
@@ -1890,10 +1890,10 @@
   ],
   "cjkvi_reading": "⿴囗屯",
   "cjkvi_tags": "",
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-05"
  },
  {
   "id": "hanzi-56e5",
@@ -1907,10 +1907,10 @@
   ],
   "cjkvi_reading": "⿴囗亢",
   "cjkvi_tags": "",
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-05"
  },
  {
   "id": "hanzi-56e6",
@@ -1924,10 +1924,10 @@
   ],
   "cjkvi_reading": "⿴囗水",
   "cjkvi_tags": "",
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-05"
  },
  {
   "id": "hanzi-56e7",
@@ -1941,10 +1941,10 @@
   ],
   "cjkvi_reading": "⿴四冂",
   "cjkvi_tags": "",
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-05"
  },
  {
   "id": "hanzi-56e8",
@@ -1958,10 +1958,10 @@
   ],
   "cjkvi_reading": "⿴囗不",
   "cjkvi_tags": "",
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-05"
  },
  {
   "id": "hanzi-56e9",
@@ -1975,10 +1975,10 @@
   ],
   "cjkvi_reading": "⿴囗云",
   "cjkvi_tags": "",
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-05"
  },
  {
   "id": "hanzi-56ea",
@@ -1998,10 +1998,10 @@
   ],
   "cjkvi_reading": "⿴⿱丿囗⿻⿱丿丿丶",
   "cjkvi_tags": "",
-  "status": "pending",
+  "status": "needs-render",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-05"
  },
  {
   "id": "hanzi-56eb",
@@ -2015,10 +2015,10 @@
   ],
   "cjkvi_reading": "⿴囗勿",
   "cjkvi_tags": "",
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-05"
  },
  {
   "id": "hanzi-56ec",
@@ -2030,10 +2030,13 @@
   ],
   "cjkvi_reading": "⿴囗④",
   "cjkvi_tags": "",
-  "status": "pending",
-  "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "custom",
+  "decision": [
+   "囗",
+   "日"
+  ],
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-05"
  },
  {
   "id": "hanzi-56ed",
@@ -2047,10 +2050,10 @@
   ],
   "cjkvi_reading": "⿴囗元",
   "cjkvi_tags": "",
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-05"
  },
  {
   "id": "hanzi-56ee",
@@ -2064,10 +2067,10 @@
   ],
   "cjkvi_reading": "⿴囗化",
   "cjkvi_tags": "",
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-05"
  },
  {
   "id": "hanzi-56ef",
@@ -2081,10 +2084,10 @@
   ],
   "cjkvi_reading": "⿴囗王",
   "cjkvi_tags": "",
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-05"
  },
  {
   "id": "hanzi-56f0",
@@ -2098,10 +2101,10 @@
   ],
   "cjkvi_reading": "⿴囗木",
   "cjkvi_tags": "",
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-05"
  },
  {
   "id": "hanzi-56f1",
@@ -2117,10 +2120,10 @@
   ],
   "cjkvi_reading": "⿴⿱丿囗夂",
   "cjkvi_tags": "G",
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-05"
  },
  {
   "id": "hanzi-56f2",
@@ -2134,10 +2137,10 @@
   ],
   "cjkvi_reading": "⿴囗井",
   "cjkvi_tags": "",
-  "status": "pending",
+  "status": "keep-ours",
   "decision": null,
-  "reviewed_by": null,
-  "reviewed_at": null
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-05"
  },
  {
   "id": "hanzi-56f3",
