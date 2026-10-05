@@ -17410,3 +17410,145 @@ guardrails.
 
 495 total, 395 pending after this chunk (415 before —
 `hanzi_worklist_next.py --pending-count`).
+
+## 2026-10-05 — chunk 95: `audit_csv_regressions.py`'s dropped-concept list, two real fixes and a pile of confirmed false positives
+
+Fresh container this firing (no `/home/user/kanji` checkout, no venv, no
+`cjkvi-ids`, no CJK fonts) — rebuilt all of it per the task brief's step 0
+before touching any data: cloned nothing (the checkout already existed once
+the environment attached), `git fetch`/`pull --ff-only` brought master from
+`30c671b` to `09ac04e` (17 commits behind, all from the parallel hanzi-worklist
+daily automation), `git push --dry-run origin master` confirmed push access
+before any work started, then `python3 -m venv venv` + pip install, curled
+`cjkvi-ids/ids.txt` to `/tmp`, and `apt-get install fonts-noto-cjk
+fonts-hanazono` (Noto first, per the documented font-priority bug).
+
+Picked up chunk 94's own "Next": a full chunk against
+`audit_csv_regressions.py`'s 230-item dropped-concept list, not spot-checked
+piecemeal like chunk 94 did in passing. Before writing anything, checked each
+candidate against this log's own history first — this list has been partially
+mined by earlier chunks without ever being driven to zero, so a meaningful
+fraction of the 230 are **already-settled false positives**, not new bugs:
+
+**Confirmed non-bugs, no `data.txt` change (verified, not re-litigated):**
+- **rtk28 世** ("ten" dropped): 2026-09-01's session already render-confirmed
+  `廿,一` over CSV's literal "ten; twenty" — `廿`(rtk1274) itself was fixed the
+  same session to `凵,一` (not "ten,ten"), so "ten" is Heisig's own redundant
+  pre-expansion of what "twenty" means, not a live concept the override threw
+  away. The audit script has no way to see that history; it will keep
+  flagging this one forever.
+- **The whole `穴`("hole") "human legs" family — 12 hosts** (窓 空 控 突 究 窒
+  窃 窟 窪 搾 窯 窮, all via `kangxi10`): already diagnosed and **pinned** in
+  `test_regression_fixes.py` (chunk 47, 2026-09-23) as a defect in
+  `heisig-kanjis.csv`'s own stale pre-expansion — `穴`'s own CSV row says
+  "house; EIGHT", not "human legs", and rendered, 穴's bottom is 八 (丿 then
+  乀), not 儿 (whose right stroke hooks). The pin's own comment already says
+  it: "Inserting 儿 here would plant a phantom part in fourteen kanji to quiet
+  a defect in the baseline." Confirmed the pin is still in place and still
+  matches live `kanji.db`; no action needed, just re-verified before moving
+  on rather than assumed.
+- **丈/吏/使 family "stick" drops** (rtk746/748/1065): 2026-09-01 already
+  render-confirmed 丈's bottom matches `乂`("tucked under the arm"), not a
+  separate stick stroke — CSV's "stick" here is the same redundant-
+  pre-expansion shape as the 世 case above, already deliberately resolved in
+  the opposite direction (dropped on purpose, not restored).
+
+**Two real fixes:**
+
+1. **"snake" missing as a literal alias on `巳`(rtk2200)** — clears 6 hosts
+   outright: 包 胞 砲 泡 抱 飽 (rtk569/570/571/572/697/1592). Chunk 78
+   (2026-09-25) had already resolved this family's "self" half the same way
+   (adding "self" to rtk2200 alongside its existing "sign of the snake or
+   serpent,mosaic with bit missing" aliases) and explicitly said in its own
+   writeup that 巳 "already holds 'snake' duty for this shape family" — but
+   that was descriptive, not literal: the row's aliases never actually
+   contained the bare word "snake", only "sign of the snake or serpent",
+   which doesn't match `claimants()`'s exact-alias lookup. Added "snake" as
+   a plain alias alongside it, same "union multiple meanings" pattern
+   already used for "self". `rtk2181`(襲)'s own "snake"/"self" drops are
+   unaffected — it reaches the concept through `龍`/`衣`, never through 巳,
+   so this fix doesn't touch it; left for a future chunk.
+
+2. **`尺`(shaku, rtk1151)'s extra stroke was spelled `丶`("dot"), and should
+   be `乀`("right-falling stroke")** — a lookalike bug flagged by name in
+   this log three separate times (chunks 13, 14, 51: 2026-09-20/2026-09-23)
+   and never acted on ("needs its own pass", "not a thing to settle in
+   passing"). Rendered `尺` beside `丶`, `ノ`, and `乀`
+   (`render_glyphs.py`): the stroke inside 尺 is a long, gently curving
+   right-falling mark reaching the bottom-right corner — matches `乀`
+   (U+4E40) cleanly, and is visibly longer/differently-angled than both
+   `丶`(a short tick) and `ノ`(a left-falling stroke, wrong direction
+   entirely). `乀` had never been registered as a primitive despite being
+   correctly identified in three prior chunks' prose — added it as
+   `prim-right-falling-stroke` (not a Kangxi radical, so no `kangxi{n}`
+   id — confirmed by checking the 214-radical list, 乀 isn't on it), with
+   alias "stick" alongside "right-falling stroke" (the same name-on-two-
+   glyphs pattern as "stick"/prim-pipe/prim-katakana-no, "silver"/艮/皀,
+   "self"+"snake"/己+巳 — `claimants()` and the real app's
+   `get_all_aliases_for_term` both already treat multiple claimants as
+   normal, not an error). Fixed `rtk1151`'s own parts from `尸,丶` to
+   `尸,乀`; this cascades via recursion to clear "stick" for 6 more hosts
+   that reference 尺 directly: 尽 沢 訳 択 昼 駅 (rtk1152/1153/1154/1155/1156/
+   2138). `釈`(rtk2057), also CSV-paired "flag; stick", was never flagged in
+   the first place — it reaches "stick" through a different, already-correct
+   path (釆→ノ, prim-katakana-no, which already carried the alias).
+
+   **Deliberately not touched**: `声`(rtk2044) and `眉`(rtk2045) carry the
+   same CSV "flag; stick" pair but go through `𠃜`("flagpole"), a visually
+   different shape from 尺's `尸+乀` (chunk 51's own prose: "𠃜 is 尸 with a
+   bar inside") — whether 𠃜 itself needs a separate "stick" sub-part is a
+   distinct, unverified question this chunk didn't render-check. Left
+   flagged. `尽`(rtk1152) also still drops "ice" after this fix (unrelated,
+   pre-existing: its own extra `丶` represents something else again, visible
+   in the render as two short marks above 尺's shape, not the ice radical's
+   two dots as currently spelled) — noted for later, not fixed here to keep
+   this chunk's blast radius to what was actually render-verified.
+
+   **Deliberately deferred, not attempted this chunk**: `瓦`(tile, rtk1108)
+   and `瓶`(rtk1109) — flagged "needs a slower, dedicated pass, not a
+   same-session guess" in an early session and never revisited; still true,
+   CSV's seven loosely-related gloss words don't cleanly map to structure
+   without its own render pass. `韋`("tanned leather", kangxi178, feeds
+   偉違緯衛韓, 5 hosts) — cjkvi gives `⿳𫝀口㐄` (a third part on top, `𫝀`,
+   that our row drops entirely) and CSV separately claims "key" is in there
+   too, but `𫝀`(U+2B740) rendered as a dubious shape on this font stack and
+   `㐄`(U+3404, already a registered primitive) rendered as what looked like
+   a plain `牛` — exactly the "render can lie" failure mode this project's
+   own font-substitution check exists to catch, and I didn't have the
+   fc-list/relative-check budget left in this chunk to run it down properly.
+   Also, "key" here can't just reuse `rtk418`(鍵) — that's the 17-stroke
+   compound kanji "key", not a plausible simple-primitive match for a piece
+   of 韋. Both need their own chunk.
+
+`audit_csv_regressions.py`: **230 → 218** flagged kanji (12 cleared: 6 snake,
+6 stick-family; `尽` stays flagged on the separate "ice" gap noted above).
+
+Verified (full rebuild from scratch, fresh container — `rm kanji.db*` +
+`import_data()`): `test_regression_fixes.py` **1328/1328** (no pins moved —
+neither fix touched a pinned decomposition's shape in a way the existing
+pins asserted against), `pytest -q` **74 passed**, `audit_overflatten.py` 0,
+`audit_self_reference.py` 0, `audit_radicals.py` 0/0, `audit_phantom_parts.py
+--in-csv-range` 11 across 10 kanji (unchanged from chunk 94), 
+`audit_primary_choice.py` 0/71. Frontend: `npm run lint` clean, `npm run
+build:prod` clean (SEO generation picked up the new `prim-right-falling-
+stroke` page, confirmed in `sitemap.xml`'s diff — one line, in alphabetical
+order, nothing else moved).
+
+Not deployed — no server access from this container, per the task brief.
+A deployer needs `sync_system_data.py` run against the live DB to pick up
+the new `prim-right-falling-stroke` row and the two changed decompositions
+(`rtk1151`, `rtk2200`), same as any other data-only change.
+
+### Next
+
+Continue `audit_csv_regressions.py`'s list — 218 left, same method (check
+this log before rendering, since more of the remainder may already be
+settled false positives like today's `世`/`穴` cases). Concrete leads already
+scoped above and ready to pick up directly: `尽`'s separate "ice" gap, `韋`'s
+missing `𫝀` top (needs the font-lying check first), `瓦`/`瓶`'s seven-gloss
+CSV row, and `声`/`眉`'s `𠃜`-vs-尺 "stick" question. Beyond those four, the
+next-largest untouched clusters in today's output by dropped-term frequency
+were "key" (10, mostly the same 韋 family), "hook" (9), "person" (7), "sword"
+(6), "row" (6) — worth checking name-frequency clusters first before
+individual hosts, since (as today showed twice) a handful of root-cause
+primitives often explain a dozen+ flagged hosts at once.

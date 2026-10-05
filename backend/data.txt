@@ -1231,7 +1231,7 @@ rtk1147:局:bureau:口,尸;口,尸,𠃌
 rtk1148:遅:slow:辶,羊,尸
 rtk1149:漏:leak:雨,水,尸
 rtk1150:刷:printing:尸,巾,刀
-rtk1151:尺:shaku,shaku-hachi:尸,丶
+rtk1151:尺:shaku,shaku-hachi:尸,乀
 rtk1152:尽:exhaust:尺,丶
 rtk1153:沢:swamp:尺,水
 rtk1154:訳:translate:尺,言
@@ -2293,7 +2293,7 @@ rtk2196:丹:rust-colored,rust colored,ship´s funnel,ship's funnel:ノ,一,丶,�
 rtk2197:丑:sign of the ox or cow:｜,ノ,一
 rtk2198:羞:feel ashamed:羊,丑
 rtk2199:卯:sign of the hare or rabbit,blown eggs:prim-receipt,卩
-rtk2200:巳:sign of the snake or serpent,mosaic with bit missing,self:
+rtk2200:巳:sign of the snake or serpent,snake,mosaic with bit missing,self:
 rtk2201:此:this,prince:止,匕
 rtk2202:柴:brush:木,此
 rtk2203:些:a little bit:二,此
@@ -3122,6 +3122,7 @@ kangxi13:冂:border,down box,hood,belt,glass canopy,glass hood,helmet
 # before adding (render_glyphs.py).
 kangxi14:冖:cover,cloth cover,birdcage,birdhouse,crown,miss world,paper punch
 kangxi4:丿:slash,left-falling stroke
+prim-right-falling-stroke:乀:right-falling stroke,stick
 kangxi6:亅:hook
 kangxi44:尸:corpse,flag
 kangxi62:戈:spear,halberd,fiesta
