@@ -945,7 +945,7 @@ rtk861:堂:public chamber:outhouse,土
 rtk862:常:usual:outhouse,巾
 rtk863:裳:skirt:outhouse,衣
 rtk864:掌:palm of hand:outhouse,手
-rtk865:皮:pelt:支
+rtk865:皮:pelt:支,亅
 rtk866:波:waves:水,皮
 rtk867:婆:old woman:女,波
 rtk868:披:expose:扌,皮

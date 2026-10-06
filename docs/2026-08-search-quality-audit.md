@@ -17622,19 +17622,92 @@ A deployer needs `sync_system_data.py` run against the live DB to pick up
 the new `prim-right-falling-stroke` row and the two changed decompositions
 (`rtk1151`, `rtk2200`), same as any other data-only change.
 
+## 2026-10-06 — chunk 96: `皮`'s missing "hook" clears the whole pelt family (8 hosts)
+
+Fresh container this firing (no checkout present when the task started, but
+it appeared by the time step 0 ran — `git fetch`/`pull --ff-only` found
+master already current at `c78d5a8`). Push access confirmed via
+`git push --dry-run origin master` before any work. Rebuilt the venv,
+curled `cjkvi-ids/ids.txt`, `apt-get install fonts-noto-cjk fonts-hanazono`
+(Noto first), then ran the full step-3 verification suite against a
+from-scratch `import_data()` to get a clean baseline before touching
+anything: `test_regression_fixes.py` 1328/1328, `pytest -q` 74 passed,
+`audit_overflatten.py`/`audit_self_reference.py`/`audit_radicals.py` all 0,
+`audit_phantom_parts.py --in-csv-range` 11 across 10 (unchanged from chunk
+95), `audit_primary_choice.py` 0/71 — matches chunk 95's numbers exactly, so
+nothing drifted between firings.
+
+Picked up chunk 95's "Next": ran the dropped-term frequency count over
+`audit_csv_regressions.py`'s full 218-item output rather than guessing from
+host count. "hook" (9 occurrences) sorted into two groups by source: 8 hosts
+all chain through `皮`(rtk865, "pelt") — `波 婆 披 破 被 彼 疲`(rtk866-870,
+948, 1823) plus `皮` itself — and a 9th (`虎`/rtk2145, via `虍`) that doesn't
+share a root cause and was left alone.
+
+`皮`'s own row carried only `支`("branch") as its sole part. CSV baseline is
+"branch; ten; needle; crotch; hook" — `支`(rtk768) already resolves
+"ten"/"needle"/"crotch" through its own `十,又` (十's aliases are literally
+`ten,cross,needle`; 又's are `or again,crotch`), so those three words were
+never actually missing, just reached through two levels of recursion. "hook"
+was the one word with nothing backing it anywhere in the chain.
+
+Rendered `皮` next to `支`, `亅`(kangxi6, alias "hook", registered chunk
+unknown but never once used as a part anywhere in `data.txt`), and two
+known hook-stroke hosts (`氏`, `民`) for a shape cross-check
+(`render_glyphs.py 皮 亅 氏 民`). `支`'s top is a plain `十` cross — clean
+horizontal + vertical, no curve. `皮`'s corresponding stroke is visibly
+different: a vertical that hooks at the bottom, the same shape `亅` draws
+and the same shape `氏`/`民` carry on their own left-hand strokes. `支`'s
+literal cross is not actually what's drawn in `皮`'s upper portion — Heisig's
+own component list already said as much by naming "hook" as a fifth,
+separate concept rather than folding it silently into "branch". cjkvi-ids
+has no opinion here (`皮`'s entry in `ids.txt` is `皮→皮`, fully atomic — this
+sits entirely on the Heisig-channel side, same as the weaker half of
+`audit_phantom_parts.py`'s split, except here the direction runs the other
+way: a name CSV supplies and nothing in the row currently covers, not an
+unevidenced addition).
+
+Changed `rtk865`'s parts from `支` to `支,亅` (data.txt:948) — flat
+side-by-side, same convention `虎`'s own row already uses for `卜,儿,七,厂,虍`
+rather than nesting. No new primitive needed; `kangxi6` already existed with
+the right alias, just unused until now.
+
+`audit_csv_regressions.py`: **218 → 210** flagged kanji. Verified by id that
+exactly the 8 predicted hosts (`rtk865/866/867/868/869/870/948/1823`)
+dropped out and no others changed. Full re-verification (fresh rebuild):
+`test_regression_fixes.py` **1328/1328** (no pin needed correcting — this
+decomposition wasn't pinned), `pytest -q` **74 passed**,
+`audit_overflatten.py` 0, `audit_self_reference.py` 0, `audit_radicals.py`
+0/0, `audit_phantom_parts.py --in-csv-range` 11 across 10 (unchanged —
+`亅` here is CSV-evidenced, not a phantom addition), `audit_primary_choice.py`
+0/71. Frontend: `npm install`, `npm run lint` clean, `npm run build:prod`
+clean (SEO generation ran over all 3222 pages without error; `皮`'s page
+picks up the new `亅` chip, nothing else in the diff).
+
+Not deployed — no server access from this container, per the task brief. A
+deployer needs `sync_system_data.py` run against the live DB to pick up
+`rtk865`'s changed decomposition.
+
 ### Next
 
-Continue `audit_csv_regressions.py`'s list — 218 left, same method (check
-this log before rendering, since more of the remainder may already be
-settled false positives like today's `世`/`穴` cases). Concrete leads already
-scoped above and ready to pick up directly: `尽`'s separate "ice" gap, `韋`'s
-missing `𫝀` top (needs the font-lying check first), `瓦`/`瓶`'s seven-gloss
-CSV row, and `声`/`眉`'s `𠃜`-vs-尺 "stick" question. Beyond those four, the
-next-largest untouched clusters in today's output by dropped-term frequency
-were "key" (10, mostly the same 韋 family), "hook" (9), "person" (7), "sword"
-(6), "row" (6) — worth checking name-frequency clusters first before
-individual hosts, since (as today showed twice) a handful of root-cause
-primitives often explain a dozen+ flagged hosts at once.
+Continue `audit_csv_regressions.py`'s list — 210 left. The 9th "hook" host,
+`虎`(rtk2145), is a separate root cause from today's `皮` fix (its "hook"
+comes via `虍`, whose own cjkvi IDS entry `⿸⿱⺊②七` has an unencoded
+placeholder piece between `卜`/`⺊` and `七` — `audit_weak_evidence.py --host
+虎` returns nothing in any of its three sections, meaning this doesn't fit
+the three documented false-positive shapes cleanly and needs its own
+from-scratch render pass rather than reuse of today's reasoning). Leads
+still open from chunk 95, unchanged: `尽`'s separate "ice" gap, `韋`'s
+missing `𫝀` top (needs the font-lying relative check first), `瓦`/`瓶`'s
+seven-gloss CSV row, `声`/`眉`'s `𠃜`-vs-尺 "stick" question. Next-largest
+untouched clusters by dropped-term frequency after today: "key" (10, mostly
+`韋`), "human legs" (12, but already diagnosed as the pinned `穴`
+false-positive family per chunk 95 — skip re-flagging it, just confirm the
+pin still holds before moving past it), "tool" (8), "spike" (7), "person"
+(7), "vase" (6), "sword" (6), "stand up" (6), "row" (6), "insect" (6),
+"apron" (6) — same method as today: check this log for settled
+false-positives before rendering, then look for one root-cause primitive
+that explains several hosts at once rather than fixing hosts one at a time.
 
 ## 2026-10-06 — hanzi worklist chunk 4 (daily automation): 18 keep-ours, 2 needs-render, no kanji.db edit this chunk
 
