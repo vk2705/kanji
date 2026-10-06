@@ -17635,3 +17635,88 @@ were "key" (10, mostly the same 韋 family), "hook" (9), "person" (7), "sword"
 (6), "row" (6) — worth checking name-frequency clusters first before
 individual hosts, since (as today showed twice) a handful of root-cause
 primitives often explain a dozen+ flagged hosts at once.
+
+## 2026-10-06 — hanzi worklist chunk 4 (daily automation): 18 keep-ours, 2 needs-render, no kanji.db edit this chunk
+
+Fourth automated daily chunk against `hanzi_decomposition_worklist.json`
+(`hanzi_worklist_next.py -n 20`). Pending count was 375/495 going in. Both
+checks passed before starting: `kanji.db` present, `./venv/bin/pytest -v`
+green (99 passed). All 20 rows were `[overlay]` kind, and all 20 are the
+same `⿴囗X` enclosure-radical family continuing straight on from chunk 3's
+batch — U+56F3 through U+5706, the "diagram/nation/garden" block immediately
+after where chunk 3 left off (U+56EC/囬 was the last one fixed there).
+Rendered all 20 hosts in one batch (`render_glyphs.py 図 围 囵 囶 囷 囸 囹 固
+囻 囼 国 图 囿 圀 圁 圂 圃 圄 圅 圆`), then two follow-up batches for the rows
+that needed a closer look at individual components.
+
+**18 keep-ours** (図 围 囵 囷 囸 囹 固 囻 囼 国 图 囿 圀 圁 圂 圃 圄 圆): every
+one of these is a 囗 box drawn cleanly around a single, visually distinct
+inner shape with no stroke-sharing — the render matches the stored parts
+term-for-term in all 18 (固→囗+古, 国→囗+玉, 囿→囗+有, etc.). One needed a
+second render to be sure rather than a glance:
+
+- **圀** (U+5700, `⿴囗⿱八方`): cjkvi nests `八` over `方` inside the box;
+  our row flattens that nesting into three flat siblings (`囗, 八, 方`). A
+  dedicated render of 圀 alone confirmed the interior really is two
+  independent, non-overlapping shapes stacked top-to-bottom — a small
+  two-stroke 八 above a clear 方 — so the flattening loses the nesting
+  relationship but not any visible content, the same "flattening a
+  non-overlapping ⿱ into flat siblings is fine" call chunk 1-3 made
+  repeatedly. Kept.
+
+**2 needs-render**, both for the same reason — a cjkvi-named component that
+draws as a tofu box (a plain outlined square with an X through it, not a
+small/stylized glyph) on every face this machine has, confirmed by rendering
+each standalone rather than assumed from the codepoint:
+
+- **囶 (hanzi-56f6)**, `⿴囗𡉀 [GJ]`: `𡉀` (U+21240) rendered alone is tofu.
+  The host 囶 itself renders with real, distinct interior strokes (it has its
+  own font entry), but with no independently-renderable `𡉀` to compare
+  those strokes against, there's no way to confirm the interior really is
+  `𡉀` specifically rather than some other shape cjkvi happens to label that
+  way. Row already matches cjkvi term-for-term (`囗, 𡉀`); left `needs-render`
+  rather than guessed at.
+- **圅 (hanzi-5705)**, `⿱龴⿴囗𢆉`: `𢆉` (U+22189) is also tofu standalone.
+  Here the host itself is the bigger worry — rendered beside 囷 (a plain,
+  unambiguous `⿴囗X` case from this same chunk) for comparison, 圅's render
+  doesn't show a clean box outline the way every other row in this chunk
+  does; the strokes read more like a single fused glyph than a visible
+  龴-over-(box-containing-𢆉) stack. The row's current parts (`龴, 囗, 𢆉`,
+  already a flattening of cjkvi's own nested reading) may well still be
+  right, but between the unclear box in the host render and the tofu
+  component, nothing here can actually be confirmed one way or the other.
+  `龴` (U+9FB4) itself did render as a real, distinct shape (resembling
+  katakana マ) — not tofu — so it's specifically `𢆉` and the host's overall
+  legibility that block this one, not every component.
+
+**No kanji.db edit this chunk** — nothing reached `use-cjkvi`/`custom`, so
+there was no decomposition to replace; `backup_db.py` wasn't run since there
+was nothing to back up before.
+
+**One finding flagged for a maintainer, not fixed (out of this job's
+scope):** every one of the 18 keep-ours rows resolves its `囗` part through
+`expand_part_terms` to **hanzi-56d7** (the `zh-Hani` row for 囗 itself),
+whose stored keyword is **"erect, proud"** — not "enclosure"/"surround",
+which is what Kangxi radical 31 (囗, also present correctly as `kangxi31`/
+`rad1014` on the `ja-kanji` side, keyword "enclosure") actually means. This
+isn't a decomposition-structure bug in any of this chunk's 20 worklist rows
+— the chosen *parts* (which glyphs) are all correct — but it does mean every
+hanzi row that lists 囗 as a component (not just this chunk's 18, but
+presumably every `⿴囗X` hanzi across the whole dataset) is displaying "erect,
+proud" as 囗's auto-expanded keyword text, which reads as wrong to anyone
+looking at the part chip. Did not fix: hanzi-56d7 is not one of this
+worklist's 20 rows, fixing a system row's own keyword is outside what this
+job's guardrails authorize touching, and there was no way to independently
+confirm the *correct* replacement value (no local Unihan source file to
+cross-check against, and the existing `ja-kanji` 囗 row's "enclosure" is a
+strong but not certain match for whatever Unihan's actual `kDefinition` for
+U+56D7 is). Left as a note here for a maintainer to verify and fix directly
+(likely a one-row `UPDATE kanji SET keyword = ... WHERE id = 'hanzi-56d7'`,
+plus checking whether its aliases need the same correction) rather than
+guessed at.
+
+Verified: `./venv/bin/pytest -v` passed before (99) — no `kanji.db` edit was
+made this chunk, so no after-check was needed.
+
+495 total, 355 pending after this chunk (375 before —
+`hanzi_worklist_next.py --pending-count`).
