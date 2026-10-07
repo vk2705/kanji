@@ -17793,3 +17793,65 @@ made this chunk, so no after-check was needed.
 
 495 total, 355 pending after this chunk (375 before —
 `hanzi_worklist_next.py --pending-count`).
+
+## 2026-10-07 — hanzi worklist, chunk 5: next 20 (19 keep-ours, one deferred)
+
+Unattended daily run. `git status` on the two tracked files
+(`docs/hanzi_decomposition_worklist.json`, this doc) was clean on arrival —
+no interrupted prior run. `./venv/bin/pytest -v` passed (99 tests) before
+touching anything; `backup_db.py` taken first
+(`backups/kanji-20261007-100711.db`). `hanzi_worklist_next.py -n 20` for the
+next 20 rows (355 pending going in) — this chunk landed entirely inside one
+tight family: every row is `⿴囗X`, the 囗 ("erect, proud") enclosure radical
+(U+56D7, kuni-gamae) fully surrounding a single inner component, hosts
+U+5707 through U+571A consecutively (圇圈圉圊國圌圍圎圏圐圑園圓圔圕圖圗團圙圚).
+
+Rendered all 20 hosts plus every component named in either cjkvi's reading
+or the current row, in two batches via `render_glyphs.py`, before deciding
+anything.
+
+**19 keep-ours** (圇 圈 圉 圊 國 圌 圍 圎 圏 圑 園 圓 圔 圕 圖 圗 團 圙 圚): `⿴` is
+a full-surround operator — unlike `⿻` (which this project has repeatedly
+found lies about shared strokes, e.g. 蝿's 日 that's really 田) a surround
+does not in itself imply any stroke-sharing between the outer and inner
+shapes, and the renders confirm that holds here: in every case 囗 is cleanly
+drawn as a complete unbroken box with the inner component sitting entirely
+inside it, not fused into it. The current rows already name exactly that —
+`囗` (keyword set "erect, proud") plus the inner part(s) — so the overlay
+flag this family triggers is the weak-evidence kind CLAUDE.md describes
+(operator is enclosure, not that the data is wrong). Two worth noting
+specifically since cjkvi's own reading nests further than our flat row does:
+- **圗 (hanzi-5717)**: cjkvi's `⿴囗⿳厶十囬` stacks `厶` over `十` over `囬`
+  inside the box; our row lists all three as flat siblings (`囗, 厶, 十,
+  囬`). The render shows exactly three distinct stacked pieces inside the
+  box, matching what's visible — the extra nesting in cjkvi's IDS is about
+  stroke order/layout, not an extra visible piece our row is missing.
+- **圙 (hanzi-5719)**: same shape, smaller stack — cjkvi's `⿴囗⿱八面` vs.
+  our flat `囗, 八, 面`. Render confirms `八` sits directly above `面`
+  inside the box, both named, nothing missing.
+
+**One deferred — needs-render**:
+- **圐 (hanzi-5710)**: our row names `囗, 𬙙` (U+2C659, CJK Ext C/D range).
+  Rendered alone, `𬙙` comes back as a plain crossed-box placeholder (the
+  classic `.notdef` tofu shape) — genuinely no outline for this codepoint on
+  this machine's font stack, not a small/stylized real glyph. The host 圐
+  itself *does* render with real strokes (a box enclosing something that
+  looks exactly like `另`, U+53E6), which is tempting to read as "the real
+  answer is 另" — but per the standing rule, a composed host glyph is drawn
+  by the font as one designed unit, not assembled live from its component
+  codepoints, so a visual match between 圐's interior and a *different*,
+  unrelated codepoint (`另`) that happens to render identically proves
+  nothing about what `𬙙` itself actually looks like; it could just as
+  easily be font-level coincidence or Han-unification-adjacent sharing.
+  Recorded `needs-render` rather than guessing a swap to `另` — this is the
+  same shape of call as chunk 1's 临/`𫩏`: component unrenderable here, host
+  renders fine, decision left for a machine/font stack that can actually
+  draw the component.
+
+No `kanji.db` edits this chunk — every decision was `keep-ours` or
+`needs-render`, neither of which changes the stored decomposition. Verified:
+`./venv/bin/pytest -v` passed before (99) and again after, unchanged, since
+no DB write was made.
+
+495 total, 335 pending after this chunk (355 before —
+`hanzi_worklist_next.py --pending-count`).
