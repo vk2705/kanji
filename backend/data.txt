@@ -61,7 +61,7 @@ kangxi80:毋:mother,do not,breasts
 rtk3:?:3,three:one,two
 rtk4:?:4,four:囗,儿
 rtk6:六:six,6:top hat,八
-rtk7:七:seven,diced: 
+rtk7:七:seven,diced,hook:
 rtk8:?:eight,8,infinity,animal legs
 rtk16:?:old,church,gravestone,tombstone:mouth,ten
 rtk17:?:I:five,mouth

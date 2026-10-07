@@ -17855,3 +17855,132 @@ no DB write was made.
 
 495 total, 335 pending after this chunk (355 before —
 `hanzi_worklist_next.py --pending-count`).
+
+## 2026-10-07 — chunk 97: 虎's "hook" — the 9th hook host left open by chunk 96
+
+Fresh container this firing. Followed the task's step 0 before any audit
+work: repo was present at `/home/user/kanji` but `HEAD` was detached at
+origin's merge commit while local `master` sat 3 commits behind — fast-
+forwarded `master` onto it (`git checkout master && git merge --ff-only
+origin/master`) rather than leaving it detached, then confirmed with
+`git push --dry-run origin master` (clean, no diff to push) before touching
+anything. No venv existed in this container either — rebuilt it
+(`python3.11 -m venv venv`, installed `requirements.txt` +
+`requirements-dev.txt`), installed `fonts-noto-cjk fonts-hanazono` (Noto
+first), curled `cjkvi-ids/ids.txt` to `/tmp/ids.txt`, then ran the full
+step-3 suite against a from-scratch `import_data()` for a clean baseline:
+`test_regression_fixes.py` 1328/1328, `pytest -q` 74 passed,
+`audit_overflatten.py`/`audit_self_reference.py`/`audit_radicals.py` all 0,
+`audit_phantom_parts.py --in-csv-range` 11 across 10, `audit_primary_choice.py`
+0/71 — all matching chunk 96's numbers exactly. `audit_csv_regressions.py`'s
+flagged count needed its own baseline run since chunk 96 didn't print it
+with this script's own counter: 210 by `grep '^- rtk' | awk '{print $2}'`
+count (the script's own summary line undercounts by one for a reason not
+investigated — counted consistently via the grep method before and after
+throughout this chunk, so the delta is trustworthy even if the absolute
+number doesn't match a casual read of the printed summary line).
+
+Picked up chunk 96's "Next" directly: the 9th "hook" host, `虎`(rtk2145),
+left open because it didn't fit any of `audit_weak_evidence.py`'s three
+false-positive shapes (`--host 虎` returns 0 rows in all three sections —
+confirmed again this chunk, same result).
+
+CSV baseline for `虎` (frame 2145): "magic wand; augury; cliff; hook; diced;
+seven; human legs" — 7 glosses, no "tiger" among them. That matters: every
+*other* member of this family that uses 虍 (`虜 膚 虚 虞 慮 劇 虐`, confirmed
+by reading their own CSV rows) lists **"tiger" itself** as a component, i.e.
+Heisig names 虍 as a whole radical in those frames. Frame 2145 is the one
+exception — he spells 虍's own pieces out in full instead of naming it,
+which is why `data.txt`'s row for `虎` already carries `卜,七,厂` (magic
+wand/augury, cliff, diced/seven) alongside `虍` itself and `儿` (human legs),
+and why "hook" was the one gloss left with nothing resolving to it anywhere
+in the chain.
+
+Rendered `虍` zoomed (`render_glyphs.py 虎 虍 卜 七 厂 儿 亅`, then cropped/
+upscaled each region with Pillow for a closer look — the 110px fixed render
+size doesn't resolve fine stroke detail at a glance). Per the standing note
+left after chunk 85/86's font-substitution incident with this exact
+U+864D-family glyph ("any future render of U+864D-family shapes should
+force a non-Noto font first"), checked the script's own built-in relative
+check first: no identical-glyph warning fired for 虍 vs 虎 in this
+container's stack, meaning Noto isn't lying about U+864D here the way it
+was in that earlier incident — the render is trustworthy as rendered.
+Zoomed crops showed three distinct stroke groups inside 虍, not four: a
+vertical-plus-flag top piece matching standalone 卜's own shape (magic
+wand/augury), a horizontal-top-plus-curving-descender frame matching
+standalone 厂's own shape exactly (cliff), and a cross shape in the middle.
+That cross shape's own vertical stroke runs down into a horizontal
+terminal that curls upward at the right end — a real hook, visible in the
+same place and the same shape on **standalone 七's own render**, not just
+inside 虍 (cropped and compared side by side). No fourth, unaccounted
+stroke group exists in the glyph — the "hook" gloss describes a visual
+feature of 七's own hook-terminal stroke, not a separate primitive.
+
+Fix: added `hook` as a third alias on `rtk7`(七) — `data.txt:64`, from
+`七:seven,diced:` to `七:seven,diced,hook:`. Left `虎`'s own decomposition
+row untouched (still `卜,儿,七,厂,虍` primary / `儿,虍` alt) — 七 was already
+a direct part of `虎`'s primary decomposition, so making "hook" resolve to
+七 was enough on its own to clear the finding without touching the row
+structure. `kangxi6`(亅) already carries its own, different "hook" alias
+(used for 皮's unrelated hook stroke, chunk 96) — checked this doesn't
+create a resolution problem before adding a second claimant for the same
+word: `search_by_parts` resolves alias terms through
+`get_all_aliases_for_term`/`_reachable_kanji_for_term`, which already
+treats every row answering to a term as a claimant (not a single forced
+pick) — the exact mechanism `audit_csv_regressions.py`'s own docstring
+documents for "one name, several rows" cases like 貝/蛤/蛎 all answering to
+different degrees of "shellfish"/"clam"/"oyster" today. `resolve_alias`
+(the single-canonical-id picker, used for write-time part resolution, not
+search) does exist and would pick arbitrarily between 七/亅 if ever asked to
+resolve "hook" alone to one id, but nothing in today's change calls it with
+that term — did not try to make the two "hook" aliases mutually exclusive
+or pick a "more canonical" one, since the multi-claimant case is already
+the documented, load-bearing design for exactly this kind of synonym
+overlap.
+
+`audit_csv_regressions.py`: **210 → 209** flagged kanji (by consistent
+`grep`-based count before/after — summary line itself reads 209→209 for a
+reason not chased down, see above). Confirmed by id: `rtk2145` is the only
+entry that dropped out (`comm -23`/`comm -13` on the sorted id lists before
+and after), nothing newly flagged.
+
+Full re-verification (fresh rebuild from scratch): `test_regression_fixes.py`
+**1328/1328** (no pin needed correcting — the alias addition doesn't touch
+any pinned decomposition's shape), `pytest -q` **74 passed**,
+`audit_overflatten.py` 0, `audit_self_reference.py` 0, `audit_radicals.py`
+0/0, `audit_phantom_parts.py --in-csv-range` 11 across 10 (unchanged — an
+alias addition isn't visible to the phantom-part detector), `audit_primary_
+choice.py` 0/71. Frontend: `npm install`, `npm run lint` clean, `npm run
+build:prod` clean (SEO generation ran over all 3222 pages without error;
+七's page is the only one whose alias list changed in the diff).
+
+Not deployed — no server access from this container, per the task brief. A
+deployer needs `sync_system_data.py` run against the live DB to pick up
+七's new "hook" alias.
+
+### Next
+
+Continue `audit_csv_regressions.py`'s list — 209 left (210 before this
+chunk's `grep`-based count, which is the number to keep using for future
+deltas rather than the script's own summary line). Leads still open from
+chunk 95/96, unchanged: `尽`'s separate "ice" gap, `韋`'s missing `𫝀` top
+(needs the font-lying relative check first — `render_glyphs.py` warns
+automatically if a pair comes back identical in one face but not another;
+budget time for it rather than skipping it again), `瓦`/`瓶`'s seven-gloss
+CSV row ("cane, stick, drop, fishhook, ice" all dropped — seen again this
+chunk while grepping for "hook", worth its own chunk given how many glosses
+are missing at once), `声`/`眉`'s `𠃜`-vs-尺 "stick" question, "human legs"
+(already diagnosed chunk 95 as the pinned `穴` false-positive family — skip
+re-flagging, just confirm the pin still holds before moving past it).
+Next-largest untouched clusters by chunk 96's dropped-term frequency count,
+still unstarted: "tool" (8), "spike" (7), "person" (7), "vase" (6), "sword"
+(6), "stand up" (6), "row" (6), "insect" (6), "apron" (6) — same method as
+the last two chunks: check this log for settled false-positives before
+rendering, then look for one root-cause primitive that explains several
+hosts at once rather than fixing hosts one at a time. `虎`'s family
+(`虞 慮 驢` all flatten `卜,七,厂,虍` the same way, per the chunk 85/86 era
+comment at `data.txt` around line 4883) is worth a second look once the
+current list is further down — the redundancy of listing `虍` as a part
+*alongside* its own already-spelled-out pieces in those rows (not just
+`虎`) was noticed this chunk but not touched, since no current audit script
+flags it and it wasn't this chunk's finding to fix.
