@@ -17984,3 +17984,77 @@ current list is further down — the redundancy of listing `虍` as a part
 *alongside* its own already-spelled-out pieces in those rows (not just
 `虎`) was noticed this chunk but not touched, since no current audit script
 flags it and it wasn't this chunk's finding to fix.
+
+## 2026-10-08 — hanzi worklist, chunk 6: next 20 (19 keep-ours, one real fix)
+
+Unattended daily run. `git status` on the two tracked files
+(`docs/hanzi_decomposition_worklist.json`, this doc) was clean on arrival —
+no interrupted prior run. `./venv/bin/pytest -v` passed (99 tests) before
+touching anything; `backup_db.py` taken first
+(`backups/kanji-20261008-100154.db`). `hanzi_worklist_next.py -n 20` for the
+next 20 rows (335 pending going in) — this chunk spans two families: the
+back half of the `⿴囗X` enclosure run chunk 5 started (圛 圜 圝 圞, hosts
+U+571B-571E, completing that family) and most of the `夕`/`大` radical block
+(场 坐 埀 埓 堇 墀 夓 夕 夜 大 夨 夫 夬 夷 夹 夾).
+
+Rendered all 20 hosts plus every component named in either cjkvi's reading
+or the current row, in several batches via `render_glyphs.py`, before
+deciding anything.
+
+**19 keep-ours**, two different weak-evidence shapes:
+- **圛 圜 圝 圞** (hanzi-571b/c/d/e): same `⿴` full-surround pattern as chunk
+  5's 圇-圚 run — box (`囗`) cleanly enclosing a single inner component
+  (`睪`/`睘`/`䜌`/`欒` respectively), confirmed by render in each case. Same
+  reasoning as chunk 5: enclosure doesn't imply stroke-sharing, and the
+  current rows already name exactly what's drawn.
+- **坐 埀 堇 墀 夓 夕 夜 大 夨 夫 夬 夷 夹 夾** (the other 14): genuine `⿻`
+  stroke-overlap or opaque-stop cases where the render confirms the named
+  parts are still what's visible, just with shared/crossing strokes at the
+  seams — the same pattern chunk 1 established (大 = `一`+`人` with the
+  horizontal stroke cutting through 人's crossing strokes; 夫 = `二`+`人`
+  the same way one stroke up; 夷 = `大`+`弓`; 夹 = `夫`+`丷`; 夾 = `大`+`从`;
+  夜 = `亠`+`亻`+`夂`+`丶`). Two are worth calling out individually:
+  - **场 (hanzi-573a, opaque)**: the phonetic half is `𠃓` (U+200D3), which
+    renders as a genuine tofu box standalone on this machine's font stack
+    (confirmed via a direct solo render, not just the batch) — normally
+    grounds for `needs-render` per the standing rule. But this exact
+    codepoint is already used consistently across 16 other system rows in
+    the same phonetic family (扬 旸 杨 殇 汤 炀 玚 畅 疡 砀 肠 觞 钖 飏 饧 —
+    all the simplified `昜`-phonetic characters), and the host itself
+    renders with real, unambiguous strokes in that position. A single
+    unrenderable codepoint check isn't the only evidence available here;
+    16 independently-seeded system rows agreeing is stronger
+    corroboration than this one render alone, so this is the
+    "opaque-intermediate" case CLAUDE.md describes (cjkvi can't see inside
+    an atomic shape we've already named correctly), not a `needs-render`.
+  - **夓 (hanzi-5913, overlay)**: one of its parts, `𦣻` (U+268FB), is
+    *also* a tofu box standalone — `render_glyphs.py`'s own substitution
+    checker flagged it as pixel-identical to another tofu codepoint in
+    every face checked. Same reasoning as 场 rescued this one too: `𦣻`
+    is already used in 5 system rows including 夏 ("summer"), where
+    `𦣻` (a stylized head/face) over `夂`/`夊` (legs) is the textbook
+    traditional reading — well-established independently of this one
+    render. Kept rather than deferred.
+
+**One real fix — 埓 (hanzi-57d3)**, `土,寸` → `土,寽`. cjkvi's own GJ
+reading uses a circled placeholder here (`⿰土⿱④寸[GJ]`, per
+`/tmp/ids.txt` — the `audit_phantom_parts.py`-documented "circled numbers
+are per-entry placeholders, not identifiers" case), so the worklist tool
+fell back to displaying the T-variant expansion instead
+(`⿰土⿱⿴𠂊冫寸[T]`). Rendered 埓 alone at full size: the right side
+clearly has a hook stroke plus a short diagonal *above* `寸`, not `寸`
+alone — exactly the piece the current two-part row omits entirely. Rather
+than trust the T-variant's raw `𠂊`+`冫` stroke-level split, checked
+whether a single real character matches that whole shape first: `寽`
+("a handful", already a resolvable row, `hanzi-5bfd`) rendered
+side-by-side with 埓 is a pixel-for-pixel match for the top-hook + 寸
+structure. Applied directly to `kanji.db` (no `data.txt` line exists for
+hanzi rows) via `database.expand_part_terms(conn, ['土', '寽'],
+script_group='zh')`, replacing decomposition 5302's 4 old `parts` rows
+(`土`, `soil, earth`, `寸`, `inch`) with 4 new ones (`土`, `soil, earth`,
+`寽`, `a handful`). Verified with `get_kanji_detail` (resolves cleanly,
+keyword "enclosure, dike, embankment" intact) and the full pytest suite
+(99 passed, both before and after).
+
+495 total, 315 pending after this chunk (335 before —
+`hanzi_worklist_next.py --pending-count`).
