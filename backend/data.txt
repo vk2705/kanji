@@ -62,7 +62,7 @@ rtk3:?:3,three:one,two
 rtk4:?:4,four:囗,儿
 rtk6:六:six,6:top hat,八
 rtk7:七:seven,diced,hook:
-rtk8:?:eight,8,infinity,animal legs
+rtk8:?:eight,8,infinity,animal legs,tool
 rtk16:?:old,church,gravestone,tombstone:mouth,ten
 rtk17:?:I:five,mouth
 rtk18:?:risk:sun,eye
@@ -4994,3 +4994,40 @@ prim-turkey-house:隺:turkeyhouse,turkey house:冖,隹
 # names and cjkvi's own split exactly. 鍛 (forge) already used 段 whole and
 # needed no change.
 prim-staple-gun:㐆:staple gun:
+
+# --- 2026-10-08: "tool" was dropping on 8 hosts in audit_csv_regressions.py
+# (興 典 呉 娯 誤 挙 誉 虞), all via heisig-kanjis.csv's components column.
+# Checked first whether it meant 具 (rtk78, the one kanji actually keyworded
+# "tool") the way frame 79's 真 ("ten; needle; eye; tool; one; animal legs;
+# eight") does -- 真's own row already carries 具 literally (具,十) and was
+# never flagged, so that's the control case: when a host truly contains 具,
+# the row already says so, parts and all (目,一,八 under the eye-box).
+# None of the 8 flagged hosts show that shape when rendered (render_glyphs.py
+# 興 挙 誉 丌 八 一, and 典 丌 八 具, with a cropped/upscaled pass on each):
+# 典's bottom is 曲,八 with nothing resembling 具's 目; 興 is 𦥑,同,一,八
+# (settled 2026-09-20, re-confirmed today); 挙/誉 are 手/言,𭕄,八,一 -- no
+# eye-box anywhere. Tried reading the "一,八" pair as a fused 丌 (U+4E0C,
+# "stand") instead of separate 一 + 八, since 具 itself is 目 sitting on
+# exactly that stand shape -- cropped 典's bottom against standalone 丌 and
+# standalone 八 at 4x and they do NOT match: 丌's left stroke curves
+# continuously out of the bar (one stroke) and its right leg is straight;
+# 典's bottom (and 八 rendered alone, and 具's own base) all show a short
+# horizontal cap with a visible gap before two separate diagonal legs -- a
+# serif flourish on 八's two independent strokes, not a literal connecting
+# bar. Rejected the 丌 swap once the pixels disagreed.
+# Across every CSV occurrence of "tool", the 79/294/677 (真-family) case is
+# the only one where a host literally contains 具; the other 8 never do but
+# all reach 八 already (directly in 興/典/挙/誉, through 呉 for 娯/誤/虞). 八
+# already carries four names for different mnemonic roles on one shape
+# (eight, 8, infinity, animal legs) -- same pattern, same shape, Heisig
+# apparently also calling the splayed-legs stroke pair "tool" in these
+# frames' stories, distinct from frame 78's "tool" (具) the way rtk7's
+# "hook" and kangxi6's "hook" already coexist as two claimants (chunk 97).
+# Added as 八's fifth alias rather than touching any of the 8 hosts' rows.
+# 呉/娯/誤/虞 also drop "chair" (only ever appears in 呉's own CSV
+# components, nowhere else in the CSV) -- that's 呉-specific, not explained
+# by this fix, and left open for a future chunk: 呉's own row (口,八) covers
+# "mouth"+"tool"(now)+"animal legs" but not "chair"; cjkvi reads 呉 as
+# ⿺⿱𠃑大口 (hook + a 大-like crossed-legs shape, under 口), so "chair"
+# likely names something in that crossed-legs portion rather than in the
+# splayed 八 -- needs its own render pass, not assumed from today's fix.
