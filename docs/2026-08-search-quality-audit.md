@@ -17984,3 +17984,133 @@ current list is further down — the redundancy of listing `虍` as a part
 *alongside* its own already-spelled-out pieces in those rows (not just
 `虎`) was noticed this chunk but not touched, since no current audit script
 flags it and it wasn't this chunk's finding to fix.
+
+## 2026-10-08 — chunk 98: "tool" cluster — 4 of 8 cleared, root cause is a 5th name on 八
+
+Fresh container again this firing. Step 0 first, as the task brief requires:
+repo was present at `/home/user/kanji`, but `HEAD` was detached at origin's
+merge commit (same shape of issue as chunk 97, different cause — this time
+nothing was ahead on `master` locally, it was just never checked out in this
+container). Ran `git checkout master` (already at the same commit as the
+detached HEAD), confirmed `master` was 6 commits behind `origin/master`
+(another firing had pushed since this container's base image was made),
+fast-forwarded with `git merge --ff-only origin/master`, then confirmed with
+`git push --dry-run origin master` (clean) before touching anything. No
+venv existed either — rebuilt it (`python3.11 -m venv venv`, installed
+`requirements.txt` + `requirements-dev.txt` + `Pillow`, needed this chunk
+for pixel-level crop comparisons — see below), installed
+`fonts-noto-cjk fonts-hanazono` (Noto first, `apt-get update` needed first
+since the package lists weren't seeded), curled `cjkvi-ids/ids.txt` to
+`/tmp/ids.txt`. Full step-3 suite against a from-scratch `import_data()`
+for a clean baseline, before any edit: `test_regression_fixes.py`
+1328/1328, `pytest -q` 74 passed, `audit_overflatten.py`/
+`audit_self_reference.py`/`audit_radicals.py` all 0, `audit_phantom_parts.py
+--in-csv-range` 11 across 10, `audit_primary_choice.py` 0/71 — all matching
+chunk 97's numbers exactly. `audit_csv_regressions.py` baseline: 209 by the
+`grep '^- rtk' | awk '{print $2}' | wc -l` method chunk 97 flagged as the
+one to keep using (its own summary line undercounts by one, still not
+chased down) — matches chunk 97's end-of-chunk number exactly.
+
+Picked up chunk 96/97's "Next": the largest untouched cluster, "tool" (8
+hosts: 興 典 呉 娯 誤 挙 誉 虞).
+
+First checked whether "tool" meant 具 (rtk78, the one kanji actually
+keyworded "tool") the way frame 79's 真 does — 真's own CSV components read
+"ten; needle; eye; tool; one; animal legs; eight", and 真's row already
+carries 具 literally (`具,十`), which is why 真 (and its dependents 294 鎮,
+677 慎) were never flagged: when a host truly contains 具, the row already
+says so, 目/一/八 under the eye-box and all. That's the control case for
+what a *real* 具 match looks like.
+
+None of the 8 flagged hosts show that shape. Rendered all of them
+(`render_glyphs.py 興 挙 誉 丌 八 一` and `典 丌 八 具`, then cropped each
+row to 4x with Pillow for a close look — a first attempt comparing
+full-size rows wasn't sharp enough to settle the next question and quietly
+gave a wrong first impression, see below): 典's bottom is 曲,八, nothing
+resembling 具's 目; 興 is 𦥑,同,一,八 (settled 2026-09-20, re-confirmed
+today, still no eye-box); 挙/誉 are 手/言,𭕄,八,一 — same story.
+
+**A theory tried and rejected**: since 具 itself is 目 sitting on a
+"一+八" base, tried reading the hosts' separate "一,八" pair as actually
+being a single fused `丌` (U+4E0C, "stand") that our rows had mis-split
+into two strokes — the same shape of bug this project has caught before
+(a compound flattened into its visually-similar letters). A quick side-by-
+side render of `丌` and `八` alone seemed to half-support this (both showed
+a horizontal top element), but a 4x crop of 典's bottom against standalone
+`丌` and standalone `八` separately showed they do NOT match each other:
+`丌`'s left stroke curves continuously out of the bar as one stroke and its
+right leg is a separate straight vertical; 典's bottom — and 八 rendered
+completely alone, and 具's own base under its 目 — all show a short
+horizontal cap with a visible *gap* before two separate diagonal legs: a
+serif flourish belonging to 八's own two independent strokes in this font,
+not a literal connecting bar. The lower-resolution first render made the
+serif cap look enough like a bar to suggest `丌`; the crop didn't agree.
+Rejected the swap once the pixels disagreed — exactly the "render it,
+don't reason about it" failure mode the brief warns about, caught before
+it reached `data.txt`.
+
+With `丌` ruled out, and 具 ruled out by the lack of any eye-box, the only
+primitive already present on all 8 hosts (directly on 興/典/挙/誉, through
+呉 for 娯/誤/虞, confirmed by walking each row) is 八 itself. 八 already
+carries four names for different mnemonic roles on one shape (`eight, 8,
+infinity, animal legs`) — adding "tool" as a fifth is the same pattern,
+not a new one, and matches chunk 97's `七`/`hook` precedent for one shape
+answering to more than one Heisig name depending on the frame's story (and
+rtk7's "hook" already coexists with kangxi6's own separate "hook" alias —
+multi-claimant terms are the documented, load-bearing design here, not an
+edge case to special-case around).
+
+Fix: `data.txt:65`, `rtk8:?:eight,8,infinity,animal legs` →
+`rtk8:?:eight,8,infinity,animal legs,tool`. No host row touched.
+
+This clears "tool" wherever it was the *only* gap — 興(1533), 典(1969),
+挙(2088), 誉(2089) — but **not** 呉/娯/誤/虞, which also drop "chair"
+(`heisig-kanjis.csv`'s components for 2046 呉 read "mouth; chair; tool;
+animal legs"). Checked whether "chair" is a recurring name needing the same
+treatment: it isn't — across the whole CSV, "chair" appears only in 呉's
+own family (2046/2047/2048/2150), nowhere else, unlike "tool" which also
+legitimately means real 具 at frame 79/294/677. rtk218 (椅, "chair" the
+actual chair-kanji) is an unrelated keyword collision, not evidence either
+way. 呉's own row (口,八) covers "mouth" and now "tool", but not "chair";
+cjkvi reads 呉 as `⿺⿱𠃑大口` (a hook `𠃑` plus a 大-like crossed-legs shape,
+under 口), so "chair" most likely names something inside that crossed-legs
+portion rather than in the splayed 八 — left open rather than guessed,
+since nothing rendered today confirms it and it's a different shape
+question from the one this chunk answered.
+
+Verification, full rebuild from scratch: `test_regression_fixes.py`
+**1328/1328** (no pin needed correcting — adding an alias doesn't change
+any pinned decomposition's shape), `pytest -q` **74 passed**,
+`audit_overflatten.py` 0, `audit_self_reference.py` 0, `audit_radicals.py`
+0/0, `audit_phantom_parts.py --in-csv-range` 11 across 10 (unchanged — an
+alias addition isn't visible to the phantom-part detector), `audit_primary_
+choice.py` 0/71 (unchanged). Frontend: `npm install`, `npm run lint` clean,
+`npm run build:prod` clean (SEO generation ran over all 3222 pages without
+error).
+
+`audit_csv_regressions.py`: **209 → 205** flagged kanji (consistent
+`grep`-based count both times). Confirmed by id (`comm -23`/`comm -13` on
+sorted id lists before/after): exactly `rtk1533 rtk1969 rtk2088 rtk2089`
+dropped out, nothing newly flagged — matching the prediction (4 of 8 fully
+clear; 呉/娯/誤/虞 stay flagged on "chair" alone).
+
+Not deployed — no server access from this container, per the task brief. A
+deployer needs `sync_system_data.py` run against the live DB to pick up
+八's new "tool" alias.
+
+### Next
+
+呉's family (呉 娯 誤 虞) is the natural next step, left open above: find
+what "chair" names inside 呉's crossed-legs shape (cjkvi `⿺⿱𠃑大口`) with
+its own render pass — don't assume it's also 八 just because "tool" was.
+That would close out the whole "tool" cluster chunk 96/97 flagged. After
+that, continue down the same frequency list, still unstarted: "spike" (7),
+"person" (7), "vase" (6), "sword" (6), "stand up" (6), "row" (6), "insect"
+(6), "apron" (6) — same method: check this log for settled false-positives
+first, then look for one root-cause primitive per cluster rather than
+fixing hosts one at a time (today's chunk is itself a clean example: one
+alias addition cleared 4 of 8 hosts at once). `audit_csv_regressions.py`
+is at 205 now (by the `grep`-based count, not the script's own summary
+line) — keep using that method for future deltas. `虎`'s family redundancy
+note from chunk 97 (`虞 慮 驢` listing `虍` *alongside* its own spelled-out
+pieces) is still untouched and still not flagged by any current script.
