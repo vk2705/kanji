@@ -18188,3 +18188,130 @@ is at 205 now (by the `grep`-based count, not the script's own summary
 line) — keep using that method for future deltas. `虎`'s family redundancy
 note from chunk 97 (`虞 慮 驢` listing `虍` *alongside* its own spelled-out
 pieces) is still untouched and still not flagged by any current script.
+
+## 2026-10-09 — chunk 99: 呉's "chair" — closing the thread chunk 98 left open
+
+Fresh container again. Step 0: repo present at `/home/user/kanji`, `HEAD`
+detached at the same commit `origin/master` was already on, local `master`
+9 commits behind — `git checkout master`, `git merge --ff-only
+origin/master`, `git push --dry-run origin master` clean before touching
+anything. No venv (rebuilt: `python3.11 -m venv venv` +
+`requirements.txt`+`requirements-dev.txt`+`Pillow`), no fonts
+(`apt-get update` then `fonts-noto-cjk fonts-hanazono`, Noto first), no
+`/tmp/ids.txt` (curled fresh). Full step-3 suite against a from-scratch
+`import_data()` before any edit: `test_regression_fixes.py` 1328/1328,
+`pytest -q` 74 passed, `audit_overflatten.py`/`audit_self_reference.py`/
+`audit_radicals.py` all 0, `audit_phantom_parts.py --in-csv-range` 11
+across 10, `audit_primary_choice.py` 0/71 — all matching chunk 98's
+numbers exactly. `audit_csv_regressions.py`: 205 by the `grep` method,
+also matching.
+
+Picked up chunk 98's "Next": 呉's family (呉 娯 誤 虞), left open because
+"chair" (`heisig-kanjis.csv`'s components for 2046 呉: "mouth; chair;
+tool; animal legs") didn't resolve against 呉's row (`口,八`) even after
+that chunk's "tool" fix.
+
+**First caught a mistake in chunk 98's own note.** It quoted cjkvi-ids'
+reading of 呉 as `⿺⿱𠃑大口` — that's actually the line for **U+5433 吳**,
+the Taiwan/mainland traditional form, not **U+5449 呉** (the Japanese
+shinjitai glyph RTK's frame 2046 actually uses). The two codepoints look
+near-identical at a glance but are separate `ids.txt` entries; grepping
+the tab-delimited character field precisely (`grep -P "\t呉\t"`, not a
+loose substring match that happens to also catch 吳's row) gives 呉's real
+line: `⿳⿺𠃑口一八[GJ]` / `⿱⿳口𠃑一八[T]` — a 3-way vertical stack (hook-
+wrapped mouth / a bare 一 / 八), not the 2-way reading quoted last time.
+A reminder that "render it, don't reason about it" applies to cjkvi
+lookups too, not just font rendering — a codepoint lookup can silently
+grab a visually-identical sibling character's row.
+
+Rendered 呉 alone (`render_glyphs.py 呉`, Pillow crop+5x upscale on the
+glyph region): top is a plain 口 box, nothing like 具's internal-stroked
+eye-box. Directly under it, a vertical stroke drops down the left side
+and turns right with a short downward tick — rendered `𠃑` (U+200D1)
+solo alongside 呉 and 具 for a direct comparison (`render_glyphs.py
+𠃑 呉 具`, the script's own pairwise font-identity check raised no
+substitution warning) and it's a clean match for that hook shape. Below
+the hook, a separate long horizontal bar, then 八's splayed legs — three
+distinct vertical zones, matching cjkvi's 3-way split, not something that
+collapses the hook and the bar into one unit.
+
+Cross-checked against the control case: 具 (rtk78, row `一,八,目`) has the
+same bottom "一,八" but no hook above its own box, and 具's CSV explicitly
+names that bar ("eye; one; animal legs; eight" — "one" present). 呉's CSV
+never names "one" at all ("mouth; chair; tool; animal legs" — four names,
+no "one"). That only makes sense if "chair" is the hook alone and the
+bare 一 below it stays the same kind of unnamed connecting stroke this
+audit has already flagged as common elsewhere (the "ノ 一 ｜ with no
+alternative to promote" pile from the phantom-parts list) — not folded
+into "chair", which would just leave 一 unclaimed, same outcome either
+way for what gets written to `data.txt`. The hook alone is also a clean
+mnemonic match for "chair" on its own terms: a vertical back and a
+horizontal seat is exactly an L-shaped chair silhouette, and that's
+`𠃑`'s whole shape.
+
+Fix: registered `prim-chair:𠃑:chair` (new row, no further decomposition
+— cjkvi's own entry for `𠃑` is self-referential, i.e. atomic) and changed
+`rtk2046:呉:give:口,八` to `rtk2046:呉:give:口,prim-chair,八`, ordered to
+match the CSV's own mouth/chair/tool sequence. 娯/誤/虞's own rows
+(`呉,女` / `言,呉` / `呉,卜,七,厂,虍;呉,虍`) needed no edit — they
+reference 呉 as a literal part already, so they inherit the fix through
+that reference.
+
+`𠃑` (U+200D1, CJK Ext B) is one of the codepoints `make_primitive_images.
+needs_image` flags as unrenderable in most fonts, so `test_regression_
+fixes.py` immediately caught the new row needing a picture
+(`prim-chair (𠃑, U+200D1) needs a primitive image and has none`) before
+this ever reached a commit — the check added in the session that found
+`𭕄` doing exactly the job it was built for. Ran `make_primitive_images.py`
+(no `--only`, first time): it silently re-rendered **all 69** existing
+primitive images too, not just the new one, each a few dozen bytes
+different in size from the committed versions — almost certainly harmless
+(antialiasing/font-metrics noise from a Chromium/fontconfig version this
+container's apt snapshot doesn't share with whatever committed the
+originals), but unverified and entirely out of scope for a one-primitive
+fix, so `git checkout -- backend/primitive_images/` reverted all 39
+flagged-as-modified files and kept only the new untracked
+`prim-chair.png`. `--only` exists for exactly this (`make_primitive_images.
+py --only rtk2046` would have scoped it, if the row's host id were known
+up front) — worth defaulting to next time a single new primitive needs an
+image, to avoid re-diffing the whole directory.
+
+Verification, full rebuild from scratch after the fix: `test_regression_
+fixes.py` **1328/1328** (no pin needed correcting — a new primitive row
+plus one host's parts list doesn't touch any pinned decomposition's
+shape), `pytest -q` **74 passed**, `audit_overflatten.py` 0,
+`audit_self_reference.py` 0, `audit_radicals.py` 0/0,
+`audit_phantom_parts.py --in-csv-range` **11 across 10, unchanged**
+(identical breakdown: 3 on the strong/blind channel — 斎,属,能 — plus the
+same 8 weaker-evidence entries — a real cjkvi-corroborated part addition
+doesn't move this audit either way), `audit_primary_choice.py` **0/71,
+unchanged**. Frontend: `npm install`, `npm run lint` clean, `npm run
+build:prod` clean (SEO generation ran over all 3223 pages — one more than
+chunk 98's 3222, the new `prim-chair` page — without error).
+
+`audit_csv_regressions.py`: **205 → 201** flagged kanji (`grep`-based
+count both times). Confirmed by id: exactly `rtk2046 rtk2047 rtk2048
+rtk2150` (呉 娯 誤 虞) dropped out, nothing newly flagged — the whole
+"tool"/"chair" cluster chunk 96 originally raised (8 hosts: 興 典 呉 娯
+誤 挙 誉 虞) is now fully clear across both chunks' fixes.
+
+Not deployed — no server access from this container, per the task brief.
+A deployer needs `sync_system_data.py` run against the live DB to pick up
+the new `prim-chair` row and 呉's updated parts list, and the new
+`backend/primitive_images/prim-chair.png` file needs to exist on the
+server the same way the other `primitive_images/` files already do (it's
+committed, not generated at import time, but `sync_system_data.py` should
+be checked to confirm it propagates `image_url` for a brand-new row the
+same way it does for an edited one on an existing row).
+
+### Next
+
+Continue down chunk 96's frequency list, still unstarted: "spike" (7),
+"person" (7), "vase" (6), "sword" (6), "stand up" (6), "row" (6), "insect"
+(6), "apron" (6) — same method as both tool/chair chunks: check this log
+for settled false-positives first, then look for one root-cause primitive
+per cluster before fixing hosts one at a time. `audit_csv_regressions.py`
+is at 201 now (by the `grep`-based count). `虎`'s family redundancy note
+from chunk 97 (`虞 慮 驢` listing `虍` *alongside* its own spelled-out
+pieces) is still untouched and still not flagged by any current script —
+unrelated to today's fix, 虞's row itself wasn't touched.

@@ -2139,7 +2139,7 @@ rtk2042:靴:shoes:化,革
 rtk2043:覇:hegemony:革,月,西
 rtk2044:声:voice:士,𠃜
 rtk2045:眉:eyebrow:𠃜,目
-rtk2046:呉:give:口,八
+rtk2046:呉:give:口,prim-chair,八
 rtk2047:娯:recreation:呉,女
 rtk2048:誤:mistake:言,呉
 rtk2049:蒸:steam:丞,灬,艹
@@ -5031,3 +5031,37 @@ prim-staple-gun:㐆:staple gun:
 # ⿺⿱𠃑大口 (hook + a 大-like crossed-legs shape, under 口), so "chair"
 # likely names something in that crossed-legs portion rather than in the
 # splayed 八 -- needs its own render pass, not assumed from today's fix.
+
+# --- 2026-10-09: picked up the "chair" thread left open above. First
+# corrected a mistake baked into that same note: `⿺⿱𠃑大口` is cjkvi-ids'
+# reading of U+5433 吳 (the Taiwan/mainland traditional form), not of
+# U+5449 呉 (the actual character on rtk2046 -- RTK uses the Japanese
+# shinjitai glyph). The two codepoints render near-identically at a glance
+# but are genuinely different entries in ids.txt; grepping the tab-
+# delimited character field precisely (not a loose substring match) for
+# 呉 gives its real line: `⿳⿺𠃑口一八[GJ]` / `⿱⿳口𠃑一八[T]` -- a 3-way
+# vertical stack (hook-wrapped mouth / a bare 一 / 八), not the 吳 reading
+# quoted last time.
+# Rendered 呉 alone at 5x crop (render_glyphs.py 呉, then Pillow crop+
+# upscale): top is a plain 口 box; directly under it, a vertical stroke
+# drops down the left side and turns right with a short downward tick --
+# exactly 𠃑 (U+200D1, rendered solo via render_glyphs.py 𠃑 呉 具 for a
+# direct comparison, confirmed not a font substitution via the script's own
+# pairwise identity check). Below *that*, a separate long horizontal bar,
+# then 八's splayed legs -- matching cjkvi's 3-way split, not a 2-way one.
+# 具 (rtk78, 一,八,目) has the same bottom "一,八" but no hook above its
+# eye-box, and 具's CSV names that bar explicitly ("one") -- 呉's CSV never
+# names "one" at all (mouth; chair; tool; animal legs, four names, no
+# "one"), which only makes sense if "chair" belongs to the hook alone and
+# the bare 一 stays the same kind of unnamed connecting stroke this audit
+# has flagged elsewhere (the "ノ 一 ｜ with no alternative to promote"
+# pile) -- not folded into "chair", which would leave 一 claimed by
+# nothing and still correctly unflagged, same as today's fix produces.
+# The hook by itself is a clean mnemonic match for "chair" besides: a
+# vertical back and a horizontal seat, an L-shaped chair silhouette, is
+# exactly 𠃑's whole shape. Registered prim-chair (𠃑) below and added it
+# to rtk2046's row between 口 and 八, matching the CSV's own mouth/chair/
+# tool ordering. No change to 娯/誤/虞's own rows (呉,女 / 言,呉 / ...) --
+# they already reference 呉 as a literal part, so they inherit the fix
+# through that reference rather than needing their own edit.
+prim-chair:𠃑:chair
