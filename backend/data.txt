@@ -969,7 +969,7 @@ rtk885:撮:snapshot:扌,最
 rtk886:恥:shame:耳,心
 rtk887:職:post:戠,耳
 rtk888:聖:holy:王,口,耳
-rtk889:敢:daring:耳,攵
+rtk889:敢:daring:丅,耳,攵
 rtk890:聴:listen:耳,十,罒,心
 rtk891:懐:feelings:state of mind,十,罒,衣
 rtk892:慢:ridicule:曼,忄
@@ -5065,3 +5065,80 @@ prim-staple-gun:㐆:staple gun:
 # they already reference 呉 as a literal part, so they inherit the fix
 # through that reference rather than needing their own edit.
 prim-chair:𠃑:chair
+
+# 2026-10-10 chunk 100: "spike" cluster (chunk 96's frequency list, next
+# after tool/chair). audit_csv_regressions.py flags 8 hosts dropping
+# "street"/"nail"/"spike" against rtk95's CSV baseline: 敢(889) 融(1123)
+# 両(1252) 満(1253) 汚(1334) 隔(1409) 厳(2086), all routing the missing
+# concept to rtk95 (丁, street/nail/spike's existing home). Checked each
+# host's real cjkvi-ids line before assuming one root-cause primitive
+# covers all of them, per chunk 98/99's method -- it doesn't: this
+# cluster splits into at least three unrelated shape questions.
+#
+# 敢 is the one with clean evidence. ids.txt's JKV-script line for 敢
+# (U+6562) is `⿰⿱丅耳攵` -- its top-left component is 丅 (U+4E05), not
+# rtk95's 丁 (U+4E01). Rendered both side by side (render_glyphs.py 丁 丅
+# 敢 耳 攵, Noto Sans CJK JP): 丁 has a hook curving left at the bottom of
+# its vertical stroke, 丅 is a plain straight vertical, no hook -- visibly
+# different outlines, and the script's own font-substitution check found
+# no pair rendering identically in any face, so this isn't a case of one
+# font silently drawing the other. Rendered 敢 alone at 600px
+# (crop_glyph.py) and the top-left stroke under the horizontal bar runs
+# straight down with no leftward hook where it meets 耳 -- matches 丅, not
+# 丁. CSV's components for 889 ("street; nail; spike; ear; taskmaster")
+# read straightforwardly once split this way: 丅 contributes all three of
+# street/nail/spike as Heisig's one mnemonic name for this shape (same
+# precedent as 龶/丰 "grow up" or rtk7/kangxi6's two separate "hook"s --
+# one Heisig name, two distinct codepoints, here because of a CJK
+# unification regional-variant split rather than a true second mnemonic),
+# 耳 is "ear", 攵 is "taskmaster" (rtk889's existing keyword for that
+# radical elsewhere, not touched here).
+#
+# 丅 is not one of the 214 official Kangxi radicals (not in
+# CJKRadicals.txt), so it gets a prim-{slug} id, not kangxiN. cjkvi-ids
+# gives 丅 its own sub-decomposition (`⿱一丨`, not self-referential),
+# matching how 丁 itself is already split into its own strokes
+# (`rtk95:丁:...:一,亅` -- 丁's hook is 亅, 丅's straight stroke is the
+# generic vertical prim-pipe) rather than registered atomic like 𠃑 was.
+# U+4E05 is well inside the ordinary CJK Unified block, not one of
+# make_primitive_images.py's UNRENDERABLE_RANGES, so no primitive image
+# needed (confirmed by the clean render above).
+#
+# Fix: registered prim-straight-nail (丅, parts 一,｜) and changed
+# `rtk889:敢:daring:耳,攵` to `rtk889:敢:daring:丅,耳,攵`, matching the
+# CSV's own street/nail/spike, ear, taskmaster ordering. 厳(2086) already
+# references 敢 as a literal part (`敢,𭕄,厂`) and needed no edit of its
+# own -- it inherits the fix through that reference, same pattern as
+# chunk 99's 呉 family.
+#
+# The other 6 hosts are explicitly NOT covered by this fix and need their
+# own separate investigation, not a "spike" blanket primitive:
+# - 融(1123)/隔(1409) reach "spike" through 鬲 (kangxi193, currently
+#   `口,冂,儿`). cjkvi-ids gives 鬲 two genuinely different sub-IDS by
+#   script: GT (`⿳一口⿵𦉪丅`, 丅 present) vs JK (`⿳一口⿵冂⿱䒑丨`, no 丅 at
+#   all -- replaced by 䒑 over 丨 wrapped in 冂). RTK is Japanese, so the
+#   JK line is the relevant one, and it doesn't contain 丅 -- today's 敢
+#   fix must NOT be copied onto kangxi193 without its own render pass on
+#   鬲 itself to see which of 冂/䒑/丨 the "street/nail/spike" concept
+#   actually sits on, if any. Left open.
+# - 両(1252)/満(1253): 両's CSV baseline ("street; nail; spike; belt;
+#   shovel") doesn't match cjkvi's own IDS for 両 (`⿱一⿻冂山`, an ⿻
+#   overlay with no 丁/丅-shaped piece in it at all -- see CLAUDE.md's "an
+#   IDS is not a parts list when its operator is ⿻" warning) or the
+#   current row's cjkvi-derived parts (`一,冂,山`) even loosely. "shovel"
+#   is kangxi17's (凵) own self-name, not currently on this row either.
+#   This looks like Heisig's real book decomposition of 両 is a different
+#   scheme than the structural one `data.txt` currently carries, not a
+#   single missing primitive -- a bigger reconciliation than fits this
+#   chunk. Left open.
+# - 汚(1334): CSV lists "spike" separately from "snare" (丂, already on
+#   this row) and "one" (already reachable via 丂's own `一,勹` split, not
+#   flagged as dropped). Candidate location is 丂/亐's own anatomy
+#   (`勹`, currently "bound up" only) but changing a shape as
+#   widely-reused as 丂 needs its own dedicated check of every host that
+#   uses it, not a one-line guess here. Left open.
+#
+# Net: 2 of 8 hosts (敢, 厳) cleared with solid render-based evidence;
+# 融/隔/両/満/汚 need their own follow-up passes, each a different shape
+# question, not a shared fix.
+prim-straight-nail:丅:street,nail,spike:一,｜
