@@ -18315,3 +18315,149 @@ is at 201 now (by the `grep`-based count). `虎`'s family redundancy note
 from chunk 97 (`虞 慮 驢` listing `虍` *alongside* its own spelled-out
 pieces) is still untouched and still not flagged by any current script —
 unrelated to today's fix, 虞's row itself wasn't touched.
+
+## 2026-10-10 — chunk 100: "spike" — one root cause turned out to be three
+
+Fresh container again. Step 0: no repo checked out at `/home/user/kanji`
+this time — `git clone https://github.com/vk2705/kanji /home/user/kanji`,
+then `cd`, `git fetch origin`, `git pull --ff-only` (failed: detached
+`HEAD`, already at the same commit `origin/master` was on, but the local
+`master` ref itself was 9 commits stale — `git checkout -B master
+origin/master` fixed both at once), `git push --dry-run origin master`
+clean before touching anything. No venv (`python3.11 -m venv venv` +
+`requirements.txt`+`requirements-dev.txt`+`Pillow`), no fonts
+(`apt-get update` then `fonts-noto-cjk fonts-hanazono`, Noto first — this
+container's `apt-get install` failed until `apt-get update` ran first),
+no `/tmp/ids.txt` (curled fresh, 88,939 lines). Full step-3 suite against
+a from-scratch `import_data()` before any edit: `test_regression_
+fixes.py` 1328/1328, `pytest -q` 74 passed, `audit_overflatten.py`/
+`audit_self_reference.py`/`audit_radicals.py` all 0,
+`audit_phantom_parts.py --in-csv-range` 11 across 10, `audit_primary_
+choice.py` 0/71, `audit_csv_regressions.py` 201 by the `grep` method —
+all matching chunk 99's numbers exactly.
+
+Picked up chunk 96's frequency list where chunk 99 left it: "spike" (7
+hosts by that list; `audit_csv_regressions.py` actually flags 8 —
+敢(889) 融(1123) 両(1252) 満(1253) 汚(1334) 隔(1409) 厳(2086), plus 厳
+inheriting from 敢 once fixed, matching the "tool"/"chair" precedent of
+one shared primitive clearing several hosts at once). Checked each
+host's real cjkvi-ids line individually before assuming that pattern
+held here, per chunks 98/99's method of not promoting a name to a shared
+fix on host-count alone. It didn't hold: "spike" is not one shape
+problem, it's three.
+
+**敢 — the one with clean evidence.** `ids.txt`'s JKV line for 敢
+(U+6562) is `⿰⿱丅耳攵`, top-left `丅` (U+4E05) — not rtk95's `丁`
+(U+4E01), the kanji already carrying street/nail/spike as aliases.
+Rendered both (`render_glyphs.py 丁 丅 敢 耳 攵`): `丁` has a hook curving
+left at the bottom of its vertical stroke, `丅` is a plain straight
+vertical with no hook — visibly different outlines in Noto Sans CJK JP,
+and the script's own pairwise substitution check found no pair rendering
+identically in any face, so this isn't one font silently drawing the
+other for both. Rendered 敢 alone at 600px (a small ad-hoc crop script,
+same "render big, read the pixels" method as chunk 99's 呉 crop) and the
+stroke under 敢's top bar runs straight down into 耳 with no leftward
+hook — matches `丅`, not `丁`. CSV's components for 889 ("street; nail;
+spike; ear; taskmaster") read cleanly split this way: `丅` carries all
+three of street/nail/spike as one Heisig mnemonic name landing on a
+second codepoint (same precedent as 龶/丰 "grow up" or rtk7/kangxi6's two
+separate "hook"s — here the second codepoint exists because of a CJK
+unification regional-variant split, not a second mnemonic idea), `耳` is
+"ear", `攵` is "taskmaster" (already rtk889's keyword for that radical,
+untouched).
+
+`丅` isn't one of the 214 Kangxi radicals, so `prim-{slug}`, not
+`kangxiN`. `ids.txt` gives `丅` its own split (`⿱一丨`, not
+self-referential) — followed that rather than registering it atomic like
+chunk 99's `𠃑`, since it mirrors how `丁` is *already* split into its own
+strokes (`rtk95:丁:...:一,亅` — `丁`'s hook is `亅`, so `丅`'s straight
+stroke is the generic vertical `prim-pipe`/`｜`). U+4E05 sits in the
+ordinary CJK Unified block, not `make_primitive_images.py`'s
+`UNRENDERABLE_RANGES`, so no primitive image needed — confirmed by the
+clean render above, no `prim-chair`-style image-generation step required
+this time.
+
+Fix: registered `prim-straight-nail:丅:street,nail,spike:一,｜` and
+changed `rtk889:敢:daring:耳,攵` to `rtk889:敢:daring:丅,耳,攵`, matching
+the CSV's own street/nail/spike, ear, taskmaster order. 厳(2086)'s row
+(`敢,𭕄,厂`) already references 敢 literally and needed no edit — inherits
+through that reference, same as chunk 99's 娯/誤/虞.
+
+**The other three were checked and deliberately left open, not folded
+into the same fix:**
+- **融(1123)/隔(1409)** reach "spike" through `鬲` (`kangxi193`, currently
+  `口,冂,儿`). `ids.txt` gives `鬲` two genuinely different per-script
+  IDS lines: GT (`⿳一口⿵𦉪丅`, `丅` present) vs JK (`⿳一口⿵冂⿱䒑丨`, no `丅`
+  at all — replaced by `䒑` over `丨` wrapped in `冂`). RTK is Japanese,
+  so JK is the line that matters, and it has no `丅` in it — copying
+  today's fix onto `kangxi193` would have been exactly the "render it,
+  don't reason about it" mistake this audit keeps warning about (reusing
+  one script-variant's answer for a different script's glyph, the same
+  failure class as chunk 99's own 呉/吳 mixup, just caught before being
+  made rather than after). Needs its own render pass on `鬲` to see which
+  of `冂`/`䒑`/`丨` (if any) actually carries "spike" in the JP glyph.
+- **両(1252)/満(1253)**: CSV baseline "street; nail; spike; belt; shovel"
+  doesn't correspond to cjkvi's own IDS for 両 (`⿱一⿻冂山`) at all — that
+  `⿻` is an overlay (CLAUDE.md's standing warning: "an IDS is not a
+  parts list when its operator is ⿻ or ⿴"), and even loosely, neither
+  `丁`/`丅`-shaped piece nor "shovel" (`kangxi17`/`凵`'s own self-name)
+  appears in it. Rendered 両 at 600px to check directly: the shape is `一`
+  over a `山`-and-`冂` merge, no nail/spike silhouette visible anywhere in
+  it. This reads as Heisig's real book decomposition of 両 being a
+  different scheme from the cjkvi-structural one `data.txt` currently
+  carries for it — a bigger reconciliation than a missing primitive, out
+  of scope for this chunk.
+- **汚(1334)**: CSV lists "spike" separately from "snare" (`丂`, already
+  on this row) and "one" (already reachable via `丂`'s own `一,勹` split
+  — not flagged as dropped, so not part of the gap). Candidate location
+  is `丂`/`亐`'s own anatomy (`勹`, currently "bound up" only), but `丂` is
+  reused widely enough that changing it needs its own check across every
+  host, not a one-line guess folded into today's chunk.
+
+Verification, full rebuild from scratch after the fix: `test_regression_
+fixes.py` **1328/1328** (no pin needed correcting — a new primitive row
+plus one host's parts list doesn't touch any pinned decomposition's
+shape), `pytest -q` **74 passed**, `audit_overflatten.py` 0,
+`audit_self_reference.py` 0, `audit_radicals.py` 0/0,
+`audit_phantom_parts.py --in-csv-range` **11 across 10, unchanged**
+(a cjkvi-corroborated part addition doesn't register as a phantom),
+`audit_primary_choice.py` **0/71, unchanged**. Frontend: `npm install`,
+`npm run lint` clean, `npm run build:prod` clean (SEO generation: 3224
+pages, one more than chunk 99's 3223 — the new `prim-straight-nail`
+page).
+
+`audit_csv_regressions.py`: **201 → 199** flagged kanji (`grep`-based
+count both times). Confirmed by id (sorted-list diff): exactly `rtk889
+rtk2086` (敢 厳) dropped out, nothing newly flagged — matching the
+prediction (2 of 8 cleared; 融/隔/両/満/汚 stay flagged, each on a
+different open question above).
+
+Not deployed — no server access from this container, per the task brief.
+A deployer needs `sync_system_data.py` run against the live DB to pick up
+the new `prim-straight-nail` row and 敢's updated parts list. No new
+`primitive_images/` file this time (`丅` renders fine in-font), so
+nothing extra for `sync_system_data.py` to propagate there.
+
+### Next
+
+Three follow-ups left open above, each its own render pass rather than a
+shared fix:
+1. `鬲`'s JK-script anatomy (`⿳一口⿵冂⿱䒑丨`) for 融/隔 — render `鬲`
+   itself and each of `冂`/`䒑`/`丨` to find where (or whether) "spike"
+   actually sits, independent of the GT-script `丅` answer that doesn't
+   apply here.
+2. `両`'s real Heisig decomposition for 両/満 — the CSV's street/nail/
+   spike/belt/shovel breakdown doesn't match this project's current
+   cjkvi-structural parts list for 両 at all; needs its own investigation
+   of what Heisig's book actually says 両 is built from, not a
+   one-primitive patch.
+3. `丂`/`亐`'s anatomy for 汚 — check every other host using `丂` before
+   touching it, since it's reused widely.
+
+After those (or if they turn out too large for one chunk each), continue
+down chunk 96's frequency list: "person" (7), "vase" (6), "sword" (6),
+"stand up" (6), "row" (6), "insect" (6), "apron" (6). `audit_csv_
+regressions.py` is at 199 now (`grep`-based count). `虎`'s family
+redundancy note from chunk 97 (`虞 慮 驢` listing `虍` *alongside* its own
+spelled-out pieces) is still untouched and still not flagged by any
+current script.
