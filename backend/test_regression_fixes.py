@@ -199,8 +199,12 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"prim-snare", "rtk11"}},
     "rtk1331": {"character": "朽", "keyword": "decay",
                "expected_part_ids": {"prim-snare", "rtk207"}},
-    "rtk1334": {"character": "汚", "keyword": "dirty",
-               "expected_part_ids": {"prim-snare", "rtk137"}},
+    "rtk1334": {"character": "汚", "keyword": "dirty",  # 2026-10-11: cjkvi-ids'
+               # real line for 汚 is 氵+亐 (U+4E90), not 氵+丂 (U+4E02) --
+               # rendered side by side, 亐 has an extra bar 丂 doesn't; same
+               # lookalike-codepoint bug as 丁/丅, not part of the 丂-flattening
+               # group above despite sharing the "snare" name
+               "expected_part_ids": {"prim-snare-barred", "rtk137"}},
     # 2026-09-20: Heisig renames 丂("snare") to "slingshot"/"catapult" starting
     # here (frame 1335) and keeps using it under the new name through at least
     # frame 1344 -- prim-snare gained both as extra aliases. 誇/顎 above already

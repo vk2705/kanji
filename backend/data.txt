@@ -1414,7 +1414,7 @@ rtk1330:号:nickname:口,丂
 rtk1331:朽:decay:木,丂
 rtk1332:誇:boast:言,大,一,丂
 rtk1333:顎:jaw:口,頁,一,丂
-rtk1334:汚:dirty:水,丂
+rtk1334:汚:dirty:水,亐
 rtk1335:与:bestow:丂,一
 rtk1336:写:copy:与,冖
 rtk1337:身:somebody:
@@ -5142,3 +5142,42 @@ prim-chair:𠃑:chair
 # 融/隔/両/満/汚 need their own follow-up passes, each a different shape
 # question, not a shared fix.
 prim-straight-nail:丅:street,nail,spike:一,｜
+
+# --- 2026-10-11: chunk 100's third "spike" follow-up, 汚(1334)'s own 丂/亐
+# anatomy -- a lookalike-codepoint bug, not an anatomy question.
+# rtk1334's row cites 丂 (U+4E02, prim-snare), but cjkvi-ids' real line for
+# 汚 is `⿰氵亐` -- U+4E90 亐, a different codepoint, not 丂 at all. Rendered
+# both side by side (render_glyphs.py 丂 亐 汚): 丂 is one bar over a single
+# swooping hook stroke (no crossbar); 亐 has a second, parallel bar inserted
+# between the top bar and the hook -- a clearly different stroke count, not
+# a font substitution (cross-checked against 汚 itself at 6x crop: its
+# right-hand side shows both bars, same as standalone 亐, not 丂's single-
+# bar swoop). Same shape of bug as chunk 100's own 丁/丅 fix on 敢 -- a
+# visually-close but distinct codepoint silently standing in for the real
+# one -- just caught on a second primitive in the same chunk's follow-up
+# list rather than a new cluster.
+# 亐 isn't self-referential in cjkvi (`⿱一𠀁`, 𠀁 = U+20001, itself an
+# overlay `⿻一㇉` of a bar and a raw CJK-Strokes hook glyph) -- going that
+# far down lands on a stroke-block character this project has never named,
+# and the overlay operator is exactly CLAUDE.md's "not a parts list"
+# warning, so not followed. Decomposed one level instead, by shape rather
+# than by cjkvi's own sub-codepoint: 亐's top bar is 一 ("one"), and its
+# lower bar-plus-hook reads as the same shape 丂 already carries under
+# "snare" (the two are visually distinguished only by that one extra bar,
+# the same "same mnemonic idea, two codepoints" pattern as 丁/丅 and
+# 龶/丰) -- so 亐 = 一,丂, reusing both existing rows rather than inventing
+# an unverified third shape. No other rtk host's cjkvi line contains 亐
+# (checked: the only CJK-Unified-range hit in ids.txt's reverse search is
+# 汚 itself; every other occurrence is an Ext-B/C/D rare character outside
+# RTK's frame list), so this is a self-contained fix, not a shared-
+# primitive one like 丁/丅 turned out to be.
+# Fix: registered `prim-snare-barred:亐:snare:一,丂` and changed
+# `rtk1334:汚:dirty:水,丂` to `rtk1334:汚:dirty:水,亐`.
+# This resolves the wrong-codepoint bug and keeps "one"/"snare" reachable
+# through 亐 the same way they were reachable through 丂 before (both now
+# two levels deep: 汚->亐->丂="snare", 汚->亐->一="one"). It does NOT
+# resolve CSV's "spike"/"stick" for 汚 -- neither name has a confirmed home
+# in 亐's own anatomy (the candidates the overlay's own sub-codepoint would
+# imply are below any primitive this project names), so both stay open,
+# same as chunk 100 left them.
+prim-snare-barred:亐:snare:一,丂

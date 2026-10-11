@@ -18461,3 +18461,164 @@ regressions.py` is at 199 now (`grep`-based count). `虎`'s family
 redundancy note from chunk 97 (`虞 慮 驢` listing `虍` *alongside* its own
 spelled-out pieces) is still untouched and still not flagged by any
 current script.
+
+## 2026-10-11 — chunk 101: 汚's 丂/亐 mixup, plus two dead ends worth recording
+
+Fresh container again. Step 0: repo present at `/home/user/kanji`, `HEAD`
+detached at the same commit `origin/master` was already on, local `master`
+12 commits stale — `git checkout master`, `git merge --ff-only
+origin/master`, `git push --dry-run origin master` clean before touching
+anything. No venv (`python3.11 -m venv venv` + `requirements.txt`+
+`requirements-dev.txt`+`Pillow`), no fonts (`apt-get update` then
+`fonts-noto-cjk fonts-hanazono`, Noto first), no `/tmp/ids.txt` (curled
+fresh, 88,939 lines). Full step-3 suite against a from-scratch
+`import_data()` before any edit: `test_regression_fixes.py` 1328/1328,
+`pytest -q` 74 passed, `audit_overflatten.py`/`audit_self_reference.py`/
+`audit_radicals.py` all 0, `audit_phantom_parts.py --in-csv-range` 11
+across 10, `audit_primary_choice.py` 0/71, `audit_csv_regressions.py` 199
+by the `grep` method — all matching chunk 100's numbers exactly.
+
+Picked up chunk 100's three open follow-ups in order. Two turned into
+dead ends worth recording so a future chunk doesn't retry them the same
+way; the third produced today's actual fix.
+
+**Follow-up 1, 鬲's JK anatomy for 融/隔 — blocked, not by the shape but by
+the tool.** The plan was to render 鬲 and settle whether JK's
+`⿳一口⿵冂⿱䒑丨` (no 丅) actually carries "spike" anywhere, per chunk 100's
+own caution not to copy the GT-script answer onto a JK host. Rendering 鬲
+alone (`render_glyphs.py`, Mincho via Noto Serif CJK JP as the first font
+in the stack) showed a plausible-looking inner shape, but before trusting
+it, checked whether the font actually draws a JP-specific glyph for this
+rare a character at all — rendered 鬲 explicitly in `Noto Serif CJK JP`,
+`Noto Serif CJK SC`, and `Noto Serif CJK TC` side by side in one page
+(bypassing `render_glyphs.py`'s own stack to force each locale subset).
+All three are pixel-identical. Noto's per-region CJK subsets carry a
+distinct outline only for characters common enough in that region to need
+one; 鬲 is rare enough that all three regional builds fall back to the
+same shared design, so **this font cannot be used to decide which of
+cjkvi's two script variants the rendered glyph actually matches** — the
+"render it, don't reason about it" method has a real blind spot here, not
+a workaround within this container. Tried reading the single available
+render stroke-by-stroke anyway (an upper hook-like curve, a `十`-ish
+cross, a second hook) but couldn't confidently match it to `冂`/`䒑`/`丨`
+over the GT-script `𦉪`/`丅` reading either way — it was exactly the kind
+of "half-supports a theory" read chunk 98 warned about repeating. Left
+untouched, with this specific finding recorded so the next attempt knows
+to look for a different font (one with real JP/GT-distinct outlines for
+rare CJK Unified characters) rather than re-running the same render.
+
+**Follow-up 2, 両/満's real decomposition — rendered, genuinely
+undecidable at this session's confidence bar, still left open.** Rendered
+両 at high zoom: the glyph's top bar and the frame's own top edge are the
+same stroke (not two separate `一`+`冂` tops stacked, confirming chunk
+100's ⿻-overlay warning was right to flag this), and a vertical stroke
+drops from the center of that bar down into the frame's interior. Inside,
+a horizontal crossbar partway down connects to two short vertical ticks
+near the bottom, with the outer frame's own two legs running the full
+height on either side. This is consistent with *several* different
+readings (丅's bar+vertical fused into 冂's top; a 凵-shaped "shovel"
+split visually in half by the passing vertical; two mirrored partial
+shapes side by side, fitting "両" = "both/pair" thematically) and none of
+them could be confirmed over the others without a stroke-order reference
+this project doesn't have access to here. Rather than pick the
+best-sounding story — precisely the trap chunk 98's rejected `丌` theory
+fell partway into before the crop caught it — left this open with the
+specific stroke inventory recorded above, so the next pass starts from
+what's actually drawn instead of re-deriving it.
+
+**Follow-up 3, 汚's 丂/亐 — a lookalike-codepoint bug, same shape as 丁/丅
+but on a second primitive.** `rtk1334:汚:dirty:水,丂` cites 丂 (U+4E02,
+prim-snare), but cjkvi-ids' real line for 汚 is `⿰氵亐` — U+4E90 亐, a
+different codepoint entirely, not 丂. Rendered both side by side
+(`render_glyphs.py 丂 亐 汚`): 丂 is one bar over a single swooping hook
+stroke; 亐 has a second, parallel bar inserted between the top bar and the
+hook — a clearly different stroke count. Cropped 汚's own right-hand side
+at 6x to rule out a font-substitution false match: it shows both bars,
+matching standalone 亐, not 丂's single-bar swoop. Same bug shape as
+chunk 100's own 丁/丅 fix on 敢 (a visually-close but distinct codepoint
+silently standing in for the real one), just found on the second of the
+three follow-ups that chunk's own list pointed at, not a new cluster.
+
+Checked whether 亐 needed its own full stroke-level decomposition: cjkvi
+gives it `⿱一𠀁`, and `𠀁` (U+20001) is itself `⿻一㇉` — an *overlay* of a
+bar and a raw CJK-Strokes-block hook glyph, which is both CLAUDE.md's "not
+a parts list" operator and a stroke-block character this project has never
+named. Declined to follow it that far. Instead read 亐 by shape one level
+up: its top bar is `一` ("one"), and its lower bar-plus-hook is the same
+shape `丂` already carries under "snare" — the two codepoints differing
+only by that one extra bar, the same "same mnemonic idea, two codepoints"
+pattern as 丁/丅 and 龶/丰 (CLAUDE.md's own list). So `亐 = 一,丂`, reusing
+two existing rows rather than inventing a third, unverified shape.
+Reverse-searched `ids.txt` for every entry containing 亐: `汚` is the only
+one inside RTK's frame list (every other hit is a rare Ext-B/C/D
+character), so this is self-contained — no other host needed touching the
+way 丁/丅 turned out to need `厳`'s own reference-inheritance.
+
+Fix: registered `prim-snare-barred:亐:snare:一,丂` and changed
+`rtk1334:汚:dirty:水,丂` to `rtk1334:汚:dirty:水,亐`. This does **not**
+resolve CSV's "spike"/"stick" for 汚 — neither has a confirmed home in
+亐's anatomy within this session's render budget (the candidates the
+overlay's own sub-codepoint would imply sit below any primitive this
+project names) — both stay open, same as chunk 100 left them.
+
+`test_regression_fixes.py` caught the expected pin: `rtk1334` was grouped
+under the `rtk1329`/`1330`/`1331` "丂-flattening" pin block even though it
+turns out not to belong to that family at all (those three really are
+丂, confirmed independently above). Corrected the pin in place —
+`expected_part_ids` for `rtk1334` now reads `{"prim-snare-barred",
+"rtk137"}`, with a comment explaining the codepoint mixup rather than
+just swapping the id.
+
+Verification, full rebuild from scratch after the fix: `test_regression_
+fixes.py` **1328/1328** (after the pin correction above), `pytest -q`
+**74 passed**, `audit_overflatten.py` 0, `audit_self_reference.py` 0,
+`audit_radicals.py` 0/0, `audit_phantom_parts.py --in-csv-range` **11
+across 10, unchanged** (a lookalike-codepoint swap that keeps the same
+two names reachable doesn't move this audit either way),
+`audit_primary_choice.py` **0/71, unchanged**. Frontend: `npm install`,
+`npm run lint` clean, `npm run build:prod` clean (SEO generation: 3225
+pages, one more than chunk 100's 3224 — the new `prim-snare-barred`
+page).
+
+`audit_csv_regressions.py`: **199 → 199**, no change (confirmed by id-list
+diff: nothing dropped out, nothing newly flagged). Expected — `rtk1334`
+stays flagged on the same two names ("spike", "stick") both before and
+after; the fix corrected *which* codepoint supplies "snare"/"one"
+without changing whether either was reachable.
+
+Not deployed — no server access from this container, per the task brief.
+A deployer needs `sync_system_data.py` run against the live DB to pick up
+the new `prim-snare-barred` row and 汚's corrected parts list. No new
+`primitive_images/` file (亐, U+4E90, is in the ordinary CJK Unified
+block and rendered cleanly), so nothing extra for `sync_system_data.py`
+to propagate there.
+
+### Next
+
+Two dead ends from today, each needs a different approach next time, not
+a retry of today's method:
+1. `鬲`'s JK anatomy for 融/隔 — blocked on this container's Noto build
+   having no region-distinct outline for 鬲 at all (confirmed: JP/SC/TC
+   subsets render pixel-identical). Needs either a different font that
+   does carry separate GT/JK designs for rare CJK Unified characters, or
+   a non-rendering source (a stroke-order reference, a dictionary that
+   states the JP-specific radical breakdown) rather than another
+   `render_glyphs.py` pass with the same font stack.
+2. `両`'s real decomposition for 両/満 — rendered and stroke-inventoried
+   (see above: shared top stroke between `一` and `冂`'s own top, a
+   vertical dropping into the frame, an inner crossbar with two short
+   ticks near the bottom) but multiple readings fit equally well. Next
+   attempt should start from that stroke inventory rather than
+   re-rendering from scratch, and resist picking whichever reading sounds
+   best without a render that actually discriminates between them.
+
+After those, chunk 96's frequency list still has: "person" (7), "vase"
+(6), "sword" (6), "stand up" (6), "row" (6), "insect" (6), "apron" (6) —
+same method as chunks 99-101: check this log for settled false positives
+first, verify whether a cluster is really one shared primitive or several
+different ones (today's own "spike" cluster turned out to be three
+separate shape questions, not one), then render before writing anything
+to `data.txt`. `audit_csv_regressions.py` is at 199 now (`grep`-based
+count, confirmed unchanged by today's fix). `虎`'s family redundancy note
+from chunk 97 (`虞 慮 驢` listing `虍` *alongside* its own spelled-out
+pieces) is still untouched and still not flagged by any current script.
