@@ -18622,3 +18622,230 @@ to `data.txt`. `audit_csv_regressions.py` is at 199 now (`grep`-based
 count, confirmed unchanged by today's fix). `虎`'s family redundancy note
 from chunk 97 (`虞 慮 驢` listing `虍` *alongside* its own spelled-out
 pieces) is still untouched and still not flagged by any current script.
+
+## 2026-10-12 — chunk 102: the "person" cluster — three real shapes, not one
+
+Fresh container, no checkout present when the task fired; cloned fresh.
+Working tree was clean at `bece565` with `HEAD` detached (previous firing
+left it that way) — `git checkout master && git merge --ff-only
+origin/master` to land on a branch rather than leave it detached (no
+divergence; `master` was already at `bece565`), confirmed with
+`git push --dry-run origin master` ("Everything up-to-date") before any
+work. No venv existed either — `pip`/`python3` resolve to two *different*
+Pythons on this container specifically (`pip` → 3.13 dist-packages,
+`python3` → 3.11.17), so a bare `pip install` silently installs for the
+wrong interpreter and `python3 -m pytest` then reports "No module named
+pytest" even though pip just claimed success; used `python3 -m pip install
+--ignore-installed -r requirements.txt -r requirements-dev.txt` instead
+(the `--ignore-installed` needed because the box's system `python3-jwt`
+deb package collides with pip's own uninstall-then-reinstall of `PyJWT`).
+Curled `cjkvi-ids/ids.txt`, `apt-get install fonts-noto-cjk fonts-hanazono`
+(Noto first). Full step-3 suite against a from-scratch `import_data()`
+before touching anything: `test_regression_fixes.py` 1328/1328, `pytest -q`
+74 passed, `audit_overflatten.py`/`audit_self_reference.py`/
+`audit_radicals.py` all 0, `audit_phantom_parts.py --in-csv-range` 11
+across 10, `audit_primary_choice.py` 0/71, `audit_csv_regressions.py` 199
+by the `grep` method — all matching chunk 101's numbers exactly.
+
+Picked up chunk 101's "Next": the "person" (7) item from chunk 96's
+frequency list. Grepped `audit_csv_regressions.py`'s output for
+`dropped:.*person` and got exactly 7 hosts: `rtk1031`(悠), `rtk1127`(旅),
+`rtk1302`(不), `rtk1481`(幾), `rtk1482`(機), `rtk1999`(派), `rtk2000`(脈).
+Per chunk 101's own method (confirm a cluster is really one shared cause
+before fixing it as one), rendered all seven plus candidate parts before
+writing anything — and this one split three ways, not just two.
+
+**1. `rtk1031` 悠 — a flattened 攸 silently dropped its own 亻.** cjkvi
+gives 悠 as `⿱攸心`, and 攸 itself (no row here — not a kanji frame, never
+registered as a primitive) as `⿰⿰亻丨攵`. Our row flattened 攸's expansion
+straight into 悠's own parts (`｜,心,攵`) but dropped the 亻 that 攸 actually
+starts with. Rendered 悠 next to 攸 and 亻: 悠's upper-left stroke pattern
+(diagonal tick + vertical) matches 攸's own left side, which in turn
+matches 亻, not a bare vertical. `修`(rtk1858), the CSV sibling that shares
+"person; stick; fred astaire; taskmaster" with 悠, already spells this out
+correctly (`亻,｜,彡,攵`) — 悠 was the one row that took the flattening
+shortcut too far. Fix: `rtk1031` parts `｜,心,攵` → `亻,｜,心,攵`.
+
+**2. `rtk1481` 幾 (and `rtk1482` 機 by inheritance) — cjkvi names a 人
+sibling our row never had.** cjkvi gives 幾 as `⿹⿻戈𢆶人` — a 人 standing
+directly beside the `⿻戈𢆶` overlay, not nested inside it. Our row
+(`ノ,幺,戈,丶`) accounted for "fiesta" (戈, already aliased) and "cocoon"
+(幺/𢆶's own `⿰幺幺`) but had nothing at all for "person" — not a phantom
+or a flattening casualty, just absent. Rendered 幾 next to 人: the bottom
+of 幾 is an unmistakable splayed two-stroke leg pair, same shape and
+proportions as 人 standalone. `rtk1483` 畿 (CSV: "cocoon; rice field;
+brains; fiesta" — no "person") was checked as a control and correctly has
+no 人, since its own cjkvi entry (`⿹⿻戈𢆶田`) replaces 人 with 田 — good,
+confirms this isn't a blanket "this whole shape-family needs 人" move.
+`rtk1482` 機 inherits straight through (its own parts are just `幾,木`), so
+fixing `rtk1481` fixes it too, with no edit needed there. Fix: `rtk1481`
+parts `ノ,幺,戈,丶` → `ノ,幺,戈,丶,人`.
+
+**3. `rtk1127`/`rtk1999`/`rtk2000` (旅/派/脈) — three "person"-via-④
+unencoded-placeholder hosts, and they are not the same shape.** A
+2026-09-30 comment already on this file (just above `prim-crowd`) flagged
+these three (plus 衆) as a standing open question: Heisig names "person;
+rag" on all of them, cjkvi can't resolve the shape (unencoded `④`
+placeholder in each), and "there is no codepoint to register." Rendering
+settled it, and it turns out there are two different answers, not one:
+
+- **旅**: cjkvi gives `⿰方⿱𠂉④`. Rendered 旅 next to 人 and 𠂉: the `④`
+  position is a plain, unadorned two-stroke splay — literally 人, no extra
+  stem or hook. Fix: `rtk1127` parts `㫃` → `㫃,人`. "Rag" stays dropped for
+  this one specifically — it reads as CSV's own flavour text for the same
+  two strokes ("a person in rags" trailing from the banner), not a second
+  visible piece, so there is nothing to point it at beyond what "person"
+  already covers.
+- **派/脈**: cjkvi gives these two specifically as `⿰氵𠂢`/`⿰月𠂢` —
+  U+200A2 𠂢, a *different* codepoint from 后's `⿸𠂋口` (U+2008B 𠂋) even
+  though both were grouped together in the 2026-09-14 note that registered
+  `prim-drag` as 𠂋 for all five "drag" hosts (后 盾 脈 派 逓). That note
+  only checked the *top* stroke across all five (the raised 丿 that tells
+  𠂋 apart from plain 厂/丆/𠂆) — the right call for distinguishing the
+  family from 厚/原/反's "cliff" group, but it never checked whether the
+  rest of the glyph matched too, because at the time `prim-drag`'s own
+  parts were just "一" and the splayed legs below weren't in scope. They
+  are now: rendered 𠂋 alone (flat top, one hook, no legs) against 派/脈's
+  actual right-hand radical (same hook, *plus* a vertical stem, *plus* a
+  splayed two-stroke leg pair below it) — different shapes, confirmed
+  again rendering 𠂢 alone, which matches 派/脈 pixel-for-pixel. No
+  substitution warning from `render_glyphs.py`'s own relative check across
+  any of these renders. 后/盾 were re-checked too and correctly stay on
+  𠂋 — 后's top-left is the flat-hook shape with no legs, matching 𠂋, not
+  𠂢.
+
+  𠂢's own cjkvi entry is `⿸𠂆④` — the same unencoded-placeholder pattern
+  as 衆's `乑` (`prim-crowd`, 2026-09-20). Followed that precedent instead
+  of inventing a further breakdown of the placeholder: registered 𠂢
+  atomic, as `prim-tributary`, with Heisig's own names for the shape
+  ("drag" shared with the rest of the family, "person"/"rag" from 派/脈's
+  own CSV rows) as aliases directly — `prim-tributary:𠂢:drag,person,rag:`.
+  "Caveman" (also in both hosts' CSV baseline) has no claimant anywhere in
+  this project; stays in `suggest_heisig_aliases.py`'s territory, same as
+  before. Fix: `rtk1999` parts `水,𠂋` → `水,𠂢`; `rtk2000` parts `月,𠂋` →
+  `月,𠂢`.
+
+`𠂢` (U+200A2) turned out to need a primitive image —
+`test_regression_fixes.py` caught it immediately (`needs a primitive image
+and has none`). Ran `make_primitive_images.py`: it correctly wrote
+`prim-tributary.png`, but it *also* rewrote 38 other already-committed
+primitive PNGs with a few dozen bytes of difference each (same dimensions,
+same content on inspection — font-hinting/anti-aliasing drift between
+whatever rendered the committed versions and this container's freshly
+`apt-get`-installed font stack, not a content change). `git checkout --`
+on all 38 to discard that noise before staging, keeping only the genuinely
+new `prim-tributary.png`. Worth a line for the next chunk that hits this:
+`make_primitive_images.py` (no `--dry-run`) regenerates *every* primitive
+that needs an image, not just the missing one, and the diff needs
+checking before commit every time, not just skimmed.
+
+**`rtk1302` 不 — left untouched, same "weak evidence" bucket as before.**
+cjkvi gives 不 as `⿱一③` — a circled, unencoded placeholder, and
+`audit_phantom_parts.py`'s weaker-evidence section already lists 不's `｜`
+on the same grounds. Rendered 不 next to 人: 不's bottom two strokes (a
+short ノ and a short 丶, flanking the central 丨 stem) don't read as a
+splayed 人-shape the way 幾's or 旅's do — they're small marks either side
+of the stem, not a full two-stroke leg pair spanning the character. CSV's
+"person" here reads as an impressionistic name for those two small
+strokes rather than a literal 人 citation, and with cjkvi unable to
+corroborate either way (a circled placeholder, same shape class chunk
+97/98 have repeatedly warned reads differently host to host — `③` is not
+`④` is not the bottom of 不 in any other kanji), there's nothing to render
+toward with confidence. Left open, matching the standing "don't invent
+claims when the structural source can't corroborate and the render
+doesn't give a clean match" rule.
+
+**Found, not fixed — flagged for a future chunk.** While rendering the
+旅/施/旋/族/旗/遊 "banner" family to confirm `㫃`'s role: `㫃` (U+3AC3,
+registered as `prim-banner`, parts `方,𠂉`) is being used purely as a
+*display glyph* for the shared "方 + small 𠂉 hook" shape those six hosts
+all have at top — but `㫃`'s own real glyph, rendered, is unambiguously
+`方` + a *full* 人 (two splayed legs), not `方` + a small hook. cjkvi
+confirms: `㫃` itself is `⿰方人`, and none of the six actual hosts use `㫃`
+in their own cjkvi entries at all (they use `㐌`/`𭻾`/`斿`/`⿱𠂉矢`/`⿱𠂉其`,
+each of which resolves to `𠂉`+something when expanded one more level).
+So the "banner" primitive's *decomposition* (`方,𠂉`) is correct and
+well-evidenced, but the *glyph shown for it* doesn't match that
+decomposition — a user expanding the "banner" chip sees a full person
+figure where a small hook is what's actually drawn in every host. Did not
+fix this chunk: no replacement codepoint was found or looked for (would
+need its own render pass across CJK Ext A/B for "方 + small hook, no
+legs, no code point already in system"), and it's a display-accuracy
+question orthogonal to the "person" cluster this chunk was scoped to.
+
+**Found, not fixed — a blind spot in `audit_missing_children.py`.** While
+checking why that script didn't already catch `rtk1481`'s missing 人 (it
+should, by its own docstring's test — cjkvi puts 人 inside 幾, Heisig names
+it there), traced it to `reachable()`'s BFS: `_direct_children()` adds
+*every* claimant of each part term at each step, not just the one
+`resolve_alias` would pick — so 幾's own four parts (`ノ,幺,戈,丶`) reach
+far more of the graph than `audit_csv_regressions.py`'s own
+`transitive_closure()` does (which resolves each term to one id via
+`min(claimants)` before recursing), and that wider reach happened to
+already include `rtk1023`/`kangxi9` through unrelated paths (`"cocoon"`
+and `"spear"` both have extra claimants besides `kangxi52`/`kangxi62`,
+and those extra claimants' own decompositions eventually reach "person"
+within the default depth-4 budget) — a false "already reachable" that
+suppressed the finding `audit_csv_regressions.py` correctly made. Confirmed
+by direct comparison of `_direct_children(conn, claims, 'rtk1481')` against
+the shadow-db `own_parts`/`resolve()` pair `audit_csv_regressions.py` uses
+for the same node. Did not fix the tool this chunk — found by working from
+`audit_csv_regressions.py`'s own report rather than from
+`audit_missing_children.py`'s (empty) one, so it didn't block today's
+work, but it means `audit_missing_children.py`'s summary under-reports
+relative to what `audit_csv_regressions.py` + a render pass can still
+find, specifically for any dropped name whose claimant set includes a
+primitive with its own non-trivial decomposition.
+
+Full re-verification (fresh rebuild, after generating `prim-tributary.png`):
+`test_regression_fixes.py` **1328/1328** (no pin needed correcting — none
+of today's six touched rows were pinned, only referenced as *expected
+parts* of other hosts' pins, which this fix doesn't touch), `pytest -q`
+**74 passed**, `audit_overflatten.py` 0, `audit_self_reference.py` 0,
+`audit_radicals.py` 0/0, `audit_phantom_parts.py --in-csv-range` **11
+across 10, unchanged** (all three new parts are cjkvi- and render-
+evidenced, not phantom additions), `audit_primary_choice.py` **0/71**.
+`audit_csv_regressions.py`: **199 → 194** (`grep` method). Verified by id:
+`rtk1031`, `rtk1481`, `rtk1482`, `rtk1999`, `rtk2000` all dropped out
+entirely; `rtk1127` stayed flagged but now only for "rag" (person
+resolved), exactly as the partial fix above intended; nothing else moved.
+Frontend: `npm install`, `npm run lint` clean, `npm run build:prod` clean
+(SEO generation: 3226 pages, one more than chunk 101's 3225 — the new
+`prim-tributary` page).
+
+Not deployed — no server access from this container, per the task brief.
+A deployer needs `sync_system_data.py` run against the live DB to pick up
+the six changed rows and the new `prim-tributary` row, *and* needs
+`primitive_images/prim-tributary.png` copied over (new file, not just a
+changed `image_url` value — `sync_system_data.py`'s own docstring should
+be checked for whether it copies new image files or only propagates the
+DB column; if the former isn't automatic, the file needs a manual copy
+alongside the sync run).
+
+### Next
+
+1. Continue chunk 96's frequency list: "vase" (6), "sword" (6), "stand up"
+   (6), "row" (6), "insect" (6), "apron" (6) — same method as today: split
+   each cluster by actual shape before assuming one cause, render before
+   writing.
+2. The `㫃`/`prim-banner` glyph-mismatch found above (display glyph is
+   `方`+人, the real shared shape across its 6 hosts is `方`+small hook) —
+   worth a dedicated render pass across nearby CJK Ext A/B codepoints for
+   a better-matching stand-in, or a documented decision that no such
+   codepoint exists and `㫃` is accepted as "close enough, nothing exact
+   available" (same category as other display-only substitutions this
+   project has accepted elsewhere, but this one hasn't had that decision
+   made explicitly).
+3. The `audit_missing_children.py` blind spot found above (its
+   `reachable()` is more permissive than `audit_csv_regressions.py`'s,
+   suppressing findings the latter still catches) — either tighten
+   `_direct_children()` to match `audit_csv_regressions.py`'s single-pick
+   `resolve()` semantics, or document the gap in the script's own
+   docstring so a future chunk doesn't trust an empty
+   `audit_missing_children.py` report over a non-empty
+   `audit_csv_regressions.py` one the way this chunk almost did.
+4. Two dead ends from chunk 101, still open, same shape as before: `鬲`'s
+   JK anatomy for 融/隔 (blocked on this container's Noto build having no
+   region-distinct outline for 鬲 at all), and `両`/`満`'s real
+   decomposition (rendered and stroke-inventoried in chunk 101's entry,
+   multiple readings still fit equally well).

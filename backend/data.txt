@@ -1111,7 +1111,7 @@ rtk1027:住:dwell:亻,主
 rtk1028:位:rank:亻,立
 rtk1029:仲:go-between:亻,中
 rtk1030:体:body:亻,本
-rtk1031:悠:permanence:｜,心,攵
+rtk1031:悠:permanence:亻,｜,心,攵
 rtk1032:件:affair:亻,牛
 rtk1033:仕:attend:亻,士
 rtk1034:他:other:亻,也
@@ -1207,7 +1207,7 @@ rtk1123:融:dissolve:虫,鬲
 rtk1124:施:give:㫃,也
 rtk1125:旋:rotation:㫃,疋
 rtk1126:遊:play:㫃,子,辶
-rtk1127:旅:trip:㫃
+rtk1127:旅:trip:㫃,人
 rtk1128:勿:not,piglet’s tail,knot:ノ,勹
 rtk1129:物:thing:牛,勿
 rtk1130:易:easy:日,勿
@@ -1561,7 +1561,7 @@ rtk1477:縄:straw rope:糸,亀
 rtk1478:幼:infancy:力,幺
 rtk1479:後:behind:夂,幺,彳
 rtk1480:幽:seclude:山,幺,幺
-rtk1481:幾:how many,abacus:ノ,幺,戈,丶
+rtk1481:幾:how many,abacus:ノ,幺,戈,丶,人
 rtk1482:機:loom:幾,木
 rtk1483:畿:capital:田,幺,戈,丶,ノ
 rtk1484:玄:mysterious:亠,幺
@@ -2092,8 +2092,8 @@ rtk1995:郎:son:良,⻏
 rtk1996:廊:corridor:郎,广
 rtk1997:盾:shield:𠂋,十,目
 rtk1998:循:sequential:盾,彳
-rtk1999:派:faction:水,𠂋
-rtk2000:脈:vein:月,𠂋
+rtk1999:派:faction:水,𠂢
+rtk2000:脈:vein:月,𠂢
 rtk2001:衆:masses:血,乑
 rtk2002:逓:relay:辶,𠂋,prim-cornstalk,冂
 rtk2003:段:grade:prim-staple-gun,殳
@@ -3419,6 +3419,47 @@ prim-grow-up:龶:grow up:
 # and 𠂆 rendered on its own is indistinguishable from 厂. 𠂋 is the one that
 # actually draws the raised stroke, and it is what cjkvi gives 后.
 prim-drag:𠂋:drag:一
+
+# --- 2026-10-12: 𠂋 'drag' above was correct for 后(rtk2005)/盾(rtk1997) but
+# wrong for 派(rtk1999)/脈(rtk2000), two of the same five hosts the 2026-09-14
+# note lists together. That note only checked the top stroke (the raised 丿
+# distinguishing 𠂋 from plain 厂) across all five hosts at once; it never
+# checked whether the *rest* of the glyph matched too, because at the time
+# prim-drag's own parts were just "一" and the splayed legs below weren't in
+# scope yet. They became in scope now: audit_csv_regressions.py's frequency
+# list (docs/2026-08-search-quality-audit.md chunk 101's Next) flagged
+# "person" dropped on 7 hosts including 派/脈, both still carrying only 水,𠂋
+# / 月,𠂋 — no accounting at all for CSV's "person; rag".
+#
+# Rendered 𠂋 next to 派/脈 at size: 𠂋 draws a flat top with one hook
+# descending on the left, no legs. 派/脈's own right-hand radical has that
+# same hook *plus* a vertical stem *plus* a splayed two-stroke leg pair below
+# it — a different, more complex shape 𠂋 does not draw. cjkvi-ids agrees:
+# it gives 派 as ⿰氵𠂢 and 脈 as ⿰月𠂢 — U+200A2 𠂢, not U+2008B 𠂋 — while
+# giving 后 as ⿸𠂋口 and 盾 as ⿸𠂆𥃭, the same cross-codepoint inconsistency
+# the 2026-09-14 note already flagged for this family (厂/丆/𠂆 for 厚/石/盾).
+# Rendering 𠂢 alone confirmed it: pixel-for-pixel, hook + stem + splayed
+# legs, matching 派's and 脈's actual right-hand radical exactly (no
+# substitution warning from render_glyphs.py's own relative check either).
+#
+# 𠂢's own cjkvi-ids entry is ⿸𠂆④ — the same unencoded-placeholder pattern
+# as 衆's 乑 (prim-crowd, registered 2026-09-20 immediately below). Rather
+# than invent a sub-decomposition for the placeholder, followed that same
+# precedent: register 𠂢 atomic, with Heisig's own names for this shape
+# ("drag" from the shared family, "person"/"rag" from 派/脈's own CSV rows)
+# as aliases directly, rather than guessing a further breakdown. "caveman"
+# (also in both hosts' CSV baseline) has no claimant anywhere in this
+# project and stays in suggest_heisig_aliases.py's territory, same as
+# before this fix.
+prim-tributary:𠂢:drag,person,rag:
+
+# 旅(rtk1127)'s own "person" gap is a separate shape, not this one: cjkvi
+# gives it ⿰方⿱𠂉④, and rendering the ④ position there shows a plain,
+# unadorned two-stroke splay -- 人 itself, with no extra hook or stem the
+# way 𠂢 has. Added 人 directly to rtk1127 rather than reusing 𠂢 or 乑 for
+# it. "rag" stays unresolved for 旅 specifically (person is the real shape;
+# "rag" reads as CSV's own flavour text for the same strokes, not a second
+# visible piece — same call as "Carol in rags person" below).
 # 龹 'quarter' and 戌 'march' were each spelled out in every host instead
 # (一+大+二+丷 and 厂+成). Both take cjkvi-ids' own decomposition, so a
 # deeper search still reaches the pieces.
