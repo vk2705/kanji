@@ -18849,3 +18849,151 @@ alongside the sync run).
    region-distinct outline for 鬲 at all), and `両`/`満`'s real
    decomposition (rendered and stroke-inventoried in chunk 101's entry,
    multiple readings still fit equally well).
+
+## 2026-10-13 — chunk 103: the "insect" cluster (禸, not 虫) — 6 of 6 cleared, one new dead end recorded
+
+Fresh container, no checkout present when the task fired. Step 0 first, per
+the task brief's own scar tissue: `git clone` fresh to `/home/user/kanji`,
+`git fetch origin` + `git checkout master` (found `HEAD` detached, same
+shape chunk 102 hit) + `git pull --ff-only origin master` (14 commits
+behind — chunks 99-102 landed since this container's base image), then
+`git push --dry-run origin master` ("Everything up-to-date") before
+touching anything. No venv; same two-Python trap chunk 102 documented
+(`pip` resolves to 3.13, `python3` to 3.11.17) — used
+`python3 -m pip install --ignore-installed -r requirements.txt -r
+requirements-dev.txt`. `apt-get update` then `fonts-noto-cjk
+fonts-hanazono` (Noto first). Curled `cjkvi-ids/ids.txt`, 88,939 lines.
+
+Full step-3 suite against a from-scratch `import_data()` before any edit:
+`test_regression_fixes.py` 1328/1328, `pytest -q` 74 passed,
+`audit_overflatten.py`/`audit_self_reference.py`/`audit_radicals.py` all 0,
+`audit_phantom_parts.py --in-csv-range` 11 across 10, `audit_primary_
+choice.py` 0/71, `audit_csv_regressions.py` 194 (`grep '^- rtk' | wc -l`
+method) — all matching chunk 102's end-of-chunk numbers exactly.
+
+Picked up chunk 96's frequency list, now down to "vase"(6), "sword"(6),
+"stand up"(6), "row"(6), "insect"(6), "apron"(6) — confirmed each count by
+`grep "dropped:.*<word>" csvreg.txt | wc -l` (the naive `grep .*row`
+over-matches "arrow"/"arrowhead"; filtered to the literal `row (->
+rtk1924)` line to get the real 6).
+
+**Looked at "vase"/"stand up" first (shared root `rtk462`, 立) — turned
+into a new dead end, left open.** Both words point at the same host set
+(幸 rtk1622 directly; 執/報/南 inherit from 幸 or chain through 南; 楠/献
+inherit from 南), so fixing `rtk462`'s reachability once looked like it
+would clear two list items at once. `rtk1622`'s current parts (`土,丷,干`)
+already match cjkvi-ids exactly (`幸 = ⿱土𢆉`, `𢆉 = ⿱丷干` — rendered and
+confirmed stroke-for-stroke: a 土-shaped top (short bar over a longer bar,
+not 十's equal-length arms — confirmed by rendering 十 and 土 side by side),
+a convergent two-stroke 丷 in the middle, a 干-shaped bottom). CSV's own
+reading is "ten; needle; stand up; vase; ten; needle" — three stacked
+pieces, 2+5+2=9 raw strokes against 幸's actual 8, which only works with an
+assumed stroke-share nobody can currently confirm. Tried to find the
+discriminating render chunk 98 keeps warning not to skip: cropped the
+middle `丷` region at 6x specifically to check whether it reads as 立's
+splayed, *diverging* legs (per the solo 立 render) or something else —
+it's a *convergent* V, narrower at the bottom than the top, the opposite
+orientation from 立's own legs. That's real evidence against the CSV
+reading, not just absence of evidence for it, but it's also not enough to
+confidently assert what the three pieces *are* instead of cjkvi's own
+answer when weighed against Heisig's explicit alternative naming — exactly
+the "a name whose every claimant is both too late and absent from the
+host" bar `audit_anachronistic_names.py` sets, except there's no automated
+check for this shape of claim (a *different* stacked reading of the same
+strokes, not a wrong-codepoint substitution). Left open rather than force
+a call, same standing rule `不`(rtk1302) and `両`/`満` were left under.
+Recorded here so a future chunk doesn't re-render from scratch: the
+diagonal direction is the one fact established, not yet enough on its own.
+
+**"insect" (6 hosts: 属 嘱 偶 遇 愚 隅) — real fix, one shared root cause.**
+All six cite "insect" in `heisig-kanjis.csv`'s components column (偶/遇/
+愚/隅 pair it with "brains" every time); current rows route either
+directly through `禸`(`kangxi114`, "track radical") — 属's own parts are
+`尸,ノ,禸` — or through `禺`(`prim-talking-cricket`, parts `田,禸`) for the
+other four. "brains" already resolves cleanly: `田`(`rtk14`) carries
+"brains" as an existing second alias alongside "rice field", confirming
+Heisig's "brains" = 田 directly, which is exactly `禺`'s own top half.
+"insect" had nothing — `kangxi114` only carried "track radical".
+
+Rendered `属`, `禹`(U+79B9, the real cjkvi-ids answer for 属's own
+right-hand side — `ids.txt` gives `属 = ⿸尸禹`, not the `尸,ノ,禸`
+approximation currently stored, since 禹 itself has no row here and no
+further cjkvi breakdown either — `禹→禹`, fully atomic) and `禺` side by
+side. `禹`'s lower portion (box frame + a hooked diagonal tail running out
+the bottom-right, plus a trailing horizontal) is pixel-compatible with
+`禸`'s own shape (`冂,厶` — rendered separately as a box plus a short
+swirl/hook) wherever it appears, in both `属`'s own glyph and inside
+`禺`. Not a clean one-codepoint match to `禹` (our `ノ,禸` approximation
+for the missing 禹 row stays as-is — not this chunk's question, and
+plausible as a two-piece flattening of 禹's slanted-top-stroke-plus-hook
+shape), but the piece CSV calls "insect" is unambiguously the same `禸`
+shape in every one of the six hosts, directly or via `禺`. cjkvi has no
+opinion either way (`禺`/`禹` both atomic, no placeholder, just nothing
+below them) — this sits entirely on the Heisig channel, same tier as
+chunk 96's `皮`→`亅`("hook") fix.
+
+Checked for conflicting evidence before trusting it: `禸` is also used in
+three unrelated hosts (`離`/`璃`/`禽`), where CSV instead calls the same shape
+"elbow"/"belt" — a different Heisig story for the same strokes, not
+contradicting evidence (the established "one shape, several mnemonic
+names depending on context" pattern CLAUDE.md already documents for
+`龶`/`丰` and `丁`/`丅`), since adding "insect" as *one more* alias on
+`kangxi114` doesn't remove or override those other names, and "belt"
+already resolves independently via `禸`'s own part `冂`(`kangxi13`).
+
+Fix: `kangxi114:禸:track radical:冂,厶` → `kangxi114:禸:track radical,
+insect:冂,厶` (data.txt:3209) — one alias added, no parts/rows changed.
+`属`/`嘱` stay partially flagged after this (CSV's "gnats" for those two,
+pointing at `kangxi16`/几, has no render support found — 禹's own slanted
+top stroke doesn't read as 几's curved stool-leg shape under the same
+side-by-side render — left open, not guessed at, same standing rule as
+the "vase"/"stand up" case above).
+
+`audit_phantom_parts.py --in-csv-range` dropped from **11 across 10 to 10
+across 9** as a direct side effect — `rtk2103`'s own `禸` part is no longer
+phantom, since the script's CSV-match now finds "insect" resolving straight
+to `kangxi114`, closing the loop from the other direction. `audit_csv_
+regressions.py`: **194 → 190**, confirmed by id-diff — `rtk2105/2106/2107/
+2108`(偶/遇/愚/隅) dropped out entirely, `rtk2103/2104`(属/嘱) stayed
+flagged but only for "gnats" now, nothing else moved.
+
+Full re-verification (fresh rebuild after the fix): `test_regression_
+fixes.py` **1328/1328** (no pin needed correcting — `kangxi114` wasn't
+pinned anywhere, only referenced as an unpinned sub-part), `pytest -q`
+**74 passed**, `audit_overflatten.py` 0, `audit_self_reference.py` 0,
+`audit_radicals.py` 0/0, `audit_phantom_parts.py --in-csv-range` **10
+across 9** (see above), `audit_primary_choice.py` **0/71**. Frontend:
+`npm install`, `npm run lint` clean, `npm run build:prod` clean (SEO
+generation: 3226 pages, unchanged from chunk 102 — alias-only change adds
+no new row).
+
+Not deployed — no server access from this container, per the task brief.
+A deployer needs `sync_system_data.py` run against the live DB to pick up
+`kangxi114`'s new alias. No new `primitive_images/` file (no new row).
+
+### Next
+
+1. The "vase"/"stand up" dead end above (`rtk462`/立, hosts 幸 執 報 南 楠
+   献): established the middle `丷` is convergent, not 立's divergent
+   legs, but that alone doesn't settle what the three pieces *are*
+   instead of cjkvi's `土,丷,干` reading. Needs either a stroke-order
+   reference (same gap chunk 101's `両`/`満` dead end hit) or a render
+   that can discriminate between competing 8-vs-9-stroke stacking
+   theories, not another `render_glyphs.py` pass with the same method.
+2. `属`/`嘱`'s remaining "gnats" (→ `kangxi16`/几) — same shape of
+   open question as "vase"/"stand up": no render match found this
+   session, worth one more look specifically at 禹's top stroke rather
+   than reusing today's 禸-focused renders.
+3. Continue chunk 96's frequency list: "sword" (6), "row" (6), "apron"
+   (6) — all still unstarted, same method: check this log for settled
+   false positives first (none of today's clusters overlap with any of
+   these three), split by actual shape before assuming one root cause,
+   render before writing. `audit_csv_regressions.py` is at 190 now.
+4. Two still-older dead ends, unchanged: `鬲`'s JK anatomy for 融/隔
+   (blocked on this container's Noto build having no region-distinct
+   outline for 鬲 at all), and `両`/`満`'s real decomposition (rendered
+   and stroke-inventoried in chunk 101's entry, multiple readings still
+   fit equally well).
+5. The `㫃`/`prim-banner` glyph-mismatch (chunk 102) and the
+   `audit_missing_children.py` blind spot (chunk 102) — both still open,
+   neither touched this session.

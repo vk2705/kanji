@@ -3206,7 +3206,7 @@ prim-mound-radical:阡:mound radical
 prim-small-radical:⺌:small radical,small,little:
 prim-fire-radical:灬:fire radical,barbecue,oven-fire,tail feathers
 kangxi104:疒:sickness radical,疔,sickness,hospital
-kangxi114:禸:track radical:冂,厶
+kangxi114:禸:track radical,insect:冂,厶
 prim-katakana-no:ノ:katakana no,drop,stick
 prim-katakana-yu:ユ:katakana yu
 
