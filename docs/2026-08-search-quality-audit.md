@@ -18997,3 +18997,142 @@ A deployer needs `sync_system_data.py` run against the live DB to pick up
 5. The `㫃`/`prim-banner` glyph-mismatch (chunk 102) and the
    `audit_missing_children.py` blind spot (chunk 102) — both still open,
    neither touched this session.
+
+## 2026-10-14 — chunk 104: the "sword" cluster — 4 of 6 cleared, 班/帰 only partly (separate "spear"/"apron" gaps left open)
+
+Unattended daily run. `git status` clean on arrival (no interrupted prior
+session). `git push --dry-run origin master` confirmed before any work, per
+the standing container-access check — this fresh container had no venv and
+no cjkvi-ids checkout either, both rebuilt from scratch (`fonts-noto-cjk` +
+`fonts-hanazono` installed in that priority order, `ids.txt` fetched fresh).
+
+Picked up chunk 102/103's "Next" item 3: continue chunk 96's frequency
+list with "sword" (6 hosts). Chunk 56 (2026-09-23) had already looked at
+all six — `成 城 誠` (closed as "the glyph is a hook, not a blade") and
+`班 帰 赤` (closed as "cjkvi writes the piece as a bare placeholder, so
+only the Heisig channel speaks and the shape is not a blade") — and left
+both groups for "their own pass" without rendering either. Rendering
+settled all six, and the two groups needed opposite fixes from what
+chunk 56 guessed:
+
+* **成/城/誠 — chunk 56 had it backwards.** `成` is `戊` (parade) + `𠃌`
+  (cjkvi: `⿵戊𠃌`, already our own `戊,𠃌`), and `𠃌` is registered as
+  `prim-clothes-hanger` elsewhere (e.g. `旅`'s "clothes hanger"). Rendered
+  `𠃌` beside `刀` (U+5200, itself `⿹𠃌丿`): `𠃌` is visibly the exact
+  body-and-hook of `刀` with the diagonal blade-stroke (`丿`) omitted —
+  not a generic hook unrelated to a blade, which is what chunk 56's "the
+  glyph is a hook" read as a negative finding. Heisig's own CSV component
+  list for all three is "parade; sword; dagger" — two concepts for two
+  parts, matching 1:1. Fix: add `sword,dagger` to `prim-clothes-hanger`'s
+  alias list (`prim-clothes-hanger:𠃌:clothes hanger,coat hanger:` →
+  `...,sword,dagger:`, data.txt:3332) — same "one shape, several Heisig
+  names, named by mnemonic role" pattern as chunk 103's `禸` gaining
+  "insect" alongside "track radical". `城`/`誠` both decompose through
+  `成` and clear automatically, no edit of their own needed.
+
+* **班/帰 — chunk 56 had this backwards too.** Rendered `班` and `帰`
+  large, cropped and upscaled, directly beside `刑`/`罰` (confirmed `刂`
+  hosts from chunk 56 itself: "the render shows the two-stroke blade on
+  the right of all four"). `班`'s middle component and `帰`'s left
+  component are pixel-for-pixel the same vertical-stroke-plus-hook shape
+  as `刑`'s right-side `刂` — this *is* a blade, just the compact
+  standing form, which is exactly why cjkvi encodes it as an unencoded
+  placeholder (`⿲王②王`, `⿰②帚[GTK]`) rather than the full `刀` codepoint:
+  same reason chunk 56 (2026-09-23, same session) already established
+  for `刑 罰 刷 劇` — "this file has always written `刂` as `刀`... so all
+  four names go on the one row" (data.txt:4119-4122). Fix: `班`
+  `王` → `王,刀,王` (cjkvi's own `⿲王②王` order, and the render confirms
+  a second, independent `王` on the right, which the old one-part entry
+  had silently dropped regardless of the sword question); `帰` `ノ,帚,｜`
+  → `刀,帚` — the old entry had the same `刂` shattered into its two raw
+  strokes (`丨`+`丿`, matching cjkvi's own J-variant `⿰⿰丨丿帚`) instead of
+  named at Heisig's primitive level, the same over-flattening class
+  `audit_overflatten.py` targets but doesn't catch here because raw
+  Unicode strokes aren't "other kanji" to its detector.
+  Both still appear in `audit_csv_regressions.py`'s flagged list after
+  this fix — not a miss, a different concept: both also carry "spear"
+  (and `帰` also "apron"), neither of which this chunk touched. "Spear"
+  for this exact two-host set is already sitting in
+  `suggest_heisig_aliases.py --near 0.8 --all`'s "already-registered
+  names vouch for the row" section, flagged `<-- CHECK` with
+  `cjkvi support 0.00` (add "cutlass" to `rtk2576`/槍, vouched by "spear"
+  on `e.g. 帰班`) — weak evidence by the project's own standard, left
+  open rather than guessed at. "Apron" is literally tomorrow's named
+  item in the frequency list; touching it today would have been scope
+  creep onto a cluster with its own hosts to check.
+
+* **赤 — confirms chunk 56's call, for the right reason.** Rendered
+  large: top is `土`, already present; bottom is a plain three-stroke
+  `小` (vertical center, two flanking diagonals) — no hook, no blade,
+  nothing resembling `刀`/`刂` anywhere. cjkvi agrees structurally
+  (`⿱土④`, one placeholder for the whole bottom piece, same as `班`/`帰`'s
+  placeholders but this time genuinely not a blade). `data_from_pdf.txt`'s
+  original, pre-override reading was `ground,dagger,little` — three
+  Heisig names for what cjkvi shows as only *two* real parts, meaning
+  "dagger" and "little" were always two synonyms for the one bottom
+  shape, not two separate pieces (same pattern as `月` = "moon; flesh").
+  Fix: add `小` as a real part (`rtk1880:赤:red:土` → `土,小`, data.txt:1971,
+  resolves "small" immediately via `rtk110`'s existing `small` alias) and
+  add `sword,dagger` to `rtk110`'s own alias list (`rtk110:小:little,small:`
+  → `...,sword,dagger:`, data.txt:185) so the same two names Heisig also
+  uses for `刀` resolve here too, on the row that's actually in the glyph.
+  `rtk1881`(赦, "pardon") decomposes through `赤` and needed no edit of
+  its own.
+
+Considered and rejected: inventing a wholly separate primitive row for
+赤's bottom shape rather than reusing `rtk110`/小 — the render shows the
+same proportions as the standalone character (not the compressed `⺌`
+top-radical form `prim-small-radical` already carries separately), and
+`小` is already used as a literal part at the bottom of several other
+rows (`原 戚 歳 県 叔 党 隙`), so this follows an existing convention
+rather than creating a new one.
+
+Verified (fresh rebuild): `test_regression_fixes.py` **1328/1328** (no
+pin needed correcting — none of the five touched rows were pinned by id;
+one existing pin checks that `戚`/`滅`/`蔑` reach `rtk386` as a *sub-part
+id*, untouched since `成`'s own two parts didn't change), `pytest -q`
+**74 passed**, `audit_overflatten.py` 0, `audit_self_reference.py` 0,
+`audit_radicals.py` 0/0, `audit_phantom_parts.py --in-csv-range`
+unchanged at **10 across 9** (none of today's five rows appear in that
+list), `audit_primary_choice.py` **0/71**. `audit_csv_regressions.py`
+**190 → 186**: `成`/`城`/`誠`/`赤` fully cleared (confirmed by diffing the
+flagged list, not just the summary count); `班`/`帰` remain flagged, but
+only for "spear"/"apron" now, confirmed by inspecting their entries
+directly rather than trusting the aggregate number. Frontend: `npm install`,
+`npm run lint` clean, `npm run build:prod` clean (SEO generation: 3226
+pages, unchanged — alias/part-only changes add no new row).
+
+Not deployed — no server access from this container, per the task brief.
+A deployer needs `sync_system_data.py` run against the live DB to pick up
+these five rows' alias/part changes. No new `primitive_images/` file (no
+new row, no new unrenderable codepoint).
+
+### Next
+
+1. Continue chunk 96's frequency list, next after "sword": "row" (6) and
+   "apron" (6) — both still unstarted. "Row"'s six hosts (湿 顕 繊 霊 業
+   撲僕, CSV term "row") already decompose through `业`
+   (`prim-upside-down-row`, alias "upside down in a row") at the literal
+   shape level; the likely fix is adding "row" as a shorter alias there,
+   but check first whether that collides in `resolve_alias`'s tie-break
+   with `並`/`rtk1924` (which already owns "row" alone) before touching
+   it — same ambiguity-safety check this chunk did for `sword`/`dagger`
+   on `rtk110`/`小` (confirm which row wins ties stays the existing one
+   for any search-facing term, not just that the audit script's
+   claimant-set check clears). "Apron"'s hosts (`帝 諦 婦 掃 帰 締`) all
+   resolve "apron" to `prim-thirty` (丗) currently — same kind of
+   check needed, plus a render of 丗 beside each host's actual apron-like
+   stroke before trusting the match.
+2. The still-open "spear"/"cutlass" question on `班`/`帰` from today,
+   and `suggest_heisig_aliases.py --near 0.8 --all`'s flagged
+   `rtk2576`(槍)/"cutlass" group (`cjkvi support 0.00`) that names the
+   same two hosts — worth resolving together, with a render of `槍`/`鑓`
+   against `班`/`帰`'s middle piece, rather than separately.
+3. Two still-older dead ends, unchanged: the "vase"/"stand up" question
+   (`rtk462`/立, chunk 102) and `属`/`嘱`'s remaining "gnats" (chunk 103) —
+   neither touched this session, both still need a discriminating render
+   this project hasn't found yet.
+4. The `㫃`/`prim-banner` glyph-mismatch (chunk 102) and the
+   `audit_missing_children.py` blind spot (chunk 102), and `鬲`'s JK
+   anatomy / `両`/`満`'s real decomposition (both pre-chunk-100) — all
+   still open, none touched this session.

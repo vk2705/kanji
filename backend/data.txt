@@ -182,7 +182,7 @@ rtk106:貫:pierce:母,貝
 rtk107:兄:elder brother:口,儿
 rtk108:呪:spell:兄,口
 rtk109:克:overcome:十,兄
-rtk110:小:little,small:
+rtk110:小:little,small,sword,dagger:
 rtk111:少:few:ノ,小
 rtk112:大:large,st. bernard:;一,人
 rtk113:多:many:夕
@@ -1395,8 +1395,8 @@ rtk1311:矛:halberd:予
 rtk1312:柔:tender:木,矛
 rtk1313:務:task:矛,力,攵
 rtk1314:霧:fog:雨,務
-rtk1315:班:squad:王
-rtk1316:帰:homecoming:ノ,帚,｜
+rtk1315:班:squad:王,刀,王
+rtk1316:帰:homecoming:刀,帚
 rtk1317:弓:bow:
 rtk1318:引:pull:｜,弓
 rtk1319:弔:condolences:｜,弓
@@ -1968,7 +1968,7 @@ rtk1876:摂:vicarious:prim-sparkler,扌,耳
 rtk1877:央:center,centre:冖,大
 rtk1878:英:england:艹,央
 rtk1879:映:reflect:央,日;ノ,日,大,冖
-rtk1880:赤:red:土
+rtk1880:赤:red:土,小
 rtk1881:赦:pardon:攵,赤
 rtk1882:変:unusual:亦,夂
 rtk1883:跡:tracks:亦,足
@@ -3329,7 +3329,7 @@ prim-mist:𠦝:mist:十,早
 # listing that name shares this glyph and nothing more specific — then rendered
 # beside real hosts before registering. Sub-decompositions are cjkvi's top level,
 # blank where that needs a component still unregistered.
-prim-clothes-hanger:𠃌:clothes hanger,coat hanger:
+prim-clothes-hanger:𠃌:clothes hanger,coat hanger,sword,dagger:
 prim-float:㦮:float:二,戈
 prim-spool:圣:spool,clod,toilet paper:又,土
 prim-bonsai:𡗗:bonsai:三,人
