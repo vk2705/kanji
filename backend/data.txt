@@ -3223,7 +3223,7 @@ prim-katakana-yu:ユ:katakana yu
 prim-heki:辟:heki,ketchup:尸,口,辛
 prim-finally:竟:finally:音,儿
 prim-teki:啇:teki,antique:立,冂,古
-prim-upside-down-row:业:upside down in a row
+prim-upside-down-row:业:upside down in a row,row
 prim-tucked-under-the-arm:乂:tucked under the arm
 prim-southeast:巽:southeast:己,共
 prim-maestro:𠂤:maestro,maestro without baton

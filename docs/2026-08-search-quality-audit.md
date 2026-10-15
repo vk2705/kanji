@@ -19136,3 +19136,162 @@ new row, no new unrenderable codepoint).
    `audit_missing_children.py` blind spot (chunk 102), and `鬲`'s JK
    anatomy / `両`/`満`'s real decomposition (both pre-chunk-100) — all
    still open, none touched this session.
+
+## 2026-10-15 — chunk 105: the "row" cluster cleared; "apron" investigated, left open with a narrowed finding
+
+Unattended daily run. Container came up with no repo-push guarantee this
+time either (the whole reason this check exists per the task brief) — found
+`/home/user/kanji` already present but in a detached-HEAD state, one commit
+behind `origin/master`. Checked out `master`, fast-forwarded, confirmed
+`git push --dry-run origin master` succeeded before starting any audit work.
+Fresh container otherwise: venv, `cjkvi-ids`' `ids.txt`, and
+`fonts-noto-cjk`/`fonts-hanazono` all rebuilt from scratch (Noto first, per
+standing order).
+
+Picked up chunk 104's "Next" item 1: continue chunk 96's frequency list
+with "row" (6) and "apron" (6), both still unstarted.
+
+### "row" — cleared, all 6 hosts, one alias
+
+`audit_csv_regressions.py` flagged six hosts dropping "row":
+`rtk1927`(湿) `rtk1928`(顕) `rtk1929`(繊) `rtk1930`(霊) `rtk2148`(虚)
+`rtk2149`(戯, a child of 虚 that clears automatically). All six already
+list `业` (`prim-upside-down-row`, alias "upside down in a row") as a
+literal part — the shape was already correctly identified; only the
+shorter name Heisig actually uses in these frames ("row") was missing as
+an alias.
+
+Rendered `业` beside `並` (`rtk1924`, whose own keyword_6th_ed is
+literally "row", CSV components empty — frame 1924, taught immediately
+before this cluster starts at 1927) and beside all six hosts
+(`render_glyphs.py`): `业`'s crossbar-through-two-verticals is visibly
+the bottom four-fifths of `並`, missing only its own top `丷`/`䒑` cap —
+confirmed independently via `cjkvi-ids`, which gives `並 = ⿱丷亚` (JP
+variant `⿱䒑业`). Same shape-reuse pattern as chunk 104's `业`/`並`-adjacent
+finds and chunk 103's `禸` gaining "insect" alongside its existing name:
+Heisig, having just taught `並` as "row" at 1924, reuses the shape as a
+primitive by the same keyword in the very next frames that need it.
+
+The one thing worth checking before touching it, per chunk 104's own
+note: `並` already owns "row" alone, so adding the same literal alias
+text to a second row risks `resolve_alias`'s tie-break (no `ORDER BY`,
+and both rows are public) silently flipping which kanji a bare "row"
+search lands on. Verified directly rather than assumed: added `row` to
+`prim-upside-down-row`'s alias list
+(`prim-upside-down-row:业:upside down in a row` → `...,row`,
+data.txt:3226), rebuilt, then called `database.resolve_alias(conn,
+"row")` directly — still returns `rtk1924` (import order puts the CSV-
+seeded kanji rows ahead of data.txt's primitives, so `並` keeps winning
+the single-value tie-break). `search_by_parts(["row"])` now returns 11
+kanji instead of 1 — `並` itself plus `prim-upside-down-row` and all nine
+of its reachable hosts — confirming the audit-script fix and the
+search-facing behavior both land correctly without disturbing the
+existing single-value answer.
+
+`audit_csv_regressions.py`: **186 → 180**, confirmed by inspecting the
+six ids directly (all six fully dropped out, nothing else moved).
+
+Full re-verification (fresh rebuild): `test_regression_fixes.py`
+**1328/1328** (no pin needed correcting — `prim-upside-down-row` wasn't
+pinned by id anywhere), `pytest -q` **74 passed**, `audit_overflatten.py`
+0, `audit_self_reference.py` 0, `audit_radicals.py` 0/0,
+`audit_phantom_parts.py --in-csv-range` unchanged at **10 across 9**
+(none of today's six rows appear in that list), `audit_primary_choice.py`
+**0/71**. Frontend: `npm install`, `npm run lint` clean, `npm run
+build:prod` clean (SEO generation: 3226 pages, unchanged — alias-only
+change adds no new row).
+
+Not deployed — no server access from this container, per the task brief.
+A deployer needs `sync_system_data.py` run against the live DB to pick up
+`prim-upside-down-row`'s new alias. No new `primitive_images/` file (no
+new row).
+
+### "apron" — investigated, left open: ruled out the obvious transfer, narrowed to a genuine tie
+
+Chunk 104's own note flagged the risk here explicitly: "apron"'s hosts
+(`帝 諦 婦 掃 帰 締`) all currently resolve "apron" to `prim-thirty` (丗) —
+the same primitive chunk 92 (2026-08-27) correctly added for `帯`
+(frame 444, CSV baseline "buckle; apron; crown; towel", `cjkvi-ids`
+confirms `帯 = ⿳丗冖巾`) — and the note asked for a render before trusting
+that the other six hosts share that same shape, rather than assuming one
+Heisig name always means one primitive.
+
+The render says no. `cjkvi-ids` gives `帝 = ⿱⿱⿱亠丷冖巾` (`亠`+`丷`+`冖`+`巾`,
+four separately-stacked pieces, no `丗` anywhere), and `render_glyphs.py`
+on `帝` cropped and upscaled confirms it structurally: top is a `亠`
+dot-and-bar, then two short separate diagonal marks (`丷`), then a plain
+wide bar (`冖`, drawn without visible side-hooks in this font), then
+`巾`. Compared side by side with `丗` (the three-vertical-strokes-through-
+one-bar "comb" shape, confirmed via its own render and via `丗 = ⿻廿丨`,
+an **overlay** operator per CLAUDE.md's own "⿻/⿴ is not a parts list"
+rule, so not literally "两 layered shapes" either) — nothing in `帝`
+reads as that comb shape. Chunk 92's `帯` fix doesn't transfer: `帯`
+genuinely has a `丗` where `帝` has `亠`+`丷` instead, two different real
+shapes that happen to share Heisig's "apron" keyword — exactly the
+"same name, different glyph" trap CLAUDE.md documents for `龶`/`丰`,
+`戌`/`戍`, `母`/`毋`.
+
+Having ruled out `丗`, tried to narrow down which of `帝`'s actually-
+present pieces "apron" should alias onto instead, with two checks:
+
+1. **CSV host-set overlap.** Every one of the 8 frames whose components
+   include "apron" (`帯 滞 帝 諦 婦 掃 帰 締`) *also* includes both "crown"
+   (→ `kangxi14`/`冖`) and "towel" (→ `rtk...`/`巾`) — `apron ⊆ crown` and
+   `apron ⊆ towel`, no exceptions in either direction across the whole
+   CSV. "Horns" (`丷`'s own name, 44 CSV hosts) and "lid" (`亠`'s name)
+   have **zero** overlap with "apron"'s 8 hosts — "lid" in fact has zero
+   CSV hosts at all, meaning it isn't a real Heisig component name
+   anywhere in this edition; it's this project's own invented name for
+   `亠`, not corroborated by the source CSV the way "crown"/"towel" are.
+   This rules `丷` and `亠` out and narrows the real candidate to `冖` or
+   `巾` — both already present and reachable in every one of the 8 hosts.
+2. **Structural intersection, not just CSV co-occurrence.** `婦`/`掃`/
+   `帰` reach "apron" only through `帚` (`prim-feather-duster`,
+   `⺕,冖,巾`) — they never contain `亠`/`丷` at all. So whatever "apron"
+   names has to be in the intersection of `帝`'s own real pieces
+   (`亠,丷,冖,巾`) and `帚`'s (`⺕,冖,巾`), which is exactly `{冖, 巾}` —
+   confirming check 1 independently, from actual decomposition trees
+   rather than CSV text alone.
+
+That narrows it to two candidates with no remaining way to break the tie:
+no host anywhere in the full CSV has "apron" without both "crown" and
+"towel" together, so co-occurrence can't distinguish which one it
+renames, and neither `冖` nor `巾`'s own rendered shape gives a reason to
+prefer one over the other for an "apron" mnemonic (a headcover and a
+cloth are both plausible readings, and this project doesn't store
+Heisig's mnemonic story text to check against, by design). Left open
+rather than guessed at, same standing rule as the `立`/"vase" and
+`属`/`嘱`/"gnats" dead ends — this is a new, different dead end, not a
+restatement of either. `audit_csv_regressions.py`'s apron entries are
+unchanged (still 6 hosts, still `-> prim-thirty`, confirmed unaffected by
+today's `row` fix).
+
+Also checked, per the standing task brief's section 4: the brief's own
+`kangxi58` item ("holds 彑, `CJKRadicals.txt` says radical 58 is 彐") is
+stale — `kangxi58` is already `彐` (`data.txt:3474`), `彑` lives at
+`prim-pigs-head`, and the log already recorded this fixed and
+re-confirmed three separate times (2026-09-18, then twice more). Not
+touched again; noting it here so a future session trusts this log over
+the brief's own text, same as the brief itself says to.
+
+### Next
+
+1. "Apron"'s `冖`-vs-`巾` tie from today — no further CSV or structural
+   evidence will break it (checked: no host anywhere separates the two).
+   Would need either a source this project doesn't have (Heisig's actual
+   mnemonic text, deliberately not stored) or a different kind of
+   evidence entirely; worth a specifically-targeted look rather than
+   another pass with today's method before spending more time on it.
+2. Continue chunk 96's frequency list: next unstarted item (check this
+   log first for anything already settled, same as today, before
+   assuming a fresh start).
+3. The still-open "spear"/"cutlass" question on `班`/`帰` (chunk 104),
+   `suggest_heisig_aliases.py --near 0.8 --all`'s `rtk2576`(槍)/"cutlass"
+   flag (`cjkvi support 0.00`), the "vase"/"stand up" question
+   (`rtk462`/立, chunk 102), and `属`/`嘱`'s remaining "gnats" (chunk 103)
+   — none touched this session, all still need evidence this project
+   hasn't found yet.
+4. The `㫃`/`prim-banner` glyph-mismatch (chunk 102), the
+   `audit_missing_children.py` blind spot (chunk 102), and `鬲`'s JK
+   anatomy / `両`/`満`'s real decomposition (both pre-chunk-100) — all
+   still open, none touched this session.
