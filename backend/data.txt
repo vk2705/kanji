@@ -1188,7 +1188,7 @@ rtk1104:匁:monme:乂,勹
 rtk1105:以:by means of:｜,人,丶
 rtk1106:似:becoming:亻,以
 rtk1107:併:join:亻,并
-rtk1108:瓦:tile:一
+rtk1108:瓦:tile:一,｜,丶,亅
 rtk1109:瓶:bottle:并,瓦
 rtk1110:宮:shinto shrine:呂,宀
 rtk1111:営:camp:呂,prim-schoolhouse
@@ -3123,7 +3123,7 @@ kangxi13:冂:border,down box,hood,belt,glass canopy,glass hood,helmet
 kangxi14:冖:cover,cloth cover,birdcage,birdhouse,crown,miss world,paper punch
 kangxi4:丿:slash,left-falling stroke
 prim-right-falling-stroke:乀:right-falling stroke,stick
-kangxi6:亅:hook
+kangxi6:亅:hook,fishhook
 kangxi44:尸:corpse,flag
 kangxi62:戈:spear,halberd,fiesta
 kangxi115:禾:grain,wheat,cereal:丿

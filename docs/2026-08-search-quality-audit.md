@@ -19399,3 +19399,174 @@ being this cluster's quirk.
 
 495 total, 295 pending after this chunk (315 before —
 `hanzi_worklist_next.py --pending-count`).
+
+## 2026-10-16 — chunk 106: 瓦/瓶 — the "cane, stick, drop, fishhook, ice" cluster chunk 96 flagged, 4 of 5 cleared
+
+Unattended daily run. Fresh container, no checkout present when the task
+fired. Step 0 first, per the task brief's own scar tissue: `git clone`
+fresh to `/home/user/kanji`. `git pull --ff-only` failed first try with
+`HEAD` detached (same shape chunk 102/103 hit) — `git checkout master`,
+which then reported 2 commits behind; `git merge --ff-only origin/master`
+brought it current, and only then did `git push --dry-run origin master`
+report "Everything up-to-date", confirmed before any work. No venv in
+this container either — same two-Python trap prior chunks documented
+(`pip` resolves to 3.13, `python3` to 3.11.17) — used `python3 -m pip
+install --ignore-installed -r requirements.txt -r requirements-dev.txt`.
+`apt-get install -y fonts-noto-cjk fonts-hanazono` (Noto first). Curled
+`cjkvi-ids/ids.txt` fresh, 88,939 lines.
+
+Full step-3 suite against a from-scratch `import_data()` before any edit:
+`test_regression_fixes.py` 1328/1328, `pytest -q` 74 passed,
+`audit_overflatten.py`/`audit_self_reference.py`/`audit_radicals.py` all
+0, `audit_phantom_parts.py --in-csv-range` 10 across 9,
+`audit_primary_choice.py` 0/71, `audit_csv_regressions.py` 180 flagged —
+all matching chunk 105's end-of-chunk numbers exactly.
+
+Re-ran chunk 96's dropped-term frequency count fresh (its original list is
+now fully exhausted — "tool"/"spike"/"person" fixed chunks 99-101,
+"vase"/"stand up" left open chunk 103, "sword" partly cleared chunk 104,
+"row" cleared and "apron" left open chunk 105, "insect" cleared chunk
+103). New top of the list: "stick" (14 hosts), "human legs" (12, already
+diagnosed chunk 95 as the pinned `穴` false-positive family — skipped,
+per chunk 96's own standing note not to re-flag it), "drop" (10, mostly
+already covered by the "stick" cluster's own hosts), "key" (10, new).
+Chunk 96's own 2026-10-06 entry had already flagged part of the "stick"
+pile by name: "CSV row ('cane, stick, drop, fishhook, ice' all dropped —
+seen again this chunk while grepping for 'hook', worth its own chunk
+given how many glosses are missing at once)" — that's `rtk1108`/`rtk1109`
+(瓦/瓶) exactly, word for word. Picked that up.
+
+**瓦 (tile, frame 1108) — real fix, 4 of 5 missing concepts restored.**
+`data.txt`'s override had reduced 瓦's decomposition to a single part
+(`一`, "one") against CSV's seven-word baseline ("one; ceiling; cane;
+stick; drop; fishhook; ice") — `data_from_pdf.txt`'s own entry for this
+frame had three parts (`ceiling,walking stick,fishhook`), so `data.txt`'s
+override didn't just fail to add detail, it actively discarded detail the
+PDF-extracted source already had. `cjkvi-ids` has no opinion (`瓦 = 瓦`,
+fully atomic — this sits entirely on the Heisig channel, like chunk 103's
+"insect" fix). "ceiling" already resolved independently (`rtk1`/一 already
+carries "ceiling" as an existing alias, confirmed before touching
+anything) — not flagged, not touched.
+
+Rendered 瓦 large and cropped (`render_glyphs.py`, upscaled via PIL): a
+top horizontal bar, a long leaning vertical stroke with a horizontal
+cross-bar partway down (one bent L-shaped stroke), a short diagonal tick
+between the two verticals, and a right-side vertical stroke that hooks
+left at the bottom. Four strokes beyond the top bar for five CSV words
+("ceiling" already accounted for by the top bar via its existing alias;
+"cane"/"stick"/"drop"/"fishhook"/"ice" needed homes). Checked each
+candidate by rendering it directly beside the crop rather than reasoning
+from the codepoint name alone:
+- The long leaning vertical reads as a plain line, matching `prim-pipe`
+  (`｜`) — whose alias list already reads "pipe, walking stick, cane,
+  line, walking cane, stick, ..." almost word for word. No alias change
+  needed, just added as a literal part.
+- The short diagonal tick matches `kangxi3` (`丶`, "dot, tick, drop,
+  drops") directly — same orientation and proportions as `丶` rendered
+  solo. Added as a literal part, no alias change.
+- The bottom-right hook: rendered `𠃊` (`prim-fishhook`'s own codepoint,
+  U+200CA) and `乙` (`rtk75`) alongside it and neither matched — `𠃊`
+  opens the wrong direction (turns right, 瓦's hook turns left) and `乙`
+  has an extra zigzag bend 瓦's stroke doesn't have. `亅` (`kangxi6`,
+  already in this project as a part of `rtk95`/丁 and nine other hosts)
+  matched cleanly: a single vertical-then-left-hook, same as 瓦's own
+  stroke. `kangxi6` only carried "hook" as an alias, not "fishhook" — the
+  CSV's actual word. Checked the tie-break risk before adding it, same
+  method chunk 105 used for "row": `resolve_alias(conn, "fishhook")`
+  returned `rtk75` before the change; added "fishhook" to `kangxi6`'s
+  alias list, rebuilt, re-checked — still `rtk75` (CSV-seeded kanji rows
+  import ahead of data.txt primitives, same ordering chunk 105 confirmed
+  for "row"/"並"). Safe.
+
+**"ice" — checked and deliberately left unfixed, to avoid breaking the
+existing correct answer.** Tempting at first: "drop" and "ice" are both
+dropped by the exact same two hosts (瓦/瓶) and nothing else, which looked
+like another case of Heisig naming one stroke two ways (the established
+"cane"/"stick" pattern, confirmed on this very host). Tested before
+trusting it: added "ice" as a second alias to `kangxi3` (the "drop"
+primitive), rebuilt, called `resolve_alias(conn, "ice")` directly —
+**it flipped from `kangxi15` (冫, the real two-stroke ice radical used in
+冷/凍/etc.) to `kangxi3`.** Unlike "fishhook" above, `kangxi3` and
+`kangxi15` are both data.txt-only primitives (no CSV-seeded kanji to
+anchor the tie-break), and `kangxi3`'s line comes first in `data.txt`
+(line 11 vs. line 15) — so the plain insertion-order tie-break this
+project has relied on elsewhere went the wrong way here. Reverted the
+alias addition immediately. 瓦's real diagonal stroke is a single mark,
+not `冫`'s two dots, so citing `kangxi15` as a literal part of 瓦 would
+also have been wrong regardless. Left "ice" unresolved on both hosts — a
+genuine dead end, not a guess, same standing rule as "apron" (chunk 105)
+and "vase"/"stand up" (chunk 103).
+
+`audit_csv_regressions.py`: unchanged at **180** by host count (both
+hosts still carry at least one dropped term — "ice" — so neither drops
+out of the flagged list), but confirmed by direct re-run that each now
+drops only "ice" where it previously dropped five concepts apiece.
+`audit_phantom_parts.py --in-csv-range`: unchanged at **10 across 9** —
+all four added parts are CSV-corroborated, not phantom additions (`瓦`
+itself doesn't even appear in either phantom-parts list, despite
+`cjkvi-ids` being blind to it, precisely because CSV backs every one of
+the four new parts).
+
+**Investigated but not touched: "key" (10 hosts, new on this session's
+frequency count) — reverted a plausible-looking fix after the render
+turned out unreliable.** The five largest hosts (`rtk1772`-`rtk1776`,
+偉/違/緯/衛/韓) all share `kangxi178` (韋, "tanned leather") and all drop
+both "stick" and "key" together — same shape-as-this-session's "cane"/
+"stick" pattern, worth checking. `韋`'s current parts are `口,㐄` (mouth +
+`prim-winter-cow`, which already answers "monocle"/"sunglasses with one
+lens missing" independently) — `cjkvi-ids` gives `韋 = ⿳𫝀口㐄`, a *third*
+top component (`𫝀`, U+2B740) this project's decomposition doesn't carry
+at all. Rendered `韋` large: the top portion does look like it has a
+vertical stroke running through it that could plausibly be "stick"/"key"
+by the same cane-piercing-a-shape mnemonic logic as 瓦. But `fc-match
+"Noto Sans CJK JP:charset=2B740"` and the HanaMin equivalent both resolve
+to `HanaMinB.ttf` only — Noto has no coverage of `𫝀` at all, it's a rare
+Extension C codepoint, and the rendered shape turned out to be a compound
+(土-like base plus an added diagonal), not the single straight line the
+"stick"/`prim-pipe` hypothesis needed. Added "key" to `prim-pipe`'s alias
+list on the strength of the first render, then reverted it once the
+closer look at `𫝀` showed the assumption it rested on (a simple vertical
+line inside 韋's top) doesn't hold up — the actual top component is more
+complex and this project has no existing primitive row for it yet.
+Left open rather than guessed at; this is a new dead end, not a
+restatement of any prior one.
+
+Full re-verification (fresh rebuild after the final fix):
+`test_regression_fixes.py` **1328/1328** (no pin needed correcting —
+neither `rtk1108` nor `kangxi6` was pinned by id anywhere, both only
+referenced as unpinned sub-parts), `pytest -q` **74 passed**,
+`audit_overflatten.py` 0, `audit_self_reference.py` 0, `audit_radicals.py`
+0/0, `audit_phantom_parts.py --in-csv-range` **10 across 9** (unchanged,
+see above), `audit_primary_choice.py` **0/71**. Frontend: `npm install`,
+`npm run lint` clean, `npm run build:prod` clean (SEO generation: 3226
+pages, unchanged from chunk 105 — alias/parts-only change, no new row).
+
+Not deployed — no server access from this container, per the task brief.
+A deployer needs `sync_system_data.py` run against the live DB to pick up
+`rtk1108`'s new parts and `kangxi6`'s new "fishhook" alias. No new
+`primitive_images/` file (no new row).
+
+### Next
+
+1. "Key"/`韋`'s top component (`𫝀`, U+2B740) from today's dead end: needs
+   either a font that actually covers this Extension C codepoint (to
+   confirm or disprove the HanaMin-only render) or a different kind of
+   evidence — the "stick"/"key" hypothesis isn't ruled out, just
+   unconfirmed. `audit_csv_regressions.py` still lists all five hosts
+   (`rtk1772`/`rtk1773`/`rtk1774`/`rtk1775`/`rtk1776`) dropping both
+   terms.
+2. "Ice" on 瓦/瓶 (today): no further evidence found that doesn't risk
+   regressing the existing correct `kangxi15` resolution — same shape of
+   dead end as "apron".
+3. Continue the regenerated frequency list: "human legs" (12, skip —
+   already diagnosed chunk 95 as the pinned false-positive family), "key"
+   (10, see item 1 above), then whatever's next after those by count —
+   re-run `audit_csv_regressions.py` fresh rather than trusting this
+   session's snapshot, since fixes shift the ranking.
+4. Four older dead ends, unchanged: "apron" (chunk 105, `冖`-vs-`巾` tie),
+   "vase"/"stand up" (chunk 103, `rtk462`/立), `属`/`嘱`'s "gnats" (chunk
+   103), `鬲`'s JK anatomy and `両`/`満`'s real decomposition
+   (pre-chunk-100).
+5. The `㫃`/`prim-banner` glyph-mismatch and the `audit_missing_children.py`
+   blind spot (both chunk 102) — still open, neither touched this
+   session.
