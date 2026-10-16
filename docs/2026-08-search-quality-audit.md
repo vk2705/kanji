@@ -19295,3 +19295,107 @@ the brief's own text, same as the brief itself says to.
    `audit_missing_children.py` blind spot (chunk 102), and `鬲`'s JK
    anatomy / `両`/`満`'s real decomposition (both pre-chunk-100) — all
    still open, none touched this session.
+
+## 2026-10-16 — hanzi worklist, chunk 2: next 20 (16 keep-ours, 4 real fixes — all the same missing-コ pattern)
+
+Second unattended daily run against `hanzi_decomposition_worklist.json`
+(`hanzi_worklist_next.py -n 20`), same method as chunk 1 (2026-09-30):
+every host rendered via `render_glyphs.py`, plus every component glyph in
+its cjkvi reading, before any decision; zoomed crops (PIL) where the
+110px row render wasn't enough to settle a stroke count. `pytest -v`
+confirmed green (99 passed) before touching anything; `backup_db.py` run
+first.
+
+**16 keep-ours** (奉 奭 姊 姬 婣 媱 嫨 嬊 官 宧 宻 將 尧 展 屬 屮): in each of
+these the render confirmed the current parts already describe what's
+drawn, even where cjkvi's reading goes through a real overlay/enclosure
+or an opaque child. A few worth noting:
+- **奉** (`⿱𡗗⿻二丨`) is the clean version of the pattern — zoomed in, the
+  top of 奉 is pixel-for-pixel `𡗗`'s own shape, and the bottom is
+  unmistakably two horizontals (`二`) with one vertical (`丨`) running
+  through both. Nothing to fix, just evidence that happens to come via
+  an overlay operator.
+- **姬/宧** (opaque, both stop at `𦣞`): `𦣞` (U+268DE) is a genuine tofu
+  box standalone (confirmed via the same check chunk 1 used on `临`'s
+  `𫩏` — rendered alone, it's an empty box with an X, no outline in any
+  stack font), but both hosts render fine as composed characters, and
+  their right-hand shape is visibly the same intricate form in both —
+  consistent with the current `女,𦣞` / `宀,𦣞` split being correct at the
+  level we can verify, same as chunk 1's 乃/`𠄎`.
+- **尧** (`𭠍=⿻𫠠丿`): both `𭠍` (U+2D80D) and `𫠠` (U+2B820) are tofu in
+  every face `render_glyphs.py` checks — the script's own substitution
+  check flagged them as "identical in every face", i.e. near-identical
+  shapes rather than a hidden substitution, consistent with both being
+  equally unrenderable rather than one standing in for the other. Left
+  opaque, same as 姬/宧.
+- **媱** (`䍃=⿱⿴𠂊冫缶`): `䍃` itself renders fine and matches 媱's right
+  side exactly, so leaving it as one unexpanded term (rather than forcing
+  the 𠂊/冫/缶 split) is the same call as 𠂔 in chunk 1's logic — a real,
+  checkable glyph that just doesn't have its own row yet.
+
+**4 real fixes, all the same shape of bug**: 妻, 媫, 専, 尹 each had a
+piece of their cjkvi reading silently dropped by the original
+`import_hanzi.py` seed — three of the four (妻, 媫, 尹) dropped `コ`
+specifically, which turns out to be a real, visible box-shaped stroke
+group (top + right-vertical + bottom, open on the left) that keeps
+showing up as a component in these hosts, not a cjkvi artifact. Confirmed
+each one by zooming into the host at 5-6x after the 110px row render
+wasn't conclusive enough to count strokes:
+- **妻 (hanzi-59bb)**, `⿱⿻十⿻コ一女`: old parts `十,一,女`. Zoomed into
+  the top of 妻 and counted three horizontal strokes plus two verticals —
+  a short peg at the very top (`十`'s vertical) and a separate right-side
+  vertical lower down connecting the 2nd and 3rd horizontals, which is
+  exactly `コ`'s own right-angle shape. The old row only accounted for
+  two of the three horizontals (`十`+`一`) and named no vertical on the
+  right at all. Fixed to `十,コ,一,女` (decomposition 5776).
+- **媫 (hanzi-5aab)**, `⿰女⿳⺊⿻コ一龰`: old parts `女,一,龰,龰` (the
+  duplicate `龰` is a pre-existing, unrelated artifact — `龰`'s own
+  keyword in this DB is literally "龰", unglossed, so `expand_part_terms`
+  prints the glyph twice; not touched here). Zoomed into the right side
+  and saw, top to bottom: a short hook (`⺊`, matches its own render
+  exactly), then a distinct box with an internal crossbar (`コ`+`一`
+  overlaid, same shape as 妻's), then `龰` at the bottom. The old row
+  skipped both the `⺊` hook and the `コ` box entirely. Fixed to
+  `女,⺊,コ,一,龰` (decomposition 6009).
+- **尹 (hanzi-5c39)**, `⿻⿻コ一丿`: old parts `一,丿` — only two strokes
+  for a character whose render clearly shows a top horizontal, a
+  right-side box (`コ` again), a vertical through the middle, and a
+  bottom-left diagonal (`丿`). Fixed to `コ,一,丿` (decomposition 6387).
+- **専 (hanzi-5c02)**, `⿱𤰔寸`, where `𤰔=⿻一由`: old parts `𤰔,寸` left
+  the top as one opaque term. Unlike 䍃/𣶒/𠂔 above, `𤰔` (U+24C14) *is*
+  tofu standalone, but its claimed sub-expansion (`一,由`) is simple,
+  fully resolvable, and matches the zoomed render exactly — 専's top is
+  plainly `由` with one extra horizontal stroke laid over its top, not an
+  irreducible shape worth leaving opaque. Fixed to `一,由,寸`
+  (decomposition 6337). This one is `use-cjkvi` for a different reason
+  than the `コ` fixes: not a dropped piece, but an opaque term worth
+  expanding because, unlike this chunk's other opaque leaves, the render
+  actually settles it.
+
+All four applied directly to `kanji.db` (no `data.txt` line exists for
+hanzi rows) via `database.expand_part_terms(conn, [...], char_lookup,
+script_group='zh')`, deleting each decomposition's old `parts` rows and
+re-inserting the expanded list at sequential positions — same method as
+chunk 1's 乕 fix. Note `コ` doesn't resolve to its own `kanji` row (no
+character='コ' row exists), so it won't show up as a clickable chip in
+`KanjiDetail`'s `parts_detail` the way a resolved term does — same
+already-accepted behavior as `𠂔`/`𣶒`/`䍃`/`㠯`/`𦣞` elsewhere in this
+same chunk, not a regression, and not something introduced by this fix
+(confirmed `コ` was already present, unresolved, in one existing row —
+`hanzi-56d9`'s decomposition — from the original `import_hanzi.py` seed).
+Verified with raw `parts` table reads (`get_kanji_detail` naturally drops
+unresolved terms from its `parts_detail`, so it undercounts — read the
+table directly to confirm a fix landed) and the full pytest suite both
+before and after (99 passed each time).
+
+**Worth flagging for a future chunk**: three of four real fixes this
+session were the identical `コ`-dropped-from-a-`⿻コ一` overlay pattern.
+That's a small sample, but if it keeps recurring it may be worth a
+targeted grep across the remaining pending overlay rows for `コ` inside
+`cjkvi_reading` specifically, rather than re-discovering it host by host.
+Not done this session — out of scope for the per-row render-first method,
+and three examples isn't enough to be sure it generalizes rather than
+being this cluster's quirk.
+
+495 total, 295 pending after this chunk (315 before —
+`hanzi_worklist_next.py --pending-count`).
