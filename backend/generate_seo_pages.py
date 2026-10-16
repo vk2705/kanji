@@ -13,6 +13,7 @@ import argparse
 import html
 import shutil
 import sqlite3
+from datetime import date
 from pathlib import Path
 from urllib.parse import quote
 
@@ -220,14 +221,101 @@ def component_glyphs(entry: dict, term_glyphs: dict[str, str]) -> list[str]:
     return []
 
 
-def write_sitemap(sitemap_path: Path, entries: list[dict]) -> None:
+HUB_CHUNK = 1000
+
+
+def has_content(entry: dict) -> bool:
+    """A page worth putting in the sitemap: it lists at least one decomposition part.
+
+    Atomic shapes (一, 丶) have nothing to say beyond a keyword, and a sitemap of
+    thin pages dilutes the ones that do. They keep their page and stay linked
+    from the hubs; they are just not volunteered to crawlers.
+    """
+    return any(d["parts_detail"] for d in entry["decompositions"])
+
+
+def _hub_page(title: str, intro: str, items: list[tuple[str, str]], nav: list[tuple[str, str]]) -> str:
+    links = "\n".join(
+        f'        <li><a href="{html.escape(url, quote=True)}">{html.escape(label)}</a></li>'
+        for url, label in items
+    )
+    navigation = " · ".join(
+        f'<a href="{html.escape(url, quote=True)}">{html.escape(label)}</a>' for url, label in nav
+    )
+    return f"""<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{html.escape(title)} | RTK Kanji Search</title>
+    <meta name="description" content="{html.escape(intro, quote=True)}">
+    <meta name="robots" content="index, follow">
+  </head>
+  <body>
+    <main>
+      <p><a href="/">RTK Kanji Search</a></p>
+      <h1>{html.escape(title)}</h1>
+      <p>{html.escape(intro)}</p>
+      <p>{navigation}</p>
+      <ol>
+{links}
+      </ol>
+    </main>
+  </body>
+</html>
+"""
+
+
+def write_hubs(output_dir: Path, entries: list[dict]) -> list[str]:
+    """Browsable index pages, so crawlers reach every kanji by links and not only
+    via the sitemap. Returns the hub URLs, for the sitemap."""
+    def label(entry: dict) -> str:
+        return f"{display_character(entry['character'])} {entry['keyword'] or entry['id']}".strip()
+
+    rtk = sorted((e for e in entries if e["id"].startswith("rtk") and e.get("frame")), key=lambda e: e["frame"])
+    other = [e for e in entries if not (e["id"].startswith("rtk") and e.get("frame")) and has_content(e)]
+    chunks = [other[i:i + HUB_CHUNK] for i in range(0, len(other), HUB_CHUNK)]
+
+    index_url = f"{SITE_URL}/kanji/"
+    nav = [(index_url, "Japanese kanji")] + [
+        (f"{SITE_URL}/kanji/browse-{n}.html", f"Hanzi and other characters {n}") for n in range(1, len(chunks) + 1)
+    ]
+    urls = [index_url]
+    (output_dir / "index.html").write_text(
+        _hub_page(
+            "Japanese kanji in Remembering the Kanji order",
+            f"All {len(rtk)} kanji of Remembering the Kanji in frame order, each with its building blocks, "
+            "readings and stroke count.",
+            [(page_url(e["id"]), f"{e['frame']}. {label(e)}") for e in rtk],
+            nav,
+        ),
+        encoding="utf-8",
+    )
+    for n, chunk in enumerate(chunks, start=1):
+        (output_dir / f"browse-{n}.html").write_text(
+            _hub_page(
+                f"Hanzi and other characters, part {n} of {len(chunks)}",
+                "Chinese hanzi (simplified and traditional) and other characters, each with the shapes it is built from.",
+                [(page_url(e["id"]), label(e)) for e in chunk],
+                nav,
+            ),
+            encoding="utf-8",
+        )
+        urls.append(f"{SITE_URL}/kanji/browse-{n}.html")
+    return urls
+
+
+def write_sitemap(sitemap_path: Path, entries: list[dict], hub_urls: list[str]) -> None:
+    lastmod = date.today().isoformat()
     urls = [
         (f"{SITE_URL}/", "weekly", "1.0"),
+        *[(url, "weekly", "0.7") for url in hub_urls],
         (f"{SITE_URL}/privacy.html", "yearly", "0.2"),
-        *[(page_url(entry["id"]), "weekly", "0.8") for entry in entries],
+        *[(page_url(entry["id"]), "weekly", "0.8") for entry in entries if has_content(entry)],
     ]
     body = "\n".join(
-        f"  <url><loc>{html.escape(url)}</loc><changefreq>{changefreq}</changefreq><priority>{priority}</priority></url>"
+        f"  <url><loc>{html.escape(url)}</loc><lastmod>{lastmod}</lastmod>"
+        f"<changefreq>{changefreq}</changefreq><priority>{priority}</priority></url>"
         for url, changefreq, priority in urls
     )
     sitemap_path.parent.mkdir(parents=True, exist_ok=True)
@@ -285,7 +373,8 @@ def generate(db_path: Path, output_dir: Path, sitemap_path: Path) -> int:
             (output_dir / f"{quote(entry['id'], safe='')}.html").write_text(
                 render_page(entry), encoding="utf-8"
             )
-        write_sitemap(sitemap_path, entries)
+        hub_urls = write_hubs(output_dir, entries)
+        write_sitemap(sitemap_path, entries, hub_urls)
     finally:
         conn.close()
     print(f"Generated {len(entries)} public kanji pages in {output_dir}")
