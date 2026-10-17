@@ -19662,3 +19662,140 @@ revisit with a larger single-glyph render or a cjkvi cross-check of what
 
 495 total, 275 pending after this chunk (295 before — see
 `hanzi_worklist_next.py --pending-count`).
+
+## 2026-10-17 — chunk 107: "fit" resolved on the 㑒 family (5 hosts); two more investigated and left open
+
+Container came up clean this time (repo present, push access confirmed via
+`git push --dry-run` before any work — see the task brief's own standing
+note about the prior session that nearly lost work to a container without
+the repo attached). Installed `fonts-noto-cjk`/`fonts-hanazono` and fetched
+`cjkvi-ids`'s `ids.txt` fresh (neither persists between firings), built a
+venv under `backend/venv` (neither `python3` on this box has `fastapi`
+installed globally — `/usr/local/bin/python3` is 3.11 with nothing, `pip`
+targets a separate 3.13 — so bare `pip install` silently installed into the
+wrong interpreter the first time; venv sidesteps it). Re-ran the full chunk
+106 frequency count fresh per its own "Next" item 3 rather than trusting
+last session's snapshot: "stick" dropped 14→12 (chunk 106's 瓦/瓶 fix),
+"human legs" still 12 (skip, pinned false-positive family, chunk 95),
+"key" still 10 (chunk 106's own open item), "drop" 8, "apron"/"vase"/
+"stand up" 6 each (older dead ends), then new ground: "ten" (5, two
+unrelated hosts), "fit" (5, one real cluster — see below).
+
+**"Fit" on 剣/険/検/倹/験 — real fix, one alias.** All five share `㑒`
+(`prim-awl`, "awl") as a literal part and all five CSV baselines list
+"fit" (→ `rtk269`/合) among the concepts `㑒` itself is supposed to carry
+through. `cjkvi-ids` gives `㑒 = ⿱亼⿻口人` — top `亼` (already a literal
+part of `prim-awl`'s own decomposition, matching `合 = ⿱亼口` exactly on
+that half) and a bottom `⿻口人` (`口` and `人` sharing strokes, the same
+"⿻ is not a parts list" trap `CLAUDE.md` already documents for 蝿 — the
+merged box-with-splayed-legs shape in `primitive_images/prim-awl.png`,
+checked at 4x zoom before touching anything, confirms this: it is one
+fused shape, not `合` sitting whole next to a separate `人`). So citing
+`合` as a literal sub-part the way the top `亼` already is would have
+repeated that exact mistake. Instead: added "fit" as a second alias on
+`prim-awl` itself (`awl,fit`), the same move already established for 甲
+("armor, armour, roots" — one shape, several of Heisig's own names, not a
+decomposition). Checked the blast radius before applying — `㑒` is a
+literal part on exactly 6 hosts total (`rtk1801`/剣, `rtk1802`/険,
+`rtk1803`/検, `rtk1804`/倹, `rtk2134`/験, `rtk2880`/鹸 — the sixth wasn't
+even flagged, outside `heisig-kanjis.csv`'s baseline scope apparently),
+so the new alias can only ever surface on rows where it is already
+CSV-corroborated, nothing broader. `audit_csv_regressions.py`: **180 → 175**
+flagged hosts, all five of today's targets cleared completely (not just
+"fit" — nothing else was dropped on them to begin with).
+
+**Investigated, left open: "ten"/"needle" on 単/戦/禅/弾 (`rtk2078`-
+`rtk2081`).** All four share `甲`(armor, `rtk1194`) as a literal part;
+`甲`'s own decomposition is `田`(rice field) + `｜`(prim-pipe) and CSV's
+flattened baseline for frame 2078 (単) lists "owl; rice field; brains;
+ten; needle" — "rice field"/"brains" already resolve fine via `甲`'s own
+`田`, only "ten"/"needle" are missing. Rendered `甲` next to `十` and `｜`
+large (`render_glyphs.py`): `甲`'s lower stroke is a bare vertical line
+with no crossbar, matching `｜` exactly, not `十`'s cross shape — citing
+`十` literally would misrepresent the glyph the way chunk 106 explicitly
+checked against for the fishhook stroke. The obvious alternative —
+add "ten"/"needle" as aliases to `prim-pipe` itself, same move as today's
+`㑒` fix — fails the blast-radius check that fix depended on: `｜` is a
+literal part on **63** hosts project-wide (not 6), so "ten" would start
+resolving on every kanji that happens to use a bare vertical stroke for
+any unrelated reason, a false-positive risk chunk 106's own "cane"/"stick"
+additions to this same primitive already push close to the edge of.
+Also checked aliasing `甲` (`rtk1194`) itself as "ten"/"needle" directly
+(cheap, and scoped to only the 5 hosts citing `甲`) — rejected because
+`_self_identity_kanji_ids` means a direct "ten" search would then surface
+`甲`/armor itself as *being* "ten", which it plainly isn't (unlike 甲's
+existing "armor, armour, roots" names, which really are alternate names
+for the whole glyph, "ten" would be describing one stroke pulled out of
+context). Left open — not a guess either way.
+
+**Investigated, left open: "ten" on `rtk28`/世 alone.** CSV baseline for
+frame 28 is just "ten; twenty"; current parts are `廿`(twenty) + `一`
+(one) and "twenty" already resolves fine. Checked whether the extra
+stroke should be `十` instead of `一` the same way as above: rendered 世
+next to 廿 and the delta between them is one plain horizontal stroke with
+no vertical component, matching `一`, not `十`. `cjkvi-ids` has no entry
+for 世 at all (fully atomic). Worth noting for future sessions: frame 28
+is taught long before frame 1274 (廿) even exists as a named primitive,
+yet CSV's own un-flattened source already uses "twenty" for frame 28 —
+checked against `audit_anachronistic_names.py` on the chance this was
+exactly that bug class, but it didn't fire, because the detector's own
+glyph test (documented in `CLAUDE.md`, using this exact 廿/世 pair as its
+worked example) already excuses a forward reference when the referenced
+shape really is visible in the host, which 廿 is. So the anachronism isn't
+the explanation for "ten" being dropped. Most likely explanation, unverified
+without the book text: "ten"/"twenty" in frame 28's components column are
+narrative number references in Heisig's mnemonic story for 世 ("a
+generation spans ten or twenty years") rather than glyph pieces at all —
+plausible given cjkvi's atomic read and the numeral gives no other
+ambiguity report. Left unfixed rather than guess.
+
+Full re-verification (fresh rebuild after the one applied fix):
+`test_regression_fixes.py` **1328/1328** (no pin needed correcting — the
+`㑒` fix only added an alias, no part changed), `pytest -q` **74 passed**,
+`audit_overflatten.py` 0, `audit_self_reference.py` 0, `audit_radicals.py`
+0/0, `audit_phantom_parts.py --in-csv-range` **10 across 9** (unchanged —
+the alias fix touches no part term), `audit_primary_choice.py` **0/71**.
+Frontend: `npm install`, `npm run lint` clean, `npm run build:prod` clean
+(SEO generation: 3226 pages, matching chunk 106 — alias-only change, no
+new row). `npm run build:prod` also regenerates `frontend/public/
+sitemap.xml` from whatever DB is on disk; this session's shadow DB has no
+hanzi rows (no `import_hanzi.py` run, same as the task brief's own rebuild
+recipe), so that regeneration would have silently dropped every `zh-*`
+URL from the committed sitemap — caught before committing and reverted
+(`git checkout -- frontend/public/sitemap.xml`), not pushed. Worth a note
+for whoever next touches `generate_seo_pages.py`'s invocation in CI/local
+verification: it should not be trusted as a diff source unless the DB
+backing it was built with `import_hanzi.py` too.
+
+Not deployed — no server access from this container, per the task brief.
+A deployer needs `sync_system_data.py` run against the live DB to pick up
+`prim-awl`'s new "fit" alias. No new `primitive_images/` file (no new row).
+
+### Next
+
+1. "Ten"/"needle" on 単/戦/禅/弾 (today): both the broad fix (alias on
+   `prim-pipe`, blocked by its 63-host blast radius) and the narrow one
+   (alias on `甲` itself, blocked by self-identity) were checked and
+   rejected. A real fix would need either a new, narrowly-scoped primitive
+   id for "the vertical stroke inside 甲 specifically" (a bigger schema
+   question — aliases are global to a primitive id in this project, there
+   is no per-occurrence stroke identity) or the actual book text. Not
+   attempted lightly again without one of those.
+2. "Ten" on 世 alone (today): likely a narrative/mnemonic reference in
+   Heisig's own text rather than a glyph piece — no further action without
+   the book text.
+3. "Key" (10 hosts, `韋`'s `𫝀`/U+2B740 top component) — chunk 106's dead
+   end, unchanged; still needs either a font with real Ext-C coverage or
+   a different kind of evidence.
+4. "Ice" on 瓦/瓶 (chunk 106) — unchanged dead end.
+5. Continue the regenerated frequency list past "ten"/"fit": "drop" (8,
+   mostly the chunk-106 "stick" cluster's own remaining hosts — check
+   whether any are genuinely separate before re-touching `prim-pipe`
+   again), "apron"/"vase"/"stand up" (6 each, older dead ends) — re-run
+   `audit_csv_regressions.py` fresh rather than trusting this session's
+   snapshot.
+6. Four still-older dead ends, unchanged: `属`/`嘱`'s "gnats" (chunk 103),
+   `鬲`'s JK anatomy and `両`/`満`'s real decomposition (pre-chunk-100).
+7. The `㫃`/`prim-banner` glyph-mismatch and the `audit_missing_children.py`
+   blind spot (both chunk 102) — still open, neither touched this
+   session.
