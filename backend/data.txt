@@ -3312,7 +3312,7 @@ prim-futon:翟:futon:羽,隹
 prim-talking-cricket:禺:talking cricket:田,禸
 prim-mao:夌:mao:土,儿,夂
 prim-pup-tent:尞:pup tent:大,日,小
-prim-awl:㑒:awl:亼,口,人
+prim-awl:㑒:awl,fit:亼,口,人
 prim-calling-card:氐:calling card:氏,一
 # Second batch, 2026-09-09. Same method: Heisig's own name from
 # heisig-kanjis.csv, then confirmed structurally (every CSV kanji listing the
