@@ -19570,3 +19570,95 @@ A deployer needs `sync_system_data.py` run against the live DB to pick up
 5. The `㫃`/`prim-banner` glyph-mismatch and the `audit_missing_children.py`
    blind spot (both chunk 102) — still open, neither touched this
    session.
+
+## 2026-10-17 — hanzi worklist, chunk 2: next 20 (16 keep-ours, 2 real fixes, 1 deferred)
+
+Unattended daily run against `hanzi_decomposition_worklist.json`
+(`hanzi_worklist_next.py -n 20`), same method as chunk 1 (2026-09-30).
+Pytest baseline checked clean (99 passed) and `kanji.db` backed up
+(`backup_db.py`) before any writes. All 20 hosts rendered in one batch via
+`render_glyphs.py`, plus a second batch of every distinct component glyph
+referenced in their cjkvi-ids readings, before any decision.
+
+That second batch's own relative-identity check flagged eight requested
+codepoints (`𡳾 𠬤 𣥂 𫶧 𦣞 𢆶 𬎾 𫠠`) as rendering identically across every
+installed face — genuine tofu, not stylized-but-real glyphs (confirmed by
+eye: all eight came back as the same ⊠ placeholder box in the PNG, unlike
+real-but-rare glyphs like `𡿨` or `𠃍` earlier in the same batch, which did
+render distinctly). All eight turned out to already be this project's own
+`opaque`-category parts — bare codepoints with no row in `kanji.db`,
+written as literal text by `import_hanzi.py`/`expand_part_terms` when
+cjkvi-ids itself stops at an unresolvable intermediate. None of them needed
+resolving: the question for an opaque finding is whether *our* row stops at
+the same place cjkvi-ids does, not what that intermediate itself looks
+like, and in every one of these eight cases it does.
+
+**16 keep-ours** (屯 峄 嵗 巛 巜 巟 巪 巫 巸 巿 帚 平 幽 幾 庸 廾): in each, the
+current parts list names exactly the same top-level pieces cjkvi-ids does
+— either the overlay/opaque flag sits one level deeper than where this
+project's row stops (e.g. 峄's `山,𠬤` matches cjkvi's own `⿰山𠬤` split,
+and doesn't need to follow `𠬤`'s internal `⿱又⿻二丨` any further), or the
+overlay is real but already correctly named at the visible-piece level
+(巫's `工,从` for `⿻工从`, 幾's `戈,𢆶,人` for the nested `⿹⿻戈𢆶人`). 巛/巜
+are the simplest confirmations in the batch: cjkvi reduces each to repeated
+copies of the single opaque stroke-group `𡿨`, and the render shows exactly
+three (巛) and two (巜) of that same curved stroke stacked — parts count
+matches stroke count on sight. 帚 (`彐,冖,巾` for `⿳⿻コ一冖巾`) is the clean
+reference case the chunk's two fixes below are measured against: `彐`
+("snout") is this database's own existing single term for cjkvi's
+`⿻コ一` sub-overlay (a コ-shape and a horizontal stroke sharing a stroke to
+draw one 3-stroke ヨ-like shape), already used correctly here.
+
+**2 real fixes, applied directly to `kanji.db`** (no `data.txt` line exists
+for hanzi rows — `expand_part_terms(conn, [...], char_lookup,
+script_group='zh')`, then `DELETE FROM parts WHERE decomposition_id = ?`
+and re-`INSERT` at sequential positions, same procedure as chunk 1's 乕):
+
+- **帇 (hanzi-5e07)**, `⿻⿻コ一巾`, old parts `一,巾`. The old row kept only
+  the bare `一` and silently dropped the `コ` entirely, flattening the
+  three-stroke ヨ-shaped top (the exact same `⿻コ一` sub-overlay 帚 uses
+  correctly in the same batch) down to a single horizontal line. Rendered
+  `帇` next to `彐`/`一`/`巾` side by side (`/tmp/check2.png`) to confirm:
+  帇's top is visibly the same 3-stroke ヨ shape as 彐, with its bottom
+  stroke merged into 巾's top stroke underneath (the overlay cjkvi is
+  flagging) — not a bare single stroke. New parts: `彐,巾` (expands to
+  `彐, snout, 巾, kerchief`).
+- **庚 (hanzi-5e9a)**, `⿸广⿻⿻コ一人`, old parts `广,一,人` — the identical
+  bug as 帇, one level deeper: the nested `⿻コ一` (same ヨ/彐 shape) sits
+  overlaid with `人` this time instead of `巾`, and the old row again kept
+  only the bare `一` and dropped `コ`. Rendered `庚` next to `彐`/コ/一/人/广
+  (`/tmp/check3.png`) and confirmed the same 3-stroke lattice visible in
+  庚's midsection before it opens into the leg-like strokes at the bottom.
+  New parts: `广,彐,人` (expands to `广, 彐, snout, 人, man`) — built by hand
+  rather than from `expand_part_terms`'s raw output, because a fresh call
+  also picked up a keyword for `广` itself (`wide, extensive, broad`, from
+  a zh-Hans row, `hanzi-5e7f`) that none of 庚's sibling rows using `广`
+  (庸, 廌, both untouched this chunk) carry — that row evidently didn't
+  exist yet when those rows were first seeded. Adding it now would have
+  been a real improvement but a scope-creeping one, and would have left
+  庚 inconsistent with its own siblings for a reason unrelated to this
+  chunk's actual finding; kept `广` bare, unchanged, and limited the diff
+  to inserting `彐,snout` in place of the dropped `一,one`.
+
+Both fixes verified with the full pytest suite after writing (99 passed,
+unaffected) and a direct read-back of the new `parts` rows.
+
+**1 deferred: 廌 (hanzi-5ecc)**, `⿸⿸广⿻コ⿰丨丨⿹②灬`. Marked `needs-render`,
+not because anything is a tofu box (every referenced glyph rendered fine)
+but because the structure itself is genuinely ambiguous at the available
+render resolution: parsed as prefix IDS it's `广` outer-left of [`⿻コ⿰丨丨`]
+outer-left of [`⿹②灬`] — six leaf components (`广 コ 丨 丨 ② 灬`), one of
+which (`②`) is cjkvi's own per-entry placeholder convention
+(CLAUDE.md's "circled numbers are not identifiers" rule) and genuinely
+can't be represented regardless. The old row's `广,丨,丨,灬` reads as a
+plausible simplification (广 roof, two "eye" strokes, 灬 legs for this
+mythical-deer character) that might already be fine, or might be the same
+dropped-コ pattern as 帇/庚 one layer further in — the render
+(`/tmp/zhi_large.png`) wasn't sharp enough at this tool's fixed per-row
+glyph size to tell the two apart with confidence, unlike 帇's and 庚's much
+clearer side-by-side comparisons. Left pending rather than guessed at;
+revisit with a larger single-glyph render or a cjkvi cross-check of what
+`②` itself stands for in this specific entry.
+
+495 total, 275 pending after this chunk (295 before — see
+`hanzi_worklist_next.py --pending-count`).
