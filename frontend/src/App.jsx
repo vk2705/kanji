@@ -108,6 +108,22 @@ export default function App() {
     return () => searchController.current?.abort();
   }, []);
 
+  // The MCP instructions live in index.html's static introduction, below #root.
+  // An incoming /#ai-access link (the kanji pages' footer uses one) is resolved
+  // by the browser before the app has rendered above it, so the jump lands short;
+  // redo it once the app is on screen.
+  useEffect(() => {
+    if (window.location.hash === "#ai-access") {
+      requestAnimationFrame(() => document.getElementById("ai-access")?.scrollIntoView());
+    }
+  }, []);
+
+  // Not a #ai-access link: a hash change fires popstate, which applyUrlState
+  // would treat as Back/Forward and use to re-run the current search.
+  function scrollToMcp() {
+    document.getElementById("ai-access")?.scrollIntoView({ behavior: "smooth" });
+  }
+
   // Pushes a new history entry reflecting the given state, unless we're currently
   // applying a URL ourselves (initial load or a Back/Forward-triggered restore) —
   // otherwise restoring state from `popstate` would immediately re-push it, turning
@@ -438,6 +454,9 @@ export default function App() {
               </button>
             </>
           )}
+          <button className="header-nav-btn" onClick={scrollToMcp}>
+            {tt("mcpLinkBtn")}
+          </button>
           <button className="header-nav-btn" onClick={() => openView("about")}>
             {tt("aboutLinkBtn")}
           </button>

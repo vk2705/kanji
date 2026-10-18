@@ -122,6 +122,7 @@ export const translations = {
     visibilityPrivateLabel: "Private",
 
     aboutLinkBtn: "About",
+    mcpLinkBtn: "AI / MCP",
     aboutHeading: "About this project",
     aboutIntro: "A search tool for Japanese kanji and Chinese hanzi that works by shape. Every character is broken down into named building blocks, so you can find one without knowing how to read it — type \"sun\" + \"moon\" to get 明 (bright), or look a character up by its glyph or by an English or Russian keyword. It covers ~3,000 Japanese kanji and the Chinese simplified and traditional sets, with decompositions, readings and, where they exist, pictures for building blocks most fonts cannot draw.",
     aboutIntro2: "It began as a companion to Remembering the Kanji and still works well as one, but it is no longer limited to that book or to Japanese: registered users can add their own characters, decompositions, names and mnemonic stories, and much of the decomposition data now comes from open structural sources rather than from any one method.",
@@ -263,6 +264,7 @@ export const translations = {
     visibilityPrivateLabel: "Приватно",
 
     aboutLinkBtn: "О проекте",
+    mcpLinkBtn: "ИИ / MCP",
     aboutHeading: "О проекте",
     aboutIntro: "Поиск японских кандзи и китайских иероглифов по форме. Каждый знак разобран на именованные составные части, поэтому его можно найти, не зная чтения: наберите «солнце» + «луна» и получите 明 (яркий), либо ищите по самому знаку или по ключевому слову на английском или русском. Охвачены ~3000 японских кандзи и китайские упрощённые и традиционные наборы — с разборами, чтениями и, где нужно, картинками для тех составных частей, которые большинство шрифтов не рисует.",
     aboutIntro2: "Проект начинался как спутник книги Remembering the Kanji и по-прежнему хорошо ей служит, но больше не ограничен ни этой книгой, ни японским: зарегистрированные пользователи могут добавлять свои знаки, разборы, названия и мнемонические истории, а значительная часть данных о разборах теперь берётся из открытых структурных источников, а не из какого-то одного метода.",
