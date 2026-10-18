@@ -19888,3 +19888,174 @@ a direct read-back of the new `parts` rows, and `get_kanji_detail` showing
 
 495 total, 255 pending after this chunk (275 before — see
 `hanzi_worklist_next.py --pending-count`).
+
+## 2026-10-18 — chunk 108: "key" resolved on 韋's own missing top component (5 hosts); "drop"/"apron"/"stand up"/"vase" investigated and confirmed to be the same blocked class as "ten"
+
+Container came up clean again — repo present, `git push --dry-run origin
+master` confirmed before any work per the task brief's standing check
+(HEAD was detached at `origin/master`'s own tip; checked out `master` and
+fast-forwarded it, not a conflict). Fetched `ids.txt` fresh and installed
+`fonts-noto-cjk`/`fonts-hanazono` (neither persists between firings); a
+venv under `backend/venv` was likewise rebuilt from `requirements.txt` +
+`requirements-dev.txt` (same stale-interpreter reason chunk 107 hit —
+system `python3` has no `fastapi`).
+
+Re-ran `audit_csv_regressions.py` fresh per chunk 107's own "Next" item 5
+rather than trusting its snapshot: **175** flagged, confirming chunk 107's
+closing count exactly. Frequency re-count past "ten"/"fit": "stick" 12,
+"human legs" 12 (skip, pinned false-positive family, chunk 95), "key" 10,
+"drop" 8, "apron"/"vase"/"stand up" 6 each — all matching chunk 107's own
+prediction for where this list lands next.
+
+**"Key" on 偉/違/緯/衛/韓 (frames 1772-1776) — real fix, one new
+primitive.** All five cite `kangxi178`/韋 ("tanned leather, locket") as a
+literal part, and every one of their CSV baselines carries the identical
+tail `..."locket, stick, key, mouth, monocle, sunglasses with one lens
+missing"` — the flattened expansion of 韋's *own* primitive breakdown,
+not the host's. 韋's row here only expanded to `口` + `㐄` (mouth +
+monocle/sunglasses — chunk 95's "winter cow" row), leaving "stick"/"key"
+with nothing to resolve to.`cjkvi-ids` gives 韋 a third, unregistered top
+component this row never cited: `U+97CB 韋 ⿳𫝀口㐄`. `𫝀` (U+2B740, CJK Ext
+C) is exactly the gap chunk 106 left open as a font-coverage dead end
+("needs either a font with real Ext-C coverage or a different kind of
+evidence") — `fonts-hanazono` wasn't installed yet that session. It is
+now, and `fc-list :charset=2B740` shows HanaMinB is the only installed
+face claiming the codepoint. Rendered 𫝀 and 韋 together at 500px (a
+one-off HTML page through the same Chromium binary `render_glyphs.py`
+uses, at a size its own fixed 110px doesn't offer) and the two matched
+stroke-for-stroke: same top horizontal, same diagonal crossing it, same
+hooked right-side descender in exactly the position cjkvi's IDS places
+the component. Not a lookalike substitution — checked 弋/戈/七/九 as
+candidate real-codepoint stand-ins first (CLAUDE.md's "never substitute a
+well-supported lookalike" rule) and none of them carry that right-side
+hook; 𫝀 stays the registered codepoint and gets its own primitive id,
+`prim-hooked-stick` (named for what it draws, not for either borrowed
+Heisig name), with both "stick" and "key" as aliases since both CSV names
+land on every one of the five hosts identically.
+
+Checked blast radius before registering, same discipline as chunk 107's
+`㑒`/"awl" fix: `韋` is a literal part on exactly 6 hosts project-wide —
+the five above plus `rtk2491`/葦 (ditch reed), whose CSV `components`
+column is empty (CLAUDE.md's atomicity rule — Heisig teaches it whole, so
+there is nothing for this fix to regress there). "Stick" already has
+three existing homes (`prim-pipe`, `prim-katakana-no`,
+`prim-right-falling-stroke` — the broad, pinned-false-positive-prone
+family chunk 106 explicitly stepped back from widening further); adding
+it to a fourth, brand-new row scoped to exactly these 6 hosts doesn't
+touch any of those three or their existing blast radius — it is additive,
+not a widening of the family that was rejected.
+
+`make_primitive_images.py` (no `--only` flag passed, which exists and
+should have been used — it rendered and rewrote all 39 primitives
+currently needing a picture, not just the new one; the 38 pre-existing
+PNGs came back byte-different, presumably this container's Chromium/font
+build versus whatever produced the committed ones, so all 38 were
+`git checkout --`-ed back out before committing and only
+`prim-hooked-stick.png` was kept. Worth remembering for next time: pass
+`--only prim-hooked-stick` and this doesn't happen). Looked at the result
+(CLAUDE.md's "look at them" instruction) — matches the zoomed render
+exactly, not a tofu box.
+
+`audit_csv_regressions.py` re-run after the fix: **175 → 170**, all five
+targets cleared completely (both "stick" and "key" resolve now, nothing
+new dropped on any of them).
+
+**Investigated, confirmed as the same blocked class as "ten" on 世
+(chunk 107), left unfixed: "drop" (8 hosts), "apron" (6 hosts via
+`prim-thirty`), "stand up"/"vase" (6 hosts via `rtk462`/立).** All three
+were checked the same way "key" was — cjkvi-ids decomposition fetched,
+candidate shape rendered beside the host and beside the literal glyph the
+dropped concept's own row already carries — and none of them survived:
+
+- **"Drop" is not one shape.** Of the 8 hosts (均, 金, 終, 卑, 碑, 醒, 面,
+  麺), only **one** — `rtk287`/金 — even contains `丷` (kangxi12,
+  "horns"), the one plausible glyph match (cjkvi: `金 = ⿱人⿻王丷`,
+  confirmed by render — 金's middle two strokes are exactly `丷`). The
+  other seven don't share a glyph, a cjkvi overlay, or even a rough
+  stroke-count story with each other (checked `均`'s `⿰土勻` against `勺`
+  "ladle", `卑`'s `⿱丿𤰞` against a bare dot, `醒`/`面`/`終` similarly) —
+  "drop" is scattered mnemonic vocabulary, not a decomposable primitive.
+  Even the one real candidate (`丷` on 金) fails the blast-radius check
+  `key` just passed: `丷` is already a literal part on **42** other hosts
+  (`horns`/`丷` — 従, 傍, 善, 弟, 南, 彦, 撲, 僕, 首, 脊, 前, 立, 帝, 商,
+  曽, 遂, 羊, 半, 釜, 隊, 網, 平, 幸, 兼, 並, 業, 益, 岡, 犀, 渕, 蕨, 鑿,
+  酋, and several `prim-*` rows), only one of which (金 itself) names
+  "drop" in its own CSV — adding the alias globally would make `丷`'s 42
+  other hosts falsely match a "drop" search their own Heisig baseline
+  never claims, the exact failure class chunk 107 already rejected for
+  "ten" on `｜`/prim-pipe (63 hosts). Same wall: needs a per-occurrence
+  primitive identity the schema doesn't have, not attempted lightly.
+- **"Apron" (`帝`/`諦`/`婦`/`掃`/`帰`/`締` family) is narrative, not
+  glyph.** `prim-thirty` (丗) already carries "apron" as an alias from an
+  earlier session — it's just never reachable from any of these hosts.
+  `帝`'s cjkvi (`⿱⿱⿱亠丷冖巾`) and `帚`'s (`⿳彐冖巾`, the clean reference
+  case from an earlier chunk) between them account for every stroke in
+  both families already (`亠`/`丷`/`冖`/`巾` and `彐`/`冖`/`巾`
+  respectively) — there is no unclaimed shape left for `丗` to be. Most
+  likely Heisig's own mnemonic uses "apron" for the cloth (`巾`, already
+  cited) hanging off a crown, not a separate glyph piece.
+- **"Stand up"/"vase" (`幸`/`執/報` and `南`/`楠`/`献` families) is the
+  same mnemonic-not-glyph pattern as `世`'s "ten" (chunk 107).** Both
+  families bottom out in `𢆉` (cjkvi: `幸 = ⿱土𢆉`, `南 = ⿱十⿵冂𢆉`, and
+  `𢆉 = ⿱丷干`), which is *already* fully accounted for by the existing
+  `丷`/`干` parts — exact match, nothing dropped there. `立` (rtk462,
+  "stand up") itself is `⿱⿱亠丷一` — visually close to `𢆉` but not the
+  same shape: rendered side by side at 500px, `立`'s bottom stroke is a
+  flat `一` with no descender, where `幸`/`南`'s bottom is `干`'s
+  vertical-through-a-crossbar, clearly visible in the render. Heisig's
+  mnemonic for "happiness"/`幸` most likely narrates a "vase stood up" on
+  soil without that being a literal citable shape, the same conclusion
+  chunk 107 reached for "ten or twenty years" in `世`'s story.
+
+Full re-verification after the one applied fix: `test_regression_fixes.py`
+**1328/1328** (no pin needed correcting — additive only, no existing part
+changed), `pytest -q` **74 passed**, `audit_overflatten.py` 0,
+`audit_self_reference.py` 0, `audit_radicals.py` 0/0,
+`audit_phantom_parts.py --in-csv-range` **10 across 9** (unchanged — the
+fix touches no phantom-flagged row), `audit_primary_choice.py` **0/71**.
+Frontend: `npm install`, `npm run lint` clean, `npm run build:prod` clean
+(SEO generation: **3227** pages, one more than chunk 107's 3226 — the new
+`prim-hooked-stick` system row gets its own page). `sitemap.xml`
+regenerated with the same hanzi-less shadow DB chunk 107 flagged;
+reverted before committing, not pushed, for the same reason.
+
+Not deployed — no server access from this container, per the task brief.
+A deployer needs `sync_system_data.py` run against the live DB to pick up
+`prim-hooked-stick`'s new row, its `口,㐄`→`𫝀,口,㐄` update on `kangxi178`,
+and `make_primitive_images.py --only prim-hooked-stick` (not a bare
+`make_primitive_images.py` — see the gotcha above) to get the picture
+onto disk there too.
+
+### Next
+
+1. "Drop" (today): confirmed scattered across 7 unrelated shapes plus one
+   blast-radius-blocked candidate (`丷` on 金) — same blocked class as
+   "ten". Not worth another pass without the schema change.
+2. "Apron"/"stand up"/"vase" (today): confirmed narrative-only, CSV
+   concepts with no unclaimed glyph left to assign them to. No further
+   action.
+3. "Ten"/"needle" on 単/戦/禅/弾 (chunk 107), "ten" on 世 alone (chunk
+   107): unchanged, same blocked class as items 1-2 above — all of it
+   now traces back to the same missing schema feature (a per-occurrence
+   primitive identity, not a global alias). Worth a design pass on its
+   own rather than checking yet another frequency-list entry against it.
+4. "Key" on `rtk1767`/`rtk1769` (侯/候, via `ユ`/katakana-yu) and on
+   `rtk1770`/`rtk1771` (決/快, via `夬`/guillotine's own `⿻ユ人` overlay)
+   — investigated today, NOT fixed: `ユ` is a literal part on 5 hosts
+   project-wide, but only 2 of them (侯, 候) actually carry "key" in
+   their own CSV — the other 3 (`為`, `抉`, `訣`) either omit it entirely
+   or are atomic — so this fails the same corroboration check "key" on
+   韋 passed. A different, 2-host-scoped fix (narrower than a blanket
+   `ユ` alias) wasn't attempted this session; worth a dedicated look.
+5. "Key" (10 total) is now resolved on the `韋` family (5 of its 10
+   hosts); the remaining `rtk1767`/`rtk1769`/`rtk1770`/`rtk1771` cluster
+   (item 4 above) is the rest.
+6. Continue the frequency list past today's items once 1-4 are either
+   fixed or formally retired: next candidates after "ten"/"needle"/
+   "drop"/"apron"/"stand up"/"vase" weren't re-surveyed this session —
+   re-run `audit_csv_regressions.py` fresh next time rather than trusting
+   this snapshot, same standing instruction chunk 107 gave this session.
+7. Four still-older dead ends, unchanged: `属`/`嘱`'s "gnats" (chunk 103),
+   `鬲`'s JK anatomy and `両`/`満`'s real decomposition (pre-chunk-100).
+8. The `㫃`/`prim-banner` glyph-mismatch and the
+   `audit_missing_children.py` blind spot (both chunk 102) — still open.
