@@ -19799,3 +19799,92 @@ A deployer needs `sync_system_data.py` run against the live DB to pick up
 7. The `㫃`/`prim-banner` glyph-mismatch and the `audit_missing_children.py`
    blind spot (both chunk 102) — still open, neither touched this
    session.
+
+## 2026-10-18 — hanzi worklist, chunk 7 (daily automation): 19 keep-ours, 1 real fix (antlers)
+
+Unattended daily run against `hanzi_decomposition_worklist.json`
+(`hanzi_worklist_next.py -n 20`), same method as chunk 1 (2026-09-30).
+Pytest baseline checked clean (99 passed) and `kanji.db` backed up
+(`backup_db.py`) before any writes. All 20 hosts rendered in one batch via
+`render_glyphs.py`, then every distinct component glyph referenced in their
+cjkvi-ids readings in a second batch, before any decision.
+
+The component batch's relative-identity check flagged seven requested
+codepoints (`𧰨 𪪷 𠬤 𤰔 𠓜 𢖻 𠃓`) as rendering identically across every
+installed face — genuine tofu, confirmed by eye (all seven came back as the
+same ⊠ placeholder box), distinct from real-but-rare glyphs in the same
+batch (`𦣝`, `㐁` both rendered as real, distinct shapes, just unfamiliar
+ones). All seven turned out to already be this project's own `opaque`
+intermediates, cited literally because cjkvi-ids itself stops there —
+nothing to resolve.
+
+**19 keep-ours** (弐 弔 弗 弬 弻 彖 彗 彛 彧 徭 必 怿 恵 愮 慲 戈 戋 扥 扬): in
+every one, the current parts list already names exactly the top-level
+pieces cjkvi-ids' overlay/opaque reading does. A few notables:
+- `弐`/`弍`/`一` (⿻弍一) looked pixel-identical to the eye in a small
+  side-by-side render, which would normally be worth re-checking at larger
+  size — but `render_glyphs.py`'s own substitution check (which hashes each
+  pair per-face, independent of how big my own eyes can resolve a PNG)
+  reported no match in any checked face, so the two really are distinct and
+  the overlay is exactly what the current `弍,一` parts already say.
+- `弗` (⿻弓⿰丿丨) and `扥` (⿰扌⿻丿七) both flatten a nested overlay straight
+  into its two bare leaf strokes rather than inventing a combined term —
+  correct, because (unlike `彗`/`彛`'s `⿻コ一`, which already has a real,
+  encoded fused glyph in `彐`) there is no single Unicode character for
+  "丿 fused with 丨" or "丿 fused with 七", so bare strokes are the only
+  honest representation. Rendering `弗`/`扥` large confirmed the crossing
+  strokes are visibly there, not merged away.
+- The seven opaque intermediates found to be tofu above are exactly the
+  ones `弬`/`弻`/`彖`/`彛`/`怿`/`恵`/`扬` already cite literally (`𦣝` on
+  `弬` is the one opaque target that turned out *not* to be tofu — a real,
+  if rare, rendered glyph — which doesn't change the verdict: the question
+  for an opaque finding is only whether our row stops where cjkvi-ids does,
+  not what that intermediate looks like).
+
+**1 real fix, applied directly to `kanji.db`** (no `data.txt` line exists
+for hanzi rows — `DELETE FROM parts WHERE decomposition_id = ?` then
+re-`INSERT` at sequential positions):
+
+- **慶 (hanzi-6176)**, `⿸⿸广⿻コ⿰丨丨⿱乛𢖻`, old parts `广,丨,丨,乛,𢖻`. This
+  is the exact same missing-コ bug `帇`/`庚` had (chunk 2, 2026-10-17): the
+  nested `⿻コ⿰丨丨` sub-overlay was flattened down to its bare `丨,丨` and
+  the `コ` silently dropped. Rendered `慶`, `廌` (its still-pending sibling,
+  `hanzi-5ecc`) and `鹿` (`cf. only`) side by side (`/tmp/keisou.png`): all
+  three show a clear forking, zigzag shape in that position — not a plain
+  pair of parallel verticals — below the `广` roof. Cross-checked against
+  this project's own prior work rather than guessing a new name: `鹿`'s
+  **`ja-kanji`** row (`rtk2154`) already made this exact correction, using
+  `prim-antlers` (Heisig's own name for the shape, keyword "antlers",
+  placeholder glyph `?`) in place of raw `丨,丨` — while `鹿`'s own
+  **hanzi** row (`hanzi-9e7f`, still pending, not in today's batch) still
+  has the unfixed `丨,丨`, meaning this bug was already found and fixed once
+  on the RTK side and just never propagated to the hanzi rows sharing the
+  same glyph. `prim-antlers` is scripted `ja-kanji`, not `zh-*`, which could
+  have been a blocker — checked `resolve_alias`'s script-scope fallback
+  first (`database.py`'s `scoped = [...]; if scoped: rows = scoped` else
+  keep the unscoped set): since no `zh`-scripted row carries an "antlers"
+  alias, the lookup falls back to the only match regardless of script, so
+  citing the existing `ja-kanji` primitive from a `zh-Hant` decomposition
+  resolves correctly rather than silently failing — confirmed directly via
+  `search_by_parts(conn, ['antlers'])`, which now returns both `rtk2154` and
+  `hanzi-6176`. New parts: `广,prim-antlers,乛,kwukyel,𢖻` (built by hand,
+  matching `rtk2154`'s own convention of citing `prim-antlers` bare with no
+  trailing keyword, since it has no real character for `expand_part_terms`
+  to find a keyword through). Left `广` bare and `乛,𢖻` untouched — same
+  minimal-diff discipline as chunk 2's `庚` fix, not re-litigating parts of
+  the row this finding didn't flag. `廌` (`hanzi-5ecc`) and `鹿`'s own hanzi
+  row (`hanzi-9e7f`) share the identical `⿻コ⿰丨丨` antler substructure and
+  are both still pending (`廌` already decided `needs-render` for an
+  unrelated reason — its own `②` placeholder — and per this job's rules
+  decided rows stay decided; `鹿`'s hanzi row simply hasn't come up yet) —
+  worth revisiting with this same `prim-antlers` answer whenever either
+  resurfaces in a future chunk, but out of scope to touch pre-emptively
+  today.
+
+Verified with the full pytest suite after writing (99 passed, unaffected),
+a direct read-back of the new `parts` rows, and `get_kanji_detail` showing
+`慶`'s decomposition resolving to `广` (wide, extensive, broad) /
+`prim-antlers` (antlers) / `乛` (kwukyel) with no broken chips.
+
+495 total, 255 pending after this chunk (275 before — see
+`hanzi_worklist_next.py --pending-count`).
