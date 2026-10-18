@@ -234,7 +234,7 @@ this section on the old shared srv.alteon.help box (a domain-root
 
 Every frontend build now runs `backend/generate_seo_pages.py` first. It writes a
 static, crawlable page for every public kanji/hanzi to `/kanji/{id}.html`, including
-its public decomposition, and regenerates the sitemap with those canonical URLs.
+its public decomposition, and regenerates the sitemap (an index at `/sitemap.xml` over `/sitemap-N.xml` chunks of 5,000 URLs, all generated, none committed) with those canonical URLs.
 For example, `https://kanji.alteon.help/kanji/rtk207.html` is the crawlable page for
 the RTK "tree" entry. The output is generated from the live database and deliberately
 is not committed. Rebuild the frontend after any public decomposition change to update

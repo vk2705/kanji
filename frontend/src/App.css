@@ -1131,3 +1131,22 @@ textarea {
     flex-basis: auto;
   }
 }
+
+/* Static introduction in index.html, outside #root (see the comment there):
+   indexed by search engines, and shown to visitors below the app. */
+.site-intro {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px 20px 60px;
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+.site-intro h1 { font-size: 1.5rem; color: var(--text); }
+.site-intro h2 { font-size: 1.15rem; color: var(--text); margin-top: 1.6em; }
+.site-intro h3 { font-size: 1rem; color: var(--text); margin-bottom: 0.3em; }
+.site-intro a { color: var(--accent-hover); }
+.site-intro code { font-size: 0.85em; word-break: break-all; }
+/* index.css's template default stretched #root to a full screen, which put the
+   introduction a whole empty viewport below a short search form. */
+#root { min-height: 0; }

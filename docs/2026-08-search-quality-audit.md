@@ -20059,3 +20059,34 @@ onto disk there too.
    `鬲`'s JK anatomy and `両`/`満`'s real decomposition (pre-chunk-100).
 8. The `㫃`/`prim-banner` glyph-mismatch and the
    `audit_missing_children.py` blind spot (both chunk 102) — still open.
+
+## 2026-10-18 — SEO pages: 2,785 headlines named components that are not in the character
+
+Not a `data.txt` fix: a bug in `backend/generate_seo_pages.py`, the script that
+writes the crawlable `/kanji/{id}.html` pages. Their `<title>`/`<h1>` read
+"明 = 孙 + 月" instead of "明 = 日 + 月": 2,785 of 23,987 pages (1,918 of them
+Japanese), e.g. 縮 = 糸 + 綅 + 宿, 崩 = 山 + 朋 + 伙, 挽 = 扌 + 指 + 免 + 恕.
+That headline is also what Google shows as the result title.
+
+**Cause.** The part-name → glyph table picked among a name's claimants by "a
+row with no frame is a primitive, prefer it". Hanzi rows have no frame either,
+so they outranked RTK rows; and `import_hanzi.py` gives every hanzi its
+tone-stripped pinyin as a search alias, so 孙 (sūn) claimed "sun" and 仔
+claimed "child". The live app never had this bug, because
+`database._resolve_parts_detail` already scopes resolution by the viewed
+kanji's own script; the generator had its own simplified copy of the rule.
+
+**Fix.** Names now resolve per script group (a Japanese page resolves within
+Japanese rows first, a Chinese page within Chinese), and a pinyin
+transliteration ranks below a real name. Checked by regenerating with the old
+and new script and diffing every headline. A few changed headlines now show a
+radical form next to its full form (恣 = 心 + 忄 + 次), because the
+decomposition stores the glyph and the name and they resolve to different rows;
+that is minor and left alone.
+
+Same commit, unrelated to data: the static pages gained prose, links to their
+parts and to the characters that contain them, prev/next frame links and an MCP
+mention; the sitemap became an index over 5,000-URL chunk files (Search Console
+had been reporting the single 3.7 MB file as unreadable); and the home page's
+introduction moved out of `#root`, where React replaced it before Google's
+renderer ever saw it.
