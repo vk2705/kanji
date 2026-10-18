@@ -19,6 +19,7 @@ import database
 
 from mcp.server.mcpserver import MCPServer
 from mcp.server.transport_security import TransportSecuritySettings
+from mcp.types import ToolAnnotations
 
 mcp = MCPServer(
     name="kanji",
@@ -33,6 +34,18 @@ mcp = MCPServer(
 )
 
 
+# Every tool only reads public rows from a local database: no writes, no side
+# effects, same answer for the same input, nothing reached beyond this server.
+# The Claude Connectors Directory requires a title and readOnlyHint on every
+# tool; the other hints say the same thing explicitly.
+READ_ONLY = ToolAnnotations(
+    read_only_hint=True,
+    destructive_hint=False,
+    idempotent_hint=True,
+    open_world_hint=False,
+)
+
+
 def _kanji_summary(row: dict) -> dict:
     return {
         "id": row["id"],
@@ -43,7 +56,7 @@ def _kanji_summary(row: dict) -> dict:
     }
 
 
-@mcp.tool()
+@mcp.tool(title="Search characters by parts", annotations=READ_ONLY)
 def search_by_parts(
     parts: list[str],
     script: str | None = None,
@@ -74,7 +87,7 @@ def search_by_parts(
         conn.close()
 
 
-@mcp.tool()
+@mcp.tool(title="Get a character's decomposition", annotations=READ_ONLY)
 def get_decomposition(kanji_or_id: str) -> dict:
     """Look up one kanji/hanzi by character glyph, id (e.g. "rtk145"), or exact
     keyword/alias, and return its full public decomposition: the character
@@ -104,7 +117,7 @@ def get_decomposition(kanji_or_id: str) -> dict:
         conn.close()
 
 
-@mcp.tool()
+@mcp.tool(title="Search characters by keyword", annotations=READ_ONLY)
 def search_by_text(query: str, script: str | None = None) -> list[dict]:
     """Find kanji/hanzi whose id, keyword, or any alias contains `query` as a
     whole word (e.g. "hat" matches "hat"/"bamboo hat" but not "hate"). This is

@@ -6,6 +6,7 @@ const APK_URL = "https://github.com/vk2705/kanji/raw/master/android/releases/rtk
 const PRIVACY_URL = "privacy.html";
 const CHANGELOG_URL = "https://github.com/vk2705/kanji/blob/master/CHANGELOG.md";
 const BOOK_URL = "https://uhpress.hawaii.edu/title/remembering-the-kanji-1/";
+const MCP_URL = "https://kanjimcp.alteon.help/mcp";
 const PROVENANCE_URL = "https://github.com/vk2705/kanji/blob/master/docs/DATA_SOURCES.md";
 
 export default function AboutPage({ lang, onBack, onHome }) {
@@ -39,6 +40,14 @@ export default function AboutPage({ lang, onBack, onHome }) {
         <a className="about-link" href={CHANGELOG_URL} target="_blank" rel="noreferrer">
           {t(lang, "aboutChangelogLinkLabel")}
         </a>
+      </div>
+
+      <div className="contrib-section">
+        <h3>{t(lang, "aboutMcpHeading")}</h3>
+        <p className="login-hint">{t(lang, "aboutMcpText")}</p>
+        <p className="login-hint">
+          {t(lang, "aboutMcpUrlLabel")} <code>{MCP_URL}</code>
+        </p>
       </div>
 
       <div className="contrib-section">
