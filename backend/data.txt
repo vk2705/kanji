@@ -3161,7 +3161,7 @@ kangxi165:釆:distinguish,claw print,animal tracks:ノ,米
 kangxi171:隶:reach,slave,sieve:⺕,氺
 kangxi129:聿:brush
 kangxi136:舛:oppose,dance,ballerina,dancing legs,sunglasses:夕,㐄
-kangxi178:韋:tanned leather,locket:口,㐄
+kangxi178:韋:tanned leather,locket:𫝀,口,㐄
 kangxi127:耒:plow,christmas tree
 kangxi153:豸:badger,legless insect,skunk
 # 2026-09-30: "stitching"/"patchwork quilt" are heisig-kanjis.csv's own
@@ -3314,6 +3314,31 @@ prim-mao:夌:mao:土,儿,夂
 prim-pup-tent:尞:pup tent:大,日,小
 prim-awl:㑒:awl,fit:亼,口,人
 prim-calling-card:氐:calling card:氏,一
+# 2026-10-18 chunk 108: "key" (and its sibling "stick") on 偉/違/緯/衛/韓
+# (frames 1772-1776, CSV's "...locket, stick, key, mouth, monocle,
+# sunglasses with one lens missing" for every one of them). All five cite
+# kangxi178/韋 ("tanned leather, locket") as a literal part, and 韋's own
+# row only expanded to 口 + 㐄 ("mouth" + "monocle, sunglasses with one
+# lens missing") — the first and last concepts in that chain, leaving
+# "stick"/"key" with nowhere to resolve. cjkvi-ids gives 韋 a third,
+# unregistered top component: `U+97CB 韋 ⿳𫝀口㐄`. 𫝀 (U+2B740, CJK Ext C
+# — chunk 106 left this exact gap open as a font-coverage dead end before
+# `fonts-hanazono` was installed this session) rendered via HanaMinB
+# (`fc-list :charset=2B740` — the only installed face claiming it) next to
+# 韋's own top stroke at 500px (render_glyphs.py's fixed 110px wasn't
+# enough to tell) confirmed an exact stroke-for-stroke match: same
+# horizontal, same diagonal crossing it, same hooked right-side
+# descender — not a lookalike substitution, the real referenced shape.
+# Named for what it draws (a straight stroke plus a hooked one), not
+# invented to fit the two Heisig names. Checked blast radius before
+# registering: 韋 is a literal part on exactly 6 hosts project-wide (the
+# five above plus `rtk2491`/葦, whose CSV components are empty —
+# CLAUDE.md's atomicity rule, no regression possible there), so "stick"
+# joining the already-registered, already-broad `prim-pipe`/
+# `prim-katakana-no`/`prim-right-falling-stroke` "stick" family changes
+# nothing about those — this is a new, narrowly-scoped row, not an
+# addition to theirs.
+prim-hooked-stick:𫝀:stick,key
 # Second batch, 2026-09-09. Same method: Heisig's own name from
 # heisig-kanjis.csv, then confirmed structurally (every CSV kanji listing the
 # name shares exactly this glyph) and by rendering it beside real hosts. Four of
