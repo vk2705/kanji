@@ -20090,3 +20090,79 @@ mention; the sitemap became an index over 5,000-URL chunk files (Search Console
 had been reporting the single 3.7 MB file as unreadable); and the home page's
 introduction moved out of `#root`, where React replaced it before Google's
 renderer ever saw it.
+
+## 2026-10-19 — hanzi worklist: next 20 (19 keep-ours, one real fix — 暵's missing 堇)
+
+Unattended daily run against `hanzi_decomposition_worklist.json`
+(`hanzi_worklist_next.py -n 20`), same method as every prior chunk. Pytest
+baseline checked clean (99 passed) and `kanji.db` backed up (`backup_db.py`)
+before any writes. Two render passes before any decision: all 20 hosts in
+one batch (`拣 择 挿 揷 搖 摇 敖 敝 敷 斤 斥 斲 旸 昚 晝 暚 暪 暵 更 書`), then
+every distinct component glyph referenced in their cjkvi-ids readings in a
+second batch.
+
+The component batch's relative-identity check flagged nine requested
+codepoints (`𫠣 𠬤 𢆍 𫠤 𤰔 𠁁 𠃓 𡗜 𠓜`) as rendering identically across every
+installed face — genuine tofu, confirmed by eye (all nine came back as the
+same ⊠ placeholder). Four of these (`𠬤 𤰔 𠓜 𠃓`) are the same codepoints
+the 2026-10-18 chunk already confirmed tofu; the other five are new sightings
+of the same font-stack gap. None of the nine blocked a decision today — in
+every row that bottoms out at one of them, cjkvi-ids itself stops there too
+(an `opaque` finding, or an `overlay` finding whose nested term is one of
+these), so our row naming the same opaque intermediate is already at the
+evidence ceiling, not a bug.
+
+**19 keep-ours** (拣 择 挿 揷 搖 摇 敖 敝 敷 斤 斥 斲 旸 昚 晝 暚 暪 更 書): in
+every one, the current parts list already names what's actually drawn, at
+the right granularity. A few notables:
+- `敝` (`⿰㡀攵`, `㡀=⿻丷⿻巾八`) and `敷` (`旉` left of `攵`, cjkvi expanding
+  `旉` down to `⿺𤰔丶方`): both `㡀` and `旉` are real, distinct rendered
+  glyphs (not tofu), and rendering them stand-alone next to their hosts
+  (`/tmp/zoom1.png`) confirmed each is the exact shape drawn on the left —
+  the current rows already stop at the right natural whole rather than
+  flattening into cjkvi's deeper stroke-level reading.
+- `搖`/`摇`/`暚` (`䍃=⿱⿴𠂊冫缶`) and `暪` (`㒼=⿱廿⿻巾𠓜`): both `䍃` and `㒼`
+  are likewise real, distinct glyphs, and a side-by-side render
+  (`/tmp/zoom4.png`) confirmed each matches its host's right/left portion
+  exactly — same "named whole beats flattened overlay" pattern.
+- `斤` (opaque, cjkvi stops at `𠂆`): our row already pairs `𠂆` (real,
+  rendered) with `丅` for the bottom stroke, and cjkvi's own reading doesn't
+  reach past `𠂆` either — nothing to improve on.
+- `斥`/`更` (`⿻斤丶` and `⿱一⿻日乂`): both flatten a nested overlay into
+  bare leaf parts rather than inventing a fused term, same as chunk 7's
+  `弗`/`扥` — correct, since there's no single Unicode character for "斤
+  fused with 丶" or "日 fused with 乂" and the render shows the pieces are
+  visibly separate, not merged.
+
+**One real fix, applied directly to `kanji.db`**: **暵 (hanzi-66b5)**,
+`⿰日⿱廿⿻口夫`, old parts `日,廿,口,夫`. cjkvi's own reading flattens this
+the same way it does for 難/漢/艱 (also `廿,口,夫`-style, confirmed by
+querying their rows directly) — but this database's **own** sibling rows for
+the identical shape (謹 `hanzi-8b39`, 勤 `hanzi-52e4`, 槿 `hanzi-69ff`, 瑾
+`hanzi-747e`, 饉 `hanzi-9949`) already cite it as one atomic part, `堇`
+("yellow loam", `hanzi-5807`). Rendered `暵`, `謹`, standalone `堇`, `漢`,
+and `難` together (`/tmp/zoom3.png`): the bottom-right stroke cluster in all
+five is visually identical — same `廿` top, same crossbar, same box, same
+crossing-leg finish — confirming `堇` isn't a lookalike substitution but the
+exact shape already drawn in `暵`. Same reasoning as the 2026-10-18 `慶`
+antlers fix: where this project has already established a named, correctly
+rendered primitive for a shape elsewhere, citing it consistently beats
+re-flattening it into bare strokes just because cjkvi-ids' own IDS entry for
+this particular host happens not to group it. Applied via
+`expand_part_terms(conn, ['日', '堇'], script_group='zh')` →
+`日,sun,堇,yellow loam`, replacing decomposition 8965's 8 old `parts` rows
+with 4 new ones (`DELETE` + re-`INSERT` at sequential positions). `難`
+(`hanzi-96e3`), `漢` (`hanzi-6f22`), and `艱` (`hanzi-8271`) share the exact
+same un-grouped `廿,口,夫`(,`艮`/`隹`/`氵`) pattern and are candidates for the
+identical fix, but none were in today's batch — left untouched, same
+minimal-diff discipline as every prior chunk, worth revisiting if/when they
+come up on their own.
+
+Verified with the full pytest suite after writing (99 passed, unaffected),
+a direct read-back of the new `parts` rows, and `get_kanji_detail` showing
+`暵`'s decomposition resolving to `日` (sun) / `堇` (yellow loam, itself
+expanding to `廿`/`口`/`夫`) with no broken chips; `search_by_parts(conn,
+['yellow loam'])` now returns `hanzi-66b5` alongside its five siblings.
+
+495 total, 235 pending after this chunk (255 before — see
+`hanzi_worklist_next.py --pending-count`).
