@@ -20166,3 +20166,195 @@ expanding to `廿`/`口`/`夫`) with no broken chips; `search_by_parts(conn,
 
 495 total, 235 pending after this chunk (255 before — see
 `hanzi_worklist_next.py --pending-count`).
+
+## 2026-10-19 — "mountain" on 屰's family fixed; "key"/"sun,day"/鳥's "white,dove,one" all investigated, left open
+
+Container came up clean (repo present at its own tip, not detached this time;
+`git push --dry-run origin master` confirmed before any work per the task
+brief's standing check). Fetched `ids.txt` fresh, installed
+`fonts-noto-cjk`/`fonts-hanazono` (neither persists between firings), rebuilt
+`backend/venv` from `requirements.txt` + `requirements-dev.txt` (system
+`python3` is 3.11 here, newer than the 3.9 the brief warns about, but still no
+`fastapi` installed system-wide).
+
+Baseline before any change: `test_regression_fixes.py` **1328/1328**,
+`pytest -q` **74 passed**, `audit_overflatten.py`/`audit_self_reference.py`/
+`audit_radicals.py` all 0, `audit_phantom_parts.py --in-csv-range` **10 across
+9** (identical set to chunk 108 — no drift), `audit_primary_choice.py` **0/71**,
+`audit_csv_regressions.py` **170** (matches chunk 108's closing count exactly).
+
+Picked up item 4 from chunk 108's "Next" ("key" on the 侯/候/決/快 cluster,
+explicitly flagged as worth a dedicated look) and continued down the
+frequency list per item 6.
+
+**"Key" (now 5 hosts: 侯/喉/候/決/快) — investigated further, confirmed
+genuinely blocked, not just under-investigated.** 侯's CSV baseline
+("person; key; dart; drop; heavens") maps cleanly onto its structure
+(`⿰亻⿱ユ矢`, cjkvi-confirmed): 矢 already expands to "drop; heavens" itself
+(its own CSV row), so "key" unambiguously names ユ here — a real, direct,
+non-overlay structural match, unlike 夬's `⿻ユ人` (overlay, doesn't count
+per CLAUDE.md's ⿻ rule). But ユ is also a literal part of `rtk2067`/為
+(`ノ,灬,ユ,丶,勹`) — a decomposition that doesn't match 為's own CSV
+("so; strange building; tail feathers") at all and looks like a stale
+import untouched since this project's early days, but fixing *that* is a
+separate, open-ended investigation (為's real breakdown needs its own
+render-based pass), out of scope for one chunk. Blast-radius check (same
+discipline as the 韋/"key" fix): adding "key" to ユ globally would make
+為 match a "key" search that its own CSV baseline never claims — exactly
+the corroboration failure chunk 108 already found for this family. Checked
+whether 抉/訣's primary decompositions (`人,大,二,扌,ユ` / `言,人,大,二,ユ`)
+could be swapped for their already-present cjkvi-matching alternates
+(`夬,扌` / `夬,言`) to shrink ユ's blast radius first — plausible (both
+primaries look like an over-flattened reading of 夬's own `⿻ユ人`/`⿻𠃍大`
+overlay, the exact anti-pattern CLAUDE.md warns about for ⿻), and both
+hosts are CSV-atomic (empty components column) so the structural alternate
+would be the more defensible primary — but that is itself a second
+unrelated side-investigation, not attempted today. Left open; the schema's
+missing per-occurrence primitive identity (same wall chunk 107/108 hit for
+"ten"/"drop"/"apron"/"stand up") is the real blocker, not a lack of effort.
+
+**"Sun"/"day" on 申's family (5 hosts: 申/伸/神/紳/痩) — new finding, same
+blocked class.** All five trace to a single primitive, `rtk1198`/申
+(`田,｜`), whose CSV baseline is "monkey; sun; day; stick" — "stick"
+already resolves (｜ carries that alias), "monkey" is self-referential
+(申's own secondary alias, reused when it appears inside other frames'
+stories), leaving "sun"/"day" unaccounted. Rendered 申 beside 田 and 日:
+the box inside 申 has a `+`-cross dividing it into four cells, pixel-for-
+pixel matching 田 (rice field), not 日's single center bar — so the
+*current* decomposition (`田,｜`) is the structurally correct one. Checked
+every other host citing 田 literally (`町`/`畑`/`男`/`果`/`細`/`留`/
+40+ others): every single one of them names it "rice field; brains" in
+CSV, never "sun"/"day" — 申 is the *only* exception. This is Heisig
+reusing the "sun"/"day" keyword (taught at frame 12, long before 1198) as
+a mnemonic label for the same already-cited 田 shape in this one frame's
+story, not a second, missing glyph — structurally identical to the
+"apron" (丗) and "stand up"/"vase" (立) dead ends chunk 108 already closed.
+Confirmed, not fixed: adding "sun"/"day" to 田 globally would wrongly
+tag all 40+ other 田-hosts.
+
+**"One" on 網 (netting) — checked, same narrative-only pattern.** 網's
+current parts (`亡,糸,丷,冂`) already structurally match cjkvi's
+`⿰糸罔` → `罔 = 冂+𠅇`, `𠅇 = 䒑(≈丷)+亡` exactly, with every stroke
+accounted for — no room left for a separate "one". Left alone, consistent
+with "apron"'s precedent.
+
+**"Mountain" on 屰's family — real fix, one new alias, no new primitive.**
+3 of 5 hosts reaching this concept (`rtk2109`/逆, `rtk2110`/塑,
+`rtk2111`/遡, frames 2109-2111) trace through `prim-mountain-goat`
+(屰 = 丷 + 屮, cjkvi-confirmed `⿱䒑屮`). CSV lists "mountain goat; horns;
+mountain" as three separate names for this family — "horns" already
+resolves (丷), "mountain goat" is 屰's own compound name, leaving
+"mountain" with nowhere to go. Rendered 屮 (`kangxi45`) beside 山: same
+three-peak silhouette, mirrored/rotated — close enough, and corroborated
+by three independent hosts agreeing, that Heisig reusing his own
+"mountain" keyword (frame 830, far earlier than 2109+) for this visually-
+similar-but-technically-different shape is the likelier reading, the same
+"same mnemonic idea, different codepoint" pattern already catalogued for
+丁/丅, 龶/丰, 戌/戍, 母/毋, ⺕/彐. Checked blast radius before adding:
+`屮` is a literal part on exactly 4 hosts project-wide — the three above
+plus `出`/`芻`/`蕨` (frames 829/2229/2485), all three CSV-*atomic* (empty
+components column — CLAUDE.md's atomicity rule), so adding "mountain"
+contradicts no CSV claim for any of them, unlike the "key"/ユ case this
+session declined for the opposite reason (為's non-atomic CSV row names
+unrelated concepts for the same literal part). Added "mountain" as a
+fourth alias on `kangxi45:屮` (joining "mountain goat with horns missing",
+"sprout", "Radical 45") — additive only, no decomposition touched.
+
+The other 2 of the original 5 "mountain" hits (`rtk2118`/揺, `rtk2119`/謡)
+do **not** come through 屰 at all — checked before assuming they would:
+their own CSV "mountain"/"king" traces to an unrelated primitive (cjkvi:
+`揺 = 扌 + ⿱爫𠙻`, `𠙻` with no further cjkvi breakdown, same unencoded-
+placeholder dead end as 鳥 below) and was left alone.
+
+`audit_csv_regressions.py` re-run after the fix: **170 → 167**, all three
+target hosts (逆/塑/遡) cleared completely.
+
+**鳥 (bird)'s "white; dove; one" — investigated at length, deliberately
+NOT fixed, documented for next time.** 鳥's current decomposition is just
+`灬` (chunk-93-era fix, deliberately de-duplicated against the 16 other
+鳥-containing kanji). CSV baseline "white; dove; one; tail feathers" (灬
+already covers "tail feathers") leaves the whole top of the glyph
+unaccounted. cjkvi gives `鳥 = ⿹⑦灬` — `⑦` is one of the circled-number
+unencoded placeholders CLAUDE.md warns are "per-entry, not identifiers",
+so the structural channel is blind here, same as `能`/`北` in the phantom-
+parts weak section. Rendered the top portion alone at 1400px and beside
+`白`/`自`/`百`, in three different installed faces (Noto Serif CJK JP,
+HanaMin, Noto Sans CJK JP) to rule out a font artifact: it is **not** 百's
+`一` stacked cleanly above `白` (that pattern has a visibly separate full-
+width top stroke, confirmed by rendering 百 itself alongside) — it is
+pixel-for-pixel identical, hook included, to `自` (oneself, frame 36,
+*immediately* before 白 at frame 37), not `白` (which has one fewer
+internal bar). Stroke-count arithmetic was inconclusive either way (白+一+
+灬 = 10, 自+灬 = 10, actual 鳥 = 11; components don't always sum exactly
+across a glyph boundary, so this didn't resolve anything by itself).
+
+Did not add `自` to 鳥's row despite the clean visual match, for one
+specific reason: cjkvi-ids is built to cite a real codepoint wherever one
+genuinely fits, and `自` is about as common and unambiguous a codepoint as
+exists — if it were simply `自`, cjkvi would very likely have written
+`自` instead of reaching for an unencoded placeholder. Its choice not to
+is itself evidence against the match, not just an absence of evidence for
+it, and CSV's own naming ("white"/"dove"/"one", never "self") doesn't
+support `自` either. Rather than resolve that tension by picking a side
+without a render-independent tiebreaker, left it open. **Next session:**
+either find a stroke-order reference or a second independent cjkvi entry
+that uses this exact top-of-鳥 shape with a real codepoint attached (would
+settle it either way), or accept this as a fourth member of the
+opaque-intermediate class and move on — don't re-spend a full session on
+pixel comparison alone a second time without new evidence to bring.
+
+Full re-verification after the one applied fix: `test_regression_fixes.py`
+**1328/1328** (no pin needed correcting — additive-only alias change, no
+decomposition touched), `pytest -q` **74 passed**, `audit_overflatten.py`
+0, `audit_self_reference.py` 0, `audit_radicals.py` 0/0,
+`audit_phantom_parts.py --in-csv-range` **10 across 9** (unchanged — the
+fix touches no phantom-flagged row), `audit_primary_choice.py` **0/71**.
+Frontend: `npm install`, `npm run lint` clean, `npm run build:prod` clean
+(SEO generation: **3227** pages, same count as chunk 108 — an alias-only
+change adds no new system kanji row). Generated `frontend/public/kanji/`
+pages and sitemap are gitignored, confirmed via `git status` before
+committing (only `backend/data.txt` modified).
+
+Not deployed — no server access from this container, per the task brief.
+A deployer needs `sync_system_data.py` run against the live DB to pick up
+`kangxi45`'s new "mountain" alias; no image regeneration needed (no new
+primitive row, no `image_url` change).
+
+### Next
+
+1. "Key" (5 hosts: 侯/喉/候/決/快): confirmed blocked by the same missing
+   per-occurrence-primitive-identity schema gap as "ten"/"drop"/"apron"/
+   "stand up". Two possible unblocks worth a dedicated look before
+   retiring it for good: (a) fix `rtk2067`/為's own decomposition to match
+   its real 6th-ed CSV baseline ("so; strange building; tail feathers")
+   instead of the stale `ノ,灬,ユ,丶,勹` — if 為 stops citing bare ユ, the
+   blast radius for adding "key" to ユ shrinks to just 侯/候's own family
+   (抉/訣's primaries would still need their own fix first, see next
+   point, or excluding them specifically); (b) swap `rtk2373`/抉 and
+   `rtk2749`/訣's primary decomposition for their already-present
+   cjkvi-matching alternates (`夬,扌` / `夬,言`) — both are CSV-atomic, so
+   the structural alternate is the more defensible primary, and doing so
+   removes ユ from their citation entirely. Neither attempted this
+   session; both are scoped, separate side-investigations.
+2. 鳥's "white; dove; one": see above — need a tiebreaker beyond pixel
+   comparison (cjkvi explicitly declined to cite 自 despite looking like a
+   match) before committing either direction.
+3. "Sun"/"day" on 申's family (5 hosts): confirmed narrative-only
+   (Heisig reusing an early keyword for an already-cited 田), same
+   blocked class as "apron"/"stand up". No further action without the
+   schema change.
+4. "One" on 網: confirmed narrative-only, no unclaimed glyph. No further
+   action.
+5. "Mountain" on 揺/謡 (2 hosts): traces to an unrelated, cjkvi-opaque
+   primitive (𠙻) — same class as 鳥's case above, not attempted.
+6. Continue the frequency list past today's items (remaining after
+   today: "stick" 7 — treat with the same caution chunk 106 already
+   applied, "spike" mostly resolves to already-known dead ends 鬲/両/満/
+   汚, "rice field"/"brains" likely already covered via existing aliases,
+   worth a quick re-check rather than assumed). Re-run
+   `audit_csv_regressions.py` fresh next time rather than trusting this
+   snapshot, same standing instruction prior chunks gave.
+7. Four still-older dead ends, unchanged: `属`/`嘱`'s "gnats" (chunk 103),
+   `鬲`'s JK anatomy and `両`/`満`'s real decomposition (pre-chunk-100).
+8. The `㫃`/`prim-banner` glyph-mismatch and the
+   `audit_missing_children.py` blind spot (both chunk 102) — still open.

@@ -21,7 +21,26 @@ prim-hooked-hand:𠂊:bound up
 kangxi162:辶:road:prim130
 kangxi34:夂:walking legs,go slowly
 kangxi43:尢:chihuahua with one human leg,lame
-kangxi45:屮:mountain goat with horns missing,sprout,Radical 45
+# 2026-10-19: added "mountain" alias. CSV baseline for 逆/塑/遡 (frames
+# 2109-2111), reaching 屮 only via prim-mountain-goat (屰 = 丷 + 屮), lists
+# "mountain goat; horns; mountain" as three separate names -- "horns"
+# already resolves (丷), "mountain goat" is 屰's own compound name, leaving
+# "mountain" homeless. Rendered 屮 beside 山: same three-peak silhouette,
+# mirrored/rotated, strong enough resemblance that Heisig reusing the
+# "mountain" keyword here (taught at frame 830, long before 2109+) is the
+# far likelier reading than coincidence. The other 3 hosts citing 屮
+# directly (出/芻/蕨, frames 829/2229/2485) are all CSV-atomic -- empty
+# components column, so adding this alias contradicts no CSV claim for them
+# (CLAUDE.md's atomicity rule), unlike the "key"/ユ case this session ruled
+# out for the exact same reason (為's non-atomic CSV row names unrelated
+# concepts for the same literal ユ part). Checked blast radius: no 4th host
+# of 屮 exists project-wide.
+# Does NOT reach 揺/謡 (2118-2119), whose own "mountain"/"king" trace to an
+# unrelated primitive (𠙻, inside 爫+𠙻) that cjkvi-ids can't see inside
+# either -- same opaque-placeholder class as 鳥's "white/dove/one" (see
+# docs/2026-08-search-quality-audit.md), not attempted this session.
+# audit_csv_regressions.py: clears "mountain" on 3 of 5 target hosts, 170 -> 167.
+kangxi45:屮:mountain goat with horns missing,sprout,mountain,Radical 45
 kangxi47:巛:curving river,Radical 47,flood,river
 kangxi55:廾:two hands
 # 2026-09-30: "mutual"/"broken broom"/"broom*" are the CSV's own names for
