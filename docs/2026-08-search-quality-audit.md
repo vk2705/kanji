@@ -20572,3 +20572,90 @@ primitive row, no `image_url` change).
    `鬲`'s JK anatomy and `両`/`満`'s real decomposition (pre-chunk-100),
    `㫃`/`prim-banner`'s glyph-mismatch and `audit_missing_children.py`'s
    blind spot (chunk 102).
+
+## 2026-10-20 — hanzi worklist: next 20 (12 keep-ours, 1 real fix — 果's 日→田, 7 needs-render)
+
+Unattended daily run against `hanzi_decomposition_worklist.json`
+(`hanzi_worklist_next.py -n 20`), same method as every prior chunk. Found
+the working tree with only the other daily job's unrelated uncommitted
+files present (`docs/decomposition_worklist.json`,
+`docs/kanji_review_coverage.tsv` — not this job's concern per the task
+brief) and neither of this job's two tracked files dirty, so no
+interrupted prior run to investigate. `git pull` needed a merge (two
+incoming commits from the other routine, `backend/data.txt` +
+`docs/2026-08-search-quality-audit.md` — fast-forwarded cleanly, no
+overlap with the files this job writes). Pytest baseline checked clean
+(99 passed) and `kanji.db` backed up (`backup_db.py`) before any writes.
+
+20 rows: 14 `overlay`, 6 `opaque`. Rendered the host plus every distinct
+component glyph referenced in each row's cjkvi-ids reading, in a few
+batches, then zoomed in on individual characters where the batch render
+was too small to judge confidently.
+
+Four referenced component codepoints came back as tofu (confirmed by eye
+against the ⊠ placeholder, not assumed from the charset table) and
+directly blocked a decision: `𤰔` (U+24C14, 曺's top), `𭥴` (U+2D974,
+shared by 曾/會's bottom), `𣎳` (U+233B3, 朮's main body), `𠃓` (U+200D3,
+杨's right side), `𣶒` (U+23D92, 棩's right side). `render_glyphs.py`'s own
+relative-identity check flagged `𤰔`/`𭥴` as rendering pixel-identical
+across every installed face — genuine tofu, not a hidden substitution.
+Recorded `needs-render` for the five hosts these block (曺, 曾, 會, 朮,
+杨, 棩 — six hosts, since 曾 and 會 both depend on `𭥴`) rather than
+guessing at a shape none of this machine's fonts can actually draw.
+A seventh, `栆` (U+6806, a simplified variant of 棗/枣), rendered in a
+visibly different — cursive/calligraphic — style from its own siblings
+`枣`/`棗` in the same batch, suggesting a font-fallback substitution
+rather than a reliable rendering of the standard glyph; also recorded
+`needs-render` rather than trust a stroke reading off a render that may
+itself be lying (the exact failure mode CLAUDE.md's "the render itself
+can lie" section warns about, just the stylistic-substitution flavor of
+it rather than the pixel-identical-tofu flavor).
+
+**12 keep-ours** (曹, 望, 柹, 栃, 棄, 楽, 榣, 樠, 橐, 檃, 櫜, 欫): in each,
+the current parts list already names what's actually drawn, even though
+cjkvi-ids' own reading goes through an overlay or a deeper nested
+expansion to get there. A few notables:
+- `曹`: top renders as two cross-cells with a single shared top bar — the
+  `⿻一曲` overlay in cjkvi's reading is exactly that: `一` fused onto
+  `曲`'s own top stroke, not a separate, cleanly-stacked line. The
+  current `一,曲,日` already names both real pieces.
+- `望`: cleanly renders as `亡` (top-left) + `月` (top-right, unambiguous
+  — two full internal strokes, not a stylized `臣`) + `王` (bottom), no
+  overlap in the modern glyph despite cjkvi's enclosure-heavy historical
+  reading. High-confidence keep-ours.
+- `檃`: its right-hand component `𤔌` (U+2450C) is *also* tofu standalone,
+  but cross-checked by rendering `隱`/`隱`-family siblings that share the
+  same phonetic component and do render — the claw+工 shape is visibly
+  present in both, confirming `𤔌` isn't a lookalike before trusting it
+  as a part, the same "compare against a sibling" check CLAUDE.md
+  prescribes for exactly this situation. `棩`'s `𣶒` got the same
+  treatment (checked against `將`'s `爿`) but stayed inconclusive enough
+  to record `needs-render` instead.
+- `榣`/`樠`: both right-hand components (`䍃`, `㒼`) are real, distinct,
+  non-tofu glyphs, confirmed matching their hosts by rendering `摇`/`遥`
+  (share `䍃`) and `满`/`滿` (share `㒼`) alongside — same "named whole
+  beats flattened overlay" pattern as every prior chunk's majority.
+- `欫`: `𦈢` (U+26222) renders as a real, distinct glyph (not tofu) and
+  visibly matches the left side of the host; `欠` on the right is
+  unambiguous. cjkvi's own deeper reading bottoms out at a `③`
+  placeholder (a per-entry circled-number stand-in, not a citable
+  identifier per CLAUDE.md), so stopping at `𦈢` is already the evidence
+  ceiling, not a shortcut.
+
+**One real fix, applied directly to `kanji.db`**: **果 (hanzi-679c,
+"fruit")**, old parts `日,木`. cjkvi's reading is a plain `⿻日木`
+overlay, no nested expansion — but rendering 果 next to both 日 and 田
+settled it immediately: the top of 果 is unambiguously a 4-cell grid
+(vertical + horizontal cross-divider), matching 田 (field) stroke for
+stroke, not 日's single center bar. The top and 木's own top stroke share
+a line (explaining the `⿻` overlay operator — classic "tree bearing
+round fruit" pictograph), but the shape sitting on top of 木 is 田, not
+日. Applied via `expand_part_terms(conn, ['田', '木'], script_group='zh')`
+→ `田,field, arable land, cultivated,木,tree`, replacing decomposition
+9171's 4 old `parts` rows with 4 new ones (`DELETE` + re-`INSERT` at
+sequential positions, decomposition id/owner/visibility untouched).
+Verified with a direct read-back of the new `parts` rows and the full
+pytest suite after writing (99 passed, unaffected).
+
+495 total, 215 pending after this chunk (235 before — see
+`hanzi_worklist_next.py --pending-count`).
