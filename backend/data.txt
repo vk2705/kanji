@@ -179,7 +179,20 @@ rtk83:有:possess:月,𠂇
 rtk84:賄:bribe:有,貝
 rtk85:貢:tribute:貝,工
 rtk86:項:paragraph:工,頁
-rtk87:刀:sword,dagger,sabre,saber:;ノ,𠃌
+# 2026-10-20: "spear"/"cutlass" added -- both are Heisig's own names for 刀
+# here, each occurring exactly twice in heisig-kanjis.csv and both times
+# paired directly with "sword" in 班's (rtk1315) and 帰's (rtk1316) own
+# components columns -- the only two CSV rows that use either word at all,
+# so no risk of colliding with an unrelated meaning anywhere else in the
+# corpus. 刀 is a literal part on 50 hosts project-wide; none of the other
+# 48 use "spear"/"cutlass" (checked), and 刀's existing "sword,dagger,sabre,
+# saber" aliases are already used this broadly without issue -- two more
+# weapon synonyms in the same family. "spear" already has two other
+# claimants (kangxi62/戈, rtk2789/鑓); multiple claimants per name is
+# already how this project treats e.g. 言/心/虫. Cleared both hosts in
+# audit_csv_regressions.py (班 fully, 帰 still flags the unrelated, already-
+# confirmed-dead-end "apron").
+rtk87:刀:sword,dagger,sabre,saber,spear,cutlass:;ノ,𠃌
 rtk88:刃:blade:刀,丶
 rtk89:切:cut:七,刀
 rtk90:召:seduce,summon:口,刀
@@ -3116,7 +3129,24 @@ rtk3000:鼈:snapping turtle:敝,黽
 # (Finding 1, 2026-08 search-quality audit). Names are the standard public-domain
 # Kangxi radical English names (or, for 艹/厶, the established primitive meaning);
 # not Heisig book text.
-kangxi8:亠:lid,primitive_lid,top hat
+# 2026-10-20: "churchill" and bare "hat" added -- both are Heisig's own names
+# for this exact 亠/"top hat" shape, each occurring exactly once in
+# heisig-kanjis.csv (suggest_heisig_aliases.py --min-hosts 1, below the
+# script's own MIN_HOSTS=3 reliability floor, so verified by hand rather than
+# trusted as a cluster): "churchill" sits immediately next to "top hat" in
+# 壇's (rtk631 = 旦,土,亠,回) own components column, and nowhere else in the
+# CSV -- a one-frame flourish name, same pattern as "fred astaire" above.
+# Bare "hat" is on 製's (rtk448) own components column, next to "system"
+# (制's own name) and the rest of 衣's expansion ("top hat; scarf; cloth;
+# clothes; clothing", 衣 = 亠,𧘇). The script vouched it via rtk447/制
+# (cjkvi support 1.00 -- 制's glyph genuinely is in 製, since 製 = 制 + 衣 --
+# but that only confirms 制 is present, not that "hat" is *its* name): 衣's
+# own CSV row independently lists "top hat" as one of 衣's own names, and
+# that's 亠, already registered here, not 制 or 衣 as a whole. So "hat" is
+# just a shortened echo of "top hat" in this one frame, same row as the
+# existing alias. Confirmed "hat" has no other use anywhere in the CSV (84
+# "*hat*" hits are 81 "top hat" + 2 "bamboo hat" + this 1 bare occurrence).
+kangxi8:亠:lid,primitive_lid,top hat,churchill,hat
 kangxi13:冂:border,down box,hood,belt,glass canopy,glass hood,helmet
 # "crown" added 2026-09-19: Heisig's OWN alternate name for this exact glyph,
 # used in 57 CSV component lists (冗,冥,軍,冠,帝,... plus every host that

@@ -20358,3 +20358,217 @@ primitive row, no `image_url` change).
    `鬲`'s JK anatomy and `両`/`満`'s real decomposition (pre-chunk-100).
 8. The `㫃`/`prim-banner` glyph-mismatch and the
    `audit_missing_children.py` blind spot (both chunk 102) — still open.
+
+## 2026-10-20 — "spear"/"cutlass" on 刀 and "churchill"/"hat" on 亠; `suggest_heisig_aliases.py`'s tail confirmed exhausted at its own reliability floor; five more dead ends recorded
+
+Container came up with the repo already present at master's tip (`git fetch`/
+`git pull --ff-only` reported already up to date), so step 0 was just the
+`git push --dry-run origin master` check — clean, confirmed before any work.
+No venv (`python3 -m venv venv` + `requirements.txt` + `requirements-dev.txt`,
+then `Pillow` separately for a pixel-diff check used later), no fonts
+(`apt-get update` then `fonts-noto-cjk fonts-hanazono`, Noto first), no
+`/tmp/ids.txt` (curled fresh, 88,939 lines). Full step-3 suite against a
+from-scratch `import_data()` before any edit: `test_regression_fixes.py`
+**1328/1328**, `pytest -q` **74 passed**, `audit_overflatten.py`/
+`audit_self_reference.py`/`audit_radicals.py` all 0, `audit_phantom_parts.py
+--in-csv-range` **10 across 9**, `audit_primary_choice.py` **0/71**,
+`audit_csv_regressions.py` **167** — all matching chunk 109's closing numbers
+exactly, no drift.
+
+Checked the task brief's standing `kangxi58` housekeeping item before
+anything else, per the "verify before redoing" discipline chunk 107's own
+entry established: still stale, same as chunk 107 (2026-10-17) and chunk 105
+(2026-10-15) already found — `kangxi58` is `彐` (confirmed by direct `grep`
+of `data.txt`), matching `CJKRadicals.txt`'s radical 58 exactly (confirmed
+via `test_regression_fixes.py`'s own comment citing `58; 2F39; 5F50`); `彑`
+lives at `prim-pigs-head`. Fourth consecutive session confirming this is
+fixed; the brief text itself needs updating by whoever maintains it, not
+something this session can do.
+
+**`suggest_heisig_aliases.py --near 0.8 --all` (the brief's item 2): run
+fresh, and the news is the tail is now genuinely gone at the script's own
+calibrated threshold.** At its default `MIN_HOSTS=3` (`--all`, with or
+without `--near 0.8`) the script now reports **0 matched / 0 ambiguous / 0
+unresolved groups** — every name with three or more corroborating hosts has
+already been placed. That is new since the "~236 left" figure in this log's
+older entries; a long run of chunks has been quietly clearing this list
+chunk by chunk without the running total being re-stated here. Re-ran with
+`--min-hosts 1` (below the script's own documented reliability floor — its
+docstring: "Two names sharing a single host is a coincidence; sharing three
+host sets exactly is not") to see what's left below that bar: **4 matched
+groups, 0 ambiguous, 110 "no name resolves" groups**. Checked all four
+matched groups by hand rather than trusting the script's own vouching at
+this weakened setting, since single-host grouping can't tell two different
+primitives in the same compound apart (worth noting for next time: the
+script correctly flagged one of its own four with `cjkvi support 0.00
+<-- CHECK`, see below — that self-check is doing real work).
+
+**Two real fixes, found by hand-verifying the `--min-hosts 1` output:**
+
+1. **"spear"/"cutlass" on `rtk87`/刀.** The script's own top candidate here
+   was wrong (vouched `rtk2576`/槍 "lance" via "spear", `cjkvi support
+   0.00` — correctly self-flagged `<-- CHECK`, since 槍's glyph isn't in
+   either host at all). Traced it by hand instead: both "spear" and
+   "cutlass" occur in `heisig-kanjis.csv` exactly twice each, always
+   immediately after "sword" in `班`'s (rtk1315) and `帰`'s (rtk1316) own
+   components columns — the *only* two rows using either word anywhere in
+   the CSV, and both cite `刀` (not `槍`) literally. `刀` is a literal part
+   on 50 hosts project-wide; checked none of the other 48 use either word
+   (grep confirms zero other occurrences in the corpus), so this is the
+   same "multiple Heisig names, one shape, no corroboration gap" pattern as
+   `fred astaire`/`｜` and `churchill`/`亠` below, not the contested
+   "key"/`ユ` case (chunks 108-109) where a non-corroborating host's CSV
+   row names *other* concepts for the same part. Added
+   `spear,cutlass` to `rtk87`'s alias list.
+2. **"churchill"/"hat" on `kangxi8`/亠.** "churchill" occurs exactly once
+   in the CSV, immediately next to "top hat" in `壇`'s (rtk631 = `旦,土,
+   亠,回`) own components column and nowhere else — a one-frame flourish
+   name, same shape as `fred astaire`/`｜` (chunk 101-era precedent already
+   in this file). Bare "hat" (distinct from "top hat", which `亠` already
+   carries) occurs exactly once too, on `製`'s (rtk448) own components
+   column — the script vouched it via `rtk447`/制 (`cjkvi support 1.00`,
+   since `制`'s glyph really is inside `製` = `制`+`衣`), but that only
+   confirms `制` is present, not that "hat" is *its* name: `衣`'s own CSV
+   row independently lists "top hat" as one of `衣`'s own names, and that
+   shape is `亠` (already registered), not `制`. So "hat" is a shortened
+   echo of "top hat" misattributed by the script's single-host vouching,
+   not a real match for `制`. Confirmed "hat" has no other use anywhere in
+   the CSV (84 `*hat*` hits split 81 "top hat" + 2 "bamboo hat" + this 1).
+   Added both to `kangxi8`.
+
+`audit_csv_regressions.py` re-run after both fixes: **167 → 166** (by id:
+only `rtk1315`/班 dropped out completely; `rtk1316`/帰 stays flagged, now
+solely for the pre-confirmed "apron" dead end — exactly as predicted before
+making the edit). `churchill`/`hat` don't move this count at all — neither
+`壇` nor `製` was ever flagged by it (zero prior claimants means nothing to
+compare against, same invisibility this log has noted for other
+narrative-only names); they're pure vocabulary-coverage additions in the
+spirit of `suggest_heisig_aliases.py`'s own stated goal, not audit-clearing
+ones.
+
+**Five investigated today, confirmed as dead ends or left open — no
+`data.txt` change for any of them:**
+
+- **"Stick" on `声`/`眉` via `𠃜` (chunk 95's own long-deferred question,
+  "whether `𠃜` itself needs a separate stick sub-part").** Rendered `𠃜`
+  (U+200DC) against `尸` (U+5C38) at 500px: pixel-identical in this font
+  stack. Before trusting that, ran the project's own font-lying check by
+  hand (`fc-list :charset=200dc` — only `HanaMinB` claims this codepoint;
+  `尸` renders via `Noto Serif CJK JP`) and force-rendered `𠃜` in each
+  individual face: Noto and HanaMinA both silently fall back to HanaMinB's
+  glyph for it (neither actually has the codepoint), so every render of
+  `𠃜` available here is really HanaMinB's single design, compared against
+  Noto's `尸` — two different font files independently drawing the same
+  shape, which is real (if not airtight) evidence they *are* the same
+  shape, not a substitution artifact. No available font shows a third
+  stroke beyond what `𠃜`'s existing `尸,一` parts already cover, and
+  `cjkvi-ids` gives `𠃜` as fully atomic (`𠃜→𠃜`, no opinion to check
+  against) — the same "opaque-intermediate" dead end CLAUDE.md already
+  catalogues for `捷`/疌 and `蘭`/柬. Left `𠃜`'s parts unchanged; "stick"
+  stays unreachable for `声`/`眉`, consistent with the blocked-class
+  pattern chunks 107-109 already established for "ten"/"drop"/"apron"/
+  "stand up". This specific question (chunk 95, 108, 109, now this one) is
+  closed for real absent a non-rendering source (a stroke-order reference).
+- **"Box" on `抑`/`仰`/`迎` via `卬`.** Rendered `卬`, `匚` (kangxi22,
+  the existing "box" claimant), and `卩`: `卬`'s left side is a
+  hook/claw-like stroke pair, visually close to `印`'s own left side (both
+  share the circled-placeholder-left `cjkvi` pattern — `卬` = `⿰②卩`,
+  `印` = `⿰③卩`, already flagged in `audit_phantom_parts.py`'s weak
+  section) — nothing like `匚`'s open rectangle. CSV's "box" here is
+  narrative (imagining a box of stamps), not a literal glyph. Confirmed,
+  not fixed.
+- **"Dice" on `番`/`審`/`翻`/`藩` via `釆`.** `番`'s own CSV baseline
+  genuinely says "dice" for this shape (the same "one primitive, multiple
+  Heisig names" pattern as `屰`/"mountain" and `韋`/"key"), but `釆` is a
+  literal part on exactly 3 hosts project-wide and only `番` (plus its
+  children `審`/`翻`/`藩`, reached via recursion) names "dice" — `釈`
+  (rtk2057) cites `釆` too and its own CSV names other things for it
+  ("animal tracks; drop; rice; shaku-hachi; flag; stick") without ever
+  saying "dice", the exact non-corroboration shape chunk 108-109 already
+  rejected for "key"/`ユ` (not the atomic-silence shape that let "mountain"
+  through). Same blocked class as "key"/"ten"/"drop"/"apron"/"stand up" —
+  a per-occurrence identity the schema doesn't have. Confirmed, not fixed.
+- **"Bushel basket"/"hamper" on `甚`/`勘`/`堪` via `其`.** Rendered `甚`
+  beside `其` (its claimed CSV namesake), `甘`, `八`, and `匹`: both share
+  the same `甘`-like top (already `甚`'s own first part), but `甚`'s bottom
+  is a compressed `匹` shape (matching `甚`'s current `甘,匹` parts
+  exactly), while `其`'s bottom is plainly `八` — a different shape, not a
+  literal match. Narrative reuse of `其`'s name, not a shared glyph.
+  Confirmed, not fixed.
+- **"Claw"/"vulture" on `瓜`/`弧`/`孤` via `爪`.** Rendered `瓜` beside
+  `爪`: `瓜`'s outline is a smooth box-with-diagonal, nothing like `爪`'s
+  sharp three-stroke hook/claw mark anywhere in it. `瓜`'s current single
+  part (`厶`) already accounts for what's renderable there. Narrative only.
+  Confirmed, not fixed.
+- **"Arrow" on `求`/`球`/`救`, left open (not confirmed either way).**
+  `cjkvi` gives `求 = ⿺⿻一氺丶` — note the inner `⿻一氺`, an overlay
+  (CLAUDE.md's "not a parts list" operator), which the current `一,氺,丶`
+  decomposition already reads as three flat siblings, potentially the
+  exact flattening bug the overlay rule warns about, independent of the
+  "arrow" question. Rendered `求`/`氺`/`一`/`丶`/`弋` (`kangxi56`, the
+  existing "arrow" claimant) together: couldn't confidently trace `弋`'s
+  diagonal-plus-dot shape through the overlapping strokes at this
+  resolution — genuinely needs disentangling the overlay stroke-by-stroke,
+  which this session's render budget didn't stretch to. Left both the
+  decomposition and the "arrow" alias untouched; worth a dedicated pass,
+  starting from the overlay (not the flat reading) next time.
+
+Full re-verification after the two applied fixes: `test_regression_fixes.py`
+**1328/1328** (no pin needed correcting — both fixes are additive aliases,
+no decomposition shape touched), `pytest -q` **74 passed**,
+`audit_overflatten.py` 0, `audit_self_reference.py` 0, `audit_radicals.py`
+0/0, `audit_phantom_parts.py --in-csv-range` **10 across 9** (unchanged —
+neither fix touches a phantom-flagged row), `audit_primary_choice.py`
+**0/71**. Frontend: `npm install`, `npm run lint` clean, `npm run
+build:prod` clean (SEO generation: **3227** pages, same as chunk 109 — two
+alias-only additions create no new system kanji row).
+
+Not deployed — no server access from this container, per the task brief. A
+deployer needs `sync_system_data.py` run against the live DB to pick up
+`rtk87`'s and `kangxi8`'s new aliases; no image regeneration needed (no new
+primitive row, no `image_url` change).
+
+### Next
+
+1. `suggest_heisig_aliases.py` at its documented default (`MIN_HOSTS=3`) is
+   now at **0/0/0** — genuinely exhausted, not just thin. Don't re-run it
+   at the default expecting new results; its `--min-hosts 1` output (110
+   "no name resolves" groups, mostly single-CSV-occurrence narrative names
+   like today's five dead ends) is the real remaining shape of this list,
+   and each one needs the same by-hand render/corroboration check today's
+   five got, not a blind sweep. Not worth re-surveying from scratch every
+   session — keep a running tally of which of the 110 have been checked
+   instead, the same problem `audit_csv_regressions.py`'s frequency list
+   already has (see item 3).
+2. "Arrow" on `求`/`球`/`救` (today, left open): the real blocker is the
+   `⿻一氺` overlay in `求`'s own `cjkvi` entry, not yet disentangled
+   stroke-by-stroke. Start from that overlay directly next time, not from
+   another flat side-by-side render at the default resolution.
+3. Continue `audit_csv_regressions.py`'s list — 166 left. Re-run it fresh
+   next time rather than trusting this snapshot, same standing instruction
+   every prior chunk has given. Clusters checked and closed as of today:
+   "human legs" (12, pinned false-positive, chunk 95), "key" (韋 family
+   fixed chunk 108; 侯/候/決/快 cluster confirmed blocked, chunks 108-109),
+   "drop"/"apron"/"stand up"/"vase" (chunk 108), "sun"/"day"/"one"/
+   "mountain" on 揺謡 (chunk 109), "box"/"dice"/"bushel basket"/"hamper"/
+   "claw"/"vulture" (today). Untouched and not yet checked: "stream" (3:
+   災巡拶), "house" (3: 確探深), "flowers"/"car" (3: 革靴覇), and whatever
+   `audit_csv_regressions.py`'s fresh re-run surfaces below those.
+4. "Key" on `侯`/`候`/`決`/`快` (chunks 108-109): the two unblocks chunk
+   109 proposed — fixing `rtk2067`/為's stale decomposition, or swapping
+   `rtk2373`/`rtk2749`'s primaries for their cjkvi-matching alternates —
+   remain unattempted. Checked today whether the primary-swap is even safe
+   under CLAUDE.md's data-provenance rule first: `_load_parts_file`
+   (`database.py`) labels position 0 unlabelled ("Heisig's own breakdown")
+   and position 1+ `structural (cjkvi-ids)` by *position*, not by actual
+   source — literally swapping the two clauses in `data.txt` would make a
+   cjkvi-derived breakdown display as if it were Heisig's own, which reads
+   as exactly the misattribution CLAUDE.md's "never attribute data to a
+   source it did not come from" rule warns against. Not attempted for that
+   reason; this needs either a schema change (an explicit source label
+   instead of position-implies-source) or a different kind of fix, not a
+   quiet reordering.
+5. Five still-older dead ends, unchanged: `属`/`嘱`'s "gnats" (chunk 103),
+   `鬲`'s JK anatomy and `両`/`満`'s real decomposition (pre-chunk-100),
+   `㫃`/`prim-banner`'s glyph-mismatch and `audit_missing_children.py`'s
+   blind spot (chunk 102).
