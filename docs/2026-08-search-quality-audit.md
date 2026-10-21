@@ -21154,3 +21154,90 @@ afterward — both still clean.
 
 No production deploy from this session — a deployer needs `git pull` +
 `sync_system_data.py` on prod to pick this up.
+
+## 2026-10-21 — full re-review: frames 101–150
+
+48 keep, 2 fixed. `full_review.py --pending-count`: 2849/3000 pending (was
+2899 at the start of this run). Both fixes were caught by a stroke-count
+mismatch after rendering, not by `audit_weak_evidence.py` (neither trips
+any of its three checks) — Heisig's own CSV components column named the
+right concept in both cases, just under a name he also uses for a
+different, lookalike codepoint.
+
+- **rtk106 貫 fixed (母,貝 → 毌,貝)**: the top was `母` (U+6BCD, "mama", 5
+  strokes including its two interior dots). Rendered beside 貫's real top,
+  they don't match — 貫's top has no dots at all, just two bars crossing a
+  box. cjkvi-ids agrees: `⿱毌貝`, not `⿱母貝`. The real shape is `毌`
+  (U+6BCC), a distinct codepoint from both `母` and `毋` (`kangxi80`,
+  already on record in `data.txt`'s own comment as a 母/毋 "breasts"
+  lookalike pair per CLAUDE.md). Heisig's own components column for 貫
+  just says "mama; mother; breasts" — he doesn't distinguish `毌` from `母`
+  either, the same "one mnemonic name, several codepoints" pattern as
+  龶/丰. Registered a new primitive, `prim-skewer:毌:skewer,mother,breasts`
+  — "mother"/"breasts" kept reachable since that's literally what Heisig
+  calls this shape here, "skewer" added as the distinguishing primary name
+  since 母/毋 already own "mother"/"breasts" as their primary.
+
+  **Shape-family check**: only `rtk674` 慣 ("accustomed") touches this
+  shape among RTK frames, and it already references `貫` directly rather
+  than copying out `母`/`毌` itself, so it inherits the fix with no
+  separate edit. No other RTK frame's cjkvi-ids line contains `毌`.
+
+- **rtk125 光 fixed (⺌,儿 → ⺌,兀)**: `⺌` (small, 3 strokes) + bare `儿`
+  (human legs, 2 strokes) only totals 5 strokes, but 光 is a 6-stroke
+  kanji (`heisig-kanjis.csv`'s own `stroke_count`). The missing stroke is
+  an extra horizontal bar 光's bottom actually draws above the legs:
+  rendered beside 兄 (bare `儿`, no bar) and `兀` (bar + legs), 光's bottom
+  clearly matches `兀`, not 兄's. cjkvi-ids agrees: `⿱⺌兀`. Heisig's own
+  components column says "small; little; human legs" — same conflation as
+  貫/毌, he doesn't distinguish `兀` from `儿`. Registered a new primitive,
+  `prim-stool:兀:stool,human legs` — "human legs" kept reachable as a
+  secondary alias.
+
+  Checked `rtk63` 元 for the same bug, since its cjkvi-ids is also
+  `⿱一兀`: the frame 51–100 chunk (run earlier today) had already reviewed
+  it and kept `二,儿` with the reasoning that cjkvi's deeper cut is the
+  same four strokes, not a disagreement. That reasoning holds up under the
+  stroke-count check that caught 光's bug — 元's stroke count (4) is
+  accounted for exactly either way (`二`+`儿` = 2+2, `一`+`兀` = 1+3), so
+  元's `keep` stands; 光's did not (`⺌`+`儿` = 3+2 = 5 strokes short of
+  光's actual 6), which is the concrete difference between why one needed
+  fixing today and the other didn't.
+
+  **Shape-family check**: `輝 洸 晃 胱 耀` all reference `光` directly
+  rather than copying its parts, so they inherit the fix with no separate
+  edit. No other RTK frame's cjkvi-ids line contains `兀`.
+
+- **rtk112 大 and rtk114 夕 kept, not fixed**: both carry a primary atomic
+  entry (matching Heisig's own empty/self-referential components column)
+  plus a labelled structural alternate off an overlay/enclosure cjkvi
+  reading (`⿻一人` for 大, `⿴𠂊丶` for 夕) — exactly the pattern CLAUDE.md
+  warns about for ⿻/⿴. Rendered both alternates anyway: 大's `一,人` and
+  夕's `丶,𠂊` both visibly correspond to real, distinct strokes in the
+  host (confirmed the same way 亀's 𠂊+电 fix was confirmed), so the
+  existing alternates are kept as legitimate secondary search paths rather
+  than removed — `audit_weak_evidence.py` doesn't flag either because it
+  only checks a host's *primary* decomposition against the overlay rule,
+  and both primaries here are atomic.
+
+- **rtk129 嗅 kept, not fixed despite an empty Heisig column**: "an empty
+  components column is positive evidence of atomicity" is the default, but
+  `嗅`'s existing non-atomic row (`口,臭`) checked out under
+  `audit_weak_evidence.py --host 嗅` — 0 hits on all three traps. cjkvi's
+  `⿰口臭` is a plain left-right split (not an overlay), and "sniff" isn't
+  used as a named whole anywhere else in the CSV, so the usual
+  heisig-atomic trap (he deliberately avoids decomposing a kanji because he
+  wants to reuse it whole elsewhere) doesn't apply here — there's nowhere
+  else "sniff" is reused. Left as the structurally well-supported `口,臭`.
+
+Checked before syncing: `pytest` 104 passed, `audit_radicals.py` clean, and
+`regression_fresh.sh` reported **all 1328 checks pass** on a freshly seeded
+DB after updating the `rtk125` pin (it had pinned `kangxi10`/human-legs as
+reachable through `光`; now `prim-stool`). Applied to this machine's DB
+with `sync_system_data.py` (dry-run first; 2 kanji inserted — the two new
+primitives — 9 aliases added, 2 decompositions replaced). Re-ran `pytest`
+and `audit_radicals.py` against the synced live DB afterward — both still
+clean.
+
+No production deploy from this session — a deployer needs `git pull` +
+`sync_system_data.py` on prod to pick this up.

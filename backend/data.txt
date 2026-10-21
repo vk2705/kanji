@@ -221,7 +221,7 @@ rtk102:女:woman:
 rtk103:好:fond:子,女
 rtk104:如:likeness:口,女
 rtk105:母:mother,breasts:毋
-rtk106:貫:pierce:母,貝
+rtk106:貫:pierce:毌,貝
 rtk107:兄:elder brother:口,儿
 rtk108:呪:spell:兄,口
 rtk109:克:overcome:十,兄
@@ -240,7 +240,7 @@ rtk121:砕:smash:卆,石
 rtk122:砂:sand:石,少
 rtk123:妬:jealous:女,石
 rtk124:削:plane:肖,刀
-rtk125:光:ray:⺌,儿
+rtk125:光:ray:⺌,兀
 rtk126:太:plump:大,丶
 rtk127:器:utensil:口,犬
 rtk128:臭:stinking:自,大
@@ -5331,3 +5331,44 @@ prim-straight-nail:丅:street,nail,spike:一,｜
 # imply are below any primitive this project names), so both stay open,
 # same as chunk 100 left them.
 prim-snare-barred:亐:snare:一,丂
+
+# --- 2026-10-21: full re-review, frames 101-150. Two lookalike-codepoint
+# fixes, both caught by stroke-count mismatch after rendering, not by
+# audit_weak_evidence.py (neither trips any of its three checks).
+#
+# rtk106 貫 "pierce": row used 母 (U+6BCD, "mama", 5 strokes incl. the two
+# interior dots) for the top. Rendered beside 貫's real top, they don't
+# match -- 貫's top has no dots at all, just two crossing bars through a
+# box. cjkvi-ids agrees: 貫 is `⿱毌貝`, not `⿱母貝`. The real shape is 毌
+# (U+6BCC), a distinct codepoint from both 母 and 毋 (kangxi80, already
+# on record as a 母/毋 "breasts" lookalike pair per CLAUDE.md). Heisig's own
+# CSV components for 貫 just say "mama; mother; breasts" -- he doesn't
+# distinguish 毌 from 母 either, same "one mnemonic name, several
+# codepoints" pattern as 龶/丰. New primitive `prim-skewer`, keeping
+# "mother"/"breasts" reachable since that's what Heisig actually calls it
+# here, with "skewer" as the distinguishing primary name (母/毋 already own
+# "mother"/"breasts" as primary). Checked for other hosts: only rtk674
+# 慣 ("accustomed") touches this shape, and it already references 貫
+# directly rather than its own copy of 母/毌, so it inherits the fix with
+# no separate edit.
+prim-skewer:毌:skewer,mother,breasts:
+
+# rtk125 光 "ray": row used bare 儿 (human legs, 2 strokes) under ⺌
+# (small, 3 strokes) -- 5 strokes total, but 光 is a 6-stroke kanji
+# (heisig-kanjis.csv stroke_count). The missing stroke is the extra
+# horizontal bar that 光's bottom actually draws above the legs: rendered
+# beside 兄 (bare 儿, no bar) and 兀 (bar + legs), 光's bottom matches 兀,
+# not 兄's. cjkvi-ids agrees: 光 is `⿱⺌兀`. Heisig's own CSV components
+# say "small; little; human legs" -- same conflation as 貫/毌, he doesn't
+# distinguish 兀 from 儿. New primitive `prim-stool` (its shape: a
+# horizontal bar over two legs), keeping "human legs" reachable as a
+# secondary alias. Checked rtk63 元 (also cjkvi `⿱一兀`, frame 1-50/51-100
+# chunk already reviewed it today and kept "二,儿" with the reasoning that
+# cjkvi's deeper cut is the same four strokes, not a disagreement) --
+# unlike 光, 元's stroke count (4) is accounted for exactly either way
+# (二+儿 = 2+2, 一+兀 = 1+3), so that keep stands; 光's did not (⺌+儿 = 3+2
+# = 5 strokes short of 光's actual 6), which is why this one needed a real
+# fix and 元 didn't. Checked for other hosts: 輝 洸 晃 胱 耀 all reference
+# 光 directly rather than copying its parts, so they inherit the fix with
+# no separate edit. No other RTK frame's cjkvi-ids line contains 兀.
+prim-stool:兀:stool,human legs:

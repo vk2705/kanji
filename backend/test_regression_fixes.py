@@ -96,8 +96,13 @@ EXPECTED_DECOMPOSITIONS = {
     # 光 had a spurious 一+尚 where render shows a plain 小-like top (no
     # box/口 shape at all -- 尚 doesn't belong here) over 儿. The top is
     # ⺌ rather than 小 as of 2026-09-12 -- see the rtk196 note below.
+    # Updated 2026-10-21 (full re-review): bottom is not bare 儿 (kangxi10,
+    # 2 strokes) -- ⺌+儿 only accounts for 5 of 光's 6 strokes. Rendered
+    # beside 兄 (bare 儿) and 兀, 光's bottom matches 兀 (bar + legs, 3
+    # strokes), and cjkvi-ids agrees (⿱⺌兀). New primitive prim-stool;
+    # see data.txt's dated comment for the full writeup.
     "rtk125": {"character": "光", "keyword": "ray",
-               "expected_part_ids": {"kangxi10", "prim-small-radical"}},
+               "expected_part_ids": {"prim-stool", "prim-small-radical"}},
     # 器 used 大 for the center element; render clearly shows 犬(with its
     # extra dot stroke), not plain 大, surrounded by four 口 (deduped to one
     # per the established "no duplicate primitive" convention).

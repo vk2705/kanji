@@ -1757,11 +1757,11 @@
   "heisig_components": "child with arms wrapped up",
   "cjkvi_ids": "⿱乛亅",
   "google_parts": [],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Heisig's components column is mnemonic text ('child with arms wrapped up'), not resolvable part names; no real sub-shapes to name, stays atomic per the CSV row.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk102",
@@ -1772,11 +1772,11 @@
   "heisig_components": "",
   "cjkvi_ids": "女",
   "google_parts": [],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Atomic, empty Heisig column, cjkvi atomic. Matches.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk103",
@@ -1790,11 +1790,11 @@
    "女",
    "子"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "子,女 matches Heisig (woman; child) and cjkvi ⿰女子.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk104",
@@ -1808,11 +1808,11 @@
    "女",
    "口"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "口,女 matches Heisig (woman; mouth) and cjkvi ⿰女口.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk105",
@@ -1823,11 +1823,11 @@
   "heisig_components": "mother; breasts",
   "cjkvi_ids": "母",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Single part 毋 (kangxi80, aliased mother/breasts) is the documented 母/毋 lookalike-trap handling already on record in data.txt's own comment; correct as-is.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk106",
@@ -1838,11 +1838,14 @@
   "heisig_components": "mama; mother; breasts; oyster; shellfish; clam; oyster; eye; animal legs; eight",
   "cjkvi_ids": "⿱毌貝",
   "google_parts": null,
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "毌",
+   "貝"
+  ],
+  "note": "Top was 母 (5 strokes, dotted) but render + cjkvi (⿱毌貝) show 毌 (U+6BCC, undotted, distinct codepoint). New prim-skewer (mother/breasts kept as aliases, Heisig conflates it with 母). rtk674 inherits via its direct 貫 reference.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk107",
@@ -1856,11 +1859,11 @@
    "口",
    "儿"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "口,儿 matches Heisig (mouth; human legs — 'teenager' is 儿's own alt alias, already registered on kangxi10, not a missing third part).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk108",
@@ -1871,11 +1874,11 @@
   "heisig_components": "mouth; elder brother; teenager; mouth; human legs",
   "cjkvi_ids": "⿰口兄",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "兄,口 matches Heisig's recursive expansion (mouth + elder-brother/teenager/mouth/human-legs).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk109",
@@ -1886,11 +1889,11 @@
   "heisig_components": "ten; needle; elder brother; teenager; mouth; human legs",
   "cjkvi_ids": "⿱古儿 ⿱十兄",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "十,兄 matches Heisig and cjkvi's ⿱十兄 alternate reading; the other cjkvi alt ⿱古儿 is a deeper cut of the same shape.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk110",
@@ -1901,11 +1904,11 @@
   "heisig_components": "small",
   "cjkvi_ids": "小",
   "google_parts": [],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Atomic, Heisig's 'components' is just its own alt-name 'small', cjkvi atomic. Matches.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk111",
@@ -1919,11 +1922,11 @@
    "小",
    "丿"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "ノ,小 matches Heisig (little; small; drop) and cjkvi ⿱小丿.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk112",
@@ -1937,11 +1940,11 @@
    "一",
    "人"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Primary atomic matches Heisig's empty column ('St. Bernard' is 大's own alt-name); alternate ;一,人 is a pre-existing labelled structural reading off cjkvi's ⿻一人 (the canonical overlay example in CLAUDE.md) — already reviewed/pinned, left as-is.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk113",
@@ -1955,11 +1958,11 @@
    "夕",
    "夕"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Single 夕 entry is correct — 多 draws two 夕 but search only needs presence once, same convention as 州's single 丶 for three dots.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk114",
@@ -1970,11 +1973,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿴𠂊丶",
   "google_parts": [],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Primary atomic matches Heisig's empty column. Alternate ;丶,𠂊 (⿴𠂊丶 in cjkvi) rendered and confirmed: 𠂊's hook + 丶's dot visibly make up 夕's three strokes, same pattern as 亀's 𠂊+电 fix.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk115",
@@ -1988,11 +1991,11 @@
    "氵",
    "夕"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "水,夕 matches Heisig and cjkvi ⿰氵夕.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk116",
@@ -2006,11 +2009,11 @@
    "夕",
    "卜"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "卜,夕 matches Heisig (evening; magic wand/augury) and cjkvi ⿰夕卜.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk117",
@@ -2024,11 +2027,11 @@
    "夕",
    "口"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "口,夕 matches Heisig (evening; mouth) and cjkvi ⿱夕口.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk118",
@@ -2042,11 +2045,11 @@
    "厂",
    "口"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "厂,口 matches Heisig (cliff; mouth) and cjkvi ⿸丆口.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk119",
@@ -2060,11 +2063,11 @@
    "小",
    "月"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "⺌,月 matches cjkvi's GJ (Japanese-standard) variant ⿱⺌月, consistent with Heisig's spark/candle/small + moon/flesh naming.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk120",
@@ -2078,11 +2081,11 @@
    "石",
    "肖"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "石,肖 matches Heisig's full recursive expansion (stone + resemblance).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk121",
@@ -2097,11 +2100,11 @@
    "九",
    "十"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "卆,石 matches Heisig; 卆 is the coherent primitive (prim-ninety, itself 九,十) preferred over splitting further, per the 'right level, not stroke soup' rule.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk122",
@@ -2115,11 +2118,11 @@
    "石",
    "少"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "石,少 matches Heisig (stone; few) and cjkvi ⿰石少.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk123",
@@ -2133,11 +2136,11 @@
    "女",
    "石"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "女,石 matches Heisig (woman; stone) and cjkvi ⿰女石.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk124",
@@ -2151,11 +2154,11 @@
    "肖",
    "刂"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "肖,刀 matches Heisig; right side renders as 刂 but 刀/刂 are already treated as one term throughout data.txt (則/副/前 etc. all use 刀 for drawn 刂).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk125",
@@ -2169,11 +2172,14 @@
    "小",
    "儿"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "⺌",
+   "兀"
+  ],
+  "note": "⺌+儿 (bare legs) only totals 5 strokes; 光 is 6. Rendered beside 兄 (bare 儿) and 兀 (bar+legs), 光's bottom matches 兀, and cjkvi agrees (⿱⺌兀). New prim-stool (human legs kept as alias, Heisig conflates it with 儿). rtk63 元's similar cjkvi ⿱一兀 was correctly kept as 二,儿 earlier today since its stroke count works out equally either way — 光's didn't. 輝/洸/晃/胱/耀 inherit via their direct 光 reference.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk126",
@@ -2187,11 +2193,11 @@
    "大",
    "丶"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "大,丶 matches Heisig (large; St. Bernard; drop).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk127",
@@ -2208,11 +2214,11 @@
    "口",
    "口"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "口,犬 matches Heisig; render confirms the middle stroke is 犬 (dot visible, GTKV variant) not plain 大. One 口 listed for the four drawn (presence-only convention, same as 多/州).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk128",
@@ -2226,11 +2232,11 @@
    "自",
    "大"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "自,大 matches Heisig; render confirms the bottom is plain 大 (no dot, J variant) not 犬, opposite variant from 器 but each matches its own render.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk129",
@@ -2244,11 +2250,11 @@
    "口",
    "臭"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "口,臭 (non-atomic) checked against audit_weak_evidence.py --host 嗅: 0 hits on all three traps, so the empty-CSV-column default doesn't override here — cjkvi's ⿰口臭 is a plain left-right split, not overlay, and 'sniff' isn't used as a named whole elsewhere.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk130",
@@ -2262,11 +2268,11 @@
    "女",
    "少"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "少,女 matches Heisig (woman; few).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk131",
@@ -2280,11 +2286,11 @@
    "少",
    "目"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "少,目 matches Heisig (few; eye).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk132",
@@ -2299,11 +2305,11 @@
    "日",
    "子"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "子,日,厂 matches Heisig (cliff; sun; child); cjkvi's ⿸厂㫗 enclosure is still a legitimate split (⿸, not an overlay operator).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk133",
@@ -2314,11 +2320,11 @@
   "heisig_components": "large; St. Bernard; can; mouth; street; nail; spike",
   "cjkvi_ids": "⿱大可",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "大,可 matches Heisig (large; can/mouth/street/nail).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk134",
@@ -2329,11 +2335,11 @@
   "heisig_components": "flood",
   "cjkvi_ids": "川",
   "google_parts": [],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Atomic, Heisig's column is just its own alt-name 'flood', cjkvi atomic. Matches.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk135",
@@ -2347,11 +2353,11 @@
    "川",
    "丶"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "川,丶 matches Heisig (stream; drops); single 丶 for the three drawn dots, same presence-only convention as 多/器.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk136",
@@ -2365,11 +2371,11 @@
    "川",
    "頁"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "川,頁 matches Heisig's full recursive expansion.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk137",
@@ -2380,11 +2386,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿲㇇亅⿺乀丿",
   "google_parts": [],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Atomic, empty Heisig column, cjkvi gives no usable split. Matches.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk138",
@@ -2398,11 +2404,11 @@
    "丶",
    "水"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "水,丶 matches Heisig (drop; water).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk139",
@@ -2416,11 +2422,11 @@
    "水",
    "丶"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "水,丶 matches Heisig (drop; water); cjkvi has no decomposition for 永 at all, so Heisig's own breakdown is the only evidence and is trusted.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk140",
@@ -2434,11 +2440,11 @@
    "白",
    "水"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "水,白 matches Heisig (white; water) and cjkvi ⿱白水.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk141",
@@ -2449,11 +2455,11 @@
   "heisig_components": "moon; month; flesh; part of the body; spring; white; dove; water",
   "cjkvi_ids": "⿰月泉[GJK] ⿰⺼泉[T]",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "月,泉 matches Heisig's full recursive expansion.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk142",
@@ -2468,11 +2474,11 @@
    "白",
    "小"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "小,白,厂 matches Heisig exactly — note the bottom of 原's inner stack is 小, not the usual 水/泉 water shape; cjkvi confirms (⿸厂⿱白小).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk143",
@@ -2486,11 +2492,11 @@
    "原",
    "頁"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "原,頁 matches Heisig's full recursive expansion.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk144",
@@ -2504,11 +2510,11 @@
    "水",
    "永"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "水,永 matches Heisig (water; eternity).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk145",
@@ -2522,11 +2528,11 @@
    "水",
    "召"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "召,水 matches Heisig (water; summon).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk146",
@@ -2540,11 +2546,11 @@
    "水",
    "中"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "中,水 matches Heisig (water; in/stick/mouth).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk147",
@@ -2555,11 +2561,11 @@
   "heisig_components": "water; water droplets; water pistol; mediocre; wind; drop",
   "cjkvi_ids": "⿰氵凡",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "水,凡 matches Heisig (water; mediocre/wind/drop).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk148",
@@ -2573,11 +2579,11 @@
    "水",
    "工"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "工,水 matches Heisig (water; craft).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk149",
@@ -2588,11 +2594,11 @@
   "heisig_components": "water; water droplets; water pistol; plump; large; St. Bernard; drop",
   "cjkvi_ids": "⿰氵太",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "水,太 matches Heisig (water; plump).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk150",
@@ -2606,11 +2612,11 @@
    "水",
    "十"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "水,十 matches Heisig (water; ten/needle).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk151",
