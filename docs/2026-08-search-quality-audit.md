@@ -20750,3 +20750,143 @@ since nothing was written.
 
 495 total, 195 pending after this chunk (215 before — see
 `hanzi_worklist_next.py --pending-count`).
+
+## 2026-10-21 — chunk 111: "stream" and "house" clusters cleared (6 hosts); 革's own top component was wrong independent of the "car"/"flowers" question open since session 12
+
+Container came up with the repo present but no venv, no fonts, no
+`/tmp/ids.txt` — same first-boot shape as chunk 110. `git fetch`/`git pull
+--ff-only` reported already up to date; `git push --dry-run origin master`
+clean, confirmed before any work (per the task brief's step 0). Built the
+venv, installed `fonts-noto-cjk fonts-hanazono` (Noto first), curled
+`ids.txt` fresh (88,939 lines). Full step-3 suite against a from-scratch
+`import_data()` before any edit: `test_regression_fixes.py` **1328/1328**,
+`pytest -q` **74 passed**, `audit_overflatten.py`/`audit_self_reference.py`/
+`audit_radicals.py` all 0, `audit_phantom_parts.py --in-csv-range` **10
+across 9**, `audit_primary_choice.py` **0/71**, `audit_csv_regressions.py`
+**166** — matching chunk 110's own closing number exactly, no drift.
+
+Picked up chunk 110's "Next" item 3 verbatim: continue
+`audit_csv_regressions.py`'s list, specifically the three named-but-untouched
+clusters — "stream" (3: 災巡拶), "house" (3: 確探深), "flowers"/"car" (3:
+革靴覇).
+
+**"stream" on 災/巡/拶 (3 hosts, fixed)**: all three already decompose
+through `巛` (kangxi47, "curving river"), and `巛`'s sibling `川`/rtk134
+carries `stream,flood` — but chunk 53 (2026-09-23) only ever added `flood`
+to `巛` itself ("the two are the same river drawn two ways"), never
+`stream`. Rendered `巛` beside `川` and all three hosts
+(`render_glyphs.py`) to confirm the claim still holds today: `巛` is
+unmistakably the cursive-stroke form of `川`'s three verticals, and is
+genuinely the piece drawn in `災`'s top, `巡`'s wavy strokes and `拶`'s
+right-hand top. Added `stream` to `kangxi47`'s alias list alongside
+`flood`/`river` — same reasoning chunk 53 already used for `flood`, just
+finishing the pair.
+
+**"house" on 確/探/深 (3 hosts, fixed)**: all three dropped `house` even
+via recursion. `探`/`深` share `罙` (cjkvi: `⿱㓁木`) on their right side,
+already correctly flattened here into `冖,儿,木` (confirmed by rendering
+`㓁` directly next to `探`/`深` — same roof-with-legs stroke, no dot, not
+the real 5-stroke `穴`/"hole" radical despite `探`'s own CSV token list
+including "hole" — stroke-count checks out too: `探` = 扌3+木4+冖2+儿2 = 11,
+matching its real count, whereas a literal `穴` would overflow it by one
+stroke). `確`'s right side is `隺`/prim-turkey-house (already registered
+chunk-whenever as `冖,隹`), and its CSV baseline literally restates `house`
+as one of the sub-parts of "turkeyhouse" the same way chunk-whenever's note
+already described for `turkey`. In both cases the unresolved concept traces
+to the same `冖` (kangxi14) that chunk 2026-10-03's note already registered
+`miss world`/`paper punch` on, for this exact same roof-with-legs shape, on
+exactly two of these same four hosts (`探`/`深`, alongside `売`/`読`) — and
+that note already explains why `crown` legitimately co-resolves there too
+(the 2026-09-09 ambiguous-term-union fix). `hole` and `house` are simply the
+other two names from the same five-name set (`crown, miss world, paper
+punch, hole, house`) that `探`/`深`'s and `確`'s own CSV rows cite for this
+identical shape, in different combinations across different hosts — exactly
+the pattern this project has hit repeatedly (`turtle` on both `兆`/`丬`,
+`flood` on both `川`/`巛`). Added both `hole` and `house` to `kangxi14`.
+`audit_weak_evidence.py --host 確` and `--host 探` both came back empty on
+all three sections before either change.
+
+**`革`/rtk2041's top component was simply wrong (fixed), independent of the
+"car"/"flowers" question (left open, as it has been since session 12)**:
+investigating `革`/`靴`/`覇`'s "flowers"/"car" drop, found it already flagged
+at line ~1012 of this file (session 12/13, pre-chunk-numbering) as "likely a
+CSV bug, not a `data.txt` regression, out of scope" and never revisited
+since. Rendering `革` next to `廿`(U+5EFF, "twenty"), `艹`(U+8279, "flowers")
+and `廾`(U+5EFE, "two hands", `革`'s current top part) settled a different
+question than the one session 12 left open: `革`'s top is unambiguously
+`廿` — a closed rectangular frame around a double cross, stroke-for-stroke
+matching `廿`'s own render — and not `廾`, which has no enclosing frame at
+all and looks nothing like it. Stroke count confirms it: `廿`(4)+`口`(3)+
+`十`(2) = 9, exactly matching `革`'s real stroke count from the CSV; the old
+`廾`(3)+`口`(3)+`十`(2) = 8 was one short. `廿` is already a registered
+primitive (`rtk1274`, keyword "twenty", used e.g. by `世`/rtk28's own row).
+Replaced `廾` with `廿` in `rtk2041`'s parts — `靴`/`覇` inherit the fix
+automatically since both reference `革` itself, not its flattened strokes.
+Left "car"/"flowers" itself untouched: with only three real visual zones in
+`革` (now `廿`/`口`/`十`) and cjkvi treating `革` as fully atomic (no IDS
+decomposition to corroborate against at all), there's no structural evidence
+either name belongs to any of those three pieces, and nothing today adds to
+session 12's own open suspicion that this is a CSV digitization artifact
+rather than a real Heisig primitive name. Not forcing an alias add without
+evidence, same standard applied throughout this project.
+
+Verified full suite after all three fixes from a single rebuild:
+`test_regression_fixes.py` **1328/1328** (no pin needed correcting — none of
+the three changes touches a pinned decomposition's part *identity* in a way
+any existing pin checks, and `革`'s own shape isn't itself pinned), `pytest
+-q` **74 passed**, `audit_overflatten.py`/`audit_self_reference.py`/
+`audit_radicals.py` all 0, `audit_phantom_parts.py --in-csv-range`
+**10 across 9** (unchanged — none of today's three fixes touches a
+phantom-flagged row), `audit_primary_choice.py` **0/71**,
+`audit_csv_regressions.py` **160** (166 → 160, exactly the 6 stream/house
+hosts; `革`/`靴`/`覇` still flagged for `flowers`/`car` as expected, left
+open). Frontend: `npm install`, `npm run lint` clean, `npm run build:prod`
+clean (SEO generation: **3227** pages, same as chunk 109/110 — no new
+system kanji row from any of today's three fixes).
+
+Not deployed — no server access from this container, per the task brief. A
+deployer needs `sync_system_data.py` run against the live DB to pick up
+`kangxi47`'s, `kangxi14`'s and `rtk2041`'s changed rows; no image
+regeneration needed (no new primitive row, no `image_url` change).
+
+### Next
+
+1. Continue `audit_csv_regressions.py`'s list — 160 left (166 before this
+   chunk, 63 further behind `--via-atomic`). Re-run fresh next time, same
+   standing instruction every prior chunk has given. Untouched and not yet
+   checked, in CSV order: whatever the fresh re-run surfaces after
+   `革`/`靴`/`覇` (still open — "flowers"/"car", see above, likely not
+   fixable without new evidence) — no other named cluster identified yet
+   this chunk; next session should scan the fresh list for the next
+   repeated-host-set cluster rather than working the list host-by-host.
+2. `革`/`靴`/`覇`'s "flowers"/"car": still open. `revisit only if new
+   evidence turns up` — e.g. if `suggest_heisig_aliases.py`'s `--near`
+   output or a future `audit_csv_regressions.py` pass on a *different* kanji
+   turns up another host independently citing "car" or "flowers" for a
+   shape that *does* visually match part of `革`, that would be real
+   corroboration one way or the other. Rendering `革` alone settled the
+   `廾`→`廿` bug but did not settle this — cjkvi gives zero structural
+   signal here (fully atomic), so this stays an editorial judgement call,
+   not a mechanical one.
+3. `suggest_heisig_aliases.py` at its documented default (`MIN_HOSTS=3`) is
+   still genuinely exhausted (confirmed again this chunk by the "house"/
+   "hole" case: both already resolve elsewhere, so this tool's own
+   "resolves to nothing" filter can't and won't catch names like this —
+   confirmed this is a structurally distinct problem from what that tool
+   finds, not a gap in how it's being run). Don't re-run it expecting new
+   results; `audit_csv_regressions.py` is the right tool for the
+   already-resolves-but-to-the-wrong/incomplete-place class, as today's
+   `kangxi14`/`kangxi47` fixes both were.
+4. "Arrow" on `求`/`球`/`救` (chunk 110's own open item, untouched this
+   chunk): the `⿻一氺` overlay in `求`'s own `cjkvi` entry is still not
+   disentangled stroke-by-stroke. Start from that overlay directly.
+5. `kangxi58` (task brief's standing housekeeping item: holds `彑` where
+   `CJKRadicals.txt` says radical 58 is `彐`) — still untouched, same as
+   every chunk back through 105. Renaming an id moves every pin referencing
+   it, which is why it keeps getting deferred in favour of bounded
+   single-cluster work; worth doing as its own dedicated chunk rather than
+   folding into a cluster-fix session.
+6. "Key" on `侯`/`候`/`決`/`快` and the five older dead ends from chunks
+   95-109 (属/嘱's "gnats", 鬲's JK anatomy, 両/満's real decomposition,
+   㫃/prim-banner's glyph-mismatch): all unchanged, not attempted this
+   chunk.
