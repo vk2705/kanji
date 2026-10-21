@@ -41,7 +41,7 @@ kangxi43:尢:chihuahua with one human leg,lame
 # docs/2026-08-search-quality-audit.md), not attempted this session.
 # audit_csv_regressions.py: clears "mountain" on 3 of 5 target hosts, 170 -> 167.
 kangxi45:屮:mountain goat with horns missing,sprout,mountain,Radical 45
-kangxi47:巛:curving river,Radical 47,flood,river
+kangxi47:巛:curving river,Radical 47,flood,river,stream
 kangxi55:廾:two hands
 # 2026-09-30: "mutual"/"broken broom"/"broom*" are the CSV's own names for
 # 彙's top stroke (heisig-kanjis.csv: "broken broom; mutual; crown; fruit;
@@ -2166,7 +2166,7 @@ rtk2037:衰:decline:一,亠,口,𧘇;衣,一,亠
 rtk2038:衷:inmost:衣,十,口;十,口,𧘇
 rtk2039:面:mask:一,丿,囗
 rtk2040:麺:noodles:面,麦
-rtk2041:革:leather:廾,口,十
+rtk2041:革:leather:廿,口,十
 rtk2042:靴:shoes:化,革
 rtk2043:覇:hegemony:革,月,西
 rtk2044:声:voice:士,𠃜
@@ -3169,7 +3169,7 @@ kangxi13:冂:border,down box,hood,belt,glass canopy,glass hood,helmet
 # existing rows already decompose all four through 冖). Rendered the four
 # hosts beside 冖 to confirm the roof-with-legs stroke is really there
 # before adding (render_glyphs.py).
-kangxi14:冖:cover,cloth cover,birdcage,birdhouse,crown,miss world,paper punch
+kangxi14:冖:cover,cloth cover,birdcage,birdhouse,crown,miss world,paper punch,hole,house
 kangxi4:丿:slash,left-falling stroke
 prim-right-falling-stroke:乀:right-falling stroke,stick
 kangxi6:亅:hook,fishhook
