@@ -81,6 +81,11 @@ SLOW = 900
 STEPS = [
     ("review_queue", [PYTHON, str(HERE / "review_queue.py")], FAST),
     ("build_decomp_worklist", [PYTHON, str(HERE / "build_decomp_worklist.py")], SLOW),
+    # build_hanzi_worklist reads this step's --json output, so it has to run
+    # first: the /tmp copy it used to rely on is deleted by tmpfiles after 10
+    # days unused, and this audit was last in the list without --json at all.
+    ("audit_hanzi_weak_evidence", [PYTHON, str(HERE / "audit_hanzi_weak_evidence.py"),
+                                   "--json", "/tmp/hanzi_weak_evidence.json"], SLOW),
     ("build_hanzi_worklist", [PYTHON, str(HERE / "build_hanzi_worklist.py")], SLOW),
     ("audit_radicals", [PYTHON, str(HERE / "audit_radicals.py")], FAST),
     ("audit_self_reference", [PYTHON, str(HERE / "audit_self_reference.py")], SLOW),
@@ -94,7 +99,6 @@ STEPS = [
     ("audit_direct_ref_overlap", [PYTHON, str(HERE / "audit_direct_ref_overlap.py")], SLOW),
     ("audit_primary_choice", [PYTHON, str(HERE / "audit_primary_choice.py"), "--all"], SLOW),
     ("audit_weak_evidence", [PYTHON, str(HERE / "audit_weak_evidence.py")], SLOW),
-    ("audit_hanzi_weak_evidence", [PYTHON, str(HERE / "audit_hanzi_weak_evidence.py")], SLOW),
 ]
 
 
@@ -148,21 +152,40 @@ def run_step(label, argv, timeout, log):
     return f"{label}: {tail} [{elapsed:.0f}s]"
 
 
+# cjkvi-ids is third-party data, not committed, so it lives at /tmp/ids.txt by
+# convention -- and systemd-tmpfiles deletes anything in /tmp unused for 10 days.
+# That is exactly what happened on 2026-10-19: the file aged out, and this job
+# failed three nights running before anyone looked. Re-fetch it instead.
+CJKVI_URL = "https://raw.githubusercontent.com/cjkvi/cjkvi-ids/master/ids.txt"
+
+
+def fetch_cjkvi(path: Path) -> None:
+    import urllib.request
+
+    staged = path.with_suffix(path.suffix + ".part")
+    try:
+        with urllib.request.urlopen(CJKVI_URL, timeout=60) as response:
+            staged.write_bytes(response.read())
+        staged.replace(path)
+        print(f"Fetched cjkvi-ids to {path} ({path.stat().st_size:,} bytes).", file=sys.stderr)
+    except OSError as exc:
+        staged.unlink(missing_ok=True)
+        print(
+            f"CJKVI_IDS data file not found at {path} and re-fetching it from {CJKVI_URL} "
+            f"failed ({exc}) -- most audit steps below need it and will fail. Continuing "
+            "anyway so the few steps that don't need it (review_queue, audit_radicals) "
+            "still run.",
+            file=sys.stderr,
+        )
+
+
 def main():
     LOG_DIR.mkdir(exist_ok=True)
     prune_old_logs()
 
     cjkvi_path = Path(os.environ.get("CJKVI_IDS", "/tmp/ids.txt"))
     if not cjkvi_path.exists():
-        print(
-            f"CJKVI_IDS data file not found at {cjkvi_path} -- most audit steps below "
-            "need it and will fail. It lives outside the repo (third-party cjkvi-ids "
-            "data, not committed) and /tmp can be cleared on reboot; re-fetch it and "
-            "either place it back at that path or set CJKVI_IDS to wherever it lives. "
-            "Continuing anyway so the few steps that don't need it (review_queue, "
-            "audit_radicals) still run.",
-            file=sys.stderr,
-        )
+        fetch_cjkvi(cjkvi_path)
 
     today = datetime.now().strftime("%Y-%m-%d")
     log_path = LOG_DIR / f"daily_review_{today}.log"

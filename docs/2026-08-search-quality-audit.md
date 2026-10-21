@@ -20890,3 +20890,34 @@ regeneration needed (no new primitive row, no `image_url` change).
    95-109 (属/嘱's "gnats", 鬲's JK anatomy, 両/満's real decomposition,
    㫃/prim-banner's glyph-mismatch): all unchanged, not attempted this
    chunk.
+
+## 2026-10-21 — routines: the nightly review was failing, and the kanji worklist had no job at all
+
+Not a data fix: a check of the scheduled routines, at the owner's request.
+
+**`kanji-daily-review` failed on 10-19, 10-20 and 10-21.** Most of its audit
+steps read cjkvi-ids from `/tmp/ids.txt`, and this box's `systemd-tmpfiles`
+deletes anything in `/tmp` unused for 10 days (`q /tmp 1777 root root 10d`).
+The file had been fetched once by hand and never again. `daily_review.py`
+noticed and only printed a warning. It now re-fetches the file when missing.
+The same cleanup had also removed `/tmp/hanzi_weak_evidence.json`, which
+`build_hanzi_worklist` reads; it had only ever worked off a stale copy,
+because the step that produces it ran last and without `--json`. That step
+now runs first, with `--json`.
+
+**The kanji worklist (`docs/decomposition_worklist.json`) has had no routine
+since 10-01.** That day's entry describes the daily job being built and
+tested, but its script, prompt and systemd unit were never committed or
+installed, and the files were gone. The hanzi job's prompt still said a
+separate kanji job was "already running", so nothing flagged the gap: the
+list sat at 544-546 pending for three weeks. Rebuilt as
+`backend/run_kanji_worklist_review.sh` + `backend/kanji_worklist_daily_prompt.md`
++ `kanji-worklist-review.{service,timer}` (12:00 UTC, after the cloud audit
+routine at 09:00 and the hanzi job at 10:00). Its prompt fixes the guardrail
+that stopped the 10-01 run: the nightly rebuild always leaves the worklist
+JSON modified, so that is now expected, and the "previous run died midway"
+signal is an uncommitted `backend/data.txt` instead, which only this job
+edits on this machine.
+
+At 20 rows a day the 546 pending rows take about 28 days. The hanzi worklist
+(195 pending, 20 a day) finishes around 10-31.
