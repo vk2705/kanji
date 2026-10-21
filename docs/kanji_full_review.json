@@ -3520,11 +3520,11 @@
    "宀",
    "肖"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "house+resemblance(肖) matches Heisig comps & cjkvi ⿱宀肖",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk202",
@@ -3538,11 +3538,11 @@
    "宀",
    "女"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "house+woman matches ⿱宀女",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk203",
@@ -3557,11 +3557,11 @@
    "日",
    "女"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "relax(安)+sun(日) matches Heisig comps; cjkvi's 妟 is an unnamed structural midpoint, not a Heisig primitive",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk204",
@@ -3575,11 +3575,11 @@
    "宀",
    "奇"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "house+strange(奇) matches ⿱宀奇",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk205",
@@ -3593,11 +3593,11 @@
    "宀",
    "畐"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "house+畐 matches ⿱宀畐",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk206",
@@ -3611,11 +3611,11 @@
    "貝",
    "宁"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "shellfish+house+nail matches fully-expanded Heisig comps (no coherent 宁 primitive exists in data.txt); audit_weak_evidence clean",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk207",
@@ -3626,11 +3626,11 @@
   "heisig_components": "wood",
   "cjkvi_ids": "木",
   "google_parts": [],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "atomic tree, Heisig teaches it whole, cjkvi atomic",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk208",
@@ -3644,11 +3644,11 @@
    "木",
    "木"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "tree (single-listed per project's no-count convention) matches ⿰木木",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk209",
@@ -3663,11 +3663,11 @@
    "木",
    "木"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "primary=tree alt=tree+grove; CSV components list 'tree; wood' with no counts, matching convention; cjkvi ⿱木林",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk210",
@@ -3681,11 +3681,11 @@
    "木",
    "圭"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "tree+圭 matches ⿰木圭",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk211",
@@ -3699,11 +3699,11 @@
    "木",
    "白"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "white(白)+tree matches ⿰木白",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk212",
@@ -3718,11 +3718,11 @@
    "九",
    "十"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "tree+卆(ninety/baseball) matches ⿰木卆; audit_weak_evidence clean",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk213",
@@ -3733,11 +3733,11 @@
   "heisig_components": "tree; wood; resemblance; spark; candle; small; little; moon; month; flesh; part of the body",
   "cjkvi_ids": "⿰木肖",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "resemblance(肖)+tree matches ⿰木肖",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk214",
@@ -3752,11 +3752,11 @@
    "月",
    "月"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "tree+companion(朋) matches ⿰木朋",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk215",
@@ -3770,11 +3770,11 @@
    "木",
    "口"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "mouth+tree matches ⿱木口",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk216",
@@ -3788,11 +3788,11 @@
    "木",
    "同"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "tree+same(同) matches ⿰木同",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk217",
@@ -3806,11 +3806,11 @@
    "木",
    "直"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "tree+straightaway(直) matches ⿰木直",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk218",
@@ -3824,11 +3824,11 @@
    "木",
    "奇"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "tree+strange(奇) matches ⿰木奇",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk219",
@@ -3842,11 +3842,11 @@
    "木",
    "古"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "old(古)+tree matches ⿰木古",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk220",
@@ -3860,11 +3860,11 @@
    "木",
    "卜"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "magic wand(卜)+tree matches ⿰木卜",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk221",
@@ -3878,11 +3878,11 @@
    "木",
    "寸"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "measure(寸)+tree matches ⿰木寸",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk222",
@@ -3896,11 +3896,11 @@
    "木",
    "目"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "tree+eye(目) matches ⿰木目",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk223",
@@ -3914,11 +3914,11 @@
    "木",
    "几"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "tree+wind(几) matches ⿰木几",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk224",
@@ -3932,11 +3932,11 @@
    "木",
    "一"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "one+tree matches Heisig comps; cjkvi atomic (expected, Heisig splits for mnemonic), render confirms distinct from 未/末",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk225",
@@ -3950,11 +3950,11 @@
    "木",
    "乚"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "fishhook(乙)+tree matches ⿰木乚",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk226",
@@ -3969,11 +3969,11 @@
    "林",
    "日"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cliff(厂)+grove(林)+sun(日) matches cjkvi's compound 𠩵=厂+林 at right level; audit_weak_evidence clean",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk227",
@@ -3987,11 +3987,11 @@
    "安",
    "木"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "relax(安)+tree matches ⿱安木 (TV variant 朩 is a glyph form, not a different primitive)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk228",
@@ -4006,11 +4006,11 @@
    "品",
    "木"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "fire+furniture(喿) matches coherent 喿 primitive, ⿰火喿; audit_weak_evidence clean",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk229",
@@ -4024,11 +4024,11 @@
    "木",
    "一"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "one+tree (short top stroke) matches Heisig comps; cjkvi atomic, render confirms distinct from 末/本",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk230",
@@ -4042,11 +4042,11 @@
    "一",
    "木"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "one+tree (long top stroke) matches Heisig comps; cjkvi atomic, render confirms distinct from 未/本",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk231",
@@ -4060,11 +4060,11 @@
    "日",
    "未"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "sun+not-yet(未) matches ⿰日未",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk232",
@@ -4078,11 +4078,11 @@
    "水",
    "末"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "water+extremity(末) matches ⿰氵末; 水 used as primitive name regardless of radical glyph form",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk233",
@@ -4096,11 +4096,11 @@
    "口",
    "未"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "mouth+not-yet(未) matches ⿰口未",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk234",
@@ -4114,11 +4114,11 @@
    "女",
    "未"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "woman+not-yet(未) matches ⿰女未",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk235",
@@ -4129,11 +4129,11 @@
   "heisig_components": "vermillion; drop; not yet; one; tree; wood",
   "cjkvi_ids": "朱",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "not-yet(未)+drop(丶) matches Heisig comps; cjkvi atomic (expected)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk236",
@@ -4147,11 +4147,11 @@
    "木",
    "朱"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "tree+vermilion(朱) matches ⿰木朱",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk237",
@@ -4165,11 +4165,11 @@
    "艹",
    "右"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "flowers(艹)+right(右) matches ⿱艹右",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk238",
@@ -4183,11 +4183,11 @@
    "艹",
    "早"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "flowers(艹)+early(早) matches ⿱艹早",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk239",
@@ -4201,11 +4201,11 @@
    "艹",
    "古"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "flowers(艹)+old(古) matches ⿱艹古",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk240",
@@ -4219,11 +4219,11 @@
    "艹",
    "可"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "flowers(艹)+can(可) matches ⿱艹可",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk241",
@@ -4238,11 +4238,11 @@
    "艹",
    "見"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "house(宀)+flowers(艹)+see(見) matches Heisig's non-coherent naming; cjkvi's 莧 isn't a Heisig primitive so splitting to subparts is correct; audit_weak_evidence clean",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk242",
@@ -4253,11 +4253,11 @@
   "heisig_components": "flowers; water; water droplets; water pistol; acupuncturist; specialty; drop; ten; needle; rice field; brains; glue",
   "cjkvi_ids": "⿱艹溥[GT] ⿱艹⿰氵⿱⿺𤰔丶寸[JK]",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "flowers(艹)+water(水)+尃(acupuncturist) at coherent level; audit_weak_evidence's ⿻ flag is inside 尃's own internal structure (𤰔), not decomposed in this row, so not actionable",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk243",
@@ -4272,11 +4272,11 @@
    "世",
    "木"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "flowers(艹)+枼(Tarzan) matches ⿱艹枼ちゃ coherent level",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk244",
@@ -4290,11 +4290,11 @@
    "木",
    "莫"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "tree+莫(graveyard) matches ⿰木莫 coherent level",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk245",
@@ -4308,11 +4308,11 @@
    "水",
    "莫"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "water+莫(graveyard) matches ⿰氵莫 coherent level",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk246",
@@ -4326,11 +4326,11 @@
    "莫",
    "土"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "莫(graveyard)+soil(土) matches ⿱莫土 coherent level",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk247",
@@ -4344,11 +4344,11 @@
    "莫",
    "日"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "莫(graveyard)+sun(日) matches ⿱莫日 coherent level",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk248",
@@ -4359,11 +4359,11 @@
   "heisig_components": "moon; month; flesh; part of the body; graveyard; flowers; sun; day; large; St. Bernard",
   "cjkvi_ids": "⿰月莫[GJK] ⿰⺼莫[T]",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "moon/flesh(月)+莫(graveyard) matches ⿰月莫 coherent level",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk249",
@@ -4377,11 +4377,11 @@
    "艹",
    "田"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "rice-field(田)+flowers(艹) matches ⿱艹田",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk250",
@@ -4392,11 +4392,11 @@
   "heisig_components": "turtle",
   "cjkvi_ids": "兆",
   "google_parts": [],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "atomic, self-identical with its own primitive name 'turtle', cjkvi atomic",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk251",

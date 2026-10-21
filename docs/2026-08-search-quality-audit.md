@@ -21312,3 +21312,59 @@ against the synced live DB afterward — both still clean.
 
 No production deploy from this session — a deployer needs `git pull` +
 `sync_system_data.py` on prod to pick this up.
+
+## 2026-10-21 — full re-review: frames 201–250
+
+50 kept, 0 fixed, 0 needs-render. `full_review.py --pending-count` now
+2749/3000.
+
+Rendered all 50 host kanji and every part term in their rows
+(`render_glyphs.py`, two batches: `/tmp/batch1_kanji.png` for the 50 hosts,
+`/tmp/batch1_parts.png` for 43 distinct parts) — nothing rendered as tofu or
+looked like a font substitution. Every row's parts matched both Heisig's
+`components` column (fully expanded) and cjkvi-ids' IDS, at the same level
+this file has preferred all along: a coherent Heisig-named primitive over
+its own strokes (`莫` for the five frames 244–248 that use it, `喿` for 燥,
+`尃` for 薄, `枼` for 葉, `卆` for 枠), not the fully-flattened CSV list.
+
+Ran `audit_weak_evidence.py --host` on the six rows with any reason for
+hesitation — the overlay/enclosure-operator or multi-variant cjkvi entries,
+or ones with no Google hint shown: 薄, 暦, 寛, 燥, 枠, 貯. Five came back
+completely clean (0 hits in all three categories). 薄 flagged one
+`not-a-parts-list` hit: cjkvi's deep IDS for `薄` goes `⿱艹⿰氵⿱⿺𤰔丶寸` with
+`𤰔=⿻一由[JK]` — an overlay operator — but that overlay is buried inside
+`尃`'s *own* internal structure, three levels below what this row actually
+decomposes to (`艹,水,尃`). We never ask cjkvi to tell us what's inside `尃`
+here — we use it as its own coherent primitive — so the flag doesn't reach
+anything this row claims. Not actionable, kept.
+
+Also specifically checked:
+- **rtk206 貯** (`丁,貝,宀`, i.e. house+nail rather than a single `宁`
+  primitive): confirmed no row anywhere in `data.txt` uses `宁` as a named
+  primitive, and the CSV's fully-expanded components (`house; street; nail;
+  spike`) name exactly `宀`+`丁`, not a coherent `宁` — Heisig teaches this
+  shape split, so the existing row is already at the right level.
+- **rtk208 林 / rtk209 森** (`木` listed once, not twice/thrice): this
+  project doesn't encode primitive multiplicity — a part's presence is
+  boolean for search — and the CSV components column for both rows is
+  literally `tree; wood` with no count either, confirming "list the
+  primitive once" is the established convention here, not a gap. 森's
+  labelled alternate (`木,林`) also still matches cjkvi's `⿱木林`.
+- **rtk224 本 / rtk229 未 / rtk230 末**: rendered side by side — the three
+  differ only in the top stroke's length relative to the tree's branches
+  (本 adds a full crossing line near the base instead), and all three
+  render as distinct, correctly-assigned codepoints with no lookalike
+  substitution.
+- **rtk241 寛** (`見,宀,艹`, not cjkvi's coherent `莧`): `莧` isn't a name
+  Heisig uses anywhere in the CSV, so splitting to its own subparts
+  (house+flowers+see) is the correct level, not under-decomposition.
+
+No shape-family follow-ups — no fixes were made this session, so nothing to
+propagate.
+
+Checked before and after (no edits were made, so this is a single baseline):
+`pytest` 104 passed, `regression_fresh.sh` reported **all 1328 checks pass**
+on a freshly seeded DB, `audit_radicals.py` clean (0 undefined part terms).
+No sync needed since `data.txt` didn't change.
+
+No production deploy from this session — nothing changed to deploy.
