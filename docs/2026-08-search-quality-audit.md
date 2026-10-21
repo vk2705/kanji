@@ -21241,3 +21241,74 @@ clean.
 
 No production deploy from this session — a deployer needs `git pull` +
 `sync_system_data.py` on prod to pick this up.
+
+## 2026-10-21 — full re-review: frames 151–200
+
+49 keep, 1 fixed. `full_review.py --pending-count`: 2799/3000 pending (was
+2849 at the start of this run).
+
+- **rtk185 里 fixed (atomic + cjkvi-alt `一,甲` → `田,土`)**: the existing
+  row was atomic (Heisig's own primary reading) with a labelled structural
+  alternate `一,甲`, sourced from cjkvi-ids' `⿱⿻甲一一` / `⿻甲二` — both of
+  which use the `⿻` overlay operator, which per CLAUDE.md's rule is not a
+  parts list. Rendered beside 甲: 甲's defining feature is a vertical stroke
+  that extends *below* its box; 里's top has no such descender, it is a
+  plain closed box with a cross inside, i.e. `田`, not `甲`. Frame 185's own
+  CSV `components` column (`computer; rice field; brains; soil; dirt;
+  ground`) isn't actually empty, but it isn't a real list either — the
+  Heisig-side ambiguity here is that `computer` is 里's *own* 5th-edition
+  keyword, included by self-reference the same way `土`'s own CSV row lists
+  itself as `dirt; ground`. Stripped of that noise, the remaining two
+  groups are exactly `田`'s keyword set (`rice field; brains`, rtk14's own
+  aliases) followed by `土`'s (`soil; dirt; ground`, rtk161's own) — Heisig's
+  real reading is 田 over 土, the textbook etymology, not `一,甲`.
+  `audit_weak_evidence.py --host 里` doesn't flag this row (0 hits in all
+  three categories) because none of its three checks are built to catch
+  "the kept alternate doesn't survive a render" — this one needed the
+  render directly.
+
+  **Shape-family check**: no other row in `data.txt` decomposes 里's
+  internals — every other frame using it (`黒 理 裏 童 野 重 狸 纏 鍾 哩 浬
+  裡` etc.) already treats it as an atomic primitive by its own keyword, so
+  there is nothing else to fix.
+
+- **rtk166 填, rtk172 均 — checked closely, kept**: 填's CSV `components`
+  column is empty, which is usually positive evidence of atomicity, but
+  `audit_weak_evidence.py --host 填` returns 0 hits and 填 is never used as
+  a named whole anywhere else in the CSV (the actual precondition for that
+  rule, per 冊/柵) — so the existing `土,真` stands, backed by a clean
+  left-right render and cjkvi's plain `⿰土真`. 均's Heisig expansion
+  (`soil; dirt; ground; ladle; drop`) superficially suggests the primitive
+  `勺` ("ladle" = 丶+勹, a single dot), but rendered side by side with `勺`
+  and `匀`/`勻`, 均's right side unambiguously has *two* internal strokes
+  like `匀`/`勻`, not one like `勺` — matching the existing row `土,勹,二`
+  and cjkvi's `⿰土匀[G]`/`⿰土勻[TJKV]` one level further. Kept as-is; this
+  is a case where trusting the render over the CSV text was the right call.
+
+- **rtk192 同, rtk195 向, rtk196 尚 — re-confirmed, not re-litigated**: all
+  three already carry the `prim-alien:冋` fix from the 2026-09-20 session
+  (`冋` = `冂`+`口`, named "alien" in Heisig's own text for 向/尚). Checked
+  against today's renders and cjkvi (`⿵𠔼口`, `⿵⿱丿冂口`, `⿱⺌冋`) — all
+  still correct, kept.
+
+- **rtk161 土, rtk173 火, rtk167 圭, rtk174 炎 — doubled/self-referential
+  shapes, kept**: 土 and 火 are atomic with a labelled cjkvi alternate (the
+  same pattern as 大/夕 in the 101–150 chunk); 圭 (`⿱土土`) and 炎
+  (`⿱火火`) are each a doubled primitive listed once, per this file's
+  existing convention for doubled shapes, not a missing second occurrence.
+
+Remaining 44 rows (151–160, 162–165, 168–171, 175–184, 186–191, 193–194,
+197–200) were straightforward 氵/土/火/里/宀-radical compounds: each
+rendered cleanly, matched cjkvi-ids and Heisig's components column exactly,
+and needed no further digging.
+
+Checked before syncing: `pytest` 104 passed, `audit_radicals.py` clean, and
+`regression_fresh.sh` reported **all 1328 checks pass** on a freshly seeded
+DB (no pin referenced rtk185's old decomposition, so none needed updating).
+Applied to this machine's DB with `sync_system_data.py` (dry-run first; 0
+kanji inserted/updated, 0 aliases changed, 1 decomposition created / 1
+removed — exactly the rtk185 swap). Re-ran `pytest` and `audit_radicals.py`
+against the synced live DB afterward — both still clean.
+
+No production deploy from this session — a deployer needs `git pull` +
+`sync_system_data.py` on prod to pick this up.

@@ -300,7 +300,17 @@ rtk181:点:spot:占,灬
 rtk182:照:illuminate:昭,灬
 rtk183:魚:fish:𠂊,田,灬
 rtk184:漁:fishing:水,魚
-rtk185:里:ri,computer:;一,甲
+# 2026-10-21 full re-review: was atomic with a cjkvi-sourced alt "一,甲" (from
+# cjkvi's overlay IDS ⿻甲一/⿻甲二, which per CLAUDE.md's ⿻ rule is not a parts
+# list). Rendered, 里's top is a closed box+cross with no descender -- 田, not
+# 甲 (which extends a stroke below its box; see rtk1196 岬/rtk1195 押). Frame
+# 185's own CSV components field, after stripping the self-reference noise
+# ("computer" is 里's own 5th-ed keyword), spells out exactly 田's keyword set
+# ("rice field; brains") then 土's ("soil; dirt; ground") -- Heisig's own
+# reading is 田 over 土, the standard etymology. No other row decomposes 里's
+# internals; every other host using it (黒 理 裏 重 童 etc.) already treats it
+# as an atomic primitive by its own keyword, so no shape-family follow-up.
+rtk185:里:ri,computer:田,土
 rtk186:黒:black:里,灬
 rtk187:墨:black ink:土,黒
 rtk188:鯉:carp:魚,里
