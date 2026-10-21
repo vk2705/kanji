@@ -1161,3 +1161,4 @@ textarea {
 .history-meta { color: var(--text-muted); font-size: 0.82rem; }
 .history-meta a { color: var(--text-muted); }
 .history-note { color: var(--text-muted); font-size: 0.82rem; margin-top: 2px; }
+.history-reviews, .history-versions { text-align: left; }
