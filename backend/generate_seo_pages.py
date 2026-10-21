@@ -45,7 +45,7 @@ ATTRIBUTION = f"""      <p>Frame numbers and many building-block names follow
         <a href="https://github.com/vk2705/kanji/blob/master/docs/DATA_SOURCES.md">Full data
         provenance</a>.</p>
       <p>AI assistants can query the same data: a free, read-only
-        <a href="/#ai-access">MCP server</a> at <code>{MCP_URL}</code> offers search by parts,
+        <a href="/guide/#ai-access">MCP server</a> at <code>{MCP_URL}</code> offers search by parts,
         decomposition lookup and keyword search.</p>
 """
 
@@ -609,7 +609,7 @@ def generate(db_path: Path, output_dir: Path, sitemap_path: Path) -> int:
                 render_page(entry, entries_by_id), encoding="utf-8"
             )
         hub_urls = write_hubs(output_dir, entries)
-        urls = [f"{SITE_URL}/", *hub_urls, f"{SITE_URL}/privacy.html"] + [
+        urls = [f"{SITE_URL}/", f"{SITE_URL}/guide/", *hub_urls, f"{SITE_URL}/privacy.html"] + [
             page_url(entry["id"]) for entry in entries if has_content(entry)
         ]
         chunk_files = write_sitemaps(sitemap_path, urls)

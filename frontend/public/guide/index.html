@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <title>How to find a kanji or hanzi by its parts | RTK Kanji Search</title>
+    <meta name="description" content="Look up a Japanese kanji or Chinese character without knowing its reading: type the shapes it is made of, like sun + moon to find 明. How the search works, readings, Remembering the Kanji, and access from AI assistants (MCP).">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://kanji.alteon.help/guide/">
+    <style>
+      :root { --bg: #0f0f13; --text: #e0e0f0; --muted: #8888aa; --accent: #9d92f5; --kanji: #f0c060; --card: #1a1a22; }
+      @media (prefers-color-scheme: light) {
+        :root { --bg: #fafafc; --text: #1c1c28; --muted: #5c5c78; --accent: #5a4bd6; --kanji: #a0661a; --card: #efeff5; }
+      }
+      body { background: var(--bg); color: var(--text); font-family: "Segoe UI", system-ui, sans-serif;
+             line-height: 1.6; margin: 0; padding: 0 16px; }
+      main, footer { max-width: 760px; margin: 0 auto; }
+      main { padding: 24px 0; }
+      footer { color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--card); padding: 16px 0 32px; }
+      a { color: var(--accent); }
+      h1 { font-size: 2rem; margin: 0.4em 0; }
+      h1 .glyph { color: var(--kanji); font-family: "Noto Serif CJK JP", "Hiragino Mincho ProN", serif; }
+      .glyph-list a, .cjk { font-family: "Noto Serif CJK JP", "Hiragino Mincho ProN", serif; }
+      .facts { background: var(--card); border-radius: 8px; padding: 12px 16px; }
+      .facts dt { color: var(--muted); font-size: 0.85rem; }
+      .facts dd { margin: 0 0 8px; }
+      .glyph-list { display: flex; flex-wrap: wrap; gap: 6px 14px; padding: 0; list-style: none; }
+      nav.pager { display: flex; justify-content: space-between; gap: 12px; margin-top: 24px; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p><a href="/">← RTK Kanji Search</a></p>
+
+      <h1>Find a kanji or hanzi by its parts</h1>
+      <p>Seen a Japanese kanji or a Chinese character you cannot read? You do not need its pronunciation, its radical or its stroke count to look it up. Type the shapes you can see in it, and RTK Kanji Search lists every character built from those shapes. Search <a href="/kanji/rtk20.html">“sun” + “moon” to find 明</a> (bright), <a href="/kanji/rtk1038.html">“person” + “tree” to find 休</a> (rest), or <a href="/kanji/rtk103.html">“woman” + “child” to find 好</a> (fond).</p>
+
+      <h2>Three ways to search</h2>
+      <ul>
+        <li><strong>By parts:</strong> enter two or more building blocks by name and get every character that contains all of them. A depth setting also finds characters where a part is nested inside another part: 壁 contains 辟, which contains 尸 (“corpse”).</li>
+        <li><strong>By keyword:</strong> search an English meaning, a primitive name such as “water” or “mouth”, or a Russian word.</li>
+        <li><strong>By character:</strong> paste a glyph to see what it is made of, its readings and its stroke count, with every part clickable down to the smallest piece.</li>
+      </ul>
+
+      <h2>Built for Remembering the Kanji learners</h2>
+      <p>The building-block names follow the method of <a href="https://uhpress.hawaii.edu/title/remembering-the-kanji-1/">Remembering the Kanji</a> (RTK) by James W. Heisig, where each kanji is learned as a combination of simpler, named shapes called primitives. All of the book’s kanji are here in <a href="/kanji/">frame order</a>, each with its keyword, frame number, components and the other kanji that use it, so you can check how a kanji breaks down or find the one whose keyword you have forgotten. The book’s mnemonic stories are not reproduced; registered users write their own.</p>
+
+      <h2>Japanese kanji and Chinese hanzi</h2>
+      <p>The same search covers about 3,000 Japanese kanji and over 20,000 Chinese hanzi, simplified and traditional. A study-language switch limits results to Japanese, simplified Chinese or traditional Chinese. Many characters exist in more than one form, and you can compare them side by side: <a href="/kanji/hanzi-6f22.html">漢</a> and <a href="/kanji/hanzi-6c49.html">汉</a>, <a href="/kanji/hanzi-8a9e.html">語</a> and <a href="/kanji/hanzi-8bed.html">语</a>, <a href="/kanji/hanzi-66f8.html">書</a> and <a href="/kanji/hanzi-4e66.html">书</a>. Structural breakdowns come from the open cjkvi-ids project and readings from kanjidic2 and Unicode’s Unihan database.</p>
+
+      <h2>Readings and stroke counts</h2>
+      <p>Each Japanese kanji shows its on’yomi (the Sino-Japanese reading, written in katakana) and kun’yomi (the native Japanese reading, in hiragana); each Chinese character shows its Mandarin pinyin with tones. Once the parts search has found a character, its page gives you everything you need to look it up in a dictionary or type it.</p>
+
+      <h2>Add your own decompositions and stories</h2>
+      <p>With a free account you can add your own names for parts, alternative breakdowns, pictures for shapes that have no Unicode character, and your own mnemonic stories, each private or public as you choose. Anyone signed in can also mark a breakdown as correct or disputed, which helps keep the data accurate.</p>
+
+      <h2 id="ai-access">Use it from an AI assistant (MCP)</h2>
+      <p>The same database is available to AI assistants through a free, public, read-only <a href="https://modelcontextprotocol.io/">Model Context Protocol</a> server at <code>https://kanjimcp.alteon.help/mcp</code>. It offers three tools: <code>search_by_parts</code> (characters built from given components, for example sun + moon → 明), <code>get_decomposition</code> (a character’s breakdown, recursively) and <code>search_by_text</code> (keyword search). No sign-up or API key is needed. In Claude, add it as a custom connector with that URL; in Claude Code, run <code>claude mcp add --transport http kanji https://kanjimcp.alteon.help/mcp</code>.</p>
+
+      <h2>Questions</h2>
+      <h3>How do I look up a kanji when I don’t know how to read it?</h3>
+      <p>Name two of the shapes it contains, such as “tree” and “mouth”, and run a parts search. The results are every character containing both, here including <a href="/kanji/rtk215.html">杏</a> (apricot). As you type, suggestions show the names the database knows.</p>
+      <h3>Is it free?</h3>
+      <p>Yes. Searching needs no account, and there are no ads. An Android app is available from the About page.</p>
+      <h3>Does it work for Chinese?</h3>
+      <p>Yes: switch the study language to simplified or traditional Chinese and the same search returns hanzi, with pinyin.</p>
+
+      <p lang="ru"><strong>По-русски:</strong> поиск японских иероглифов (кандзи) и китайских иероглифов (ханьцзы) по составным частям — например, «солнце» + «луна» даёт 明. Интерфейс переключается на русский язык, а ключевые слова можно искать по-русски.</p>
+
+      <p><a href="/kanji/">Browse all kanji in RTK order</a> · <a href="/kanji/browse-1.html">Browse hanzi and primitives</a> · <a href="/privacy.html">Privacy</a></p>
+    
+      <p><a href="/">Open the search →</a></p>
+    </main>
+  </body>
+</html>
