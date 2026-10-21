@@ -874,11 +874,11 @@
    "一",
    "卜"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "一,卜 matches Heisig components and cjkvi ⿱一卜",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk52",
@@ -892,11 +892,11 @@
    "卜",
    "早"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "卜,早 matches cjkvi ⿱⺊早 and Heisig components",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk53",
@@ -907,11 +907,11 @@
   "heisig_components": "mist; ten; needle; early; sun; day; moon; month; flesh; part of the body",
   "cjkvi_ids": "⿰𠦝月",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "月,𠦝 matches cjkvi ⿰𠦝月",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk54",
@@ -925,11 +925,11 @@
    "口",
    "朝"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "口,朝 matches cjkvi ⿰口朝",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk55",
@@ -943,11 +943,11 @@
    "口",
    "八"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "口,八 matches cjkvi ⿱口八",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk56",
@@ -961,11 +961,11 @@
    "目",
    "八"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "目,八 matches cjkvi ⿱目八 and Heisig components",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk57",
@@ -976,11 +976,11 @@
   "heisig_components": "mouth; shellfish; clam; oyster; eye; animal legs; eight",
   "cjkvi_ids": "⿰口貝",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "貝,口 matches cjkvi ⿰口貝",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk58",
@@ -994,11 +994,11 @@
    "卜",
    "貝"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "貝,卜 matches cjkvi ⿱⺊貝",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk59",
@@ -1012,11 +1012,11 @@
    "口",
    "貝"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "貝,口 matches cjkvi ⿱口貝",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk60",
@@ -1030,11 +1030,11 @@
    "貝",
    "占"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "貝,占 matches cjkvi ⿰貝占",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk61",
@@ -1048,11 +1048,11 @@
    "目",
    "儿"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "目,儿 matches cjkvi ⿱目儿",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk62",
@@ -1066,11 +1066,11 @@
    "旧",
    "儿"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "旧,儿 matches cjkvi ⿱旧儿",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk63",
@@ -1084,11 +1084,11 @@
    "二",
    "儿"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "二,儿 matches Heisig components (two; human legs); cjkvi's deeper ⿱一兀 cut is the same four strokes, not a disagreement",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk64",
@@ -1102,11 +1102,11 @@
    "一",
    "貝"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "一,丶,貝: rendered top shows 一 + a short stroke + a 貝-shaped body, matches Heisig's one;ceiling;drop;shellfish",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk65",
@@ -1117,11 +1117,11 @@
   "heisig_components": "beginning; two; human legs; head; page; one; ceiling; drop; shellfish; clam; oyster; eye; animal legs; eight",
   "cjkvi_ids": "⿰元頁",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "頁,元 matches cjkvi ⿰元頁",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk66",
@@ -1135,11 +1135,11 @@
    "几",
    "丶"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "丶,几 matches cjkvi ⿵几丶",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk67",
@@ -1153,11 +1153,14 @@
    "勹",
    "貝"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "貝",
+   "𠂊"
+  ],
+  "note": "勹 was a lookalike for 𠂊 (same bug as 亀, commit dd76112): rendered beside confirmed 亀/色's flat 𠂊 cap vs 句/旬/勺's enclosing 勹 wrap, 負's top is a cap, not a wrap. cjkvi's own IDS is only ⿱𠂊貝, no 勹 alt. audit_weak_evidence.py clean. Shape-family: same bug found+fixed on rtk1412 陥, rtk1890 色, rtk2605 焔 (all already carried 𠂊 as their own cjkvi-derived alt).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk68",
@@ -1171,11 +1174,11 @@
    "一",
    "勹"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "一,勹 primary (Heisig's pedagogical 'bound up') + ノ,一,𠃌 cjkvi-structural alt already correctly captures both readings; audit_weak_evidence.py clean, no evidence of a wrong codepoint (unlike rtk67's 負, where cjkvi offered no 勹 alternative at all)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk69",
@@ -1189,11 +1192,11 @@
    "勹",
    "口"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "口,勹 matches cjkvi ⿹勹口; 勹 here genuinely wraps 口, unlike rtk67's 貝",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk70",
@@ -1207,11 +1210,11 @@
    "月",
    "几"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "月,几 matches cjkvi ⿰月几",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk71",
@@ -1225,11 +1228,11 @@
    "勹",
    "日"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "日,勹 matches cjkvi ⿹勹日, genuine wrap",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk72",
@@ -1243,11 +1246,11 @@
    "勹",
    "丶"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "丶,勹 matches cjkvi ⿹勹丶, genuine wrap",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk73",
@@ -1261,11 +1264,11 @@
    "白",
    "勺"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "白,勺 matches cjkvi ⿰白勺",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk74",
@@ -1279,11 +1282,11 @@
    "丷",
    "自"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "自,丷,一: 'horns' is already kangxi12/丷's alias project-wide; sibling rows 并(prim-eight-radical) and 兹(prim-double-mysterious) both list 丷,一 as two separate items rather than merged into 䒑, same convention here",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk75",
@@ -1294,11 +1297,11 @@
   "heisig_components": "fishguts; fishhook",
   "cjkvi_ids": "乙",
   "google_parts": [],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "atomic, matches Heisig and cjkvi",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk76",
@@ -1312,11 +1315,11 @@
    "舌",
    "乚"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "乙,舌: cjkvi spells the bound hook as 乚, but this file's established convention (see rtk1168 礼, line ~4345 comment) is to use 乙 as the resolvable term for this shape in both standalone and bound-hook position; 乚 is never introduced as its own row anywhere in data.txt",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk77",
@@ -1331,11 +1334,11 @@
    "目",
    "乚"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "十,目,𠃊 matches cjkvi's [JK] variant ⿱十⿺𠃊目",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk78",
@@ -1350,11 +1353,11 @@
    "一",
    "ハ"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "一,八,目 matches cjkvi [J] variant ⿳目一八",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk79",
@@ -1370,11 +1373,11 @@
    "一",
    "ハ"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "具,十 matches cjkvi ⿱十具",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk80",
@@ -1385,11 +1388,11 @@
   "heisig_components": "artificial",
   "cjkvi_ids": "工",
   "google_parts": [],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "atomic, matches Heisig and cjkvi",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk81",
@@ -1403,11 +1406,11 @@
    "𠂇",
    "工"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "工,𠂇 matches cjkvi ⿸𠂇工",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk82",
@@ -1421,11 +1424,11 @@
    "𠂇",
    "口"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "口,𠂇 matches cjkvi ⿸𠂇口",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk83",
@@ -1439,11 +1442,11 @@
    "𠂇",
    "月"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "月,𠂇 matches cjkvi ⿸𠂇月",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk84",
@@ -1457,11 +1460,11 @@
    "貝",
    "有"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "有,貝 matches cjkvi ⿰貝有",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk85",
@@ -1475,11 +1478,11 @@
    "工",
    "貝"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "貝,工 matches cjkvi ⿱工貝",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk86",
@@ -1490,11 +1493,11 @@
   "heisig_components": "craft; head; page; one; ceiling; drop; shellfish; clam; oyster; eye; animal legs; eight",
   "cjkvi_ids": "⿰工頁",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "工,頁 matches cjkvi ⿰工頁",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk87",
@@ -1505,11 +1508,11 @@
   "heisig_components": "dagger",
   "cjkvi_ids": "⿹𠃌丿",
   "google_parts": [],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "atomic primary + ノ,𠃌 cjkvi-structural alt already correctly captures Heisig-whole vs structural split",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk88",
@@ -1523,11 +1526,11 @@
    "刀",
    "丶"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "刀,丶 matches cjkvi [TV] variant ⿹刀丶; the dot is a distinct visible mark",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk89",
@@ -1541,11 +1544,11 @@
    "七",
    "刀"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "七,刀 matches cjkvi ⿰七刀",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk90",
@@ -1559,11 +1562,11 @@
    "刀",
    "口"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "口,刀 matches cjkvi ⿱刀口",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk91",
@@ -1577,11 +1580,11 @@
    "日",
    "召"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "日,召 matches cjkvi ⿰日召",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk92",
@@ -1595,11 +1598,11 @@
    "貝",
    "刂"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "貝,刀: cjkvi draws 刂 here but this file's established, documented convention (data.txt comment ~line 4204-4207, confirmed again 2026-10-20/2026-09-23) is to write 刂 as 刀 project-wide (50 hosts) rather than invent a split the rest of the data doesn't make; not a bug",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk93",
@@ -1615,11 +1618,11 @@
    "田",
    "刂"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "畐,刀: same established 刂-as-刀 convention as rtk92",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk94",
@@ -1634,11 +1637,11 @@
    "力",
    "刂"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "口,力,刀: same established 刂-as-刀 convention as rtk92",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk95",
@@ -1652,11 +1655,11 @@
    "一",
    "亅"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "一,亅 matches cjkvi ⿱一亅",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk96",
@@ -1670,11 +1673,11 @@
    "田",
    "丁"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "田,丁 matches cjkvi ⿰田丁",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk97",
@@ -1688,11 +1691,11 @@
    "丁",
    "口"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "丁,口 matches cjkvi ⿹丁口",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk98",
@@ -1706,11 +1709,11 @@
    "丁",
    "頁"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "丁,頁 matches cjkvi ⿰丁頁",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk99",
@@ -1721,11 +1724,11 @@
   "heisig_components": "",
   "cjkvi_ids": "子",
   "google_parts": [],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "atomic, Heisig's empty components column is positive evidence, matches cjkvi atomic",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk100",
@@ -1739,11 +1742,11 @@
    "子",
    "乚"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "乙,子: cjkvi spells the bound hook as 乚, but this file's established convention (see rtk76/rtk1168 note) uses 乙 as the resolvable term for this shape everywhere",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk101",

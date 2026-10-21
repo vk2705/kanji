@@ -21049,3 +21049,108 @@ failures belonging to that old DB. New `backend/regression_fresh.sh` runs the
 pins the way CI does — fresh DB from the source files, in a temp copy — in
 about 2 minutes, and the job's prompt now uses it. Not a hang, so the
 script itself is unchanged.
+
+## 2026-10-21 — full re-review: frames 51–100
+
+49 keep, 1 fixed in range (rtk67), plus 3 shape-family fixes outside today's
+range found while fixing rtk67. `full_review.py --pending-count`: 2899/3000
+pending (was 2949 at the start of this run).
+
+- **rtk67 負 fixed (貝,勹 → 貝,𠂊)**: the top component is 𠂊
+  (`prim-hooked-hand`, "bound up"), not 勹 (`kangxi20`, also "bound up" —
+  both rows carry that alias, which is how this slipped through). Rendered
+  負 beside 亀 (fixed in commit `dd76112`, the session right before this one)
+  and 句/旬/勺 (genuine 勹 hosts): 亀's confirmed 𠂊 sits as a flat cap that
+  doesn't enclose anything, exactly what 負's top does; 句/旬/勺's 勹 sweeps
+  into a wrap that encloses what's inside it, which 負's top does not do.
+  cjkvi-ids agrees — 負's only IDS is `⿱𠂊貝`, no 勹 reading at all.
+  `audit_weak_evidence.py --host 負` is clean on all three checks. The old
+  `貝,勹;貝,𠂊` alternate is collapsed to the single correct `貝,𠂊` (勹
+  dropped outright, matching how 亀's own fix handled it, rather than kept
+  as a second alternate cjkvi never offers).
+
+  **Shape-family check**: grepped every row listing `勹` as a part and
+  found exactly three more with the identical `X,勹;X,𠂊` primary/alt
+  pattern — i.e. a prior cjkvi-ids pass had already flagged the correct
+  𠂊 reading as a structural alternate but left the wrong 勹 as primary.
+  All three rendered the same flat-cap-not-wrap shape and came back clean
+  on `audit_weak_evidence.py`, so all three were fixed in this run too:
+  - **rtk1412 陥** (`旧,勹,阝;旧,阝,𠂊` → `旧,阝,𠂊`)
+  - **rtk1890 色** (`巴,勹;巴,𠂊` → `巴,𠂊`)
+  - **rtk2605 焔** (`｜,火,日,勹;旧,火,𠂊` → `旧,火,𠂊` — the old primary had
+    also split 旧 into its own `｜,日` strokes rather than keeping the named
+    compound; the promoted alt already had this right too)
+
+  The other ~28 rows citing `勹` without an existing 𠂊 alternate (e.g. 包,
+  勾, 急, 争, 危, 象, 鰐, 燭, …) were **not** touched — none of them had
+  cjkvi-ids already pointing at 𠂊 the way these four did, so confirming or
+  rejecting each needs its own render-and-cjkvi check rather than a
+  pattern match. Left for their own frames, as instructed. Likewise `丂`
+  (prim-snare)'s own `一,勹` anatomy was flagged open by an earlier session
+  (2026-09-20 chunk, "`勹`, currently 'bound up' only") and is still open.
+
+  `test_regression_fixes.py`'s `rtk1412` pin pinned `kangxi20` (勹) in its
+  expected top-level part set; updated to `prim-hooked-hand` (𠂊) with a
+  comment, since the fix changed what's actually reachable. No other pin
+  referenced any of the four fixed rows' own composition.
+
+- **rtk68 万 kept, not fixed**: tempting to read as the same bug (primary
+  `一,勹`, alternate `ノ,一,𠃌`), but the evidence points the other way.
+  cjkvi-ids never offers a 𠂊 reading for 万 (unlike the four fixes above,
+  where cjkvi's own alternate already said 𠂊) — its structural alternate
+  cuts the bottom into raw strokes (丿+𠃌), not into a named primitive.
+  Heisig's own components column says "one; ceiling; bound up", i.e. he
+  names the bottom "bound up" (勹) directly, matching the already-present
+  primary. This fits the documented primary = Heisig's own named
+  breakdown / alternate = cjkvi's finer structural cut pattern on purpose,
+  not a lookalike bug. `audit_weak_evidence.py --host 万` is clean.
+
+- **rtk92 則 / rtk93 副 / rtk94 別 kept, not fixed**: all three render with
+  the narrow two-stroke 刂 ("saber") on the right rather than full-width
+  刀 ("sword"), and cjkvi-ids agrees (`⿰貝刂`, `⿰畐刂`, `⿰𠮠刂`). Checked
+  before touching anything: this is a long-standing, explicitly documented
+  project decision, not a gap. `data.txt`'s own comment (written
+  2026-09-20, reconfirmed 2026-09-23 and again 2026-10-20) says outright
+  that "this file has always written 刂 as 刀 — 則 副 別 刺 all do — so all
+  four names [sword/dagger/sabre/saber] go on the one row rather than
+  inventing a split the rest of the data does not make." `rtk87`'s own row
+  already carries `sword,dagger,sabre,saber,spear,cutlass` as one alias
+  set. Leaving this alone rather than re-litigating a decision three
+  separate sessions have already confirmed.
+
+- **rtk76 乱 / rtk100 孔 kept, not fixed**: both cite `乙` for the bound
+  hook shape where cjkvi-ids spells it `乚` (a distinct codepoint, U+4E5A).
+  Same situation as 刀/刂 above: `data.txt`'s own comment on `rtk1168` 礼
+  (2026-09-21) already discusses this exact 乙/乚 distinction and still
+  spells 礼 itself `礻,乙`, and `乚` is never introduced as a resolvable
+  term anywhere in the file. Reads as a deliberate choice to use `乙` as
+  the one searchable name for this shape in both standalone and bound
+  position, not an oversight — left alone rather than introducing a new
+  `乚` row that would make 礼 (already reviewed) and these two inconsistent
+  with each other.
+
+- **rtk74 首 kept, not fixed**: `自,丷,一` looked like it might be
+  over-flattening cjkvi's `䒑` (horns-as-one-unit, `⿱䒑自`), but `丷`
+  already carries the alias "horns" project-wide (`kangxi12`), and two
+  sibling rows that also draw this cap shape — `并` (prim-eight-radical)
+  and `兹` (prim-double-mysterious) — already list `丷,一` as two separate
+  items rather than merging them into `䒑`. Matching that existing
+  convention rather than introducing a third way to spell the same shape.
+
+- **rtk88 刃 kept, not fixed**: cjkvi's Japanese-variant IDS uses the
+  overlay operator (`⿻刀丶`), which CLAUDE.md's standing warning says is
+  not a parts list — but the Traditional/Vietnamese variant (`⿹刀丶`) uses
+  a genuine enclosure operator with the same two pieces, and the render
+  shows the dot as a clearly separate mark from 刀's own strokes. Kept
+  `刀,丶` on that basis.
+
+Checked before syncing: `pytest` 104 passed, `audit_radicals.py` clean, and
+`regression_fresh.sh` reported **all 1328 checks pass** (including the
+updated rtk1412 pin) on a freshly seeded DB. Applied to this machine's DB
+with `sync_system_data.py` (dry-run first; 4 decompositions replaced, 4
+removed as now-atomic-alternates, matching the 4 fixes above exactly).
+Re-ran `pytest` and `audit_radicals.py` against the synced live DB
+afterward — both still clean.
+
+No production deploy from this session — a deployer needs `git pull` +
+`sync_system_data.py` on prod to pick this up.

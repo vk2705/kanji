@@ -1337,7 +1337,11 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1411": {"character": "堕", "keyword": "degenerate",
                 "expected_part_ids": {"kangxi170", "rtk161", "rtk83"}},
     "rtk1412": {"character": "陥", "keyword": "collapse",
-                "expected_part_ids": {"kangxi170", "kangxi20", "rtk35"}},
+                # 2026-10-21: kangxi20 (勹) -> prim-hooked-hand (𠂊), same
+                # lookalike bug as 亀 (commit dd76112) -- the render shows a
+                # flat non-enclosing cap, not 勹's wrap; cjkvi never offers a
+                # 勹 reading for 陥. See data.txt's rtk1412 comment.
+                "expected_part_ids": {"kangxi170", "prim-hooked-hand", "rtk35"}},
     "rtk1415": {"character": "控", "keyword": "withdraw",
                 "expected_part_ids": {"kangxi64", "rtk1414"}},
     "rtk1422": {"character": "搾", "keyword": "squeeze",

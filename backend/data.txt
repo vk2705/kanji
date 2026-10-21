@@ -163,7 +163,14 @@ rtk63:元:beginning,beginnings:二,儿
 rtk64:頁:page,head:一,丶,貝
 rtk65:頑:stubborn:頁,元
 rtk66:凡:commonplace:丶,几
-rtk67:負:defeat:貝,勹;貝,𠂊
+# 2026-10-21 (full re-review, frames 51-100): top is 𠂊, not 勹. Rendered
+# beside confirmed 亀/色's 𠂊 (flat cap, doesn't enclose) vs 句/旬/勺's 勹 (a
+# wrap that encloses what it holds), 負's top sits as a flat cap on 貝 --
+# same shape as 𠂊, not a wrap. cjkvi's own IDS for 負 is only ⿱𠂊貝, no 勹
+# alternative at all. Same lookalike bug just fixed on 亀 (commit dd76112);
+# audit_weak_evidence.py --host 負 flags nothing. 勹 dropped entirely, same
+# as 亀's fix, rather than kept as a second alternate cjkvi never offers.
+rtk67:負:defeat:貝,𠂊
 rtk68:万:ten thousand,wimbledon:一,勹;ノ,一,𠃌
 rtk69:句:phrase:口,勹
 rtk70:肌:texture:月,几
@@ -1535,7 +1542,13 @@ rtk1408:隣:neighboring:阝,米,舛
 rtk1409:隔:isolate:阝,鬲
 rtk1410:隠:conceal:阝,爪,⺕,心
 rtk1411:堕:degenerate:有,土,阝
-rtk1412:陥:collapse:旧,勹,阝;旧,阝,𠂊
+# 2026-10-21 (full re-review, frames 51-100 shape-family follow-up to rtk67
+# 負): same 勹/𠂊 lookalike bug. 陥's right side (臽) already carried 𠂊 as
+# its own cjkvi-derived alt; the render shows the same flat non-enclosing
+# cap as 亀/色/負, not a 勹 wrap. audit_weak_evidence.py --host 陥 flags
+# nothing. 勹 dropped from the primary; 旧,阝,𠂊 promoted (was already the
+# alt, now the only reading -- cjkvi never offers a 勹 alternative for 陥).
+rtk1412:陥:collapse:旧,阝,𠂊
 rtk1413:穴:hole:八,宀
 rtk1414:空:empty,sky:穴,工
 rtk1415:控:withdraw:空,扌
@@ -2021,7 +2034,12 @@ rtk1886:湾:gulf:水,亦,弓
 rtk1887:黄:yellow:八,由,龷
 rtk1888:横:sideways:木,黄
 rtk1889:把:grasp:巴,扌
-rtk1890:色:color,colour:巴,勹;巴,𠂊
+# 2026-10-21 (full re-review, frames 51-100 shape-family follow-up to rtk67
+# 負): same 勹/𠂊 lookalike bug. 色's top is the flat 𠂊 cap (confirmed by
+# direct render comparison against 亀/句), not a 勹 wrap. cjkvi's own IDS
+# for 色 already gives this as an alt; audit_weak_evidence.py --host 色
+# flags nothing. 勹 dropped; 巴,𠂊 is now the sole reading.
+rtk1890:色:color,colour:巴,𠂊
 rtk1891:絶:discontinue:糸,色
 rtk1892:艶:glossy:色,豊
 rtk1893:肥:fertilizer:月,巴
@@ -2740,7 +2758,13 @@ rtk2601:煉:refine metals:火,東
 rtk2602:燦:brilliant:火,米,又,夕
 rtk2603:灼:miraculous:勺,火
 rtk2604:烙:burn:各,火
-rtk2605:焔:flame:｜,火,日,勹;旧,火,𠂊
+# 2026-10-21 (full re-review, frames 51-100 shape-family follow-up to rtk67
+# 負): same 勹/𠂊 lookalike bug, plus the primary had already split 旧 into
+# its own ｜,日 strokes rather than keeping it as the named compound. The
+# render shows the same flat 𠂊 cap as 亀/色/負/陥, not a 勹 wrap.
+# audit_weak_evidence.py --host 焔 flags nothing. The former alt (旧,火,𠂊)
+# is promoted to sole primary -- cjkvi never offers a 勹 reading for 焔.
+rtk2605:焔:flame:旧,火,𠂊
 rtk2606:烹:boil:口,亅,亠,灬
 rtk2607:牽:pull:亠,冖,幺,牛
 rtk2608:牝:female:牛,匕
