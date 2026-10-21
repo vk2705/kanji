@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Unlisted on purpose (owner request, 2026-10-21): open to anyone who has the
+       URL, linked from nowhere, kept out of search results and the sitemap. -->
+  <meta name="robots" content="noindex, nofollow">
+  <title>Visitor stats | RTK Kanji Search</title>
+  <style>
+    :root { --bg: #0f0f13; --text: #e0e0f0; --muted: #8888aa; --accent: #9d92f5; --card: #1a1a22; --border: #2e2e3e; --people: #f0c060; }
+    @media (prefers-color-scheme: light) {
+      :root { --bg: #fafafc; --text: #1c1c28; --muted: #5c5c78; --accent: #5a4bd6; --card: #efeff5; --border: #dcdce6; --people: #a0661a; }
+    }
+    body { background: var(--bg); color: var(--text); font-family: "Segoe UI", system-ui, sans-serif; margin: 0; padding: 0 16px; line-height: 1.5; }
+    main { max-width: 860px; margin: 0 auto; padding: 28px 0 48px; }
+    h1 { margin: 0 0 4px; font-size: 1.6rem; }
+    a { color: var(--accent); }
+    .muted { color: var(--muted); font-size: 0.9rem; }
+    .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin: 20px 0 8px; }
+    .tile { background: var(--card); border-radius: 10px; padding: 14px 16px; }
+    .tile .label { color: var(--muted); font-size: 0.85rem; }
+    .tile .big { font-size: 2rem; font-weight: 650; color: var(--people); font-variant-numeric: tabular-nums; }
+    .tile .small { color: var(--muted); font-size: 0.82rem; font-variant-numeric: tabular-nums; }
+    h2 { font-size: 1.15rem; margin-top: 32px; }
+    .table-wrap { overflow-x: auto; }
+    table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; font-size: 0.92rem; }
+    th, td { padding: 6px 10px; text-align: right; border-bottom: 1px solid var(--border); white-space: nowrap; }
+    th:first-child, td:first-child { text-align: left; }
+    th { color: var(--muted); font-weight: 500; }
+    td.people { color: var(--people); font-weight: 600; }
+    td.zero { color: var(--muted); }
+    .bar { display: inline-block; height: 8px; border-radius: 4px; background: var(--people); vertical-align: middle; }
+    .note { background: var(--card); border-radius: 8px; padding: 12px 16px; font-size: 0.9rem; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <main>
+    <p><a href="/">RTK Kanji Search</a></p>
+    <h1>Visitor stats</h1>
+    <p class="muted" id="meta">Loading…</p>
+
+    <div class="tiles" id="tiles"></div>
+
+    <h2>Last 30 days</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Day (UTC)</th><th>Real people</th><th></th><th>Searches</th><th>Kanji opened</th><th>Page views</th><th>Visitors</th></tr>
+        </thead>
+        <tbody id="daily"></tbody>
+      </table>
+    </div>
+
+    <h2>What the numbers mean</h2>
+    <p class="note">
+      <strong>Real people</strong> are visitors who ran a search or opened a kanji in the app. Crawlers and
+      bot bursts load the page and leave, so they never appear there. <strong>Page views</strong> and
+      <strong>visitors</strong> count every load of the app that did not identify itself as a bot, so they
+      still include bots that pretend to be browsers (on some days thousands, one view each). Searches and
+      kanji opened count page loads in which that happened. Readers of the static
+      <code>/kanji/…</code> pages who never open the app are not counted.
+    </p>
+  </main>
+  <script>
+    const fmt = (n) => n.toLocaleString("en-US");
+    const LABELS = { today: "Today", "7d": "Last 7 days", "30d": "Last 30 days", all: "All time" };
+
+    fetch("/kanji/api/analytics/stats?days=30")
+      .then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then((data) => {
+        document.getElementById("meta").textContent =
+          `Real-people tracking since ${data.people_tracked_since} · updated ${data.generated_at.replace("T", " ").replace("+00:00", " UTC")}`;
+
+        document.getElementById("tiles").innerHTML = data.periods.map((p) => `
+          <div class="tile">
+            <div class="label">${LABELS[p.period] || p.period}</div>
+            <div class="big">${fmt(p.people)}</div>
+            <div class="small">real ${p.people === 1 ? "person" : "people"}</div>
+            <div class="small">${fmt(p.searches)} searches · ${fmt(p.kanji_opened)} kanji opened</div>
+            <div class="small">${fmt(p.views)} page views · ${fmt(p.visitors)} visitors</div>
+          </div>`).join("");
+
+        const maxPeople = Math.max(1, ...data.daily.map((d) => d.people));
+        document.getElementById("daily").innerHTML = data.daily.map((d) => `
+          <tr>
+            <td>${d.day}</td>
+            <td class="${d.people ? "people" : "zero"}">${fmt(d.people)}</td>
+            <td style="text-align:left"><span class="bar" style="width:${Math.round(80 * d.people / maxPeople)}px"></span></td>
+            <td class="${d.searches ? "" : "zero"}">${fmt(d.searches)}</td>
+            <td class="${d.kanji_opened ? "" : "zero"}">${fmt(d.kanji_opened)}</td>
+            <td class="${d.views ? "" : "zero"}">${fmt(d.views)}</td>
+            <td class="${d.visitors ? "" : "zero"}">${fmt(d.visitors)}</td>
+          </tr>`).join("");
+      })
+      .catch((err) => {
+        document.getElementById("meta").textContent = `Could not load stats (${err.message}).`;
+      });
+  </script>
+</body>
+</html>

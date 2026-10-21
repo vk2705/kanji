@@ -1,5 +1,6 @@
 import re
 import secrets
+from datetime import date, datetime, timedelta, timezone
 from typing import Literal
 
 from fastapi import APIRouter, Cookie, Depends, Header, Response
@@ -88,3 +89,80 @@ def event(
         return {"ok": True}
     record_engagement(conn, _visitor_id(kanji_visitor, response), body.kind)
     return {"ok": True}
+
+
+@router.get("/analytics/stats")
+def stats(days: int = 30, conn=Depends(db_conn)):
+    """Aggregate visit counts for the unlisted /stats page (owner request,
+    2026-10-21: "let anyone access it if they know the URL"). Counts only — no
+    visitor ids, paths or anything per-visitor leaves this function. The same
+    numbers visit_stats.py prints; "people" (visitor_engagement) is the one that
+    means real humans, the view/visitor columns still include anything that ran
+    the app's JavaScript without a bot user agent."""
+    days = max(1, min(days, 365))
+    now = datetime.now(timezone.utc)
+    today = now.date()
+
+    def views_since(cutoff: datetime) -> tuple[int, int]:
+        row = conn.execute(
+            "SELECT COUNT(*), COUNT(DISTINCT visitor_id) FROM page_views WHERE viewed_at >= ?",
+            (cutoff.isoformat(),),
+        ).fetchone()
+        return row[0], row[1]
+
+    def people_since(day: date | None) -> dict:
+        where, params = ("WHERE day >= ?", (day.isoformat(),)) if day else ("", ())
+        row = conn.execute(
+            f"""SELECT COUNT(DISTINCT visitor_id),
+                       COALESCE(SUM(CASE WHEN kind = 'search' THEN count END), 0),
+                       COALESCE(SUM(CASE WHEN kind = 'detail' THEN count END), 0)
+                FROM visitor_engagement {where}""",
+            params,
+        ).fetchone()
+        return {"people": row[0], "searches": row[1], "kanji_opened": row[2]}
+
+    periods = []
+    for label, span in [("today", 1), ("7d", 7), ("30d", 30)]:
+        views, visitors = views_since(now - timedelta(days=span))
+        periods.append({"period": label, "views": views, "visitors": visitors,
+                        **people_since(today - timedelta(days=span - 1))})
+    total_views = conn.execute("SELECT COUNT(*) FROM page_views").fetchone()[0] + conn.execute(
+        "SELECT COALESCE(SUM(view_count), 0) FROM daily_visit_summary").fetchone()[0]
+    total_visitors = conn.execute(
+        "SELECT COUNT(*) FROM (SELECT visitor_id FROM page_views UNION SELECT visitor_id FROM known_visitors)"
+    ).fetchone()[0]
+    periods.append({"period": "all", "views": total_views, "visitors": total_visitors, **people_since(None)})
+
+    first_day = (today - timedelta(days=days - 1)).isoformat()
+    daily: dict[str, dict] = {}
+    for row in conn.execute(
+        "SELECT day, view_count, distinct_visitor_count FROM daily_visit_summary WHERE day >= ?", (first_day,)
+    ):
+        daily[row[0]] = {"views": row[1], "visitors": row[2]}
+    for row in conn.execute(
+        """SELECT date(viewed_at), COUNT(*), COUNT(DISTINCT visitor_id) FROM page_views
+           WHERE date(viewed_at) >= ? GROUP BY date(viewed_at)""", (first_day,)
+    ):
+        daily[row[0]] = {"views": row[1], "visitors": row[2]}
+    for row in conn.execute(
+        """SELECT day, COUNT(DISTINCT visitor_id),
+                  COALESCE(SUM(CASE WHEN kind = 'search' THEN count END), 0),
+                  COALESCE(SUM(CASE WHEN kind = 'detail' THEN count END), 0)
+           FROM visitor_engagement WHERE day >= ? GROUP BY day""", (first_day,)
+    ):
+        daily.setdefault(row[0], {"views": 0, "visitors": 0}).update(
+            {"people": row[1], "searches": row[2], "kanji_opened": row[3]})
+    days_list = []
+    for offset in range(days):
+        day = (today - timedelta(days=offset)).isoformat()
+        entry = {"day": day, "views": 0, "visitors": 0, "people": 0, "searches": 0, "kanji_opened": 0}
+        entry.update(daily.get(day, {}))
+        days_list.append(entry)
+
+    people_since_row = conn.execute("SELECT MIN(day) FROM visitor_engagement").fetchone()[0]
+    return {
+        "generated_at": now.isoformat(timespec="seconds"),
+        "people_tracked_since": people_since_row or today.isoformat(),
+        "periods": periods,
+        "daily": days_list,
+    }

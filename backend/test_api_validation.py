@@ -132,3 +132,18 @@ def test_analytics_ignores_crawlers(client, db_path):
     conn = sqlite3.connect(db_path)
     assert conn.execute("SELECT COUNT(*) FROM page_views").fetchone()[0] == 0
     assert conn.execute("SELECT COUNT(*) FROM visitor_engagement").fetchone()[0] == 0
+
+
+def test_analytics_stats_aggregates_only(client):
+    """GET /analytics/stats backs the unlisted /stats page: public, counts only."""
+    client.post("/analytics/pageview", json={"path": "/"})
+    client.post("/analytics/event", json={"kind": "search"})
+    r = client.get("/analytics/stats?days=7")
+    assert r.status_code == 200
+    body = r.json()
+    by_period = {p["period"]: p for p in body["periods"]}
+    assert by_period["today"]["people"] == 1
+    assert by_period["today"]["searches"] == 1
+    assert by_period["all"]["views"] == 1
+    assert len(body["daily"]) == 7
+    assert "visitor_id" not in r.text
