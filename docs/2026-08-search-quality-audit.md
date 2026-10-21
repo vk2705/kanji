@@ -20950,3 +20950,78 @@ and whether a change made it worse. `backend/build_decomposition_history.py`
 rebuilds every past version of each row from `data.txt`'s git history (249
 commits since 2026-06-28: 7,515 versions, 2,532 of the 3,000 kanji changed at
 least once), plus the review decisions; the kanji detail page shows it.
+
+## 2026-10-21 — full re-review: frames 1–50, stopped uncommitted (test_regression_fixes.py hangs)
+
+Not a normal chunk entry: this session found `backend/data.txt` and
+`docs/kanji_full_review.json` already modified before touching anything,
+which is this job's own documented "previous run died midway" signal. Per
+its guardrails, stopping to describe the diff rather than building on it or
+discarding it.
+
+**Reconstructed timeline.** A background retry loop (started by an earlier
+session at 18:24 UTC, logging to a scratchpad outside the repo) has been
+calling `systemctl start kanji-worklist-review.service` repeatedly today
+whenever the pending count drops, to push through more than one chunk a day.
+Its log: run 1 started 18:25:00 with 2999 pending, ended 19:03:29 with 2949
+pending (systemd reported success); run 2 started immediately after, at
+19:03:29 — this session is (most likely) that run. `backend/kanji_worklist_review.log`
+confirms: run 1's last line is "Waiting for the post-sync
+`test_regression_fixes.py` run to finish before finalizing" — it never got
+further, so it never committed or pushed.
+
+**What run 1 actually did (frames rtk1–rtk50, all recorded with
+`reviewed_by: claude`, `reviewed_at: 2026-10-21`):** 48 kept, 1 fixed, 1
+needs-render.
+
+- `rtk3` (三, "three") — **fixed**. CSV's `heisig-kanjis.csv` components for
+  三 are empty, like 一/二 (positive evidence it's atomic, per this job's own
+  rule 2), but the row's only decomposition was the unlabelled `one,two` —
+  cjkvi's `⿱一二` structural view standing in for Heisig's own breakdown.
+  Demoted to a labelled `structural (cjkvi-ids)` alternate
+  (`rtk3:?:3,three:;one,two`), matching `rtk2`/二's atomic-primary pattern;
+  self-identity still covers a bare "three" lookup. This was already applied
+  to the live `kanji.db` — `sync_system_data.py` ran and the decomposition's
+  label is now `structural (cjkvi-ids)` there, matching the new `data.txt`
+  line, confirming run 1 reached step 5 of the apply procedure before dying
+  on step 6.
+- `rtk42` (升, a capacity-measure kanji) — **needs-render**. Primary
+  `千,廾` claims a full "thousand" shape (千 = 丿+十, 3 strokes) atop 廾 (3
+  strokes) = 6 strokes, but the CSV's own `stroke_count` for 升 is 4, matching
+  the row's already-present alternate `ノ,廾` (1+3) instead. Heisig's
+  components column literally says "thousand", so this may be a deliberately
+  reused keyword for just the top stroke rather than a literal full-字 claim
+  — genuinely ambiguous without a clearer side-by-side render than this
+  session could produce. Left the primary untouched (no change made), alt
+  already covers the structural reading.
+- The other 48 (rtk1, 2, 4–41, 43–50) were kept as rendered and matched
+  against Heisig's components / cjkvi-ids; no shape-family follow-ups were
+  opened by either decision above (rtk3's fix only narrows its own primary;
+  it introduces no new part term for other rows to share).
+
+**Checks run this session (read-only, no further edits):**
+- `pytest -q`: 104 passed.
+- `audit_radicals.py`: 0 undefined part terms.
+- `test_regression_fixes.py`: did **not** complete. Killed by `timeout 240`
+  with **zero bytes of output** after 4 minutes of genuine CPU work (92%+ of
+  one core throughout, confirmed via `ps`, not I/O-blocked or hung on a
+  network call) — the first run also died waiting on exactly this script.
+  This is a new problem: nothing in this session's scope explains why a
+  script whose own docstring calls it a "fast smoke test" now takes minutes
+  and prints nothing. Needs investigation before this job can reliably
+  finish a chunk end-to-end again; until then, every chunk risks dying at
+  the same step. Not something this session should guess-fix unattended.
+
+**Decision: stopping without committing.** `data.txt` and
+`kanji_full_review.json` are left exactly as run 1 left them — not reverted,
+not built on. Only this doc entry is being committed. rtk1–rtk50 are already
+decided and rtk3's fix is already live in `kanji.db` on this machine; an
+owner who trusts that work can commit it as-is (it has pins' two supporting
+checks green) once `test_regression_fixes.py`'s hang is understood, or
+revert the one `data.txt` line and re-run `sync_system_data.py` if not.
+`full_review.py --pending-count` still reports 2949/3000 pending — unchanged
+by this session, so the retry loop (which stops when the pending count
+stops dropping) should end itself after this run.
+
+No production deploy implied by any of this — nothing here has been
+committed for prod to pull.
