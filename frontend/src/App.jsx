@@ -7,6 +7,7 @@ import AboutPage from "./components/AboutPage";
 import CreateKanji from "./components/CreateKanji";
 import MyContributions from "./components/MyContributions";
 import AutocompleteInput from "./components/AutocompleteInput";
+import ViewNavigation from "./components/ViewNavigation";
 import { t } from "./i18n";
 import { stateToParams, paramsToState, paramsToUrl } from "./urlState";
 import "./App.css";
@@ -601,6 +602,11 @@ export default function App() {
             </div>
 
             <div ref={resultsRef}>
+              {/* Same Home button as the detail and other views: once a search has
+                  run, it clears the form and results and starts over. */}
+              {(results !== null || loading || fallbackMsg || searchError) && (
+                <ViewNavigation onHome={goHome} lang={uiLang} />
+              )}
               {fallbackMsg && (
                 <p className="fallback-msg">{fallbackMsg}</p>
               )}
