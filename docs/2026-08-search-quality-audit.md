@@ -20659,3 +20659,94 @@ pytest suite after writing (99 passed, unaffected).
 
 495 total, 215 pending after this chunk (235 before — see
 `hanzi_worklist_next.py --pending-count`).
+
+## 2026-10-21 — hanzi worklist: next 20 (11 keep-ours, 9 needs-render, no kanji.db edit this chunk)
+
+Unattended daily run against `hanzi_decomposition_worklist.json`
+(`hanzi_worklist_next.py -n 20`), same method as every prior chunk. Both of
+this job's tracked files (the worklist JSON and this doc) were clean at the
+start — no interrupted prior run to investigate — and `git status`/`git log`
+showed nothing from the other daily routine needing a merge this time.
+Pytest baseline checked clean (99 passed) before touching anything.
+
+20 rows: 13 `overlay`, 7 `opaque`. Rendered the 20 hosts in one batch, then
+every distinct component glyph referenced in each row's cjkvi-ids reading
+across two more batches, then did several targeted side-by-side renders
+(host next to its claimed parts, at large size) for the closer calls.
+
+Eight distinct component codepoints came back as tofu — confirmed by eye
+against the ⊠ placeholder in the rendered PNG, not assumed from the charset
+table, and `render_glyphs.py`'s own relative-identity check flagged every
+one of them as pixel-identical across all four installed faces (Noto Sans
+CJK JP, WenQuanYi Zen Hei, HanaMinA, HanaMinB), i.e. genuine missing
+outlines rather than a hidden substitution: `𣥂` (U+23942, shared by 步's and
+歲's own bottom), `𠃓` (U+200D3, shared by 殇's and 汤's own right side —
+same codepoint already confirmed tofu in yesterday's chunk for 杨, so this is
+a repeat sighting of a known gap, not a new one), `𠘧` (U+20627, 殳's own
+left side), `𠬤` (U+20B24, 泽's own right side), `𦣞` (U+268DE, 洍's own right
+side), `𣶒` (U+23D92, 淵's own right side — also a repeat: yesterday's chunk
+already found this one tofu for 棩 and recorded it `needs-render` there),
+`𡕖` (U+21556, 溄's own 𡕖 child), and `𠓜` (U+204DC, found one level deeper
+inside 㒼's own cjkvi reading, but irrelevant to today's decisions since no
+row here uses it directly — see 滿 below). Recorded `needs-render` for the
+nine hosts these directly block: 步, 歲, 殇, 殳, 汤, 泽, 洍, 淵, 溄. In every
+one of these, the *opaque/overlay child itself* is the only thing standing
+between "keep-ours" and a verified answer — there was nothing else
+ambiguous about any of these nine rows, the block is purely "can't see the
+piece cjkvi itself is naming."
+
+**11 keep-ours** (歎, 殷, 毛, 氷, 氺, 求, 泲, 滛, 滿, 漢, 灵): in each, the
+render confirmed the current parts already name what's actually drawn, at
+the right level, even though cjkvi's reading goes through an overlay or an
+opaque stop to describe the same shape. Notables:
+- `歎`/`漢` (reviewed together — they share the exact same phonetic
+  top-right cluster): cjkvi reads both as `⿱廿⿻口夫` for the shared part,
+  an overlay nested inside a stack. Rendered side by side with standalone
+  `廿`/`口`/`夫`/`欠`, all four pieces are unmistakably present and at the
+  right granularity in both hosts — this project's row already stops at
+  the same four flat parts cjkvi's operators describe, just without
+  inventing one fused reading for the `口`+`夫` overlap. High-confidence
+  keep-ours for both, each corroborating the other.
+- `殷`: cjkvi stops at `㐆` (opaque — no row here, but not tofu; `㐆`
+  rendered as a clean, real glyph, a `月`-like shape with an extra stroke).
+  This project's own row *also* stops at `㐆` without inventing a deeper
+  reading — row and source agree on exactly where the evidence ends, which
+  is the one cjkvi-opaque case this chunk didn't need to defer.
+- `毛`: cjkvi's `⿱丿⿻二乚` overlay is visibly real (the middle and bottom
+  strokes cross rather than sitting apart), but the current flat
+  `丿,二,乚` already names all three visible strokes correctly — nothing
+  invented, nothing missing.
+- `氷`: textbook case, `水` plus one extra dot (`丶`) sharing a stroke —
+  current parts already exactly this.
+- `氺`/`求`: `氺`'s own `亅,丷,八` reading checked out stroke-for-stroke
+  against the render (central hook, splayed strokes above and below); `求`
+  then builds on that — `一,氺,丶` matches the glyph's top stroke, water-
+  variant body, and extra dot. (`求`'s decomposition prints with `氺`
+  listed twice in the worklist's compact view — that's not a duplicate
+  part, it's `氺`'s own row having no real keyword yet, so
+  `expand_part_terms` echoes the glyph back as its own placeholder
+  "keyword"; a keyword gap, not a decomposition bug, and out of this
+  chunk's scope.)
+- `泲`: cjkvi's `𠂔` is real (not tofu) and, rendered large next to `泲`
+  itself, the right-hand halves are visibly the same shape. Current
+  `氵,𠂔` confirmed correct as-is.
+- `滛`/`滿`: both ride on components (`䍃`, `㒼`) that this same audit
+  thread already confirmed real and matching in yesterday's chunk (checked
+  against 摇/遥 and 满/滿 respectively) — today's render repeated the check
+  against these exact two hosts directly (`滿` *is* one of the two hosts
+  yesterday's check used) and got the same answer. No new uncertainty,
+  keep-ours on both.
+- `灵`: cjkvi flattens the top all the way to `⿻コ一` (a bare bracket plus
+  a stroke), but rendered large, `灵`'s top is unmistakably three
+  horizontal bars joined by a hook on the left — the same shape as the
+  standalone primitive `彐` ("snout"), not a two-stroke `コ`. Current
+  `彐,火` is the correctly-leveled reading; adopting cjkvi's `コ,一` here
+  would be the over-flattening mistake CLAUDE.md warns against, not an
+  improvement.
+
+No real fix and no `kanji.db` edit this chunk — every finding either
+confirmed the existing row or hit a tofu ceiling. `backup_db.py` wasn't run
+since nothing was written.
+
+495 total, 195 pending after this chunk (215 before — see
+`hanzi_worklist_next.py --pending-count`).
