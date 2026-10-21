@@ -677,7 +677,14 @@ rtk569:包:wrap:勹,巳
 rtk570:胞:placenta:月,包
 rtk571:砲:cannon:石,包
 rtk572:泡:bubbles:水,包
-rtk573:亀:tortoise:日,勹,乙
+# 2026-10-21: 亀 was 日,勹,乙 -- the "eel" strokes rather than the shape, the same
+# spelling the 2026-09-20 pass fixed on 電 and 竜 (now 雨,电 / 立,电) but missed
+# here. Rendered beside 電/竜: the bottom is the same 电 box-and-hook. The top is
+# the small 𠂊 sitting on it (cjkvi ⿱𠂊..., prim-hooked-hand), not 勹, which wraps
+# around what it holds -- 勹 was a lookalike. Heisig's components ("bound up;
+# eels; sun; day") are exactly 𠂊 + 电 expanded, and "bound up" + "eel" found
+# nothing before this.
+rtk573:亀:tortoise:𠂊,电
 rtk574:電:electricity:雨,电
 rtk575:竜:dragon:立,电
 rtk576:滝:waterfall:水,竜

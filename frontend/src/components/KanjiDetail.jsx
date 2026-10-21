@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getKanji, addAlias, addStory, createDecomposition, uploadKanjiImage, reviewDecomposition } from "../api";
+import { getKanji, addAlias, addStory, createDecomposition, uploadKanjiImage, reviewDecomposition, getKanjiHistory } from "../api";
 import { displayChar } from "../utils";
 import { t } from "../i18n";
 import AutocompleteInput from "./AutocompleteInput";
@@ -286,6 +286,64 @@ function DecompositionReview({ decompositionId, myReview, lang, onReviewed }) {
   );
 }
 
+// Every past version of this kanji's system decomposition and its reviews, from
+// GET /kanji/{id}/history (built from data.txt's git history; owner request
+// 2026-10-21: "has it been reviewed? was it degraded by a review?").
+function DecompositionHistory({ kanjiId, lang }) {
+  const [history, setHistory] = useState(null);
+  useEffect(() => {
+    const controller = new AbortController();
+    setHistory(null);
+    getKanjiHistory(kanjiId, controller.signal).then(setHistory).catch(() => {});
+    return () => controller.abort();
+  }, [kanjiId]);
+  if (!history || !history.available) return null;
+  const versions = [...history.versions].reverse();
+  const reviews = [...history.reviews].reverse();
+  const fullReview = history.reviews.find((r) => r.source === "full re-review");
+  const reviewed = fullReview && fullReview.status && fullReview.status !== "pending";
+  return (
+    <section className="detail-section history-section">
+      <h3>{t(lang, "historyHeading")}</h3>
+      <p className={`history-status ${reviewed ? "history-reviewed" : "history-unreviewed"}`}>
+        {reviewed
+          ? t(lang, "historyReviewed", fullReview.date, fullReview.by, fullReview.status)
+          : t(lang, "historyNotReviewed")}
+      </p>
+      {reviews.filter((r) => r.status && r.status !== "pending").length > 0 && (
+        <ul className="history-reviews">
+          {reviews.filter((r) => r.status && r.status !== "pending").map((r, i) => (
+            <li key={i}>
+              <span className="history-date">{r.date}</span> {r.source}: <strong>{r.status}</strong>
+              {r.decision && <> → <span className="history-parts">{r.decision.join(", ")}</span></>}
+              {r.by && <> · {r.by}</>}
+              {r.note && <div className="history-note">{r.note}</div>}
+            </li>
+          ))}
+        </ul>
+      )}
+      <details className="history-versions">
+        <summary>{t(lang, "historyVersions", versions.length)}</summary>
+        <ol reversed>
+          {versions.map((v, i) => (
+            <li key={v.commit + i}>
+              <div>
+                <span className="history-date">{v.date}</span>{" "}
+                <span className="history-parts">{v.parts === null ? t(lang, "historyRemoved") : v.parts || t(lang, "historyAtomic")}</span>
+                {i === 0 && <span className="history-current"> · {t(lang, "historyCurrent")}</span>}
+              </div>
+              <div className="history-meta">
+                {v.by} · <a href={v.url} target="_blank" rel="noreferrer">{v.subject}</a>
+              </div>
+              {v.note && <div className="history-note">{v.note}</div>}
+            </li>
+          ))}
+        </ol>
+      </details>
+    </section>
+  );
+}
+
 export default function KanjiDetail({ kanjiId, onSelectPart, onBack, onHome, user, lang = "en", sources = null }) {
   const [kanji, setKanji] = useState(null);
   const [error, setError] = useState(null);
@@ -475,6 +533,8 @@ export default function KanjiDetail({ kanjiId, onSelectPart, onBack, onHome, use
           </div>
         )}
       </section>
+
+      <DecompositionHistory kanjiId={kanji.id} lang={lang} />
 
       {(kanji.onyomi || kanji.kunyomi || kanji.pinyin) && (
         <section className="detail-section readings-section">

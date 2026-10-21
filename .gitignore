@@ -42,3 +42,4 @@ audit_report.md
 # -o backend/ids.txt`), not this project's own data. Was never gitignored
 # before, which a stop-hook's generic "untracked files" check flagged.
 backend/ids.txt
+backend/decomposition_history.json

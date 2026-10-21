@@ -476,3 +476,19 @@ def test_suggest_restricted_to_study_script(conn, client):
 
 def test_suggest_rejects_invalid_script(conn, client):
     assert client.get("/search/suggest", params={"q": "mo", "script": "klingon"}).status_code == 400
+
+
+def test_kanji_history_endpoint(client, tmp_path, monkeypatch):
+    """GET /kanji/{id}/history serves decomposition_history.json (owner
+    request 2026-10-21); hanzi and missing files answer available=false."""
+    import json
+    import main
+
+    path = tmp_path / "history.json"
+    path.write_text(json.dumps({"rtk573": {"versions": [{"date": "2026-10-21", "parts": "𠂊,电"}],
+                                           "reviews": []}}), encoding="utf-8")
+    monkeypatch.setattr(main, "HISTORY_FILE", path)
+    body = client.get("/kanji/rtk573/history").json()
+    assert body["available"] is True and body["versions"][0]["parts"] == "𠂊,电"
+    assert client.get("/kanji/hanzi-4e80/history").json()["available"] is False
+    assert client.get("/kanji/rtk9999/history").json()["reason"] == "not-generated"

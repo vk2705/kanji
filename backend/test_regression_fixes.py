@@ -3393,8 +3393,13 @@ EXPECTED_DECOMPOSITIONS = {
     # real part rather than us having a wrong one) are still unmined.
     "rtk450": {"character": "芸", "keyword": "technique",
                "expected_part_ids": {"prim-mugwort", "rtk2241"}},
+    # 2026-10-21: was {kangxi20 勹, rtk12 日, rtk75 乙}. That pinned the box fix
+    # above (田 -> 日) but kept two older errors: 日 + 乙 are the strokes of
+    # the "eel" shape 电 (prim-eel), which 電/竜 were switched to on 09-20 while
+    # 亀 was missed, and the top is 𠂊 (prim-hooked-hand), not the lookalike 勹,
+    # by render beside 電/竜. Heisig: "bound up; eels; sun; day" = 𠂊 + 电.
     "rtk573": {"character": "亀", "keyword": "tortoise",
-               "expected_part_ids": {"kangxi20", "rtk12", "rtk75"}},
+               "expected_part_ids": {"prim-hooked-hand", "prim-eel"}},
     "rtk684": {"character": "添", "keyword": "annexed",
                "expected_part_ids": {"rtk137", "rtk457", "rtk639"}},
     "rtk903": {"character": "渓", "keyword": "mountain stream",

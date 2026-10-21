@@ -76,6 +76,12 @@ export async function getKanji(id, sources = null, signal = undefined) {
   return res.json();
 }
 
+export async function getKanjiHistory(id, signal = undefined) {
+  const res = await fetch(`${BASE}/kanji/${encodeURIComponent(id)}/history`, { signal });
+  if (!res.ok) throw new Error(await extractError(res));
+  return res.json();
+}
+
 export async function register(username, password, prefs = {}) {
   const res = await fetch(`${BASE}/auth/register`, {
     method: "POST",

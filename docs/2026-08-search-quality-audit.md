@@ -20921,3 +20921,32 @@ edits on this machine.
 
 At 20 rows a day the 546 pending rows take about 28 days. The hanzi worklist
 (195 pending, 20 a day) finishes around 10-31.
+
+## 2026-10-21 — 亀 was wrong all along; every kanji goes back through review
+
+The owner asked whether 亀's decomposition could be better. It was
+`日,勹,乙`: the "eel" spelled as its strokes (日 + 乙) instead of the shape
+(电), the same spelling the 2026-09-20 pass fixed on 電 (`雨,电`) and 竜
+(`立,电`) — 亀 has that same bottom and was missed. Its top was also a
+lookalike: rendered, it is the small 𠂊 sitting on top (cjkvi `⿱𠂊⿻日电`,
+our `prim-hooked-hand`), not 勹, which wraps around what it holds. Heisig's
+components for 亀 are "bound up; eels; sun; day", which is exactly `𠂊 + 电`
+expanded, and before this "bound up" + "eel" found nothing. Now
+`rtk573:亀:tortoise:𠂊,电`. Related rows still in review: 縄 (`糸,亀`), 竃
+and 蝿 contain the same shape.
+
+**Why nothing caught it.** The decomposition worklist only queued kanji
+whose breakdown disagreed with Google's AI answer. Google said `勹, 日, 乙`
+for 亀 — the same mistake — so it was never queued; the coverage file marked
+it reviewed. Two sources agreeing on one error is not evidence. Owner's
+decision: re-review all 3,000 Japanese kanji from scratch, 50 a day (about
+60 days), in frame order, against the render, Heisig's column and cjkvi-ids,
+with a shape-family check on every fix (`docs/kanji_full_review.json`,
+`backend/full_review.py`, the `kanji-worklist-review` job). 亀 is the first
+decision recorded there.
+
+**History.** The owner also wants to see, per kanji, whether it was reviewed
+and whether a change made it worse. `backend/build_decomposition_history.py`
+rebuilds every past version of each row from `data.txt`'s git history (249
+commits since 2026-06-28: 7,515 versions, 2,532 of the 3,000 kanji changed at
+least once), plus the review decisions; the kanji detail page shows it.
