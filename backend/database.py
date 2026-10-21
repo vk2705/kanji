@@ -400,10 +400,42 @@ def _migrate_v8(conn):
 _register(8, _migrate_v8)
 
 
+def _migrate_v9(conn):
+    """Real-visitor signal (2026-10-21, owner request: "do any real people ever
+    use it?"). page_views counts every load of the app's JavaScript, and almost all
+    of those are not people: Google's renderer, a 13,417-visit burst on 2026-10-02,
+    one view per fresh cookie. A visitor who runs a search or opens a kanji did
+    something a crawler doesn't, so that is recorded here, one row per
+    (visitor, day, kind) with a counter -- bounded by construction, no pruning
+    needed. Only the kind of action is stored, never what was searched.
+    """
+    conn.execute(
+        """CREATE TABLE visitor_engagement (
+               visitor_id TEXT NOT NULL,
+               day TEXT NOT NULL,
+               kind TEXT NOT NULL CHECK (kind IN ('search', 'detail')),
+               count INTEGER NOT NULL DEFAULT 1,
+               PRIMARY KEY (visitor_id, day, kind)
+           )"""
+    )
+
+
+_register(9, _migrate_v9)
+
+
 def record_page_view(conn, visitor_id: str, path: str | None):
     conn.execute(
         "INSERT INTO page_views (visitor_id, path) VALUES (?, ?)",
         (visitor_id, path)
+    )
+    conn.commit()
+
+
+def record_engagement(conn, visitor_id: str, kind: str):
+    conn.execute(
+        """INSERT INTO visitor_engagement (visitor_id, day, kind) VALUES (?, date('now'), ?)
+           ON CONFLICT (visitor_id, day, kind) DO UPDATE SET count = count + 1""",
+        (visitor_id, kind),
     )
     conn.commit()
 

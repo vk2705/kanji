@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { searchByParts, searchByText, searchByChar, getMe, updatePreferences, recordPageView } from "./api";
+import { searchByParts, searchByText, searchByChar, getMe, updatePreferences, recordPageView, recordEvent } from "./api";
 import ResultsGrid from "./components/ResultsGrid";
 import KanjiDetail from "./components/KanjiDetail";
 import AuthBar from "./components/AuthBar";
@@ -107,6 +107,11 @@ export default function App() {
     recordPageView();
     return () => searchController.current?.abort();
   }, []);
+
+  // Opening a kanji, by click or by a shared ?kanji= link, counts as a real visit.
+  useEffect(() => {
+    if (selectedId) recordEvent("detail");
+  }, [selectedId]);
 
   // The MCP instructions live in index.html's static introduction, below #root.
   // An incoming /#ai-access link (the kanji pages' footer uses one) is resolved
@@ -281,6 +286,7 @@ export default function App() {
   const [searchDepth, setSearchDepth] = useState(initialUrlState.searchDepth || 1);
 
   async function runSearch(fn) {
+    recordEvent("search");
     searchController.current?.abort();
     const controller = new AbortController();
     searchController.current = controller;

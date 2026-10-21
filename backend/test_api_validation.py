@@ -101,3 +101,34 @@ def test_ordinary_length_inputs_still_work(client):
 
     r = client.post(f"/kanji/{kid}/decompositions", json={"parts": ["sun", "moon", "tree"]})
     assert r.status_code == 200, r.text
+
+
+def test_analytics_event_records_real_visitor(client, db_path):
+    """POST /analytics/event is the "a person did something" signal (analytics.py,
+    database._migrate_v9): one row per visitor/day/kind, counted up on repeats."""
+    import sqlite3
+
+    assert client.post("/analytics/event", json={"kind": "search"}).status_code == 200
+    assert client.post("/analytics/event", json={"kind": "search"}).status_code == 200
+    assert client.post("/analytics/event", json={"kind": "detail"}).status_code == 200
+    rows = sqlite3.connect(db_path).execute(
+        "SELECT kind, count FROM visitor_engagement ORDER BY kind"
+    ).fetchall()
+    assert rows == [("detail", 1), ("search", 2)]
+
+
+def test_analytics_event_rejects_unknown_kind(client):
+    assert client.post("/analytics/event", json={"kind": "anything"}).status_code == 422
+
+
+def test_analytics_ignores_crawlers(client, db_path):
+    """Google's renderer runs the app's JavaScript; self-declared bots must not
+    count as visits or as real people."""
+    import sqlite3
+
+    googlebot = {"User-Agent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"}
+    assert client.post("/analytics/pageview", json={"path": "/"}, headers=googlebot).status_code == 200
+    assert client.post("/analytics/event", json={"kind": "search"}, headers=googlebot).status_code == 200
+    conn = sqlite3.connect(db_path)
+    assert conn.execute("SELECT COUNT(*) FROM page_views").fetchone()[0] == 0
+    assert conn.execute("SELECT COUNT(*) FROM visitor_engagement").fetchone()[0] == 0

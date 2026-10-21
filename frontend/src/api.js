@@ -233,6 +233,20 @@ export async function setRowVisibility(table, rowId, visibility) {
 // Fire-and-forget visit counter (see backend/database.py's _migrate_v5 docstring and
 // visit_stats.py) — deliberately never awaited or surfaced to the user; a failure
 // here (offline, ad blocker, etc.) shouldn't affect the app itself.
+// "Did something a crawler wouldn't": the real-visitor signal (see analytics.py's
+// /analytics/event). Each kind is sent at most once per page load.
+const sentEvents = new Set();
+export function recordEvent(kind) {
+  if (sentEvents.has(kind)) return;
+  sentEvents.add(kind);
+  fetch(`${BASE}/analytics/event`, {
+    method: "POST",
+    credentials: "include",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ kind }),
+  }).catch(() => {});
+}
+
 export function recordPageView() {
   fetch(`${BASE}/analytics/pageview`, {
     method: "POST",

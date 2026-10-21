@@ -12,6 +12,12 @@ POST /analytics/pageview -- a bot that only ever hits URLs directly (the vast
 majority of this site's raw traffic, per the nginx-log analysis that prompted this)
 never runs the page's JS and never shows up here at all, unlike an IP-based count.
 
+Raw page views still include crawlers that run JavaScript and bot bursts that
+mint a fresh cookie per hit. The "real people" lines count only visitors who
+then *did* something -- ran a search or opened a kanji (visitor_engagement,
+database.py's _migrate_v9) -- which is the number to read for "does anyone
+actually use this?".
+
 Usage:
     ./visit_stats.py              # summary: today / 7d / 30d / all-time
     ./visit_stats.py --days 14    # daily breakdown for the last N days
@@ -57,6 +63,19 @@ def summary(conn):
     """).fetchone()[0]
     print(f"{'All-time':<14} {total_views:>6} page views, {total_visitors:>4} unique visitors")
 
+    print("\nReal people (ran a search or opened a kanji):")
+    for label, days in [("Today", 1), ("Last 7 days", 7), ("Last 30 days", 30), ("All-time", None)]:
+        where, params = ("WHERE day >= ?", (_since(days)[:10],)) if days else ("", ())
+        people, searches, details = conn.execute(
+            f"""SELECT COUNT(DISTINCT visitor_id),
+                       COALESCE(SUM(CASE WHEN kind = 'search' THEN count END), 0),
+                       COALESCE(SUM(CASE WHEN kind = 'detail' THEN count END), 0)
+                FROM visitor_engagement {where}""",
+            params,
+        ).fetchone()
+        print(f"{label:<14} {people:>4} people, {searches:>5} page loads with a search, "
+              f"{details:>5} with a kanji opened")
+
     first = conn.execute("""
         SELECT MIN(t) FROM (
             SELECT MIN(viewed_at) AS t FROM page_views
@@ -97,13 +116,20 @@ def daily_breakdown(conn, days: int):
     # prune_page_views.py only rolls up days older than its retention window --
     # but prefer the exact live figure if it ever does).
     merged = {**summary_rows, **live_rows}
-    rows = sorted(merged.items())
-    if not rows:
+    people = {
+        r["day"]: r["people"] for r in conn.execute(
+            "SELECT day, COUNT(DISTINCT visitor_id) AS people FROM visitor_engagement WHERE day >= ? GROUP BY day",
+            (cutoff[:10],)
+        ).fetchall()
+    }
+    days_seen = sorted(set(merged) | set(people))
+    if not days_seen:
         print(f"No visits in the last {days} day(s).")
         return
-    print(f"{'Date':<12} {'Views':>7} {'Visitors':>10}")
-    for day, (views, visitors) in rows:
-        print(f"{day:<12} {views:>7} {visitors:>10}")
+    print(f"{'Date':<12} {'Views':>7} {'Visitors':>10} {'Real people':>12}")
+    for day in days_seen:
+        views, visitors = merged.get(day, (0, 0))
+        print(f"{day:<12} {views:>7} {visitors:>10} {people.get(day, 0):>12}")
 
 
 def main():
