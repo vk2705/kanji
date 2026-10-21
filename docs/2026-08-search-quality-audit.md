@@ -21025,3 +21025,27 @@ stops dropping) should end itself after this run.
 
 No production deploy implied by any of this — nothing here has been
 committed for prod to pull.
+
+## 2026-10-21 — full re-review frames 1–50 committed; the regression step fixed
+
+Follow-up to the entry above (`c1f1485`). Run 1's work on frames 1–50 was
+sound and is committed as it stood: 48 keep, 1 fixed, 1 needs-render.
+- **rtk3 三 fixed**: Heisig's components column is empty (he teaches it whole,
+  like 一 and 二), but the row's only decomposition was an unlabelled
+  `one,two` — the cjkvi structural view standing in as the primary. Now
+  `;one,two`: atomic primary, the structure kept as a labelled alternate,
+  matching 二.
+- **rtk42 升 needs-render**: the primary `千,廾` claims 3 + 3 strokes for a
+  4-stroke character, while Heisig's column does say "thousand". Left for a
+  person, correctly.
+
+Checked here before committing: `pytest` 104 passed, `audit_radicals.py`
+clean, and the regression pins **all 1328 pass on a freshly seeded DB**.
+
+The run had stalled on `test_regression_fixes.py` against the live dev
+`kanji.db`: on this one-CPU box that takes 10–20 minutes with no output (24k
+rows plus legacy rows the source files no longer have), and it reports 6
+failures belonging to that old DB. New `backend/regression_fresh.sh` runs the
+pins the way CI does — fresh DB from the source files, in a temp copy — in
+about 2 minutes, and the job's prompt now uses it. Not a hang, so the
+script itself is unchanged.

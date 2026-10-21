@@ -55,8 +55,15 @@ owner in the kanji's history:
 ## Applying fixes
 
 1. Before editing: `./venv/bin/python3 backup_db.py`, and record the baselines
-   of `./venv/bin/pytest -q`, `./venv/bin/python3 test_regression_fixes.py`
-   and `./venv/bin/python3 audit_radicals.py`.
+   of `./venv/bin/pytest -q`, `./regression_fresh.sh` and
+   `./venv/bin/python3 audit_radicals.py`.
+   **Always run the regression pins as `./regression_fresh.sh`**, never as
+   `test_regression_fixes.py` directly: the script seeds a fresh database from
+   the source files the way CI does (about 2 minutes, give the command a
+   10-minute timeout). Run against the live `kanji.db` the same pins take 10-20
+   minutes with no output on this one-CPU box (the first run of this job gave
+   up waiting there and never committed) and report 6 failures that belong to
+   that old DB, not to your change.
 2. Edit the `rtkNNN:` line in `backend/data.txt` (format in CLAUDE.md; keep `;`
    alternates that are still right) and put a short `#` comment above it
    saying what it was and why it changed — the history page shows it.

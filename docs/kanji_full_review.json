@@ -8,11 +8,11 @@
   "heisig_components": "",
   "cjkvi_ids": "一",
   "google_parts": [],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Atomic, matches empty CSV components; rendered as a single stroke, no decomposition needed.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk2",
@@ -26,11 +26,11 @@
    "一",
    "一"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Atomic primary matches empty CSV; alt 一 (structural, cjkvi ⿱一一) correctly demoted/labelled.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk3",
@@ -44,11 +44,14 @@
    "二",
    "一"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   ";one",
+   "two"
+  ],
+  "note": "CSV components empty (atomic, like 一/二) but row's only decomposition was unlabelled one,two -- cjkvi's ⿱一二 structural view masquerading as primary. Demoted to a labelled alternate, matching rtk2's pattern; self-identity still covers bare lookups.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk4",
@@ -62,11 +65,11 @@
    "囗",
    "儿"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Matches CSV 'pent in; human legs' and cjkvi ⿴囗儿; rendered correctly.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk5",
@@ -77,11 +80,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿱一𫝀",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Atomic, matches empty CSV components.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk6",
@@ -95,11 +98,11 @@
    "亠",
    "八"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "top hat,八 matches CSV 'top hat; animal legs' and cjkvi ⿱亠八.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk7",
@@ -110,11 +113,11 @@
   "heisig_components": "diced",
   "cjkvi_ids": "⿻㇀乚",
   "google_parts": [],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Atomic; CSV's 'diced' is an alternate primitive-name alias already present, not a sub-part.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk8",
@@ -125,11 +128,11 @@
   "heisig_components": "",
   "cjkvi_ids": "八",
   "google_parts": [],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Atomic, matches empty CSV components.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk9",
@@ -140,11 +143,11 @@
   "heisig_components": "baseball",
   "cjkvi_ids": "九",
   "google_parts": [],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Atomic; CSV's 'baseball' is an alternate primitive-name alias already present, not a sub-part.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk10",
@@ -155,11 +158,11 @@
   "heisig_components": "needle",
   "cjkvi_ids": "十",
   "google_parts": [],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Atomic; CSV's 'needle' is an alternate primitive-name alias already present, not a sub-part.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk11",
@@ -170,11 +173,11 @@
   "heisig_components": "",
   "cjkvi_ids": "口",
   "google_parts": [],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Atomic, matches empty CSV components.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk12",
@@ -185,11 +188,11 @@
   "heisig_components": "sun",
   "cjkvi_ids": "日",
   "google_parts": [],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Atomic; CSV's 'sun' is an alternate primitive-name alias already present, not a sub-part.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk13",
@@ -200,11 +203,11 @@
   "heisig_components": "moon; flesh; part of the body",
   "cjkvi_ids": "月",
   "google_parts": [],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Atomic; CSV's moon/flesh/part-of-body are alternate aliases already present, not sub-parts.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk14",
@@ -215,11 +218,11 @@
   "heisig_components": "brains",
   "cjkvi_ids": "田",
   "google_parts": [],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Atomic; CSV's 'brains' is an alternate primitive-name alias already present, not a sub-part.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk15",
@@ -230,11 +233,11 @@
   "heisig_components": "",
   "cjkvi_ids": "目",
   "google_parts": [],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Atomic, matches empty CSV components.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk16",
@@ -248,11 +251,11 @@
    "十",
    "口"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "mouth,ten matches CSV and cjkvi ⿱十口.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk17",
@@ -266,11 +269,11 @@
    "五",
    "口"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "five,mouth matches CSV and cjkvi ⿱五口.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk18",
@@ -284,11 +287,11 @@
    "日",
    "目"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "sun,eye matches the Japanese cjkvi variant ⿱日目[J] and CSV.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk19",
@@ -302,11 +305,11 @@
    "月",
    "月"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "flesh (single mention) matches cjkvi ⿰月月, consistent with the project's single-mention convention for doubled primitives.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk20",
@@ -320,11 +323,11 @@
    "日",
    "月"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "sun,moon matches CSV and cjkvi ⿰日月.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk21",
@@ -338,11 +341,11 @@
    "口",
    "昌"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "mouth,昌 matches CSV and cjkvi ⿰口昌.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk22",
@@ -357,11 +360,11 @@
    "日",
    "日"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "日 (single mention) matches CSV 'day; sun' and the doubled-primitive convention, despite the glyph showing three suns.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk23",
@@ -376,11 +379,11 @@
    "口",
    "口"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "口 (single mention) matches CSV 'mouth' and the doubled-primitive convention.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk24",
@@ -394,11 +397,11 @@
    "口",
    "口"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "口,ノ,口 (two mouths + connecting drop) matches cjkvi's 3-level stack ⿳口丿口 -- a case where Heisig's own narrative uses the repeated primitive twice, unlike rtk22/rtk23.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk25",
@@ -412,11 +415,11 @@
    "日",
    "日"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "日 (single mention) matches CSV 'sun; day' and the doubled-primitive convention.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk26",
@@ -430,11 +433,11 @@
    "日",
    "十"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "十,日 matches CSV and cjkvi ⿱日十 (listing order differs from top-to-bottom reading but set is correct).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk27",
@@ -448,11 +451,11 @@
    "日",
    "九"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "日,九 matches CSV and cjkvi ⿺九日.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk28",
@@ -463,11 +466,11 @@
   "heisig_components": "ten; twenty",
   "cjkvi_ids": "世",
   "google_parts": [],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "廿,一 already verified by render in a prior session (see the data.txt comment above rtk1274/廿: '廿 = 凵 + a top horizontal stroke exactly'). audit_csv_regressions flags 'ten' as unreachable, but that's CSV's fully-expanded narrative concept for 廿, not a literal drawn shape -- known false positive.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk29",
@@ -481,11 +484,11 @@
    "田",
    "月"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "月,田 matches CSV and cjkvi ⿱田月[GJK].",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk30",
@@ -499,11 +502,11 @@
    "日",
    "一"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "一,日 matches CSV and cjkvi ⿱日一 (listing order reversed from top-to-bottom but set is correct).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk31",
@@ -517,11 +520,11 @@
    "月",
    "旦"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "旦,月 matches CSV and cjkvi ⿰月旦[GJK].",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk32",
@@ -536,11 +539,11 @@
    "日",
    "一"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "一,旦 matches CSV and cjkvi ⿱一旦.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk33",
@@ -551,11 +554,11 @@
   "heisig_components": "",
   "cjkvi_ids": "凹",
   "google_parts": [],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Atomic, matches empty CSV components.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk34",
@@ -566,11 +569,11 @@
   "heisig_components": "",
   "cjkvi_ids": "凸",
   "google_parts": [],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Atomic, matches empty CSV components.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk35",
@@ -584,11 +587,11 @@
    "丨",
    "日"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "｜,日 matches CSV 'stick; sun' and cjkvi ⿰丨日.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk36",
@@ -602,11 +605,11 @@
    "丶",
    "目"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "丶,目 matches CSV 'drop; eye'; cjkvi treats 自 as atomic but Heisig's own explicit decomposition is honored per rule #4.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk37",
@@ -620,11 +623,11 @@
    "丶",
    "日"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "丶,日 matches CSV 'drop; sun'; cjkvi treats 白 as atomic but Heisig's own explicit decomposition is honored.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk38",
@@ -638,11 +641,11 @@
    "一",
    "白"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "一,白 matches CSV and cjkvi ⿱一白.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk39",
@@ -656,11 +659,11 @@
    "口",
    "丨"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "｜,口 matches CSV 'stick; mouth'; cjkvi's ⿻ overlay (stick passes through the box) doesn't contradict Heisig's two-part narrative.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk40",
@@ -674,11 +677,11 @@
    "丿",
    "十"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "ノ,十 matches CSV 'drop; ten; needle'.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk41",
@@ -692,11 +695,11 @@
    "千",
    "口"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "千,口 matches CSV and cjkvi ⿱千口[GJK] (Japanese variant).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk42",
@@ -710,11 +713,11 @@
    "千",
    "十"
   ],
-  "status": "pending",
+  "status": "needs-render",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Primary 千,廾 claims a full 'thousand' shape (千=丿+十, 3 strokes) atop 廾 (3 strokes) = 6, but CSV's official stroke_count is 4, matching the already-present alt ノ,廾 (1+3) instead. CSV's Heisig components literally say 'thousand', so this may be a deliberate reused keyword for just the top stroke rather than a literal full-字 claim -- genuinely ambiguous without a clearer side-by-side render than this session could produce; leaving primary untouched, alt already covers the structural reading.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk43",
@@ -728,11 +731,11 @@
    "日",
    "升"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "升,日 matches CSV and cjkvi ⿱日升; uses 升 as one opaque part, independent of rtk42's own internal-breakdown question.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk44",
@@ -746,11 +749,11 @@
    "九",
    "丶"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "九,丶 matches CSV 'drop; nine'; cjkvi's ⿻/⿵ operators don't add a hidden third shape.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk45",
@@ -764,11 +767,11 @@
    "十",
    "丶"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "十,丶 matches CSV 'glue; drop; ten with a hook'; cjkvi treats 寸 as atomic but Heisig's own explicit decomposition is honored.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk46",
@@ -782,11 +785,11 @@
    "月",
    "寸"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "月,寸 matches CSV and cjkvi ⿰月寸[GJK].",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk47",
@@ -797,11 +800,11 @@
   "heisig_components": "ten; needle; rice field; brains; glue",
   "cjkvi_ids": "⿱𤰔寸",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "十,寸,田 matches CSV's flattened 'ten; rice field; brains; glue' -- no coherent Heisig-named intermediate shape to group them under.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk48",
@@ -817,11 +820,11 @@
    "寸",
    "丶"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "十,尃 already correctly fixed in a prior session (see the data.txt comment: '尃 is not 専. Its four hosts spelled it 専 plus a stray 丶.'); audit_csv_regressions' 'dropped rice field/brains via specialty' is the expected false positive from that same fix, since 尃 does not route through 専.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk49",
@@ -835,11 +838,11 @@
    "卜",
    "口"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "口,卜 matches CSV and cjkvi ⿱⺊口 (⺊ is a positional variant of 卜).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk50",
@@ -853,11 +856,11 @@
    "卜",
    "一"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "一,卜 matches CSV and cjkvi ⿱⺊一.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-21"
  },
  {
   "id": "rtk51",

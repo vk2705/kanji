@@ -77,7 +77,11 @@ kangxi80:毋:mother,do not,breasts
 
 
 
-rtk3:?:3,three:one,two
+# 2026-10-21 full re-review: CSV components for 三 are empty (Heisig teaches
+# it whole, like 一/二) but this row's only decomposition was the unlabelled
+# "one,two" -- cjkvi's structural ⿱一二 view masquerading as Heisig's own.
+# Demoted to a labelled alternate, matching rtk2/二's atomic-primary pattern.
+rtk3:?:3,three:;one,two
 rtk4:?:4,four:囗,儿
 rtk6:六:six,6:top hat,八
 rtk7:七:seven,diced,hook:
