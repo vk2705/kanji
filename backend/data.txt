@@ -433,8 +433,16 @@ rtk304:車:car,vehicle:
 rtk305:連:take along:辶,車
 rtk306:軌:rut:車,九
 rtk307:輸:transport:俞,車
-rtk308:喩:metaphor:月,口,𠆢,一
-rtk309:前:in front:丷,月,刀
+# Rendered: 喩 = 口 + 俞 (meeting of butchers), same right-side shape as
+# rtk307 輸/rtk376 諭/rtk675 愉/rtk2511 愈. The old row flattened 俞 into
+# 𠆢,一,月 and dropped its bottom 刀 stroke entirely (an omission, not a
+# relabelling) instead of using the existing prim-meeting-of-butchers primitive.
+rtk308:喩:metaphor:口,俞
+# Rendered: top is 丷 over a full-width 一 crossbar (the 䒑 shape), same as
+# rtk74 首's top (which already lists 丷,一 separately) — the old row dropped
+# the crossbar. 煎(310)/道(295)/導(296) reference 前/首 by name, so they
+# inherit the fix automatically and needed no edit of their own.
+rtk309:前:in front:丷,一,月,刀
 rtk310:煎:broil:前,灬
 rtk311:各:each:口,夂
 rtk312:格:status:木,各

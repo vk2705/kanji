@@ -1053,10 +1053,15 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk287", "rtk79"}},
     "rtk301": {"character": "逃", "keyword": "escape",
                 "expected_part_ids": {"kangxi162", "rtk250"}},
-    # 2026-09-07 worklist loop, day 5 batch:
-    # 前 had a spurious extra 一 and was missing 刀(刂) entirely.
+    # 2026-10-22 full re-review: reverses the 2026-09-07 call that this row's
+    # top was just 丷 with "no extra ceiling stroke". Rendering 䒑 (U+4992,
+    # cjkvi's own atomic top for ⿱䒑刖) on its own shows it has a full-width
+    # crossbar that bare 丷 doesn't; 前's top matches 䒑, not bare 丷, and is
+    # identical to rtk74 首's top, which already splits into 丷,一. The
+    # crossbar spans both 月 and 刀 below it (wider than 月 alone), so it
+    # isn't just 月's own top stroke. Added 一 (rtk1) back.
     "rtk309": {"character": "前", "keyword": "in front",
-                "expected_part_ids": {"kangxi12", "rtk13", "rtk87"}},
+                "expected_part_ids": {"kangxi12", "rtk1", "rtk13", "rtk87"}},
     # 夢 was missing 罒(net/eyeglasses) entirely.
     "rtk327": {"character": "夢", "keyword": "dream",
                 "expected_part_ids": {"kangxi122", "kangxi14", "prim-mugwort", "rtk114"}},

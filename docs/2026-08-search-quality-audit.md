@@ -21759,3 +21759,83 @@ choice: name everything drawn. Now `prim-pup-tent:尞:pup tent:大,丷,日,小`
 Fresh-DB regression pins: 1328/1328; audit_radicals clean. No pin covered
 尞. Made in a separate worktree because the full re-review job was editing
 data.txt in the main checkout at the time.
+
+## 2026-10-22 — full re-review: frames 301–350
+
+48 kept, 2 fixed, 0 needs-render. `full_review.py --pending-count` now
+2649/3000.
+
+Rendered every host plus its parts in ten batches
+(`render_glyphs.py --labelled`, `/tmp/b1.png`…`/tmp/b10.png`, plus a handful
+of closer one-off comparisons) and cross-checked each against Heisig's CSV
+`components` column and cjkvi-ids. Most of the 50 agreed cleanly on all
+three; two did not:
+
+- **rtk308 喩** (metaphor) — the row was `月,口,𠆢,一`, flattening the
+  right-hand shape 俞 ("meeting of butchers") into three of its own four
+  sub-strokes while silently dropping the bottom 刀 stroke entirely. 俞
+  already has a row (`prim-meeting-of-butchers` = 亼,月,刀) and is already
+  used directly, unflattened, by its siblings rtk307 輸, rtk376 諭, rtk675
+  愉 and rtk2511 愈. Fixed to `口,俞`, matching that convention and
+  restoring the missing 刀. Heisig's own CSV `components` column for 喩 is
+  empty — he teaches it whole — so this is a project-added override, not a
+  correction to his own breakdown; cjkvi's `⿰口兪` confirms the two-piece
+  split.
+- **rtk309 前** (in front) — the row was `丷,月,刀`, missing the full-width
+  crossbar that runs under the two "horns" strokes and over both 月 and 刀.
+  Rendering 䒑 (U+4992, the codepoint cjkvi's `⿱䒑刖` uses for that exact
+  top) on its own shows it has that crossbar, and bare 丷 (U+4E37) doesn't;
+  前's top is pixel-for-pixel 䒑, and identical to rtk74 首's top, whose row
+  already splits into `丷,一` separately. Fixed to `丷,一,月,刀`. This
+  reverses a 2026-09-07 call on the same row ("render shows 丷,月,刂
+  cleanly, no extra ceiling stroke") — re-rendering today the crossbar is
+  unambiguous and spans wider than 月 alone, so it can't be read as just
+  月's own top stroke. `audit_weak_evidence.py --host 前` found no ⿻/⿴
+  overlay and no opaque-intermediate blind spot that would explain the
+  earlier miss either way.
+
+**Shape-family check.** For 前: 煎(310)/道(295)/導(296) all reference 前 or
+首 by name rather than drawing the crossbar themselves, so they inherited
+the fix automatically with no edit needed — grepped data.txt and confirmed.
+For 喩: grepped every other host containing `俞` (307/376/675/2511) and all
+already use the unflattened primitive; rtk308 was the only offender.
+
+**Also checked but left as-is, with reasoning:**
+- **rtk304 車** (car) — CSV `components` reads "sun; ten; needle", but every
+  later frame that uses this shape (連, 軌, 輸, 軍, 輝, 運, …) names it
+  "car", not its strokes — the CSV column is Heisig's own mnemonic aside
+  for the frame that introduces the primitive, not evidence it should be
+  split. Kept atomic, per the "車, not sun/ten/needle" trap in CLAUDE.md.
+- **rtk317 夏** (summer) — CSV lists "one; ceiling; drop; eye; walking
+  legs" against a 3-part row (`一,自,夂`); "ceiling" has no part of its own
+  in the row. Read as a second English name Heisig gives the same top
+  stroke he also calls "one" elsewhere in the same story (the same pattern
+  as "turtle; portent" both naming 兆 in rtk301), not a fourth drawn
+  component — the render shows nothing between the cap stroke and 自's own
+  box that isn't already accounted for.
+- **rtk341 士** — CSV names it only "samurai" (i.e., itself) with no
+  sub-parts, which CLAUDE.md flags as positive evidence of atomicity; kept
+  atomic, with the already-present `一,十` alternate covering cjkvi's
+  structural `⿱十一` reading for search.
+- **rtk335 涼 / rtk350 津** — both pair 氵 (the radical form) with the part
+  term `水`; confirmed by grep this is the established project-wide
+  convention (one canonical term for both forms of water), not a form
+  mismatch.
+
+Checked before editing: `pytest` 104 passed, `regression_fresh.sh` all
+1328/1328 on a fresh DB, `audit_radicals.py` clean, `backup_db.py` ran
+first. After the two fixes, `regression_fresh.sh` failed one stale pin —
+`rtk309`'s expected part-id set hadn't been updated for the 2026-09-07 call
+this session reverses — so the pin in `test_regression_fixes.py` was
+updated in place (now expects `rtk1` alongside `kangxi12`/`rtk13`/`rtk87`)
+with a comment explaining the reversal; re-run after that: all 1328/1328.
+`pytest` 104 passed again. `sync_system_data.py --dry-run` showed the two
+intended decomposition replacements plus four unrelated rows
+(`prim-pup-tent`, rtk2914, rtk2958, rtk2971) already drifted from a prior
+commit that hadn't been synced to this box's `kanji.db` yet; applied for
+real (`sync_system_data.py`), then re-ran `pytest` (104 passed) and
+`audit_radicals.py` (clean) against the live DB, and a final
+`sync_system_data.py --dry-run` confirmed no remaining drift.
+
+No production deploy from this session — a deployer needs `git pull` +
+`sync_system_data.py` on prod to pick up rtk308/rtk309.
