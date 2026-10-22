@@ -104,14 +104,19 @@ Then `git push origin master`.
 - This is a shared dev box with other unrelated work routinely left
   uncommitted in this same working tree (stray scripts, image exports, a
   constantly-regenerated sitemap file, etc.) — that is normal and not your
-  concern. Check `git status` only for the two files this job itself
-  writes: the hanzi worklist JSON and the audit log doc (see paths below).
-  Only stop if one of those two specific files already shows an
-  uncommitted change before you've made any edit yourself this run (that
-  means a prior invocation of THIS job got interrupted after writing but
-  before committing — a real "incomplete prior run" worth investigating
-  rather than silently building on or discarding). Do not look at, judge,
-  or mention any other file's status.
+  concern. **`docs/hanzi_decomposition_worklist.json` showing as modified
+  before you start is normal too**: since 2026-10-21 the nightly
+  `kanji-daily-review` job (02:00 UTC) rebuilds it and does not commit —
+  it only adds or drops *pending* rows and never records a decision. Build on
+  it and commit it with your chunk. The one real "a prior invocation of THIS
+  job got interrupted" signal is decisions that are not committed yet: run
+  ```
+  python3 -c "import json,subprocess as s; f='docs/hanzi_decomposition_worklist.json'; d=lambda rows: {r['id'] for r in rows if r.get('status') != 'pending'}; print(len(d(json.load(open(f))) - d(json.loads(s.run(['git','show','HEAD:'+f],capture_output=True,text=True).stdout))))"
+  ```
+  from the repo root. If it prints anything but 0, or the audit log doc
+  shows an uncommitted change, stop and write a doc entry describing it
+  instead of building on it or discarding it. Do not look at, judge, or
+  mention any other file's status.
 - If `backend/kanji.db` doesn't exist, or pytest fails before you've made
   any change — stop and leave a note in the doc explaining what you found,
   rather than proceeding.

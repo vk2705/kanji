@@ -21656,3 +21656,19 @@ part terms). `backup_db.py` ran first regardless, per the standing
 guardrail.
 
 No production deploy from this session — nothing changed to deploy.
+
+## 2026-10-22 — hanzi job halted by the now-working nightly rebuild; guardrail fixed
+
+Today's hanzi worklist run (`38e7839`) stopped before reviewing anything: it
+found `docs/hanzi_decomposition_worklist.json` modified and, per its
+guardrail, took that for an interrupted run of its own. It was the nightly
+`kanji-daily-review` rebuild, which works again since 2026-10-21 (before, its
+hanzi builder failed every night, so the file stayed clean and the guardrail
+never tripped). The rebuild only adds or drops pending rows; it never records
+a decision. The prompt now says the file being modified is normal and checks
+the real signal instead — decisions in the working copy that `HEAD` does not
+have — with a one-line command. For today's tree it prints 0.
+
+Full re-review so far: frames 1–300, 294 keep, 6 fixed (三 負 貫 光 里 亀), 1
+needs-render (升). The 2026-10-21 evening loop did frames 51–250 in four runs
+and stopped on the plan's session limit; the 12:00 timer did 251–300.
