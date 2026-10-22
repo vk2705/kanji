@@ -21672,3 +21672,77 @@ have — with a one-line command. For today's tree it prints 0.
 Full re-review so far: frames 1–300, 294 keep, 6 fixed (三 負 貫 光 里 亀), 1
 needs-render (升). The 2026-10-21 evening loop did frames 51–250 in four runs
 and stopped on the plan's session limit; the 12:00 timer did 251–300.
+
+## 2026-10-22 — hanzi worklist, chunk 2: next 20 (18 keep-ours, one real fix, one deferred)
+
+Second daily chunk against `hanzi_decomposition_worklist.json`
+(`hanzi_worklist_next.py -n 20`), continuing straight after chunk 1
+(2026-09-30). The uncommitted-decisions check described in the job's own
+guardrail printed 0 first, confirming no prior run was left mid-flight.
+`pytest` (104 passed) confirmed green before touching anything. All 20 hosts
+rendered via `render_glyphs.py` (hosts first, then every component glyph
+named in their cjkvi readings, plus several follow-up zoomed crops via PIL
+for the ambiguous cases below) before any decision.
+
+**18 keep-ours** (炀 炼 炿 焏 然 熎 熯 燕 爭 爽 爾 牬 牽 犀 狦 猺 率 玚): same
+pattern as chunk 1 — the overlay/opaque cjkvi reading is real, but in every
+one of these the row's existing flat parts list already names exactly the
+leaves cjkvi's own tree bottoms out at, just without the overlay/enclosure
+grouping. Three are worth calling out specifically:
+- **炀/炼/玚** (opaque, stopping at 𠃓/𫠣/𠃓 respectively) — all three
+  render as genuine tofu boxes on this machine (no outline in any installed
+  face, confirmed identical-looking to each other for the same reason: none
+  of them have one, not because they're the same shape), and the current
+  row already treats that exact codepoint as the atomic term rather than
+  guessing at what's inside it. Nothing more to verify with the tools
+  available.
+- **爭** looked like it might be missing cjkvi's `コ` leaf (bottom is
+  `⿻⿻コ一亅`, ours only has `一,亅`) until a zoomed crop of 爭 alongside
+  コ/ヨ/彐/一/亅 rendered separately showed why: the bottom of 爭 is just a
+  horizontal stroke crossed by a hooked vertical — a plain `+`-with-hook
+  shape, nothing resembling コ's distinct bracket anywhere in it. cjkvi's
+  `コ` here is an alternate token for the same two overlapping strokes `一`
+  and `亅` already name, not a third visible piece. Confirms the render-it
+  rule catches false positives as well as real misses.
+- **牬/狦/猺/熎** all stop their second component (`𠂔`/`𠕋`/`䍃`) at one
+  atomic term instead of flattening its own inner overlay — `𠂔` and `䍃`
+  render as real, distinct glyphs (not tofu), `𠕋` is tofu, but in all four
+  cases the row is already at the right granularity: the one further layer
+  cjkvi's `via` note exposes is the component's *own* sub-structure, not
+  something missing from the host's row.
+
+**One real fix: 犮 (hanzi-72ae)**, `友,丶` → `犬,丿`. This is the one case
+in the batch where the overlay flag was hiding an actual lookalike
+substitution rather than a weak-evidence true positive. cjkvi's reading is
+`⿻犬丿` with three independent regional sources agreeing ([TJK]). Rendered
+side by side, 犮 and 友 are close enough in this font to explain the
+mix-up, but a direct comparison crop shows 犮's top is a crossed
+hook-and-horizontal, structurally the "extra stroke through 犬" shape
+dictionaries describe (犮's own definition, "to pull/run like a dog",
+points the same way — 拔/跋 both use it as the 犬-derived phonetic), not
+友's 𠂉+又. Confirmed the fix is sound against existing naming conventions
+first — `犬` is already used as a flat part term (keyword "dog") in at
+least ten other `hanzi-*` rows, and `丿` (keyword "line" on its `zh-Hani`
+row, `hanzi-4e3f`) already appears the same way in several more — before
+writing: `backup_db.py` (`backups/kanji-20261022-175539.db`), then
+`database.expand_part_terms(conn, ['犬','丿'], char_lookup,
+script_group='zh')` → `['犬','dog','丿','line']`, replacing decomposition
+11937's 4 old `parts` rows with the new 4. Verified via `get_kanji_detail`
+(resolves cleanly to `hanzi-72ac`/`hanzi-4e3f`) and the full pytest suite
+(104 passed, unaffected) before recording the decision.
+
+**One deferred: 炙 (hanzi-7099)**, `needs-render`. cjkvi reads its top as
+`⿴𠂊⺀` (claw enclosing the two-dot ice radical). Zoomed crops rule out the
+two innocent explanations: isolated `𠂊` alone has no extra stroke, and
+isolated `火`'s own top has no stray tick either (so the extra mark isn't
+火 bleeding upward) — the top of 炙 really does show one more stroke than
+bare `𠂊` accounts for, consistent with `⺀` being present and merged into
+what reads as a single tick in print. But `⺀` (U+2E80) has no row of any
+kind anywhere in this database — not even referenced as an unresolved term
+elsewhere — so there's no existing id to point at and no established
+naming convention to match. Inventing a new primitive row to fill the gap
+is a bigger, more consequential call than this unattended job should make
+on its own; left `needs-render` for a maintainer to decide whether `⺀`
+deserves its own row.
+
+193 → 173 pending after this chunk.
