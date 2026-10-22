@@ -21368,3 +21368,35 @@ on a freshly seeded DB, `audit_radicals.py` clean (0 undefined part terms).
 No sync needed since `data.txt` didn't change.
 
 No production deploy from this session — nothing changed to deploy.
+
+## 2026-10-22 — hanzi worklist: stopped before reviewing, unexplained pre-existing change found
+
+Today's scheduled hanzi-worklist chunk did not run. At the start of this
+session, `docs/hanzi_decomposition_worklist.json` already had an uncommitted
+change on disk — before this session touched anything — removing 6 entries
+relative to the last committed chunk (`d2659bb`, 2026-10-21, "11 keep-ours,
+9 needs-render, no kanji.db edit"): `hanzi-4e94` 五, `hanzi-5433` 吳,
+`hanzi-5449` 呉, `hanzi-6bb7` 殷, `hanzi-821d` 舝, `hanzi-97cb` 韋. No rows
+were added; several of the removed rows were already decided `keep-ours`
+(殷 as recently as the 2026-10-21 chunk), two were still `pending`.
+
+This isn't a side effect `hanzi_worklist_next.py --decide` can produce — its
+own docstring states the hanzi worklist "never auto-drops rows." The only
+script that drops a row is `build_hanzi_worklist.py`, when a fresh
+`audit_hanzi_weak_evidence.py` run no longer flags it — but that is a
+separate, manual maintenance step, and no entry in this doc after `d2659bb`
+records such a rebuild. `ps aux` showed no other process touching this repo.
+So this looks like an interrupted prior action (manual or automated) that
+regenerated the worklist but never committed the result — not something
+today's job caused or should silently build on, commit, or discard.
+
+Per the job's own guardrails, an unexplained pre-existing change to the one
+file this job tracks is a stop condition, not something to proceed past. No
+rows were reviewed this run, `kanji.db` was not touched, and the pre-existing
+worklist diff was left exactly as found, uncommitted, for the owner to
+inspect (possibly legitimate — e.g. 殷/呉/吳/五/舝/韋 may genuinely no
+longer meet the overlay/opaque bar after some other change — but not
+something to assume without the missing `/tmp/hanzi_weak_evidence.json`
+provenance). Pending count was not re-checked since the worklist state is
+in question. Next run should start by asking the owner about this diff
+before resuming the normal chunk cadence.
