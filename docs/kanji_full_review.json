@@ -7072,11 +7072,11 @@
    "人",
    "止"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Top is 𠆢 not 人 (clean roof, no vertical stroke) -- matches the 2026-09-20 data.txt resolution that explicitly rendered 企 alongside 茶/全/谷/傘 and confirmed this. Current primary 止,𠆢 with alt 人,止 is correct.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk402",
@@ -7087,11 +7087,11 @@
   "heisig_components": "cliff; grove; tree; wood; stop; footprint",
   "cjkvi_ids": "⿸𠩵止",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "厂 wraps 林 (⿸𠩵止ちwhere 𠩵=厂+林), then 止 below -- matches Heisig's cliff/grove/stop and cjkvi structure. Render confirms.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk403",
@@ -7106,11 +7106,11 @@
    "止",
    "戈"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "一 + 弋(hook) + 止 all visible in render; matches Heisig one/arrow/stop and cjkvi leaves.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk404",
@@ -7121,11 +7121,11 @@
   "heisig_components": "shellfish; clam; oyster; eye; animal legs; eight; warrior; one; stop; footprint; arrow",
   "cjkvi_ids": "⿰貝武",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "貝 + 武, both parts already verified this chunk, matches cjkvi ⿰貝武.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk405",
@@ -7139,11 +7139,11 @@
    "一",
    "止"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "一 over 止, clean match to Heisig and cjkvi ⿱一止.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk406",
@@ -7157,11 +7157,11 @@
    "言",
    "正"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "言 + 正, render confirms both pieces visible, matches cjkvi ⿰言正.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk407",
@@ -7175,11 +7175,11 @@
    "正",
    "攵"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "正 + 攵(taskmaster), render confirms, matches cjkvi ⿰正攵.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk408",
@@ -7193,11 +7193,11 @@
    "宀",
    "疋"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "宀 (roof) over 疋/𤴓 (mend), render confirms both pieces, matches cjkvi ⿱宀𤴓.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk409",
@@ -7211,11 +7211,11 @@
    "金",
    "定"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "金 + 定, render confirms, matches cjkvi ⿰金定.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk410",
@@ -7229,11 +7229,11 @@
    "土",
    "龰"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "土 over 龰, render confirms both pieces, matches cjkvi ⿱土龰.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk411",
@@ -7247,11 +7247,11 @@
    "走",
    "召"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "走 + 召, render confirms, matches cjkvi ⿺走召.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk412",
@@ -7265,11 +7265,11 @@
    "走",
    "卜"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "走 + 卜, render confirms, matches cjkvi ⿺走卜.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk413",
@@ -7283,11 +7283,11 @@
    "走",
    "戉"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "走 + 戉, render confirms, matches cjkvi ⿺走戉.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk414",
@@ -7301,11 +7301,11 @@
    "日",
    "疋"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "日 over 疋/𤴓, render confirms, matches cjkvi ⿱日𤴓.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk415",
@@ -7316,11 +7316,11 @@
   "heisig_components": "just so; sun; day; mend; head; page; one; ceiling; drop; shellfish; clam; oyster; eye; animal legs; eight",
   "cjkvi_ids": "⿺是頁",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "頁 + 是, render confirms, matches cjkvi ⿺是頁.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk416",
@@ -7331,11 +7331,11 @@
   "heisig_components": "soil; dirt; ground; just so; sun; day; mend",
   "cjkvi_ids": "⿰土是",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "土 + 是, render confirms, matches cjkvi ⿰土是.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk417",
@@ -7346,11 +7346,11 @@
   "heisig_components": "brush; stretch",
   "cjkvi_ids": "⿺廴聿",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "廴 + 聿, render confirms, matches cjkvi ⿺廴聿.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk418",
@@ -7361,11 +7361,11 @@
   "heisig_components": "metal; gold; build; brush; stretch",
   "cjkvi_ids": "⿰金建",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "金 + 建, render confirms, matches cjkvi ⿰金建.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk419",
@@ -7380,11 +7380,11 @@
    "止",
    "ノ"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "廴 wraps 丿 over 止 (ノ,廴,止 flat list of the same leaves); matches the [TJV] cjkvi variant for this Japanese kanji, render confirms.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk420",
@@ -7398,11 +7398,11 @@
    "言",
    "延"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "延 + 言, render confirms, matches cjkvi ⿰言延.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk421",
@@ -7416,11 +7416,11 @@
    "石",
    "楚"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "石 + 楚, render confirms, matches cjkvi ⿰石楚.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk422",
@@ -7434,11 +7434,11 @@
    "女",
    "胥"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "女 + 胥, render confirms, matches cjkvi ⿰女胥.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk423",
@@ -7452,11 +7452,11 @@
    "亠",
    "𧘇"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "亠(top hat) + 𧘇(scarf), render confirms, matches cjkvi ⿱亠𧘇 and Heisig's own components.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk424",
@@ -7470,11 +7470,11 @@
    "𢦏",
    "衣"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "衣 + 𢦏 (correct codepoint, not a lookalike), Heisig's components list includes 'garment' confirming he used the whole 衣 frame here, unlike 裏/哀. Matches cjkvi ⿹𢦏衣.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk425",
@@ -7488,11 +7488,11 @@
    "壮",
    "衣"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "衣 + 壮, Heisig's components include 'garment' confirming whole-衣 usage here. Matches cjkvi ⿱壮衣.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk426",
@@ -7503,11 +7503,15 @@
   "heisig_components": "top hat; scarf; computer",
   "cjkvi_ids": "⿳亠里𧘇",
   "google_parts": null,
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "亠",
+   "里",
+   "𧘇"
+  ],
+  "note": "Heisig's own CSV components are 'top hat; scarf; computer' -- no 'garment' -- unlike 裁/装/壊 (424/425/427) which do include it, so he didn't reference the whole 衣 frame here. Swapped primary/alt so 亠,里,𧘇 (matches cjkvi ⿳亠里𧘇 exactly, audit_weak_evidence clean) is primary; whole-衣 version kept as alt.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk427",
@@ -7523,11 +7527,11 @@
    "罒",
    "衣"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "土 + 十 + 罒 + 衣, all 4 leaves confirmed in Heisig's fully-expanded component list (includes 'garment') and audit_weak_evidence.py --host 壊 clean.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk428",
@@ -7541,11 +7545,15 @@
    "衣",
    "口"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "亠",
+   "口",
+   "𧘇"
+  ],
+  "note": "Same fix as rtk426/裏: Heisig's CSV components are 'top hat; scarf; mouth', no 'garment'. Swapped primary/alt so 亠,口,𧘇 (matches cjkvi ⿳亠口𧘇, audit_weak_evidence clean) is primary.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk429",
@@ -7559,11 +7567,11 @@
    "辶",
    "袁"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "𠮷(=土+口) + 𧘇 + 辶, matches Heisig's fully-expanded list (soil/dirt/ground/mouth/scarf/road) and cjkvi ⿺辶袁.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk430",
@@ -7577,11 +7585,11 @@
    "犭",
    "袁"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "犭 + 𠮷 + 𧘇, matches Heisig's list and cjkvi ⿰犭袁.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk431",
@@ -7595,11 +7603,11 @@
    "衤",
    "刀"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "衤 + 刀, render confirms, matches cjkvi ⿰衤刀.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk432",
@@ -7613,11 +7621,11 @@
    "冂",
    "丨"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Atomic, Heisig's components column is empty -- positive evidence per CLAUDE.md, render shows a simple unitary shape.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk433",
@@ -7631,11 +7639,11 @@
    "𠂇",
    "巾"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "巾 + 𠂇(by one's side), render confirms, matches cjkvi ⿸𠂇巾 and Heisig's components.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk434",
@@ -7649,11 +7657,11 @@
    "巾",
    "凡"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "巾 + 凡, render confirms, matches cjkvi ⿰巾凡.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk435",
@@ -7667,11 +7675,11 @@
    "巾",
    "畐"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "巾 + 畐, render confirms, matches cjkvi ⿰巾畐.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk436",
@@ -7685,11 +7693,11 @@
    "巾",
    "冒"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "巾 + 冒, render confirms, matches cjkvi ⿰巾冒.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk437",
@@ -7703,11 +7711,11 @@
    "莫",
    "巾"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "莫 over 巾, render confirms, matches cjkvi ⿱莫巾.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk438",
@@ -7721,11 +7729,11 @@
    "巾",
    "晃"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "巾 + 晃, render confirms, matches cjkvi ⿰巾晃.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk439",
@@ -7740,11 +7748,11 @@
    "白",
    "巾"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "帛 + 金, render confirms, matches cjkvi ⿰金帛.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk440",
@@ -7758,11 +7766,11 @@
    "亠",
    "巾"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "亠 over 巾, render confirms, matches cjkvi ⿱亠巾.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk441",
@@ -7776,11 +7784,11 @@
    "木",
    "市"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "市 + 木, render confirms, matches cjkvi ⿰木市.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk442",
@@ -7794,11 +7802,11 @@
    "女",
    "市"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "市 + 女; cjkvi's [TJKV] variant (⿰女市, with-dot 市) applies for this Japanese kanji, which is what's used -- not the dotless 巿[G] simplified-Chinese variant. Render confirms.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk443",
@@ -7812,11 +7820,11 @@
    "月",
    "市"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "市 + 月; cjkvi's [JK] variant (⿰月市) applies for Japanese, matches. Render confirms.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk444",
@@ -7827,11 +7835,11 @@
   "heisig_components": "buckle; apron; crown; towel",
   "cjkvi_ids": "⿳丗冖巾",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "丗/冖/巾 stack, render confirms three bands, matches cjkvi ⿳丗冖巾.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk445",
@@ -7846,11 +7854,11 @@
    "𠂉",
    "巾"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "帯 + 水. Left side of 滞 visually is the 3-dot 氵 radical, not standalone 水's 4-stroke shape -- but this is a project-wide, consistent convention (grepped: every water-radical kanji in data.txt, e.g. 河,況,消,江,沼 etc., uses 水 not 氵; 氵 never appears), not a one-off error, so leaving as-is rather than creating a one-row inconsistency.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk446",
@@ -7861,11 +7869,11 @@
   "heisig_components": "tree; wood; belt; sword; sabre; saber",
   "cjkvi_ids": "⿰朿刂",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "朿 + 刀 (standalone 刀, not 刂 -- same project-wide convention as the water radical, grepped 50 other 刀-as-part hosts, 刂 never used). Render confirms, matches cjkvi ⿰朿刂.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk447",
@@ -7880,11 +7888,11 @@
    "木",
    "刂"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "冂,刀,牛. audit_weak_evidence.py flags cjkvi's ⿰⿻牛冂刂 as not-a-parts-list (⿻ overlay of 牛/冂) -- but Heisig's own CSV components independently name 'cow' (牛) here, corroborating outside the overlay-tainted cjkvi reading, and the pre-existing 冂 (named 'belt' by Heisig, resolved here as 'border') matches the enclosure shape in the render. No stronger evidence either source is wrong.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk448",
@@ -7898,11 +7906,11 @@
    "制",
    "衣"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "制 + 衣; Heisig's components include 'garment', confirming whole-衣 usage. Matches cjkvi ⿱制衣, render confirms.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk449",
@@ -7916,11 +7924,11 @@
    "車",
    "云"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "車 + 云, render confirms, matches cjkvi ⿰車云.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk450",
@@ -7934,11 +7942,11 @@
    "艹",
    "云"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "艹 over 云, render confirms, matches cjkvi ⿱艹云.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk451",

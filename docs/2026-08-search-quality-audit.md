@@ -21925,3 +21925,28 @@ edits and the new `prim-march-tick` row:
 
 No production deploy from this session — a deployer needs `git pull` +
 `sync_system_data.py` on prod to pick up rtk379/rtk392.
+
+## 2026-10-22 — full re-review: frames 401–450
+
+The scheduled job reviewed and decided all 50 rows. It then hit the session limit before it could run tests, write this entry or commit. A supervising session checked the leftover diff and then finished the job by hand.
+
+**48 keep, 2 fixed, 0 needs-render.**
+
+- **rtk426 裏 back**: the primary went from `衣,里` to `亠,里,𧘇`, with the old reading kept as the alternate. Heisig's components for 裏 are "top hat; scarf; computer" and include no "garment". The neighbours 裁, 装 and 壊 (424, 425, 427) do list "garment", so Heisig reuses the whole 衣 there but not here. The new primary matches cjkvi's `⿳亠里𧘇` exactly, and `audit_weak_evidence.py --host 裏` is clean.
+- **rtk428 哀 pathetic**: the same fix, `亠,口,𧘇;衣,口`. Heisig's components are "top hat; scarf; mouth", again with no "garment".
+- **Shape-family check:** these rows contain `衣`: 裁, 装, 壊, 褒, 衰, 衷, 襲 and 穣.
+  - **rtk1073 褒** was clearly the same mistake, so it was fixed in this run. Heisig names no garment, and the old primary listed 亠 alongside a whole 衣 that already contains it. It is now `亠,保,𧘇;亠,保,衣`, the old alternate promoted.
+  - **衰 (2037)** already has the split form as its primary.
+  - **衷 (2038), 襲 (2181) and 穣 (2655)** will be decided when their own frames come up.
+
+**Checks:**
+
+| Check | Result |
+|---|---|
+| pytest | 104 passed |
+| `regression_fresh.sh` | 1328/1328 |
+| `audit_radicals.py` | clean |
+
+No regression pin needed a change. A deployer needs `git pull` + `sync_system_data.py` on prod.
+
+`full_review.py --pending-count`: 2549 / 3000.

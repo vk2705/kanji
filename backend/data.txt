@@ -559,9 +559,20 @@ rtk422:婿:bridegroom:女,胥
 rtk423:衣:garment,cloth,clothes,clothing:亠,𧘇
 rtk424:裁:tailor:衣,𢦏
 rtk425:装:attire:衣,壮
-rtk426:裏:back:衣,里;亠,里,𧘇
+# 2026-10-22 full re-review: swapped primary/alt. Heisig's own CSV components
+# for 裏 are "top hat; scarf; computer" -- no "garment" -- unlike 裁/装/壊
+# (424/425/427) whose component lists do include "garment", confirming
+# Heisig genuinely reused the 衣 frame whole there but not here. For 裏 he
+# spelled out 亠+𧘇 fresh instead of referencing frame 衣, matching cjkvi's
+# own ⿳亠里𧘇 exactly. audit_weak_evidence.py --host 裏 is clean (no
+# overlay/opaque-intermediate flags). Whole-衣 kept as the alt -- still a
+# true visual read, just the coarser-grained one.
+rtk426:裏:back:亠,里,𧘇;衣,里
 rtk427:壊:demolition:土,十,罒,衣
-rtk428:哀:pathetic:衣,口;亠,口,𧘇
+# 2026-10-22 full re-review: same fix as 裏/rtk426 above and for the same
+# reason -- Heisig's CSV components are "top hat; scarf; mouth", no
+# "garment". audit_weak_evidence.py --host 哀 clean.
+rtk428:哀:pathetic:亠,口,𧘇;衣,口
 rtk429:遠:distant:𠮷,𧘇,辶
 rtk430:猿:monkey:犭,𠮷,𧘇
 rtk431:初:first time:衤,刀
@@ -1221,7 +1232,12 @@ rtk1069:伐:fell:亻,戈
 rtk1070:宿:inn:宀,亻,百
 rtk1071:傷:wound:亻,日,一,昜,𠂉
 rtk1072:保:protect:亻,呆
-rtk1073:褒:praise:亠,保,衣;亠,保,𧘇
+# 2026-10-22 full re-review (shape-family follow-up from rtk426/428): same
+# 衣-vs-亠+𧘇 bug -- Heisig's CSV components are "top hat; protect; person;
+# dumbfounded; mouth; tree; wood; scarf", no "garment", and the old primary
+# redundantly listed 亠 *and* whole 衣 (which already contains 亠). Swapped
+# to the already-present, correct alt.
+rtk1073:褒:praise:亠,保,𧘇;亠,保,衣
 rtk1074:傑:greatness:亻,舛,木
 rtk1075:付:adhere,sellotape:亻,寸
 rtk1076:符:token:付,竹
