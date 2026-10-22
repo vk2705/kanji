@@ -21672,3 +21672,16 @@ have — with a one-line command. For today's tree it prints 0.
 Full re-review so far: frames 1–300, 294 keep, 6 fixed (三 負 貫 光 里 亀), 1
 needs-render (升). The 2026-10-21 evening loop did frames 51–250 in four runs
 and stopped on the plan's session limit; the 12:00 timer did 251–300.
+
+## 2026-10-22 — pup tent (尞) gains its horns
+
+Owner noticed 尞's top does not look like a plain 大. Rendered beside 大: the
+three strokes of 大 are there, plus two small dots between its legs — cjkvi
+`尞 = ⿱昚小`, `昚 = ⿱𡗜日`, `𡗜 = ⿻大丷`. The row `大,日,小` named the 大
+and left the dots out, which matches Heisig's column for 僚 瞭 寮 療 ("pup
+tent; large; St. Bernard; sun; day; small; little" — no horns). Owner's
+choice: name everything drawn. Now `prim-pup-tent:尞:pup tent:大,丷,日,小`
+(丷 = kangxi12 "horns"), so "horns" also finds the pup-tent kanji.
+Fresh-DB regression pins: 1328/1328; audit_radicals clean. No pin covered
+尞. Made in a separate worktree because the full re-review job was editing
+data.txt in the main checkout at the time.
