@@ -8,7 +8,7 @@ one of their own alternatives.
 A `data.txt` line can carry several decompositions separated by `;`. The first is
 the primary: it is the unlabelled one, it is what `KanjiDetail` shows first, and
 it is what a reader takes to be this project's answer. The rest are labelled
-alternatives (`structural (cjkvi-ids)`).
+alternatives (labelled `alternative`).
 
 When the structural alternatives were added in bulk on 2026-09-13, nothing
 checked whether the primary they were added *next to* was any good. Often it was

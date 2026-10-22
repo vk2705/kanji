@@ -173,3 +173,23 @@ def test_v7_reading_columns_exist_and_are_nullable(db_path):
     assert detail_zh["pinyin"] == "hàn"
     assert detail_zh["onyomi"] is None
     conn.close()
+
+
+def test_v10_renames_alternate_label_in_place(db_path):
+    """_migrate_v10 relabels system alternates without changing their ids (so votes
+    on them survive), and leaves hanzi 'ids' rows and user labels alone."""
+    conn = database.get_db()
+    conn.execute("INSERT INTO kanji (id, character, keyword, owner_id, visibility, script) "
+                 "VALUES ('rtk9999', '裏', 'back', 1, 'public', 'ja-kanji')")
+    rows = {}
+    for owner, label in [(1, "structural (cjkvi-ids)"), (1, "ids"), (1, None)]:
+        cur = conn.execute("INSERT INTO decompositions (kanji_id, owner_id, visibility, label) "
+                           "VALUES ('rtk9999', ?, 'public', ?)", (owner, label))
+        rows[label] = cur.lastrowid
+    conn.commit()
+    database._migrate_v10(conn)
+    got = dict(conn.execute("SELECT id, label FROM decompositions WHERE kanji_id = 'rtk9999'").fetchall())
+    assert got[rows["structural (cjkvi-ids)"]] == database.ALT_DECOMPOSITION_LABEL == "alternative"
+    assert got[rows["ids"]] == "ids"
+    assert got[rows[None]] is None
+    conn.close()

@@ -21981,3 +21981,16 @@ The dev DB was synced. A deployer needs `git pull` + `sync_system_data.py` on pr
 ## 2026-10-22 — full-review job: run checks in the foreground
 
 On 2026-10-22, two of the job's runs ended with their review finished but not committed. Both were waiting on a check that had been started in the background, and a non-interactive `claude -p` session ends at that point. `kanji_worklist_daily_prompt.md` now says to run every check in the foreground and wait for it to finish.
+
+## 2026-10-22 — second breakdowns relabelled "alternative" (owner decision)
+
+**What changed:** every second-and-later system breakdown of a Japanese kanji (data.txt's `;` alternates, 116 rows) used to carry the label "structural (cjkvi-ids)". It now reads **"alternative"**, shown in Russian as «другой вариант». On the static SEO pages it reads "Alternative decomposition".
+
+**Why:** that fixed label credited a source the data often did not come from. Tonight's full re-review made 裏 `亠,里,𧘇;衣,里`, 哀 `亠,口,𧘇;衣,口` and 褒 `亠,保,𧘇;亠,保,衣`. Each of those alternates is the kanji's own older, coarser reading, not cjkvi's. The project rule is never to attribute data to a source it did not come from. A source-neutral label is true for every row, with no need to check each one by hand.
+
+**How:**
+- `database.ALT_DECOMPOSITION_LABEL` is now `"alternative"`.
+- The 116 live rows are renamed **in place** by a new `_migrate_v10`, which runs on backend restart. `sync_system_data.py` matches breakdowns by (kanji_id, label), so changing only the constant would have made it delete and recreate all 116 rows, losing every approve/dispute vote on them.
+- Hanzi rows keep their own `ids` label, which is accurate.
+
+**Test:** a new migration test checks that the ids are unchanged and that `ids` and user labels are left alone. pytest: 105 passed. `docs/DATA_SOURCES.md` and CLAUDE.md are updated.

@@ -336,6 +336,8 @@ def render_page(entry: dict, entries_by_id: dict[str, dict]) -> str:
         if not parts:
             continue
         label = decomposition.get("label") or ("Primary decomposition" if number == 1 else f"Decomposition {number}")
+        if label == "alternative":
+            label = "Alternative decomposition"
         items = "\n".join(
             f"          <li>{link(entries_by_id[p['id']], p['glyph'] + ' ' + first_keyword(entries_by_id[p['id']]))}</li>"
             if p.get("id") in entries_by_id else f"          <li>{html.escape(p['term'])}</li>"

@@ -423,6 +423,23 @@ def _migrate_v9(conn):
 _register(9, _migrate_v9)
 
 
+def _migrate_v10(conn):
+    """Rename the label on system alternate decompositions from "structural
+    (cjkvi-ids)" to the source-neutral ALT_DECOMPOSITION_LABEL (2026-10-22, owner
+    decision). Done in place rather than by sync_system_data.py, which matches
+    decompositions by (kanji_id, label) and would delete and recreate every
+    alternate -- dropping the approve/dispute votes on them. Hanzi rows use their
+    own "ids" label, which is accurate, and are not touched.
+    """
+    conn.execute(
+        "UPDATE decompositions SET label = ? WHERE owner_id = 1 AND label = ?",
+        (ALT_DECOMPOSITION_LABEL, "structural (cjkvi-ids)"),
+    )
+
+
+_register(10, _migrate_v10)
+
+
 def record_page_view(conn, visitor_id: str, path: str | None):
     conn.execute(
         "INSERT INTO page_views (visitor_id, path) VALUES (?, ?)",
@@ -443,8 +460,11 @@ def record_engagement(conn, visitor_id: str, kind: str):
 # Label for the second and later decompositions a data.txt line declares with ";".
 # The primary (Heisig's own breakdown) stays unlabelled so the detail page renders it
 # plain; alternatives are labelled because KanjiDetail's tab strip falls back to "#N"
-# otherwise, which tells a reader nothing about where the alternative came from.
-ALT_DECOMPOSITION_LABEL = "structural (cjkvi-ids)"
+# otherwise. Deliberately source-neutral: until 2026-10-22 it read "structural
+# (cjkvi-ids)", which was false for alternates that are simply an older or coarser
+# reading of the same kanji (裏's "衣,里" after the full re-review promoted 亠,里,𧘇)
+# -- crediting a source the data did not come from. See _migrate_v10.
+ALT_DECOMPOSITION_LABEL = "alternative"
 
 
 def _backfill_decompositions(conn):

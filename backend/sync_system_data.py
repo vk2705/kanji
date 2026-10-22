@@ -51,7 +51,7 @@ against the live DB's, and applies only the difference:
     (owner_id=1) specifically — never a user's alternate decomposition on
     the same kanji_id. A kanji can carry more than one system decomposition
     (data.txt's ";" syntax — a primary, label NULL, plus labelled
-    alternatives like "structural (cjkvi-ids)"; see ALT_DECOMPOSITION_LABEL
+    alternatives labelled "alternative"; see ALT_DECOMPOSITION_LABEL
     in database.py); each is matched to its live counterpart by
     (kanji_id, label), not kanji_id alone, so gaining or losing one
     alternative doesn't disturb the others. Replaces a decomposition's

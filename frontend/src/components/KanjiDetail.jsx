@@ -6,6 +6,12 @@ import AutocompleteInput from "./AutocompleteInput";
 import Glyph from "./Glyph";
 import ViewNavigation from "./ViewNavigation";
 
+// System alternates carry the fixed backend label "alternative" (database.ALT_DECOMPOSITION_LABEL); translate it.
+function decompositionLabel(d, i, lang) {
+  if (d.label === "alternative") return t(lang, "altDecompositionLabel");
+  return d.label || d.owner || `#${i + 1}`;
+}
+
 // DecompositionForm's parts field is a single comma-separated input ("water, fire,
 // tree") rather than one box per part, so autocomplete only makes sense against the
 // segment currently being typed — the text after the last comma — not the whole
@@ -223,7 +229,7 @@ function PartChip({ part, lang, user, onSelectPart, kanjiScript = null }) {
           {subDecompositions.map((sd, i) => (
             <div key={sd.id} className="sub-decomposition">
               {subDecompositions.length > 1 && (
-                <div className="sub-decomposition-label">{sd.label || sd.owner || `#${i + 1}`}</div>
+                <div className="sub-decomposition-label">{decompositionLabel(sd, i, lang)}</div>
               )}
               <div className="parts-list sub-parts">
                 {sd.parts.map((sub, j) => (
@@ -462,7 +468,7 @@ export default function KanjiDetail({ kanjiId, onSelectPart, onBack, onHome, use
           {nonEmptyDecompositions.map((d, i) => (
             <div key={d.id} className="decomposition-block">
               {nonEmptyDecompositions.length > 1 && (
-                <div className="decomposition-label">{d.label || d.owner || `#${i + 1}`}</div>
+                <div className="decomposition-label">{decompositionLabel(d, i, lang)}</div>
               )}
               <div className="parts-list">
                 {d.parts_detail.map((part, j) => (
