@@ -21994,3 +21994,29 @@ On 2026-10-22, two of the job's runs ended with their review finished but not co
 - Hanzi rows keep their own `ids` label, which is accurate.
 
 **Test:** a new migration test checks that the ids are unchanged and that `ids` and user labels are left alone. pytest: 105 passed. `docs/DATA_SOURCES.md` and CLAUDE.md are updated.
+
+## 2026-10-22 — full re-review: frames 501–550
+
+**50 keep, 0 fixed, 0 needs-render.**
+
+Every row in this chunk (rtk501–rtk550) was rendered — the kanji and every part in its current row, batched across ten PNGs of ~10 glyphs each via `render_glyphs.py` — and checked against Heisig's components column and cjkvi-ids. All fifty already matched what's actually drawn; no `data.txt` edit was needed.
+
+Notes on the less obvious ones:
+- **rtk505 欠, rtk529 方**: both correctly atomic. 欠's Heisig column names it only "yawn" (Google's `勹,人` hint is wrong and was ignored); 方's primary is deliberately empty (Heisig teaches it whole as "compass", empty `components` in the CSV) with cjkvi's `ノ,亠,𠃌` structural breakdown correctly kept as a labelled alternate rather than promoted to primary — this is the state the project's "empty CSV column is positive evidence of atomicity" rule calls for, not a gap.
+- **rtk508 歌, rtk514 諮, rtk527 荒, rtk536 激, rtk540 曽, rtk548 染**: each has an intermediate compound in cjkvi-ids (哥, 咨, 巟, 敫, 𬎿, 氿) with no row of its own here, and in every case Heisig's own components column flattens straight through it (e.g. 歌's column lists "can; can; ...; lack" rather than naming 哥) — so the current flat rows (可,可,欠 / 次,言,口 / 川,艹,亡 / 水,白,方,攵 / 田,日,丷 / 九,水,木) are the right level, not under- or over-flattened.
+- **rtk515 賠 / rtk518 音**: rendered 咅 (U+5485, "mouth; stand up") and 音 (U+97F3, "sound") side by side and zoomed in to confirm they are genuinely distinct glyphs (咅's bottom is 口, no middle stroke; 音's bottom is 日, with one) — not a font substitution. `render_glyphs.py`'s own substitution checker (comparing all glyphs pairwise across Noto Sans CJK JP / WenQuanYi Zen Hei / HanaMinA / HanaMinB) raised nothing across any of the ten batches either.
+- **rtk510, rtk533, rtk537, rtk542, rtk545, rtk547, rtk550**: cjkvi-ids lists more than one regional variant (e.g. 冫 vs 二, 曾 vs 曽, 壬 vs 𡈼); in each case the row already matches the `[J]`/`[GJK]` (Japanese-inclusive) variant, which is the right one for a `ja-kanji` row.
+
+No shape-family follow-ups — nothing was changed.
+
+**Checks (baseline only, no edits made so the post-checks were skipped):**
+
+| Check | Result |
+|---|---|
+| pytest | 104 passed |
+| `regression_fresh.sh` | 1328/1328 |
+| `audit_radicals.py` | clean |
+
+No DB sync needed (data.txt unchanged).
+
+`full_review.py --pending-count`: 2449 / 3000.

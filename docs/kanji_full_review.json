@@ -8823,11 +8823,11 @@
   "heisig_components": "reclining; lying down; fishhook",
   "cjkvi_ids": "⿱𠂉乙",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Render confirms ⿱𠂉乙 (reclining+fishhook); matches Heisig & cjkvi",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk502",
@@ -8838,11 +8838,11 @@
   "heisig_components": "mist; ten; needle; early; sun; day; beg; reclining; lying down; fishhook",
   "cjkvi_ids": "⿰𠦝乞",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Render confirms ⿰𠦝乞ー mist+beg; matches Heisig & cjkvi",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk503",
@@ -8856,11 +8856,11 @@
    "月",
    "复"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Render confirms ⿰月复ー flesh+fold back; matches Heisig & cjkvi",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk504",
@@ -8874,11 +8874,11 @@
    "衤",
    "复"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Render confirms ⿰衤复ー cloak+fold back; matches Heisig & cjkvi",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk505",
@@ -8892,11 +8892,11 @@
    "勹",
    "人"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Atomic in Heisig (yawn); cjkvi also treats 欠 as atomic; Google's 勹,人 hint is wrong, ignored",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk506",
@@ -8910,11 +8910,11 @@
    "口",
    "欠"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Render confirms ⿰口欠; matches Heisig & cjkvi",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk507",
@@ -8928,11 +8928,11 @@
    "火",
    "欠"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Render confirms ⿰火欠; matches Heisig & cjkvi",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk508",
@@ -8943,11 +8943,11 @@
   "heisig_components": "cancan; can; mouth; street; nail; spike; lack; yawn",
   "cjkvi_ids": "⿰哥欠",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Render shows 哥=可+可 (cancan); row flattens to 可,可,欠 same as Heisig's own component list",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk509",
@@ -8961,11 +8961,11 @@
    "車",
    "欠"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Render confirms ⿰車欠; matches Heisig & cjkvi",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk510",
@@ -8979,11 +8979,11 @@
    "冫",
    "欠"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Render confirms ⿰冫欠 (ja/zh-G variant); matches Heisig & cjkvi",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk511",
@@ -8994,11 +8994,11 @@
   "heisig_components": "flowers; next; ice; lack; yawn",
   "cjkvi_ids": "⿱艹次",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Render confirms ⿱艹次; matches Heisig & cjkvi",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk512",
@@ -9012,11 +9012,11 @@
    "次",
    "貝"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Render confirms 次+貝; matches Heisig & cjkvi",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk513",
@@ -9030,11 +9030,11 @@
    "次",
    "女"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Render confirms ⿱次女; matches Heisig & cjkvi",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk514",
@@ -9049,11 +9049,11 @@
    "次",
    "口"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Render shows 諮=言+咨(次+口); row flattens to 次,言,口 same as Heisig's own component list",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk515",
@@ -9067,11 +9067,11 @@
    "貝",
    "咅"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Render confirms 咅 (mouth+stand, distinct from 音 - verified bottom is 口 not 日) + 貝; matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk516",
@@ -9085,11 +9085,11 @@
    "土",
    "咅"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Render confirms ⿰土咅; matches Heisig & cjkvi",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk517",
@@ -9103,11 +9103,11 @@
    "咅",
    "刂"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Render confirms ⿰咅刂(刀); matches Heisig & cjkvi",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk518",
@@ -9118,11 +9118,11 @@
   "heisig_components": "vase; stand up; sun; day; tongue wagging",
   "cjkvi_ids": "⿱立日",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Render confirms ⿱立日 (stand+sun), bottom is 日 not 口, distinct from 咅; matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk519",
@@ -9136,11 +9136,11 @@
    "日",
    "音"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Render confirms ⿰日音; matches Heisig & cjkvi",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk520",
@@ -9151,11 +9151,11 @@
   "heisig_components": "sound; vase; stand up; sun; day; employee; mouth; shellfish; clam; oyster; eye; animal legs; eight",
   "cjkvi_ids": "⿰音員",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Render confirms ⿰音員; matches Heisig & cjkvi",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk521",
@@ -9170,11 +9170,11 @@
    "音",
    "戈"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Render confirms ⿰言戠; 戠 atomic per Heisig; matches cjkvi",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk522",
@@ -9188,11 +9188,11 @@
    "金",
    "竟"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Render confirms ⿰金竟; matches Heisig & cjkvi",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk523",
@@ -9206,11 +9206,11 @@
    "土",
    "竟"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Render confirms ⿰土竟; matches Heisig & cjkvi",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk524",
@@ -9224,11 +9224,11 @@
    "亠",
    "乚"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Render confirms ⿱亠𠃊 (top hat+fishhook); matches Heisig & cjkvi",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk525",
@@ -9242,11 +9242,11 @@
    "亡",
    "目"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Render confirms ⿱亡目; matches Heisig & cjkvi",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk526",
@@ -9260,11 +9260,11 @@
    "亡",
    "女"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Render confirms ⿱亡女; matches Heisig & cjkvi",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk527",
@@ -9279,11 +9279,11 @@
    "亡",
    "川"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Render confirms 艹 over 巟(亡+川); row flattens to 川,艹,亡 same as Heisig's own component list",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk528",
@@ -9298,11 +9298,11 @@
    "月",
    "王"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Render confirms 亡+月+王 stacked (ja/zh-G variant); matches Heisig's flattened list",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk529",
@@ -9316,11 +9316,11 @@
    "亠",
    "勹"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Primary correctly atomic (Heisig names it whole, \"compass\", empty CSV components); structural ノ,亠,𠃌 kept as labelled cjkvi alternate - ideal state, no change",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk530",
@@ -9334,11 +9334,11 @@
    "女",
    "方"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Render confirms ⿰女方; matches Heisig & cjkvi",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk531",
@@ -9352,11 +9352,11 @@
    "土",
    "方"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Render confirms ⿰土方; matches Heisig & cjkvi",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk532",
@@ -9367,11 +9367,11 @@
   "heisig_components": "perfume; flowers; compass; direction",
   "cjkvi_ids": "⿱艹方",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Render confirms ⿱艹方; matches Heisig & cjkvi",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk533",
@@ -9385,11 +9385,11 @@
    "月",
    "方"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Render confirms ⿰月方 (ja/zh-G variant); matches Heisig & cjkvi",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk534",
@@ -9403,11 +9403,11 @@
    "言",
    "方"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Render confirms ⿰言方; matches Heisig & cjkvi",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk535",
@@ -9421,11 +9421,11 @@
    "方",
    "攵"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Render confirms ⿰方攵; matches Heisig & cjkvi",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk536",
@@ -9441,11 +9441,11 @@
    "方",
    "攵"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Render confirms 氵+白+方+攵(攴); row flattens 敫 into white,direction,taskmaster same as Heisig's own component list",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk537",
@@ -9456,11 +9456,11 @@
   "heisig_components": "moon; month; flesh; part of the body; devil; horns; elder brother; teenager; mouth; human legs",
   "cjkvi_ids": "⿰月兑[GJK] ⿰⺼兑[TV]",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Render confirms ⿰月兑 (ja/zh-G variant); matches Heisig & cjkvi",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk538",
@@ -9474,11 +9474,11 @@
    "言",
    "兌"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Render confirms ⿰言兑; matches Heisig & cjkvi",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk539",
@@ -9492,11 +9492,11 @@
    "金",
    "兌"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Render confirms ⿰金兑; matches Heisig & cjkvi",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk540",
@@ -9511,11 +9511,11 @@
    "田",
    "日"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Render confirms 丷 over 田 over 日; row flattens 𬎿 into horns,rice field same as Heisig's own component list",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk541",
@@ -9529,11 +9529,11 @@
    "土",
    "曽"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Render confirms ⿰土曽; matches Heisig & cjkvi",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk542",
@@ -9547,11 +9547,11 @@
    "貝",
    "曽"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Render confirms ⿰貝曽 (ja variant); matches Heisig & cjkvi",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk543",
@@ -9565,11 +9565,11 @@
    "日",
    "木"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Render confirms 日 over 木 (atomic per cjkvi, Heisig flattens to sun+tree); matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk544",
@@ -9580,11 +9580,11 @@
   "heisig_components": "tree; wood; east; tree; wood; sun; day",
   "cjkvi_ids": "⿰木東",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Render confirms ⿰木東; matches Heisig & cjkvi",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk545",
@@ -9598,11 +9598,11 @@
    "冫",
    "東"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Render confirms ⿰冫東; matches Heisig & cjkvi",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk546",
@@ -9616,11 +9616,11 @@
    "女",
    "壬"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Render confirms ⿰女壬; matches Heisig & cjkvi",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk547",
@@ -9631,11 +9631,11 @@
   "heisig_components": "porter; drop; samurai; stretch",
   "cjkvi_ids": "⿺廴壬[GJK] ⿺廴𡈼[TV]",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Render confirms ⿺廴壬 (ja/zh-G variant); matches Heisig & cjkvi",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk548",
@@ -9650,11 +9650,11 @@
    "九",
    "木"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Render confirms 氿(水+九)+木; row flattens to 九,水,木 same as Heisig's own component list",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk549",
@@ -9668,11 +9668,11 @@
    "火",
    "然"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Render confirms ⿰火然; 然 itself out of scope (own frame not in this chunk); matches Heisig",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk550",
@@ -9687,11 +9687,11 @@
    "少",
    "貝"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Render confirms 宀 over 一 over 少 over 貝 (ja variant); matches Heisig's own flattened component list",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk551",
