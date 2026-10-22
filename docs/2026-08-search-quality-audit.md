@@ -21368,3 +21368,185 @@ on a freshly seeded DB, `audit_radicals.py` clean (0 undefined part terms).
 No sync needed since `data.txt` didn't change.
 
 No production deploy from this session — nothing changed to deploy.
+
+## 2026-10-22 — chunk 112: `kangxi58` has been closed since chunk 6 (stale backlog item), two undone fixes applied, `audit_phantom_parts.py`'s strong section worked through
+
+Container had the repo but no `venv/`, no `node_modules/`, no CJK fonts, and
+no `/tmp/ids.txt` — same first-boot shape as recent chunks. `HEAD` came up
+detached one commit *behind* `master`'s own local ref, which was itself 16
+commits behind `origin/master`; `git checkout master && git merge --ff-only
+origin/master` brought it current (strict fast-forward, nothing discarded).
+`git push --dry-run origin master` clean, confirmed before any work. Rebuilt
+`venv/` (`pip install -r requirements.txt -r requirements-dev.txt`),
+installed `fonts-noto-cjk fonts-hanazono` (needed `apt-get update` first —
+the box's package lists were empty), curled `ids.txt` (88,941 lines),
+`npm install`.
+
+**`kangxi58` was never still open.** The task brief's standing housekeeping
+item — "`kangxi58` holds 彑 where `CJKRadicals.txt` says radical 58 is 彐"
+— was fixed in chunk 6 (2026-09-18): `data.txt` already reads
+`kangxi58:彐:broom,Radical 58,ヨ:` and `prim-pigs-head:彑:pig's head,...`,
+confirmed by `grep` before touching anything. Chunk 6's own entry says so in
+its last line: "the `kangxi58` housekeeping item... is now closed." But
+every chunk from 57 (2026-09-23) through 111 (2026-10-21) — 20+ sessions
+over a month — repeated "`kangxi58` still holds 彑... still untouched" in
+their own "Next" sections, and today's task brief still carries the same
+claim. Nobody in that chain actually checked `data.txt` before writing it;
+each session copied the previous one's backlog line forward. Correcting the
+record here: there is nothing left to do on `kangxi58`. If this claim
+resurfaces in a future brief, grep `data.txt` before believing it.
+
+**Baseline before any edit** (fresh `import_data()`): `test_regression_fixes.py`
+1328/1328, `pytest` 79 passed, `audit_overflatten.py` found **1** (not 0 —
+see below), `audit_self_reference.py` 0, `audit_radicals.py` 0/0,
+`audit_phantom_parts.py --in-csv-range` 10 across 9 (unchanged from chunk
+111), `audit_phantom_parts.py` (full) 51 across 37 — 18 of them across 13
+kanji in the strong (structural + Heisig) section, `audit_primary_choice.py`
+0/68.
+
+**`audit_overflatten.py` found a live regression, fixed**: `rtk2958`/浬
+("knot") had `水,里,田,土;水,里` — a flattened primary that spells out
+里's own sub-parts (田,土) *alongside* 里 itself, plus an alternate that
+already had the coherent reading. This wasn't wrong when it was written
+(里 was atomic until chunk "full re-review frames 151–200", 2026-10-21,
+gave it its own `田,土` decomposition) — it only became over-flattened
+*today*, as fallout from that unrelated fix two days ago, because 田/土 are
+now reachable through 里 and didn't need spelling out a second time.
+`audit_overflatten.py --emit` would have produced `水,里;水,里` (the primary
+and the alt becoming identical duplicates) had it been applied blindly;
+rendered 浬/水/里/田/土 together and checked rtk2958's sibling row `哩`
+(rtk2957, "mile") = `口,里`, already using 里 as a coherent whole — confirmed
+`水,里` is right and the duplicate alt is pointless. Fixed to
+`rtk2958:浬:knot:水,里`. No pin referenced this row.
+
+**Worked `audit_phantom_parts.py`'s 13-kanji strong section** (structural
+*and* Heisig channel both fail to find the part — the highest-confidence
+class). Two were real bugs:
+
+- `rtk2914`/叡 ("intelligence") had `八,卜,又,目,冖`. A comment already sitting
+  in `data.txt` from the 2026-09-25 volume-3 phantom sweep says: "`叡` was
+  `八,卜,又,目,冖`. cjkvi: `⿰睿又` with `睿` = `⿳𣦵八𥃦`. The `冖` is not in the
+  glyph and nothing supplies it; dropped, the rest left as it was." But the
+  live row was *still* exactly the "was" state — the fix was written up and
+  never actually applied to the line. Rendered 叡/睿/八/卜/又/目/冖 to confirm
+  no flat-roof `冖` shape appears anywhere in the glyph, then applied the
+  documented fix: `八,卜,又,目`.
+- `rtk2971`/淵 ("abyss (old)") had `｜,一,水,丬,片`. Same sweep, same bug
+  shape: the comment says "the left inner element is the full `爿`, not the
+  abbreviated `丬`... and the loose `｜` is not there at all," but the line
+  still read `丬` and still carried the `｜`. Rendered 淵/水/片/丬/爿/一
+  directly: 淵's middle-left component has the full boxed `爿` structure
+  (U+723F, already registered as `kangxi90`), not `丬`'s bare two-tick form
+  (U+4E2C, `prim-half-turtle`) — and no free-standing `｜` anywhere. Shape-
+  family check on `丬` before touching anything: rendered 状/壮/将/寝 (the
+  four other hosts using `丬`) alongside both candidates — all four draw the
+  simple two-tick `丬`, confirming it's the right primitive *there* and this
+  is not a database-wide mix-up, just these two volume-3 rows. Fixed to
+  `一,水,爿,片`. Corrected the `rtk2971` pin in `test_regression_fixes.py`
+  (`{prim-half-turtle, prim-pipe, rtk1, rtk1297, rtk137}` →
+  `{kangxi90, rtk1, rtk1297, rtk137}`) with a comment explaining the fix was
+  already documented but never applied.
+
+**One more host in the shape family, deferred rather than guessed**: `rtk2878`/
+鼎 ("three legged kettle", `｜,一,片,目,丬`) also uses `丬` and is also in the
+phantom list (weak section — cjkvi gives `⿶⑧目`, an unencoded `⑧` placeholder,
+so there's no structural corroboration either way, and `heisig-kanjis.csv`'s
+own components column for frame 2878 is empty with no other host reusing 鼎
+by name). Rendered 鼎 alone and beside 爿/丬/片: at the sizes this tool
+produces, 鼎's two legs read as closer to 丬's plain two-tick form than to
+爿's boxed one, but not clearly enough to act on — this is exactly the
+"stroke primitives on hosts with no alternative to promote" class the task
+brief warns is slow to clear. Left untouched.
+
+**The rest of the strong section was already correct, and already
+documented** — re-confirmed rather than re-investigated, each checked with
+`audit_weak_evidence.py --host` and/or a render before being accepted:
+
+- `rtk1869`/斎, `rtk2388`/滲 — the "codepoint-variant blind spot" chunk 57
+  registered for 斎 (斉 vs 齐) and chunk 79 generalized for `data.txt`'s own
+  2026-09-25 note: cjkvi's raw IDS spells these with the Chinese-unified
+  codepoint (齐 U+9F50, 參 U+53C3) while this row correctly uses the Japanese
+  one (斉 U+6589, 参 U+53C2). Rendered both pairs directly beside their hosts
+  to re-confirm rather than trust the note alone — still visibly distinct
+  shapes, still the Japanese form actually drawn. `audit_weak_evidence.py`
+  returns 0/0/0 for both; this blind spot is a fourth trap class the tool's
+  three checks don't cover, already known, not re-documented as new.
+- `rtk2647`/祢 — same blind spot (尓 U+5C13 vs 尔 U+5C14), and already has an
+  unusually thorough `data.txt` comment (2026-09-25) covering a same-day
+  *correction of a correction*: chunk 79 had briefly changed 祢's row from
+  𠂉 to 𠂊 on a bare-codepoint render of 尔, then caught its own mistake by
+  rendering 祢/称/弥 side by side and finding all three draw the identical
+  flat-bar-with-left-tick form — 𠂉 was right all along. Nothing to add;
+  left untouched.
+- `rtk2372`/捷, `rtk2449`/蘭 — the "opaque-intermediate" class CLAUDE.md
+  documents by name (cjkvi reaches 疌/柬 as atomic children with no row here,
+  so it can't see what's really inside them). Already correct per the
+  architecture doc itself.
+- `rtk2725`/蝿 — the "⿻ is not a parts list" rule's own worked example in
+  CLAUDE.md (cjkvi's `⿻日电` overlay reads as 日 structurally, but rendered
+  it's 田 — the row's existing `田` is the one CLAUDE.md says is right).
+- `rtk2748`/訊 — already fixed in the same 2026-09-25 sweep (`ノ,言,几` →
+  `言,乙,十`, with the reasoning for keeping `乙`+`十` over introducing a new
+  `卂` id written up right there in `data.txt`). Rendered to re-confirm: the
+  right side matches 卂's hooked-cross shape exactly, consistent with the
+  existing two-primitive spelling.
+- `rtk2160`/能 — phantom is `prim-mirrored-spoon` itself, a deliberately
+  glyph-less primitive (`character` field is `?`) for a mirrored-匕 shape
+  with no standalone Unicode codepoint; same primitive is used by `rtk480`/
+  北 (weak section) for the identical shape. Not a bug, not actionable
+  without inventing a codepoint that doesn't exist — left alone.
+
+**A near-miss, caught before editing**: `audit_weak_evidence.py --host 爾`
+flagged `rtk2867`/爾 ("you") under *two* categories — `heisig-atomic` (empty
+CSV components, reused whole in `rtk2194`/璽) and `not-a-parts-list` (cjkvi's
+`⿻巾㸚` overlay) — which looked like a clean case for demoting the current
+`｜,一,八,冂,爻,巾` to a labelled structural alternate behind an atomic
+primary, the same move chunk "full re-review frames 1–50" made for 三. Before
+editing, grepped for other mentions of 爾 in `data.txt` per this session's
+own "trust the notes" instruction, and found a 2026-09-30 comment that had
+already examined this exact row: 璽's own CSV components column (frame 2194)
+spells out "towel; stitching; patchwork quilt; jewel; earring" — fine-grained
+names for 爾's *interior* pieces (巾, 爻, ...), not a restatement of 爾's own
+keyword "let it be" the way a truly-atomic reused primitive would read. That
+note concludes "爻 is already 爾's own real sub-part" and keyword-registers
+爻 with "stitching, patchwork quilt" to match. `heisig-atomic`'s heuristic
+(empty own-CSV-row = atomic) is a reasonable default but isn't infallible,
+and this is a case where a human-reasoned prior conclusion, working from the
+*reuse site's* components column rather than 爾's own empty one, already
+overrides it. Left `rtk2867` untouched.
+
+Checked after all edits, from a single fresh `import_data()`:
+`test_regression_fixes.py` **1328/1328** (`rtk2971`'s pin corrected in
+place, see above), `pytest` **79 passed**, `audit_overflatten.py` **0** (was
+1), `audit_self_reference.py` 0, `audit_radicals.py` 0/0,
+`audit_phantom_parts.py --in-csv-range` **10 across 9** (unchanged — neither
+fix touched a CSV-range row), `audit_phantom_parts.py` (full) **48 across
+35** (was 51 across 37 — the two fixes removed 3 phantom parts across 2
+kanji), `audit_primary_choice.py` **0/68**. Frontend: `npm install`, `npm
+run lint` clean, `npm run build:prod` clean (3,229 SEO pages, same ballpark
+as recent chunks).
+
+Not deployed — no server access from this container, per the task brief. A
+deployer needs `sync_system_data.py` run against the live DB to pick up
+`rtk2958`, `rtk2914` and `rtk2971`'s changed rows; no image regeneration
+needed (no new primitive row, no `image_url` change; `kangxi90`/爿 and
+`prim-half-turtle`/丬 both already existed and are both ordinary-codepoint
+glyphs).
+
+### Next
+
+1. `audit_phantom_parts.py`'s weak section (cjkvi-blind, Heisig-channel-only)
+   — 30 phantom parts across 22 kanji left, unattempted this chunk beyond
+   the 鼎 shape-family check above. `rtk480`/北's `prim-mirrored-spoon`,
+   `rtk2879`/鹵 and `rtk2898`/毅 are already explicitly deferred (鹵's top
+   `⺊` has no row and shouldn't get one in passing; 毅's row is tangled with
+   a separate over-flattening question — "one question, not two," per the
+   2026-09-25 note) — don't re-litigate those without new evidence, same
+   standing instruction that note already gives.
+2. `suggest_heisig_aliases.py --near 0.8 --all` — ~236 names left, flat tail,
+   still genuinely low-value per name (per chunk 111's own conclusion) but
+   untouched this chunk; pick from `--near` output, not host count.
+3. `革`/`靴`/`覇`'s "flowers"/"car" (open since session 12) and "key" on
+   `侯`/`候`/`決`/`快` (chunk 111's item 6) — both still open, not attempted.
+4. Before writing "`kangxi58` still open" in any future chunk: it is not.
+   Check `data.txt` directly before copying that line forward again.

@@ -3082,7 +3082,7 @@ rtk2910:套:accumulate:大,長,厶
 rtk2911:叛:disobey:半,反
 rtk2912:尖:be pointed:小,大
 rtk2913:壷:jar:｜,一,口,士,冖
-rtk2914:叡:intelligence:八,卜,又,目,冖
+rtk2914:叡:intelligence:八,卜,又,目
 rtk2915:酋:chieftain,molotov cocktail:酉,丷
 rtk2916:鴬:nightingale:prim-schoolhouse,鳥
 rtk2917:赫:suddenly:赤
@@ -3126,7 +3126,7 @@ rtk2954:糎:centimeter:厘,米
 rtk2955:粍:millimeter:米,毛
 rtk2956:噸:tonnage:口,頓
 rtk2957:哩:mile:口,里
-rtk2958:浬:knot:水,里,田,土;水,里
+rtk2958:浬:knot:水,里
 rtk2959:吋:inch:口,寸
 rtk2960:呎:foot:口,尺
 rtk2961:梵:sanskrit:凡,林
@@ -3139,7 +3139,7 @@ rtk2967:珈:ornamental hairpin:加,王
 rtk2968:琲:string of many pearls:王,非
 rtk2969:檜:japanese cypress:日,木,𠆢,一
 rtk2970:轡:bit (horse):口,糸,車
-rtk2971:淵:abyss:｜,一,水,丬,片
+rtk2971:淵:abyss:一,水,爿,片
 rtk2972:伍:five:亻,五
 rtk2973:什:utensil:亻,十
 rtk2974:萬:ten thousand:艹,禺

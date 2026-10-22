@@ -1014,8 +1014,15 @@ EXPECTED_DECOMPOSITIONS = {
     # a correctly-named compound.
     "rtk2924": {"character": "乖", "keyword": "disobey",
                 "expected_part_ids": {"rtk40", "rtk480"}},
+    # Corrected 2026-10-22: data.txt's own 2026-09-25 comment above this row
+    # already worked out the fix (left inner element is the full 爿/kangxi90,
+    # not the abbreviated 丬/prim-half-turtle, rendered side by side; the
+    # loose｜/prim-pipe is not in the glyph at all) but the data.txt line
+    # itself was never actually edited to match -- this pin had been pinning
+    # the pre-fix row the whole time. Applied the documented fix and updated
+    # the pin to match.
     "rtk2971": {"character": "淵", "keyword": "abyss (old)",
-                "expected_part_ids": {"prim-half-turtle", "prim-pipe", "rtk1", "rtk1297", "rtk137"}},
+                "expected_part_ids": {"kangxi90", "rtk1", "rtk1297", "rtk137"}},
     "rtk213": {"character": "梢", "keyword": "treetops",
                 "expected_part_ids": {"rtk119", "rtk207"}},
     # Corrected 2026-09-01 (owner-reported): the original sweep-batch-1 fix
