@@ -3405,7 +3405,12 @@ prim-devil:兑:devil:丷,兄
 prim-futon:翟:futon:羽,隹
 prim-talking-cricket:禺:talking cricket:田,禸
 prim-mao:夌:mao:土,儿,夂
-prim-pup-tent:尞:pup tent:大,日,小
+# 2026-10-22 (owner): 尞's top is not a bare 大 -- two small dots sit between
+# its legs (cjkvi 尞 = ⿱昚小, 昚 = ⿱𡗜日, 𡗜 = ⿻大丷), so the row names them:
+# 丷 "horns" (kangxi12). Heisig's column for 僚 瞭 寮 療 names only "large;
+# St. Bernard" for that top; he treats the dots as part of the pup-tent
+# picture. Owner chose to name everything drawn, so "horns" finds these too.
+prim-pup-tent:尞:pup tent:大,丷,日,小
 prim-awl:㑒:awl,fit:亼,口,人
 prim-calling-card:氐:calling card:氏,一
 # 2026-10-18 chunk 108: "key" (and its sibling "stick") on 偉/違/緯/衛/韓
@@ -4802,7 +4807,7 @@ prim-tall:?:tall:亠,口
 # alternate -- the same arrangement 食 had in chunk 49. Promoted: Heisig reads
 # it "top hat; scarf; cloth; clothes; clothing", which is 亠 + 𧘇 exactly, and
 # 裁 装 裏 壊 哀 製 懐 褒 all stopped at it.
-# 尞 (pup tent) = 大 + 日 + 小. Heisig reads 僚 瞭 寮 療 as "pup tent; large;
+# 尞 (pup tent) = 大 + 日 + 小 (+ 丷, added 2026-10-22, see its row). Heisig reads 僚 瞭 寮 療 as "pup tent; large;
 # St. Bernard; sun; day; small; little" and the render is those three stacked.
 # 釆 (animal tracks) = ノ + 米, cjkvi's ⿱丿米, which Heisig writes as "animal
 # tracks; drop; rice" in 釈 番 審 翻.
