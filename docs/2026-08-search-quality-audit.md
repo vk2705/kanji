@@ -22020,3 +22020,28 @@ No shape-family follow-ups — nothing was changed.
 No DB sync needed (data.txt unchanged).
 
 `full_review.py --pending-count`: 2449 / 3000.
+
+## 2026-10-22 — full re-review: frames 551–601
+
+**50 keep, 0 fixed, 0 needs-render.** (One row was briefly marked `fixed` mid-session, then reverted before committing — see below.)
+
+Every row in this chunk (rtk551–rtk601, rtk573 absent from the worklist) was rendered across six batched PNGs via `render_glyphs.py` and checked against Heisig's components column and cjkvi-ids. Notes on the less obvious ones:
+
+- **rtk557 蛍, rtk582 豪, rtk583 腸, rtk553 栃**: each uses a compound primitive (`prim-schoolhouse`, `prim-tall`, `prim-piggy-bank` (昜), 万) that itself expands one level down to cover Heisig's extra component names (𭕄+冖, 亠+口, 旦+勿, 一+勹 respectively) — the row itself is correctly flat, nothing missing.
+- **rtk586 羊 and its family (美/洋/詳/鮮/達/羨/差/着, rtk587–594)**: cjkvi sometimes shows a truncated top variant (𦍌, "wool") for some of these in non-China regions, and Heisig's CSV components column lists both "wool" and "sheep" for 差/着. This is not a new finding — the 2026-08-24 audit (see that date's entry) already render-verified this whole cluster and deliberately rejected registering a separate 𦍌 primitive, since Heisig names it "sheep" (one atomic 羊) throughout and no host needs a distinct glyph identity for it. Re-confirmed, not re-litigated.
+- **rtk569 包 — reverted, not fixed.** Initially decided this row should flip from `勹,巳` to `勹,己` (primary/alt swapped), reasoning that the rendered JP glyph showed 己's open-hook shape and that cjkvi tags 己 as the `[J]` variant. Before syncing further, `regression_fresh.sh` failed on exactly this row's pin — which led to `docs/2026-08-search-quality-audit.md`'s 2026-09-24 "chunk 76" entry (and a later re-confirmation session) showing this exact question had already been render-verified **twice** before, with the opposite conclusion (巳's closed form, not 己's), plus an explicit standing warning not to re-flip it without a strictly clearer render than those sessions used. My own render was not clearer — if anything, more ambiguous. Reverted the `data.txt` edit, re-ran `sync_system_data.py` to restore the live DB, and re-decided the row `keep` in `full_review.py` with a note. `rtk569` ends this session exactly as it started. This is the kind of mistake the project's doc-per-commit rule exists to catch — recorded in full so a future session doesn't repeat it.
+- **rtk565 起**: already correctly carries both regional forms (`走,己` primary / `巳,走` alternate) — confirmed against the rendered JP glyph, which clearly shows the open-hook 己 shape here (unlike 包, where the established verdict is the closed 巳 shape). No relation to the 包 question above beyond sharing a component name.
+
+No shape-family follow-ups beyond the above — nothing changed in `data.txt`.
+
+**Checks (after the revert, so this is the final/committed state):**
+
+| Check | Result |
+|---|---|
+| pytest | 105 passed |
+| `regression_fresh.sh` | 1328/1328 |
+| `audit_radicals.py` | clean |
+
+No DB sync needed in the final state (data.txt unchanged from before this session; the live DB was synced twice — once to apply the attempted fix, once to revert it — and ends matching `data.txt`).
+
+`full_review.py --pending-count`: 2399 / 3000.
