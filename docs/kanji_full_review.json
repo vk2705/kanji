@@ -4410,11 +4410,11 @@
    "木",
    "兆"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render + cjkvi ⿰木兆 match 木,兆 exactly",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk252",
@@ -4428,11 +4428,11 @@
    "目",
    "兆"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render + cjkvi ⿰目兆 match 目,兆 exactly",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk253",
@@ -4446,11 +4446,11 @@
    "大",
    "丶"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "rendered 犬 beside 大/丶: 犬 is literally 大 plus the extra dot stroke at top-right, confirms 大,丶",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk254",
@@ -4464,11 +4464,11 @@
    "丬",
    "犬"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰丬犬 matches 犬,丬 (order differs, same set)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk255",
@@ -4482,11 +4482,11 @@
    "黒",
    "犬"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "primary 犬,黒 + alt 灬,犬,里 are two valid levels of the same shape; cjkvi ⿱⿰里犬灬 confirms the expanded alt",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk256",
@@ -4501,11 +4501,11 @@
    "犬",
    "灬"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "top-left is Heisig's own 'crescent moon' mnemonic (夕) for the flesh-stroke per CSV components; alt 冫,灬,犬,𠂊 is cjkvi's structural ⿴-enclosure reading of the same stroke — both already correctly present",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk257",
@@ -4520,11 +4520,11 @@
    "犭",
    "火"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "艹,犭,火 is the full flattening of cjkvi's ⿱艹狄; 狄 has no row of its own in data.txt/CSV so flattening to named primitives is correct per project convention",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk258",
@@ -4538,11 +4538,11 @@
    "犭",
    "守"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰犭守 matches 犭,守 exactly",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk259",
@@ -4556,11 +4556,11 @@
    "犭",
    "苗"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰犭苗 matches 犭,苗 exactly",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk260",
@@ -4571,11 +4571,11 @@
   "heisig_components": "",
   "cjkvi_ids": "牛",
   "google_parts": [],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "CSV components column empty = Heisig teaches 牛 whole (positive evidence of atomicity); cjkvi also atomic",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk261",
@@ -4589,11 +4589,11 @@
    "牛",
    "寺"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰牛寺 matches 牛,寺 exactly",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk262",
@@ -4607,11 +4607,11 @@
    "牛",
    "口"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "rendered 告 beside 牛: top is the cow radical missing its bottom stroke (cjkvi's 𠂒 placeholder), visually confirms Heisig's 'cow' naming",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk263",
@@ -4625,11 +4625,11 @@
    "牛",
    "儿"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "same 𠂒/牛 top as 告, rendered and confirmed",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk264",
@@ -4643,11 +4643,11 @@
    "水",
    "先"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰氵先 matches 水,先 (氵 is the bound variant of 水)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk265",
@@ -4661,11 +4661,11 @@
    "𠆢",
    "ハ"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "rendered: primary 𠆢,ノ,｜ matches Heisig's own 'umbrella; stick; walking cane' CSV components; alt 人,ノ,｜ is cjkvi's structural ⿱人⿰丿丨 reading — both correctly present already",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk266",
@@ -4679,11 +4679,11 @@
    "田",
    "介"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿱田介 matches 田,介 exactly",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk267",
@@ -4698,11 +4698,11 @@
    "𠆢",
    "木"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "艹,𠆢,朩 vs cjkvi ⿳艹人朩: 𠆢='umbrella' is Heisig's own CSV-listed name for this top stroke, same naming pattern confirmed at 265/281/287",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk268",
@@ -4717,11 +4717,11 @@
    "𭕄",
    "月"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "audit_weak_evidence --host 脊 flags cjkvi's ⿻ overlay (人 merged with 丷/八) as not a literal parts list; our row already matches Heisig's own 4-part CSV components ('I Ching; Master Po; umbrella; moon...') via 丷,𠆢,八,月",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk269",
@@ -4736,11 +4736,11 @@
    "一",
    "口"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿱亼口 matches 口,亼 (order differs, same set)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk270",
@@ -4755,11 +4755,11 @@
    "艹",
    "合"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "⿰土荅 fully flattened to 土,艹,合 (荅 has no row of its own) matches Heisig's listed CSV components",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk271",
@@ -4770,11 +4770,11 @@
   "heisig_components": "jewel; ball",
   "cjkvi_ids": "⿱一土",
   "google_parts": [],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "atomic per Heisig (keyword 'king'); CSV components 'jewel; ball' are alias names this same shape is called under in later frames (272 玉, etc.), not sub-parts; alt 一,土 is cjkvi's structural ⿱一土 reading — correctly dual-encoded already",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk272",
@@ -4788,11 +4788,11 @@
    "王",
    "丶"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿷王丶 matches 王,丶 exactly",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk273",
@@ -4806,11 +4806,11 @@
    "宀",
    "玉"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿱宀玉 matches 玉,宀 exactly",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk274",
@@ -4824,11 +4824,11 @@
    "王",
    "朱"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰王朱 matches 王,朱 exactly",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk275",
@@ -4842,11 +4842,11 @@
    "王",
    "見"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰王見 matches 王,見 exactly",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk276",
@@ -4860,11 +4860,11 @@
    "王",
    "元"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰王元 matches 王,元 exactly",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk277",
@@ -4878,11 +4878,11 @@
    "犭",
    "王"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰犭王 matches 犭,王 exactly",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk278",
@@ -4896,11 +4896,11 @@
    "日",
    "王"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰日王 matches 王,日 exactly",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk279",
@@ -4914,11 +4914,11 @@
    "白",
    "王"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿱白王 matches 王,白 exactly",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk280",
@@ -4929,11 +4929,11 @@
   "heisig_components": "mouth; king; jewel; ball",
   "cjkvi_ids": "⿱口王[GJK] ⿱口𡈼[TV]",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿱口王[GJK] matches our 王,口 (Japanese variant)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk281",
@@ -4947,11 +4947,11 @@
    "人",
    "王"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "rendered: primary 𠆢,王 is Heisig's own 'umbrella' CSV naming, alt 人,王 is cjkvi's ⿱人王[GJ] structural reading — both correctly present",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk282",
@@ -4965,11 +4965,11 @@
    "木",
    "全"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰木全 matches 木,全 exactly",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk283",
@@ -4983,11 +4983,11 @@
    "王",
    "里"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰王里 matches 王,里 exactly",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk284",
@@ -5001,11 +5001,11 @@
    "丶",
    "王"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "primary 王,丶 matches Heisig's own CSV components ('drop; king; jewel; ball'); alt 亠,土 is cjkvi's default ⿱亠土 structural reading — both correctly present",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk285",
@@ -5016,11 +5016,11 @@
   "heisig_components": "water; water droplets; water pistol; candlestick; lord; drop; king; jewel; ball",
   "cjkvi_ids": "⿰氵主",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰氵主 matches 水,主 (氵 bound variant)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk286",
@@ -5034,11 +5034,11 @@
    "木",
    "主"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰木主 matches 木,主 exactly",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk287",
@@ -5053,11 +5053,11 @@
    "土",
    "丷"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "rendered: primary 𠆢,王,丷 is Heisig's own 'umbrella' CSV naming for the roof stroke (same pattern as 介/全/茶), alt 丷,人,王 is cjkvi's ⿱人⿻王丷 structural reading — both correctly present",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk288",
@@ -5068,11 +5068,11 @@
   "heisig_components": "pig-iron; metal; gold; before; cow; human legs",
   "cjkvi_ids": "⿰金先",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰金先 matches 先,金 exactly",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk289",
@@ -5086,11 +5086,11 @@
    "金",
    "本"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰金本 matches 本,金 (order differs, same set)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk290",
@@ -5104,11 +5104,11 @@
    "金",
    "同"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰金同 matches 金,同 exactly",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk291",
@@ -5122,11 +5122,11 @@
    "金",
    "勺"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰金勺 matches 金,勺 exactly",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk292",
@@ -5140,11 +5140,11 @@
    "金",
    "十"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰金十 matches 金,十 exactly",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk293",
@@ -5158,11 +5158,11 @@
    "金",
    "名"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰金名 matches 金,名 exactly",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk294",
@@ -5176,11 +5176,11 @@
    "金",
    "真"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰金真 matches 金,真 exactly",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk295",
@@ -5194,11 +5194,11 @@
    "辶",
    "首"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿺辶首 matches 辶,首 exactly",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk296",
@@ -5212,11 +5212,11 @@
    "道",
    "寸"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿱道寸 matches 寸,道 exactly",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk297",
@@ -5230,11 +5230,11 @@
    "辶",
    "十"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿺辶十 matches 辶,十 exactly",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk298",
@@ -5249,11 +5249,11 @@
    "十",
    "乙"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "辶,十,乙 flattens cjkvi's ⿺辶卂 (卂 has no row of its own); CSV components list 'fishhook' confirming 乙 naming",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk299",
@@ -5267,11 +5267,11 @@
    "辶",
    "告"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿺辶告[GTJV] matches 告,辶 (Japanese variant; Korean uses 吿 instead)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk300",
@@ -5285,11 +5285,11 @@
    "辶",
    "白"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿺辶白 matches 辶,白 exactly",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-22"
  },
  {
   "id": "rtk301",

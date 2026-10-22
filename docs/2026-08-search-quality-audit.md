@@ -21582,3 +21582,77 @@ glyphs).
    `侯`/`候`/`決`/`快` (chunk 111's item 6) — both still open, not attempted.
 4. Before writing "`kangxi58` still open" in any future chunk: it is not.
    Check `data.txt` directly before copying that line forward again.
+
+## 2026-10-22 — full re-review: frames 251–300
+
+50 kept, 0 fixed, 0 needs-render. `full_review.py --pending-count` now
+2699/3000.
+
+Rendered every host with any reason for hesitation plus its parts
+(`render_glyphs.py`, three batches: `/tmp/batch1.png` for 犬/大/丶 and the
+介/全/金/脊 "umbrella" family, `/tmp/seki.png` for 脊 alongside 春/奏/泰,
+`/tmp/ushi.png` for 告/先 beside 牛/午/生) — nothing rendered as tofu or
+looked like a font substitution. For the other 40-odd straightforward
+two-part `⿰`/`⿱` compounds, cross-checked programmatically that every
+primary-decomposition character appears in cjkvi-ids' IDS string and that
+Heisig's own `components` column names the same shapes; all matched, so
+individual renders weren't needed on top of that triple agreement.
+
+Specifically checked, because each had a reason to look twice:
+- **rtk253 犬** — rendered beside 大/丶: 犬 is literally 大 plus one extra
+  dot stroke at the top-right. `大,丶` isn't stroke-soup here, it's exactly
+  what's drawn.
+- **rtk256 然** — cjkvi's `⿱⿰⿴𠂊冫犬灬` has a `⿴` enclosure on the top-left
+  stroke. Our primary (`犬,夕,灬`) uses Heisig's own "crescent moon" naming
+  for that stroke (CSV components lead with "moon; crescent moon; month;
+  flesh"), and the already-present labelled alternate (`冫,灬,犬,𠂊`) is the
+  cjkvi structural reading of the same enclosure. Both were already correct
+  on both sides of the `;` — nothing to change.
+- **rtk265 介 / rtk281 全 / rtk287 金 / rtk267 茶** — all four pair a
+  primary that spells the top stroke `𠆢` with Heisig's own CSV-listed name
+  "umbrella", against cjkvi's structural `人` (person) reading for the same
+  stroke. 265 and 281 already carry that cjkvi reading as a labelled
+  alternate; 267 and 287 don't need one since only one decomposition is on
+  record for them and the render confirms the stroke shape either way. Not
+  a lookalike substitution (𠆢 and 人 render visibly differently in
+  `/tmp/batch1.png`) — two legitimate names for the same drawn stroke,
+  consistent with how 王 gets called "king"/"jewel"/"ball" depending on
+  context (see rtk271 below).
+- **rtk268 脊** — `audit_weak_evidence.py --host 脊` flagged cjkvi's `⿻`
+  overlay (人 merged with 丷/八) as `not-a-parts-list`, so cjkvi's literal
+  reading can't be used to check this row. Heisig's own CSV components
+  column lists four groups ("I Ching; Master Po; umbrella; moon; month;
+  flesh; part of the body") matching our row's four parts (`丷,𠆢,八,月`) in
+  count and in the "umbrella"/"month" names that do match our aliases
+  directly — "I Ching" and "Master Po" are one-off Heisig names for 丷/八 in
+  this frame that this project's aliases don't use (we call 丷 "horns"
+  elsewhere), but that's a synonym gap, not a wrong shape. Kept.
+- **rtk257 荻 / rtk270 塔 / rtk298 迅** — each flattens an intermediate
+  shape (狄, 荅, 卂 respectively) that cjkvi sees as one unit but that has
+  no row of its own anywhere in `data.txt` or `heisig-kanjis.csv`. Flattening
+  to named primitives that do have rows is the established convention here
+  (confirmed by grep, no accidental duplicate row exists for any of the
+  three), not under- or over-flattening.
+- **rtk262 告 / rtk263 先** — both top with cjkvi's `𠂒` (cow radical minus
+  its bottom stroke). Rendered beside 牛: visually it's unmistakably the cow
+  shape with its lowest stroke absorbed into the character below, so
+  Heisig's "cow" naming is accurate, not a placeholder-as-identifier trap.
+- **rtk271 王** — primary is atomic (Heisig teaches "king" whole), but its
+  CSV `components` column isn't empty — it reads "jewel; ball". These
+  aren't sub-parts of 王: they're the keyword names Heisig assigns to this
+  *same* shape when it's reused as a primitive in later frames (272 玉
+  itself, 274 珠, etc., whose own CSV components repeat "king; jewel; ball"
+  as a trio of aliases for one shape). The already-present labelled
+  alternate (`一,土`) is cjkvi's structural `⿱一土` reading. Correctly
+  dual-encoded already.
+
+No shape-family follow-ups and no `data.txt` edits this session — every row
+was already right, so there's nothing to propagate and no sync needed.
+
+Checked before this session (single baseline, no edits made so no after-run
+needed): `pytest` 104 passed, `regression_fresh.sh` reported **all 1328
+checks pass** on a freshly seeded DB, `audit_radicals.py` clean (0 undefined
+part terms). `backup_db.py` ran first regardless, per the standing
+guardrail.
+
+No production deploy from this session — nothing changed to deploy.
