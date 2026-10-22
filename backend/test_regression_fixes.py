@@ -635,14 +635,22 @@ EXPECTED_DECOMPOSITIONS = {
     # 滅 pinned 戊 "parade" (U+620A, empty frame). What it draws is 戌 (U+620C),
     # the same frame with a bar across the top — cjkvi-ids reads 滅 as ⿰氵烕 and
     # 烕 as ⿵戌火, and Heisig's components column calls it "march". Registered
-    # 2026-09-14 as prim-march. 蔑 deliberately still pins 戊 and not 戌: Heisig
-    # calls it "march" too, but cjkvi-ids reads it ⿱𦭝戍 — 戍 (U+620D) is a third
-    # near-identical glyph with a *dot* in the frame, and the render backs cjkvi.
-    # Heisig conflating three shapes under one name is the same trap 龶/丰 set.
+    # 2026-09-14 as prim-march.
     "rtk390": {"character": "滅", "keyword": "destroy",
                "expected_part_ids": {"prim-march", "rtk137", "rtk173"}},
+    # 2026-10-22 full re-review: 蔑 had been left pinning 戊 and a spurious 十
+    # (rtk10) since 2026-09-14, with a comment admitting cjkvi-ids reads it
+    # ⿱𦭝戍 (戍, U+620D, a third near-identical glyph with a dot where 戊 has
+    # none) and that "the render backs cjkvi" — but punting on registering a
+    # third primitive for one host. Heisig's CSV components for 蔑 are
+    # "flowers; eye; cross-eyed; net; march" (three parts: 艹, 罒's own
+    # self-named set, "march") with no "ten" at all, so rtk10 was always
+    # spurious too. Completed the fix this chunk, following the same
+    # one-name-two-glyphs precedent already used for parade (戊/戉), silver
+    # (艮/皀), mend (龰/𤴓) and grow up (龶/丰): new `prim-march-tick`, keeping
+    # "march" as its name since Heisig doesn't distinguish 戌 from 戍 either.
     "rtk392": {"character": "蔑", "keyword": "revile",
-               "expected_part_ids": {"kangxi122", "prim-mugwort", "prim-parade", "rtk10"}},
+               "expected_part_ids": {"kangxi122", "prim-mugwort", "prim-march-tick"}},
     # 武 used 弋(stake, a simple cross, no hook) where render shows 戈
     # (spear, with the hook) instead, and was missing the top 一 entirely.
     "rtk403": {"character": "武", "keyword": "warrior",

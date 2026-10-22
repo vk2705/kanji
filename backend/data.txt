@@ -512,7 +512,7 @@ rtk375:諾:consent:若,言
 rtk376:諭:rebuke:俞,言
 rtk377:式:style:工,弋
 rtk378:試:test:言,式
-rtk379:弐:ii:一,弋,二
+rtk379:弐:ii:二,弋
 rtk380:域:range:土,或
 rtk381:賊:burglar:貝,十,戈
 rtk382:栽:plantation:木,𢦏
@@ -525,7 +525,7 @@ rtk388:誠:sincerity:言,成
 rtk389:威:intimidate:女,戌
 rtk390:滅:destroy:水,戌,火
 rtk391:減:dwindle:水,戌,口
-rtk392:蔑:ignore:艹,罒,十,戊
+rtk392:蔑:ignore:艹,罒,戍
 rtk393:桟:scaffold:㦮,木
 rtk394:銭:coin:㦮,金
 rtk395:浅:shallow:㦮,水
@@ -5395,3 +5395,47 @@ prim-skewer:毌:skewer,mother,breasts:
 # 光 directly rather than copying its parts, so they inherit the fix with
 # no separate edit. No other RTK frame's cjkvi-ids line contains 兀.
 prim-stool:兀:stool,human legs:
+
+# --- 2026-10-22: full re-review, frames 351-400. Two fixes.
+#
+# rtk379 弐 "II (two)": row carried a spurious extra 一 alongside 弋 and 二
+# (一,弋,二). Heisig's own CSV components for 弐 are just "II; two; arrows;
+# quiver" -- two primitives (two=二, arrows/quiver=弋), nothing named "one".
+# cjkvi-ids gives 弐 as `⿻弍一`, but ⿻ overlays shapes that share strokes
+# (CLAUDE.md's standing ⿻/⿴ caution) -- its "一" is describing the extra
+# stroke that distinguishes 弐 from the 弍 variant glyph, not a third
+# separately-drawn primitive. Rendered, 弐 is just 弋 (top, hook+diagonal)
+# over 二 (bottom, two bars); dropped the 一.
+#
+# rtk392 蔑 "ignore": row was 艹,罒,十,戊 -- a spurious 十 and a lookalike
+# codepoint. Heisig's CSV components are "flowers; eye; cross-eyed; net;
+# march" -- three primitives (艹, then 罒's own self-named "eye;
+# cross-eyed; net" set, then "march"), no "ten". cjkvi-ids agrees on three
+# parts and is explicit about the bottom one: `⿱𦭝戍[GJK]` /
+# `⿳艹罒戍[TV]`, both naming U+620D 戍, not U+620A 戊 (the row's old
+# value) or U+620C 戌 ("march" elsewhere, e.g. rtk389 威). Rendered side by
+# side, 戍's bottom has the short diagonal tick that 戊 lacks and 戌's full
+# crossing bar that 戊 also lacks -- a real third glyph in the
+# 戊/戌/戍/戉 family, not a font artifact (render_glyphs.py's own
+# relative check stayed silent on the three). New primitive
+# `prim-march-tick`, keeping "march" as its name (same one-name-two-glyphs
+# pattern already in this file for parade (戊/戉), silver (艮/皀), mend
+# (龰/𤴓) and grow up (龶/丰) -- Heisig does not distinguish 戌 from 戍 by
+# name, only the render does). Checked for other hosts: 蔑 is the only CSV
+# row whose cjkvi-ids line mentions 戍 at all, so no shape-family
+# follow-up needed this chunk.
+#
+# Rest of the chunk (48 of 50) kept as-is, each checked against render +
+# Heisig's CSV components + cjkvi-ids: rtk363 訃 "obituary" has an *empty*
+# CSV components column (CLAUDE.md's atomicity-evidence trap), but
+# rendered it is a plain `⿰言卜` (confirmed by cjkvi-ids too) and every
+# neighbouring 言+X frame (362, 364-378) is genuinely broken down the same
+# way, so the empty field reads as a CSV extraction gap on this one row
+# rather than real evidence 訃 is taught whole; kept 言,卜. rtk356 敬's
+# 句,艹,攵 was confirmed by rendering 苟 (= 艹 over 勹+口, i.e. 句) beside
+# it. rtk385 戚's 小,戊,上 flattens cjkvi's `⿵戊尗` one level further
+# (尗 has no row and only this one host, so flattening follows the
+# project's established single-host convention rather than inventing a
+# primitive for it). rtk382/383's 𢦏 and rtk393-395's 㦮 both render
+# cleanly (no tofu) and match their hosts' real shape.
+prim-march-tick:戍:march:

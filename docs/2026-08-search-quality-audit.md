@@ -21839,3 +21839,89 @@ real (`sync_system_data.py`), then re-ran `pytest` (104 passed) and
 
 No production deploy from this session — a deployer needs `git pull` +
 `sync_system_data.py` on prod to pick up rtk308/rtk309.
+
+## 2026-10-22 — full re-review: frames 351–400
+
+Daily chunk of the full re-review (`backend/full_review.py -n 50`), run
+unattended. 48 kept, 2 fixed, 0 needs-render. Baselines before touching
+anything: `pytest` 104/104, `regression_fresh.sh` 1328/1328,
+`audit_radicals.py` clean (0 undefined terms) — all green, so this was a
+normal day, not a resumed/interrupted run.
+
+### Fixes
+
+**rtk379 弐 "II (two)"**: row was `一,弋,二` — a spurious extra `一` next to
+`弋` and `二`. Heisig's own CSV components are just "II; two; arrows; quiver"
+(two primitives — two=二, arrows/quiver=弋 — nothing named "one"). cjkvi-ids
+gives 弐 as `⿻弍一`, but `⿻` overlays shapes that share strokes (CLAUDE.md's
+standing caution on ⿻/⿴); its `一` is describing the extra stroke that
+distinguishes 弐 from the 弍 variant glyph, not a third separately-drawn
+primitive. Rendered, 弐 is cleanly 弋 (top) over 二 (bottom) — dropped the 一.
+New parts: `二,弋`.
+
+**rtk392 蔑 "ignore"**: row was `艹,罒,十,戊` — a spurious `十` and a
+lookalike codepoint. Heisig's CSV components are "flowers; eye; cross-eyed;
+net; march" — three primitives (艹, then 罒's own self-named "eye;
+cross-eyed; net" set, then "march"), no "ten" anywhere. cjkvi-ids agrees on
+three parts and is explicit about the bottom one: `⿱𦭝戍[GJK]` /
+`⿳艹罒戍[TV]`, both naming U+620D 戍 — not U+620A 戊 (the row's old value,
+already registered here as `prim-parade`) or U+620C 戌 (registered as
+`prim-march`, used by rtk389 威 and rtk390/391 滅/減 in this same chunk).
+Rendered side by side, 戍 has the short diagonal tick that 戊 lacks and
+lacks 戌's full crossing bar — a real third glyph in the 戊/戌/戍/戉 family,
+not a font substitution artifact (`render_glyphs.py`'s own relative check
+stayed silent on all three faces). This exact gap was already flagged on
+2026-09-14 (`test_regression_fixes.py`'s old rtk392 comment: "cjkvi-ids reads
+it ⿱𦭝戍 ... and the render backs cjkvi") but left unfixed, deliberately
+pinning the known-wrong 戊 rather than registering a third primitive for one
+host. Completed it this chunk: new primitive `prim-march-tick:戍:march:`,
+reusing "march" as the name since Heisig doesn't distinguish 戌 from 戍
+either — the same one-name-two-glyphs pattern already used here for parade
+(戊/戉), silver (艮/皀), mend (龰/𤴓) and grow up (龶/丰). New parts:
+`艹,罒,戍`.
+
+**Shape-family check**: `docs/kanji_full_review.json` is the only place this
+session can search cjkvi-ids across the full CSV range (no local cjkvi-ids
+checkout on this box) — grepped it for `戍`: 蔑 is the only CSV row whose
+cjkvi-ids line mentions it at all, so no other frame needed the same fix.
+
+### Notable keeps (reasoning worth recording)
+
+- **rtk363 訃 "obituary"** has an *empty* Heisig CSV components column —
+  CLAUDE.md's standing trap flags this as positive atomicity evidence, not
+  "no evidence." Rendered, though, 訃 is a plain `⿰言卜` (cjkvi-ids agrees),
+  and every neighbouring 言+X frame in this same chunk (362, 364–378) is
+  genuinely broken down the same way by Heisig. Read the empty field as a CSV
+  extraction gap on this one row rather than real evidence 訃 is taught
+  whole, and kept `言,卜`.
+- **rtk356 敬**: confirmed by rendering 苟 (= 艹 over 勹+口, i.e. exactly 句)
+  beside it — matches the row's `句,艹,攵` directly.
+- **rtk385 戚**: cjkvi gives `⿵戊尗`, a legitimate enclosure (⿵ is not in
+  CLAUDE.md's ⿻/⿴ caution list) naming 尗 ("half-uncle") as the inner shape.
+  The row flattens 尗 one level further into its own `上,小` — 尗 has no row
+  here and only this one host, so flattening follows the project's
+  established single-host convention (same reasoning the 2026-09-21 chunk
+  used for 柬 inside 蘭) rather than inventing a primitive for it.
+- **rtk382/383 栽/載** (`𢦏`, Ext B) and **rtk393–395 桟/銭/浅** (`㦮`, Ext A)
+  all rendered cleanly — no tofu, no silent font substitution — and matched
+  their hosts exactly.
+
+### Checks after the fix
+
+`backend/test_regression_fixes.py`'s rtk392 pin was updated in place (old
+pin expected `prim-parade`+`rtk10`, i.e. the bug this session fixed) with a
+comment explaining the 2026-09-14→2026-10-22 history. After the data.txt
+edits and the new `prim-march-tick` row:
+
+- `./venv/bin/python3 audit_radicals.py` — 0 undefined part terms, clean.
+- `./venv/bin/pytest -q` — 104 passed.
+- `./regression_fresh.sh` — all 1328 regression checks OK.
+- `sync_system_data.py --dry-run` then applied for real (auto-backed up
+  `kanji.db` first): 1 kanji inserted (`prim-march-tick`), 3 aliases added,
+  2 decompositions replaced. Re-ran all three checks above against the live
+  DB afterward — still clean.
+
+`full_review.py --pending-count`: 2599 pending / 3000 total (was 2649).
+
+No production deploy from this session — a deployer needs `git pull` +
+`sync_system_data.py` on prod to pick up rtk379/rtk392.
