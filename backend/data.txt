@@ -641,7 +641,13 @@ rtk493:旨:delicious:日,匕
 rtk494:脂:fat:月,旨
 rtk495:詣:visit a temple:言,旨
 rtk496:壱:one (in documents):士,冖,匕
-rtk497:毎:every:毋,𠂉;母,毋
+# 2026-10-22 full re-review: was 毋,𠂉 (primary) / 母,毋 (incoherent alt listing
+# both at once). cjkvi's untagged ⿱𠂉毋 says 毋, but Heisig's CSV names the
+# bottom piece "mother" (not "do not"), and rendered side by side with 母/毋,
+# 毎's bottom carries 母's diagonal cross-marks, not 毋's flat bars -- render
+# wins per CLAUDE.md's standing method. 毒(rtk1651)'s own 毋 stays: cjkvi
+# locale-tags it 毋 for J specifically, consistent with its own render.
+rtk497:毎:every:𠂉,母
 rtk498:敏:cleverness:毎,攵
 rtk499:梅:plum:毎,木
 rtk500:海:sea:水,毎

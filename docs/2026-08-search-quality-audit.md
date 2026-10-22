@@ -21950,3 +21950,30 @@ The scheduled job reviewed and decided all 50 rows. It then hit the session limi
 No regression pin needed a change. A deployer needs `git pull` + `sync_system_data.py` on prod.
 
 `full_review.py --pending-count`: 2549 / 3000.
+
+## 2026-10-22 — full re-review: frames 451–500
+
+The scheduled job decided all 50 rows and edited `data.txt`. It then ended while still waiting on its own regression run, so it never committed. A supervising session checked the leftover diff and then finished the job by hand.
+
+The same job also committed `d6a3a40`, which updates rtk1073 褒's pin. `cff6485`, the frames 401–450 commit, had changed 褒's primary without updating that pin.
+
+**49 keep, 1 fixed, 0 needs-render.**
+
+- **rtk497 毎 every**: the row went from `毋,𠂉;母,毋` to `𠂉,母`.
+  - The old alternate listed both 母 and 毋 at once, which made no sense.
+  - Heisig's components name the bottom piece "mother", not "do not".
+  - Rendered beside 母 and 毋, 毎's bottom has 母's two dots, not 毋's single stroke.
+  - cjkvi's untagged `⿱𠂉毋` loses to the render and Heisig together. 毒 (rtk1651) keeps its 毋, because cjkvi tags 毋 there for Japanese specifically.
+- **Shape-family check:** 敏, 梅, 海, 侮, 悔 and 繁 all use 毎 whole, so nothing else changes. Their four pins against rtk497 still hold.
+
+**Checks:**
+
+| Check | Result |
+|---|---|
+| pytest | 104 passed |
+| `regression_fresh.sh` | 1328/1328 |
+| `audit_radicals.py` | clean |
+
+The dev DB was synced. A deployer needs `git pull` + `sync_system_data.py` on prod.
+
+`full_review.py --pending-count`: 2499 / 3000.
