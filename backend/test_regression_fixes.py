@@ -3563,7 +3563,14 @@ EXPECTED_DECOMPOSITIONS = {
                                                               # its own distinct codepoint, not just a loose synonym
                                                               # for 衣 itself -- see data.txt's "cloak" comment block
     "rtk1073": {"character": "褒", "keyword": "praise",  # was 衣,口,小,亠 -- flattened 保(rtk1072)'s own 呆 with a
-               "expected_part_ids": {"kangxi8", "rtk1072", "rtk423"}},  # wrong 小 for 木; CSV names "protect" directly
+               "expected_part_ids": {"kangxi8", "rtk1072", "prim-scarf"}},  # wrong 小 for 木; CSV names "protect" directly
+                                                              # 2026-10-22 full re-review (shape-family follow-up from
+                                                              # rtk426/428): rtk423(衣)->prim-scarf(𧘇). Heisig's CSV
+                                                              # components for 褒 are "top hat; protect; ...; scarf",
+                                                              # no "garment" -- he never referenced the whole 衣 frame
+                                                              # here, and the old primary redundantly had both 亠 and
+                                                              # whole 衣 (which already contains 亠). Swapped to the
+                                                              # already-present, correct 亠,保,𧘇 alt.
     "rtk1304": {"character": "杯", "keyword": "counter for cupfuls",  # was ｜,ノ,一,木,礼 -- render-confirmed the
                "expected_part_ids": {"rtk1302", "rtk207"}},  # right side is 不(rtk1302)-shaped, not remotely 礼-shaped
     "rtk1349": {"character": "署", "keyword": "signature",  # was 日,老 -- an exact copy-paste of 暑(rtk1350)'s own
