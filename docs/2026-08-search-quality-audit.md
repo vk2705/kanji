@@ -21977,3 +21977,7 @@ The same job also committed `d6a3a40`, which updates rtk1073 褒's pin. `cff6485
 The dev DB was synced. A deployer needs `git pull` + `sync_system_data.py` on prod.
 
 `full_review.py --pending-count`: 2499 / 3000.
+
+## 2026-10-22 — full-review job: run checks in the foreground
+
+On 2026-10-22, two of the job's runs ended with their review finished but not committed. Both were waiting on a check that had been started in the background, and a non-interactive `claude -p` session ends at that point. `kanji_worklist_daily_prompt.md` now says to run every check in the foreground and wait for it to finish.

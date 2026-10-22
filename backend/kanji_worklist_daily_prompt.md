@@ -64,6 +64,10 @@ owner in the kanji's history:
    minutes with no output on this one-CPU box (the first run of this job gave
    up waiting there and never committed) and report 6 failures that belong to
    that old DB, not to your change.
+   **Run every check in the foreground and wait for it** — never with
+   `run_in_background`. This session is non-interactive: once you end a turn
+   to wait for a background task, the run is over, and twice (2026-10-22) a
+   finished chunk was left uncommitted that way.
 2. Edit the `rtkNNN:` line in `backend/data.txt` (format in CLAUDE.md; keep `;`
    alternates that are still right) and put a short `#` comment above it
    saying what it was and why it changed — the history page shows it.
