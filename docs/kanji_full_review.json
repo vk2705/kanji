@@ -37663,11 +37663,18 @@
    "丶",
    "彡"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "木",
+   "缶",
+   "木",
+   "冖",
+   "鬯",
+   "彡"
+  ],
+  "note": "Owner asked about the second tree: the glyph has 木 缶 木 across the top (cjkvi ⿳⿲木缶木冖⿰鬯彡, render confirms); the row listed one 木 and in no visual order. Repeated non-adjacent shapes are listed twice (班, 歌). Heisig's CSV column is empty here because it has no data for the 2010 jōyō additions, not because he teaches it whole.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk2121",

@@ -2332,7 +2332,17 @@ rtk2116:缶:tin can:午,凵
 rtk2117:陶:pottery:缶,勹,阝
 rtk2118:揺:swing:干,爪,凵,扌
 rtk2119:謡:song:干,言,爪,凵
-rtk2120:鬱:gloom:冖,彡,木,缶,鬯
+# 2026-10-23 (owner question "what about the second tree?"): was 冖,彡,木,缶,鬯 --
+# right pieces, but one tree for the two the glyph draws (木 缶 木 across the
+# top, cjkvi ⿳⿲木缶木冖⿰鬯彡) and in no visual order. A shape repeated with
+# something between its copies is listed twice, as 班 王,刀,王 and 歌 可,可,欠
+# already are; only adjacent copies that make a named whole collapse (林 is
+# "grove", not 木,木 -- and the trees here are not adjacent, so 林 does not
+# apply). Now top-to-bottom, left-to-right. Heisig's components column is
+# empty for 鬱, but as for most of the 196 kanji added to the jōyō list in
+# 2010 (嗅 喩 楷 …), the CSV simply has no data there -- it is not his
+# "taught whole" signal.
+rtk2120:鬱:gloom:木,缶,木,冖,鬯,彡
 rtk2121:就:concerning:京,尤
 rtk2122:蹴:kick:就,足
 rtk2123:懇:sociable:豸,艮,心

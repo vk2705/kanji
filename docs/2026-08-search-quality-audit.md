@@ -22319,3 +22319,31 @@ No production deploy from here — a deployer needs `git pull` +
 `sync_system_data.py` on prod to pick this up.
 
 `full_review.py --pending-count`: 2199 / 3000.
+
+## 2026-10-23 — 鬱: the second tree; empty Heisig column ≠ atomic outside the core frames
+
+**rtk2120 鬱 gloom** (owner question: "what about the second tree?"): the row is now `木,缶,木,冖,鬯,彡`; it was `冖,彡,木,缶,鬯`.
+
+- The old row had the right pieces but only one of the two trees the glyph draws. cjkvi `⿳⿲木缶木冖⿰鬯彡` shows 木 缶 木 across the top, and the render confirms it.
+- The old row was also in no visual order. The new one goes top to bottom, left to right.
+- A shape repeated with something between its copies is listed twice, as 班 `王,刀,王` and 歌 `可,可,欠` already are. Only adjacent copies that form a named whole collapse (林 "grove"), and the two trees here are not adjacent.
+- Search was never affected, because "tree" matched either way. The detail page and the history now show the shape as it is drawn.
+- Recorded as `fixed` in `kanji_full_review.json`. The pin is a set of part ids, so it is unchanged and still passes.
+
+**Method correction found on the way.** 鬱's components column in `heisig-kanjis.csv` is empty. The review method, and CLAUDE.md since 2026-09-25, read an empty column as Heisig teaching the kanji whole. Counting by `id_5th_ed` shows that holds only for the core frames:
+
+| `id_5th_ed` range | Frames | Empty components | Meaning |
+|---|---|---|---|
+| 1–2042 | 2042 | 34 (一 口 木 …) | genuinely "taught whole" |
+| 2043–2999 | 957 | 827 | mostly missing data |
+| 3000+ (the 2010 jōyō additions: 嗅 喩 楷 鬱 …) | 31 | 31 | missing data |
+
+`kanji_worklist_daily_prompt.md` and CLAUDE.md now say this. Frames already reviewed that fall in the no-data ranges were decided from the render and cjkvi-ids anyway; the job's notes cite those for 嗅, 喩 and 楷. So no earlier decision is known to rest on the wrong reading.
+
+**Checks:**
+
+| Check | Result |
+|---|---|
+| pytest | 105 passed |
+| `regression_fresh.sh` | 1328/1328 |
+| `audit_radicals.py` | clean |
