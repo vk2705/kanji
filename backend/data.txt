@@ -2131,7 +2131,21 @@ rtk1920:査:investigate:且,木
 rtk1921:助:help:且,力
 rtk1922:宜:best regards:且,宀
 rtk1923:畳:tatami mat:田,冖,且
-rtk1924:並:row:｜,一,二,丷
+# 2026-10-23 (search-quality audit): was ｜,一,二,丷 (pure stroke soup, 6
+# strokes against an official count of 8 -- the two missing strokes alone
+# say this split was never actually derived from the glyph). CSV components
+# is empty for frame 1924, and CLAUDE.md's rule reads that as positive
+# atomicity evidence, not silence -- confirmed here the way the doc's own
+# 冊/柵 example was: "row" is reused whole, by name, in heisig-kanjis.csv's
+# components column for 1925 普 ("row; sun; day"), 1926 譜, 1927 湿, 1928 顕,
+# 1929 繊, 1930 霊 ("...; two; row"), 2148 虚 ("tiger; row") and 2149 戯 --
+# eight later frames teaching it as one piece, never spelling out a pipe or
+# a two inside it. Rendered 並 beside 竝 (U+7ADD, the unfused "two 立"
+# traditional form) and 立 itself: 並 is visibly a fused/overlapped
+# compression of two 立, not independently resolvable into the claimed
+# strokes. rtk1925 普's own row already reads 日,並 -- already treating 並
+# as the whole unit, so this fix changes nothing downstream.
+rtk1924:並:row:
 rtk1925:普:universal:日,並
 rtk1926:譜:musical score:言,普
 rtk1927:湿:damp:水,日,业
@@ -2897,7 +2911,17 @@ rtk2658:穆:respectful:禾,小,白,彡
 rtk2659:窺:lie in wait:穴,規
 rtk2660:窄:narrow:｜,ノ,穴;乍,穴
 rtk2661:穿:put on (to the feet):牙,穴
-rtk2662:竃:kitchen stove:穴,土,田,亀
+# 2026-10-23 (search-quality audit): was 穴,土,田,亀 -- 田 beside 亀 was the
+# same ⿻-misread bug CLAUDE.md names for 蝿 and the 2026-10-01 entry already
+# fixed on 縄 (糸,田,亀 -> 糸,亀): cjkvi's own reading here is
+# ⿳穴土⿻日电, an *overlay* of 日 and 电, not a separate flat 田 sibling.
+# Rendered 竃 beside 亀 and 田 directly: the bottom of 竃 is pixel-for-pixel
+# 亀's own shape (the curved-leg tortoise body), with no independent boxed
+# 田 anywhere in it. The 2026-10-01 entry's own wording ("the simplified
+# tortoise this project already uses whole in 竃") assumed this row had
+# already been fixed the same way 縄 was -- it hadn't; this was the one
+# case the 2026-10-01 pass missed. 田 dropped.
+rtk2662:竃:kitchen stove:穴,土,亀
 rtk2663:竪:length:立,臤
 rtk2664:颯:sudden:立,風
 rtk2665:站:stop:占,立
@@ -3100,7 +3124,18 @@ rtk2856:鼠:rat:臼
 # The 臼,干,丷 portion (for 𣫞's ⿻丵臼 overlay, no clean codepoint for 丵)
 # is left as-is -- not today's finding, not re-verified here.
 rtk2857:鑿:chisel:臼,干,金,丷,殳
-rtk2858:艘:counter for small boats:舟,日,支
+# 2026-10-23 (search-quality audit): was 舟,日,支. cjkvi gives ⿰舟叟, with
+# 叟 itself ⿱⿻臼丨又 -- CSV is empty for frame 2858 (past the 6th-edition
+# cutoff), but the same 叟-shape region is in-range, named, and already
+# registered on two earlier hosts: rtk1201 捜 ("finger; fingers; Buddha's
+# hand; monkey; sun; day; stick; crotch", row 日,又,扌,申) and rtk1818 痩
+# (row includes 又). Both land on 日 for 叟's upper portion -- consistent
+# with this row's existing 日 -- but both use 又 (hand) for its lower
+# portion, not 支 (branch). Rendered 艘 beside 又 and 支 directly: the
+# lower-right stroke is a plain hook, matching 又's two strokes, not 支's
+# four-stroke cross-plus-hook shape. 支 replaced with 又 to match the
+# established shape-family reading.
+rtk2858:艘:counter for small boats:舟,日,又
 rtk2859:瞑:sleep:冥,目
 rtk2860:暝:dark:冥,日
 rtk2861:坐:sit:从,土
