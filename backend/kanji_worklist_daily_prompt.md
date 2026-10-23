@@ -28,8 +28,12 @@ For each of the (up to) 50 rows, in order:
 2. **Heisig's components column** (shown by full_review.py) is the list of
    names his book uses for the pieces, fully expanded. Every shape it names
    must be reachable from our row, and our row must not contain a shape that
-   is not drawn. An EMPTY column means he teaches the kanji whole: that is
-   positive evidence the row should be atomic, not missing data.
+   is not drawn. An EMPTY column means he teaches the kanji whole -- positive
+   evidence the row should be atomic -- **only for the core frames**, those
+   whose `id_5th_ed` in `heisig-kanjis.csv` is 1-2042 (34 such rows: 一 口 木
+   …). For `id_5th_ed` 2043-2999 (827 of 957 empty) and 3000+ (the 31 kanji
+   added to the jōyō list in 2010, e.g. 嗅 喩 楷 鬱 -- all empty) the CSV simply
+   has no data: decide those from the render and cjkvi-ids alone.
 3. **cjkvi-ids** is a structural cross-check. Beware ⿻ and ⿴: those overlay
    shapes that share strokes, so the pieces are not separate parts (蝿's
    `⿻日电` is not a 日 plus a 电). Run `./venv/bin/python3 audit_weak_evidence.py

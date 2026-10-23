@@ -932,8 +932,12 @@ rtk762:投:throw:扌,殳
 rtk763:没:drown:殳,水
 rtk764:股:thigh:月,殳
 rtk765:設:establishment:殳,言
-rtk766:撃:beat:車,手,殳,几,又
-rtk767:殻:husk:士,冗,殳,又
+# 2026-10-23 full re-review: both rows restated 殳's own cjkvi sub-parts
+# (几,又 for 撃, just 又 for 殻) redundantly beside 殳 itself, same bug
+# already fixed once for 段/劇 (see that comment below). cjkvi: 撃 ⿱軗手,
+# 軗 ⿰車殳 -> 車,殳,手; 殻 ⿰壳殳, 壳[G] ⿱士冗 -> 士,冗,殳.
+rtk766:撃:beat:車,殳,手
+rtk767:殻:husk:士,冗,殳
 rtk768:支:branch:十,又
 rtk769:技:skill:扌,支
 rtk770:枝:bough:木,支
@@ -2009,7 +2013,12 @@ rtk1820:嫉:jealous:女,疾
 rtk1821:痢:diarrhea:利,疒;禾,疔
 rtk1822:痕:mark:艮,疔
 rtk1823:疲:exhausted:皮,又,疔;疒,皮
-rtk1824:疫:epidemic:殳,疔,几,又;殳,疒
+# 2026-10-23 full re-review shape-family follow-up (see rtk766/rtk767):
+# primary restated 殳's own cjkvi sub-parts (几,又) redundantly beside 殳
+# itself. cjkvi: 疫 ⿸疒殳 -> 殳,疔 (疔 kept: this file's established
+# alias for kangxi104/疒, used by every sibling 疒-radical row below).
+# The alt duplicated the fixed primary once 几,又 is dropped, so it's gone.
+rtk1824:疫:epidemic:殳,疔
 rtk1825:痛:pain:甬,疒
 rtk1826:癖:mannerism:疔,辟
 rtk1827:匿:hide:匚,若
@@ -2337,7 +2346,17 @@ rtk2116:缶:tin can:午,凵
 rtk2117:陶:pottery:缶,勹,阝
 rtk2118:揺:swing:干,爪,凵,扌
 rtk2119:謡:song:干,言,爪,凵
-rtk2120:鬱:gloom:冖,彡,木,缶,鬯
+# 2026-10-23 (owner question "what about the second tree?"): was 冖,彡,木,缶,鬯 --
+# right pieces, but one tree for the two the glyph draws (木 缶 木 across the
+# top, cjkvi ⿳⿲木缶木冖⿰鬯彡) and in no visual order. A shape repeated with
+# something between its copies is listed twice, as 班 王,刀,王 and 歌 可,可,欠
+# already are; only adjacent copies that make a named whole collapse (林 is
+# "grove", not 木,木 -- and the trees here are not adjacent, so 林 does not
+# apply). Now top-to-bottom, left-to-right. Heisig's components column is
+# empty for 鬱, but as for most of the 196 kanji added to the jōyō list in
+# 2010 (嗅 喩 楷 …), the CSV simply has no data there -- it is not his
+# "taught whole" signal.
+rtk2120:鬱:gloom:木,缶,木,冖,鬯,彡
 rtk2121:就:concerning:京,尤
 rtk2122:蹴:kick:就,足
 rtk2123:懇:sociable:豸,艮,心
@@ -2928,7 +2947,10 @@ rtk2693:籾:unhulled rice:刃,米
 rtk2694:糠:rice bran:康,米
 rtk2695:糞:shit:異,米
 rtk2696:粟:millet:西,米
-rtk2697:繋:tie:糸,車,殳,几,又
+# 2026-10-23 full re-review shape-family follow-up (see rtk766): restated
+# 殳's own cjkvi sub-parts (几,又) redundantly beside 殳 itself. cjkvi:
+# 繋 ⿱軗糸, 軗 ⿰車殳 -> 糸,車,殳.
+rtk2697:繋:tie:糸,車,殳
 rtk2698:綸:thread:侖,糸
 rtk2699:絨:wool cloth:ノ,一,糸,戈
 rtk2700:絆:bonds:糸,半
@@ -3088,7 +3110,11 @@ rtk2853:塵:dust:鹿,土
 rtk2854:麒:chinese unicorn:其,鹿
 rtk2855:舅:father-in-law:男,臼
 rtk2856:鼠:rat:臼
-rtk2857:鑿:chisel:臼,干,金,丷,殳,几,又
+# 2026-10-23 full re-review shape-family follow-up (see rtk766): restated
+# 殳's own cjkvi sub-parts (几,又) redundantly beside 殳 itself; dropped.
+# The 臼,干,丷 portion (for 𣫞's ⿻丵臼 overlay, no clean codepoint for 丵)
+# is left as-is -- not today's finding, not re-verified here.
+rtk2857:鑿:chisel:臼,干,金,丷,殳
 # 2026-10-23 (search-quality audit): was 舟,日,支. cjkvi gives ⿰舟叟, with
 # 叟 itself ⿱⿻臼丨又 -- CSV is empty for frame 2858 (past the 6th-edition
 # cutoff), but the same 叟-shape region is in-range, named, and already
@@ -3140,7 +3166,12 @@ rtk2894:嚢:pouch:一,中,八,冖,𠀎,𧘇
 rtk2895:暢:stretch:昜,申
 rtk2896:廻:round:回,廴
 rtk2897:欣:take pleasure in:斤,欠
-rtk2898:毅:strong:立,亠,殳,豕,几,又
+# 2026-10-23 full re-review shape-family follow-up (see rtk766): restated
+# 殳's own cjkvi sub-parts (几,又) redundantly beside 殳 itself; dropped.
+# Also dropped 亠: cjkvi 毅 ⿰豙殳, 豙 ⿱立𧰨 -- rendered side by side with
+# 豕 (⿱一𧰨, same 𧰨 body, this file's existing stand-in for it), 豙's top
+# is 立 alone, no separate 亠.
+rtk2898:毅:strong:立,豕,殳
 rtk2899:斯:this:其,斤
 rtk2900:匙:spoon:匕,是
 rtk2901:匡:correct:王,匚
@@ -3175,7 +3206,14 @@ rtk2929:胤:descendent:ノ,乙,幺,月
 rtk2930:疏:pass through:止,川,亠,厶
 rtk2931:膏:fat:月,高
 rtk2932:魁:charging ahead of others:斗,鬼
-rtk2933:馨:fragrant:禾,香,士,日,又,几,殳,尸
+# 2026-10-23 full re-review shape-family follow-up (see rtk766): three
+# redundant restatements at once. cjkvi 馨 ⿱殸香, 殸 ⿰声殳 -- 殳's own
+# sub-parts (几,又) were restated beside 殳 itself (same bug as rtk766);
+# 香's own sub-parts (禾,日 per 香 ⿱禾日) were restated beside 香 itself
+# (same bug, different shape); and 声 (⿱士𠃜, already rtk2044's own row)
+# was flattened to 士,日,尸 with a wrong 日 standing in for 𠃜 (whose own
+# row is 尸,一, not 日). Using the already-correct coherent primitives:
+rtk2933:馨:fragrant:声,殳,香
 rtk2934:牒:label:枼,片
 rtk2935:瞥:glance at:敝,目
 rtk2936:睾:testicles:血,幸

@@ -22221,6 +22221,148 @@ No `data.txt` edit this run, so the "before changing a row" checks (backup, pyte
 
 `full_review.py --pending-count`: 2249 / 3000.
 
+## 2026-10-23 — full re-review: frames 752–801
+
+48 keep, 2 fixed, 0 needs-render. All 50 rows checked against `/tmp/ids.txt`
+(cjkvi-ids, already downloaded in this sandbox) directly — a real `grep -P
+"\t<char>\t"` lookup, not the one-level summary `full_review.py` prints —
+plus Heisig's components column and `render_glyphs.py` renders for anything
+where that wasn't conclusive on its own. 48 kept rows matched their cjkvi-ids
+top-level split exactly (allowing this project's established "collapse a
+doubled shape to one occurrence" convention, confirmed against the existing
+林/木 precedent, for 双 `又`/cjkvi `⿰又又` and 桑 `又,木`/cjkvi `⿱叒木`
+where 叒 is three 又 stacked) or matched Heisig's own column where cjkvi
+names an intermediate shape (尗, 孚, 㸒, 𪧷/寽, 𢖻) Heisig doesn't teach as
+its own primitive — rtk775 叔 `小,又,上` is the clearest case: cjkvi says
+`⿰尗又` but Heisig's column is itself already `above; small; little;
+crotch`, the same flattening, and this dataset has no `尗` row to point to
+instead.
+
+**Fixed, both in today's range:**
+
+- **rtk766 撃 ("beat")** — was `車,手,殳,几,又`. `/tmp/ids.txt`: 撃 `⿱軗手`,
+  軗 `⿰車殳`, 殳(JK) `⿱几又`. 殳's own cjkvi sub-parts (几,又) were restated
+  redundantly beside 殳 itself — the same bug already caught and fixed once
+  for 段/劇 (see that comment in `data.txt`, 2026-0x session: "几,又 is 殳's
+  own cjkvi sub-parts restated redundantly beside 殳 itself"). Fixed to
+  `車,殳,手`.
+- **rtk767 殻 ("husk")** — was `士,冗,殳,又`. cjkvi: 殻 `⿰壳殳`, 壳[G]
+  `⿱士冗`. Same bug, one duplicate (又) instead of two. Fixed to `士,冗,殳`.
+
+**Shape-family follow-up (the 亀 lesson: same bug, other hosts, done now
+rather than waiting for their own frame).** A file-wide grep for any row
+listing 殳 alongside 几 and/or 又 found five more hosts with the identical
+redundant-restatement bug, all outside today's 752–801 range — fixed now
+since it's mechanically the same finding already confirmed above, each
+checked against `/tmp/ids.txt` before touching it:
+
+- **rtk1824 疫 ("epidemic")** — was `殳,疔,几,又;殳,疒` (two decompositions
+  disagreeing with each other on top of the redundancy). cjkvi: 疫 `⿸疒殳`.
+  Consolidated to one: `殳,疔` — kept the `疔` spelling (not `疒`) since
+  every sibling 疒-radical row in this file (症, 瘍, 痩, 疾, 痢, ...) already
+  uses `疔` as this file's established alias for kangxi104/疒; swapping just
+  this one row to `疒` would have made it the odd one out. The alt
+  decomposition `殳,疒` became an exact duplicate of the fixed primary once
+  几,又 were dropped, so it's gone, not merely relabelled.
+- **rtk2697 繋 ("tie")** — was `糸,車,殳,几,又`. cjkvi: 繋 `⿱軗糸`, 軗
+  `⿰車殳` (same 軗 as 撃 above). Fixed to `糸,車,殳`.
+- **rtk2857 鑿 ("chisel")** — was `臼,干,金,丷,殳,几,又`. cjkvi: 鑿
+  `⿱𣫞金`, 𣫞 `⿰⿻丵臼殳` — note the `⿻` on the left half: 丵 and 臼 overlay
+  (share strokes), so they are not cleanly separable the way the `臼,干,丷`
+  portion of this row implies, and 丵 has no codepoint with a usable font
+  outline to check against directly (U+23ADE 𣫞 itself renders as tofu in
+  this sandbox's fonts). Only removed the confirmed 几,又 duplication,
+  leaving `臼,干,金,丷,殳`; the `臼,干,丷` portion is **not** re-verified
+  and may still need a render-capable font or a dedicated session — flagged
+  for whoever reviews frame 2857 directly, not re-decided here.
+- **rtk2898 毅 ("strong")** — was `立,亠,殳,豕,几,又`. cjkvi: 毅 `⿰豙殳`,
+  豙 `⿱立𧰨`. Rendered 豙 next to 豕 (`⿱一𧰨`, this file's existing
+  stand-in for the shared `𧰨` body) side by side to check for a font
+  substitution before trusting the IDS text (CLAUDE.md's "the render itself
+  can lie" warning) — they're genuinely distinct in this font (豙's top is
+  立's three strokes; 豕's top is one bare 一), so no substitution issue.
+  豙's top is 立 alone; no separate 亠 anywhere in the real structure. Fixed
+  to `立,豕,殳` (dropped 亠 along with the 几,又 redundancy).
+- **rtk2933 馨 ("fragrant")** — was `禾,香,士,日,又,几,殳,尸`, stacking
+  three separate instances of the same redundant-restatement bug in one
+  row. cjkvi: 馨 `⿱殸香`, 殸 `⿰声殳`. (1) 殳's own `几,又` restated beside
+  殳 itself, same as every row above. (2) 香's own `禾,日` (cjkvi 香
+  `⿱禾日`) restated beside 香 itself — same bug, different shape. (3) 声
+  (cjkvi `⿱士𠃜`, already this file's own rtk2044 row, correctly `士,𠃜`)
+  was flattened inline to `士,日,尸` with `日` wrongly standing in for `𠃜`
+  (whose own row, added 2026-09-20, is `尸,一` — not `日`; a different
+  character, not a font-lookalike). Replaced the whole row with the three
+  already-correct coherent primitives it's built from: `声,殳,香`.
+
+**Verification.** Before editing: `backup_db.py`, `pytest -q` (105 passed),
+`./regression_fresh.sh` (1328/1328), `audit_radicals.py` (0 undefined
+terms) — all clean, no earlier run left anything mid-way.
+
+After editing `data.txt`, `regression_fresh.sh` caught two pins that had
+baked in the now-removed redundant `又`: `rtk767`'s pin expected `rtk752`
+(又) as a direct part, and `rtk2697`'s pin expected both `kangxi16` (几) and
+`rtk752` (又). Both pins were checking the literal old (buggy) row, not
+independent evidence, so updated them in place in `test_regression_fixes.py`
+with a comment explaining why, rather than reverting the fix. Full sequence
+re-run clean after: `pytest -q` → 105 passed; `regression_fresh.sh` →
+1328/1328; `audit_radicals.py` → 0 undefined terms.
+
+`sync_system_data.py --dry-run` reported exactly 7 decompositions replaced
+(matching the 7 rows touched) and 1 removed-now-redundant (rtk1824's dropped
+alt) before counts looked sane; ran for real, applied cleanly to this
+machine's `kanji.db`. The dry-run's unrelated `! 286 system ja-kanji ids
+exist live but not in source` warning is pre-existing (legacy primitive ids
+phased out over past sessions) and untouched by this run — not investigated
+further here.
+
+No production deploy from here — a deployer needs `git pull` +
+`sync_system_data.py` on prod to pick this up.
+
+`full_review.py --pending-count`: 2199 / 3000.
+
+## 2026-10-23 — 鬱: the second tree; empty Heisig column ≠ atomic outside the core frames
+
+**rtk2120 鬱 gloom** (owner question: "what about the second tree?"): the row is now `木,缶,木,冖,鬯,彡`; it was `冖,彡,木,缶,鬯`.
+
+- The old row had the right pieces but only one of the two trees the glyph draws. cjkvi `⿳⿲木缶木冖⿰鬯彡` shows 木 缶 木 across the top, and the render confirms it.
+- The old row was also in no visual order. The new one goes top to bottom, left to right.
+- A shape repeated with something between its copies is listed twice, as 班 `王,刀,王` and 歌 `可,可,欠` already are. Only adjacent copies that form a named whole collapse (林 "grove"), and the two trees here are not adjacent.
+- Search was never affected, because "tree" matched either way. The detail page and the history now show the shape as it is drawn.
+- Recorded as `fixed` in `kanji_full_review.json`. The pin is a set of part ids, so it is unchanged and still passes.
+
+**Method correction found on the way.** 鬱's components column in `heisig-kanjis.csv` is empty. The review method, and CLAUDE.md since 2026-09-25, read an empty column as Heisig teaching the kanji whole. Counting by `id_5th_ed` shows that holds only for the core frames:
+
+| `id_5th_ed` range | Frames | Empty components | Meaning |
+|---|---|---|---|
+| 1–2042 | 2042 | 34 (一 口 木 …) | genuinely "taught whole" |
+| 2043–2999 | 957 | 827 | mostly missing data |
+| 3000+ (the 2010 jōyō additions: 嗅 喩 楷 鬱 …) | 31 | 31 | missing data |
+
+`kanji_worklist_daily_prompt.md` and CLAUDE.md now say this. Frames already reviewed that fall in the no-data ranges were decided from the render and cjkvi-ids anyway; the job's notes cite those for 嗅, 喩 and 楷. So no earlier decision is known to rest on the wrong reading.
+
+**Checks:**
+
+| Check | Result |
+|---|---|
+| pytest | 105 passed |
+| `regression_fresh.sh` | 1328/1328 |
+| `audit_radicals.py` | clean |
+
+## 2026-10-23 — show a part the glyph draws twice, twice (display only)
+
+After 鬱 was relisted as `木,缶,木,…`, the detail page still showed one tree. Since the first commit, `database._resolve_parts_detail` had dropped every repeated part id. Its purpose was to hide the synthetic keyword row stored after each literal glyph (`木`, `tree`). As a side effect, 12 rows that deliberately list a shape twice also showed it once: 班 `王,刀,王`, 歌 `可,可,欠`, 幽 `山,幺,幺`, 呂, 棘, …
+
+**Detail page and MCP** (`_resolve_parts_detail`):
+- A term is now dropped only when it names the same part as the term just before it under a different spelling. Real repeats are shown.
+- The synthetic-keyword pass now checks the keyword of *every* row drawing that glyph, not just the first one it picks. 幺 has three rows (kangxi52 "cocoon", rad1040, a hanzi row). Checking only one let 幽's synthetic "cocoon" through, where it resolved to 繭, so 幽 had been showing `山, 幺, 繭`.
+
+**Static SEO pages** (`generate_seo_pages.py`):
+- The same adjacency rule now applies here.
+- Synthetic keyword rows are now dropped at load time. Resolved on their own, they could land on a different row: 幽's "mountain" on 屮, 班's "sword" on 𠃌, each adding a chip for a part the character does not have.
+
+**Unchanged:** search, which reads the stored rows independently.
+
+**Verified** on the detail output and a full SEO regeneration into a scratch directory: 鬱 `木 缶 木 冖 鬯 彡`, 幽 `山 幺 幺`, 班 `王 刀 王`, 屋 `至 尸`, 裏 unchanged. pytest: 105 passed.
 ## 2026-10-23 — chunk 113: `audit_phantom_parts.py`'s weak section, three fixed, one tooling gap found
 
 Container had the repo but no `venv/`, no `node_modules/`, no CJK fonts, no `/tmp/ids.txt`
@@ -22240,18 +22382,26 @@ passed, `audit_overflatten.py` 0, `audit_self_reference.py` 0, `audit_radicals.p
 `audit_phantom_parts.py --in-csv-range` 10 across 9 (unchanged from chunk 112),
 `audit_phantom_parts.py` (full) 49 across 36, `audit_primary_choice.py` 0/67.
 
-**A tooling gap, not a data bug**: `audit_weak_evidence.py`'s `heisig-atomic` category
-(empty CSV `components` = positive atomicity evidence) checks every host regardless of
-frame number, but `heisig-kanjis.csv`'s `components` column is **uniformly empty past
-frame 2200** (800/800 empty in that range, vs. ~2.5% empty below it) — the CSV simply
-doesn't carry component data for 6th-edition volume 3 at all, which `audit_phantom_parts.py`'s
-own docstring already documents (`--in-csv-range` exists for exactly this reason) but
-`audit_weak_evidence.py` doesn't account for. It flagged `heisig-atomic` for six hosts in
-this session's candidate list (兎 2235, 梟 2852, and others past the cutoff); for those,
-the signal is noise, not evidence. Only two of this chunk's candidates were below the
-cutoff with a genuinely empty row: 喩 (308) and 並 (1924). Not fixing the script this
-session — flagging here so a future one doesn't spend time chasing `heisig-atomic` hits
-above frame 2200 as if they meant something.
+**A tooling gap, not a data bug — independently found twice the same day.** Before
+touching any row, `audit_weak_evidence.py`'s `heisig-atomic` category (empty CSV
+`components` = positive atomicity evidence) was checked against frame number on a
+hunch, using `id_6th_ed` as the proxy: empty past roughly frame 2200 (800/800 empty
+above it, ~2.5% below), which lines up with `audit_phantom_parts.py`'s own
+`--in-csv-range` cutoff. The full-review-frames session working in parallel today
+found the same gap independently (see "鬱: the second tree; empty Heisig column ≠
+atomic outside the core frames" above) and did the
+precise version: the real boundary is `id_5th_ed` 1–2042, not an `id_6th_ed` proxy,
+and landed the exact table in `CLAUDE.md` and `kanji_worklist_daily_prompt.md`. Six
+hosts in this session's own candidate list were flagged `heisig-atomic` on the stale
+reading (兎 2235, 梟 2852, and others whose `id_5th_ed` is also past 2042) — for those,
+the signal was noise, not evidence, confirmed against the corrected rule. Only
+`id_5th_ed` 1–2042 hosts in this chunk's list had a genuinely load-bearing empty row:
+並 (`id_5th_ed` 1785, fixed below) and 喩 (`id_5th_ed` 3009 — checked and actually
+**outside** the core range despite its low `id_6th_ed` of 308, so its empty CSV row
+carried no weight either way; 喩 was kept on render/shape-family evidence alone, not
+on atomicity). `audit_weak_evidence.py` itself still checks the wrong column and still
+needs the `CLAUDE.md`-table fix applied in code, not just documented — not done this
+session, carried to Next.
 
 **Three real fixes, each render-confirmed and shape-family-corroborated:**
 
@@ -22362,10 +22512,11 @@ Not deployed — no server access from this container. A deployer needs `git pul
    (doesn't parse into the usual 卯+金+刀 structure, needs render iteration), rtk2852 梟
    (needs a new "bird without legs" primitive, name still open), plus rtk2910 套, rtk2913
    壷, rtk2930 疏, rtk2235 兎 — not reached at all this chunk.
-2. `audit_weak_evidence.py`'s `heisig-atomic` category should learn the same
-   `--in-csv-range`-style cutoff `audit_phantom_parts.py` already applies (frame > 2200 ->
-   CSV is empty for everyone, not evidence of atomicity for anyone) — a real fix to the
-   tool, not just a note, if a future session has room for it.
+2. `audit_weak_evidence.py`'s `heisig-atomic` category should gate on `id_5th_ed` 1–2042
+   the way the now-corrected `CLAUDE.md` rule (and `kanji_worklist_daily_prompt.md`) say
+   to — the rule and the table already exist (landed today by the parallel full-review
+   session's 鬱 entry), only the code change in `audit_weak_evidence.py` itself is still
+   outstanding.
 3. `suggest_heisig_aliases.py --near 0.8 --all` — ~236 names left, flat tail, still
    genuinely low-value per name (chunk 111's conclusion), untouched again this chunk.
 4. `革`/`靴`/`覇`'s "flowers"/"car" (open since session 12) and "key" on

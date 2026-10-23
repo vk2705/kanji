@@ -2073,8 +2073,9 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"prim-radio-caroline", "rtk357"}},
     "rtk759": {"character": "怒", "keyword": "angry",
                 "expected_part_ids": {"rtk639", "rtk758"}},
-    "rtk767": {"character": "殻", "keyword": "husk",
-                "expected_part_ids": {"kangxi79", "rtk321", "rtk341", "rtk752"}},
+    "rtk767": {"character": "殻", "keyword": "husk",  # was 士,冗,殳,又 -- 又(rtk752) is 殳's
+               # own cjkvi sub-part (殳=几+又) restated redundantly; dropped 2026-10-23
+                "expected_part_ids": {"kangxi79", "rtk321", "rtk341"}},
     "rtk781": {"character": "板", "keyword": "plank",
                 "expected_part_ids": {"rtk207", "rtk779"}},
     "rtk790": {"character": "奨", "keyword": "exhort",
@@ -3015,8 +3016,10 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"rtk12", "rtk183", "rtk207"}},
     "rtk2683": {"character": "纂", "keyword": "redaction",
                "expected_part_ids": {"rtk1007", "rtk1431", "rtk15"}},
-    "rtk2697": {"character": "繋", "keyword": "link up",
-               "expected_part_ids": {"kangxi16", "kangxi79", "rtk1431", "rtk304", "rtk752"}},
+    "rtk2697": {"character": "繋", "keyword": "link up",  # was 糸,車,殳,几,又 -- 几,又
+               # (kangxi16/rtk752) are 殳's own cjkvi sub-parts restated redundantly;
+               # dropped 2026-10-23, same bug as rtk766/rtk767
+               "expected_part_ids": {"kangxi79", "rtk1431", "rtk304"}},
     # Was redundantly re-listing 冊(rtk1967)'s own ｜,一,亅,廾 alongside
     # referencing it directly -- 2026-09-05, audit_direct_ref_overlap.py
     # 2026-09-21: promoted from each row's own labelled alternate by

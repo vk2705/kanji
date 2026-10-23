@@ -13235,11 +13235,11 @@
   "heisig_components": "crotch",
   "cjkvi_ids": "又",
   "google_parts": [],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "atomic, cjkvi 又; matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk753",
@@ -13253,11 +13253,11 @@
    "又",
    "又"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "又 once; cjkvi ⿰又又ー, dup collapsed, project convention (cf. 林)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk754",
@@ -13273,11 +13273,11 @@
    "又",
    "木"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "又,木; cjkvi 叒=3x又 collapsed per convention, matches Heisig's single crotch",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk755",
@@ -13288,11 +13288,11 @@
   "heisig_components": "turkey; crotch",
   "cjkvi_ids": "⿱隹又",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "又,隹; cjkvi ⿱隹又 matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk756",
@@ -13308,11 +13308,11 @@
    "隹",
    "又"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "蒦,言; cjkvi ⿰言蒦 matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk757",
@@ -13328,11 +13328,11 @@
    "隹",
    "又"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "犭,蒦; cjkvi ⿰犭蒦 matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk758",
@@ -13346,11 +13346,11 @@
    "女",
    "又"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "女,又; cjkvi ⿰女又 matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk759",
@@ -13365,11 +13365,11 @@
    "又",
    "心"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "奴,心; cjkvi ⿱奴心 matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk760",
@@ -13383,11 +13383,11 @@
    "𠂇",
    "又"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "又,𠂇; cjkvi ⿸𠂇又 matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk761",
@@ -13398,11 +13398,11 @@
   "heisig_components": "finger; fingers; friend; woman; crotch",
   "cjkvi_ids": "⿰扌友",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "友,扌; cjkvi ⿰扌友 matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk762",
@@ -13417,11 +13417,11 @@
    "几",
    "又"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "扌,殳; cjkvi ⿰扌殳 matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk763",
@@ -13435,11 +13435,11 @@
    "水",
    "殳"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "殳,水; cjkvi ⿰氵殳 matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk764",
@@ -13450,11 +13450,11 @@
   "heisig_components": "moon; month; flesh; part of the body; cruise missile; missile; wind; crotch",
   "cjkvi_ids": "⿰月殳[GJK] ⿰⺼殳[TV]",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "月,殳; cjkvi ⿰月殳 matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk765",
@@ -13468,11 +13468,11 @@
    "言",
    "殳"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "殳,言; cjkvi ⿰言殳 matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk766",
@@ -13487,11 +13487,15 @@
    "殳",
    "手"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "車",
+   "殳",
+   "手"
+  ],
+  "note": "was 車,手,殳,几,又: 几,又 is 殳's own cjkvi sub-parts restated redundantly (confirmed via /tmp/ids.txt: 撃⿱軗手, 軗⿰車殳, 殳(JK)⿱几又) -- same bug as 段/劇",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk767",
@@ -13508,11 +13512,15 @@
    "兀",
    "殳"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "士",
+   "冗",
+   "殳"
+  ],
+  "note": "was 士,冗,殳,又: 又 is 殳's own cjkvi sub-part restated redundantly (cjkvi 殻⿰壳殳, 壳[G]⿱士冗)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk768",
@@ -13526,11 +13534,11 @@
    "十",
    "又"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "十,又; cjkvi ⿱十又 matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk769",
@@ -13544,11 +13552,11 @@
    "扌",
    "支"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "扌,支; cjkvi ⿰扌支 matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk770",
@@ -13562,11 +13570,11 @@
    "木",
    "支"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "木,支; cjkvi ⿰木支 matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk771",
@@ -13580,11 +13588,11 @@
    "月",
    "支"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "月,支; cjkvi ⿰月支 matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk772",
@@ -13598,11 +13606,11 @@
    "艹",
    "圣"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "圣,艹; cjkvi ⿱艹圣[TJK] matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk773",
@@ -13616,11 +13624,11 @@
    "忄",
    "圣"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "圣,state of mind(→忄); cjkvi ⿰忄圣 matches, alias consistent with kangxi61 sibling rows",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk774",
@@ -13634,11 +13642,11 @@
    "車",
    "圣"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "圣,車; cjkvi ⿰車圣 matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk775",
@@ -13653,11 +13661,11 @@
    "小",
    "又"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "小,又,上; cjkvi ⿰尗又 but Heisig's own column (above;small;little;crotch) flattens 尗 the same way, no 尗 primitive in this dataset",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk776",
@@ -13668,11 +13676,11 @@
   "heisig_components": "uncle; above; small; little; crotch; eye",
   "cjkvi_ids": "⿱叔目",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "叔,目; cjkvi ⿱叔目 matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk777",
@@ -13686,11 +13694,11 @@
    "宀",
    "叔"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "叔,宀; cjkvi ⿱宀叔 matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk778",
@@ -13704,11 +13712,11 @@
    "氵",
    "叔"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "水,叔; cjkvi ⿰氵叔 matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk779",
@@ -13722,11 +13730,11 @@
    "厂",
    "又"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "又,厂; cjkvi TJKV ⿸厂又 matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk780",
@@ -13740,11 +13748,11 @@
    "土",
    "反"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "土,反; cjkvi ⿰土反 matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk781",
@@ -13758,11 +13766,11 @@
    "木",
    "反"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "反,木; cjkvi ⿰木反 matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk782",
@@ -13776,11 +13784,11 @@
    "辶",
    "反"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "辶,反; cjkvi ⿺辶反 matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk783",
@@ -13794,11 +13802,11 @@
    "貝",
    "反"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "貝,反; cjkvi ⿰貝反 matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk784",
@@ -13809,11 +13817,11 @@
   "heisig_components": "vulture",
   "cjkvi_ids": "爪",
   "google_parts": [],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "atomic; cjkvi 爪 matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk785",
@@ -13827,11 +13835,11 @@
    "爫",
    "女"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "女,爪; cjkvi ⿱爫女 matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk786",
@@ -13846,11 +13854,11 @@
    "子",
    "乚"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "乙,子,爪; cjkvi ⿰孚乚, 孚=爪+子 flattened matches Heisig's fledgling/claw/child/fishhook",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk787",
@@ -13865,11 +13873,11 @@
    "爫",
    "子"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "子,水,爪; cjkvi ⿰氵孚, 孚=爪+子 matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk788",
@@ -13884,11 +13892,11 @@
    "爫",
    "壬"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "水,爪,壬; cjkvi ⿰氵㸒, matches Heisig's water/claw/porter/drop/samurai column, no redundancy",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk789",
@@ -13903,11 +13911,11 @@
    "爫",
    "寸"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "寸,爪,丬; matches Heisig's turtle/claw/glue column",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk790",
@@ -13923,11 +13931,11 @@
    "一",
    "大"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "将,大; cjkvi ⿱将大 matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk791",
@@ -13941,11 +13949,11 @@
    "爫",
    "木"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "爪,木; cjkvi ⿱爫木 matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk792",
@@ -13959,11 +13967,11 @@
    "扌",
    "采"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "采,扌; cjkvi ⿰扌采 matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk793",
@@ -13978,11 +13986,11 @@
    "爫",
    "木"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "采,艹; cjkvi ⿱艹采 matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk794",
@@ -13997,11 +14005,11 @@
    "冖",
    "又"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "爪,又,冖; cjkvi ⿱⿱爫冖又 matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk795",
@@ -14015,11 +14023,11 @@
    "扌",
    "受"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "受,扌; cjkvi ⿰扌受 matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk796",
@@ -14035,11 +14043,11 @@
    "心",
    "夂"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "心,爪,冖,夂; cjkvi ⿱⿱爫冖𢖻, 𢖻=心+夂 flattened matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk797",
@@ -14053,11 +14061,11 @@
    "日",
    "愛"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "愛,日; cjkvi ⿰日愛 matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk798",
@@ -14068,11 +14076,11 @@
   "heisig_components": "finger; fingers; elbow",
   "cjkvi_ids": "⿰扌厶",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "厶,扌; cjkvi ⿰扌厶 matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk799",
@@ -14086,11 +14094,11 @@
    "广",
    "厶"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "厶,广; cjkvi ⿸广厶 matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk800",
@@ -14104,11 +14112,11 @@
    "勹",
    "厶"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "勹,厶; cjkvi ⿹勹厶 matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk801",
@@ -14122,11 +14130,11 @@
    "扌",
    "広"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "広,扌; cjkvi ⿰扌広 matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk802",
@@ -37655,11 +37663,18 @@
    "丶",
    "彡"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "木",
+   "缶",
+   "木",
+   "冖",
+   "鬯",
+   "彡"
+  ],
+  "note": "Owner asked about the second tree: the glyph has 木 缶 木 across the top (cjkvi ⿳⿲木缶木冖⿰鬯彡, render confirms); the row listed one 木 and in no visual order. Repeated non-adjacent shapes are listed twice (班, 歌). Heisig's CSV column is empty here because it has no data for the 2010 jōyō additions, not because he teaches it whole.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk2121",
