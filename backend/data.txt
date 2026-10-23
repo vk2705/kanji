@@ -2856,7 +2856,12 @@ rtk2604:烙:burn:各,火
 # audit_weak_evidence.py --host 焔 flags nothing. The former alt (旧,火,𠂊)
 # is promoted to sole primary -- cjkvi never offers a 勹 reading for 焔.
 rtk2605:焔:flame:旧,火,𠂊
-rtk2606:烹:boil:口,亅,亠,灬
+# 2026-10-23 (owner: a "lid" search found stew; "if you have tall, stew should
+# refer to it"): was 口,亅,亠,灬 -- the strokes of 亨 scattered, out of order, and
+# 亅 "hook" where the shape is 了. cjkvi ⿱亨灬, 亨 = ⿳亠口了; render confirms.
+# 亨 has no row of its own here, so its pieces: "tall" (亠 over 口, as 京 享 亭 豪
+# already use) + 了 + 灬. Heisig's components column has no data for this frame.
+rtk2606:烹:boil:prim-tall,了,灬
 rtk2607:牽:pull:亠,冖,幺,牛
 rtk2608:牝:female:牛,匕
 rtk2609:牡::牛,土
@@ -3212,7 +3217,12 @@ rtk2926:圃:garden:囗,甫
 rtk2927:丞:help:ノ,一,亅
 rtk2928:亮:clear:口,亠,儿,冖
 rtk2929:胤:descendent:ノ,乙,幺,月
-rtk2930:疏:pass through:止,川,亠,厶
+# 2026-10-23 (same "lid" report): was 止,川,亠,厶 -- both halves spelled out in
+# loose strokes. cjkvi ⿰𤴔㐬; rendered beside 疎 and 流, the left is the same
+# left-side 疋 as 疎 (疋,束) and the right is exactly 流's "lifebelt" 㐬
+# (prim-lifebelt). Its 亠 is real (over 厶, not 口), so "lid" still reaches 疏 at
+# depth 2 -- correctly -- but no longer as a direct part.
+rtk2930:疏:pass through:疋,㐬
 rtk2931:膏:fat:月,高
 rtk2932:魁:charging ahead of others:斗,鬼
 # 2026-10-23 full re-review shape-family follow-up (see rtk766): three

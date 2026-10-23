@@ -22557,3 +22557,35 @@ Not deployed — no server access from this container. A deployer needs `git pul
    `侯`/`候`/`決`/`快` (chunk 111's item 6) — both still open, not attempted.
 5. `kangxi58` is closed (chunk 112 corrected a month-long stale-backlog claim) — don't
    re-open it without checking `data.txt` directly first.
+
+## 2026-10-23 — stew 烹 uses "tall"; transcription 疏 uses "lifebelt"
+
+The owner searched "lid" and got stew and transcription among the results: "if you have tall, stew should refer to it rather than lid".
+
+**rtk2606 烹 stew**: the row is now `prim-tall,了,灬`; it was `口,亅,亠,灬`.
+- The old row had 亨's strokes scattered and out of order, and used 亅 "hook" where the shape is 了.
+- cjkvi gives `⿱亨灬` with 亨 = `⿳亠口了`, and the render confirms it.
+- 亨 has no row here, so the row uses its pieces: "tall" (亠 over 口, as 京 享 亭 豪 already use) + 了.
+
+**rtk2930 疏 transcription**: the row is now `疋,㐬`; it was `止,川,亠,厶`. Both halves had been spelled out as loose strokes. cjkvi gives `⿰𤴔㐬`. Rendered beside 疎 and 流:
+- the left is the same left-side 疋 that 疎 `疋,束` already uses
+- the right is exactly 流's "lifebelt" 㐬 (`prim-lifebelt`)
+- its 亠 is real (over 厶, not 口), so "lid" still reaches 疏 at depth 2, correctly, but no longer at depth 1
+
+**Shape-family check** (every row spelling 亠 directly over 口):
+
+| Rows | Status |
+|---|---|
+| 京 享 亭 豪 | already "tall" in the primary; 亠,口 only in their alternates |
+| 高 `亠,口,冋` | left alone: it is where Heisig introduces "tall", and his components column names the pieces |
+| 哀 衰 `亠,口,𧘇` | left alone: there the 口 sits inside a split 衣, and Heisig names "top hat; scarf; mouth", not "tall" |
+
+**After:** "lid" at depth 1 no longer returns 烹 or 疏, and "tall" now finds 烹.
+
+**Checks:**
+
+| Check | Result |
+|---|---|
+| pytest | 105 passed |
+| `regression_fresh.sh` | 1328/1328 |
+| `audit_radicals.py` | clean |
