@@ -22045,3 +22045,48 @@ No shape-family follow-ups beyond the above — nothing changed in `data.txt`.
 No DB sync needed in the final state (data.txt unchanged from before this session; the live DB was synced twice — once to apply the attempted fix, once to revert it — and ends matching `data.txt`).
 
 `full_review.py --pending-count`: 2399 / 3000.
+
+## 2026-10-23 — full re-review: frames 602–651
+
+**50 keep, 0 fixed, 0 needs-render.**
+
+Every row in this chunk (rtk602–rtk651) was rendered across seven batched PNGs via
+`render_glyphs.py` and checked against Heisig's components column and cjkvi-ids. Two
+rows needed more than a glance:
+
+- **rtk610 午 ("noon")** — currently `十,𠂉` (ten + the already-registered `prim-reclining`
+  primitive 𠂉, aliased "pantomime horse"/"sign of the horse"). The render and cjkvi's
+  `⿱𠂉十` both support this structural split. What gave pause: the CSV's own components
+  column for this frame is `horse; pantomime horse; sign of the horse` — no "ten"/"needle"
+  synonym anywhere — and 木's own frame shows the same pattern (components=`wood`, a
+  self-synonym, not a sub-part), raising the question of whether 午 should be atomic
+  instead. Checked every consumer of this shape (許 rtk611, 卸 rtk1499) and both reference
+  午 whole rather than spelling out `十,𠂉` themselves, which is the normal pattern either
+  way (a kanji's own row is where its internal split lives, not its consumers'). Decided
+  `keep`: the structural/visual evidence (cjkvi, the render, 𠂉 already being a legitimately
+  named, independently-used primitive in many other kanji) outweighs the synonym-only
+  ambiguity in one CSV field. Flagging here in case this self-synonym pattern recurs
+  elsewhere and is worth its own pass.
+- **rtk649 串 ("shish kebab")** — `audit_weak_evidence.py --host 串` flags this row under
+  `not-a-parts-list`, since cjkvi's `⿻吕丨` uses the overlay operator (two stacked 口
+  sharing one pierced stroke, not two independent full strokes). But the current row
+  (`｜,口,中`) wasn't derived from misreading that overlay — it matches Heisig's own CSV
+  components (`kebab; in; stick; mouth`) exactly, and reads coherently as: the stick's
+  visible protrusion above the top box (｜), the top 口, and the bottom box with the
+  stick's lower protrusion built in (中 = 口+｜). Not a double-count of the shared stroke.
+  Kept, noted for the audit tool's own false-positive record (it did its job — flagged
+  something worth a manual look — the look just didn't turn up a bug here).
+
+No shape-family follow-ups — nothing was changed in `data.txt`.
+
+**Checks (baseline only, no edits made so the post-checks were skipped):**
+
+| Check | Result |
+|---|---|
+| pytest | 105 passed |
+| `regression_fresh.sh` | 1328/1328 |
+| `audit_radicals.py` | clean |
+
+No DB sync needed (data.txt unchanged).
+
+`full_review.py --pending-count`: 2349 / 3000.

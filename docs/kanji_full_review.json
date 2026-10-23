@@ -10612,11 +10612,11 @@
   "heisig_components": "ice; turkey",
   "cjkvi_ids": "⿰冫隹",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "准=冫+隹 rendered confirms ice+turkey, matches Heisig & cjkvi ⿰冫隹.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk603",
@@ -10630,11 +10630,11 @@
    "辶",
    "隹"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "進=辶+隹 rendered confirms, matches Heisig & cjkvi ⿺辶隹.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk604",
@@ -10649,11 +10649,11 @@
    "木",
    "隹"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "雑=木,隹,九 rendered: left is 九 over 木 (cjkvi's opaque 杂), matches Heisig nine;tree;wood;turkey.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk605",
@@ -10664,11 +10664,11 @@
   "heisig_components": "Prince; this here; stop; footprint; spoon; sitting on the ground; turkey",
   "cjkvi_ids": "⿰此隹",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "雌=此+隹 rendered confirms, matches Heisig and cjkvi ⿰此隹.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk606",
@@ -10683,11 +10683,11 @@
    "隹",
    "十"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "準=十,水,隹 rendered: 氵+隹 (=淮) stacked over 十, matches Heisig and cjkvi ⿱淮十.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk607",
@@ -10702,11 +10702,11 @@
    "隹",
    "田"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "奮=大,田,隹 rendered: 大+隹(=奞) over 田, matches Heisig and cjkvi ⿱奞田.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk608",
@@ -10717,11 +10717,11 @@
   "heisig_components": "large; St. Bernard; turkey; glue",
   "cjkvi_ids": "⿱奞寸",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "奪=寸,大,隹 rendered: 大+隹(=奞) over 寸, matches Heisig and cjkvi ⿱奞寸.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk609",
@@ -10736,11 +10736,11 @@
    "冖",
    "隹"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "確=石+prim-turkey-house(隺) rendered confirms, matches Heisig and cjkvi ⿰石隺.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk610",
@@ -10751,11 +10751,11 @@
   "heisig_components": "horse; pantomime horse; sign of the horse",
   "cjkvi_ids": "⿱𠂉十",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "午=十,𠂉 rendered: top diagonal matches 𠂉 (prim-reclining, already named horse/pantomime-horse/sign-of-horse elsewhere), bottom cross matches 十, consistent with cjkvi ⿱𠂉十. CSV's own components field for this frame lists only synonyms of 午 itself (horse;pantomime horse;sign of the horse) with no ten/needle synonym, which is ambiguous (cf. 木's components=wood, a self-synonym not a sub-part) but every consumer kanji (許,卸) references 午 whole rather than spelling out 十,𠂉 -- structural+visual evidence (cjkvi, render, 𠂉 already a legitimate named primitive) outweighs the synonym-only ambiguity. Keeping; worth a second look if this pattern recurs.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk611",
@@ -10769,11 +10769,11 @@
    "言",
    "午"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "許=午+言 rendered confirms, matches Heisig and cjkvi ⿰言午.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk612",
@@ -10789,11 +10789,11 @@
    "隹",
    "欠"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "歓=欠+prim-pegasus(𮥶) rendered confirms, matches Heisig (pegasus;...;lack;yawn) and cjkvi ⿰𮥶欠.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk613",
@@ -10807,11 +10807,11 @@
    "木",
    "𨾏"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "権=木+prim-pegasus(𮥶) rendered confirms, matches Heisig and cjkvi ⿰木𮥶.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk614",
@@ -10827,11 +10827,11 @@
    "夫",
    "見"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "観=見+prim-pegasus(𮥶) rendered confirms, matches Heisig and cjkvi ⿰𮥶見.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk615",
@@ -10842,11 +10842,11 @@
   "heisig_components": "wings",
   "cjkvi_ids": "⿰习习[GTJV] ⿰⿹𠃌⿱丿丿⿹𠃌⿱丿丿[K]",
   "google_parts": [],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "羽 atomic, rendered confirms a single coherent wings shape; Heisig teaches it whole (components=wings, a self-synonym); matches cjkvi's own-glyph (no real split).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk616",
@@ -10860,11 +10860,11 @@
    "羽",
    "白"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "習=羽+白 rendered confirms, matches Heisig and cjkvi ⿱羽白.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk617",
@@ -10875,11 +10875,11 @@
   "heisig_components": "feathers; wings; vase; stand up",
   "cjkvi_ids": "⿱羽立",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "翌=羽+立 rendered confirms, matches Heisig and cjkvi ⿱羽立.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk618",
@@ -10895,11 +10895,11 @@
    "ヨ",
    "隹"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "曜=日+翟(prim-futon, itself 羽+隹) rendered confirms, matches Heisig and cjkvi ⿰日翟.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk619",
@@ -10914,11 +10914,11 @@
    "羽",
    "隹"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "濯=水+翟 rendered confirms (氵 left, 翟 right), matches Heisig and cjkvi ⿰氵翟.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk620",
@@ -10929,11 +10929,11 @@
   "heisig_components": "pent in; one",
   "cjkvi_ids": "曰",
   "google_parts": [],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "曰 atomic, rendered confirms a simple closed box shape close to 日; Heisig teaches it whole (components=pent in;one, describing its own strokes not separate reusable primitives); cjkvi shows it as its own leaf glyph.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk621",
@@ -10947,11 +10947,11 @@
    "木",
    "囗"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "困=木+囗 rendered confirms tree inside a box, matches Heisig and cjkvi ⿴囗木.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk622",
@@ -10965,11 +10965,11 @@
    "囗",
    "古"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "固=古+囗 rendered confirms, matches Heisig and cjkvi ⿴囗古.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk623",
@@ -10983,11 +10983,11 @@
    "金",
    "固"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "錮=金+固 rendered confirms, matches cjkvi ⿰金固 (Heisig components empty = taught whole, consistent: 固 used as a known whole unit).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk624",
@@ -11001,11 +11001,11 @@
    "囗",
    "玉"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "国=玉+囗 rendered confirms king/jewel inside a box, matches Heisig and cjkvi ⿴囗玉.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk625",
@@ -11016,11 +11016,11 @@
   "heisig_components": "pent in; glue",
   "cjkvi_ids": "⿴囗寸",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "団=寸+囗 rendered confirms, matches Heisig and cjkvi ⿴囗寸.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk626",
@@ -11034,11 +11034,11 @@
    "囗",
    "大"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "因=大+囗 rendered confirms, matches Heisig and cjkvi ⿴囗大.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk627",
@@ -11049,11 +11049,11 @@
   "heisig_components": "woman; cause; pent in; large; St. Bernard",
   "cjkvi_ids": "⿰女因",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "姻=女+因 rendered confirms, matches Heisig and cjkvi ⿰女因.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk628",
@@ -11067,11 +11067,11 @@
    "口",
    "因"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "咽=口+因 rendered confirms, matches Heisig and cjkvi ⿰口因.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk629",
@@ -11087,11 +11087,11 @@
    "口",
    "衣"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "園=囗,𠮷,𧘇 rendered confirms a pent-in box with 𠮷(earthenware jar, itself 口+土)+𧘇(scarf) inside, matching the real shape of 袁 inside 囗ー consistent with cjkvi ⿴囗袁 and Heisig's soil/mouth/scarf breakdown.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk630",
@@ -11105,11 +11105,11 @@
    "囗",
    "口"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "回=口+囗 rendered confirms a box inside a box, matches Heisig and cjkvi ⿴囗口.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk631",
@@ -11120,11 +11120,11 @@
   "heisig_components": "soil; dirt; ground; Churchill; top hat; -times; pent in; mouth; nightbreak; sun; day; one; floor",
   "cjkvi_ids": "⿰土亶",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "壇=旦,土,亠,回 rendered confirms: 土 left; right side built from 亠+旦+回-like shape (亶), matching Heisig's expanded soil/top-hat/nightbreak-sun-day-one/times-pent-in-mouth breakdown.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk632",
@@ -11138,11 +11138,11 @@
    "广",
    "占"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "店=占+广 rendered confirms, matches Heisig and cjkvi ⿸广占.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk633",
@@ -11156,11 +11156,11 @@
    "广",
    "車"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "庫=車+广 rendered confirms, matches Heisig and cjkvi ⿸广車.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk634",
@@ -11174,11 +11174,11 @@
    "广",
    "廷"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "庭=广+廷 rendered confirms, matches Heisig and cjkvi ⿸广廷.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk635",
@@ -11192,11 +11192,11 @@
    "广",
    "丁"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "庁=丁+广 rendered confirms, matches Heisig and cjkvi ⿸广丁.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk636",
@@ -11210,11 +11210,11 @@
    "广",
    "木"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "床=木+广 rendered confirms, matches Heisig and cjkvi ⿸广木.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk637",
@@ -11229,11 +11229,11 @@
    "木",
    "木"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "麻=广+林 rendered confirms two 木 side by side under the cave roof, matches Heisig and cjkvi ⿸广林.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk638",
@@ -11247,11 +11247,11 @@
    "麻",
    "石"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "磨=麻+石 rendered confirms, matches Heisig and cjkvi ⿸麻石.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk639",
@@ -11262,11 +11262,11 @@
   "heisig_components": "drops; fishhook",
   "cjkvi_ids": "心",
   "google_parts": [],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "心 atomic, rendered confirms a single coherent heart shape; Heisig's components (drops;fishhook) describe its own strokes as a mnemonic device, not separate reusable primitives -- consistent with cjkvi treating 心 as its own leaf glyph.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk640",
@@ -11280,11 +11280,11 @@
    "亡",
    "心"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "忘=亡+心 rendered confirms, matches Heisig and cjkvi ⿱亡心.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk641",
@@ -11298,11 +11298,11 @@
    "次",
    "心"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "恣=次+心 rendered confirms, matches cjkvi ⿱次心 (Heisig components empty = taught whole, consistent: 次 used as a known whole unit).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk642",
@@ -11316,11 +11316,11 @@
    "刃",
    "心"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "忍=刃+心 rendered confirms, matches Heisig and cjkvi ⿱刃心.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk643",
@@ -11334,11 +11334,11 @@
    "言",
    "忍"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "認=言+忍 rendered confirms, matches Heisig and cjkvi ⿰言忍.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk644",
@@ -11352,11 +11352,11 @@
    "己",
    "心"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "忌=己+心 rendered confirms, matches Heisig and cjkvi ⿱己心.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk645",
@@ -11370,11 +11370,11 @@
    "士",
    "心"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "志=士+心 rendered confirms, matches Heisig and cjkvi ⿱士心.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk646",
@@ -11385,11 +11385,11 @@
   "heisig_components": "say; words; keitai; mouth; intention; samurai; heart",
   "cjkvi_ids": "⿰言志",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "誌=言+志 rendered confirms, matches Heisig and cjkvi ⿰言志.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk647",
@@ -11403,11 +11403,11 @@
    "艹",
    "心"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "芯=艹+心 rendered confirms, matches Heisig and cjkvi ⿱艹心.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk648",
@@ -11421,11 +11421,11 @@
    "中",
    "心"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "忠=中+心 rendered confirms, matches Heisig and cjkvi ⿱中心.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk649",
@@ -11440,11 +11440,11 @@
    "口",
    "丨"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "串=｜,口,中 rendered confirms two 口 stacked pierced by one stick: checked with audit_weak_evidence --host 串 which flags cjkvi's ⿻吕丨 overlay operator, but our row is not derived from misreading that overlay -- it matches Heisig's own CSV components (kebab;in;stick;mouth) exactly, reading as stick-above + top mouth + bottom mouth-with-stick(中), a coherent non-redundant account of the visible strokes.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk650",
@@ -11458,11 +11458,11 @@
    "串",
    "心"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "患=串+心 rendered confirms, matches Heisig and cjkvi ⿱串心.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk651",
@@ -11476,11 +11476,11 @@
    "田",
    "心"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "思=田+心 rendered confirms, matches Heisig and cjkvi ⿱田心.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk652",
