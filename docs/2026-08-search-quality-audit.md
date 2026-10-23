@@ -22090,3 +22090,74 @@ No shape-family follow-ups — nothing was changed in `data.txt`.
 No DB sync needed (data.txt unchanged).
 
 `full_review.py --pending-count`: 2349 / 3000.
+
+## 2026-10-23 — full re-review: frames 652–701
+
+48 keep, 2 fixed, 0 needs-render.
+
+Every row in this chunk (rtk652–rtk701) was rendered across several batched PNGs via
+`render_glyphs.py` and checked against Heisig's components column, official stroke
+counts, and cjkvi-ids (`/tmp/ids.txt`). Two rows needed fixing; one more needed heavy
+forensic work before landing on `keep`.
+
+- **rtk690 我 ("ego")** — fixed `亅,戈,手` → `手,戈`. cjkvi-ids gives 我 **no** structural
+  split at all (its own entry is just `我`, fully atomic — cjkvi couldn't decompose it),
+  and Heisig's own components column names exactly two concepts, "hand; fiesta" — no
+  third name for a stray hook. The old row's three parts sum to 9 strokes (亅1 + 戈4 +
+  手4) against an official stroke count of 7. Rendered 我 large: the hook at the
+  bottom-left is 手's own terminal stroke (its vertical descender ending in a leftward
+  hook, the same shape seen in 看's `龵` top), not a separate `亅` — the old row was
+  double-counting part of 手 as its own component. 手+戈 shares one stroke (the
+  horizontal crossbar), which is exactly why cjkvi refused to split it with a clean
+  `⿰`/`⿱` operator rather than guessing.
+- **rtk691 義 ("righteousness")** — fixed `一,羊,我` → `羊,我`. cjkvi-ids gives a clean
+  `⿱𦍌我` (two parts). Heisig's own components column names exactly two concepts,
+  "sheep; ego" — no "one". Old row's three parts sum to 14 strokes (一1 + 羊6 + 我7)
+  against an official count of 13; dropping the spurious 一 and using 我's corrected
+  7-stroke count above (6+7=13) matches exactly. Shape-family check: rtk692 議 (`義,言`)
+  and rtk693 犠 (`牛,義`), both frames later in this same chunk, already reuse 義 as a
+  clean two-primitive-equivalent unit with no extra 一 tacked on — the two siblings
+  agree with the fix, not with the old row. No other row in `data.txt` repeats either
+  stray-single-stroke pattern (checked via grep for `亅,戈,手` / `一,羊,我` and their
+  reorderings — zero other hits), so this was an isolated pair, not a systemic issue;
+  no further hosts needed touching.
+- **rtk663 憂 ("melancholy")** — kept `一,心,冖,夂,白`, but only after real back-and-forth.
+  cjkvi-ids is blind here: `㥑 = ⿱⑧心`, where `⑧` is one of cjkvi's own
+  codepoint-less placeholders (see CLAUDE.md's "three ways the sources lie" —
+  circled-number placeholders aren't identifiers). Heisig's own gloss, "summer; head;
+  page; crown; heart; walking legs", doesn't visually parse cleanly either — "summer"
+  (夏) and "head;page" (頁) are both named but neither's full stroke count fits the
+  remaining budget, and a close pixel-level crop of the rendered box briefly looked
+  like it had two internal bars (自's pattern, 6 strokes) rather than one (白's
+  pattern, 5 strokes). Settled it by stroke-count arithmetic against the character's
+  official total (15): `一`(1) + `白`(5) + `冖`(2) + `心`(4) + `夂`(3) = 15 exactly;
+  substituting `自` (6 strokes) overshoots to 16. `crown` = `冖` was already confirmed
+  2026-09-19 (kangxi14's alias list). Recorded the reasoning in the decision note in
+  case a future render-only pass wants to re-litigate it with a cleaner image.
+- **rtk664 寡 ("widow")** — kept `宀,頁,刀`. Heisig's gloss lists "animal legs; eight"
+  in addition to "head; page", which looks at first glance like a missing separate
+  component — but that's just 頁's own internal structure (頁 = 一,丶,貝, and 貝 itself
+  contains eye+animal-legs+eight) surfacing in the CSV's fully-expanded list, not a
+  second drawn shape. Stroke count confirms: 宀(3) + 頁(9) + 刀(2) = 14, matching the
+  official count exactly with nothing left over for a separate `八`.
+
+Shape-family follow-ups: none beyond what's noted above for rtk691 (its two siblings
+were already correct, nothing to change there).
+
+**Checks (before and after the two fixes):**
+
+| Check | Before | After |
+|---|---|---|
+| pytest | 105 passed | 105 passed |
+| `regression_fresh.sh` | 1328/1328 | 1 failure (rtk691 pin expected `rtk1`), fixed by updating the pin, then 1328/1328 |
+| `audit_radicals.py` | clean | clean |
+
+Updated `test_regression_fixes.py`'s `rtk691` pin to drop the now-incorrect `rtk1`
+expectation, with a comment explaining why (same fix, same reasoning as the `data.txt`
+change). `sync_system_data.py --dry-run` reported exactly 2 decompositions replaced (no
+kanji/alias changes) before applying for real.
+
+Deployer note: prod needs `git pull` + `./venv/bin/python3 sync_system_data.py` to pick
+this up.
+
+`full_review.py --pending-count`: 2299 / 3000.

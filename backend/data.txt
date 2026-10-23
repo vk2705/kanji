@@ -847,8 +847,17 @@ rtk686:泌:ooze:必,水
 rtk687:手:hand:
 rtk688:看:watch over:手,目
 rtk689:摩:chafe:手,麻
-rtk690:我:ego:亅,戈,手
-rtk691:義:righteousness:一,羊,我
+# 2026-10-23 full re-review: 我 was 亅,戈,手 (3 parts, 9 strokes) -- cjkvi-ids
+# treats 我 as fully atomic (no IDS split at all), Heisig names only "hand;
+# fiesta" (2 concepts), and the official stroke count is 7, not 9. Rendered
+# 我/手/戈/亅: the bottom-left hook is 手's own terminal stroke, not a
+# separate 亅 -- the stray 亅 was double-counting part of 手.
+rtk690:我:ego:手,戈
+# 2026-10-23 full re-review: 義 was 一,羊,我 (14 strokes) -- cjkvi-ids gives a
+# clean 2-part ⿱𦍌我, Heisig names only "sheep;ego" (no "one"), official
+# stroke count is 13, and siblings rtk692/rtk693 (議/犠) both reuse 義 as a
+# clean 2-primitive unit with no extra 一. The 一 was spurious.
+rtk691:義:righteousness:羊,我
 rtk692:議:deliberation:義,言
 rtk693:犠:sacrifice:牛,義
 rtk694:抹:rub:扌,末

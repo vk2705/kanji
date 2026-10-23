@@ -396,8 +396,13 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"rtk112", "rtk586"}},
     "rtk588": {"character": "洋", "keyword": "ocean",
                "expected_part_ids": {"rtk137", "rtk586"}},
+    # 2026-10-23 full re-review: dropped rtk1 ("one") -- the old row (一,羊,我,
+    # 14 strokes) had a spurious extra 一 Heisig never names (just "sheep;
+    # ego") and cjkvi-ids gives a clean 2-part ⿱𦍌我; official stroke count is
+    # 13 (羊 6 + 我 7), and siblings 議/犠 both reuse 義 as a clean 2-primitive
+    # unit with no extra 一.
     "rtk691": {"character": "義", "keyword": "righteousness",
-               "expected_part_ids": {"rtk1", "rtk586", "rtk690"}},
+               "expected_part_ids": {"rtk586", "rtk690"}},
     "rtk1591": {"character": "養", "keyword": "foster",
                 "expected_part_ids": {"rtk1582", "rtk586"}},
     "rtk2622": {"character": "痒", "keyword": "itch",
