@@ -540,6 +540,13 @@ EXPECTED_DECOMPOSITIONS = {
     # per-kanji reasoning. A representative sample, one per sub-pattern:
     # 2026-10-23 "lid" audit: the primary listed 立 *and* 立's own 亠,丷; now Heisig's
     # 立 + 冖 + 巾. 亠/丷 stay reachable through 立 and the cjkvi alternate.
+    # 2026-10-23: 离 "sheik" got its own row; 離/璃 were spelled 亠,凶,禸 loose.
+    "rtk1605": {"character": "離", "keyword": "detach",
+                "expected_part_ids": {"prim-sheik", "kangxi172"}},
+    "rtk1606": {"character": "璃", "keyword": "glassy",
+                "expected_part_ids": {"rtk271", "prim-sheik"}},
+    "prim-sheik": {"character": "离", "keyword": "sheik",
+                   "expected_part_ids": {"kangxi8", "rtk1603", "kangxi114"}},
     "rtk466": {"character": "帝", "keyword": "sovereign",
                "expected_part_ids": {"rtk432", "rtk462", "kangxi14"}},
     "rtk1286": {"character": "半", "keyword": "half",

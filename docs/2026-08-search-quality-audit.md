@@ -22634,3 +22634,25 @@ Both carry comments.
 | pytest | 105 passed |
 | `regression_fresh.sh` | 1328/1328 |
 | `audit_radicals.py` | clean |
+
+## 2026-10-23 — "sheik" (离): the shared part of detach 離 and crystal 璃
+
+Owner asked whether 離 and 璃's common part has a name. It does: Heisig calls
+离 (top hat 亠 + villain 凶 + belt 禸) "sheik", and his components column for
+both kanji starts with it. We had no row for it, so both rows listed its three
+pieces separately (`亠,凶,禸,隹` and `王,亠,凶,禸`): "sheik" found nothing and
+the shared part was invisible.
+
+Why it was missing: both rows date from the project's first commit
+(0bd0525, 2026-06-28), carried over from the legacy app, which never had
+"sheik" either (no mention in cgi-bin/ or html/). 离 has no kanji frame and is
+not a Kangxi radical, so it could only exist as a hand-made `prim-` row, and
+nobody had made one. The full re-review (frame order, 801 decided) has not yet
+reached frame 1605.
+
+Fix: new `prim-sheik:离:sheik:亠,凶,禸`; 離 = `离,隹`, 璃 = `王,离`. Rendered
+离 beside both hosts: it is exactly 離's left and 璃's right; U+79BB draws in
+every installed CJK font, so no picture is needed. Shape family: only these
+two jōyō kanji contain it (禽 has 凶+禸 under 今, not 离). Searches for lid,
+villain or belt still find both, now at depth 2 via sheik. Pins added for all
+three rows. Deployer: `git pull` + `sync_system_data.py` on prod.

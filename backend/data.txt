@@ -1808,8 +1808,12 @@ rtk1601:刹:temple:㐅,木,刀
 rtk1602:希:hope:㐅,布
 rtk1603:凶:villain:㐅,凵
 rtk1604:胸:bosom:月,勹,凶
-rtk1605:離:detach:亠,凶,禸,隹
-rtk1606:璃:glassy:王,亠,凶,禸
+# 2026-10-23: 離 and 璃 share 离, which Heisig names "sheik" (his components
+# column for both starts with it); it had no row, so both spelled it out as
+# 亠,凶,禸 loose and the shared part could not be searched. Was 亠,凶,禸,隹 /
+# 王,亠,凶,禸. Rendered: 离 is exactly 離's left and 璃's right.
+rtk1605:離:detach:离,隹
+rtk1606:璃:glassy:王,离
 rtk1607:殺:kill:㐅,木,殳
 rtk1608:爽:refreshing:大,㐅
 rtk1609:純:genuine:糸,屯
@@ -5582,3 +5586,8 @@ prim-stool:兀:stool,human legs:
 # primitive for it). rtk382/383's 𢦏 and rtk393-395's 㦮 both render
 # cleanly (no tofu) and match their hosts' real shape.
 prim-march-tick:戍:march:
+
+# 2026-10-23: "sheik" (离, U+79BB) -- Heisig's name for top hat + villain + belt,
+# the shared part of 離 (detach) and 璃 (crystal). No kanji frame of its own and
+# not a Kangxi radical, hence prim-. Renders in every installed CJK font.
+prim-sheik:离:sheik:亠,凶,禸
