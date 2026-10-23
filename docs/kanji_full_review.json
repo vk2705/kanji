@@ -12365,11 +12365,11 @@
    "扌",
    "召"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "招=扌+召; cjkvi ⿰扌召 matches current row; render clean, 召 resolves to its own row. Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk703",
@@ -12383,11 +12383,11 @@
    "扌",
    "石"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "拓=扌+石; matches cjkvi/Heisig, render clean. Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk704",
@@ -12398,11 +12398,11 @@
   "heisig_components": "finger; fingers; white; dove",
   "cjkvi_ids": "⿰扌白",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "拍=扌+白; matches cjkvi/Heisig, render clean. Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk705",
@@ -12416,11 +12416,11 @@
    "扌",
    "丁"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "打=扌+丁; matches cjkvi/Heisig, render clean. Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk706",
@@ -12434,11 +12434,11 @@
    "扌",
    "句"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "拘=扌+句; matches cjkvi/Heisig, 句 resolves. Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk707",
@@ -12452,11 +12452,11 @@
    "扌",
    "舎"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "捨=扌+舎 (cjkvi gives 舍/舎 variants, both resolve to the same 舎 primitive); matches. Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk708",
@@ -12470,11 +12470,11 @@
    "扌",
    "另"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "拐=扌+右side; cjkvi splits by locale (另[GK]=口+力 vs 叧[TJ]=口+刀); render's font-substitution hash check found 另/叧/力/刀 all distinct in every face, so J variant is really 叧 (刀), matching current row and Heisig's own 'mouth;sword;dagger'. Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk709",
@@ -12488,11 +12488,11 @@
    "扌",
    "啇"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "摘=扌+啇; cjkvi ⿰扌啇, 啇 resolves as prim-teki. Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk710",
@@ -12506,11 +12506,11 @@
    "扌",
    "兆"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "挑=扌+兆; matches cjkvi/Heisig. Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk711",
@@ -12524,11 +12524,11 @@
    "扌",
    "旨"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "指=扌+旨; matches cjkvi/Heisig. Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk712",
@@ -12542,11 +12542,11 @@
    "扌",
    "寺"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "持=扌+寺; matches cjkvi/Heisig. Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk713",
@@ -12561,11 +12561,11 @@
    "巛",
    "夕"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "拶=扌+巛+夕 (cjkvi's rare 𡿪 = 巛 over 夕); Heisig names stream/flood + evening separately, matching the flattened row. Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk714",
@@ -12579,11 +12579,11 @@
    "扌",
    "舌"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "括=扌+舌; matches cjkvi/Heisig. Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk715",
@@ -12597,11 +12597,11 @@
    "扌",
    "軍"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "揮=扌+軍; matches cjkvi/Heisig, 軍 resolves. Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk716",
@@ -12615,11 +12615,11 @@
    "扌",
    "隹"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "推=扌+隹; matches cjkvi/Heisig. Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk717",
@@ -12633,11 +12633,11 @@
    "扌",
    "昜"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "揚=扌+昜; matches cjkvi/Heisig, 昜 resolves as prim-piggy-bank. Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk718",
@@ -12651,11 +12651,11 @@
    "扌",
    "是"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "提=扌+是; matches cjkvi/Heisig, 是 resolves. Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk719",
@@ -12666,11 +12666,11 @@
   "heisig_components": "finger; fingers; employee; mouth; shellfish; clam; oyster; eye; animal legs; eight",
   "cjkvi_ids": "⿰扌員",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "損=扌+員; matches cjkvi/Heisig, 員 resolves, not flattened further (consistent with other rows referencing 員 whole). Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk720",
@@ -12681,11 +12681,11 @@
   "heisig_components": "finger; fingers; fit; meeting; umbrella; one; mouth",
   "cjkvi_ids": "⿰扌合",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "拾=扌+合; matches cjkvi/Heisig. Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk721",
@@ -12696,11 +12696,11 @@
   "heisig_components": "finger; fingers; nightbreak; sun; day; one; floor",
   "cjkvi_ids": "⿰扌旦",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "担=扌+旦; matches cjkvi/Heisig. Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk722",
@@ -12711,11 +12711,11 @@
   "heisig_components": "finger; fingers; dispose; walking legs; wind",
   "cjkvi_ids": "⿰扌処",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "拠=扌+処; matches cjkvi/Heisig, 処 resolves. Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk723",
@@ -12729,11 +12729,11 @@
    "扌",
    "苗"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "描=扌+苗; matches cjkvi/Heisig. Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk724",
@@ -12748,11 +12748,11 @@
    "品",
    "木"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "操=扌+喿; matches cjkvi/Heisig, 喿 resolves as prim-furniture. Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk725",
@@ -12767,11 +12767,11 @@
    "立",
    "女"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "接=扌+妾; matches cjkvi/Heisig, 妾 resolves. Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk726",
@@ -12786,11 +12786,11 @@
    "日",
    "匂"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "掲=扌+日+匂 (cjkvi ⿰扌⿱日匂, flattened); both 日 and 匂 resolve as their own rows. Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk727",
@@ -12806,11 +12806,11 @@
    "卜",
    "ト"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "掛=扌+卜+圭 (cjkvi's 卦=圭+卜, flattened; matches alt IDS ⿰挂卜 too). Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk728",
@@ -12824,11 +12824,11 @@
    "扌",
    "歩"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "捗=扌+歩; cjkvi's 步/歩 variants both resolve to the same 歩 primitive. Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk729",
@@ -12842,11 +12842,11 @@
    "石",
    "幵"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "研=石+一+廾 (open/开 flattened into its known 一+廾 pieces, consistent with rtk734 刑's same flattening). Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk730",
@@ -12860,11 +12860,11 @@
    "廾",
    "戈"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "戒=廾+戈; matches cjkvi/Heisig. Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk731",
@@ -12878,11 +12878,11 @@
    "王",
    "廾"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "弄=王+廾; matches cjkvi/Heisig. Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk732",
@@ -12896,11 +12896,11 @@
    "木",
    "戒"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "械=木+戒; matches cjkvi/Heisig, 戒 resolves. Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk733",
@@ -12915,11 +12915,11 @@
    "田",
    "廾"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "鼻=自+田+廾 (cjkvi's 畀/𢌿 variants both = 田+廾, flattened); render shows self-shape over rice-field over two-hands clearly. Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk734",
@@ -12930,11 +12930,11 @@
   "heisig_components": "two hands; sword; sabre; saber",
   "cjkvi_ids": "⿰开刂",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "刑=廾+一+刀 (开 flattened to 一+廾, plus 刀); consistent with rtk729's identical 开 flattening. Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk735",
@@ -12945,11 +12945,11 @@
   "heisig_components": "punish; two hands; sword; sabre; saber; soil; dirt; ground",
   "cjkvi_ids": "⿱刑土",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "型=土+刑; matches cjkvi/Heisig, 刑 resolves. Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk736",
@@ -12960,11 +12960,11 @@
   "heisig_components": "genie",
   "cjkvi_ids": "才",
   "google_parts": [],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "才 atomic; Heisig teaches it whole as 'genie', cjkvi also shows it atomic. Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk737",
@@ -12978,11 +12978,11 @@
    "貝",
    "才"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "財=才+貝; matches cjkvi/Heisig. Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk738",
@@ -12996,11 +12996,11 @@
    "木",
    "才"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "材=才+木; matches cjkvi/Heisig. Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk739",
@@ -13011,11 +13011,11 @@
   "heisig_components": "genie; child",
   "cjkvi_ids": "⿸③子",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "存=才+子 (cjkvi's ③ is a per-entry placeholder for 才, not a separate identifier); matches Heisig's own 'genie;child'. Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk740",
@@ -13029,11 +13029,11 @@
    "才",
    "土"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "在=才+土 (same ③=才 placeholder as 存); matches Heisig. Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk741",
@@ -13044,11 +13044,11 @@
   "heisig_components": "fist",
   "cjkvi_ids": "⿹𠄎丿",
   "google_parts": [],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "乃 atomic; Heisig names it whole as 'fist', cjkvi's ⿹𠄎丿 is a stroke-level IDS Heisig doesn't teach as separate pieces. Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk742",
@@ -13063,11 +13063,11 @@
    "乃",
    "隹"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "携=扌+隹+乃 (cjkvi's 隽=隹+乃, flattened); matches Heisig. Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk743",
@@ -13081,11 +13081,11 @@
    "乃",
    "丿"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "及=丶+乃; matches Heisig's 'fist;from;drop' (乃=fist/from, 丶=drop). Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk744",
@@ -13099,11 +13099,11 @@
    "口",
    "及"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "吸=口+及; matches cjkvi/Heisig. Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk745",
@@ -13117,11 +13117,11 @@
    "扌",
    "及"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "扱=扌+及; matches cjkvi/Heisig. Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk746",
@@ -13135,11 +13135,11 @@
    "一",
    "乂"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "丈=一+乂; matches Heisig's 'stick;tucked under the arm'; cjkvi has no further IDS split, consistent with Heisig's 2-primitive teaching. Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk747",
@@ -13153,11 +13153,11 @@
    "口",
    "乂"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "史=口+乂; matches Heisig; same atomic-per-cjkvi situation as 丈. Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk748",
@@ -13168,11 +13168,11 @@
   "heisig_components": "history; length; stick; one; mouth; tucked under the arm",
   "cjkvi_ids": "⿻一史",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "吏=一+史; matches cjkvi ⿻一史 (an overlay, but 史 is still fully recognizable beneath the extra stroke) and Heisig's own expansion. Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk749",
@@ -13187,11 +13187,11 @@
    "日",
    "乂"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿱一⿻日乂 flagged by audit_weak_evidence.py (⿻ overlay: box's vertical strokes continue into the legs below). Rendered large: unlike 蝿's 日+电->田 case, the overlay here doesn't produce a different recognizable character -- box still reads as 日, legs still read as 乂 -- and Heisig's own column names exactly these two primitives (sun;day / tucked under the arm). Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk750",
@@ -13205,11 +13205,11 @@
    "石",
    "更"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "硬=石+更; matches cjkvi/Heisig, 更 unchanged (see rtk749). Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk751",
@@ -13220,11 +13220,11 @@
   "heisig_components": "tree; wood; grow late; Ameratasu; one; ceiling; sun; tucked under the arm",
   "cjkvi_ids": "⿰木更",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "梗=木+更; matches cjkvi/Heisig, 更 unchanged (see rtk749). Keep.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-23"
  },
  {
   "id": "rtk752",

@@ -22172,3 +22172,51 @@ The owner wanted a place where users can submit ideas or discuss the site. The s
 - an "Ideas, questions and corrections" section on `/guide/`
 
 Reading the forum needs no account; posting needs a GitHub account. No backend change.
+
+## 2026-10-23 — full re-review: frames 702–751
+
+50 kept / 0 fixed / 0 needs-render.
+
+All 50 rows (rtk702–rtk751, mostly 扌-compounds plus a 廾/戈/才/乃/乂 cluster) checked
+out against the render, Heisig's components column and cjkvi-ids. Two needed real
+back-and-forth before landing on keep:
+
+- **rtk708 拐 ("kidnap")** — current row `口,刀,扌`. cjkvi-ids splits this by locale:
+  `⿰扌另[GK]` (另 = 口 + 力, China/Korea) vs `⿰扌叧[TJ]` (叧 = 口 + 刀, Taiwan/Japan) —
+  two different codepoints, U+53E6 vs U+53E7, that happen to look nearly identical in
+  the rendering font's cursive style. A first look at the render made it seem like
+  另 (力) was what's actually drawn, which would have meant replacing 刀 with 力 — the
+  same class of mistake already caught and fixed for 捌/別 on 2026-09-21 (see that
+  entry: 捌's old row wrongly used 勹 where 別 draws 力). Before acting on that read,
+  ran `render_glyphs.py`'s own font-substitution guard directly
+  (`check_substitution(['拐','力','刀','另','叧'])`) rather than trusting the visual
+  crop: it returned zero identical-hash pairs across all four check faces, meaning
+  另 and 叧 *do* have genuinely distinct outlines in this font stack despite looking
+  alike to the eye at this render size. Since our rows are Japanese (`ja-kanji`), the
+  relevant variant is the TJ one, 叧 = 口 + 刀 — which is exactly the current row.
+  Kept, but flagged in case a future chunk wants a second, larger-scale render pass
+  specifically on 另/叧 pairs elsewhere in the dataset, since this is the kind of
+  subtle-but-real distinction a quick glance can get backwards.
+- **rtk749 更 ("grow late")** — current row `一,日,乂`. `audit_weak_evidence.py --host 更`
+  flagged cjkvi's `⿱一⿻日乂` for its `⿻` (overlay) operator: the box's vertical strokes
+  visibly continue straight down into the splayed legs below, so 日 and 乂 are not two
+  cleanly separate shapes the way `⿰`/`⿱` would draw them. Rendered large to check
+  whether this is the 蝿-style trap (⿻日电 actually draws as 田, a third, different
+  character) — it isn't: the box here still reads unambiguously as 日 and the legs
+  still read as 乂, just sharing ink at the seam. Heisig's own components column
+  independently names exactly these two primitives ("sun; day" / "tucked under the
+  arm"), so the current flattened row stays correct. rtk750 硬 and rtk751 梗 (both
+  `石,更` / `木,更`, not flattened further) are unaffected either way.
+
+The other 48 rows were straightforward finger-radical (扌) or two-hands (廾) compounds
+whose current `data.txt` row, Heisig's components column and cjkvi-ids's IDS all agreed
+once any compound intermediate (開/开, 另/叧, 隽, 畀/𢌿, etc.) was expanded — confirmed
+by batch-rendering all 50 host kanji plus a spot-check of their named parts (none
+resolve to a missing primitive; checked `召 句 舎 啇 兆 旨 寺 舌 軍 昜 是 員 合 旦 処 苗
+喿 妾 匂 卜 圭 歩 石 廾 戈 王 自 田 乂 丶` against `data.txt` directly). No shape-family
+follow-ups — nothing was changed.
+
+No `data.txt` edit this run, so the "before changing a row" checks (backup, pytest,
+`regression_fresh.sh`, `audit_radicals.py`, `sync_system_data.py`) were not needed.
+
+`full_review.py --pending-count`: 2249 / 3000.
