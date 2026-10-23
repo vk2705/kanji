@@ -538,8 +538,10 @@ EXPECTED_DECOMPOSITIONS = {
     # itself and was left untouched. 業/撲/僕/為/偽/誉/糞/粉 remain open —
     # see docs/2026-08-search-quality-audit.md for the full breakdown and
     # per-kanji reasoning. A representative sample, one per sub-pattern:
+    # 2026-10-23 "lid" audit: the primary listed 立 *and* 立's own 亠,丷; now Heisig's
+    # 立 + 冖 + 巾. 亠/丷 stay reachable through 立 and the cjkvi alternate.
     "rtk466": {"character": "帝", "keyword": "sovereign",
-               "expected_part_ids": {"rtk432", "kangxi12", "rtk462", "kangxi8", "kangxi14"}},
+               "expected_part_ids": {"rtk432", "rtk462", "kangxi14"}},
     "rtk1286": {"character": "半", "keyword": "half",
                 "expected_part_ids": {"prim-pipe", "rtk2", "kangxi12", "rtk10"}},
     "rtk1596": {"character": "平", "keyword": "even",
@@ -3197,8 +3199,10 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"rtk137", "rtk1654"}},
     "rtk1660": {"character": "静", "keyword": "quiet",
                "expected_part_ids": {"rtk1238", "rtk1654"}},
+    # 2026-10-23 "lid" audit: 回 was split into 口 (rtk11) + 囗 (kangxi31); cjkvi
+    # ⿰冫禀, 禀 = 亠 回 示, so 回 (rtk630) whole.
     "rtk2264": {"character": "凛", "keyword": "stately",
-               "expected_part_ids": {"kangxi15", "kangxi31", "kangxi8", "rtk11", "rtk1167"}},
+               "expected_part_ids": {"kangxi15", "kangxi8", "rtk630", "rtk1167"}},
     "rtk2265": {"character": "凧", "keyword": "kite",
                "expected_part_ids": {"kangxi16", "rtk432"}},
     "rtk2269": {"character": "剽", "keyword": "menace",

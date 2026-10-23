@@ -463,11 +463,14 @@ rtk326:冠:crown:寸,冖,元
 rtk327:夢:dream:艹,罒,冖,夕
 rtk328:坑:pit:亢,土
 rtk329:高:tall:亠,口,冋
-rtk330:享:enjoy:prim-tall,子;亠,口,子
+# 2026-10-23 "lid" audit (owner: "what about overpowering?"): dropped the alternate that spelled "tall" out as 亠,口 -- it only re-listed the shape the primary already names, and made a depth-1 "lid" search list this kanji. 亠 is still reached through "tall" at depth 2.
+rtk330:享:enjoy:prim-tall,子
 rtk331:塾:cram school:丸,享,土
 rtk332:熟:mellow:丸,享,灬
-rtk333:亭:pavilion:prim-tall,冖,丁;亠,口,冖,丁
-rtk334:京:capital:prim-tall,小;亠,口,小
+# 2026-10-23 "lid" audit (owner: "what about overpowering?"): dropped the alternate that spelled "tall" out as 亠,口 -- it only re-listed the shape the primary already names, and made a depth-1 "lid" search list this kanji. 亠 is still reached through "tall" at depth 2.
+rtk333:亭:pavilion:prim-tall,冖,丁
+# 2026-10-23 "lid" audit (owner: "what about overpowering?"): dropped the alternate that spelled "tall" out as 亠,口 -- it only re-listed the shape the primary already names, and made a depth-1 "lid" search list this kanji. 亠 is still reached through "tall" at depth 2.
+rtk334:京:capital:prim-tall,小
 rtk335:涼:refreshing:水,京
 rtk336:景:scenery:京,日
 rtk337:鯨:whale:魚,京
@@ -584,7 +587,8 @@ rtk436:帽:cap:巾,冒
 rtk437:幕:curtain:巾,莫
 rtk438:幌:canopy:巾,晃
 rtk439:錦:brocade:帛,金
-rtk440:市:market:巾,亠
+# 2026-10-23 "lid" audit (owner: search by parts for lid, explain every result): 市: same pieces, now in drawn order (亠 over 巾; Heisig "top hat; towel").
+rtk440:市:market:亠,巾
 rtk441:柿:persimmon:市,木
 rtk442:姉:elder sister:市,女
 rtk443:肺:lungs:市,月
@@ -606,16 +610,19 @@ rtk458:妖:attractive:夭,女
 rtk459:沃:fertility:夭,水
 rtk460:橋:bridge:喬,木
 rtk461:嬌:attractive:喬,女
-rtk462:立:stand up,vase:丶;一,丷,亠
+# 2026-10-23 "lid" audit (owner: search by parts for lid, explain every result): 立: alternate reordered top-down (cjkvi ⿱⿱亠丷一).
+rtk462:立:stand up,vase:丶;亠,丷,一
 rtk463:泣:cry:水,立
 rtk464:章:badge:立,早
 rtk465:競:emulate:兄,立
-rtk466:帝:sovereign:巾,丷,立,亠,冖;丷,亠,冖,巾
+# 2026-10-23 "lid" audit (owner: search by parts for lid, explain every result): 帝: was 巾,丷,立,亠,冖 -- 立 AND its own 亠,丷 listed together. Heisig: "vase; stand up; apron; crown; towel" = 立 + 冖 + 巾; cjkvi split kept as the alternate.
+rtk466:帝:sovereign:立,冖,巾;亠,丷,冖,巾
 rtk467:諦:truth:言,帝
 rtk468:童:juvenile:里,立
 rtk469:瞳:pupil (of eye):目,童
 rtk470:鐘:bell:金,童
-rtk471:商:make a deal:口,丷,立,亠,儿,冂
+# 2026-10-23 "lid" audit (owner: search by parts for lid, explain every result): 商: was 口,丷,立,亠,儿,冂 -- 立 plus its own 亠,丷 again, in no order. Heisig: "vase; stand up; alien; hood; human legs; mouth" = 立 + 冂 + 儿 + 口.
+rtk471:商:make a deal:立,冂,儿,口
 rtk472:嫡:legitimate wife:女,啇
 rtk473:適:suitable:辶,啇
 rtk474:滴:drip:水,啇
@@ -739,7 +746,8 @@ rtk578:逐:pursue:辶,豕
 rtk579:遂:consummate:辶,丷,豕
 rtk580:家:house:宀,豕
 rtk581:嫁:marry into:女,家
-rtk582:豪:overpowering:prim-tall,冖,豕;亠,口,冖,豕
+# 2026-10-23 "lid" audit (owner: "what about overpowering?"): dropped the alternate that spelled "tall" out as 亠,口 -- it only re-listed the shape the primary already names, and made a depth-1 "lid" search list this kanji. 亠 is still reached through "tall" at depth 2.
+rtk582:豪:overpowering:prim-tall,冖,豕
 rtk583:腸:intestines:昜,月
 rtk584:場:location:土,昜
 rtk585:湯:hot water:昜,水
@@ -788,7 +796,8 @@ rtk627:姻:matrimony:女,因
 rtk628:咽:throat:口,因
 rtk629:園:park:囗,𠮷,𧘇
 rtk630:回:-times:口,囗
-rtk631:壇:podium:旦,土,亠,回
+# 2026-10-23 "lid" audit (owner: search by parts for lid, explain every result): 壇: same pieces, drawn order (cjkvi ⿰土亶, 亶 = 亠 回 旦).
+rtk631:壇:podium:土,亠,回,旦
 rtk632:店:store:占,广
 rtk633:庫:warehouse:車,广
 rtk634:庭:courtyard:广,廷
@@ -1232,7 +1241,8 @@ rtk1050:侍:waiter:亻,寺
 rtk1051:停:halt:亻,亭
 rtk1052:値:price:亻,直
 rtk1053:倣:emulate:亻,放
-rtk1054:傲:be proud:亻,土,方,攵,亠,二
+# 2026-10-23 "lid" audit (owner: search by parts for lid, explain every result): 傲: was 亻,土,方,攵,亠,二 -- the 亠 and 二 are strokes already inside 方/土, listed a second time. cjkvi ⿰亻敖, 敖 = ⿰⿱土方攵 (J).
+rtk1054:傲:be proud:亻,土,方,攵
 rtk1055:倒:overthrow:亻,到
 rtk1056:偵:spy:亻,貞
 rtk1057:僧:buddhist priest:亻,曽
@@ -1273,10 +1283,12 @@ rtk1086:傾:lean:亻,頃
 rtk1087:何:what:亻,可
 rtk1088:荷:baggage:何,艹
 rtk1089:俊:sagacious:亻,夋
-rtk1090:傍:bystander:亻,丷,方,立,亠,冖
+# 2026-10-23 "lid" audit (owner: search by parts for lid, explain every result): 傍: was 亻,丷,方,立,亠,冖 -- 立 plus its own 亠,丷 again. Heisig: "person; ... stand up; crown; compass; direction" = 亻 + 立 + 冖 + 方.
+rtk1090:傍:bystander:亻,立,冖,方
 rtk1091:俺:i:亻,奄
 rtk1092:久:long time:𠂊,人
-rtk1093:畝:furrow:田,亠,久
+# 2026-10-23 "lid" audit (owner: search by parts for lid, explain every result): 畝: same pieces, drawn order (亠 over 田, then 久).
+rtk1093:畝:furrow:亠,田,久
 rtk1094:囚:captured:人,囗
 rtk1095:内:inside:人,冂
 rtk1096:丙:third class:一,内
@@ -1298,7 +1310,8 @@ rtk1111:営:camp:呂,prim-schoolhouse
 rtk1112:善:virtuous:王,口,丷,羊
 rtk1113:膳:small low table:善,月
 rtk1114:年:year:ノ,午
-rtk1115:夜:night:丶,亠,亻,夂
+# 2026-10-23 "lid" audit (owner: search by parts for lid, explain every result): 夜: same pieces, drawn order (Heisig "top hat; person; walking legs; drop").
+rtk1115:夜:night:亠,亻,夂,丶
 rtk1116:液:fluid:夜,水
 rtk1117:塚:hillock:土,冖,豕
 rtk1118:幣:cash:巾,敝
@@ -1551,7 +1564,8 @@ rtk1364:棺:coffin:官,木
 rtk1365:管:pipe:官,竹
 rtk1366:父:father:;乂,八
 rtk1367:釜:kettle:父,金;丷,父,王
-rtk1368:交:mingle:父,亠
+# 2026-10-23 "lid" audit (owner: search by parts for lid, explain every result): 交: same pieces, drawn order (Heisig "top hat; father").
+rtk1368:交:mingle:亠,父
 rtk1369:効:merit:交,力
 rtk1370:較:contrast:車,交
 rtk1371:校:exam:交,木
@@ -2046,7 +2060,8 @@ rtk1848:影:shadow:景,彡
 rtk1849:杉:cedar:木,彡
 rtk1850:彩:coloring:采,彡
 rtk1851:彰:patent:章,彡
-rtk1852:彦:lad:丷,立,亠,厂,彡
+# 2026-10-23 "lid" audit (owner: search by parts for lid, explain every result): 彦: was 丷,立,亠,厂,彡 -- 立 plus its own 亠,丷 again. Heisig: "vase; stand up; cliff; shape" = 立 + 厂 + 彡.
+rtk1852:彦:lad:立,厂,彡
 rtk1853:顔:face:彦,頁
 rtk1854:須:ought:頁,彡
 rtk1855:膨:swell:月,鼓,彡
@@ -2272,7 +2287,8 @@ rtk2033:沈:sink:水,冘
 rtk2034:枕:pillow:木,冘
 rtk2035:妻:wife:十,⺕,女
 rtk2036:凄:uncanny:冫,妻
-rtk2037:衰:decline:一,亠,口,𧘇;衣,一,亠
+# 2026-10-23 "lid" audit (owner: search by parts for lid, explain every result): 衰: was 一,亠,口,𧘇 / 衣,一,亠 (the alternate listed 亠 twice: once alone, once inside 衣). Heisig: "pathetic; stick; ..." = 哀 + 一 (render: 哀 with a bar through its 口); cjkvi ⿳亠⿻口一𧘇 as the alternate.
+rtk2037:衰:decline:哀,一;亠,口,一,𧘇
 rtk2038:衷:inmost:衣,十,口;十,口,𧘇
 rtk2039:面:mask:一,丿,囗
 rtk2040:麺:noodles:面,麦
@@ -2508,7 +2524,8 @@ rtk2260:做:make:亻,故
 rtk2261:冴:be clear:牙,冫
 rtk2262:凋:wither:冫,周
 rtk2263:凌:endure:冫,夌
-rtk2264:凛:cold:口,示,亠,冫,囗
+# 2026-10-23 "lid" audit (owner: search by parts for lid, explain every result): 凛: was 口,示,亠,冫,囗 -- 回 split into 口 + 囗, in no order. cjkvi ⿰冫禀, 禀 = 亠 回 示.
+rtk2264:凛:cold:冫,亠,回,示
 rtk2265:凧:kite:巾,几
 rtk2266:凪:lull:止,几
 rtk2267:夙:bright and early:几,歹
@@ -2829,7 +2846,8 @@ rtk2581:橇:sled:毛,木
 rtk2582:槃:tub:木,般
 rtk2583:栞:bookmark:干,木
 rtk2584:椰:coconut tree:木,耶
-rtk2585:檀:cedar:一,口,日,木,亠
+# 2026-10-23 "lid" audit (owner: search by parts for lid, explain every result): 檀: was 一,口,日,木,亠 -- 旦 split into 日 + 一 and 回 reduced to one 口. cjkvi ⿰木亶, 亶 = 亠 回 旦; same right side as 壇.
+rtk2585:檀:cedar:木,亠,回,旦
 rtk2586:樗:japanese bead tree:雨,木,二,勹
 rtk2587:槻:zelkova tree:木,規
 rtk2588:椙:japanese cedar:昌,木
@@ -2909,7 +2927,8 @@ rtk2651:黍:millet:禾,人,氺
 rtk2652:禿:become bald:禾,儿
 rtk2653:稔:harvest:念,禾
 rtk2654:稗:humble:卑,禾
-rtk2655:穣:good crops:衣,禾,八,亠;㐮,禾
+# 2026-10-23 "lid" audit (owner: search by parts for lid, explain every result): 穣: was 衣,禾,八,亠 -- no 衣 is drawn, and 亠 was listed beside it. Its right side is the same "grass skirt" 㐮 as 譲 嬢 醸 壌 (all 㐮,X; render confirms); cjkvi ⿰禾㐮.
+rtk2655:穣:good crops:禾,㐮
 rtk2656:稜:angle:夌,禾
 rtk2657:稀:rare:禾,希
 rtk2658:穆:respectful:禾,小,白,彡
@@ -3215,7 +3234,8 @@ rtk2924:乖:oppose:北,千
 rtk2925:畠:field:田,白
 rtk2926:圃:garden:囗,甫
 rtk2927:丞:help:ノ,一,亅
-rtk2928:亮:clear:口,亠,儿,冖
+# 2026-10-23 "lid" audit (owner: search by parts for lid, explain every result): 亮: was 口,亠,儿,冖 -- "tall" (亠 over 口) spelled out, in no order. cjkvi ⿱⿳亠口冖儿 (J).
+rtk2928:亮:clear:prim-tall,冖,儿
 rtk2929:胤:descendent:ノ,乙,幺,月
 # 2026-10-23 (same "lid" report): was 止,川,亠,厶 -- both halves spelled out in
 # loose strokes. cjkvi ⿰𤴔㐬; rendered beside 疎 and 流, the left is the same

@@ -22589,3 +22589,48 @@ The owner searched "lid" and got stew and transcription among the results: "if y
 | pytest | 105 passed |
 | `regression_fresh.sh` | 1328/1328 |
 | `audit_radicals.py` | clean |
+
+## 2026-10-23 — "lid" audit: every depth-1 result explained, 21 rows fixed
+
+The owner asked for a parts search on "lid" (ja-kanji, depth 1), with each result explained and the mistakes fixed. Evidence used: renders, Heisig's components column, and cjkvi-ids. The search returned 44 results before and returns 32 after.
+
+**Fixed: duplicates.** These rows listed 立 *and* 立's own 亠,丷 (or a piece inside another listed piece). Rewritten to Heisig's pieces:
+
+| Kanji | New row |
+|---|---|
+| 帝 | `立,冖,巾` (cjkvi split kept as the alternate) |
+| 商 | `立,冂,儿,口` |
+| 傍 | `亻,立,冖,方` |
+| 彦 | `立,厂,彡` |
+| 傲 | `亻,土,方,攵` (the 亠 and 二 are strokes inside 方/土) |
+| 衰 | `哀,一` (Heisig "pathetic; stick"; cjkvi `亠,口,一,𧘇` as the alternate, replacing one that listed 亠 beside 衣) |
+
+**Fixed: wrong pieces.**
+
+| Kanji | Old row | New row | Why |
+|---|---|---|---|
+| 凛 | 回 split into 口 + 囗 | `冫,亠,回,示` | |
+| 檀 | `一,口,日,木,亠` | `木,亠,回,旦` | the same 亶 as 壇 |
+| 穣 | `衣,禾,八,亠` | `禾,㐮` | no 衣 is drawn; same "grass skirt" as 譲 嬢 醸 壌 |
+| 亮 translucent | `口,亠,儿,冖` | `prim-tall,冖,儿` | "tall" spelled out as strokes |
+
+**Fixed: order only** (same pieces, now in drawn order): 市 `亠,巾`, 壇 `土,亠,回,旦`, 畝 `亠,田,久`, 夜 `亠,亻,夂,丶`, 交 `亠,父`, and 立's alternate `亠,丷,一`.
+
+**Fixed: redundant alternates removed** (owner: "what about overpowering?"). 豪 overpowering, 京, 享 and 亭 each had an alternate re-spelling their "tall" primary as 亠,口. That made them depth-1 "lid" results. The tall-family kanji (豪 亮 京 享 亭 烹) now reach "lid" through "tall" at depth 2.
+
+**Correct, kept** (亠 really is a named piece there): 六 主(alt) 高 衣 裏 哀 褒 立(alt) 帝(alt) 亡 方(alt) 卒 玄 離 璃 亥 文(alt) 禽 牽 亢 𠫓 tall.
+
+**Still listed, queued:** 蓋 (keyword "lid") and 亠 itself appear as results of their own name. That is the queued "don't list the queried entity" design item, not a data error.
+
+**Pins:**
+- 帝: no longer expects the duplicated 亠/丷.
+- 凛: expects 回 (rtk630), not 口 + 囗.
+Both carry comments.
+
+**Checks:**
+
+| Check | Result |
+|---|---|
+| pytest | 105 passed |
+| `regression_fresh.sh` | 1328/1328 |
+| `audit_radicals.py` | clean |
