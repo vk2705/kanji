@@ -22220,3 +22220,102 @@ No `data.txt` edit this run, so the "before changing a row" checks (backup, pyte
 `regression_fresh.sh`, `audit_radicals.py`, `sync_system_data.py`) were not needed.
 
 `full_review.py --pending-count`: 2249 / 3000.
+
+## 2026-10-23 — full re-review: frames 752–801
+
+48 keep, 2 fixed, 0 needs-render. All 50 rows checked against `/tmp/ids.txt`
+(cjkvi-ids, already downloaded in this sandbox) directly — a real `grep -P
+"\t<char>\t"` lookup, not the one-level summary `full_review.py` prints —
+plus Heisig's components column and `render_glyphs.py` renders for anything
+where that wasn't conclusive on its own. 48 kept rows matched their cjkvi-ids
+top-level split exactly (allowing this project's established "collapse a
+doubled shape to one occurrence" convention, confirmed against the existing
+林/木 precedent, for 双 `又`/cjkvi `⿰又又` and 桑 `又,木`/cjkvi `⿱叒木`
+where 叒 is three 又 stacked) or matched Heisig's own column where cjkvi
+names an intermediate shape (尗, 孚, 㸒, 𪧷/寽, 𢖻) Heisig doesn't teach as
+its own primitive — rtk775 叔 `小,又,上` is the clearest case: cjkvi says
+`⿰尗又` but Heisig's column is itself already `above; small; little;
+crotch`, the same flattening, and this dataset has no `尗` row to point to
+instead.
+
+**Fixed, both in today's range:**
+
+- **rtk766 撃 ("beat")** — was `車,手,殳,几,又`. `/tmp/ids.txt`: 撃 `⿱軗手`,
+  軗 `⿰車殳`, 殳(JK) `⿱几又`. 殳's own cjkvi sub-parts (几,又) were restated
+  redundantly beside 殳 itself — the same bug already caught and fixed once
+  for 段/劇 (see that comment in `data.txt`, 2026-0x session: "几,又 is 殳's
+  own cjkvi sub-parts restated redundantly beside 殳 itself"). Fixed to
+  `車,殳,手`.
+- **rtk767 殻 ("husk")** — was `士,冗,殳,又`. cjkvi: 殻 `⿰壳殳`, 壳[G]
+  `⿱士冗`. Same bug, one duplicate (又) instead of two. Fixed to `士,冗,殳`.
+
+**Shape-family follow-up (the 亀 lesson: same bug, other hosts, done now
+rather than waiting for their own frame).** A file-wide grep for any row
+listing 殳 alongside 几 and/or 又 found five more hosts with the identical
+redundant-restatement bug, all outside today's 752–801 range — fixed now
+since it's mechanically the same finding already confirmed above, each
+checked against `/tmp/ids.txt` before touching it:
+
+- **rtk1824 疫 ("epidemic")** — was `殳,疔,几,又;殳,疒` (two decompositions
+  disagreeing with each other on top of the redundancy). cjkvi: 疫 `⿸疒殳`.
+  Consolidated to one: `殳,疔` — kept the `疔` spelling (not `疒`) since
+  every sibling 疒-radical row in this file (症, 瘍, 痩, 疾, 痢, ...) already
+  uses `疔` as this file's established alias for kangxi104/疒; swapping just
+  this one row to `疒` would have made it the odd one out. The alt
+  decomposition `殳,疒` became an exact duplicate of the fixed primary once
+  几,又 were dropped, so it's gone, not merely relabelled.
+- **rtk2697 繋 ("tie")** — was `糸,車,殳,几,又`. cjkvi: 繋 `⿱軗糸`, 軗
+  `⿰車殳` (same 軗 as 撃 above). Fixed to `糸,車,殳`.
+- **rtk2857 鑿 ("chisel")** — was `臼,干,金,丷,殳,几,又`. cjkvi: 鑿
+  `⿱𣫞金`, 𣫞 `⿰⿻丵臼殳` — note the `⿻` on the left half: 丵 and 臼 overlay
+  (share strokes), so they are not cleanly separable the way the `臼,干,丷`
+  portion of this row implies, and 丵 has no codepoint with a usable font
+  outline to check against directly (U+23ADE 𣫞 itself renders as tofu in
+  this sandbox's fonts). Only removed the confirmed 几,又 duplication,
+  leaving `臼,干,金,丷,殳`; the `臼,干,丷` portion is **not** re-verified
+  and may still need a render-capable font or a dedicated session — flagged
+  for whoever reviews frame 2857 directly, not re-decided here.
+- **rtk2898 毅 ("strong")** — was `立,亠,殳,豕,几,又`. cjkvi: 毅 `⿰豙殳`,
+  豙 `⿱立𧰨`. Rendered 豙 next to 豕 (`⿱一𧰨`, this file's existing
+  stand-in for the shared `𧰨` body) side by side to check for a font
+  substitution before trusting the IDS text (CLAUDE.md's "the render itself
+  can lie" warning) — they're genuinely distinct in this font (豙's top is
+  立's three strokes; 豕's top is one bare 一), so no substitution issue.
+  豙's top is 立 alone; no separate 亠 anywhere in the real structure. Fixed
+  to `立,豕,殳` (dropped 亠 along with the 几,又 redundancy).
+- **rtk2933 馨 ("fragrant")** — was `禾,香,士,日,又,几,殳,尸`, stacking
+  three separate instances of the same redundant-restatement bug in one
+  row. cjkvi: 馨 `⿱殸香`, 殸 `⿰声殳`. (1) 殳's own `几,又` restated beside
+  殳 itself, same as every row above. (2) 香's own `禾,日` (cjkvi 香
+  `⿱禾日`) restated beside 香 itself — same bug, different shape. (3) 声
+  (cjkvi `⿱士𠃜`, already this file's own rtk2044 row, correctly `士,𠃜`)
+  was flattened inline to `士,日,尸` with `日` wrongly standing in for `𠃜`
+  (whose own row, added 2026-09-20, is `尸,一` — not `日`; a different
+  character, not a font-lookalike). Replaced the whole row with the three
+  already-correct coherent primitives it's built from: `声,殳,香`.
+
+**Verification.** Before editing: `backup_db.py`, `pytest -q` (105 passed),
+`./regression_fresh.sh` (1328/1328), `audit_radicals.py` (0 undefined
+terms) — all clean, no earlier run left anything mid-way.
+
+After editing `data.txt`, `regression_fresh.sh` caught two pins that had
+baked in the now-removed redundant `又`: `rtk767`'s pin expected `rtk752`
+(又) as a direct part, and `rtk2697`'s pin expected both `kangxi16` (几) and
+`rtk752` (又). Both pins were checking the literal old (buggy) row, not
+independent evidence, so updated them in place in `test_regression_fixes.py`
+with a comment explaining why, rather than reverting the fix. Full sequence
+re-run clean after: `pytest -q` → 105 passed; `regression_fresh.sh` →
+1328/1328; `audit_radicals.py` → 0 undefined terms.
+
+`sync_system_data.py --dry-run` reported exactly 7 decompositions replaced
+(matching the 7 rows touched) and 1 removed-now-redundant (rtk1824's dropped
+alt) before counts looked sane; ran for real, applied cleanly to this
+machine's `kanji.db`. The dry-run's unrelated `! 286 system ja-kanji ids
+exist live but not in source` warning is pre-existing (legacy primitive ids
+phased out over past sessions) and untouched by this run — not investigated
+further here.
+
+No production deploy from here — a deployer needs `git pull` +
+`sync_system_data.py` on prod to pick this up.
+
+`full_review.py --pending-count`: 2199 / 3000.
