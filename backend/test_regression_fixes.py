@@ -3380,8 +3380,12 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"rtk1413", "rtk2053"}},
     # Was redundantly re-listing 亀(rtk573)'s own 乙,勹 alongside referencing it
     # directly -- 2026-09-05, audit_direct_ref_overlap.py
+    # 2026-10-23 (search-quality audit): rtk14 (田) dropped -- same
+    # ⿻-misread bug CLAUDE.md names for 蝿, already fixed on 縄: cjkvi's
+    # ⿳穴土⿻日电 is an overlay of 日+电 that renders as 亀 (rtk573) itself,
+    # not a separate 田 sibling.
     "rtk2662": {"character": "竃", "keyword": "kitchen stove",
-               "expected_part_ids": {"rtk14", "rtk1413", "rtk161", "rtk573"}},
+               "expected_part_ids": {"rtk1413", "rtk161", "rtk573"}},
     "rtk2687": {"character": "篇", "keyword": "livraison",
                "expected_part_ids": {"prim-fishfinger", "rtk1007"}},
     "rtk2821": {"character": "騙", "keyword": "cheat",
@@ -3825,8 +3829,13 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"rtk768", "rtk830"}},
     "rtk2312": {"character": "妓", "keyword": "stretch",
                "expected_part_ids": {"rtk102", "rtk768"}},
+    # 2026-10-23 (search-quality audit): rtk768 (支, "branch") -> rtk752
+    # (又, "crotch") -- rendered beside its shape-family siblings rtk1201 捜
+    # and rtk1818 痩 (both already use 又 for the same 叟-shape region),
+    # the lower-right stroke is a plain hook matching 又, not 支's extra
+    # crossbar.
     "rtk2858": {"character": "艘", "keyword": "counter for small boats",
-               "expected_part_ids": {"rtk12", "rtk2012", "rtk768"}},
+               "expected_part_ids": {"rtk12", "rtk2012", "rtk752"}},
     "rtk2176": {"character": "醜", "keyword": "ugly",
                "expected_part_ids": {"rtk1534", "rtk2175"}},
     "rtk2177": {"character": "魂", "keyword": "soul",  # was flattening a redundant 二 instead of referencing 云

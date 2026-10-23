@@ -22220,3 +22220,155 @@ No `data.txt` edit this run, so the "before changing a row" checks (backup, pyte
 `regression_fresh.sh`, `audit_radicals.py`, `sync_system_data.py`) were not needed.
 
 `full_review.py --pending-count`: 2249 / 3000.
+
+## 2026-10-23 — chunk 113: `audit_phantom_parts.py`'s weak section, three fixed, one tooling gap found
+
+Container had the repo but no `venv/`, no `node_modules/`, no CJK fonts, no `/tmp/ids.txt`
+— same first-boot shape as every recent chunk. `HEAD` came up detached one commit behind
+`origin/master`; `git checkout master && git merge --ff-only origin/master` brought it
+current (strict fast-forward). `git push --dry-run origin master` clean, confirmed before
+any work. Rebuilt `venv/`, installed `fonts-noto-cjk fonts-hanazono` (needed `apt-get
+update` first), curled `ids.txt` (88,939 lines), `npm install`.
+
+Picked up chunk 112's "Next" item 1: `audit_phantom_parts.py`'s weak section (cjkvi-blind,
+Heisig-channel-only), 25 kanji at this session's baseline — not the full-review-frames
+routine's own numbered chunks, which is a separate daily timer working a different list
+(`docs/kanji_full_review.json`) and was last at frames 702–751.
+
+**Baseline** (fresh `import_data()`): `test_regression_fixes.py` 1328/1328, `pytest` 80
+passed, `audit_overflatten.py` 0, `audit_self_reference.py` 0, `audit_radicals.py` 0/0,
+`audit_phantom_parts.py --in-csv-range` 10 across 9 (unchanged from chunk 112),
+`audit_phantom_parts.py` (full) 49 across 36, `audit_primary_choice.py` 0/67.
+
+**A tooling gap, not a data bug**: `audit_weak_evidence.py`'s `heisig-atomic` category
+(empty CSV `components` = positive atomicity evidence) checks every host regardless of
+frame number, but `heisig-kanjis.csv`'s `components` column is **uniformly empty past
+frame 2200** (800/800 empty in that range, vs. ~2.5% empty below it) — the CSV simply
+doesn't carry component data for 6th-edition volume 3 at all, which `audit_phantom_parts.py`'s
+own docstring already documents (`--in-csv-range` exists for exactly this reason) but
+`audit_weak_evidence.py` doesn't account for. It flagged `heisig-atomic` for six hosts in
+this session's candidate list (兎 2235, 梟 2852, and others past the cutoff); for those,
+the signal is noise, not evidence. Only two of this chunk's candidates were below the
+cutoff with a genuinely empty row: 喩 (308) and 並 (1924). Not fixing the script this
+session — flagging here so a future one doesn't spend time chasing `heisig-atomic` hits
+above frame 2200 as if they meant something.
+
+**Three real fixes, each render-confirmed and shape-family-corroborated:**
+
+- **rtk1924 並 ("row") — made atomic**, was `｜,一,二,丷` (pure stroke soup, 6 strokes
+  against an official 8). Frame 1924 is below the 2200 cutoff and genuinely has an empty
+  CSV row, so CLAUDE.md's atomicity rule actually applies here. Confirmed the way the
+  doc's own 冊/柵 example is confirmed: grepped `heisig-kanjis.csv`'s `components` column
+  for "row" and found it named whole in eight later frames — 1925 普 ("row; sun; day"),
+  1926 譜, 1927 湿, 1928 顕, 1929 繊, 1930 霊 ("...; two; row"), 2148 虚 ("tiger; row"),
+  2149 戯 — never once spelling out a pipe or a two inside it. Rendered 並 beside 竝
+  (U+7ADD, the traditional unfused "two 立" form) and 立 itself: 並 is a fused/overlapped
+  compression of two 立, not independently resolvable into the claimed strokes. rtk1925
+  普's own row already reads `日,並`, already treating 並 as the whole unit, so this fix
+  changes nothing downstream.
+- **rtk2662 竃 ("kitchen stove") — dropped a redundant 田**, was `穴,土,田,亀`. Same
+  ⿻-misread bug CLAUDE.md names for 蝿, and the one the 2026-10-01 entry already fixed on
+  縄 (`糸,田,亀` → `糸,亀`) — cjkvi's own reading here is `⿳穴土⿻日电`, an *overlay* of
+  日+电, not a separate flat 田 sibling. That 2026-10-01 entry's own wording ("the
+  simplified tortoise this project already uses whole in 竃") assumed 竃 had already been
+  fixed the same way — checked git history on this line and it hadn't; this was the one
+  case that pass missed. Rendered 竃 beside 亀 and 田 directly: the bottom of 竃 is
+  pixel-for-pixel 亀's own shape, no independent boxed 田 anywhere in it. `田` dropped.
+- **rtk2858 艘 ("counter for small boats") — 支 → 又**, was `舟,日,支`. CSV is empty for
+  frame 2858 (past the cutoff), but the same 叟-shape region is in-range and already
+  named on two earlier hosts: rtk1201 捜 ("finger; fingers; Buddha's hand; monkey; sun;
+  day; stick; crotch", row `日,又,扌,申`) and rtk1818 痩 (row includes 又). Both land on
+  日 for 叟's upper portion, consistent with this row's existing 日, but both use 又
+  (hand) for its lower portion, not 支 (branch). Rendered 艘 beside 又 and 支: the
+  lower-right stroke is a plain hook matching 又's two strokes, not 支's four-stroke
+  cross-plus-hook shape. `支` replaced with `又` to match the established shape-family
+  reading.
+
+Both `test_regression_fixes.py` pins affected (`rtk2662`, `rtk2858`) were corrected in
+place with comments explaining the new values, per the standing "pins carry reasons" rule.
+
+**Investigated and deferred, each with a specific, named blocker rather than a guess —
+not a blanket defer**:
+
+- **rtk2852 梟 ("owl")** — `鳥,木` overcounts strokes by 4 (15 vs. official 11) and cjkvi
+  confirms why: `⿹⑦木`, an unencoded placeholder standing in for a *reduced* bird shape,
+  not the full 11-stroke 鳥. Rendered 梟 beside 鳥 and 木: the top of 梟 matches 鳥's own
+  head/body/wing strokes but is missing 鳥's bottom `灬` legs entirely, replaced by 木
+  underneath (an owl sitting in a tree, legs implied by the branch). No existing
+  "bird-without-legs" primitive is registered anywhere else in `data.txt` to reuse, and
+  CSV is empty (2852 > 2200, no name to borrow). Needs a new primitive and a confident
+  name for it, not a glyph swap — left for a session with room for that.
+- **rtk2620 畢 ("lastly")** — `｜,一,田` undercounts by 4 strokes (7 vs. 11). cjkvi's
+  `⿻⑨一` confirms the bottom is not just `一`, but ⑨ is a per-entry placeholder (CLAUDE.md:
+  "nothing may ever be inferred from two entries sharing one") and CSV is empty (2620 >
+  2200), so there's no name to anchor a replacement to. Rendered: the bottom shows two
+  splayed legs under the 田 box that are clearly more than a single horizontal stroke, but
+  nothing in this project's existing primitive set was a confident visual match. Needs
+  individual identification, not a guess.
+- **rtk2270 劉 ("slaughter")** — `金,厶` undercounts by 5 strokes (10 vs. 15). cjkvi's
+  `⿰⿱⿰③刀金刂` doesn't parse into the "卯 + 金 + 刀" structure 劉 is traditionally taught
+  with (checked: 卯's own IDS is `⿰𠂎卩`, which doesn't match the `③+刀` sub-block cjkvi
+  gives for 劉 at all) — the ③ placeholder covers a shape this session couldn't confidently
+  identify from the IDS alone and didn't have time to render-iterate on. Left as a named
+  open question rather than fixed on a guess.
+- **rtk2907 卿 ("you")** — `皀,卩` is missing an entire left-side part: cjkvi's
+  `⿲𠂎⑤卩[GTJV]` is a three-way split (𠂎 | ⑤ | 卩), and the row only has two pieces.
+  𠂎 is already a registered primitive (used in 卯's row), so the left gap is plausibly
+  fillable, but the middle ⑤ placeholder's identity and how it relates to 皀 needed more
+  render time than this chunk had left. Flagged, not fixed.
+
+**Re-confirmed correct, not re-investigated** (each already has a dated `data.txt` comment
+from an earlier chunk reaching the same conclusion after a render): 不/印/甚 (chunk 53/54,
+2026-09-23 — opaque-placeholder cases already deliberately left as-is, 印's "staples" name
+explicitly left unassigned pending a clearer referent), 慕/添 (chunk 57-descended,
+codepoint-variant blind spot, 㣺 vs 心), 驢 (chunk 87, 2026-09-28, the 虍-inside-stroke
+匕→七 family fix), 齟/齬 (same codepoint-variant class, 齒 vs 歯), 鴬 (`prim-schoolhouse`
+self-reference, a deliberately glyph-less compound primitive, not a bug), 爾 (chunk 112,
+near-miss already resolved in 爾's favor against a tempting but wrong atomic-primary
+rewrite). `rtk480`/北's `prim-mirrored-spoon`, `rtk2879`/鹵, `rtk2898`/毅 and `rtk2878`/鼎
+(shape-family question on 丬 vs 爿, inconclusive at this render size per chunk 112) were
+already explicitly deferred by name in chunk 112 and not re-litigated here per that
+session's own instruction.
+
+**Not reached this chunk**: rtk2907 卿 is covered above; rtk2910 套, rtk2913 壷, rtk2930 疏
+and rtk2235 兎 remain unexamined — `audit_phantom_parts.py`'s weak section still has ~20
+kanji left after this chunk's three fixes, the queue is not close to empty.
+
+**Checks (after the three fixes, final state):**
+
+| Check | Before | After |
+|---|---|---|
+| `test_regression_fixes.py` | 1328/1328 | 2 pins broke (rtk2662, rtk2858), corrected in place, then 1328/1328 |
+| `pytest` | 80 passed | 80 passed |
+| `audit_overflatten.py` | 0 | 0 |
+| `audit_self_reference.py` | 0 | 0 |
+| `audit_radicals.py` | 0/0 | 0/0 |
+| `audit_phantom_parts.py --in-csv-range` | 10/9 | 10/9 (unchanged — none of the three fixes were in-CSV-range hosts) |
+| `audit_phantom_parts.py` (full) | 49/36 | 46/34 |
+| `audit_primary_choice.py` | 0/67 | 0/67 |
+
+Frontend: `npm install`, `npm run lint` clean, `npm run build:prod` clean (3,230 SEO pages,
+same ballpark as recent chunks).
+
+Not deployed — no server access from this container. A deployer needs `git pull` +
+`./venv/bin/python3 sync_system_data.py` on prod to pick up `rtk1924`, `rtk2662` and
+`rtk2858`'s changed rows; no image regeneration needed (no new primitive registered, no
+`image_url` change).
+
+### Next
+
+1. `audit_phantom_parts.py`'s weak section, remainder: rtk2907 卿 (left-side `𠂎` gap,
+   middle `⑤` unidentified), rtk2620 畢 (bottom-leg shape needs a name), rtk2270 劉
+   (doesn't parse into the usual 卯+金+刀 structure, needs render iteration), rtk2852 梟
+   (needs a new "bird without legs" primitive, name still open), plus rtk2910 套, rtk2913
+   壷, rtk2930 疏, rtk2235 兎 — not reached at all this chunk.
+2. `audit_weak_evidence.py`'s `heisig-atomic` category should learn the same
+   `--in-csv-range`-style cutoff `audit_phantom_parts.py` already applies (frame > 2200 ->
+   CSV is empty for everyone, not evidence of atomicity for anyone) — a real fix to the
+   tool, not just a note, if a future session has room for it.
+3. `suggest_heisig_aliases.py --near 0.8 --all` — ~236 names left, flat tail, still
+   genuinely low-value per name (chunk 111's conclusion), untouched again this chunk.
+4. `革`/`靴`/`覇`'s "flowers"/"car" (open since session 12) and "key" on
+   `侯`/`候`/`決`/`快` (chunk 111's item 6) — both still open, not attempted.
+5. `kangxi58` is closed (chunk 112 corrected a month-long stale-backlog claim) — don't
+   re-open it without checking `data.txt` directly first.
