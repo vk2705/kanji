@@ -22363,3 +22363,36 @@ After 鬱 was relisted as `木,缶,木,…`, the detail page still showed one tr
 **Unchanged:** search, which reads the stored rows independently.
 
 **Verified** on the detail output and a full SEO regeneration into a scratch directory: 鬱 `木 缶 木 冖 鬯 彡`, 幽 `山 幺 幺`, 班 `王 刀 王`, 屋 `至 尸`, 裏 unchanged. pytest: 105 passed.
+
+## 2026-10-23 — "lid" search: 円 and 来 fixed, "tall" gets a picture
+
+A user searching "lid" through the MCP got wrong results. Checked against the data, two causes are data errors and are fixed here. The others are design issues, now queued in CLAUDE.md.
+
+**Data fixes:**
+- **rtk1952 円**: `冂,｜,一`; it was `冂,亠,一,｜`. There is no 亠 in 円. The render shows 冂 with a short vertical and a horizontal inside, which is exactly Heisig's own "glass canopy, walking stick, one" (4th-ed PDF).
+- **rtk2029 来**: `未,丷;一,米`; it was `｜,二,米,亠,木`. The old row listed about 17 strokes for a 7-stroke kanji: two readings run together, plus a 亠 that is not drawn.
+  - The new primary follows Heisig's components, "not yet; animal horns": 未 with 丷 between its horizontals (5 + 2 strokes).
+  - The alternative, 一 over 米 (1 + 6), is the other true reading.
+  - cjkvi treats 来 as atomic, so it has no say here.
+- **prim-tall ("tall", 亠 over 口: the top of 高 京 亭 享 豪)**: the row showed `?`. The shape has no codepoint, since cjkvi only composes it. `primitive_images/prim-tall.png` is a hand crop of `make_primitive_images.py`'s own serif render of 京, cut at 口's bottom bar. The importer and sync attach it like every other primitive picture, and the script's docstring now records that it is hand-made.
+  - Noto Serif CJK had gone missing from the dev box, and the first render fell back to sans. `google-noto-serif-cjk-ttc-fonts` was reinstalled.
+
+**Not changed — 主**: the primary `王,丶` is Heisig's own "drop; king". The alternative `亠,土` is a true structural reading (cjkvi `⿱亠土`), so a "lid" search finding 主 is correct.
+
+**Result:** "lid" (ja-kanji, depth 1) no longer returns 円 or 来.
+
+**Checks:**
+
+| Check | Result |
+|---|---|
+| pytest | 105 passed |
+| `regression_fresh.sh` | 1328/1328 |
+| `audit_radicals.py` | clean |
+
+**Not fixed, queued in CLAUDE.md "Known limitations"** (owner request):
+- choosing which "lid" is meant before the search runs
+- grouping results by why they matched
+- dropping the queried entity itself from the results
+- the Android app's missing Dispute button and History; the probable cause is noted there
+
+**Also noted:** the 12:00 UTC `kanji-worklist-review` run today exited at once on the account session limit (12:08, reset 12:20), with no changes. Today's chunk did not run.

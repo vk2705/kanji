@@ -2159,7 +2159,11 @@ rtk1948:囲:surround:囗,井
 rtk1949:耕:till:耒,井
 rtk1950:亜:asia:｜,一,口
 rtk1951:悪:bad:亜,心
-rtk1952:円:circle,yen:冂,亠,一,｜
+# 2026-10-23 (owner report via the MCP: a "lid" search returned 円): was
+# 冂,亠,一,｜ -- there is no 亠 in 円. Rendered: 冂 with a short vertical from the
+# top and a horizontal inside; Heisig's own pieces (4th-ed PDF) are exactly
+# "glass canopy, walking stick, one". The 亠 was the vertical+horizontal misread.
+rtk1952:円:circle,yen:冂,｜,一
 rtk1953:角:angle:勹,用
 rtk1954:触:contact:角,虫
 rtk1955:解:unravel:角,牛,刀
@@ -2241,7 +2245,12 @@ rtk2025:繭:cocoon:艹,冂,｜,糸,虫
 rtk2026:益:benefit:一,皿,八,丷
 rtk2027:暇:spare time:日,又
 rtk2028:敷:spread:十,田,方,丶,攵
-rtk2029:来:come:｜,二,米,亠,木
+# 2026-10-23 (same "lid" report): was ｜,二,米,亠,木 -- 7 strokes listed as ~17,
+# two readings run together plus a 亠 that is not drawn. Heisig's components are
+# "not yet; animal horns": 未 with 丷 set between its two horizontals (render
+# confirms, 7 = 5 + 2). Alternative: 一 over 米, the other way to see the same
+# strokes (also 7). cjkvi treats 来 as atomic, so it has no say here.
+rtk2029:来:come:未,丷;一,米
 rtk2030:気:spirit:㐅,气
 rtk2031:汽:vapor:水,气
 rtk2032:飛:fly:

@@ -45,6 +45,12 @@ quietly produces Chinese-variant shapes. Requires the same headless Chromium
     ./venv/bin/python3 make_primitive_images.py --dry-run   # list what needs one
     ./venv/bin/python3 make_primitive_images.py             # (re)render them all
 
+One picture is NOT produced here: `prim-tall.png` ("tall", the 亠-over-口 top
+of 高 京 亭 享 豪) has no codepoint at all -- cjkvi only ever composes it -- so it
+was cropped by hand (2026-10-23) from this script's own render of 京 (same font,
+colour and one-em canvas) down to the bottom bar of 口. Re-running this script
+leaves it alone, since the row's character is "?" and is never a target.
+
 The DB side is separate and automatic: `database.py::import_data()` points a
 system row's `image_url` at `/primitive-images/{id}.png` when the file exists,
 and `sync_system_data.py` propagates that to a live DB. Nothing here writes to
