@@ -22161,3 +22161,14 @@ Deployer note: prod needs `git pull` + `./venv/bin/python3 sync_system_data.py` 
 this up.
 
 `full_review.py --pending-count`: 2299 / 3000.
+
+## 2026-10-23 — "Discuss" link to GitHub Discussions (owner request)
+
+The owner wanted a place where users can submit ideas or discuss the site. The site does not run its own forum, since an open-signup forum is a spam and moderation burden. Instead, GitHub Discussions was enabled on `vk2705/kanji`, and the site links to https://github.com/vk2705/kanji/discussions from four places:
+
+- a **Discuss** / «Обсуждение» button in the header
+- the static footer
+- an "Ideas and discussion" section on the About page (en/ru)
+- an "Ideas, questions and corrections" section on `/guide/`
+
+Reading the forum needs no account; posting needs a GitHub account. No backend change.

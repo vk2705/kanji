@@ -7,6 +7,7 @@ const PRIVACY_URL = "privacy.html";
 const CHANGELOG_URL = "https://github.com/vk2705/kanji/blob/master/CHANGELOG.md";
 const BOOK_URL = "https://uhpress.hawaii.edu/title/remembering-the-kanji-1/";
 const MCP_URL = "https://kanjimcp.alteon.help/mcp";
+const DISCUSS_URL = "https://github.com/vk2705/kanji/discussions";
 const PROVENANCE_URL = "https://github.com/vk2705/kanji/blob/master/docs/DATA_SOURCES.md";
 
 export default function AboutPage({ lang, onBack, onHome }) {
@@ -39,6 +40,14 @@ export default function AboutPage({ lang, onBack, onHome }) {
         </ul>
         <a className="about-link" href={CHANGELOG_URL} target="_blank" rel="noreferrer">
           {t(lang, "aboutChangelogLinkLabel")}
+        </a>
+      </div>
+
+      <div className="contrib-section">
+        <h3>{t(lang, "aboutDiscussHeading")}</h3>
+        <p className="login-hint">{t(lang, "aboutDiscussText")}</p>
+        <a className="about-link" href={DISCUSS_URL} target="_blank" rel="noreferrer">
+          {t(lang, "aboutDiscussLinkLabel")}
         </a>
       </div>
 

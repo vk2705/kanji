@@ -116,6 +116,10 @@ export default function App() {
 
   // The MCP instructions are on the static /guide/ page. A plain link, not
   // in-app navigation: the guide is not part of the SPA.
+  // Community forum: GitHub Discussions on the project repo (owner decision 2026-10-23 --
+  // no forum of our own to moderate). Posting needs a GitHub account; reading does not.
+  const DISCUSS_URL = "https://github.com/vk2705/kanji/discussions";
+
   function openMcpGuide() {
     window.location.href = `${import.meta.env.BASE_URL}guide/#ai-access`;
   }
@@ -451,6 +455,9 @@ export default function App() {
               </button>
             </>
           )}
+          <a className="header-nav-btn" href={DISCUSS_URL} target="_blank" rel="noreferrer">
+            {tt("discussLinkBtn")}
+          </a>
           <button className="header-nav-btn" onClick={openMcpGuide}>
             {tt("mcpLinkBtn")}
           </button>

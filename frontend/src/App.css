@@ -93,6 +93,10 @@ textarea {
   padding: 5px 12px;
   font-size: 0.8rem;
   cursor: pointer;
+  font-family: inherit;
+  line-height: normal;
+  text-decoration: none;
+  display: inline-block;
   transition: color 0.15s, border-color 0.15s;
 }
 
