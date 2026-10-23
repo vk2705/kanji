@@ -1571,13 +1571,11 @@ def _resolve_parts_detail(conn, cid: str, decomposition_id: int, viewer_id: int 
         candidates = char_to_candidates.get(term)
         if not candidates:
             continue
-        chosen_id = None
-        if parent_group:
-            chosen_id = next((kid for kid, script in candidates if _script_group(script) == parent_group), None)
-        if chosen_id is None:
-            chosen_id = candidates[0][0]
-        kw = id_to_keyword.get(chosen_id)
-        if kw and part_terms[i + 1] == kw:
+        # Any row drawing this character counts, not just the first one picked: 幺 has
+        # three (kangxi52 "cocoon", rad1040, a hanzi row), and checking only one let
+        # 幽's synthetic "cocoon" through, where it resolved to 繭 (2026-10-23).
+        keywords = {id_to_keyword.get(kid) for kid, _script in candidates}
+        if part_terms[i + 1] in keywords:
             synthetic_positions.add(i + 1)
     if synthetic_positions:
         part_terms = [t for i, t in enumerate(part_terms) if i not in synthetic_positions]
@@ -1635,12 +1633,19 @@ def _resolve_parts_detail(conn, cid: str, decomposition_id: int, viewer_id: int 
         ).fetchall()
     }
 
-    seen_ids: set[str] = set()
+    # Drop a term only when it names the same part as the term just before it under
+    # a different spelling (a char and its keyword that the synthetic-position pass
+    # above missed). A shape the glyph really draws twice is listed twice and shown
+    # twice: 鬱 木,缶,木 / 班 王,刀,王 / 棘 朿,朿. Until 2026-10-23 any repeated part
+    # id was dropped, so those rows showed one tree, one king, one thorn.
+    prev_pid = prev_term = None
     resolved = []
     for term in part_terms:
         pid = term_to_id.get(term)
-        if pid and pid != cid and pid not in seen_ids:
-            seen_ids.add(pid)
+        if pid and pid == prev_pid and term != prev_term:
+            continue
+        prev_pid, prev_term = pid, term
+        if pid and pid != cid:
             prow = prow_map.get(pid)
             if prow:
                 sub_decompositions = []

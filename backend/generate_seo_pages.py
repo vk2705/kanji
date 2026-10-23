@@ -199,7 +199,7 @@ def resolve_parts(entry: dict, targets: dict[str, dict[str, tuple[str, str]]]) -
     entry["components"] = []
     for decomposition in entry["decompositions"]:
         resolved = []
-        seen: set[str] = set()
+        prev_id = prev_term = None
         complete = True
         for part in decomposition["parts_detail"]:
             target = table.get((part["term"] or "").lower())
@@ -208,10 +208,15 @@ def resolve_parts(entry: dict, targets: dict[str, dict[str, tuple[str, str]]]) -
                 resolved.append({"term": part["term"]})
                 continue
             glyph, kanji_id = target
-            # The glyph and its name are usually stored as two rows: one chip.
-            if kanji_id in seen or kanji_id == entry["id"]:
+            # The glyph and its name are usually stored as two adjacent rows: one
+            # chip. A shape drawn twice (鬱 木,缶,木 / 班 王,刀,王) is listed twice and
+            # kept twice -- same rule as database._resolve_parts_detail.
+            term = part["term"]
+            if kanji_id == prev_id and term != prev_term:
                 continue
-            seen.add(kanji_id)
+            prev_id, prev_term = kanji_id, term
+            if kanji_id == entry["id"]:
+                continue
             resolved.append({"term": part["term"], "glyph": glyph, "id": kanji_id})
         decomposition["resolved"] = resolved
         if complete and resolved and not entry["components"]:
@@ -552,6 +557,14 @@ def generate(db_path: Path, output_dir: Path, sitemap_path: Path) -> int:
             if alias not in entry["aliases"]:
                 entry["aliases"].append(alias)
 
+        # Import stores each literal-glyph part followed by a synthetic row for that
+        # glyph's own keyword ("木", "tree") so search matches either. Drop those
+        # here, the way database._resolve_parts_detail does: resolved on its own a
+        # keyword can land on a different row (幽's "mountain" on 屮, 班's "sword"
+        # on 𠃌), adding a chip for a part the character does not have.
+        keywords_by_char: dict[str, set[str]] = {}
+        for row in conn.execute("SELECT character, keyword FROM kanji WHERE keyword IS NOT NULL"):
+            keywords_by_char.setdefault(row["character"], set()).add(row["keyword"])
         decompositions: dict[int, dict] = {}
         for row in conn.execute(
             "SELECT d.id, d.kanji_id, d.label, p.part_term, p.position "
@@ -566,7 +579,10 @@ def generate(db_path: Path, output_dir: Path, sitemap_path: Path) -> int:
                 decomposition = {"id": row["id"], "label": row["label"], "parts_detail": []}
                 decompositions[row["id"]] = decomposition
                 entries_by_id[row["kanji_id"]]["decompositions"].append(decomposition)
-            decomposition["parts_detail"].append({"term": row["part_term"]})
+            parts = decomposition["parts_detail"]
+            if parts and row["part_term"] in keywords_by_char.get(parts[-1]["term"], ()):
+                continue
+            parts.append({"term": row["part_term"]})
 
         targets = load_term_targets(conn)
         for entry in entries:

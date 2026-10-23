@@ -22347,3 +22347,19 @@ No production deploy from here — a deployer needs `git pull` +
 | pytest | 105 passed |
 | `regression_fresh.sh` | 1328/1328 |
 | `audit_radicals.py` | clean |
+
+## 2026-10-23 — show a part the glyph draws twice, twice (display only)
+
+After 鬱 was relisted as `木,缶,木,…`, the detail page still showed one tree. Since the first commit, `database._resolve_parts_detail` had dropped every repeated part id. Its purpose was to hide the synthetic keyword row stored after each literal glyph (`木`, `tree`). As a side effect, 12 rows that deliberately list a shape twice also showed it once: 班 `王,刀,王`, 歌 `可,可,欠`, 幽 `山,幺,幺`, 呂, 棘, …
+
+**Detail page and MCP** (`_resolve_parts_detail`):
+- A term is now dropped only when it names the same part as the term just before it under a different spelling. Real repeats are shown.
+- The synthetic-keyword pass now checks the keyword of *every* row drawing that glyph, not just the first one it picks. 幺 has three rows (kangxi52 "cocoon", rad1040, a hanzi row). Checking only one let 幽's synthetic "cocoon" through, where it resolved to 繭, so 幽 had been showing `山, 幺, 繭`.
+
+**Static SEO pages** (`generate_seo_pages.py`):
+- The same adjacency rule now applies here.
+- Synthetic keyword rows are now dropped at load time. Resolved on their own, they could land on a different row: 幽's "mountain" on 屮, 班's "sword" on 𠃌, each adding a chip for a part the character does not have.
+
+**Unchanged:** search, which reads the stored rows independently.
+
+**Verified** on the detail output and a full SEO regeneration into a scratch directory: 鬱 `木 缶 木 冖 鬯 彡`, 幽 `山 幺 幺`, 班 `王 刀 王`, 屋 `至 尸`, 裏 unchanged. pytest: 105 passed.
