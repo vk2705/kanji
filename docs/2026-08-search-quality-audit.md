@@ -22656,3 +22656,82 @@ every installed CJK font, so no picture is needed. Shape family: only these
 two jōyō kanji contain it (禽 has 凶+禸 under 今, not 离). Searches for lid,
 villain or belt still find both, now at depth 2 via sheik. Pins added for all
 three rows. Deployer: `git pull` + `sync_system_data.py` on prod.
+
+## 2026-10-24 — hanzi worklist: next 20 (14 keep-ours, 3 real fixes, 3 needs-render)
+
+Daily unattended chunk, `hanzi_worklist_next.py -n 20` (14 overlay findings,
+6 opaque). `backup_db.py` first; `pytest` passed (105) before any change.
+Every host plus every component glyph named in its cjkvi reading rendered
+via `render_glyphs.py` before any decision, standalone at large size where a
+compound render left ambiguity.
+
+**14 keep-ours** (瑤 瑶 璊 甍 用 甩 甫 甴 电 畏 畞 畫 畵 疟): in each, our row
+is already cjkvi's own reading flattened to its literal pieces, and the
+render confirms those pieces are what's actually drawn — the overlay/opaque
+operator makes the *evidence* weaker than a same-looking ⿰/⿱ case without
+making the *row* wrong, same as every prior chunk's majority. 甍 is the one
+worth flagging on its own: the opaque hit was `cjkvi stops at 艹`, but
+cjkvi-ids spells that top piece with U+FA5D (a CJK compatibility
+ideograph), not the U+8279 `艹` this project's own `艹` row uses — rendered,
+they're pixel-identical, and the two existing rows for the grass radical
+(`hanzi-8279`, `prim-mugwort`) both already use U+8279. This is a detector
+blind spot (a codepoint-variant pair `RADICAL_VARIANTS` doesn't cover,
+unlike 氵/水 or 刂/刀), not a real evidence gap — `audit_hanzi_weak_evidence.py`
+itself is fine either way since it only *reports* weak evidence, but worth
+a `RADICAL_VARIANTS` entry if this pair recurs. 畞's row (`十,畂`) looks like
+it's missing a `田` at a glance — the host clearly shows a box on the left —
+but rendering `畂` (U+7542) alone shows it already draws that box as part of
+its own glyph; cjkvi's `⿻十畂` overlay is `十` laid onto a shape that already
+contains 田, not a dropped third component.
+
+**3 real fixes, applied directly to `kanji.db`** (no `data.txt` line exists
+for hanzi rows):
+
+- **畢 (hanzi-7562), decomposition 12608: `一` → `田,丰`.** cjkvi's own
+  reading here is `⿻⑨一` — `⑨` is one of cjkvi's per-entry placeholders for
+  a shape it has no codepoint for (CLAUDE.md's "circled numbers are holes,
+  not components"), so the existing row had almost nothing to go on and it
+  showed: a single `一` for a character that visibly has a full `田` box on
+  top. Rendered `畢` alone first — the top is unmistakably a `田` grid, the
+  bottom an unbroken vertical stroke crossed by two bars, protruding past
+  both ends. That second shape is this project's own `丰` (`hanzi-4e30`,
+  "abundant, lush, bountiful, plenty" on the zh-Hans side; the ja-kanji
+  `prim-bushes` row shares the glyph) — rendered `畢,田,丰` side by side
+  confirms both pieces pixel-match. Checked against the 龶/丰 trap this
+  project has been burned by before (CLAUDE.md: only the render
+  distinguishes them, since Heisig's own keyword for both is "grow up"):
+  `丰`'s vertical runs through its bottom bar, same as what `畢`'s bottom
+  draws, so this is the right one of the pair, not a guess.
+- **疎 (hanzi-758e), decomposition 12650: `𤴔,束` → `疋,束`.** Same case as
+  2026-10-23's rtk1797 fix (previous entry above): `𤴔` (U+24D14) is
+  cjkvi's own codepoint for 疎/疏's left side; rendered large, its outline
+  is the same shape as this project's own `疋` (U+758B) — confirmed side
+  by side with `疎`'s own left side. The Japanese counterpart `rtk1797`
+  already reads `疋,束`; this applies the same, already-investigated
+  reading to the hanzi twin that was never touched.
+- **疏 (hanzi-758f), decomposition 12651: `𤴔,㐬` → `疋,㐬`.** Same pair,
+  same `𤴔`→`疋` swap; `㐬` (lifebelt) was already correct and untouched.
+  Mirrors `rtk2930`'s 2026-10-23 fix the same way.
+
+Both `疋,束`/`疋,㐬` fixes resolve script-aware to the zh-Hani/zh-Hans rows
+(`hanzi-758b` "roll, bolt of cloth", `hanzi-4e30` "abundant...") via
+`expand_part_terms(..., script_group='zh')`, not the ja-kanji `rtk2238`
+"critters" row that shares the same `疋` glyph — confirmed by reading back
+`get_kanji_detail` for all three fixed rows before committing anything.
+Applied with a direct `DELETE FROM parts WHERE decomposition_id = ?` +
+re-`INSERT` at sequential positions, same pattern as chunk 1's 乕 fix.
+`pytest` passed again after (105), unaffected.
+
+**3 needs-render, deferred**: 畅 (hanzi-7545, opaque child `𠃓`/U+200D3),
+畿 (hanzi-757f, overlay-via `𢆶`/U+221B6), 疡 (hanzi-75a1, opaque child
+`𠃓` again). All three components render as a genuine tofu box (empty
+square, no fallback outline at all) in every installed face on this
+machine, confirmed by rendering each alone at large size rather than just
+trusting an earlier font-comparison note from this same session — that
+note said `𠃓`/`𢆶` are "identical in every face checked", which turned out
+to mean identically *absent* (both tofu) in every face, not identically
+present. No way to verify these three without a font that actually covers
+the codepoints, so left `pending`→`needs-render` rather than guessed at.
+
+173 → 153 pending after this chunk (`hanzi_worklist_next.py
+--pending-count`).
