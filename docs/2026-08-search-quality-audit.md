@@ -22656,3 +22656,124 @@ every installed CJK font, so no picture is needed. Shape family: only these
 two jōyō kanji contain it (禽 has 凶+禸 under 今, not 离). Searches for lid,
 villain or belt still find both, now at depth 2 via sheik. Pins added for all
 three rows. Deployer: `git pull` + `sync_system_data.py` on prod.
+
+## 2026-10-24 — `audit_phantom_parts.py`'s named-blocker backlog, a new cross-check source, and a correction to yesterday's "sheik" chunk
+
+Daily firing. Step 0: container had the repo checked out already (unusual —
+most recent firings clone fresh); `git fetch`/`pull --ff-only` showed nothing
+new, `git push --dry-run origin master` confirmed push access before touching
+anything. `cjkvi-ids` and the font stack (`fonts-noto-cjk` then
+`fonts-hanazono`) were both missing and rebuilt from scratch, as usual.
+
+Picked up the "Next" pointer from two sessions ago: the named-blocker items
+`audit_phantom_parts.py`'s weak section had left open (rtk2907 卿, rtk2620
+畢, rtk2270 劉, rtk2852 梟), plus three items flagged "not reached" in the
+same note (rtk2910 套, rtk2913 壷, rtk2235 兎) and one more sharing the same
+profile found by re-running the full audit (rtk2874 輿). First checked
+whether the rest of `audit_phantom_parts.py`'s output was actually new work:
+it wasn't — every other finding (捷, 蘭, 祢, 蝿, 訊, 爾, 鹵, 齟, 齬, 毅, 喩,
+驢, 艘, 鴬, 疏, 斎, 能, 北, 憂, 慕, 添, 不, 印, 甚) is already a documented
+detector blind spot from chunks 57/79-83/97/112 and the 2026-10-23 sessions,
+some going back to 2026-09-23 — re-confirmed as still-correct rather than
+re-litigated.
+
+**New tool: KanjiVG.** `raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/{codepoint}.svg`
+gives an authoritative, hand-curated stroke-by-stroke grouping per
+character, independent of both cjkvi-ids and Heisig's CSV — neither of
+which had anything to say about any of these eight (all eight have
+`id_5th_ed` 2043+, outside the CSV's atomicity-evidence range). Not used by
+this audit before. It settled several of these cleanly, but every verdict
+was still rendered with `render_glyphs.py` before trusting it — KanjiVG is
+a cross-check source, not a replacement for looking, and it disagreed with
+a plausible-looking hypothesis at least once (see 輿 below).
+
+**Three real fixes** (full reasoning and exact stroke-count math in
+`data.txt`'s own 2026-10-24 comment, next to `prim-sheik`):
+- **rtk2270 劉** (weapon of war): `金,厶` → `卯,金,刀`. 厶 was a phantom; 卯
+  and 刀 were missing entirely. KanjiVG confirms the traditionally-taught
+  卯+金+刀 structure a previous session suspected but couldn't get
+  cjkvi-ids to confirm on its own (15 strokes exact).
+- **rtk2620 畢** (the end): `｜,一,田` → `田,廾,一,一,｜`. Undercounted by 4
+  strokes. KanjiVG's bottom group is 廾 plus two more bars beyond what 廾
+  alone covers; rendered solo, 畢's legs are straight (廾-shaped), not
+  flared like 共's 八 (11 strokes exact).
+- **rtk2907 卿** (you): `皀,卩` → `prim-receipt,皀,卩`. The old row was
+  identical to 即's own row — it only captured 卿's right half and dropped
+  the left (𠂎/prim-receipt, already used in 卯 and 貿) entirely (12
+  strokes exact).
+
+**Four re-confirmed correct, no edit** — rtk2874 輿, rtk2910 套, rtk2913 壷,
+rtk2235 兎 — each a cjkvi-ids placeholder or codepoint-variant blind spot
+where KanjiVG's independent stroke grouping matches the current row exactly.
+輿 is the interesting one: cjkvi's IDS for 輿's top looks like 興's own
+𦥑-shaped top (fixed from 臼 on 2026-09-20), so the working hypothesis going
+in was the same stale-臼 bug. KanjiVG disagreed — it explicitly labels 輿's
+top `臼` (not 𦥑) while independently confirming `𦥑` for 興 itself — so the
+two "two-hands-ish" tops are genuinely different shapes and 輿's existing
+row was already right. Recorded so the next session doesn't re-open it on
+the same resemblance.
+
+**One correction to yesterday's "sheik" chunk.** The pre-edit baseline run
+of `audit_overflatten.py` (checked per "verify before committing", before
+any of the above) was not clean — it flagged rtk2206 禽 (fowl), still
+`𠆢,亠,凶,禸` after yesterday, as carrying prim-sheik's own three parts
+spelled out flat. Yesterday's note had explicitly excluded 禽 from the
+sheik rewrite ("禽 has 凶+禸 under 今, not 离"). That call didn't survive a
+second look: cjkvi-ids gives the plain two-piece `⿱人离`, and KanjiVG's own
+labels agree exactly (人 top + 离 bottom). Rendered 禽 beside 人, 𠆢, 今 and
+离 directly — 禽's top is a plain crossing 人, visibly different from both
+𠆢's compact crown and 今's extra stroke, and its bottom matches standalone
+离 the same way 離/璃's already do. Fixed to `人,离` (13 strokes exact).
+Both independent sources disagreeing with yesterday's single-render call is
+exactly the "render again before trusting a verdict" pattern this audit
+keeps finding — recorded rather than silently overwritten.
+
+**Still deferred, sharper blocker than before:** rtk2852 梟 (owl). KanjiVG
+confirms the top is a `kvg:partial` 鳥 — 7 of its 11 strokes, missing
+exactly the bottom 灬 legs, matching the earlier render-only finding — plus
+木(4) = 11 exact. Still no registered "bird without legs" primitive to
+point the row at, and no CSV name to borrow one from (frame 2852, CSV
+empty). Needs a new primitive and a confident name — left for a session
+with room for that, now with an exact stroke count for whoever picks it up.
+
+**Checks (after all four fixes):**
+
+| Check | Before | After |
+|---|---|---|
+| `test_regression_fixes.py` | 1331/1331 | 1331/1331 (no pin referenced any of the four rows) |
+| `pytest` | 80 passed | 80 passed |
+| `audit_overflatten.py` | 1 (禽, pre-existing from yesterday) | 0 |
+| `audit_self_reference.py` | 0 | 0 |
+| `audit_radicals.py` | 0/0 | 0/0 |
+| `audit_phantom_parts.py --in-csv-range` | 10/9 | 10/9 (unaffected — all four fixes are outside CSV range) |
+| `audit_phantom_parts.py` (full) | 48/36 | 49/36 (expected — cjkvi's placeholder-heavy IDS for these hosts can't corroborate the now-more-accurate terms either; same blind-spot class as the rest of the backlog) |
+| `audit_primary_choice.py` | 0/62 | 0/62 |
+
+Frontend: `npm install`, `npm run lint` clean, `npm run build:prod` clean
+(3,231 SEO pages, same ballpark as recent chunks).
+
+Not deployed — no server access from this container. A deployer needs
+`git pull` + `./venv/bin/python3 sync_system_data.py` on prod to pick up
+rtk2206, rtk2270, rtk2620 and rtk2907's changed rows; no image regeneration
+needed (no new primitive registered, no `image_url` change).
+
+### Next
+
+1. rtk2852 梟 — needs a new "bird without legs" primitive (7 of 鳥's 11
+   strokes, confirmed via KanjiVG) and a confident name; no CSV name to
+   borrow since frame 2852 is past the CSV's range. Budget a session with
+   room to settle a name, not a quick pass.
+2. `audit_phantom_parts.py`'s weak section is now fully accounted for —
+   every remaining finding is a documented blind spot (listed above) except
+   梟. Next pass through this script should go back to full re-review
+   (`kanji_full_review.json`, already running daily via its own timer) or
+   `suggest_heisig_aliases.py --near 0.8 --all` (~236 names left, flat
+   tail, unchanged since chunk 111).
+3. KanjiVG (`raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/{codepoint}.svg`)
+   is now a usable third cross-check source alongside cjkvi-ids and
+   Heisig's CSV, particularly valuable for the empty-CSV / placeholder-IDS
+   cases that make up most of what's left in the phantom-parts backlog —
+   worth reaching for first on those rather than render-only guessing.
+4. `audit_weak_evidence.py`'s `heisig-atomic` category gating on `id_5th_ed`
+   1–2042 (chunk-112-era item) — still outstanding, not attempted again
+   today.

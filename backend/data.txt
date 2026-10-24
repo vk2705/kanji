@@ -2471,7 +2471,7 @@ rtk2202:柴:brush:木,此
 rtk2203:些:a little bit:二,此
 rtk2204:砦:fort:石,此
 rtk2205:髭:beard:此,髟
-rtk2206:禽:bird:𠆢,亠,凶,禸
+rtk2206:禽:bird:人,离
 rtk2207:檎:apple:木,禽
 rtk2208:憐:pity:舛,米,state of mind,夕
 rtk2209:燐:phosphorus:火,舛,米,夕
@@ -2535,7 +2535,7 @@ rtk2266:凪:lull:止,几
 rtk2267:夙:bright and early:几,歹
 rtk2268:鳳:male mythical bird:鳥,几
 rtk2269:剽:threat:票,刀
-rtk2270:劉:weapon of war:金,厶
+rtk2270:劉:weapon of war:卯,金,刀
 rtk2271:剃:shave:弟,刀
 rtk2272:厭:get tired of:月,犬,日,厂
 rtk2273:雁:wild goose:厂,隹
@@ -2897,7 +2897,7 @@ rtk2616:瑞:congratulations:王,山,而
 rtk2617:玖:beautiful black jewel:久,王
 rtk2618:瑛:sparkle of jewelry:ノ,王,艹,大,冖;王,英
 rtk2619:玲:sound of jewels:令,王;王,𠆢,卩,一
-rtk2620:畢:the end:｜,一,田
+rtk2620:畢:the end:田,廾,一,一,｜
 rtk2621:畦:rice paddy ridge:圭,田
 rtk2622:痒:itchy:羊,疔
 rtk2623:痰:sputum:火,疔;炎,疒
@@ -3217,7 +3217,7 @@ rtk2903:麿:i:麻,呂
 rtk2904:叢:plexus:耳,又,羊
 rtk2905:肴:accompaniment for drinks:㐅,有
 rtk2906:斐:beautiful:非,文
-rtk2907:卿:you:皀,卩
+rtk2907:卿:you:prim-receipt,皀,卩
 rtk2908:翫:take pleasure in:元,習
 rtk2909:於:at:方,𠆢
 rtk2910:套:accumulate:大,長,厶
@@ -5591,3 +5591,110 @@ prim-march-tick:戍:march:
 # the shared part of 離 (detach) and 璃 (crystal). No kanji frame of its own and
 # not a Kangxi radical, hence prim-. Renders in every installed CJK font.
 prim-sheik:离:sheik:亠,凶,禸
+
+# 2026-10-24: picked up the "Next" list's named-blocker items from
+# audit_phantom_parts.py's weak section (rtk2907 卿, rtk2620 畢, rtk2270 劉,
+# rtk2852 梟, plus the unexamined rtk2910 套, rtk2913 壷, rtk2235 兎, rtk2874
+# 輿). All eight have empty CSV components (every id_5th_ed is 2043+, outside
+# the atomicity-evidence range), so the Heisig channel is silent on every one
+# and cjkvi-ids hits an unencoded placeholder or a codepoint-variant mismatch
+# on most of them too -- exactly why they were stuck. New tool for this
+# session: KanjiVG's per-character stroke-group SVGs
+# (raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/{codepoint}.svg),
+# not used by this audit before. It gives an authoritative stroke-by-stroke
+# grouping independent of both cjkvi-ids and Heisig, and resolves several of
+# these cleanly where cjkvi-ids alone could not. Still rendered every verdict
+# with render_glyphs.py before trusting it, per the standing method -- KanjiVG
+# is a second source to cross-check against, not a replacement for looking.
+#
+# Three real fixes, each stroke-count-exact against the official count once
+# applied:
+# - rtk2270 劉 (weapon of war): was `金,厶` (厶 phantom, 卯 and 刀 missing
+#   entirely). KanjiVG's own grouping is 卯(variant,5 strokes) + 金(8) +
+#   刂(variant of 刀, 2) = 15, matching the official count exactly. Rendered
+#   劉 beside 卯, 金, 刀, 留 -- the top-left is unmistakably a compressed 卯
+#   (same shape as 留's own top and 卯 standalone), confirming this is the
+#   traditionally-taught 卯+金+刀 structure the previous session suspected
+#   but couldn't get cjkvi-ids (`⿰⿱⿰③刀金刂`) to confirm on its own.
+# - rtk2620 畢 (the end): was `｜,一,田` (undercounted by 4 strokes). KanjiVG
+#   gives 田(5) + an unlabelled bottom group that is itself 廾(3, s6-s8) + a
+#   second 一(s9) + a third 一(s10) + a long center 丨(s11, drawn through
+#   everything, matching the row's existing ｜). Rendered solo at large size:
+#   two straight parallel legs (not 共's flared 八) crossed by two separate
+#   bars, exactly 廾's shape plus one extra bar beyond what 廾 alone covers --
+#   matches the established 廾 convention already used in 刑/研/戒/弄/鼻/弁/葬/
+#   算. Fixed to `田,廾,一,一,｜` (duplicate 一 is an established pattern in
+#   this file already -- see 呂, 歌, 班, 鬱, 彗, 棘). 5+3+1+1+1=11, exact.
+# - rtk2907 卿 (you): was `皀,卩` -- identical to 即's own row, meaning the
+#   row only captured 卿's right half (即) and dropped the left entirely.
+#   KanjiVG's 卿 = [3-stroke left group] + 艮(7, labelled 皀 here per the
+#   即/既/郷 convention) + 卩(2) = 12, matching the official count. The
+#   3-stroke left group is exactly 𠂎 (prim-receipt)'s own stroke count (3,
+#   backed out from 卯 = prim-receipt + 卩 = 5 - 2): rendered 卿 beside 卯,
+#   即 and 貿 confirms the same left-side shape as 卯's and 貿's own
+#   prim-receipt. Fixed to `prim-receipt,皀,卩`. 3+7+2=12, exact.
+#
+# Four re-confirmed correct via the same KanjiVG cross-check, no edit --
+# each already a documented cjkvi-ids/codepoint-variant blind spot, now with
+# independent stroke-level confirmation the current row is actually right:
+# - rtk2874 輿 (palanquin): cjkvi's `⿶⿳𦥑一八車` looks like 興's own
+#   𦥑-shaped top (fixed from 臼 to 𦥑/prim-staples on 2026-09-20), so the
+#   working hypothesis going in was that 輿 had the same stale 臼 bug. It
+#   doesn't: KanjiVG explicitly labels 輿's top group `臼` (not 𦥑), three
+#   times over (the whole group plus both split halves), while 興's own
+#   KanjiVG file independently confirms `𦥑` for 興. The two "two-hands-ish"
+#   tops are not the same shape after all, whatever cjkvi-ids' shared `𦥑`
+#   reading suggests -- 輿's existing `臼,車,八` row already matches KanjiVG.
+#   Left alone; a close call worth recording so the next session doesn't
+#   re-open it on the same cjkvi-vs-興 resemblance.
+# - rtk2910 套 (hackneyed): cjkvi's `⿱大镸` (镸, the simplified "long"
+#   radical, not 長) raised the question of whether this row's `厶` was a
+#   stray extra stroke double-counting part of 長's own tail. KanjiVG says
+#   no -- `大,長,厶` is exactly its own three-element breakdown, 厶 genuinely
+#   present. Left alone.
+# - rtk2913 壷 (crock): cjkvi hits an unencoded placeholder (`⿱士⑧`).
+#   KanjiVG's own hierarchy is 士(top) + 冖 + 亜(itself 二,冖,口,二) -- and
+#   this project's own rtk1950 (亜) already decomposes as `｜,一,口` for
+#   exactly that lower shape. The current row (`｜,一,口,士,冖`) is that same
+#   breakdown spelled out flat instead of referencing 亜 by name. Not a
+#   phantom-part bug (every listed piece is genuinely in the glyph); left
+#   alone rather than churn the granularity on a row that already resolves
+#   correctly, which is outside what this audit was checking today.
+# - rtk2235 兎 (rabbit): cjkvi hits a placeholder (`⿱丿⿷⑤丶`). KanjiVG's
+#   full stroke breakdown (丿-labelled top group = 4 strokes, 儿 = the
+#   sweeping diagonal, an unlabelled right-side vertical/hook, 丶 = the dot)
+#   lines up with all four of the current row's parts (`ノ,丶,儿,｜`) one for
+#   one -- the unlabelled KanjiVG stroke is exactly where this row's `｜`
+#   sits. Left alone.
+#
+# One correction to yesterday's "sheik" chunk: while verifying the above eight,
+# audit_overflatten.py's baseline run (checked before any edit, per "verify
+# before committing") flagged rtk2206 禽 (fowl) as an unresolved finding from
+# that session -- `𠆢,亠,凶,禸`, with 亠,凶,禸 being exactly prim-sheik's own
+# three parts spelled out flat. Yesterday's note explicitly excluded 禽 from
+# the "sheik" rewrite ("禽 has 凶+禸 under 今, not 离"), but that call doesn't
+# survive a second look: cjkvi-ids gives 禽 as the plain two-piece `⿱人离`,
+# and KanjiVG's own element labels for 禽 independently agree exactly --
+# `人`(top) + `离`(bottom, itself further split into 亠/凶/禸, matching
+# prim-sheik's own breakdown stroke for stroke). Rendered 禽 beside 人, 𠆢
+# (the kneeling variant yesterday's note seems to have actually meant), 今
+# and 离 directly: 禽's top is a plain crossing 人, visibly wider and
+# differently-shaped than either 𠆢's compact crown or 今's extra under-stroke,
+# and 禽's bottom matches standalone 离 closely, the same shape already
+# confirmed against 離/璃. Fixed to `人,离` (13 strokes exact: 人 2 + 离 11).
+# Both independent sources agreeing against yesterday's single-render call is
+# exactly the "render again before trusting a verdict" case this audit's own
+# history keeps finding -- recorded here instead of silently overwriting
+# yesterday's entry so the reasoning for the reversal stays visible.
+#
+# Still deferred, now with a sharper blocker instead of a vaguer one:
+# - rtk2852 梟 (owl): confirmed via KanjiVG that the top is a `kvg:partial`
+#   鳥 (7 of 鳥's 11 strokes -- missing exactly the bottom 灬 legs, which
+#   matches the earlier render-only finding) + 木(4) = 11, exact. Still no
+#   registered "bird without legs" primitive anywhere in this file to point
+#   the row at, and Heisig's CSV is empty at this frame (2852), so there's
+#   no citable name to borrow the way "march" or "silver" could be reused
+#   for earlier two-glyphs-one-name cases. Needs a new primitive and a
+#   confident name for it -- left for a session with room for that, per the
+#   prior chunk's own conclusion, now backed by an exact stroke count for
+#   whoever picks it up.
