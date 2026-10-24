@@ -22856,3 +22856,98 @@ needed (no new primitive registered, no `image_url` change).
 4. `audit_weak_evidence.py`'s `heisig-atomic` category gating on `id_5th_ed`
    1–2042 (chunk-112-era item) — still outstanding, not attempted again
    today.
+
+## 2026-10-24 — full re-review: frames 802–851
+
+Daily `full_review.py -n 50` chunk (rtk802–rtk851), run by the unattended
+`kanji-worklist-review` timer. 47 keep, 3 fixed, 0 needs-render.
+`full_review.py --pending-count`: 2148 pending / 3000 total after this
+chunk.
+
+Baselines before any edit: `pytest -v` 105 passed, `regression_fresh.sh`
+1331/1331, `audit_radicals.py` 0 findings — all clean, so every row was
+genuinely reviewable.
+
+### Fixes
+
+- **rtk829 出 "exit"** — was `凵,屮` as primary. 出 is a core frame
+  (`id_5th_ed` 767, 1–2042 range), and its Heisig `components` column is
+  empty — per the standing rule, that is positive evidence of atomicity,
+  not absence of evidence. Checked all 34 core frames with an empty
+  components column (一 二 三 五 八 口 目 凹 凸 子 女 夕 水 火 牛 手 出 山 入
+  耳 米 竹 人 廿 弓 父 皿 門 並 井 冊 舟 牙 毛): 33 of 34 already have an
+  atomic primary row in `data.txt`; 出 was the lone exception (and 廿/rtk1274
+  is the other one, `凵,一` — outside this chunk's frame range, left for its
+  own turn, noted here as a shape-family follow-up). Demoted the existing
+  `凵,屮` decomposition — which is structurally real, matches cjkvi's
+  `⿱屮凵` and renders correctly — to a labelled `alternative`, the same
+  pattern already used for rtk2/rtk3 (二/三, decided in the 2026-10-21
+  session). Self-identity search still covers a bare "出" lookup; a
+  "container"+"sprout" parts search still finds it via the alternate.
+- **rtk837 密 "secrecy"** and **rtk838 蜜 "honey"** — both were
+  `必,山,丶,宀` / `必,虫,丶,宀`, carrying a stray extra `丶` alongside the
+  already-complete `必` primitive (必 itself is `ノ,心` per rtk685, so the
+  dot is already inside it). Stroke count only balances without the extra
+  dot: 密 = 宀(3)+必(5)+山(3) = 11 (its real count); with the stray `丶` it
+  overcounts to 12. Same for 蜜: 宀(3)+必(5)+虫(6) = 14, its real count.
+  Render confirmed no extra dot is visible beyond 必's own shape in either
+  character; cjkvi's `⿱宓山`/`⿱宓虫` (宓 = 宀+必) agree with the 3-part
+  reading. Fixed both to `必,山,宀` / `必,虫,宀`. This looks like a leftover
+  from before `必` had its own primitive row — the shape family search
+  (`必,` with a `丶` elsewhere in the same row) found exactly these two rows
+  and nothing else.
+
+### Notable keeps
+
+- **rtk820 棄 "abandon"** (`𠫓,丗,木`) — cjkvi's IDS uses an overlay operator
+  here (`⿱𠫓⿻廿木[GHT]`), which per the standing ⿻ caution is not literally
+  a parts list (木's trunk and 丗's vertical bar share a drawn stroke).
+  `audit_weak_evidence.py --host 棄` duly flags it under `not-a-parts-list`.
+  But Heisig's own fully-expanded components ("infant; toddler; top hat;
+  elbow; buckle; tree; wood") independently corroborate the same 3-way
+  split — "buckle" is `prim-thirty`'s (丗) own alias. Two independent
+  sources agreeing was enough to keep it as-is rather than treat the ⿻
+  warning as decisive on its own.
+- **rtk814 会 "meeting"** (`𠆢,云`) — cjkvi's IDS writes the top as `人`
+  (`⿱人云`), but the render clearly shows the narrow hito-yane roof shape
+  (𠆢), not full 人 with splayed legs; kept the existing 𠆢.
+- **rtk851 谷 "valley"** (`口,八,𠆢`) — cjkvi has no structural IDS for 谷 at
+  all (shown as atomic in its tables), but Heisig explicitly lists "eight;
+  umbrella; mouth" as its components, matching the existing row exactly.
+  cjkvi's silence here is a gap in its own data, not evidence against
+  Heisig's.
+
+### Side effect: unrelated sync backlog picked up
+
+`sync_system_data.py --dry-run` before applying my 3 fixes reported 6
+decompositions replaced, not the 2 expected from rtk837/838 (rtk829 is a
+create+remove pair). The other 4 — rtk2206 禽, rtk2270 劉, rtk2620 畢,
+rtk2907 卿 — were already-committed fixes from the 2026-10-23 session
+(`f598704`) that this machine's `kanji.db` hadn't been synced against yet
+(noted as pending in that session's own doc entry above). Applying the sync
+for my own fixes necessarily applied those too; nothing about their content
+was touched or re-reviewed here. The 286 `system ja-kanji ids exist live
+but not in source` warning is unrelated pre-existing drift (legacy
+`rad*.*`/`prim*` ids), unchanged by this run.
+
+### Checks
+
+- `pytest -v`: 105 passed (before and after).
+- `regression_fresh.sh`: 1331/1331 after updating the rtk837/rtk838 pins in
+  `test_regression_fixes.py` (`kangxi3` dropped from each `expected_part_ids`
+  set, with a comment explaining why) — the two pins existed to lock in the
+  exact bug this session fixed, so the failure on the first post-fix run was
+  expected, not a regression.
+- `audit_radicals.py`: 0 undefined part terms, before and after.
+- `sync_system_data.py` applied to this machine's `kanji.db` (backed up
+  first via `backup_db.py` and again automatically by `sync_system_data.py`
+  itself). **Not deployed** — no server access from this container. A
+  deployer needs `git pull` + `./venv/bin/python3 sync_system_data.py` on
+  prod to pick up rtk829/837/838 plus the carried-over rtk2206/2270/2620/2907
+  rows; no image regeneration needed.
+
+### Next
+
+- rtk1274 廿 (twenty) — same atomicity pattern as rtk829: core frame, empty
+  Heisig components, but primary is `凵,一` instead of atomic. Outside this
+  chunk's range; decide when frame 1274 comes up in its own turn.

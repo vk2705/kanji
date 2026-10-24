@@ -1266,8 +1266,10 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"kangxi64", "kangxi66", "rtk821"}},
     "rtk824": {"character": "銃", "keyword": "gun",
                 "expected_part_ids": {"rtk287", "rtk823"}},
+    # kangxi3 (丶) dropped 2026-10-24 full re-review: it duplicated a stroke
+    # already inside rtk685 (必=ノ,心); stroke count only totals 14 without it.
     "rtk838": {"character": "蜜", "keyword": "honey",
-                "expected_part_ids": {"kangxi3", "kangxi40", "rtk556", "rtk685"}},
+                "expected_part_ids": {"kangxi40", "rtk556", "rtk685"}},
     "rtk850": {"character": "訟", "keyword": "sue",
                 "expected_part_ids": {"rtk357", "rtk847"}},
     "rtk872": {"character": "殉", "keyword": "martyrdom",
@@ -2105,8 +2107,10 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk180", "rtk830"}},
     "rtk835": {"character": "峠", "keyword": "mountain pass",
                 "expected_part_ids": {"rtk50", "rtk51", "rtk830"}},
+    # kangxi3 (丶) dropped 2026-10-24 full re-review: it duplicated a stroke
+    # already inside rtk685 (必=ノ,心); stroke count only totals 11 without it.
     "rtk837": {"character": "密", "keyword": "secrecy",
-                "expected_part_ids": {"kangxi3", "kangxi40", "rtk685", "rtk830"}},
+                "expected_part_ids": {"kangxi40", "rtk685", "rtk830"}},
     "rtk848": {"character": "松", "keyword": "pine tree",
                 "expected_part_ids": {"rtk207", "rtk847"}},
     "rtk849": {"character": "翁", "keyword": "venerable old man",

@@ -1016,7 +1016,11 @@ rtk825:硫:sulphur:㐬,石
 rtk826:流:current:㐬,水
 rtk827:允:license:厶,儿
 rtk828:唆:tempt:口,夋
-rtk829:出:exit:凵,屮
+# Full re-review 2026-10-24: core frame (id_5th_ed 767), empty Heisig
+# components column -- positive evidence of atomicity per the 34-row pattern
+# (一 口 木 山 入 etc. are all atomic). 出 was the lone exception. Demoted the
+# structurally-accurate (cjkvi ⿱屮凵) 凵,屮 split to a labelled alternate.
+rtk829:出:exit:;凵,屮
 rtk830:山:mountain:
 rtk831:拙:bungling:出,扌
 rtk832:岩:boulder:山,石
@@ -1024,8 +1028,13 @@ rtk833:炭:charcoal:灰,山
 rtk834:岐:branch off:山,支
 rtk835:峠:mountain peak:山,上,下
 rtk836:崩:crumble:山,朋
-rtk837:密:secrecy:必,山,丶,宀
-rtk838:蜜:honey:必,虫,丶,宀
+# Full re-review 2026-10-24: dropped a stray 丶 that duplicated a stroke
+# already inside 必 (必=ノ,心, rtk685) -- stroke count only adds up (11)
+# without it: 宀(3)+必(5)+山(3)=11. Render confirms no extra dot.
+rtk837:密:secrecy:必,山,宀
+# Full re-review 2026-10-24: same stray-丶 bug as rtk837/密 (shape family via
+# 宓=宀+必). Stroke count only adds up (14) without it: 宀(3)+必(5)+虫(6)=14.
+rtk838:蜜:honey:必,虫,宀
 rtk839:嵐:storm:山,風
 rtk840:崎:promontory:奇,山
 rtk841:崖:cliff:山,厂,圭
