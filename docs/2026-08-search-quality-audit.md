@@ -22951,3 +22951,130 @@ but not in source` warning is unrelated pre-existing drift (legacy
 - rtk1274 廿 (twenty) — same atomicity pattern as rtk829: core frame, empty
   Heisig components, but primary is `凵,一` instead of atomic. Outside this
   chunk's range; decide when frame 1274 comes up in its own turn.
+
+## 2026-10-25 — hanzi worklist, chunk 2: 11 keep-ours, 4 needs-render, 5 real fixes (and a cross-check method worth reusing)
+
+Daily unattended run (`hanzi_worklist_next.py -n 20`), same cadence and
+method as chunk 1 (2026-09-30). No interrupted prior run (the documented
+uncommitted-decisions check printed `0`); `docs/hanzi_decomposition_worklist.json`
+showing modified at session start was the expected nightly-rebuild diff, not
+a sign of anything to investigate. Baseline: `pytest -v` 105 passed,
+`kanji.db` present. All 20 hosts rendered via `render_glyphs.py` (hosts plus
+every referenced cjkvi-ids component), per the standing render-it rule, plus
+closer zoomed crops (via the venv's Pillow, which chunk 1 didn't need) where
+a glyph's internal stroke count mattered — telling 目's two bars from 且's
+one, or 𠃊's wrapping hook from a flat 一, isn't reliable at the tool's
+default render size.
+
+**A method worth naming: cross-check against the glyph's own `rtk*` row,
+when one exists.** `grep ":<char>:" data.txt` before touching anything —
+roughly half of this worklist's hosts share a glyph with a Japanese kanji
+frame, and that row has usually already been through `full_review.py`'s
+frame-by-frame review or an earlier audit chunk, i.e. independently
+Heisig/render-verified. Where it existed, it settled every real fix below
+faster and with more confidence than rendering alone, and in two cases
+(竃, 竜) it turned out the Japanese row had *already* been fixed for this
+exact bug and the hanzi row simply never got the matching edit — the two
+worklists aren't synced with each other, so a fix on one side doesn't
+propagate to the other.
+
+**11 keep-ours** (発 盥 瞞 磘 禸 秉 秭 窰 笝 笫 簿): in each, the render shows
+the current parts already name what's drawn, at the right granularity.
+Three worth calling out: 禸's row (`冂,厶`) is also `kangxi114`'s own entry
+for the same glyph, as direct a cross-check as exists. 秉 (`禾,一`) renders
+as exactly 禾 plus one extra horizontal stroke through the top — cjkvi's
+`⿻禾⿻コ一` makes it look like a `コ` should be hiding in there, but nothing
+in the glyph needs a fourth stroke beyond what `禾,一` already draws — the
+`コ` is cjkvi's own schematic for 禾's existing top strokes, not a separate
+piece. 簿 (`竹,溥`) stops one level higher than cjkvi's full expansion
+(`氵,𤰔,丶,寸`) and higher than rtk1020's own `竹,水,尃` — rendered, 簿's
+lower portion is pixel-for-pixel 溥, a real character already in this
+database, so stopping there is the right depth per CLAUDE.md's
+over-flattening guidance, not an inconsistency with the Japanese row.
+
+**4 needs-render**, all genuine tofu confirmed with a large solo render per
+component (not assumed from a small default-size box): 盾's `𥃭`, 眘's
+`𡗜`, 砀's `𠃓` (all U+250ED/U+215DC/U+200D3 — none has an outline anywhere
+in this machine's font stack, confirmed with `fc-list`'s charset claim
+being present but the actual glyph drawing as an empty box in every face).
+穯 (`禾,土,吅,回`) is a different kind of uncertain: cjkvi wants five parts
+crammed under one compressed host glyph, and at the tool's rendering size
+the right-hand portion is indistinguishable from plain 回 — it may well be
+回 compressing visually over 土+吅 at this stroke density, or the render may
+be hiding real structure. `render_glyphs.py`'s own per-face identical-shape
+check did not flag 穯 against 回 as a substitution, which rules out a
+missing-outline font lie specifically, but doesn't resolve the compression
+question either way. Deferred rather than guessed.
+
+**5 real fixes, each cross-checked against a render and, where available,
+an already-reviewed `rtk*` row for the same glyph — applied directly to
+`kanji.db` (no `data.txt` line exists for hanzi rows):**
+
+- **hanzi-7690 皐 ("the high land along a river"), `白,𠦂` → `白,十,二`.**
+  `𠦂` (U+20982) is itself tofu on this machine, but the *host* 皐 renders
+  fine, and its lower portion is unambiguous at zoom: three horizontal
+  strokes with one vertical running through all of them — not an opaque
+  blob. `rtk2220` (皐, "lunar month") already reads `十,白,二`, an
+  independent Heisig-sourced confirmation of the same three-part reading.
+  Decomposition 12900, 3 parts.
+- **hanzi-76f4 直 ("straight, erect, vertical"), `十,且,一` → `十,目,𠃊`.**
+  Zoomed render shows the box has *two* internal
+  bars (目's structure, 3 cells), not one (且's structure, 2 cells) — and
+  the "extra" bottom stroke isn't a flat centered `一`, it's a single
+  continuous stroke that wraps from the box's left edge down and out to the
+  right, i.e. `𠃊` (fishhook), not `一`. `rtk77` (直, "straightaway") already
+  reads `十,目,𠃊` — exact match, and that data.txt line itself cites
+  Heisig's own components column ("ten; needle; eye; fishhook"). The old
+  hanzi row's `且`+`一` double-read a single wrapping stroke as two separate
+  flat ones. Decomposition 12995, 3 parts.
+- **hanzi-796d 祭 ("ritual"), `𠂊,冫,示` → `月,又,示`.** cjkvi's own reading
+  (`⿱⿰⿴𠂊冫②示`) has an unencoded `②` placeholder standing in for the
+  entire right-hand half of the glyph, and the old row simply dropped that
+  half rather than naming it — a missing part, not just a weak-evidence
+  one. Zoomed render of the top of 祭 shows the right side is unmistakably
+  又 (same flowing hand-stroke shape as standalone 又), and the left side is
+  the cursive three-stroke top-of-肉 form conventionally named 月 (flesh)
+  elsewhere in this project. `rtk1183` (祭, "ritual") already reads
+  `月,又,示`, sourced from Heisig's own "flesh, crotch, altar" gloss for
+  this exact frame. Decomposition 13618, 3 parts.
+- **hanzi-7ac3 竃 ("kitchen stove"), `穴,土,日,电` → `穴,土,亀`.** This is
+  the `⿻`-overlay-misread bug CLAUDE.md names for 蝿, caught on 縄 in the
+  2026-10-01 chunk, and already fixed on this exact glyph's own `rtk2662`
+  row on 2026-10-23 (`穴,土,田,亀` → `穴,土,亀`, "the bottom of 竃 is
+  pixel-for-pixel 亀's own shape, no independent boxed 田 anywhere in it") —
+  that 2026-10-23 entry's own text assumed the fix already covered 竃
+  generally and only checked git history on the `data.txt` line, not this
+  database's separate hanzi row, which still had the old reading include a
+  redundant `日,电` pair where `rtk2662` has plain `亀`. Confirmed by direct
+  render (竃's bottom matches 亀, not a free-standing `田`) before applying.
+  Decomposition 13948, 3 parts. `get_kanji_detail` shows 亀's own existing
+  sub-decomposition (`𠂊,日,电`) nested correctly underneath it — unrelated
+  to this fix, just confirmation the new row still resolves cleanly.
+- **hanzi-7adc 竜 ("dragon"), `立,日,乚` → `立,电`.** Same bug, same family
+  as 竃 immediately above: cjkvi's `⿱立⿻日乚` overlay was read as two flat
+  siblings, but rendered, 竜's bottom is pixel-for-pixel 电 (which itself
+  already decomposes to `日,乚` one level down — visible in
+  `get_kanji_detail`'s nested `sub_decompositions`, so nothing is lost, just
+  moved down a level). `rtk575` (竜, "dragon") already reads `立,电` —
+  direct match. Decomposition 13973, 2 parts.
+
+### Checks
+
+- Backed up `kanji.db` first (`backup_db.py` →
+  `backups/kanji-20261025-102036.db`).
+- `pytest -v`: 105 passed, before and after — unaffected by direct
+  `parts`/`decompositions` edits outside the test DB fixtures.
+- Verified each of the 5 fixes via `get_kanji_detail` post-edit: all
+  resolve cleanly, including 电's nested `日,乚` sub-decomposition showing
+  correctly under 竜.
+- 153 → 133 pending (`hanzi_worklist_next.py --pending-count`).
+
+### Next
+
+- The "check for a same-glyph `rtk*` row first" method above is worth
+  making systematic rather than ad hoc — roughly a quarter of today's
+  pending backlog likely has one, going by today's hit rate (5 of 20 hosts
+  had a usable counterpart).
+- 穯 (hanzi-7a6f) needs either a higher-resolution render or a second
+  font/renderer to settle whether `吅`/`土` are really compressed into what
+  reads as `回` at normal size, or whether the row is missing two parts.
