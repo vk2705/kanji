@@ -22951,3 +22951,113 @@ but not in source` warning is unrelated pre-existing drift (legacy
 - rtk1274 廿 (twenty) — same atomicity pattern as rtk829: core frame, empty
   Heisig components, but primary is `凵,一` instead of atomic. Outside this
   chunk's range; decide when frame 1274 comes up in its own turn.
+
+## 2026-10-25 — rtk2852 梟 (owl): new "legless bird" primitive, hand-cropped image
+
+Picked up the one sharp, named blocker left open by the 2026-10-23 session: rtk2852
+梟 was `鳥,木` (15 strokes against official 11), already confirmed via KanjiVG as a
+`kvg:partial` 鳥 — 7 of its 11 strokes, missing exactly the bottom 灬 legs — sitting
+on 木, with no registered "bird without legs" primitive anywhere in `data.txt` to
+point the row at and no CSV name to borrow (frame 2852 is past the CSV's range).
+Left explicitly for "a session with room" to settle a name. The daily full-review
+timer (`kanji-worklist-review`) already covers the frame-ordered re-review
+(frames 802-851 landed yesterday), so today's chunk deliberately stayed off that
+queue and took this instead, plus `suggest_heisig_aliases.py --near 0.8 --all`
+checked and still reporting 0 actionable groups (see below) — a real one-item
+chunk, per the standing "bounded, not the whole database" brief.
+
+**The fix.** Rendered 梟 beside 鳥 and 木 (`render_glyphs.py`): confirmed the top of
+梟 is 鳥's own head/body/box strokes with no 灬 legs, resting directly on 木 — an owl
+in a tree, legs hidden by the branch. No existing primitive in this project's
+`data.txt` represents this shape (checked: 鳥's own row is itself only `灬`, i.e.
+the "body" of the bird has never been named as anything other than the whole
+character, confirmed by grep). Registered a new glyph-less primitive,
+`prim-legless-bird` (character `?`, keyword "legless bird" — same naming pattern
+already used for kangxi153's "legless insect" alias on 豸), and changed rtk2852 to
+`prim-legless-bird,木`.
+
+**The image.** Same method `prim-tall.png` used on 2026-10-23 for an equally
+codepoint-less partial shape: render a real host at the one-em canvas
+`make_primitive_images.py` uses (Mincho, `--kanji-color`, 256×256), then make
+everything below the right row transparent, keeping the full 256×256 canvas so the
+visible shape sits at the top of its box exactly like a real partial glyph would.
+One deliberate difference from the `prim-tall` precedent: cropped from a render of
+**梟 itself**, not standalone 鳥. Standalone 鳥's own hook stroke (the bottom-right
+sweep) draws much lower to make room for the four legs that follow it — row-by-row
+ink analysis on the standalone render showed that hook still going at a width ≈18px
+as late as row 229 of 256, well past where the legs' own ink starts (~row 187) —
+so a height-only crop of standalone 鳥 would either clip the hook mid-stroke or let
+leg ink through. 梟's own KanjiVG data confirms why: its `kvg:partial` 鳥 occupies
+roughly the top 60% of the character, compressed and compactly drawn to make room
+for 木 below, with no elongated tail sweep. Rendering 梟 directly and cropping at
+the row where 木's crossbar begins (found the same way — row-by-row ink-run
+analysis, picking the plateau between the completed hook and the first sign of 木's
+own strokes) gave a clean, complete "legless bird" shape with no guesswork about
+where the standalone character's proportions would need to be rescaled. Verified
+the output PNG matches `prim-tall.png`'s format exactly (256×256, 8-bit RGBA, PNG
+color type 6) before committing it.
+
+Added a `test_regression_fixes.py` pin (`rtk2852` → `{prim-legless-bird, rtk207}`)
+since the row had none before — nothing to correct, a new entry. Documented both
+images' hand-cropped-not-generated status together in
+`make_primitive_images.py`'s own docstring (previously only mentioned `prim-tall`).
+
+**Checked against `audit_phantom_parts.py` before committing**, not just after: the
+fix is a lateral move on that audit's own terms, not a regression. Before the fix,
+rtk2852 was already in the full scan's weak-evidence section (`鳥 -> rtk2091`
+flagged as unreachable, because cjkvi's own IDS for 梟 uses a `⑦` placeholder for
+the reduced bird shape, not a literal 鳥). After the fix it's still there, now
+reading `prim-legless-bird (?) -> prim-legless-bird` — flagged for the same reason
+every other glyph-less primitive in this project is (prim-mirrored-spoon,
+prim-tall, prim-schoolhouse already carry the identical "(?)" weak-evidence entry)
+— cjkvi structurally cannot corroborate a primitive with no codepoint, whether the
+row is right or wrong. Confirmed by temporarily stashing the fix and re-running the
+full scan: 49/36 both before and after, net zero change, same blind-spot class as
+the rest of the backlog. `--in-csv-range` is unaffected either way (rtk2852 is
+outside CSV range).
+
+**`suggest_heisig_aliases.py --near 0.8 --all` re-checked, still 0 actionable
+groups** (both the default run and `--near 0.8 --all`) — matches the 2026-10-20
+session's conclusion that this script is exhausted at its own reliability floor;
+not re-attempted further today.
+
+### Checks
+
+| Check | Before | After |
+|---|---|---|
+| `test_regression_fixes.py` | 1331/1331 | 1332/1332 (new rtk2852 pin added, nothing corrected) |
+| `pytest` | 80 passed | 80 passed |
+| `audit_overflatten.py` | 0 | 0 |
+| `audit_self_reference.py` | 0 | 0 |
+| `audit_radicals.py` | 0/0 | 0/0 |
+| `audit_phantom_parts.py --in-csv-range` | 10/9 | 10/9 (unaffected — rtk2852 is outside CSV range) |
+| `audit_phantom_parts.py` (full) | 49/36 | 49/36 (net zero — see above, a lateral move on this audit's own terms) |
+| `audit_primary_choice.py` | 0/62 | 0/62 |
+
+Frontend: `npm install`, `npm run lint` clean, `npm run build:prod` clean (3,232 SEO
+pages, same ballpark as recent chunks).
+
+Not deployed — no server access from this container. A deployer needs `git pull` +
+`./venv/bin/python3 sync_system_data.py` on prod to pick up rtk2852's changed row,
+**plus `git pull` alone is not enough for the image** — `primitive_images/` is
+committed and served statically, so the new `prim-legless-bird.png` file just needs
+to exist in the checked-out tree; no regeneration step, since
+`make_primitive_images.py` deliberately skips both hand-cropped images on every
+run.
+
+### Next
+
+1. `audit_phantom_parts.py`'s weak section: rtk2907 卿 (left-side `𠂎` gap, middle
+   `⑤` unidentified), rtk2620 畢 (bottom-leg shape needs a name), rtk2270 劉
+   (doesn't parse into the usual 卯+金+刀 structure, needs render iteration), plus
+   rtk2910 套, rtk2913 壷, rtk2930 疏, rtk2235 兎 — still not reached. rtk2852 is now
+   closed; this was the last of that chunk's explicitly-named items.
+2. `suggest_heisig_aliases.py --near 0.8 --all` — confirmed again today at 0
+   actionable groups. Not worth another pass without new input (e.g. a fresh CSV
+   diff or a newly-registered primitive changing a host set) to re-seed it.
+3. The full-review daily timer (`kanji-worklist-review`) continues independently;
+   nothing in today's chunk overlapped its frame range (802–851 already done
+   yesterday) or needs coordination with it.
+4. `audit_weak_evidence.py`'s `heisig-atomic` category gating on `id_5th_ed`
+   1–2042 — still outstanding, not attempted again today (carried from
+   2026-10-23/24).
