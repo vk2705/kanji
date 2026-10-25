@@ -23188,3 +23188,66 @@ run.
 4. `audit_weak_evidence.py`'s `heisig-atomic` category gating on `id_5th_ed`
    1–2042 — still outstanding, not attempted again today (carried from
    2026-10-23/24).
+
+## 2026-10-25 — full re-review: frames 852–901
+
+Daily unattended chunk (`full_review.py -n 50`). Pre-flight: no uncommitted
+`data.txt`/`kanji_full_review.json` found (no prior run died midway), `git
+pull --no-rebase origin master` already up to date, `kanji.db` present,
+baseline `pytest -q` 105 passed, baseline `./regression_fresh.sh` 1332/1332,
+baseline `audit_radicals.py` 0 undefined terms.
+
+**48 keep, 2 fixed, 0 needs-render.** `--pending-count`: 2098/3000 (was
+2148).
+
+### Fixes
+
+- **rtk875 列 (file)**: dropped a stray orphaned alternate decomposition,
+  `;歹` alone. Traced via `git log -S` to commit `d8fd894` (2026-09-16,
+  "the right decomposition was in the second slot for 76 kanji"), which
+  swapped `歹;刀,歹` → `刀,歹;歹` to fix which slot was primary, but never
+  removed the now-pointless leftover single-part alt it created. 列 cannot
+  be "just bones" — that drops the sword/刂 half entirely, which no source
+  supports (cjkvi `⿰歹刂`, Heisig "bones...sword"). Primary content (`刀,歹`)
+  was already correct and is unchanged. Checked every other `歹`-family row
+  in this chunk (871–874, 876–879) for the same leftover-alt pattern via
+  direct grep of each line; none found.
+- **rtk884 最 (utmost)**: was `一,取,日` primary / `取,日` alt. Rendered 最
+  beside 日, 冃, 量, 冒 (already-registered hosts sharing the same top), and
+  早/旦/是 (plain-日-top hosts) side by side (`render_glyphs.py`). 最's top is
+  the fused two-pronged 冃 shape — identical in silhouette to 量/冒's tops —
+  not an independent `一` stroke sitting over a plain flat-topped 日 the way
+  更/曹/晋/旦 genuinely draw it (those four were swept as the shape-family
+  check, each confirmed to carry a real separate `一`, none touched). Heisig's
+  own CSV components column for this frame says only "sun; day; take; ear;
+  crotch" — no "one" — matching cjkvi's Japan-grouped `⿱日取`. The row's own
+  existing alternate (`取,日`) already had the right content; promoted it to
+  primary and dropped the wrong one, leaving a single correct decomposition.
+  Also checked `rtk189` 量 ("旦,里") while here, since it shares 最's exact
+  top shape: Heisig's own CSV names "nightbreak" (the book's keyword for 旦
+  itself, rtk30) as 量's top-level primitive, explicitly, so 量's row already
+  matches what Heisig teaches and needed no change — left untouched (frame
+  189 is also well outside today's 852–901 range regardless).
+
+### Checks
+
+- Pre-fix: `pytest -q` 105 passed; `./regression_fresh.sh` 1332/1332;
+  `audit_radicals.py` 0 undefined terms.
+- `sync_system_data.py --dry-run` then applied for real (auto-backed up
+  `kanji.db` first): `decompositions: 0 created, 2 replaced, 2 removed (now
+  atomic)` — exactly the two rows touched. (Dry-run also showed 1 pre-existing
+  unrelated kanji insert and 2 pre-existing unrelated alias adds, and the
+  long-standing "286 system ids live but not in source" warning — all
+  pre-existing drift from other sessions, not caused by this chunk's edits.)
+- Post-fix: `pytest -q` 105 passed. `./regression_fresh.sh` initially failed
+  one pin — `rtk884` expected `{rtk1, rtk12, rtk882}` (i.e. still expected
+  一) — updated in place to `{rtk12, rtk882}` with a comment explaining the
+  fix, then 1332/1332 passed. `audit_radicals.py` 0 undefined terms,
+  unchanged.
+
+### Notes for whoever reviews frame 189 (量) next, or deploys this
+
+No production deploy from here. A deployer needs `git pull` then
+`sync_system_data.py` on prod to pick up rtk875/rtk884.
+
+`full_review.py --pending-count`: 2098/3000.

@@ -1071,7 +1071,14 @@ rtk871:残:remainder:㦮,歹
 rtk872:殉:martyrdom:旬,歹
 rtk873:殊:particularly:歹,朱
 rtk874:殖:augment:歹,直
-rtk875:列:file:刀,歹;歹
+# 2026-10-25: dropped a stray alternate decomposition, "歹" alone -- a
+# leftover from a 2026-09-16 commit (d8fd894) that swapped primary/alt
+# slots (was "歹;刀,歹", became "刀,歹;歹") but never cleaned up the orphaned
+# single-part alt it left behind. 列 cannot be "just bones" -- it drops the
+# sword/knife entirely, which no source (cjkvi ⿰歹刂, Heisig "bones...sword")
+# supports as a second reading. Primary unchanged, verified against cjkvi
+# and Heisig's own components column during the frame-875 full re-review.
+rtk875:列:file:刀,歹
 rtk876:裂:split:列,衣
 rtk877:烈:ardent:列,灬
 rtk878:死:death:匕,歹
@@ -1080,7 +1087,16 @@ rtk880:瞬:wink:目,爪,冖,舛
 rtk881:耳:ear:
 rtk882:取:take:耳,又
 rtk883:趣:purport:取,走
-rtk884:最:utmost:一,取,日;取,日
+# 2026-10-25: dropped the spurious leading "一" from the primary (was
+# "一,取,日;取,日"). Rendered 最 beside 日/冃/量/冒/早/旦/是: 最's top is the
+# fused two-pronged 冃 shape (same as 量/冒), not a separate "一" stroke above
+# a plain 日 -- unlike 更/曹/晋/旦, which really do carry an independent 一
+# (checked as a shape-family sweep over every other "一,...,日"/"日,...,一"
+# row and found no other host with this mistake). Heisig's own components
+# column for this frame says only "sun; day; take; ear; crotch" -- no "one"
+# -- matching cjkvi's Japan-grouped ⿱日取. The old alt already had the
+# right answer; promoted it to primary and dropped the wrong one.
+rtk884:最:utmost:日,取
 rtk885:撮:snapshot:扌,最
 rtk886:恥:shame:耳,心
 rtk887:職:post:戠,耳

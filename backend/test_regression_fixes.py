@@ -2128,8 +2128,11 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk137", "rtk853"}},
     "rtk883": {"character": "趣", "keyword": "gist",
                 "expected_part_ids": {"rtk410", "rtk882"}},
+    # 2026-10-25 full re-review: dropped rtk1 (一) -- 最's top is the fused
+    # 冃 shape (same as 量/冒), not a separate "one" stroke over 日; Heisig's
+    # own components column for this frame says only "sun; day" (no "one").
     "rtk884": {"character": "最", "keyword": "utmost",
-                "expected_part_ids": {"rtk1", "rtk12", "rtk882"}},
+                "expected_part_ids": {"rtk12", "rtk882"}},
     "rtk885": {"character": "撮", "keyword": "snapshot",
                 "expected_part_ids": {"kangxi64", "rtk884"}},
     "rtk892": {"character": "慢", "keyword": "ridicule",
