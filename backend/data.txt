@@ -3151,7 +3151,14 @@ rtk2848:鷺:heron:路,鳥
 rtk2849:鷲:eagle:就,鳥
 rtk2850:鴨:wild duck:｜,鳥,日,田;甲,鳥
 rtk2851:鳶:black kite:鳥,弋
-rtk2852:梟:owl:鳥,木
+# 2026-10-25: was 鳥,木 (15 strokes against official 11). KanjiVG confirms the
+# top is a `kvg:partial` 鳥 -- 7 of its 11 strokes, missing exactly the bottom
+# 灬 legs -- sitting directly on 木 (an owl in a tree, legs implied by the
+# branch); 7+4=11, exact. No codepoint exists for "鳥 minus legs" and no CSV
+# name to borrow (frame 2852 is past the CSV's range). Registered
+# prim-legless-bird below, same pattern as prim-tall: glyph-less (character
+# "?"), a hand-cropped image rather than a lookalike codepoint substitution.
+rtk2852:梟:owl:prim-legless-bird,木
 rtk2853:塵:dust:鹿,土
 rtk2854:麒:chinese unicorn:其,鹿
 rtk2855:舅:father-in-law:男,臼
@@ -5600,6 +5607,23 @@ prim-march-tick:戍:march:
 # the shared part of 離 (detach) and 璃 (crystal). No kanji frame of its own and
 # not a Kangxi radical, hence prim-. Renders in every installed CJK font.
 prim-sheik:离:sheik:亠,凶,禸
+
+# 2026-10-25: "legless bird" -- 鳥 (bird) with its bottom 灬 (the four legs)
+# cut off, the top of rtk2852 梟 (owl) sitting on 木. No Unicode codepoint
+# draws this partial shape on its own (KanjiVG's own 梟 data tags it
+# `kvg:partial` 鳥 rather than a named component), so -- per the standing
+# "never substitute a lookalike from a well-supported block" rule -- it gets
+# `?` for its character and a hand-cropped image instead of a borrowed
+# codepoint. Same method as prim-tall (2026-10-23): rendered from a real host
+# (梟 itself here, not standalone 鳥, since standalone 鳥's own hook stroke
+# sweeps much lower to make room for the legs that aren't present in 梟's
+# compressed top half -- cropping standalone 鳥 at the matching row would
+# have clipped the hook mid-stroke) in Mincho at the one-em canvas
+# make_primitive_images.py uses, with everything below the row where 木's
+# crossbar starts made transparent, same colour, same 256x256 canvas so it
+# sits in its box exactly like any other glyph chip. Named on the same
+# "legless insect" pattern already used for kangxi153 (豸).
+prim-legless-bird:?:legless bird
 
 # 2026-10-24: picked up the "Next" list's named-blocker items from
 # audit_phantom_parts.py's weak section (rtk2907 卿, rtk2620 畢, rtk2270 劉,

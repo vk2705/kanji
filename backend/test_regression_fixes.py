@@ -1149,6 +1149,15 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"prim-pipe", "rtk12", "rtk14", "rtk2091"}},
     "rtk2851": {"character": "鳶", "keyword": "black kite",
                 "expected_part_ids": {"kangxi56", "rtk2091"}},
+    # Corrected 2026-10-25: was rtk2091(鳥)+rtk207(木), 15 strokes against the
+    # official 11. KanjiVG confirms 梟's top is a `kvg:partial` 鳥 -- 7 of
+    # 鳥's 11 strokes, missing exactly the bottom 灬 legs -- not the full
+    # bird; 7+4(木)=11, exact. No codepoint exists for "鳥 minus legs", so a
+    # new glyph-less primitive (prim-legless-bird, hand-cropped image, same
+    # pattern as prim-tall) was registered rather than substituting a
+    # lookalike codepoint.
+    "rtk2852": {"character": "梟", "keyword": "owl",
+                "expected_part_ids": {"prim-legless-bird", "rtk207"}},
     "rtk2982": {"character": "嶋", "keyword": "island (alternate)",
                 "expected_part_ids": {"rtk2091", "rtk830"}},
     "rtk310": {"character": "煎", "keyword": "roast",

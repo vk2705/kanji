@@ -45,11 +45,18 @@ quietly produces Chinese-variant shapes. Requires the same headless Chromium
     ./venv/bin/python3 make_primitive_images.py --dry-run   # list what needs one
     ./venv/bin/python3 make_primitive_images.py             # (re)render them all
 
-One picture is NOT produced here: `prim-tall.png` ("tall", the 亠-over-口 top
-of 高 京 亭 享 豪) has no codepoint at all -- cjkvi only ever composes it -- so it
-was cropped by hand (2026-10-23) from this script's own render of 京 (same font,
-colour and one-em canvas) down to the bottom bar of 口. Re-running this script
-leaves it alone, since the row's character is "?" and is never a target.
+Two pictures are NOT produced here, both for the same reason: no codepoint
+exists for the shape at all, so there is nothing for `render_one()` to draw.
+`prim-tall.png` ("tall", the 亠-over-口 top of 高 京 亭 享 豪) was cropped by
+hand (2026-10-23) from this script's own render of 京 (same font, colour and
+one-em canvas) down to the bottom bar of 口. `prim-legless-bird.png`
+("legless bird", 鳥 with its bottom 灬 legs removed, the top of 梟) was
+cropped by hand (2026-10-25) the same way, from a render of 梟 itself rather
+than standalone 鳥 -- standalone 鳥's hook stroke sweeps lower to make room
+for legs that 梟's compressed top half doesn't draw, so cropping standalone
+鳥 at the matching row would have clipped the hook mid-stroke. Re-running
+this script leaves both alone, since both rows' character is "?" and is
+never a target.
 
 The DB side is separate and automatic: `database.py::import_data()` points a
 system row's `image_url` at `/primitive-images/{id}.png` when the file exists,
