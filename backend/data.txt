@@ -1495,7 +1495,35 @@ rtk1270:借:borrow:亻,昔
 rtk1271:惜:pity:昔,忄
 rtk1272:措:set aside:昔,扌
 rtk1273:散:scatter:龷,月,攵
-rtk1274:廿:twenty:凵,一
+# 2026-10-28: primary made atomic (was "凵,一"), structure demoted to a
+# labelled alternate -- the rtk1967/冊 precedent, not a straight revert.
+# CSV's own column for frame 1190 (id_5th_ed) is empty, which is positive
+# atomicity evidence per CLAUDE.md's rule (this frame is inside the core
+# 1-2042 range the rule applies to), and cjkvi-ids independently treats 廿
+# as fully atomic too -- its own IDS entry maps to itself with no candidate
+# decomposition at all, not even an overlay-operator one (unlike 冊, whose
+# cjkvi entry at least offers "⿻冂卄" -- an overlay, so not a literal parts
+# list either, but a source cjkvi does speak on). Shape-family check: rtk28
+# 世 ("廿,一") and rtk1275/1277/1278 庶/席/度 (already "...,廿,...") all
+# already treat 廿 as a single search unit elsewhere in this project --
+# rtk1274's own row was the only one still spelling it out, and depth>1
+# search through it would have reached "container"/"one" from every one of
+# those hosts too, which nothing here actually supports.
+# Render (zoomed, not the size this tool's default row renders at) does
+# genuinely show two verticals joined by a bottom bar -- a real 凵 shape --
+# crossed by a second, separately-drawn horizontal that protrudes past both
+# verticals near the top, i.e. a plausible 凵+一 reading, just not one any
+# source actually backs. Kept as a labelled alternate rather than deleted
+# outright, same as 冊's "冂,艹" alternate: a visually-motivated mnemonic
+# reading parked below an atomic primary, not thrown away for being
+# source-unconfirmed. (The previous primary's own pin comment claimed this
+# same render finding; the row was already right about the shape, only
+# wrong about which slot -- primary vs. alternate -- it belonged in.)
+# Surfaced by fixing audit_weak_evidence.py's heisig-atomic check to gate
+# on id_5th_ed 1-2042 (previously ungated, so it also misread hundreds of
+# frames outside that range as atomicity evidence -- see CLAUDE.md and the
+# audit log for why those are just missing data, not evidence).
+rtk1274:廿:twenty:;凵,一
 rtk1275:庶:commoner:广,廿,灬;广,灬
 rtk1276:遮:intercept:庶,辶
 rtk1277:席:seat:巾,广,廿

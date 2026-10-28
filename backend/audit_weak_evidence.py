@@ -29,11 +29,22 @@ shape** — a render of the lone codepoint is a Unicode table with extra steps.
 
 ## What it reports
 
-**`heisig-atomic`** (128 rows) — this file decomposes a row whose CSV components column is
+**`heisig-atomic`** — this file decomposes a row whose CSV components column is
 empty *and* whose character is used as a named whole somewhere else in the CSV.
 Heisig teaches these whole. Splitting them is not automatically wrong (cjkvi may
 have real structure, and it can live in the labelled alternate) but the primary
 should be his reading, which is no reading.
+
+Gated on `id_5th_ed` 1-2042 (added 2026-10-28, closing a gap flagged since
+2026-10-23): an empty column is positive atomicity evidence only for the core
+5th-edition frames. Past that range — `id_5th_ed` 2043-2999 (827 of 957 rows
+empty) and every frame added at 3000+ for the 2010 jōyō revision (嗅 喩 楷 鬱
+…, all empty) — the CSV just has no data for that frame (see CLAUDE.md's 鬱
+entry and the `audit_phantom_parts.py --in-csv-range` cutoff this mirrors).
+Before this fix, `heisig_columns()` read every empty-components glyph as
+atomicity evidence regardless of frame, so hosts like 兎 (rtk2235, `id_5th_ed`
+blank — added in the 6th edition) and 梟 (rtk2852, same) were flagged on noise,
+not evidence, exactly as chunk 113 (2026-10-23) found by hand for those two.
 
 **`not-a-parts-list`** (177 rows) — the host's cjkvi entry, or that of a child
 it has no row for, uses ⿻ or ⿴. ⿻ overlays two shapes so they share strokes;
@@ -92,16 +103,26 @@ from audit_overflatten import IDS_OPS, _raw_ids
 # field means, and are not reported at all.
 OVERLAY_OPS = "⿻⿴"
 
+# id_5th_ed range Heisig's 5th edition actually covers. An empty `components`
+# column is positive atomicity evidence only inside this range -- outside it,
+# the CSV simply has no data for that frame (see CLAUDE.md's "鬱: the second
+# tree; empty Heisig column ≠ atomic outside the core frames", 2026-10-23).
+CORE_FRAME_RANGE = range(1, 2043)
+
 
 def heisig_columns(path=CSV_PATH):
-    """(glyphs whose own components column is empty, names the CSV ever emits)."""
+    """(glyphs whose own components column is empty within the core 5th-edition
+    frame range (id_5th_ed 1-2042), names the CSV ever emits anywhere)."""
     empty, named = set(), set()
     with open(path, encoding="utf-8") as fh:
         for row in csv.DictReader(fh):
             glyph = (row.get("kanji") or "").strip()
             names = {n.strip().lower() for n in (row.get("components") or "").split(";") if n.strip()}
             named |= names
-            if glyph and not names:
+            if not glyph or names:
+                continue
+            frame = (row.get("id_5th_ed") or "").strip()
+            if frame.isdigit() and int(frame) in CORE_FRAME_RANGE:
                 empty.add(glyph)
     return empty, named
 

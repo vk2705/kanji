@@ -23322,3 +23322,133 @@ unaffected) both before and after.
 133 → 113 pending after this chunk (`hanzi_worklist_next.py --pending-count`).
 
 `full_review.py --pending-count`: 2098/3000.
+
+## 2026-10-28 — `audit_weak_evidence.py`'s `heisig-atomic` gating fixed; 廿 (rtk1274) made atomic
+
+Daily firing. Step 0 first: container had the repo but detached `HEAD` one commit
+behind nothing (local `HEAD` and `origin/master` were identical, just not on a
+branch) — `git checkout master` put it on the branch cleanly, no merge needed.
+`git push --dry-run origin master` reported "Everything up-to-date", which isn't
+a real auth check with nothing to push, so pushed a throwaway branch
+(`_push-access-check-<timestamp>`) and confirmed the create succeeded before doing
+any audit work, per this session's own step-0 mandate. (Its delete was blocked by
+this sandbox's own command classifier as an "unverifiable deletion scope" — a
+stray empty branch on origin, harmless, left for a future session or the owner to
+remove.) No entries exist for 2026-10-26 or 2026-10-27 — neither this routine nor
+the separate `kanji-worklist-review` timer advanced in that window
+(`full_review.py --pending-count` is still 2098/3000, unchanged from the last
+2026-10-25 entry) — consistent with the same "container came up without the repo"
+failure mode this session's own brief was written to catch. Not investigated
+further (no access to whatever infrastructure schedules these firings); noting it
+here so a human knows there's a two-day gap, not silent skipped work.
+
+Rebuilt `venv/` (fresh container, as usual), `apt-get install fonts-noto-cjk
+fonts-hanazono`, curled `ids.txt` (88,939 lines) to `/tmp/ids.txt`. One addition
+to the usual setup: `render_glyphs.py`'s hardcoded `CHROME_CANDIDATES` didn't
+match this container's Playwright cache layout (`chromium-1243/chrome-linux64/chrome`,
+not `chromium/chrome-linux/chrome`) — worked around with a `/usr/local/bin/chromium`
+symlink (its `shutil.which` fallback) rather than editing the script, since the
+path is this-container-specific and the script already documents that candidate
+list as liable to drift.
+
+**Checked the three named items in this session's own brief first — all closed:**
+- `kangxi58` — already `彐` (`data.txt:3785`), confirmed closed since chunk 6
+  (2026-09-18). The task brief's own text is stale on this point, as at least five
+  prior sessions have already noted; not re-opened.
+- `audit_phantom_parts.py` (full) — 49 findings across 36 kanji, every single one
+  cross-checked by name against the log's documented blind-spot list (codepoint
+  variants, ⿻-overlay misreads already fixed, glyph-less primitives that can't be
+  corroborated by construction, opaque-intermediate placeholders). All 49 matched
+  an existing dated entry. Nothing new to act on.
+- `suggest_heisig_aliases.py --near 0.8 --all` — 0 actionable groups, same as every
+  check since chunk 111.
+
+**The real work: a four-session-old tooling gap.** `audit_weak_evidence.py`'s
+`heisig-atomic` section has been flagged as checking the wrong thing since chunk
+113 (2026-10-23) — `heisig_columns()` read *any* empty-components glyph as
+atomicity evidence, with no `id_5th_ed` gate, even though CLAUDE.md's own rule
+(landed the same day by the parallel full-review session's 鬱 entry) says that
+only holds for `id_5th_ed` 1-2042; outside it, empty just means missing data (827
+of 957 empty for 2043-2999, all 31 of the 2010 jōyō additions at 3000+ empty).
+Carried as "Next" across four entries (10-23 through two mentions on 10-25)
+without the code fix landing. Added `CORE_FRAME_RANGE = range(1, 2043)` and gated
+`heisig_columns()`'s empty-row collection on it (full diff in `audit_weak_evidence.py`).
+
+**Effect: 122 of 123 `heisig-atomic` findings were noise.** Before the fix: 122
+rows (docstring said 128, already stale by a few). After: 1 row, `rtk1274` 廿
+("twenty"). Spot-verified the drop is the gating working as intended, not a bug —
+directly counted CSV rows with empty `components` and `id_5th_ed` in 1-2042: 34,
+exactly matching CLAUDE.md's own figure. Of those 34, all but one were either
+already atomic in `data.txt` or didn't have their own alias name used as a
+component elsewhere in the CSV (the second half of the `heisig-atomic` test) —
+`rtk2235`/兎 and `rtk2852`/梟, the two hosts chunk 113 found by hand to be false
+positives on this exact bug, dropped out as expected (both have blank `id_5th_ed`
+— added in the 6th edition, never in the 5th).
+
+**The one real finding: rtk1274 廿 ("twenty"), primary made atomic.** Was
+`凵,一` (container + one), matching neither source: CSV's column for frame 1190
+(`id_5th_ed`) is empty — in-range, genuine atomicity evidence — and cjkvi-ids'
+own entry for 廿 maps to itself with *no* candidate decomposition at all (not
+even an overlay-operator one, which is more than 冊 itself gets: cjkvi offers
+冊 `⿻冂卄`, overlay, not literal, but at least a source speaking). Shape-family
+check: this project's own rtk28 (世, `廿,一`) and rtk1275/1277/1278 (庶/席/度,
+`...,廿,...`) already treat 廿 as a single search unit — rtk1274's own row was
+the only place still spelling it out, which also meant depth>1 search through
+廿 would have reached "container"/"one" from every one of those hosts, unsupported
+by anything. Rendered zoomed (not this tool's default row size) before touching
+the row, since a smaller render had previously been read as supporting a literal
+凵+一 split (the row's own prior pin comment, 2026-09-01): it genuinely does show
+two verticals joined by a bottom bar (a real 凵 shape) crossed by a second,
+separately-drawn protruding horizontal — a plausible mnemonic reading, just one
+no source backs as the glyph's actual construction. Followed the `rtk1967`/冊
+precedent rather than deleting that reading outright: primary now empty,
+`凵,一` demoted to a labelled alternate (`data.txt`: `rtk1274:廿:twenty:;凵,一`).
+The prior session's render finding wasn't wrong about the shape, only about which
+slot it belonged in.
+
+Removed rtk1274's own `test_regression_fixes.py` pin (it tested `decompositions[0]`
+content, which is now empty by design) rather than pinning an empty set — no
+other atomic-primary-with-alternate row (`rtk1967` included) carries a self-pin
+either; `rtk1274` stays covered via `rtk28`'s existing pin, which checks it as a
+*part* of 世, unaffected by its own internal structure.
+
+### Checks
+
+| Check | Before | After |
+|---|---|---|
+| `test_regression_fixes.py` | 1332/1332 | 1331/1331 (rtk1274's own pin removed, not corrected — see above; no other pin broke) |
+| `pytest` | 80 passed | 80 passed |
+| `audit_overflatten.py` | 0 | 0 |
+| `audit_self_reference.py` | 0 | 0 |
+| `audit_radicals.py` | 0/0 | 0/0 |
+| `audit_phantom_parts.py --in-csv-range` | 10/9 | 10/9 (unaffected — 廿 carries no phantom finding either side) |
+| `audit_phantom_parts.py` (full) | 49/36 | 49/36 (unaffected, same reason) |
+| `audit_primary_choice.py` | 0/60 | 0/60 |
+| `audit_weak_evidence.py --kind atomic` | 122 | 0 |
+
+Frontend: `npm install`, `npm run lint` clean, `npm run build:prod` clean (3,232
+SEO pages, same ballpark as recent chunks).
+
+Not deployed — no server access from this container. A deployer needs `git pull`
++ `./venv/bin/python3 sync_system_data.py` on prod to pick up rtk1274's changed
+row; no image regeneration needed (no new primitive registered, no `image_url`
+change). The `audit_weak_evidence.py` change is tooling only, nothing for
+`sync_system_data.py` to carry.
+
+### Next
+
+1. The two-day gap (10-26, 10-27) with no entries from either this routine or the
+   `kanji-worklist-review` timer — worth the owner's attention if it recurs; not
+   something a session can self-diagnose without infrastructure access.
+2. `audit_weak_evidence.py`'s `heisig-atomic` section is now empty (0 rows) and
+   its gating bug is fixed — nothing queued here until a `data.txt` change creates
+   a new finding.
+3. `audit_phantom_parts.py`'s full backlog (49/36) is fully accounted for by
+   documented blind spots, same conclusion as chunk 113/114 — not a queue to work
+   from without new input.
+4. `suggest_heisig_aliases.py --near 0.8 --all` — still 0 actionable, confirmed
+   again. Not worth another pass without a fresh CSV diff or a newly-registered
+   primitive to re-seed it.
+5. `full_review.py --pending-count`: 2098/3000, frame range next up is ~902-951
+   (last landed chunk was 852-901, 2026-10-25) — that queue belongs to the
+   separate daily timer per CLAUDE.md, not picked up here.

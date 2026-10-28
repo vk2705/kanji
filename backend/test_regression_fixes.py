@@ -1621,10 +1621,15 @@ EXPECTED_DECOMPOSITIONS = {
     # fixed below) exactly, plus a bottom horizontal stroke; CSV says "ten; twenty".
     "rtk28": {"character": "世", "keyword": "generation",
               "expected_part_ids": {"rtk1274", "rtk1"}},
-    # 廿 was ｜,一,凵 -- the lone ｜ was redundant, both verticals already come from
-    # 凵; render confirms 廿 = 凵 + a top horizontal stroke exactly.
-    "rtk1274": {"character": "廿", "keyword": "twenty",
-                "expected_part_ids": {"kangxi17", "rtk1"}},
+    # 2026-10-28: rtk1274/廿 ("twenty") made atomic -- its primary is now
+    # empty (CSV's own column is empty too, in-range evidence per CLAUDE.md,
+    # and cjkvi-ids treats it as fully atomic), so there is no longer a
+    # primary content to pin here. Not a gap: this very entry's own
+    # audit_weak_evidence.py fix is what found it. The "凵,一" structural
+    # reading it used to carry as primary now lives as a labelled alternate
+    # in data.txt instead -- same precedent as rtk1967/冊 below, which also
+    # has no self-pin, only references from hosts that use it whole (rtk28
+    # above does the same for rtk1274).
     # 自 was missing the top dot entirely; CSV: "drop; eye" = 丶+目.
     "rtk36": {"character": "自", "keyword": "oneself",
               "expected_part_ids": {"kangxi3", "rtk15"}},
