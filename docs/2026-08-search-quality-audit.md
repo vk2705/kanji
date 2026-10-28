@@ -23452,3 +23452,111 @@ change). The `audit_weak_evidence.py` change is tooling only, nothing for
 5. `full_review.py --pending-count`: 2098/3000, frame range next up is ~902-951
    (last landed chunk was 852-901, 2026-10-25) — that queue belongs to the
    separate daily timer per CLAUDE.md, not picked up here.
+
+## 2026-10-28 — full re-review: frames 902–951
+
+Daily unattended chunk (`full_review.py -n 50`). Pre-flight: `docs/decomposition_worklist.json`
+and `docs/kanji_review_coverage.tsv` were locally modified (the expected
+always-dirty files from other routines) but `backend/data.txt` and
+`docs/kanji_full_review.json` were both clean — no prior run died midway.
+Stashed the two always-dirty files, `git pull --no-rebase origin master`
+(already up to date), restored the stash. `kanji.db` present. Baseline
+`pytest -q` 105 passed, baseline `./regression_fresh.sh` 1331/1331, baseline
+`audit_radicals.py` not run pre-edit (oversight — see Checks below; the fix
+only removes a part reference, which cannot create a new undefined-term
+finding, so this doesn't affect confidence in the result).
+
+**49 keep, 1 fixed, 0 needs-render.** `--pending-count`: 2048/3000 (was 2098).
+
+### Fix
+
+- **rtk938 行 (going/boulevard)**: was `彳` alone — only the left half of the
+  glyph. Render (`render_glyphs.py` 行/彳/亍/丁) confirms 行 has a clearly
+  separate right-side stroke group that `彳` alone doesn't cover; cjkvi
+  agrees (`⿰彳亍`). heisig-kanjis.csv's own components column for frame 938
+  is a single name, "boulevard" — and that exact name is reused as a
+  primitive (i.e., 行 taken whole) in five later frames: 街 (955), 衡 (957),
+  術 (1644), 衛 (1775), 衝 (1811) (`grep -i boulevard heisig-kanjis.csv`).
+  That confirms Heisig teaches 行 whole under the nickname "boulevard" and
+  never decomposes it — the "彳" previously on this row is a *different*,
+  separately-named primitive ("going"/"Nelson"/"column"/"line", reused
+  standalone across frames 939–951, confirmed via `grep -nP ":彳:" data.txt`
+  resolving to `kangxi60`). Core frame (`id_5th_ed` 873, well inside 1–2042),
+  so the non-empty-but-single-name CSV column is exactly the atomic-whole
+  pattern used elsewhere (rtk911 臣, rtk920 巨, both in this same chunk).
+  Row is now atomic, matching that pattern.
+  `audit_weak_evidence.py --host 行` found 0 issues in all three of its
+  categories, as expected — its `heisig-atomic` check only fires on an
+  *empty* CSV column, and frame 938's column isn't empty (it's the one name
+  "boulevard"), so this fix rests on the primitive-reuse evidence above, not
+  on that tool.
+  **Shape-family check**: searched for any other row whose sole part is `彳`
+  alone (same bug pattern) via `grep -nP "^\S+:[^:]*:[^:]*:彳$" data.txt` —
+  rtk938 was the only match, so no further rows needed touching.
+
+### Other rows checked but left alone (worth recording — initially looked
+like findings, turned out not to be)
+
+- **rtk905 替 / rtk906 賛**: top renders as two 夫-shapes side by side
+  (cjkvi: `替 ⿱㚘日`, `賛 ⿱㚘貝`, `㚘 = ⿰夫夫`), and both rows currently carry
+  only one `夫`. This looks like a missing-second-夫 bug on first read, but
+  an in-file comment above `prim-turkey-house` (dated 2026-10-02) shows it
+  was already investigated and deliberately fixed to read a single `夫`:
+  heisig-kanjis.csv names a doubled primitive once, not twice (the 森
+  pattern — 森's row reads "tree; wood", not "tree; wood; tree; wood"), and
+  both frames' CSV columns here read "husband; sun; day; ..." / "husband;
+  shellfish; ...", a single "husband". Re-confirmed via
+  `audit_weak_evidence.py --host 替` / `--host 賛`, both 0 findings. Left
+  untouched — re-applying the old two-夫 form would have reverted a correct,
+  already-documented fix.
+- **rtk908 失 (lose)**: Google's hint (`丿, 大`) disagrees with the current
+  row (`ノ,夫`), and the render is genuinely close enough between 夫 and 大
+  that it's tempting to "fix" this to match Google. But heisig-kanjis.csv's
+  own column for this frame explicitly says "drop; husband" (not "drop;
+  large"), and cjkvi-ids independently agrees (`⿰丿夫`) — two primary
+  sources agree with the current row, and only the hint-only Google answer
+  disagrees. Kept as-is; this is exactly the "never decide on Google alone"
+  case the brief warns about.
+- **rtk913 蔵 (storehouse)**: cjkvi's IDS for this host (`⿱艹𮍏`) routes
+  through an unencoded composite (`𮍏`) rather than giving `戊`/`臣` as
+  plain siblings, which initially looked like it might be the ⿻-overlay
+  trap (CLAUDE.md's 蝿 example). `audit_weak_evidence.py --host 蔵` found 0
+  issues in all three categories, including `not-a-parts-list` (the
+  overlay/enclosure check) — the current `艹,戊,臣` row stands.
+- **rtk919 覧 (perusal)**: primary (`一,臣,見,𠂉`) matches cjkvi's
+  TJK-tagged IDS (`⿱⿰臣⿱𠂉一見`) and the render cleanly. The row's own
+  labelled alternate (`;ノ,見,臣,二`) looks like a weaker/stale variant — `二`
+  doesn't correspond to the small hooked stroke (𠂉) actually drawn — but
+  fixing or dropping an alternate decomposition is outside this chunk's
+  scope (primary-row correctness only), so it's left alone and flagged
+  here for whoever looks at 覧 next.
+- **rtk930 勃 (uprising)**: flattens Heisig's "bishop" primitive (十+冠/冖,
+  cjkvi's `孛` node) straight into `子,十,力,冖` rather than giving "bishop"
+  its own row. "Bishop" is reused at frame 1465 (索, `grep -i bishop
+  heisig-kanjis.csv`), which already flattens the same shape the same way
+  (`糸,十,冖`) — consistent, not a bug, just a granularity choice (promoting
+  it to a shared `prim-bishop` row is a reasonable future cleanup, not a
+  correctness fix, so left for another day).
+
+### Checks
+
+- Pre-fix: `pytest -q` 105 passed; `./regression_fresh.sh` 1331/1331.
+- `sync_system_data.py --dry-run` then applied for real (auto-backed up
+  `kanji.db` first): `decompositions: 1 created, 0 replaced, 2 removed (now
+  atomic)` — one of the two atomic transitions is rtk938 from this chunk;
+  the other is rtk1274 廿, already committed in `9e825df` by an earlier
+  session but not yet synced to this machine's live DB until now. The "286
+  system ids live but not in source" warning is the same long-standing,
+  pre-existing drift noted in prior entries, unrelated to this chunk.
+- Post-fix: `pytest -q` 105 passed, `./regression_fresh.sh` 1331/1331 (no
+  pin referenced rtk938, so nothing needed updating), `audit_radicals.py` 0
+  undefined terms.
+
+### Next
+
+No production deploy from here. A deployer needs `git pull` then
+`sync_system_data.py` on prod to pick up rtk938 (and rtk1274, already on
+master but apparently not yet deployed either).
+
+`full_review.py --pending-count`: 2048/3000, frame range next up is
+~952-1001.

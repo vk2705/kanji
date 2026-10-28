@@ -1150,7 +1150,15 @@ rtk934:架:erect:加,木
 rtk935:脇:armpit:劦,月
 rtk936:脅:threaten:劦,月
 rtk937:協:co-:劦,十
-rtk938:行:going,boulevard:彳
+# 2026-10-28 full re-review: was 彳 alone, which is only the left half of the
+# glyph and is a different, separately-named primitive ("going"/"Nelson"/
+# "column"/"line", used standalone in frames 939-951). heisig-kanjis.csv's
+# own column for frame 938 is the single name "boulevard", and that exact
+# name is reused as a primitive (=行 whole) in 街(955)/衡(957)/術(1644)/
+# 衛(1775)/衝(1811) -- Heisig teaches 行 whole under that nickname, never
+# decomposing it. Render confirms 彳 alone is missing 行's right-side
+# stroke group. Now atomic, matching rtk911/rtk920's core-frame pattern.
+rtk938:行:going,boulevard:
 rtk939:律:rhythm:彳,聿
 rtk940:復:restore:复,彳
 rtk941:得:gain:寸,彳,旦
