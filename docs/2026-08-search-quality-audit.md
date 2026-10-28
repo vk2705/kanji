@@ -23250,4 +23250,75 @@ baseline `audit_radicals.py` 0 undefined terms.
 No production deploy from here. A deployer needs `git pull` then
 `sync_system_data.py` on prod to pick up rtk875/rtk884.
 
+## 2026-10-28 — hanzi worklist chunk: 19 keep-ours, one real fix via a cross-check against an already-fixed sibling
+
+Daily `hanzi_worklist_next.py -n 20` chunk. No interrupted prior run (the
+guardrail's decided-vs-HEAD diff printed `0`), and
+`docs/hanzi_decomposition_worklist.json` wasn't even showing as locally
+modified at the start — the nightly rebuild job hadn't touched it since the
+last commit. Pre-change `pytest -v`: 105 passed. All 20 hosts rendered via
+`render_glyphs.py` (batch of hosts, then every component glyph referenced in
+their cjkvi readings) before any decision, standard method.
+
+**7 of the 46 requested component codepoints are genuine tofu on this
+machine** (confirmed, not assumed — each checked individually at large size,
+not just via the cross-face identity note): `𣫞` (U+23ADE, inside 糳's
+cjkvi reading), `𧰨` (U+27C28, 縁), `𤰔` (U+24C14, 縛), `𬗌` (U+2C5CC, 繭),
+`𫠣` (U+2B823, 练), `𠬤` (U+20B24, 绎), `𠃓` (U+200D3, 肠). `render_glyphs.py`'s
+own cross-face check flagged all 21 pairs among them as "identical in every
+face" — consistent with all seven being the same fallback tofu box rather
+than seven genuinely identical shapes. In every one of those rows the host
+character itself still renders with real strokes (the font has an outline
+for the *whole* composed character, just not for the SIP codepoint used as
+cjkvi's isolated intermediate), so this didn't block a decision — it's
+exactly the `opaque-intermediate` pattern CLAUDE.md describes: cjkvi (and
+our own row) stop at a true leaf, and that's a ceiling on the evidence, not
+a sign the row is wrong.
+
+**19 keep-ours** (粤 粵 糳 縁 縛 縣 繇 繭 练 绎 羊 羋 羐 羲 耒 耜 聿 肀 肠): in
+every one, the overlay/enclosure/opaque flag is real, but the current parts
+list already names what's actually drawn at the right granularity rather
+than inventing a flat reading cjkvi's own operator doesn't support. A few
+worth recording the specific cross-check for, since this project has been
+burned before by trusting reasoning over rendering:
+- **练 (hanzi-7ec3)**: right side could plausibly be misread as the familiar
+  `东` by shape memory alone — rendered side by side they are visibly
+  different (东 has a cross-stroke through a boxed 小 shape that 练's side
+  lacks entirely), so keeping the opaque `𫠣` placeholder rather than
+  substituting a familiar lookalike was the right call, not a missed fix.
+- **绎 (hanzi-7ece)**: shares its right-hand component with 译/驿/泽 (checked
+  all four directly against the `parts` table, not just `get_kanji_detail`,
+  since the latter was silently collapsing the alias-expansion rows and made
+  it briefly look like these rows had only one part each). All four use the
+  identical opaque placeholder `𠬤` for that shared piece — already
+  consistent across the shape family, nothing to fix.
+- **縛 (hanzi-7e1b)**: cjkvi wants to split the right side down to
+  `𤰔,丶,寸` (with `𤰔` itself an opaque `一,由` overlay), but rendered
+  side-by-side with 尃/博/薄, 縛's right side is pixel-for-pixel 尃 — the
+  existing 2-part row (`糹,尃`) is already at the correct level, not
+  under-decomposed.
+
+**One real fix: 縄 (hanzi-7e04)**, `糹,日,电` → `糹,田,乙`. cjkvi's reading
+is `⿰糹⿻日电` — the exact `⿻日电` substructure CLAUDE.md's own
+"an IDS is not a parts list when its operator is ⿻" rule names by example
+(蝿 `⿰虫⿻日电`, documented as rendering a visible 田, not 日). That made 蝿's
+own row the obvious cross-check before touching 縄: queried it directly
+(`rtk2725`) and found it already reads `虫,田,乙`, not `虫,日,电` — someone
+fixed 蝿 at some earlier point but the sibling hanzi row 縄, carrying the
+identical cjkvi substructure, was never revisited, the same "fix landed on
+one host, not on its sibling" gap chunk 1's 乕 fix closed for a different
+pair. Rendered 縄, 蝿, 田, 日, 电, 乙 side by side to confirm before writing
+anything: 縄's right side is pixel-identical to 蝿's — a clear four-cell
+grid (田) above a hooked tail stroke (乙), not a plain single-box 日 beside
+a separate 电. Applied directly to `kanji.db` (no `data.txt` line exists for
+hanzi rows): backed up first (`backup_db.py`), then
+`expand_part_terms(conn, ['糹','田','乙'], script_group='zh')` →
+`['糹','silk','田','field, arable land, cultivated','乙','second']`,
+replacing decomposition 14767's 5 old `parts` rows with 6 new ones at
+sequential positions. Verified with `get_kanji_detail` (resolves to
+silk/field/second cleanly) and the full pytest suite (105 passed,
+unaffected) both before and after.
+
+133 → 113 pending after this chunk (`hanzi_worklist_next.py --pending-count`).
+
 `full_review.py --pending-count`: 2098/3000.
