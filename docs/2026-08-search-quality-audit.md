@@ -23560,3 +23560,134 @@ master but apparently not yet deployed either).
 
 `full_review.py --pending-count`: 2048/3000, frame range next up is
 ~952-1001.
+
+## 2026-10-29 — fresh container bootstrap; three `audit_csv_regressions.py` clusters sampled, no edit this chunk
+
+**No `/home/user/kanji` checkout existed and no venv/`kanji.db` either** —
+this session started from a genuinely empty container, unlike recent prior
+chunks that found the repo already there. Cloned/attached per the task
+brief's step 0, detached-HEAD on an unrelated `_push-access-check-*` fetch
+(harmless, not this repo's branch — left alone), checked out `master`,
+fast-forwarded to `origin/master` (974c00c), confirmed `git push --dry-run
+origin master` succeeds before doing anything else. Built `backend/venv`
+fresh (`python3 -m venv` + `pip install -r requirements.txt
+-r requirements-dev.txt` — none of it existed), `apt-get install
+fonts-noto-cjk fonts-hanazono` (Noto first, per standing instruction), fetched
+`cjkvi-ids/ids.txt` fresh. `render_glyphs.py` also needed a one-time local
+fixup with no repo change: this container's pre-installed Chromium lives at
+`/opt/pw-browsers/chromium-1243/chrome-linux64/chrome`, not at any path
+`CHROME_CANDIDATES` checks directly — symlinked it under
+`~/.cache/ms-playwright/chromium-1243/` (the versioned-subdirectory probe the
+script already has) rather than editing `CHROME_CANDIDATES`, since the exact
+version number is container-specific and will likely differ again next time.
+Worth a maintainer's attention if it recurs enough to be worth hardcoding.
+
+**Full step-3 suite against a from-scratch `import_data()`, no `data.txt`
+edits this chunk:** `test_regression_fixes.py` 1331/1331 (no `zh-*` rows —
+`import_hanzi.py` wasn't run, so the 4 known hanzi spot-checks self-skip, as
+documented), `pytest -q` 80 passed, `audit_overflatten.py`/
+`audit_self_reference.py`/`audit_radicals.py` all 0, `audit_phantom_parts.py
+--in-csv-range` 10 across 9 (unchanged from the last chunk's closing number),
+`audit_phantom_parts.py` full 49 across 36 (unchanged), `audit_primary_
+choice.py` 0/60, `suggest_heisig_aliases.py --near 0.8 --all` 0 groups in
+every category (unchanged), `audit_missing_children.py --summary` 5 findings
+— all five already-documented dead ends re-confirmed below, not new. No
+frontend change, so `npm run lint`/`build` not re-run.
+
+**`audit_missing_children.py`'s 5 findings are the same closed set chunk
+107's "Next" item 3 already named** — re-confirmed directly rather than
+trusted from the note: `融`/`隔`'s `鬲` (`kangxi193`) JK-script anatomy is
+still blocked on this container's Chromium having no region-distinct outline
+for `鬲` at all (same font limitation, re-checked: `render_glyphs.py`'s own
+face-divergence check found nothing to act on); `敷`(`rtk2028`)/`衰`
+(`rtk2037`)/`終`(`rtk1452`) are the chunk-87/chunk-94 "already-closed" set —
+`終` in particular was the chunk-94 entry that did the 6x-crop render and
+the exact stroke-arithmetic check (`冫` already covers both of `冬`'s bottom
+strokes as one 2-stroke unit; adding `丶` on top would double-count a
+stroke) and explicitly rejected three different ways of acting on it.
+Nothing here needed touching again.
+
+**Sampled three `audit_csv_regressions.py` clusters by hand (157 flagged
+hosts total, per a fresh run — down from the 160 chunk-110 left off at), to
+test whether the "next session should scan for the next repeated-host-set
+cluster" advice from that chunk still has anything live in it:**
+
+- **"stand up"/"vase" (`rtk462`/立) on the `幸`-family (`幸 執 報 南 楠
+  献`)** — this is **not** new: it's the exact dead end chunk 108 already
+  investigated at length (6x-cropped-render level) and deliberately left
+  open (`幸`'s middle `丷` reads as a *convergent* V, the opposite
+  orientation from solo `立`'s *diverging* legs — real evidence against the
+  current reading, not enough to assert a replacement). Re-ran the same
+  stroke check (`土`(3)+`丷`(2)+`干`(3) = 8, matching `幸`'s own stroke count
+  exactly) and got the same non-conclusive result chunk 108 got. No new
+  evidence this chunk; still open, still not touched, for the same reason.
+- **"apron" (`prim-thirty`/丗) on the `帝`-family (`帝 諦 締`)** — also not
+  new: chunk 108's "apron... dead end... closed" entry. Re-confirmed
+  `帝`'s cjkvi IDS (`⿱⿱⿱亠丷冖巾`, no `丗` anywhere) matches the row's own
+  already-registered alternate decomposition (`亠,丷,冖,巾`) exactly.
+  Consistent with the standing conclusion; nothing to add.
+- **"box" (`kangxi22`/匚) on `抑`/`仰`/`迎` (`卬`, `prim-stamp-album`) — new
+  territory, no prior entry mentions `prim-stamp-album` or `rtk1835`/`1836`/
+  `1837` at all.** `卬`'s cjkvi IDS (`⿰②卩`) puts the "box" claim inside a
+  circled-placeholder left half cjkvi can't see into — the
+  opaque-intermediate/placeholder class `audit_weak_evidence.py` and
+  `CLAUDE.md` both describe. Rendered `卬` next to `匚` directly (not just
+  reasoned from the placeholder) specifically to rule out the cheap read:
+  `匚` is a plain open rectangle, nothing like the hooked diagonal stroke
+  `卬`'s own left half actually draws (closer to a mirrored `𠂉`than to any
+  box shape). So "box" isn't `匚` — ruled out, not confirmed as anything
+  else. `prim-stamp-album` (`卬`) is currently fully atomic (no listed
+  parts), which is consistent with leaving this alone rather than guessing
+  a replacement name for the hook from the render alone. Left open,
+  recorded here specifically so a future chunk doesn't re-render `卬`/`匚`
+  from scratch to reach the same "not `匚`" answer.
+
+**One near-miss worth recording as a process note, not a finding**: before
+touching anything, checked `rtk2091`(鳥)/`rtk2132`(馬) — both also appear in
+the 157-item list (`dropped: white/dove/one`, `dropped: horse/noon` via
+their shared `灬`-only rows) and looked, on a first render-only pass, like a
+genuinely new multi-stroke gap (`鳥`'s `灬`-only row is 4 of 11 strokes;
+`馬`'s is 4 of 10). `test_regression_fixes.py`'s own comments at the `rtk2092`
+(鳴) and `rtk2132`-area pins say otherwise: a **day-4 fix already
+established that `鳥`/`馬` are each deliberately taught with exactly `灬`**
+as their one listed part, and every *other* `鳥`/`馬`-containing host that
+also separately listed `灬` was the actual bug (restated already-implied
+information), fixed in that same pass across all 16+ affected hosts. Reading
+`test_regression_fixes.py`'s inline comments before acting on an audit
+tool's raw output — not just `grep`-ing the prose log — caught this before
+it became a wrong edit undoing settled, already-verified work. No change
+made to either row.
+
+**No `data.txt` change this chunk.** All three dead-end-or-new clusters
+sampled from `audit_csv_regressions.py`'s list stayed at "left open,
+insufficient evidence" or "re-confirmed already closed" — none cleared the
+render-plus-corroboration bar this project holds fixes to. Nothing to sync
+to prod.
+
+### Next
+
+1. `audit_csv_regressions.py`'s list is at **157** (was 160 at chunk 110).
+   Three more clusters sampled this chunk, all dead ends (two pre-existing,
+   one new) — this list is getting thin on cheap wins; what's left mostly
+   needs the "insect" cluster's level of effort (render multiple atomic
+   intermediates, trace one shared root cause) rather than a quick cjkvi
+   cross-check. Scan the fresh list for a cluster with more than 2-3 hosts
+   that hasn't been named in this doc before trying another one by hand.
+2. `卬`'s "box" claim (new today): still genuinely unidentified, not just
+   unconfirmed. If a future render of some *other* `卬`-containing or
+   similarly-hooked-shape host turns up independent corroboration for what
+   that hook actually is, that would be the way back in — same standing
+   rule as `不`(rtk1302)/`両`/`満`.
+3. `鬲`'s JK-script anatomy for `融`/`隔`: still blocked on this specific
+   container's Chromium having no region-distinct outline for `鬲` — not
+   re-attempted, same conclusion several chunks running now.
+4. Environment bootstrap note for whoever hits a from-scratch container
+   next: this session's Chromium lived at a different versioned path than
+   `render_glyphs.py`'s `CHROME_CANDIDATES` checks and needed a
+   `~/.cache/ms-playwright/chromium-<N>/` symlink to be found at all — if
+   this keeps happening across containers, worth having `render_glyphs.py`
+   glob `/opt/pw-browsers/chromium-*` directly instead of relying on the
+   symlink workaround each time.
+5. `full_review.py`/hanzi-worklist pending counts not re-checked this
+   chunk — those belong to their own separate daily timers per the task
+   brief, not this routine.
