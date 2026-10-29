@@ -23741,3 +23741,132 @@ to prod.
 5. `full_review.py`/hanzi-worklist pending counts not re-checked this
    chunk — those belong to their own separate daily timers per the task
    brief, not this routine.
+
+## 2026-10-29 — full re-review: frames 952–1001
+
+Daily unattended chunk (`full_review.py -n 50`). Pre-flight: `git status`
+showed `docs/decomposition_worklist.json` and `docs/kanji_review_coverage.tsv`
+locally modified (the expected always-dirty files from other routines), but
+`backend/data.txt` and `docs/kanji_full_review.json` were both clean — no
+prior run died midway. Stashed the two always-dirty files, `git pull
+--no-rebase origin master` (already up to date, no merge needed), restored
+the stash. `kanji.db` present. Baseline `pytest -q` 105 passed, baseline
+`./regression_fresh.sh` 1331/1331, baseline `audit_radicals.py` 0 undefined
+terms. `backup_db.py` run before any edit.
+
+**46 keep, 4 fixed, 0 needs-render.** `--pending-count`: 1998/3000 (was 2048).
+
+### Fixes
+
+- **rtk954 微 (delicate)**: was `山,彳,攵,儿`, missing `一`. cjkvi's default
+  IDS for 微 is `⿰彳𡵉攵`, and `𡵉` itself is `⿱山兀` (looked up directly in
+  the cached `/tmp/ids.txt`, since `audit_weak_evidence.py --host 微` came
+  back clean on all three of its categories and didn't itself flag this).
+  Heisig's own components column for frame 954 is "sherpa; Nelson; column;
+  going; line; mountain; one; ceiling; human legs; taskmaster" — the first
+  five are all existing synonyms for `彳` (`kangxi60`, confirmed via
+  `grep -n ":彳:" data.txt`), then "mountain" (山), then **"one; ceiling"
+  (`rtk1`, confirmed these are `一`'s own aliases) and "human legs" (儿) as
+  two separate groups** — meaning Heisig reads `兀` as `一+儿`, not as one
+  atomic primitive, matching cjkvi's structural view exactly. Render
+  (`render_glyphs.py 微`, large) shows a horizontal stroke between the `山`
+  shape and the `儿` legs, distinct from both — the piece the row was
+  missing. New row: `彳,山,一,儿,攵`.
+  **Shape-family check**: `徽` (emblem) shares the same `彳` + stacked-shape
+  + `攵` family but has no RTK frame and isn't in `heisig-kanjis.csv` or
+  `data.txt` — nothing else to fix.
+
+- **rtk955 街 (boulevard)** and **rtk957 衡 (equilibrium)**: both carried a
+  redundant standalone `彳` alongside `行`, left over from before rtk938
+  (行) was made atomic in yesterday's chunk (2026-10-28) — that fix's own
+  comment explicitly named 955/957/1644/1775/1811 as frames that reuse 行
+  whole under the "boulevard"/"going" nickname, but these two rows weren't
+  updated to match at the time. Render (`render_glyphs.py 街 衡`, large,
+  cropped and zoomed) shows exactly one `彳`-shaped stroke group in each
+  glyph, not two — the standalone `彳` entry was double-counting the same
+  region `行` already covers. heisig-kanjis.csv's own components for 955
+  are exactly two groups ("going" = 行 whole, self-reference rules out
+  saying "boulevard" since that's 955's own keyword; "ivy; square jewel;
+  soil; dirt; ground" = `圭` and its own sub-expansion), and for 957 exactly
+  four ("boulevard; going" = 行 whole; "bound up" = 勹; "rice field; brains"
+  = 田; "large; St. Bernard" = 大) — neither names `彳` on its own.
+  `audit_weak_evidence.py --host 街` / `--host 衡` both came back clean on
+  all three categories. New rows: 955 → `行,圭`; 957 → `行,大,田,勹`.
+  **Shape-family check**: `grep` confirmed 1644 (術, `行,朮`) and 1775 (衛,
+  `行,韋`) are already clean (no redundant `彳`). 1811 (衝, currently
+  `｜,行,日,彳,ノ,重`) has the same leftover `彳` but also several other odd
+  elements (`｜`, `ノ`) that look like a separate stroke-soup issue needing
+  its own look — left as a follow-up for when frame 1811 comes up rather
+  than fixed here, since it isn't clearly *only* the same mistake.
+
+- **rtk972 利 (profit)**: was `刀,禾;禾` — a primary decomposition (`刀,禾`,
+  correct, matches cjkvi `⿰禾刂` and Heisig's "wheat; cereal; sword; sabre;
+  saber") plus a bogus alternate (`禾` alone) that claims 利 is made of 禾
+  only, missing the 刀/刂. `git log -p -- data.txt` on this line shows the
+  primary and this alternate were swapped back and forth across several
+  past edits (at one point `禾` alone *was* the primary), and this stray
+  entry survived the swap as an alternate without ever being corrected.
+  Self-identity search already makes 利 reachable from `["wheat"]`/
+  `["cereal"]` via its real primary decomposition, so the alternate added
+  no search coverage, only a false structural claim. Dropped it; new row:
+  `刀,禾` (primary only). `audit_weak_evidence.py --host 利`: 0 findings.
+
+### Rows checked in depth but kept as-is (worth recording)
+
+- **rtk952 徴 / rtk953 懲**: 952's components column reads as five words
+  for `彳` (sherpa/Nelson/column/going/line, already established aliases of
+  `kangxi60`) plus mountain (山) plus king/jewel/ball (王) plus taskmaster
+  (攵) — i.e. exactly the current `王,山,彳,攵`. cjkvi's intermediate `㞷`
+  looked at first like it might hide an extra piece the same way `𡵉` did
+  for 954, but its own IDS entry gives the J-variant as `⿱山王` (no `一`) —
+  the opposite of 微's case. 953 (`徴,心`) matches directly.
+- **rtk975 穂 (ear of a plant)**: components column opens with "ear (of a
+  plant)" before "favour; favor" — reads at first like self-reference (the
+  frame naming itself as its own component), but cross-checking `恵`'s own
+  frame (rtk659, keyword "favor,favour", components "ten; needle; rice
+  field; brains; heart", row `十,心,田`) confirms "ear (of a plant)" is
+  just an in-context synonym Heisig gives `恵` here, not the frame
+  referencing itself. Row (`恵,禾`) stands.
+- **rtk984 穀 (cereals)**: components read "samurai; crown; wheat; cereal;
+  cruise missile; missile; wind; crotch" — the last two words ("wind" =
+  `kangxi16` 几's own alias, "crotch" = 又's own keyword) look like they
+  might mean Heisig expands `殳` into its own `几,又` subparts here rather
+  than using `殳` whole. cjkvi's J-variant IDS (`⿳士冖禾殳`) settles it:
+  `殳` is one of exactly four top-level children, not split. Kept `殳`
+  unexpanded, matching cjkvi and the right-level rule (prefer the coherent
+  named primitive over its strokes) — row (`冖,士,殳,禾`) stands.
+- **rtk996 菊 / rtk998 数 / rtk999 楼 / rtk1000 類**: each has a CSV
+  components entry that names a compound by nickname ("rice cooker" for
+  勹+米, implicit for 娄=米+女, for 类=米+大) with no dedicated primitive id
+  anywhere in `data.txt`, immediately followed by that compound's own
+  sub-parts, which *do* have established ids. In every case the current
+  row already expands into the named sub-parts rather than inventing a new
+  nicknamed primitive — consistent with the right-level rule (use the
+  coherent name only when one actually exists as a reusable id). All four
+  rows stand unchanged.
+
+### Checks
+
+- Pre-fix: `pytest -q` 105 passed; `./regression_fresh.sh` 1331/1331;
+  `audit_radicals.py` 0 undefined terms.
+- `sync_system_data.py --dry-run` then applied for real (auto-backed up
+  `kanji.db` first, in addition to the pre-edit `backup_db.py` run):
+  `decompositions: 0 created, 3 replaced, 1 removed (now atomic)` — the 3
+  replaced are rtk954/955/957, the 1 removed is rtk972's dropped bogus
+  alternate. The "286 system ids live but not in source" warning is the
+  same long-standing, pre-existing drift noted in prior entries, unrelated
+  to this chunk.
+- Post-fix: `pytest -q` 105 passed (no pin referenced any of the four
+  changed rows, so nothing needed updating), `./regression_fresh.sh`
+  1331/1331, `audit_radicals.py` 0 undefined terms.
+
+### Next
+
+No production deploy from here. A deployer needs `git pull` then
+`sync_system_data.py` on prod to pick up today's four fixes (and rtk938
+from 2026-10-28, if not already deployed).
+
+`full_review.py --pending-count`: 1998/3000, frame range next up is
+~1002-1051. rtk1811 (衝) carries the same leftover-`彳`-beside-`行` pattern
+fixed on 955/957 today, tangled with other odd elements — worth a closer
+look whenever frame 1811 comes up.

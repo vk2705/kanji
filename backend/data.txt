@@ -1174,10 +1174,29 @@ rtk950:徳:benevolence:彳,十,罒,心
 rtk951:徹:penetrate:育,彳,攵
 rtk952:徴:indications:王,山,彳,攵
 rtk953:懲:penal:徴,心
-rtk954:微:delicate:山,彳,攵,儿
-rtk955:街:boulevard:行,彳,圭
+# 2026-10-29 full re-review: cjkvi's J-variant IDS for 微 is ⿰彳⿰𡵉攵, and
+# 𡵉 = ⿱山兀 -- Heisig's own components column lists "mountain" (山) and
+# separately "one; ceiling" (rtk1) + "human legs" (儿), i.e. he reads 兀 as
+# 一+儿, not as one atomic primitive. Row was missing 一 entirely. Render
+# confirms a horizontal stroke between 山 and 儿 distinct from both.
+rtk954:微:delicate:彳,山,一,儿,攵
+# 2026-10-29 full re-review: leftover from before rtk938 (行) was made atomic
+# (2026-10-28) -- that fix's own comment names 955/957/1644/1775/1811 as
+# frames that reuse 行 whole under the "boulevard"/"going" nickname, but this
+# row still carried a redundant standalone 彳 alongside 行, double-counting
+# the same stroke group. Render confirms only one 彳-shaped region in 街 (行
+# split around 圭, not 彳 repeated). Heisig's own components column for 955
+# names only two groups: "going" (=行 whole; self-reference avoidance means
+# he can't say "boulevard" here) and "ivy; square jewel; soil; dirt; ground"
+# (=圭). 1644/1775 were already clean; 1811 has the same leftover but isn't
+# this chunk's frame, left as a follow-up.
+rtk955:街:boulevard:行,圭
 rtk956:桁:beam:木,行
-rtk957:衡:equilibrium:行,大,田,彳,勹
+# 2026-10-29 full re-review: same leftover-彳 mistake as 955 (see its comment)
+# -- CSV components "boulevard; going; bound up; rice field; brains; large;
+# St. Bernard" is exactly 4 groups (行, 勹, 田, 大), not 5. Render confirms a
+# single 彳-shaped region.
+rtk957:衡:equilibrium:行,大,田,勹
 rtk958:稿:draft:禾,高
 rtk959:稼:earnings:禾,家
 rtk960:程:extent:呈,禾
@@ -1192,7 +1211,13 @@ rtk968:私:private:禾,厶
 rtk969:秩:regularity:失,禾
 rtk970:秘:secret:禾,必
 rtk971:称:appellation:禾,尓
-rtk972:利:profit:刀,禾;禾
+# 2026-10-29 full re-review: dropped the trailing ";禾" alternate decomposition
+# -- git history shows primary/alt got swapped back and forth (禾 alone was
+# once the primary) and this stray entry survived as an alternate, but it
+# claims 利 is made of 禾 alone, missing the 刀/刂. Self-identity search
+# already makes 利 reachable via "wheat"/"cereal" from its real primary
+# decomposition, so the alt added no coverage, only a false claim.
+rtk972:利:profit:刀,禾
 rtk973:梨:pear tree:利,木
 rtk974:穫:harvest:禾,蒦
 rtk975:穂:ear:恵,禾
