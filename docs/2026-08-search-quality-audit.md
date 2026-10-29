@@ -23560,3 +23560,53 @@ master but apparently not yet deployed either).
 
 `full_review.py --pending-count`: 2048/3000, frame range next up is
 ~952-1001.
+
+## 2026-10-29 — hanzi worklist, chunk: 20 keep-ours, no real fixes
+
+`hanzi_worklist_next.py -n 20` against `docs/hanzi_decomposition_worklist.json`,
+same cadence and method as chunk 1 (2026-09-30). All 20 hosts rendered via
+`render_glyphs.py` (one batch of the 20 hosts, then several smaller batches
+pairing each host with its claimed component glyphs, large, for a direct
+side-by-side), per the standing render-it rule.
+
+**14 overlay + 6 opaque, all 20 keep-ours** — no `kanji.db` edits this chunk.
+Noteworthy points from the review, not just a blanket "looked fine":
+
+- **艹 (hanzi-8279) itself**, flagged for `⿻十丨`: rendered alone at full
+  size, the radical is unambiguously one shared horizontal stroke with two
+  verticals dropping from it — exactly 1 horizontal + 2 verticals, i.e.
+  precisely a `十` (horizontal + left vertical) with a second vertical (`丨`)
+  sharing that same horizontal. The current flat `十,丨` parts list names
+  that stroke count exactly; cjkvi's overlay operator is just encoding the
+  shared horizontal, not a different reading. This one matters more than
+  most in this chunk because `艹` is itself a component of five other hosts
+  reviewed today (芈 茰 菫 蕐 薄, plus 苢/茍/茝/薎/薨 at the opaque level) —
+  confirming it once covers most of the chunk's top-level shape.
+- **船 (hanzi-8239)**, `舟,𠘧,口` against cjkvi's opaque-at-𠘧 (𠘧 is
+  U+20627, a genuine tofu box on this machine's font stack, confirmed
+  against several other installed faces). Couldn't render 𠘧 itself, so
+  cross-checked by querying `kanji.db` for every other row that uses 𠘧 as a
+  part: 殳 (hanzi-6bb3) = `𠘧,又` alone, and 鉛/铅 (hanzi-925b/94c5) both =
+  `金/钅,𠘧,口` — the same `𠘧,口` split 船 uses, each a different host
+  sharing the same phonetic shape. 殳's row is the clincher: it uses 𠘧
+  *without* a 口 attached, meaning 𠘧 doesn't itself contain an embedded
+  mouth stroke, so 船 listing 口 as a separate part alongside 𠘧 is drawing a
+  real, distinct stroke group, not double-counting what 𠘧 already covers.
+  Three independent rows agreeing beats guessing from Unicode naming alone.
+- **臯 (hanzi-81ef) and others resolving to a tofu intermediate** (𠦂, 𦣞)
+  needed no `needs-render`: in both cases cjkvi's own reading *also* stops
+  at that same opaque unit (⿱自𠦂, opaque-at-𦣞 for 茝), so our row isn't
+  claiming to see anything cjkvi can't — both sides agree the host is
+  "top-level shape + one atomic bottom unit," and nothing about that
+  atomic unit's own internal strokes is asserted by either side. The tofu
+  render only becomes a blocker when a decision would depend on what's
+  *inside* the opaque glyph, which wasn't the case for any row this chunk.
+- The remaining rows (脊 臾 臿 舉 艱 芈 芲 苢 茍 茰 菫 蕐 薄 薎 薨) were each
+  rendered host-beside-parts and matched cleanly — same "weaker evidence,
+  not a wrong row" pattern as chunk 1: 薄 (`艹,溥`) is the clean
+  over-flattening-avoidance case, since cjkvi's own reading goes three
+  levels deeper into 溥's internal 氵/寸/𤰔 strokes while the current row
+  correctly stops at 溥 itself, an existing citable character.
+
+93 pending after this chunk (`hanzi_worklist_next.py --pending-count`:
+113 → 93).
