@@ -23870,3 +23870,115 @@ from 2026-10-28, if not already deployed).
 ~1002-1051. rtk1811 (衝) carries the same leftover-`彳`-beside-`行` pattern
 fixed on 955/957 today, tangled with other odd elements — worth a closer
 look whenever frame 1811 comes up.
+
+## 2026-10-30 — hanzi worklist: next 20 (19 keep-ours, one real fix — 蝿's missing sibling-sync with rtk2725)
+
+`hanzi_worklist_next.py -n 20` against `docs/hanzi_decomposition_worklist.json`,
+93 pending at the start. Interruption check (the `git show HEAD:...` diff of
+non-pending ids) printed `0` first, so no prior invocation was mid-flight.
+Backed up `kanji.db` (`backup_db.py`) and confirmed `pytest -v` passed (105)
+before touching anything. 14 overlay + 6 opaque in this chunk, all rendered
+via `render_glyphs.py` — the 20 hosts in one batch, then several smaller
+batches pairing each host with its claimed component glyphs (and, where a
+component was itself claimed atomic, that component rendered alone), per
+the standing render-it rule.
+
+**19 keep-ours**, most following the by-now-familiar "cjkvi's `⿻`/`⿴`
+operator flags real shared strokes, but the row already names what's drawn
+at the right level" pattern. A few worth recording specifically:
+
+- **虐 (hanzi-8650)**, `虍,匚,一` against `⿸虍⿻匚一`: rendered large, the
+  box-with-a-crossing-line under 虍's head is exactly a `匚` overlapping a
+  `一` — the flat 3-part row already names that stroke count precisely.
+- **蜵 (hanzi-8735) and 裫 (hanzi-88eb)** both use the same atomic unit `𣶒`
+  (U+23D92) as their second part. `𣶒` itself renders as a tofu box on this
+  machine's font stack — but its own constituents, `片` and `爿`, render
+  fine, and side-by-side with the hosts their stacked shape (a mirrored
+  vertical radical over another) matches `𣶒`'s expected footprint in both
+  蜵's and 裫's right half exactly. Since neither row claims anything about
+  `𣶒`'s *internal* overlap (`⿴⿰片爿一`) — both stop at `𣶒` as a citable
+  atomic unit, matching cjkvi's own top-level split (`⿰虫𣶒` / `⿰衤𣶒`)
+  exactly — the tofu render of the isolated codepoint never became a
+  blocker, same reasoning chunk 110 (2026-10-29) used for 船's `𠘧`.
+- **螤 (hanzi-87a4)**, `蚉,㬰`: rendered `㬰` alone and it is, by coincidence
+  of shape rather than codepoint, nearly identical to the unrelated
+  character `央` (both being a box/crown over crossing legs) — worth noting
+  so a future pass doesn't mistake the resemblance for a substitution bug.
+  `螤`'s right half matches rendered `㬰` exactly.
+- **蟎 (hanzi-87ce) and 襔 (hanzi-8954)** both use atomic `㒼` as their
+  second part; rendered side by side, both hosts' right halves are
+  pixel-identical to standalone `㒼`, confirming both rows correctly stop
+  there rather than flattening into `㒼`'s own `⿱廿⿻巾𠓜` (and `𠓜` is
+  itself tofu on this machine, same "doesn't matter, not claimed" case as
+  `𣶒` above).
+- **蟗 (hanzi-87d7) and 蠹 (hanzi-8839)** share the same top cluster
+  (`一,中,冖` naming an overlapping `一`+`中` plus a separate `冖`) over
+  different bottom halves (`出,虫` vs `石,䖵`); rendered large, both hosts'
+  top clusters show a horizontal stroke genuinely separate from (not just
+  redundant with) `中`'s own top edge, so the flat 3-part top reading is
+  real, not invented.
+- **衋 (hanzi-884b)**, `聿,皕,血`: rendered `聿` alone and it is
+  pixel-identical to 衋's top third, confirming the row correctly stops at
+  the existing character `聿` instead of cjkvi's finer `⿱𦘒一` (`𦘒` itself
+  being `⿻肀一`) — the same over-flattening-avoidance call chunk 110 made
+  for 船/薄.
+- **衰 (hanzi-8870) vs 衷 (hanzi-8877)**: both hosts have a box-like middle
+  stroke cluster overlapping something else, but they're *different*
+  overlaps and the current rows already distinguish them correctly — 衰's
+  middle is a box with a *horizontal* stroke crossing through it (`口`
+  overlapping `一`, matching cjkvi's `⿻口一`), while 衷's middle is a box
+  with a *vertical* stroke extending above and below it (matching `中`
+  exactly, not a `口`+`一` overlap at all, despite cjkvi routing through
+  `⿻十口` to get there). Rendered side by side to make sure before trusting
+  it — the two shapes are visibly different, not an inconsistency between
+  sibling rows.
+- **褱 (hanzi-8931)**, `亠,眔,眔,𧘇` (the middle `眔` listed twice is the
+  established glyph+keyword-pair convention, where `眔`'s own keyword
+  column is just itself — two real parts, not three): rendered `眔` alone
+  and it's pixel-identical to 褱's middle third, confirming the row
+  correctly stops there rather than flattening into cjkvi's `⿱罒⿻丨⿱丷八`.
+- **西 (hanzi-897f) vs 覀 (hanzi-8980)**: two visually distinct forms of
+  "west" that the worklist flags independently, and they deserve their
+  different treatments — 西's lower portion is a rounded, cursive
+  basket-like shape named as one atomic opaque unit `𠁤` (cjkvi's own
+  top-level split, `⿱一𠁤`, agrees, and never expands further than our row
+  does either), while 覀's lower portion is a cleaner box-with-two-internal-
+  verticals grid that the row already flattens correctly to `口,丨,丨`,
+  matching cjkvi's `⿻口⿰丨丨` stroke-for-stroke. Not a case of one row
+  needing to match the other.
+- **觞 (hanzi-89de)**, `角,𠂉,𠃓` (opaque, cjkvi also stops at `𠃓`): `𠃓`
+  renders as tofu standalone — identical tofu shape to 西's `𠁤`, per
+  `render_glyphs.py`'s own cross-face note, a coincidence of two different
+  unrenderable codepoints rather than a substitution — but since cjkvi's
+  own reading stops at the same point ours does, there was nothing to
+  verify beyond the top-level 3-way split, which the render confirms.
+- **詧 (hanzi-8a67)**, `𠂊,冫,言` against `⿱⿰⿴𠂊冫②言`: rendered large and
+  cross-checked against 祭/蔡/察 (characters sharing the same top cluster
+  shape) — the top of 詧 shows a claw-like diagonal (`𠂊`) beside two short
+  strokes (`冫`) above `言`, matching the row; the `②` in cjkvi's reading is
+  the circled-placeholder class CLAUDE.md already documents as "not an
+  identifier" for a shape cjkvi has no codepoint for, not a missed part.
+
+**One real fix: 蝿 (hanzi-877f)**, `虫,日,电` → `虫,田,乙`. This is the
+exact "⿻ is not a parts list" trap CLAUDE.md names 蝿 as the *worked
+example* for (`⿰虫⿻日电` does not mean the visible box is `日`; rendered,
+it's `田`) — except this specific row was never the one fixed. Querying the
+DB directly found both a `ja-kanji` row and this `zh-*` row share the glyph
+蝿 (`rtk2725` and `hanzi-877f`), and `rtk2725` already reads `虫,田,乙` —
+fixed at some earlier point (per the 2026-10-25 entry on 縄, which cites
+this exact row as the cross-check it used). `hanzi-877f`, the hanzi sibling,
+was never revisited — the same "fix landed on one host, not its sibling"
+gap chunk 1's 乕 fix and chunk 123's 縄 fix both closed for other pairs,
+recurring a third time on the same character family. Rendered 蝿 next to
+`田`, `乙`, `日`, `电` to confirm directly rather than trust the citation:
+蝿's right half is a clean four-cell grid over a hooked tail stroke — `田`
+over `乙`, not a single-box `日` beside a separately-shaped `电`. Applied
+directly to `kanji.db` (no `data.txt` line exists for hanzi rows):
+`expand_part_terms(conn, ['虫','田','乙'], script_group='zh')` →
+`['虫','insects, worms','田','field, arable land, cultivated','乙','second']`,
+replacing decomposition 17131's 5 old `parts` rows with 6 new ones at
+sequential positions. Verified with `get_kanji_detail` (resolves to
+insects/field/second cleanly, keyword "flies" intact) and the full pytest
+suite (105 passed, unaffected) both before and after the edit.
+
+93 → 73 pending after this chunk (`hanzi_worklist_next.py --pending-count`).
