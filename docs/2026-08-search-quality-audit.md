@@ -24241,3 +24241,18 @@ re-run clean against the synced DB.
 No production deploy from here — a deployer needs `git pull` +
 `sync_system_data.py` on prod to pick up `prim-twin-spear` and the `rtk1011`
 fix.
+
+## 2026-10-30 — developer page at /kermit/ (for kermit.is-a.dev)
+
+Owner wants the free `kermit.is-a.dev` name. is-a.dev requires the root
+subdomain to be software-development related and a preview link on a domain
+the site already lives on, so the kanji site itself does not qualify. Added a
+static developer page, `frontend/public/kermit/index.html` (served at
+`https://kanji.alteon.help/kermit/`), describing the project's glyph tools:
+the search engine, the decomposition dataset, the MCP server, the render and
+audit CLIs and the Android app, with an API example. Every number on it was
+checked against the data (3,307 ja-kanji rows, ~21,000 zh-* rows; 1,300+
+pins). The owner submits the is-a.dev pull request themselves (that repo
+rejects AI-made PRs). Once the name resolves, prod nginx needs a
+`server_name kermit.is-a.dev` block rooted at `frontend/dist/kermit` plus a
+Certbot certificate; the kanji site can then follow as `kanji.kermit.is-a.dev`.

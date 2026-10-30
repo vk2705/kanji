@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kermit — glyph tools</title>
+<meta name="description" content="Kermit develops open-source software libraries and tools for glyphs: decomposing, searching, rendering and verifying CJK characters.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%232f7d5b'/><text x='32' y='45' font-size='38' text-anchor='middle' fill='white' font-family='serif'>字</text></svg>">
+<style>
+  :root {
+    --bg: #fbfaf7; --surface: #ffffff; --text: #1d2420; --muted: #5d6a63;
+    --line: #e3e6e1; --accent: #2f7d5b; --accent-soft: #e5f2eb; --code: #f1f3ef;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #121614; --surface: #1a201d; --text: #e6ebe7; --muted: #9aa8a0;
+      --line: #2b3430; --accent: #5fc394; --accent-soft: #1d3329; --code: #222a26;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #121614; --surface: #1a201d; --text: #e6ebe7; --muted: #9aa8a0;
+    --line: #2b3430; --accent: #5fc394; --accent-soft: #1d3329; --code: #222a26;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 16px; }
+  header { padding: 64px 0 40px; border-bottom: 1px solid var(--line); }
+  .brand { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
+  .logo {
+    width: 48px; height: 48px; border-radius: 12px; background: var(--accent); color: #fff;
+    display: grid; place-items: center; font: 30px/1 "Noto Serif CJK JP", "Hiragino Mincho ProN", serif;
+  }
+  .brand b { font-size: 20px; letter-spacing: .02em; }
+  h1 { font-size: clamp(28px, 5vw, 42px); line-height: 1.15; margin: 0 0 16px; letter-spacing: -.01em; }
+  .lead { font-size: 18px; color: var(--muted); max-width: 640px; margin: 0; }
+  .glyphs {
+    margin-top: 32px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
+    font-family: "Noto Serif CJK JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+  }
+  .glyphs span { font-size: 28px; }
+  .glyphs .op { font-family: inherit; color: var(--muted); font-size: 20px; }
+  .glyphs .tag { font: 13px/1 system-ui, sans-serif; color: var(--muted); margin-left: 6px; }
+  section { padding: 40px 0; border-bottom: 1px solid var(--line); }
+  h2 { font-size: 22px; margin: 0 0 20px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 20px;
+    display: flex; flex-direction: column;
+  }
+  .card h3 { margin: 0 0 8px; font-size: 17px; }
+  .card p { margin: 0 0 14px; color: var(--muted); font-size: 15px; flex: 1; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip { font-size: 12px; padding: 3px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); }
+  a { color: var(--accent); text-underline-offset: 3px; }
+  .card a { font-size: 14px; margin-top: 12px; }
+  code {
+    background: var(--code); padding: 2px 6px; border-radius: 6px;
+    font: 13px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; overflow-wrap: anywhere;
+  }
+  pre { background: var(--code); padding: 14px 16px; border-radius: 10px; overflow-x: auto; margin: 0; }
+  pre code { padding: 0; background: none; }
+  ul.plain { margin: 0; padding-left: 20px; color: var(--muted); }
+  ul.plain li { margin-bottom: 8px; }
+  ul.plain b { color: var(--text); font-weight: 600; }
+  footer { padding: 32px 0 48px; color: var(--muted); font-size: 14px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="brand"><div class="logo">字</div><b>Kermit</b></div>
+    <h1>Software libraries and tools for glyphs</h1>
+    <p class="lead">We develop open-source tools for working with CJK characters as shapes: breaking glyphs into named components, searching by those components, rendering them faithfully, and checking the data against what is actually drawn.</p>
+    <div class="glyphs" aria-label="Example: sun plus moon gives bright">
+      <span>日</span><span class="op">+</span><span>月</span><span class="op">→</span><span>明</span>
+      <span class="tag">search by parts, not by reading</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section>
+    <h2>Projects</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Shape search engine</h3>
+        <p>Find a Japanese kanji or Chinese hanzi by the parts you can see, with recursive search through decomposition trees, keyword and glyph lookup, English and Russian.</p>
+        <div class="chips"><span class="chip">Python</span><span class="chip">FastAPI</span><span class="chip">SQLite</span><span class="chip">React</span></div>
+        <a href="https://kanji.alteon.help/">Live site →</a>
+      </div>
+      <div class="card">
+        <h3>Glyph decomposition dataset</h3>
+        <p>More than 24,000 characters (about 3,000 Japanese kanji and 21,000 Chinese hanzi, simplified and traditional) broken into named components, with alternate breakdowns, per-row history and documented provenance.</p>
+        <div class="chips"><span class="chip">open data</span><span class="chip">cjkvi-ids</span><span class="chip">Unihan</span></div>
+        <a href="https://github.com/vk2705/kanji/blob/master/docs/DATA_SOURCES.md">Data sources →</a>
+      </div>
+      <div class="card">
+        <h3>MCP server</h3>
+        <p>A public, read-only Model Context Protocol server, so AI assistants can search characters by parts and fetch decompositions. No key needed.</p>
+        <div class="chips"><span class="chip">MCP</span><span class="chip">Streamable HTTP</span></div>
+        <a href="https://kanji.alteon.help/guide/#ai-access">Connect →</a>
+      </div>
+      <div class="card">
+        <h3>Glyph rendering &amp; audit tools</h3>
+        <p>Command-line tools that render glyphs with headless Chromium, detect fonts silently substituting one glyph for another, and audit decompositions for phantom, missing or mislevelled parts.</p>
+        <div class="chips"><span class="chip">Python</span><span class="chip">CLI</span><span class="chip">fonts</span></div>
+        <a href="https://github.com/vk2705/kanji/tree/master/backend">Source →</a>
+      </div>
+      <div class="card">
+        <h3>Android app</h3>
+        <p>A lightweight Android client for the search engine.</p>
+        <div class="chips"><span class="chip">Kotlin</span><span class="chip">Android</span></div>
+        <a href="https://github.com/vk2705/kanji/tree/master/android">Source →</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Use it from code</h2>
+    <p>The search API is public. For example, characters containing both "sun" and "moon":</p>
+    <pre><code>curl -X POST https://kanji.alteon.help/kanji/api/search/parts \
+  -H 'Content-Type: application/json' \
+  -d '{"parts": ["sun", "moon"], "depth": 1}'</code></pre>
+    <p style="margin-bottom:0">Or add the MCP server to Claude Code:<br><code>claude mcp add --transport http kanji https://kanjimcp.alteon.help/mcp</code></p>
+  </section>
+
+  <section>
+    <h2>How we work</h2>
+    <ul class="plain">
+      <li><b>Render it, don't reason about it.</b> Every component is checked against the drawn glyph, not just against Unicode tables.</li>
+      <li><b>Provenance first.</b> Each piece of data records where it came from; open sources are credited and nothing is attributed to a source it did not come from.</li>
+      <li><b>Tested.</b> An isolated API test suite and more than 1,300 pinned decomposition checks run in CI on every push.</li>
+    </ul>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    Open source on <a href="https://github.com/vk2705/kanji">GitHub</a> · Ideas and questions in <a href="https://github.com/vk2705/kanji/discussions">Discussions</a>
+  </div>
+</footer>
+</body>
+</html>
