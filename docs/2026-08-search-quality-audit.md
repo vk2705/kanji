@@ -23982,3 +23982,178 @@ insects/field/second cleanly, keyword "flies" intact) and the full pytest
 suite (105 passed, unaffected) both before and after the edit.
 
 93 → 73 pending after this chunk (`hanzi_worklist_next.py --pending-count`).
+
+## 2026-10-30 — fresh container again; five `audit_csv_regressions.py`/`audit_phantom_parts.py` clusters sampled, one real near-miss caught, no `data.txt` edit
+
+**Another from-scratch container** (no checkout, no venv, no `kanji.db`, no
+fonts, no `cjkvi-ids`). Followed the task brief's step 0 before anything
+else: the repo was present this time but detached-HEAD on an unrelated
+`_push-access-check-*` fetch; checked out `master`, fast-forwarded 8 commits
+to `origin/master` (`ac18c0d`), confirmed `git push --dry-run origin master`
+succeeds. Built `backend/venv` fresh, `apt-get install fonts-noto-cjk
+fonts-hanazono` (Noto first), fetched `cjkvi-ids/ids.txt`, rebuilt `kanji.db`
+from source. Baseline: `test_regression_fixes.py` 1331/1331 (no `zh-*` rows,
+hanzi spot-checks self-skip as documented), `pytest -q` 80 passed,
+`audit_overflatten.py`/`audit_self_reference.py`/`audit_radicals.py` all 0,
+`audit_phantom_parts.py --in-csv-range` 10 across 9 (unchanged),
+`audit_phantom_parts.py` full 49 across 36 (unchanged), `audit_primary_
+choice.py` 0/60, `suggest_heisig_aliases.py --near 0.8 --all` 0 groups in
+every category (unchanged), `audit_missing_children.py --summary` the same
+5 already-closed findings re-confirmed (鬲's font-blocked JK-anatomy, the
+chunk-87/94 敷/終/衰 set).
+
+**Chromium path fixed properly this time, not just symlinked around.**
+Three chunks running now (this one plus the 2026-10-29 bootstrap, plus an
+earlier one) have hit the same thing: a from-scratch container's
+pre-installed Chromium lives at `/opt/pw-browsers/chromium-<N>/chrome-
+linux64/chrome`, a path `render_glyphs.py`'s `CHROME_CANDIDATES` never
+checked directly, only `~/.cache/ms-playwright/chromium-<N>/...` — so every
+prior session either hardcoded one container's exact `<N>` or symlinked
+around it, both one-off fixes that don't survive the next container.
+`render_glyphs.py` now globs `/opt/pw-browsers/chromium-*/chrome-linux64/
+chrome` the same way it already globbed the `~/.cache` location, so this
+container needed zero manual fixup — confirmed with `find_chrome()` directly
+and a smoke-test render, both worked with no symlink. Committed.
+
+### Five clusters sampled, by hand, past the quick-win point
+
+Yesterday's "Next" said the `audit_csv_regressions.py` list (156 today, was
+157) is thin on cheap wins and to scan for an unexplored cluster bigger than
+2-3 hosts. Found several candidates with zero/low prior mentions in this
+doc and worked through them properly (render-plus-corroboration, not just
+word-matching) rather than taking the low mention-count as itself a signal
+of anything:
+
+- **"human legs" on the 穴-family (11 hosts: 控 突 究 窒 窃 窟 窪 搾 窯 窮,
+  the biggest cluster in the list)** — re-confirmed dead, not re-opened.
+  `kangxi10`'s own data.txt comment (line ~4854, dated 2026-09-23 chunk 47)
+  already settles this: `穴`'s own CSV row says "house; eight" matching the
+  current `八,宀` row and cjkvi (`⿱宀八`) exactly, and the pin on `rtk1413`
+  in `test_regression_fixes.py` carries the same reasoning. Heisig naming
+  the bottom stroke-pair "human legs" when *reusing* `穴` in later frames,
+  rather than "eight" as when he *teaches* it, is the "Heisig names by
+  mnemonic role" pattern, not a missing part. Nothing to do.
+
+- **"dice" on 番/審/翻/藩 (4 hosts, via 釆/`rtk791`)** — same cluster the
+  log already closed at chunk 108-109 (`釈`'s "dice" claim, no
+  corroboration found then either). No new evidence this chunk.
+
+- **"specialty"/"rice field"/"brains" on 博/薄/簿/縛 (4 hosts, via 尃/
+  `prim-acupuncturist`) — the real near-miss of this chunk.** Heisig's CSV
+  components for all four hosts literally re-paste frame 47's (専's) own
+  components string verbatim after naming "acupuncturist" ("specialty;
+  drop; ten; needle; rice field; brains; glue" = exactly rtk47's own
+  components field), which reads at first glance like textbook evidence
+  that `尃` (U+5C03) should decompose into `専` (U+5C02, "specialty",
+  already a registered row) + `丶` ("drop") — the same "reuse the named
+  compound" pattern already applied to `頁`/`殳`/`咅`/`喬` elsewhere in this
+  file. Was about to make exactly that edit when the comment sitting
+  directly above the current row (`# 尃 is not 専. Its four hosts spelled
+  it 専 plus a stray 丶`, data.txt line 3847) stopped it — this exact
+  question was already asked and answered on **2026-09-15** ("尃 is not
+  専" section): `尃` and `専` are different codepoints that look close but
+  render distinctly in every font checked (confirmed again this chunk —
+  `check_substitution(['尃','専'])` returns zero matching pairs across
+  Noto/WenQuanYi/HanaMinA/HanaMinB, and a cropped pixel-diff of a fresh
+  render agrees once the comparison excludes label text and the row
+  divider), and cjkvi reads every one of the four hosts as `⿱⿺𤰔丶寸`
+  (confirmed again via `audit_weak_evidence.py --host 博`, which still
+  flags it `not-a-parts-list` — surround operator). The original 2026-09-15
+  fix had found the *opposite* bug: someone had literally typed `専`
+  (wrong codepoint) into these four hosts' decompositions, and the fix was
+  registering the *correct*, distinct `尃` (`甫,寸`, matching cjkvi) and
+  pointing the hosts at it. Reusing `専` today would have silently
+  reintroduced that same already-fixed bug under a new, superficially
+  well-evidenced excuse. No change made. Worth flagging as a process point:
+  **a comment sitting directly next to a row is a stronger signal than a
+  grep of this file for the id** — `grep -c rtk47` and `grep -c
+  prim-acupuncturist` both came back near-zero before this was found, yet
+  the one line of context inline in `data.txt` carried the whole answer.
+
+- **"moon"/"month"/"flesh"/"part of the body" on 然/燃 (2 hosts, via
+  `rtk13`/月)** — `然`'s own cjkvi entry is `⿱⿰⿴𠂊冫犬灬`, carrying a `⿴`
+  (full-surround) operator over the `𠂊`/`冫` pair — `audit_weak_evidence.py
+  --host 然` confirms `not-a-parts-list`. Rendered `然` next to `月`, `夕`,
+  `𠂊`, `冫`: the top-left region is unambiguously the open three-stroke
+  claw of `夕`, nothing like `月`'s closed box. `然`'s two already-registered
+  decompositions (`犬,夕,灬` primary; `冫,灬,犬,𠂊` alternate) already cover
+  both plausible readings of that region and neither needs `月` — Heisig's
+  CSV word is almost certainly reaching for the "meat/flesh" etymology
+  (然 = burnt dog meat) rather than describing what the glyph actually
+  draws here, same homograph-by-etymology shape as the `尃`/`専` case.
+  Left alone.
+
+- **`斎` (rtk1869) "斉" phantom part, from `audit_phantom_parts.py`'s
+  strong section** — cjkvi reads `斎` as `⿵齐示`, i.e. the Chinese
+  canonical variant `齐` (U+9F50), while the current row uses the Japanese
+  jōyō variant `斉` (U+6589) — same character, different script variant,
+  the same kind of cross-script mismatch `CLAUDE.md`'s "script-aware
+  resolution" section describes for shared glyphs generally. Rendered all
+  three (`斎`, `斉`, `齐`) side by side: `斎`'s top visibly matches `斉`'s
+  internal strokes, not `齐`'s. Current row correct; the "phantom" is
+  `audit_phantom_parts.py` not knowing about this specific Japan/mainland
+  variant pair. Left alone — not a tool bug worth chasing today, just
+  logged so a future session doesn't re-render this same pair from scratch.
+
+### One new, genuinely open lead: `叚` on `暇` (rtk2027)
+
+`audit_csv_regressions.py` also flags `box (-> kangxi22/rtk1013)` on 暇
+alongside the already-logged, already-open `抑`/`仰`/`迎` "box" question
+(re-confirmed still open today, no new evidence — see 2026-10-29's entry).
+暇's own current row (`日,又`) is badly under-decomposed: cjkvi gives `暇 =
+⿰日叚` and Heisig's CSV components for frame 2027 are "sun; day; hobby;
+staples; mouth; box; crotch" — `日`(sun/day) and `又`(crotch, already in
+the row) account for two of those, but `叚` (U+53DA) itself has **no
+registered primitive row at all** and is not itself an RTK frame (it's a
+components-column-only name, like `殳`/`咅` were before they got rows).
+`叚` is used nowhere else in `heisig-kanjis.csv` — this is a single-host
+question.
+
+Rendered `叚` large and cropped close: it is unambiguously four pieces —
+a closed box top-left (`口`, matching Heisig's "mouth"), an open-on-one-side
+box top-right (resembling `コ`, matching cjkvi's own `⿱コ又` reading for
+叚's right half), a floor stroke, and `又` at the bottom (matching "crotch",
+already accounted for). That leaves Heisig's "staples" unaccounted for and
+unidentified: it is *not* the existing `prim-staples` row (`𦥑`, rendered
+side by side — `𦥑` is a slanted-stroke ladder/cradle shape, visibly
+nothing like the clean rectangular box-pair in `叚`), and it does not match
+`目`/`自`/`戸`/`尸` either (all rendered and ruled out). cjkvi's own IDS
+(`⿰⑤⿱コ又`) marks the left portion as an unencoded placeholder (`⑤`),
+confirming the structural channel can't see inside it either — this is a
+genuine opaque-intermediate case, not a lookup failure on my end.
+
+**Not fixed.** Confirmed pieces (`コ`, `又`, almost certainly `口`) aren't
+enough on their own to commit a full decomposition without guessing at the
+one unidentified element, and this project's standing bar is render-plus-
+corroboration, not a partial match. Left open, same as the `卬`/"box"
+question, with enough narrowed down that a future session doesn't have to
+re-render `叚`/`𦥑`/`目`/`自`/`戸`/`尸` from scratch to reach the same point.
+
+### Checks
+
+Pre- and post- identical (`data.txt` untouched): `test_regression_fixes.py`
+1331/1331, `pytest -q` 80 passed, `audit_overflatten.py`/
+`audit_self_reference.py`/`audit_radicals.py` all 0, `audit_phantom_parts.py
+--in-csv-range` 10 across 9, `audit_primary_choice.py` 0/60. No frontend
+file touched, so `npm run lint`/`build` not re-run. `sync_system_data.py`
+not run — nothing to sync.
+
+### Next
+
+1. `叚` on `暇` (new today): the unidentified top-left piece beside `口` is
+   the way back in — if a future render of some *other* character
+   containing a similar "box-pair over 又" shape turns up independent
+   corroboration for what that second box is, register `叚` then.
+2. `audit_csv_regressions.py`'s list (156) is now mostly mined: every
+   cluster sampled across today and 2026-10-29 combined (human legs, apron,
+   dice, specialty, moon/flesh, box×2, stand up/vase) is a confirmed dead
+   end or genuinely unresolved opaque case. A future chunk should budget
+   for *effort per cluster*, not count on finding more quick wins the way
+   early chunks did.
+3. `卬`'s "box" claim and `鬲`'s JK-script anatomy: still exactly as
+   2026-10-29 left them, re-confirmed not re-attempted.
+4. `kangxi58` is closed (confirmed again, chunk 112 and several times
+   since) — not touched, not re-investigated, no need to re-confirm again
+   next time either.
+5. `full_review.py`/hanzi-worklist pending counts belong to their own
+   separate daily timers, not this routine — not touched.
