@@ -24256,3 +24256,32 @@ pins). The owner submits the is-a.dev pull request themselves (that repo
 rejects AI-made PRs). Once the name resolves, prod nginx needs a
 `server_name kermit.is-a.dev` block rooted at `frontend/dist/kermit` plus a
 Certbot certificate; the kanji site can then follow as `kanji.kermit.is-a.dev`.
+
+## 2026-10-30 — Search Console "Couldn't fetch", and Bing verification
+
+Owner has seen "Couldn't fetch" on every sitemap in Google Search Console
+(Domain property `kanji.alteon.help`) for months. Diagnosed from prod's nginx
+logs (Oct 16–30): it is not a server, sitemap or DNS fault. Every Google request
+for `/sitemap.xml` and `/sitemap-1.xml` got 200 with valid XML; the XML parses
+(index over 5 chunks, 24,195 URLs, all on-host); DNS resolves identically via
+8.8.8.8, Google DoH, Quad9 and OpenDNS; iptables allows 80/443. What the logs
+do show is that Google's sitemap processor **never requested** a submitted
+sitemap: `sitemap-1.xml`, submitted Oct 18, had no Google hit until the owner
+ran URL Inspection on it on Oct 30. Google knows 3 URLs in total, all "Crawled –
+currently not indexed", with no referring pages: a new, unlinked subdomain with
+near-zero crawl priority. "Couldn't fetch" with an empty "Last read" means "never
+attempted". Note that log lines from `34.197.54.75` claiming to be Googlebot are
+the dev box (srv.alteon.help) testing with curl, not Google; the "ChatGPT-User"
+lines probing `/.env` etc. are a scanner, while real OpenAI crawlers made 4,000+
+successful requests.
+
+Levers are backlinks, manual Request Indexing, and Bing (which feeds DuckDuckGo
+and ChatGPT search). Added `frontend/public/BingSiteAuth.xml`, the Bing
+Webmaster Tools ownership-verification file, served at
+`https://kanji.alteon.help/BingSiteAuth.xml`. It must stay in place for as long
+as the site should remain verified in Bing.
+
+Still open: a frontend deploy rebuilds `dist/` in place, and nginx logged
+"rewrite or internal redirection cycle" errors for requests during the Oct 30
+21:11 deploy; and `try_files … /index.html` answers any missing file (including
+a mistyped sitemap URL) with the SPA's HTML and status 200 rather than a 404.
