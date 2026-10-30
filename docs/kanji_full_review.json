@@ -17747,11 +17747,11 @@
   "heisig_components": "moon; month; flesh; part of the body; tree; wood; umbrella; grains of rice",
   "cjkvi_ids": "⿰月桼[GJK] ⿰⺼桼[T]",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Matches Heisig's own components column exactly (flesh/tree/umbrella/grains of rice); cjkvi's ⿰月桼 right side is opaque, no further structural check applies.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1003",
@@ -17766,11 +17766,11 @@
    "羊",
    "氺"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Matches Heisig's components column exactly (tree/sheep/grains of rice); cjkvi's ⿰木𣴎 right side is an opaque intermediate (no row), Heisig's own flattened list is the authority here.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1004",
@@ -17784,11 +17784,11 @@
    "水",
    "丶"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi's ⿺⿻一氺丶 uses an overlay operator (confirmed via audit_weak_evidence.py --host 求), so it is not a literal parts list; current row (一,氺,丶) covers every drawn stroke. Heisig's column names only 'arrow; grains of rice' but we have no registered 'arrow' primitive to attribute the 一+丶 portion to without the book text, so left as-is rather than guessing a new primitive.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1005",
@@ -17802,11 +17802,11 @@
    "王",
    "求"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Clean ⿰王求, both parts already correctly registered rows.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1006",
@@ -17820,11 +17820,11 @@
    "求",
    "攵"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Clean ⿰攵求 (order), both parts already correctly registered rows.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1007",
@@ -17835,11 +17835,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰亇亇",
   "google_parts": [],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Atomic radical, used correctly as the top of every bamboo-family kanji in this batch.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1008",
@@ -17853,11 +17853,11 @@
    "竹",
    "夭"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Clean ⿱竹夭, 夭 already a registered primitive row.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1009",
@@ -17871,11 +17871,11 @@
    "竹",
    "立"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Clean ⿱竹立, 立 already a registered row.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1010",
@@ -17889,11 +17889,11 @@
    "竹",
    "世"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Clean ⿱竹世, 世 already a registered row.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1011",
@@ -17907,11 +17907,14 @@
    "竹",
    "戔"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "竹",
+   "戔"
+  ],
+  "note": "Was 竹,戈 (one spear) -- rendered beside shinjitai siblings 浅/銭/践/残/賎/桟 (which correctly use the simplified 㦮 'float' primitive), 箋 itself keeps the unsimplified traditional 戔 (two 戈 stacked). Registered new prim-twin-spear:戔:戈,戈 (no existing row for it).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1012",
@@ -17926,11 +17929,11 @@
    "月",
    "力"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Clean ⿱竹肋, 肋 already a registered row (rtk2534, power+flesh) matching Heisig's own flattened listing.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1013",
@@ -17945,11 +17948,11 @@
    "木",
    "目"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Clean ⿱竹相, 相 already a registered row (rtk222, tree+eye).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1014",
@@ -17960,11 +17963,11 @@
   "heisig_components": "bamboo; brush",
   "cjkvi_ids": "⿱竹聿",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Clean ⿱竹聿, 聿 already a registered atomic row (kangxi129).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1015",
@@ -17978,11 +17981,11 @@
    "竹",
    "同"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Clean ⿱竹同, 同 already a registered row (rtk192).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1016",
@@ -17993,11 +17996,11 @@
   "heisig_components": "bamboo; Buddhist temple; soil; dirt; ground; glue",
   "cjkvi_ids": "⿱竹寺",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Clean ⿱竹寺, 寺 already a registered row (rtk170).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1017",
@@ -18008,11 +18011,11 @@
   "heisig_components": "bamboo; eye; two hands",
   "cjkvi_ids": "⿱竹𥃲",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Matches Heisig's components column exactly (bamboo/eye/two hands).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1018",
@@ -18027,11 +18030,11 @@
    "人",
    "口"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Clean ⿱竹合, 合 already a registered row (rtk269).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1019",
@@ -18045,11 +18048,11 @@
    "竹",
    "朿"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Clean ⿱竹朿, 朿 already a registered row (prim-thorn-stalk).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1020",
@@ -18064,11 +18067,11 @@
    "氵",
    "専"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Matches cjkvi's ⿱竹溥 structural read one level down (水+尃); 尃 already a registered row (prim-acupuncturist).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1021",
@@ -18084,11 +18087,11 @@
    "几",
    "木"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Clean ⿱筑木, 筑 already a registered row (rtk2681, anachronistic-but-correct reuse per the frame-order rule).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1022",
@@ -18102,11 +18105,11 @@
    "竹",
    "竜"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Clean ⿱竹竜, 竜 already a registered row (rtk575); empty Heisig column is just no-CSV-data here (id_5th_ed outside the core 1-2042 range), not atomicity evidence, but our row already matches cjkvi.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1023",
@@ -18117,11 +18120,11 @@
   "heisig_components": "",
   "cjkvi_ids": "人",
   "google_parts": [],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Atomic radical, correct base of the whole 亻-series in this batch.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1024",
@@ -18135,11 +18138,11 @@
    "亻",
    "左"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Clean ⿰亻左, 左 already a registered row.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1025",
@@ -18150,11 +18153,11 @@
   "heisig_components": "person; spine; mouth; drop; mouth",
   "cjkvi_ids": "⿰亻呂",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Clean ⿰亻呂, 呂 already a registered row.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1026",
@@ -18165,11 +18168,11 @@
   "heisig_components": "person; nightbreak; sun; day; one; floor",
   "cjkvi_ids": "⿰亻旦",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Clean ⿰亻旦, 旦 already a registered row.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1027",
@@ -18183,11 +18186,11 @@
    "亻",
    "主"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Clean ⿰亻主, 主 already a registered row.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1028",
@@ -18201,11 +18204,11 @@
    "亻",
    "立"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Clean ⿰亻立, 立 already a registered row.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1029",
@@ -18219,11 +18222,11 @@
    "亻",
    "中"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Clean ⿰亻中, 中 already a registered row.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1030",
@@ -18237,11 +18240,11 @@
    "亻",
    "本"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Clean ⿰亻本, 本 already a registered row.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1031",
@@ -18257,11 +18260,11 @@
    "攵",
    "心"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Top 攸 is ⿰亻⿻｜攵ish, no registered 攸 row, but Heisig's full flattened list (person/stick/taskmaster/heart) matches our row exactly; the ｜ used is the already-registered prim-pipe codepoint, not a lookalike. Rendered 悠/攸/亻/心/攵 to confirm.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1032",
@@ -18272,11 +18275,11 @@
   "heisig_components": "person; cow",
   "cjkvi_ids": "⿰亻牛",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Clean ⿰亻牛, 牛 already a registered row.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1033",
@@ -18290,11 +18293,11 @@
    "亻",
    "士"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Clean ⿰亻士, 士 already a registered row.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1034",
@@ -18308,11 +18311,11 @@
    "亻",
    "也"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Clean ⿰亻也, 也 already a registered row.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1035",
@@ -18326,11 +18329,11 @@
    "亻",
    "犬"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Clean ⿰亻犬, 犬 already a registered row.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1036",
@@ -18341,11 +18344,11 @@
   "heisig_components": "person; rising cloud; two; elbow; wall",
   "cjkvi_ids": "⿰亻云",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Clean ⿰亻云, 云 already a registered row.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1037",
@@ -18356,11 +18359,11 @@
   "heisig_components": "buddha; person; elbow",
   "cjkvi_ids": "⿰亻厶",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Clean ⿰亻厶, 厶 already a registered atomic row.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1038",
@@ -18374,11 +18377,11 @@
    "亻",
    "木"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Clean ⿰亻木, 木 already a registered row.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1039",
@@ -18389,11 +18392,11 @@
   "heisig_components": "sham; person; anti-; demonstration; cliff; crotch",
   "cjkvi_ids": "⿰亻反",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Clean ⿰亻反, 反 already a registered row.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1040",
@@ -18404,11 +18407,11 @@
   "heisig_components": "person; branch; ten; needle; crotch",
   "cjkvi_ids": "⿰亻支",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Clean ⿰亻支, 支 already a registered row.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1041",
@@ -18419,11 +18422,11 @@
   "heisig_components": "person; white; dove",
   "cjkvi_ids": "⿰亻白",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Clean ⿰亻白, 白 already a registered row.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1042",
@@ -18434,11 +18437,11 @@
   "heisig_components": "person; valley; eight; umbrella; mouth",
   "cjkvi_ids": "⿰亻谷",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Clean ⿰亻谷, 谷 already a registered row.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1043",
@@ -18449,11 +18452,11 @@
   "heisig_components": "person; say; words; keitai; mouth",
   "cjkvi_ids": "⿰亻言",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Clean ⿰亻言, 言 already a registered atomic row.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1044",
@@ -18467,11 +18470,11 @@
    "亻",
    "圭"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Clean ⿰亻圭, 圭 already a registered row.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1045",
@@ -18482,11 +18485,11 @@
   "heisig_components": "person; cloth; clothes; clothing; garment",
   "cjkvi_ids": "⿰亻衣",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Clean ⿰亻衣, 衣 already a registered row.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1046",
@@ -18497,11 +18500,11 @@
   "heisig_components": "person; file; bones; one; ceiling; evening; sword; sabre; saber",
   "cjkvi_ids": "⿰亻列",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Clean ⿰亻列, 列 already a registered row.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1047",
@@ -18515,11 +18518,11 @@
    "亻",
    "固"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Clean ⿰亻固, 固 already a registered row.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1048",
@@ -18530,11 +18533,11 @@
   "heisig_components": "person; build; brush; stretch",
   "cjkvi_ids": "⿰亻建",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Clean ⿰亻建, 建 already a registered row.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1049",
@@ -18549,11 +18552,11 @@
    "貝",
    "刂"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Clean ⿰亻則, 則 already a registered row.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1050",
@@ -18564,11 +18567,11 @@
   "heisig_components": "person; Buddhist temple; soil; dirt; ground; glue",
   "cjkvi_ids": "⿰亻寺",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Clean ⿰亻寺, 寺 already a registered row.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1051",
@@ -18579,11 +18582,11 @@
   "heisig_components": "person; pavilion; tall; top hat; mouth; crown; street; nail; spike",
   "cjkvi_ids": "⿰亻亭",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Clean ⿰亻亭, 亭 already a registered row.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-10-30"
  },
  {
   "id": "rtk1052",

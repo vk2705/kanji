@@ -24157,3 +24157,87 @@ not run — nothing to sync.
    next time either.
 5. `full_review.py`/hanzi-worklist pending counts belong to their own
    separate daily timers, not this routine — not touched.
+
+## 2026-10-30 — full re-review: frames 1002–1051
+
+Daily unattended chunk (`full_review.py -n 50`). Pre-flight: `git status`
+showed only the expected always-dirty files (`docs/decomposition_worklist.json`,
+`docs/kanji_review_coverage.tsv`) plus unrelated untracked scratch files;
+`backend/data.txt` and `docs/kanji_full_review.json` were both clean — no
+prior run died midway. `git pull --no-rebase origin master`: already up to
+date. `kanji.db` present. Baseline `pytest -q` 105 passed, baseline
+`./regression_fresh.sh` 1331/1331, baseline `audit_radicals.py` 0 undefined
+terms. `backup_db.py` run before any edit.
+
+**49 keep, 1 fixed, 0 needs-render.** `--pending-count`: 1948/3000 (was 1998).
+
+This chunk covered the second half of the 竹 (bamboo) family (rtk1007–1022)
+and the start of the 亻 (person) family (rtk1023–1051, 28 rows of clean
+`⿰亻X` compounds), plus 膝/様/求/球/救 (rtk1002–1006). Every 竹-series and
+亻-series row's second part already had its own correctly-registered
+primitive row and matched cjkvi-ids' IDS exactly, so this chunk was mostly
+confirmation rather than discovery — the one real fix:
+
+### Fixes
+
+- **rtk1011 箋 (stationery)**: was `竹,戈` (bamboo + one spear). Rendering it
+  alongside its shinjitai siblings that share the same right-side shape
+  family — `浅`/`銭`/`践`/`残`/`賎`/`桟`, all of which correctly use the
+  already-registered `prim-float` primitive (`㦮`, U+39AE, "two"+"spear") —
+  showed those six all draw the *simplified* single-stroke-group form, while
+  `箋`'s bottom draws the more complex double-stacked form matching `戔`
+  (U+6214) exactly: 箋 isn't a jōyō kanji, so it kept the unsimplified
+  traditional component instead of being shinjitai-reduced to `㦮` like its
+  siblings. cjkvi-ids agrees (`⿱竹戔`). Heisig's own components column is
+  empty here (`id_5th_ed` 2991, outside the core 1–2042 range, so no
+  atomicity evidence either way per the empty-column rule) — decided from
+  the render and cjkvi alone. No row for `戔` existed; registered
+  `prim-twin-spear:戔:twin spear:戈,戈` (visually two `戈` stacked, no
+  overlay operator involved) and pointed `rtk1011` at `竹,戔`.
+  **Shape-family check**: grepped every other `:戈,` / `,戈` part-list in
+  `data.txt` — `賊`/`我`/`戒`/`伐`/`幾`/`畿`/`戦`/`戯`/`籤`/`懺`/`或`/`絨`/
+  `截`/`哉` (plus the primitive rows `prim-harvest-festival`/`prim-float`/
+  `prim-kazoo`) all genuinely contain a single bare `戈`, not a disguised
+  `戔` — only `箋` had the mistake, so no further rows needed the same fix.
+
+### Kept, worth noting
+
+- **rtk1004 求 (request)**: `audit_weak_evidence.py --host 求` confirms
+  cjkvi's `⿺⿻一氺丶` uses the `⿻` overlay operator, so it is not a literal
+  three-piece parts list (per the CLAUDE.md caveat on `⿻`/`⿴`). The current
+  row (`一,氺,丶`) covers every stroke actually drawn. Heisig's own column
+  names only two primitives, "arrow; grains of rice" — "grains of rice"
+  matches our `氺`, but there is no registered "arrow" primitive to
+  attribute the `一`+`丶` portion to, and guessing its exact shape without
+  the book text would be exactly the kind of unverified call this review is
+  supposed to avoid. Left as-is rather than inventing a primitive on a
+  guess.
+- **rtk1002 膝 (knee)** and **rtk1003 様 (esq.)**: both have an opaque cjkvi
+  intermediate on one side (`桼` for 膝, `𣴎` for 様 — neither has a row here
+  and cjkvi doesn't expand further), but Heisig's own components column is
+  non-empty and matches our existing flattened rows exactly in both cases,
+  which settles it without needing to resolve the intermediate.
+- **rtk1031 悠 (remote)**: top is `攸` (no registered row), bottom `心`.
+  Heisig's fully-flattened column ("permanence; person; stick; fred astaire;
+  taskmaster; heart") matches our row (`亻,｜,心,攵`) exactly once expanded;
+  the `｜` is the already-registered `prim-pipe` codepoint (U+FF5C, aliased
+  "stick, fred astaire"), not a stray lookalike stroke. Rendered
+  `悠 攸 亻 心 攵` together to confirm the four pieces are all actually
+  drawn and nothing extra.
+- **rtk1021 築 (fabricate)**: `木,筑` reuses `筑` (rtk2681, frame 2681 — a
+  later frame than 1021) as a primitive. This is the deliberate
+  anachronistic-but-correct pattern `audit_anachronistic_names.py` exists to
+  distinguish from a real naming bug: Heisig teaches a shape as a primitive
+  long before its own frame, and the glyph itself (`筑`) is correctly drawn
+  inside `築`, so this is not a finding.
+
+Post-fix: `pytest -q` 105 passed, `./regression_fresh.sh` 1331/1331,
+`audit_radicals.py` 0 undefined terms, all unchanged from baseline.
+`sync_system_data.py --dry-run` showed exactly the expected diff (1 kanji
+inserted — the new `prim-twin-spear` row, 3 aliases added, 1 decomposition
+created + 1 replaced) before being applied for real, then all three checks
+re-run clean against the synced DB.
+
+No production deploy from here — a deployer needs `git pull` +
+`sync_system_data.py` on prod to pick up `prim-twin-spear` and the `rtk1011`
+fix.

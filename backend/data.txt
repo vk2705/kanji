@@ -1256,7 +1256,12 @@ rtk1007:竹:bamboo:
 rtk1008:笑:laugh:夭,竹
 rtk1009:笠:bamboo hat:竹,立
 rtk1010:笹:bamboo grass:世,竹
-rtk1011:箋:paper:竹,戈
+# 2026-10-30 full re-review: was 竹,戈 (one spear) -- rendered beside its
+# shinjitai siblings 浅/銭/践/残/賎/桟 (which correctly use the simplified
+# 㦮 "float" primitive for this same shape family), 箋 itself keeps the
+# unsimplified traditional 戔 (two 戈 stacked), not a bare 戈 and not 㦮.
+# No existing row for 戔; registered prim-twin-spear below.
+rtk1011:箋:paper:竹,戔
 rtk1012:筋:muscle:竹,肋
 rtk1013:箱:box:相,竹
 rtk1014:筆:writing brush:竹,聿
@@ -3703,6 +3708,7 @@ prim-mist:𠦝:mist:十,早
 # blank where that needs a component still unregistered.
 prim-clothes-hanger:𠃌:clothes hanger,coat hanger,sword,dagger:
 prim-float:㦮:float:二,戈
+prim-twin-spear:戔:twin spear:戈,戈
 prim-spool:圣:spool,clod,toilet paper:又,土
 prim-bonsai:𡗗:bonsai:三,人
 prim-tarzan:枼:tarzan:世,木
