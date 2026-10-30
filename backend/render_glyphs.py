@@ -76,15 +76,19 @@ CHROME_CANDIDATES = [
     "/opt/pw-browsers/chromium/chrome-linux/chrome",
 ]
 
-# Fall back to whatever Chromium `playwright install` put in the default cache dir
-# (versioned subdirectory, e.g. ~/.cache/ms-playwright/chromium-1234/chrome-linux64/chrome)
-# if none of the fixed CHROME_CANDIDATES paths above exist.
-_PW_CACHE = Path.home() / ".cache" / "ms-playwright"
-if _PW_CACHE.is_dir():
-    for _entry in sorted(_PW_CACHE.glob("chromium-*")):
-        _bin = _entry / "chrome-linux64" / "chrome"
-        if _bin.exists():
-            CHROME_CANDIDATES.append(str(_bin))
+# Fall back to whatever Chromium a pre-installed-browser container put in its own
+# versioned directory, trying both the documented remote-sandbox location
+# (/opt/pw-browsers/chromium-<N>/chrome-linux64/chrome — the exact <N> is
+# container-specific and has already differed across sessions working on this repo)
+# and the default `playwright install` cache dir
+# (~/.cache/ms-playwright/chromium-<N>/chrome-linux64/chrome), if none of the fixed
+# CHROME_CANDIDATES paths above exist.
+for _cache_root in (Path("/opt/pw-browsers"), Path.home() / ".cache" / "ms-playwright"):
+    if _cache_root.is_dir():
+        for _entry in sorted(_cache_root.glob("chromium-*")):
+            _bin = _entry / "chrome-linux64" / "chrome"
+            if _bin.exists():
+                CHROME_CANDIDATES.append(str(_bin))
 
 # HanaMin sits ahead of Unifont deliberately. Unifont covers almost everything, but
 # it is a 16px *bitmap* face: enlarged for comparison, a CJK Ext B/G glyph like 𠂉 or
