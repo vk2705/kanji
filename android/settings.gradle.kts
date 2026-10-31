@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "RTK Kanji"
+rootProject.name = "KumiJi"
 include(":app")

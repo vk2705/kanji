@@ -381,6 +381,69 @@ textarea {
   margin: 0.5rem 0 0.25rem;
 }
 
+.meaning-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin: 0.5rem 0 0.75rem;
+}
+
+.meaning-picker-hint {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.meaning-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.meaning-term {
+  font-weight: 600;
+  margin-right: 2px;
+}
+
+.meaning-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 3px 10px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  cursor: pointer;
+  opacity: 0.6;
+  text-decoration: line-through;
+}
+
+.meaning-chip-on {
+  background: var(--accent-light);
+  border-color: var(--accent);
+  color: var(--text);
+  opacity: 1;
+  text-decoration: none;
+}
+
+.meaning-glyph {
+  font-size: 1.15rem;
+  color: var(--kanji-color);
+  display: inline-flex;
+}
+
+.meaning-more {
+  background: none;
+  border: none;
+  color: var(--accent-hover);
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 3px 4px;
+}
+
 .parts-inputs {
   display: flex;
   gap: 10px;

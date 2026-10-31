@@ -8,6 +8,7 @@ import CreateKanji from "./components/CreateKanji";
 import MyContributions from "./components/MyContributions";
 import AutocompleteInput from "./components/AutocompleteInput";
 import ViewNavigation from "./components/ViewNavigation";
+import MeaningPicker from "./components/MeaningPicker";
 import { t } from "./i18n";
 import { stateToParams, paramsToState, paramsToUrl } from "./urlState";
 import "./App.css";
@@ -279,6 +280,11 @@ export default function App() {
   // matches a large fraction of the dataset at high depth, so this stays an explicit
   // user choice rather than a fixed default (see search_by_parts's docstring).
   const [searchDepth, setSearchDepth] = useState(initialUrlState.searchDepth || 1);
+  // What each ambiguous part name in the last parts search can mean ({term: [option]},
+  // from the response), and which of those the user has kept on ({term: [ids]}; a
+  // term not in it searches every meaning). See MeaningPicker.
+  const [partMeanings, setPartMeanings] = useState({});
+  const [meaningChoice, setMeaningChoice] = useState({});
 
   async function runSearch(fn) {
     recordEvent("search");
@@ -320,9 +326,10 @@ export default function App() {
     return false;
   }
 
-  function runPartsSearch(filled, script, srcs, depth) {
+  function runPartsSearch(filled, script, srcs, depth, choice = meaningChoice) {
     runSearch(async (signal) => {
-      const data = await searchByParts(filled, script || null, srcs, depth, signal);
+      const data = await searchByParts(filled, script || null, srcs, depth, signal, choice);
+      setPartMeanings(data.meanings || {});
       if (data.results.length === 0 && filled.length === 1) {
         const text = await searchByText(filled[0], script || null, srcs, signal);
         setResults(text.results);
@@ -355,7 +362,20 @@ export default function App() {
     if (!filled.length || !canSearchSelectedSources()) return;
     setSelectedId(null);
     pushUrl({ tab: 0, parts, textQuery, charQuery, searchDepth, studyScript, sources: [...sources], selectedId: null, view: "search" });
-    runPartsSearch(filled, studyScript, activeSources, searchDepth);
+    // A narrowed meaning is kept only while its name is still one of the parts.
+    const typed = new Set(filled.map((p) => p.trim().toLowerCase()));
+    const choice = Object.fromEntries(Object.entries(meaningChoice).filter(([term]) => typed.has(term)));
+    setMeaningChoice(choice);
+    runPartsSearch(filled, studyScript, activeSources, searchDepth, choice);
+  }
+
+  function handleMeaningChange(term, ids) {
+    const choice = { ...meaningChoice };
+    if (ids) choice[term] = ids;
+    else delete choice[term];
+    setMeaningChoice(choice);
+    const filled = parts.filter((p) => p.trim());
+    if (filled.length) runPartsSearch(filled, studyScript, activeSources, searchDepth, choice);
   }
 
   async function handleTextSearch(e) {
@@ -379,6 +399,8 @@ export default function App() {
     setResults(null);
     setSelectedId(null);
     setFallbackMsg("");
+    setPartMeanings({});
+    setMeaningChoice({});
     setSearchError("");
   }
 
@@ -420,6 +442,8 @@ export default function App() {
     setSearchDepth(1);
     setResults(null);
     setFallbackMsg("");
+    setPartMeanings({});
+    setMeaningChoice({});
     setSearchError("");
     setDetailStack([]);
     setSelectedId(null);
@@ -613,6 +637,14 @@ export default function App() {
                   run, it clears the form and results and starts over. */}
               {(results !== null || loading || fallbackMsg || searchError) && (
                 <ViewNavigation onHome={goHome} lang={uiLang} />
+              )}
+              {tab === 0 && (
+                <MeaningPicker
+                  meanings={partMeanings}
+                  choice={meaningChoice}
+                  onChange={handleMeaningChange}
+                  lang={uiLang}
+                />
               )}
               {fallbackMsg && (
                 <p className="fallback-msg">{fallbackMsg}</p>

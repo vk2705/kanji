@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-RTK Kanji Search — CLI
+KumiJi Glyph Explorer — CLI
 Usage:
   rtk.py parts sun moon          # kanji containing all given primitives
   rtk.py text marsh              # kanji whose keyword/alias contains substring

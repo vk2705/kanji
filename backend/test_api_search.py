@@ -492,3 +492,50 @@ def test_kanji_history_endpoint(client, tmp_path, monkeypatch):
     assert body["available"] is True and body["versions"][0]["parts"] == "𠂊,电"
     assert client.get("/kanji/hanzi-4e80/history").json()["available"] is False
     assert client.get("/kanji/rtk9999/history").json()["reason"] == "not-generated"
+
+
+def _seed_lid_fixture(conn):
+    """The name "lid" means two things, as in the real data: the primitive 亠 (kangxi8)
+    and the kanji 蓋 (rtk1561). 市 lists 亠 by its glyph; the stand-in host 盖 lists 蓋."""
+    _seed_kanji(conn, "kangxi8", "亠", "lid")
+    _seed_kanji(conn, "rtk1561", "蓋", "lid")
+    _seed_kanji(conn, "rtk440", "市", "market")
+    _seed_kanji(conn, "rtk9001", "盖", "host-of-cover")
+    for kid, alias in (("kangxi8", "lid"), ("kangxi8", "top hat"), ("kangxi8", "亠"),
+                       ("rtk1561", "lid"), ("rtk1561", "cover"), ("rtk1561", "蓋")):
+        _seed_alias(conn, kid, alias)
+    _seed_decomposition(conn, "rtk440", 1, ["亠", "towel"])
+    _seed_decomposition(conn, "rtk9001", 1, ["蓋"])
+    conn.commit()
+
+
+def test_ambiguous_part_name_returns_its_meanings(conn, client):
+    _seed_lid_fixture(conn)
+    r = client.post("/search/parts", json={"parts": ["lid", "towel"]})
+    assert r.status_code == 200, r.text
+    meanings = r.json()["meanings"]
+    # Only the ambiguous name is listed, primitive first.
+    assert list(meanings) == ["lid"]
+    assert [(m["character"], m["kind"]) for m in meanings["lid"]] == [("亠", "primitive"), ("蓋", "kanji")]
+
+
+def test_every_meaning_is_searched_by_default(conn, client):
+    """The default is the union of what each meaning finds on its own, including
+    hosts that list a meaning by its glyph rather than by the typed name."""
+    _seed_lid_fixture(conn)
+    ids = {row["id"] for row in client.post("/search/parts", json={"parts": ["lid"]}).json()["results"]}
+    assert ids == {"kangxi8", "rtk1561", "rtk440", "rtk9001"}
+
+
+def test_choosing_a_meaning_narrows_the_search(conn, client):
+    _seed_lid_fixture(conn)
+
+    def search(chosen):
+        r = client.post("/search/parts", json={"parts": ["lid"], "meanings": {"lid": chosen}})
+        assert r.status_code == 200, r.text
+        return {row["id"] for row in r.json()["results"]}
+
+    assert search(["kangxi8"]) == {"kangxi8", "rtk440"}
+    assert search(["rtk1561"]) == {"rtk1561", "rtk9001"}
+    # Ids the term does not name are ignored; choosing none of its meanings means all.
+    assert search(["no-such-id"]) == {"kangxi8", "rtk1561", "rtk440", "rtk9001"}

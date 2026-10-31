@@ -1,3 +1,4 @@
+import unicodedata
 import sqlite3
 import csv
 from pathlib import Path
@@ -949,84 +950,6 @@ def _self_identity_kanji_ids(conn, term: str, viewer_id: int | None,
     return {r["kanji_id"] for r in rows}
 
 
-def get_all_aliases_for_term(conn, term: str, viewer_id: int | None = None,
-                              script_scope: tuple[str, ...] | None = None) -> set[str]:
-    """Return the full visible alias set for a primitive (for parts-table matching).
-
-    Unions *every* entry the term names, not just resolve_alias's single canonical
-    pick (owner decision, 2026-09-09: "when searching by parts and a term has several
-    meanings, bring both — we don't know which one the user meant"). A search box
-    takes a word, and plenty of words name two different things in this database: the
-    standalone kanji and the primitive drawn inside other kanji. "owl" is both 梟
-    (rtk2852, the bird) and 𭕄 (prim-owl, the three-stroke crown of 学/巣/単); "heart"
-    is both 心 (rtk639) and 忄 (kangxi61); "finger" both 指 and 扌. Picking one — and
-    resolve_alias picks whichever row SQLite hands back first, which is usually the
-    standalone kanji — silently hid the other reading's hosts, so a parts search for
-    "owl" returned 1 kanji where "owl crown" returned 17.
-
-    This deliberately mirrors _self_identity_kanji_ids, which already returns every
-    match for the same reason (a term ambiguous across *scripts* must self-identify
-    against all of them). The two halves of the same search now agree.
-
-    resolve_alias itself is left alone: its callers (contributions.py's write-path
-    visibility gate, decomposition-chip resolution) need exactly one id, and a write
-    endpoint that suddenly addressed several rows would be a different bug entirely.
-    """
-    term = term.strip().lower()
-    rows = conn.execute(
-        "SELECT id AS kanji_id, script FROM kanji "
-        "WHERE id = ? AND (visibility = 'public' OR owner_id = ?)",
-        (term, viewer_id)
-    ).fetchall()
-    if not rows:
-        rows = conn.execute(
-            "SELECT DISTINCT a.kanji_id, k.script FROM aliases a "
-            "JOIN kanji k ON k.id = a.kanji_id "
-            "WHERE a.alias = ? AND (a.visibility = 'public' OR a.owner_id = ?) "
-            "AND (k.visibility = 'public' OR k.owner_id = ?)",
-            (term, viewer_id, viewer_id)
-        ).fetchall()
-    if not rows:
-        return {term}
-    if script_scope:
-        # Script is a filter the user actually set, so it still narrows; meaning is
-        # not, so it doesn't.
-        scoped = [r for r in rows if r["script"] in script_scope]
-        if scoped:
-            rows = scoped
-    ids = {r["kanji_id"] for r in rows}
-    ph = ",".join("?" * len(ids))
-    aliases = {r["alias"] for r in conn.execute(
-        f"SELECT alias FROM aliases WHERE kanji_id IN ({ph}) "
-        f"AND (visibility = 'public' OR owner_id = ?)",
-        [*ids, viewer_id]
-    )}
-
-    # Widening to every meaning of the *queried* word must not also widen to every
-    # meaning of its synonyms, or the union chains through unrelated entries: "cover"
-    # names 蓋 (rtk1561), whose own keyword is "lid" — and "lid" is separately the name
-    # of 亠 (kangxi8), a completely different shape. Following that chain returned all
-    # 102 hosts that draw a 亠 to someone searching for a 冖. So a synonym is usable as
-    # a search key only when everything it names is already in the answer set;
-    # otherwise it is dropped and only its owner's unambiguous names are kept.
-    ambiguous = set()
-    for alias in aliases - ids - {term}:
-        script_sql = ""
-        script_params = []
-        if script_scope:
-            script_sql = f" AND k.script IN ({','.join('?' * len(script_scope))})"
-            script_params = list(script_scope)
-        claimants = {r["kanji_id"] for r in conn.execute(
-            "SELECT DISTINCT a.kanji_id FROM aliases a JOIN kanji k ON k.id = a.kanji_id "
-            "WHERE a.alias = ? AND (a.visibility = 'public' OR a.owner_id = ?) "
-            "AND (k.visibility = 'public' OR k.owner_id = ?)" + script_sql,
-            (alias, viewer_id, viewer_id, *script_params)
-        )}
-        if claimants - ids:
-            ambiguous.add(alias)
-    return (aliases - ambiguous) | ids | {term}
-
-
 def _kanji_with_part_terms(conn, terms: set[str], viewer_id: int | None,
                             sources: set[str] | None,
                             script_scope: tuple[str, ...] | None) -> set[str]:
@@ -1095,9 +1018,86 @@ def _terms_for_kanji_ids(conn, kanji_ids: set[str], viewer_id: int | None,
     return result
 
 
+def _primitive_kind(kanji_id: str) -> str:
+    """What a row is, for the meaning picker: a primitive (kangxi{n}, prim-*, the
+    legacy rad* rows), an RTK kanji, a hanzi, or a user's own entry."""
+    if kanji_id.startswith(("kangxi", "prim", "rad")):
+        return "primitive"
+    if kanji_id.startswith("rtk"):
+        return "kanji"
+    if kanji_id.startswith("hanzi-"):
+        return "hanzi"
+    return "user"
+
+
+_KIND_ORDER = {"primitive": 0, "kanji": 1, "hanzi": 2, "user": 3}
+
+
+def part_term_meanings(conn, term: str, viewer_id: int | None = None,
+                       script: str | None = None) -> list[dict]:
+    """Every distinct thing a typed part name can mean, for the parts-search meaning
+    picker (owner request, 2026-10-23/30: "lid" is both the primitive 亠 and the kanji
+    蓋, and the user should be able to say which one they meant).
+
+    Rows that draw the same glyph are one meaning, not several: 心 exists as rtk639 and
+    as hanzi-5fc3, and offering "心" twice would be a choice between two scripts, which
+    the study-language filter already makes. Each meaning carries every id it covers;
+    those ids are what a caller sends back in search_by_parts's `meanings`. Primitives
+    are listed first, since a part name is most often meant as one."""
+    script_scope = SCRIPT_VISIBILITY.get(script) if script else None
+    ids = _self_identity_kanji_ids(conn, term, viewer_id, script_scope)
+    if not ids:
+        return []
+    ph = ",".join("?" * len(ids))
+    rows = conn.execute(
+        f"SELECT id, character, keyword, frame, image_url, pinyin FROM kanji WHERE id IN ({ph})",
+        list(ids)
+    ).fetchall()
+    term = term.strip().lower()
+    groups: dict[str, dict] = {}
+    for r in sorted(rows, key=lambda r: (_KIND_ORDER[_primitive_kind(r["id"])],
+                                         r["frame"] is None, r["frame"] or 0, r["id"])):
+        glyph = r["character"] if r["character"] and r["character"] not in ("?", "??") else None
+        key = glyph or r["id"]
+        group = groups.get(key)
+        if group is None:
+            groups[key] = {
+                "ids": [r["id"]],
+                "character": glyph,
+                "keyword": r["keyword"],
+                "kind": _primitive_kind(r["id"]),
+                "image_url": r["image_url"],
+                "via": "reading" if _matches_by_reading_only(term, r) else "name",
+            }
+        else:
+            group["ids"].append(r["id"])
+            group["image_url"] = group["image_url"] or r["image_url"]
+            if not _matches_by_reading_only(term, r):
+                group["via"] = "name"
+    return list(groups.values())
+
+
+def _matches_by_reading_only(term: str, row) -> bool:
+    """True when a row answers to `term` only because it is the hanzi's tone-stripped
+    pinyin (import_hanzi.py adds one as an alias), not because it is what the row
+    means: 孙 "grandchild" answers to "sun" because it is read sūn. The meaning picker
+    folds these together rather than offering every homophone as its own meaning."""
+    if not row["pinyin"]:
+        return False
+    keyword_words = {w.strip().lower() for w in (row["keyword"] or "").split(",")}
+    if term in keyword_words:
+        return False
+    stripped = "".join(
+        ch for ch in unicodedata.normalize("NFKD", row["pinyin"].lower())
+        if not unicodedata.combining(ch)
+    )
+    return term in {r.strip() for r in stripped.replace(",", " ").split()}
+
+
 def _reachable_kanji_for_term(conn, term: str, viewer_id: int | None,
                                script_scope: tuple[str, ...] | None,
-                               sources: set[str] | None, max_depth: int) -> set[str]:
+                               sources: set[str] | None, max_depth: int,
+                               meaning_ids: set[str] | None = None) -> set[str]:
     """All kanji ids where `term` is present anywhere in the decomposition tree —
     directly, or nested inside any alternative decomposition of any part, up to
     `max_depth` levels deep (same cycle-safety as the detail view's recursive
@@ -1110,10 +1110,33 @@ def _reachable_kanji_for_term(conn, term: str, viewer_id: int | None,
     "is made of" itself) is included via every kanji the term itself names — not just
     resolve_alias's single canonical pick, so a term ambiguous across scripts (e.g.
     '族', matching both an rtk row and a hanzi row) self-matches all of them — and is
-    independent of max_depth."""
-    matched = _self_identity_kanji_ids(conn, term, viewer_id, script_scope)
+    independent of max_depth.
 
-    frontier_terms = get_all_aliases_for_term(conn, term, viewer_id, script_scope)
+    meaning_ids narrows an ambiguous term to the rows the user picked (see
+    part_term_meanings); ids the term does not name are ignored, and a choice that
+    names none of them falls back to every meaning. Either way the walk starts from
+    the chosen rows' own names (_terms_for_kanji_ids), never from a name one of them
+    shares with a row that was *not* chosen: picking only 亠 must not search by "lid",
+    which 蓋 also answers to. With every meaning chosen this is the union the owner
+    asked for on 2026-09-09 ("we don't know which one the user meant": "owl" is
+    both 梟 and the 𭕄 crown of 学/巣/単), and _terms_for_kanji_ids keeps the guard
+    against synonym chains ("cover" names 蓋, whose keyword "lid" also names 亠). It
+    replaces get_all_aliases_for_term, and unlike that helper it includes the rows'
+    glyphs, so "lid" reaches the 102 kanji that list 亠 by character (until
+    2026-10-30 it reached 32, because the hanzi row for 亠 made that glyph look
+    ambiguous)."""
+    names = _self_identity_kanji_ids(conn, term, viewer_id, script_scope)
+    chosen = names & meaning_ids if meaning_ids else names
+    if not chosen:
+        chosen = names
+    if chosen:
+        matched = chosen
+        frontier_terms = _terms_for_kanji_ids(conn, chosen, viewer_id, script_scope)
+        if chosen == names:
+            frontier_terms.add(term.strip().lower())
+    else:
+        matched = set()
+        frontier_terms = {term.strip().lower()}
     found_kanji: set[str] = set()
     depth = 0
     while frontier_terms and depth < max_depth:
@@ -1130,7 +1153,8 @@ def _reachable_kanji_for_term(conn, term: str, viewer_id: int | None,
 
 def search_by_parts(conn, part_names: list[str], viewer_id: int | None = None,
                      script: str | None = None, sources: set[str] | None = None,
-                     depth: int = 1) -> list[dict]:
+                     depth: int = 1,
+                     meanings: dict[str, list[str]] | None = None) -> list[dict]:
     """Find kanji containing ALL given primitives. A primitive counts as present if it's
     reachable within `depth` levels of a kanji's decomposition tree — directly (depth=1,
     the historical/default behavior: the term must appear in a decomposition of the
@@ -1150,17 +1174,21 @@ def search_by_parts(conn, part_names: list[str], viewer_id: int | None = None,
     for terms ambiguous across scripts, which alias set they expand to. sources (a subset
     of SOURCE_SCOPES) restricts both which kanji can be returned and which decompositions
     are consulted for matching (at every depth) to the selected contributor scope(s) — it
-    does NOT restrict which alias terms resolve (get_all_aliases_for_term is source-
+    does NOT restrict which alias terms resolve (name lookup is source-
     agnostic), so a primitive name contributed by an excluded source can still be typed
-    to search, it just won't match via a decomposition from that source."""
+    to search, it just won't match via a decomposition from that source.
+    meanings maps a typed term to the kanji ids the user picked for it out of
+    part_term_meanings; a term absent from it searches every meaning."""
     terms = [p.strip().lower() for p in part_names if p.strip()]
     if not terms:
         return []
 
     depth = max(1, min(depth, MAX_DECOMPOSITION_DEPTH))
     script_scope = SCRIPT_VISIBILITY.get(script) if script else None
+    chosen = {k.strip().lower(): set(v) for k, v in (meanings or {}).items()}
     matched_sets = [
-        _reachable_kanji_for_term(conn, t, viewer_id, script_scope, sources, depth) for t in terms
+        _reachable_kanji_for_term(conn, t, viewer_id, script_scope, sources, depth, chosen.get(t))
+        for t in terms
     ]
     candidate_ids = set.intersection(*matched_sets) if matched_sets else set()
     if not candidate_ids:

@@ -23,7 +23,7 @@ from mcp.types import ToolAnnotations
 
 mcp = MCPServer(
     name="kanji",
-    title="Kanji & Hanzi Decomposition",
+    title="KumiJi Glyph Explorer: kanji & hanzi decomposition",
     instructions=(
         "Look up Japanese kanji / Chinese hanzi by shape. search_by_parts finds "
         "characters built from a given set of named components (e.g. ['sun', "

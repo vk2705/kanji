@@ -1,4 +1,4 @@
-# RTK Kanji Search
+# KumiJi Glyph Explorer
 
 Search Japanese kanji and Chinese hanzi by their named visual components. Built for learners using *Remembering the Kanji* by James W. Heisig and extended as a community-editable reference.
 

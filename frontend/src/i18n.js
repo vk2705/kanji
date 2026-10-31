@@ -8,8 +8,8 @@ function ruPlural(n, one, few, many) {
 
 export const translations = {
   en: {
-    appTitle: "RTK Kanji Search",
-    appSubtitle: "Search kanji by their primitive elements",
+    appTitle: "KumiJi Glyph Explorer",
+    appSubtitle: "Find any kanji or hanzi by its parts",
 
     tabParts: "By Parts",
     tabText: "By Text",
@@ -23,6 +23,14 @@ export const translations = {
     charHint: "Paste a kanji character to look it up (e.g. 明)",
     charPlaceholder: "paste kanji here…",
     searchBtn: "Search",
+    meaningHint: "Some names mean more than one thing. All meanings are searched; tap one to leave it out.",
+    meaningKind_primitive: "primitive",
+    meaningKind_kanji: "kanji",
+    meaningKind_hanzi: "hanzi",
+    meaningKind_user: "user entry",
+    meaningReading: (n, term) => `${n} hanzi read "${term}"`,
+    meaningMore: (n) => `+${n} more`,
+    meaningAll: "all meanings",
     fallbackMsg: (term) => `No kanji use "${term}" as a primitive. Showing keyword matches instead:`,
 
     searching: "Searching…",
@@ -136,7 +144,7 @@ export const translations = {
     aboutDiscussText: "Have an idea, a question, or a breakdown you think is wrong? Post it on the project's discussion forum on GitHub (posting needs a free GitHub account; reading does not).",
     aboutDiscussLinkLabel: "Open the discussion forum",
     aboutHeading: "About this project",
-    aboutIntro: "A search tool for Japanese kanji and Chinese hanzi that works by shape. Every character is broken down into named building blocks, so you can find one without knowing how to read it — type \"sun\" + \"moon\" to get 明 (bright), or look a character up by its glyph or by an English or Russian keyword. It covers ~3,000 Japanese kanji and the Chinese simplified and traditional sets, with decompositions, readings and, where they exist, pictures for building blocks most fonts cannot draw.",
+    aboutIntro: "KumiJi Glyph Explorer (from 組み字, \"assembled characters\") is a search tool for Japanese kanji and Chinese hanzi that works by shape. Every character is broken down into named building blocks, so you can find one without knowing how to read it — type \"sun\" + \"moon\" to get 明 (bright), or look a character up by its glyph or by an English or Russian keyword. It covers ~3,000 Japanese kanji and the Chinese simplified and traditional sets, with decompositions, readings and, where they exist, pictures for building blocks most fonts cannot draw.",
     aboutIntro2: "It began as a companion to Remembering the Kanji and still works well as one, but it is no longer limited to that book or to Japanese: registered users can add their own characters, decompositions, names and mnemonic stories, and much of the decomposition data now comes from open structural sources rather than from any one method.",
     aboutCreditsHeading: "Sources and credits",
     aboutCreditsBook: "The frame numbers and many of the building-block names follow Remembering the Kanji by James W. Heisig (University of Hawai'i Press), which is in print and worth owning — this app is an unofficial study aid, is not affiliated with or endorsed by the author or publisher, and deliberately does not reproduce the book's mnemonic stories.",
@@ -162,8 +170,8 @@ export const translations = {
   },
 
   ru: {
-    appTitle: "Поиск кандзи RTK",
-    appSubtitle: "Ищите кандзи по составляющим их элементам",
+    appTitle: "KumiJi Glyph Explorer",
+    appSubtitle: "Найдите любой кандзи или ханьцзы по его частям",
 
     tabParts: "По частям",
     tabText: "По тексту",
@@ -177,6 +185,14 @@ export const translations = {
     charHint: "Вставьте символ кандзи, чтобы найти его (например: 明)",
     charPlaceholder: "вставьте кандзи сюда…",
     searchBtn: "Найти",
+    meaningHint: "У некоторых названий несколько значений. Поиск идёт по всем; нажмите на значение, чтобы его исключить.",
+    meaningKind_primitive: "примитив",
+    meaningKind_kanji: "кандзи",
+    meaningKind_hanzi: "ханьцзы",
+    meaningKind_user: "запись пользователя",
+    meaningReading: (n, term) => `${n} ханьцзы с чтением «${term}»`,
+    meaningMore: (n) => `ещё ${n}`,
+    meaningAll: "все значения",
     fallbackMsg: (term) => `Ни один кандзи не использует «${term}» как примитив. Показаны совпадения по ключевым словам:`,
 
     searching: "Поиск…",
@@ -290,7 +306,7 @@ export const translations = {
     aboutDiscussText: "Есть идея, вопрос или разбор, который кажется неверным? Напишите на форуме проекта на GitHub (чтобы писать, нужен бесплатный аккаунт GitHub; читать можно без него).",
     aboutDiscussLinkLabel: "Открыть форум",
     aboutHeading: "О проекте",
-    aboutIntro: "Поиск японских кандзи и китайских иероглифов по форме. Каждый знак разобран на именованные составные части, поэтому его можно найти, не зная чтения: наберите «солнце» + «луна» и получите 明 (яркий), либо ищите по самому знаку или по ключевому слову на английском или русском. Охвачены ~3000 японских кандзи и китайские упрощённые и традиционные наборы — с разборами, чтениями и, где нужно, картинками для тех составных частей, которые большинство шрифтов не рисует.",
+    aboutIntro: "KumiJi Glyph Explorer (от 組み字, «собранные знаки») — поиск японских кандзи и китайских иероглифов по форме. Каждый знак разобран на именованные составные части, поэтому его можно найти, не зная чтения: наберите «солнце» + «луна» и получите 明 (яркий), либо ищите по самому знаку или по ключевому слову на английском или русском. Охвачены ~3000 японских кандзи и китайские упрощённые и традиционные наборы — с разборами, чтениями и, где нужно, картинками для тех составных частей, которые большинство шрифтов не рисует.",
     aboutIntro2: "Проект начинался как спутник книги Remembering the Kanji и по-прежнему хорошо ей служит, но больше не ограничен ни этой книгой, ни японским: зарегистрированные пользователи могут добавлять свои знаки, разборы, названия и мнемонические истории, а значительная часть данных о разборах теперь берётся из открытых структурных источников, а не из какого-то одного метода.",
     aboutCreditsHeading: "Источники",
     aboutCreditsBook: "Номера фреймов и многие названия составных частей следуют книге Remembering the Kanji Джеймса Хайсига (University of Hawai'i Press) — она издаётся и её стоит купить. Это приложение — неофициальное учебное пособие, не связанное с автором и издателем и не одобренное ими, и оно намеренно не воспроизводит мнемонические истории из книги.",

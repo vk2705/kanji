@@ -8,7 +8,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from database import (
     init_db, import_data, get_db, db_conn, migrate_schema,
-    search_by_parts, search_by_substring, search_by_char, suggest_terms,
+    search_by_parts, part_term_meanings, search_by_substring, search_by_char, suggest_terms,
     get_kanji_detail, SCRIPT_VISIBILITY, SOURCE_SCOPES, MAX_DECOMPOSITION_DEPTH,
     PRIMITIVE_IMAGE_DIR
 )
@@ -89,6 +89,10 @@ class PartsSearchRequest(BaseModel):
     # level — see search_by_parts's docstring for why this is a UI-exposed choice
     # rather than a fixed default (a common primitive's reachable set grows fast).
     depth: int = 1
+    # For a part name that means several things ("lid": the primitive 亠, the kanji 蓋),
+    # the kanji ids the user picked out of that term's `meanings` in an earlier
+    # response. A term left out searches every meaning.
+    meanings: dict[str, list[str]] | None = None
 
 
 @app.post("/search/parts")
@@ -103,8 +107,16 @@ def search_parts(req: PartsSearchRequest, conn=Depends(db_conn), user=Depends(cu
             status_code=400,
             detail=f"depth must be between 1 and {MAX_DECOMPOSITION_DEPTH}"
         )
-    results = search_by_parts(conn, parts, user["id"] if user else None, script, sources, req.depth)
-    return {"results": results, "count": len(results)}
+    viewer_id = user["id"] if user else None
+    results = search_by_parts(conn, parts, viewer_id, script, sources, req.depth, req.meanings)
+    # Only the names that are actually ambiguous, so the page has nothing to show for
+    # an ordinary search.
+    meanings = {}
+    for part in parts:
+        options = part_term_meanings(conn, part, viewer_id, script)
+        if len(options) > 1:
+            meanings[part.lower()] = options
+    return {"results": results, "count": len(results), "meanings": meanings}
 
 
 @app.get("/search/text")

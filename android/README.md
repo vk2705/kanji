@@ -1,4 +1,4 @@
-# RTK Kanji — Android app
+# KumiJi — Android app
 
 A thin native shell that loads the existing web app (`frontend/`, deployed
 per the root `CLAUDE.md`'s Deployment section) in a `WebView`, rather than a

@@ -256,7 +256,7 @@ def render_page(entry: dict, entries_by_id: dict[str, dict]) -> str:
     short_noun = "hanzi" if script_group(entry.get("script")) == "zh" else "kanji"
 
     headline = f"{subject} = {components}" if components else subject
-    title = f"{headline} — {short_noun} components, readings, strokes | RTK Kanji Search"
+    title = f"{headline} — {short_noun} components, readings, strokes | KumiJi"
 
     facts = []
     if components:
@@ -308,7 +308,7 @@ def render_page(entry: dict, entries_by_id: dict[str, dict]) -> str:
     if len(search_names) >= 2:
         how_to_find = (
             f"      <h2>How to find {html.escape(subject)} without knowing its reading</h2>\n"
-            f"      <p>On RTK Kanji Search, open the parts search and type "
+            f"      <p>On KumiJi Glyph Explorer, open the parts search and type "
             + " + ".join(f"“{html.escape(name)}”" for name in search_names[:3])
             + f". {html.escape(subject)} is among the results, together with every other character "
             f"containing the same shapes.</p>\n"
@@ -391,7 +391,7 @@ def render_page(entry: dict, entries_by_id: dict[str, dict]) -> str:
 {PAGE_STYLE}  </head>
   <body>
     <main>
-      <p><a href="/">RTK Kanji Search</a> › <a href="/kanji/">Browse</a></p>
+      <p><a href="/">KumiJi Glyph Explorer</a> › <a href="/kanji/">Browse</a></p>
       <h1><span class="glyph">{html.escape(headline)}</span></h1>
       <p>{summary}</p>
       <dl class="facts">
@@ -423,14 +423,14 @@ def _hub_page(title: str, url: str, intro: str, items: list[tuple[str, str]], na
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{html.escape(title)} | RTK Kanji Search</title>
+    <title>{html.escape(title)} | KumiJi Glyph Explorer</title>
     <meta name="description" content="{html.escape(intro, quote=True)}">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="{html.escape(url, quote=True)}">
 {PAGE_STYLE}  </head>
   <body>
     <main>
-      <p><a href="/">RTK Kanji Search</a></p>
+      <p><a href="/">KumiJi Glyph Explorer</a></p>
       <h1>{html.escape(title)}</h1>
       <p>{html.escape(intro)}</p>
       <p>{navigation}</p>

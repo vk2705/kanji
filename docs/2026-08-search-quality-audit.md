@@ -24297,3 +24297,77 @@ http→https redirect (renewal by the existing `certbot.timer`). Reference copy
 in `deploy/nginx/prod/kermit.conf`, mapped in `deploy/nginx/README.md`. The
 kanji site was unaffected (200). Updating the page is a normal frontend build;
 no nginx change needed.
+
+## 2026-10-31 — parts search: pick which meaning of a name you meant
+
+**Request.** Owner: when a part like "lid" is typed, show on the page what it can
+mean — the primitive 亠 or the full kanji 蓋 — with every meaning searched by
+default and the user able to narrow it. This is the first half of the item queued
+on 2026-10-23 in CLAUDE.md's "Known limitations".
+
+**What a "meaning" is.** `part_term_meanings()` returns every visible row the typed
+name names (the same set self-identity already used), collapsing rows that draw
+the same glyph into one option (心 is both rtk639 and hanzi-5fc3; offering it twice
+would be a choice between scripts, which the study-language filter already makes).
+Order: primitives (kangxi*, prim-*, rad*) first, then RTK kanji by frame, then hanzi,
+then user entries. Hanzi that answer to the name only because it is their
+tone-stripped pinyin (孙 is read sūn, so it answers to "sun") are flagged
+`via: "reading"`; the page folds them into one chip instead of 22.
+
+**Search change, and the bug it fixed.** `search_by_parts` takes an optional
+`meanings` ({term: [ids]}). `_reachable_kanji_for_term` now starts its walk from
+`_terms_for_kanji_ids(chosen rows)` — the rows' own unambiguous names plus ids and
+glyphs — instead of `get_all_aliases_for_term`, which is removed. With every meaning
+chosen this is the 2026-09-09 union, and the synonym-chain guard is the same rule
+(a name is a key only if nothing outside the chosen set also claims it). The
+difference is glyphs: the old expander dropped a glyph like 亠 whenever a hanzi row
+shared it, so under "All scripts" a "lid" search found 32 characters rather than
+112, and "turkey" (隹) found only 隹 itself rather than 130. Measured: for all 7,229
+system names in Japanese mode, old and new results are identical; under "All
+scripts", none of 606 sampled names lost a result and 265 gained some. With a
+narrowed choice the walk deliberately does not use a name the chosen rows share with
+an unchosen one: picking only 亠 must not search by "lid", which 蓋 also answers to.
+Ids a term does not name are ignored, and a choice naming none of them means all.
+
+**API.** `POST /search/parts` accepts `meanings` and its response gains `meanings`:
+the options for each typed name that has more than one (none for an ordinary search).
+
+**UI.** `MeaningPicker.jsx`, under the form: per ambiguous name, a row of toggle
+chips (glyph + kind), all on; switching one off re-runs the search narrowed to the
+rest, and an "all meanings" link restores it. At least one stays on. Lists longer
+than 7 show 6 and "+N more". English and Russian strings. The choice is kept across
+re-searches while the name is still typed, and cleared on tab change or Home. It is
+not in the shareable URL.
+
+**Verified.** pytest 108 passed (three new tests in `test_api_search.py`: options
+listed primitive-first, default = union including glyph-listed hosts, narrowing to
+each meaning, unknown ids fall back to all). In headless Chromium against a copy of
+the DB: Japanese "lid" shows 亠 primitive / 蓋 kanji, 30 results; switching 蓋 off
+gives 29, all drawn with 亠. "sun, tree" under All scripts shows the folded
+"22 hanzi read "sun"" chip and "+10 more"; switching the fold off takes the results
+from 10 to 7.
+
+**Not done.** Grouping results by why they matched (the second half of the queued
+item), and exposing meanings through the MCP server.
+
+## 2026-10-31 — project renamed "KumiJi Glyph Explorer"
+
+Owner decision: the project's official name is **KumiJi Glyph Explorer**, short
+form "KumiJi" (from 組み字, "assembled characters"). It replaces "RTK Kanji
+Search", which tied the name to Heisig's book although the project now covers
+hanzi and open structural data, and could read as an official Heisig product. A
+search before adopting it found no app, site or product called KumiJi; the nearest
+is "Kumi" (kumi.app), a Japanese-learning app, so the full name is used wherever
+there is room.
+
+Renamed: the site title, Open Graph and JSON-LD in `frontend/index.html`; the app
+header and a new subtitle ("Find any kanji or hanzi by its parts") in `i18n.js`
+(en and ru, the name kept in Latin script in both); the About intro, which now
+says what the name means; the guide, privacy and stats pages; the title suffix,
+breadcrumb and footer of every generated per-kanji page (`generate_seo_pages.py`,
+"| KumiJi" in the `<title>`, where length matters); the README, CHANGELOG, the
+`rtk.py` docstring; the Android app label and Gradle project name; the MCP
+server's display title. Kept on purpose, because links and connectors point at
+them: the GitHub repo `vk2705/kanji`, the domain, the MCP identifier `kanji`, and
+the APK filename `rtk-kanji-latest.apk`. The Android label only changes in a
+rebuilt APK.

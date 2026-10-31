@@ -1,6 +1,6 @@
 # Changelog
 
-Plain version history for the RTK Kanji app (web + Android). One entry per
+Plain version history for KumiJi Glyph Explorer (web + Android). One entry per
 release; newest first. The Android app's own version (`versionName` in
 `android/app/build.gradle.kts`) and this file are meant to move together —
 bump both in the same commit.
