@@ -24285,3 +24285,15 @@ Still open: a frontend deploy rebuilds `dist/` in place, and nginx logged
 "rewrite or internal redirection cycle" errors for requests during the Oct 30
 21:11 deploy; and `try_files … /index.html` answers any missing file (including
 a mistyped sitemap URL) with the SPA's HTML and status 200 rather than a 404.
+
+## 2026-10-31 — kermit.is-a.dev is live
+
+is-a-dev/register PR #59266 (submitted by the owner) was merged; the name has
+an A record to the prod VM. Added `/etc/nginx/sites-available/kermit.conf` on
+prod (symlinked into `sites-enabled/`), rooted at
+`/opt/kanji/frontend/dist/kermit`, so the developer page added on 2026-10-30
+is what the name serves; Certbot issued its certificate and added the
+http→https redirect (renewal by the existing `certbot.timer`). Reference copy
+in `deploy/nginx/prod/kermit.conf`, mapped in `deploy/nginx/README.md`. The
+kanji site was unaffected (200). Updating the page is a normal frontend build;
+no nginx change needed.

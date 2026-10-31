@@ -41,6 +41,7 @@ existing one.
 | `prod/kanji.conf` | `/etc/nginx/sites-available/kanji.conf` (symlinked from `sites-enabled/`) | kanji.alteon.help (dedicated prod VM) |
 | `prod/kanji-ratelimit.conf` | `/etc/nginx/conf.d/kanji-ratelimit.conf` | kanji.alteon.help (dedicated prod VM) |
 | `prod/kanjimcp.conf` | `/etc/nginx/sites-available/kanjimcp.conf` (symlinked from `sites-enabled/`) | kanjimcp.alteon.help (same prod VM — see DEPLOY_README.md's "MCP server" section) |
+| `prod/kermit.conf` | `/etc/nginx/sites-available/kermit.conf` (symlinked from `sites-enabled/`) | kermit.is-a.dev (same prod VM) — static developer page, root `/opt/kanji/frontend/dist/kermit`; DNS via is-a-dev/register `domains/kermit.json`, cert by Certbot |
 
 `kanji-ratelimit.conf` on either machine declares the `limit_req_zone`s the
 matching `kanji.conf`'s `location` blocks reference, plus the
