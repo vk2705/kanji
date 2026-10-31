@@ -24372,6 +24372,18 @@ them: the GitHub repo `vk2705/kanji`, the domain, the MCP identifier `kanji`, an
 the APK filename `rtk-kanji-latest.apk`. The Android label only changes in a
 rebuilt APK.
 
+## 2026-10-31 — kumiji.alteon.help and kumiji.kermit.is-a.dev live
+
+The owner pointed both names at the prod VM (CNAME / is-a.dev record). Both
+redirect permanently to https://kanji.alteon.help, which stays the canonical site:
+Google sign-in only works on the OAuth client's listed origins, login cookies are
+per host, and one host keeps Search Console's signal in one place. HTTPS came from
+`sudo certbot --nginx -d kumiji.alteon.help -d kumiji.kermit.is-a.dev` (Let's
+Encrypt cert, expires 2027-01-29, auto-renewed); `deploy/nginx/prod/kumiji.conf`
+is refreshed from the live file certbot rewrote. Checked: https on both names
+gives 301 to the same path on kanji.alteon.help, plain http reaches it in two
+hops, and kanji.alteon.help itself still answers 200.
+
 ## 2026-10-31 — fresh container; re-confirmed three open leads, no new fix
 
 Daily firing. Step 0 per the task brief: repo was present at `/home/user/kanji`
