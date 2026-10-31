@@ -24563,3 +24563,103 @@ cleanly to `hanzi-7676`/癶 and `hanzi-8c46`/豆) and the full pytest suite
 (108 passed, before and after).
 
 73 → 53 pending after this chunk.
+
+## 2026-10-31 — full re-review: frames 1052–1101
+
+Daily unattended chunk (`full_review.py -n 50`). Pre-flight: `git status`
+showed only the expected always-dirty files (`docs/decomposition_worklist.json`,
+`docs/kanji_review_coverage.tsv`, both rebuilt nightly by other jobs) plus
+unrelated untracked scratch files (`kanji.db.bak-*`, logs, `review1`, etc);
+stashed the two dirty tracked files before `git pull --no-rebase origin
+master` (already up to date) and popped them back unchanged. `backend/data.txt`
+and `docs/kanji_full_review.json` were both clean against HEAD — no prior run
+died midway. `kanji.db` present. Baseline `pytest -q` 108 passed, baseline
+`./regression_fresh.sh` 1331/1331, baseline `audit_radicals.py` 0 undefined
+terms. `backup_db.py` run before any edit.
+
+**48 keep, 2 fixed, 0 needs-render.** `--pending-count`: 1898/3000 (was 1948).
+
+This chunk covered the back half of the 亻 (person) family (rtk1052–1091,
+~35 rows of clean `⿰亻X` compounds) plus the 久/畝/囚/内/丙/柄/肉/腐/座/挫
+cluster (rtk1092–1101). Two rows in this range had cached `parts_at_start`
+snapshots in `kanji_full_review.json` showing older, already-superseded
+content — **rtk1054 傲** (worklist cache said `亻,土,方,攵,亠,二`; live
+`data.txt` already read `亻,土,方,攵` since the 2026-10-23 "lid" audit) and
+**rtk1090 傍** (cache said `亻,丷,方,立,亠,冖`; live already read
+`亻,立,冖,方` from the same 2026-10-23 session) — both re-rendered and
+confirmed correct as currently written, recorded `keep` rather than
+re-fixing stale history.
+
+### Fixes
+
+- **rtk1071 傷 (wound)**: was `亻,日,一,昜,𠂉` — `日` and `一` are already
+  inside `昜` (`prim-piggy-bank` = `旦,勿`, and `旦` itself = `日`+`一`), so
+  the row double-counted those two strokes on top of referencing `昜`
+  directly. Every sibling kanji using `昜` (`腸`/`場`/`湯`/`揚`/`陽`/`楊`/
+  `暢`) just uses the bare primitive with no re-expansion; rendering `傷`
+  alongside `亻`/`𠂉`/`昜`/`日`/`一` confirmed the right side is exactly
+  `𠂉` over `昜`, matching cjkvi's single-codepoint `⿰亻𬀷` reading. Fixed to
+  `亻,𠂉,昜`. Grepped `data.txt` for the same `日,一,昜` pattern — no other
+  row has it, so no further sibling fix needed this chunk. (Flagging but not
+  touching: `rtk1817` 瘍, out of range this chunk, has a primary decomposition
+  `一,日,疔,勿` with a cleaner `昜,疒` alternate already sitting right next
+  to it — looks like the same stroke-soup shape, worth a look when frame
+  1817 comes up.)
+- **rtk1098 肉 (meat)**: was bare `内`. This reopens a 2026-09-05
+  `audit_direct_ref_overlap.py` change (commit `1d6eada`, "Clear 8 more
+  redundant-overlap families") that collapsed an earlier, deliberate
+  `内,人` row (itself from the original CSV-driven re-decomposition pass,
+  "rtk1098 (肉): real parts are 内 (whole compound) + one extra stroke") down
+  to bare `内`, reasoning that the second `人` was "redundantly re-listing
+  内's own 人". Rendering `内` and `肉` side by side (`/tmp/batch9.png`
+  this session) shows this was a false positive for this character: `内` has
+  one internal diagonal stroke, `肉` has two clearly separate ones — the
+  standard real-world `肉`-vs-`月` distinction, not a font artifact (checked
+  both at full size, codepoints U+5185 vs U+8089). Heisig's own CSV
+  components column for this frame, "person; inside; belt; person", reads as
+  exactly 内's own expansion (person, belt) plus one more person, agreeing
+  with the two-stroke render rather than with the 2026-09-05 collapse.
+  Restored to `内,人`. **Flagging for the owner**: this reverses one member
+  of a 33-kanji family-wide automated fix (`専/無/内/斉/黒/缶` plus
+  `骨/歯/風/免/尤/亀/高`, commit `1d6eada`, 2026-09-04/05) on render evidence
+  the original audit didn't check (it reasoned from the parts-list text
+  alone, not from comparing the host's glyph stroke-for-stroke against the
+  referenced compound's). The other 32 members of that family were not
+  re-examined this session — only `肉`'s own frame was in range today — but
+  the same blind spot (compound referenced correctly, but the host actually
+  draws more strokes than the compound alone) could in principle affect
+  others in that list and may be worth a dedicated pass.
+
+Both fixes required updating a stale `test_regression_fixes.py` pin
+(`rtk1071`: dropped `rtk1`/`rtk12` from `expected_part_ids`; `rtk1098`: added
+`rtk1023` back to `expected_part_ids`, with an updated comment explaining the
+reversal) — both changes are mechanical restatements of what the corrected
+`data.txt` rows now resolve to, not new claims.
+
+### Kept, worth noting
+
+- **rtk1092 久 (long time)**: `𠂊,人` has no CSV support for "atomic" (frame
+  1092 is inside the core 1–2042 range but the components column is
+  non-empty: "bound up; person; mummy"), and cjkvi reports only `久` itself
+  (no IDS breakdown offered) — settled entirely by the CSV column plus
+  render, matching exactly.
+- **rtk1100 座 / rtk1101 挫**: both reference `坐` (rtk2861, "sit", a later
+  frame) as a whole primitive rather than re-flattening `从,土` — the
+  deliberate anachronistic-but-correct pattern (shape is real, name just
+  comes from a later frame), same as `rtk1021`/`筑` noted in the 2026-10-30
+  entry. Not a finding.
+- **rtk1070 宿 (inn)**: `宀,亻,百` matches cjkvi's `⿱宀佰` one level
+  flattened (`佰` = `亻`+`百`, itself not independently registered) — same
+  flattening-is-fine pattern as `rtk1076`/`rtk1077`/`rtk1079`/`rtk1081`/
+  `rtk1082`/`rtk1084`/`rtk1085`/`rtk1088` in this chunk, all of which
+  reference an already-taught compound (`付`/`任`/`代`/`化`/`何`) rather
+  than re-spelling its own strokes.
+
+Post-fix: `pytest -q` 108 passed, `./regression_fresh.sh` 1331/1331,
+`audit_radicals.py` 0 undefined terms, all unchanged from baseline.
+`sync_system_data.py --dry-run` showed exactly the expected diff (0 kanji
+inserted/updated, 2 decompositions replaced) before being applied for real,
+then all three checks re-run clean against the synced DB.
+
+No production deploy from here — a deployer needs `git pull` +
+`sync_system_data.py` on prod to pick up the `rtk1071`/`rtk1098` fixes.

@@ -1723,13 +1723,15 @@ EXPECTED_DECOMPOSITIONS = {
     # up") exactly and the bottom matches 人; CSV: "bound up; person; mummy".
     "rtk1092": {"character": "久", "keyword": "long time",
                 "expected_part_ids": {"prim-hooked-hand", "rtk1023"}},
-    # 肉 was 冂,人 -- render confirms 肉 and 内 ("inside", rtk1095) share almost the
-    # same outer contour; CSV: "person; inside; belt; person" -- fixed to reference
-    # 内 as a whole compound plus the extra internal stroke (人) 肉 adds over 内.
-    # Was redundantly re-listing 内(rtk1095)'s own 人 alongside referencing it
-    # directly -- 2026-09-05, audit_direct_ref_overlap.py
+    # 肉 was 冂,人, fixed to 内,人 (CSV: "person; inside; belt; person" = 内's own
+    # expansion plus one more person), then on 2026-09-05 audit_direct_ref_overlap.py
+    # collapsed it back to bare 内 as a "redundant re-listing" of 内's own 人 --
+    # that was a false positive: a direct 内-vs-肉 render (2026-10-31 full
+    # re-review) shows 肉 has two separate internal strokes where 内 has one
+    # (the standard 肉-vs-月 distinction), so the second 人 is real content, not
+    # a duplicate of 内's own. Restored to 内,人.
     "rtk1098": {"character": "肉", "keyword": "meat",
-                "expected_part_ids": {"rtk1095"}},
+                "expected_part_ids": {"rtk1095", "rtk1023"}},
     # 年 was ノ,一,干 -- render confirms 年 and 午 ("noon", rtk610) are nearly
     # identical, differing only by one added short stroke on top; CSV: "sign of
     # the horse; sunglasses" (午 is the zodiac "horse" hour). Fixed to reference
@@ -3661,8 +3663,11 @@ EXPECTED_DECOMPOSITIONS = {
     # the CSV's "person; reclining; lying down; piggy bank; sun; day; piglets"
     # names against cjkvi's ⿰亻𬀷 split -- "reclining"/"lying down" is exactly
     # prim-reclining's own alias pair, already a taught primitive elsewhere.
+    # 2026-10-31 full re-review: dropped rtk1 (一) and rtk12 (日) -- both are
+    # already inside prim-piggy-bank (昜 = 旦,勿, and 旦 = 日+一), so the row
+    # was double-counting those two strokes on top of referencing 昜 itself.
     "rtk1071": {"character": "傷", "keyword": "wound",
-               "expected_part_ids": {"kangxi9", "prim-piggy-bank", "prim-reclining", "rtk1", "rtk12"}},
+               "expected_part_ids": {"kangxi9", "prim-piggy-bank", "prim-reclining"}},
     "rtk1106": {"character": "似", "keyword": "becoming",
                "expected_part_ids": {"kangxi9", "rtk1105"}},
     "rtk2260": {"character": "做", "keyword": "make",

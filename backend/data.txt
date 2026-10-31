@@ -1322,7 +1322,11 @@ rtk1067:倍:double:亻,咅
 rtk1068:優:tenderness:亻,憂
 rtk1069:伐:fell:亻,戈
 rtk1070:宿:inn:宀,亻,百
-rtk1071:傷:wound:亻,日,一,昜,𠂉
+# 2026-10-31 full re-review: was 亻,日,一,昜,𠂉 -- 日 and 一 are already inside
+# 昜 (prim-piggy-bank = 旦,勿, and 旦 = 日+一), listed again redundantly.
+# Siblings 腸/場/湯/揚/陽/楊/暢 all use plain 昜; render confirms the right side
+# here is just 𠂉 on top of 昜, matching cjkvi's single-codepoint ⿰亻𬀷.
+rtk1071:傷:wound:亻,𠂉,昜
 rtk1072:保:protect:亻,呆
 # 2026-10-22 full re-review (shape-family follow-up from rtk426/428): same
 # 衣-vs-亠+𧘇 bug -- Heisig's CSV components are "top hat; protect; person;
@@ -1356,7 +1360,10 @@ rtk1094:囚:captured:人,囗
 rtk1095:内:inside:人,冂
 rtk1096:丙:third class:一,内
 rtk1097:柄:design:木,丙
-rtk1098:肉:meat:内
+# 2026-10-31 full re-review: was bare 内 -- Heisig's CSV components for this
+# frame are "person; inside; belt; person" (=内 fully expanded, plus one more
+# person), and render confirms 肉 has two internal strokes where 内 has one.
+rtk1098:肉:meat:内,人
 rtk1099:腐:rot:府,肉
 rtk1100:座:squat:坐,广
 rtk1101:挫:crush:坐,扌
