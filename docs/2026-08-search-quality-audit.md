@@ -24675,3 +24675,12 @@ then all three checks re-run clean against the synced DB.
 
 No production deploy from here — a deployer needs `git pull` +
 `sync_system_data.py` on prod to pick up the `rtk1071`/`rtk1098` fixes.
+
+## 2026-10-31 — picture on the kermit.is-a.dev front page
+
+Owner request: put their pirate-Kermit-at-the-laptop picture on the front page of
+kermit.is-a.dev (`frontend/public/kermit/index.html`, served from prod's dist by
+`deploy/nginx/prod/kermit.conf`). Added as a full-width figure under the 日 + 月 → 明
+line in the header, as WebP (179 KB) with a JPEG fallback (250 KB), converted from
+the 2.7 MB PNG; explicit width/height so the page does not jump while it loads.
+Checked in headless Chromium at 1200 px and 390 px wide.

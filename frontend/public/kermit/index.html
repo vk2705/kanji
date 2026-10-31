@@ -43,6 +43,11 @@
   .glyphs span { font-size: 28px; }
   .glyphs .op { font-family: inherit; color: var(--muted); font-size: 20px; }
   .glyphs .tag { font: 13px/1 system-ui, sans-serif; color: var(--muted); margin-left: 6px; }
+  .hero { margin: 36px 0 0; }
+  .hero img {
+    display: block; width: 100%; height: auto; border-radius: 14px;
+    border: 1px solid var(--line); box-shadow: 0 8px 28px rgba(0,0,0,.18);
+  }
   section { padding: 40px 0; border-bottom: 1px solid var(--line); }
   h2 { font-size: 22px; margin: 0 0 20px; }
   .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
@@ -78,6 +83,13 @@
       <span>日</span><span class="op">+</span><span>月</span><span class="op">→</span><span>明</span>
       <span class="tag">search by parts, not by reading</span>
     </div>
+    <figure class="hero">
+      <picture>
+        <source srcset="kermit-pirate.webp" type="image/webp">
+        <img src="kermit-pirate.jpg" width="1374" height="1145"
+             alt="A frog puppet in a pirate hat and coat typing on a laptop at a candlelit desk, with Claude open on the monitor, a parrot on the chair, a treasure map, and a mug reading Code Sail Repeat">
+      </picture>
+    </figure>
   </div>
 </header>
 
