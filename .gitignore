@@ -43,3 +43,6 @@ audit_report.md
 # before, which a stop-hook's generic "untracked files" check flagged.
 backend/ids.txt
 backend/decomposition_history.json
+
+# IndexNow: per-machine record of what was last submitted (indexnow_submit.py)
+backend/indexnow_state.json

@@ -24469,3 +24469,28 @@ the render-plus-corroboration bar, and the one new tool angle tried
    is close to dry).
 5. `full_review.py`/hanzi-worklist pending counts belong to their own
    separate daily timers, not this routine — not touched.
+
+## 2026-10-31 — IndexNow submission for Bing/Yandex
+
+Search Console still shows "Couldn't fetch" with an empty "Last read" on all three
+submitted sitemaps, the same picture as on 2026-10-30: Google has not tried to fetch
+them. A fresh outside check found nothing wrong: one A record and no AAAA, the Google
+TXT verification present, a valid Let's Encrypt cert, and every sitemap returning 200
+quickly, including to the Googlebot user agent. A meta-tag sweep of ~550 pages found
+index/follow, a self-canonical and a description everywhere except `/privacy.html`,
+which has neither a description nor a canonical (harmless, left for now).
+
+Owner asked for IndexNow so the site no longer depends on Google's crawl queue alone.
+Added the public key file `frontend/public/4159b1e0528bf4cd388f532c71252e4d.txt` and
+`backend/indexnow_submit.py`, run on prod after each deploy against the built
+`dist/`. It reads the sitemap index the build produced, hashes each page's file,
+and posts only new or changed URLs to `api.indexnow.org` in batches of 10,000,
+recording what was accepted in a gitignored `backend/indexnow_state.json`. Hashing
+works because the generated pages carry no build date, so an unchanged kanji page is
+byte-identical from one build to the next; resubmitting all 24k every deploy would
+get the host throttled. The script checks the key file is live before submitting,
+since otherwise the API rejects every URL with 403. Deliberately not wired into
+`npm run build:prod`: the build also runs on the dev box and in CI, and neither
+should announce prod URLs. Tested against a copy of the build (24,197 URLs found;
+after a recorded run, editing one page queued only that page). Not yet run for real:
+that needs a prod deploy so the key file is live.

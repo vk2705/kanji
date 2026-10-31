@@ -267,6 +267,29 @@ can do on its own:
      doesn't have a clean "this site moved to a different domain" flow
      for a URL-prefix property, only for a Domain property.
 
+### IndexNow — pushing URLs to Bing and Yandex (added 2026-10-31)
+
+Google never fetched the submitted sitemaps (see the audit doc, 2026-10-30), so the
+site also pushes its URLs to the IndexNow engines (Bing, Yandex, Seznam, Naver;
+DuckDuckGo and ChatGPT search draw on Bing's index). Google does not take part.
+
+The ownership key is the public file `frontend/public/4159b1e0528bf4cd388f532c71252e4d.txt`,
+shipped by the normal build; `backend/indexnow_submit.py` holds the same value. **On
+prod, after each frontend deploy** (once the new `dist/` is in place):
+
+```bash
+cd /opt/kanji/backend
+python3 indexnow_submit.py --dist /opt/kanji/frontend/dist --dry-run   # what would go
+python3 indexnow_submit.py --dist /opt/kanji/frontend/dist
+```
+
+It submits only pages whose built file changed since its last successful run
+(recorded in `backend/indexnow_state.json`, gitignored and per-machine), so the
+first run sends all ~24k URLs and later runs send just what changed. It refuses to
+submit until the key file is live. Never run it on the dev box. `--all` resubmits
+everything; avoid doing that routinely, since engines throttle hosts that resubmit
+unchanged URLs.
+
 `backend/visit_stats.py` (see `CLAUDE.md`'s Analytics section) is how to
 check afterward whether any of this actually brought real visitors — it
 already excludes bots that only ever hit URLs directly without running the
@@ -400,6 +423,8 @@ that's easy to skip or get wrong:
      copy `dist/` to `/opt/kanji/frontend/dist`.
    - Dev (`srv.alteon.help`, shared box): `npm run build:dev`, then copy
      `dist/` to `/usr/share/nginx/html/kanji/`.
+   - Prod only, after the copy: `python3 backend/indexnow_submit.py --dist
+     /opt/kanji/frontend/dist` (see "IndexNow" above).
 
    Copy the whole directory (overwriting old files), not merging. The
    single most common cause of "I redeployed but nothing changed" is this

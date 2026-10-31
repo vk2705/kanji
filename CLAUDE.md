@@ -88,6 +88,7 @@ for the one-time setup and `deploy/nginx/prod/kanjimcp.conf` for its nginx block
 ./venv/bin/python3 sync_system_data.py --dry-run   # reconcile live system rows with data.txt/CSV without wiping user data
 ./venv/bin/python3 make_primitive_images.py --dry-run  # render a PNG for each primitive whose codepoint most fonts can't draw (see Unrenderable primitives)
 ./venv/bin/python3 review_queue.py          # list pending user-submitted decomposition approve/dispute votes
+python3 indexnow_submit.py --dist /opt/kanji/frontend/dist  # PROD ONLY, after each frontend deploy: push new/changed page URLs to Bing/Yandex via IndexNow (stdlib only; see DEPLOY_README)
 ./venv/bin/python3 visit_stats.py           # site visit counts (today/7d/30d/all-time), or --days N for a daily breakdown
 ./venv/bin/python3 prune_page_views.py --dry-run   # roll up + prune page_views rows older than 90 days (see Analytics)
 ./venv/bin/python3 add_ru_aliases.py --dry-run     # add Russian-translation aliases under the ru-aliases pseudo-account (see Internationalization)
