@@ -24494,3 +24494,72 @@ since otherwise the API rejects every URL with 403. Deliberately not wired into
 should announce prod URLs. Tested against a copy of the build (24,197 URLs found;
 after a recorded run, editing one page queued only that page). Not yet run for real:
 that needs a prod deploy so the key file is live.
+
+## 2026-10-31 — hanzi worklist, chunk 2: 19 keep-ours, one real fix (豋)
+
+Second daily chunk against `hanzi_decomposition_worklist.json`
+(`hanzi_worklist_next.py -n 20`), unattended run. Interruption check (the
+"a prior invocation of this job got interrupted" heuristic from
+`kanji_worklist_daily_prompt.md`'s hanzi counterpart) came back `0` — nothing
+to recover from. `./venv/bin/pytest -v` passed (108 tests) before touching
+anything.
+
+Both batches — the 20 hosts, then every component glyph named in their
+cjkvi-ids readings — rendered via `render_glyphs.py` before any decision,
+per the standing render-it rule. The relative substitution check flagged six
+codepoints (𠁳, 𠬤, 𣥂, 𦣞, 𧰨, 𫩏) as rendering identically to each other in
+*every* font face checked — all six are genuine tofu boxes on this machine
+(no outline in any face in the stack, not a same-shape coincidence), matching
+chunk 1's finding on 𫩏 and confirming it's a systemic gap in this font
+stack's Ext-B/C/G coverage, not a one-off.
+
+**19 keep-ours** (謠 謡 譱 译 谣 豐 豕 豖 豙 象 豳 貭 賓 賫 賷 賾 质 赍 赜): in
+every one, the row already names what's actually drawn, at the right level,
+and the overlay/opaque flag is correctly describing weaker evidence rather
+than a wrong row — the same pattern chunk 1 found in 18 of its 20. Three
+worth calling out:
+
+- 謠/謡/译/谣 all stop at the atomic compound 䍃 or 𠬤 rather than flattening
+  into cjkvi's own further overlay reading (`䍃=⿱⿴𠂊冫缶`,
+  `𠬤=⿱又⿻二丨`) — same "overlay inside an overlay, stop at the outer one"
+  call as 丧 in chunk 1.
+- 豳's row lists `山, 豩, 豩` and 賷's lists `十, 吅, 冖, 貝` with `吅`
+  doubled — not a decomposition bug. `expand_part_terms` appends a part's
+  keyword after its glyph, and both `hanzi-8c69` (豩) and `hanzi-5405` (吅)
+  have their own `keyword` column literally set to the glyph itself (an
+  `import_hanzi.py`-era artifact for characters with no English gloss in
+  Unihan/kanjidic2), so the glyph gets echoed back as its own "keyword" and
+  shows up twice. The decomposition structure itself (山+豩, 十+吅+冖+貝)
+  is correct and matches cjkvi exactly. Out of scope here — this worklist
+  reviews decomposition evidence, not primitive keyword data — left
+  unfixed and flagged for whoever next touches hanzi primitive keywords.
+- The pig/elephant family (豕 豖 豙 象 豳) all resolve to the same opaque
+  primitive `𧰨` for "body," consistently, which is itself evidence the
+  existing data is coherent rather than ad hoc — each member stops at the
+  same wall cjkvi itself stops at.
+
+**One real fix: 豋 (hanzi-8c4b)**, `⿱⿰⿴𠂊冫②豆`, old parts
+`𠂊, 冫, 豆`. Rendered 豋 large next to 癶 (U+7676) and confirmed pixel-for-
+pixel stroke match on the top: two mirrored hook strokes, not a `𠂊`-encloses-
+`冰` shape — cjkvi's own reading never names the real Kangxi radical 癶 here,
+splitting it instead into a named left half (`𠂊` overlaying `冰`) and an
+unnamed right half (cjkvi's `②` placeholder, per CLAUDE.md's note that these
+circled numbers are per-entry placeholders with no fixed identity). The
+decisive cross-check was the sibling-shape rule: 豋's near-identical twin
+**登** (both `rtk1838` and `hanzi-767b`) already decomposes as `癶, 豆` in
+this database — Heisig's own CSV-derived row and the hanzi import agree with
+each other but not with 豋's row, which was the odd one out. Confirmed via
+`render_glyphs.py`'s substitution checker that 豋 (U+8C4B) and 登 (U+767B)
+are genuinely distinct codepoints in every font face (no identical-hash
+pair reported), so this isn't a render artifact — they really are two
+different characters that happen to share the same 癶+豆 structure.
+
+Applied directly to `kanji.db` (decomposition 18341, hanzi-8c4b's only
+system decomposition) via `expand_part_terms(conn, ['癶', '豆'],
+script_group='zh')`, replacing its 4 old `parts` rows (`𠂊`, `冫`+keyword,
+`豆`+keyword) with the 4 new ones (`癶`+keyword, `豆`+keyword). Backed up
+`kanji.db` first (`backup_db.py`). Verified with `get_kanji_detail` (resolves
+cleanly to `hanzi-7676`/癶 and `hanzi-8c46`/豆) and the full pytest suite
+(108 passed, before and after).
+
+73 → 53 pending after this chunk.
