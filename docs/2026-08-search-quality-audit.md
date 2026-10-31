@@ -24371,3 +24371,101 @@ server's display title. Kept on purpose, because links and connectors point at
 them: the GitHub repo `vk2705/kanji`, the domain, the MCP identifier `kanji`, and
 the APK filename `rtk-kanji-latest.apk`. The Android label only changes in a
 rebuilt APK.
+
+## 2026-10-31 — fresh container; re-confirmed three open leads, no new fix
+
+Daily firing. Step 0 per the task brief: repo was present at `/home/user/kanji`
+already checked out on `master`, `git fetch`/`pull --ff-only` showed nothing
+new (one stray `_push-access-check-*` branch on the remote, not touched),
+`git push --dry-run origin master` succeeded before any work started. Built
+`backend/venv` fresh (`python3.11 -m venv`), `apt-get install fonts-noto-cjk
+fonts-hanazono` (Noto first, per the standing font-order rule), fetched
+`cjkvi-ids/ids.txt`. Rebuilt `kanji.db` from source. `render_glyphs.py`'s
+Chromium glob (committed 2026-10-30) worked with zero manual fixup this time —
+first container in a while that didn't need a symlink workaround.
+
+Baseline, all matching the previous chunk's closing numbers: `test_regression_
+fixes.py` 1331/1331 (no `zh-*` rows, hanzi spot-checks self-skip as
+documented), `pytest -q` 83 passed (was 80 two chunks ago — new tests landed
+from the 2026-10-31 "pick a meaning" work, not this routine's doing),
+`audit_overflatten.py`/`audit_self_reference.py`/`audit_radicals.py` all 0,
+`audit_phantom_parts.py --in-csv-range` 10 across 9 (unchanged), full 49
+across 36 (unchanged), `audit_primary_choice.py` 0/59, `suggest_heisig_
+aliases.py --near 0.8 --all` 0 groups in every category (unchanged).
+
+**Tried `suggest_heisig_aliases.py --min-hosts 1` looking for anything the
+default threshold misses — found the exact false-positive its own docstring
+warns against, not a new lead.** At `--min-hosts 1` the script surfaced
+`rtk659`/恵 ("favor") as vouching for a new alias "ear (of a plant)", backed
+by "favor, favour" sharing a host set of size 1 (穂, `rtk975`). Checked
+`heisig-kanjis.csv` directly: 穂's own components column is "ear (of a
+plant); wheat; cereal; favour; favor; ten; needle; rice field; brains;
+heart" — the first three names (ear of a plant / wheat / cereal) belong to
+穂's *other* part, 禾, not to 恵 at all; they only share 恵's host set
+because that host set has exactly one member. This is precisely the
+degenerate case the script's own min-size guard exists to block (host-set
+identity is only meaningful once multiple hosts agree) — confirmed by
+reading `rtk975`'s row (`恵,禾`) before acting, not applied. No alias added.
+`--min-hosts 1` is not a usable search mode for this tool; not worth
+re-trying.
+
+**Sampled three `audit_csv_regressions.py` clusters that looked unexplored
+by keyword frequency, all turned out to be already-closed dead ends —
+re-confirmed rather than re-opened:**
+- **"apron" (`prim-thirty`/丗) on the 帝-family** (6 hosts) — chunk 108's
+  conclusion exactly: `帝`'s cjkvi IDS already accounts for every stroke via
+  `亠,丷,冖,巾`, nothing left for `丗` to be. Narrative, not glyph.
+- **"ten"/"needle" on 単/戦/禅/弾** (`rtk2078`-`rtk2081`) — chunk 107's
+  conclusion exactly. Rendered `単 戦 禅 弾 甲 田 十` together: `単`'s bottom
+  matches `甲` stroke-for-stroke (the box plus one descending stroke), not a
+  separate `田`+`十`. `甲`(`rtk1194`) is already cited as-is; CSV's "rice
+  field; brains; ten; needle" is `甲`'s own un-registered sub-breakdown, the
+  same "Heisig renames a compound's sub-pieces when re-teaching it" pattern
+  as 博/薄/簿/縛's "尃 is not 専" case. Left as-is.
+- **"key" on 侯/喉/候/決/快** (`rtk1767`-`rtk1771`) — chunks 108/109/111's
+  conclusion exactly, re-confirmed with one new cross-check. `KanjiVG`
+  (`0592c.svg`, 夬) independently stroke-groups 夬 as one standalone stroke
+  (`㇕` type, ungrouped) plus a 3-stroke `大` group — confirming cjkvi's own
+  `⿻ユ人`/`⿻𠃍大` overlay reading structurally rather than just via IDS text:
+  there really is one extra stroke beyond `大`, sitting alone, not fused into
+  either named sub-shape. Checked whether that lone stroke could be
+  `prim-hooked-stick` (𫝀, registered chunk 108 for 韋's top, already called
+  "key" there) — rendered `夬`, `大`, `𫝀`, `韋` side by side: `𫝀` is a
+  2-stroke diagonal-through-a-hook shape, visibly bigger and more complex
+  than 夬's single small top tick. Ruled out, not a match. The lone stroke
+  itself remains unidentified against any registered primitive. Narrows the
+  open question for whoever picks this up next: it needs a *single-stroke*
+  primitive, not a borrow from an existing multi-stroke one — same shape of
+  problem as the stroke-primitive backlog in `audit_phantom_parts.py`
+  (CLAUDE.md: "led by stroke primitives (ノ 一 ｜) ... each needs its
+  component identified individually").
+
+No `data.txt` change this chunk — none of the three sampled clusters cleared
+the render-plus-corroboration bar, and the one new tool angle tried
+(`--min-hosts 1`) produced a confirmed false positive, correctly not applied.
+`git status` clean, nothing to push beyond this note.
+
+### Next
+
+1. "Key" on 夬 (決/快, and by extension the 侯/喉/候 "key" question):
+   narrowed today to "a single `㇕`-type stroke, not `prim-hooked-stick`".
+   A future session should look for *other* kanji where this same lone hook
+   appears standalone or beside an unambiguous sibling, the way 𫝀 itself
+   was confirmed against 韋 — not re-render `夬`/`大`/`𫝀` from scratch.
+2. `卬`'s "box" claim and `鬲`'s JK-script anatomy (`融`/`隔`): both still
+   exactly where 2026-10-29/30 left them — not re-attempted today, no new
+   evidence.
+3. `叚` on `暇` (`rtk2027`): still open per 2026-10-30's entry — the
+   unidentified box-pair piece beside `口` needs independent corroboration
+   from some other host before it's safe to register.
+4. `audit_csv_regressions.py`'s list is thoroughly mined at this point —
+   every cluster sampled across the last four chunks (human legs, apron,
+   dice, specialty, moon/flesh, box×2, stand up/vase, ten/needle, key) is a
+   confirmed dead end or genuinely unresolved opaque case. A future chunk
+   should either accept the lower hit rate per cluster or pivot to
+   `full_review.py`'s frame-ordered worklist territory instead (owned by its
+   own separate daily timer, but worth a human decision on whether this
+   routine should start drawing from it too, since the CSV-regressions well
+   is close to dry).
+5. `full_review.py`/hanzi-worklist pending counts belong to their own
+   separate daily timers, not this routine — not touched.
