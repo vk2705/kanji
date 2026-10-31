@@ -98,6 +98,9 @@ def classify(conn, keywords, components):
             continue
         if row["username"] == "ru-aliases":
             category = "project-russian"
+        elif row["username"] == "wanikani-aliases":
+            # Tofugu's names; removable in one go with add_wanikani_aliases.py --remove-all.
+            category = "wanikani-radical-name"
         elif name == (entry["character"] or "").lower() or name == kid.lower():
             category = "mechanical"
         elif entry["frame"] and name == str(entry["frame"]):

@@ -23,6 +23,7 @@ cd backend
 | **cjkvi-ids** | the structural decompositions (`⿰⿱…` IDS), many of the `alternative` decompositions (not all — some are an older reading of the same kanji), and the ground truth the whole 2026-08/09 audit checks against | Open — attribution required |
 | **Unicode `CJKRadicals.txt`** | the 69 `kangxi*` row ids and the official radical numbering | Open — Unicode licence |
 | **This project** | the 146 `prim-*` rows and their descriptive names, every decomposition correction in `docs/2026-08-search-quality-audit.md` (60+ chunks), the Russian aliases, all user contributions | Ours |
+| **WaniKani** (Tofugu LLC) | 473 radical names (`tsunami`, `triceratops`, `lip ring` …) as public aliases owned by the `wanikani-aliases` pseudo-account, from `backend/wanikani_radicals.json` via `add_wanikani_aliases.py` (added 2026-10-31) | **Proprietary, Tofugu's own content.** Added at the owner's decision so WaniKani learners can search by the names they know, attributed on the About page and SEO footer; `add_wanikani_aliases.py --remove-all` deletes every one if WaniKani objects |
 | **Remembering the Kanji, James W. Heisig** | the frame numbers, the keyword for each frame, and the primitive names his components column emits | **In-print commercial book, copyrighted** |
 
 The first five are the bulk of the structure. The last is the part that needs

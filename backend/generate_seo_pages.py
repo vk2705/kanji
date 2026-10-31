@@ -40,6 +40,9 @@ ATTRIBUTION = f"""      <p>Frame numbers and many building-block names follow
         Kanji</a> by James W. Heisig (University of Hawai&#39;i Press). This is an unofficial
         study aid, not affiliated with or endorsed by the author or publisher, and it does not
         reproduce the book&#39;s mnemonic stories.</p>
+      <p>Some alternative names are <a href="https://www.wanikani.com/radicals">WaniKani</a>&#39;s
+        radical names (Tofugu LLC), added so WaniKani learners can search by them; this site is
+        not affiliated with WaniKani.</p>
       <p>Structural decompositions from cjkvi-ids; readings and character data from kanjidic2
         and KRADFILE (EDRDG, CC BY-SA) and from the Unicode Consortium&#39;s Unihan database.
         <a href="https://github.com/vk2705/kanji/blob/master/docs/DATA_SOURCES.md">Full data

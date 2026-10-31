@@ -92,6 +92,7 @@ python3 indexnow_submit.py --dist /opt/kanji/frontend/dist  # PROD ONLY, after e
 ./venv/bin/python3 visit_stats.py           # site visit counts (today/7d/30d/all-time), or --days N for a daily breakdown
 ./venv/bin/python3 prune_page_views.py --dry-run   # roll up + prune page_views rows older than 90 days (see Analytics)
 ./venv/bin/python3 add_ru_aliases.py --dry-run     # add Russian-translation aliases under the ru-aliases pseudo-account (see Internationalization)
+./venv/bin/python3 add_wanikani_aliases.py --dry-run  # WaniKani radical names as public aliases under the wanikani-aliases pseudo-account (proprietary, Tofugu's; --remove-all is the takedown)
 ./venv/bin/python3 audit_phantom_parts.py          # parts in neither cjkvi-ids' tree nor Heisig's CSV (see Decomposition audit tooling)
 ./venv/bin/python3 suggest_heisig_aliases.py --all  # Heisig component names that resolve to nothing here, and which row each belongs on
 ./venv/bin/python3 audit_anachronistic_names.py     # component names that resolve to a kanji taught *after* their first host (see Decomposition audit tooling)

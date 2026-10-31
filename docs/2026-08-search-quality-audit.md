@@ -24684,3 +24684,35 @@ kermit.is-a.dev (`frontend/public/kermit/index.html`, served from prod's dist by
 line in the header, as WebP (179 KB) with a JPEG fallback (250 KB), converted from
 the 2.7 MB PNG; explicit width/height so the page does not jump while it loads.
 Checked in headless Chromium at 1200 px and 390 px wide.
+
+## 2026-10-31 — WaniKani radical names as searchable aliases
+
+Owner asked whether WaniKani radical names work here. Checked all 491 radicals of
+WaniKani's public list (wanikani.com/radicals, six difficulty bands, levels 1–60)
+against prod's live DB, read-only: 259 names already found WaniKani's glyph (217 in
+Japanese mode), 134 existed but pointed at a *different* glyph ("ground" → 土, where
+WaniKani's ground is 一; "hat" → 亠, not 𠆢), 70 glyphs were present under other
+names only, 13 were written with a lookalike, 15 are image-only. 463 of the 476
+Unicode glyphs are in the DB, so the gap was names, not data.
+
+Owner decision: add the names under a separate pseudo-account and remove them if
+WaniKani objects. They are Tofugu's content, not open data, which is why they are
+kept apart and listed in `docs/DATA_SOURCES.md`, the About credits (en/ru) and the
+SEO footer. New: `backend/wanikani_radicals.json` (the list: level, slug, glyph,
+name) and `backend/add_wanikani_aliases.py`, `ru-aliases`-style: public aliases owned
+by `wanikani-aliases`, converging on the JSON on every run, `--remove-all` as the
+takedown. `provenance_report.py` counts them as `wanikani-radical-name`.
+
+Matching is by glyph. Ten lookalikes map to their real glyph (`map_to`), each pair
+rendered side by side first: ハ→八, ナ→𠂇, ⻌→辶, ト→卜, ム→厶, メ→乂, ｲ→亻 (half-width
+katakana), ネ→礻, ⺤→爫, マ→龴. A first test run showed "tsunami" + "mouth" finding
+nothing in Japanese mode: 氵 has only a hanzi row, and our Japanese decompositions
+spell it 水 (海 = 水 + 毎). Seven such radicals therefore also name the Japanese
+stand-in that our own decompositions use (`ja_glyph`): 氵→水, 刂→刀, 爫→爪, 覀→西,
+耂→老, 乚→乙, 丨→｜. Not mapped, because the Japanese rows split the shape or the
+stand-in is not certain: 开 丆 龸 壴 袁 苟 尭 巩 堇 (on their hanzi row only); ホ Angel,
+L Lion, 㠯 Bear (no row) and the 15 image-only radicals are skipped.
+
+A name a row already carries is not duplicated. Collisions are left ambiguous on
+purpose: "ground" now offers 一 / 土 / 地 in the parts-search meaning picker, and
+searches by such a name return the union by default, as with every ambiguous name.
