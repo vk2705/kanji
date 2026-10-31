@@ -24716,3 +24716,15 @@ L Lion, 㠯 Bear (no row) and the 15 image-only radicals are skipped.
 A name a row already carries is not duplicated. Collisions are left ambiguous on
 purpose: "ground" now offers 一 / 土 / 地 in the parts-search meaning picker, and
 searches by such a name return the union by default, as with every ambiguous name.
+
+## 2026-10-31 — contact email on the site
+
+Owner asked for their contact address, vitaly.kroivets+kanji@gmail.com, on the site.
+Added to the About page's "Ideas and discussion" section (en/ru, as the channel for
+people without a GitHub account or with something private), the guide's feedback
+paragraph, the footer of every generated page, and the privacy policy's contact
+section. The privacy page previously sent account-deletion requests to a public
+GitHub issue, which publishes the requester's username; email is now the first
+option there and its "Last updated" date moved to 2026-10-31, as the page promises.
+GitHub Discussions stays the public channel and the in-app Dispute button the one
+for a wrong breakdown.

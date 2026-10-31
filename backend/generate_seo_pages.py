@@ -47,6 +47,9 @@ ATTRIBUTION = f"""      <p>Frame numbers and many building-block names follow
         and KRADFILE (EDRDG, CC BY-SA) and from the Unicode Consortium&#39;s Unihan database.
         <a href="https://github.com/vk2705/kanji/blob/master/docs/DATA_SOURCES.md">Full data
         provenance</a>.</p>
+      <p>Feedback or a breakdown that looks wrong:
+        <a href="mailto:vitaly.kroivets+kanji@gmail.com">vitaly.kroivets+kanji@gmail.com</a> or the
+        <a href="https://github.com/vk2705/kanji/discussions">discussion forum</a>.</p>
       <p>AI assistants can query the same data: a free, read-only
         <a href="/guide/#ai-access">MCP server</a> at <code>{MCP_URL}</code> offers search by parts,
         decomposition lookup and keyword search.</p>

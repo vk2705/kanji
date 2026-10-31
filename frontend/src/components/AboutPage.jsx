@@ -9,6 +9,7 @@ const BOOK_URL = "https://uhpress.hawaii.edu/title/remembering-the-kanji-1/";
 const MCP_URL = "https://kanjimcp.alteon.help/mcp";
 const DISCUSS_URL = "https://github.com/vk2705/kanji/discussions";
 const PROVENANCE_URL = "https://github.com/vk2705/kanji/blob/master/docs/DATA_SOURCES.md";
+const CONTACT_EMAIL = "vitaly.kroivets+kanji@gmail.com";
 
 export default function AboutPage({ lang, onBack, onHome }) {
   const whatsNewItems = t(lang, "aboutWhatsNewItems");
@@ -49,6 +50,9 @@ export default function AboutPage({ lang, onBack, onHome }) {
         <a className="about-link" href={DISCUSS_URL} target="_blank" rel="noreferrer">
           {t(lang, "aboutDiscussLinkLabel")}
         </a>
+        <p className="login-hint">
+          {t(lang, "aboutEmailText")} <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+        </p>
       </div>
 
       <div className="contrib-section">
