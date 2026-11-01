@@ -24728,3 +24728,77 @@ GitHub issue, which publishes the requester's username; email is now the first
 option there and its "Last updated" date moved to 2026-10-31, as the page promises.
 GitHub Discussions stays the public channel and the in-app Dispute button the one
 for a wrong breakdown.
+
+## 2026-11-01 — hanzi worklist, daily chunk: 20 of 20 keep-ours
+
+`hanzi_worklist_next.py -n 20` against `docs/hanzi_decomposition_worklist.json`
+(53 pending at start of run). Backed up `kanji.db` first (`backup_db.py` ->
+`backups/kanji-20261101-100537.db`); pytest was green (108 passed) before
+starting. Every one of the 20 rows was rendered via `render_glyphs.py` before
+any decision — the 20 hosts in one batch, then every component glyph named in
+each row's cjkvi-ids reading in a second batch — per the standing render-it
+rule.
+
+Breakdown: 13 overlay findings, 7 opaque findings. All 20 came back
+**keep-ours**, no `kanji.db` writes this chunk.
+
+**The gold-radical family (10 of the 20) is the clearest illustration of why.**
+金 鈻 鉛 鎐 鏋 鑿 钖 铅 铎 all flagged because cjkvi's own readings of their
+right-hand (or, for 金/釜, internal) components use `⿻`/`⿴` somewhere — but in
+every case this project's row already stops at exactly the unit the render
+shows as one recognizable shape, not an invented flat reading of the overlap:
+㠯 (鈻, a real two-box-stacked glyph, confirmed by its own standalone render),
+𠘧+口 (鉛/铅, a small cap over a mouth box, identical on both the traditional
+and simplified forms — good cross-check), 䍃 (鎐, matches a real standalone
+render that looks like 备), 㒼 (鏋, ditto, a real glyph even though cjkvi's own
+breakdown of *it* bottoms out at a codepoint with no font anywhere), and 𠬤
+(铎, a crossed-stroke shape over 又, reused identically in 释 — another good
+cross-check, since 释's own row already uses the same term for the same
+shape). 釜 and 金 share the bottom 王,丷 pattern letter for letter, which the
+render confirms is the same shape in both.
+
+**Confirmed-tofu components, checked individually, not inferred from the
+batch render's "identical in every face" note:** 𠓜, 𠬤, 𠘧, 𣫞, 𠃓, 𠁣, 𠃛
+(the components cjkvi stops at inside 蹣/鏋, 释/铎, 鉛/铅, 鑿, 钖, and both
+halves of 門, respectively) all rendered alone at full size as the classic
+crossed-box `.notdef` placeholder on this machine, not a small or stylized
+real glyph. The batch render's own identical-across-every-face note flagged
+all seven as suspects; confirming each individually is what the project's
+standing method (chunk 1's 临/𫩏) calls for, not a reason to skip the
+individual check. None of the seven has a `kanji` row either. Where the
+current decomposition uses one of these as a single part term (释/铎's 𠬤,
+鉛/铅's 𠘧, 钖's 𠃓, 鑿's 𣫞, 門's 𠁣+𠃛), that term is standing in for a
+sub-shape that *is* visible inside the host — confirmed by looking at the
+host's own render, not the unrenderable term alone — so the opaque finding
+is reporting the evidence ceiling (cjkvi can't resolve further either, hence
+"opaque"), not a wrong row. This is the same situation as chunk 1's 乃
+(`𠄎`) and 与 (`②`).
+
+**辰 and 長 share their bottom four strokes** (`𠄌,乀,丿` plus 辰's extra 厂
+on top) — both opaque findings for the same reason (cjkvi stops at `𠄌`,
+itself a real, renderable hook stroke, just one cjkvi doesn't itself name
+further), and the shared-shape agreement between the two unrelated hosts is
+itself a cross-check that this project's stroke-level breakdown here is
+reading the same thing consistently rather than guessing per-row.
+
+**The one row given the most scrutiny before settling on keep-ours: 鑿**
+(`𣫞,金`), where cjkvi's own reading of `𣫞` (`⿰⿻丵臼殳`) names three
+components — 丵, 臼, 殳 — that *do* all have real, renderable, non-tofu rows
+in this database, unlike every other opaque term in this chunk. Rendered
+large, 鑿's top really does look like three stacked/overlapping pieces
+(a grass-like cluster, a box, a hand-with-stick shape) rather than one
+indivisible blob, so expanding `𣫞` into `丵,臼,殳` was a real candidate.
+Decided against it: cjkvi's own formula for that expansion is itself an
+overlay (`⿻丵臼`), meaning 丵 and 臼 share strokes rather than sitting
+side by side — flattening it to three independent parts would be exactly
+the over-confident flat reading of an overlap that this audit's whole
+methodology (CLAUDE.md's "three ways the sources lie") warns against
+introducing. Kept at the coarser, opaque-but-accurate `𣫞` unit instead of
+trading a weak-evidence finding for a new one.
+
+那 (`刀,二,阝` for `⿰⿻刀二阝`) and 里 (`甲,一,一` for `⿱⿻甲一一`) are the
+same overlay-flattening pattern as chunk 1's 丧 — each visibly contains the
+listed pieces, just with the first two sharing strokes rather than sitting
+cleanly apart; kept for the same reason.
+
+53 -> 33 pending after this chunk (487 total).
