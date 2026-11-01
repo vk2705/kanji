@@ -3289,7 +3289,13 @@ rtk2875:歪:warp:不,正
 rtk2876:翠:green:卒,羽
 rtk2877:黛:blackened eyebrows:代,黒
 rtk2878:鼎:three legged kettle:｜,一,片,目,丬
-rtk2879:鹵:salt:十,囗
+# 2026-11-01: was 十,囗. cjkvi reads the top ⺊ (the audit_phantom_parts.py
+# "deferred" item from chunk 79: "鹵's top is ⺊, which has no row here" --
+# it does now, kangxi25/卜, added later the same week for 占/卓/貞's own ⺊).
+# Rendered side by side with 占's already-registered ⺊ top and with 卜 alone,
+# the stroke is pixel-for-pixel the same vertical-plus-sweeping-hook shape in
+# all three, not 十's straight cross. Fixed to 卜.
+rtk2879:鹵:salt:卜,囗
 rtk2880:鹸:saltiness:㑒,鹵
 rtk2881:虔:respect:文,虍
 rtk2882:燕:swallow (bird):北,口,廿,灬
@@ -5187,6 +5193,11 @@ prim-tall:?:tall:亠,口
 # over-flattened (亠 inside 立, 几+又 beside 殳) -- one question, not two.
 # 鹵's top is ⺊, which has no row here and should not get one in passing.
 # 蝋 needs 𠂡 and 捷 needs 疌, both atomic in cjkvi. 蘭 needs 柬, likewise.
+# (2026-11-01: 鹵's ⺊ now does have a row -- kangxi25/卜, which this same
+# chunk's RADICAL_VARIANTS fix for 占/卓/貞 added after this note was
+# written. See rtk2879's own row for the render that settled it. 毅/捷/蘭
+# stayed open questions and are unchanged; see CLAUDE.md's "opaque
+# intermediate" section for why 捷's 疌 and 蘭's 柬 are correct as written.)
 
 # --- 2026-09-25: "hammock" gets its row, and a correction to the same day's
 # chunk 79. Owner-reported: 祢's right side is a known primitive.
