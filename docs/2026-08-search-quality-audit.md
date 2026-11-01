@@ -24728,3 +24728,137 @@ GitHub issue, which publishes the requester's username; email is now the first
 option there and its "Last updated" date moved to 2026-10-31, as the page promises.
 GitHub Discussions stays the public channel and the in-app Dispute button the one
 for a wrong breakdown.
+
+## 2026-11-01 — fresh container; `audit_phantom_parts.py` fix (鹵) plus a round of re-confirmations
+
+Daily firing. Step 0 per the task brief: no `/home/user/kanji` checkout existed in
+this container, so `git clone` fresh; `git fetch`/`pull --ff-only` pulled 8 commits
+(the 2026-10-31 session's work), `git push --dry-run origin master` succeeded
+before any work started (one stray `_push-access-check-*` branch on the remote,
+same as previous sessions have noted, not touched). Built `backend/venv` fresh
+(`python3.11 -m venv`), `apt-get install fonts-noto-cjk fonts-hanazono`, fetched
+`cjkvi-ids/ids.txt` to `/tmp/ids.txt`. Rebuilt `kanji.db` from source.
+
+Baseline: `test_regression_fixes.py` 1331/1331 (no `zh-*` rows — hanzi spot-checks
+self-skip), `pytest -q` 83 passed, `audit_overflatten.py`/`audit_self_reference.py`/
+`audit_radicals.py` all 0, `audit_phantom_parts.py --in-csv-range` 10 across 9
+(unchanged from 2026-10-31's close), full `audit_phantom_parts.py` 49 across 36
+(unchanged), `audit_primary_choice.py` 0/59, `suggest_heisig_aliases.py --near 0.8
+--all` 0 groups in every category (unchanged). `frontend`: `npm run lint` clean,
+`npm run build:prod`/`build:dev` both clean.
+
+This routine's own task brief (section 4, "Where the work is") pointed at three
+items; two were stale and one produced the session's fix:
+
+- **`kangxi58` housekeeping — already done.** The brief says `kangxi58` holds 彑
+  where `CJKRadicals.txt` says radical 58 is 彐. Checked `data.txt`: it already
+  reads `kangxi58:彐:broom,Radical 58,ヨ:` — the swap happened 2026-09-18 (this
+  log's own "`kangxi58` id swap: 彑 vs 彐" entry), with 彑 moved to
+  `prim-pigs-head`. The brief text predates that fix and is stale; no action
+  needed, and no further invalidation check seemed worth the time since the
+  2026-09-18 entry already documented the render-based verification.
+- **`suggest_heisig_aliases.py --near 0.8 --all` — still 0 groups in every
+  category**, matching 2026-10-31's close. Nothing new to pick from.
+- **`audit_phantom_parts.py` — one real fix, several re-confirmations.**
+
+### Fix
+
+- **rtk2879 鹵 (salt)**: was `十,囗`. This was literally the dataset's own
+  "deferred rather than guessed" item from the 2026-09-25 chunk-79 note
+  (`"鹵's top is ⺊, which has no row here and should not get one in passing"`)
+  — the row kept `十` only because nothing better was registered at the time.
+  It is now: `kangxi25`/卜 was given a `⺊`↔卜 `RADICAL_VARIANTS` mapping later
+  that same week for 占/卓/貞's own `⺊` tops (see `audit_overflatten.py`'s
+  comment on that mapping), but nobody had come back to re-check 鹵 against it.
+  Rendered `鹵`, `占`, `卜` together at 500px (a dedicated zoom script, since
+  `render_glyphs.py`'s fixed 110px wasn't enough to be sure): 鹵's top stroke is
+  pixel-for-pixel the same vertical-plus-sweeping-hook shape as 占's already-
+  registered `⺊` top and as free-standing 卜 — not 十's straight cross, which
+  has no diagonal sweep at all. Fixed to `卜,囗`. Added a dated addendum next to
+  the original 2026-09-25 note so a future session doesn't read it as still
+  open. `audit_phantom_parts.py` full count: 49 across 36 → 48 across 35.
+
+### Re-confirmed, not touched
+
+Investigated every other item in `audit_phantom_parts.py`'s "strong evidence"
+section (both channels fail, not the placeholder-blind-spot kind) that wasn't
+already closed by a prior session's note:
+
+- **rtk2606 烹 / rtk2928 亮 (`prim-tall`)**: `prim-tall` is a glyph-less
+  synthetic primitive (`?` character, chunk 55's note) — same category as
+  `prim-mirrored-spoon` (rtk2160, rtk480), which this log already settled as
+  "a synthetic primitive with no real codepoint can never resolve against
+  cjkvi or the CSV text ... that is a property of the primitive, not evidence
+  against any one host." Not touched.
+- **rtk2748 訊 (`乙`)**: current row is `言,乙,十`, but the 2026-09-25 fix note
+  for this row only settled the `十` (dropping stray `ノ`/`几`) and says
+  nothing about `乙` at all — so the `乙` in the live row is unexplained by
+  that note, not contradicted by it. cjkvi gives `卂 = ⿹⺄十`; `⺄` is the same
+  enclosing-hook codepoint this file's own 2026-09-23 chunk-61 note already
+  chose to spell as `乙` elsewhere ("`気`... 乙 rather than cjkvi's 乁") on the
+  grounds that this file has a row for 乙 and none for the lookalike variant.
+  Rendered `訊`/`乙`/`十`/`言` together: the enclosing hook around 訊's right-
+  side cross is a plausible match for 乙's hook, consistent with that
+  precedent, but close enough (wrapping around the cross rather than sitting
+  beside it) that I was not confident enough to call it either way against the
+  standing "render it, don't guess" bar. `kanji_full_review.json` already has
+  this row queued (`status: pending`, frame 2748) for the separate
+  frame-ordered review timer — left for that pass rather than guessed here.
+- **rtk2725 蝿 (`田`)**: this is CLAUDE.md's own canonical example of the
+  ⿻-operator caveat ("cjkvi's 蝿 = ⿰虫⿻日电 does not mean the visible top box
+  is a 日; rendered, it is a 田") — the phantom flag on 田 is the documented
+  false positive, not a bug. Not touched.
+- **rtk2898 毅 (`豕`)**: already resolved 2026-10-23 (own comment in `data.txt`
+  right above the row) — cjkvi's `豙 = ⿱立𧰨` and this file's `豕` is the
+  deliberate same-body stand-in for the codepoint-less `𧰨`, confirmed by
+  render at the time. Not touched.
+- **rtk2372 捷 (`疌`) / rtk2449 蘭 (`柬`)**: both are CLAUDE.md's own named
+  examples of the "opaque-intermediate" pattern (cjkvi treats `疌`/`柬` as
+  atomic, so it can't see inside them, and this file's genuine sub-parts read
+  as phantoms) — "both rows correct" per that doc. Not touched.
+- **rtk2647 祢 (`尓`) / rtk1869 斎 (`斉`) / rtk2388 滲 (`参`)**: all previously
+  closed codepoint-variant non-bugs (`尔`/`尓`, `齐`/`斉`, `參`/`参`) with their
+  own dated notes already in `data.txt`. Not touched.
+- **rtk2160 能 (`prim-mirrored-spoon`)**: same synthetic-primitive non-bug as
+  `prim-tall` above, already documented 2026-09-23. Not touched.
+- **rtk2867 爾 (`｜`, `冂`)**: not previously investigated. Rendered `爾`/`巾`/
+  `冂`/`爻` together — the top (`一`+`八`) and the hooked-bottom vertical
+  (matching `巾`'s own hook) both look right, but I could not find a clear `冂`
+  frame in the render, and cjkvi's notation here is also an `⿻`-overlay
+  (`⿻巾㸚`) with no CSV data at this frame (2867, past the ~2042 core range)
+  to corroborate either way. Left open rather than guessed — a candidate for
+  a session with time to find sibling hosts using the same `爻`/`巾` cross
+  pattern before touching it.
+
+### Verification
+
+Post-fix: `test_regression_fixes.py` 1331/1331 (no pin needed updating — rtk2879
+had none), `pytest -q` 83 passed, `audit_overflatten.py`/`audit_self_reference.py`/
+`audit_radicals.py` all 0 (unchanged), `audit_phantom_parts.py` 48/35 (was 49/36),
+`--in-csv-range` unaffected (rtk2879 is past the CSV range) at 10/9,
+`audit_primary_choice.py` 0/59 (unchanged). `frontend`: `npm run lint` clean,
+`npm run build:dev` clean.
+
+No production deploy from here — a deployer needs `git pull` + `sync_system_data.py`
+on prod to pick up the rtk2879 fix. Not run against the live server (no server
+access from this container, per the task brief).
+
+### Next
+
+1. rtk2867 爾's `｜`/`冂` phantoms (CLAUDE.md "render it" bar not cleared this
+   session) — look for siblings sharing the `爻`-over-`巾` shape before
+   deciding, the way 祢's 尓 fix leaned on 称/弥.
+2. rtk2748 訊's `乙` — plausible under the 気/乁→乙 precedent but not certain
+   enough to touch; it is also already queued in `kanji_full_review.json`
+   (frame 2748, pending) for the separate frame-ordered timer, so check there
+   first before re-investigating from scratch.
+3. `audit_phantom_parts.py`'s "strong evidence" section is now fully mined —
+   every item not already closed by a prior session is either a confirmed
+   non-bug (synthetic primitive, codepoint variant, opaque-intermediate) or
+   one of the two open items above. A future chunk should move to the larger
+   "weaker evidence" section (cjkvi-blind, Heisig-only) or to the full
+   `audit_phantom_parts.py` output beyond today's `--in-csv-range`/strong
+   subset, which still has ~23 untouched hosts.
+4. `kangxi58`/`suggest_heisig_aliases.py` are dead ends per the brief as
+   currently worded; worth updating the brief itself so future firings don't
+   re-check a already-closed item each day.
