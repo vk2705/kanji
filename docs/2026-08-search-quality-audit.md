@@ -24988,3 +24988,145 @@ re-run since nothing changed. Only `docs/hanzi_decomposition_worklist.json`
 is touched by this commit.
 
 33 → 13 pending after this chunk.
+
+## 2026-11-02 — fresh container; rtk1943 恭 fix, two RADICAL_VARIANTS additions, prior Next items closed out
+
+Daily firing. Step 0: no checkout existed, cloned fresh, `git checkout master`
+(container started detached), `git fetch`/`pull --ff-only` picked up 11 commits
+(the 2026-11-01 session plus an unrelated `kermit.is-a.dev` developer-page
+addition from the owner, not touched), `git push --dry-run origin master`
+succeeded before any work started. Built `backend/venv` fresh, `apt-get install
+fonts-noto-cjk fonts-hanazono`, fetched `cjkvi-ids/ids.txt` to `/tmp/ids.txt`.
+Rebuilt `kanji.db` from source. Baseline matched 2026-11-01's close exactly:
+`test_regression_fixes.py` 1331/1331, `pytest -q` 83 passed, `audit_overflatten
+.py`/`audit_self_reference.py`/`audit_radicals.py` all 0, `audit_phantom_parts
+.py --in-csv-range` 10/9, full `audit_phantom_parts.py` 48/35, `audit_primary_
+choice.py` 0/59. `frontend`: `npm run lint` clean, `npm run build:dev` clean.
+
+### The two explicit Next items, both closed as confirmed non-bugs
+
+- **rtk2748 訊's `乙`**: right side is 卂, atomic in cjkvi's GT reading (its
+  JK alternate, `⿹⺄𠂇`, names a stylistic variant whose inner shape is not
+  what any installed face actually draws here). A 500px render of 訊/卂/乙/
+  十 together settled what 2026-11-01's session couldn't: 卂 is a full 十
+  cross plus one sweeping hook stroke, and that hook matches 乙's own lower
+  hook exactly — same "lookalike stand-in, no row for the real cjkvi
+  codepoint" call as rtk2030 気's `𠂉,一,乙` (chunk 61, 2026-09-23). Added a
+  dated comment to the row; no data change.
+- **rtk2867 爾's `｜`/`冂`**: cjkvi reads 爾 as `⿱一⿱八⿻巾㸚` — the bottom
+  unit is an *overlay* (`⿻巾㸚`), so per CLAUDE.md's overlay caveat cjkvi
+  structurally cannot see inside it. An 800px solo render shows exactly what
+  the row lists, nothing more or less: a full-width 一 top bar, a diverging
+  八 under it, an outer box frame open at the bottom with a hook on the
+  right (冂, sharing that same top bar), one unbroken vertical pipe (｜)
+  running from the top bar to the very bottom and splitting the interior,
+  two stacked 爻 crosses either side of the pipe, and a hooked 巾-like base.
+  璽 (rtk2194) references 爾 whole, so there's no sibling host to cross-
+  check against independently — the render is the only evidence, and it's
+  unambiguous. Added a dated comment; no data change.
+
+### Working the rest of `audit_phantom_parts.py`'s weaker-evidence section
+
+`audit_weak_evidence.py` (full run, no `--host`) confirmed most of the
+remaining weaker-evidence hosts are already-known non-bug categories —
+everything with `cjkvi stops at <placeholder>` in its opaque-intermediate
+section (不/印/甚/兎/劉/畢/鼎/卿/套/壷/疏/喩/北/憂, i.e. 14 of the list's 23
+hosts) needs no further look. Investigated the remainder individually:
+
+- **rtk2858 艘**: already settled 2026-10-23 (own comment above the row) —
+  deliberately reads 叟's upper portion as 日 for consistency with two
+  sibling hosts (rtk1201 捜, rtk1818 痩) that both already use 日 there too,
+  over cjkvi's structural `⿻臼丨` overlay reading. Re-confirmed, not
+  re-opened.
+- **rtk2825 驢**: cjkvi only resolves 盧 to `⿸虍⿱田皿` (虍/田/皿), not the
+  row's `卜,七,厂,虍` — but that four-way flattening of 虍 itself is
+  Heisig's own detailed teaching, already used identically across all three
+  in-CSV-range siblings sharing the shape (rtk2145 虎, rtk2150 虞, rtk2151
+  慮). A real shape-family cross-check, already satisfied; not a bug.
+- **rtk2874 輿**: already settled via KanjiVG cross-check in a prior session
+  (own comment in the "Four re-confirmed correct" block) — cjkvi's `𦥑`
+  resemblance to 興's own top is a false lead; KanjiVG independently labels
+  輿's top group 臼 three times over. Re-confirmed, not re-opened.
+- **rtk2916 鴬**: `prim-schoolhouse` is a glyph-less synthetic primitive
+  (`?` character), same category as `prim-mirrored-spoon`/`prim-tall`/
+  `prim-legless-bird` — a synthetic primitive with no real codepoint can
+  never resolve against cjkvi or CSV text by construction. Not a bug.
+- **rtk683 慕 / rtk684 添 (`心`)**: already documented (data.txt note near
+  rtk2858) as "the same variant-codepoint non-bug as 斎/斉" — cjkvi spells
+  the bottom heart `㣺` (a compact variant this project has no row for),
+  not `心` directly. Re-confirmed, not re-opened on its own — but checking
+  *why* it was a phantom at all led to the session's one real fix:
+
+### Fix: rtk1943 恭
+
+CSV's own component list for frame 1943 ("graveyard; flowers; sun; day;
+large; St. Bernard; valentine" for 慕, "water; water droplets; water
+pistol; heavens; valentine" for 添, "strung together; salad; animal legs;
+eight; valentine" for 恭) uses "valentine" for all three hosts' heart
+component — and in this database "valentine" is registered as an alias of
+kangxi61/忄 only. 慕 and 添 already correctly use `心` regardless (hence
+their own phantom flags, settled above), but **恭's row used `忄`** — the
+left-side 3-stroke heart radical, structurally wrong for a heart sitting at
+the *bottom* of the character the way it does in 恭 (and in 慕/添). cjkvi
+agrees: `⿱共㣺`, the same compact `㣺` heart-variant codepoint as 慕/添, not
+忄. An 800px render of 恭/慕/添 beside both 心 and 忄 confirmed it directly —
+all three hosts' bottom component is 心's 4-stroke shape (dot, hook, two
+dots), not 忄's three plain verticals. No other row references 恭 as a
+sub-part, so no shape-family fallout to check. Fixed to `共,心`.
+
+No `test_regression_fixes.py` pin existed for rtk1943, so none needed
+correcting.
+
+### Two RADICAL_VARIANTS additions (`audit_overflatten.py`, evidence-only, no data.txt effect beyond what's above)
+
+Fixing rtk1943 the right way (㣺→心, not 㣺→忄) left `audit_phantom_parts
+.py` flagging it as a *new* strong-evidence phantom, since nothing told the
+detector `㣺` and `心` are the same primitive by a different codepoint — the
+exact gap the data.txt note already called out for 慕/添 but had never been
+codified. Added two mappings, same class as the existing 飠/糹/訁/⻏ entries:
+
+- `齒` → `歯`: cjkvi spells every tooth-radical host (齟, 齬— the only two
+  in RTK's scope) with the traditional 9F52 codepoint, which this project
+  has no row for; 歯 (rtk1255) is the Japanese form Heisig actually
+  teaches. Clears both hosts' phantom flags with no data.txt change (both
+  rows already correctly read 歯).
+- `㣺` → `心`: clears rtk1943's new flag and rtk683/684's pre-existing ones
+  in one shot, matching the editorial call already on record.
+
+### Verification
+
+`test_regression_fixes.py` 1331/1331 (no pins needed updating), `pytest -q`
+83 passed, `audit_overflatten.py`/`audit_self_reference.py`/`audit_radicals
+.py` all 0 (unchanged). `audit_phantom_parts.py --in-csv-range`: 10/9 →
+8/7. Full `audit_phantom_parts.py`: 48/35 → 44/31. `audit_primary_choice
+.py` 0/59 (unchanged). `frontend`: `npm run lint` clean, `npm run build:dev`
+clean.
+
+No production deploy from here — a deployer needs `git pull` on prod; no
+`sync_system_data.py` run needed beyond the usual (data.txt change only,
+no schema/backend change, no restart required for the `audit_overflatten.py`
+change since it's a maintenance-script-only file, not imported by the
+running app).
+
+### Next
+
+1. `audit_phantom_parts.py`'s weaker-evidence section is now down to 8
+   hosts in `--in-csv-range` (was 10) and the full list's genuinely
+   untouched remainder is small: rtk2907 卿 (`皀`) and rtk2910 套 (`長`) both
+   already have "Four re-confirmed correct" KanjiVG-backed notes elsewhere
+   in data.txt (same block as rtk2874, not restated in full here — worth
+   double-checking those notes cover the exact current phantom wording
+   before re-investigating from scratch) and rtk2930 疏 (`疋`) has not been
+   looked at by any session yet — a good next pick.
+2. `audit_phantom_parts.py`'s "strong evidence" section (the unconditional
+   top block, not gated by `--in-csv-range`) is now down to just rtk1869
+   斎 (already a known codepoint-variant non-bug per its own data.txt note)
+   and rtk2160 能 (`prim-mirrored-spoon`, synthetic-primitive non-bug) —
+   effectively fully mined at this point; a future session confirming that
+   and saying so explicitly would let this Next section stop re-pointing
+   at it.
+3. `kangxi58`/`suggest_heisig_aliases.py --near 0.8 --all` are still dead
+   ends per 2026-11-01's close (0 groups in every category) — this is the
+   second session in a row confirming that; the task brief's section 4
+   genuinely needs updating by whoever has write access to it, not just a
+   repeated note here.

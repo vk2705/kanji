@@ -2281,7 +2281,16 @@ rtk1939:洪:deluge:共,水
 rtk1940:港:harbor:水,共,己
 rtk1941:暴:outburst:日,共,氺
 rtk1942:爆:bomb:暴,火
-rtk1943:恭:respect:共,忄
+# (2026-11-02) Was 共,忄. CSV's "valentine" component name for this frame
+# resolves in this db only to kangxi61/忄 (the 3-stroke left-side heart
+# radical, as in 忙/快/情), but 恭's heart sits at the *bottom*, not the
+# left -- cjkvi agrees (⿱共㣺, 㣺 being the compact heart-variant
+# codepoint this file already treats as 心, same call as 慕/添's own
+# phantom-flagged 心, see that note above/rtk683-684). Rendered beside
+# 心 and 忄 directly: 恭's bottom component is the 4-stroke 心 shape (dot,
+# hook, two dots), not 忄's 3 plain verticals. No other row references 恭
+# as a sub-part, so no shape-family fallout. Fixed to 共,心.
+rtk1943:恭:respect:共,心
 rtk1944:選:elect:辶,巽
 rtk1945:殿:mr.:尸,共,殳
 rtk1946:井:well:
@@ -3136,6 +3145,12 @@ rtk2744:讐:enemy:言,隹
 rtk2745:諌:admonish:言,東
 rtk2746:諒:fact:京,言
 rtk2747:讃:praise:言,賛
+# (2026-11-02) Right side is 卂, atomic in cjkvi's GT reading (JK reading
+# ⿹⺄𠂇 names a stylistic variant whose inner shape is not what's rendered
+# here). A 500px render of 訊/卂/乙/十 together shows 卂 = a full 十 cross
+# plus one sweeping hook stroke that matches 乙's own lower hook, same
+# "lookalike stand-in" call as rtk2030 気's 𠂉,一,乙 (cjkvi 乁, no row here).
+# Confirmed keep, not a fix -- queued in kanji_full_review.json frame 2748.
 rtk2748:訊:request:言,乙,十
 rtk2749:訣:separation:言,人,大,二,ユ;夬,言
 rtk2750:詫:apologize:宅,言
@@ -3277,6 +3292,17 @@ rtk2863:曳:pull:乙,日
 rtk2864:洩:leak:曳,水
 rtk2865:彗:comet:丰,丰,彐
 rtk2866:慧:wise:彗,心
+# (2026-11-02) `｜` and `冂` confirmed by render, not phantoms. cjkvi reads
+# 爾 as ⿱一⿱八⿻巾㸚 -- the bottom unit is an *overlay* (⿻巾㸚), so per
+# CLAUDE.md's overlay caveat cjkvi structurally cannot see inside it. An
+# 800px solo render shows exactly what the row lists: a full-width 一 top
+# bar, a diverging 八 under it, an outer box frame open at the bottom with
+# a hook on the right (冂, sharing the same top bar), a single unbroken
+# vertical pipe (｜) running from the top bar to the very bottom and
+# splitting the interior, two stacked 爻 crosses either side of that pipe,
+# and a hooked 巾-like base. 璽 (rtk2194) references 爾 whole, so there is
+# no sibling host to cross-check `｜`/`冂` against independently -- the
+# render is the only evidence, per the standing rule, and it is clear.
 rtk2867:爾:you:｜,一,八,冂,爻,巾
 rtk2868:嘉:applaud:口,士,力
 rtk2869:兇:wickedness:儿,凶

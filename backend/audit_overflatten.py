@@ -94,6 +94,20 @@ RADICAL_VARIANTS = {
     # where Heisig's "walls" would otherwise clear them). The data keeps the
     # distinction; only the audit stops insisting on it.
     "⻏": "阝",
+    # cjkvi-ids writes every 齒-class host (齟, 齬, …) with the traditional
+    # 9F52 form, which this project has no row for — 歯 (the Japanese form
+    # Heisig actually teaches, rtk1255) has its own different internal
+    # strokes (止,米,凵 vs 齒's ⿱止𠚕) but is plainly the same tooth radical
+    # wherever a host uses it. Evidence only, same class as 飠/糹/訁 above.
+    "齒": "歯",
+    # 㣺 (U+38FA) is cjkvi-ids' compact heart-variant, used for a bottom-
+    # positioned heart in hosts like 慕/添/恭 where it writes ⿱X㣺. This
+    # project has no row for it (cjkvi itself resolves it further, as
+    # ⿰小丶) and already treats it as the real, legitimate 心 by eye —
+    # see data.txt's own note on 慕/添's phantom flags ("the same variant-
+    # codepoint non-bug as 斎/斉"). Evidence only; 心 keeps its own row and
+    # its own real strokes, which differ from 忄's.
+    "㣺": "心",
 }
 
 
