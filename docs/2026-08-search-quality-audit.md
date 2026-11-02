@@ -25130,3 +25130,79 @@ running app).
    second session in a row confirming that; the task brief's section 4
    genuinely needs updating by whoever has write access to it, not just a
    repeated note here.
+
+## 2026-11-02 — full re-review: found an uncommitted chunk from a dead run, did not continue
+
+This session's own job brief flags a trip-wire: stop before doing anything if
+`backend/data.txt` or `docs/kanji_full_review.json` already show uncommitted
+changes, since that means a previous run died before its commit/push step.
+That trip-wire fired today — `git status` at the start of this session
+already showed both files (plus `backend/test_regression_fixes.py` and
+`docs/kanji_review_coverage.tsv`) modified, with nothing committed. Per the
+brief, this session made none of today's review decisions and did not touch
+`data.txt`/`kanji_full_review.json`/`test_regression_fixes.py`/
+`kanji_review_coverage.tsv` — it only inspected the existing diff and records
+what it found here, leaving the working tree exactly as it was.
+
+**What the orphaned diff contains.** The last *committed* full-review chunk
+was frames 1052–1101 (`08d31d8`). The uncommitted work picks up immediately
+after that and covers frames **1102–1151** (rtk1102 through rtk1151, a full
+50-row chunk, `reviewed_by: "claude"`, `reviewed_at: "2026-11-01"` on every
+row) — i.e. a previous day's session appears to have completed the chunk and
+then died before committing, not mid-chunk.
+
+- 48 rows decided `keep`, each with a specific one-line reason (e.g. matching
+  Heisig's named components, matching a cjkvi-ids IDS string exactly, or
+  citing an earlier audit that already settled the same shape).
+- 2 rows decided `fixed`, both already written into `backend/data.txt` with a
+  dated `#` comment above the line, and both already reflected in
+  `backend/test_regression_fixes.py` where relevant:
+  - **rtk1112 善** ("virtuous"): dropped a phantom 王 ("king/jewel"). The note
+    argues neither Heisig's "sheep; horns; mouth" (3 concepts) nor cjkvi's
+    `⿱⿱羊䒑口` names a king/jewel piece, that 王 is used consistently as
+    "jewel" across 40+ other kanji and never as "sheep" elsewhere, and that
+    the compressed lower body of 羊-as-component visually resembles 王 (cjkvi's
+    own `⿻` overlay for that region, not a literal parts list) — plausibly how
+    the phantom got in. New primary: `丷,羊,口`.
+  - **rtk1121 喚** ("yell"): added a missing 口 ("mouth"), citing cjkvi's
+    `⿰口奐` and Heisig's own "mouth; bound up; four; large; St. Bernard" (5
+    concepts). New primary: `口,四,大,冂,勹`. The note records a shape-family
+    check against rtk1122 換 ("interchange"), the only other host of the same
+    `四,大,冂,勹` cluster, confirming it already correctly carries 扌 instead
+    of 口 and needs no change. `test_regression_fixes.py`'s `rtk1121` pin was
+    updated in the same diff to expect `rtk11` (口) added to its
+    `expected_part_ids`.
+  - Both notes read as render-grounded and consistent with this project's
+    conventions (named-primitive-over-strokes, ⿻/⿴ overlay caveat, Heisig
+    components column as a checklist) — nothing in them looks wrong on
+    inspection — but this session did not re-render either kanji itself, so
+    they are reported, not re-verified.
+- `docs/kanji_review_coverage.tsv`'s diff is consistent with the same 50-row
+  range being marked reviewed.
+- `docs/decomposition_worklist.json`'s diff is unrelated noise per the job
+  brief (nightly-rebuilt file, out of scope for this review) and was left
+  untouched along with everything else.
+
+**Why this session did not finish the job for the previous one.** The brief
+is explicit that discovering this signal means stop and document, not "pick
+up and commit for them" — the orphaned diff was never independently
+re-rendered or checked against the regression pins/`audit_radicals.py`
+baseline by *this* session, and committing someone else's unverified work
+under today's authorship would misattribute it. The working tree has been
+left exactly as found (`data.txt`, `kanji_full_review.json`,
+`test_regression_fixes.py`, `kanji_review_coverage.tsv` all still show as
+modified in `git status`); nothing was staged, committed, or reverted.
+
+**Pending count**: `full_review.py --pending-count` reports **1848 / 3000**
+pending — unchanged by this session, since the orphaned chunk above is not
+yet marked as committed/landed in the owner's eyes even though the JSON file
+says `reviewed`.
+
+**For the next session or the owner**: the orphaned diff looks complete and
+plausible. If it checks out, the fastest path is likely to review the two
+`fixed` rows' renders, run `./regression_fresh.sh` once, and commit it as
+"Full re-review frames 1102-1151" under whatever authorship is appropriate —
+then tomorrow's automated run resumes cleanly at frame 1152. If instead it
+should be discarded, that's also a one-step `git checkout --` away. Either
+way, no automated session should build further review work on top of an
+uncommitted chunk without resolving this first.
