@@ -24936,3 +24936,55 @@ access from this container, per the task brief).
 4. `kangxi58`/`suggest_heisig_aliases.py` are dead ends per the brief as
    currently worded; worth updating the brief itself so future firings don't
    re-check a already-closed item each day.
+
+## 2026-11-02 — hanzi worklist, chunk 3: 20 reviewed, all keep-ours/needs-render, no DB write
+
+Daily unattended run against `hanzi_decomposition_worklist.json`
+(`hanzi_worklist_next.py -n 20`), same cadence and method as chunks 1
+(2026-09-30) and 2. Pre-flight checks passed before touching anything: no
+uncommitted prior decisions in the worklist JSON, `kanji.db` present,
+`pytest -v` green (108 passed) before starting. 33 pending at the start of
+this chunk.
+
+All 20 hosts rendered via `render_glyphs.py` in one batch
+(陝 隺 雈 難 雨 電 頤 頯 顢 颐 颻 飏 飖 飮 饧 驿 鬗 鬥 鰩 鳐), plus every
+component glyph referenced in either side's reading (`ours` and cjkvi's) in
+two further batches, per the standing render-it rule.
+
+**12 keep-ours** (陝 隺 雈 難 電 顢 颻 飖 飮 鬗 鰩 鳐): in every one of these
+the overlay/opaque evidence cjkvi flags sits entirely *inside* a child our
+own row never expands into — our row's top-level split already matches
+cjkvi's own top-level operator (陝 = ⿰阝㚒, 顢/鬗 = …㒼 where cjkvi's own
+overlay is inside 㒼's *own* unresolved reading, 颻/飖/鰩/鳐 all share the
+same pattern through 䍃), or (雈, 飮) the opaque child cjkvi stops at is a
+term we don't use further either. All the parts we actually list (阝 㚒 冖
+隹 艹 廿 口 夫 雨 日 乚 㒼 頁 䍃 風 风 𩙿 欠 髟 魚 鱼, plus the twelve hosts
+themselves) render with real outlines and visually match what each host
+draws — 難 and 電 in particular are common, unambiguous characters where the
+four-part/three-part flat listing (廿,口,夫,隹 / 雨,日,乚) is exactly what's
+visible, the overlay only being between two of those parts' strokes, not a
+missing or invented piece.
+
+**8 needs-render** (雨 頤 頯 颐 飏 饧 驿 鬥): in each of these, one of our
+*own current parts* — not just a term buried in cjkvi's unused deeper
+reading — is a codepoint with no real outline on this machine: 𠕒 (雨), 𦣞
+(頤, 颐), 𢌳 (頯), 𠃓 (飏, 饧), 𠬤 (驿), and both 𩰋/𩰊 (鬥). `render_glyphs.py`
+confirmed each is identical across all four installed faces (Noto Sans CJK
+JP, WenQuanYi Zen Hei, HanaMinA, HanaMinB) — a true missing glyph, not a
+stylized or small one — so there is no sibling render that would resolve it
+either. This is the same situation as chunk 1's 临/𫩏: the finding may well
+still be a correct "evidence ceiling, not a bug" case (these opaque/overlay
+children were CJKVI's own choice of atomic unit too), but since the
+unverifiable glyph is the thing *this database itself* is asserting as a
+real component — not merely a child cjkvi mentions and we ignore — there's
+no way to rule out a wrong identification without seeing it, so each was
+left `needs-render` rather than guessed at. Revisit if a font covering CJK
+Ext B/C/D/E (U+204DC, U+20552, U+268DE, U+22333, U+200D3, U+20B24, U+29C0A,
+U+29C0B) becomes available.
+
+No `kanji.db` write this chunk — nothing crossed into `use-cjkvi`/`custom`,
+so the pre-flight backup wasn't needed and wasn't taken; `pytest -v` was not
+re-run since nothing changed. Only `docs/hanzi_decomposition_worklist.json`
+is touched by this commit.
+
+33 → 13 pending after this chunk.
