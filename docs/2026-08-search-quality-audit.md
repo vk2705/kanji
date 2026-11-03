@@ -25237,3 +25237,105 @@ instead of reviewing new frames — this now needs a human to clear it, not
 another automated pass repeating the same observation.
 
 **Pending count**: unchanged at **1848 / 3000**.
+
+## 2026-11-03 — hanzi worklist: last 13 (9 keep-ours, 4 needs-render, no DB write, worklist now fully reviewed)
+
+Daily unattended run against `hanzi_decomposition_worklist.json`
+(`hanzi_worklist_next.py -n 20`), same cadence and method as prior chunks.
+Pre-flight checks passed before touching anything: no uncommitted prior
+decisions in the worklist JSON, `kanji.db` present, `pytest -v` green (108
+passed) before starting, pre-flight backup taken
+(`kanji-20261103-173329.db`). Only 13 rows were pending (not a full 20 —
+this was the tail of the list), all `overlay` kind, none `opaque`.
+
+All 13 hosts (鷂 鷰 鹞 鹵 鹿 麥 黹 鼘 鼡 龙 龟 龱 鿃) rendered via
+`render_glyphs.py` in one batch, plus every component glyph referenced in
+either side's reading (`ours` and cjkvi's) across three further batches, per
+the standing render-it rule.
+
+**9 keep-ours** (鷂 鷰 鹞 麥 黹 龙 龟 龱 鿃): in each, cjkvi's own full leaf
+set (the characters it bottoms out at, once its overlay/enclosure operators
+are followed all the way down) is either exactly what our flat row already
+lists (鷰's 廿,北,口,鳥 against cjkvi's `⿳廿⿴北口鳥`; 龙's 尤,丿 against
+`⿻尤丿`; 龟's 𠂊,日,乚 against `⿱𠂊⿻日乚`; 龱's 囗,㐅 against `⿴囗㐅`), or the
+overlay/enclosure cjkvi flags sits entirely inside a child our own row never
+expands into (鷂/鹞's 䍃, 黹's 㡀, 鿃's 㚒 — each atomic in our row, each
+cjkvi expands one level further via `⿻`/`⿴`). 麥 needed a closer look: our
+row (來, 夂) doesn't share a single leaf with cjkvi's flattened
+`⿳⿻十从人夕` reading, but that reading is just 來's own internal strokes
+(十+从, the "ears of wheat" shape) spelled out instead of naming 來 whole,
+plus a bottom leaf cjkvi calls 夕 where the render clearly shows 麥's
+bottom-right stroke is a sweeping hook matching 夂 (go/trail), not 夕's
+crescent-plus-dot — consistent with the traditional 來+夂 etymology (wheat +
+treading feet), so cjkvi's own 夕 looks like noise in its flattening, not a
+correction we're missing. Every component involved across these nine rows
+(廿 北 口 鳥/鸟 䍃 业 㡀 尤 丿 𠂊 日 乚 囗 㐅 目 㚒 來 夂 十 从 人, plus the nine
+hosts themselves) rendered with a real outline and visually matched what
+each host draws; the 麥/來/夂/十/从/人 side-by-side render was what settled
+the 夕-vs-夂 question above.
+
+**4 needs-render** (鹵, 鹿, 鼘, 鼡) — two different reasons, not the usual
+single "unrenderable codepoint" one:
+
+- **鹵 and 鼘/鼡 are a true tofu-box case**, the same as prior chunks' 临/雨/頤
+  etc: `𠂭` (U+200AD, one of 鹵's own two current parts), `𣶒` (U+23D92, one
+  of 鼘's own two current parts) and `𠂡` (U+200A1, one of 鼡's own two
+  current parts) all render as an empty box-with-X placeholder, confirmed
+  with `fc-list :charset=<hex>` returning **zero** fonts for any of the
+  three — not even a false claim to cross-check faces against, genuinely no
+  outline anywhere on this machine. `𠂡` additionally has no `kanji`/`aliases`
+  row in the DB at all (checked directly), so it isn't even a recognized
+  primitive here yet, just a bare glyph term — one more reason not to guess
+  at it. (鼡's sibling part `𭕄`, by contrast, is fine: it's one of the four
+  primitives `make_primitive_images.py` already covers, backed by
+  `prim-owl.png`, so the app never actually asks a font to draw it — the
+  raw-codepoint render I did for comparison purposes drew it as something
+  resembling katakana ツ, which is *exactly* the historical mis-substitution
+  CLAUDE.md warns about for this codepoint, a reminder that this script's
+  raw-font render is not what end users see for that one part.) 鹵 has a
+  second, independent reason for caution: cjkvi's reading is `⿱⺊⿴囗𠂭` — a
+  top `⺊` stroke above the `囗`-encloses-`𠂭` unit — and our row has no `⺊`
+  at all. Whether that top stroke is a real missing piece or already
+  implicit in how `囗` is drawn can't be settled without also resolving the
+  `𠂭` tofu box, so the whole row stays `needs-render` rather than a partial
+  fix.
+- **鹿 is an evidence-shape mismatch, not a font problem** — every glyph
+  involved rendered fine. cjkvi's full leaf set for 鹿 is five pieces
+  (广, コ, 丨, 丨, 比 — parsing `⿸⿸广⿻コ⿰丨丨比` out fully), but our row only
+  lists four (广, 丨, 丨, 比): the `コ` leaf that cjkvi's `⿻コ⿰丨丨` overlay
+  names has no counterpart in our flat list at all. That's a different shape
+  of finding than this chunk's nine keep-ours rows, where our leaf set
+  always matched cjkvi's full leaf set exactly once flattened — here one
+  leaf is simply absent. A side-by-side render of 鹿 against 广/コ/丨/比
+  couldn't settle whether the box-like structure between 鹿's roof and its
+  bottom 比 legs is genuinely drawing a distinct コ-shaped frame stroke that
+  our row is missing, or whether — per CLAUDE.md's overlay caveat, `⿻`
+  meaning *shared strokes* — the コ cjkvi names is wholly absorbed into the
+  two 丨 strokes we already list and there is no separate frame to add. Given
+  the leaf-count mismatch and the owner's standing "when genuinely unsure,
+  needs-render rather than guess" instruction for this unattended job, left
+  this one for a human look (a stroke-order reference for 鹿 would settle it
+  in seconds; this script can't get closer than a static render).
+
+Aside, out of scope for this audit: `hanzi-56d7` (the `zh-Hani` row for 囗,
+used as a part by both 鹵 and 龱 in this chunk) has `keyword = "erect,
+proud"` in the live DB, which is clearly not what 囗 (box/enclosure) means —
+looks like a genuine keyword-import bug, unrelated to decomposition
+evidence and this audit's scope, so noted here rather than touched. Worth a
+follow-up by whichever routine owns hanzi keyword correctness.
+
+No `kanji.db` write this chunk — nothing crossed into
+`use-cjkvi`/`custom`, so the pre-flight backup wasn't needed for a restore
+and `pytest -v` was not re-run after (nothing changed to invalidate the
+earlier green run). Only `docs/hanzi_decomposition_worklist.json` is
+touched by this commit.
+
+13 → **0 pending**. `audit_hanzi_weak_evidence.py`'s overlay/opaque findings
+across all 487 `zh-*` rows it flagged have now all been reviewed at least
+once (9 keep-ours-this-chunk + prior chunks' decisions); the backlog this
+daily job was created to work through is empty. Whether that means the job
+should go idle until `audit_hanzi_weak_evidence.py --json` is re-run (e.g.
+after a `needs-render` row's blocking codepoint becomes renderable, or new
+hanzi rows get added) or whether there's a next phase queued is an owner
+call, not this run's to make — flagging it rather than inventing a new scope
+unprompted.
