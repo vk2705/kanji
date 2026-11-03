@@ -25339,3 +25339,33 @@ after a `needs-render` row's blocking codepoint becomes renderable, or new
 hanzi rows get added) or whether there's a next phase queued is an owner
 call, not this run's to make — flagging it rather than inventing a new scope
 unprompted.
+
+## 2026-11-03 — full re-review: frames 1102–1151 committed (orphaned 2026-11-01 chunk)
+
+The 2026-11-01 run of `kanji-worklist-review` finished reviewing frames
+1102–1151 and then hit the account's session limit before committing. Its
+diff sat uncommitted, so the 2026-11-02 and 2026-11-03 runs both tripped the
+"previous run died midway" guardrail and stopped without reviewing anything
+(see those two entries above). The owner asked for review batches to run
+back to back, so this session cleared the blockage by checking and
+committing that chunk as it was, without editing it.
+
+What the chunk contains: 48 `keep`, 2 `fixed`, 0 `needs-render`.
+- **rtk1112 善**: dropped the phantom 王 → `丷,羊,口`. Neither Heisig
+  ("sheep; horns; mouth") nor cjkvi (`⿱⿱羊䒑口`) names a king/jewel piece.
+- **rtk1121 喚**: added the missing 口 → `口,四,大,冂,勹`, matching cjkvi
+  `⿰口奐` and Heisig's "mouth; bound up; four; large; St. Bernard". The
+  rtk1121 pin in `test_regression_fixes.py` gains rtk11, with a comment.
+  Shape family: 換 (rtk1122) correctly has 扌 there, so no other row changes.
+
+Checks after `git` HEAD + this diff: pytest 108 passed, `regression_fresh.sh`
+1331/1331, `audit_radicals.py` 0/0. Synced to this machine's DB
+(`sync_system_data.py`: 1 decomposition replaced). Prod needs `git pull` +
+`sync_system_data.py`. `full_review.py --pending-count` drops from 1848 to
+1798.
+
+Also added `backend/run_kanji_review_loop.sh`, which runs
+`run_kanji_worklist_review.sh` repeatedly and stops when a batch fails
+(for example, when the session limit is hit), makes no progress, or nothing is
+left. `docs/kanji_review_coverage.tsv` and `docs/decomposition_worklist.json`
+are rebuilt nightly and are deliberately not part of this commit.

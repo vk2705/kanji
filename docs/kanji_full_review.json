@@ -19503,11 +19503,11 @@
    "人",
    "十"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "亠,从,十 matches Heisig (top hat; assembly line/person; ten/needle); rendered, consistent with established 从 primitive",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1103",
@@ -19525,11 +19525,11 @@
    "人",
    "十"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "𠆢,从,十 matches; 𠆢=umbrella/roof-form-of-person already confirmed correct by 2026-08-23 and 2026-09-20 audits (cjkvi's plain 人 roof is the same evidence)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1104",
@@ -19543,11 +19543,11 @@
    "勹",
    "乂"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "乂,勹 matches Heisig's two named concepts (bound up; tucked under arm); cjkvi ⿻ overlay noted but Heisig explicitly names two separate pieces",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1105",
@@ -19562,11 +19562,11 @@
    "丶",
    "人"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "｜,人,丶 matches Heisig exactly (plow;drop;person); cjkvi treats as atomic but Heisig's explicit breakdown is the established convention here",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1106",
@@ -19577,11 +19577,11 @@
   "heisig_components": "becoming; person; by means of; plow; drop; person",
   "cjkvi_ids": "⿰亻以",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "亻,以 matches (person + by-means-of compound, consistent with Heisig's becoming;person;by-means-of;plow;drop;person)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1107",
@@ -19595,11 +19595,11 @@
    "亻",
    "并"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "亻,并 matches established 并 compound (puzzle;horns;two hands)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1108",
@@ -19610,11 +19610,11 @@
   "heisig_components": "one; ceiling; cane; stick; drop; fishhook; ice",
   "cjkvi_ids": "瓦",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "一,｜,丶,亅 already deeply audited 2026-10-16 chunk 106: 4 of 5 CSV concepts restored then, 'ice' deliberately left unresolved since 瓦's stroke is a single mark not 冫's two dots and no safe codepoint exists",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1109",
@@ -19628,11 +19628,11 @@
    "并",
    "瓦"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "并,瓦 matches established pattern (puzzle-horns-2hands + tile)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1110",
@@ -19647,11 +19647,11 @@
    "口",
    "口"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "呂,宀 matches cjkvi ⿱宀呂 exactly",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1111",
@@ -19666,11 +19666,11 @@
    "口",
    "口"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "呂,prim-schoolhouse matches cjkvi ⿳𭕄冖呂 exactly (schoolhouse already groups 𭕄+冖)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1112",
@@ -19685,11 +19685,15 @@
    "丷",
    "口"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "丷",
+   "羊",
+   "口"
+  ],
+  "note": "Dropped phantom 王 (king/jewel) — unsupported by Heisig's sheep;horns;mouth or cjkvi's ⿱⿱羊䒑口; 王 used consistently as 'jewel' in 40+ other kanji, never 'sheep'; likely a stray literal-stroke misread of 羊's compressed lower body (cjkvi's own ⿻ overlay for that region, not a literal parts list)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1113",
@@ -19703,11 +19707,11 @@
    "月",
    "善"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "善,月 matches (moon/flesh + virtuous compound)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1114",
@@ -19721,11 +19725,11 @@
    "𠂉",
    "干"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "ノ,午 matches Heisig's 2-item count (sign of the horse; sunglasses); established primitives",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1115",
@@ -19741,11 +19745,11 @@
    "夂",
    "丶"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "亠,亻,夂,丶 matches Heisig exactly (top hat;person;walking legs;drop)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1116",
@@ -19759,11 +19763,11 @@
    "氵",
    "夜"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "夜,水 matches (water + night compound)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1117",
@@ -19778,11 +19782,11 @@
    "冖",
    "豕"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "土,冖,豕 matches cjkvi's J-variant ⿰土⿱冖豕 exactly",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1118",
@@ -19796,11 +19800,11 @@
    "敝",
    "巾"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "巾,敝 matches (towel + shredder/taskmaster compound)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1119",
@@ -19814,11 +19818,11 @@
    "艹",
    "敝"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "敝,艹 matches (flowers + shredder/taskmaster compound)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1120",
@@ -19832,11 +19836,11 @@
    "敝",
    "廾"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "廾,敝 matches (two hands + shredder/taskmaster compound)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1121",
@@ -19852,11 +19856,17 @@
    "四",
    "大"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "口",
+   "四",
+   "大",
+   "冂",
+   "勹"
+  ],
+  "note": "Added missing 口 (mouth) — visible on the left of the glyph, confirmed by cjkvi ⿰口奐 and Heisig's mouth;bound up;four;large;St.Bernard; shape-family check: 換 (rtk1122) already correctly uses 扌 instead, no other row affected",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1122",
@@ -19870,11 +19880,11 @@
    "扌",
    "奐"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "扌,四,大,冂,勹 matches cjkvi ⿰扌奐 and Heisig's finger;fingers;bound up;four;large;St.Bernard; shape-family check against 喚 confirms 換 correctly uses 扌 not 口 (interchange is hand-related)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1123",
@@ -19892,11 +19902,11 @@
    "十",
    "虫"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "虫,鬲 matches cjkvi ⿰鬲虫 exactly",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1124",
@@ -19911,11 +19921,11 @@
    "𠂉",
    "也"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "㫃,也 matches (banner + scorpion compound)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1125",
@@ -19929,11 +19939,11 @@
    "方",
    "疋"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "㫃,疋 matches (banner + zoo/critters compound)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1126",
@@ -19949,11 +19959,11 @@
    "方",
    "子"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "㫃,子,辶 matches cjkvi ⿺辶斿 (banner+child+road)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1127",
@@ -19968,11 +19978,11 @@
    "𠂉",
    "衣-lower"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "㫃,人 matches; already investigated and fixed in a prior chunk (2026-09-xx): rendered ④ unencoded placeholder = plain 人, 'rag' confirmed to be CSV flavour text for the same two strokes, not a second piece",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1128",
@@ -19983,11 +19993,11 @@
   "heisig_components": "knot; piglet’s tail",
   "cjkvi_ids": "⿹勹⿱丿丿",
   "google_parts": [],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "ノ,勹 matches Heisig's 2-item count (knot; piglet's tail); cjkvi's ⿱丿丿 pair read as one 'knot' concept, consistent with coherent-primitive-over-strokes convention",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1129",
@@ -20001,11 +20011,11 @@
    "牛",
    "勿"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "牛,勿 matches (cow + not compound)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1130",
@@ -20019,11 +20029,11 @@
    "日",
    "勿"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "日,勿 matches cjkvi ⿱日勿 exactly",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1131",
@@ -20034,11 +20044,11 @@
   "heisig_components": "shellfish; clam; oyster; eye; animal legs; eight; easy; sun; day; knot; piglet’s tail",
   "cjkvi_ids": "⿰貝易",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "易,貝 matches cjkvi ⿰貝易 exactly",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1132",
@@ -20052,11 +20062,11 @@
    "尸",
    "水"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "水,尸 matches cjkvi ⿸尸水 exactly",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1133",
@@ -20067,11 +20077,11 @@
   "heisig_components": "flag; spoon; sitting on the ground",
   "cjkvi_ids": "⿸尸匕",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "匕,尸 matches cjkvi ⿸尸匕 exactly",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1134",
@@ -20085,11 +20095,11 @@
    "尸",
    "九"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "九,尸 matches cjkvi ⿸尸九 exactly",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1135",
@@ -20100,11 +20110,11 @@
   "heisig_components": "water; water droplets; water pistol; nun; flag; spoon; sitting on the ground",
   "cjkvi_ids": "⿰氵尼",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "水,尼 matches cjkvi ⿰氵尼 exactly",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1136",
@@ -20120,11 +20130,11 @@
    "丷",
    "廾"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "土,屏 matches (soil + folding-screen compound)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1137",
@@ -20135,11 +20145,11 @@
   "heisig_components": "flag; restore; Nelson; column; going; line; fold back; double back; reclining; lying down; sun; day; walking legs",
   "cjkvi_ids": "⿸尸復",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "尸,復 matches cjkvi ⿸尸復 exactly",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1138",
@@ -20155,11 +20165,11 @@
    "厶",
    "土"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "至,尸 matches cjkvi ⿸尸至 exactly",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1139",
@@ -20173,11 +20183,11 @@
    "扌",
    "屋"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "屋,扌 matches (finger + roof compound)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1140",
@@ -20192,11 +20202,11 @@
    "山",
    "凵"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "出,尸 matches cjkvi ⿸尸出 exactly",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1141",
@@ -20211,11 +20221,11 @@
    "尸",
    "出"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "屈,扌 matches (finger + yield compound)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1142",
@@ -20226,11 +20236,11 @@
   "heisig_components": "moat; soil; dirt; ground; yield; flag; exit",
   "cjkvi_ids": "⿰土屈",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "屈,土 matches (soil + yield compound)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1143",
@@ -20244,11 +20254,11 @@
    "尸",
    "古"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "尸,古 matches cjkvi ⿸尸古 exactly",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1144",
@@ -20262,11 +20272,11 @@
    "扌",
    "居"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "扌,居 matches (finger + reside compound)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1145",
@@ -20280,11 +20290,11 @@
    "衤",
    "居"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "居,衤 matches (reside + cloak compound)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1146",
@@ -20298,11 +20308,11 @@
    "尸",
    "曽"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "曽,尸 matches cjkvi ⿸尸曾/⿸尸曽 exactly",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1147",
@@ -20317,11 +20327,11 @@
    "勹",
    "口"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "primary 口,尸 is Heisig's simplified teaching; alternate 口,尸,𠃌 matches cjkvi ⿸尸⿹𠃌口 exactly using cjkvi's own precise codepoint for the hook; deliberate two-decomposition design, not an error",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1148",
@@ -20336,11 +20346,11 @@
    "尸",
    "羊"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "辶,羊,尸 matches Heisig exactly (flag;sheep;road)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1149",
@@ -20355,11 +20365,11 @@
    "尸",
    "雨"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "雨,水,尸 matches cjkvi ⿰氵屚 (water+flag/rain compound)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1150",
@@ -20374,11 +20384,11 @@
    "巾",
    "刂"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "尸,巾,刀 matches cjkvi ⿰𡰯刂 (flag+towel+sword)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1151",
@@ -20392,11 +20402,11 @@
    "尸",
    "丶"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "尸,乀 matches Heisig's 2-item count (flag;stick); cjkvi atomic but Heisig breakdown trusted (established convention)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-01"
  },
  {
   "id": "rtk1152",

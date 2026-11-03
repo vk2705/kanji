@@ -1377,7 +1377,15 @@ rtk1108:瓦:tile:一,｜,丶,亅
 rtk1109:瓶:bottle:并,瓦
 rtk1110:宮:shinto shrine:呂,宀
 rtk1111:営:camp:呂,prim-schoolhouse
-rtk1112:善:virtuous:王,口,丷,羊
+# 2026-11-01 full re-review: dropped phantom 王 ("king"). Neither Heisig's
+# "sheep; horns; mouth" (3 concepts) nor cjkvi's ⿱⿱羊䒑口 names a king/jewel
+# piece; 王's own established keyword ("king,jewel,ball") is used consistently
+# across 40+ other "jewel" kanji (玉,珠,現,...) and never "sheep" anywhere else.
+# The compressed lower body of 羊-as-component visually resembles 王 (cjkvi's
+# own entry for 羊, ⿱䒑⿻二丨, uses the overlay operator ⿻ for that exact
+# region — not a literal separate-parts reading, per the ⿻/⿴ caveat), which
+# is almost certainly how 王 got added here as a stray literal-stroke read.
+rtk1112:善:virtuous:丷,羊,口
 rtk1113:膳:small low table:善,月
 rtk1114:年:year:ノ,午
 # 2026-10-23 "lid" audit (owner: search by parts for lid, explain every result): 夜: same pieces, drawn order (Heisig "top hat; person; walking legs; drop").
@@ -1387,7 +1395,13 @@ rtk1117:塚:hillock:土,冖,豕
 rtk1118:幣:cash:巾,敝
 rtk1119:蔽:cover:敝,艹
 rtk1120:弊:abuse:廾,敝
-rtk1121:喚:yell:四,大,冂,勹
+# 2026-11-01 full re-review: added missing 口 ("mouth"). Visibly present on
+# the left of the glyph (喚 = yell/exclaim); cjkvi ⿰口奐 and Heisig's own
+# "mouth; bound up; four; large; St. Bernard" (5 concepts) both confirm it.
+# Shape-family check: 換 (rtk1122), the only other host of this same
+# 四,大,冂,勹 cluster, already correctly carries 扌 instead of 口 (interchange
+# is hand-related, not mouth-related) — no other row needed this fix.
+rtk1121:喚:yell:口,四,大,冂,勹
 rtk1122:換:interchange:扌,四,大,冂,勹
 rtk1123:融:dissolve:虫,鬲
 rtk1124:施:give:㫃,也

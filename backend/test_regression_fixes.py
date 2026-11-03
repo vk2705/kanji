@@ -2207,8 +2207,12 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"prim-schoolhouse", "rtk24"}},
     "rtk1113": {"character": "膳", "keyword": "dining tray",
                 "expected_part_ids": {"rtk1112", "rtk13"}},
+    # Corrected 2026-11-01 (full re-review): the row was missing 口 ("mouth"),
+    # visibly present on the left of the glyph and confirmed by both cjkvi
+    # (⿰口奐) and Heisig's own "mouth; bound up; four; large; St. Bernard" --
+    # added rtk11/口 to the pin to match.
     "rtk1121": {"character": "喚", "keyword": "yell",
-                "expected_part_ids": {"kangxi13", "kangxi20", "rtk112", "rtk4"}},
+                "expected_part_ids": {"kangxi13", "kangxi20", "rtk11", "rtk112", "rtk4"}},
     "rtk1140": {"character": "屈", "keyword": "yield",
                 "expected_part_ids": {"kangxi44", "rtk829"}},
     "rtk1141": {"character": "掘", "keyword": "dig",
