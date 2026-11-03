@@ -549,8 +549,13 @@ EXPECTED_DECOMPOSITIONS = {
                    "expected_part_ids": {"kangxi8", "rtk1603", "kangxi114"}},
     "rtk466": {"character": "帝", "keyword": "sovereign",
                "expected_part_ids": {"rtk432", "rtk462", "kangxi14"}},
+    # 2026-11-03 full re-review: rtk10 (十) dropped -- the primary double-
+    # counted ｜+二 (the actual drawn strokes, per cjkvi's ⿱丷⿻二丨) and 十 (a
+    # coherent primitive built from those same two strokes) in one
+    # decomposition; promoted the already-correct alt (｜,二,丷, no 十) to
+    # primary instead.
     "rtk1286": {"character": "半", "keyword": "half",
-                "expected_part_ids": {"prim-pipe", "rtk2", "kangxi12", "rtk10"}},
+                "expected_part_ids": {"prim-pipe", "rtk2", "kangxi12"}},
     "rtk1596": {"character": "平", "keyword": "even",
                 "expected_part_ids": {"rtk1777", "kangxi12"}},
     # 2026-09-20: the 八 is in neither 金 nor 全. cjkvi gives ⿱人⿻王丷 and
@@ -2237,8 +2242,11 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk1220", "rtk357"}},
     "rtk1247": {"character": "群", "keyword": "flock",
                 "expected_part_ids": {"rtk1246", "rtk586"}},
+    # 2026-11-03 full re-review: rtk2 (二) dropped -- the primary had a
+    # redundant extra 二 not in cjkvi's ⿰氵⿱艹両 (3 pieces) and not in the
+    # already-correct labelled alt; promoted the alt (now a clean primary).
     "rtk1253": {"character": "満", "keyword": "full",
-                "expected_part_ids": {"prim-mugwort", "rtk1252", "rtk137", "rtk2"}},
+                "expected_part_ids": {"prim-mugwort", "rtk1252", "rtk137"}},
     "rtk1258": {"character": "遭", "keyword": "encounter",
                 "expected_part_ids": {"kangxi162", "rtk1257"}},
     "rtk1259": {"character": "漕", "keyword": "rowing",

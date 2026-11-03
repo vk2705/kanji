@@ -1552,10 +1552,19 @@ rtk1249:需:demand:雨,而
 rtk1250:儒:confucian:亻,需
 rtk1251:端:edge:山,而,立
 rtk1252:両:both:一,冂,山
-rtk1253:満:full:両,水,二,艹;両,水,艹
+# 2026-11-03 full re-review: primary had a redundant extra 二 not in cjkvi's
+# ⿰氵⿱艹両 (water + grass over 両, 3 pieces) and not in the already-correct
+# labelled alt. Promoted the alt (now identical to a clean primary) and
+# dropped the duplicate.
+rtk1253:満:full:両,水,艹
 rtk1254:画:brush-stroke:一,凵,由
 rtk1255:歯:tooth,teeth:止,米,凵
-rtk1256:曲:bend:｜,日
+# 2026-11-03 full re-review: was ｜,日. Render shows the box has an internal
+# cross grid (two verticals + one horizontal, 4 cells) matching 田, not 日's
+# single horizontal divider (2 cells) -- confirmed side by side. Heisig's own
+# components are "rice field; brains; stick", both aliases of 田 (rtk14) plus
+# ｜ ("stick", prim-pipe). 日 was a lookalike substitution.
+rtk1256:曲:bend:｜,田
 rtk1257:曹:office:一,曲,日
 rtk1258:遭:encounter:曹,辶
 rtk1259:漕:rowing:曹,水
@@ -1563,10 +1572,24 @@ rtk1260:槽:vat:曹,木
 rtk1261:斗:big dipper,the plough,measuring cup:
 rtk1262:料:fee:斗,米
 rtk1263:科:department:禾,斗
-rtk1264:図:map:斗,囗
+# 2026-11-03 full re-review: was 斗,囗. cjkvi's ⿴囗⿱⺀乂 and the render both
+# show the enclosed shape is two short dashes (⺀, "ice" -- rendered
+# stroke-for-stroke like 冫/kangxi15, same reading already applied to 尺/rtk1151
+# earlier today and to 寒/rtk1645 on 2026-09-27) over 乂 (prim-tucked-under-
+# the-arm, already used in 父/文's alternates) -- nothing like 斗's hook-and-
+# cross ladle shape, which is absent from the render entirely. Heisig's own
+# "measuring cup" label for this component does not match what's drawn.
+rtk1264:図:map:囗,冫,乂
 rtk1265:用:utilize,utilise:月,｜;二,冂,｜
 rtk1266:庸:commonplace:⺕,用,广,聿
-rtk1267:備:equip:亻,用,厂,艹
+# 2026-11-03 full re-review: was 亻,用,厂,艹. Render shows the top-left shape
+# as two straight crossing lines with the verticals poking past both the top
+# and bottom horizontal (matching 卄, U+5344) rather than 艹's curved/hooked
+# grass strokes -- confirmed side by side against both. cjkvi's [JK] variant
+# agrees: ⿰亻⿱卄⿸厂用. 卄 has no kanji frame and is not one of the 214 Kangxi
+# radicals, so it gets a new bare primitive row (see prim-double-ten below).
+rtk1267:備:equip:亻,卄,厂,用
+prim-double-ten:卄:double ten
 rtk1268:昔:once upon a time,storyteller:日,龷
 rtk1269:錯:confused:昔,金
 rtk1270:借:borrow:亻,昔
@@ -1613,7 +1636,12 @@ rtk1282:墳:tomb:土,賁
 rtk1283:憤:aroused:忄,賁
 rtk1284:焼:bake:火,儿,卉
 rtk1285:暁:daybreak:日,儿,卉
-rtk1286:半:half:｜,二,丷,十;丷,二,｜
+# 2026-11-03 full re-review: primary double-counted the same strokes twice --
+# ｜+二 (the actual drawn strokes, per cjkvi's ⿱丷⿻二丨) AND 十 (a coherent
+# primitive built from exactly those same two strokes) in one decomposition.
+# The already-correct labelled alt had no such duplicate; promoted it to
+# primary and dropped the redundant alt.
+rtk1286:半:half:丷,二,｜
 rtk1287:伴:consort:亻,半
 rtk1288:畔:paddy ridge:田,半
 rtk1289:判:judgement:半,刀

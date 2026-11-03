@@ -25532,3 +25532,113 @@ live-but-not-in-source system ids noted by the sync script, unrelated to
 this chunk, not touched). Prod needs `git pull` + `sync_system_data.py`.
 
 `full_review.py --pending-count`: 1747/3000.
+
+## 2026-11-03 — full re-review: frames 1252–1301
+
+44 keep, 5 fixed, 1 needs-render. All 50 render-checked against
+`render_glyphs.py`, cross-checked against Heisig's components column and
+cjkvi-ids.
+
+**The fixes:**
+
+- **rtk1256 曲** (`bend`) was `｜,日`. Rendered side by side, 曲's box has an
+  internal cross grid (two verticals + one horizontal, 4 cells) matching 田
+  (rice field), not 日's single horizontal divider (2 cells) — a clear
+  lookalike substitution, not an overlay-reading trap. Heisig's own
+  components are `rice field; brains; stick`, both names being 田's own
+  aliases (`rtk14:田:rice field,brains`), plus `｜` ("stick", `prim-pipe`).
+  Fixed to `｜,田`.
+- **rtk1264 図** (`map`) was `斗,囗`. cjkvi's `⿴囗⿱⺀乂` and the render both
+  show the enclosed shape as two short dashes (`⺀`, "ice" — renders
+  stroke-for-stroke like `冫`/`kangxi15`, the same reading already applied
+  today to 尺/rtk1151 and on 2026-09-27 to 寒/rtk1645) over `乂`
+  (`prim-tucked-under-the-arm`, already used in 父/文's alternates) — nothing
+  like 斗's hook-and-cross ladle shape, which the render doesn't show at
+  all. Heisig's own `measuring cup` label for this component doesn't match
+  what's drawn. Checked every other `斗`-using row (料/科/斜/斡/魁) by
+  render: all five genuinely show 斗's ladle shape, so this bug is isolated
+  to 図. Fixed to `囗,冫,乂`.
+- **rtk1267 備** (`equip`) was `亻,用,厂,艹`. Render shows the top-left shape
+  (above `厂用`) as two straight crossing lines, with the verticals poking
+  past both the top and bottom horizontal — matching `卄` (U+5344, "double
+  ten"), not `艹`'s curved/hooked grass strokes, confirmed side by side
+  against both. cjkvi's `[JK]` variant agrees: `⿰亻⿱卄⿸厂用`. `卄` has no
+  kanji frame of its own and isn't one of the 214 Kangxi radicals, so it
+  gets a new bare primitive, `prim-double-ten:卄:double ten`. Fixed to
+  `亻,卄,厂,用`.
+- **rtk1253 満** (`full`) and **rtk1286 半** (`half`) both had the same
+  structural bug: a primary decomposition that double-counted the same
+  strokes at two granularities, alongside an already-correct labelled
+  alternate that didn't. 満's primary was `両,水,二,艹` — an extra `二` not
+  in cjkvi's `⿰氵⿱艹両` (3 pieces) and not in the alt (`両,水,艹`). 半's
+  primary was `｜,二,丷,十` — `｜`+`二` (the actual drawn strokes, per
+  cjkvi's `⿱丷⿻二丨`) *and* `十` (a coherent primitive built from those same
+  two strokes) listed together, while the alt (`丷,二,｜`) had no such
+  duplicate. In both cases the alt was promoted to primary and the now-
+  redundant duplicate alt dropped, rather than guessing which of the two
+  readings (raw strokes vs. the coherent `十`) was "more correct" — the alt
+  was already the one matching cjkvi exactly.
+
+**needs-render: rtk1266 庸** (`comfortable`, `⺕,用,广,聿`). A prior
+2026-09-18 session (see the `data.txt` comment above `prim-dog-tag`/甫)
+explicitly deferred this exact row, pending "a cleaner side-by-side render
+pass" to settle whether its `用`-adjacent portion carries 甫's extra
+"screwdriver" tick (per Heisig's own CSV, which lists `screwdriver` as a
+component of 庸 too) or is plain `用`+`聿` as the row already has it. Did
+that pass today (庸 zoomed beside 甫/用/聿/肀) — still inconclusive on that
+specific question, for the same reason the earlier session gave: cjkvi's
+own entry for 庸 is fully opaque (`⿸广𬎾`, one undecomposed glyph), so there
+is no structural corroboration either way, and the render alone doesn't
+resolve a one-stroke difference at this font size with confidence. Left
+open rather than guessing.
+
+**Everything else in the chunk matched cleanly** — render, Heisig's
+components column (where non-empty) and cjkvi-ids all agreed:
+- 両 (rtk1252): `一,冂,山` — cjkvi's `⿱一⿻冂山` overlay flags as
+  `not-a-parts-list` in `audit_weak_evidence.py`, but the render itself
+  supports the current reading (shared outer strokes between `冂` and `山`,
+  not a different shape underneath, unlike 蝿's `⿻日电` trap). Heisig's raw
+  CSV names (`street; nail; spike; belt; shovel`) don't map cleanly onto
+  any alternative reading either — left as keep rather than replacing a
+  render-supported row on an unresolved name mismatch.
+- 画/歯 (rtk1254–1255): `一,凵,由` and `止,米,凵` match cjkvi and render
+  exactly.
+- 曹-family (rtk1257–1260): 曹/遭/漕/槽 all render as stated.
+- 斗-family (rtk1261–1263): 斗 (atomic)/料/科 all render as stated.
+- 用 (rtk1265): `月,｜` matches Heisig's components exactly (`moon; month;
+  flesh; part of the body; walking stick`) and the render.
+- 昔-family (rtk1268–1273): 昔/錯/借/惜/措/散 all render as stated.
+- 廿 (rtk1274): already made atomic (primary, with the old `凵,一` split
+  demoted to a labelled alternate) on 2026-10-28 by a prior session
+  (commit `9e825df`), matching both Heisig's CSV (`id_5th_ed` 1190, a core
+  frame, empty components column) and cjkvi (atomic) — the review json's
+  frozen `parts_at_start` snapshot predates that fix and is stale, not a
+  sign of a live bug.
+- 广+廿-family (rtk1275–1279): 庶/遮/席/度/渡 all render as stated.
+- 卉-family (rtk1280–1285): 奔/噴/墳/憤/焼/暁 all render as stated,
+  including 焼/暁's `儿,卉` flattening of `尭` (no frame/row of its own;
+  Heisig names `human legs`+`haystack` directly rather than `尭` as a unit).
+- 龹-family (rtk1287–1296, skipping 半/備/図/曲/庸 above): 伴/畔/判/拳/券/巻/
+  圏/勝/藤/謄 all render as stated, including the `[GTJV]` vs. `[K]` cjkvi
+  variant split (`龹` vs. `𠔉`) consistently resolving to `龹` for this
+  Japan-facing project.
+- 片/版 (rtk1297–1298): atomic / `片,反`, both as stated.
+- 之-family (rtk1299–1301): 之 (atomic)/乏/芝 all render as stated,
+  including 之's cjkvi `⿱丶②` (`②` a cjkvi placeholder, not an
+  identifier — confirms cjkvi can't see inside, consistent with keeping it
+  atomic).
+
+Checks: `backup_db.py` before editing; pytest 108 passed before and after;
+`regression_fresh.sh` 1331/1331 before (1329/1331 immediately after the
+edits, both failures expected — the two pins for 満/rtk1253 and 半/rtk1286
+still expected the dropped `rtk2`/`rtk10` reachability; updated both pins
+in `test_regression_fixes.py` with a comment explaining the drop, then
+1331/1331 again); `audit_radicals.py` 0/0 before and after (the new
+`prim-double-ten` row resolves cleanly, no undefined terms). Synced to this
+machine's DB (`sync_system_data.py`: 1 kanji inserted — `prim-double-ten` —
+3 aliases added, 5 decompositions replaced matching the 5 fixes, 2 removed
+matching the two dropped duplicate alts on 満/半; the same 286 pre-existing
+live-but-not-in-source system ids noted by the sync script, unrelated to
+this chunk, not touched). Prod needs `git pull` + `sync_system_data.py`.
+
+`full_review.py --pending-count`: 1697/3000.
