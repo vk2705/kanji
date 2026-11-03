@@ -25206,3 +25206,34 @@ then tomorrow's automated run resumes cleanly at frame 1152. If instead it
 should be discarded, that's also a one-step `git checkout --` away. Either
 way, no automated session should build further review work on top of an
 uncommitted chunk without resolving this first.
+
+## 2026-11-03 — full re-review: orphaned chunk from 2026-11-01 still unresolved, second stop in a row
+
+Same trip-wire as 2026-11-02's entry fired again at the start of this
+session: `git status` showed `backend/data.txt`, `docs/kanji_full_review.json`,
+`backend/test_regression_fixes.py`, and `docs/kanji_review_coverage.tsv`
+still modified, with nothing committed. Per the brief, that means stop and
+document rather than build on or discard it — so, as yesterday, this session
+made none of today's review decisions and touched none of those four files.
+
+**Confirmed unchanged from yesterday's report.** Diffed against what
+2026-11-02's entry described: same frame range (`rtk1102`–`rtk1152` in the
+JSON, i.e. the 1102–1151 chunk), same two `fixed` rows (rtk1112 善 dropping
+phantom 王; rtk1121 喚 adding missing 口), same `reviewed_at: "2026-11-01"` on
+every row (100 `reviewed_at` occurrences in the diff — one add, one context
+line per row — consistent with a clean 50-row chunk). `full_review.py
+--pending-count` still reports **1848 / 3000** pending, identical to
+yesterday's number. Nothing has touched this working tree in the intervening
+day.
+
+**Flagging for the owner.** Two consecutive automated sessions have now
+hit this same unresolved orphan without anyone (human or automated) acting
+on either entry's suggested next step — re-render rtk1112/rtk1121, run
+`./regression_fresh.sh` once, and either commit the chunk or discard it with
+`git checkout -- backend/data.txt docs/kanji_full_review.json
+backend/test_regression_fixes.py docs/kanji_review_coverage.tsv`. Until one
+of those happens, every subsequent automated run will keep stopping here
+instead of reviewing new frames — this now needs a human to clear it, not
+another automated pass repeating the same observation.
+
+**Pending count**: unchanged at **1848 / 3000**.
