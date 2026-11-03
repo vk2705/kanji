@@ -1522,10 +1522,25 @@ rtk1234:婦:lady:女,帚
 rtk1235:掃:sweep:帚,扌
 rtk1236:当:hit:⺌,彐
 rtk1237:彙:same kind:冖,彑,果
-rtk1238:争:contend:⺕,一,亅,勹
+# 2026-11-03 full re-review: was ⺕,一,亅,勹. cjkvi's ⿱𠂊⿻⿻コ一亅 overlays
+# コ,一,亅 to draw the one ⺕ "rake" shape (audit_weak_evidence.py flags it
+# not-a-parts-list); Heisig's own components are just "bound up; rake", no
+# "one"/"hook" at all. The 一 and 亅 were ⺕'s own strokes double-counted.
+rtk1238:争:contend:⺕,勹
 rtk1239:浄:clean:水,争
-rtk1240:事:matter:一,口,亅,⺕
-rtk1241:唐:t'ang:｜,⺕,一,口,广
+# 2026-11-03 full re-review: was 一,口,亅,⺕. cjkvi has no decomposition for
+# 事 at all (listed as the literal atomic character), so this came from reading
+# raw strokes; Heisig's components are "one; ceiling; mouth; rake" -- "ceiling"
+# is rtk1's own second alias (one glyph 一 used twice in his story, not a
+# "hook"/亅). No primitive named "hook" appears anywhere in his list.
+rtk1240:事:matter:一,口,⺕
+# 2026-11-03 full re-review: was ｜,⺕,一,口,广. The [J] cjkvi variant
+# ⿸广⿱⿻⿻コ一丨口 overlays コ,一,丨 to draw the one ⺕/肀 "rake" shape
+# (audit_weak_evidence.py: not-a-parts-list), same bug as 争/事 above; Heisig's
+# components are "T'ang; cave; rake; mouth" -- no "one"/"stick" named (the
+# leading "T'ang" is 唐's own keyword leaking into its own components column,
+# not a separate drawn shape -- 广+⺕+口 alone already accounts for the render).
+rtk1241:唐:t'ang:⺕,口,广
 rtk1242:糖:sugar:唐,米
 rtk1243:康:ease:广,隶
 rtk1244:逮:apprehend:辶,隶
@@ -2046,7 +2061,14 @@ rtk1719:予:beforehand,halberd with stroke missing:龴,亅
 rtk1720:序:preface:予,广
 rtk1721:預:deposit:予,頁
 rtk1722:野:plains:矛,里,亅;予,里
-rtk1723:兼:concurrently:｜,⺕,一,八,丷
+# 2026-11-03, shape-family follow-up from the 争/事/唐 rake fix (frame not yet
+# reached by the full review): was ｜,⺕,一,八,丷. cjkvi's ⿱䒑⿻⿻コ一④ overlays
+# コ,一,④ (a cjkvi placeholder, not an identifier) to draw the same one ⺕
+# "rake" shape (audit_weak_evidence.py: not-a-parts-list); Heisig's components
+# are "animal horns; rake; stick" -- three items (丷/八 "horns", ⺕ "rake", ｜
+# "stick", per the 2026-09-20 note above that ｜ is Heisig's "stick"), not
+# five. 八 was 丷 double-counted under its other name; 一 was ⺕'s own stroke.
+rtk1723:兼:concurrently:｜,⺕,丷
 rtk1724:嫌:dislike:兼,女
 rtk1725:鎌:sickle:金,兼
 rtk1726:謙:self-effacing:兼,言

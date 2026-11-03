@@ -25438,3 +25438,97 @@ live-but-not-in-source system ids noted by the sync script, unrelated to
 this chunk, not touched). Prod needs `git pull` + `sync_system_data.py`.
 
 `full_review.py --pending-count`: 1798/3000.
+
+## 2026-11-03 — full re-review: frames 1202–1251
+
+47 keep, 3 fixed, 0 needs-render, plus 1 out-of-range shape-family fix
+(rtk1723, see below). All 51 render-checked against `render_glyphs.py`,
+cross-checked against Heisig's components column and cjkvi-ids.
+
+**The fixes (one bug, three/four sightings): 争/事/唐/兼 all double-counted
+the `⺕` "rake" primitive's own strokes.** `⺕` (`prim-rake`, kept atomic,
+`rake,broom`) appears in several already-reviewed rows (穏, 隠, 妻, 庸, 当,
+急) as a single coherent part with nothing alongside it. 争/事/唐 (and 兼,
+found via the shape-family grep below) instead carried `⺕` *plus* one or
+more of its own constituent strokes (`一`, `亅`, `｜`) listed a second time:
+
+- **rtk1238 争** (`contend`) was `⺕,一,亅,勹`. `audit_weak_evidence.py --host
+  争` flags cjkvi's `⿱𠂊⿻⿻コ一亅` as `not-a-parts-list`: the bottom overlay
+  (`コ,一,亅`) draws the one `⺕` shape, not three separate pieces — the
+  CLAUDE.md ⿻-trap rule, same family as 蝿's `⿻日电`. Heisig's own
+  components are only `bound up; rake` — no "one", no "hook" at all. Fixed
+  to `⺕,勹`.
+- **rtk1240 事** (`matter`) was `一,口,亅,⺕`. cjkvi has no decomposition for
+  事 at all (returns the literal atomic character), so this reading came
+  from raw strokes rather than either source of evidence. Heisig's
+  components are `one; ceiling; mouth; rake` — "ceiling" is rtk1's own
+  second alias (`rtk1:一:one,floor,ceiling,minus,silage`), i.e. the *same*
+  一 glyph named twice in his story, not a second shape, and there is no
+  "hook" anywhere in the list. Fixed to `一,口,⺕` (the second `一` isn't
+  re-listed since the schema tracks presence, not repeat count, same as the
+  単-斦-under-質 precedent noted below).
+- **rtk1241 唐** (`T'ang`) was `｜,⺕,一,口,广`. Same bug: the `[J]` cjkvi
+  variant `⿸广⿱⿻⿻コ一丨口` overlays `コ,一,丨` into the one `⺕`/`肀` shape
+  (`audit_weak_evidence.py` flags it the same way). Heisig's components are
+  `T'ang; cave; rake; mouth` — no "one", no "stick"; the leading "T'ang" is
+  唐's own keyword leaking into its own components column (not a drawn
+  shape — `广+⺕+口` alone already accounts for the render, and matches the
+  `[GTKV]` cjkvi variant `⿸广⿱肀口` directly). Fixed to `⺕,口,广`.
+- **Shape-family follow-up, rtk1723 兼** (`concurrently`, frame far outside
+  today's range): grepping `data.txt` for `⺕` next to `一`/`｜`/`亅` turned up
+  one more live instance, `｜,⺕,一,八,丷`. `audit_weak_evidence.py --host 兼`
+  confirms the same not-a-parts-list overlay (`⿱䒑⿻⿻コ一④`, the `④` a cjkvi
+  placeholder glyph, not an identifier — see the CLAUDE.md note on circled
+  numbers). Heisig's components are `animal horns; rake; stick` — three
+  items: `丷`/`八` ("horns", the row had both names for the same shape,
+  double-counted), `⺕` ("rake"), and `｜` (Heisig's own name for this is
+  "stick", established by the 2026-09-20 note already in this file, a few
+  lines above the `prim-rake` row). Fixed to `｜,⺕,丷`. Decided out of frame
+  order since the bug was already fully confirmed; this is *not* part of
+  today's 50-row count.
+
+No other `⺕` row in the file (穏/隠/妻/庸/当/急, already reviewed in earlier
+sessions or this one) carries the bug — all five already use plain `⺕` with
+nothing alongside it, which is what made the four flagged rows stand out in
+the first place.
+
+**Everything else in the chunk matched cleanly** — render, Heisig's
+components column and cjkvi-ids all agreed, no overlay/enclosure traps in
+play:
+- 果/菓/課/裸 (rtk1202–1205): render confirms 果's top is 田 (rice field),
+  not 日 — cjkvi's `⿻日木` is an overlay, same trap class as above, correctly
+  not taken literally; the existing `日,木` alternate decomposition is kept
+  as a secondary reading.
+- 斤-family (rtk1206–1221): 斤/析/所/祈/近/折/哲/逝/誓/斬/暫/漸/断/質/斥/訴 all
+  render exactly as their rows say. 質 (`貝,斤`) renders with *two* 斤 side
+  by side (斦) but Heisig's own components list names "axe" once — kept at
+  one `斤`, consistent with how this project already tracks primitive
+  presence rather than stroke/repeat count (same reasoning applied to 事's
+  doubled `一` above).
+- 乍-family (rtk1222–1224): 昨/詐/作 all render as stated.
+  Heisig expands "altar" to two visually distinct forms, `礻` (kangxi113)
+  and `示` (rtk1167), and a Unihan-derived hanzi row (`hanzi-58c7` 壇,
+  "altar" as in a platform) also carries the alias "altar" — a pre-existing,
+  site-wide alias-collision bug (`resolve_alias('altar')` currently resolves
+  to the unrelated 壇, not either primitive), flagged here but **not fixed**:
+  it's a cross-cutting alias-resolution issue, not a decomposition-shape
+  error, and out of this review's scope. rtk1209's own row (`斤,altar`) is
+  shape-correct regardless — render shows 礻+斤 exactly.
+- 彐/⺕-family (rtk1225–1237, 1239): 雪/録/剥/尋/急/穏/侵/浸/寝/婦/掃/当/彙/浄
+  all render as stated, including 侵/浸/寝's `𠬶` (`prim-french-maid`) which
+  is unrenderable in every installed font (tofu box in `render_glyphs.py`'s
+  output) but has a committed PNG (`primitive_images/prim-french-maid.png`)
+  confirming the `⺕,冖,又` sub-decomposition directly.
+- 唐-family (rtk1242–1251): 糖/康/逮/伊/君/群/耐/需/儒/端 all render as
+  stated, including 端's `耑` (no own frame, flattened per Heisig into
+  `山,而` alongside the top-level `立`).
+
+Checks: `backup_db.py` before editing; pytest 108 passed before and after;
+`regression_fresh.sh` 1331/1331 before and after (no pin needed updating —
+none of the four fixed rows were previously pinned); `audit_radicals.py`
+0/0 before and after. Synced to this machine's DB (`sync_system_data.py`:
+4 decompositions replaced, matching the 4 fixes; the same 286 pre-existing
+live-but-not-in-source system ids noted by the sync script, unrelated to
+this chunk, not touched). Prod needs `git pull` + `sync_system_data.py`.
+
+`full_review.py --pending-count`: 1747/3000.
