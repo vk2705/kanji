@@ -20420,11 +20420,14 @@
    "尺",
    "⺀"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "尺",
+   "冫"
+  ],
+  "note": "bottom was a single dot (丶); cjkvi's ⿱尺⺀ is ⺀=⿱丶丶ice (two dots), rendered stroke-for-stroke like 冫 -- same ice-radical reading already applied to 寒/rtk1645 on 2026-09-27; replaced 丶 with kangxi15 (冫), no new primitive needed",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1153",
@@ -20438,11 +20441,11 @@
    "水",
    "尺"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "沢=尺,水 matches cjkvi ⿰氵尺 and Heisig's recursive 尺(shaku-hachi;flag)/水 naming; render clean.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1154",
@@ -20453,11 +20456,11 @@
   "heisig_components": "say; words; keitai; mouth; shaku-hachi; flag; stick",
   "cjkvi_ids": "⿰言尺",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "訳=尺,言 matches cjkvi ⿰言尺 and Heisig's recursive naming; render clean.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1155",
@@ -20472,11 +20475,11 @@
    "尺",
    "丶"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "択=尺,扌 matches cjkvi ⿰扌尺 and Heisig's recursive naming; render clean.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1156",
@@ -20490,11 +20493,11 @@
    "尺",
    "旦"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "昼=尺,旦 matches cjkvi ⿱尺旦; 旦 already rtk30, Heisig's chain (nightbreak;sun;day;one;floor) is just 旦's own recursion.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1157",
@@ -20508,11 +20511,11 @@
    "一",
    "尸"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "戸=一,尸 matches cjkvi ⿱一尸 and Heisig's one;flag naming exactly; render clean.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1158",
@@ -20526,11 +20529,11 @@
    "戸",
    "月"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "肩=月,戸 matches cjkvi ⿸户月 family; render clean, no overlay operators.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1159",
@@ -20544,11 +20547,11 @@
    "戸",
    "方"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "房=戸,方 matches cjkvi ⿸户方 family; render clean.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1160",
@@ -20562,11 +20565,11 @@
    "戸",
    "羽"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "扇=羽,戸 matches cjkvi ⿸户羽 family; render clean.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1161",
@@ -20580,11 +20583,11 @@
    "火",
    "戸"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "炉=火,戸 matches cjkvi ⿰火户 family; render clean.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1162",
@@ -20598,11 +20601,11 @@
    "戸",
    "大"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "戻=戸,大 matches cjkvi ⿸户大 family; render clean, legs of 大 visible under 戸's hook.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1163",
@@ -20616,11 +20619,11 @@
    "水",
    "戻"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "涙=戻,水 matches cjkvi ⿰氵戻, reuses 戻 (rtk1162) as a single part correctly.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1164",
@@ -20634,11 +20637,11 @@
    "戸",
    "隹"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "雇=戸,隹 matches cjkvi ⿸户隹 family; render clean.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1165",
@@ -20652,11 +20655,11 @@
    "雇",
    "頁"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "顧=雇,頁 matches cjkvi ⿰雇頁, reuses 雇 (rtk1164) as a single part correctly.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1166",
@@ -20671,11 +20674,11 @@
    "攵",
    "口"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "啓=戸,攵,口 matches cjkvi's [TK]/[J] readings (⿱⿰戶攵口 / ⿱⿰戸攵口) once flattened; avoids the unrenderable [G] 𢼄 tofu codepoint cjkvi also offers. Render shows door+taskmaster over mouth.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1167",
@@ -20686,11 +20689,11 @@
   "heisig_components": "altar; two; small",
   "cjkvi_ids": "示",
   "google_parts": [],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "示=二,小 matches Heisig's own recursive naming exactly (altar is 示's own reuse-name for later hosts, not a third part; two;small is its real breakdown); cjkvi treats 示 as atomic (no IDS) which is expected for a primitive-level shape, not contradicting evidence.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1168",
@@ -20704,11 +20707,11 @@
    "礻",
    "乚"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "礼=礻,乙 matches cjkvi ⿰礻乚 (乚 is a radical-form variant of 乙) and Heisig's altar;fishhook naming; 乙/rtk75 already carries the 'fishhook' alias used identically on 毛/屯/訊/胤.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1169",
@@ -20722,11 +20725,11 @@
    "礻",
    "羊"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "祥=礻,羊 matches cjkvi ⿰礻羊[GTJ] (⿰示羊[K] is just the Korean unsimplified-礻 regional variant); render clean.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1170",
@@ -20740,11 +20743,11 @@
    "礻",
    "兄"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "祝=礻,兄 matches cjkvi ⿰礻兄[GTJV]; render clean.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1171",
@@ -20760,11 +20763,11 @@
    "口",
    "田"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "福=礻,畐 matches cjkvi ⿰礻畐[GTJV]; 畐 (prim-wealth) already correctly =一,口,田 matching Heisig's own;ceiling;mouth;rice field;brains chain.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1172",
@@ -20778,11 +20781,11 @@
    "礻",
    "止"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "祉=礻,止 matches cjkvi ⿰礻止[GTJ]; render clean.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1173",
@@ -20796,11 +20799,11 @@
    "礻",
    "土"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "社=礻,土 matches cjkvi ⿰礻土[GTJV]; render clean.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1174",
@@ -20814,11 +20817,11 @@
    "礻",
    "見"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "視=礻,見 matches cjkvi ⿰礻見[GTJV]; render clean.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1175",
@@ -20832,11 +20835,11 @@
    "大",
    "示"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "奈=示,大 matches cjkvi ⿱大示; render clean.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1176",
@@ -20847,11 +20850,11 @@
   "heisig_components": "flag; altar; show; two; small; glue",
   "cjkvi_ids": "⿰𫵖寸",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "尉=示,寸,尸 -- the three flat parts match Heisig's flag(尸);altar(示→show;two;small);glue(寸, already aliased 'glue' on rtk45) chain exactly; cjkvi's ⿰𫵖寸 nests 尸+示 inside an intermediate 𫵖 but flattens to the same three glyphs.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1177",
@@ -20862,11 +20865,11 @@
   "heisig_components": "military officer; flag; altar; show; two; small; glue; heart",
   "cjkvi_ids": "⿱尉心",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "慰=尉,心 matches cjkvi ⿱尉心, reuses 尉 (rtk1176) as a single part correctly.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1178",
@@ -20877,11 +20880,11 @@
   "heisig_components": "samurai; altar; show; two; small; lack; yawn",
   "cjkvi_ids": "⿰⿱士示欠",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "款=欠,士,示 -- matches Heisig's samurai(士);altar(示→show;two;small);lack(欠) chain exactly, and cjkvi's ⿰⿱士示欠 flattens to the same three glyphs.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1179",
@@ -20895,11 +20898,11 @@
    "林",
    "示"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "禁=林,示 matches cjkvi ⿱林示; render clean.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1180",
@@ -20913,11 +20916,11 @@
    "衤",
    "禁"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "襟=禁,衤 matches cjkvi ⿰衤禁, reuses 禁 (rtk1179) as a single part correctly.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1181",
@@ -20931,11 +20934,11 @@
    "宀",
    "示"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "宗=示,宀 matches cjkvi ⿱宀示; render clean.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1182",
@@ -20949,11 +20952,11 @@
    "山",
    "宗"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "崇=山,宗 matches cjkvi ⿱山宗, reuses 宗 (rtk1181) as a single part correctly.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1183",
@@ -20968,11 +20971,11 @@
    "又",
    "示"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "祭=月,又,示 matches Heisig's moon(月→month;flesh;part of body);crotch(又);altar(示→show;two;small) chain exactly. cjkvi's ⿱⿰⿴𠂊冫②示 uses an overlay (⿴) for the top -- confirmed via audit_weak_evidence.py --host 祭 (flagged not-a-parts-list) -- so its stroke-level reading is not trusted over Heisig's coherent 月+又 grouping, per the CLAUDE.md overlay-trap rule.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1184",
@@ -20986,11 +20989,11 @@
    "宀",
    "祭"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "察=宀,祭 matches cjkvi ⿱宀祭, reuses 祭 (rtk1183) as a single part correctly.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1185",
@@ -21004,11 +21007,11 @@
    "扌",
    "察"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "擦=察,扌 matches cjkvi ⿰扌察, reuses 察 (rtk1184) as a single part correctly.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1186",
@@ -21022,11 +21025,11 @@
    "田",
    "丨"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "由=田,｜ -- render confirms the box is a full cross-grid matching 田 (compared directly against 日's single-bar box and 田's grid, not the same shape as 日); Heisig's 'sun;day' wording is a mnemonic label, not a literal-glyph claim, and the project already treats 由/甲/申 uniformly this way. cjkvi has no IDS for 由 (atomic in its own tree).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1187",
@@ -21040,11 +21043,11 @@
    "扌",
    "由"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "抽=扌,由 matches cjkvi ⿰扌由; render clean.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1188",
@@ -21058,11 +21061,11 @@
    "水",
    "由"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "油=水,由 matches cjkvi ⿰氵由; render clean.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1189",
@@ -21076,11 +21079,11 @@
    "衤",
    "由"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "袖=由,衤 matches cjkvi ⿰衤由; render clean.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1190",
@@ -21094,11 +21097,11 @@
    "宀",
    "由"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "宙=宀,由 matches cjkvi ⿱宀由; render clean.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1191",
@@ -21112,11 +21115,11 @@
    "尸",
    "由"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "届=尸,由 matches cjkvi ⿸尸由; render clean.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1192",
@@ -21130,11 +21133,11 @@
    "竹",
    "由"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "笛=由,竹 matches cjkvi ⿱竹由; render clean.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1193",
@@ -21148,11 +21151,11 @@
    "車",
    "由"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "軸=由,車 matches cjkvi ⿰車由; render clean.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1194",
@@ -21166,11 +21169,11 @@
    "田",
    "丨"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "甲=田,｜ -- same grid-box evidence as 由 (rtk1186); render confirms the box matches 田, not 日, despite Heisig's 'roots' mnemonic naming. cjkvi has no IDS for 甲 (atomic).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1195",
@@ -21184,11 +21187,11 @@
    "扌",
    "甲"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "押=扌,甲 (alt ｜,日,扌,田 kept) matches cjkvi ⿰扌甲 and Heisig's finger;armour;armor;roots chain; already correct, two valid readings.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1196",
@@ -21202,11 +21205,11 @@
    "山",
    "甲"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "岬=山,甲 matches cjkvi ⿰山甲; render clean.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1197",
@@ -21221,11 +21224,11 @@
    "千",
    "甲"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "挿=扌,千,日 -- re-confirmed, not changed. A 2026-09-20 session (see data.txt comment near 'the last bounded sweep of double-checked phantoms') already resolved this exact question: cjkvi's ⿰扌𢆍 has 𢆍=⿻千日, an *overlay* -- the apparent 田-style grid in the render is 日 with 千's descending vertical stroke read through it, not a true 田+armor. Trusting the documented overlay-aware reading over a fresh naive render read, per the CLAUDE.md ⿻ trap rule.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1198",
@@ -21239,11 +21242,11 @@
    "日",
    "丨"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "申=田,｜ -- same grid-box evidence as 由/甲 (rtk1186/1194); render confirms the box matches 田, not 日. Heisig's 'monkey;sun;day;stick' wording names 申 itself as a reuse-primitive ('monkey') plus a mnemonic gloss, not a literal 日 claim. cjkvi has no IDS for 申 (atomic).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1199",
@@ -21257,11 +21260,11 @@
    "亻",
    "申"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "伸=亻,申 matches cjkvi ⿰亻申; render clean.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1200",
@@ -21275,11 +21278,11 @@
    "礻",
    "申"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "神=礻,申 matches cjkvi ⿰礻申[GTJV]; render clean.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1201",
@@ -21294,11 +21297,11 @@
    "由",
    "又"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "捜=日,又,扌,申 -- already independently validated by a 2026-10-23 session that cross-referenced this exact row (and rtk1818 痩) while fixing 艘/rtk2858's 叟-shape reading; both land on 日+又 for 叟's upper/lower portions, consistent with this row. Not re-litigated here.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-03"
  },
  {
   "id": "rtk1202",

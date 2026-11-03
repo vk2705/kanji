@@ -3483,8 +3483,11 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"rtk137", "rtk457", "rtk639"}},
     "rtk903": {"character": "渓", "keyword": "mountain stream",
                "expected_part_ids": {"rtk137", "rtk784", "rtk901"}},
+    # 2026-11-03 full re-review: bottom was a single dot (kangxi3). cjkvi's
+    # ⿱尺⺀ is ⺀=⿱丶丶 (two dots, "ice"), same reading already applied to
+    # 寒/rtk1645 on 2026-09-27 -- replaced with kangxi15 (冫).
     "rtk1152": {"character": "尽", "keyword": "exhaust",
-               "expected_part_ids": {"kangxi3", "rtk1151"}},
+               "expected_part_ids": {"kangxi15", "rtk1151"}},
     "rtk1301": {"character": "芝", "keyword": "turf",
                "expected_part_ids": {"prim-mugwort", "rtk1299"}},
     "rtk1430": {"character": "浜", "keyword": "seacoast",

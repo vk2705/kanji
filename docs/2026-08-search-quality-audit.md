@@ -25369,3 +25369,72 @@ Also added `backend/run_kanji_review_loop.sh`, which runs
 (for example, when the session limit is hit), makes no progress, or nothing is
 left. `docs/kanji_review_coverage.tsv` and `docs/decomposition_worklist.json`
 are rebuilt nightly and are deliberately not part of this commit.
+
+## 2026-11-03 — full re-review: frames 1152–1201
+
+50 reviewed: 49 `keep`, 1 `fixed`, 0 `needs-render`.
+
+- **rtk1152 尽** ("exhaust") — was `尺,丶` (a single dot). cjkvi's `⿱尺⺀`
+  resolves `⺀` (U+2E80) as `⿱丶丶`, two stacked dots ("ice"), and
+  heisig-kanjis.csv names the same component "ice" directly, not "dot" —
+  matching the exact trap already caught on **寒**/rtk1645 (2026-09-27:
+  "cjkvi's `⺀` is `⿱丶丶`, two dots, and rendered beside 冫 they match
+  stroke for stroke... Replaced 丶 with 冫 (kangxi15)"). Rendered 尽 large
+  and beside 次/凍/准/冶 (real `冫` hosts) and beside 冫/⺀/丶 standalone: the
+  bottom cluster is visibly two marks, not one, and distinct from a plain
+  `丶`. Checked whether this needed a brand-new `⺀`-specific primitive row
+  first (a different unattended chunk, 2026-10-22, explicitly declined to
+  invent one for 炙/hanzi-7099 rather than guess) — it doesn't: `寒` already
+  established the convention of mapping this exact two-dot shape straight
+  onto the existing `kangxi15` (冫), so this fix reuses that id rather than
+  creating anything new. Replaced `丶` with `冫`.
+  Shape-family check: every other CSV frame whose components list "ice"
+  (冬/次/茨/資/姿/諮/凍/准/冶/瓦/瓶/弱/溺/終/冷/凝/盗/寒/凄) was checked
+  against its current `data.txt` row — all already use `冫` correctly except
+  瓦/瓶, which deliberately and separately drop "ice" entirely (documented
+  2026-10-?? session, not this one's call to revisit). rtk1152 was the only
+  row still carrying the wrong `丶`.
+
+Two near-misses caught by checking existing `data.txt` comments *before*
+writing a fix, not after:
+- **rtk1197 挿** looked wrong at first glance (`扌,千,日`, while Heisig's
+  "thousand; armour; armor; roots" names `甲`'s own exact alias set, and a
+  fresh render of 挿's right side looks 甲-like, with a stroke poking below
+  the box). But a 2026-09-20 session had already resolved this exact
+  question and left a comment: cjkvi's `⿰扌𢆍` has `𢆍 = ⿻千日`, an
+  **overlay** — the apparent grid is `日` with `千`'s descending stroke read
+  through it, not a real `甲`. Re-confirmed the overlay reading over my own
+  fresh (naive) render read and left it unchanged — the CLAUDE.md `⿻`-trap
+  rule caught what a bare render would have gotten backwards.
+- **rtk1201 捜** (`日,又,扌,申`) was already cross-referenced and relied on
+  by a 2026-10-23 fix to 艘/rtk2858's 叟-shape reading. Left unchanged
+  rather than re-litigated.
+
+Also checked and kept the `由`/`甲`/`申` trio (rtk1186/1194/1198, all
+`田,｜`) despite Heisig's CSV wording for 申 ("monkey; sun; day; stick")
+sounding like it might want `日`: rendered `由`/`甲`/`申`/`日`/`田` side by
+side and the box portion of all three is unambiguously `田`'s full
+cross-grid (two compartments vertically *and* horizontally), not `日`'s
+single-bar box. Heisig's word choice here is a mnemonic label, not a literal
+glyph claim, and the project already treats all three frames uniformly this
+way. `祭`/rtk1183 (`月,又,示`) was also double-checked against
+`audit_weak_evidence.py --host 祭`, which confirmed cjkvi's `⿱⿰⿴𠂊冫②示` is
+flagged `not-a-parts-list` (overlay `⿴`) — kept Heisig's coherent 月+又+示
+reading over the stroke-level IDS, per the standing overlay-trap rule.
+
+Everything else in the chunk (the 尺/戸/礻/由 families: rtk1153–1156,
+1157–1165, 1166–1178, 1179–1196, 1199–1200) matched cleanly across render,
+Heisig's components column, and cjkvi-ids with no overlay/enclosure
+operators in play — kept as-is. Full per-row reasoning is in
+`docs/kanji_full_review.json`.
+
+Checks: `backup_db.py` before editing; pytest 108 passed before and after;
+`regression_fresh.sh` 1331/1331 before, 1 failure after the data.txt edit
+(the stale `rtk1152` pin asserting the old `kangxi3`/`丶` answer — updated
+the pin in place with a comment, re-ran clean at 1331/1331);
+`audit_radicals.py` 0/0 before and after. Synced to this machine's DB
+(`sync_system_data.py`: 1 decomposition replaced; 286 pre-existing
+live-but-not-in-source system ids noted by the sync script, unrelated to
+this chunk, not touched). Prod needs `git pull` + `sync_system_data.py`.
+
+`full_review.py --pending-count`: 1798/3000.

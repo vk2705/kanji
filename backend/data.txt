@@ -1432,7 +1432,11 @@ rtk1148:遅:slow:辶,羊,尸
 rtk1149:漏:leak:雨,水,尸
 rtk1150:刷:printing:尸,巾,刀
 rtk1151:尺:shaku,shaku-hachi:尸,乀
-rtk1152:尽:exhaust:尺,丶
+# 2026-11-03 full re-review: bottom was a single dot (丶). cjkvi's ⿱尺⺀ is
+# ⺀=⿱丶丶 (two dots, "ice"), rendered stroke-for-stroke like 冫 -- same ice
+# reading already applied to 寒/rtk1645 on 2026-09-27. Replaced 丶 with
+# kangxi15 (冫); no new primitive needed, no other "ice" host had this bug.
+rtk1152:尽:exhaust:尺,冫
 rtk1153:沢:swamp:尺,水
 rtk1154:訳:translate:尺,言
 rtk1155:択:choose:尺,扌
