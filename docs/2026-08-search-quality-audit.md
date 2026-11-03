@@ -25361,8 +25361,8 @@ What the chunk contains: 48 `keep`, 2 `fixed`, 0 `needs-render`.
 Checks after `git` HEAD + this diff: pytest 108 passed, `regression_fresh.sh`
 1331/1331, `audit_radicals.py` 0/0. Synced to this machine's DB
 (`sync_system_data.py`: 1 decomposition replaced). Prod needs `git pull` +
-`sync_system_data.py`. `full_review.py --pending-count` drops from 1848 to
-1798.
+`sync_system_data.py`. `full_review.py --pending-count` is 1848/3000. The
+uncommitted JSON already held these 50 decisions, so the count includes them.
 
 Also added `backend/run_kanji_review_loop.sh`, which runs
 `run_kanji_worklist_review.sh` repeatedly and stops when a batch fails
