@@ -29427,11 +29427,11 @@
    "屮",
    "糸"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render + cjkvi ⿱龶... confirm 龶 (vertical stops at bottom bar, distinct from 丰) — matches Heisig's components, row 素=龶,糸 correct",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1653",
@@ -29445,11 +29445,11 @@
    "龶",
    "夂"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render + cjkvi ⿱龶... confirm 龶 (vertical stops at bottom bar, distinct from 丰) — matches Heisig's components, row 麦=龶,夂 correct",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1654",
@@ -29463,11 +29463,11 @@
    "龶",
    "月"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render + cjkvi ⿱龶... confirm 龶 (vertical stops at bottom bar, distinct from 丰) — matches Heisig's components, row 青=龶,月 correct",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1655",
@@ -29481,11 +29481,11 @@
    "米",
    "青"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "青 confirmed as J-variant (cjkvi [GTJV] group); render shows standard 青, not 靑 (K variant) — row matches Heisig; 精=米,青 matches ⿰米青[GTJV]",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1656",
@@ -29499,11 +29499,11 @@
    "言",
    "青"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "青 confirmed as J-variant (cjkvi [GTJV] group); render shows standard 青, not 靑 (K variant) — row matches Heisig; 請=言,青 matches ⿰言青[GTJV]",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1657",
@@ -29517,11 +29517,11 @@
    "忄",
    "青"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "青 confirmed as J-variant (cjkvi [GTJV] group); render shows standard 青, not 靑 (K variant) — row matches Heisig; 情=青,state of mind matches ⿰忄青[GTJV], 'state of mind' is this file's established alias for 忄",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1658",
@@ -29535,11 +29535,11 @@
    "日",
    "青"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "青 confirmed as J-variant (cjkvi [GTJV] group); render shows standard 青, not 靑 (K variant) — row matches Heisig; 晴=青,日 matches ⿰日青[GTJV]",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1659",
@@ -29553,11 +29553,11 @@
    "水",
    "青"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "青 confirmed as J-variant (cjkvi [GTJV] group); render shows standard 青, not 靑 (K variant) — row matches Heisig; 清=水,青 matches ⿰氵青, 水 is this file's established name for 氵 (used throughout)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1660",
@@ -29571,11 +29571,11 @@
    "青",
    "争"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "青 confirmed as J-variant (cjkvi [GTJV] group); render shows standard 青, not 靑 (K variant) — row matches Heisig; 静=争,青 matches ⿰青争",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1661",
@@ -29589,11 +29589,11 @@
    "龶",
    "貝"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render+cjkvi ⿱龶貝ー責=龶,貝 correct, 龶,貝/糸/禾/亻/水 all confirmed against cjkvi and Heisig's exact term list",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1662",
@@ -29607,11 +29607,11 @@
    "糸",
    "責"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "績=責,糸 matches ⿰糸責[JK]",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1663",
@@ -29622,11 +29622,11 @@
   "heisig_components": "wheat; cereal; blame; grow up; shellfish; clam; oyster; eye; animal legs; eight",
   "cjkvi_ids": "⿰禾責",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "積=禾,責 matches ⿰禾責",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1664",
@@ -29637,11 +29637,11 @@
   "heisig_components": "person; blame; grow up; shellfish; clam; oyster; eye; animal legs; eight",
   "cjkvi_ids": "⿰亻責",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "債=亻,責 matches ⿰亻責",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1665",
@@ -29652,11 +29652,11 @@
   "heisig_components": "water; water droplets; water pistol; blame; grow up; shellfish; clam; oyster; eye; animal legs; eight",
   "cjkvi_ids": "⿰氵責",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "漬=責,水 matches ⿰氵責, 水=氵 per established convention",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1666",
@@ -29670,11 +29670,11 @@
    "艾",
    "衣"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render confirms 龶 top + 𧘇 (scarf, FONT_OVERRIDES glyph, renders small/raised but distinct) bottom — 表=龶,𧘇 matches cjkvi ⿱龶𧘇 and Heisig exactly",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1667",
@@ -29688,11 +29688,11 @@
    "亻",
    "表"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "俵=亻,表 matches ⿰亻表",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1668",
@@ -29708,11 +29708,11 @@
    "刀",
    "糸"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render of 潔 shows 氵 + 㓞(flick-knife top, same shape as 契's top) + 糸 — matches cjkvi ⿰氵絜 (絜=㓞+糸) and Heisig's water;...;flick knife;...;thread list",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1669",
@@ -29727,11 +29727,11 @@
    "刀",
    "大"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render confirms 契=㓞(top)+大(bottom), matches cjkvi primary ⿱㓞大[GTKV] and Heisig's flick knife;...;large list",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1670",
@@ -29745,11 +29745,11 @@
    "口",
    "契"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "喫=口,契 matches ⿰口契",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1671",
@@ -29764,11 +29764,11 @@
    "丰",
    "口"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render of 害 shows 宀/龶/口 stacked (⿳), matching the J-variant cjkvi split ⿳宀龶口[TJV] exactly (not the G/K atomic ⿱𫲸口) — correct for this ja-kanji row",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1672",
@@ -29782,11 +29782,11 @@
    "車",
    "害"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "轄=害,車 matches ⿰車害",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1673",
@@ -29800,11 +29800,11 @@
    "害",
    "刂"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "割=刀,害 — this file writes 刂(knife radical, confirmed in render as the narrow 2-stroke blade on 割's right) as 刀 throughout by established convention (see data.txt comments ~L4651/5050/5176: 則/副/別/刺/刑/罰/刷/劇 etc all do this); not a bug",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1674",
@@ -29820,11 +29820,11 @@
    "罒",
    "心"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render of 憲 confirms 宀,龶,罒,心 stacked, matching J-variant cjkvi ⿱𡩜心[TJKV] (𡩜=宀+龶+罒) and Heisig's mansion;house;grow up;eye;net;heart list exactly",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1675",
@@ -29835,11 +29835,11 @@
   "heisig_components": "This is Your Life; cell; drop; grow up",
   "cjkvi_ids": "生",
   "google_parts": [],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "生 is atomic per cjkvi (bare 生) and is a core frame (id_5th_ed well within 1-2042) — (atomic) is correct, not missing data",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1676",
@@ -29853,11 +29853,11 @@
    "日",
    "生"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "星=生,日 matches ⿱日生, 生 (life) confirmed correct per rtk1675; renders show consistent sun/day, woman, heart, cow, etc. pairings matching cjkvi and Heisig term-for-term",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1677",
@@ -29872,11 +29872,11 @@
    "日",
    "疋"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "醒=星,酉 matches ⿰酉星, 生 (life) confirmed correct per rtk1675; renders show consistent sun/day, woman, heart, cow, etc. pairings matching cjkvi and Heisig term-for-term",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1678",
@@ -29890,11 +29890,11 @@
    "女",
    "生"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "姓=女,生 matches ⿰女生, 生 (life) confirmed correct per rtk1675; renders show consistent sun/day, woman, heart, cow, etc. pairings matching cjkvi and Heisig term-for-term",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1679",
@@ -29908,11 +29908,11 @@
    "忄",
    "生"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "性=生,state of mind matches ⿰忄生 ('state of mind'=established 忄 alias), 生 (life) confirmed correct per rtk1675; renders show consistent sun/day, woman, heart, cow, etc. pairings matching cjkvi and Heisig term-for-term",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1680",
@@ -29926,11 +29926,11 @@
    "牛",
    "生"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "牲=牛,生 matches ⿰牛生, 生 (life) confirmed correct per rtk1675; renders show consistent sun/day, woman, heart, cow, etc. pairings matching cjkvi and Heisig term-for-term",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1681",
@@ -29945,11 +29945,11 @@
    "厂",
    "生"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "産=立,厂,生 matches ⿸产生 (产=立+厂), 生 (life) confirmed correct per rtk1675; renders show consistent sun/day, woman, heart, cow, etc. pairings matching cjkvi and Heisig term-for-term",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1682",
@@ -29964,11 +29964,11 @@
    "夂",
    "生"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "隆=生,夂,阝 matches J-variant cjkvi ⿰阝⿱夂生[J] exactly (G/K use atomic 㚅), 生 (life) confirmed correct per rtk1675; renders show consistent sun/day, woman, heart, cow, etc. pairings matching cjkvi and Heisig term-for-term",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1683",
@@ -29983,11 +29983,11 @@
    "夂",
    "丰"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "峰=夆,山 matches ⿰山夆, 夆 (丰+夂, render-confirmed: top is 丰 not 龶, bottom is 夂 walking-legs) matches cjkvi ⿰...夆 and Heisig's Segway;Macbeth;walking legs;bushes list",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1684",
@@ -30002,11 +30002,11 @@
    "夂",
    "丰"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "蜂=夆,虫 matches ⿰虫夆, 夆 (丰+夂, render-confirmed: top is 丰 not 龶, bottom is 夂 walking-legs) matches cjkvi ⿰...夆 and Heisig's Segway;Macbeth;walking legs;bushes list",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1685",
@@ -30022,11 +30022,11 @@
    "夂",
    "丰"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "縫=糸,逢 matches ⿰糸逢ー逢 used whole (render confirms 夆+辶), 夆 (丰+夂, render-confirmed: top is 丰 not 龶, bottom is 夂 walking-legs) matches cjkvi ⿰...夆 and Heisig's Segway;Macbeth;walking legs;bushes list",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1686",
@@ -30041,11 +30041,11 @@
    "一",
    "丰"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render of 拝 confirms 扌 + 一 over 丰 (not 龶) — matches cjkvi ⿰扌⿱一丰 and Heisig's finger;fingers;one;ceiling;bushes list exactly",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1687",
@@ -30060,11 +30060,11 @@
    "一",
    "寸"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "寿=丰,寸 (primary) matches cjkvi ⿸丰寸 and Heisig's bushes;glue; kept alt decomposition ノ,一,寸,二 as a labelled alternate, unchanged",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1688",
@@ -30080,11 +30080,11 @@
    "一",
    "寸"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "鋳=寿,金 matches ⿰金寿",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1689",
@@ -30099,11 +30099,11 @@
    "耒",
    "昔"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render of 籍 confirms 竹(top) + 耒/昔 compound (耤) below, matching cjkvi ⿱竹耤 (耤 render-verified as 耒+昔) and Heisig's bamboo;...;once upon a time;storyteller list",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1690",
@@ -30120,11 +30120,11 @@
    "人",
    "大"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render confirms 𡗗 (bonsai, a 夫-like shape with extra top strokes, distinct from 大) over 日 — 春=日,𡗗 matches cjkvi ⿱𡗗日 and Heisig's bonsai;sun;day list",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1691",
@@ -30138,11 +30138,11 @@
    "木",
    "春"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "椿=春,木 matches ⿰木春, 𡗗 (bonsai) render-confirmed distinct shape, consistently matches cjkvi's ⿱𡗗... across all these hosts and Heisig's term lists",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1692",
@@ -30159,11 +30159,11 @@
    "大",
    "水"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "泰=氺,𡗗 matches cjkvi primary ⿱𡗗氺, 𡗗 (bonsai) render-confirmed distinct shape, consistently matches cjkvi's ⿱𡗗... across all these hosts and Heisig's term lists",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1693",
@@ -30179,11 +30179,11 @@
    "人",
    "大"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "奏=天,𡗗 matches ⿱𡗗天, 𡗗 (bonsai) render-confirmed distinct shape, consistently matches cjkvi's ⿱𡗗... across all these hosts and Heisig's term lists",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1694",
@@ -30197,11 +30197,11 @@
    "宀",
    "头"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "実=宀,𡗗 matches ⿱宀𡗗, 𡗗 (bonsai) render-confirmed distinct shape, consistently matches cjkvi's ⿱𡗗... across all these hosts and Heisig's term lists",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1695",
@@ -30218,11 +30218,11 @@
    "二",
    "｜"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "奉=prim-cornstalk,𡗗 — cjkvi's ⿻二丨 is an overlay (shared strokes per the ⿻ rule), correctly represented here as one atomic prim-cornstalk name rather than split into 二,丨; matches Heisig's observance;bonsai;cornstalk, 𡗗 (bonsai) render-confirmed distinct shape, consistently matches cjkvi's ⿱𡗗... across all these hosts and Heisig's term lists",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1696",
@@ -30236,11 +30236,11 @@
    "亻",
    "奉"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "俸=亻,奉 matches ⿰亻奉",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1697",
@@ -30258,11 +30258,11 @@
    "二",
    "｜"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "棒=木,奉 matches ⿰木奉",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1698",
@@ -30279,11 +30279,11 @@
    "土",
    "二"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "謹=言,𦰌 matches ⿰言𦰌[J], 𦰌 (cabbage) is a genuine tofu glyph in this font (confirmed: isolated render shows the font's missing-glyph box) but already has its own primitive image (prim-cabbage.png, image_url set) — a prior session's fix, not an issue for this row. J-variant cjkvi ⿰...𦰌[J] matches and compound hosts render it correctly in context",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1699",
@@ -30297,11 +30297,11 @@
    "亻",
    "堇"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "僅=亻,𦰌 matches ⿰亻𦰌[J], 𦰌 (cabbage) is a genuine tofu glyph in this font (confirmed: isolated render shows the font's missing-glyph box) but already has its own primitive image (prim-cabbage.png, image_url set) — a prior session's fix, not an issue for this row. J-variant cjkvi ⿰...𦰌[J] matches and compound hosts render it correctly in context",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1700",
@@ -30319,11 +30319,11 @@
    "二",
    "一"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "勤=力,𦰌 matches ⿰𦰌力[J], 𦰌 (cabbage) is a genuine tofu glyph in this font (confirmed: isolated render shows the font's missing-glyph box) but already has its own primitive image (prim-cabbage.png, image_url set) — a prior session's fix, not an issue for this row. J-variant cjkvi ⿰...𦰌[J] matches and compound hosts render it correctly in context",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1701",
@@ -30341,11 +30341,11 @@
    "大",
    "二"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "漢=水,𦰩 matches J-variant cjkvi ⿰氵𦰩[J] (an atomic Japan-specific form vs G/K's more decomposed ⿰氵⿱廿⿻口夫); Heisig's sino;water;...;scarecrow;flowers;mouth;husband list bundles 𦰩's own sub-names, consistent with existing convention for atomic J-variant primitives",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1702",

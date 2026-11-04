@@ -26259,3 +26259,55 @@ was edited).
 `full_review.py --pending-count`: 1347/3000.
 
 **Next**: continue the full re-review at frame 1652.
+
+## 2026-11-04 — full re-review: frames 1652–1701
+
+50/50 kept, 0 fixed, 0 needs-render. Baselines recorded before starting:
+`pytest -q` 108 passed, `./regression_fresh.sh` 1331/1331 passed,
+`audit_radicals.py` 0 undefined part terms. No `data.txt` edit was needed in
+this chunk, so no re-sync or pin update either, and the baselines stand
+unchanged.
+
+This chunk is mostly the 青/生/龶/丰/𡗗/𦰌 primitive families (rtk1652–1701:
+素 麦 青 精 請 情 晴 清 静 責 績 積 債 漬 表 俵 潔 契 喫 害 轄 割 憲 生 星 醒 姓
+性 牲 産 隆 峰 蜂 縫 拝 寿 鋳 籍 春 椿 泰 奏 実 奉 俸 棒 謹 僅 勤 漢), each checked
+against its render, Heisig's components column and cjkvi-ids, with extra
+renders for the shapes shared across many hosts:
+
+- **龶 vs 丰** (the CLAUDE.md trap: 龶's vertical stops at the bottom bar,
+  丰's runs through). Rendered both standalone plus every host that uses
+  either (素 麦 青 責 害 憲 for 龶; 拝 寿 鋳 峰 蜂 縫 for 丰, via 夆=丰+夂).
+  Every host matched its row and matched cjkvi's own `⿱龶...`/`⿱一丰` split —
+  no mix-ups found.
+- **𡗗 "bonsai"** (U+215D7, used in 春 泰 奏 実 奉 俸 棒): rendered standalone
+  next to 大 — a distinct shape (大 with two extra top strokes), not a tofu
+  box and not a duplicate of 大. Matches cjkvi's `⿱𡗗...` for all six hosts
+  and Heisig's "bonsai" term-for-term.
+- **𦰌 "cabbage"** (U+26C0C, used in 謹 僅 勤): isolated render is a genuine
+  tofu box in this font stack (confirmed — not a lookalike substitution,
+  an actual missing glyph), but the row already has its own primitive image
+  (`prim-cabbage.png`, `image_url` set on the `prim-cabbage` row) from an
+  earlier session, so the frontend never shows the tofu. The three compound
+  hosts render fine in context and match the J-variant cjkvi split
+  (`⿰...𦰌[J]`) and Heisig's cabbage;flowers;mouth;grow up list. Not a new
+  issue, just confirmed still correctly handled.
+- **rtk1673 割** (`刀,害`): the render shows the narrow 2-stroke 刂ー not
+  full 刀ー on the right. Checked the data.txt comments (~L4651, L5050,
+  L5176) before "fixing" this: this file has a long-standing, deliberate
+  convention of writing 刂 as 刀 everywhere (刑 罰 刷 劇 則 副 別 刺 all do the
+  same), so all the sword/dagger/sabre/saber keyword variants live on one
+  row instead of splitting an artificial 刀/刂 distinction the rest of the
+  data doesn't make. Not a bug — kept as-is, would have been a false fix.
+- **rtk1671 害 / rtk1674 憲**: both resolve to the Japan-specific cjkvi
+  variant (`⿳宀龶口[TJV]` / `⿱𡩜心[TJKV]`, i.e. 宀+龶+口/罒+心 stacked) rather
+  than the more-fused G/K atomic forms (`⿱𫲸口[GK]`) — correct, since these
+  are `ja-kanji` rows.
+- **rtk1657 情 / rtk1679 性**: both use "state of mind" as a part name
+  alongside 青/生. Confirmed this is the file's existing alias for 忄 (not a
+  typo or an undefined term — `audit_radicals.py` found 0 undefined terms
+  both before and after this chunk), used consistently with how 水 is used
+  as this file's name for 氵 elsewhere in the same chunk (清 漬 etc.).
+
+`full_review.py --pending-count`: 1297/3000.
+
+**Next**: continue the full re-review at frame 1702.
