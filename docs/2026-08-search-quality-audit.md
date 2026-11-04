@@ -26206,3 +26206,56 @@ No deploy from here — a deployer needs `git pull` + `sync_system_data.py`
 on prod to pick up the `壴` fix.
 
 **Next**: continue the full re-review at frame 1602.
+
+## 2026-11-04 — full re-review: frames 1602–1651
+
+50/50 kept, 0 fixed, 0 needs-render. Every row in this chunk's decomposition
+already matched its render; no `data.txt` edit was needed, so no
+`sync_system_data.py`/pin updates were made either.
+
+Two rows got closer scrutiny than a routine match and are worth recording:
+
+- **rtk1622 幸** (`土,丷,干`): this looked at first glance like it might be
+  wrong — Heisig's own CSV components read "ten; needle; stand up; vase;
+  ten; needle" (i.e. 十+立+十), not what's in the row. Checked the git
+  history: this is not stale data, it's a deliberate fix from 2026-09-20
+  (commit `84b3e35`) that already worked through exactly this tension —
+  十+立 is 7 strokes and 十+立+十 is 9, but 幸 is 8 strokes, so Heisig's
+  literal reading can't be a clean partition, and the structural
+  `土+丷+干` (cjkvi `⿱土𢆉`, 𢆉=`⿱丷干`) reading was used instead with the
+  overlap not guessed at. Render confirms that fix; no new evidence to
+  reopen it. Kept, with the reasoning restated in the decision note so a
+  future pass doesn't re-flag it from a cold start.
+- **rtk1629 卑** (`十,田,丿`): Heisig's CSV components list "Wayne Slob;
+  drop; rice field; brains; cornucopia; ten; needle". "rice field; brains"
+  are both existing aliases of `田` (rtk14) and "drop" resolves to the
+  existing `prim-katakana-no` (ノ) — those two check out. "cornucopia" is
+  `prim-cornucopia` (丩), used correctly elsewhere in this same chunk
+  (叫/糾/収 at rtk1626–1628). Rendered 卑 at high zoom specifically looking
+  for a 丩-shaped hook/zigzag inside it: there isn't one — the glyph is
+  cleanly 丿 (top-left diagonal) + a 2-cell box + 十 (bottom cross+tail),
+  matching the current row. Ran `audit_weak_evidence.py --host 卑`, which
+  flags cjkvi's non-Japanese variant (`⿱⿻白丿十`) as `not-a-parts-list`
+  (⿻ overlay, per the CLAUDE.md caveat); the Japanese variant
+  (`⿱丿𤰞`) is a clean stack and doesn't contradict the row either. Treating
+  Heisig's "cornucopia" mention here as a CSV labelling artifact (the same
+  already-expanded-alias behavior seen elsewhere this chunk, e.g. `幸`'s
+  "Baba Yaga's hut; celery" both naming one `𠀎`) rather than a real missing
+  piece, since nothing in the render supports adding one. Kept, not changed.
+
+Also note for context, not new findings: `rtk1624 摯` (`執,手`) and `rtk1637
+亥`'s "acorn" alias both reflect earlier, already-correct decisions
+(`摯` was fixed in the same 2026-09-20 commit as `幸`; `亥`'s own row lists
+its 4 literal strokes, and "acorn" in the CSV is just this same row's own
+second alias, used when later kanji like `核`/`刻` reference `亥` as a
+primitive — not a separate drawn shape).
+
+No `data.txt`/`test_regression_fixes.py` changes this chunk, so the
+pre-existing baselines stand unchanged: `pytest -q` 108 passed,
+`./regression_fresh.sh` 1331/1331 passed, `audit_radicals.py` 0 undefined
+part terms (all checked before starting, not re-run after since nothing
+was edited).
+
+`full_review.py --pending-count`: 1347/3000.
+
+**Next**: continue the full re-review at frame 1652.
