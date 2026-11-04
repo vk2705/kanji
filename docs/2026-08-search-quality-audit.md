@@ -26125,3 +26125,84 @@ touched this run (no fixes), so these checks were not re-run after.
 `full_review.py --pending-count`: 1447/3000.
 
 **Next**: continue the full re-review at frame 1552.
+
+## 2026-11-04 — full re-review: frames 1552–1601
+
+Ran the daily `full_review.py -n 50` chunk (unattended timer run). **1 fix
+(3 rows + 1 shape-family follow-up outside the chunk), 49 keep**, no
+`needs-render`.
+
+**Fix — `prim-drum-stand` (壴, U+58F4)**: `rtk1553` 喜 (rejoice) and
+`rtk1554` 樹 (timber) both listed `鼓` (the full "drum" kanji, `rtk1552`) as
+a shared part. Rendering `喜`/`樹` next to `鼓` and its own components
+(`士`,`豆`,`支`) shows neither host draws `鼓`'s striking hand (`支`) — only
+the drum-stand top, `壴` (`士`+`豆`), which `鼓` happens to start with.
+Heisig's own components column for both hosts names "drum" without ever
+naming "branch", confirming he's reusing the frame-1552 keyword for the
+bare sub-shape — the same pattern already used for `艮`/`皀`, both aliased
+"silver". `audit_weak_evidence.py --host` on all three (喜/樹/膨, see below)
+came back empty in all three categories (heisig-atomic, not-a-parts-list,
+opaque-intermediate), confirming this is a phantom-shape bug outside what
+that tool targets, not a false positive. Gave `壴` its own row
+(`prim-drum-stand:壴:drum:士,豆`) and pointed `rtk1552` itself at it too
+(`壴,支`) for consistency, per "prefer the coherent primitive Heisig names
+over its strokes."
+
+- **Shape-family check**: grepped `data.txt` for every other use of `鼓` as
+  a part — one more hit, `rtk1855` 膨 (swell, outside today's 1552–1601
+  window). Rendered it: `膨`'s right side `彭` is `壴`+`彡`, the identical
+  phantom-`支` bug. Fixed alongside the in-window rows (`月,壴,彡`). No
+  other host anywhere in `data.txt`/`data_from_pdf.txt` references `鼓`.
+
+Groups reviewed (each rendered via `render_glyphs.py`, batched by shared
+component), all matching cjkvi-ids and Heisig's components column:
+
+- **皿-group** (皿 血 盆 盟 盗 温 蓋 監 濫 鑑 藍 猛 盛): `皿` is atomic (core
+  frame, empty CSV = positive evidence). `蓋`'s `去` was confirmed by
+  rendering `盍` (`去` stacked exactly over `皿`) — cjkvi's `⿱艹盍` matches
+  one level down. `監`'s primary (`一,皿,臣,𠂉`) and alternate (`皿,臣,二`)
+  match cjkvi's TJKV and G variants respectively. `猛`'s `皿`+`子` (for
+  `孟`) confirmed by render against cjkvi's `⿰犭孟`.
+- **塩 (salt)**: `土,𠂉,口,皿` — a deliberate lookalike check, since Google's
+  hint uses `卜` instead of `𠂉` for the top-right stroke. Rendered `塩`
+  beside standalone `卜` and `𠂉`: `塩`'s stroke is the hooked diagonal of
+  `𠂉` (matching `祢`/`称`/`弥`'s "reclining" stroke elsewhere in this
+  project), not `卜`'s vertical-plus-cross (confirmed against `占`). Kept
+  as-is; this is the CLAUDE.md lookalike trap working as intended —
+  structural data and the render agree, Google doesn't.
+- **艮(silver)/良(good)-group** (銀 恨 根 即 爵 節 退 限 眼 良 朗 浪 娘, plus
+  食 and its eight derivatives 飯 飲 飢 餓 飾 餌 館 餅 養 飽, plus 既 概 慨):
+  all matched cjkvi one-for-one on render. `即`'s `皀` and `既`'s `皀`
+  both correctly resolve cjkvi's per-entry `⑤` placeholder to the same
+  real shape, consistent with each other. `良`'s primary (`丶,艮`) and
+  alternate (`艮,｜`) match cjkvi's GTV/JK split. `飾`'s primary and
+  alternate both confirmed.
+- **平(even)-group** (平 呼 坪 評): `平` (`干,丷`) — cjkvi's entry uses the
+  `⿻` (overlay) operator for this pairing, which CLAUDE.md flags as "not a
+  parts list," but this is a long-standing, previously-reviewed primitive
+  combination (not new evidence being introduced this session), and the
+  render clearly shows both strokes present and legible; left as-is.
+  呼/坪/評 all matched cjkvi directly.
+- **㐅(sheaf)-group** (刈 刹): another deliberate lookalike check — Google's
+  hint uses `乂` for both, cjkvi-ids uses `㐅`. Rendered `刈`'s left stroke
+  beside standalone `㐅` and `乂`: it matches `㐅`'s asymmetric hook, not
+  `乂`'s full symmetric X. `刹`'s `㐅,木` (for `杀`) confirmed the same way.
+  Both already matched cjkvi's own codepoint choice before this review;
+  Google's hint was the wrong one here.
+
+Checks (after the fix — `壴` row added, `rtk1552`/`1553`/`1554`/`1855`
+re-pointed at it): `pytest -q` 108 passed before and after; `sync_system_data.py
+--dry-run` counts sanity-checked (1 kanji inserted, 1 decomposition
+created + 4 replaced — exactly the touched rows) then applied for real;
+`./regression_fresh.sh` failed first with 4 expected pin mismatches
+(`rtk1552`/`1553`/`1554`/`1855` still pinned to the old `rtk341`/`rtk1548`/
+`rtk1552` ids) — updated the four pins in `test_regression_fixes.py` to
+`prim-drum-stand` with a comment explaining why, then 1331/1331 passed;
+`audit_radicals.py` 0 undefined part terms both before and after.
+
+`full_review.py --pending-count`: 1397/3000.
+
+No deploy from here — a deployer needs `git pull` + `sync_system_data.py`
+on prod to pick up the `壴` fix.
+
+**Next**: continue the full re-review at frame 1602.

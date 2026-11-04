@@ -1949,9 +1949,19 @@ rtk1548:豆:beans:几,一,口
 rtk1549:頭:head:豆,頁
 rtk1550:短:short:矢,豆
 rtk1551:豊:bountiful:曲,豆
-rtk1552:鼓:drum:士,豆,支
-rtk1553:喜:rejoice:鼓,口
-rtk1554:樹:timber:木,鼓,寸
+# 2026-11-04 full re-review: 喜/樹's "鼓" part was the full drum kanji
+# (士+豆+支, with the striking hand 支), but rendered, neither contains a
+# 支 at all -- just the 壴 drum-stand top (士+豆) that 鼓 itself starts
+# with. 鼓's own breakdown is unaffected (it does draw 支) but now points
+# at the same new 壴 primitive for consistency. cjkvi-ids agrees for both
+# (⿱壴口, ⿰木尌 where 尌=壴+寸) and Heisig's components column names
+# "drum" for both without ever listing "branch" -- he reuses the frame
+# 1552 keyword for the bare sub-shape, same pattern as 艮/皀 "silver".
+# Shape-family: rtk1855 膨 "swell" has the identical bug (月,鼓,彡 -> its
+# right side 彭 is 壴+彡, no 支 either) -- fixed alongside these.
+rtk1552:鼓:drum:壴,支
+rtk1553:喜:rejoice:壴,口
+rtk1554:樹:timber:木,壴,寸
 rtk1555:皿:dish:
 rtk1556:血:blood:ノ,皿
 rtk1557:盆:basin:皿,分
@@ -2269,7 +2279,9 @@ rtk1851:彰:patent:章,彡
 rtk1852:彦:lad:立,厂,彡
 rtk1853:顔:face:彦,頁
 rtk1854:須:ought:頁,彡
-rtk1855:膨:swell:月,鼓,彡
+# 2026-11-04 full re-review shape-family fix (see rtk1552/1553/1554): same
+# phantom-支 bug, 彭 (right side) is 壴+彡, not 鼓.
+rtk1855:膨:swell:月,壴,彡
 rtk1856:参:nonplussed:厶,大,彡
 rtk1857:惨:wretched:参,忄
 rtk1858:修:discipline:亻,｜,彡,攵
@@ -5961,3 +5973,14 @@ prim-legless-bird:?:legless bird
 #   confident name for it -- left for a session with room for that, per the
 #   prior chunk's own conclusion, now backed by an exact stroke count for
 #   whoever picks it up.
+
+# 2026-11-04 full re-review: "drum" (壴, U+58F4) -- Heisig's name for 士+豆,
+# the drum-stand shape shared by 喜 (rejoice), 樹 (timber) and 膨 (swell).
+# All three previously pointed at the full kanji 鼓 (drum), which also has
+# a striking hand (支) that none of the three actually draw -- caught by
+# rendering each host next to 鼓 and 壴. No kanji frame of its own and not
+# a Kangxi radical, hence prim-. Reuses "drum" as its alias, same as
+# 艮/皀 both carry "silver" -- the frame that teaches the full character
+# lends its keyword to the bare sub-shape. Renders in every installed CJK
+# font (no tofu).
+prim-drum-stand:壴:drum:士,豆

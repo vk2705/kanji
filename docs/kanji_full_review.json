@@ -27635,11 +27635,14 @@
    "豆",
    "支"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "壴",
+   "支"
+  ],
+  "note": "喜/樹/膨 all pointed at full 鼓 (incl. 支 hand) for their shared piece but render shows no 支; gave 壴 its own row (prim-drum-stand) and pointed 鼓 at it too for consistency",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1553",
@@ -27654,11 +27657,14 @@
    "口",
    "口"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "壴",
+   "口"
+  ],
+  "note": "鼓 part was phantom (included 支 not drawn in 喜); fixed to new prim-drum-stand(壴)+口, confirmed by render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1554",
@@ -27673,11 +27679,15 @@
    "鼓",
    "寸"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "木",
+   "壴",
+   "寸"
+  ],
+  "note": "鼓 part was phantom (included 支 not drawn in 樹's 尌=壴+寸); fixed to prim-drum-stand(壴)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1555",
@@ -27688,11 +27698,11 @@
   "heisig_components": "",
   "cjkvi_ids": "皿",
   "google_parts": [],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "atomic dish shape, core frame (id_5th_ed in 1-2042), empty CSV = positive evidence; render confirms simple 皿",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1556",
@@ -27706,11 +27716,11 @@
    "丶",
    "皿"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "ノ+皿 confirmed by render, matches cjkvi ⿱丿皿",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1557",
@@ -27725,11 +27735,11 @@
    "刀",
    "皿"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "分+皿 confirmed by render, matches cjkvi ⿱分皿",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1558",
@@ -27744,11 +27754,11 @@
    "月",
    "皿"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "明+皿 confirmed by render, matches cjkvi ⿱明皿",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1559",
@@ -27763,11 +27773,11 @@
    "欠",
    "皿"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "次+皿 confirmed by render, matches cjkvi ⿱次皿",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1560",
@@ -27782,11 +27792,11 @@
    "日",
    "皿"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "水(氵)+日+皿 confirmed by render, matches cjkvi ⿰氵昷 (昷=日+皿)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1561",
@@ -27797,11 +27807,11 @@
   "heisig_components": "flowers; gone; soil; dirt; ground; elbow; dish",
   "cjkvi_ids": "⿱艹盍",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "艹+去+皿 confirmed by render (盍=去 stacked exactly over 皿), matches cjkvi ⿱艹盍",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1562",
@@ -27816,11 +27826,11 @@
    "𠂉",
    "皿"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "primary 一,皿,臣,𠂉 matches cjkvi TJKV variant ⿱⿰臣⿱𠂉一皿, alt matches G variant; both renders check out",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1563",
@@ -27834,11 +27844,11 @@
    "氵",
    "監"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "水+監 confirmed by render, matches cjkvi ⿰氵監",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1564",
@@ -27849,11 +27859,11 @@
   "heisig_components": "metal; gold; oversee; retainer; slave; reclining; lying down; one; floor; dish",
   "cjkvi_ids": "⿰金監",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "金+監 confirmed by render, matches cjkvi ⿰金監",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1565",
@@ -27867,11 +27877,11 @@
    "艹",
    "監"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "監+艹 confirmed by render, matches cjkvi ⿱艹監",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1566",
@@ -27886,11 +27896,11 @@
    "子",
    "皿"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "犭+皿+子 confirmed by render (孟=子+皿), matches cjkvi ⿰犭孟",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1567",
@@ -27904,11 +27914,11 @@
    "成",
    "皿"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "成+皿 confirmed by render, matches cjkvi ⿱成皿",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1568",
@@ -27924,11 +27934,11 @@
    "口",
    "皿"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "土+𠂉+口+皿 confirmed by render: top-right stroke is a hooked diagonal matching standalone 𠂉, not the vertical+cross of 卜 (Google's hint); checked side-by-side against 占/名",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1569",
@@ -27942,11 +27952,11 @@
    "金",
    "艮"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "金+艮 confirmed by render, matches cjkvi ⿰金艮",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1570",
@@ -27960,11 +27970,11 @@
    "忄",
    "艮"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "艮+忄(state of mind) confirmed by render, matches cjkvi ⿰忄艮",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1571",
@@ -27975,11 +27985,11 @@
   "heisig_components": "tree; wood; silver",
   "cjkvi_ids": "⿰木艮",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "艮+木 confirmed by render, matches cjkvi ⿰木艮",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1572",
@@ -27990,11 +28000,11 @@
   "heisig_components": "silver; stamp",
   "cjkvi_ids": "⿰⑤卩",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "皀+卩 confirmed by render; cjkvi's ⑤ placeholder (per-entry, not a fixed glyph) already correctly resolved to 皀 here, consistent with rtk1593 既",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1573",
@@ -28010,11 +28020,11 @@
    "皿",
    "寸"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "爪+罒+皀+寸 confirmed by render against cjkvi ⿳爫罒𡬠[GTJV]; 𡬠 placeholder = 皀+寸",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1574",
@@ -28028,11 +28038,11 @@
    "竹",
    "即"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "竹+即 confirmed by render, matches cjkvi ⿱竹即",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1575",
@@ -28043,11 +28053,11 @@
   "heisig_components": "road; silver",
   "cjkvi_ids": "⿺辶艮",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "辶+艮 confirmed by render, matches cjkvi ⿺辶艮",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1576",
@@ -28061,11 +28071,11 @@
    "阝",
    "艮"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "阝+艮 confirmed by render, matches cjkvi ⿰阝艮",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1577",
@@ -28079,11 +28089,11 @@
    "目",
    "艮"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "目+艮 confirmed by render, matches cjkvi ⿰目艮",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1578",
@@ -28097,11 +28107,11 @@
    "白",
    "ル"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "primary 丶,艮 matches cjkvi GTV variant ⿱丶艮, alt 艮,｜ matches JK variant ⿱丨艮; both confirmed by render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1579",
@@ -28115,11 +28125,11 @@
    "良",
    "月"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "月+良 confirmed by render, matches cjkvi GTJV variant ⿰良月",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1580",
@@ -28133,11 +28143,11 @@
    "水",
    "良"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "水(氵)+良 confirmed by render, matches cjkvi ⿰氵良",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1581",
@@ -28151,11 +28161,11 @@
    "女",
    "良"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "女+良 confirmed by render, matches cjkvi ⿰女良",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1582",
@@ -28166,11 +28176,11 @@
   "heisig_components": "food; umbrella; good; halo; drop; silver",
   "cjkvi_ids": "⿱人良",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "primary 𠆢,良 and alt 人,良 both confirmed by render, matches cjkvi ⿱人良",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1583",
@@ -28184,11 +28194,11 @@
    "食",
    "反"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "食+反 confirmed by render, matches cjkvi GTJ variant ⿰飠反",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1584",
@@ -28199,11 +28209,11 @@
   "heisig_components": "eat; food; umbrella; good; halo; drop; silver; lack; yawn",
   "cjkvi_ids": "⿰飠欠",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "欠+食 confirmed by render, matches cjkvi ⿰飠欠",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1585",
@@ -28217,11 +28227,11 @@
    "食",
    "几"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "食+几 confirmed by render, matches cjkvi GTJV variant ⿰飠几",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1586",
@@ -28235,11 +28245,11 @@
    "食",
    "我"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "食+我 confirmed by render, matches cjkvi GTJ variant ⿰飠我",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1587",
@@ -28254,11 +28264,11 @@
    "𠂉",
    "巾"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "巾+食+𠂉 (primary) and ノ,巾,食,一,人 (alt) both confirmed by render, matches cjkvi GTJ ⿰飠⿱𠂉巾",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1588",
@@ -28272,11 +28282,11 @@
    "食",
    "耳"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "耳+食 confirmed by render, matches cjkvi GTJ variant ⿰飠耳",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1589",
@@ -28290,11 +28300,11 @@
    "食",
    "官"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "官+食 confirmed by render, matches cjkvi GTJV variant ⿰飠官",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1590",
@@ -28308,11 +28318,11 @@
    "食",
    "并"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "并+食 confirmed by render, matches cjkvi GTJV variant ⿰飠并",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1591",
@@ -28326,11 +28336,11 @@
    "羊",
    "食"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "食+羊 confirmed by render, matches cjkvi ⿱𦍌食",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1592",
@@ -28344,11 +28354,11 @@
    "食",
    "包"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "食+包 confirmed by render, matches cjkvi GTJ variant ⿰飠包",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1593",
@@ -28359,11 +28369,11 @@
   "heisig_components": "silver; waitress",
   "cjkvi_ids": "⿰⑤旡",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "皀+旡 confirmed by render, matches cjkvi ⑤ placeholder resolving to 皀, consistent with rtk1572 即",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1594",
@@ -28377,11 +28387,11 @@
    "木",
    "既"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "既+木 confirmed by render, matches cjkvi ⿰木既",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1595",
@@ -28392,11 +28402,11 @@
   "heisig_components": "regret; resentment; Freud; state of mind; silver; waitress; previously",
   "cjkvi_ids": "⿰忄既[GTJV] ⿰忄既[K]",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "既+忄 confirmed by render, matches cjkvi GTJV variant ⿰忄既",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1596",
@@ -28411,11 +28421,11 @@
    "ソ",
    "十"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "干+丷 confirmed by render; cjkvi's ⿻ operator (strokes overlaid) noted but this is an existing, already-reviewed primitive pairing, not a new claim",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1597",
@@ -28429,11 +28439,11 @@
    "口",
    "乎"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "口+平 confirmed by render, matches cjkvi ⿰口乎",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1598",
@@ -28447,11 +28457,11 @@
    "土",
    "平"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "土+平 confirmed by render, matches cjkvi ⿰土平",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1599",
@@ -28462,11 +28472,11 @@
   "heisig_components": "say; words; keitai; mouth; even; water-lily; lily pad",
   "cjkvi_ids": "⿰言平",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "言+平 confirmed by render, matches cjkvi ⿰言平",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1600",
@@ -28480,11 +28490,11 @@
    "乂",
    "刂"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "㐅+刀 confirmed by render: 刈's left stroke matches standalone 㐅's asymmetric hook, not 乂's full symmetric X (Google's hint); matches cjkvi's own choice ⿰㐅刂",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1601",
@@ -28499,11 +28509,11 @@
    "木",
    "刂"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "㐅+木+刀 confirmed by render (杀=㐅+木 exactly), matches cjkvi ⿰杀刂 flattened one level",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1602",

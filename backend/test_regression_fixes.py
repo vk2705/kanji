@@ -448,12 +448,17 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk1305", "rtk1548"}},
     "rtk1551": {"character": "豊", "keyword": "bountiful",
                 "expected_part_ids": {"rtk1256", "rtk1548"}},
+    # 2026-11-04 full re-review: 鼓/喜/樹 (and 膨, below) pointed at the full
+    # kanji 鼓 for their shared top/left piece, but rendered, none of them
+    # (鼓 itself aside) draws 鼓's striking hand (支) -- just the 壴
+    # drum-stand (士+豆). New prim-drum-stand(壴) replaces rtk341+rtk1548
+    # here and rtk1552 itself in the three downstream hosts.
     "rtk1552": {"character": "鼓", "keyword": "drum",
-                "expected_part_ids": {"rtk341", "rtk1548", "rtk768"}},
+                "expected_part_ids": {"prim-drum-stand", "rtk768"}},
     "rtk1553": {"character": "喜", "keyword": "rejoice",
-                "expected_part_ids": {"rtk1552", "rtk11"}},
+                "expected_part_ids": {"prim-drum-stand", "rtk11"}},
     "rtk1554": {"character": "樹", "keyword": "timber",
-                "expected_part_ids": {"rtk207", "rtk1552", "rtk45"}},
+                "expected_part_ids": {"rtk207", "prim-drum-stand", "rtk45"}},
     "rtk1757": {"character": "闘", "keyword": "fight",
                 "expected_part_ids": {"rtk1743", "rtk1548", "rtk45"}},
     "rtk1815": {"character": "痘", "keyword": "pox",
@@ -462,8 +467,9 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"kangxi105", "rtk1548"}},
     "rtk1839": {"character": "澄", "keyword": "lucidity",
                 "expected_part_ids": {"rtk137", "rtk1838"}},
+    # 2026-11-04 full re-review: same prim-drum-stand fix as rtk1552/1553/1554.
     "rtk1855": {"character": "膨", "keyword": "swell",
-                "expected_part_ids": {"rtk13", "rtk1552", "kangxi59"}},
+                "expected_part_ids": {"rtk13", "prim-drum-stand", "kangxi59"}},
     "rtk1892": {"character": "艶", "keyword": "glossy",
                 "expected_part_ids": {"rtk1551", "rtk1890"}},
     "rtk2223": {"character": "鎧", "keyword": "put on armor",
