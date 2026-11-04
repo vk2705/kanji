@@ -24045,11 +24045,11 @@
    "犭",
    "者"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "犭+者, cjkvi ⿰犭者, Heisig matches, rendered confirms",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1353",
@@ -24060,11 +24060,11 @@
   "heisig_components": "water; water droplets; water pistol; someone; puppet; sooty; old man; sun; day",
   "cjkvi_ids": "⿰氵者",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "水+者, cjkvi ⿰氵者, matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1354",
@@ -24075,11 +24075,11 @@
   "heisig_components": "shellfish; clam; oyster; eye; animal legs; eight; someone; puppet; sooty; old man; sun; day",
   "cjkvi_ids": "⿰貝者",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "貝+者, cjkvi ⿰貝者, matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1355",
@@ -24090,11 +24090,11 @@
   "heisig_components": "mountain; scissors; husband; horns",
   "cjkvi_ids": "⿰山夹",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "夹+山, cjkvi ⿰山夹, matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1356",
@@ -24108,11 +24108,11 @@
    "犭",
    "夹"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "夹+犭, cjkvi ⿰犭夹, matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1357",
@@ -24126,11 +24126,11 @@
    "扌",
    "夹"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "夹+扌, cjkvi ⿰扌夹, matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1358",
@@ -24144,11 +24144,11 @@
    "夾",
    "頁"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "夹+頁, cjkvi ⿰夹頁, structural match overrides empty CSV (non-core frame)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1359",
@@ -24162,11 +24162,11 @@
    "辶",
    "𠂤"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "辶+𠂤, cjkvi ⿺辶𠂤, matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1360",
@@ -24177,11 +24177,11 @@
   "heisig_components": "maestro; ten; needle",
   "cjkvi_ids": "⿱𠂤十",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "𠂤+十, cjkvi ⿱𠂤十, matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1361",
@@ -24195,11 +24195,11 @@
    "𠂤",
    "巾"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "𠂤+帀, cjkvi ⿰𠂤帀, matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1362",
@@ -24213,11 +24213,11 @@
    "𠂤",
    "巾"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "𠂤+巾, cjkvi ⿰𠂤巾, matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1363",
@@ -24231,11 +24231,11 @@
    "宀",
    "𠂤"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "宀+𠂤; cjkvi shows ⿱宀㠯 but a 2026-09-20 session already rendered 官's lower half beside both and confirmed it's 𠂤 (baton-topped box), not 㠯 (stacked pair) -- see comment above prim-maestro",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1364",
@@ -24249,11 +24249,11 @@
    "木",
    "官"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "官+木, cjkvi ⿰木官, matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1365",
@@ -24267,11 +24267,11 @@
    "竹",
    "官"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "官+竹, cjkvi ⿱竹官, matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1366",
@@ -24282,11 +24282,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿱八乂",
   "google_parts": [],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "primary empty (core frame id_5th_ed 1274, empty CSV = atomic evidence), alt 乂,八 matches cjkvi ⿱八乂",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1367",
@@ -24300,11 +24300,11 @@
    "父",
    "金"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "父+金, Heisig components match; alt 丷,父,王 also available for the ⿻-overlay reading",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1368",
@@ -24318,11 +24318,11 @@
    "亠",
    "父"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "亠+父, cjkvi ⿱亠父, matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1369",
@@ -24336,11 +24336,11 @@
    "交",
    "力"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "交+力, cjkvi ⿰交力, matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1370",
@@ -24354,11 +24354,11 @@
    "車",
    "交"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "車+交, cjkvi ⿰車交, matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1371",
@@ -24372,11 +24372,11 @@
    "木",
    "交"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "交+木, cjkvi ⿰木交, matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1372",
@@ -24390,11 +24390,11 @@
    "口",
    "疋"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "口+龰 primary, cjkvi ⿱口龰, matches; alt 口,止 also present",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1373",
@@ -24408,11 +24408,11 @@
    "亻",
    "足"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "亻+足, cjkvi ⿰亻足, matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1374",
@@ -24426,11 +24426,11 @@
    "扌",
    "足"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "扌+足, cjkvi ⿰扌足, matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1375",
@@ -24444,11 +24444,11 @@
    "足",
    "巨"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "足+巨, cjkvi ⿰𧾷巨, matches (𧾷 is 足's compressed left-form)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1376",
@@ -24459,11 +24459,11 @@
   "heisig_components": "wooden leg; mouth; stop; footprint; each; walking legs; mouth",
   "cjkvi_ids": "⿰𧾷各",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "各+足, cjkvi ⿰𧾷各, matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1377",
@@ -24477,11 +24477,11 @@
    "雨",
    "路"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "雨+路, cjkvi ⿱雨路, matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1378",
@@ -24495,11 +24495,11 @@
    "足",
    "兆"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "足+兆, cjkvi ⿰𧾷兆, matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1379",
@@ -24514,11 +24514,11 @@
    "羽",
    "隹"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "翟+足, cjkvi ⿰𧾷翟, matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1380",
@@ -24532,11 +24532,11 @@
    "足",
    "戔"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "㦮+足, cjkvi JK variant ⿰𧾷㦮, matches (ja-kanji uses JK form)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1381",
@@ -24551,11 +24551,14 @@
    "水",
    "日"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "足",
+   "沓"
+  ],
+  "note": "was 水,足,日 (stroke soup); cjkvi ⿰𧾷沓 and 沓=⿱水日 is a real character with no RTK frame -- Heisig's CSV names the compound itself ('wednesday; boots'). Render confirms. New prim-boots row added for 沓.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1382",
@@ -24569,11 +24572,11 @@
    "足",
    "宗"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "足+宗, cjkvi ⿰𧾷宗, structural match overrides empty CSV (non-core frame)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1383",
@@ -24587,11 +24590,11 @@
    "冎",
    "月"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "月+冎 primary, Heisig 'joint; moon' matches prim-joint; cjkvi top is a circled-number placeholder (structurally blind) so Heisig's name is the only usable evidence here, and it's solid. Alt 月,冖,冂 left untouched (not today's edit target).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1384",
@@ -24605,11 +24608,11 @@
    "水",
    "骨"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "水+骨, cjkvi ⿰氵骨, matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1385",
@@ -24624,11 +24627,11 @@
    "辶",
    "有"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "有+辶+骨 matches established convention (same pattern as rtk1395 随) for cjkvi's compound 迶 (辶+有)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1386",
@@ -24642,11 +24645,11 @@
    "礻",
    "咼"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "礻+咼, cjkvi JA-applicable ⿰礻咼[GTJV], matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1387",
@@ -24660,11 +24663,11 @@
    "水",
    "咼"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "水+咼, cjkvi ⿰氵咼, matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1388",
@@ -24678,11 +24681,11 @@
    "金",
    "咼"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "金+咼, cjkvi ⿰金咼, matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1389",
@@ -24696,11 +24699,11 @@
    "咼",
    "辶"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "辶+咼, cjkvi ⿺辶咼, matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1390",
@@ -24714,11 +24717,11 @@
    "阝",
    "反"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "反+阝, cjkvi ⿰阝反, matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1391",
@@ -24732,11 +24735,11 @@
    "阝",
    "可"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "可+阝, cjkvi ⿰阝可, matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1392",
@@ -24750,11 +24753,11 @@
    "阝",
    "祭"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "祭+阝, cjkvi ⿰阝祭, matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1393",
@@ -24768,11 +24771,11 @@
    "阝",
    "章"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "阝+章, cjkvi ⿰阝章, matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1394",
@@ -24788,11 +24791,16 @@
    "日",
    "小"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "小",
+   "日",
+   "小",
+   "阝"
+  ],
+  "note": "was 小,日,阝 -- missing a second 小. Heisig's CSV names the shape twice (small/little, both aliases of rtk110); cjkvi's JGK compound 𡭴 decomposes as ⿱小⿱日小 (小 above AND below 日). Render confirms right side is small/日/small stacked.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1395",
@@ -24807,11 +24815,11 @@
    "辶",
    "有"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "有+辶+阝, same established convention as rtk1385 髄 for cjkvi's compound 迶",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1396",
@@ -24825,11 +24833,11 @@
    "阝",
    "咅"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "咅+阝, cjkvi ⿰阝咅, matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1397",
@@ -24845,11 +24853,11 @@
    "一",
    "勿"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "昜+阝, cjkvi ⿰阝昜, matches -- correctly uses the coherent 昜 primitive rather than Google's over-flattened 日,一,勿",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1398",
@@ -24863,11 +24871,11 @@
    "阝",
    "東"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "阝+東, cjkvi ⿰阝東, matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1399",
@@ -24881,11 +24889,11 @@
    "阝",
    "方"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "方+阝, cjkvi ⿰阝方, matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1400",
@@ -24899,11 +24907,11 @@
    "阝",
    "付"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "付+阝, cjkvi ⿰阝付, matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1401",
@@ -24917,11 +24925,11 @@
    "阝",
    "完"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "完+阝, cjkvi ⿰阝完, matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1402",

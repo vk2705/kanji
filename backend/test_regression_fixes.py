@@ -2897,8 +2897,12 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"prim-futon", "rtk1372"}},
     "rtk1380": {"character": "践", "keyword": "tread",
                "expected_part_ids": {"prim-float", "rtk1372"}},
+    # 2026-11-04 full re-review: was 水,足,日 (stroke soup) -- cjkvi's ⿰𧾷沓
+    # and Heisig's own "wednesday; boots" name for the compound show 踏's
+    # right side is 沓 (U+6C93, = 水 over 日) as a unit, not loose strokes.
+    # New prim-boots row for 沓; pin updated to match.
     "rtk1381": {"character": "踏", "keyword": "step",
-               "expected_part_ids": {"rtk12", "rtk137", "rtk1372"}},
+               "expected_part_ids": {"prim-boots", "rtk1372"}},
     "rtk1382": {"character": "踪", "keyword": "trail",
                "expected_part_ids": {"rtk1181", "rtk1372"}},
     "rtk1432": {"character": "織", "keyword": "weave",

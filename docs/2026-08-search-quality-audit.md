@@ -25800,3 +25800,92 @@ structural alternative — worth a dedicated pass if a future session wants
 to either confirm them with better evidence or register the missing
 primitive names properly, per CLAUDE.md's "led by stroke primitives" note
 on `audit_phantom_parts.py`'s remaining pile.
+
+## 2026-11-04 — full re-review: frames 1352–1401
+
+50/50 decided: 48 keep, 2 fixed, 0 needs-render.
+
+- **rtk1381 踏 (step), fixed**: was `水,足,日` — stroke soup. cjkvi gives
+  `⿰𧾷沓`, and 沓 (U+6C93) is itself `⿱水日` per ids.txt — a real CJK
+  character with no RTK frame of its own. Heisig's CSV names the compound
+  directly ("wooden leg; mouth; stop; footprint; **wednesday; boots**;
+  water; sun; day" — the trailing "water; sun; day" is the recursive leaf
+  expansion of that same "wednesday/boots" unit, not a second occurrence).
+  Render (踏/足/沓/水/日 side by side) confirms the right half of 踏 is
+  exactly 沓, not loose 水+日. New primitive row added:
+  `prim-boots:沓:wednesday,boots:水,日`. Now `足,沓`. No other kanji in
+  `data.txt` use a bare `水,日`/`日,水` pair that is actually 沓 in disguise
+  (checked: 渇/温/湿 all use 水+日 as part of genuinely different
+  structures, not this shape) — no shape-family follow-up needed.
+- **rtk1394 隙 (chink), fixed**: was `小,日,阝` — missing a second `小`.
+  Heisig's CSV components ("pinnacle; parthenon; acropolis; **small;
+  little**; sun; day; **little**") name the small/little shape (both
+  aliases of rtk110/小) twice, not once. cjkvi's JGK-variant compound
+  `𡭴` (U+21B74) decomposes as `⿱小⿱日小` — 小 above **and** below 日.
+  Render confirms the right side of 隙 is small/日/small stacked. Was
+  `小,日,阝`, now `小,日,小,阝`. No other row shares this exact pattern
+  (checked), no shape-family follow-up needed.
+- Everything else in the chunk matched both Heisig's components column and
+  cjkvi-ids exactly, confirmed by rendering five batches (猪/渚/賭/峡/狭/
+  挟/頬 and their parts; 追/阜/師/帥/官/棺/管/父/釜/交 and their parts;
+  足/距/路/露/跳/躍/践/踪/骨/滑/髄 and their parts; the 咼-family and
+  阝-family kanji and their parts; 踏/足/沓/水/日 for the fix). Notable
+  confirmed-correct rows worth recording since they looked suspicious on
+  paper before rendering:
+  - **rtk1363 官** (`宀,𠂤`): cjkvi shows `⿱宀㠯`, a *different* glyph
+    (㠯, "maestro without baton") than our `𠂤` ("maestum", with baton).
+    Already resolved by a 2026-09-20 session (comment above `prim-maestro`
+    in `data.txt`): rendered side by side, 官's lower half is plainly the
+    baton-topped 𠂤 box, not 㠯's stacked pair. Re-confirmed by this
+    session's own render of the same three glyphs — still correct, no
+    change.
+  - **rtk1397 陽** (`昜,阝`): Google's hint flattens this to `阝,日,一,勿`
+    — exactly the stroke-soup anti-pattern CLAUDE.md names as its own
+    canonical bad example ("昜, not 日,一,勿"). Our row already uses the
+    coherent `昜` primitive; cjkvi (`⿰阝昜`) agrees. Keep, Google ignored.
+  - **rtk1372 足**: already the documented primary/alt pair from
+    CLAUDE.md's own "Search logic" section (`口,龰` primary, `口,止` alt).
+    Confirmed still correct.
+  - **rtk1383 骨** (`月,冎` primary, `月,冖,冂` alt): cjkvi's top shape is
+    a circled-number placeholder in every variant (`⑤`/`⑥`), i.e.
+    structurally blind per CLAUDE.md's "three ways the sources lie" —
+    only Heisig's "joint; moon" column is usable evidence here, and it
+    matches the existing `冎`-based primary (`prim-joint`) exactly. Left
+    the `月,冖,冂` alt untouched — it looks like the same stroke-soup
+    pattern as the two fixes above, but changing an alt that wasn't the
+    subject of today's finding is out of scope for this chunk; flagging
+    for a future pass.
+  - **rtk1358 頬 / rtk1382 踪**: both have an empty Heisig components
+    column, but both are non-core frames (`id_5th_ed` 2043+: 頬 and 踪 are
+    well past 2042), so the empty column is "CSV has no data", not
+    atomicity evidence per CLAUDE.md's core-frame rule. Both already have
+    a structural decomposition matching cjkvi-ids exactly (`⿰夹頁`,
+    `⿰𧾷宗`) — kept.
+  - **rtk1366 父**: empty primary + `乂,八` alt. `父`'s `id_5th_ed` is
+    1274 (core range), so the empty primary is itself positive atomicity
+    evidence per CLAUDE.md, and the alt still matches cjkvi's `⿱八乂`
+    structurally. No change — already correctly set up by a prior session.
+
+`audit_weak_evidence.py --host 隙` and `--host 踏` both came back clean on
+all three sections (heisig-atomic / not-a-parts-list / opaque-intermediate)
+before either edit.
+
+Checks: `backup_db.py` before editing. `pytest -q` 108 passed before and
+after. `./regression_fresh.sh` (fresh DB seeded from source, not the live
+`kanji.db`) found exactly one failure after the two data.txt edits —
+rtk1381's pin still expected the old `rtk12`/`rtk137` reachability; updated
+the pin's `expected_part_ids` to `{"prim-boots", "rtk1372"}` with a dated
+comment, then 1331/1331 clean. `audit_radicals.py` 0 undefined part terms
+before and after. Synced to this machine's live `kanji.db` via
+`sync_system_data.py` (1 kanji inserted — `prim-boots`; 4 aliases added;
+1 decomposition created, 3 replaced); verified `rtk1381`, `rtk1394` and
+`prim-boots` directly in the live DB match the intended parts. Prod needs
+`git pull` + `sync_system_data.py` to pick up both fixes.
+
+`full_review.py --pending-count`: 1597/3000.
+
+**Next**: continue the full re-review at frame 1402. The `月,冖,冂` alt on
+rtk1383 骨 (noted above) is a plausible stroke-soup cleanup candidate for
+whichever future session's frame range happens to revisit it, or a
+dedicated pass, but is left alone here since it wasn't the row's own
+reported finding today.

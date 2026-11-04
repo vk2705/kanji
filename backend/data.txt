@@ -1744,7 +1744,15 @@ rtk1377:露:dew:雨,路
 rtk1378:跳:hop:足,兆
 rtk1379:躍:leap:翟,足
 rtk1380:践:tread:㦮,足
-rtk1381:踏:step:水,足,日
+# 2026-11-04 full re-review: was 水,足,日 (stroke soup). cjkvi gives
+# ⿰𧾷沓, and 沓 (U+6C93) is itself ⿱水日 -- a real Unicode character with no
+# RTK frame of its own, which Heisig's CSV names directly ("wednesday;
+# boots" -- a joke on 水+日 = "water day"). Render (踏/足/沓/水/日 side by
+# side) confirms 踏's right side is exactly 沓, not loose 水+日. New
+# prim-boots row for 沓; rtk1381 now points at 足,沓 instead of its flattened
+# strokes.
+rtk1381:踏:step:足,沓
+prim-boots:沓:wednesday,boots:水,日
 rtk1382:踪:remains:足,宗
 rtk1383:骨:skeleton:月,冎;月,冖,冂
 rtk1384:滑:slippery:水,骨
@@ -1757,7 +1765,13 @@ rtk1390:阪:heights:反,阝
 rtk1391:阿:africa:可,阝
 rtk1392:際:occasion:祭,阝
 rtk1393:障:hinder:阝,章
-rtk1394:隙:crevice:小,日,阝
+# 2026-11-04 full re-review: was 小,日,阝 -- missing a second 小. Heisig's
+# CSV components ("pinnacle...; small; little; sun; day; little") name the
+# shape twice (small/little are both aliases of rtk110/小); cjkvi's JGK
+# compound 𡭴 (U+21B74) decomposes as ⿱小⿱日小 -- 小 above AND below 日.
+# Render confirms the right side of 隙 is small/日/small stacked, not just
+# small/日. Was 小,日,阝, now 小,日,小,阝.
+rtk1394:隙:crevice:小,日,小,阝
 rtk1395:随:follow:有,辶,阝
 rtk1396:陪:obeisance:咅,阝
 rtk1397:陽:sunshine:昜,阝
