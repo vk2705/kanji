@@ -25642,3 +25642,24 @@ live-but-not-in-source system ids noted by the sync script, unrelated to
 this chunk, not touched). Prod needs `git pull` + `sync_system_data.py`.
 
 `full_review.py --pending-count`: 1697/3000.
+
+## 2026-11-04 — hanzi worklist: still 0 pending, no action taken
+
+Checked for an interrupted prior run first (the guardrail script comparing
+decided ids between `HEAD` and the working tree): printed `0`, clean.
+`backend/kanji.db` exists; `pytest -v` was 108/108 passing, so a pre-flight
+backup was taken (`backups/kanji-20261104-101058.db`) in case it was needed.
+
+`hanzi_worklist_next.py -n 20` returned **0 pending / 487 total** —
+unchanged from the 2026-11-02 entry above, which reached 0 pending and
+flagged that the backlog `audit_hanzi_weak_evidence.py` was created to work
+through is empty. No new `zh-*` rows or re-run of that audit script have
+happened since, so there is nothing new to queue and nothing to review
+today. No `kanji.db` write, no worklist JSON change (`git status` on it is
+clean) — only this doc entry.
+
+Repeating the open question from 2026-11-02 since it's still unresolved:
+whether this job should go idle until `audit_hanzi_weak_evidence.py --json`
+is re-run (new hanzi rows, or a previously-blocked `needs-render` codepoint
+becoming renderable) or whether there's a next phase queued is an owner
+call, not this run's to make.
