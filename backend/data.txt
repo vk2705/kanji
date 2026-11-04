@@ -1695,7 +1695,14 @@ rtk1336:写:copy:与,冖
 rtk1337:身:somebody:
 rtk1338:射:shoot:身,寸
 rtk1339:謝:apologize:言,射
-rtk1340:老:old man:匕
+# 2026-11-04: full re-review, frames 1302-1351. Heisig's CSV names two
+# components for 老 ("soil; dirt; ground; spoon; sitting on the ground" =
+# 土/rtk161 + 匕/rtk476), but the row only had 匕 -- 土 was dropped. Render
+# (老/土/匕 side by side) confirms 老's top matches 土 with its last
+# horizontal elongated into the diagonal leading to 匕's hook; cjkvi's
+# ⿸耂匕 agrees and audit_weak_evidence.py --host 老 flags nothing (not an
+# overlay/enclosure trap). Was 匕, now 土,匕.
+rtk1340:老:old man:土,匕
 rtk1341:考:consider:老,丂
 rtk1342:孝:filial piety:子,老
 rtk1343:教:teach:孝,攵

@@ -25642,3 +25642,140 @@ live-but-not-in-source system ids noted by the sync script, unrelated to
 this chunk, not touched). Prod needs `git pull` + `sync_system_data.py`.
 
 `full_review.py --pending-count`: 1697/3000.
+
+## 2026-11-04 — full re-review: frames 1302–1351
+
+Fresh container this run (the scheduled audit routine's environment is
+rebuilt from scratch each day) — set up and verified push access first
+(`git push --dry-run origin master`), then installed the backend venv,
+downloaded `cjkvi-ids` to `/tmp/ids.txt`, and installed
+`fonts-noto-cjk`/`fonts-hanazono` (Noto first, per CLAUDE.md's ordering)
+before any render work, per the standing brief's step 0.
+
+49 keep, 1 fixed. All 50 render-checked against `render_glyphs.py`,
+cross-checked against Heisig's components column and cjkvi-ids.
+
+**The fix:**
+
+- **rtk1340 老** (`old man`) was `匕` alone. Heisig's CSV names *two*
+  components for this frame ("soil; dirt; ground; spoon; sitting on the
+  ground" — the first three are rtk161/土's own aliases, the last two are
+  rtk476/匕's), but the row only carried 匕 — 土 was dropped entirely.
+  Rendered 老/土/匕 side by side: 老's top clearly matches 土's shape
+  (vertical + two horizontals), with 土's last horizontal elongated into
+  the diagonal that leads into 匕's hook at the bottom-right — cjkvi's
+  `⿸耂匕` agrees, and `audit_weak_evidence.py --host 老` flagged nothing
+  (not an overlay/enclosure trap, not cjkvi-opaque). Fixed `匕` → `土,匕`.
+  Shape-family check: every other row touching this shape (考/孝/教/拷/者
+  and its own descendants 煮/著/箸/署/暑/諸) already references 老 *as a
+  whole* rather than decomposing it further, so they all inherit the fix
+  automatically via depth>1 search reachability — no other row needed
+  editing. No existing regression pin referenced 老's row, so none needed
+  updating.
+
+**Everything else in the chunk matched cleanly or was already correctly
+set up by prior sessions** — render, Heisig's components column and
+cjkvi-ids all agreed, or an already-documented prior decision covered it:
+
+- 不/否/杯 (rtk1302–1304): 不's four strokes (`｜,ノ,一,丶`) match Heisig's
+  four named components ("one; ceiling; person; drop") exactly — "one" and
+  "ceiling" both correctly alias to the same rtk1/一 row, an existing
+  convention, not a gap. `audit_phantom_parts.py --in-csv-range` flags
+  不's `｜` as weak evidence (cjkvi's bottom placeholder means it can't
+  corroborate), but doesn't contradict it either; left as keep rather than
+  guessing a replacement with no stronger evidence either way.
+- 矢-family (rtk1305, 1308–1310): 矢's primary (`ノ,天`) matches Heisig's
+  own named components ("drop; heavens") verbatim — his mnemonic primitive
+  assignment, not a stroke-literal one (矢's top is really 𠂉-shaped, not a
+  full 天) — while the existing labelled alternate (`大,𠂉`) already
+  carries the cjkvi-corroborated structural reading (`⿱𠂉大`). Same
+  Heisig-primary/cjkvi-alternate split already used elsewhere in this
+  file (e.g. 果/rtk1202's `日,木` alternate, 2026-11-03's entry above).
+  挨's `矢,厶,扌` matches cjkvi's full expansion once 矣 (no row of its
+  own) is itself expanded: `矣 = ⿱厶矢` per ids.txt.
+- 矯/族 (rtk1306–1307): 矯 (`喬,矢`) matches cjkvi exactly, 喬 already has
+  its own row (`prim-angel`). 族 (`㫃,矢`) was already resolved by a
+  2026-09-20 session's explicit research into exactly this shape (see the
+  "banner → 㫃" comment above `prim-banner` in `data.txt`) — cjkvi never
+  writes the 㫃 unit itself (spells all six hosts 方+𠂉+X), but Heisig
+  names it directly and the project already registered
+  `prim-banner:㫃:banner:方,𠂉` to match. No change needed on either.
+- 知/智 (rtk1308–1309): both match Heisig and cjkvi exactly.
+- 矛-family (rtk1311–1314): 矛's sole part 予 matches Heisig's single name
+  ("beforehand") exactly — 予's own row literally documents the
+  relationship (alias "halberd with stroke missing"), confirming 矛 = 予 +
+  one extra stroke is this project's established reading, not a gap.
+  柔/務/霧 all match Heisig and cjkvi exactly.
+- 班/帰 (rtk1315–1316): 班 (`王,刀,王`) matches Heisig and render; cjkvi's
+  `⿲王②王` placeholder is consistent with a middle 刀 it can't cleanly
+  encode in a 3-way split. 帰 (`刀,帚`) matches Heisig's own naming
+  ("sword; spear; cutlass; feather duster; broom...") exactly, even though
+  cjkvi's JP-variant IDS (`⿰⿰丨丿帚`) spells the left side as raw strokes
+  rather than a full 刀 — same Heisig-primary pattern as 矢 above.
+- 弓-family (rtk1317–1324): 弓 is atomic (core frame, empty CSV, cjkvi
+  agrees). 引/弘/強/弥/弱/溺 all match Heisig and cjkvi exactly (JP-variant
+  readings consistently preferred where cjkvi splits by region, matching
+  this project's standing convention). 弔's `｜,弓` uses cjkvi's overlay
+  operator (`⿻弓丨`), but render confirms the visible result genuinely
+  shows both a 弓 shape and a vertical stroke protruding above it — unlike
+  the 蝿-class trap where an overlay collapses into a different third
+  shape — so reading it as two parts is correct here, not a trap. 弱's
+  doubled shape (`⿰⿹弓冫⿹弓冫`) is listed once per this project's
+  established "track presence, not count" convention (same as 質's single
+  斤 from 2026-11-02's entry).
+- 弗-family (rtk1325–1328): 沸/費 match Heisig and cjkvi exactly. 第/弟
+  both match Heisig's own naming ("dollar"/"bow;stick") exactly; cjkvi
+  spells the lower piece with a distinct, unencoded-elsewhere codepoint
+  (𢎨, no row here, no other host in the whole database), a subtle
+  stroke-level variant of 弗 rather than a different shape — the same
+  "two codepoints, one mnemonic idea" pattern as 丁/丅 and 龶/丰 noted
+  elsewhere in this file, and directly analogous to the 2026-09-21
+  decision on rtk2670/袴 not to invent a new primitive row for a
+  single-host variant (here, two hosts — still not enough to justify a
+  new row over two already-searchable primitives that already cover it).
+- 丂-family (rtk1329–1335): 巧/号/朽 match Heisig and cjkvi exactly. 誇
+  (`言,大,一,丂`) and 顎 (`口,頁,一,丂`) both match cjkvi's *full*
+  expansion once their unregistered intermediate shapes are themselves
+  expanded: 夸 (no row) = `⿱大亏` and 亏 (no row) = `⿱一丂` per ids.txt, so
+  誇's `大,一,丂` is exactly cjkvi's structural reading using
+  already-registered primitives rather than inventing a row for 夸/亏;
+  likewise 顎's 咢 (no row) = `⿱吅亏`, with 吅 (two 口, listed once per
+  the presence-not-count convention) and the same 亏 = 一+丂 — and
+  correctly has no 大, since that belongs to 夸, a different compound, not
+  咢. 汚 (`水,亐`) was already fixed by a 2026-10-11 session (see the
+  comment above `prim-snare-barred` in `data.txt`) — 亐 (U+4E90, distinct
+  from both 丂/U+4E02 and 亏/U+4E8F) had been a wrong-codepoint bug,
+  already resolved to `一,丂`. 与/写 match Heisig and cjkvi exactly.
+- 身-family (rtk1337–1339): 身 is atomic (core frame; CSV's "nose" is a
+  single whole-character mnemonic name, not real sub-parts; cjkvi agrees,
+  no IDS entry). 射/謝 match Heisig and cjkvi exactly.
+- 老-family (rtk1341–1351, aside from 1340's fix above): 考/孝/教/拷 all
+  match Heisig and cjkvi exactly. 者 (`日,老`) uses 老 as a whole rather
+  than a separate 耂 primitive (which has no row here) — Heisig's own
+  naming for this frame is literally "old man" (老's own RTK keyword), so
+  this is the same Heisig-primary pattern as 矢/帰 above, not a gap.
+  煮/著/箸/署/暑/諸 all inherit this via 者 and match Heisig/cjkvi exactly
+  on their own additional parts.
+
+Checks: `backup_db.py` before editing; a fresh DB rebuilt from
+`data.txt`/`data_from_pdf.txt`/`heisig-kanjis.csv` (this container had no
+prior `kanji.db`) gave `test_regression_fixes.py` 1331/1331 before and
+after the edit (no pin referenced rtk1340, so none needed updating);
+`pytest -q` 83 passed before and after; `audit_overflatten.py`,
+`audit_self_reference.py`, `audit_radicals.py`, `audit_primary_choice.py`
+all 0/0 before and after; `audit_phantom_parts.py --in-csv-range`
+unchanged (9 phantom parts across 8 kanji, same set as baseline — the
+rtk1340 fix didn't introduce or remove any). `npm run lint` and
+`npm run build:prod` both clean. This container has no server access —
+prod needs `git pull` + `sync_system_data.py` to pick up the rtk1340 fix.
+
+`full_review.py --pending-count`: 1647/3000.
+
+**Next**: continue the full re-review at frame 1352 (the next 50 pending
+rows). `audit_phantom_parts.py --in-csv-range`'s weak-evidence list still
+has 5 open single-stroke-primitive findings (480/663/1302/1530/1905) that
+this and prior sessions have left as keep for lack of a stronger
+structural alternative — worth a dedicated pass if a future session wants
+to either confirm them with better evidence or register the missing
+primitive names properly, per CLAUDE.md's "led by stroke primitives" note
+on `audit_phantom_parts.py`'s remaining pile.
