@@ -25889,3 +25889,80 @@ rtk1383 骨 (noted above) is a plausible stroke-soup cleanup candidate for
 whichever future session's frame range happens to revisit it, or a
 dedicated pass, but is left alone here since it wasn't the row's own
 reported finding today.
+
+## 2026-11-04 — full re-review: frames 1402–1451
+
+50 kept, 0 fixed, 0 needs-render. This chunk is three contiguous radical
+families — the ozato 阝 side-radical (1402–1412), the 穴 "hole" family
+(1413–1426), the 丘 "hill" family (1427–1430), and the 糸 "thread" family
+(1431–1451) — and every row already matched cjkvi-ids and Heisig's
+components column exactly. No data.txt edit, so no sync/regression-pin
+rerun was needed; the baselines below are this session's pre-check, left
+unchanged.
+
+Rows that looked suspicious on paper before rendering, confirmed correct:
+
+- **rtk1412 陥** (`旧,阝,𠂊`): this row already carries the `𠂊` fix from
+  the same 勹-vs-𠂊 bug class as 亀 (see the 2026-10-21 entry above and
+  `docs/kanji_full_review.json`'s note on rtk67 負) — `parts_at_start` in
+  the review JSON still shows the old `旧,勹,阝;旧,阝,𠂊` pair from before
+  that untracked fix, which is why this row surfaced as "pending" despite
+  `data.txt` already being right. Rendered 陥 beside 勹/𠂊/亀: the top-right
+  of 陥 is the short two-stroke 𠂊 hook, not 勹's longer wrap — matches
+  cjkvi's `⿰阝⿱𠂊旧`. `audit_weak_evidence.py --host 陥` clean. Recorded
+  `keep` rather than `fixed` since nothing was changed this session.
+- **rtk1425 探 / rtk1426 深** (`木,儿,冖,扌` / `水,木,儿,冖`): Heisig's
+  components column lists "hole; house; human legs" alongside "paper
+  punch; Miss World" for both frames, which reads like it's asserting
+  `穴` (hole = 宀+八) belongs in the row. Rendered 探/深 beside 穴 and 罙:
+  the roof over 探/深's right side is a flat `冖` (paper punch, no
+  splayed legs), clearly narrower than `穴`'s `宀` (house, which has the
+  pediment/dot). The CSV's "hole;house" text is boilerplate carried over
+  from `穴`'s own recursive expansion elsewhere in Heisig's component
+  chain, not evidence this row should contain `穴` itself. cjkvi's
+  `⿰扌罙`/`⿰氵罙` backs the existing `冖`-based row. `audit_weak_evidence.py`
+  clean on both hosts.
+- **rtk1416 突** (`穴,大`): CSV components list both "large" and "St.
+  Bernard" (大 and 犬), and cjkvi gives four glyph variants
+  (`⿱穴犬[GTKV]` vs `⿱穴大[J]`). Rendered: our font's 突 has no dog's-dot
+  stroke, matching the dotless `大` — the Japanese variant, correct for
+  this ja-kanji row. `audit_weak_evidence.py --host 突` clean.
+- **rtk1429 兵** (`丘,八`): cjkvi's `⿱丘八` looked surprising next to
+  1427 丘's own `一,斤` — is the top of 兵 really the *whole* 丘 shape, or
+  just its `斤` top? Rendered 兵 beside 丘/斤/八: the top of 兵 carries
+  丘's full axe-plus-floor shape (not bare 斤), and the bottom splay
+  matches 八. Confirms the existing row over a plausible `斤,八` guess.
+- **rtk1431 糸** (`幺,小`): Heisig's components column is non-empty but
+  reads as just "spiderman" — his own primitive nickname for 糸 itself,
+  not a real breakdown, since he teaches 糸 as one atomic shape. This
+  isn't the CLAUDE.md empty-column atomicity rule (the column isn't
+  empty) and cjkvi's `⿱幺小` is a well-established structural reading
+  cjkvi backs independently of whether Heisig's book bothers to subdivide
+  it; rendered, the top zigzag matches `幺` and the bottom three strokes
+  match `小`. Kept as the existing cjkvi-sourced decomposition rather than
+  flattened to atomic.
+- **rtk1437 緻** (`糸,致`): empty Heisig components column, but
+  `id_5th_ed` is 3020 — a 2010 jōyō addition, outside the 1–2042 core-frame
+  range — so per CLAUDE.md this empty column is "no data", not atomicity
+  evidence. cjkvi's `⿰糹致[GT]`/`⿰糸致[JK]` settles it; matches the
+  existing row.
+- **rtk1443 練 / rtk1445 続**: both have multiple cjkvi glyph variants
+  (`⿰糹柬[GTV]` vs `⿰糸東[J]` for 練; `⿰糹売[G]` vs `⿰糸売[JK]` for 続) —
+  confirmed the existing rows (`東,糸` / `売,糸`) already pick the
+  Japanese-appropriate variant, not a Chinese one.
+
+Everything else in the chunk (1402–1411, 1413–1424, 1427–1428, 1430,
+1432–1436, 1438–1442, 1444, 1446–1451) was a direct, unambiguous match
+between `data.txt`, Heisig's components column and cjkvi-ids with no
+variant ambiguity — recorded `keep` without a render, consistent with how
+routine the ozato/穴/糸 radical families have looked in every prior session
+that has touched them (see the 2026-09-05/09-10 KRADFILE-gap entries for
+阝 specifically).
+
+Checks (pre-check only, since no data.txt edit was made): `pytest -q` 108
+passed. `./regression_fresh.sh` 1331/1331 pinned checks passed.
+`audit_radicals.py` 0 undefined part terms.
+
+`full_review.py --pending-count`: 1547/3000.
+
+**Next**: continue the full re-review at frame 1452.
