@@ -23144,11 +23144,11 @@
    "卜",
    "ノ"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Render shows all 4 drawn strokes (一,ノ,｜,丶) matching Heisig's 4 named components; 'one'/'ceiling' both correctly alias to the same rtk1(一) row per existing convention. cjkvi's bottom placeholder (③) means it can't corroborate further, but doesn't contradict either.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1303",
@@ -23162,11 +23162,11 @@
    "不",
    "口"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "不,口 matches Heisig 'negative;mouth' and cjkvi ⿱不口 exactly; render confirms stacked 不/口.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1304",
@@ -23180,11 +23180,11 @@
    "木",
    "不"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "木,不 matches Heisig 'tree;wood;negative' and cjkvi ⿰木不; render confirms 木 beside 不.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1305",
@@ -23198,11 +23198,11 @@
    "ノ",
    "天"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Primary ノ,天 matches Heisig's own named components ('drop;heavens') verbatim -- his mnemonic primitive assignment, not stroke-literal (矢's top is really 𠂉-shaped, not a full 天). The existing labelled alternate 大,𠂉 already carries the cjkvi-corroborated structural reading (⿱𠂉大). Same established pattern as other Heisig-primary/cjkvi-alternate pairs in this file.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1306",
@@ -23213,11 +23213,11 @@
   "heisig_components": "dart; drop; heavens; angel; heavens; mouth; hood; mouth",
   "cjkvi_ids": "⿰矢喬",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "喬,矢 matches cjkvi ⿰矢喬 exactly; 喬 already has its own registered row (prim-angel).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1307",
@@ -23232,11 +23232,11 @@
    "𠂉",
    "矢"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "㫃,矢 already resolved by a 2026-09-20 session's explicit research (see the 'banner -> 㫃' comment above prim-banner in data.txt): cjkvi never writes the 㫃 unit itself (spells all six hosts as 方+𠂉+X), but Heisig names it directly and this project already registered prim-banner:㫃:banner:方,𠂉 to match. No change.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1308",
@@ -23250,11 +23250,11 @@
    "矢",
    "口"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "口,矢 matches Heisig 'dart;drop;heavens;mouth' and cjkvi ⿰矢口 exactly.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1309",
@@ -23268,11 +23268,11 @@
    "知",
    "日"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "知,日 matches Heisig and cjkvi ⿱知日 exactly.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1310",
@@ -23287,11 +23287,11 @@
    "厶",
    "矢"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "矢,厶,扌 matches cjkvi's full expansion: ⿰扌矣, and 矣 (no own row) = ⿱厶矢 per ids.txt, so 矢+厶+扌 is the correct flattened reading.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1311",
@@ -23302,11 +23302,11 @@
   "heisig_components": "beforehand",
   "cjkvi_ids": "⿱龴⿹𠄐丿",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "矛's sole part 予 matches Heisig's single name 'beforehand' exactly; 予's own row literally documents this relationship (alias 'halberd with stroke missing'), confirming 矛 = 予 + one extra stroke is the project's established reading.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1312",
@@ -23320,11 +23320,11 @@
    "矛",
    "木"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "木,矛 matches Heisig and cjkvi ⿱矛木 exactly.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1313",
@@ -23339,11 +23339,11 @@
    "攵",
    "力"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "矛,力,攵 matches Heisig 'halberd;...;taskmaster;power;muscle;arnold' and cjkvi's JP variant ⿰矛⿱攵力.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1314",
@@ -23357,11 +23357,11 @@
    "雨",
    "務"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "雨,務 matches Heisig and cjkvi ⿱雨務 exactly.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1315",
@@ -23376,11 +23376,11 @@
    "刂",
    "王"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "王,刀,王 matches Heisig 'sword;spear;cutlass;king;jewel;ball' (刀=cutlass, 王 x2); cjkvi's ⿲王②王 placeholder is consistent with a middle 刀 it can't cleanly encode in a 3-way split. Render confirms visible 王/刀/王.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1316",
@@ -23395,11 +23395,11 @@
    "巾",
    "帚"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "刀,帚 matches Heisig 'sword;spear;cutlass;feather duster;broom;...' exactly -- his own primitive naming, even though cjkvi's JP-variant IDS (⿰⿰丨丿帚) spells the left side as raw strokes rather than full 刀. Same established Heisig-primary pattern as rtk1305/矢.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1317",
@@ -23410,11 +23410,11 @@
   "heisig_components": "",
   "cjkvi_ids": "弓",
   "google_parts": [],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Atomic; id_5th_ed 1231 is a core frame with an empty CSV components column (positive evidence of atomicity) and cjkvi agrees (bare 弓, no IDS entry).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1318",
@@ -23428,11 +23428,11 @@
    "弓",
    "丨"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "｜,弓 matches Heisig 'bow;stick' and cjkvi ⿰弓丨 exactly.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1319",
@@ -23446,11 +23446,11 @@
    "弓",
    "丨"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "｜,弓 matches Heisig 'bow;walking stick'. cjkvi's ⿻弓丨 uses the overlay operator, but render confirms the visible result genuinely shows both a 弓 shape and a vertical stroke protruding above it (unlike the 蝿-class trap where the overlay result reads as a different third shape) -- so taking it as two parts is correct here.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1320",
@@ -23464,11 +23464,11 @@
    "弓",
    "厶"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "弓,厶 matches Heisig 'bow;elbow' and cjkvi ⿰弓厶 exactly.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1321",
@@ -23483,11 +23483,11 @@
    "厶",
    "虫"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "弓,虫,厶 matches Heisig 'bow;elbow;insect' and cjkvi ⿰弓𧈧ーthe compressed right-side compound covering 厶+虫.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1322",
@@ -23502,11 +23502,11 @@
    "𠂉",
    "小"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "弓,尓 matches Heisig and the JP-variant cjkvi reading ⿰弓尓[TJK] (consistent with this project's standing JP-variant preference over [G]'s 尔).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1323",
@@ -23522,11 +23522,11 @@
    "弓",
    "冫"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "弓,冫 matches Heisig 'bow;ice'; cjkvi shows the shape doubled (⿰⿹弓冫⿹弓冫), but per this project's established 'track presence, not count' convention (e.g. 質's single 斤), listing each primitive once is sufficient.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1324",
@@ -23540,11 +23540,11 @@
    "水",
    "弱"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "弱,水 matches Heisig and cjkvi ⿰氵弱 exactly.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1325",
@@ -23558,11 +23558,11 @@
    "水",
    "弗"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "水,弗 matches Heisig and cjkvi ⿰氵弗 exactly.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1326",
@@ -23576,11 +23576,11 @@
    "弗",
    "貝"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "貝,弗 matches Heisig and cjkvi ⿱弗貝 exactly.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1327",
@@ -23594,11 +23594,11 @@
    "竹",
    "弔"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "竹,弗 matches Heisig 'no.;bamboo;dollar;bow;stick' exactly. cjkvi spells the lower piece with a distinct unencoded-elsewhere codepoint (𢎨, no row here, no other host), a subtle stroke-level variant of 弗 rather than a different shape -- same 'two codepoints, one mnemonic idea' pattern as 丁/丅 and 龶/丰, and the closely analogous 2026-09-21 decision on rtk2670/袴 not to invent a new primitive row for a single host.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1328",
@@ -23614,11 +23614,11 @@
    "丿",
    "丨"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "丷,弗 matches Heisig 'horns;dollar;bow;stick' exactly; same 𢎨-vs-弗 variant reasoning as rtk1327.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1329",
@@ -23632,11 +23632,11 @@
    "工",
    "丂"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "工,丂 matches Heisig and cjkvi ⿰工丂 exactly.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1330",
@@ -23650,11 +23650,11 @@
    "口",
    "丂"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "口,丂 matches Heisig and cjkvi ⿱口丂 exactly.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1331",
@@ -23668,11 +23668,11 @@
    "木",
    "丂"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "木,丂 matches Heisig and cjkvi ⿰木丂 exactly.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1332",
@@ -23688,11 +23688,11 @@
    "大",
    "亏"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "言,大,一,丂 matches cjkvi's full expansion: ⿰言夸, and 夸 (no own row) = ⿱大亏 per ids.txt, and 亏 itself = ⿱一丂 per ids.txt -- so 大+一+丂 is exactly cjkvi's fully-expanded structural reading, using already-registered primitives rather than inventing one for 夸/亏.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1333",
@@ -23708,11 +23708,11 @@
    "丂",
    "頁"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "口,頁,一,丂 matches cjkvi's full expansion: ⿰咢頁, 咢 (no own row) = ⿱吅亏, 吅 = two 口 (listed once per the established 'presence not count' convention), and 亏 = 一+丂 as above. No 大 in 咢 (that's 夸's own structure, a different compound) -- correctly absent here.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1334",
@@ -23726,11 +23726,11 @@
    "水",
    "亐"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "水,亐 already fixed by a prior session (see the 2026-xx comment above prim-snare-barred in data.txt): 亐 (distinct from both 丂 and 亏) was registered as 一,丂 to resolve a prior wrong-codepoint bug. Already correct, no change.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1335",
@@ -23744,11 +23744,11 @@
    "勹",
    "一"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "丂,一 matches Heisig 'slingshot;catapult;one' exactly (丂's own aliases include slingshot/catapult). cjkvi's placeholder (②) means it can't fully corroborate, but render shows a hook+horizontal shape consistent with 丂 extended by a 一.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1336",
@@ -23762,11 +23762,11 @@
    "冖",
    "与"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "与,冖 matches Heisig and cjkvi ⿱冖与 exactly.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1337",
@@ -23777,11 +23777,11 @@
   "heisig_components": "nose",
   "cjkvi_ids": "身",
   "google_parts": [],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Atomic; id_5th_ed 1248 is a core frame. CSV lists a single mnemonic name ('nose') rather than real sub-parts, and cjkvi agrees (bare 身, no IDS entry) -- a whole-character mnemonic name, not a decomposition.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1338",
@@ -23795,11 +23795,11 @@
    "身",
    "寸"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "身,寸 matches Heisig and cjkvi ⿰身寸 exactly.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1339",
@@ -23814,11 +23814,11 @@
    "身",
    "寸"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "言,射 matches Heisig and cjkvi ⿰言射 exactly.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1340",
@@ -23832,11 +23832,14 @@
    "耂",
    "匕"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "土",
+   "匕"
+  ],
+  "note": "Heisig's CSV names TWO components for frame 1340 ('soil; dirt; ground; spoon; sitting on the ground' = rtk161/土 + rtk476/匕), but the row only had 匕 -- 土 was dropped. Rendered 老/土/匕 side by side: 老's top clearly matches 土's shape (vertical + two horizontals) with the last horizontal elongated into the diagonal that leads into 匕's hook at bottom-right -- cjkvi's ⿸耂匕 agrees (not an overlay/enclosure trap per audit_weak_evidence.py --host 老, which flagged nothing). Fixed 匕 -> 土,匕.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1341",
@@ -23847,11 +23850,11 @@
   "heisig_components": "old man; slingshot; catapult",
   "cjkvi_ids": "⿸耂丂",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "老,丂 matches Heisig 'old man;slingshot;catapult' and cjkvi ⿸耂丂 (consistent with 老 used whole here, same as elsewhere in this family).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1342",
@@ -23865,11 +23868,11 @@
    "耂",
    "子"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "子,老 matches Heisig and cjkvi ⿸耂子 exactly.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1343",
@@ -23883,11 +23886,11 @@
    "孝",
    "攵"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "孝,攵 matches Heisig 'filial piety;old man;child;taskmaster' and cjkvi ⿰孝攵 exactly.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1344",
@@ -23901,11 +23904,11 @@
    "扌",
    "考"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "扌,考 matches Heisig and cjkvi ⿰扌考 exactly.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1345",
@@ -23919,11 +23922,11 @@
    "耂",
    "日"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "日,老 matches Heisig's own naming ('puppet;sooty;old man;sun;day' -- 'old man' is literally 老's own RTK keyword). cjkvi's ⿸耂日 uses just the 耂 top (no row of its own here), but Heisig's primitive assignment uses the nearest already-registered kanji (老) rather than inventing a separate 耂 primitive -- same established 'Heisig-primary, not stroke-literal' pattern as rtk1305/矢, rtk1316/帰 above, and every other downstream row in this family (煮/著/箸/署/暑/諸) inherits this via 者 as a whole, so no separate edits needed there.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1346",
@@ -23937,11 +23940,11 @@
    "者",
    "灬"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "者,灬 matches Heisig and cjkvi ⿱者灬 exactly.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1347",
@@ -23955,11 +23958,11 @@
    "艹",
    "者"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "者,艹 matches Heisig and cjkvi ⿱艹者 exactly.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1348",
@@ -23973,11 +23976,11 @@
    "竹",
    "者"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "竹,者 matches Heisig and cjkvi ⿱竹者 exactly.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1349",
@@ -23988,11 +23991,11 @@
   "heisig_components": "eye; cross-eyed; net; someone; puppet; sooty; old man; sun; day",
   "cjkvi_ids": "⿱罒者",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "罒,者 matches Heisig and cjkvi ⿱罒者 exactly.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1350",
@@ -24006,11 +24009,11 @@
    "日",
    "者"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "日,者 matches Heisig and cjkvi ⿱日者 exactly.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1351",
@@ -24024,11 +24027,11 @@
    "言",
    "者"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "言,者 matches Heisig and cjkvi ⿰言者 exactly.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1352",
