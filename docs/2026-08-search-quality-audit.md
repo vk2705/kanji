@@ -26061,3 +26061,67 @@ up these three fixes.
 `full_review.py --pending-count`: 1497/3000.
 
 **Next**: continue the full re-review at frame 1502.
+
+## 2026-11-04 — full re-review: frames 1502–1551
+
+Ran the daily `full_review.py -n 50` chunk (unattended timer run). All 50
+rows checked out against the render, Heisig's components column, and
+cjkvi-ids — **0 fixes, 50 keep**, no `needs-render`.
+
+Groups reviewed (each rendered via `render_glyphs.py`, batched by shared
+component):
+
+- **命/令 and its five derivatives** (零 齢 冷 領 鈴): `命` is `合,卩`,
+  matching Heisig's own components column exactly ("fit" expands to
+  meeting/umbrella/one/mouth, then "stamp" = 卩) — render confirms 亼+口+卩
+  are all genuinely drawn, even though cjkvi's `⿱亼叩` groups the bottom
+  口+卩 together as `叩`; this is a presentation-level grouping difference,
+  not a missing/extra shape. `令` (`亼,龴`) and all five 令-hosts matched
+  cjkvi's `⿰`/`⿱` splits one-for-one on render.
+- **甬-group** (勇 湧 通 踊): `勇` is `男,龴`, matching Heisig's own
+  component order (chop-seal/hanko taught before male) over cjkvi's
+  alternative `⿱甬力` grouping — both describe the same drawn shapes.
+  湧/通/踊 all matched cjkvi directly.
+- **疑-group** (疑 擬 凝): `疑`'s cjkvi entry `⿰𠤕⿱龴疋` has a tofu
+  intermediate (`𠤕`) on the left; the existing row already splits it at
+  the level Heisig names (匕+矢), which render confirms are the actual
+  drawn shapes. 擬/凝 both matched cjkvi directly.
+- **㔾(fingerprint)-group** (範 犯 氾 厄 危): all five render with the 卩-like
+  hook (㔾) clearly visible — in 範 it sits at 車's bottom-right, matching
+  cjkvi's `𨊠` = 車+㔾. All matched.
+- **夗-group** (宛 腕 苑 怨): all four matched cjkvi directly, no ambiguity.
+- **卯-group** (柳 卵 留 瑠 貿): confirmed 柳's `卯` is U+536F (the undotted
+  rabbit-sign half used bare), distinct from `卵`'s row (`卯,丶,丶`) where
+  render shows two dots sitting inside the mirrored halves that bare 卯
+  lacks — two different codepoints that happen to look near-identical was
+  exactly the kind of substitution CLAUDE.md's "render can lie" section
+  warns about, so this was checked carefully and the existing rows are
+  right. 留/貿 both use the already-named `prim-receipt` for cjkvi's
+  unresolved `③` placeholder, consistent with each other and with cjkvi's
+  `⿱⿰③刀田` / `⿱⿰③刀貝` structure.
+- **印/臼/毀/興**: `印` (`｜,卩`) is a known opaque-intermediate per
+  `audit_weak_evidence.py --host 印` — cjkvi's `③` left shape is one it
+  can't see inside, and an earlier session already rejected renaming it
+  "staples" since that name's other two hosts (興, 暇) don't contain 印.
+  No new evidence this run; left as-is. 臼 and 酉 are correctly atomic
+  (match cjkvi). 毀/興 both matched cjkvi's part set on render.
+- **酉-group** (酒 酌 酎 酵 酷 酬 酪 酢 酔 配 酸 猶 尊): all thirteen are
+  simple two-way splits matching cjkvi exactly; rendered the less common
+  right-hand shapes (卆, 夋, 酋) to confirm against 酔/酸/猶/尊 directly
+  rather than trusting the codepoint alone.
+- **豆-group** (豆 頭 短 豊): `豆` (`几,一,口`) is atomic in cjkvi, but
+  Heisig's own breakdown names three shapes that render confirms are
+  genuinely drawn (一/口/几), so the existing row stands. 頭/短/豊 all
+  matched cjkvi directly.
+
+No shape-family follow-ups needed — nothing in this chunk changed, so
+nothing to propagate to other hosts.
+
+Checks: baseline (before this run, nothing was edited) `pytest -q` 108
+passed, `./regression_fresh.sh` 1331/1331 pinned checks passed,
+`audit_radicals.py` 0 undefined part terms. `backend/data.txt` was not
+touched this run (no fixes), so these checks were not re-run after.
+
+`full_review.py --pending-count`: 1447/3000.
+
+**Next**: continue the full re-review at frame 1552.
