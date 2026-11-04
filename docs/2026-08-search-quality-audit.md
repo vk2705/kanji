@@ -25966,3 +25966,98 @@ passed. `./regression_fresh.sh` 1331/1331 pinned checks passed.
 `full_review.py --pending-count`: 1547/3000.
 
 **Next**: continue the full re-review at frame 1452.
+
+## 2026-11-04 — full re-review: frames 1452–1501
+
+Unattended daily chunk. 47 keep, 3 fixed, 0 needs-render.
+
+- **rtk1481 幾 / rtk1483 畿** (shape family, both `⿹⿻戈𢆶ー`): both rows
+  were `ノ,幺,戈,丶,人` / `田,幺,戈,丶,ノ` — stroke soup for a doubled
+  cocoon. cjkvi's `𢆶` is two `幺` overlaid with `戈` (⿻, shared strokes);
+  rendering `幺幺` side by side next to `幾` showed the match is exact —
+  the top-left of 幾 is plainly two cocoon loops, not one cocoon plus two
+  loose strokes. rtk1480 幽 (`山,幺,幺`, earlier in this same chunk) had
+  already established the convention of doubling a named primitive for a
+  repeated shape rather than flattening the second occurrence to raw
+  strokes — followed it here too. Fixed to `幺,幺,戈,人` / `田,幺,幺,戈`.
+  `audit_weak_evidence.py --host 幾`/`--host 畿` both flagged the row
+  under "not-a-parts-list" (⿻ operator) before the edit, which is the
+  expected warning for an overlay host, not a sign the fix is wrong — the
+  render is what settled it, per CLAUDE.md's standing method.
+- **rtk1488 擁** (`玄,推` → `扌,玄,隹`): the existing row was missing `扌`
+  entirely and used whole `推` ("push" = 扌+隹) to cover the right side.
+  cjkvi gives `擁 = ⿰扌雍`, `雍 = 玄` over `隹`; rendered, 擁's left
+  radical is plainly `扌` and its right side is `玄` (top) + `隹`
+  (bottom) — no fused `推` shape anywhere in it. Matches Heisig's
+  components column (finger;fingers;mysterious;turkey — no mention of
+  "push") and the Google hint (扌, 玄, 隹) exactly. Checked for a shape
+  family: no other row references 雍, so this was an isolated encoding
+  error, not a pattern. Updated the matching pin in
+  `test_regression_fixes.py` (`rtk1488`) from `{rtk1484, rtk716}` to
+  `{kangxi64, rtk1484, kangxi172}` with a comment explaining why.
+- **rtk1466 総** (`糸,心,公`, considered and rejected as a fix): the
+  right-side primitive `忩` rendered at a glance like plain `八` over
+  `心`, with no visible `厶`, which looked like a 公-vs-忩 lookalike bug
+  worth fixing to `糸,八,心`. Checked cjkvi-ids directly for `忩` itself
+  before touching the row: `忩 = ⿱公心` (the *full* 公, not just its `八`
+  top) over `心`. Heisig's components column independently names
+  "public" and "heart" as separate concepts, matching the existing row
+  exactly. Also checked rtk2717 聡 (`耳,心,八,厶`, outside this chunk,
+  suspected of the same bug) against cjkvi: `聡 = ⿰耳忩`, and its row's
+  fully-flattened `八,厶,心` is the same structure as `公,心` written out
+  — also correct, not touched. Net: the render of a rare combining glyph
+  (`忩`) was misleading on its own; cjkvi's structural decomposition plus
+  Heisig's keyword list outweighed it. Left both rows as-is. This is the
+  kind of case CLAUDE.md's "render itself can lie" section warns about,
+  just surfacing on the *input* side (an intermediate primitive rendering
+  simplified) rather than the host-vs-primitive substitution case that
+  section documents.
+- **rtk1472 縁** (`彐,糸,豕`): cjkvi gives `⿱彐𧰨`, and `𧰨` renders as a
+  tofu box in every available font — no way to visually confirm it
+  against `豕` directly. Rendered the full host `縁` instead: its
+  bottom-right is a clearly recognizable `豕`/pig shape, matching
+  Heisig's own naming ("sow; pig") and the Google hint. Kept.
+- **rtk1473 網** (`亡,糸,丷,冂`): first glance at the thumbnail read the
+  inside of `罔` as an X-cross, which would have meant `丷` was wrong.
+  A dedicated zoomed render of `罔` alone settled it: the frame (`冂`)
+  contains two short separate strokes splayed like `丷`/`ハ`, not a
+  crossing pair, with `亡` protruding below. Matches the existing row.
+  Kept.
+- **rtk1477 縄** (`糸,亀`): cjkvi's `⿻日电` for the right side is the
+  same日+电 overlay pattern documented for 電/竜 (fixed in an earlier
+  session) and for 亀 itself (`rtk573`, already `𠂊,电`). Rendered 縄's
+  right side beside standalone 亀 — near-identical. Referencing the whole
+  kanji `亀` here is correct regardless of how 亀's own row breaks down
+  further; no change needed.
+- **rtk1479 後** (`夂,幺,彳`): cjkvi's Japanese-script variant is
+  `⿰彳⿱幺夂` (the `夊`-using variant is HT, Hong Kong/Taiwan only) —
+  matches the existing `夂` (kangxi34, "walking legs"), which is also
+  what every other walking-legs host in `data.txt` (各, 夏, 冬, 処, etc.)
+  already uses. `render_glyphs.py`'s own cross-font identical-glyph check
+  printed no warning for 夂/夊, so this isn't a tofu/substitution case
+  either. Kept.
+- **rtk1480 幽** (`山,幺,幺`): cjkvi's `⿻山𢆶` overlay rendered cleanly as
+  two distinct `幺` loops inside `山`. Kept — this row is what set the
+  "double a named primitive, don't flatten it to strokes" precedent used
+  on rtk1481/1483 above.
+
+Everything else in the chunk (1452–1465, 1467–1471, 1474–1476, 1478,
+1482, 1484–1487, 1489–1501) was a direct, unambiguous match between
+`data.txt`, cjkvi-ids and Heisig's components column — recorded `keep`
+without needing a render.
+
+Checks: baseline (before any edit) `pytest -q` 108 passed,
+`./regression_fresh.sh` 1331/1331 pinned checks passed, `audit_radicals.py`
+0 undefined part terms. After applying the three fixes and
+`sync_system_data.py` (3 decompositions replaced, 0 kanji/alias changes):
+`regression_fresh.sh` initially failed one stale pin (`rtk1488`, expecting
+the old wrong decomposition) — updated that pin in place with a comment,
+then all three checks passed clean again (108/108, 1331/1331, 0 undefined
+terms).
+
+A deployer needs to `git pull` + run `sync_system_data.py` on prod to pick
+up these three fixes.
+
+`full_review.py --pending-count`: 1497/3000.
+
+**Next**: continue the full re-review at frame 1502.

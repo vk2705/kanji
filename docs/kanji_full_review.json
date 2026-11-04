@@ -25850,11 +25850,11 @@
    "糸",
    "冬"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰糸冬 matches 冬,糸; row correct",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1453",
@@ -25868,11 +25868,11 @@
    "糸",
    "及"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰糸及 matches 及,糸; row correct",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1454",
@@ -25886,11 +25886,11 @@
    "糸",
    "己"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰糸己 matches 糸,己; row correct",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1455",
@@ -25904,11 +25904,11 @@
    "糸",
    "工"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰糸工 matches 工,糸; row correct",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1456",
@@ -25922,11 +25922,11 @@
    "糸",
    "内"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰糸内 matches 糸,内; row correct",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1457",
@@ -25940,11 +25940,11 @@
    "糸",
    "方"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰糸方 matches 糸,方; row correct",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1458",
@@ -25958,11 +25958,11 @@
    "糸",
    "分"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰糸分 matches 糸,分; row correct",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1459",
@@ -25977,11 +25977,11 @@
    "刀",
    "口"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰糸召 matches 召,糸; row correct",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1460",
@@ -25992,11 +25992,11 @@
   "heisig_components": "thread; spiderman; spool; clod; toilet paper; crotch; soil; dirt; ground",
   "cjkvi_ids": "⿰糹圣[GT] ⿰糸圣[JK]",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰糸圣 matches 圣,糸; row correct",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1461",
@@ -26010,11 +26010,11 @@
    "糸",
    "申"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰糸申 matches 申,糸; row correct",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1462",
@@ -26028,11 +26028,11 @@
    "糸",
    "勺"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰糸勺 matches 糸,勺; row correct",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1463",
@@ -26046,11 +26046,11 @@
    "糸",
    "田"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰糸田 matches 糸,田; row correct",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1464",
@@ -26064,11 +26064,11 @@
    "田",
    "糸"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿱田糸 matches 糸,田; row correct",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1465",
@@ -26079,11 +26079,11 @@
   "heisig_components": "bishop; cross; ten; needle; crown; thread; spiderman",
   "cjkvi_ids": "⿱⿱十冖糸",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿱⿱十冖糸 matches 糸,十,冖; row correct",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1466",
@@ -26094,11 +26094,11 @@
   "heisig_components": "thread; spiderman; public; eight; elbows; heart",
   "cjkvi_ids": "⿰糹忩[GT] ⿰糸忩[JK]",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "rendered 忩 looked like plain 八+心 but cjkvi gives 忩=⿱公心 (公 over 心); Heisig's column separately names public+heart, matching existing 糸,心,公 -- structural+keyword evidence outweighs the render of a rare combining glyph here",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1467",
@@ -26113,11 +26113,11 @@
    "白",
    "巾"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰糸帛 matches 帛,糸; row correct",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1468",
@@ -26132,11 +26132,11 @@
    "口",
    "月"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi right side is 肙=⿱口月 but Heisig's column flattens to mouth;moon;month;flesh with no name for 肙, matching existing 月,口,糸",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1469",
@@ -26151,11 +26151,11 @@
    "品",
    "木"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰糸喿 matches 喿,糸; row correct",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1470",
@@ -26166,11 +26166,11 @@
   "heisig_components": "thread; spiderman; rice; fishhook",
   "cjkvi_ids": "⿰糹⿺𠃊米[GT] ⿰糸⿺𠃊米[JK]",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰糸⿺𠃊米 matches 糸,米,𠃊; row correct",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1471",
@@ -26184,11 +26184,11 @@
    "糸",
    "彔"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰糸录 matches 录,糸; row correct",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1472",
@@ -26203,11 +26203,11 @@
    "彐",
    "豕"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰糸⿱彐𧰨, 𧰨 is a tofu variant of 豕 (font has no outline for it) but rendered 縁 clearly shows a recognizable 豕/pig shape at bottom-right, matching Heisig's sow;pig and existing 彐,糸,豕",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1473",
@@ -26223,11 +26223,11 @@
    "ハ",
    "亡"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "zoomed render of 罔 shows 冂 frame containing two short 丷-style strokes over 亡, not an X-cross -- matches existing 亡,糸,丷,冂",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1474",
@@ -26242,11 +26242,11 @@
    "又",
    "糸"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿱臤糸 matches 糸,臤; row correct",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1475",
@@ -26261,11 +26261,11 @@
    "匕",
    "糸"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿱此糸 matches 此,糸; row correct",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1476",
@@ -26280,11 +26280,11 @@
    "専",
    "丶"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi uses atomic 尃 for G/T/K (J-only variant further splits it) matching existing 糸,尃, a coherent primitive over raw strokes",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1477",
@@ -26298,11 +26298,11 @@
    "糸",
    "竜"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "縄's 亀 part rendered near-identical to the standalone 亀 glyph (already fixed to 𠂊,电 at rtk573); reference is correct regardless of 亀's own internal breakdown",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1478",
@@ -26316,11 +26316,11 @@
    "幺",
    "力"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰幺力 matches 力,幺; row correct",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1479",
@@ -26331,11 +26331,11 @@
   "heisig_components": "Nelson; column; going; line; cocoon; walking legs",
   "cjkvi_ids": "⿰彳⿱幺夂[GJKV] ⿰彳⿱幺夊[HT]",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰彳⿱幺夂 (J script) matches existing 夂 (kangxi34), consistent with every other walking-legs host in data.txt (各,夏,冬,etc); 夊[HT] variant doesn't apply to this ja-kanji row",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1480",
@@ -26346,11 +26346,11 @@
   "heisig_components": "seclude; cocoon; mountain",
   "cjkvi_ids": "⿻山𢆶",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿻山𢆶 (overlay of 山 with doubled-幺); rendered 幽 shows two clear 幺-shapes inside 山, matching existing 山,幺,幺",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1481",
@@ -26366,11 +26366,16 @@
    "人",
    "几"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "幺",
+   "幺",
+   "戈",
+   "人"
+  ],
+  "note": "was ノ,幺,戈,丶,人 -- stroke soup for a doubled cocoon. cjkvi ⿹⿻戈𢆶人 (𢆶=two overlaid 幺); rendered 幺幺 side by side matches top of 幾 exactly. 1480's row above already doubles 幺 for the same shape -- followed that convention instead of flattening the second cocoon to raw strokes",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1482",
@@ -26386,11 +26391,11 @@
    "幺",
    "戍"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰木幾ー matches 幾,木; nests through 幾's corrected row",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1483",
@@ -26406,11 +26411,16 @@
    "戈",
    "田"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "田",
+   "幺",
+   "幺",
+   "戈"
+  ],
+  "note": "same ⿹⿻戈𢆶 top as 幾 (shape family); was 田,幺,戈,丶,ノ, same stroke-soup issue, fixed the same way",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1484",
@@ -26424,11 +26434,11 @@
    "亠",
    "幺"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿱亠幺 matches 亠,幺; row correct",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1485",
@@ -26443,11 +26453,11 @@
    "幺",
    "田"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿱玄田 matches 田,玄; row correct",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1486",
@@ -26461,11 +26471,11 @@
    "艹",
    "畜"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿱艹畜 matches 艹,畜; row correct",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1487",
@@ -26479,11 +26489,11 @@
    "弓",
    "玄"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰弓玄 matches 弓,玄; row correct",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1488",
@@ -26498,11 +26508,15 @@
    "玄",
    "隹"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "扌",
+   "玄",
+   "隹"
+  ],
+  "note": "was 玄,推 -- missing 扌 entirely, wrongly using whole 推 (扌+隹) for the right side. cjkvi: 擁=⿰扌雍, 雍=玄 over 隹; rendered, left radical is plainly 扌 and right side is 玄(top)+隹(bottom), not a fused 推 shape. Matches Heisig's column (finger;mysterious;turkey) and Google hint (扌,玄,隹). No other row references 雍",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1489",
@@ -26516,11 +26530,11 @@
    "氵",
    "兹"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰氵兹 matches 兹,水 (水 names the 氵 radical, standard convention); row correct",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1490",
@@ -26534,11 +26548,11 @@
    "兹",
    "心"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿱兹心 matches 兹,心; row correct",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1491",
@@ -26549,11 +26563,11 @@
   "heisig_components": "stone; rock; double-mysterious; mothballs; horns; one; cocoon",
   "cjkvi_ids": "⿰石兹",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰石兹 matches 兹,石; row correct",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1492",
@@ -26567,11 +26581,11 @@
    "丿",
    "糸"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿱丿糸 matches ノ,糸; row correct",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1493",
@@ -26585,11 +26599,11 @@
    "亻",
    "系"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰亻系 matches 亻,系; row correct",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1494",
@@ -26600,11 +26614,11 @@
   "heisig_components": "child; lineage; drop; thread; spiderman",
   "cjkvi_ids": "⿰子系",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰子系 matches 系,子; row correct",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1495",
@@ -26619,11 +26633,11 @@
    "糸",
    "心"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿱縣心, 縣's JP form is 県+系; matches existing 県,系,心",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1496",
@@ -26639,11 +26653,11 @@
    "丿",
    "糸"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿺辶孫 matches 孫,辶; row correct",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1497",
@@ -26658,11 +26672,11 @@
    "厶",
    "卩"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰去卩 matches 去,卩; row correct",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1498",
@@ -26677,11 +26691,11 @@
    "去",
    "卩"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰月却 matches 月,却; row correct",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1499",
@@ -26696,11 +26710,11 @@
    "止",
    "卩"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰𦈢卩, primary 午,止,卩ー already flattened consistent with Heisig's column and existing alternate 𠂉,一,止,卩; row correct",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1500",
@@ -26714,11 +26728,11 @@
    "彳",
    "卸"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰彳卸 matches 卸,彳; row correct",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1501",
@@ -26733,11 +26747,11 @@
    "ク",
    "又"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi right side 𠬝 flattens to Heisig's underpants;stamp;crotch with no name for 𠬝, matching existing 月,又,卩",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-04"
  },
  {
   "id": "rtk1502",

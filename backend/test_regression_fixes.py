@@ -1419,8 +1419,12 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk1368", "rtk1431"}},
     "rtk1476": {"character": "縛", "keyword": "truss",
                 "expected_part_ids": {"prim-acupuncturist", "rtk1431"}},
+    # 2026-11-04 full re-review: was rtk1484(玄)+rtk716(推) -- missing 扌
+    # entirely and wrongly fusing the turkey into 推 ("push"). cjkvi 擁=⿰扌雍,
+    # 雍=玄 over 隹; rendered, the left radical is plainly 扌 and the right
+    # side is 玄(top)+隹(bottom), not a fused 推 shape. Pin updated to match.
     "rtk1488": {"character": "擁", "keyword": "hug",
-                "expected_part_ids": {"rtk1484", "rtk716"}},
+                "expected_part_ids": {"kangxi64", "rtk1484", "kangxi172"}},
     "rtk1498": {"character": "脚", "keyword": "shins",
                 "expected_part_ids": {"rtk13", "rtk1497"}},
     "rtk1500": {"character": "御", "keyword": "honorable",

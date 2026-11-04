@@ -1864,14 +1864,28 @@ rtk1477:縄:straw rope:糸,亀
 rtk1478:幼:infancy:力,幺
 rtk1479:後:behind:夂,幺,彳
 rtk1480:幽:seclude:山,幺,幺
-rtk1481:幾:how many,abacus:ノ,幺,戈,丶,人
+# 2026-11-04 full re-review: 幾 was ノ,幺,戈,丶,人 -- stroke soup for a doubled
+# cocoon (cjkvi ⿹⿻戈𢆶人, 𢆶 = two 幺 overlaid with 戈; rendered 幺幺 side by
+# side matches the top of 幾 exactly). Heisig's column names "cocoon" once but
+# 1480's row above already doubles 幺 for the same shape (𢆶), so this follows
+# that established convention instead of flattening the second cocoon to raw
+# strokes.
+rtk1481:幾:how many,abacus:幺,幺,戈,人
 rtk1482:機:loom:幾,木
-rtk1483:畿:capital:田,幺,戈,丶,ノ
+# 2026-11-04 full re-review: same ⿹⿻戈𢆶ー top as 幾 (shape family, see 1481);
+# was 田,幺,戈,丶,ノ, same stroke-soup issue, fixed the same way.
+rtk1483:畿:capital:田,幺,幺,戈
 rtk1484:玄:mysterious:亠,幺
 rtk1485:畜:livestock:田,玄
 rtk1486:蓄:amass:艹,畜
 rtk1487:弦:bowstring:弓,玄
-rtk1488:擁:hug:玄,推
+# 2026-11-04 full re-review: was 玄,推 -- missing 扌 entirely and wrongly using
+# whole 推 ("push" = 扌+隹) for the right side. cjkvi: 擁 = ⿰扌雍, 雍 = 玄 over
+# 隹; rendered, 擁's left radical is plainly 扌 and the right side is 玄(top)+
+# 隹(bottom), not a fused 推 shape. Matches Heisig's column (finger;fingers;
+# mysterious;turkey) and the Google hint (扌, 玄, 隹). No other row references
+# 雍 or this pair, so no shape-family follow-up.
+rtk1488:擁:hug:扌,玄,隹
 rtk1489:滋:nourishing:兹,水
 rtk1490:慈:mercy:兹,心
 rtk1491:磁:magnet:兹,石
