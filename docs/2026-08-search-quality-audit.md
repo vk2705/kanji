@@ -26858,3 +26858,112 @@ on prod to pick up today's two fixes (民, 郭).
 
 **Next**: continue the full re-review at frame 2003, and if anyone picks
 up rtk1970 (氏), start with `render_glyphs.py 氏 乙 𠃊 亅`.
+
+## 2026-11-05 — full re-review: frames 2003–2052
+
+50 reviewed (段 through 極): 46 keep, 2 fixed, 2 needs-render.
+
+**Fixed**
+
+* **rtk2038 衷 "inmost": `衣,十,口` → `十,口,𧘇`**, dropping the old
+  alternate (`十,口,𧘇`) by promoting it to the only decomposition. 衣
+  can't actually be whole here — the host would need a gap partway
+  through 衣's own strokes to insert 十,口 into, which isn't how a glyph
+  works. A zoomed render (`/tmp/chu_zoom.png` this session) shows the
+  middle of 衷 is a closed box (口) pierced top-to-bottom by one stroke —
+  literally 中 — with no 亠 top-hat the way 哀/衰 (the same shape family)
+  have one; that absence is exactly why the CSV's core-frame components
+  for 衷 are "ten; needle; mouth; scarf" with no "top hat" listed, unlike
+  哀's "top hat; scarf; mouth" and 衰's "pathetic [=哀]; stick". The old
+  primary was presumably reaching for the family resemblance to 哀/衰 but
+  got the geometry wrong; the alternate someone already wrote down was
+  the correct reading all along. Shape family (哀/衰/衷, all rendered
+  side by side this session): 哀 and 衰 were already fixed 2026-10-23 and
+  are independently confirmed correct by this session's own render; no
+  other row needed touching.
+* **rtk2039 面 "mask": `一,丿,囗` → `一,丿,目`.** Zoomed render shows the
+  box has two internal horizontal dividers spanning its full width —
+  rendering plain 囗 by itself (same session) confirms it has no such
+  dividers, but rendering 目 by itself produces exactly this pattern
+  (outer rectangle + 2 full-width horizontal bars). The CSV's core-frame
+  components list "...drop; pent in; eye" — the drawn shape is the eye,
+  not a bare enclosure. (cjkvi-ids structurally reads 面 as `⿱丆囬`,
+  naming the obscure variant-of-回 codepoint 囬 instead of 目 — but 囬 has
+  no alias/primitive row anywhere in this database and isn't a name
+  Heisig uses, while 目 is the established "eye" primitive used
+  elsewhere, e.g. rtk2045 眉 below. Went with the render + Heisig's own
+  stated component over the raw structural codepoint, per CLAUDE.md's
+  "prefer the coherent primitive Heisig names.") `grep`ped data.txt for
+  any other row spelling `一,丿,囗`: none, so no shape-family follow-up.
+
+**needs-render**
+
+* **rtk2027 暇 "spare time" stays `日,又`.** CSV's core-frame components
+  are "sun; day; hobby; staples; mouth; box; crotch" — cjkvi's `⿰日叚`
+  agrees the right side is the single compound 叚, but the current row
+  flattens that entire compound down to 又 alone. A zoomed render of 叚
+  (`/tmp/ka_zoom.png`) shows a real 4-zone shape — top-left a box/mouth-ish
+  form, top-right a 3-pronged staple/ヨ-like shape, bottom-right 又 — so
+  又 only accounts for about a quarter of what's drawn, and Heisig's
+  "hobby" is most likely his own keyword for 叚 as a whole primitive (the
+  same pattern as 哀/衰 above: a named sub-primitive whose own further
+  breakdown the CSV then lists too). There's no existing primitive row
+  for 叚 or a confident 1:1 mapping from "staples"/"mouth"/"box" onto
+  its sub-strokes without guessing a new codepoint or slug — exactly the
+  kind of guess CLAUDE.md warns against making blind. 叚 is also shared
+  by 霞 ("mist", not in this chunk, per `google_decompositions.json`'s
+  own note on it), so a real fix needs a shape-family check against that
+  row too. Left as-is; flagging for a session that can spend more time on
+  it. `render_glyphs.py 暇 叚 日 又` to pick this back up.
+* **rtk2032 飛 "fly" stays atomic (no parts).** First pass in this
+  session wrongly treated this as "CSV empty → atomic"; it isn't — the
+  core-frame components are "hook; propeller; measuring box; thousand;
+  needles" (id_5th_ed 1887), five names, not empty. cjkvi-ids can't
+  decompose it either (U+98DB is Kangxi radical 183 in its own right).
+  Rendered large, 飛 shows a 开/廾-like crossbar on the left and two
+  stacked hook/feather shapes on the right, but mapping those four
+  shapes onto Heisig's five names with confidence — versus reading them
+  as mnemonic-story prose describing a radical he still teaches whole,
+  not a structural parts list — needs more care than this run should
+  spend guessing. Left the existing atomic row alone rather than invent
+  a decomposition. `render_glyphs.py 飛` to pick this back up.
+
+**Kept, worth recording the reasoning on**
+
+* **rtk2022 瓜 "melon" stays `厶`.** CSV's "claw; vulture; elbow" reads
+  as three names for the one primitive 厶 (visible as the hooked tail at
+  bottom-right of 瓜's render), not three separate parts — consistent
+  with cjkvi-ids treating 瓜 as atomic and the row naming only the one
+  shape Heisig actually introduces here.
+* **rtk2025 繭 "cocoon" stays `艹,冂,｜,糸,虫`.** cjkvi-ids's
+  `⿻⿵冂丨𬗌` looks like it should collapse to fewer pieces (𬗌 reads as a
+  doubled-insect ligature, no font renders it), but a 4x zoomed render
+  of 繭 itself (`/tmp/mayu_zoom.png`) shows the box clearly containing a
+  糸-like shape on the left and a 虫-like shape on the right side by
+  side — matching the CSV's "thread; spiderman; insect" and the existing
+  5-part row exactly.
+* **rtk2026 益 "benefit" stays `一,皿,八,丷`.** A zoomed render shows all
+  four as physically distinct strokes: two short ticks at the very top
+  (丷), a wide horizontal bar (一) with two diagonal legs flaring below
+  it (八), then 皿. Matches the CSV's "animal horns; one; floor; animal
+  legs; eight; dish" once the synonym pairs are collapsed onto those 4
+  shapes.
+* **rtk2029 来 "come" / rtk2037 衰 "decline" stay as already fixed on
+  2026-10-23** (by the "lid" audit session, not this one) — re-verified
+  this session by independent render and left untouched.
+
+**Tests**: `pytest -q` 108/108 (unchanged), `./regression_fresh.sh`
+1333/1333 (unchanged — the 衷/面 fixes didn't need a new pin), 0
+findings from `audit_radicals.py`. `sync_system_data.py --dry-run` showed
+exactly 2 decompositions replaced + 1 removed (衷's now-redundant old
+alternate), 0 unexpected; applied for real; all three checks re-run clean
+afterward.
+
+No deploy from here — a deployer needs `git pull` + `sync_system_data.py`
+on prod to pick up today's two fixes (衷, 面).
+
+`full_review.py --pending-count`: 947/3000.
+
+**Next**: continue the full re-review at frame 2053, and whoever picks up
+rtk2027 (暇) or rtk2032 (飛) should start with the two `render_glyphs.py`
+commands noted above.
