@@ -2397,8 +2397,20 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk1936", "rtk615"}},
     "rtk1972": {"character": "婚", "keyword": "marriage",
                 "expected_part_ids": {"rtk102", "rtk2526"}},
+    # 2026-11-05 full re-review: was 口,氏,尸 -- a phantom 尸 not named by the
+    # CSV's two-item core-frame components ("mouth; family name") and not
+    # reachable in cjkvi-ids, which gives 民 as a bare atomic leaf.
+    "rtk1976": {"character": "民", "keyword": "people",
+                "expected_part_ids": {"rtk11", "rtk1970"}},
     "rtk1977": {"character": "眠", "keyword": "sleep",
                 "expected_part_ids": {"rtk15", "rtk1976"}},
+    # 2026-11-05 full re-review: was 享,⻏,丶 -- a redundant 丶 added
+    # 2026-09-24 ("chunk 64") whose own justification note cites 図, an
+    # unrelated kanji (a copy/paste slip from that session). cjkvi-ids gives
+    # a clean ⿰享阝 with no third piece, and neither 郭's nor 享's own CSV
+    # components name a separate drop.
+    "rtk1985": {"character": "郭", "keyword": "enclosure",
+                "expected_part_ids": {"rtk330", "kangxi163"}},
     # 2026-09-18 (sixteenth chunk): was 丶+十+用+舎 (raw-stroke spelling of 甫,
     # dog-tag/arrowhead, plus 舎/cottage) -- an over-flattening audit_overflatten.py
     # could not see until prim-dog-tag (甫) gained a registered 用,screwdriver

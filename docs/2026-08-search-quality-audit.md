@@ -26787,3 +26787,74 @@ on prod to pick up today's fix (遣) and the new primitive image.
 `full_review.py --pending-count`: 1047/3000.
 
 **Next**: continue the full re-review at frame 1953.
+
+## 2026-11-05 — full re-review: frames 1953–2002
+
+Unattended daily run, continuing the full re-review after the chunk above
+(1903-1952, also today). 47 keep, 2 fixed, 1 needs-render.
+
+**Fixed**
+
+* **rtk1976 民 "people": `口,氏,尸` → `口,氏`.** The CSV's core-frame
+  components for this frame are only two items, "mouth; family name"
+  (口,氏) — no 尸 anywhere. cjkvi-ids gives 民 as a bare atomic leaf, so
+  there's no structural path to a 尸 either. Rendered at 800px: the
+  lower-right stroke reads as 氏's own hooked tail, not a separate 尸
+  shape layered underneath it. No shape-family follow-up — `grep`ped
+  data.txt for any other row pairing 氏 with 尸 and found none; this was
+  an isolated extra part on 民 alone.
+* **rtk1985 郭 "enclosure": `享,⻏,丶` → `享,⻏`.** This 丶 was added
+  2026-09-24 ("chunk 64", `audit_missing_children.py`'s "add three missing
+  intermediate children"), whose own doc note justified it as "the
+  component named by the two-source report for 図" — 図 has nothing to do
+  with 郭, which reads as a copy/paste slip from that session rather than
+  a deliberate finding. cjkvi-ids gives a clean `⿰享阝` with no third
+  piece. Neither 郭's own CSV components ("receive; tall; top hat; mouth;
+  child; children; city walls") nor 享's ("tall; top hat; mouth; child;
+  children") name a separate drop — the only dot-like stroke in the glyph
+  is 亠's own point, already accounted for inside `prim-tall` under 享.
+  No other row pairs 享 with a bare 丶 (`grep`ped for the combination),
+  so this was isolated too.
+
+**Kept, worth recording the reasoning on**
+
+* **rtk1956 再 "again" stays `王,冂`** despite cjkvi-ids reading it
+  structurally as `⿱一冉`. The CSV's core-frame components are non-empty
+  and literally "king; jewel; ball; belt" — Heisig's own documented
+  mnemonic breakdown of 再 really is "king trapped in a belt/box," not a
+  stroke-accurate 一+冉 split. Per this project's standing rule, the CSV
+  is the primary source for what Heisig actually teaches; cjkvi is the
+  structural cross-check, not an override when the two genuinely disagree
+  on which primitives were named.
+* **rtk1992 那 "interrogative" stays `刀,⻏,二` / alt `二,刀,阝`**
+  despite cjkvi-ids spelling the left side with an overlay,
+  `⿰⿻刀二阝` — per CLAUDE.md, a ⿻ operator means the two shapes share
+  strokes and aren't really separate pieces. But the CSV's core-frame
+  components list "sword; dagger; two" as distinct named items, so
+  Heisig's own teaching keeps them apart regardless of the structural
+  overlap, and that's what this project records as primary.
+* **rtk1970 氏 "family name" → `needs-render`.** The CSV's core-frame
+  components are non-empty ("drop; fishhook"), which by the project's own
+  rule is positive evidence of real sub-parts, not atomicity — but
+  cjkvi-ids treats 氏 as a leaf with no decomposition at all, and the
+  database already has three separate rows all partly aliased "fishhook"
+  (乙, prim-fishhook/𠃊, kangxi6/亅). None of the three is a confident
+  visual match for 氏's single continuous hook-stroke on one render pass,
+  and 氏 isn't cleanly two glued-together shapes the way most Heisig
+  "drop+X" splits are. Left atomic rather than guess a codepoint and risk
+  the kind of lookalike substitution CLAUDE.md flags repeatedly as this
+  project's most common real mistake. Needs a dedicated render session
+  comparing 乙/𠃊/亅 directly against 氏's stroke path before deciding.
+
+**Tests**: `pytest -q` 108/108 (unchanged), `./regression_fresh.sh`
+1333/1333 (up from 1331 — 2 new pins for rtk1976/rtk1985), 0 radicals
+findings from `audit_radicals.py`. `sync_system_data.py --dry-run` showed
+exactly 2 decompositions replaced, 0 unexpected; applied for real.
+
+No deploy from here — a deployer needs `git pull` + `sync_system_data.py`
+on prod to pick up today's two fixes (民, 郭).
+
+`full_review.py --pending-count`: 997/3000.
+
+**Next**: continue the full re-review at frame 2003, and if anyone picks
+up rtk1970 (氏), start with `render_glyphs.py 氏 乙 𠃊 亅`.

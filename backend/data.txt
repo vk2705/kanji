@@ -2508,7 +2508,12 @@ rtk1972:婚:marriage:昏,女
 rtk1973:低:lower:亻,氐
 rtk1974:抵:resist:扌,氐
 rtk1975:底:bottom:广,氐
-rtk1976:民:people:口,氏,尸
+# 2026-11-05 full re-review: dropped a phantom 尸. Heisig's CSV components
+# for this core frame are only "mouth; family name" (口,氏), two items, not
+# three; cjkvi-ids also gives 民 as a bare atomic leaf, no 尸 anywhere. The
+# render shows 民's lower-right stroke is 氏's own hooked tail, not a
+# separate 尸 shape layered on top of it.
+rtk1976:民:people:口,氏
 rtk1977:眠:sleep:民,目
 rtk1978:捕:catch:扌,甫
 rtk1979:哺:nurse:口,甫
@@ -2522,7 +2527,16 @@ rtk1981:蒲:bullrush,bulrush:浦,艹
 rtk1982:舗:shop:甫,舎
 rtk1983:補:supplement:甫,衤
 rtk1984:邸:residence:氐,阝
-rtk1985:郭:enclosure:享,⻏,丶
+# 2026-11-05 full re-review: dropped a redundant 丶. Added 2026-09-24
+# ("chunk 64") citing "the component named by the two-source report for
+# 図" — 図 has nothing to do with 郭, so that note's own justification looks
+# like a copy/paste slip from that session. cjkvi-ids gives a clean ⿰享阝
+# with no third piece, and 享's own CSV components ("tall; top hat; mouth;
+# child; children") already account for the only dot-like stroke in the
+# glyph (亠's own point, inside prim-tall). Heisig's CSV components for 郭
+# itself ("receive; tall; top hat; mouth; child; children; city walls")
+# name no separate "drop" either.
+rtk1985:郭:enclosure:享,⻏
 rtk1986:郡:county:君,⻏;君,阝
 rtk1987:郊:outskirts:交,⻏;交,阝
 rtk1988:部:section:咅,阝
