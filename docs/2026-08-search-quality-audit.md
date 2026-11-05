@@ -26677,3 +26677,113 @@ on prod to pick up today's two fixes (斑, 粛).
 
 **Next**: continue the full re-review at frame 1903. rtk1818/rtk1201 still
 need an owner look (see above) before either is touched again.
+
+## 2026-11-05 — full re-review: frames 1903–1952
+
+49 keep, 1 fixed, 0 needs-render.
+
+**Fixed: rtk1910 遣 (dispatch), missing a component.** Was `辶,𠀐`. cjkvi
+gives 遣 as `⿺辶𠳋`, `𠳋 = ⿱𠀐㠯` (U+382F) — an 800px render of 遣 shows
+unmistakably *two* stacked box tiers below 辶's dot, not the single `𠀐`
+tier that 貴/遺/潰 (the three sibling rows right next to it, all built on
+`𠀐`) have. Heisig's own CSV components text for 遣 ("purse; in; one;
+floor; maestro without baton; road") names that second tier "maestro
+without baton" — his name for 𠂤 (`prim-maestro`) — which looked like a
+real conflict until rendering 追 (CSV: "maestro; road") alongside it: 追's
+own non-辶 part is a 丿 stroke sitting on *the same* two-box 㠯 shape, just
+with the extra slash 𠂤 has and 遣 doesn't. cjkvi agrees (𠂤 itself is
+`⿱丿㠯`). So 𠂤 and the shape in 遣 share a lower half but aren't the same
+primitive — Heisig's book calls both "maestro without baton" instead of
+distinguishing them, the same kind of collision CLAUDE.md's 龶/丰 trap
+warns about. No Heisig name exists for the bare two-box shape on its own,
+so it got a plain descriptive one (`prim-stacked-boxes`, alias "stacked
+boxes") rather than a borrowed/invented "Heisig" name. `audit_weak_evidence.py
+--host 遣` raised no ⿻/⿴/opaque-intermediate flags before the edit — this
+was a genuine missing child, not a misread overlay. New primitive is in
+CJK Ext A (U+382F), so it needed a `make_primitive_images.py` picture too
+(Noto Serif CJK JP renders it fine, not tofu — checked the PNG).
+Shape-family check: `𠳋`'s only other cjkvi hosts (𧪯 𩝡 𬳈 𮚾) aren't in
+this dataset; `㠯` also appears as a *direct* (non-𠳋) child of 官, 耜, 苢,
+鈻 and others in cjkvi, none of which are in heisig-kanjis.csv or today's
+scope — not touched.
+
+**A snapshot-staleness trap, caught before it caused a bad decision.**
+`full_review.py`'s displayed "data.txt at start" is frozen from whenever
+`docs/kanji_full_review.json` was last `--init`'d — it does **not** track
+live edits other sessions make to `data.txt` in between. rtk1924 並's
+snapshot showed `｜,一,二,丷` (stroke-flattened), which looked like a real
+bug (missing a second vertical and the bottom diagonal pair, by render).
+But `git blame` on the live line showed it was already made atomic on
+2026-10-23 (commit ed7f9c9, "CSV-empty + 8 later frames reuse row whole,
+same 冊/柵 pattern") — the *live* row is empty/atomic and correct; only
+the stale snapshot still had the old stroke list. Recorded as keep with
+the staleness noted rather than "fixing" something already fixed.
+Cross-checked every other row in today's chunk against live `data.txt`
+(not just the snapshot) after this; two more had already been
+independently fixed by other sessions since init — rtk1943 恭 (忄→心,
+2026-11-02, render-confirmed heart shape) and rtk1952 円 (dropped a
+spurious 亠, 2026-10-23) — both just reconfirmed here, not re-touched.
+**Lesson for future chunks: always `grep`/`git blame` the live
+`backend/data.txt` line before deciding, not just the tool's cached
+snapshot.**
+
+**Deep-dived and kept as-is (no change) after checking against
+`audit_overflatten.py`, cjkvi's *full* IDS tree (not just its top level),
+and the pinned reasoning already in `test_regression_fixes.py`:** the
+並/业/亜/菐/𦍎 cluster (rtk1924–1933, 1950–1951). `audit_overflatten.py
+--term row` suggested collapsing 湿/顕's `日,业` into `显` and 撲/僕's
+`业,丷,夫` into `菐`, but in every case the current flat row already
+matches cjkvi's full structural tree one level deeper (显=日+业, 菐=业+䒑+夫)
+*and* matches Heisig's own CSV text, which never names 显 or 菐 as a unit
+— so the tool's suggestion is a valid alternative grouping, not a
+correctness fix, and was not applied. rtk1931 業's extra `一,木` beside
+`未` is a documented, intentional 2026-09-25 decision (未=一+木 already
+present as loose strokes; 未 added only for name-reachability) — confirmed
+via render, not re-litigated. rtk1930 霊's `二` (not cjkvi's literal `一`)
+matches Heisig's own CSV naming "two" explicitly.
+
+**`⿴`-operator rows checked but kept:** rtk1947 丼 (`⿴井丶`) and rtk1948
+囲 (`⿴囗井`) both got an `audit_weak_evidence.py` flag ("not-a-parts-list")
+for the enclosure operator, but an 800px render of 丼 beside bare 井 shows
+井 drawn fully intact with a separate dot placed inside it — no
+stroke-sharing, unlike the ⿻-overlay cases this flag also catches. Kept.
+
+Checks: baseline `pytest -q` 108 passed, `./regression_fresh.sh` 1331/1331,
+`audit_radicals.py` 0 undefined terms, all before touching anything (plus
+`backup_db.py` first). After the rtk1910 fix, `regression_fresh.sh` failed
+on 2 things: the stale pin (updated in place, reason in the pin's own
+comment) and the new `prim-stacked-boxes` row needing a picture
+(`make_primitive_images.py`, checked the PNG isn't tofu). Re-ran all three
+clean after both fixes. `sync_system_data.py --dry-run` showed exactly 1
+kanji inserted (the new primitive) + 3 aliases + 1 decomposition replaced,
+plus the same pre-existing 286 orphan system `ja-kanji` ids this box's DB
+has carried for a while (unrelated, not touched); ran for real, then ran
+again after the primitive image existed on disk (1 kanji updated for
+`image_url`); re-checked all three clean both times.
+
+**`make_primitive_images.py` regenerates every needs-image row on each run,
+not just new ones — and on this box right now, that's not safe to commit
+wholesale.** Running it re-wrote 14 pre-existing, already-correct PNGs
+(`prim-purse`, `prim-flagpole`, `prim-pegasus`, …) plus produced two new
+ones for already-live legacy orphan rows (`rad2.31`, `rad3.41` — part of
+the pre-existing 286-orphan backlog, unrelated to today). Checked a sample
+before staging anything: `prim-purse.png` (𠀐) came back as a plain tofu
+box — this box's current font stack doesn't render that glyph the way
+whatever produced the committed version did, even though `rad2.31.png`
+(𠂊, rendered in the same batch) came out fine. Reverted all 14 pre-existing
+PNGs to their committed versions (`git checkout --`) and deleted the two
+orphan-row images rather than risk committing a silent regression on
+unrelated rows; kept only the one new file this chunk's fix actually needs
+(`prim-stacked-boxes.png`, visually checked, not tofu). Re-ran all three
+checks clean after reverting. Worth a closer look in its own session —
+either this box is missing a font package it used to have, or the
+script's rendering is non-deterministic per-run — before anyone runs
+`make_primitive_images.py` here for a reason that isn't "one specific new
+primitive."
+
+No deploy from here — a deployer needs `git pull` + `sync_system_data.py`
+on prod to pick up today's fix (遣) and the new primitive image.
+
+`full_review.py --pending-count`: 1047/3000.
+
+**Next**: continue the full re-review at frame 1953.

@@ -2387,8 +2387,12 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk102", "rtk1896"}},
     "rtk1908": {"character": "貴", "keyword": "precious",
                 "expected_part_ids": {"prim-purse", "rtk56"}},
+    # gained prim-stacked-boxes (㠯) 2026-11-05 full re-review: was missing a
+    # component -- cjkvi gives 遣 as ⿺辶𠳋, 𠳋=⿱𠀐㠯, and an 800px render shows
+    # two stacked box tiers below 辶's dot (matching 官's bottom, not just
+    # 貴/遺/潰's single-tier 𠀐).
     "rtk1910": {"character": "遣", "keyword": "dispatch",
-                "expected_part_ids": {"kangxi162", "prim-purse"}},
+                "expected_part_ids": {"kangxi162", "prim-purse", "prim-stacked-boxes"}},
     "rtk1937": {"character": "翼", "keyword": "wing",
                 "expected_part_ids": {"rtk1936", "rtk615"}},
     "rtk1972": {"character": "婚", "keyword": "marriage",

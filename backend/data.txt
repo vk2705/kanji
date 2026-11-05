@@ -2415,7 +2415,7 @@ rtk1906:勘:intuition:力,甚
 rtk1907:堪:withstand:土,甚
 rtk1908:貴:precious,takanohana:貝,𠀐
 rtk1909:遺:bequeath:貴,辶
-rtk1910:遣:dispatch:辶,𠀐
+rtk1910:遣:dispatch:辶,𠀐,㠯
 rtk1911:潰:crush:水,貴
 rtk1912:舞:dance:𠂉,卌,一,舛
 rtk1913:無:nothingness:𠂉,卌,一,灬
@@ -6060,3 +6060,24 @@ prim-legless-bird:?:legless bird
 # lends its keyword to the bare sub-shape. Renders in every installed CJK
 # font (no tofu).
 prim-drum-stand:壴:drum:士,豆
+
+# 2026-11-05 full re-review: rtk1910 遣 (dispatch) was `辶,𠀐` -- missing a
+# component. cjkvi gives 遣 as ⿺辶𠳋 with 𠳋 = ⿱𠀐㠯 (U+382F): rendered, the
+# non-辶 part of 遣 is unmistakably two stacked open rectangles sitting under
+# 𠀐's box-and-bar, not just the single 𠀐 tier that 貴/遺/潰 have. Heisig's
+# own CSV components text for 遣 ("purse; in; one; floor; maestro without
+# baton; road") names this same bottom piece "maestro without baton", his
+# name for 𠂤 (prim-maestro) -- but cjkvi separately gives 𠂤 itself as
+# ⿱丿㠯, and rendering 追 (追 = 𠂤+road, CSV: "maestro; road") alongside 遣
+# confirms it: 追's non-辶 part is a 丿 stroke sitting on the *same* two-box
+# 㠯 shape, just with that extra slash 𠂤 has and 遣 doesn't. So 𠂤 and the
+# shape in 遣 share a lower half but aren't the same primitive -- Heisig's
+# book names them both "maestro without baton" instead of distinguishing
+# them, the same kind of collision CLAUDE.md's 龶/丰 trap warns about. No
+# Heisig name exists for the bare two-box shape on its own, so it gets a
+# plain descriptive one rather than a borrowed/invented "Heisig" name.
+# Shape-family check: 𠳋's only other cjkvi hosts (𧪯 𩝡 𬳈 𮚾) aren't in this
+# dataset. 㠯 also appears as a direct (non-𠳋) child of 官, 耜, 苢, 鈻 and
+# others in cjkvi, none of which are in heisig-kanjis.csv or this review's
+# scope -- not touched here.
+prim-stacked-boxes:㠯:stacked boxes
