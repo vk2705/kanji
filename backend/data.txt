@@ -2120,7 +2120,15 @@ rtk1705:垂:droop:｜,ノ,一
 rtk1706:唾:saliva:垂,口
 rtk1707:睡:drowsy:垂,目
 rtk1708:錘:weight:垂,金
-rtk1709:乗:ride:｜,ノ,一,禾,八
+# 2026-11-05 full re-review: was ｜,ノ,一,禾,八. The ladder (3 bars +
+# through-vertical) rendered pixel-for-pixel identical to the established
+# 丰 primitive (same shape as in 拝=扌,一,丰 / 寿=丰,寸), not a bare ｜+一
+# pair. 禾, rendered separately, is a visibly different shape (a cross with
+# one diagonal slash) that isn't drawn here at all -- it only got into this
+# row because Heisig's CSV names the frame's components "wheat;cereal;
+# silage" (i.e. names the ladder by 禾's own keyword, not by its real
+# Unicode identity), the keyword-vs-glyph trap CLAUDE.md warns about.
+rtk1709:乗:ride:ノ,丰,八
 rtk1710:剰:surplus:乗,刀
 rtk1711:今:now,clock:亼,一
 rtk1712:含:contain:口,今
@@ -2133,7 +2141,16 @@ rtk1718:陰:shade:今,阝,云
 rtk1719:予:beforehand,halberd with stroke missing:龴,亅
 rtk1720:序:preface:予,广
 rtk1721:預:deposit:予,頁
-rtk1722:野:plains:矛,里,亅;予,里
+# 2026-11-05 full re-review: primary was 矛,里,亅 (with 予,里 demoted to an
+# alternate). cjkvi gives only ⿰里予 and Heisig's own components ("computer;
+# beforehand" = 里's alias + 予's alias) match the alternate, not the
+# primary. Rendered 矛 vs 予 vs 野's right half: 野 has 予's full stroke set
+# (including the short right-side flick) and none of 矛's extra long
+# lower-left sweep -- the former primary misidentified a near-lookalike
+# (矛, one stroke removed from 予) and patched the gap with a bare 亅.
+# Promoted 予,里 to primary; the old reading was simply wrong, not a
+# legitimate second alternate, so it was dropped rather than kept.
+rtk1722:野:plains:予,里
 # 2026-11-03, shape-family follow-up from the 争/事/唐 rake fix (frame not yet
 # reached by the full review): was ｜,⺕,一,八,丷. cjkvi's ⿱䒑⿻⿻コ一④ overlays
 # コ,一,④ (a cjkvi placeholder, not an identifier) to draw the same one ⺕
@@ -2158,7 +2175,18 @@ rtk1736:慄:fear:state of mind,栗
 rtk1737:遷:transition:辶,西,大,己
 rtk1738:覆:capsize:復,西
 rtk1739:煙:smoke:火,西,土
-rtk1740:南:south:十,丷,冂
+# 2026-11-05 full re-review: was 十,丷,冂 -- missing a child. Rendered 南 at
+# high zoom: inside the 冂 box, below 丷, is a 2-bar+through-vertical shape
+# identical to 干's own render (干=十,一). cjkvi's ⿱十⿵冂𢆉 names that inner
+# piece 𢆉, which frame 1622's own entry (幸, this same chunk) already
+# identified as ⿱丷干 -- the exact 丷+干 pair 南 shares. Heisig's "ten;
+# needle;belt;happiness;ten;needle;stand up;vase" reads as 十(top)+冂(belt)
+# +[the shared 丷+干 compound, named loosely via the 幸 frame ("happiness")
+# and via 立's aliases for the visually-similar bare 丷 -- the same CSV
+# labelling quirk already documented for other hosts in the 2026-10-23
+# "lid audit" comments elsewhere in this file] -- i.e. two separate
+# 十-shaped elements, matching the render's two distinct crosses.
+rtk1740:南:south:十,丷,干,冂
 rtk1741:楠:camphor tree:木,南
 rtk1742:献:offering:犬,南
 rtk1743:門:gate:
@@ -2168,7 +2196,13 @@ rtk1746:閥:clique:伐,門
 rtk1747:間:interval:日,門
 rtk1748:闇:get dark:門,音
 rtk1749:簡:simplicity:竹,間
-rtk1750:開:open:一,門,廾,二,ノ
+# 2026-11-05 full re-review: was 一,門,廾,二,ノ -- two phantom parts.
+# Rendered 開 at high zoom: inside 門 is exactly one horizontal bar over
+# 廾's two legs (the real character 开, which cjkvi cites directly: ⿵門开),
+# with no second horizontal bar and no diagonal stroke anywhere drawn.
+# Heisig's components for this frame are just "gates;two hands" (門+廾),
+# with no third or fourth concept at all. Dropped 二 and ノ.
+rtk1750:開:open:一,門,廾
 rtk1751:閉:closed:才,門
 rtk1752:閣:tower:各,門
 rtk1753:閑:leisure:木,門
@@ -3419,7 +3453,17 @@ rtk2866:慧:wise:彗,心
 # no sibling host to cross-check `｜`/`冂` against independently -- the
 # render is the only evidence, per the standing rule, and it is clear.
 rtk2867:爾:you:｜,一,八,冂,爻,巾
-rtk2868:嘉:applaud:口,士,力
+# 2026-11-05 audit_overflatten: was 口,士,力 -- a double problem, not just
+# one shattered compound. 力+口 flattened 加 (rtk932, itself 口+力) AND
+# dropped 豆 from 壴 (prim-drum-stand, 士+豆), leaving a bare 士 standing
+# in for the whole shape. cjkvi-ids gives 嘉 = ⿱壴加 (U+5609); CSV
+# components for frame 2868/id_5th_ed 2852 is empty, which per CLAUDE.md
+# is not atomicity evidence outside frames 1-2042 -- just no CSV data for
+# this late-added frame. Rendered 嘉 beside 壴/加/士/豆/力/口: the top is
+# clearly 壴's 士-over-豆, the bottom is 加's 力-口 side-by-side, matching
+# cjkvi exactly. Reordered to 壴,加 (top-first), matching the existing
+# 鼓=壴,支 / 喜=壴,口 convention for this primitive.
+rtk2868:嘉:applaud:壴,加
 rtk2869:兇:wickedness:儿,凶
 rtk2870:兜:helmet:白,儿
 rtk2871:靄:mist:謁,雨

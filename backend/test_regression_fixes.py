@@ -2806,7 +2806,12 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk1686": {"character": "拝", "keyword": "worship",
                 "expected_part_ids": {"kangxi64", "rtk1", "prim-bushes"}},
     "rtk1740": {"character": "南", "keyword": "south",
-                "expected_part_ids": {"rtk10", "kangxi12", "kangxi13"}},
+                # 2026-11-05 full re-review: added rtk1777 (干) -- the row was
+                # missing a child. Rendered 南: inside the 冂 box, below 丷, is
+                # a 2-bar+through-vertical shape identical to 干's own render,
+                # matching cjkvi's 𢆉 (⿱丷干, the same pair frame 1622's 幸
+                # entry already identified) and Heisig's doubled "ten;needle".
+                "expected_part_ids": {"rtk10", "kangxi12", "kangxi13", "rtk1777"}},
     "rtk703": {"character": "拓", "keyword": "clear (the land)",
                "expected_part_ids": {"rtk118", "kangxi64"}},
     "rtk729": {"character": "研", "keyword": "polish",
