@@ -26311,3 +26311,26 @@ renders for the shapes shared across many hosts:
 `full_review.py --pending-count`: 1297/3000.
 
 **Next**: continue the full re-review at frame 1702.
+
+## 2026-11-05 — hanzi worklist: still 0 pending, no action taken
+
+Checked for an interrupted prior run first, per the guardrail script
+comparing decided ids between `HEAD` and the working tree: printed `0`,
+clean. `backend/kanji.db` exists.
+
+`hanzi_worklist_next.py --pending-count` returned **0 pending / 487
+total** — unchanged since the 2026-11-02 entry that first reached 0 and
+every daily check since (2026-11-03, 2026-11-04). The `n -20` call therefore
+has nothing to hand back, so there was nothing to render, decide, or apply
+today, and no reason to take a pre-flight backup or run `pytest` (no write
+was ever going to happen). No `kanji.db` change, no worklist JSON change
+(the only non-clean files in `git status` are `docs/decomposition_worklist.json`
+and `docs/kanji_review_coverage.tsv`, both the separate full-review job's
+own output, left untouched per this job's guardrails) — only this doc entry.
+
+Same open question as the last three entries, still unresolved and still
+not this run's to decide: whether this job should go idle until
+`audit_hanzi_weak_evidence.py --json` is re-run (new `zh-*` rows, or a
+previously-blocked `needs-render` codepoint becoming renderable on this
+machine) surfaces a new backlog, or whether a next phase is queued
+elsewhere. Flagging it again here rather than guessing at an answer.
