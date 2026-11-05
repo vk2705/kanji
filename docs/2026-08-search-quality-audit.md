@@ -26439,3 +26439,72 @@ on prod to pick up today's five fixes (嘉, 乗, 野, 南, 開).
 **Next**: continue the full re-review at frame 1753. When frame 1311 (矛)
 comes up, revisit it against today's 野 finding — its current row (`予`
 alone) looks incomplete on the same render evidence.
+
+## 2026-11-05 — full re-review: frames 1753–1802
+
+49 keep, 0 fixed, 1 needs-render (rtk1756). Rendered every kanji in the
+chunk (`閑 聞 潤 闘 倉 創 非 俳 排 悲 罪 輩 扉`, `侯 喉 候 決 快 偉 違 緯 衛 韓`,
+`干 肝 刊 汗 軒 岸 幹 芋 宇 于`, `余 除 徐 叙 途 斜 塗 束 頼 瀬`,
+`勅 疎 辣 速 整 剣 険 㑒 僉`) via `render_glyphs.py` in five batches and
+cross-checked each against cjkvi-ids and Heisig's components column; every
+row's structure matched (mostly direct `⿰`/`⿱`/`⿵` splits, or a compound
+sub-piece — 閏, 厈, 涗/涂, 敕 — correctly expanded to its real pieces rather
+than referenced as an unnamed unit). Two findings worth recording even
+though neither changed anything:
+
+- **rtk1769 候** (primary `亻,侯,｜`, alternate `ユ,亻,矢,｜`): looked like a
+  double-count at first (the primary names both `人` and `侯`, and `侯`
+  already contains a person radical — only one `亻`-shaped stroke group is
+  actually drawn). Checked `heisig-kanjis.csv`'s components column, which
+  literally starts with "marquis" before "person" — this is Heisig's own
+  mnemonic reuse of the already-taught `侯` as a building block, and the
+  alternate is the fully-expanded structural reading. Both belong; not a
+  bug, no change made.
+- **rtk1756 欄** (`木,門,東`) — the one `needs-render`, and not for lack of
+  rendering. `闌` (its right side) renders with two extra marks inside the
+  gate that clean `東` doesn't have; that shape is `柬` (U+67EC), confirmed
+  side-by-side against `東`/`柬`/`闌`/`蘭`. Went looking for precedent before
+  touching it and found two **conflicting** ones already in this repo:
+  a pinned regression (`test_regression_fixes.py`, session 2026-08-30)
+  deliberately collapsed this exact row to `木,門,東` after finding a worse
+  corrupted flatten (`｜,一,日,木,田`, with a stray `田`) copy-pasted across
+  every `東`-containing compound, 欄 included — the fix was to reference
+  `東` as a whole part rather than re-flatten. But `data.txt`'s own comment
+  above rtk2449 (蘭, same `闌`/`柬` shape, added in a later session) flags
+  the identical 柬-vs-東 mismatch and chose to spell `柬`'s strokes out
+  rather than call it `東` — explicitly because inventing a primitive name
+  for `柬` would be worse than leaving it spelled out — but describes 柬 as
+  having "one host," meaning that session didn't register 欄 as a second
+  one and never revisited it. Tried applying 蘭's convention here
+  (`木,門,一,｜,日,木`); it renders fine and matches cjkvi, but it reverts the
+  2026-08-30 fix and fails its regression pin (`rtk1756`: expected
+  `rtk207,rtk1743,rtk543`, got a different set). Reverted rather than pick
+  a side unattended — recorded `needs-render` with the full conflict in the
+  note so an owner can decide which precedent wins (and, if 蘭's wins,
+  whether 柬 now deserves a `prim-{slug}` of its own with two hosts instead
+  of one).
+
+No shape-family follow-ups beyond the above — 蘭/欄 are the only two hosts
+of `闌`/`柬` in this dataset (爛/瀾/斕/鑭 etc. are glyphs this project
+doesn't have rows for at all).
+
+Checks: baseline `pytest -q` 108 passed, `./regression_fresh.sh` 1331/1331,
+`audit_radicals.py` 0 undefined terms — all before touching anything. Tried
+and reverted the rtk1756 edit (see above); re-ran all three after the
+revert, back to clean (108 passed / 1331/1331 / 0). `sync_system_data.py`
+picked up five pre-existing decomposition changes from `data.txt` that had
+been committed by a previous session but not yet synced to this box's live
+`kanji.db` (unrelated to today's chunk — confirmed by re-running the
+dry-run with today's edit stashed, which still showed the same five);
+harmless to pick up alongside today's no-op.
+
+No deploy from here — nothing to deploy; this chunk made no `data.txt`
+changes.
+
+`full_review.py --pending-count`: 1197/3000.
+
+**Next**: continue the full re-review at frame 1803. An owner call is
+needed on rtk1756/rtk2449 before either is touched again: keep the
+2026-08-30 "reference 東 as a whole part" convention for 柬-shaped
+compounds, or switch to spelling 柬's strokes out (and decide whether `柬`
+should get its own `prim-{slug}` now that it has two known hosts).
