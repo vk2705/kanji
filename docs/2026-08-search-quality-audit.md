@@ -26602,3 +26602,78 @@ on prod to pick up today's four fixes (衝, 瘍, 疲, 形).
 
 **Next**: continue the full re-review at frame 1853. rtk1818/rtk1201 need
 an owner look (see above) before either is touched again.
+
+## 2026-11-05 — full re-review: frames 1853–1902
+
+50 rows reviewed: 48 `keep`, 2 `fixed`, 0 `needs-render`.
+
+Two rows in this chunk had already been fixed in an earlier session before
+today's date reached their frame — `full_review.py`'s "data.txt at start"
+field is a snapshot frozen when `docs/kanji_full_review.json` was built
+(2026-10-21), not the live file, so it still showed their old, wrong parts.
+Checked live `data.txt` against it for every row before deciding anything,
+confirmed the fix was already in place, and recorded `keep` with a note
+rather than re-doing or reverting it:
+- **rtk1855 膨** "swell" — live row is already `月,壴,彡`, fixed alongside
+  rtk1552/1553/1554's 鼓/壴 "phantom-支" cleanup (see that comment in
+  `data.txt`); the snapshot still showed the old `月,鼓,彡`.
+- **rtk1890 色** "color" — live row is already `巴,𠂊` (the old `巴,勹;巴,𠂊`
+  alternate was dropped entirely in an earlier 𠂊-not-勹 fix); the snapshot
+  still showed the stale pair.
+
+Two real fixes, both rendered with `render_glyphs.py` before changing
+anything, `audit_weak_evidence.py --host <char>` run on both first (no
+overlay/opaque flags on either):
+
+- **rtk1865 斑** "speckled": `王,文` → `王,文,王`. The render shows 王 on
+  *both* sides of 文 (⿲ left-middle-right), not one — cjkvi-ids agrees
+  (`⿲王文王`) and the current row was missing the second 王. Heisig's own
+  CSV components column also names only one "king", so this wasn't a
+  Heisig-taught-it-whole case, just a genuine dropped child — the same
+  shape the existing automated audits (`audit_missing_children.py`,
+  `audit_radicals.py`) don't catch, since 王 already resolves to a real,
+  correct row; nothing to flag it as missing or undefined. No other row
+  references 斑 as a part, so no shape-family follow-up needed.
+- **rtk1870 粛** "solemn": `｜,ノ,米,隶` → `｜,ノ,米,⺕`. This one had been
+  explicitly left open in an earlier chunk (see the comment above the
+  `prim-fenceposts` row in `data.txt`, written when 斉/剤/済/斎 were fixed)
+  pending render budget. Rendered now: the top-left of 粛 is the same ⺕
+  "rake" shape already used in 争/事/妻/隷/庸/糖/康/逮/嫌/鎌/謙/廉/凄 (all
+  via `prim-rake`), not 隶 (kangxi171, "reach/slave/sieve") — 隶's own row
+  decomposes it as `⺕,氺`, and 粛 has no 氺 "water legs" anywhere in it.
+  Heisig's CSV components for 粛 itself, "rake; fenceposts; cabers; rice",
+  never name a reach/slave sense either. cjkvi-ids has no IDS entry for
+  either 粛 or its traditional form 肅 (both map to themselves), which is
+  why this needed a render rather than a structural cross-check. `隶` isn't
+  used as a part anywhere else in `data.txt`, so no shape-family follow-up.
+
+Everything else in the chunk matched cjkvi-ids and Heisig's named
+components directly and was rendered where the match wasn't already
+obvious from the glyph alone (the 彦/頁, 攵-vs-夂 in 修, 㐱=𠆢+彡 in
+珍/診, 亦-family in 変/跡/蛮/恋/湾, 巴-family in 把/絶/肥, 其-family in
+欺/棋/旗/期) — notably 修 (`亻,｜,彡,攵`), where cjkvi's Japan/Traditional
+IDS variant collapses the right side into the atomic `㣊` rather than
+decomposing it, but Heisig's own components column explicitly names
+"taskmaster" (=攵, 4 strokes with a top bar), confirmed against the render
+as distinct from 3-stroke 夂. 率's cjkvi IDS uses a `⿻` overlay
+(`⿱⿻玄⿱丷八十`) between 玄 and the sparkler shape; per the overlay rule
+this wasn't read as license to invent new flat parts, only to re-confirm
+Heisig's already-named `sparkler,十,玄` render correctly together, which
+they do.
+
+Checks: baseline `pytest -q` 108 passed, `./regression_fresh.sh` 1331/1331,
+`audit_radicals.py` 0 undefined terms — all before touching anything (plus
+`backup_db.py` first). After the two real edits, all three re-ran clean
+with no pin changes needed. `sync_system_data.py --dry-run` showed exactly
+2 decompositions replaced (rtk1865, rtk1870) and the same pre-existing 286
+orphan system `ja-kanji` ids this box's DB has carried for a while
+(legacy `prim-*`/`rad*.*` ids no longer in source — unrelated to this
+chunk, not touched); ran for real, re-checked all three clean again.
+
+No deploy from here — a deployer needs `git pull` + `sync_system_data.py`
+on prod to pick up today's two fixes (斑, 粛).
+
+`full_review.py --pending-count`: 1097/3000.
+
+**Next**: continue the full re-review at frame 1903. rtk1818/rtk1201 still
+need an owner look (see above) before either is touched again.

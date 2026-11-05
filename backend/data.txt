@@ -2345,12 +2345,24 @@ rtk1861:文:sentence,plaid,kilt,billy connolly:;乂,亠
 rtk1862:対:vis-a-vis:寸,文
 rtk1863:紋:family crest:糸,文
 rtk1864:蚊:mosquito:虫,文
-rtk1865:斑:spot:王,文
+# full re-review 2026-11-05: render shows 斑 as 王/文/王 (jewel flanking both
+# sides of sentence), not just one 王 -- cjkvi-ids agrees (⿲王文王) and
+# audit_weak_evidence.py --host 斑 raises no overlay/opaque flags. Heisig's own
+# CSV components column also only names one "king", so this was a genuine
+# dropped child, not a detector blind spot his book created on purpose.
+rtk1865:斑:spot:王,文,王
 rtk1866:斉:adjusted,adjust:prim-fenceposts,文;｜,ノ,文,廾
 rtk1867:剤:dose:斉,刀
 rtk1868:済:settle (debt  etc.):水,斉
 rtk1869:斎:purification:斉,示
-rtk1870:粛:solemn:｜,ノ,米,隶
+# full re-review 2026-11-05: left open 2026-10-?? (see the comment above
+# prim-fenceposts) pending render budget. Rendered now: the top-left of 粛 is
+# the same ⺕ "rake" shape already used in 争/事/妻/隷 etc. (prim-rake), not 隶
+# (reach/slave/sieve, kangxi171) -- 隶's own decomposition is ⺕+氺 and 粛 has
+# no 氺 "water legs" anywhere in it. Heisig's CSV components for 粛 itself are
+# "rake; fenceposts; cabers; rice" -- no "reach"/"slave" sense at all, which
+# was the actual tell. cjkvi-ids has no IDS entry for 粛/肅 either way.
+rtk1870:粛:solemn:｜,ノ,米,⺕
 # prim-sparkler = ⿱丷八 (horns splayed over eight), confirmed by cjkvi-ids
 # on all six directly-cited hosts (塁楽率渋摂函) plus rendering: the same
 # distinct top-of-glyph shape in every one, not a coincidental IDS grouping.

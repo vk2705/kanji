@@ -33122,11 +33122,11 @@
    "彡",
    "頁"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "彦,頁 matches cjkvi ⿰彦頁 exactly; already-reviewed shared primitives",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1854",
@@ -33140,11 +33140,11 @@
    "彡",
    "頁"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "頁,彡 matches cjkvi ⿰彡頁",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1855",
@@ -33159,11 +33159,11 @@
    "吉",
    "彡"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "live data.txt already 月,壴,彡 (fixed in an earlier chunk alongside rtk1552/1553/1554, per the comment there); review's parts_at_start snapshot is stale, not a live discrepancy",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1856",
@@ -33178,11 +33178,11 @@
    "厶",
    "彡"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "厶,大,彡 matches cjkvi ⿳厶大彡",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1857",
@@ -33196,11 +33196,11 @@
    "忄",
    "参"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "参,忄 matches cjkvi ⿰忄参",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1858",
@@ -33216,11 +33216,11 @@
    "攵",
    "彡"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "rendered 修 vs 攵/夂: right-bottom is 攵 (taskmaster, 4 strokes incl. top bar), matching Heisig's named 'taskmaster' component, not 3-stroke 夂",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1859",
@@ -33235,11 +33235,11 @@
    "个",
    "彡"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "rendered 㐱: top is 𠆢 (umbrella), bottom is 彡 -- matches 王,𠆢,彡 exactly",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1860",
@@ -33254,11 +33254,11 @@
    "个",
    "彡"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "same 㐱=𠆢+彡 shape as rtk1859; 言,𠆢,彡 correct",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1861",
@@ -33269,11 +33269,11 @@
   "heisig_components": "plaid; kilt; Billy Connolly",
   "cjkvi_ids": "⿱亠乂",
   "google_parts": [],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "CSV 'plaid; kilt; Billy Connolly' are 文's own alternate names (same pattern as 木 listing 'wood'), not sub-parts -- empty primary (atomic) is right, cjkvi's ⿱亠乂 kept correctly as the labelled alternative",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1862",
@@ -33287,11 +33287,11 @@
    "寸",
    "文"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "寸,文 matches cjkvi ⿰文寸",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1863",
@@ -33307,11 +33307,11 @@
    "小",
    "文"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "糸,文 matches cjkvi ⿰糹文",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1864",
@@ -33325,11 +33325,11 @@
    "虫",
    "文"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "虫,文 matches cjkvi ⿰虫文",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1865",
@@ -33343,11 +33343,15 @@
    "王",
    "文"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "王",
+   "文",
+   "王"
+  ],
+  "note": "rendered 斑: two 王 flank 文 (王/文/王), not one -- cjkvi ⿲王文王 agrees; CSV components also only named one king (a genuine dropped child, not a Heisig-atomic case)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1866",
@@ -33358,11 +33362,11 @@
   "heisig_components": "sentence; plaid; kilt; Billy Connolly; two; fenceposts; cabers",
   "cjkvi_ids": "⿱文⿲丿二丨",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "prim-fenceposts,文 matches cjkvi ⿱文⿲丿二丨 exactly (primary); kept per the standing comment above prim-fenceposts in data.txt explaining why 剤/済/斎/粛 inherit or don't",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1867",
@@ -33373,11 +33377,11 @@
   "heisig_components": "adjust; adjusted; sentence; plaid; kilt; Billy Connolly; two; fenceposts; cabers; sword; sabre; saber",
   "cjkvi_ids": "⿰斉刂",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "斉,刀 matches cjkvi ⿰斉刂",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1868",
@@ -33388,11 +33392,11 @@
   "heisig_components": "water; water droplets; water pistol; adjust; adjusted; sentence; plaid; kilt; Billy Connolly; two; fenceposts; cabers",
   "cjkvi_ids": "⿰氵斉",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "水,斉 matches cjkvi ⿰氵斉, consistent with file's convention of 水 over 氵 for the radical",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1869",
@@ -33403,11 +33407,11 @@
   "heisig_components": "sentence; plaid; kilt; Billy Connolly; fenceposts; cabers; altar; show; two; small",
   "cjkvi_ids": "⿵齐示",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "斉,示 matches cjkvi ⿵齐示",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1870",
@@ -33418,11 +33422,16 @@
   "heisig_components": "rake; fenceposts; cabers; rice",
   "cjkvi_ids": "粛",
   "google_parts": null,
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "｜",
+   "ノ",
+   "米",
+   "⺕"
+  ],
+  "note": "rendered 粛: top-left is the ⺕ 'rake' shape (same as in 争/事/妻/隷), not 隶 (reach/slave/sieve) -- 隶 itself decomposes to ⺕+氺 and 粛 has no 氺 water-legs anywhere; Heisig's CSV components 'rake; fenceposts; cabers; rice' name no reach/slave sense. Left open since an earlier chunk (comment above prim-fenceposts) pending render budget -- resolved now",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1871",
@@ -33433,11 +33442,11 @@
   "heisig_components": "rice field; brains; sparkler; soil; dirt; ground",
   "cjkvi_ids": "⿳田⿱丷八土",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "prim-sparkler,土,田 matches cjkvi ⿳田⿱丷八土",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1872",
@@ -33448,11 +33457,11 @@
   "heisig_components": "white; dove; sparkler; tree; wood",
   "cjkvi_ids": "⿱⿴⿱丷八白木[GJK] ⿱⿴⿱丷八白朩[T]",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "prim-sparkler,木,白 matches cjkvi's nested ⿴/⿱ structure; sparkler+白+木 are the named recognizable pieces (CSV: white;dove;sparkler;tree;wood)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1873",
@@ -33468,11 +33477,11 @@
    "冫",
    "艾"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "艹,楽 matches cjkvi ⿱艹楽",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1874",
@@ -33483,11 +33492,11 @@
   "heisig_components": "mysterious; question mark; top hat; cocoon; sparkler; ten; needle",
   "cjkvi_ids": "⿱⿻玄⿱丷八十",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "rendered 率: top 丷, middle 玄-shape with legs crossing a 十 at bottom -- sparkler/十/玄 are the three named Heisig pieces despite cjkvi's ⿻ overlay notation; not inventing new flat parts from the overlay, just confirming the existing named ones render correctly",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1875",
@@ -33498,11 +33507,11 @@
   "heisig_components": "water; water droplets; water pistol; stop; footprint; sparkler",
   "cjkvi_ids": "⿰氵⿱止⿱丷八",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "prim-sparkler,止,水 matches cjkvi ⿰氵⿱止⿱丷八",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1876",
@@ -33517,11 +33526,11 @@
    "耳",
    "冫"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "prim-sparkler,扌,耳 matches cjkvi ⿰扌⿱耳⿱丷八",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1877",
@@ -33532,11 +33541,11 @@
   "heisig_components": "large; St. Bernard; box body",
   "cjkvi_ids": "央",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "冖,大 matches cjkvi atomic 央 with CSV 'box body' (冖) + 'St. Bernard' (大)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1878",
@@ -33552,11 +33561,11 @@
    "大",
    "冖"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "艹,央 matches cjkvi ⿱艹央",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1879",
@@ -33567,11 +33576,11 @@
   "heisig_components": "sun; day; centre; center; large; St. Bernard",
   "cjkvi_ids": "⿰日央",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "央,日 primary matches cjkvi ⿰日央",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1880",
@@ -33584,11 +33593,11 @@
   "google_parts": [
    "土"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "rendered 赤: 土 over a small/legs-like shape -- current 土,小 reasonably matches; CSV's extra 'sword;dagger' wording is intermediate reasoning toward the same final small-shape, not a separate drawn piece",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1881",
@@ -33602,11 +33611,11 @@
    "赤",
    "攵"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "攵,赤 matches cjkvi ⿰赤攵",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1882",
@@ -33620,11 +33629,11 @@
    "亠",
    "夂"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "亦,夂 matches cjkvi ⿱亦夂",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1883",
@@ -33635,11 +33644,11 @@
   "heisig_components": "wooden leg; mouth; stop; footprint; apple",
   "cjkvi_ids": "⿰𧾷亦",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "rendered 跡: clearly shows 亦 atop 足's foot shape; 亦,足 matches cjkvi ⿰𧾷亦",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1884",
@@ -33653,11 +33662,11 @@
    "虫",
    "亠"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "rendered 蛮: 亦 clearly on top of 虫; matches cjkvi ⿱亦虫",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1885",
@@ -33672,11 +33681,11 @@
    "ハ",
    "亠"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "rendered 恋: 亦 on top of 心; matches cjkvi ⿱亦心",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1886",
@@ -33687,11 +33696,11 @@
   "heisig_components": "water; water droplets; water pistol; apple; bow",
   "cjkvi_ids": "⿰氵弯",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "水,亦,弓 matches cjkvi ⿰氵弯 (弯=亦+弓)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1887",
@@ -33702,11 +33711,11 @@
   "heisig_components": "salad; sprout; shoot; animal legs; eight",
   "cjkvi_ids": "⿳龷由八[GJ] ⿳龷田八[TV]",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "八,由,龷 matches the J(apan) cjkvi variant ⿳龷由八[GJ] -- not the T/V variant using 田",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1888",
@@ -33717,11 +33726,11 @@
   "heisig_components": "tree; wood; yellow; salad; sprout; shoot; animal legs; eight",
   "cjkvi_ids": "⿰木黄",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "木,黄 matches cjkvi ⿰木黄",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1889",
@@ -33735,11 +33744,11 @@
    "扌",
    "巴"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "rendered 把: 巴 clearly on the right of 扌; matches cjkvi ⿰扌巴",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1890",
@@ -33750,11 +33759,11 @@
   "heisig_components": "bound up; mosaic",
   "cjkvi_ids": "⿱𠂊巴",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "live data.txt already 巴,𠂊 (dropped the old 巴,勹 alternate entirely in an earlier chunk, per the 𠂊-not-勹 trap in CLAUDE.md); matches cjkvi ⿱𠂊巴. Review's parts_at_start snapshot is stale",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1891",
@@ -33770,11 +33779,11 @@
    "小",
    "色"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "rendered 絶: 色 clearly to the right of 糸; matches cjkvi ⿰糹色",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1892",
@@ -33788,11 +33797,11 @@
    "豊",
    "色"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "色,豊 matches cjkvi ⿰豊色",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1893",
@@ -33803,11 +33812,11 @@
   "heisig_components": "moon; month; flesh; part of the body; mosaic",
   "cjkvi_ids": "⿰月巴[GJK] ⿰⺼巴[TV]",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "rendered 肥: 巴 clearly to the right of 月; matches cjkvi ⿰月巴",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1894",
@@ -33818,11 +33827,11 @@
   "heisig_components": "wicker basket; picnic basket",
   "cjkvi_ids": "甘",
   "google_parts": [],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "甘 is atomic; CSV 'wicker basket; picnic basket' are its own alternate names (same pattern as 木='wood'), not sub-parts. cjkvi also shows it atomic",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1895",
@@ -33838,11 +33847,11 @@
    "幺",
    "小"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "甘,糸 matches cjkvi ⿰糹甘",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1896",
@@ -33856,11 +33865,11 @@
    "甘",
    "木"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "甘,木 matches cjkvi ⿱甘木",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1897",
@@ -33875,11 +33884,11 @@
    "言",
    "木"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "某,言 matches cjkvi ⿰言某",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1898",
@@ -33890,11 +33899,11 @@
   "heisig_components": "woman; so-and-so; sweet; wicker basket; picnic basket; tree; wood",
   "cjkvi_ids": "⿰女某",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "某,女 matches cjkvi ⿰女某",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1899",
@@ -33905,11 +33914,11 @@
   "heisig_components": "bushel basket; hamper; animal legs; eight; lack; yawn",
   "cjkvi_ids": "⿰其欠",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "rendered 欺: 其 clearly on the left, 欠 on the right; matches cjkvi ⿰其欠",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1900",
@@ -33924,11 +33933,11 @@
    "ハ",
    "木"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "rendered 棋: 木 left, 其 right; matches cjkvi ⿰木其",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1901",
@@ -33943,11 +33952,11 @@
    "𠂉",
    "其"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "rendered 旗: 㫃 (banner, =方+𠂉) on the left, 其 nested bottom-right; matches cjkvi ⿰方⿱𠂉其 once 㫃 is read as the merged 方+𠂉 piece",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1902",
@@ -33958,11 +33967,11 @@
   "heisig_components": "bushel basket; hamper; animal legs; eight; moon; month; flesh; part of the body",
   "cjkvi_ids": "⿰其月",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "rendered 期: 其 left, 月 right; matches cjkvi ⿰其月",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1903",
