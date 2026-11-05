@@ -3839,8 +3839,12 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"rtk1128", "rtk260"}},
     "rtk1130": {"character": "易", "keyword": "easy",
                "expected_part_ids": {"rtk1128", "rtk12"}},
+    # 2026-11-05 full re-review: was 一,日,疔,勿 (stroke soup, the CLAUDE.md
+    # 昜-vs-日,一,勿 trap) promoted to the unlabelled primary over the
+    # coherent 昜,疒 alternate. Now 昜,疒 is primary, matching every other
+    # 昜-using host (rtk584 場, rtk717 揚, rtk1071 傷).
     "rtk1817": {"character": "瘍", "keyword": "swelling",
-               "expected_part_ids": {"kangxi104", "rtk1", "rtk1128", "rtk12"}},
+               "expected_part_ids": {"kangxi104", "prim-piggy-bank"}},
     "rtk2292": {"character": "吻", "keyword": "proboscis",
                "expected_part_ids": {"rtk11", "rtk1128"}},
     "rtk2509": {"character": "忽", "keyword": "in a moment",

@@ -2263,19 +2263,34 @@ rtk1807:腫:tumor:月,重
 rtk1808:勲:meritorious deed:動,灬
 rtk1809:働:work:亻,動
 rtk1810:種:species:禾,重
-rtk1811:衝:collide:｜,行,日,彳,ノ,重
+# 2026-11-05 full re-review: was stroke soup ｜,行,日,彳,ノ,重 -- double-
+# counted 行 (whole, plus its own 彳 half again) and three stray strokes
+# cjkvi (⿲彳重亍) and Heisig's column (boulevard;going;heavy;thousand;ri;
+# computer) don't account for. 行 is frame 938's own atomic primitive
+# ("going;boulevard"), already used whole with a component inserted in its
+# middle at rtk955 街 (行,圭) -- same positional pattern as 重 here.
+rtk1811:衝:collide:行,重
 rtk1812:薫:send forth fragrance:艹,重,灬
 rtk1813:病:ill:丙,疒
 rtk1814:痴:stupid:知,疔
 rtk1815:痘:pox:豆,疔
 rtk1816:症:symptoms:正,疒
-rtk1817:瘍:swelling:一,日,疔,勿;昜,疒
+# 2026-11-05 full re-review: primary was stroke soup 一,日,疔,勿 (the exact
+# CLAUDE.md trap: 昜, not 日,一,勿) while the coherent 昜,疒 sat unlabelled
+# as the alternate. cjkvi ⿸疒昜 confirms 昜+疒; CSV is empty (frame 2577,
+# past the core cutoff). Swapped so 昜,疒 is primary.
+rtk1817:瘍:swelling:昜,疒;一,日,疔,勿
 rtk1818:痩:get thin:疔,申,又
 rtk1819:疾:rapidly:矢,疔
 rtk1820:嫉:jealous:女,疾
 rtk1821:痢:diarrhea:利,疒;禾,疔
 rtk1822:痕:mark:艮,疔
-rtk1823:疲:exhausted:皮,又,疔;疒,皮
+# 2026-11-05 full re-review: primary was flattened 皮,又,疔 (splits 皮 into
+# 皮+又, double-counting -- 又 is already inside 皮's own shape) while the
+# coherent 疒,皮 sat as the alternate. cjkvi ⿸疒皮 (2 parts) and Heisig's
+# components (sickness;hospital;pelt;branch;ten;needle;crotch;hook = 疒 +
+# 皮's own full expansion) both confirm 疒+皮. Swapped so 疒,皮 is primary.
+rtk1823:疲:exhausted:疒,皮;皮,又,疔
 # 2026-10-23 full re-review shape-family follow-up (see rtk766/rtk767):
 # primary restated 殳's own cjkvi sub-parts (几,又) redundantly beside 殳
 # itself. cjkvi: 疫 ⿸疒殳 -> 殳,疔 (疔 kept: this file's established
@@ -2304,7 +2319,12 @@ rtk1843:瞭:clear:尞,目
 rtk1844:寮:dormitory:宀,尞
 rtk1845:療:heal:尞,疒
 rtk1846:彫:carve:周,彡
-rtk1847:形:shape:廾,彡,ノ,二,一
+# 2026-11-05 full re-review: was 廾,彡,ノ,二,一 -- three stray strokes left
+# over once 廾 and 彡 already account for the whole glyph. Render confirms
+# the left side matches 廾 ("two hands", kangxi55) exactly, not the
+# lookalike 开 cjkvi's own IDS (⿰开彡) uses; CSV components for this frame
+# is literally "two hands" (廾's own name).
+rtk1847:形:shape:廾,彡
 rtk1848:影:shadow:景,彡
 rtk1849:杉:cedar:木,彡
 rtk1850:彩:coloring:采,彡

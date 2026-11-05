@@ -26508,3 +26508,97 @@ needed on rtk1756/rtk2449 before either is touched again: keep the
 2026-08-30 "reference 東 as a whole part" convention for 柬-shaped
 compounds, or switch to spelling 柬's strokes out (and decide whether `柬`
 should get its own `prim-{slug}` now that it has two known hosts).
+
+## 2026-11-05 — full re-review: frames 1803–1852
+
+44 keep, 5 fixed, 1 needs-render (rtk1818). Rendered every kanji in the
+chunk (`検 倹 㑒`; `重 動 腫 勲 働 種 衝 薫 千 里 力 月 灬 行 彳`; `疒 疔 病
+痴`; `叟 臼 申 日 丨 又 痩 捜 艘`; `彦 彡 立 厂 亠 丷 产`; `形 廾 开 彡`) via
+`render_glyphs.py` in six batches and cross-checked each against
+cjkvi-ids and Heisig's components column, plus `audit_weak_evidence.py
+--host` on the two ambiguous hosts (痩, 捜 — both clean: no ⿻/⿴ overlay
+or atomicity warning at the top IDS level, since the overlay in question
+is one level deeper, inside 叟 itself, which isn't a row here).
+
+Five fixes, all the same "right level, not stroke soup" class
+(CLAUDE.md §4):
+
+- **rtk1811 衝** (`｜,行,日,彳,ノ,重` → `行,重`): double-counted 行 (both
+  whole and as its own 彳 half again) plus three stray strokes neither
+  cjkvi (`⿲彳重亍`) nor Heisig's column (`boulevard; going; heavy;
+  thousand; ri; computer`) accounts for. 行 is frame 938's own atomic
+  primitive ("going;boulevard"), already used whole with a component
+  inserted into its middle at rtk955 街 (`行,圭`) — same positional
+  pattern as 重 here. Grepped for other hosts combining 彳 and 行 in one
+  row; none found, so no further shape-family fix needed.
+- **rtk1817 瘍** (primary/alt swapped: `一,日,疔,勿;昜,疒` →
+  `昜,疒;一,日,疔,勿`): the stroke-soup half was sitting as the unlabelled
+  primary — literally the `昜, not 日,一,勿` trap CLAUDE.md names by
+  example — while the coherent `昜,疒` sat demoted as the alternate.
+  cjkvi `⿸疒昜` confirms `昜+疒`; CSV components empty (frame 2577, past
+  the 6th-edition core cutoff, so no Heisig evidence either way, decided
+  from render + cjkvi alone). `昜` (`prim-piggy-bank`) is an established
+  primitive already used whole in rtk584 場, rtk717 揚, rtk1071 傷.
+- **rtk1823 疲** (primary/alt swapped: `皮,又,疔;疒,皮` → `疒,皮;皮,又,疔`):
+  same pattern — primary split 皮 into `皮,又` (double-counting, since 又
+  is already inside 皮's own shape), while the coherent `疒,皮` sat as the
+  alternate. cjkvi `⿸疒皮` (2 parts) and Heisig's components (`sickness;
+  hospital; pelt; branch; ten; needle; crotch; hook` = 疒 + 皮's own full
+  expansion) both confirm `疒+皮`.
+- **rtk1847 形** (`廾,彡,ノ,二,一` → `廾,彡`): three stray strokes left
+  over once 廾 and 彡 already account for the whole glyph. Render
+  confirms the left side matches 廾 ("two hands", kangxi55, and the CSV's
+  own component name for this frame) exactly — not the lookalike 开 that
+  cjkvi's own IDS (`⿰开彡`) uses for its encoding. Grepped for other rows
+  using 廾; none, so this is isolated.
+- **rtk1852 彦**: turned out already fixed (2026-10-23, same "lid" audit
+  session) to `立,厂,彡` — the `parts_at_start` value shown by
+  `full_review.py` (`丷,立,亠,厂,彡`) is a snapshot frozen at
+  `--init` time (2026-10-21) and doesn't reflect later edits. Caught
+  this before touching the file by grepping current `data.txt` first;
+  recorded as `keep`, not `fixed`, since nothing changed.
+
+One false alarm worth recording so it isn't re-investigated: the live
+`kanji.db`'s stored parts for rtk1824 疫 are `殳, weapon, 疔`, which looked
+like drift from `data.txt`'s `殳,疔` (2 parts, no "weapon") until
+rebuilding a fresh shadow DB from source reproduced the exact same three
+parts. `expand_part_terms()` (`database.py`) auto-appends a kanji-
+character part's own keyword at import time for search purposes — 殳's
+keyword is "weapon" — so this is expected, not a bug. No `data.txt`
+change, no sync action needed for this row.
+
+**rtk1818 痩** (`疔,申,又`) is the one `needs-render`: cjkvi's own IDS for
+叟 is `⿱⿻臼丨又` (overlay at the top), and rendering 叟 beside 臼/申/日
+shows its top matching 臼's flared-mortar shape more closely than 申's
+full rectangle-with-protruding-stick. But Heisig's components column
+(`Buddha's hand; monkey; sun; day; stick; crotch`) reads as 申 used whole
+("Buddha's hand; monkey" as its two names in this context) and then
+recursively expanded into its own `sun;day;stick` — which is exactly what
+the current row's 申 represents. Render evidence and the Heisig-naming
+reading point different ways and neither resolves the other; the
+2026-10-23 fix of the same 叟 shape on rtk2858 艘 flagged this identical
+ambiguity on rtk1201 捜 and rtk1818 without settling it either. Left for
+a person to look at both rtk1201 and rtk1818 together.
+
+Checks: baseline `pytest -q` 108 passed, `./regression_fresh.sh`
+1331/1331, `audit_radicals.py` 0 undefined terms — all before touching
+anything (plus `backup_db.py` first). After the four real edits
+(rtk1811/1817/1823/1847 — rtk1852 needed none), `regression_fresh.sh`
+failed one pin: `rtk1817` expected the old stroke-soup resolution
+(`kangxi104, rtk1, rtk1128, rtk12`). Updated the pin in place (with a
+comment) to the new primary's resolution (`kangxi104, prim-piggy-bank`),
+confirmed correct by precedent (rtk584/rtk717/rtk1071 all resolve 昜 the
+same way). Re-ran all three clean. `sync_system_data.py --dry-run`
+showed 6 decompositions replaced (the primary+alternate pair each for
+1817 and 1823, one each for 1811 and 1847) and the same pre-existing 286
+orphan system `ja-kanji` ids this box's DB has carried for a while
+(primitives/legacy `rad*.*` ids no longer in source — unrelated to this
+chunk, not touched); ran for real, re-checked all three clean again.
+
+No deploy from here — a deployer needs `git pull` + `sync_system_data.py`
+on prod to pick up today's four fixes (衝, 瘍, 疲, 形).
+
+`full_review.py --pending-count`: 1147/3000.
+
+**Next**: continue the full re-review at frame 1853. rtk1818/rtk1201 need
+an owner look (see above) before either is touched again.

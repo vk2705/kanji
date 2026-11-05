@@ -32214,11 +32214,11 @@
   "heisig_components": "tree; wood; awl; fit; meeting; umbrella; mouth; person",
   "cjkvi_ids": "⿰木㑒",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "検 + 木 matches cjkvi ⿰木㑒 and Heisig's awl;fit;meeting;umbrella;mouth;person (㑒's own expansion)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1804",
@@ -32232,11 +32232,11 @@
    "亻",
    "僉"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "倹 亻+㑒 matches cjkvi ⿰亻㑒, same 㑒 family as rtk1803",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1805",
@@ -32247,11 +32247,11 @@
   "heisig_components": "thousand; computer; rice field; brains; soil; dirt; ground",
   "cjkvi_ids": "重",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "重 千+里 matches Heisig thousand+ri; cjkvi shows 重 atomic but that doesn't contradict Heisig's pedagogical split",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1806",
@@ -32269,11 +32269,11 @@
    "里",
    "ノ"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "動 重+力 matches cjkvi ⿰重力 and Heisig heavy+muscle;arnold",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1807",
@@ -32290,11 +32290,11 @@
    "里",
    "ノ"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "腫 月+重 matches cjkvi ⿰月重",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1808",
@@ -32305,11 +32305,11 @@
   "heisig_components": "move; heavy; thousand; ri; computer; power; muscle; arnold; oven-fire; barbecue",
   "cjkvi_ids": "⿱動灬",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "勲 動+灬 matches cjkvi ⿱動灬",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1809",
@@ -32323,11 +32323,11 @@
    "亻",
    "動"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "働 亻+動 matches cjkvi ⿰亻動",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1810",
@@ -32344,11 +32344,11 @@
    "里",
    "ノ"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "種 禾+重 matches cjkvi ⿰禾重",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1811",
@@ -32359,11 +32359,14 @@
   "heisig_components": "boulevard; going; heavy; thousand; ri; computer",
   "cjkvi_ids": "⿲彳重亍",
   "google_parts": null,
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "行",
+   "重"
+  ],
+  "note": "Was stroke soup ｜,行,日,彳,ノ,重 -- double-counted 行 (both whole and as its own 彳 half) plus three stray strokes unaccounted for by Heisig's column (boulevard;going;heavy;thousand;ri;computer) or cjkvi (⿲彳重亍). 行 is frame 938's own atomic primitive ('going;boulevard'), already used whole with an inserted middle component in rtk955 街 (行,圭) -- same positional pattern as 重 inserted into 衝. Fixed to 行,重, matching that precedent.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1812",
@@ -32374,11 +32377,11 @@
   "heisig_components": "flowers; heavy; thousand; ri; computer; oven-fire; barbecue",
   "cjkvi_ids": "⿱艹𤋱",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "薫 艹+重+灬 matches cjkvi ⿱艹𤋱 (𤋱=重+灬) and Heisig's full expansion",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1813",
@@ -32392,11 +32395,11 @@
    "疒",
    "丙"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "病 丙+疒 matches cjkvi ⿸疒丙",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1814",
@@ -32410,11 +32413,11 @@
    "疒",
    "知"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "痴 知+疔(=疒 alias) matches cjkvi ⿸疒知",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1815",
@@ -32428,11 +32431,11 @@
    "疒",
    "豆"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "痘 豆+疔(=疒) matches cjkvi ⿸疒豆",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1816",
@@ -32446,11 +32449,11 @@
    "疒",
    "正"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "症 正+疒 matches cjkvi ⿸疒正",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1817",
@@ -32468,11 +32471,14 @@
    "疒",
    "勿"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "昜",
+   "疒"
+  ],
+  "note": "Primary was stroke soup 一,日,疔,勿 (exactly the CLAUDE.md 昜-vs-日,一,勿 trap) while the coherent reading 昜,疒 was demoted to an unlabelled-losing alternate. cjkvi ⿸疒昜 confirms 昜+疒 structurally; CSV components empty (frame 2577, past core range, no evidence either way). Swapped order: 昜,疒 is now primary, 一,日,疔,勿 kept as the alternate.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1818",
@@ -32483,11 +32489,11 @@
   "heisig_components": "sickness; hospital; Buddha’s hand; monkey; sun; day; stick; crotch",
   "cjkvi_ids": "⿸疒叟",
   "google_parts": null,
-  "status": "pending",
+  "status": "needs-render",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "叟's own cjkvi IDS is ⿱⿻臼丨又: render shows 叟's top matching 臼 (flared mortar sides), not a plain box -- but Heisig's components column (Buddha's hand;monkey;sun;day;stick;crotch) strongly implies 申 (monkey) used whole, recursively expanded to its own sun;day;stick. Current row uses 申, matching the established but unresolved reading already flagged in the rtk2858 艘 fix comment (2026-10-23), which itself left this exact ambiguity open. Conflicting evidence, no new render resolves it -- leaving for a person to look at alongside rtk1201 捜 (same 叟 shape, same ambiguity).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1819",
@@ -32501,11 +32507,11 @@
    "疒",
    "矢"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "疾 矢+疔(=疒) matches cjkvi ⿸疒矢",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1820",
@@ -32519,11 +32525,11 @@
    "女",
    "疾"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "嫉 女+疾 matches cjkvi ⿰女疾",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1821",
@@ -32537,11 +32543,11 @@
    "疒",
    "利"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "痢 primary 利+疒 already matches cjkvi ⿸疒利; 禾,疔 alt kept as-is",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1822",
@@ -32555,11 +32561,11 @@
    "艮",
    "疒"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "痕 艮+疔(=疒) matches cjkvi ⿸疒艮",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1823",
@@ -32574,11 +32580,14 @@
    "又",
    "疒"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "疒",
+   "皮"
+  ],
+  "note": "Primary was flattened 皮,又,疔 (splits 皮 into 皮+又, double-counting since 又 is already inside 皮's own shape) while coherent 疒,皮 was demoted to the alternate. cjkvi ⿸疒皮 (2 parts only) and Heisig's components (sickness;hospital;pelt;branch;ten;needle;crotch;hook = 疒 + 皮's own full expansion) both confirm 疒+皮. Swapped order: 疒,皮 now primary, 皮,又,疔 kept as alternate.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1824",
@@ -32594,11 +32603,11 @@
    "几",
    "又"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "殳,疔 already coherent, matches cjkvi ⿸疒殳 and Heisig's cruise missile;missile;wind;crotch (殳's own expansion). Correction: I initially misread the live DB's stored parts (殳, weapon, 疔) as drift/a stray edit -- it's not; expand_part_terms() auto-appends a kanji-character part's own keyword at import time (殳's keyword is 'weapon'), confirmed identical in a freshly rebuilt shadow DB. No data.txt change, no sync needed for this row.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1825",
@@ -32609,11 +32618,11 @@
   "heisig_components": "sickness; hospital; pogo stick; chop-seal; hanko; utilise; utilize",
   "cjkvi_ids": "⿸疒甬",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "痛 甬+疒 matches cjkvi ⿸疒甬",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1826",
@@ -32627,11 +32636,11 @@
    "疒",
    "辟"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "癖 疔(=疒)+辟 matches cjkvi ⿸疒辟",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1827",
@@ -32642,11 +32651,11 @@
   "heisig_components": "box; young; flowers; right; by one’s side; mouth",
   "cjkvi_ids": "⿷匚若[GJK] ⿷匸若[TV]",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "匿 匚+若 matches cjkvi ⿷匚若[GJK], 匚 correct for Japanese (not TV's 匸)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1828",
@@ -32657,11 +32666,11 @@
   "heisig_components": "box; axe",
   "cjkvi_ids": "⿷匚斤",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "匠 斤+匚 matches cjkvi ⿷匚斤",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1829",
@@ -32675,11 +32684,11 @@
    "匚",
    "矢"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "医 矢+匚 matches cjkvi ⿷匚矢[GJK]",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1830",
@@ -32693,11 +32702,11 @@
    "儿",
    "匚"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "匹 儿+匚 matches cjkvi ⿷匚儿[GJK]",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1831",
@@ -32712,11 +32721,11 @@
    "丶",
    "ノ"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "区 㐅+匚 matches cjkvi ⿷匚㐅[GJK]",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1832",
@@ -32727,11 +32736,11 @@
   "heisig_components": "tree; wood; ward; box; sheaf",
   "cjkvi_ids": "⿰木区",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "枢 区+木 matches cjkvi ⿰木区",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1833",
@@ -32749,11 +32758,11 @@
    "几",
    "又"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "殴 区+殳 matches cjkvi ⿰区殳",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1834",
@@ -32769,11 +32778,11 @@
    "ノ",
    "丶"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "欧 区+欠 matches cjkvi ⿰区欠",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1835",
@@ -32787,11 +32796,11 @@
    "扌",
    "卬"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "抑 扌+卬 matches cjkvi ⿰扌卬",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1836",
@@ -32805,11 +32814,11 @@
    "亻",
    "卬"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "仰 亻+卬 matches cjkvi ⿰亻卬",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1837",
@@ -32823,11 +32832,11 @@
    "込",
    "卩"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "迎 卬+辶 matches cjkvi ⿺辶卬",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1838",
@@ -32841,11 +32850,11 @@
    "癶",
    "豆"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "登 癶+豆 matches cjkvi ⿱癶豆",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1839",
@@ -32859,11 +32868,11 @@
    "氵",
    "登"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "澄 水+登 matches cjkvi ⿰氵登 (水/氵 same primitive, established convention throughout data.txt)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1840",
@@ -32878,11 +32887,11 @@
    "儿",
    "癶"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "発 二+儿+癶 matches cjkvi ⿱癶⿻二儿; Heisig names 二 and 儿 separately despite the ⿻ overlay, matching his own components list",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1841",
@@ -32898,11 +32907,11 @@
    "广",
    "癶"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "廃 广+発 matches cjkvi ⿸广発",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1842",
@@ -32916,11 +32925,11 @@
    "亻",
    "尞"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "僚 亻+尞 matches cjkvi ⿰亻尞",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1843",
@@ -32934,11 +32943,11 @@
    "目",
    "尞"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "瞭 目+尞 matches cjkvi ⿰目尞",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1844",
@@ -32952,11 +32961,11 @@
    "宀",
    "尞"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "寮 宀+尞 matches cjkvi ⿱宀尞",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1845",
@@ -32970,11 +32979,11 @@
    "疒",
    "尞"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "療 疒+尞 matches cjkvi ⿸疒尞",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1846",
@@ -32988,11 +32997,11 @@
    "周",
    "彡"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "彫 周+彡 matches cjkvi ⿰周彡",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1847",
@@ -33003,11 +33012,14 @@
   "heisig_components": "two hands",
   "cjkvi_ids": "⿰开彡",
   "google_parts": null,
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "廾",
+   "彡"
+  ],
+  "note": "Was 廾,彡,ノ,二,一 -- three stray strokes left over after 廾 and 彡 already account for the whole glyph. Render confirms the left side matches 廾 ('two hands', kangxi55) exactly, not the lookalike 开 that cjkvi's IDS (⿰开彡) uses for its own encoding; CSV components for frame 1847 is literally 'two hands' (廾's own name). Fixed to 廾,彡.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1848",
@@ -33021,11 +33033,11 @@
    "景",
    "彡"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "影 景+彡 matches cjkvi ⿰景彡",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1849",
@@ -33036,11 +33048,11 @@
   "heisig_components": "tree; wood; shape",
   "cjkvi_ids": "⿰木彡",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "杉 木+彡 matches cjkvi ⿰木彡",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1850",
@@ -33054,11 +33066,11 @@
    "采",
    "彡"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "彩 采+彡 matches cjkvi ⿰采彡",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1851",
@@ -33072,11 +33084,11 @@
    "章",
    "彡"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "彰 章+彡 matches cjkvi ⿰章彡",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1852",
@@ -33091,11 +33103,11 @@
    "厂",
    "彡"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "parts_at_start snapshot (丷,立,亠,厂,彡) was stale -- data.txt already reads 立,厂,彡, fixed in the 2026-10-23 'lid' audit for the same reason I independently re-derived (丷,亠 are 立's own alt-decomp strokes, redundant alongside 立 itself). No change needed.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1853",
