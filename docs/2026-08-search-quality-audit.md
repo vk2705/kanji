@@ -26334,3 +26334,108 @@ not this run's to decide: whether this job should go idle until
 previously-blocked `needs-render` codepoint becoming renderable on this
 machine) surfaces a new backlog, or whether a next phase is queued
 elsewhere. Flagging it again here rather than guessing at an answer.
+
+## 2026-11-05 — full re-review: frames 1702–1752, plus one `audit_overflatten` fix
+
+Before starting the chunk, `audit_overflatten.py` (part of this routine's
+standard pre-flight suite, run against a fresh seed) reported 1 finding
+unrelated to today's frame range:
+
+- **rtk2868 嘉 (applaud)**: was `口,士,力` — a double problem, not just one
+  shattered compound. `力+口` flattened `加` (rtk932, itself `口+力`) *and*
+  dropped `豆` from `壴` (prim-drum-stand, `士+豆`), leaving a bare `士`
+  standing in for the whole top. cjkvi-ids gives `嘉 = ⿱壴加`; the CSV
+  `components` column is empty for this frame (`id_5th_ed` 2852, well
+  outside the 1–2042 core range, so per CLAUDE.md that's absence-of-data,
+  not atomicity evidence). Rendered `嘉` beside `壴`/`加`/`士`/`豆`/`力`/`口`:
+  the top is clearly `壴`'s `士`-over-`豆`, the bottom is `加`'s `力`-`口`
+  side by side. Reordered to `壴,加` (top-first), matching the existing
+  `鼓=壴,支` / `喜=壴,口` convention for this primitive.
+
+50/50 of today's chunk decided (frames 1702–1752; `rtk1723` was skipped —
+already resolved by a prior session's shape-family fix on 2026-11-03), 4
+fixed, 0 needs-render:
+
+- **rtk1709 乗 (ride)**: was `｜,ノ,一,禾,八` — a lookalike substitution plus
+  a phantom part. Rendered `乗` solo and against `丰`/`拝`/`寿`: the middle
+  ladder (3 bars + through-vertical) is pixel-for-pixel the established
+  `丰` primitive (used the same way in `拝=扌,一,丰` / `寿=丰,寸`), not a
+  bare `｜+一` pair. `禾`, rendered separately, is a visibly different
+  shape (a cross with one diagonal slash) not drawn here at all — it only
+  entered the row because Heisig's CSV names the frame's components
+  "wheat;cereal;silage" (naming the ladder by `禾`'s own keyword rather
+  than its real Unicode identity), the keyword-vs-glyph trap CLAUDE.md
+  warns about. New reading: `ノ,丰,八`.
+- **rtk1722 野 (plains)**: primary was `矛,里,亅` (with `予,里` demoted to
+  an alternate). cjkvi gives only `⿰里予`, and Heisig's own components
+  text ("computer;beforehand" — `里`'s alias + `予`'s alias) match the
+  alternate, not the primary. Rendered `矛` vs `予` vs `野`'s right half
+  side by side: `野` has `予`'s full stroke set (including the short
+  right-side flick) and none of `矛`'s extra long lower-left sweep stroke
+  that distinguishes the two — the former primary misidentified a
+  near-lookalike (`矛`, one stroke removed from `予`) and patched the gap
+  with a bare `亅`. Promoted `予,里` to primary; the old reading was simply
+  wrong, not a legitimate second alternate, so it was dropped rather than
+  kept alongside. (`矛` itself, rtk1311, has its own open question — its
+  current row is just `予`, which on this same evidence looks incomplete —
+  left for when frame 1311 comes up in the review, not touched here.)
+- **rtk1740 南 (south)**: was `十,丷,冂` — missing a child. Rendered `南` at
+  high zoom: inside the `冂` box, below `丷`, is a 2-bar+through-vertical
+  shape identical to `干`'s own render (`干=十,一`). cjkvi's `⿱十⿵冂𢆉` names
+  the inner piece `𢆉`, which this same chunk's `rtk1622 幸` entry (from
+  the prior session, 2026-11-04) already identified as `⿱丷干` — the exact
+  `丷+干` pair `南` shares. Heisig's "ten;needle;belt;happiness;ten;
+  needle;stand up;vase" reads as `十`(top)+`冂`(belt)+[the shared `丷+干`
+  compound, named loosely via the `幸` frame ("happiness") and via `立`'s
+  aliases for the visually-similar bare `丷` — the same CSV labelling
+  quirk already documented for other hosts in this file's 2026-10-23 "lid
+  audit" comments] — i.e. two separate `十`-shaped elements, matching the
+  render's two distinct crosses. Added `干`.
+- **rtk1750 開 (open)**: was `一,門,廾,二,ノ` — two phantom parts. Rendered
+  `開` at high zoom: inside `門` is exactly one horizontal bar over `廾`'s
+  two legs (the real character `开`, which cjkvi cites directly: `⿵門开`),
+  with no second horizontal bar and no diagonal stroke drawn anywhere.
+  Heisig's components for this frame are just "gates;two hands" (`門+廾`)
+  — no third or fourth concept. Dropped `二` and `ノ`.
+
+Two rows got real scrutiny but were kept as-is, since they looked similar
+to the `乗` case at first glance but didn't hold up on a closer render:
+
+- **rtk1704 華 / rtk1705 垂**: both have a ladder-like lower structure that
+  invited comparison to `丰` (used in the `乗` fix above). Rendered both at
+  high zoom: `垂`'s ladder is 4 bars with the vertical stopping flush at
+  the last bar (no overhang either end) — a different shape from `丰`'s
+  3-bar, both-ends-overhang pattern — so swapping in `丰` here would have
+  been the lookalike mistake, not a fix. `華`'s ladder is 4 bars with the
+  vertical overhanging only below. Current rows (`｜,一,艹` / `｜,ノ,一`)
+  already name every distinct shape present; per the house convention of
+  not repeating a primitive name per occurrence (`晶`/`昌`/`林` all list
+  `日`/`木` once despite 2–3 copies in the glyph), no split was missing.
+- **rtk1728 西 (west)**: Heisig's second component term, "four", has no
+  corresponding alias anywhere in this database, and cjkvi's lower piece
+  (`𠁤`) is a real but singly-used codepoint with no reusable identity
+  elsewhere. `audit_missing_children.py` does not flag this host. Rendered
+  `西`/`一`/`𠁤`/`覀` to confirm `一` (the top bar) is correctly named;
+  left the box-with-legs shape below it unlabelled rather than inventing a
+  new primitive for a single, foundational, heavily-depended-on host
+  (dozens of `覀`-bearing kanji below it in this same chunk) on a guess.
+
+Checks (fresh-seeded DB, as this routine always runs from a scratch
+container): `test_regression_fixes.py` failed once as expected —
+`rtk1740` gained `rtk1777` (干) — pin corrected in place with a comment
+explaining why; re-ran clean, **1331/1331** regression checks passed.
+`pytest -q`: 83 passed. `audit_overflatten.py`: 0 (the `嘉` fix above was
+the only one). `audit_self_reference.py`: 0. `audit_radicals.py`: 0
+undefined terms. `audit_phantom_parts.py --in-csv-range`: 9 phantom parts
+across 8 kanji, all pre-existing and outside today's frame range (図 斎 能
+北 憂 不 印 甚) — the known backlog, untouched today. `audit_primary_choice.py`:
+0. Frontend: `npm run lint` (oxlint) clean, `npm run build:prod` succeeded.
+
+No deploy from here — a deployer needs `git pull` + `sync_system_data.py`
+on prod to pick up today's five fixes (嘉, 乗, 野, 南, 開).
+
+`full_review.py --pending-count`: 1247/3000.
+
+**Next**: continue the full re-review at frame 1753. When frame 1311 (矛)
+comes up, revisit it against today's 野 finding — its current row (`予`
+alone) looks incomplete on the same render evidence.

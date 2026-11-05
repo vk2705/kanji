@@ -30363,11 +30363,11 @@
    "二",
    "大"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "口+𦰩 matches cjkvi J variant (⿰口𦰩) and the already-vetted prim-scarecrow (confirmed in the prior 1652-1701 chunk via 漢).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1703",
@@ -30386,11 +30386,11 @@
    "亠",
    "二"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "隹+𦰩 matches cjkvi J variant (⿰𦰩隹); same already-vetted scarecrow primitive as 嘆.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1704",
@@ -30405,11 +30405,11 @@
    "一",
    "艾"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi gives only ⿱艹⑦ (circled-number placeholder, not an identifier per CLAUDE.md). Rendered 華 at high zoom: below 艹 is a vertical through 4 bars with the vertical poking out below the last bar. Current ｜,一,艹 covers every distinct shape present (艹 top, ｜ the through-stroke, 一 the bars); per the established house convention of not repeating a shape name for each occurrence (晶/昌/林 all list 日/木 once despite 2-3 copies), no further split needed. Heisig's 'flowers;silage;ten;needle' names nothing not already covered by 艹+一+｜.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1705",
@@ -30424,11 +30424,11 @@
    "ノ",
    "一"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered 垂 at high zoom: ノ top, then a vertical through 4 bars that stops flush at the bottom bar (no overhang either end) -- distinct from 丰's 3-bar+both-overhang shape, so re-using the 丰 primitive here would be a lookalike substitution, not a fix. ｜,ノ,一 already names every distinct shape present (house convention: don't repeat 一 per bar, see 晶/昌/林). cjkvi's ⿳丿⑥一 is consistent (top ノ, bottom a lone 一, middle an unnamed placeholder covered by ｜+一).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1706",
@@ -30442,11 +30442,11 @@
    "口",
    "垂"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "口+垂, matches cjkvi ⿰口垂 exactly; 垂 itself re-verified this chunk.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1707",
@@ -30460,11 +30460,11 @@
    "目",
    "垂"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "目+垂, matches cjkvi ⿰目垂 exactly.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1708",
@@ -30478,11 +30478,11 @@
    "金",
    "垂"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "金+垂, matches cjkvi ⿰金垂 exactly.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1709",
@@ -30499,11 +30499,15 @@
    "禾",
    "ハ"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "ノ",
+   "丰",
+   "八"
+  ],
+  "note": "Was ｜,ノ,一,禾,八 -- a lookalike substitution plus a phantom part. Rendered 乗 solo and against 丰/拝/寿: the middle ladder (3 bars + through-vertical) is pixel-for-pixel the same shape as the already-established 丰 primitive (used the same way in 拝=扌,一,丰 and 寿=丰,寸), not the generic ｜+一 pair. And 禾 (rendered separately) is a materially different shape -- a cross with one diagonal slash, nothing like 乗's ladder -- so it was never actually drawn here; it only entered the row because Heisig's CSV names the frame's components 'wheat;cereal;silage' (i.e. calls the ladder shape by 禾's keyword/alias rather than by its real Unicode identity), exactly the keyword-vs-glyph trap CLAUDE.md warns about. New reading: ノ (top stroke) + 丰 (the ladder) + 八 (the splayed bottom legs), all confirmed against the render.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1710",
@@ -30518,11 +30522,11 @@
    "米",
    "刂"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "References 乗 whole (乗,刀); cjkvi ⿰乗刂 confirms, no re-decomposition needed.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1711",
@@ -30536,11 +30540,11 @@
    "个",
    "一"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "亼+一 matches Heisig's own 'meeting;umbrella;one' term-for-term (亼's aliases are meeting/umbrella) and cjkvi's J variant ⿱亼㇇ is structurally consistent.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1712",
@@ -30554,11 +30558,11 @@
    "今",
    "口"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "口+今 matches cjkvi ⿱今口 and Heisig 'now;clock;mouth'.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1713",
@@ -30572,11 +30576,11 @@
    "今",
    "貝"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "今+貝 matches cjkvi ⿱今貝 exactly; CSV components empty but id_5th_ed is well outside the 1-2042 core range so that's absence-of-data, not atomicity evidence, and cjkvi+render both independently confirm the current split anyway.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1714",
@@ -30587,11 +30591,11 @@
   "heisig_components": "mouth; now; clock",
   "cjkvi_ids": "⿰口今",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "口+今 matches cjkvi ⿰口今 and Heisig 'mouth;now;clock'.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1715",
@@ -30607,11 +30611,11 @@
    "心",
    "个"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "今+心 matches cjkvi ⿱今心 and Heisig 'now;clock;heart'.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1716",
@@ -30625,11 +30629,11 @@
    "扌",
    "念"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "念+扌 matches cjkvi ⿰扌念; Heisig's 'finger;fingers;wish;wishbone;now;clock;heart' is exactly 扌's aliases + 念's own aliases ('wish,wishbone' are 念's own aliases), nothing extra.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1717",
@@ -30644,11 +30648,11 @@
    "王",
    "今"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered 琴/王/玨/今: top of 琴 is two 王 side by side (=玨, matching cjkvi ⿱玨今), named once per house convention (see 晶/昌/林); bottom is plain 今. Matches.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1718",
@@ -30663,11 +30667,11 @@
    "今",
    "云"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "阝+今+云 matches cjkvi ⿰阝侌ー(侌=今+云, no dedicated row so flattened directly, consistent with how 云 is already its own established primitive and not re-split into 二,厶).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1719",
@@ -30682,11 +30686,11 @@
    "一",
    "亅"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered 予/龴(マ)/亅/𠄐 side by side: 予's bottom hook matches 亅's simple vertical+foot exactly; cjkvi's suggested 𠄐 codepoint renders as a visibly different, more complex shape (extra diagonal) that does NOT match what's drawn -- a case of the cjkvi codepoint choice not matching the render, so keeping 亅 (not switching to 𠄐) is correct.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1720",
@@ -30703,11 +30707,11 @@
    "マ",
    "一"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "予+广 matches cjkvi ⿸广予 and Heisig 'cave;beforehand'.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1721",
@@ -30721,11 +30725,11 @@
    "予",
    "頁"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "予+頁 matches cjkvi ⿰予頁; Heisig's long tail is just 頁's own already-expanded sub-parts, not new pieces for this row.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1722",
@@ -30740,11 +30744,14 @@
    "里",
    "亅"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "予",
+   "里"
+  ],
+  "note": "Was 矛,里,亅 as primary (with 予,里 demoted to an alternate). cjkvi gives only ⿰里予 (no region split), and Heisig's own components text is 'computer;beforehand' -- computer is 里's own alias (rtk185) and beforehand is 予's -- matching the alternate exactly, not the primary. Rendered 矛 vs 予 vs 野's right half side by side: 野's right side has 予's full stroke set (top hook, crossing diagonal, vertical+foot, and the short right-side flick) with no sign of 矛's extra long lower-left sweep stroke that distinguishes it from 予. So the former primary misidentified 野's right component as 矛 (a near-identical lookalike one stroke removed from 予) and then patched around the missing top strokes with a bare 亅. Promoted 予,里 to primary; the old 矛,里,亅 reading is simply wrong, not a legitimate alternate, so it was dropped rather than kept as a second alternate. (矛 itself, rtk1311, has its own unrelated row and its own open question -- its own current parts listing is just '予' -- worth a look when frame 1311 comes up in the review, not touched here.)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1723",
@@ -30781,11 +30788,11 @@
    "女",
    "兼"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "兼+女 matches cjkvi ⿰女兼; 兼 itself already fixed in a prior session (2026-11-03 note above this row).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1725",
@@ -30799,11 +30806,11 @@
    "金",
    "兼"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "金+兼 matches cjkvi ⿰金兼.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1726",
@@ -30817,11 +30824,11 @@
    "言",
    "兼"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "兼+言 matches cjkvi ⿰言兼.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1727",
@@ -30835,11 +30842,11 @@
    "广",
    "兼"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "兼+广 matches cjkvi ⿸广兼.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1728",
@@ -30850,11 +30857,11 @@
   "heisig_components": "one; four",
   "cjkvi_ids": "⿱一𠁤",
   "google_parts": [],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Current row is just 一; Heisig's second term 'four' has no corresponding alias anywhere in this database and cjkvi's lower piece (𠁤) is a real but unique codepoint with no reusable identity elsewhere. audit_missing_children.py does not flag this host. Rendered 西/一/𠁤/覀 to confirm 一 (the top bar) is genuinely present and correctly named; left the unnamed box-with-legs shape unlabelled rather than inventing a new primitive for a single, foundational, heavily-depended-on host on a guess -- conservative per the owner's 'needs-render over guessing' standing instruction, but keep rather than needs-render since nothing in the row is actually wrong.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1729",
@@ -30868,11 +30875,11 @@
    "亻",
    "西"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "亻+西 matches cjkvi ⿰亻覀 (西's own 'old west' alias covers the 覀 variant form).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1730",
@@ -30886,11 +30893,11 @@
    "女",
    "西"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "女+西 matches cjkvi ⿱覀女.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1731",
@@ -30904,11 +30911,11 @@
    "月",
    "要"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "月+要 matches cjkvi's J-tagged variant (⿰月要[GJK]), not the TV ⺼ variant -- correct for a ja-kanji row.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1732",
@@ -30922,11 +30929,11 @@
    "西",
    "示"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "示+西 matches cjkvi ⿱覀示.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1733",
@@ -30940,11 +30947,11 @@
    "氵",
    "票"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "水+票 matches cjkvi ⿰氵票; '水' is this file's established name for 氵 (consistent with 漬/清 etc. in the prior chunk).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1734",
@@ -30958,11 +30965,11 @@
    "木",
    "票"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "木+票 matches cjkvi ⿰木票.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1735",
@@ -30976,11 +30983,11 @@
    "西",
    "木"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "西+木 matches cjkvi's J-tagged variant (⿱覀木[GJK]).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1736",
@@ -30991,11 +30998,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰忄栗",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "'state of mind'+栗 matches cjkvi ⿰忄栗; 'state of mind' is the file's established alias for 忄.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1737",
@@ -31011,11 +31018,11 @@
    "大",
    "已"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "辶+西+大+己 matches cjkvi's J-tagged variant (⿺辶⿱䙲己[J], using 己 not 巳); Heisig's full term list is exactly these four primitives' own alias pairs (old west/西, large+St.Bernard/大, snake+self/己, road/辶).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1738",
@@ -31026,11 +31033,11 @@
   "heisig_components": "old west; restore; Nelson; column; going; line; fold back; double back; reclining; lying down; sun; day; walking legs",
   "cjkvi_ids": "⿱覀復",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "復+西 matches cjkvi ⿱覀復; Heisig's long tail is 復's own already-expanded sub-parts.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1739",
@@ -31045,11 +31052,11 @@
    "西",
    "土"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "火+西+土 matches cjkvi ⿰火垔 (垔=西+土, no dedicated row, flattened directly) and Heisig's 'hearth fire;old west;soil;dirt;ground' term-for-term.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1740",
@@ -31065,11 +31072,16 @@
    "￥",
    "口"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "十",
+   "丷",
+   "干",
+   "冂"
+  ],
+  "note": "Was 十,丷,冂 -- missing a child. Rendered 南 at high zoom: inside the 冂 box, below the 丷, is a clean 2-bar+through-vertical shape identical to 干's own render (干 = 十,一 per rtk1777), not just loose strokes. cjkvi's ⿱十⿵冂𢆉 names the inner piece 𢆉, which the prior session's 幸 entry (frame 1622, same chunk-adjacent shape) already identified as ⿱丷干 -- the exact same 丷+干 pair 南 shares. Heisig's components text 'ten;needle;belt;happiness;ten;needle;stand up;vase' reads as 十(top)+冂(belt)+[the shared 丷+干 compound, named loosely via the 幸 frame ('happiness') and via 立's aliases ('stand up;vase') for the visually-similar bare 丷, a known CSV labelling quirk already documented for other hosts in the 2026-10-23 'lid audit' comments elsewhere in this file] -- i.e. two separate 十-shaped elements, matching the render's two distinct crosses (top 十, inner 干). Added 干 to the row.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1741",
@@ -31083,11 +31095,11 @@
    "木",
    "南"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "木+南 matches cjkvi ⿰木南; 南 itself fixed above in this chunk.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1742",
@@ -31101,11 +31113,11 @@
    "南",
    "犬"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "犬+南 matches cjkvi ⿰南犬.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1743",
@@ -31116,11 +31128,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰𠁣𠃛",
   "google_parts": [],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Atomic, matches Heisig '(empty, teaches whole)' for this core frame and cjkvi's own sub-codepoint split (⿰𠁣𠃛) isn't a meaningful named-parts list.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1744",
@@ -31134,11 +31146,11 @@
    "口",
    "門"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "口+門 matches cjkvi ⿵門口.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1745",
@@ -31152,11 +31164,11 @@
    "門",
    "兑"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "兑+門 matches cjkvi ⿵門兑; Heisig's tail is 兑's own already-expanded sub-parts.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1746",
@@ -31170,11 +31182,11 @@
    "門",
    "伐"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "伐+門 matches cjkvi ⿵門伐.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1747",
@@ -31188,11 +31200,11 @@
    "日",
    "門"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "日+門 matches cjkvi ⿵門日.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1748",
@@ -31208,11 +31220,11 @@
    "門",
    "立"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "門+音 matches cjkvi ⿵門音; Heisig's tail is 音's own already-expanded sub-parts.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1749",
@@ -31223,11 +31235,11 @@
   "heisig_components": "bamboo; interval; gates; sun; day",
   "cjkvi_ids": "⿱竹間",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "竹+間 matches cjkvi ⿱竹間.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1750",
@@ -31244,11 +31256,15 @@
    "二",
    "ノ"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "一",
+   "門",
+   "廾"
+  ],
+  "note": "Was 一,門,廾,二,ノ -- two phantom parts. Rendered 開 at high zoom: inside 門 is exactly one horizontal bar over 廾's two legs (the real character 开, which cjkvi cites directly: ⿵門开), with no second horizontal bar and no diagonal stroke anywhere -- '二' and 'ノ' are not drawn. Heisig's components for this frame are just 'gates;two hands' (門+廾), with no third or fourth concept at all, consistent with the render. Dropped 二 and ノ.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1751",
@@ -31264,11 +31280,11 @@
    "門",
    "亅"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "才+門 matches cjkvi ⿵門才 and Heisig 'gates;genie'.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1752",
@@ -31283,11 +31299,11 @@
    "門",
    "夂"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "各+門 matches cjkvi ⿵門各.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-05"
  },
  {
   "id": "rtk1753",
