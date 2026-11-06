@@ -2528,8 +2528,12 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"prim-mugwort", "rtk1363"}},
     "rtk2543": {"character": "槌", "keyword": "wooden hammer",
                 "expected_part_ids": {"rtk1359", "rtk207"}},
+    # 2026-11-06 full re-review: was 虫,又 -- 又 is only the bottom-right
+    # stroke of 叚 (cjkvi-ids ⿰虫叚); the rest of 叚 was dropped outright.
+    # New prim-borrow row covers 叚 as one coherent primitive. Pin updated
+    # to match; same fix applied to rtk2027/rtk2800 (shape family).
     "rtk2728": {"character": "蝦", "keyword": "shrimp",
-                "expected_part_ids": {"rtk556", "rtk752"}},
+                "expected_part_ids": {"rtk556", "prim-borrow"}},
     "rtk2791": {"character": "鎚", "keyword": "hammer",
                 "expected_part_ids": {"rtk1359", "rtk287"}},
     # 羽("feathers") owner-reported (2026-09-01): 羽 itself was wrongly defined
@@ -3135,8 +3139,11 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"rtk1181", "rtk1431"}},
     "rtk2703": {"character": "紐", "keyword": "string",
                "expected_part_ids": {"rtk1431", "rtk2197"}},
+    # 2026-11-06 full re-review: was ノ,一,糸,厶, the right side flattened into
+    # raw strokes -- fixed to the coherent 厷 (prim-forearm), matching
+    # cjkvi-ids' ⿰糹厷[GT]. Pin updated to match.
     "rtk2704": {"character": "紘", "keyword": "chinstrap",
-               "expected_part_ids": {"kangxi28", "prim-katakana-no", "rtk1", "rtk1431"}},
+               "expected_part_ids": {"prim-forearm", "rtk1431"}},
     "rtk2705": {"character": "纏", "keyword": "summarize",
                "expected_part_ids": {"kangxi10", "kangxi53", "rtk1431", "rtk161", "rtk185"}},
     "rtk2706": {"character": "絢", "keyword": "gorgeous",
@@ -3145,8 +3152,11 @@ EXPECTED_DECOMPOSITIONS = {
     # 彐 inside it. The row's own labelled alternate was already 粛,糸.
     "rtk2707": {"character": "繍", "keyword": "embroidery",
                "expected_part_ids": {"rtk1870", "rtk1431"}},
+    # 2026-11-06 full re-review: primary was ｜,糸,日,田, a flattened,
+    # incomplete rendering of 由 -- promoted the row's own correct alternate
+    # (由,糸) to primary, matching cjkvi-ids' ⿰糹由[GTV]. Pin updated to match.
     "rtk2708": {"character": "紬", "keyword": "pongee",
-               "expected_part_ids": {"prim-pipe", "rtk12", "rtk14", "rtk1431"}},
+               "expected_part_ids": {"rtk1186", "rtk1431"}},
     "rtk2709": {"character": "綺", "keyword": "ornate",
                "expected_part_ids": {"rtk133", "rtk1431"}},
     "rtk2710": {"character": "綾", "keyword": "damask",

@@ -2582,7 +2582,10 @@ rtk2023:弧:arc:瓜,弓
 rtk2024:孤:orphan:瓜,子
 rtk2025:繭:cocoon:艹,冂,｜,糸,虫
 rtk2026:益:benefit:一,皿,八,丷
-rtk2027:暇:spare time:日,又
+# 2026-11-06 full re-review shape-family fix (found while reviewing rtk2728
+# 蝦): was 日,又 -- 又 is only the bottom-right stroke of 叚 (cjkvi ⿰日叚),
+# the rest of 叚 dropped outright. Use the new prim-borrow row (叚).
+rtk2027:暇:spare time:日,叚
 rtk2028:敷:spread:十,田,方,丶,攵
 # 2026-10-23 (same "lid" report): was ｜,二,米,亠,木 -- 7 strokes listed as ~17,
 # two readings run together plus a 亠 that is not drawn. Heisig's components are
@@ -3536,11 +3539,19 @@ rtk2700:絆:bonds:糸,半
 rtk2701:緋:scarlet:糸,非
 rtk2702:綜:rule:糸,宗
 rtk2703:紐:string:丑,糸
-rtk2704:紘:large:ノ,一,糸,厶
+# 2026-11-06 full re-review: was ノ,一,糸,厶 -- the right side flattened into
+# raw strokes. render_glyphs.py on 紘/厷 confirms the right side is the
+# coherent shape 厷 (prim-forearm, added for rtk2536), matching cjkvi-ids'
+# ⿰糹厷[GT].
+rtk2704:紘:large:糸,厷
 rtk2705:纏:wear:糸,土,里,儿,广
 rtk2706:絢:brilliant fabric design:旬,糸
 rtk2707:繍:sew:粛,糸
-rtk2708:紬:pongee (a knotted silk cloth):｜,糸,日,田;由,糸
+# 2026-11-06 full re-review: primary was ｜,糸,日,田 -- a flattened, incomplete
+# rendering of 由 (cjkvi ⿰糹由[GTV]). The alternate already on this row (由,糸)
+# is the correct one; promoted it to primary and dropped the stroke-soup
+# version.
+rtk2708:紬:pongee (a knotted silk cloth):糸,由
 rtk2709:綺:figured cloth:奇,糸
 rtk2710:綾:design:夌,糸
 rtk2711:絃:string:糸,玄
@@ -3548,19 +3559,54 @@ rtk2712:縞:stripe:糸,高
 rtk2713:綬:ribbon:受,糸
 rtk2714:紗:gauze:少,糸
 rtk2715:舵:rudder:舟,匕,宀
-rtk2716:聯:party:耳,幺
-rtk2717:聡:wise:耳,心,八,厶
-rtk2718:聘:invite:｜,耳,日,一,勹
-rtk2719:耽:addicted:耳,尢,冖
+# 2026-11-06 full re-review: was 耳,幺 -- missing the 丱 top and one of the
+# two 幺 (cjkvi ⿰耳𢇇, 𢇇 = ⿱𢆶丱, and 𢆶 = ⿰幺幺 -- the same two-幺 shape
+# already used unflattened at rtk1480/1481/1483 and prim-double-mysterious's
+# 兹). render_glyphs.py on 聯/丱/幺 confirms both pieces are actually drawn.
+# New primitive row for 丱 (no existing row; atomic in cjkvi, not used by any
+# other row here yet).
+prim-twin-tufts:丱:twin tufts,double hairpin
+rtk2716:聯:party:耳,幺,幺,丱
+# 2026-11-06 full re-review: was 耳,心,八,厶 -- 八,厶 is 公 flattened one
+# level too deep (cjkvi ⿰耳忩, 忩 = ⿱公心). rtk1466 総 already uses 公
+# unflattened for the same 忩 shape (糸,心,公); matched that convention.
+rtk2717:聡:wise:耳,心,公
+# 2026-11-06 full re-review: was ｜,耳,日,一,勹 -- the right side flattened
+# into raw strokes that don't actually match what's drawn. cjkvi ⿰耳甹, 甹 =
+# ⿱由丂, and both 由 (rtk1186) and 丂 (prim-snare) already have rows here.
+# render_glyphs.py on 聘/由/丂 confirms both pieces.
+rtk2718:聘:invite:耳,由,丂
+# 2026-11-06 full re-review: was 耳,尢,冖 -- 冘 (atomic in cjkvi, ⿰耳冘) was
+# split into the wrong raw strokes. prim-garter's existing 冘 row covers it
+# directly.
+rtk2719:耽:addicted:耳,冘
 rtk2720:耶:question mark:耳,⻏
-rtk2721:蚤:flea:叉,虫
+# 2026-11-06 full re-review: was 叉 -- cjkvi splits 蚤's top by region, ⿱叉虫
+# for the Chinese(G) glyph but ⿱㕚虫 for the Japanese/Taiwan/Korean(TJKV)
+# one; render_glyphs.py confirms 叉 and 㕚 are genuinely distinct shapes
+# (not a font substitution), and this is a Japanese kanji. New primitive row
+# for 㕚 (distinct from rtk2923's own 叉 row -- different codepoint, no
+# existing row).
+prim-crossed-claw:㕚:crossed claw
+rtk2721:蚤:flea:㕚,虫
 rtk2722:蟹:crab:虫,解
 rtk2723:蛋:barbarian:虫,疋
 rtk2724:蟄:hibernation of insects:執,虫
 rtk2725:蝿:fly:虫,田,乙
 rtk2726:蟻:ant:義,虫
 rtk2727:蝋:wax:虫,𭕄,几
-rtk2728:蝦:shrimp:虫,又
+# 2026-11-06 full re-review: was 虫,又 -- 又 is only the bottom-right stroke
+# of 叚 (cjkvi ⿰虫叚); the rest of 叚 was dropped outright, not just
+# flattened. cjkvi's own sub-decomposition of 叚's left side is a blind
+# placeholder (⑤, no codepoint), so treat 叚 as one coherent primitive
+# rather than guess at splitting it further. render_glyphs.py on 蝦/叚
+# confirms 叚's full shape is drawn here. New primitive row (叚's own
+# meaning, "borrow", used as the keyword rather than an invented slug).
+# Shape-family check: rtk2027 暇 and rtk2800 霞 have the exact same
+# dropped-叚 mistake (both just 又) -- fixed both below too; grep found no
+# other rtk* row using 叚/又 for this shape.
+prim-borrow:叚:borrow,false
+rtk2728:蝦:shrimp:虫,叚
 rtk2729:蛸:octopus:肖,虫
 rtk2730:螺:small  edible  helical fresh-water mollusk:累,虫
 rtk2731:蝉:cicada:単,虫
@@ -3568,15 +3614,32 @@ rtk2732:蛙:frog:圭,虫
 rtk2733:蛾:moth:我,虫
 rtk2734:蛤:clam:合,虫
 rtk2735:蛭:leech:至,虫
-rtk2736:蛎:oyster:虫,厂
-rtk2737:罫:ruled line:罒,土,卜
+# 2026-11-06 full re-review: was 虫,厂 -- missing 万 (cjkvi ⿰虫厉, 厉 =
+# ⿸厂万); rtk68's existing 万 row covers it.
+rtk2736:蛎:oyster:虫,厂,万
+# 2026-11-06 full re-review: was 罒,土,卜 -- one 土 short (cjkvi ⿱罒卦, 卦 =
+# ⿰圭卜, and 圭 is itself 土+土, confirmed at rtk167's own row which stays
+# unflattened -- hosts reference 圭 directly, not its two 土). Use 圭 instead
+# of a single 土.
+rtk2737:罫:ruled line:罒,圭,卜
 rtk2738:袈:a coarse camlet:加,衣
 rtk2739:裟:buddhist surplice:沙,衣
-rtk2740:截:cut off:土,戈,隹;隹,𢦏
-rtk2741:哉:how:口,土,戈;口,𢦏
+# 2026-11-06 full re-review: primary was 土,戈,隹 -- a stroke-soup flattening
+# of 𢦏 (cjkvi ⿹𢦏隹), same pattern already fixed elsewhere for this
+# primitive (rtk382/383/424/1929/1938 all use 𢦏 unflattened). The alternate
+# already on this row (隹,𢦏) is correct; promoted it to primary and dropped
+# the stroke-soup version.
+rtk2740:截:cut off:隹,𢦏
+# 2026-11-06 full re-review: primary was 口,土,戈 -- same 𢦏 stroke-soup
+# mistake as rtk2740 截 (shape family), cjkvi ⿹𢦏口. The alternate already
+# on this row (口,𢦏) is correct; promoted it to primary and dropped the
+# stroke-soup version.
+rtk2741:哉:how:口,𢦏
 rtk2742:詢:consult with:旬,言
 rtk2743:諄:tedious:享,言
-rtk2744:讐:enemy:言,隹
+# 2026-11-06 full re-review: was 言,隹 -- one 隹 short (cjkvi ⿱雔言, 雔 =
+# ⿰隹隹, two of them side by side).
+rtk2744:讐:enemy:言,隹,隹
 rtk2745:諌:admonish:言,東
 rtk2746:諒:fact:京,言
 rtk2747:讃:praise:言,賛
@@ -3644,7 +3707,10 @@ rtk2796:閃:flash:人,門
 rtk2797:悶:be in agony:心,門
 rtk2798:閤:small side gate:合,門
 rtk2799:雫:drop:雨,下
-rtk2800:霞:be hazy:雨,又
+# 2026-11-06 full re-review shape-family fix (found while reviewing rtk2728
+# 蝦): was 雨,又 -- 又 is only the bottom-right stroke of 叚 (cjkvi ⿰雨叚),
+# the rest of 叚 dropped outright. Use the new prim-borrow row (叚).
+rtk2800:霞:be hazy:雨,叚
 rtk2801:翰:letter:羽,𠆢,𠦝;人,羽,𠦝
 rtk2802:斡:go around:斗,𠆢,𠦝;人,斗,𠦝
 rtk2803:鞍:saddle:安,革

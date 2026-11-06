@@ -28106,3 +28106,134 @@ No deploy needed from here — a deployer needs `git pull` +
 `full_review.py --pending-count`: 297/3000.
 
 **Next**: continue the full re-review at frame 2704.
+
+## 2026-11-06 — full re-review: frames 2704–2753
+
+37 keep, 13 fixed, 0 needs-render. All 50 rows have an empty Heisig
+components column (frames 2043–2999: the CSV simply has no data for
+this range, per CLAUDE.md), so every decision rests on the render and
+cjkvi-ids alone.
+
+Two already-recorded "at start" snapshots in `kanji_full_review.json`
+were stale: `rtk2748` 訊 and `rtk2749` 訣 had already been fixed (or,
+for 訊, explicitly investigated and kept) by earlier chunks' own
+shape-family follow-ups, dated 2026-11-02 and 2026-11-06 respectively,
+with their reasoning already in a comment above each row in
+`data.txt`. Recorded both as `keep` citing that existing work rather
+than re-deriving it.
+
+**Fixes** (all confirmed by rendering the host next to each candidate
+part with `render_glyphs.py`):
+
+- `rtk2704` 紘 "chinstrap": was `ノ,一,糸,厶`, the right side flattened
+  into raw strokes. Fixed to `糸,厷` — `厷` already has a row
+  (`prim-forearm`, added for `rtk2536`肱/`rtk2324`宏), matching cjkvi
+  `⿰糹厷[GT]`.
+- `rtk2708` 紬 "pongee": primary was `｜,糸,日,田`, a flattened,
+  incomplete rendering of 由; the row's own labelled alternate (`由,糸`)
+  was already correct. Promoted it to primary, dropped the stroke-soup
+  version.
+- `rtk2716` 聯 "strung together": was `耳,幺`, missing one 幺 and the
+  whole 丱 top (cjkvi `⿰耳𢇇`, `𢇇`=`⿱𢆶丱`, `𢆶`=`⿰幺幺` — the same
+  unflattened two-幺 shape already used at `rtk1480`/`1481`/`1483` and
+  `prim-double-mysterious`). Fixed to `耳,幺,幺,丱`. New primitive row
+  `prim-twin-tufts:丱` (atomic in cjkvi, no row anywhere else here).
+- `rtk2717` 聡 "attentive": was `耳,心,八,厶`, one level too flat — `八,厶`
+  is 公 (`rtk847`) flattened again. `rtk1466` 総 already keeps the
+  identical shape (`忩`=`⿱公心`) unflattened as `糸,心,公`; matched that
+  convention. Fixed to `耳,心,公`.
+- `rtk2718` 聘 "summons": was `｜,耳,日,一,勹`, flattened and wrong — cjkvi
+  `⿰耳甹`, `甹`=`⿱由丂`, and both `由` (`rtk1186`) and `丂`
+  (`prim-snare`) already have rows. Fixed to `耳,由,丂`.
+- `rtk2719` 耽 "addiction": was `耳,尢,冖`, the wrong raw strokes for 冘,
+  which cjkvi treats as atomic (`⿰耳冘`). `prim-garter`'s existing `冘`
+  row covers it directly. Fixed to `耳,冘`.
+- `rtk2721` 蚤 "flea": was `叉,虫`. cjkvi splits this top by region —
+  `⿱叉虫[G]` for the Chinese glyph but `⿱㕚虫[TJKV]` (Japan included)
+  for the rest. `render_glyphs.py` confirmed 叉 and 㕚 are genuinely
+  distinct shapes in this font stack, not a substitution. Fixed to
+  `㕚,虫`. New primitive row `prim-crossed-claw:㕚` — Ext A codepoint,
+  needs a primitive image (`make_primitive_images.py`, see Tests below).
+- `rtk2728` 蝦 "shrimp": was `虫,又` — 又 is only the bottom-right stroke
+  of 叚 (cjkvi `⿰虫叚`); the rest of 叚 was dropped outright, not just
+  flattened. cjkvi's own sub-decomposition of 叚's left side is a blind
+  placeholder (`⑤`, no codepoint), so 叚 is kept as one coherent
+  primitive rather than guessed at further. Fixed to `虫,叚`. New
+  primitive row `prim-borrow:叚:borrow,false` (using 叚's own classical
+  meaning as the keyword, not an invented slug). **Shape-family check**:
+  grepped for other rows using the same incomplete `又`-for-叚 shape and
+  found two, both outside this chunk's own frame range — `rtk2027` 暇
+  and `rtk2800` 霞, identical bug, both fixed to use `prim-borrow`
+  too. Neither frame's own decision is recorded (2027 already decided
+  in an earlier chunk; 2800 hasn't come up yet), matching the existing
+  convention for cross-chunk shape-family fixes (e.g. the `厷` fix
+  touching `rtk2324`/`2536` from the `胚` chunk).
+- `rtk2736` 蛎 "oyster": was `虫,厂`, one piece short — cjkvi `⿰虫厉`,
+  `厉`=`⿸厂万`, and `rtk68`'s existing 万 row covers it. Fixed to
+  `虫,厂,万`.
+- `rtk2737` 罫 "ruled lines": was `罒,土,卜`, one 土 short — cjkvi
+  `⿱罒卦`, `卦`=`⿰圭卜`, and 圭 is itself two 土 but is referenced
+  directly (unflattened) everywhere else via its own `rtk167` row.
+  Fixed to `罒,圭,卜`.
+- `rtk2740` 截 "incision" / `rtk2741` 哉 "I wonder": both primaries were
+  stroke-soup flattenings of 𢦏 (`土,戈,隹` / `口,土,戈`) with an already
+  -correct labelled alternate sitting right there (`隹,𢦏` / `口,𢦏`,
+  matching cjkvi `⿹𢦏隹` / `⿹𢦏口`) — the same pattern already fixed for
+  this primitive at `rtk382`/`383`/`424`/`1929`/`1938`. Promoted each
+  alternate to primary, dropped the stroke-soup version.
+- `rtk2744` 讐 "vendetta": was `言,隹`, one 隹 short — cjkvi `⿱雔言`,
+  `雔`=`⿰隹隹` (two 隹 side by side). Fixed to `言,隹,隹`.
+
+**Kept despite a Google hint pointing elsewhere**: `rtk2745` 諌
+"remonstrate" — Google suggests 柬, but cjkvi's own entry for the host
+(`⿰言東`) confirms the real right side is 東 ("east"), not 柬
+("select") — the exact 柬/東 trap CLAUDE.md warns about, resolved here
+by trusting the structural source over the hint. `rtk2752` 謬
+"fallible" — cjkvi cites `㐱`=`⿱人彡` (人, not 𠆢), but this codebase's
+𠆢 is deliberately the established primitive for a person-shape sitting
+as a cap/lid at the top of a compound (used 34 times already: 今 全 会
+谷 金 …), which is exactly 㐱's position inside 謬. Kept 𠆢 — this is
+the Unicode-IDS-vs-project-convention distinction the project already
+settled for this shape, not a new ambiguity.
+
+`rtk2705` 纏, `rtk2715` 舵 and `rtk2725` 蝿 all looked like stroke-soup
+candidates at first glance but turned out to already be the correct,
+fully-expanded form once checked against cjkvi (`廛`'s own recursive
+expansion; 它's established `匕,宀` expansion already used at `rtk558`
+and `rtk2952`; and 蝿's already-documented `⿻日电`-overlay-renders-as-田
+resolution) — kept as-is.
+
+**Tests**: baseline before starting — `pytest -q` 108/108,
+`./regression_fresh.sh` 1333/1333, `audit_radicals.py` 0 findings.
+After the data.txt edits (13 fixes across this chunk, plus the two
+shape-family fixes to `rtk2027`/`rtk2800`) and three new primitive
+rows (`prim-twin-tufts`, `prim-crossed-claw`, `prim-borrow`):
+`./regression_fresh.sh` failed on 4 problems — 3 pins encoding the old
+decompositions (`rtk2704`, `rtk2708`, `rtk2728`), updated in place in
+`test_regression_fixes.py` with comments pointing back to this entry;
+and `prim-crossed-claw` (㕚, a CJK Ext A codepoint) needing a primitive
+image. Ran `make_primitive_images.py`, which rendered the one new
+image needed (`prim-crossed-claw.png`) but also touched 14 unrelated
+already-existing primitive PNGs and created two unrelated new ones
+(`rad2.31`, `rad3.41` — a pre-existing gap, live DB rows needing images
+that aren't even in `data.txt` under those ids, unrelated to anything
+in this chunk) — reverted all of those back to their committed state
+with `git checkout`/`rm` and kept only `prim-crossed-claw.png`.
+Re-ran clean: 1333/1333. `audit_radicals.py` 0 findings.
+`sync_system_data.py --dry-run` showed 3 kanji inserted (the three new
+primitives), 11 aliases added, 15 decompositions replaced + 3 removed
+(`rtk2708`/`2740`/`2741` each dropping their now-redundant wrong
+alternate) — applied for real with the same counts. `pytest -q`
+stayed 108/108 after sync.
+
+The pre-existing `rad2.31`/`rad3.41` missing-image gap and the 286
+system ids `sync_system_data.py` reports as "exist live but not in
+source anymore" are both out of scope for this chunk — left untouched
+for a maintainer to look at separately.
+
+No deploy needed from here — a deployer needs `git pull` +
+`sync_system_data.py` on prod to pick this up.
+
+`full_review.py --pending-count`: 247/3000.
+
+**Next**: continue the full re-review at frame 2754.
