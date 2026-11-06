@@ -2897,7 +2897,10 @@ rtk2251:伽:nursing:亻,加
 rtk2252:儲:be profitable:亻,諸
 rtk2253:僑:expatriate:亻,喬
 rtk2254:倶:both:亻,具
-rtk2255:侃:strong:亻,口,儿,｜
+# 2026-11-06 full re-review: was 亻,口,儿,｜ -- the bottom-right of 侃 is three
+# near-parallel strokes that render pixel-matching 川 (rtk134), not 儿(legs)+｜.
+# cjkvi's own component for this spot (𫶧) renders as tofu in every face checked.
+rtk2255:侃:strong:亻,口,川
 rtk2256:偲:recollect:亻,思
 rtk2257:侭:as it is:亻,尽
 rtk2258:脩:dried meat:亻,月,攵,｜
@@ -2943,7 +2946,11 @@ rtk2296:邑:village:口,巴
 rtk2297:呆:be amazed:口,木
 rtk2298:喰:eat:口,食
 rtk2299:埴:clay:土,直
-rtk2300:坤:divination sign:｜,土,日,田;土,申
+# 2026-11-06 full re-review: primary was ｜,土,日,田 -- stroke soup shattering
+# 申 (rtk1198, itself 田,｜) into its own pieces instead of naming it, one
+# level too flat. cjkvi (⿰土申) and the render both show plain 土+申; the
+# already-correct alternate becomes the sole decomposition.
+rtk2300:坤:divination sign:土,申
 rtk2301:壕:trench:土,豪
 rtk2302:垢:dirt:后,土
 rtk2303:坦:level:土,旦

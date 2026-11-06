@@ -40177,11 +40177,11 @@
    "亻",
    "具"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "亻+具, matches cjkvi and render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2255",
@@ -40196,11 +40196,15 @@
    "口",
    "川"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "亻",
+   "口",
+   "川"
+  ],
+  "note": "was 亻,口,儿,｜; bottom-right is three near-parallel strokes pixel-matching 川 (rtk134), not 儿+｜; cjkvi's own component (𫶧) renders as tofu",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2256",
@@ -40215,11 +40219,11 @@
    "田",
    "心"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "亻+思, matches cjkvi and render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2257",
@@ -40233,11 +40237,11 @@
    "亻",
    "尽"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "亻+尽, matches cjkvi and render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2258",
@@ -40248,11 +40252,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰⿰亻丨𡕙[G] ⿰⿰亻丨⿱攵⺼[T] ⿰⿰亻丨⿱攵月[JK]",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "亻+丨+攵+月(肉), matches JK cjkvi variant and render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2259",
@@ -40263,11 +40267,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰亻卒",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "亻+卒, matches cjkvi and render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2260",
@@ -40282,11 +40286,11 @@
    "十",
    "口"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "亻+故, matches cjkvi and render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2261",
@@ -40297,11 +40301,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰冫牙",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "牙+冫, matches cjkvi and render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2262",
@@ -40315,11 +40319,11 @@
    "冫",
    "周"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "冫+周, matches cjkvi and render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2263",
@@ -40330,11 +40334,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰冫夌",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "冫+夌, matches cjkvi and render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2264",
@@ -40345,11 +40349,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰冫禀",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "already fixed by 2026-10-23 lid-audit session (冫+亠+回+示, 禀=亠+回+示, not 口/囗 split); re-verified, still correct",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2265",
@@ -40363,11 +40367,11 @@
    "几",
    "巾"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "几 wraps 巾, matches cjkvi and render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2266",
@@ -40378,11 +40382,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿵几止",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "几 wraps 止, matches cjkvi and render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2267",
@@ -40393,11 +40397,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿵几歹",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "几 wraps 歹, matches cjkvi and render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2268",
@@ -40411,11 +40415,11 @@
    "几",
    "鳥"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "几 wraps 鳥 variant, matches cjkvi and render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2269",
@@ -40426,11 +40430,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰票刂",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "票+刀(刂-form), matches cjkvi and render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2270",
@@ -40445,11 +40449,11 @@
    "金",
    "刂"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "卯+金+刀(刂-form); render shows 卯 left, 金+刂 right, matches current row and Google hint",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2271",
@@ -40463,11 +40467,11 @@
    "弟",
    "刂"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "弟+刀(刂-form), matches cjkvi and render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2272",
@@ -40478,11 +40482,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿸厂猒",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "厂 wraps 猒; 猒 itself is 日(top)+肰(月+犬); render confirms row's 月,犬,日,厂 (no stray 甘/口)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2273",
@@ -40496,11 +40500,11 @@
    "厂",
    "隹"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "厂 wraps 隹 only; render shows no separate 亻 stroke despite cjkvi's 倠 (亻+隹) component -- modern glyph is plainly 厂+隹",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2274",
@@ -40515,11 +40519,11 @@
    "隹",
    "貝"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "雁+貝, matches cjkvi and render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2275",
@@ -40534,11 +40538,11 @@
    "豆",
    "寸"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "厂 wraps 豆+寸, matches cjkvi and render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2276",
@@ -40549,11 +40553,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿸厂人",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "厂 wraps 人, matches cjkvi and render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2277",
@@ -40564,11 +40568,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰口肖",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "口+肖, matches cjkvi and render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2278",
@@ -40582,11 +40586,11 @@
    "人",
    "各"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "top of 咎 (人+夂) visually matches 处's top shape per cjkvi's ⿱处口; bottom is 口; matches current row",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2279",
@@ -40597,11 +40601,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰口聶",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "right side is genuinely 聶 (three 耳 stacked, confirmed by render), but this project's convention for a repeated-primitive compound is to name the primitive once (same as rtk23 品=口, rtk209 森=木, rtk2308 姦=女, rtk2760 轟=車) rather than list it thrice -- current row's single 耳 follows that precedent",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2280",
@@ -40612,11 +40616,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰口枼",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "口+枼, matches cjkvi and render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2281",
@@ -40630,11 +40634,11 @@
    "口",
    "華"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "口+華, matches cjkvi and render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2282",
@@ -40648,11 +40652,11 @@
    "口",
    "尊"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "口+尊, matches cjkvi and render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2283",
@@ -40663,11 +40667,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰口亥",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "口+亥, matches cjkvi and render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2284",
@@ -40681,11 +40685,11 @@
    "口",
    "宣"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "口+宣, matches cjkvi and render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2285",
@@ -40699,11 +40703,11 @@
    "口",
    "卩"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "口+卩, matches cjkvi and render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2286",
@@ -40714,11 +40718,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰口虚",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "口+虚, matches cjkvi and render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2287",
@@ -40729,11 +40733,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰口豖[GTKV] ⿰口豕[J]",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "口+豕 (J-form variant), matches cjkvi JGK and render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2288",
@@ -40744,11 +40748,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰口犬",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "犬+口, matches cjkvi and render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2289",
@@ -40762,11 +40766,11 @@
    "口",
    "巾"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "巾+口, matches cjkvi and render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2290",
@@ -40780,11 +40784,11 @@
    "口",
    "歯"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "口+歯, matches cjkvi and render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2291",
@@ -40798,11 +40802,11 @@
    "口",
    "十"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "口+十, matches cjkvi and render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2292",
@@ -40813,11 +40817,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰口勿",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "口+勿, matches cjkvi and render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2293",
@@ -40831,11 +40835,11 @@
    "口",
    "乞"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "乞+口, matches cjkvi and render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2294",
@@ -40846,11 +40850,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰口新",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "口+新, matches cjkvi and render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2295",
@@ -40861,11 +40865,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰口曾[GTK] ⿰口曽[J]",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "口+曽 (J-form variant), matches cjkvi and render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2296",
@@ -40879,11 +40883,11 @@
    "口",
    "巴"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "口+巴, matches cjkvi and render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2297",
@@ -40897,11 +40901,11 @@
    "口",
    "木"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "口+木 (GJK-form), matches cjkvi and render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2298",
@@ -40912,11 +40916,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰口食",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "口+食, matches cjkvi and render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2299",
@@ -40927,11 +40931,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰土直",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "土+直, matches cjkvi and render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2300",
@@ -40945,11 +40949,14 @@
    "土",
    "申"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "土",
+   "申"
+  ],
+  "note": "primary was stroke soup ｜,土,日,田 -- shattering 申 (rtk1198, itself 田,｜) one level too flat. cjkvi (⿰土申) and the render both show plain 土+申; promoted the already-correct alternate to sole primary",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2301",
@@ -40960,11 +40967,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰土豪",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "土+豪, matches cjkvi and render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2302",
@@ -40975,11 +40982,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰土后",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "后+土, matches cjkvi and render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2303",
@@ -40993,11 +41000,11 @@
    "土",
    "旦"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "土+旦, matches cjkvi and render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2304",

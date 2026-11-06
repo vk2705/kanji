@@ -27305,3 +27305,72 @@ No deploy needed from here — a deployer needs `git pull` +
 `full_review.py --pending-count`: 747/3000.
 
 **Next**: continue the full re-review at frame 2254.
+
+## 2026-11-06 — full re-review: frames 2254–2303
+
+50 rows reviewed (48 keep, 2 fixed, 0 needs-render). Heisig's CSV column
+is empty for all 50 (every `id_5th_ed` falls in 2043–2999), so per
+CLAUDE.md that's a data gap, not atomicity evidence, and was not used to
+justify any keep — every decision came from the render and cjkvi-ids.
+
+**Fixed**:
+- `rtk2255:侃` ("forthright") — was `亻,口,儿,｜`. Rendering 侃 beside 川
+  (rtk134) showed the bottom-right three strokes pixel-match 川 exactly;
+  they don't match the shape of 儿 (legs) plus a stray `｜`. cjkvi's own
+  component for that spot (`𫶧`) renders as tofu in every face checked —
+  a `render can lie` case, resolved by comparing against a real sibling
+  glyph (川) instead of trusting the tofu box or reasoning from the
+  codepoint. New: `亻,口,川`. Shape-family check: grep found only two
+  other `儿,｜`/`｜,儿` rows — `rtk2235:兎` and `prim-lifebelt:㐬`'s
+  alternate — both already individually verified correct by an earlier
+  session (兎's comment cites a KanjiVG stroke-by-stroke match; 㐬's
+  primary already uses 川, the `儿,｜` form is just its labelled
+  alternate) — no further changes needed.
+- `rtk2300:坤` ("authochthonous") — primary was `｜,土,日,田`, an
+  already-present alternate was `土,申`. The primary is stroke soup:
+  it shatters 申 (rtk1198, itself decomposed as `田,｜`) into its own
+  pieces instead of naming it one level up, the same mistake class
+  CLAUDE.md's `电, not 日,乙` example warns about. cjkvi (`⿰土申`) and
+  the render both show a plain two-part 土+申 compound with nothing
+  else visible. Promoted the alternate to sole primary: `土,申`. Not
+  from `data_from_pdf.txt` (checked — absent there), so this wasn't
+  Heisig's own stroke-level teaching misfiled as hand-curated; it was a
+  bad override. Shape-family check: grepped for the same 4-part stroke
+  pattern elsewhere and for other `申`-using rows (`rtk1199:伸`,
+  `rtk1200:神`, `rtk1201:捜`, `rtk1461:紳`, `rtk1818:痩`, `rtk2895:暢`) —
+  none repeat it; 坤 was the only offender.
+
+**Everything else kept** (48 rows) — each checked against render + cjkvi.
+Notable ones: `rtk2264:凛` was already fixed by the 2026-10-23 "lid"-audit
+session (`冫,亠,回,示`; 禀 = 亠+回+示, not a 口/囗 split) — re-verified
+against cjkvi's `⿰冫禀` and the render, still correct, recorded `keep`
+rather than re-"fixing" it. `rtk2273:雁`'s row (`厂,隹`) omits the `亻`
+that cjkvi's component `倠` implies; rendered, the modern glyph is
+plainly just 厂 wrapping 隹 with no third stroke-group for a person —
+cjkvi here looks etymological rather than visual, kept as-is.
+`rtk2279:囁`'s right side is genuinely 聶 (three 耳 stacked, confirmed by
+render), but naming the repeated primitive once rather than three times
+matches this dataset's established convention for doubled/tripled cjkvi
+structures (`rtk23:品`=`口` once, `rtk209:森`=`木` once, `rtk2308:姦`=`女`
+once, `rtk2760:轟`=`車` once) — current single-`耳` row follows that
+precedent, kept. `rtk2270:劉`'s cjkvi string (`⿰⿱⿰③刀金刂`) didn't
+parse cleanly against the modern print layout, but the render plainly
+shows 卯 (left) + 金 (middle) + 刂 (right), matching both the current row
+(`卯,金,刀`, using this project's `刀`-canonical convention for the 刂
+variant — same as `rtk2269`/`rtk2271` this chunk) and Google's hint —
+kept.
+
+**Tests**: baseline before starting — `pytest -q` 108/108,
+`./regression_fresh.sh` 1333/1333, `audit_radicals.py` 0 findings. After
+the 2 fixes and `sync_system_data.py` (0 kanji inserted, 2 decompositions
+replaced, 1 removed — 坤's now-redundant alternate merged into its new
+primary) — `pytest -q` 108/108 unchanged; `audit_radicals.py` 0 findings
+unchanged; `./regression_fresh.sh` 1333/1333 unchanged (no existing pin
+referenced either row's old decomposition, so no pin updates needed).
+
+No deploy needed from here — a deployer needs `git pull` +
+`sync_system_data.py` on prod to pick this up.
+
+`full_review.py --pending-count`: 697/3000.
+
+**Next**: continue the full re-review at frame 2304.
