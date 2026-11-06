@@ -27206,3 +27206,102 @@ No deploy needed from here — a deployer needs `git pull` +
 `full_review.py --pending-count`: 797/3000.
 
 **Next**: continue the full re-review at frame 2204.
+
+## 2026-11-06 — full re-review: frames 2204–2253
+
+50 reviewed: 37 keep, 10 fixed, 3 needs-render.
+
+**Ten fixes, two shape families plus three genuinely new shared primitives.**
+
+*Redundant-stroke family (舛 = kangxi136:舛 = 夕,㐄).* `rtk2208:憐`
+(`舛,米,state of mind,夕`), `rtk2209:燐` (`火,舛,米,夕`) and `rtk2211:鱗`
+(`魚,舛,米,夕`) each carried `舛` **and** one of `舛`'s own children (`夕`)
+as siblings — double-counting a piece. `rtk2210:麟` (`鹿,米,舛`) and
+`rtk1408:隣` (`阝,米,舛`), same 粦-family shape, already used the correct
+3-part pattern with no redundant `夕`. Normalized the other three to
+match:
+- `rtk2208:憐:pity:舛,米,state of mind,夕` → `state of mind,米,舛`
+- `rtk2209:燐:phosphorus:火,舛,米,夕` → `火,米,舛`
+- `rtk2211:鱗:scales (fish):魚,舛,米,夕` → `魚,米,舛`
+
+*`rtk2213:庵` had a wrong primary sitting next to a correct alternate.*
+Primary was `田,广,大` — 庵 has no `田` anywhere in it; cjkvi gives
+`⿸广奄`, and the row's own alternate (`奄,广`) already matched that and
+matched the render. `rtk2212:奄` (`大,电`) confirms 奄's own shape has no
+`田` either. Promoted the alternate to primary, dropped the wrong one:
+`rtk2213:庵:hermitage:田,广,大;奄,广` → `奄,广`. Shape-family check:
+`rtk1091:俺` and `rtk2214:掩` already correctly use `奄` whole — no other
+follow-up needed.
+
+*Three stroke-soup flattenings of shapes shared by two hosts each, where
+no simpler named compound existed — added each as its own `prim-`
+primitive rather than re-flattening both hosts every time:*
+- `rtk2221:畷` (`田,又`) and `rtk2222:綴` (`糸,又`) both used the 2-stroke
+  `又` where render + cjkvi (`⿰田叕` / `⿰糸叕[JK]`, Google agrees) show
+  the 4-stroke cluster `叕`. Added `prim-stitches:叕:stitches,linked`
+  (atomic, no other cjkvi host of `叕` is in this dataset). →
+  `rtk2221:田,叕`, `rtk2222:糸,叕`.
+- `rtk2223:鎧` (`金,山,豆`) and `rtk2224:凱` (`山,豆,几`) both split the
+  coherent compound `豈` ("how could", U+8C48) into `山,豆`; cjkvi
+  (`⿰金豈` / `⿰豈几`, Google agrees on the second) and render confirm `豈`
+  is one shape, not two radicals. Added
+  `prim-surely-not:豈:surely not` (atomic). → `rtk2223:金,豈`,
+  `rtk2224:豈,几`.
+- `rtk2227:籤` (`竹,戈,韭,人`) and `rtk2228:懺` (`人,state of mind,戈,韭`)
+  both split the coherent compound `韱` ("slender", U+97F1) into
+  `戈,韭,人`; cjkvi (`⿱竹韱` / `⿰忄韱`) and render confirm. Added
+  `prim-slender:韱:slender` (atomic). → `rtk2227:竹,韱`,
+  `rtk2228:state of mind,韱`.
+
+**Three needs-render, all the same shape of problem: an `⿻`/overlay
+operator (or a circled-number opaque-intermediate) makes
+`audit_weak_evidence.py` flag the row as not-a-parts-list, and I couldn't
+confidently resolve the real stroke grouping from the render alone.**
+- `rtk2219:犀` (`尸,｜,丷,八,牛`) — cjkvi `⿸尸⿱⿻丨⿱丷八牛` overlays `丨`
+  with the rest; no simpler named compound exists for the middle shape
+  and Heisig's CSV is empty.
+- `rtk2220:皐` (`十,白,二`) — cjkvi `⿱白𠦂[G]` / `⿱白⿻十⿰二二[TJK]`;
+  `𠦂`'s own sub-decomposition overlays, and the TJK variant implies a
+  *second* `二` the current row doesn't have.
+- `rtk2239:菫` (`艹,口,龶`) — cjkvi `⿳艹一⿻口龶` overlays `口`/`龶` and
+  lists a middle `一` the current row omits. This is the exact 龶/丰 "only
+  the render settles it" trap from CLAUDE.md; a zoomed render didn't give
+  me enough confidence either way.
+
+**Everything else kept** (37 rows) — each checked against render + cjkvi
+(Heisig's CSV column is empty for all 50 rows this chunk: every
+`id_5th_ed` falls in 2043–2999 or 3000+, so per CLAUDE.md that's a data
+gap, not atomicity evidence, and was *not* used to justify any keep).
+Notable ones: `rtk2206:禽` was already fixed to `人,离` by an earlier
+session (2026-10-23, per the data.txt comment) despite the worklist's
+stale `parts_at_start` snapshot still showing the old `𠆢,亠,凶,禸` —
+verified it still matches cjkvi/render and recorded `keep` rather than
+re-"fixing" an already-correct row. `rtk2225:呑`'s top is `夭` (render
+confirms the tilted/bent shape), not `天` as Google's hint suggested.
+`rtk2229:芻` (`勹,屮`, each listed once) matches this dataset's
+established convention for doubled cjkvi structures (`林`=`木` once,
+`炎`=`火` once, `多`=`夕` once). `rtk2233:厖` (`厂,彡,尤`) and `rtk2242:莫`
+(`大,日,艹`) both expand a cjkvi-named one-off compound (`尨`, `旲`) into
+its own already-established sub-primitives rather than inventing a
+single-host primitive — same choice as the 2026-08-25-era single-host
+convention. `rtk2243:而` stays atomic; it's reused as a primitive in
+`耐`/`需`/`端`/`瑞`, confirming that's deliberate. The ten `亻,X` rows
+(`rtk2244`–`rtk2253`) all matched cjkvi exactly, no changes.
+
+**Tests**: baseline before starting — `pytest -q` 108/108,
+`./regression_fresh.sh` 1333/1333, `audit_radicals.py` 0 findings. After
+the 10 fixes and `sync_system_data.py` (3 kanji inserted — the three new
+`prim-` rows, 10 aliases added, 10 decompositions replaced, 1 removed —
+庵's now-dropped wrong alternate) — `pytest -q` 108/108 unchanged;
+`audit_radicals.py` 0 findings unchanged; `./regression_fresh.sh`
+initially failed 4/1333 on stale pins for `rtk2223`/`rtk2224`/`rtk2211`/
+`rtk2222` that encoded the old (buggy) decompositions — updated all four
+pins in place in `test_regression_fixes.py` with dated comments
+explaining why, then 1333/1333.
+
+No deploy needed from here — a deployer needs `git pull` +
+`sync_system_data.py` on prod to pick this up.
+
+`full_review.py --pending-count`: 747/3000.
+
+**Next**: continue the full re-review at frame 2254.

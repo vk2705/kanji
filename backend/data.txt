@@ -2829,12 +2829,21 @@ rtk2204:砦:fort:石,此
 rtk2205:髭:beard:此,髟
 rtk2206:禽:bird:人,离
 rtk2207:檎:apple:木,禽
-rtk2208:憐:pity:舛,米,state of mind,夕
-rtk2209:燐:phosphorus:火,舛,米,夕
+# 2026-11-06 full re-review: 憐/燐/鱗 each carried a redundant trailing "夕"
+# alongside 舛 -- 舛 is itself kangxi136:舛 = 夕,㐄, so listing 舛 AND one of
+# its own children as siblings double-counted a piece. 麟 and rtk1408 隣
+# (阝,米,舛) already use the correct 3-part pattern for this 粦 (米+舛) family;
+# normalized the other three to match.
+rtk2208:憐:pity:state of mind,米,舛
+rtk2209:燐:phosphorus:火,米,舛
 rtk2210:麟:chinese unicorn:鹿,米,舛
-rtk2211:鱗:scales (fish):魚,舛,米,夕
+rtk2211:鱗:scales (fish):魚,米,舛
 rtk2212:奄:cover:大,电
-rtk2213:庵:hermitage:田,广,大;奄,广
+# 2026-11-06 full re-review: primary was 田,广,大 -- 庵 has no 田 anywhere;
+# its interior is exactly 奄 (大+电, see rtk2212) under a 广 roof, which was
+# already present but only as the alternate. Render confirms, cjkvi agrees
+# (⿸广奄). Promoted the alternate to primary and dropped the wrong one.
+rtk2213:庵:hermitage:奄,广
 rtk2214:掩:cover:奄,扌
 rtk2215:悛:amend:夋,state of mind
 rtk2216:駿:a good horse:夋,馬
@@ -2842,14 +2851,27 @@ rtk2217:峻:high:夋,山
 rtk2218:竣:end:夋,立
 rtk2219:犀:rhinoceros:尸,｜,丷,八,牛
 rtk2220:皐:swamp:十,白,二
-rtk2221:畷:rice field ridge path:田,又
-rtk2222:綴:compose:糸,又
-rtk2223:鎧:put on armor:金,山,豆
-rtk2224:凱:victory song:山,豆,几
+# 2026-11-06 full re-review: both used 又 (2-stroke "or again") where the
+# render clearly shows the 4-stroke cluster 叕 (cjkvi agrees: ⿰田叕/⿰糸叕,
+# Google hint too). No other host in this dataset uses 叕; added it as its
+# own primitive below rather than inventing a flattening for a shape with
+# no simpler named sub-parts.
+rtk2221:畷:rice field ridge path:田,叕
+rtk2222:綴:compose:糸,叕
+# 2026-11-06 full re-review: both flattened 豈 ("how could", U+8C48) into
+# 山,豆 -- rendered, 豈 is a single coherent compound shared by both hosts
+# (cjkvi agrees: ⿰金豈/⿰豈几), not two independent radicals. Added 豈 as
+# its own primitive below.
+rtk2223:鎧:put on armor:金,豈
+rtk2224:凱:victory song:豈,几
 rtk2225:呑:drink:口,夭
 rtk2226:韮:leek:韭,艹
-rtk2227:籤:lottery:竹,戈,韭,人
-rtk2228:懺:regret:人,state of mind,戈,韭
+# 2026-11-06 full re-review: both flattened the shared shape 韱 ("slender",
+# U+97F1) into 戈,韭,人 -- cjkvi gives both as a plain two-piece split
+# (⿱竹韱/⿰忄韱) and rendering 韱 standalone confirms it matches each host's
+# right/bottom portion exactly. Added 韱 as its own primitive below.
+rtk2227:籤:lottery:竹,韱
+rtk2228:懺:regret:state of mind,韱
 rtk2229:芻:grass cutting:勹,屮
 rtk2230:雛:chick:芻,隹
 rtk2231:趨:run:芻,走
@@ -6149,3 +6171,18 @@ prim-drum-stand:壴:drum:士,豆
 # others in cjkvi, none of which are in heisig-kanjis.csv or this review's
 # scope -- not touched here.
 prim-stacked-boxes:㠯:stacked boxes
+
+# 2026-11-06 full re-review: shared compound shape of 畷 (rtk2221) and 綴
+# (rtk2222), wrongly flattened to 又 in both before this fix. Not a Kangxi
+# radical and no frame of its own, hence prim-.
+prim-stitches:叕:stitches,linked
+
+# 2026-11-06 full re-review: shared compound shape of 鎧 (rtk2223) and 凱
+# (rtk2224), wrongly flattened to 山,豆 in both before this fix. Not a
+# Kangxi radical and no frame of its own, hence prim-.
+prim-surely-not:豈:surely not
+
+# 2026-11-06 full re-review: shared compound shape of 籤 (rtk2227) and 懺
+# (rtk2228), wrongly flattened to 戈,韭,人 in both before this fix. Not a
+# Kangxi radical and no frame of its own, hence prim-.
+prim-slender:韱:slender

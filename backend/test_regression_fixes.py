@@ -472,10 +472,13 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk13", "prim-drum-stand", "kangxi59"}},
     "rtk1892": {"character": "艶", "keyword": "glossy",
                 "expected_part_ids": {"rtk1551", "rtk1890"}},
+    # 2026-11-06 full re-review: both flattened 豈 ("how could") into 山,豆;
+    # render + cjkvi (⿰金豈/⿰豈几) confirm it's one coherent shared shape,
+    # now prim-surely-not.
     "rtk2223": {"character": "鎧", "keyword": "put on armor",
-                "expected_part_ids": {"rtk287", "rtk830", "rtk1548"}},
+                "expected_part_ids": {"rtk287", "prim-surely-not"}},
     "rtk2224": {"character": "凱", "keyword": "victory song",
-                "expected_part_ids": {"rtk830", "rtk1548", "kangxi16"}},
+                "expected_part_ids": {"prim-surely-not", "kangxi16"}},
     "rtk2275": {"character": "厨", "keyword": "kitchen",
                 "expected_part_ids": {"rtk1548", "rtk45", "kangxi27"}},
     "rtk2319": {"character": "嬉", "keyword": "glad",
@@ -3079,10 +3082,14 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"prim-migrating-ducks", "rtk1431"}},
     "rtk2114": {"character": "綱", "keyword": "hawser",
                "expected_part_ids": {"rtk1431", "rtk2112"}},
+    # 2026-11-06 full re-review: 鱗 carried a redundant 夕 (rtk114) alongside
+    # 舛 (kangxi136, itself = 夕,㐄) -- matches 麟/隣's correct 3-part pattern
+    # once dropped. 綴's 又 (rtk752) was the 4-stroke cluster 叕 misread as
+    # the simpler 2-stroke 又; render + cjkvi (⿰糸叕) confirm, now prim-stitches.
     "rtk2211": {"character": "鱗", "keyword": "scaled",
-               "expected_part_ids": {"kangxi136", "rtk114", "rtk183", "rtk987"}},
+               "expected_part_ids": {"kangxi136", "rtk183", "rtk987"}},
     "rtk2222": {"character": "綴", "keyword": "mend",
-               "expected_part_ids": {"rtk1431", "rtk752"}},
+               "expected_part_ids": {"rtk1431", "prim-stitches"}},
     "rtk2336": {"character": "嶺", "keyword": "mountaintop",
                "expected_part_ids": {"rtk1507", "rtk830"}},
     "rtk2399": {"character": "瀕", "keyword": "on the verge of",

@@ -39331,11 +39331,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿱此石",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "石,此 matches cjkvi ⿱此石; render confirms.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2205",
@@ -39349,11 +39349,11 @@
    "髟",
    "此"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "此,髟 matches cjkvi ⿱髟此; render confirms.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2206",
@@ -39364,11 +39364,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿱人离",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Already 人,离 (fixed 2026-10-23, see data.txt comment); matches cjkvi ⿱人离, render confirms.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2207",
@@ -39382,11 +39382,11 @@
    "木",
    "禽"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "木,禽 matches cjkvi ⿰木禽.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2208",
@@ -39397,11 +39397,15 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰忄粦",
   "google_parts": null,
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "state of mind",
+   "米",
+   "舛"
+  ],
+  "note": "Dropped redundant trailing 夕 (舛 already = 夕,㐄 per kangxi136); now matches 麟/隣's correct 3-part pattern for this 粦 family. Regression pin not previously pinned; sync_system_data.py applied.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2209",
@@ -39417,11 +39421,15 @@
    "夕",
    "舛"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "火",
+   "米",
+   "舛"
+  ],
+  "note": "Same redundant-夕 bug as rtk2208; dropped to match 麟/隣's pattern.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2210",
@@ -39432,11 +39440,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰鹿粦",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "鹿,米,舛 already correct (no redundant 夕); matches cjkvi ⿰鹿粦 expanded.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2211",
@@ -39447,11 +39455,15 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰魚粦",
   "google_parts": null,
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "魚",
+   "米",
+   "舛"
+  ],
+  "note": "Same redundant-夕 bug; dropped. Updated regression pin test_regression_fixes.py (was pinned with rtk114).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2212",
@@ -39462,11 +39474,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿱大电",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "大,电 matches cjkvi ⿱大电; render confirms.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2213",
@@ -39477,11 +39489,14 @@
   "heisig_components": "",
   "cjkvi_ids": "⿸广奄",
   "google_parts": null,
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "奄",
+   "广"
+  ],
+  "note": "Primary was 田,广,大 -- 庵 has no 田 anywhere; interior is 奄 (大+电) under 广, already present but only as the alternate. Promoted alternate to primary, dropped wrong one. Render + cjkvi (⿸广奄) confirm. Checked family: 俺(rtk1091)/掩(rtk2214) already correctly use 奄 whole, no other follow-up needed.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2214",
@@ -39495,11 +39510,11 @@
    "扌",
    "奄"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "奄,扌 matches cjkvi ⿰扌奄.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2215",
@@ -39510,11 +39525,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰忄夋",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "夋,state of mind matches cjkvi ⿰忄夋; render confirms 夋 shape.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2216",
@@ -39525,11 +39540,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰馬夋",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "夋,馬 matches cjkvi ⿰馬夋.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2217",
@@ -39540,11 +39555,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰山夋",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "夋,山 matches cjkvi ⿰山夋.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2218",
@@ -39555,11 +39570,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰立夋",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "夋,立 matches cjkvi ⿰立夋.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2219",
@@ -39573,11 +39588,11 @@
    "尸",
    "牛"
   ],
-  "status": "pending",
+  "status": "needs-render",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿸尸⿱⿻丨⿱丷八牛 uses an overlay operator (⿻丨...) -- audit_weak_evidence.py flags as not-a-parts-list, meaning 丨/丷/八 aren't cleanly separable the way the current flat 尸,｜,丷,八,牛 reads them. No simpler named compound exists for the middle shape and Heisig's CSV is empty; could not confirm the right level from render alone. Flagging rather than guessing.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2220",
@@ -39588,11 +39603,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿱白𠦂[G] ⿱白⿻十⿰二二[TJK]",
   "google_parts": null,
-  "status": "pending",
+  "status": "needs-render",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi gives ⿱白𠦂[G] / ⿱白⿻十⿰二二[TJK] -- audit_weak_evidence.py flags 𠦂's own sub-decomposition as an overlay (⿻), so 十/二 in the current row aren't cleanly the visible pieces. Current row is also missing a second 二 the TJK variant implies. Heisig's CSV is empty and I could not confidently resolve the right breakdown from the render; flagging rather than guessing.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2221",
@@ -39606,11 +39621,14 @@
    "田",
    "叕"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "田",
+   "叕"
+  ],
+  "note": "又 was wrong -- render shows the 4-stroke cluster 叕 (cjkvi ⿰田叕, Google hint agrees). Added prim-stitches:叕 (no other host in this dataset uses it).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2222",
@@ -39621,11 +39639,14 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰糹叕[GT] ⿰糸叕[JK]",
   "google_parts": null,
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "糸",
+   "叕"
+  ],
+  "note": "Same 又->叕 bug as rtk2221 (cjkvi ⿰糸叕/⿰糹叕). Shares prim-stitches. Updated regression pin test_regression_fixes.py (was pinned with rtk752/又).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2223",
@@ -39636,11 +39657,14 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰金豈",
   "google_parts": null,
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "金",
+   "豈"
+  ],
+  "note": "山,豆 was a stroke-soup flattening of the coherent shared shape 豈 (cjkvi ⿰金豈). Added prim-surely-not:豈, reused by rtk2224. Updated regression pin test_regression_fixes.py.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2224",
@@ -39654,11 +39678,14 @@
    "豈",
    "几"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "豈",
+   "几"
+  ],
+  "note": "Same 山,豆->豈 bug as rtk2223 (cjkvi ⿰豈几, Google hint agrees). Shares prim-surely-not. Updated regression pin test_regression_fixes.py.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2225",
@@ -39672,11 +39699,11 @@
    "天",
    "口"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "口,夭 matches cjkvi ⿱夭口; render of 呑's top confirms the tilted/bent 夭 shape, not symmetric 天 -- Google's 天 hint is wrong here.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2226",
@@ -39690,11 +39717,11 @@
    "艹",
    "韭"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "韭,艹 matches cjkvi ⿱艹韭.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2227",
@@ -39705,11 +39732,14 @@
   "heisig_components": "",
   "cjkvi_ids": "⿱竹韱",
   "google_parts": null,
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "竹",
+   "韱"
+  ],
+  "note": "戈,韭,人 was a stroke-soup flattening of the coherent shared shape 韱 (cjkvi ⿱竹韱). Added prim-slender:韱, reused by rtk2228.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2228",
@@ -39720,11 +39750,14 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰忄韱",
   "google_parts": null,
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "state of mind",
+   "韱"
+  ],
+  "note": "Same 戈,韭,人->韱 bug as rtk2227 (cjkvi ⿰忄韱). Shares prim-slender.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2229",
@@ -39735,11 +39768,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿱⿹勹屮⿹勹屮",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "勹,屮 each listed once for the doubled cjkvi shape ⿱⿹勹屮⿹勹屮, consistent with this dataset's established convention for doubled structures (林=木 once, 炎=火 once, 多=夕 once).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2230",
@@ -39750,11 +39783,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰芻隹",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "芻,隹 matches cjkvi ⿰芻隹.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2231",
@@ -39765,11 +39798,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿺走芻",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "芻,走 matches cjkvi ⿺走芻.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2232",
@@ -39783,11 +39816,11 @@
    "大",
    "丶"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "丶,尢 matches cjkvi ⿺尢丶; render confirms 尤=尢+extra dot, distinct from Google's 大 hint.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2233",
@@ -39801,11 +39834,11 @@
    "厂",
    "尨"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "厂,彡,尤 -- audit_weak_evidence.py clean. Uses 尤+彡 (both established primitives, reused elsewhere) rather than inventing a one-off 尨 primitive; render confirms the shape. Equivalent in content to cjkvi/Google's 尨.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2234",
@@ -39816,11 +39849,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿹戈⿱口一",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "口,戈,一 matches cjkvi ⿹戈⿱口一; audit_weak_evidence.py clean; render confirms.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2235",
@@ -39835,11 +39868,11 @@
    "兄",
    "丶"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "ノ,丶,儿,｜ -- cjkvi stops at a circled-number placeholder (opaque-intermediate per audit_weak_evidence.py), so structural corroboration is unavailable; render confirms 兎 lacks 兔's extra dot and the existing 4-stroke breakdown is a plausible pictographic reading with no better alternative.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2236",
@@ -39850,11 +39883,11 @@
   "heisig_components": "",
   "cjkvi_ids": "也",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Atomic; cjkvi has no decomposition for 也 either.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2237",
@@ -39865,11 +39898,11 @@
   "heisig_components": "",
   "cjkvi_ids": "巴",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Atomic; cjkvi has no decomposition for 巴 either.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2238",
@@ -39883,11 +39916,11 @@
    "ト",
    "⺪"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Atomic; cjkvi has no decomposition for 疋 either.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2239",
@@ -39898,11 +39931,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿳艹一⿻口龶",
   "google_parts": null,
-  "status": "pending",
+  "status": "needs-render",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿳艹一⿻口龶 -- audit_weak_evidence.py flags the ⿻口龶 overlay as not-a-parts-list, and the current row (艹,口,龶) also omits the 一 cjkvi lists as a separate middle stroke. This is exactly the 龶/丰 'only the render settles it' trap CLAUDE.md warns about; could not confidently resolve the exact stroke grouping from the zoomed render. Flagging rather than guessing.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2240",
@@ -39913,11 +39946,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿳日罒又[GJK] ⿳冃罒又[TV]",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "日,罒,又 matches cjkvi's Japanese variant ⿳日罒又[GJK].",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2241",
@@ -39931,11 +39964,11 @@
    "二",
    "厶"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "二,厶 matches cjkvi ⿱二厶.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2242",
@@ -39946,11 +39979,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿱艹旲",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "大,日,艹 -- cjkvi's ⿱艹旲 names a rare one-off compound (旲) whose own parts are exactly 大+日, both common established primitives; expanding rather than inventing a 旲 row follows the project's single-host convention.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2243",
@@ -39964,11 +39997,11 @@
    "一",
    "𦉫"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Atomic, matching cjkvi's own structure where the bottom 𦓐 is a rare unnamed shape with no useful sub-primitives; 而 is itself reused as a primitive in 耐/需/端/瑞, confirming it's meant to be atomic here.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2244",
@@ -39979,11 +40012,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰亻委",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "亻,委 matches cjkvi ⿰亻委.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2245",
@@ -39994,11 +40027,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰亻夹",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "亻,夹 matches cjkvi ⿰亻夹.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2246",
@@ -40012,11 +40045,11 @@
    "亻",
    "巻"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "亻,巻 matches cjkvi's Japanese variant ⿰亻巻[J].",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2247",
@@ -40027,11 +40060,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰亻我",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "亻,我 matches cjkvi ⿰亻我.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2248",
@@ -40045,11 +40078,11 @@
    "亻",
    "田"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "亻,田 matches cjkvi ⿰亻田.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2249",
@@ -40060,11 +40093,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰亻子",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "亻,子 matches cjkvi ⿰亻子.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2250",
@@ -40075,11 +40108,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰亻九",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "亻,九 matches cjkvi ⿰亻九.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2251",
@@ -40090,11 +40123,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰亻加",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "亻,加 matches cjkvi ⿰亻加.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2252",
@@ -40108,11 +40141,11 @@
    "亻",
    "諸"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "亻,諸 matches cjkvi ⿰亻諸.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2253",
@@ -40126,11 +40159,11 @@
    "亻",
    "喬"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "亻,喬 matches cjkvi ⿰亻喬.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2254",
