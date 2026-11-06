@@ -41364,9 +41364,12 @@
    "宀",
    "厷"
   ],
-  "status": "keep",
-  "decision": null,
-  "note": "ノ,一,厶,宀 = full leaf set of 宀+厷(⿸𠂇厶); cjkvi doesn't split 𠂇 further but render confirms it is a ノ+一 stroke pair, no missing/extra ink",
+  "status": "fixed",
+  "decision": [
+   "宀",
+   "厷"
+  ],
+  "note": "Shape-family correction: was ノ,一,厶,宀, wrongly kept on 2026-11-06 (reasoning: cjkvi's own sub-decomposition of 厷 goes to stroke level -- but that's cjkvi's second level, not the host's immediate ⿱宀厷). Found while fixing the identical mistake on rtk2536 肱 (also 月/宀+厷, also flattened to raw strokes). render_glyphs.py on 宏/厷 confirms the bottom is the coherent shape 厷. Resolves via the new prim-forearm row added for rtk2536.",
   "reviewed_by": "claude",
   "reviewed_at": "2026-11-06"
  },
@@ -44431,11 +44434,11 @@
    "阝",
    "員"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered and checked against cjkvi-ids (⿰阝員): both pieces present, matches cjkvi; order in the row doesn't affect correctness. Heisig's components column is empty but this frame is outside the core 1-2042 id_5th_ed range, so that's just missing CSV data, not atomicity evidence -- decided from render+cjkvi alone.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2505",
@@ -44449,11 +44452,11 @@
    "阝",
    "畏"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered and checked against cjkvi-ids (⿰阝畏): matches cjkvi exactly. Heisig's components column is empty but this frame is outside the core 1-2042 id_5th_ed range, so that's just missing CSV data, not atomicity evidence -- decided from render+cjkvi alone.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2506",
@@ -44468,11 +44471,11 @@
    "馬",
    "心"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered and checked against cjkvi-ids (⿱馮心): cjkvi's top is 馮 (⿰冫馬), which has no row of its own; flattened to its real visible pieces 馬+冫 plus 心 -- no missing/extra ink, not stroke soup since 馬/冫 are themselves coherent named primitives. Heisig's components column is empty but this frame is outside the core 1-2042 id_5th_ed range, so that's just missing CSV data, not atomicity evidence -- decided from render+cjkvi alone.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2507",
@@ -44486,11 +44489,11 @@
    "若",
    "心"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered and checked against cjkvi-ids (⿱若心): matches cjkvi exactly. Heisig's components column is empty but this frame is outside the core 1-2042 id_5th_ed range, so that's just missing CSV data, not atomicity evidence -- decided from render+cjkvi alone.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2508",
@@ -44504,11 +44507,11 @@
    "釆",
    "心"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered and checked against cjkvi-ids (⿱釆心): render confirms top is 釆 (kangxi 165), not the lookalike 采; matches cjkvi. Heisig's components column is empty but this frame is outside the core 1-2042 id_5th_ed range, so that's just missing CSV data, not atomicity evidence -- decided from render+cjkvi alone.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2509",
@@ -44519,11 +44522,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿱勿心",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered and checked against cjkvi-ids (⿱勿心): matches cjkvi exactly. Heisig's components column is empty but this frame is outside the core 1-2042 id_5th_ed range, so that's just missing CSV data, not atomicity evidence -- decided from render+cjkvi alone.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2510",
@@ -44537,11 +44540,11 @@
    "匆",
    "心"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered and checked against cjkvi-ids (⿱物心): render confirms top is 物 (牛+勿); Google's hint 匆 is wrong, cjkvi's 物 matches the render. Heisig's components column is empty but this frame is outside the core 1-2042 id_5th_ed range, so that's just missing CSV data, not atomicity evidence -- decided from render+cjkvi alone.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2511",
@@ -44555,11 +44558,11 @@
    "兪",
    "心"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered and checked against cjkvi-ids (⿱俞心[GTJV] ⿱兪心[K]): top is 俞, the Japan/Taiwan/Vietnam variant per cjkvi, matching our row. Heisig's components column is empty but this frame is outside the core 1-2042 id_5th_ed range, so that's just missing CSV data, not atomicity evidence -- decided from render+cjkvi alone.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2512",
@@ -44573,11 +44576,11 @@
    "如",
    "心"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered and checked against cjkvi-ids (⿱如心): matches cjkvi exactly. Heisig's components column is empty but this frame is outside the core 1-2042 id_5th_ed range, so that's just missing CSV data, not atomicity evidence -- decided from render+cjkvi alone.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2513",
@@ -44588,11 +44591,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿱日卯",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered and checked against cjkvi-ids (⿱日卯): matches cjkvi exactly. Heisig's components column is empty but this frame is outside the core 1-2042 id_5th_ed range, so that's just missing CSV data, not atomicity evidence -- decided from render+cjkvi alone.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2514",
@@ -44606,11 +44609,14 @@
    "并",
    "日"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "亚",
+   "日"
+  ],
+  "note": "was 一,日: render_glyphs.py on 晋/亚/亜/亞 shows the top is the simplified-Chinese 亚 shape (frame bar, two slanted sides, two mid-bars, bottom bar), not a single 一, and not the 亜/亞 cross-hatch variants. cjkvi-ids agrees: ⿱亚日. Added prim-framed-ladder (new row, avoids colliding with 亜's existing 'asia' or 梯's existing 'ladder').",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2515",
@@ -44621,11 +44627,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿱日成",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered and checked against cjkvi-ids (⿱日成): matches cjkvi exactly. Heisig's components column is empty but this frame is outside the core 1-2042 id_5th_ed range, so that's just missing CSV data, not atomicity evidence -- decided from render+cjkvi alone.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2516",
@@ -44636,11 +44642,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿱日軍",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered and checked against cjkvi-ids (⿱日軍): matches cjkvi exactly. Heisig's components column is empty but this frame is outside the core 1-2042 id_5th_ed range, so that's just missing CSV data, not atomicity evidence -- decided from render+cjkvi alone.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2517",
@@ -44651,11 +44657,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰日軍",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered and checked against cjkvi-ids (⿰日軍): matches cjkvi exactly (left-right layout here vs 暈's top-bottom, same two pieces). Heisig's components column is empty but this frame is outside the core 1-2042 id_5th_ed range, so that's just missing CSV data, not atomicity evidence -- decided from render+cjkvi alone.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2518",
@@ -44669,11 +44675,11 @@
    "日",
    "干"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered and checked against cjkvi-ids (⿱日干): matches cjkvi exactly. Heisig's components column is empty but this frame is outside the core 1-2042 id_5th_ed range, so that's just missing CSV data, not atomicity evidence -- decided from render+cjkvi alone.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2519",
@@ -44687,11 +44693,11 @@
    "日",
    "安"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered and checked against cjkvi-ids (⿱日安): matches cjkvi exactly. Heisig's components column is empty but this frame is outside the core 1-2042 id_5th_ed range, so that's just missing CSV data, not atomicity evidence -- decided from render+cjkvi alone.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2520",
@@ -44702,11 +44708,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿱日辰",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered and checked against cjkvi-ids (⿱日辰): matches cjkvi exactly. Heisig's components column is empty but this frame is outside the core 1-2042 id_5th_ed range, so that's just missing CSV data, not atomicity evidence -- decided from render+cjkvi alone.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2521",
@@ -44720,11 +44726,11 @@
    "日",
    "西"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered and checked against cjkvi-ids (⿰日西): matches cjkvi exactly. Heisig's components column is empty but this frame is outside the core 1-2042 id_5th_ed range, so that's just missing CSV data, not atomicity evidence -- decided from render+cjkvi alone.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2522",
@@ -44738,11 +44744,11 @@
    "日",
    "光"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered and checked against cjkvi-ids (⿱日光): matches cjkvi exactly. Heisig's components column is empty but this frame is outside the core 1-2042 id_5th_ed range, so that's just missing CSV data, not atomicity evidence -- decided from render+cjkvi alone.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2523",
@@ -44753,11 +44759,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰日暴",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered and checked against cjkvi-ids (⿰日暴): matches cjkvi exactly. Heisig's components column is empty but this frame is outside the core 1-2042 id_5th_ed range, so that's just missing CSV data, not atomicity evidence -- decided from render+cjkvi alone.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2524",
@@ -44771,11 +44777,11 @@
    "日",
    "署"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered and checked against cjkvi-ids (⿰日署): matches cjkvi exactly. Heisig's components column is empty but this frame is outside the core 1-2042 id_5th_ed range, so that's just missing CSV data, not atomicity evidence -- decided from render+cjkvi alone.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2525",
@@ -44786,11 +44792,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿱日卬",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered and checked against cjkvi-ids (⿱日卬): matches cjkvi exactly. Heisig's components column is empty but this frame is outside the core 1-2042 id_5th_ed range, so that's just missing CSV data, not atomicity evidence -- decided from render+cjkvi alone.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2526",
@@ -44801,11 +44807,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿱氏日",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered and checked against cjkvi-ids (⿱氏日): matches cjkvi exactly. Heisig's components column is empty but this frame is outside the core 1-2042 id_5th_ed range, so that's just missing CSV data, not atomicity evidence -- decided from render+cjkvi alone.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2527",
@@ -44819,11 +44825,11 @@
    "日",
    "毎"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered and checked against cjkvi-ids (⿰日每[GTKV] ⿰日毎[J]): matches the Japan variant 毎 per cjkvi. Heisig's components column is empty but this frame is outside the core 1-2042 id_5th_ed range, so that's just missing CSV data, not atomicity evidence -- decided from render+cjkvi alone.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2528",
@@ -44837,11 +44843,11 @@
    "月",
    "農"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered and checked against cjkvi-ids (⿰月農[GJK] ⿰⺼農[TV]): matches the Japan variant 月 per cjkvi. Heisig's components column is empty but this frame is outside the core 1-2042 id_5th_ed range, so that's just missing CSV data, not atomicity evidence -- decided from render+cjkvi alone.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2529",
@@ -44855,11 +44861,11 @@
    "月",
    "府"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered and checked against cjkvi-ids (⿰月府[GJK]): matches cjkvi exactly. Heisig's components column is empty but this frame is outside the core 1-2042 id_5th_ed range, so that's just missing CSV data, not atomicity evidence -- decided from render+cjkvi alone.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2530",
@@ -44873,11 +44879,11 @@
    "月",
    "光"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered and checked against cjkvi-ids (⿰月光[GJK]): matches cjkvi exactly. Heisig's components column is empty but this frame is outside the core 1-2042 id_5th_ed range, so that's just missing CSV data, not atomicity evidence -- decided from render+cjkvi alone.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2531",
@@ -44888,11 +44894,14 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰月丕[GJK] ⿰⺼丕[T]",
   "google_parts": null,
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "月",
+   "丕"
+  ],
+  "note": "was ｜,ノ,一,月,丶: right side flattened into raw strokes. render_glyphs.py on 胚/丕 confirms the right side is the coherent shape 丕, matching cjkvi-ids' ⿰月丕[GJK]. Added prim-grand (new row).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2532",
@@ -44906,11 +44915,11 @@
    "月",
    "工"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered and checked against cjkvi-ids (⿰月工[GJK]): matches cjkvi exactly. Heisig's components column is empty but this frame is outside the core 1-2042 id_5th_ed range, so that's just missing CSV data, not atomicity evidence -- decided from render+cjkvi alone.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2533",
@@ -44924,11 +44933,11 @@
    "月",
    "危"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered and checked against cjkvi-ids (⿰月危[GJK]): matches cjkvi exactly. Heisig's components column is empty but this frame is outside the core 1-2042 id_5th_ed range, so that's just missing CSV data, not atomicity evidence -- decided from render+cjkvi alone.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2534",
@@ -44939,11 +44948,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰月力[GTV] ⿰⺼力[T]",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered and checked against cjkvi-ids (⿰月力[GTV]): matches cjkvi exactly. Heisig's components column is empty but this frame is outside the core 1-2042 id_5th_ed range, so that's just missing CSV data, not atomicity evidence -- decided from render+cjkvi alone.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2535",
@@ -44957,11 +44966,11 @@
    "月",
    "空"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered and checked against cjkvi-ids (⿰月空[GJK]): matches cjkvi exactly. Heisig's components column is empty but this frame is outside the core 1-2042 id_5th_ed range, so that's just missing CSV data, not atomicity evidence -- decided from render+cjkvi alone.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2536",
@@ -44972,11 +44981,14 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰月厷[GJK] ⿰⺼厷[TV]",
   "google_parts": null,
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "月",
+   "厷"
+  ],
+  "note": "was ノ,一,月,厶: right side flattened into raw strokes. render_glyphs.py on 肱/厷 confirms the right side is the coherent shape 厷, matching cjkvi-ids' ⿰月厷[GJK]. Added prim-forearm (new row). Shape-family check found rtk2324 宏 has the identical mistake; fixed separately.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2537",
@@ -44990,11 +45002,11 @@
    "古",
    "月"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered and checked against cjkvi-ids (⿰古月[GJK]): matches cjkvi exactly. Heisig's components column is empty but this frame is outside the core 1-2042 id_5th_ed range, so that's just missing CSV data, not atomicity evidence -- decided from render+cjkvi alone.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2538",
@@ -45005,11 +45017,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰木風",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered and checked against cjkvi-ids (⿰木風): matches cjkvi exactly. Heisig's components column is empty but this frame is outside the core 1-2042 id_5th_ed range, so that's just missing CSV data, not atomicity evidence -- decided from render+cjkvi alone.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2539",
@@ -45023,11 +45035,11 @@
    "木",
    "昜"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered and checked against cjkvi-ids (⿰木昜): matches cjkvi exactly; already the coherent 昜, not flattened to 日,一,勿. Heisig's components column is empty but this frame is outside the core 1-2042 id_5th_ed range, so that's just missing CSV data, not atomicity evidence -- decided from render+cjkvi alone.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2540",
@@ -45038,11 +45050,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰木京",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered and checked against cjkvi-ids (⿰木京): matches cjkvi exactly. Heisig's components column is empty but this frame is outside the core 1-2042 id_5th_ed range, so that's just missing CSV data, not atomicity evidence -- decided from render+cjkvi alone.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2541",
@@ -45053,11 +45065,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰木秦",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered and checked against cjkvi-ids (⿰木秦): matches cjkvi exactly. Heisig's components column is empty but this frame is outside the core 1-2042 id_5th_ed range, so that's just missing CSV data, not atomicity evidence -- decided from render+cjkvi alone.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2542",
@@ -45071,11 +45083,11 @@
    "木",
    "節"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered and checked against cjkvi-ids (⿰木節): matches cjkvi exactly. Heisig's components column is empty but this frame is outside the core 1-2042 id_5th_ed range, so that's just missing CSV data, not atomicity evidence -- decided from render+cjkvi alone.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2543",
@@ -45086,11 +45098,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰木追",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered and checked against cjkvi-ids (⿰木追): matches cjkvi exactly. Heisig's components column is empty but this frame is outside the core 1-2042 id_5th_ed range, so that's just missing CSV data, not atomicity evidence -- decided from render+cjkvi alone.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2544",
@@ -45101,11 +45113,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰木焦",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered and checked against cjkvi-ids (⿰木焦): matches cjkvi exactly. Heisig's components column is empty but this frame is outside the core 1-2042 id_5th_ed range, so that's just missing CSV data, not atomicity evidence -- decided from render+cjkvi alone.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2545",
@@ -45116,11 +45128,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰木弟",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered and checked against cjkvi-ids (⿰木弟): matches cjkvi exactly. Heisig's components column is empty but this frame is outside the core 1-2042 id_5th_ed range, so that's just missing CSV data, not atomicity evidence -- decided from render+cjkvi alone.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2546",
@@ -45134,11 +45146,11 @@
    "木",
    "甘"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered and checked against cjkvi-ids (⿰木甘): matches cjkvi exactly. Heisig's components column is empty but this frame is outside the core 1-2042 id_5th_ed range, so that's just missing CSV data, not atomicity evidence -- decided from render+cjkvi alone.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2547",
@@ -45149,11 +45161,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰木亢",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered and checked against cjkvi-ids (⿰木亢): matches cjkvi exactly. Heisig's components column is empty but this frame is outside the core 1-2042 id_5th_ed range, so that's just missing CSV data, not atomicity evidence -- decided from render+cjkvi alone.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2548",
@@ -45167,11 +45179,11 @@
    "木",
    "冬"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered and checked against cjkvi-ids (⿰木冬): matches cjkvi exactly. Heisig's components column is empty but this frame is outside the core 1-2042 id_5th_ed range, so that's just missing CSV data, not atomicity evidence -- decided from render+cjkvi alone.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2549",
@@ -45185,11 +45197,11 @@
    "木",
    "由"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered and checked against cjkvi-ids (⿰木由): matches cjkvi exactly. Heisig's components column is empty but this frame is outside the core 1-2042 id_5th_ed range, so that's just missing CSV data, not atomicity evidence -- decided from render+cjkvi alone.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2550",
@@ -45203,11 +45215,11 @@
    "木",
    "宛"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered and checked against cjkvi-ids (⿰木宛): matches cjkvi exactly. Heisig's components column is empty but this frame is outside the core 1-2042 id_5th_ed range, so that's just missing CSV data, not atomicity evidence -- decided from render+cjkvi alone.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2551",
@@ -45221,11 +45233,11 @@
    "木",
    "母"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered and checked against cjkvi-ids (⿰木母): matches cjkvi exactly. Heisig's components column is empty but this frame is outside the core 1-2042 id_5th_ed range, so that's just missing CSV data, not atomicity evidence -- decided from render+cjkvi alone.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2552",
@@ -45239,11 +45251,11 @@
    "木",
    "正"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered and checked against cjkvi-ids (⿰木正): matches cjkvi exactly. Heisig's components column is empty but this frame is outside the core 1-2042 id_5th_ed range, so that's just missing CSV data, not atomicity evidence -- decided from render+cjkvi alone.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2553",
@@ -45257,11 +45269,11 @@
    "木",
    "神"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered and checked against cjkvi-ids (⿰木神): matches cjkvi exactly. Heisig's components column is empty but this frame is outside the core 1-2042 id_5th_ed range, so that's just missing CSV data, not atomicity evidence -- decided from render+cjkvi alone.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2554",

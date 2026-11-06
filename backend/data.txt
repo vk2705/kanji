@@ -2978,7 +2978,14 @@ rtk2320:孕:become pregnant:子,乃
 rtk2321:孜:industriousness:子,攵
 rtk2322:宥:soothe:宀,有
 rtk2323:寓:temporary abode:宀,禺
-rtk2324:宏:wide:ノ,一,厶,宀
+# 2026-11-06 full re-review correction: was ノ,一,厶,宀, kept as-is on
+# 2026-11-06 on the reasoning that cjkvi's own sub-decomposition of 厷 goes
+# down to stroke level -- but that's cjkvi's *second* level, not the host's
+# immediate one (⿱宀厷); found while fixing the identical mistake on rtk2536
+# 肱 (also 月+厷, also flattened to raw strokes). render_glyphs.py on 宏/厷
+# confirms the bottom is the coherent shape 厷 (resolves via the new
+# prim-forearm row added near rtk2536, below).
+rtk2324:宏:wide:宀,厷
 rtk2325:牢:prison:牛,宀
 rtk2326:宋:dwell:木,宀
 rtk2327:宍:muscles:六,宀
@@ -3218,7 +3225,17 @@ rtk2510:惣:all:心,物
 rtk2511:愈:be superior:俞,心
 rtk2512:恕:excuse:如,心
 rtk2513:昴:the pleiades:卯,日
-rtk2514:晋:advance:一,日
+# 2026-11-06 full re-review: new primitive for 晋's top shape (see below).
+# Named "framed ladder" rather than reusing rtk1950 亜's existing "asia" or
+# rtk2545 梯's existing "ladder", to avoid a keyword collision with either.
+prim-framed-ladder:亚:framed ladder
+# 2026-11-06 full re-review: was 一,日. render_glyphs.py on 晋/亚/亜/亞 shows
+# the top is shaped exactly like simplified-Chinese 亚 (frame bar, two
+# slanted side strokes, two vertical mid-bars, bottom bar) -- not a single
+# 一, and not the Japanese 亜/traditional 亞 cross-hatch variants. cjkvi-ids
+# agrees: ⿱亚日. No other rtk* row uses this top shape (grep for
+# 一,日/日,一 found only 旦/更, unrelated).
+rtk2514:晋:advance:亚,日
 rtk2515:晟:clear:成,日
 rtk2516:暈:halo:日,軍
 rtk2517:暉:shine:日,軍
@@ -3235,12 +3252,23 @@ rtk2527:晦:dark:日,毎
 rtk2528:膿:pus:月,農
 rtk2529:腑:viscera:府,月
 rtk2530:胱:bladder:月,光
-rtk2531:胚:embryo:｜,ノ,一,月,丶
+prim-grand:丕:grand
+# 2026-11-06 full re-review: was ｜,ノ,一,月,丶 -- the right side flattened
+# into raw strokes. render_glyphs.py on 胚/丕 confirms the right side is the
+# coherent shape 丕, matching cjkvi-ids' ⿰月丕[GJK].
+rtk2531:胚:embryo:月,丕
 rtk2532:肛:anus:工,月
 rtk2533:脆:brittle:危,月
 rtk2534:肋:rib:月,力
 rtk2535:腔:body cavity:月,空
-rtk2536:肱:ability:ノ,一,月,厶
+prim-forearm:厷:forearm
+# 2026-11-06 full re-review: was ノ,一,月,厶 -- the right side flattened into
+# raw strokes. render_glyphs.py on 肱/厷 confirms the right side is the
+# coherent shape 厷, matching cjkvi-ids' ⿰月厷[GJK]. Shape-family check:
+# rtk2324 宏 has the exact same mistake (was ノ,一,厶,宀 for 宀+厷, kept
+# wrongly on 2026-11-06 before this fix was found) -- fixed below too. grep
+# found no other rtk* row using ノ,一,厶/一,厶,ノ/厶,一,ノ.
+rtk2536:肱:ability:月,厷
 rtk2537:胡:barbarian,zombie:古,月
 rtk2538:楓:maple:木,風
 rtk2539:楊:willow:昜,木

@@ -27729,3 +27729,92 @@ No deploy needed from here — a deployer needs `git pull` +
 `full_review.py --pending-count`: 497/3000.
 
 **Next**: continue the full re-review at frame 2504.
+
+## 2026-11-06 — full re-review: frames 2504–2553
+
+50 kanji reviewed: 47 keep, 3 fixed, 0 needs-render, plus one
+out-of-batch shape-family correction (rtk2324, below). `id_5th_ed` for
+this whole range is in the 2043–2999 "no data" band (confirmed by
+cross-referencing `id_6th_ed` → `id_5th_ed` in `heisig-kanjis.csv`, not
+by character, since the two numberings differ), so Heisig's empty
+components column is not atomicity evidence here — every call is from
+the render plus cjkvi-ids alone. Systematically diffed `data.txt`'s
+parts against cjkvi-ids' component set for all 50 rows before touching
+anything; 47 already matched exactly (accounting for cjkvi's
+regional-variant tags, e.g. picking 月 over ⺼, 俞 over 兪, 毎 over 每 —
+always the `[...J...]` reading). Three did not, confirmed by rendering
+each pair side by side:
+
+- `rtk2514:晋` ("progress") — primary was `一,日`; cjkvi gives
+  `⿱亚日`. Rendering 晋 next to 亚/亜/亞 side by side shows the top is
+  exactly the simplified-Chinese `亚` shape (top bar, two slanted side
+  strokes, two vertical mid-bars, bottom bar) — a single `一` is missing
+  all four of those strokes, and the Japanese `亜`/traditional `亞` tops
+  are a different cross-hatch pattern, not this one. No existing row
+  named this shape (`亜` already owns "asia", `rtk2545:梯` already owns
+  "ladder"), so added a new primitive, `prim-framed-ladder:亚:framed
+  ladder`, picked to avoid colliding with either. New: `亚,日`. Grepped
+  `data.txt` for every other `一,日`/`日,一` row — only `rtk30:旦` and
+  `rtk749:更`, both genuinely one-stroke-over-日 kanji, unrelated.
+- `rtk2531:胚` ("embryo") — primary was stroke soup `｜,ノ,一,月,丶`;
+  cjkvi gives `⿰月丕[GJK]`. render_glyphs.py on 胚/丕 confirms the right
+  side is the coherent shape 丕 exactly. Added `prim-grand:丕:grand`
+  (checked for a keyword collision first — none). New: `月,丕`.
+- `rtk2536:肱` ("armrest") — primary was stroke soup `ノ,一,月,厶`;
+  cjkvi gives `⿰月厷[GJK]`. render_glyphs.py on 肱/厷 confirms the right
+  side is the coherent shape 厷 exactly. Added `prim-forearm:厷:forearm`
+  (checked for a keyword collision first — none). New: `月,厷`.
+
+**Shape-family follow-up (the 亀 lesson)**: grepped `data.txt` for every
+other row flattening `厷` into loose strokes while fixing rtk2536, and
+found `rtk2324:宏` ("extensive") — primary `ノ,一,厶,宀`, the identical
+mistake (cjkvi: `⿱宀厷`). This row had just been reviewed and kept
+*earlier today* (2026-11-06, in the 2304–2353 chunk) on the reasoning
+that "cjkvi doesn't split `𠂇`/`厷` further than strokes" — but that
+reasoning used cjkvi's *second*-level sub-decomposition of 厷 itself,
+not 宏's own immediate one (`⿱宀厷`), which is exactly the
+flattening-past-the-right-level bug this review exists to catch.
+render_glyphs.py on 宏/厷 confirms the same coherent-厷 match as 肱.
+Corrected: `宀,厷` (resolves via the new `prim-forearm` row added for
+rtk2536). No other row in `data.txt` flattens 厷 this way.
+
+Three rows worth noting but left as-is: `rtk2506:憑` ("depend") and
+`rtk2511:愈` ("be superior") both have a cjkvi top that is itself a
+compound with no row of its own (`馮=⿰冫馬`, picking the J-variant
+`俞` for the latter) — flattened to their real visible pieces (馬+冫;
+俞 already chosen correctly) with no missing or extra ink, which is a
+flattened-but-accurate reading, not stroke soup, since every piece used
+is itself a coherent named primitive. `rtk2510:惣` ("firstborn son")
+diverges from Google's hint (勿/`匆`) but matches cjkvi and the render
+exactly (top is 物 — 牛+勿 — not 匆); Google was simply wrong here.
+
+**Tests**: baseline before starting — `pytest -q` 108/108,
+`./regression_fresh.sh` 1333/1333 (`PASSED: all 1333 regression checks
+OK`), `audit_radicals.py` 0 findings. First pass at the three
+`prim-*` additions used the raw hanzi characters (`亚`/`丕`/`厷`)
+directly as part terms, resolving only via the separately-imported
+`zh-*` rows (`hanzi-4e9a`/`hanzi-4e15`/`hanzi-53b7`) — `audit_radicals.py`
+immediately caught this (0 → 3 undefined part terms), since its shadow
+DB is built from `import_data()` alone, without `import_hanzi.py`, by
+design (CLAUDE.md: "the audit is Japanese-only, by construction").
+Switched to three dedicated `prim-*` rows instead, each self-sufficient
+within the Japanese-only import pipeline and confirmed (via
+`sync_system_data.py --dry-run`) to merge cleanly into the existing
+`hanzi-*` row on this machine's live DB rather than creating a
+duplicate (`database.py`'s `canonical = char_to_id.get(char, pid)`
+match-by-character logic). After that change and the four
+`data.txt` edits — `pytest -q` 108/108 unchanged; `audit_radicals.py`
+0 findings (confirmed clean, not just unchanged); `./regression_fresh.sh`
+1333/1333 unchanged, no pin touched this chunk. Applied with
+`sync_system_data.py` (3 kanji inserted — the three `prim-*` rows; 9
+aliases added — 3 rows × keyword/pid/character each; 4 decompositions
+replaced — the three in-batch fixes plus rtk2324). Spot-checked all
+four fixed ids directly against the live DB afterward to confirm each
+part term resolves to the intended row.
+
+No deploy needed from here — a deployer needs `git pull` +
+`sync_system_data.py` on prod to pick this up.
+
+`full_review.py --pending-count`: 447/3000.
+
+**Next**: continue the full re-review at frame 2554.
