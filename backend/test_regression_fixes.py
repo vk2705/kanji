@@ -3012,11 +3012,15 @@ EXPECTED_DECOMPOSITIONS = {
     # Was redundantly re-listing 亀(rtk573)'s own 乙,勹 alongside referencing it
     # directly -- 2026-09-05, audit_direct_ref_overlap.py
     "rtk1477": {"character": "縄", "keyword": "straw rope",
-               # 2026-10-01: dropped rtk14 (田) -- cjkvi's own reading is an
-               # overlay (⿻日电), not a flat 田 sibling, and rendered, the
-               # overlay is pixel-identical to 亀 (rtk573) itself, which this
-               # file already uses whole elsewhere (竃).
-               "expected_part_ids": {"rtk1431", "rtk573"}},
+               # 2026-11-06: the 2026-10-01 note above (overlay == 亀 whole)
+               # compared against 亀 as a whole, but 亀 itself is 𠂊 stacked
+               # OVER this same ⿻日电 overlay (CLAUDE.md's own example) --
+               # this row's cjkvi entry has no 𠂊, so it is at most the
+               # overlay alone, not the whole tortoise. Same shape as 蝿,
+               # already correctly read here as rtk14 (田, the box the
+               # overlay renders as, divided by a vertical) + rtk75 (乙, the
+               # descending hook) -- see rtk2662's own note for the render.
+               "expected_part_ids": {"rtk1431", "rtk14", "rtk75"}},
     "rtk1492": {"character": "系", "keyword": "lineage",
                "expected_part_ids": {"prim-katakana-no", "rtk1431"}},
     "rtk1493": {"character": "係", "keyword": "person in charge",
@@ -3104,7 +3108,9 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk2568": {"character": "櫓", "keyword": "turret",
                "expected_part_ids": {"rtk12", "rtk183", "rtk207"}},
     "rtk2683": {"character": "纂", "keyword": "redaction",
-               "expected_part_ids": {"rtk1007", "rtk1431", "rtk15"}},
+               # 2026-11-06: was missing rtk112 (大) -- cjkvi's 𮅕 = ⿳竹目大,
+               # render-confirmed (the splayed-leg shape above 糸 is 大).
+               "expected_part_ids": {"rtk1007", "rtk1431", "rtk15", "rtk112"}},
     "rtk2697": {"character": "繋", "keyword": "link up",  # was 糸,車,殳,几,又 -- 几,又
                # (kangxi16/rtk752) are 殳's own cjkvi sub-parts restated redundantly;
                # dropped 2026-10-23, same bug as rtk766/rtk767
@@ -3118,7 +3124,9 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk2698": {"character": "綸", "keyword": "twine",
                "expected_part_ids": {"prim-post-it-note", "rtk1431"}},
     "rtk2699": {"character": "絨", "keyword": "carpet yarn",
-               "expected_part_ids": {"kangxi62", "prim-katakana-no", "rtk1", "rtk1431"}},
+               # 2026-11-06: was raw strokes (ノ,一,戈) standing in for 戎,
+               # which has no frame of its own. cjkvi: 絨 = ⿰糸戎 directly.
+               "expected_part_ids": {"prim-military", "rtk1431"}},
     "rtk2700": {"character": "絆", "keyword": "ties",
                "expected_part_ids": {"rtk1286", "rtk1431"}},
     "rtk2701": {"character": "緋", "keyword": "scarlet",
@@ -3472,17 +3480,24 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk2535": {"character": "腔", "keyword": "body cavity",
                "expected_part_ids": {"rtk13", "rtk1414"}},
     "rtk2660": {"character": "窄", "keyword": "tight",
-               "expected_part_ids": {"prim-katakana-no", "prim-pipe", "rtk1413"}},
+               # 2026-11-06: primary was raw strokes (｜,ノ) standing in for
+               # 乍 (prim-saw), which was already sitting right there as a
+               # correct labelled alternate matching cjkvi's ⿱穴乍 exactly.
+               "expected_part_ids": {"prim-saw", "rtk1413"}},
     "rtk2661": {"character": "穿", "keyword": "drill",
                "expected_part_ids": {"rtk1413", "rtk2053"}},
     # Was redundantly re-listing 亀(rtk573)'s own 乙,勹 alongside referencing it
     # directly -- 2026-09-05, audit_direct_ref_overlap.py
-    # 2026-10-23 (search-quality audit): rtk14 (田) dropped -- same
-    # ⿻-misread bug CLAUDE.md names for 蝿, already fixed on 縄: cjkvi's
-    # ⿳穴土⿻日电 is an overlay of 日+电 that renders as 亀 (rtk573) itself,
-    # not a separate 田 sibling.
+    # 2026-11-06: the 2026-10-23 note above (overlay == 亀 whole) compared
+    # against 亀 as a whole, but 亀 itself is 𠂊 stacked OVER this same
+    # ⿻日电 overlay (CLAUDE.md's own example) -- this row's cjkvi entry has
+    # no 𠂊, so it is at most the overlay alone. Same shape as 蝿, already
+    # correctly read there as 田 (the box the overlay renders as, divided by
+    # a vertical) + 乙 (the descending hook) -- rendered beside 黾 (U+9EFE)
+    # to confirm. 縄 (rtk1477) carried the identical bug and is fixed
+    # alongside this row.
     "rtk2662": {"character": "竃", "keyword": "kitchen stove",
-               "expected_part_ids": {"rtk1413", "rtk161", "rtk573"}},
+               "expected_part_ids": {"rtk1413", "rtk161", "rtk14", "rtk75"}},
     "rtk2687": {"character": "篇", "keyword": "livraison",
                "expected_part_ids": {"prim-fishfinger", "rtk1007"}},
     "rtk2821": {"character": "騙", "keyword": "cheat",

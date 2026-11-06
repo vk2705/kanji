@@ -1860,7 +1860,11 @@ rtk1473:網:netting:亡,糸,丷,冂
 rtk1474:緊:tense:糸,臤
 rtk1475:紫:purple:此,糸
 rtk1476:縛:truss:糸,尃
-rtk1477:縄:straw rope:糸,亀
+# 2026-11-06 full re-review shape-family follow-up from rtk2662 (竃): same
+# cjkvi overlay (⿰糸⿻日电[JK]) and same 亀 phantom this row shared with 竃
+# before today -- see 竃's own note for the full 亀-vs-电-vs-田 reasoning.
+# 田,乙 replaces 亀, matching 蝿's already-correct reading of this shape.
+rtk1477:縄:straw rope:糸,田,乙
 rtk1478:幼:infancy:力,幺
 rtk1479:後:behind:夂,幺,彳
 rtk1480:幽:seclude:山,幺,幺
@@ -3440,19 +3444,29 @@ rtk2656:稜:angle:夌,禾
 rtk2657:稀:rare:禾,希
 rtk2658:穆:respectful:禾,小,白,彡
 rtk2659:窺:lie in wait:穴,規
-rtk2660:窄:narrow:｜,ノ,穴;乍,穴
+# 2026-11-06 full re-review: primary was ｜,ノ,穴 -- raw strokes standing in
+# for 乍, which was already sitting right there as a correct labelled
+# alternate (乍,穴, matching cjkvi's ⿱穴乍 exactly and resolving via the
+# existing prim-saw row). Promoted it to primary; the stroke-soup version
+# was not a second real decomposition, just a worse spelling of the same one.
+rtk2660:窄:narrow:乍,穴
 rtk2661:穿:put on (to the feet):牙,穴
-# 2026-10-23 (search-quality audit): was 穴,土,田,亀 -- 田 beside 亀 was the
-# same ⿻-misread bug CLAUDE.md names for 蝿 and the 2026-10-01 entry already
-# fixed on 縄 (糸,田,亀 -> 糸,亀): cjkvi's own reading here is
-# ⿳穴土⿻日电, an *overlay* of 日 and 电, not a separate flat 田 sibling.
-# Rendered 竃 beside 亀 and 田 directly: the bottom of 竃 is pixel-for-pixel
-# 亀's own shape (the curved-leg tortoise body), with no independent boxed
-# 田 anywhere in it. The 2026-10-01 entry's own wording ("the simplified
-# tortoise this project already uses whole in 竃") assumed this row had
-# already been fixed the same way 縄 was -- it hadn't; this was the one
-# case the 2026-10-01 pass missed. 田 dropped.
-rtk2662:竃:kitchen stove:穴,土,亀
+# 2026-11-06 full re-review: the 2026-10-23 entry above reverted this row to
+# 穴,土,亀, reasoning that the rendered bottom matched 亀's own shape -- but
+# that compared against 亀 as a whole, which itself is ⿱𠂊⿻日电 (CLAUDE.md's
+# own example): a 𠂊 hook stacked OVER the same ⿻日电 overlay. 竃's cjkvi
+# entry (⿳穴土⿻日电) has no 𠂊 anywhere -- only the overlay, so it is at
+# most the BOTTOM of 亀, never the whole tortoise. audit_weak_evidence.py
+# flags this row's cjkvi entry as not-a-parts-list (an overlay, not a parts
+# list) for exactly this reason. This is the identical cjkvi pattern 蝿 had
+# (⿰虫⿻日电, see that row's own 2026-09-25 note): rendered beside 黾
+# (U+9EFE), the box is plainly divided by a vertical -- 田, not a plain
+# undivided box -- with a hook descending from it (乙), matching 蝿's
+# already-correct 虫,田,乙 reading exactly. 亀 dropped as the same phantom
+# 蝿 had; 田,乙 replaces it. Shape-family companion: 縄 (rtk1477) carries the
+# identical cjkvi overlay and the identical 亀 phantom -- fixed alongside
+# this row, below.
+rtk2662:竃:kitchen stove:穴,土,田,乙
 rtk2663:竪:length:立,臤
 rtk2664:颯:sudden:立,風
 rtk2665:站:stop:占,立
@@ -3474,15 +3488,34 @@ rtk2677:箆:spatula:竹,比,冂
 rtk2678:箔:foil:泊,竹
 rtk2679:笥:lunch box:司,竹
 rtk2680:箭:arrow:竹,前
-rtk2681:筑:an ancient musical instrument:工,竹,丶,几,凡
-rtk2682:篠:bamboo grass:｜,竹,木,攵
-rtk2683:纂:editing:糸,竹,目
+# 2026-11-06 full re-review: was 工,竹,丶,几,凡 -- 丶,几 are 凡's own two
+# sub-strokes (凡 = rtk66 = 丶,几), so the row listed one visual region at
+# two granularities at once. cjkvi: 筑 = ⿱竹巩 unambiguously (no G/TJ split
+# at this level -- that only shows up one layer deeper, inside 巩's own
+# expansion). Render-confirmed against prim-consolidate:巩 (new row, see end
+# of file): the hook+dot shape matches.
+rtk2681:筑:an ancient musical instrument:竹,巩
+# 2026-11-06 full re-review: was ｜,竹,木,攵 -- missing 亻. cjkvi: 篠 = ⿱竹條
+# with 條(TJ) = ⿰⿰亻丨⿱攵木: the right-hand component is (亻+丨) beside
+# (攵 over 木). Rendered side by side with 條 and 条, 篠's bottom is clearly
+# the left-right 條 shape (with its 亻), not the top-bottom simplified 条
+# (rtk319, 木+夂) -- so this stays flattened to 條's own four pieces rather
+# than referencing either whole kanji, since 條 itself has no row.
+rtk2682:篠:bamboo grass:竹,亻,｜,木,攵
+# 2026-11-06 full re-review: was 糸,竹,目 -- missing 大. cjkvi: 纂 = ⿱𮅕糸
+# with 𮅕 = ⿳竹目大 (竹 top, 目 middle, 大 bottom, render-confirmed: the
+# splayed-leg shape above 糸 is plainly 大, not absent).
+rtk2683:纂:editing:竹,目,大,糸
 rtk2684:竺:bamboo:竹,二
 rtk2685:箕:winnowing:其,竹
 rtk2686:笈:backpack bookcase:及,竹
 rtk2687:篇:volume:竹,扁
 rtk2688:筈:notch of an arrow:竹,舌
-rtk2689:簸:winnow:甘,竹,皮,又
+# 2026-11-06 full re-review: was 甘,竹,皮,又 -- 甘 dropped 其's own 八 (其 =
+# prim-bushel-basket = 甘,八) and 又 is not in the glyph at all. cjkvi: 簸 =
+# ⿱竹𤿺 with 𤿺 = ⿰其皮 (render-confirmed: 其's full box-with-legs shape is
+# there, beside 皮, rtk865).
+rtk2689:簸:winnow:竹,其,皮
 rtk2690:粕:scrap:白,米
 rtk2691:糟:dregs:米,曹
 rtk2692:糊:paste:米,胡
@@ -3495,7 +3528,10 @@ rtk2696:粟:millet:西,米
 # 繋 ⿱軗糸, 軗 ⿰車殳 -> 糸,車,殳.
 rtk2697:繋:tie:糸,車,殳
 rtk2698:綸:thread:侖,糸
-rtk2699:絨:wool cloth:ノ,一,糸,戈
+# 2026-11-06 full re-review: was ノ,一,糸,戈 -- raw strokes approximating 戎
+# instead of naming it. cjkvi: 絨 = ⿰糸戎 directly (render-confirmed against
+# prim-military:戎, new row, see end of file).
+rtk2699:絨:wool cloth:糸,戎
 rtk2700:絆:bonds:糸,半
 rtk2701:緋:scarlet:糸,非
 rtk2702:綜:rule:糸,宗
@@ -6327,3 +6363,18 @@ prim-slender:韱:slender
 # sits inside one of 勿's own strokes, not beside it). Gave 匆 its own atomic
 # row instead of re-flattening it; "hurry" was already taken by 急 (rtk1229).
 prim-hasty:匆:hasty
+
+# 2026-11-06 full re-review (frames 2654-2703): 筑 (rtk2681) was flattened to
+# 工,竹,丶,几,凡 -- listing both 凡 and its own sub-strokes 丶,几 as if they
+# were separate peer regions of the same kanji, which double-counts one
+# visual area. cjkvi: 筑 = ⿱竹巩 unambiguously at this level (no G/TJ split
+# until one layer deeper, inside 巩 itself) -- so 巩 gets its own atomic row
+# instead, sidestepping that deeper variant question entirely. Not a Kangxi
+# radical and no frame of its own, hence prim-.
+prim-consolidate:巩:consolidate,secure
+
+# 2026-11-06 full re-review (frames 2654-2703): 絨 (rtk2699) was flattened to
+# ノ,一,糸,戈 -- raw strokes standing in for 戎, which cjkvi confirms directly
+# (絨 = ⿰糸戎). 戎 has no frame of its own in heisig-kanjis.csv. Not a Kangxi
+# radical, hence prim-.
+prim-military:戎:military,arms:戈,十

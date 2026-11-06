@@ -27985,3 +27985,124 @@ No deploy needed from here — a deployer needs `git pull` +
 `full_review.py --pending-count`: 347/3000.
 
 **Next**: continue the full re-review at frame 2654.
+
+## 2026-11-06 — full re-review: frames 2654–2703
+
+43 kept, 7 fixed (6 in-chunk + 1 shape-family companion outside the
+chunk), 0 needs-render. All 50 rows in this range have an empty
+`heisig-kanjis.csv` components column (frames 2654-2999 are entirely
+past the core 1-2042 range, so empty means "the CSV has no data,"
+not "taught whole") — every decision rests on the render and
+cjkvi-ids alone. Rendered every kanji and its current/candidate parts
+in batches (`render_glyphs.py`), cross-checked against cjkvi-ids, and
+ran `audit_weak_evidence.py --host` on the two rows flagged as
+overlay-operator reads.
+
+**Stale worklist snapshots, not pending bugs**: `rtk2655:穣`,
+`rtk2670:袴` and `rtk2697:繋` showed an old, flattened "data.txt at
+start" in `full_review.py`'s output, but the *live* `data.txt` already
+carried the correct decomposition from an earlier, unrelated session
+(the 2026-11-06 frames-2604–2653 chunk's own "stale snapshot" note
+describes the same mechanism). Recorded all three `keep`.
+
+Six real fixes, two needing a new primitive row apiece:
+
+- `rtk2660:窄` ("tight") — primary was raw strokes `｜,ノ,穴` standing
+  in for `乍`, which was already sitting right there as the row's own
+  labelled alternate (`乍,穴`, matching cjkvi `⿱穴乍` and resolving via
+  the existing `prim-saw` row). Promoted it to primary and dropped the
+  stroke-soup version — it was not a second real decomposition, just a
+  worse spelling of the same one. New: `乍,穴`.
+- `rtk2681:筑` ("ancient harp") — primary was `工,竹,丶,几,凡`: `丶,几`
+  are `凡`'s own two sub-strokes (`凡` = `rtk66` = `丶,几`), so the row
+  named one visual region at two granularities at once. cjkvi gives
+  `筑 = ⿱竹巩` unambiguously at the top level (`巩`'s own G/TJ variant
+  split — `⿰工凡` vs `⿰工卂` — only shows up one layer deeper). Rather
+  than guess between those two, gave `巩` its own atomic row
+  (`prim-consolidate`) and referenced it whole, sidestepping the
+  variant question entirely; render-confirmed the hook+dot shape
+  against the new row. New: `竹,巩`.
+- `rtk2682:篠` ("slender bamboo") — was `｜,竹,木,攵`, missing `亻`.
+  cjkvi: `篠 = ⿱竹條` with `條`(TJ) = `⿰⿰亻丨⿱攵木`. Rendered side by
+  side with `條` and `条`, `篠`'s bottom is clearly the left-right
+  `條` shape (with its `亻`), not the top-bottom simplified `条`
+  (`rtk319`, `木,夂`) — Japan did not simplify this particular
+  compound usage even though the standalone character was. Stayed
+  flattened to `條`'s own four pieces since `條` itself has no row.
+  New: `竹,亻,｜,木,攵`.
+- `rtk2683:纂` ("redaction") — was `糸,竹,目`, missing `大`. cjkvi:
+  `纂 = ⿱𮅕糸` with `𮅕 = ⿳竹目大`; render-confirmed the splayed-leg
+  shape above `糸` is plainly `大`, not absent. New: `竹,目,大,糸`.
+- `rtk2689:簸` ("winnow") — was `甘,竹,皮,又`: `甘` dropped `其`'s own
+  `八` (`其` = `prim-bushel-basket` = `甘,八`) and `又` is nowhere in
+  the glyph. cjkvi: `簸 = ⿱竹𤿺` with `𤿺 = ⿰其皮`; render-confirmed.
+  New: `竹,其,皮`.
+- `rtk2699:絨` ("carpet yarn") — was `ノ,一,糸,戈`, raw strokes
+  standing in for `戎`, which has no frame of its own. cjkvi:
+  `絨 = ⿰糸戎` directly. Gave `戎` its own row (`prim-military`,
+  `戈,十`) and render-confirmed. New: `糸,戎`.
+
+**Shape-family / reopened-decision fix**: `rtk2662:竃` ("kitchen
+stove") was `穴,土,亀`, re-affirmed by name on 2026-10-23 after
+comparing the render against `亀` as a whole and concluding the
+bottom was "pixel-for-pixel `亀`'s own shape." That comparison was
+itself the bug: `亀`'s own cjkvi entry is `⿱𠂊⿻日电` — a `𠂊` hook
+*stacked over* the same `⿻日电` overlay `竃` has at its base — and
+`竃`'s own entry (`⿳穴土⿻日电`) has no `𠂊` anywhere, so it is at
+most the bottom of `亀`, never the whole tortoise.
+`audit_weak_evidence.py --host 竃` flags the row's cjkvi entry as
+`not-a-parts-list` (an overlay, not a literal parts list) for exactly
+this reason. This is the identical cjkvi pattern `蝿` carries
+(`⿰虫⿻日电`), already correctly resolved on 2026-09-25: rendered
+beside `黾` (U+9EFE), the box is plainly divided by a vertical — `田`,
+not a plain undivided box — with a hook descending from it (`乙`).
+Re-rendered `竃` beside `田`, `电`, `乙`, `黾` and `亀` together to
+confirm the same division is present in `竃`'s own render and that it
+lacks `亀`'s extra `𠂊`. New: `穴,土,田,乙`.
+
+Grepping cjkvi-ids for every character carrying the exact `⿻日电`
+operator pattern turned up one more Japanese kanji sharing the same
+phantom: `rtk1477:縄` ("straw rope") was also `糸,亀` (cjkvi
+`⿰糸⿻日电[JK]`, identical shape, identical bug — the 2026-10-01
+session that first touched this row made the same "overlay equals
+亀 whole" error `竃`'s 2026-10-23 entry repeated). Fixed alongside
+`竃` in this chunk: `糸,田,乙`. (The other three kanji/primitives
+carrying the plain `⿻日乚`-with-电-itself pattern — `電 rtk574`,
+`竜 rtk575`, `奄 rtk2212` — are a different, already-correct case:
+their cjkvi entries overlay `日` directly with `乚`, which is `电`'s
+*own* canonical IDS, so `电` is the literal, correct reading there,
+not a phantom.)
+
+Two new primitive rows, both atomic/near-atomic shapes with no frame
+of their own in `heisig-kanjis.csv`: `prim-consolidate:巩` (used by
+`rtk2681`) and `prim-military:戎:戈,十` (used by `rtk2699`).
+`audit_radicals.py` confirms both resolve, 0 undefined terms.
+
+One row kept despite looking suspicious at first glance:
+`rtk2677:箆` ("spatula") — cjkvi `⿳竹𠔿比`, where `𠔿` (U+2053F) is an
+obscure CJK Ext-B shape with no row here and no independent identity
+elsewhere in this project's data. Current row approximates it as a
+plain `冂`; render comparison didn't show a clear enough mismatch
+to justify minting a new primitive row for a shape this rare. Kept.
+
+**Tests**: baseline before starting — `pytest -q` 108/108,
+`./regression_fresh.sh` 1333/1333, `audit_radicals.py` 0 findings.
+After the eight `data.txt` edits (the six fixes above plus the `縄`
+companion) and the two new primitive rows: `./regression_fresh.sh`
+failed on 5 pins that encoded the old, now-corrected decompositions
+(`rtk1477`, `rtk2683`, `rtk2699`, `rtk2660`, `rtk2662`) — updated each
+pin in place in `test_regression_fixes.py` with a comment pointing
+back to this entry, re-ran clean: 1333/1333. `audit_radicals.py` 0
+findings (3148 overrides applied, up from 3147 — the two new
+primitive rows). `sync_system_data.py --dry-run` showed 2 kanji
+inserted (the new primitives), 8 aliases added, 1 decomposition
+created + 8 replaced + 1 removed (`rtk2660`'s old alternate, folded
+into its new primary and no longer a distinct row) — applied for
+real with the same counts. `pytest -q` stayed 108/108 after sync.
+
+No deploy needed from here — a deployer needs `git pull` +
+`sync_system_data.py` on prod to pick this up.
+
+`full_review.py --pending-count`: 297/3000.
+
+**Next**: continue the full re-review at frame 2704.
