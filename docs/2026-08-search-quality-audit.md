@@ -27548,3 +27548,78 @@ No deploy needed from here — a deployer needs `git pull` +
 `full_review.py --pending-count`: 597/3000.
 
 **Next**: continue the full re-review at frame 2404.
+
+## 2026-11-06 — full re-review: frames 2404–2453
+
+47 keep, 3 fixed, 0 needs-render. All 50 rows in this chunk are post-core
+(frame > 2042, Heisig's `components` column empty for every one — per
+CLAUDE.md that's "no data" here, not atomicity evidence), so each was
+decided from the render plus cjkvi-ids alone, with Google as a hint only.
+44 of the 47 kept rows are exact one-to-one matches between `data.txt`
+and cjkvi-ids' direct `⿰`/`⿱` split (水/犭/艹/父 + a coherent named
+primitive on the other side) — no render needed beyond a few spot checks
+below. Three more needed a render before deciding:
+
+- `rtk2406:鴻` ("large goose") — cjkvi is `⿰氵䲨`; 䲨 (U+4CA8) has no row
+  of its own. Rendered 鴻/䲨 together: 䲨 is 工+鳥 fused, which is exactly
+  the existing three-part expansion `工,水,鳥`. Kept.
+- `rtk2421:涅` ("black soil") — cjkvi is `⿰氵圼`; 圼 likewise unnamed.
+  Rendered 涅/圼 together: 圼 is 土 over 日, matching the existing
+  `水,土,日`. Kept.
+- `rtk2449:蘭` ("orchid") — `｜,一,日,木,門,艹` looks like stroke soup at
+  first glance, but this is the exact case CLAUDE.md's opaque-intermediate
+  note already documents as correct ("捷's 疌, 蘭's 柬 — both rows
+  correct"): cjkvi's `⿱艹闌` can't see inside 柬 (no row here), so the
+  `一,日,木` living inside it read as phantoms to the tooling but are the
+  real strokes of 柬. Re-confirmed, not re-litigated. Kept.
+
+**Fixes** — two instances of the same bug shape (a stroke-soup primary
+decomposition with the coherent reading demoted to an unlabelled
+alternate, leaving the right answer unused) plus one genuine
+over-flattening:
+
+- `rtk2409:湛` ("inundate") — primary was `｜,一,甘,水,儿,匚`, re-flattening
+  甚 (already `rtk1905`, "tremendously") into its own strokes; alternate
+  was `水,甚`. cjkvi is `⿰氵甚`. Promoted the alternate to primary,
+  dropped the soup. New: `水,甚`.
+- `rtk2416:渕` ("abyss") — primary was `水,人,大,二,丷`; alternate was
+  `关,刀,水`. cjkvi is `⿲氵关刂`, and 关 already has its own row
+  (`prim-golden-calf`, "golden calf" = 丷,天). Promoted the alternate to
+  primary, dropped the soup. New: `关,刀,水`.
+- `rtk2440:藝` ("technique (old)") — single decomposition `九,土,二,丶,儿,
+  厶,艹`. cjkvi is `⿱蓺云`. Rendered 藝/蓺/丸/坴/云/艹 side by side: the
+  `九,丶` pair is exactly 丸 (`rtk44`, "round, fat man") and the `二,厶`
+  pair is exactly 云 (`rtk2241`, "say, rising cloud"), both already-named
+  primitives taught well before frame 2440. Collapsed both into their
+  existing names. Left `土,儿` (the unresolved remainder of 蓺's own
+  middle, after removing 艹/丸) as raw strokes — `audit_weak_evidence.py
+  --host 藝` flagged nothing, but render comparison against 坴
+  (`prim-mini-tractor`, declared `土,儿,土` — two 土's, we only have one)
+  and 丮 wasn't confident enough to call a match either way, so this part
+  of the row is deliberately left less elegant rather than guessed. New:
+  `艹,土,儿,丸,云`.
+
+**Shape-family check**: grepped `data.txt` for any other row containing
+both `九` and `丶` as separate tokens (possible uncollapsed 丸) and any
+row containing both `二` and `厶` (possible uncollapsed 云), excluding
+the rows that define 丸/云 themselves and rtk2440. Zero matches either
+way — this particular flattening was isolated to rtk2440, nothing else
+to fix this chunk.
+
+**Tests**: baseline before starting — `pytest -q` 108/108,
+`./regression_fresh.sh` 1333/1333 (`PASSED: all 1333 regression checks
+OK`), `audit_radicals.py` 0 findings. After the 3 fixes and
+`sync_system_data.py` (0 kanji inserted/updated, 3 decompositions
+replaced, 2 removed — the two dropped stroke-soup alternates for
+rtk2409/rtk2416, now atomic) — `pytest -q` 108/108 unchanged;
+`audit_radicals.py` 0 findings unchanged; `./regression_fresh.sh`
+1333/1333 unchanged, no pin touched this chunk. Spot-checked the live DB
+afterward with `rtk.py detail` on all three fixed ids to confirm a single
+clean decomposition each.
+
+No deploy needed from here — a deployer needs `git pull` +
+`sync_system_data.py` on prod to pick this up.
+
+`full_review.py --pending-count`: 547/3000.
+
+**Next**: continue the full re-review at frame 2454.

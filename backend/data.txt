@@ -3084,14 +3084,20 @@ rtk2405:汀:water's edge:水,丁
 rtk2406:鴻:large bird:工,水,鳥
 rtk2407:潅:pour into:水,𮥶
 rtk2408:溢:overflow:水,益
-rtk2409:湛:fill:｜,一,甘,水,儿,匚;水,甚
+# 2026-11-06 full re-review: primary was stroke soup re-flattening 甚 (already
+# rtk1905, "tremendously") into its own pieces; cjkvi-ids is ⿰氵甚 and the
+# coherent reading was already present but demoted to an unlabelled alternate.
+rtk2409:湛:fill:水,甚
 rtk2410:淳:pure:享,水
 rtk2411:渥:kindness:水,屋
 rtk2412:灘:open sea:水,難
 rtk2413:汲:draw (water):及,水
 rtk2414:瀞:pure water:水,静
 rtk2415:溜:collect:水,留
-rtk2416:渕:edge:水,人,大,二,丷;关,刀,水
+# 2026-11-06 full re-review: primary was stroke soup; cjkvi-ids is ⿲氵关刂
+# (water + prim-golden-calf 关 + 刀), which was already present but demoted to
+# an unlabelled alternate.
+rtk2416:渕:edge:关,刀,水
 rtk2417:沌:primeval chaos:水,屯
 rtk2418:濾:filter:慮,水
 rtk2419:濡:get wet:水,需
@@ -3115,7 +3121,13 @@ rtk2436:茉:jasmine:艹,末
 rtk2437:莉:jasmine:利,艹
 rtk2438:苺:strawberry:母,艹
 rtk2439:萩:bush clover:秋,艹
-rtk2440:藝:art:九,土,二,丶,儿,厶,艹
+# 2026-11-06 full re-review: collapsed the two sub-shapes that already have
+# their own established rows instead of leaving them as raw strokes -- 九,丶
+# is 丸 (rtk44, "round, fat man") and 二,厶 is 云 (rtk2241, "say, rising
+# cloud"), both taught before this frame (2440). The remaining 土,儿 (cjkvi's
+# ⿱蓺云 top half minus 艹/丸) is left as-is -- not confident enough in its
+# exact identity (坴/埶/丮 candidates all partial matches) to collapse further.
+rtk2440:藝:art:艹,土,儿,丸,云
 rtk2441:薙:mow down (the enemy):艹,雉
 rtk2442:蓑:straw raincoat:艹,衰
 rtk2443:苔:moss:台,艹

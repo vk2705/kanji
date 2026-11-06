@@ -42717,11 +42717,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰氵告[GTJ] ⿰氵吿[K]",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰氵告 matches 告,水; keep",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2405",
@@ -42735,11 +42735,11 @@
    "氵",
    "丁"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰氵丁 matches 水,丁; keep",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2406",
@@ -42750,11 +42750,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰氵䲨",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰氵䲨; 䲨=工+鳥 unnamed, already expanded as 工,水,鳥; keep",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2407",
@@ -42765,11 +42765,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰氵𮥶",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰氵𮥶 matches 水,𮥶; keep",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2408",
@@ -42784,11 +42784,11 @@
    "丷",
    "皿"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰氵益 matches 水,益 (coherent, not over-flattened per Google hint); keep",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2409",
@@ -42799,11 +42799,14 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰氵甚",
   "google_parts": null,
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "水",
+   "甚"
+  ],
+  "note": "primary was stroke soup re-flattening 甚 (rtk1905); promoted the already-present coherent alternate 水,甚 (cjkvi ⿰氵甚) to primary, dropped the soup",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2410",
@@ -42817,11 +42820,11 @@
    "氵",
    "享"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰氵享 matches 享,水; keep",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2411",
@@ -42832,11 +42835,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰氵屋",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰氵屋 matches 水,屋; keep",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2412",
@@ -42847,11 +42850,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰氵難",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰氵難 matches 水,難; keep",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2413",
@@ -42862,11 +42865,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰氵及",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰氵及 matches 及,水; keep",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2414",
@@ -42877,11 +42880,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰氵静[GJ] ⿰氵靜[TK]",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰氵静/靜 matches 水,静; keep",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2415",
@@ -42895,11 +42898,11 @@
    "氵",
    "留"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰氵留 matches 水,留; keep",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2416",
@@ -42910,11 +42913,15 @@
   "heisig_components": "",
   "cjkvi_ids": "⿲氵关刂",
   "google_parts": null,
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "关",
+   "刀",
+   "水"
+  ],
+  "note": "primary was stroke soup; promoted already-present coherent alternate 关(prim-golden-calf),刀,水 (cjkvi ⿲氵关刂) to primary, dropped the soup",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2417",
@@ -42925,11 +42932,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰氵屯",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰氵屯 matches 水,屯; keep",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2418",
@@ -42943,11 +42950,11 @@
    "氵",
    "慮"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰氵慮 matches 慮,水; keep",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2419",
@@ -42958,11 +42965,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰氵需",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰氵需 matches 水,需; keep",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2420",
@@ -42976,11 +42983,11 @@
    "氵",
    "定"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰氵定 matches 定,水; keep",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2421",
@@ -42991,11 +42998,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰氵圼",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰氵圼; 圼=土+日 unnamed, already expanded as 水,土,日; keep",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2422",
@@ -43006,11 +43013,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿱父斤",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿱父斤 matches 斤,父; keep",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2423",
@@ -43024,11 +43031,11 @@
    "父",
    "耶"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿱父耶 matches 父,耶; keep",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2424",
@@ -43042,11 +43049,11 @@
    "犭",
    "骨"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰犭骨 matches 犭,骨; keep",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2425",
@@ -43060,11 +43067,11 @@
    "犭",
    "畏"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰犭畏 matches 犭,畏; keep",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2426",
@@ -43078,11 +43085,11 @@
    "犭",
    "交"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰犭交 matches 犭,交; keep",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2427",
@@ -43096,11 +43103,11 @@
    "犭",
    "里"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰犭里 matches 犭,里; keep",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2428",
@@ -43114,11 +43121,11 @@
    "犭",
    "良"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰犭良 matches 犭,良; keep",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2429",
@@ -43132,11 +43139,11 @@
    "犭",
    "貝"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰犭貝 matches 犭,貝; keep",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2430",
@@ -43150,11 +43157,11 @@
    "犭",
    "句"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰犭句 matches 犭,句; keep",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2431",
@@ -43168,11 +43175,11 @@
    "犭",
    "瓜"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰犭瓜 matches 犭,瓜; keep",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2432",
@@ -43186,11 +43193,11 @@
    "犭",
    "白"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰犭白 matches 犭,白; keep",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2433",
@@ -43204,11 +43211,11 @@
    "犭",
    "師"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰犭師 matches 犭,師; keep",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2434",
@@ -43222,11 +43229,11 @@
    "犭",
    "弗"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿰犭弗 matches 弗,犭; keep",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2435",
@@ -43237,11 +43244,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿱艹良",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿱艹良 matches 良,艹; keep",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2436",
@@ -43255,11 +43262,11 @@
    "艹",
    "末"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿱艹末 matches 艹,末; keep",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2437",
@@ -43273,11 +43280,11 @@
    "艹",
    "利"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿱艹利 matches 利,艹; keep",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2438",
@@ -43288,11 +43295,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿱艹母",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿱艹母 matches 母,艹; keep",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2439",
@@ -43306,11 +43313,11 @@
    "艹",
    "秋"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿱艹秋 matches 秋,艹; keep",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2440",
@@ -43321,11 +43328,17 @@
   "heisig_components": "",
   "cjkvi_ids": "⿱蓺云",
   "google_parts": null,
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "艹",
+   "土",
+   "儿",
+   "丸",
+   "云"
+  ],
+  "note": "cjkvi ⿱蓺云; collapsed 九,丶 into existing rtk44 丸 and 二,厶 into existing rtk2241 云 instead of leaving them as raw strokes; left 土,儿 (the unresolved middle of 蓺) as-is, not confident enough to collapse further (坴/埶/丮 all partial matches on render)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2441",
@@ -43339,11 +43352,11 @@
    "艹",
    "雉"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿱艹雉 matches 艹,雉; keep",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2442",
@@ -43354,11 +43367,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿱艹衰",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿱艹衰 matches 艹,衰; keep",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2443",
@@ -43372,11 +43385,11 @@
    "艹",
    "台"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿱艹台 matches 台,艹; keep",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2444",
@@ -43391,11 +43404,11 @@
    "氵",
    "昜"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿱艹湯 matches 湯,艹 (coherent, not over-flattened per Google hint); keep",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2445",
@@ -43409,11 +43422,11 @@
    "艹",
    "曼"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿱艹曼 matches 曼,艹; keep",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2446",
@@ -43427,11 +43440,11 @@
    "艹",
    "連"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿱艹連 matches 艹,連; keep",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2447",
@@ -43442,11 +43455,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿱艹夫",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿱艹夫 matches 夫,艹; keep",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2448",
@@ -43460,11 +43473,11 @@
    "艹",
    "容"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿱艹容 matches 容,艹; keep",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2449",
@@ -43475,11 +43488,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿱艹闌",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿱艹闌; row already previously confirmed correct per CLAUDE.md opaque-intermediate note (cjkvi can't see inside 柬, our row's 一,日,木 are 柬's real sub-strokes, not phantoms); keep",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2450",
@@ -43490,11 +43503,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿱艹户[G] ⿱艹戶[TK] ⿱艹戸[J]",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿱艹户/戶/戸 matches 戸,艹; keep",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2451",
@@ -43508,11 +43521,11 @@
    "艹",
    "署"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿱艹署 matches 署,艹; keep",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2452",
@@ -43526,11 +43539,11 @@
    "艹",
    "昌"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿱艹昌 matches 昌,艹; keep",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2453",
@@ -43545,11 +43558,11 @@
    "隹",
    "灬"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi ⿱艹焦 matches 焦,艹 (coherent, not over-flattened per Google hint); keep",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2454",
