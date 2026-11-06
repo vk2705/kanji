@@ -27465,3 +27465,86 @@ No deploy needed from here — a deployer needs `git pull` +
 `full_review.py --pending-count`: 647/3000.
 
 **Next**: continue the full re-review at frame 2354.
+
+## 2026-11-06 — full re-review: frames 2354–2403
+
+50 rows reviewed (48 keep, 2 fixed, 0 needs-render). All in the
+`id_5th_ed` 2043–2999 range, so Heisig's empty `components` column here
+means "no data", not atomicity — every row was decided from render +
+cjkvi-ids alone, per the three source-caveats in CLAUDE.md.
+
+Two fixes, both single-primitive swaps caught by zoomed render comparison,
+not by any text-level mismatch (cjkvi-ids' own top-level split already
+matched `data.txt`'s part set for both before the fix):
+
+- `rtk2356:掻` ("scratch") — was `虫,又,扌`. The right side is 蚤 (flea,
+  frame 2721 — taught *after* this frame, so splitting it rather than
+  naming it whole is deliberate, not an error). But a 500px render of
+  `掻,蚤,叉,又,虫` together shows 蚤's top has the extra tick stroke that
+  distinguishes 叉 from plain 又 — confirmed against `rtk2721:蚤` itself
+  (`叉,虫`) and `rtk2923:叉` itself (`又,丶`, i.e. 叉 = 又 + that tick).
+  New: `虫,叉,扌`.
+- `rtk2373:抉` ("gouge out") — was `人,大,二,扌,ユ;夬,扌`, a stroke-soup
+  primary with the correct answer sitting unused as its own alternate.
+  夬 ("guillotine") is already an established primitive by this frame
+  (`rtk1770:決`, `rtk1771:快`, both much earlier); a render of
+  `抉,夬,訣,大,二,ユ,人` side by side shows the right side of 抉 is one
+  continuous 夬 shape, not four loose strokes. Promoted the alternate to
+  primary, dropped the stroke-soup one. New: `夬,扌`.
+
+**Shape-family check**: grepped `data.txt` for every other user of 又,
+咠, 夬, and 刅 near these hosts (the four components touched or
+considered this chunk). Found `rtk2749:訣` ("separation") had the
+*identical* pattern to `rtk2373:抉` — primary `言,人,大,二,ユ`, alternate
+`夬,言` sitting unused — same guillotine, same mistake. Fixed it the same
+way (promoted to `夬,言`, dropped the stroke-soup primary) even though its
+own frame (2749) hasn't come up in the review queue yet, so no
+`--decide` was recorded for it — `full_review.py` will show it already
+correct when frame 2749 is reached. Also found `rtk2728:蝦` ("shrimp")
+uses `虫,又` — *not* the same 又/叉 mistake (蝦's right side is 叚, an
+unrelated shape to 蚤), so left alone for its own turn rather than folded
+into this fix.
+
+**Kept rows worth a note**:
+- `rtk2362:揖` ("collect") — `⿰扌咠` with 咠 atomic/opaque in cjkvi-ids
+  and no row of its own here. Rendered `咠,口,日,曰,耳` together to check
+  whether the top of 咠 is 口 or the barred 日/曰: it's plain 口, over a
+  compressed 耳 missing its own top stroke (shared with 口's bottom
+  stroke). `口,耳,扌` confirmed correct at this level, not a phantom.
+- `rtk2372:捷` ("spoils") — `扌,彐,龰`, cjkvi's 疌 is atomic/opaque with
+  no row here; this is the exact example CLAUDE.md already documents as
+  correct-as-written (the "opaque-intermediate" exception), re-confirmed
+  rather than re-litigated.
+- `rtk2385:漱` ("gargle") — `水,束,欠`; rendered `漱,欶,束,欠` together
+  since cjkvi's `欶` isn't used as a named primitive here — confirms 欶 is
+  cleanly 束 (top) + 欠 (bottom), so the flat two-part list is the right
+  level, not stroke soup.
+- `rtk2394:梁` ("roofbeam") — `水,刀,木,丶`; cjkvi's `刅` (top-right, no
+  row here) rendered as 刀 with one extra tick above it — `刀,丶` is an
+  accurate leaf expansion, not an arbitrary fragmentation.
+- Two rows (`rtk2377:怜`, `rtk2382:澪`) carry an unlabelled-primary +
+  stroke-soup-alternate pair where the *primary* is already correct and
+  only the secondary alternate is the redundant one — left the
+  alternates alone since they're not wrong per se, just unnecessary; out
+  of this chunk's scope to clean up.
+- The other 41 rows are exact one-to-one matches between `data.txt` and
+  cjkvi-ids' direct `⿰` split (扌/忄/氵 + a coherent named primitive on
+  the other side), each individually confirmed against the cjkvi-ids
+  output shown by `full_review.py` — no render needed beyond the ones
+  above since nothing in the text-level comparison disagreed.
+
+**Tests**: baseline before starting — `pytest -q` 108/108,
+`./regression_fresh.sh` 1333/1333, `audit_radicals.py` 0 findings. After
+the 2 fixes (3 `data.txt` lines touched, including the unreviewed
+`rtk2749` shape-family follow-up) and `sync_system_data.py` (0 kanji
+inserted, 3 decompositions replaced, 2 removed — the two dropped
+stroke-soup alternates, now atomic) — `pytest -q` 108/108 unchanged;
+`audit_radicals.py` 0 findings unchanged; `./regression_fresh.sh`
+1333/1333 unchanged, no pin touched this chunk.
+
+No deploy needed from here — a deployer needs `git pull` +
+`sync_system_data.py` on prod to pick this up.
+
+`full_review.py --pending-count`: 597/3000.
+
+**Next**: continue the full re-review at frame 2404.

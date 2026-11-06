@@ -3022,7 +3022,11 @@ rtk2352:扮:impersonate:分,扌
 rtk2353:捏:knead:土,日,扌
 rtk2354:掴:catch:国,扌
 rtk2355:捺:press:扌,奈
-rtk2356:掻:scratch:虫,又,扌
+# 掻's right side is 蚤 (frame 2721, taught later -- kept split so this
+# frame doesn't forward-reference it), but the top of 蚤 renders with the
+# extra tick that distinguishes 叉 from plain 又 (cf. rtk2721's own 叉,虫 and
+# rtk2923 叉's own 又,丶); fixed 又 -> 叉. 2026-11-06 full re-review.
+rtk2356:掻:scratch:虫,叉,扌
 rtk2357:撰:composing:扌,巽
 rtk2358:揃:be complete:扌,前
 rtk2359:捌:handle:扌,別
@@ -3039,7 +3043,12 @@ rtk2369:撒:scatter:扌,散
 rtk2370:擢:excel in:扌,翟
 rtk2371:摺:rub:扌,習
 rtk2372:捷:victory:扌,彐,龰
-rtk2373:抉:gouge:人,大,二,扌,ユ;夬,扌
+# The stroke-soup primary (人,大,二,ユ) was the only one here; 夬 ("guillotine")
+# is already an established primitive by this frame (rtk1770 決, rtk1771 快),
+# a 500px render of 抉/夬/訣 confirms the right side is the same shape as 夬,
+# not loose strokes. Promoted the old alternate to primary, dropped the
+# stroke-soup one. 2026-11-06 full re-review.
+rtk2373:抉:gouge:夬,扌
 rtk2374:怯:cowardice:去,state of mind
 rtk2375:惟:consider:state of mind,隹
 rtk2376:惚:fall in love with:state of mind,忽
@@ -3446,7 +3455,11 @@ rtk2747:讃:praise:言,賛
 # "lookalike stand-in" call as rtk2030 気's 𠂉,一,乙 (cjkvi 乁, no row here).
 # Confirmed keep, not a fix -- queued in kanji_full_review.json frame 2748.
 rtk2748:訊:request:言,乙,十
-rtk2749:訣:separation:言,人,大,二,ユ;夬,言
+# Shape-family follow-up to rtk2373 抉 (2026-11-06 full re-review): same
+# stroke-soup-primary-with-correct-alternate pattern for the same 夬. Promoted
+# the alternate to primary, dropped the stroke-soup one; frame 2749 hasn't
+# come up in the review queue yet, so no --decide recorded for it here.
+rtk2749:訣:separation:夬,言
 rtk2750:詫:apologize:宅,言
 rtk2751:誼:friendship:宜,言
 rtk2752:謬:mistake:羽,言,𠆢,彡
