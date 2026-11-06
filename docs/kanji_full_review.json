@@ -36644,11 +36644,11 @@
   "heisig_components": "",
   "cjkvi_ids": "牙",
   "google_parts": [],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "atomic, core-frame empty CSV + render confirms clean single shape",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2054",
@@ -36662,11 +36662,11 @@
    "艹",
    "牙"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render: 艹 top, 牙 bottom, matches CSV flowers;tusk",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2055",
@@ -36680,11 +36680,11 @@
    "牙",
    "阝"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render: 牙 left, ⻏/阝 right in alt, matches CSV tusk;city walls",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2056",
@@ -36698,11 +36698,11 @@
    "牙",
    "隹"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render: 牙 left, 隹 right, matches CSV",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2057",
@@ -36713,11 +36713,11 @@
   "heisig_components": "animal tracks; drop; rice; shaku-hachi; flag; stick",
   "cjkvi_ids": "⿰釆尺",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render: 釆 left, 尺 right, matches cjkvi ⿰釆尺",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2058",
@@ -36731,11 +36731,11 @@
    "釆",
    "田"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render: 釆 top, 田 bottom, matches cjkvi ⿱釆田",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2059",
@@ -36749,11 +36749,11 @@
    "宀",
    "番"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render: 宀 top, 番 bottom, matches cjkvi ⿱宀番",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2060",
@@ -36767,11 +36767,11 @@
    "番",
    "羽"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render: 番 left, 羽 right, matches cjkvi ⿰番羽",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2061",
@@ -36786,11 +36786,15 @@
    "氵",
    "番"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "水",
+   "艹",
+   "番"
+  ],
+  "note": "render shows only 艹+水+番 (3 pieces); dropped phantom 米 -- not a separate drawn shape, it's 番's own top (釆) misread",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2062",
@@ -36801,11 +36805,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿱丿⿻二乚",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "atomic primary + alt ノ,乙,二 kept as-is; render consistent",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2063",
@@ -36816,11 +36820,11 @@
   "heisig_components": "christmas tree; fur",
   "cjkvi_ids": "⿰耒毛",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render: 耒 left, 毛 right, matches CSV",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2064",
@@ -36834,11 +36838,11 @@
    "尸",
    "毛"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render: 尸 wraps 毛, matches cjkvi ⿸尸毛",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2065",
@@ -36849,11 +36853,11 @@
   "heisig_components": "house; lock of hair",
   "cjkvi_ids": "⿱宀乇",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render: 宀 top, 乇 bottom, matches CSV house;lock of hair",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2066",
@@ -36864,11 +36868,11 @@
   "heisig_components": "say; words; keitai; mouth; lock of hair",
   "cjkvi_ids": "⿰言乇",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render: 言 left, 乇 right, matches CSV",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2067",
@@ -36879,11 +36883,11 @@
   "heisig_components": "so; strange building; tail feathers",
   "cjkvi_ids": "為",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render confirms all 5 strokes (ノ,灬,ユ,丶,勹) are really drawn, non-overlapping; Heisig's 2 coherent names 'so'/'strange building' have no row in our vocab and inventing slugs without book text would be guessing -- stroke-level is structurally correct, just finer-grained than Heisig's grouping",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2068",
@@ -36897,11 +36901,11 @@
    "亻",
    "為"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render: 亻 left, 為 right, matches CSV",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2069",
@@ -36912,11 +36916,11 @@
   "heisig_components": "rice field; brains; hairpin; safety-pin",
   "cjkvi_ids": "⿳田一⿰𠄌⿺乀丿",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render: 田 top, 一, 𧘇 tail at bottom, matches cjkvi ⿳田一⿰𠄌⿺乀丿",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2070",
@@ -36927,11 +36931,11 @@
   "heisig_components": "hair; hairpin; safety-pin",
   "cjkvi_ids": "⿳④一⿰𠄌⿺乀丿",
   "google_parts": [],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "re-confirmed prior 2026-09-20 decision: 長 = 𧘇 alone on purpose, CSV 'hair;hairpin;safety-pin' are synonyms for one shape per comment above the row",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2071",
@@ -36945,11 +36949,11 @@
    "弓",
    "長"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render: 弓 left, 長 right, matches CSV",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2072",
@@ -36963,11 +36967,11 @@
    "巾",
    "長"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render: 巾 left, 長 right, matches CSV",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2073",
@@ -36981,11 +36985,11 @@
    "月",
    "長"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render: 月 left, 長 right, matches CSV",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2074",
@@ -37000,11 +37004,11 @@
    "彡",
    "友"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render: 髟 top, 友 bottom-right, matches cjkvi ⿱髟友",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2075",
@@ -37019,11 +37023,11 @@
    "由",
    "衣"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render: 尸 wraps 龷+𧘇, matches cjkvi ⿸尸⿱龷⿰𠄌⿺乀丿",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2076",
@@ -37034,11 +37038,11 @@
   "heisig_components": "soil; dirt; ground; mouth; hairpin; safety-pin",
   "cjkvi_ids": "⿱⿻土吅⿰𠄌⿺乀丿",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render: 土/口 overlay top, 𧘇 tail bottom, matches cjkvi ⿱⿻土吅⿰𠄌⿺乀丿",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2077",
@@ -37052,11 +37056,11 @@
    "ツ",
    "果"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render: 𭕄(owl/ツ) top, 果 bottom, matches cjkvi ⿱𭕄果",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2078",
@@ -37071,11 +37075,11 @@
    "田",
    "十"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render: 𭕄 top, 甲+一 below, matches cjkvi ⿱𭕄⿻甲一",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2079",
@@ -37089,11 +37093,11 @@
    "単",
    "戈"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render: 単 left, 戈 right, matches CSV",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2080",
@@ -37107,11 +37111,11 @@
    "礻",
    "単"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render: 礻 left, 単 right, matches CSV",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2081",
@@ -37125,11 +37129,11 @@
    "弓",
    "単"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render: 弓 left, 単 right, matches CSV",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2082",
@@ -37140,11 +37144,11 @@
   "heisig_components": "tree; wood; owl; woman",
   "cjkvi_ids": "⿰木⿱𭕄女",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render: 木 left, 𭕄 top-right, 女 bottom-right, matches cjkvi ⿰木⿱𭕄女",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2083",
@@ -37155,11 +37159,17 @@
   "heisig_components": "owl; rice field; brains; one; mouth; chihuahua; dog; large; drop",
   "cjkvi_ids": "⿰⿳畄一口犬",
   "google_parts": null,
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "犬",
+   "口",
+   "𭕄",
+   "田",
+   "一"
+  ],
+  "note": "render of 嘼 (left half alone) shows a distinct horizontal bar between 田 and 口 that the row was missing; CSV components include 'one', cjkvi ⿰⿳畄一口犬 confirms the same 一",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2084",
@@ -37174,11 +37184,11 @@
    "巛",
    "凵"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render: 月 left, 𭕄 top-right, 凶 bottom-right, matches cjkvi ⿰月⿱𭕄凶",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2085",
@@ -37193,11 +37203,11 @@
    "巛",
    "凵"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render: 忄 left, 𭕄 top-right, 凶 bottom-right, matches cjkvi ⿰忄⿱𭕄凶",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2086",
@@ -37213,11 +37223,11 @@
    "口",
    "厂"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render: 𭕄 top, 厂+敢 below, matches CSV owl;cliff;daring",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2087",
@@ -37232,11 +37242,11 @@
    "⺌",
    "貝"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render: 金 left, 小/貝 stacked right (小+貝=𧴪), matches cjkvi ⿰金𧴪",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2088",
@@ -37251,11 +37261,11 @@
    "一",
    "手"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "re-confirmed 2026-09-20/2026-10-08 decision: 手,𭕄,八,一 -- no 具 eye-box present, per the 'tool' audit history above this row",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2089",
@@ -37271,11 +37281,11 @@
    "ハ",
    "言"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "re-confirmed 2026-09-20/2026-10-08 decision: 言,𭕄,八,一 -- same as 挙",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2090",
@@ -37289,11 +37299,11 @@
    "犭",
    "鼡"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "re-confirmed prior decision (comment above row): 犭,𭕄,几, dropped 用 which cjkvi shows is not a free shape here",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2091",
@@ -37309,11 +37319,15 @@
    "口",
    "灬"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "白",
+   "一",
+   "灬"
+  ],
+  "note": "was just 灬 -- entire top of the glyph unaccounted for. CSV 'white;dove;one;tail feathers'; render vs near-twin 烏 (丶,口,一,灬) shows 鳥's top = 白 (hook+box) plus one EXTRA internal divider (the eye), then 灬. 馬/rtk2132 has the same bare-灬 symptom but an unrelated horse-head top -- flagged for its own turn",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2092",
@@ -37327,11 +37341,11 @@
    "口",
    "鳥"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render: 口 left, 鳥 right, matches CSV",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2093",
@@ -37346,11 +37360,11 @@
    "隹",
    "鳥"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render: 隺(prim-turkey-house) left, 鳥 right, matches cjkvi ⿰隺鳥",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2094",
@@ -37364,11 +37378,11 @@
    "鳥",
    "白"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render: 丶+口+一 top (drop;mouth;one), 灬 bottom -- exact match to CSV 'drop;mouth;one;tail feathers'",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2095",
@@ -37382,11 +37396,11 @@
    "艹",
    "鳥"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render: 艹 top, 鳥 bottom, matches cjkvi ⿱艹鳥",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2096",
@@ -37400,11 +37414,11 @@
    "九",
    "鳥"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render: 九 left, 鳥 right, matches CSV",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2097",
@@ -37419,11 +37433,11 @@
    "夫",
    "鳥"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render: 爪 top-left, 夫 bottom-left, 鳥 right; 爪 (not 爫) matches project-wide convention (checked other claw-radical hosts), matches cjkvi ⿰⿱爫夫鳥",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2098",
@@ -37437,11 +37451,11 @@
    "鳥",
    "山"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render: 山 bottom, 鳥 wraps top-right, matches cjkvi ⿹⑦山",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2099",
@@ -37457,11 +37471,11 @@
    "一",
    "友"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render: 日 left, 爰 right, matches cjkvi ⿰日爰",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2100",
@@ -37477,11 +37491,11 @@
    "一",
    "友"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render: 女 left, 爰 right, matches cjkvi ⿰女爰",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2101",
@@ -37497,11 +37511,11 @@
    "友",
    "又"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render: 扌 left, 爰 right, matches cjkvi ⿰扌爰",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2102",
@@ -37512,11 +37526,11 @@
   "heisig_components": "thread; spiderman; migrating ducks; claw; vulture; one; friend",
   "cjkvi_ids": "⿰糹爰[GT] ⿰糸爰[JK]",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render: 糸 left, 爰 right, matches cjkvi ⿰糸爰",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2103",

@@ -26967,3 +26967,95 @@ on prod to pick up today's two fixes (衷, 面).
 **Next**: continue the full re-review at frame 2053, and whoever picks up
 rtk2027 (暇) or rtk2032 (飛) should start with the two `render_glyphs.py`
 commands noted above.
+
+## 2026-11-06 — full re-review: frames 2053–2102
+
+Unattended daily chunk (`full_review.py -n 50`). 47 keep, 3 fixed, 0
+needs-render.
+
+**Fixes**
+
+* **rtk2061 藩 "clan": `水,米,艹,番` → `水,艹,番`.** Rendered 藩 next to
+  潘/氵/水/米/番/艹: the glyph is only 艹 (top) + 水 (left) + 番 (right) —
+  three pieces. There is no separate 米 anywhere in it; the shape that
+  looks 米-like at a glance is 番's own top (釆), already covered by the
+  existing 番 part. CSV's "water droplets; water pistol" entries are just
+  more Heisig names for the same 水/番 shapes, not evidence of a 4th
+  piece. Dropped the phantom 米.
+* **rtk2083 獣 "animal": `犬,口,𭕄,田` → `犬,口,𭕄,田,一`.** cjkvi-ids gives
+  `⿰⿳畄一口犬` — a 一 sitting between 畄 (𭕄 over 田) and 口 in the left
+  column, and the CSV's components list "one" alongside "owl; rice
+  field; brains; mouth; ... dog". Rendered 嘼 (the left half, U+563C)
+  alone to check: 𭕄/田 stacked, then a clearly separate horizontal bar,
+  then 口 — the row was missing that bar. Added 一.
+* **rtk2091 鳥 "bird": `灬` → `白,一,灬`.** The existing row named only
+  the bottom four dots and said nothing about the other ~70% of the
+  glyph. CSV components: "white; dove; one; tail feathers". Rendered 鳥
+  beside its near-twin 烏 (already correct, `丶,口,一,灬`, CSV "drop;
+  mouth; one; tail feathers" — kept unchanged this session, matches
+  exactly): both share a hook-over-box top, but 鳥's box has one *extra*
+  internal divider line that 烏's doesn't — the classic bird-has-a-visible-
+  eye / crow-is-all-black mnemonic pair. That extra divider is Heisig's
+  "one" on top of "white" (白 = hook + box-with-one-line already), then
+  `灬` at the bottom. Fixed to `白,一,灬`.
+
+**Shape-family follow-up, not fixed this run**
+
+* **rtk2132 馬 "horse"** has the exact same bare-`灬`-only symptom as 鳥
+  did (`grep -nE "^rtk[0-9]+:[^:]+:[^:]+:灬(;|\$)" data.txt` turns up only
+  these two rows in the whole file), but 馬's top is a horse-head shape
+  structurally unrelated to 鳥/烏's hook-and-box — CSV's components column
+  for it is just the self-referential keyword "team of horses", not a
+  real decomposition, and cjkvi-ids wasn't checked for it this session.
+  Needs its own render/cjkvi pass rather than assuming the same fix
+  applies. Flagged for when frame 2132 comes up on its own.
+
+**Kept, worth recording the reasoning on**
+
+* **rtk2067 為 "do" stays `ノ,灬,ユ,丶,勹`.** CSV components are "so;
+  strange building; tail feathers" — only 3 coherent names, while the row
+  has 5 raw strokes. Rendered 為 next to each of the 5 claimed stroke
+  parts: all 5 are genuinely, separately present and together account
+  for the whole glyph with nothing left over and nothing extra. "tail
+  feathers" already resolves to 灬 (present). The other two coherent
+  names ("so", "strange building") don't exist anywhere in our
+  vocabulary and nothing else in data.txt uses them — inventing new
+  primitive slugs to match them, with no book text to ground what they
+  actually single out among the remaining 4 strokes, is exactly the kind
+  of guess CLAUDE.md warns against. Left at stroke level: structurally
+  correct, just finer-grained than Heisig's own grouping.
+* **rtk2070 長 "long" stays `𧘇` alone.** Already decided 2026-09-20 (the
+  comment directly above the row explains why: CSV's "hair; hairpin;
+  safety-pin" are three names for one shape, not three parts).
+  Re-verified by rendering 長 beside 𧘇/畏/展/喪 this session — all four
+  hosts show the same bottom hook-and-sweep tail — no change.
+* **rtk2088 挙 / rtk2089 誉 stay `手/言,𭕄,八,一`.** Both already settled
+  2026-09-20 and re-confirmed 2026-10-08 per the "tool" audit comment a
+  few hundred lines above these rows (具's eye-box is absent from both
+  when rendered and cropped). No change.
+* **rtk2090 猟 stays `犭,𭕄,几`.** Already settled per the comment above
+  the row (用 is not a free-standing shape here, confirmed by rendering
+  猟/鼡/用/几 side by side). No change.
+* **rtk2097 鶏 "chicken" stays `夫,爪,鳥`.** cjkvi-ids spells the claw as
+  ⿱爫夫 (爫, not 爪), but every other claw-radical host in this dataset
+  (妥, 乳, 浮, 淫, 将, …) uses 爪 — checked `grep` across data.txt to
+  confirm this is a settled, consistent project convention, not an
+  inconsistency to fix here.
+
+**Tests**: `pytest -q` 108/108 (unchanged), `./regression_fresh.sh`
+1333/1333 (unchanged — none of the three fixes were pinned, so no pin
+needed updating), 0 findings from `audit_radicals.py`.
+`sync_system_data.py --dry-run` showed exactly 3 decompositions replaced,
+0 unexpected (0 kanji/alias changes); applied for real; all three checks
+re-run clean afterward. `audit_weak_evidence.py --host` was run on 藩,
+獣, and 鳥 before editing each — 0 flags on all three (the bugs found
+here are missing/phantom-child shapes, a different class than that
+script's three checks).
+
+No deploy from here — a deployer needs `git pull` + `sync_system_data.py`
+on prod to pick up today's three fixes (藩, 獣, 鳥).
+
+`full_review.py --pending-count`: 897/3000.
+
+**Next**: continue the full re-review at frame 2103. Whoever reaches
+frame 2132 (馬) should start with the shape-family note above.

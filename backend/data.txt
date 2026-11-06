@@ -2629,7 +2629,10 @@ rtk2057:釈:explanation:尺,釆
 rtk2058:番:turn:田,釆
 rtk2059:審:hearing:宀,番
 rtk2060:翻:flip:番,羽
-rtk2061:藩:clan:水,米,艹,番
+# 2026-11-06 full re-review: was 水,米,艹,番. Render shows 藩 = 艹(top) +
+# 水(left) + 番(right) only -- no separate 米 anywhere; the shape that looks
+# 米-like is 番's own top (釆), already inside the 番 part, not a 4th piece.
+rtk2061:藩:clan:水,艹,番
 rtk2062:毛:fur:;ノ,乙,二
 rtk2063:耗:decrease:毛,耒
 rtk2064:尾:tail:毛,尸
@@ -2651,7 +2654,11 @@ rtk2079:戦:war:単,戈
 rtk2080:禅:zen:礻,単
 rtk2081:弾:bullet:弓,単
 rtk2082:桜:cherry:木,𭕄,女
-rtk2083:獣:animal:犬,口,𭕄,田
+# 2026-11-06 full re-review: was 犬,口,𭕄,田 (missing a stroke). Heisig CSV
+# components include "one" and cjkvi's ⿰⿳畄一口犬 shows a distinct 一
+# between the 田 and 口 inside the left column (confirmed by rendering 嘼
+# alone: 𭕄/田 stacked, then a clear separate horizontal bar, then 口).
+rtk2083:獣:animal:犬,口,𭕄,田,一
 rtk2084:脳:brain:月,𭕄,凶
 rtk2085:悩:trouble:凶,忄,𭕄
 rtk2086:厳:stern:敢,𭕄,厂
@@ -2659,7 +2666,16 @@ rtk2087:鎖:chain:金,小,貝
 rtk2088:挙:raise:手,𭕄,八,一
 rtk2089:誉:reputation:言,𭕄,八,一
 rtk2090:猟:game-hunting:犭,𭕄,几
-rtk2091:鳥:bird:灬
+# 2026-11-06 full re-review: was just 灬 -- the entire top ~70% of the
+# glyph was unaccounted for. Heisig CSV components are "white; dove; one;
+# tail feathers". Rendered 鳥 beside 白/一/灬 and beside its near-twin 烏
+# (already correctly 丶,口,一,灬 -- Heisig: "drop; mouth; one; tail
+# feathers"): 鳥's top matches 白 (hook + box) but with one EXTRA internal
+# divider line (the "eye" that distinguishes bird from all-black crow),
+# i.e. 白 + a second 一, then 灬 at the bottom. 馬 (rtk2132, not yet
+# reviewed) has the identical bare-灬 symptom but a structurally unrelated
+# (horse-head) top -- flagged for its own turn, not fixed here.
+rtk2091:鳥:bird:白,一,灬
 rtk2092:鳴:chirp:口,鳥
 rtk2093:鶴:crane:鳥,prim-turkey-house
 rtk2094:烏:crow:丶,口,一,灬
