@@ -27623,3 +27623,109 @@ No deploy needed from here — a deployer needs `git pull` +
 `full_review.py --pending-count`: 547/3000.
 
 **Next**: continue the full re-review at frame 2454.
+
+## 2026-11-06 — full re-review: frames 2454–2503
+
+50 kanji reviewed: 45 keep, 5 fixed, 0 needs-render. Almost the whole
+chunk is one shape family — `艹` (grass) over a second kanji/primitive
+(2454–2491 are all jōyō plant names) plus a short run of `辶`-over-X
+kanji (2492–2503). `id_5th_ed` for this whole range is in the 2043–2999
+band, so Heisig's components column is empty throughout for "no data",
+not "atomic" (CLAUDE.md's distinction) — every call here is from the
+render plus cjkvi-ids alone, cross-checked against this project's own
+established primitive rows for consistency.
+
+**Fixes** — all five are the same underlying bug shape (a raw-stroke or
+incomplete primary decomposition sitting where a clean, already-correct
+reading should be — either an established primitive this project had
+already named, or a plain demoted-alt mixup):
+
+- `rtk2461:葡` ("wild grape") — primary was `十,用,勹,艹,丶`,
+  double-flattening through 匍 (cjkvi `⿹勹甫`) *and* through `甫` itself,
+  which already has its own established row (`prim-dog-tag`, added
+  2026-09-18, `十,月,丶;用,screwdriver`) used literally by every sibling
+  host already in this database: 捕/浦/舗/補/圃/輔/鋪 (rtk1978/1980/1982/
+  1983/2761/2926/2981). 葡 was the one host that 2026-09-18 chunk missed.
+  render_glyphs.py confirms 葡's bottom-right is 甫, not a second loose
+  spelling of it. New: `艹,勹,甫`.
+- `rtk2470:苅` ("mow") — primary was just the bare primitive `艹` alone;
+  `刈` (the part that actually explains "cutting") was stranded on the
+  alt instead — a genuine data bug, not a judgment call. cjkvi agrees
+  (`⿱艹刈`). Dropped the degenerate single-primitive primary, promoted
+  the correct alt. New: `刈,艹`.
+- `rtk2471:葱` ("onion") — primary was `心,丶,艹,勿`, spelling 匆 as
+  "勿 plus a separate dot". cjkvi gives `匆 = ⿻勿丶` — an *overlay*
+  operator (CLAUDE.md's documented trap: a ⿻ pair shares strokes, it
+  isn't two adjacent parts; here the dot sits inside one of 勿's own
+  strokes). Rather than re-flatten it, gave 匆 its own atomic row
+  (`prim-hasty`; "hurry" was already `rtk1229:急`). New: `艹,匆,心`.
+- `rtk2472:葵` ("hollyhock") — primary was stroke soup `人,大,二,癶,艹,
+  ノ`. cjkvi is `⿱艹癶天`; the four strokes after 癶 were a loose,
+  incorrect re-spelling of `天` (`rtk457`, itself just `一,大`). render
+  confirms 葵's bottom is 天 directly. New: `艹,癶,天`.
+- `rtk2479:蒼` ("pale blue") — primary was `ノ,口,𠆢,艹,一`, an
+  incomplete re-spelling of `倉` (missing 尸, using 𠆢 where 倉's own row
+  has 亼) sitting ahead of the already-correct unlabelled alt `倉,艹`
+  (cjkvi: `⿱艹倉`). Promoted the correct one, dropped the broken one.
+  render confirms 蒼's bottom matches 倉 (`rtk1758`) directly. New:
+  `艹,倉`.
+
+**Judgment calls, kept as-is**:
+
+- `rtk2462:萄`/`rtk2463:蘇`/`rtk2480:藁` all flatten one level through an
+  intermediate (匋, 穌, 槀) that has no row of its own and no second RTK
+  host to be consistent with — each flattening matches that
+  intermediate's own cjkvi sub-split exactly (`匋=⿹勹缶`, `穌=⿰魚禾`,
+  `槀=⿱高木`), so this is the same "not worth a dedicated row" call as
+  dozens of earlier chunks, not stroke soup.
+- `rtk2474:蕊` ("stamen", `惢` = three stacked 心) and `rtk2484:蒜`
+  ("garlic", `祘` = two side-by-side 示) both collapse a repeated
+  primitive to one mention. This matches one existing sibling convention
+  (`炎=火`, `晶=日`, `rtk23:品=口` for triple-mouth) but not another
+  (`rtk2308:姦=女,女,女` spells all three out). Neither reading is wrong;
+  left both as found rather than picking a side project-wide on an
+  unattended run.
+- `rtk2485:蕨` — `欠,丷,厂,屮,艹` looked like five-way soup at first
+  glance but is the fully-expanded cjkvi chain `厥=⿸厂欮`,
+  `欮=⿰屰欠`, `屰=⿱䒑屮` (丷≈䒑) — right level, matching sibling
+  decompositions of 屰 elsewhere. Kept.
+- `rtk2498:遥` ("far off") — ja glyph is cjkvi's J-variant
+  `⿺辶⿱爫𠙻` (𠙻 renders as tofu in every available font). The existing
+  row (`干,辶,爪,凵`) already captures 𠙻's own sub-structure (`凵,干`)
+  plus 爪 standing in for 爫, matching a deliberate earlier-session call
+  on the two siblings sharing this exact 爫+𠙻 compound (揺/謡, rtk2118/
+  2119, logged as "opaque, not attempted" — see the 2026-09-xx entry on
+  kangxi45/屮 nearby in this doc). Not revisited here.
+- `rtk2503:鄭` ("courtesy") — `酋,大,⻏` matches cjkvi's `奠=⿱酋大`
+  sub-split plus `⻏` for the right-side 阝/邑, which is already this
+  project's established id for that shape (the 2026-09-10 ozato fix,
+  documented in CLAUDE.md). Kept.
+
+**Shape-family check**: grepped `data.txt` for every other row
+containing the raw spelling `十,用,丶` (匍/甫's old flattening) — only
+rtk2461 had it, already fixed. Grepped for `心,丶,艹,勿`/`丶,勿` and for
+any other host of 匆/怱 — none; 葱 is the only RTK frame touching this
+shape. Grepped for `人,大,二,癶` and any other host of 癸/天 flattened
+the same wrong way — none besides rtk2472. Grepped for `𠆢,艹,一` and
+any other host of 倉 missing 尸 — none besides rtk2479; every other 倉
+sibling (rtk1758 itself, and 艙/創/蒼's own alt before this fix) already
+used 倉 or its correct full spelling.
+
+**Tests**: baseline before starting — `pytest -q` 108/108,
+`./regression_fresh.sh` 1333/1333 (`PASSED: all 1333 regression checks
+OK`), `audit_radicals.py` 0 findings. After the 5 fixes and
+`sync_system_data.py` (1 kanji inserted — `prim-hasty`; 3 aliases added;
+5 decompositions replaced, 2 removed — the two dropped/demoted
+stroke-soup alternates for rtk2470/rtk2479, now atomic) — `pytest -q`
+108/108 unchanged; `audit_radicals.py` 0 findings unchanged (0 undefined
+part terms, confirming `prim-hasty`/甫/all literal parts resolve);
+`./regression_fresh.sh` 1333/1333 unchanged, no pin touched this chunk.
+Spot-checked the live DB afterward with `rtk.py detail` on all five fixed
+ids to confirm a single clean decomposition each.
+
+No deploy needed from here — a deployer needs `git pull` +
+`sync_system_data.py` on prod to pick this up.
+
+`full_review.py --pending-count`: 497/3000.
+
+**Next**: continue the full re-review at frame 2504.

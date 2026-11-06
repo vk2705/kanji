@@ -3148,7 +3148,13 @@ rtk2457:蔭:shade:艹,陰
 rtk2458:蓬:sagebrush:艹,逢
 rtk2459:芥:mustard:艹,介
 rtk2460:萌:show symptoms of:明,艹
-rtk2461:葡:wild grape:十,用,勹,艹,丶
+# 2026-11-06 full re-review: primary was raw-stroke soup 十,用,勹,艹,丶,
+# double-flattening through both 匍 (⿹勹甫) and prim-dog-tag's own 甫 (which
+# already has its own row, 十,月,丶;用,screwdriver, added 2026-09-18 and used
+# literally by every sibling host: 捕/浦/舗/補/圃/輔/鋪). 葡 was the one host
+# that comment thread missed. render_glyphs.py confirms 葡's bottom-right is
+# 甫, not a second spelling of it in loose strokes.
+rtk2461:葡:wild grape:艹,勹,甫
 rtk2462:萄:grape vine:缶,勹,艹
 rtk2463:蘇:be resuscitated:禾,魚,艹
 rtk2464:蕃:grow luxuriously:番,艹
@@ -3157,16 +3163,27 @@ rtk2466:菰:reed used for matting:孤,艹
 rtk2467:蒙:ignorance:冖,艹,豕
 rtk2468:茅:miscanthus reed:矛,艹
 rtk2469:芭:banana:巴,艹
-rtk2470:苅:cutting (grass):艹;刈,艹
-rtk2471:葱:stone leek:心,丶,艹,勿
-rtk2472:葵:hollyhock:人,大,二,癶,艹,ノ
+# 2026-11-06 full re-review: primary was just "艹" alone -- 刈 (the part that
+# actually explains "cutting") was stranded on the alt. cjkvi-ids agrees
+# (⿱艹刈); dropped the degenerate single-primitive primary.
+rtk2470:苅:cutting (grass):刈,艹
+rtk2471:葱:stone leek:艹,匆,心
+# 2026-11-06 full re-review: primary was stroke soup 人,大,二,癶,艹,ノ for
+# cjkvi's ⿱艹癶天 -- the four strokes after 癶 were a loose, wrong-looking
+# re-spelling of 天 (rtk457, itself just 一,大), not a real alternate. render
+# confirms 葵's bottom is 天 directly.
+rtk2472:葵:hollyhock:艹,癶,天
 rtk2473:葺:thatch:口,耳,艹
 rtk2474:蕊:pistil:心,艹
 rtk2475:茸:mushroom:耳,艹
 rtk2476:蒔:sow (seeds):時,艹
 rtk2477:芹:parsley:斤,艹
 rtk2478:苫:rush matting:占,艹
-rtk2479:蒼:blue:ノ,口,𠆢,艹,一;倉,艹
+# 2026-11-06 full re-review: primary was ノ,口,𠆢,艹,一 -- an incomplete
+# re-spelling of 倉 (missing 尸, using 𠆢 instead of 倉's own 亼) that was
+# demoted to an unlabelled alt alongside the already-correct "倉,艹" cjkvi
+# match. Promoted the correct one, dropped the broken one.
+rtk2479:蒼:blue:艹,倉
 rtk2480:藁:straw:艹,高,木
 rtk2481:蕪:turnip:艹,無
 rtk2482:藷:potato:艹,諸
@@ -6234,3 +6251,10 @@ prim-surely-not:豈:surely not
 # (rtk2228), wrongly flattened to 戈,韭,人 in both before this fix. Not a
 # Kangxi radical and no frame of its own, hence prim-.
 prim-slender:韱:slender
+
+# 2026-11-06 full re-review (frames 2454-2503): 葱 (rtk2471) was flattened to
+# 心,丶,艹,勿 -- splitting 匆 into "勿 + a separate dot" when cjkvi-ids gives
+# 匆 = ⿻勿丶, an *overlay* operator (CLAUDE.md: not a parts list -- the dot
+# sits inside one of 勿's own strokes, not beside it). Gave 匆 its own atomic
+# row instead of re-flattening it; "hurry" was already taken by 急 (rtk1229).
+prim-hasty:匆:hasty
