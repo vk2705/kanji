@@ -27123,3 +27123,86 @@ No deploy needed from here — no data changed.
 `full_review.py --pending-count`: 847/3000.
 
 **Next**: continue the full re-review at frame 2154.
+
+## 2026-11-06 — full re-review: frames 2154–2203
+
+47 kept, 3 fixed, 0 needs-render. All 50 rendered (`render_glyphs.py`,
+batched 3-21 per PNG) beside their listed parts and cross-checked against
+Heisig's CSV components and cjkvi-ids before deciding. Groups reviewed:
+鹿/麓/薦/慶/麗/熊/能/態/寅/演 (鹿-family), 辰/辱/震/振/娠/唇/農/濃 (辰-family),
+送/関/咲 (关-family), 鬼/醜/魂/魔/魅/塊 (鬼-family), 襲/嚇/朕/雰/箇/錬/遵/罷,
+屯/且/藻/隷/癒/璽/潟, and the sign-kanji cluster 丹/丑/羞/卯/巳/此/柴/些.
+
+**Two fixes, one shape-family: 薦 (rtk2156) and 慶 (rtk2157) were both
+missing `prim-antlers`.** 鹿 (rtk2154, same chunk) already names it
+explicitly (`广,prim-antlers,比`), confirmed correct by render. Rendering
+薦 and 慶 beside 鹿 shows the exact same crosshatch box directly under the
+广 slant in all three. cjkvi backs this structurally: 薦 is `⿱艹廌`, and 廌's
+own ids.txt entry (`⿸⿸广⿻コ⿰丨丨⿹②灬`) shares the identical `⿻コ⿰丨丨`
+antlers block with 鹿's own entry (`⿸⿸广⿻コ⿰丨丨比`) before diverging at the
+bottom; 慶's entry (`⿸⿸广⿻コ⿰丨丨⿱乛𢖻`) has the same block directly, no
+opaque intermediate involved. Heisig's own components column names
+"antlers" explicitly for both (薦: "flowers; deer; cave; antlers; slingshot;
+catapult; tail feathers"; 慶: "deer; cave; antlers; crown; heart; walking
+legs"). `audit_missing_children.py` structurally cannot catch this class:
+`prim-antlers` has no real codepoint (`?` in data.txt), so it can never
+appear inside a cjkvi IDS tree for the script to match against — this is
+exactly the audit-tooling blind spot CLAUDE.md's "three ways the sources
+lie" section describes for `prim-` entries in general, just not one of the
+three named checks. Shape-family check: 麓/麗 (same chunk) already spell
+the full 鹿 primitive rather than splitting into its cave/antlers/compare
+sub-pieces, so neither needed touching.
+- `rtk2156:薦:recommend:广,灬,艹` → `艹,广,prim-antlers,灬`
+- `rtk2157:慶:jubilation:心,冖,夂,广` → `广,prim-antlers,冖,心,夂`
+
+**One fix: 鬼 (rtk2175) had a phantom `匕` and a missing `ノ`.** The old
+row (`田,儿,匕,厶`) doesn't match cjkvi's `⿱甶⿺儿厶` (top `甶`, bottom `儿`
+wrapping `厶` — no `匕` anywhere) or Heisig's raw CSV components ("oni;
+drop; brains; rice field; human legs; elbow" — 6 names, none of them
+"spoon"). `甶` itself is `⿱丿田` per ids.txt, which matches the render
+exactly: a short diagonal tick top-right of a `田`-shaped box, visibly
+different from `田`'s own plain straight vertical (rendered side by side
+to confirm — not a font-substitution artifact, the two differ in every
+face checked). "Drop" is `ノ` (`prim-katakana-no` already carries that
+alias) and "brains" is already an alias on `rtk14`/`田` for exactly this
+kind of reuse (its row reads `田:rice field,brains`), so no new primitive
+row was needed — `田` stays the right codepoint, just paired with the
+missing `ノ` and without the phantom `匕`. Shape-family check: 醜/魂/魔/魅/塊
+(same chunk) all reference `鬼` wholesale (`酉,鬼` etc.), not its internal
+parts, so none needed touching. `禺` ("talking cricket", `田,禸`) has the
+same `田`-without-`ノ` gap — already flagged in data.txt's own 2026-09-20
+comment above `prim-garter` ("甶 over 禸, rendered") but never actually
+applied to the row — noted here, left alone since `禺`'s own frame isn't
+in this chunk.
+- `rtk2175:鬼:ghost,oni:田,儿,匕,厶` → `ノ,田,儿,厶`
+
+**Everything else kept.** Notable non-fixes: `rtk2189` 屯 (`ノ,乙,凵`) —
+Heisig names a 4th piece "drop" but cjkvi's `⿻丿𡳾` uses the overlay
+operator (strokes shared, not separate parts), and no distinct 4th visual
+element was found on render beyond what the 3 existing terms already
+cover; `rtk2190` 且 (`一,目`) — cjkvi shows no decomposition at all (absence
+of data, not atomicity evidence per CLAUDE.md, especially since the CSV
+components column isn't empty), but the render confirms `一,目` cleanly
+matches Heisig's own "shelf; my bookshelves" wording; `rtk2195` 潟
+(`臼,水,勹,灬`) — Heisig's raw components just don't name `勹` separately,
+but render + cjkvi (`潟=氵+舄`, `舄=⿱臼⿹勹灬`) confirm all 4 codepoints are
+structurally correct as listed; `rtk2196` 丹 and `rtk2197` 丑 — both
+atomic in cjkvi, both already stroke-level breakdowns (`ノ,一,丶,亅` /
+`｜,ノ,一`) that render-confirm as genuinely present strokes with no
+visual contradiction, even though Heisig's narrative component names
+("rust colored; ship's funnel" / "dagger; two") don't map cleanly to an
+alternative split — left as-is rather than guessing a replacement.
+
+**Tests**: baselines before starting — `pytest -q` 108/108,
+`./regression_fresh.sh` 1333/1333, `audit_radicals.py` 0 findings. After
+the 3 fixes and `sync_system_data.py` (3 decompositions replaced, as
+expected) — `pytest -q` 108/108, `./regression_fresh.sh` 1333/1333
+(unchanged — no existing pin touches 薦/慶/鬼's own internal parts),
+`audit_radicals.py` 0 findings. No pins needed updating.
+
+No deploy needed from here — a deployer needs `git pull` +
+`sync_system_data.py` on prod to pick this up.
+
+`full_review.py --pending-count`: 797/3000.
+
+**Next**: continue the full re-review at frame 2204.

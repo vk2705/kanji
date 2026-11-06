@@ -2750,8 +2750,22 @@ rtk2152:劇:drama:虍,豕,刀
 rtk2153:虐:tyrannize:一,匚,虍
 rtk2154:鹿:deer:广,prim-antlers,比
 rtk2155:麓:foot of a mountain:林,鹿
-rtk2156:薦:recommend:广,灬,艹
-rtk2157:慶:jubilation:心,冖,夂,广
+# --- 2026-11-06 full re-review: 薦/慶 both drop the antlers box that 鹿
+# (rtk2154, same chunk) already names explicitly as prim-antlers. Rendered
+# side by side, 薦's and 慶's top -- the crosshatch box directly under the 广
+# slant -- is pixel-identical in position and shape to 鹿's own antlers piece.
+# 薦's cjkvi is ⿱艹廌, and 廌's own entry (⿸⿸广⿻コ⿰丨丨⿹②灬) shares that same
+# ⿻コ⿰丨丨 antlers block with 鹿 (⿸⿸广⿻コ⿰丨丨比) before diverging at the
+# bottom (比 vs 灬). 慶's cjkvi (⿸⿸广⿻コ⿰丨丨⿱乛𢖻) has the identical antlers
+# block directly, not through an opaque intermediate. Heisig's own components
+# column names "antlers" for both (薦: "flowers; deer; cave; antlers;
+# slingshot; catapult; tail feathers"; 慶: "deer; cave; antlers; crown; heart;
+# walking legs"). audit_missing_children.py can't catch this class: prim-
+# antlers has no real codepoint (`?`), so it can never appear inside a cjkvi
+# IDS tree for the audit to match against. 麓/麗 (same chunk) already spell
+# the full 鹿 primitive rather than its sub-pieces, so they're unaffected.
+rtk2156:薦:recommend:艹,广,prim-antlers,灬
+rtk2157:慶:jubilation:广,prim-antlers,冖,心,夂
 rtk2158:麗:lovely:一,冂,鹿
 rtk2159:熊:bear:能,灬
 rtk2160:能:ability:月,匕,厶,prim-mirrored-spoon
@@ -2769,7 +2783,20 @@ rtk2171:濃:concentrated:農,水
 rtk2172:送:escort:关,辶
 rtk2173:関:connection:关,門
 rtk2174:咲:blossom:关,口
-rtk2175:鬼:ghost,oni:田,儿,匕,厶
+# --- 2026-11-06 full re-review: 鬼 had an unexplained 匕 ("spoon") that
+# matches neither cjkvi (⿱甶⿺儿厶: top 甶, bottom 儿 wrapping 厶, no 匕 anywhere)
+# nor Heisig's own raw CSV components ("oni; drop; brains; rice field; human
+# legs; elbow" -- 6 names, no "spoon"). 甶 itself is ⿱丿田 (cjkvi), matching
+# the render exactly: a short diagonal tick top-right of a 田-shaped box, not
+# 田's plain straight vertical. "Drop" = ノ/丿 (prim-katakana-no already
+# carries that alias) and "brains" is already an alias on rtk14/田 for
+# precisely this reuse, so no new primitive row is needed -- 田 stays the
+# right codepoint, just paired with the missing ノ and without the phantom 匕.
+# Downstream 醜/魂/魔/魅/塊 (same chunk) all reference 鬼 wholesale and don't
+# need touching. 禺 (talking cricket, rtk-unreviewed-this-chunk) has the same
+# 田-without-ノ gap per its own 2026-09-20 comment above prim-garter, noted but
+# left for when its own frame comes up.
+rtk2175:鬼:ghost,oni:ノ,田,儿,厶
 rtk2176:醜:ugly:酉,鬼
 rtk2177:魂:soul:云,鬼
 rtk2178:魔:witch:麻,鬼
