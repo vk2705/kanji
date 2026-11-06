@@ -1147,8 +1147,11 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk2091", "rtk784", "rtk901"}},
     "rtk2268": {"character": "鳳", "keyword": "phoenix",
                 "expected_part_ids": {"kangxi16", "rtk2091"}},
+    # Corrected 2026-11-06 full re-review: top-left is 广 wrapping 倠(=亻+隹)
+    # per cjkvi-ids (⿸䧹鳥, 䧹=⿸广倠, 倠=⿰亻隹); render showed a clear 亻 stroke
+    # beside 隹 inside the 广 that the row (and this pin) had been missing.
     "rtk2344": {"character": "鷹", "keyword": "hawk",
-                "expected_part_ids": {"kangxi172", "kangxi53", "rtk2091"}},
+                "expected_part_ids": {"kangxi172", "kangxi9", "kangxi53", "rtk2091"}},
     "rtk2406": {"character": "鴻", "keyword": "large goose",
                 "expected_part_ids": {"rtk137", "rtk2091", "rtk80"}},
     "rtk2843": {"character": "鴎", "keyword": "seagull",

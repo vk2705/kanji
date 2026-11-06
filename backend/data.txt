@@ -2957,8 +2957,12 @@ rtk2303:坦:level:土,旦
 rtk2304:埠:wharf:土,阜
 rtk2305:堰:dam:女,土,日,匚
 rtk2306:堵:fence:土,者
-rtk2307:嬰:sharp (music):貝,女
-rtk2308:姦:wicked:女
+# full re-review 2026-11-06: 賏 (top) is 貝+貝 per cjkvi-ids (⿰貝貝), rendered
+# shows two cowrie shapes side by side, not one -- row was missing a 貝.
+rtk2307:嬰:sharp (music):貝,貝,女
+# full re-review 2026-11-06: bottom 奻 is 女+女 per cjkvi-ids (⿱女奻, 奻=⿰女女);
+# render shows three 女 (one top, two below side by side) -- row had only one.
+rtk2308:姦:wicked:女,女,女
 rtk2309:婢:maidservant:卑,女
 rtk2310:婉:graceful:女,宛
 rtk2311:娼:prostitute:女,昌
@@ -2983,7 +2987,11 @@ rtk2329:屁:fart:比,尸
 rtk2330:屑:rubbish:尸,肖
 rtk2331:屡:often:女,米,尸
 rtk2332:屍:corpse:尸,死
-rtk2333:屏:wall:｜,ノ,二,并,尸,廾,一;尸,并
+# full re-review 2026-11-06: primary was stroke soup that double-counted 并
+# (listed both as a whole part and re-spelled as its own strokes). cjkvi-ids
+# gives ⿸尸并; 并 is already a named primitive reused by 併/瓶/餅 (prim-eight-radical).
+# The old alternate "尸,并" was already right -- promoted to primary.
+rtk2333:屏:wall:尸,并
 rtk2334:嵩:be aggravated:山,高
 rtk2335:崚:mountains towering in a row:夌,山
 rtk2336:嶺:peak:山,領
@@ -2994,12 +3002,20 @@ rtk2340:幟:flag:巾,戠
 rtk2341:庖:kitchen:广,包
 rtk2342:廓:enclosure:广,郭
 rtk2343:庇:protect:比,广
-rtk2344:鷹:hawk:鳥,广,隹
+# full re-review 2026-11-06: top-left is 广 wrapping 倠(=亻+隹) per cjkvi-ids
+# (⿸䧹鳥, 䧹=⿸广倠, 倠=⿰亻隹); render shows a clear 亻 stroke beside 隹 inside
+# the 广 -- row was missing the 亻.
+rtk2344:鷹:hawk:广,亻,隹,鳥
 rtk2345:庄:level:土,广
 rtk2346:廟:mausoleum:广,朝
-rtk2347:彊:strong:一,弓,田
+# full re-review 2026-11-06: right side 畺 is ⿳⿱一田⿱一田一 per cjkvi-ids (two
+# 田 stacked with three connecting 一 strokes); render confirms two full 田
+# boxes, not one -- row was missing a 田 and two 一 strokes.
+rtk2347:彊:strong:弓,一,一,一,田,田
 rtk2348:弛:slacken:弓,也
-rtk2349:粥:rice gruel:弓,米
+# full re-review 2026-11-06: cjkvi-ids gives ⿲弓米弓 -- two 弓 flanking 米;
+# render confirms a curled shape on both sides of the rice, not just the left.
+rtk2349:粥:rice gruel:弓,弓,米
 rtk2350:挽:saw:扌,免
 rtk2351:撞:thrust:扌,童
 rtk2352:扮:impersonate:分,扌

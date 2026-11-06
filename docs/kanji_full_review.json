@@ -41018,11 +41018,11 @@
    "土",
    "阜"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "土,阜 = cjkvi ⿰土阜, exact match",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2305",
@@ -41033,11 +41033,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰土匽",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "女,土,日,匚 = full leaf set of 土+匽(匚+妟(日+女)) per cjkvi ⿰土匽/⿷匚妟, confirmed by render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2306",
@@ -41048,11 +41048,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰土者",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "土,者 = cjkvi ⿰土者, exact match",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2307",
@@ -41067,11 +41067,15 @@
    "貝",
    "女"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "貝",
+   "貝",
+   "女"
+  ],
+  "note": "賏(top)=貝+貝 per cjkvi ⿱賏女/⿰貝貝; render shows two cowries, row had only one 貝",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2308",
@@ -41086,11 +41090,15 @@
    "女",
    "女"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "女",
+   "女",
+   "女"
+  ],
+  "note": "奻(bottom)=女+女 per cjkvi ⿱女奻/⿰女女; render shows three 女 total, row had only one",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2309",
@@ -41101,11 +41109,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰女卑",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "卑,女 = cjkvi ⿰女卑, exact match",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2310",
@@ -41119,11 +41127,11 @@
    "女",
    "宛"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "女,宛 = cjkvi ⿰女宛, exact match",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2311",
@@ -41134,11 +41142,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰女昌",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "女,昌 = cjkvi ⿰女昌, exact match",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2312",
@@ -41152,11 +41160,11 @@
    "女",
    "支"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "女,支 = cjkvi ⿰女支, exact match",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2313",
@@ -41167,11 +41175,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰女圭",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "圭,女 = cjkvi ⿰女圭, exact match",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2314",
@@ -41182,11 +41190,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰女至",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "至,女 = cjkvi ⿰女至, exact match",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2315",
@@ -41200,11 +41208,11 @@
    "女",
    "需"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "女,需 = cjkvi ⿰女需, exact match",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2316",
@@ -41218,11 +41226,11 @@
    "女",
    "老"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "女,老 = cjkvi ⿰女老, exact match",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2317",
@@ -41236,11 +41244,11 @@
    "女",
    "古"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "女,古 = cjkvi ⿰女古, exact match",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2318",
@@ -41251,11 +41259,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰女且",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "且,女 = cjkvi ⿰女且, exact match",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2319",
@@ -41269,11 +41277,11 @@
    "女",
    "喜"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "女,喜 = cjkvi ⿰女喜, exact match",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2320",
@@ -41284,11 +41292,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿱乃子",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "子,乃 = cjkvi ⿱乃子 (leaf set matches, order only differs)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2321",
@@ -41302,11 +41310,11 @@
    "子",
    "攵"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "子,攵 = cjkvi ⿰子攵, exact match",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2322",
@@ -41320,11 +41328,11 @@
    "宀",
    "有"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "宀,有 = cjkvi ⿱宀有, exact match",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2323",
@@ -41338,11 +41346,11 @@
    "宀",
    "禺"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "宀,禺 = cjkvi ⿱宀禺, exact match",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2324",
@@ -41356,11 +41364,11 @@
    "宀",
    "厷"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "ノ,一,厶,宀 = full leaf set of 宀+厷(⿸𠂇厶); cjkvi doesn't split 𠂇 further but render confirms it is a ノ+一 stroke pair, no missing/extra ink",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2325",
@@ -41374,11 +41382,11 @@
    "宀",
    "牛"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "牛,宀 = cjkvi ⿱宀牛, exact match",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2326",
@@ -41392,11 +41400,11 @@
    "宀",
    "木"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "木,宀 = cjkvi ⿱宀木, exact match",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2327",
@@ -41410,11 +41418,11 @@
    "宀",
    "肉"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "六,宀 = cjkvi ⿱宀六, exact match; Google's 肉 hint is wrong, render/cjkvi both say 六",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2328",
@@ -41425,11 +41433,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿸尸者",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "尸,者 = cjkvi ⿸尸者, exact match",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2329",
@@ -41440,11 +41448,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿸尸比",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "比,尸 = cjkvi ⿸尸比, exact match",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2330",
@@ -41455,11 +41463,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿸尸肖",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "尸,肖 = cjkvi ⿸尸肖, exact match",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2331",
@@ -41470,11 +41478,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿸尸娄",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "女,米,尸 = full leaf set of 尸+娄(米+女) per cjkvi ⿸尸娄/⿱米女, exact match",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2332",
@@ -41488,11 +41496,11 @@
    "尸",
    "死"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "尸,死 = cjkvi ⿸尸死, exact match",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2333",
@@ -41503,11 +41511,14 @@
   "heisig_components": "",
   "cjkvi_ids": "⿸尸并",
   "google_parts": null,
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "尸",
+   "并"
+  ],
+  "note": "old primary was stroke soup double-counting 并 (its own strokes plus the whole component); cjkvi ⿸尸并, and 并 is already a named primitive (prim-eight-radical) reused by 併/瓶/餅 -- promoted the existing correct alternate to primary",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2334",
@@ -41518,11 +41529,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿱山高",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "山,高 = cjkvi ⿱山高, exact match",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2335",
@@ -41533,11 +41544,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰山夌",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "夌,山 = cjkvi ⿰山夌, exact match",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2336",
@@ -41551,11 +41562,11 @@
    "山",
    "領"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "山,領 = cjkvi ⿱山領, exact match",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2337",
@@ -41570,11 +41581,11 @@
    "甘",
    "疋"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "甘,欠,山 = full leaf set of 山+𣢟(甘+欠) per cjkvi ⿱山𣢟/⿰甘欠, exact match; Google's 疋 hint is wrong",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2338",
@@ -41588,11 +41599,11 @@
    "巾",
    "占"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "占,巾 = cjkvi ⿰巾占, exact match",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2339",
@@ -41603,11 +41614,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰巾番",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "巾,番 = cjkvi ⿰巾番, exact match",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2340",
@@ -41618,11 +41629,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰巾戠",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "巾,戠 = cjkvi ⿰巾戠, exact match",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2341",
@@ -41633,11 +41644,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿸广包",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "广,包 = cjkvi ⿸广包, exact match",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2342",
@@ -41648,11 +41659,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿸广郭",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "广,郭 = cjkvi ⿸广郭, exact match",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2343",
@@ -41666,11 +41677,11 @@
    "广",
    "比"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "比,广 = cjkvi ⿸广比, exact match",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2344",
@@ -41685,11 +41696,16 @@
    "隹",
    "鳥"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "广",
+   "亻",
+   "隹",
+   "鳥"
+  ],
+  "note": "top-left is 广 wrapping 倠(=亻+隹) per cjkvi ⿸䧹鳥/䧹=⿸广倠/倠=⿰亻隹; render shows a clear 亻 stroke beside 隹 inside the 广 that the row was missing",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2345",
@@ -41700,11 +41716,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿸广土",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "土,广 = cjkvi ⿸广土, exact match",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2346",
@@ -41715,11 +41731,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿸广朝",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "广,朝 = cjkvi ⿸广朝, exact match",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2347",
@@ -41733,11 +41749,18 @@
    "弓",
    "畺"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "弓",
+   "一",
+   "一",
+   "一",
+   "田",
+   "田"
+  ],
+  "note": "畺 is ⿳⿱一田⿱一田一 per cjkvi -- two full 田 stacked with three connecting 一 strokes; render confirms two 田 boxes, row had only one 田 and one 一",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2348",
@@ -41751,11 +41774,11 @@
    "弓",
    "也"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "弓,也 = cjkvi ⿰弓也, exact match",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2349",
@@ -41770,11 +41793,15 @@
    "米",
    "弓"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "弓",
+   "弓",
+   "米"
+  ],
+  "note": "cjkvi ⿲弓米弓: two 弓 flanking 米; render confirms a curled shape on both sides of the rice, row had only the left 弓",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2350",
@@ -41788,11 +41815,11 @@
    "扌",
    "免"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "扌,免 = cjkvi ⿰扌免, exact match",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2351",
@@ -41806,11 +41833,11 @@
    "扌",
    "童"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "扌,童 = cjkvi ⿰扌童, exact match",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2352",
@@ -41824,11 +41851,11 @@
    "扌",
    "分"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "分,扌 = cjkvi ⿰扌分, exact match",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2353",
@@ -41839,11 +41866,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰扌圼",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "土,日,扌 = full leaf set of 扌+圼(土+日) per cjkvi ⿰扌圼, exact match",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2354",

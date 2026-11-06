@@ -27374,3 +27374,94 @@ No deploy needed from here — a deployer needs `git pull` +
 `full_review.py --pending-count`: 697/3000.
 
 **Next**: continue the full re-review at frame 2304.
+
+## 2026-11-06 — full re-review: frames 2304–2353
+
+50 rows reviewed (44 keep, 6 fixed, 0 needs-render). All 50 frames fall in
+the `id_5th_ed` 2043–2999 bucket (empty Heisig `components`, not core, no
+"teaches it whole" evidence) — every decision came from the render plus
+cjkvi-ids ground truth, Google only ever used as a (frequently wrong) hint.
+
+**Fixes:**
+
+- `rtk2307:嬰` ("suckling infant") — was `貝,女`. Top is 賏 = ⿰貝貝 per
+  cjkvi-ids; render shows two cowrie shapes side by side, not one. New:
+  `貝,貝,女`.
+- `rtk2308:姦` ("violate") — was `女` (one mention only). Bottom 奻 = ⿰女女
+  per cjkvi-ids (`⿱女奻`); render shows three 女 total (one on top, two
+  side-by-side below). New: `女,女,女`. See "Convention check" below —
+  this row had been cited *today, earlier in this same run* as settled
+  precedent for a different decision, while itself still unverified.
+- `rtk2333:屏` ("folding screen") — primary was stroke soup
+  (`｜,ノ,二,并,尸,廾,一`) that double-counted 并: it listed 并 as a whole
+  part *and* re-spelled 并's own strokes separately in the same row. cjkvi
+  gives `⿸尸并`, and 并 is already a named primitive (`prim-eight-radical`)
+  reused cleanly by `rtk1107:併`, `rtk1109:瓶`, `rtk1590:餅`. The row's own
+  alternate (`尸,并`) was already correct — promoted to sole primary,
+  dropping the garbled one.
+- `rtk2344:鷹` ("hawk") — was `鳥,广,隹`, missing a 亻. cjkvi gives
+  `⿸䧹鳥` with `䧹 = ⿸广倠` and `倠 = ⿰亻隹`; render shows a clear 亻 stroke
+  beside 隹 inside the 广 that the old row dropped. New: `广,亻,隹,鳥`.
+- `rtk2347:彊` ("strengthen") — was `一,弓,田` (one of each). Right side
+  畺 is `⿳⿱一田⿱一田一` per cjkvi-ids — two full 田 boxes stacked with
+  three connecting 一 strokes, not one of each. Render confirms two
+  distinct 田 boxes. New: `弓,一,一,一,田,田`.
+- `rtk2349:粥` ("rice gruel") — was `弓,米` (one 弓). cjkvi gives
+  `⿲弓米弓`: two 弓 flanking the rice on both sides, confirmed by render.
+  New: `弓,弓,米`.
+
+Shape-family check on each: `嬰` is itself reused whole (not reflattened)
+by `rtk2845:鸚`, unaffected by the fix. No other row flattens 奻, 畺, or
+the ⿲弓米弓 pattern. `并` is already correctly named in its three other
+hosts (併/瓶/餅) — 屏 was the only garbled one. No other `广`+隹/亻 host
+exists in `data.txt`.
+
+**Convention check (worth the owner's attention, not resolved here):**
+`rtk2279:囁`'s decision, made earlier *today* in this same daily run
+(frames 2254–2303), kept a single `耳` for 聶's triple-耳 shape, citing as
+precedent "this project's convention... (same as rtk23 品=口, rtk209
+森=木, rtk2308 姦=女, rtk2760 轟=車)". Checked all four citations: `rtk23`
+and `rtk209` are genuinely backed by Heisig's own CSV `components` column
+(`mouth`, `tree; wood` — both core frames, non-empty, authoritative per
+CLAUDE.md), so those two are solid. But `rtk2308` (姦) was *itself still
+pending* at the time it was cited, and turned out on render today to need
+fixing to three 女 — it was never settled, just assumed. And `rtk2760`
+(轟) is *still pending* right now — also never actually verified, despite
+being cited as settled. So the "established convention" rtk2279 leaned on
+is half real (the two core-CSV cases) and half circular (citing not-yet-
+reviewed rows as if already confirmed). Not touching rtk2279 or rtk2760
+today — out of this chunk's frame range, and rtk2279 is already committed
+— but when rtk2760 comes up for its own review, render it without
+treating rtk2279/rtk2308's history as settled precedent. Meanwhile this
+dataset already has plenty of precedent for listing real repeats
+explicitly rather than collapsing them (`rtk508:歌`=`可,可,欠`,
+`rtk1481:幾`=`幺,幺,戈,人`, `rtk2620:畢`=`田,廾,一,一,｜`,
+`rtk2865:彗`=`丰,丰,彐`), which is the convention today's fixes follow for
+non-core frames with no authoritative single-naming evidence from Heisig.
+
+**Everything else kept** (44 rows) — each checked against render + cjkvi,
+exact leaf-set matches. Three worth a note: `rtk2305:堰`'s flat
+`女,土,日,匚` is the correct full leaf expansion of `土+匽` (`匽 = ⿷匚妟`,
+`妟 = 日+女`) confirmed by render, not an error despite looking like 4
+unrelated pieces. `rtk2324:宏`'s `ノ,一,厶,宀` is the full leaf expansion of
+`宀+厷` (`厷 = ⿸𠂇厶`); cjkvi doesn't split `𠂇` further but the render
+confirms it really is just a ノ+一 stroke pair, no missing or extra ink.
+`rtk2327:宍`'s `六,宀` matches cjkvi's `⿱宀六` exactly — Google's hint of
+肉 is wrong, both render and cjkvi agree on 六.
+
+**Tests**: baseline before starting — `pytest -q` 108/108,
+`./regression_fresh.sh` 1333/1333, `audit_radicals.py` 0 findings. After
+the 6 fixes and `sync_system_data.py` (0 kanji inserted, 6 decompositions
+replaced, 1 removed — 屏's now-redundant garbled primary, replaced by its
+own former alternate) — `pytest -q` 108/108 unchanged; `audit_radicals.py`
+0 findings unchanged; `./regression_fresh.sh` initially failed 1 of 1333
+(`rtk2344` pin expected the old 3-part decomposition) — updated the pin
+in `test_regression_fixes.py` to the corrected 4-part set with a comment
+explaining why, then 1333/1333 clean.
+
+No deploy needed from here — a deployer needs `git pull` +
+`sync_system_data.py` on prod to pick this up.
+
+`full_review.py --pending-count`: 647/3000.
+
+**Next**: continue the full re-review at frame 2354.
