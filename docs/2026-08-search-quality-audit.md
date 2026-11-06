@@ -27059,3 +27059,67 @@ on prod to pick up today's three fixes (藩, 獣, 鳥).
 
 **Next**: continue the full re-review at frame 2103. Whoever reaches
 frame 2132 (馬) should start with the shape-family note above.
+
+## 2026-11-06 — full re-review: frames 2103–2153
+
+Unattended daily run. 50 kept, 0 fixed, 0 needs-render. Every row this chunk
+confirmed correct on render — a quiet day, but not a skipped one: each of
+the 50 was individually rendered (`render_glyphs.py`, batched 4-25 per PNG)
+beside its listed parts and cross-checked against Heisig's CSV components
+and cjkvi-ids before deciding `keep`. Groups reviewed: 属/嘱/偶/遇/愚/隅
+(禺-family), 逆/塑/遡 (屰/朔-family), 岡/鋼/綱/剛, 缶/陶, 揺/謡, 就/蹴,
+懇/墾/貌 (豸艮-family), 免/逸/晩/勉, 象/像, the 13-strong 馬-family
+(駒 験 騎 駐 駆 駅 騒 駄 驚 篤 罵 騰), and the 虍-family (虜 膚 虚 戯 虞 慮
+劇 虐).
+
+**Two renders worth recording the reasoning on:**
+
+* **rtk2103 属 "belong" stays `尸,ノ,禸`.** cjkvi-ids gives `⿸尸禹`
+  (claiming 禹, with its internal box, as the bottom), but rendering 属
+  next to 禹 and 禸 (内) shows 属's bottom has no enclosed box — it
+  matches 禸 (plus a short ノ stroke) exactly, not 禹. cjkvi's answer
+  here likely describes traditional 屬/蜀 (whose own bottom is 虫-based),
+  not the jōyō simplification. No change; cjkvi overruled by the render,
+  per CLAUDE.md's "the render itself" standing caveat about trusting
+  structural data over what's actually drawn.
+* **rtk2118 揺 / rtk2119 謡 stay `干,爪,凵,扌`/`干,言,爪,凵`.** cjkvi-ids'
+  answer for the shared right-hand component routes through `𠙻`
+  (U+2067B), which renders as tofu in every face this box has — looked
+  unverifiable at first glance. Checked `/tmp/ids.txt` directly instead
+  of trusting the tofu render: `𠙻 = ⿶凵干`, i.e. 干 sitting inside 凵
+  via the "surround from below" operator — which is exactly our existing
+  flat `干,凵` pair, not a different shape. 爪 above it confirmed
+  separately by render. No change to either row.
+
+**Addressed the flagged item: rtk2132 馬 "horse" stays `灬`.** The
+2026-10-xx session that fixed rtk2091 鳥 (`灬` → `白,一,灬`, a real
+missing-70%-of-the-glyph bug) flagged 馬 as having the identical
+bare-`灬` symptom and deferred it for "its own render/cjkvi pass." Did
+that pass this session: cjkvi-ids gives `馬 = ⿹⑥灬` (circled-number
+placeholder, no real codepoint for the top) — structurally the same
+"cjkvi can't see it" situation 鳥 had (`⑦`), so cjkvi doesn't resolve
+this either way for either kanji. The deciding difference is in
+heisig-kanjis.csv: 鳥's `components` was a real decomposition ("white;
+dove; one; tail feathers") that data.txt simply wasn't reflecting — the
+actual bug. 馬's `components` is `"team of horses"`, self-referential
+(literally the kanji's own keyword), which turns out to be CSV's
+convention for a true core-frame atomic primitive — `木` (id_5th_ed 207,
+also core) has the identical self-referential pattern (`components` =
+`"wood"`). 馬's `id_5th_ed` is 1978, inside the 1–2042 core-frame range
+where CLAUDE.md treats this as positive atomicity evidence, not a gap.
+Also checked: no "horse-head" primitive exists anywhere else in
+data.txt to attach the top shape to even if we wanted to split it out.
+Conclusion: 馬 is genuinely atomic (unlike 鳥), the row is correct as
+`灬`-only, and this is now settled rather than deferred — re-recorded
+the row's note to capture the reasoning so this doesn't get re-flagged.
+
+**Tests**: baselines taken before starting — `pytest -q` 108/108,
+`./regression_fresh.sh` 1333/1333, `audit_radicals.py` 0 findings. No
+`data.txt` edits were made this session (0 fixed), so none of the three
+were re-run — nothing to invalidate them.
+
+No deploy needed from here — no data changed.
+
+`full_review.py --pending-count`: 847/3000.
+
+**Next**: continue the full re-review at frame 2154.

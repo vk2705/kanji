@@ -37545,11 +37545,11 @@
    "丿",
    "虫"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "属=尸+ノ+禸, render confirms simple bottom shape (no enclosed box); cjkvi's ⿸尸禹 doesn't match the rendered glyph (lacks 禹's internal box) — likely describes trad. 屬/蜀, not jouyou 属",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2104",
@@ -37560,11 +37560,11 @@
   "heisig_components": "mouth; belong; flag; gnats; drop; insect; belt",
   "cjkvi_ids": "⿰口属",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "嘱=口+属, render matches cjkvi ⿰口属",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2105",
@@ -37578,11 +37578,11 @@
    "亻",
    "禺"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "偶=亻+禺, render matches cjkvi ⿰亻禺; 禺 kept coherent per CLAUDE.md rule 4 despite CSV's full stroke expansion",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2106",
@@ -37593,11 +37593,11 @@
   "heisig_components": "talking cricket; brains; insect; belt; road",
   "cjkvi_ids": "⿺辶禺",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "遇=辶+禺, render matches cjkvi ⿺辶禺",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2107",
@@ -37611,11 +37611,11 @@
    "禺",
    "心"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "愚=禺(top)+心(bottom), render matches cjkvi ⿱禺心",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2108",
@@ -37629,11 +37629,11 @@
    "阝",
    "禺"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "隅=阝+禺, render matches cjkvi ⿰阝禺",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2109",
@@ -37648,11 +37648,11 @@
    "丷",
    "屮"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "逆=屰(top-right)+辶, render matches cjkvi ⿺辶屰; 屰 kept coherent per rule 4 over Google's 丷+屮 split",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2110",
@@ -37668,11 +37668,11 @@
    "月",
    "土"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "塑=朔(top)+土(bottom), render confirms 朔 shape (= 屰+月, already own row) atop 土",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2111",
@@ -37687,11 +37687,11 @@
    "月",
    "屰"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "遡=辶+朔, render matches cjkvi ⿺辶朔",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2112",
@@ -37705,11 +37705,11 @@
    "冂",
    "山"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "岡=冂 enclosing 丷+一+山, render matches cjkvi ⿵冂⿱䒑山 (䒑 flattened to 丷,一)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2113",
@@ -37723,11 +37723,11 @@
    "金",
    "岡"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "鋼=金+岡, render matches cjkvi ⿰金岡",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2114",
@@ -37741,11 +37741,11 @@
    "糸",
    "岡"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "綱=糸+岡, render matches cjkvi ⿰糸岡",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2115",
@@ -37759,11 +37759,11 @@
    "岡",
    "刂"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "剛=岡+刂, render matches cjkvi ⿰岡刂",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2116",
@@ -37777,11 +37777,11 @@
    "午",
    "山"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "缶=午(top)+凵(bottom), render confirms exact stroke match; cjkvi treats 缶 as atomic but the row's split is visually accurate",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2117",
@@ -37797,11 +37797,11 @@
    "缶",
    "凵"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "陶=阝+勹+缶, render confirms 勹 wrapping 缶 on the right, matches cjkvi ⿰阝匋",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2118",
@@ -37816,11 +37816,11 @@
    "爫",
    "缶"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "揺=扌+爪+干+凵; cjkvi's 𠙻(tofu in our font) resolves via /tmp/ids.txt to ⿶凵干, i.e. 凵 enclosing 干 — matches our flat 干,凵 exactly, plus 爪 above confirmed by render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2119",
@@ -37836,11 +37836,11 @@
    "𠂢",
    "缶"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "謡=言+爪+干+凵, same right-hand component as 揺 (rtk2118), same reasoning applies",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2120",
@@ -37886,11 +37886,11 @@
    "京",
    "尤"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "就=京+尤, render matches cjkvi ⿰京尤",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2122",
@@ -37904,11 +37904,11 @@
    "𧾷",
    "就"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "蹴=足(as 𧾷 variant)+就, render matches cjkvi ⿰𧾷就",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2123",
@@ -37923,11 +37923,11 @@
    "艮",
    "心"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "懇=豸+艮(top, =貇)+心(bottom), render matches cjkvi ⿱貇心",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2124",
@@ -37942,11 +37942,11 @@
    "艮",
    "土"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "墾=豸+艮(top, =貇)+土(bottom), render matches cjkvi ⿱貇土",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2125",
@@ -37957,11 +37957,11 @@
   "heisig_components": "skunk; badger; white; dove; human legs",
   "cjkvi_ids": "⿰豸皃",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "貌=豸(left)+白+儿(right, =皃), render matches cjkvi ⿰豸皃",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2126",
@@ -37976,11 +37976,11 @@
    "𡵢",
    "儿"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "免=｜+一+勹+儿, render confirms top tick + 勹 enclosure + inner 一 + 儿 legs; distinct from 兎(rabbit) which has an extra dot, confirmed by direct comparison render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2127",
@@ -37994,11 +37994,11 @@
    "辶",
    "免"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "逸=辶+免, render matches cjkvi's Japanese-variant ⿺辶免 (not the 兎 form)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2128",
@@ -38012,11 +38012,11 @@
    "日",
    "免"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "晩=日+免, render matches cjkvi ⿰日免",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2129",
@@ -38030,11 +38030,11 @@
    "免",
    "力"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "勉=免+力, render matches cjkvi ⿺免力",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2130",
@@ -38049,11 +38049,11 @@
    "口",
    "豕"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "象=勹(top, containing 一)+豕(bottom), render confirms exact stroke match",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2131",
@@ -38067,11 +38067,11 @@
    "亻",
    "象"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "像=亻+象, render matches cjkvi ⿰亻象",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2132",
@@ -38086,11 +38086,11 @@
    "𡕒",
    "灬"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Re-examined per prior flag: CSV components='team of horses' is self-referential (= the keyword itself), same pattern as core-frame atomic primitives like 木 (components='wood', also self-referential) rather than a real sub-decomposition like 鳥 had ('white; dove; one; tail feathers', which data.txt was missing and got fixed). 馬's id_5th_ed=1978 is within the core-frame range (1-2042) where CLAUDE.md treats this as positive atomicity evidence. No 'horse-head' primitive exists anywhere else in data.txt to attach. cjkvi-ids gives only a circled-number placeholder (⑥, no real codepoint) for the top, same as 鳥 had (⑦) -- so cjkvi can't settle it either way. Net: 馬 is genuinely taught as an atomic shape with only its bottom 灬 legs separately named, unlike 鳥. Staying at 灬-only is correct.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2133",
@@ -38104,11 +38104,11 @@
    "馬",
    "句"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "駒=馬+句, render matches cjkvi ⿰馬句",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2134",
@@ -38122,11 +38122,11 @@
    "馬",
    "僉"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "験=馬+㑒, render confirms 㑒 shape on the right",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2135",
@@ -38140,11 +38140,11 @@
    "馬",
    "奇"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "騎=馬+奇, render matches cjkvi ⿰馬奇",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2136",
@@ -38155,11 +38155,11 @@
   "heisig_components": "stop-over; team of horses; candlestick; lord; drop; king; jewel; ball",
   "cjkvi_ids": "⿰馬主",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "駐=馬+主, render matches cjkvi ⿰馬主",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2137",
@@ -38173,11 +38173,11 @@
    "馬",
    "区"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "駆=馬+区, render matches cjkvi ⿰馬区",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2138",
@@ -38191,11 +38191,11 @@
    "馬",
    "尺"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "駅=馬+尺, render matches cjkvi ⿰馬尺",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2139",
@@ -38209,11 +38209,11 @@
    "馬",
    "蚤"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "騒=馬+虫+又, render confirms 又 over 虫 on the right (=蚤), matches cjkvi ⿰馬𧈡",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2140",
@@ -38227,11 +38227,11 @@
    "馬",
    "太"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "駄=馬+太, render matches cjkvi ⿰馬太",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2141",
@@ -38245,11 +38245,11 @@
    "敬",
    "馬"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "驚=敬(top)+馬(bottom), render matches cjkvi ⿱敬馬",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2142",
@@ -38263,11 +38263,11 @@
    "竹",
    "馬"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "篤=竹(top)+馬(bottom), render matches cjkvi ⿱竹馬",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2143",
@@ -38281,11 +38281,11 @@
    "罒",
    "馬"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "罵=罒(top)+馬(bottom), render matches cjkvi ⿱罒馬",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2144",
@@ -38301,11 +38301,11 @@
    "水",
    "馬"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "騰=月(left)+龹(top-right)+馬(bottom-right), render confirms all three pieces",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2145",
@@ -38316,11 +38316,11 @@
   "heisig_components": "magic wand; augury; cliff; hook; diced; seven; human legs",
   "cjkvi_ids": "⿸虍几[G] ⿸虍儿[TJKV]",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "虎 primary flattens 虍 into 卜,儿,七,厂 matching Heisig's CSV components exactly; alt 儿,虍 matches cjkvi's Japanese ⿸虍儿; both confirmed by render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2146",
@@ -38334,11 +38334,11 @@
    "虍",
    "男"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "虜=虍(top)+男(bottom), render matches cjkvi ⿸虍男",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2147",
@@ -38352,11 +38352,11 @@
    "虍",
    "胃"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "膚=虍(top)+胃(bottom), render matches cjkvi ⿸虍胃",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2148",
@@ -38367,11 +38367,11 @@
   "heisig_components": "tiger; row",
   "cjkvi_ids": "⿸虍业",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "虚=虍(top)+业(bottom), render matches cjkvi ⿸虍业",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2149",
@@ -38382,11 +38382,11 @@
   "heisig_components": "void; tiger; row; fiesta",
   "cjkvi_ids": "⿰虚戈",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "戯=虚(left, whole kanji as part)+戈(right), render matches cjkvi ⿰虚戈",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2150",
@@ -38397,11 +38397,11 @@
   "heisig_components": "tiger; give; mouth; chair; tool",
   "cjkvi_ids": "⿸虍吴[G] ⿸虍吳[TK] ⿸虍呉[J]",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "虞 primary flattens 虍 into 卜,儿,七,厂 plus 呉; alt 呉,虍 matches cjkvi's Japanese ⿸虍呉; both confirmed by render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2151",
@@ -38416,11 +38416,11 @@
    "田",
    "心"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "慮 primary flattens 虍 into 卜,儿,七,厂 plus 思; alt 思,虍 matches cjkvi ⿸虍思; both confirmed by render",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2152",
@@ -38431,11 +38431,11 @@
   "heisig_components": "tiger; sow; pig; sword; sabre; saber",
   "cjkvi_ids": "⿰豦刂",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "劇=虍+豕(left, =豦)+刂(right), render matches cjkvi ⿰豦刂",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2153",
@@ -38449,11 +38449,11 @@
    "虍",
    "⺕"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "虐=虍(top)+一+匚(bottom-right), render confirms; cjkvi's Japanese ⿷匚一 nesting matches our flat 一,匚 pair",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2154",
