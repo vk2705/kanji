@@ -45287,11 +45287,11 @@
    "木",
    "堅"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "⿰木堅, data.txt already 堅,木 -- matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2555",
@@ -45302,11 +45302,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰木真",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "⿰木真, data.txt already 木,真 -- matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2556",
@@ -45317,11 +45317,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰木酋",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "⿰木酋, data.txt already 木,酋 -- matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2557",
@@ -45332,11 +45332,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰木矞",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render: 矞=矛 over a boxed 儿/口 shape; current 口,矛,木,儿,儿,冂-level leaves match what's drawn, fine-grained but not wrong",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2558",
@@ -45347,11 +45347,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰木会",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "⿰木会, data.txt already 会,木 -- matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2559",
@@ -45365,11 +45365,11 @@
    "木",
    "妻"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "⿰木妻, data.txt already 妻,木 -- matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2560",
@@ -45383,11 +45383,11 @@
    "木",
    "西"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "⿰木西, data.txt already 西,木 -- matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2561",
@@ -45398,11 +45398,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰木吉",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "⿰木吉, data.txt already 木,吉 -- matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2562",
@@ -45416,11 +45416,11 @@
    "木",
    "土"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "⿰木土, data.txt already 土,木 -- matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2563",
@@ -45434,11 +45434,11 @@
    "木",
    "巴"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "⿰木巴, data.txt already 木,巴 -- matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2564",
@@ -45449,11 +45449,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰木尾",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "⿰木尾, data.txt already 尾,木 -- matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2565",
@@ -45467,11 +45467,11 @@
    "木",
    "午"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "⿰木午, data.txt already 午,木 -- matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2566",
@@ -45485,11 +45485,14 @@
    "木",
    "丈"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "丈",
+   "木"
+  ],
+  "note": "render: right side is clearly 丈 (rtk746), not ノ+一. Dropped the stroke-soup primary 'ノ,一,木' and promoted the existing 丈,木 alt to sole primary",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2567",
@@ -45503,11 +45506,11 @@
    "木",
    "尊"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "⿰木尊, data.txt already 木,尊 -- matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2568",
@@ -45518,11 +45521,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰木魯",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render: right side is 魯 (魚 over 日), data.txt's 魚,日,木 leaves match exactly what's drawn",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2569",
@@ -45533,11 +45536,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰木畺",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render: right side shows one 田+一, not the double-田 畺 cjkvi lists -- treating the render as authoritative per the 'render can lie / is ground truth' rule; current 一,田,木 matches what's actually drawn. audit_weak_evidence.py --host 橿 flags nothing",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2570",
@@ -45551,11 +45554,11 @@
    "木",
    "勺"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "⿰木勺, data.txt already 勺,木 -- matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2571",
@@ -45569,11 +45572,11 @@
    "木",
    "子"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "⿱木子, data.txt already 子,木 -- matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2572",
@@ -45587,11 +45590,11 @@
    "木",
    "帛"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "⿰木帛, data.txt already 帛,木 -- matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2573",
@@ -45605,11 +45608,11 @@
    "木",
    "盾"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "⿰木盾, data.txt already 木,盾 -- matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2574",
@@ -45623,11 +45626,11 @@
    "木",
    "夏"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "⿰木夏, data.txt already 木,夏 -- matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2575",
@@ -45641,11 +45644,11 @@
    "木",
    "華"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "⿰木華, data.txt already 木,華 -- matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2576",
@@ -45656,11 +45659,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰木倉",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "⿰木倉, data.txt already 倉,木 -- matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2577",
@@ -45674,11 +45677,11 @@
    "木",
    "石"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "⿰木石, data.txt already 石,木 -- matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2578",
@@ -45689,11 +45692,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰木困",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "⿰木困, data.txt already 困,木 -- matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2579",
@@ -45704,11 +45707,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰木比",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "⿰木比, data.txt already 比,木 -- matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2580",
@@ -45722,11 +45725,11 @@
    "木",
    "通"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "⿰木通, data.txt already 木,通 -- matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2581",
@@ -45740,11 +45743,16 @@
    "木",
    "毳"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "毛",
+   "毛",
+   "毛",
+   "木"
+  ],
+  "note": "render: right side is 毳 (three 毛 stacked, cjkvi ⿰木毳), not one 毛. No row for 毳; spelled as repeated parts (precedent: rtk2308 姦=女,女,女)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2582",
@@ -45758,11 +45766,11 @@
    "般",
    "木"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "⿱般木(G/J/K) / ⿱般朩(T/V), data.txt already 木,般 -- matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2583",
@@ -45773,11 +45781,15 @@
   "heisig_components": "",
   "cjkvi_ids": "⿱幵木[GJK] ⿱幵朩[T]",
   "google_parts": null,
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "干",
+   "干",
+   "木"
+  ],
+  "note": "render: top is 幵 (two 干 side by side, cjkvi ⿱幵木), not one 干. No row for 幵; spelled as repeated parts",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2584",
@@ -45788,11 +45800,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰木耶",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "⿰木耶, data.txt already 木,耶 -- matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2585",
@@ -45803,11 +45815,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰木亶",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "note: worklist snapshot shows a stale pre-fix value (一,口,日,木,亠); live data.txt was already corrected 2026-10-23 to 木,亠,回,旦 (cjkvi ⿰木亶, 亶=亠+回+旦) -- current row is correct, nothing to do",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2586",
@@ -45818,11 +45830,15 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰木雩",
   "google_parts": null,
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "雨",
+   "于",
+   "木"
+  ],
+  "note": "render: right side is 雨 over 于 (cjkvi ⿰木雩), not 雨+loose strokes. '二,勹' was the same 于/干 mistake already documented for 芋/宇/余/迂. Shape-family: also fixed rtk2670 袴 and rtk2772 跨 (both 夸=大+于)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2587",
@@ -45836,11 +45852,11 @@
    "木",
    "規"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "⿰木規, data.txt already 木,規 -- matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2588",
@@ -45854,11 +45870,11 @@
    "木",
    "昌"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "⿰木昌, data.txt already 昌,木 -- matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2589",
@@ -45872,11 +45888,11 @@
    "林",
    "彡"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi gives two equivalent IDS, ⿰林彡 and ⿰木杉; data.txt's 彡,林 matches the first exactly",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2590",
@@ -45890,11 +45906,11 @@
    "木",
    "甬"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "⿰木甬, data.txt already 木,甬 -- matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2591",
@@ -45905,11 +45921,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰木⿱左月",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render confirms right side is 左 over 月 (cjkvi ⿰木⿱左月, same shape as 隋 minus 阝); data.txt's 左,月,木 leaves match exactly",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2592",
@@ -45925,11 +45941,11 @@
    "必",
    "山"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "⿰木密, data.txt already 密,木 -- matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2593",
@@ -45940,11 +45956,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿺毛求",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "⿺毛求, data.txt already 毛,求 -- matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2594",
@@ -45959,11 +45975,11 @@
    "羽",
    "隹"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "⿰火翟, data.txt already 火,翟 -- matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2595",
@@ -45980,11 +45996,11 @@
    "日",
    "小"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "⿰火尞, data.txt already 尞,火 -- matches (kept 尞 whole, correctly ignoring Google's over-flattened 丷,大,日,小)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2596",
@@ -45998,11 +46014,11 @@
    "火",
    "巨"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "⿰火巨, data.txt already 巨,火 -- matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2597",
@@ -46016,11 +46032,11 @@
    "林",
    "火"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "⿱林火, data.txt already 林,火 -- matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2598",
@@ -46034,11 +46050,11 @@
    "久",
    "火"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "⿱久火, data.txt already 久,火 -- matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2599",
@@ -46052,11 +46068,11 @@
    "火",
    "扇"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "⿰火扇, data.txt already 火,扇 -- matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2600",
@@ -46067,11 +46083,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰火某",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "⿰火某, data.txt already 某,火 -- matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2601",
@@ -46085,11 +46101,11 @@
    "火",
    "東"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi J-variant is ⿰火東, matching ja-kanji row 火,東 exactly (G/T/K/V use 柬)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2602",
@@ -46100,11 +46116,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰火粲",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "render: 粲's right side is a 夕/歹-like top over 又, left is 米; data.txt's 米,又,夕 leaves match what's drawn",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2603",
@@ -46118,11 +46134,11 @@
    "火",
    "勺"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "⿰火勺, data.txt already 勺,火 -- matches",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2604",

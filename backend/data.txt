@@ -3298,7 +3298,10 @@ rtk2562:杜:woods:土,木
 rtk2563:杷:kind of rake:木,巴
 rtk2564:梶:sculling oar:尾,木
 rtk2565:杵:wooden pestle:午,木
-rtk2566:杖:staff:ノ,一,木;丈,木
+# 2026-11-06 full re-review: was ノ,一,木 primary with 丈,木 only as an alt --
+# 丈 (rtk746) is clearly drawn whole on the right (render-verified), the
+# ノ,一 spelling was stroke soup duplicating the same shape. Dropped it.
+rtk2566:杖:staff:丈,木
 rtk2567:樽:barrel:木,尊
 rtk2568:櫓:oar:魚,日,木
 rtk2569:橿:oak:一,田,木
@@ -3313,13 +3316,26 @@ rtk2577:柘:wild mulberry:石,木
 rtk2578:梱:pack:困,木
 rtk2579:枇:loquat:比,木
 rtk2580:樋:water pipe:木,通
-rtk2581:橇:sled:毛,木
+# 2026-11-06 full re-review: was 毛,木 -- render shows the right side is 毳
+# (three 毛 stacked, cjkvi ⿰木毳), not a single 毛. No row for 毳 exists and
+# it's a one-off shape here, so spelled out as repeated parts (precedent:
+# rtk2308 姦 = 女,女,女).
+rtk2581:橇:sled:毛,毛,毛,木
 rtk2582:槃:tub:木,般
-rtk2583:栞:bookmark:干,木
+# 2026-11-06 full re-review: was 干,木 -- render shows the top is 幵 (two 干
+# side by side, cjkvi ⿱幵木), not one 干. No row for 幵; spelled as repeated
+# parts, same as rtk2581 above.
+rtk2583:栞:bookmark:干,干,木
 rtk2584:椰:coconut tree:木,耶
 # 2026-10-23 "lid" audit (owner: search by parts for lid, explain every result): 檀: was 一,口,日,木,亠 -- 旦 split into 日 + 一 and 回 reduced to one 口. cjkvi ⿰木亶, 亶 = 亠 回 旦; same right side as 壇.
 rtk2585:檀:cedar:木,亠,回,旦
-rtk2586:樗:japanese bead tree:雨,木,二,勹
+# 2026-11-06 full re-review: was 雨,木,二,勹 -- the "二,勹" is the same
+# 于/干 stroke-soup mistake data.txt already documents for 芋/宇/余/迂 (see
+# the 于 comment block above prim-potato-stalk): right side is 雨 over 于
+# (cjkvi ⿰木雩), not 雨 plus loose strokes. Shape-family check found the
+# same mistake, spelled with the same "二,勹", in rtk2670 袴 and rtk2772 跨
+# (both 夸 = 大+于 on the right) -- fixed alongside this one.
+rtk2586:樗:japanese bead tree:雨,于,木
 rtk2587:槻:zelkova tree:木,規
 rtk2588:椙:japanese cedar:昌,木
 rtk2589:彬:refined:彡,林
@@ -3424,7 +3440,10 @@ rtk2666:靖:peaceful:立,青
 rtk2667:妾:concubine:女,立
 rtk2668:衿:neck:衤,今
 rtk2669:袷:lined (kimono):衤,合
-rtk2670:袴:men's formal divided skirt:衤,大,二,勹
+# 2026-11-06 shape-family follow-up from the rtk2586 樗 fix: right side is
+# 夸 (大 over 于, cjkvi ⿱大亏/⿱大于), render-confirmed -- "二,勹" was the
+# same 于/干 stroke-soup mistake, not a correct spelling of the hook under 大.
+rtk2670:袴:men's formal divided skirt:衤,大,于
 rtk2671:襖:opaque sliding door:衤,奥
 rtk2672:笙:a reed instrument:生,竹
 rtk2673:筏:raft:伐,竹
@@ -3539,7 +3558,9 @@ rtk2768:贖:redeem:貝,士,儿,囗
 rtk2769:躓:stumble:質,足
 rtk2770:蹄:hoof:足,帝
 rtk2771:蹟:remains:責,足
-rtk2772:跨:be:大,二,勹,足
+# 2026-11-06 shape-family follow-up from the rtk2586 樗 fix: same 夸 (大+于)
+# on the right as 袴/rtk2670, render-confirmed.
+rtk2772:跨:be:大,于,足
 rtk2773:跪:kneel:危,足
 rtk2774:醤:a kind of miso:将,酉
 rtk2775:醍:whey:是,酉

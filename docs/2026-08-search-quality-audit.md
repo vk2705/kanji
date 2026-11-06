@@ -27818,3 +27818,79 @@ No deploy needed from here — a deployer needs `git pull` +
 `full_review.py --pending-count`: 447/3000.
 
 **Next**: continue the full re-review at frame 2554.
+
+## 2026-11-06 — full re-review: frames 2554–2603
+
+50 kanji reviewed: 44 keep, 6 fixed, 0 needs-render, plus two
+out-of-batch shape-family corrections (rtk2670, rtk2772, below). This
+range is all `id_5th_ed` 2043+ (the "no data" band), so Heisig's empty
+components column is not atomicity evidence — every call is from the
+render plus cjkvi-ids alone. Before touching anything, diffed
+`data.txt`'s live parts against cjkvi-ids for all 50 rows: 38 of the 50
+are a plain `⿰木X`/`⿰火X` pair that already matched cjkvi exactly.
+One row (`rtk2585:檀`) showed a mismatch against the *worklist's*
+recorded starting value (`一,口,日,木,亠`) but the live `data.txt` line
+had already been corrected on 2026-10-23 (the "lid" audit session, to
+`木,亠,回,旦`) — `kanji_full_review.json`'s `parts_at_start` field is a
+one-time snapshot, not re-read live, so it can go stale when an
+unrelated session fixes a row before this review reaches its frame.
+Recorded as keep, noting the live value is already correct; no edit
+needed. Six rows needed a render to settle, and six turned out wrong:
+
+- `rtk2566:杖` ("cane") — had two decompositions: primary `ノ,一,木`
+  (stroke soup) plus an `alternative` `丈,木`. render_glyphs.py on
+  杖/丈 confirms the right side is 丈 (rtk746) whole. Dropped the
+  stroke-soup primary and promoted the existing alt to sole primary:
+  `丈,木`.
+- `rtk2581:橇` ("sled") — was `毛,木`; cjkvi gives `⿰木毳`.
+  render_glyphs.py on 橇/毳/毛 side by side shows the right side is
+  three 毛 stacked (毳), not one. No row exists for 毳 and it has no
+  other host in `data.txt`, so spelled as repeated parts rather than
+  creating a one-off primitive row (precedent: `rtk2308:姦` = `女,女,女`).
+  New: `毛,毛,毛,木`.
+- `rtk2583:栞` ("bookmark") — was `干,木`; cjkvi gives `⿱幵木`.
+  render_glyphs.py on 栞/幵/干 confirms the top is two 干 side by side
+  (幵), not one. Same repeated-parts treatment as 橇. New: `干,干,木`.
+- `rtk2586:樗` ("sumac") — was `雨,木,二,勹`; cjkvi gives `⿰木雩`.
+  render_glyphs.py on 樗/雩/雨/于 confirms the right side is 雨 over 于,
+  and that the `二,勹` in the old row is the same 于/干 confusion
+  `data.txt` already has a standing comment about above
+  `prim-potato-stalk` (documented for 芋/宇/余/迂: 于's hooked third
+  stroke was being spelled as loose strokes instead of using the
+  existing primitive). New: `雨,于,木`.
+
+**Shape-family follow-up (the 于/干 lesson)**: grepped `data.txt` for
+every other row containing the same `二,勹` pattern while fixing
+rtk2586, and found four hits. Two were a different, unrelated shape and
+left alone: `rtk172:均` (`土,勹,二`, right side is 匀, which genuinely
+is 勹+二 per the render) and `rtk2839:鰐` (`魚,口,二,勹`, right side is
+咢, not 夸/于 — different mistake if it is one, deferred to its own
+frame). The other two were the identical 于 mistake, confirmed by
+rendering each against 夸 (大 over 于):
+
+- `rtk2670:袴` ("divided skirt") — was `衤,大,二,勹`. Fixed to
+  `衤,大,于`.
+- `rtk2772:跨` ("straddle") — was `大,二,勹,足`. Fixed to `大,于,足`.
+
+**Tests**: baseline before starting — `pytest -q` 108/108,
+`./regression_fresh.sh` 1333/1333 (`PASSED: all 1333 regression checks
+OK`), `audit_radicals.py` 0 findings. After the six `data.txt` edits,
+`audit_radicals.py` stayed at 0 findings (all new repeated-part terms
+and 于 resolve against existing rows, no new primitive created this
+chunk) and `pytest -q` stayed 108/108. `./regression_fresh.sh` caught
+one pinned decomposition that encoded the old rtk2772 mistake
+(`kangxi20`/`rtk2` i.e. 勹/二, expected alongside `rtk112`/`rtk1372` i.e.
+大/足) — updated the pin in `test_regression_fixes.py` to
+`prim-potato-stalk`/`rtk112`/`rtk1372`, with a comment pointing at this
+entry, then reran to confirm 1333/1333 clean. Applied with
+`sync_system_data.py` (0 kanji changes; 0 aliases changed; 6
+decompositions replaced — the six fixes above — plus 1 removed, the now
+redundant `alternative`-labelled decomposition on rtk2566 that got
+folded into its new primary).
+
+No deploy needed from here — a deployer needs `git pull` +
+`sync_system_data.py` on prod to pick this up.
+
+`full_review.py --pending-count`: 397/3000.
+
+**Next**: continue the full re-review at frame 2604.

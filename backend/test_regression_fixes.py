@@ -3161,8 +3161,11 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"rtk1219", "rtk1372"}},
     "rtk2771": {"character": "蹟", "keyword": "vestiges",
                "expected_part_ids": {"rtk1372", "rtk1661"}},
+    # 2026-11-06 full re-review: right side is 夸 (大+于, render-confirmed),
+    # not 大+二+勹 -- was the same 于/干 stroke-soup mistake fixed elsewhere
+    # for 芋/宇/余/迂/樗/袴.
     "rtk2772": {"character": "跨", "keyword": "straddle",
-               "expected_part_ids": {"kangxi20", "rtk112", "rtk1372", "rtk2"}},
+               "expected_part_ids": {"prim-potato-stalk", "rtk112", "rtk1372"}},
     "rtk2773": {"character": "跪", "keyword": "kneel",
                "expected_part_ids": {"rtk1372", "rtk1520"}},
     "rtk2809": {"character": "顛", "keyword": "overturn",
