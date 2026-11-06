@@ -27894,3 +27894,94 @@ No deploy needed from here — a deployer needs `git pull` +
 `full_review.py --pending-count`: 397/3000.
 
 **Next**: continue the full re-review at frame 2604.
+
+## 2026-11-06 — full re-review: frames 2604–2653
+
+42 kept, 5 fixed, 0 needs-render. Rendered every kanji and its current
+parts (`render_glyphs.py`), cross-checked against cjkvi-ids and, where
+flagged, `audit_weak_evidence.py --host`.
+
+**Stale worklist snapshots, not pending bugs**: three rows in this
+chunk (`rtk2605:焔`, `rtk2606:烹`, `rtk2620:畢`) showed an old, wrong
+"data.txt at start" in `full_review.py`'s output, but the *live*
+`data.txt` already had the correct decomposition — each had already
+been fixed by an earlier, unrelated session (`焔` by the 2026-10-21
+frames-51-100 𠂊-vs-勹 sweep, `烹` by the 2026-10-23 "Stew" fix,
+`畢` by the 2026-10-24 KanjiVG stroke-count cross-check) whose work
+never made it back into `kanji_full_review.json`'s cached pre-state.
+Recorded all three as `keep` with a note explaining the discrepancy,
+no `data.txt` edit needed. Notably, for `畢` my own visual read of the
+render suggested `田,卅` (3+1=4 strokes for the bottom), but that prior
+session's fix (`田,廾,一,一,｜`) is stroke-count-verified against
+KanjiVG at the official 11 strokes — `田,卅` would only total 9. I
+deferred to the more rigorous prior check rather than re-breaking a
+correct row on a shallower analysis.
+
+Five real fixes, all cases where a bulk historical edit (the
+2026-09-13 ";"-syntax commit, which added 269 cjkvi-sourced
+`alternative` decompositions without ever reconsidering the existing
+primary) had already attached the *correct* decomposition as an
+alternate while leaving a stroke-soup or incomplete primary in place
+unexamined:
+
+- `rtk2618:瑛` ("crystal stone") — primary was `ノ,王,艹,大,冖`, which
+  doesn't reconstruct `英`'s own established breakdown (`rtk1878`:
+  `艹,央`) and doesn't match cjkvi (`⿰王英`). Promoted the existing
+  alternate to primary and dropped the flattened attempt: `王,英`.
+- `rtk2623:痰` ("phlegm") — primary was `火,疔`; render shows the
+  right side is clearly `炎` (two `火` stacked), so the primary was
+  silently missing a `火`. Promoted the existing alternate `炎,疒`
+  (cjkvi `⿸疒炎`; `炎` already `rtk174`).
+- `rtk2624:疹` ("measles") — top-right was `𠆢` (umbrella/roof);
+  rendered large it's a bare `人` with no cap stroke over it (unlike
+  `今`/`令`, which do have the extra roof layer), and cjkvi-ids
+  confirms `㐱 = ⿱人彡`. This predates the 2026-09-20 `个`→`𠆢` sweep,
+  which fixed a different bug on this same line and never re-checked
+  whether `𠆢` itself was the right shape for this host. New:
+  `人,彡,疔`.
+- `rtk2625:痔` ("hemorrhoids") — primary flattened the coherent `寺`
+  (already `rtk170`) into its atoms `寸,土` — right atoms, wrong
+  level. Promoted the existing alternate (cjkvi `⿸疒寺`) to primary,
+  kept the flattened form as a valid alternate: `寺,疒;寸,土,疔`.
+- `rtk2627:痺` ("paralysis") — primary was `十,田,疔`, but `卑`'s own
+  row (`rtk1629`) is `十,田,丿` — the primary was silently missing the
+  `丿`. Promoted the existing alternate `卑,疒` (cjkvi `⿸疒卑`).
+
+**Shape-family check**: all five new primaries reuse rows that already
+existed well before frame 2600 (`rtk174` 炎, `rtk170` 寺, `rtk1629` 卑,
+`rtk1878` 英, plus bare `人`/`彡`), so no anachronistic-name risk and no
+new primitive rows needed. Grepped `data.txt` for other sickness-radical
+(`疔`/`疒`) hosts that might share the same stroke-dropping pattern —
+`rtk1814`/`rtk1815`/`rtk1817`/`rtk1819`/`rtk1821`/`rtk1822`/`rtk1823`/
+`rtk1824`/`rtk1826` all already carry a `# full re-review` comment from
+earlier sessions (2026-11-05 and before) that specifically addressed
+this same class, so nothing further to do there this chunk.
+
+One row stayed `keep` despite an `audit_weak_evidence.py` flag:
+`rtk2607:牽` ("tug") — cjkvi's `⿻幺冖` (overlay operator) means `幺`
+and `冖` aren't cleanly separable in the IDS, but the render is
+consistent with the conventional radical analysis (lid/cover/cocoon/ox:
+`亠,冖,幺,牛`), and a dedicated 2026-09-21 stroke-soup audit already
+reviewed and kept this exact line. Three other rows (`rtk2616:瑞`,
+`rtk2634:碧`, `rtk2638:碍`, `rtk2641:砺`) have a cjkvi intermediate
+(`耑`, `珀`, `㝵`, `厉`) with no row of its own here — in each case
+checked that intermediate's *own* cjkvi IDS entry and confirmed the
+flat atoms already on the row match it exactly, so no edit needed.
+
+**Tests**: baseline before starting — `pytest -q` 108/108,
+`./regression_fresh.sh` 1333/1333, `audit_radicals.py` 0 findings.
+After the five `data.txt` edits: `sync_system_data.py --dry-run` showed
+0 kanji/alias changes, 6 decompositions replaced + 3 removed (now
+atomic) — consistent with 5 rows edited, two of which (`rtk2625`) kept
+both primary and alt while three (`rtk2618`/`rtk2623`/`rtk2627`)
+collapsed from two decompositions to one. Applied for real with the
+same counts. `pytest -q` stayed 108/108, `./regression_fresh.sh` stayed
+1333/1333 (no pin referenced any of these five rows), `audit_radicals.py`
+stayed at 0 findings. No pin updates needed.
+
+No deploy needed from here — a deployer needs `git pull` +
+`sync_system_data.py` on prod to pick this up.
+
+`full_review.py --pending-count`: 347/3000.
+
+**Next**: continue the full re-review at frame 2654.

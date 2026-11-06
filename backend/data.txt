@@ -3378,16 +3378,36 @@ rtk2614:珊:coral:王,冊
 rtk2615:瑚:ancestral offering receptacle:王,胡
 rtk2616:瑞:congratulations:王,山,而
 rtk2617:玖:beautiful black jewel:久,王
-rtk2618:瑛:sparkle of jewelry:ノ,王,艹,大,冖;王,英
+# 2026-11-06 full re-review: primary was stroke soup ノ,王,艹,大,冖 that
+# doesn't match 英's own established breakdown (rtk1878: 艹,央) or cjkvi-ids
+# (⿰王英). Promoted the existing cjkvi alternate 王,英 to primary; dropped
+# the old flattened attempt, which didn't cleanly reconstruct 央 either.
+rtk2618:瑛:sparkle of jewelry:王,英
 rtk2619:玲:sound of jewels:令,王;王,𠆢,卩,一
 rtk2620:畢:the end:田,廾,一,一,｜
 rtk2621:畦:rice paddy ridge:圭,田
 rtk2622:痒:itchy:羊,疔
-rtk2623:痰:sputum:火,疔;炎,疒
-rtk2624:疹:measles:𠆢,彡,疔
-rtk2625:痔:piles:寸,土,疔;寺,疒
+# 2026-11-06 full re-review: primary was 火,疔 — rendered large, the right
+# side is clearly 炎 (two 火 stacked), not one; the old primary silently
+# dropped the second 火. Promoted the existing correct alternate 炎,疒
+# (cjkvi ⿸疒炎; 炎 already rtk174) to primary.
+rtk2623:痰:sputum:炎,疒
+# 2026-11-06 full re-review: top-right stroke was 𠆢 (umbrella/roof) — but
+# rendered large, it's a bare 人 with no cap stroke over it (unlike 今/令,
+# which do have that extra roof layer). cjkvi-ids agrees: 㐱 = ⿱人彡.
+# (This predates the 2026-09-20 个->𠆢 sweep, which fixed a different bug
+# and never re-checked whether 𠆢 itself was right for this host.)
+rtk2624:疹:measles:人,彡,疔
+# 2026-11-06 full re-review: primary flattened the coherent 寺 (already
+# rtk170) into its atoms 寸,土 — right atoms, wrong level. Promoted the
+# existing cjkvi alternate (⿸疒寺) to primary; kept the flattened form as
+# a valid alternate.
+rtk2625:痔:piles:寺,疒;寸,土,疔
 rtk2626:癌:cancer:山,疔,品
-rtk2627:痺:palsy:十,田,疔;卑,疒
+# 2026-11-06 full re-review: primary was 十,田,疔 — but 卑's own row (rtk1629)
+# is 十,田,丿, so the old primary silently dropped the 丿. Promoted the
+# existing correct alternate 卑,疒 (cjkvi ⿸疒卑) to primary.
+rtk2627:痺:palsy:卑,疒
 rtk2628:眸:pupil of the eye:牟,目
 rtk2629:眩:faint:目,玄
 rtk2630:雉:pheasant:矢,隹

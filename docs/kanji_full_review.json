@@ -46152,11 +46152,11 @@
    "火",
    "各"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "各,火 matches cjkvi ⿰火各; render confirms.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2605",
@@ -46167,11 +46167,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰火⿱𠂊旧",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Already fixed to 旧,火,𠂊 by the 2026-10-21 session (frames 51-100, the 𠂊-vs-勹 shape-family sweep); current row matches cjkvi ⿰火⿱𠂊旧 and render. Worklist's cached pre-state was stale.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2606",
@@ -46182,11 +46182,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿱亨灬",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Already fixed to prim-tall,了,灬 by the 2026-10-23 session; matches cjkvi ⿱亨灬 (亨=⿳亠口了) and render. Worklist's cached pre-state was stale.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2607",
@@ -46197,11 +46197,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿱⿱亠⿻幺冖牛",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "亠,冖,幺,牛 is the conventional radical analysis of 牽 (lid/cover/cocoon/ox); audit_weak_evidence flags cjkvi's ⿻幺冖 as an overlay (children not literally separable), but render is consistent with the traditional breakdown, and a dedicated 2026-09-21 stroke-soup audit already reviewed and kept this line.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2608",
@@ -46215,11 +46215,11 @@
    "牛",
    "匕"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "牛,匕 matches cjkvi ⿰牛匕; render confirms.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2609",
@@ -46233,11 +46233,11 @@
    "牛",
    "土"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "牛,土 matches cjkvi ⿰牛土; render confirms.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2610",
@@ -46251,11 +46251,11 @@
    "王",
    "林"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "林,王 matches cjkvi ⿰王林; render confirms.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2611",
@@ -46266,11 +46266,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰王㐬",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "㐬,王 matches cjkvi ⿰王㐬; render confirms.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2612",
@@ -46284,11 +46284,11 @@
    "王",
    "差"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "差,王 matches cjkvi ⿰王差; render confirms.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2613",
@@ -46299,11 +46299,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰王豖[GTKV] ⿰王豕[J]",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "王,豕 matches cjkvi's Japanese variant ⿰王豕[J]; render confirms.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2614",
@@ -46314,11 +46314,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰王册[G] ⿰王冊[TJK]",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "王,冊 matches cjkvi's TJK variant ⿰王冊[TJK]; render confirms.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2615",
@@ -46332,11 +46332,11 @@
    "王",
    "胡"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "王,胡 matches cjkvi ⿰王胡; render confirms.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2616",
@@ -46347,11 +46347,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰王耑",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "王,山,而 — cjkvi gives ⿰王耑, and 耑 itself is ⿱山而 per cjkvi (no row of its own, not used elsewhere); render confirms the right side is literally 山 over 而. Flat atoms are correct.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2617",
@@ -46362,11 +46362,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰王久",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "久,王 matches cjkvi ⿰王久; render confirms.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2618",
@@ -46380,11 +46380,14 @@
    "王",
    "英"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "王",
+   "英"
+  ],
+  "note": "Primary was stroke soup ノ,王,艹,大,冖, inconsistent with 英's own row (rtk1878: 艹,央) and not a clean reconstruction of 央. Promoted the existing cjkvi-matching alternate 王,英 to primary; dropped the old flattened attempt.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2619",
@@ -46398,11 +46401,11 @@
    "王",
    "令"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "令,王 (primary) matches cjkvi ⿰王令; the flattened alt 王,𠆢,卩,一 is also correct atoms for 令, kept as alternate.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2620",
@@ -46413,11 +46416,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿻⑨一",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "田,廾,一,一,｜ was already fixed and KanjiVG-stroke-count-verified (11 strokes exact) by the 2026-10-24 session. My own visual read suggested 田,卅 but that only accounts for 9 strokes (missing 2), so I deferred to the prior session's more rigorous cross-check and left it unchanged.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2621",
@@ -46431,11 +46434,11 @@
    "田",
    "圭"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "圭,田 matches cjkvi ⿰田圭; render confirms.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2622",
@@ -46449,11 +46452,11 @@
    "疒",
    "羊"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "羊,疔(=kangxi104/疒) matches cjkvi ⿸疒羊; render confirms.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2623",
@@ -46467,11 +46470,14 @@
    "疒",
    "炎"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "炎",
+   "疒"
+  ],
+  "note": "Primary was 火,疔 — rendered large, the right side is clearly 炎 (two 火 stacked), and the old primary silently dropped the second 火. Promoted the existing correct alternate 炎,疒 (cjkvi ⿸疒炎; 炎 already rtk174) to primary.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2624",
@@ -46485,11 +46491,15 @@
    "疒",
    "㐱"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "人",
+   "彡",
+   "疔"
+  ],
+  "note": "Top-right was 𠆢 (umbrella/roof) — rendered large it's a bare 人 with no cap stroke over it (unlike 今/令, which do have that extra roof layer). cjkvi-ids confirms: 㐱 = ⿱人彡. Predates the 2026-09-20 个->𠆢 sweep, which fixed a different bug on this same line and never re-checked whether 𠆢 itself was right here.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2625",
@@ -46503,11 +46513,16 @@
    "疒",
    "寺"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "寺",
+   "疒;寸",
+   "土",
+   "疔"
+  ],
+  "note": "Primary flattened the coherent 寺 (already rtk170) into its atoms 寸,土 — right atoms, wrong level. Promoted the existing cjkvi alternate (⿸疒寺) to primary; kept the flattened form as a valid alternate since its atoms are correct.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2626",
@@ -46522,11 +46537,11 @@
    "品",
    "山"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "山,疔,品 — cjkvi gives ⿸疒嵒, and 嵒 itself (no row of its own) = 山+品; render confirms 山 over 品. Flat atoms are correct.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2627",
@@ -46540,11 +46555,14 @@
    "疒",
    "卑"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "卑",
+   "疒"
+  ],
+  "note": "Primary was 十,田,疔 — but 卑's own row (rtk1629) is 十,田,丿, so the old primary silently dropped the 丿. Promoted the existing correct alternate 卑,疒 (cjkvi ⿸疒卑) to primary.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2628",
@@ -46558,11 +46576,11 @@
    "目",
    "牟"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "牟,目 matches cjkvi ⿰目牟; render confirms.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2629",
@@ -46573,11 +46591,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰目玄",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "目,玄 matches cjkvi ⿰目玄; render confirms.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2630",
@@ -46588,11 +46606,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰矢隹",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "矢,隹 matches cjkvi ⿰矢隹; render confirms.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2631",
@@ -46606,11 +46624,11 @@
    "矢",
    "巨"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "矢,巨 matches cjkvi ⿰矢巨; render confirms.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2632",
@@ -46621,11 +46639,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿱般石",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "石,般 matches cjkvi ⿱般石; render confirms.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2633",
@@ -46639,11 +46657,11 @@
    "石",
    "定"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "石,定 matches cjkvi ⿰石定; render confirms.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2634",
@@ -46654,11 +46672,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿱珀石",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "王,石,白 — cjkvi gives ⿱珀石, and 珀 itself (no row of its own) = 王+白; atoms are correct, just flattened rather than introducing an unused intermediate primitive.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2635",
@@ -46669,11 +46687,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰石見",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "見,石 matches cjkvi ⿰石見; render confirms.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2636",
@@ -46684,11 +46702,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰石氐",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "氐,石 matches cjkvi ⿰石氐; render confirms.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2637",
@@ -46702,11 +46720,11 @@
    "石",
    "宛"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "石,宛 matches cjkvi ⿰石宛; render confirms.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2638",
@@ -46721,11 +46739,11 @@
    "旦",
    "寸"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "石,旦,寸 — cjkvi gives ⿰石㝵, and 㝵 itself is ⿱旦寸 per cjkvi (no row of its own); flat atoms are correct.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2639",
@@ -46739,11 +46757,11 @@
    "石",
    "頁"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "石,頁 matches cjkvi ⿰石頁; render confirms.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2640",
@@ -46757,11 +46775,11 @@
    "石",
    "幾"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "石,幾 matches cjkvi ⿰石幾; render confirms.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2641",
@@ -46776,11 +46794,11 @@
    "厂",
    "万"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "石,厂,万 — cjkvi gives ⿰石厉, and 厉 itself is ⿸厂万 per cjkvi (no row of its own); flat atoms are correct.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2642",
@@ -46791,11 +46809,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰石隹",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "石,隹 matches cjkvi ⿰石隹; render confirms.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2643",
@@ -46806,11 +46824,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿱御示",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "御,示 matches cjkvi ⿱御示; render confirms.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2644",
@@ -46824,11 +46842,11 @@
    "礻",
    "寿"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "礻,寿 matches cjkvi ⿰礻寿; render confirms.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2645",
@@ -46839,11 +46857,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰礻右[GTJ] ⿰示右[K]",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "礻,右 matches cjkvi's GTJ variant ⿰礻右[GTJ]; render confirms.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2646",
@@ -46854,11 +46872,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰礻氏[GT] ⿰示氏[JK]",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Both alternates (礻,氏 and 示,氏) match cjkvi's GT/JK script variants of ⿰礻氏/⿰示氏; render confirms.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2647",
@@ -46869,11 +46887,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰礻尔[GTJ] ⿰示尔[K]",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "礻,尓 matches cjkvi's GTJ variant ⿰礻尔[GTJ] — this is already the post-2026 fix state (siblings 称/弥 also use 尓/𠂉-topped forms consistently); render confirms.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2648",
@@ -46887,11 +46905,11 @@
    "礻",
    "录"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "礻,录 matches cjkvi ⿰礻录; render confirms.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2649",
@@ -46905,11 +46923,11 @@
    "礻",
    "貞"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "礻,貞 matches cjkvi's GTJ variant ⿰礻貞[GTJ]; render confirms.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2650",
@@ -46923,11 +46941,11 @@
    "禾",
    "平"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "禾,平 matches cjkvi ⿰禾平; render confirms.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2651",
@@ -46942,11 +46960,11 @@
    "人",
    "氺"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "禾,人,氺 matches cjkvi ⿱禾⿱人氺; render confirms.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2652",
@@ -46960,11 +46978,11 @@
    "禾",
    "儿"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "禾,儿 matches cjkvi ⿱禾儿; render confirms.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2653",
@@ -46978,11 +46996,11 @@
    "禾",
    "念"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "念,禾 matches cjkvi ⿰禾念; render confirms.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-06"
  },
  {
   "id": "rtk2654",
