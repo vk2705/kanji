@@ -40,7 +40,7 @@ skip it, and do not drop the `--cert-name` flag.
 cd /opt/kanji && git pull
 ```
 
-- [ ] Done. `git log --oneline -2` shows `785dc43` / `0af6458`.
+- [x] Done. `git log --oneline -2` shows `785dc43` / `0af6458`.
 
 The frontend is not rebuilt until step 5; the new canonical tag and sitemap
 come from that build.
@@ -69,9 +69,9 @@ Check:
 sudo certbot certificates | grep -A3 kumiji
 ```
 
-- [ ] There is a `kumiji.kermit.is-a.dev` lineage whose **Domains** line lists
+- [x] There is a `kumiji.kermit.is-a.dev` lineage whose **Domains** line lists
       `kumiji.kermit.is-a.dev` and **nothing else**.
-- [ ] `sudo ls /etc/letsencrypt/live/kumiji.kermit.is-a.dev/` shows
+- [x] `sudo ls /etc/letsencrypt/live/kumiji.kermit.is-a.dev/` shows
       `fullchain.pem` and `privkey.pem` — this is the path the new nginx config
       references.
 
@@ -87,7 +87,7 @@ sudo certbot certonly --nginx \
   -d kanjimcp.kermit.is-a.dev
 ```
 
-- [ ] `/etc/letsencrypt/live/kanjimcp.kermit.is-a.dev/` exists.
+- [x] `/etc/letsencrypt/live/kanjimcp.kermit.is-a.dev/` exists.
 
 ---
 
@@ -112,7 +112,7 @@ ls -l /etc/nginx/sites-enabled/
 sudo ln -sfn /etc/nginx/sites-available/kumiji.conf /etc/nginx/sites-enabled/kumiji.conf
 ```
 
-- [ ] `nginx -t` passes and nginx reloaded.
+- [x] `nginx -t` passes and nginx reloaded.
 
 If `nginx -t` complains about a missing certificate file, step 2 or 3 did not
 produce the lineage name the config expects. Fix the cert — do **not** edit the
@@ -144,9 +144,9 @@ ls -la /opt/kanji/frontend/dist/assets/ | head
 curl -s https://kumiji.kermit.is-a.dev/ | grep -i 'canonical\|og:url'
 ```
 
-- [ ] Asset filenames carry fresh timestamps (Vite content-hashes them, so a
+- [x] Asset filenames carry fresh timestamps (Vite content-hashes them, so a
       real rebuild always changes the names).
-- [ ] The canonical/og:url tags say `kumiji.kermit.is-a.dev`.
+- [x] The canonical/og:url tags say `kumiji.kermit.is-a.dev`.
 
 If the browser still shows the old site after this, hard-refresh
 (Ctrl/Cmd+Shift+R) before suspecting anything else.
@@ -188,7 +188,7 @@ https://kumiji.kermit.is-a.dev
 No trailing slash, no path, `https://` not `http://`. Then **Save** at the
 bottom of the page (easy to miss on a phone; navigating away loses it).
 
-- [ ] Added and saved.
+- [x] Added and saved.
 - [ ] The "Sign in with Google" button appears on the new host and a sign-in
       completes. Usually live within a minute or two; Google allows up to a few
       hours. If the button is missing *entirely* that is not this setting but
@@ -221,11 +221,11 @@ curl -s https://kanjimcp.kermit.is-a.dev/mcp -X POST \
   -d '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-06-18","capabilities":{},"clientInfo":{"name":"smoketest","version":"1"}}}'
 ```
 
-- [ ] Smoke test exits 0 (it prints a fixing command for every failure).
-- [ ] Both `curl -sI` calls return **301** with a `Location:` on
+- [x] Smoke test exits 0 (it prints a fixing command for every failure).
+- [x] Both `curl -sI` calls return **301** with a `Location:` on
       `kumiji.kermit.is-a.dev` and the path intact — `/kanji/rtk207.html` must
       survive, not collapse to `/`.
-- [ ] The MCP call returns a JSON-RPC `result`, not a 502 or a connection error.
+- [x] The MCP call returns a JSON-RPC `result`, not a 502 or a connection error.
 
 ### Expected fallout — not bugs, no action needed
 
@@ -307,6 +307,9 @@ sudo nginx -t && sudo systemctl reload nginx
 ```
 
 - [ ] Done.
+- [ ] Delete `LEGACY_HOSTS` from `backend/mcp_server.py` (the old MCP name is
+      on its Host allow-list so it keeps serving until now), then restart
+      `kanji-mcp.service`.
 - [ ] Delete the retiring `kanjimcp.alteon.help` server block from
       `deploy/nginx/prod/kanjimcp.conf` (it is marked in the file), and delete
       `deploy/nginx/prod/kanji.conf` from the repo, so the reference copies keep

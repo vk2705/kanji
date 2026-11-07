@@ -145,11 +145,18 @@ def search_by_text(query: str, script: str | None = None) -> list[dict]:
 # in by nginx from the public domain gets "Invalid Host header" unless that
 # domain is listed explicitly here too.
 PUBLIC_HOST = os.environ.get("KANJI_MCP_PUBLIC_HOST", "kanjimcp.kermit.is-a.dev")
+# The retiring name keeps serving until alteon.help lapses (TODO-host-move.md
+# step 10): MCP clients are deliberately not redirected, since a redirected POST
+# is often replayed as a GET, so already-configured clients still send this Host.
+# Delete this line in step 10, together with its nginx server block.
+LEGACY_HOSTS = ["kanjimcp.alteon.help"]
+PUBLIC_HOSTS = [PUBLIC_HOST] + LEGACY_HOSTS
 app = mcp.streamable_http_app(
     stateless_http=True,
     transport_security=TransportSecuritySettings(
-        allowed_hosts=["127.0.0.1", "localhost", PUBLIC_HOST],
-        allowed_origins=[f"https://{PUBLIC_HOST}", f"http://{PUBLIC_HOST}"],
+        allowed_hosts=["127.0.0.1", "localhost"] + PUBLIC_HOSTS,
+        allowed_origins=[f"{scheme}://{h}" for h in PUBLIC_HOSTS
+                         for scheme in ("https", "http")],
     ),
 )
 

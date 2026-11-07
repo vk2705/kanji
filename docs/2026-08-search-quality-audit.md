@@ -28432,3 +28432,30 @@ other session's data-only chunk.
 **Next**: continue the full re-review at frame 2804.
 
 **Next**: the full re-review continues at frame 2754 (unchanged by this chunk).
+
+## 2026-11-07 — host move carried out on prod (TODO-host-move.md steps 1–5, 7)
+
+The owner did step 6 (Google OAuth origin) and asked for the rest. Done on
+the prod VM over SSH: pulled 55 commits; issued separate
+`kumiji.kermit.is-a.dev` and `kanjimcp.kermit.is-a.dev` certs (each covers only
+its own name, so the alteon.help lapse can no longer take them down);
+installed `kumiji.conf`/`kanji.conf`/`kanjimcp.conf`/`kanji-ratelimit.conf`
+(live copies backed up to `/root/nginx-backup-20261107-102139/`); backed up
+the DB and ran `sync_system_data.py` for the review fixes (18 kanji inserted,
+59 aliases, 134 decompositions replaced, 6 created, 29 now atomic);
+restarted the backend and MCP services; and ran `npm run build:prod`.
+Verified: `deploy_smoke_test.py` passed 13/13, both alteon.help names 301 with the
+path kept, and canonical/og:url/sitemap all name the new host.
+
+One regression was found and fixed. `0af6458` put only the new MCP name on
+`mcp_server.py`'s DNS-rebinding Host allow-list, so `kanjimcp.alteon.help`
+answered every request with `Invalid Host header`. Yet that name is
+deliberately not redirected and is meant to serve until step 10, since
+already-configured MCP clients still use it. Added a `LEGACY_HOSTS` entry
+and a step-10 item to delete it again.
+
+Not done: step 8 (IndexNow, and Search Console, which needs the owner's
+Google account), step 9 (APK rebuild, needs an Android SDK) and step 10
+(later). The step-6 end-to-end Google sign-in check is left for the owner,
+since it needs a real Google login. `kermit.conf` on prod differs from the
+repo's reference copy; it is not part of this move and was left alone.
