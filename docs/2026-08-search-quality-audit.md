@@ -28470,3 +28470,9 @@ must be uninstalled once. Verified with `apksigner verify` and `aapt2 dump
 badging` (`help.alteon.kanji`, 1.2/3, label KumiJi), and the dex holds only
 `https://kumiji.kermit.is-a.dev/`. The on-device check (the Dispute button
 and the decomposition history) is left for the owner.
+
+**Search Console verification (same day).** Added
+`frontend/public/google409be40c844cf254.html` (the owner's HTML-file
+verification for the new `kumiji.kermit.is-a.dev` property, step 8). It was
+copied into prod's `dist/` directly so verification needn't wait for the next
+frontend build; later builds carry it from `public/`.
