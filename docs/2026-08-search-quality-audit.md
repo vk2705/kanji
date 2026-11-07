@@ -28492,3 +28492,35 @@ The keyword was already "large goose" (from the CSV); data.txt's "large bird"
 is only an extra alias and stays. The rtk2406 pin is updated with a comment.
 Checks: pytest 108, `regression_fresh.sh` 1333/1333, `audit_radicals.py` 0/0.
 Synced to dev and prod (`sync_system_data.py`).
+
+## 2026-11-07 — new audit: audit_grouping.py (rows that group badly)
+
+After the 鴻 fix the owner asked why no review had suggested it. Nothing would
+have: every check looks for wrong, missing or lookalike parts, and `工,水,鳥` had
+none. It was accurate but used the wrong grouping. The review's "right level"
+rule fires only when Heisig's components column names the unit, and for 鴻
+it is empty (no data past the 1–2042 core). cjkvi groups the other way
+(氵 + 䲨).
+
+`backend/audit_grouping.py` targets that shape. It flattens cjkvi's
+same-direction chains (splicing in same-direction children, so 鴻 reads
+氵 | 工 | 鳥) and reports any contiguous sub-run that equals an earlier-taught
+kanji's own run (江 = 氵 | 工) when the row does not already name that kanji.
+Tuning, with numbers: matching on parts alone was useless (別 "contains" 召).
+The position-aware first cut gave 893 suggestions on 577 kanji, almost all
+strokes inside a piece we already list (土 in 王). Keeping the row's own parts
+closed and requiring a match to touch one of them brought it to 6, minus one
+cjkvi placeholder (⑤ in 卿). Dropping suggestions that Heisig's components
+column contradicts removed 克, 美 and 予. (I had wrongly recalled 克 as
+"old + legs"; the CSV says "ten; elder brother", which is our row.) That
+leaves **2 open candidates, neither verified by render**: 蕊 (芯 "wick" = 艹
+over 心) and 叡 (火 "fire" from 八 over 人, very likely a stroke coincidence).
+Against a copy of the DB with 鴻's old row restored, it flags 鴻 → 江 as
+intended.
+
+Runs daily (`run_grouping_audit.sh`, timer `kanji-grouping-audit`, 03:40 UTC,
+no Claude, ~15 s) and commits `docs/grouping_recommendations.md` only when
+the findings change. The owner asked for 10 kanji a day from frame 3000
+down if the scan was expensive. It is not, so each run scans everything, and
+the report is ordered from 3000 down. Like the other audits it never edits
+`data.txt`.
