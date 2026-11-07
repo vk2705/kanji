@@ -28524,3 +28524,65 @@ the findings change. The owner asked for 10 kanji a day from frame 3000
 down if the scan was expensive. It is not, so each run scans everything, and
 the report is ordered from 3000 down. Like the other audits it never edits
 `data.txt`.
+
+## 2026-11-07 — full re-review: frames 2804–2853 (46 keep, 4 fixed)
+
+Today's chunk, frames 2804-2853 — all `id_5th_ed` > 2042 (mostly leather/革,
+food/食, horse/馬, fish/魚 and bird/鳥 phono-semantic compounds), so every
+row's empty Heisig-components column is "no data", not atomicity evidence;
+decided from render + cjkvi-ids alone, per CLAUDE.md. 42 of 46 kept rows
+matched cjkvi exactly via already-established primitive rows on first render
+(e.g. 鞭=革+便, the 魚-fish and 鳥-bird compounds, 頚=圣+頁ording — confirmed
+the shinjitai 圣 shape used in 経/軽 is what's actually drawn, not the
+traditional 巠 Google hinted at). Two rows were already fixed by other
+sessions before this one started: `rtk2850` 鴨 (promoted alternate `甲,鳥` to
+primary, done by today's earlier ~09:00 UTC cloud audit routine — the
+worklist's cached snapshot was stale and still showed the pre-fix
+`｜,鳥,日,田`) and `rtk2852` 梟 (already using `prim-legless-bird,木` from the
+2026-10-25 entry). Both recorded as `keep` with a note rather than re-decided
+against stale data.
+
+Four real fixes:
+
+- `rtk2814` 餐 "repast": was `食,又,夕`. Render shows the top-left component
+  is the 4-stroke `歹` (`kangxi78`, "death": `一,夕`), not the 3-stroke `夕`
+  lookalike — `夕` is missing `歹`'s extra top stroke. Fixed to `食,又,歹`.
+  Shape-family check: grepped every other row using `夕` as a part (`多` 汐
+  外 名 然 夢 拶 `rtk2602` 燦 `kangxi136` `prim-mailbox`); rendered `rtk2602`
+  鰐/燦/粲 specifically since it shares 餐's `又,夕`-adjacent shape — its
+  component is genuinely the 3-stroke `夕`, no fix needed there.
+- `rtk2825` 驢 "donkey": was stroke-soup `皿,田,馬,卜,七,厂,虍` — `卜,七,厂`
+  aren't in the glyph at all. cjkvi-ids for `盧` itself is `⿸虍⿱田皿` (just
+  `虍`+`田`+`皿`), matching `rtk2152` 劇's already-cleaned atomic-`虍` pattern
+  (`虍,豕,刀`). Fixed to `馬,虍,田,皿`. Shape-family follow-up, not touched
+  today: `rtk2145`/`rtk2150`/`rtk2151` (虎/虞/慮, outside this chunk's frame
+  range) still carry the older stroke-flattened `卜,七,厂,虍` primary from an
+  earlier (pre-`劇`-cleanup) session — left for their own frames.
+- `rtk2839` 鰐 "alligator": was `魚,口,二,勹`. Right side is `咢` (cjkvi
+  `⿱吅亏` = two `口` over `亏`) — the same `亏`/`于` stroke-soup bug as the
+  2026-11-06 樗/袴/跨 family (`prim-potato-stalk:于`): `二,勹` was never a real
+  spelling of `亏`'s extra bar+hook, and the second `口` was missing outright.
+  Fixed to `魚,口,口,于`. Checked `rtk172` 均 (`勹,二`) for the same pattern —
+  that's `匀`, a genuinely different, correct shape, not this bug.
+- `rtk2842` 鰭 "fish fin": was `魚,日,老,匕`. Right side is `耆` (cjkvi
+  `⿱老日` = `老` whole over `日`) — the row carried a redundant standalone `匕`
+  restating `老`'s own bottom hook (`老` itself is `rtk1340` = `土,匕`) at the
+  same level as `老`, double-counting one region. Fixed to `魚,老,日`. Grepped
+  for the same `老`+`匕` pattern elsewhere — only this row had it.
+
+**Tests**: baseline (before any edit) — `pytest -q` 108 passed,
+`regression_fresh.sh` 1333/1333, `audit_radicals.py` 0/0. After the four
+`data.txt` fixes and `sync_system_data.py` (0 kanji inserted/updated, 4
+decompositions replaced, counts sane — the pre-existing "286 system ids live
+but not in source" warning is unrelated, unchanged): `regression_fresh.sh`
+failed on exactly the 3 pins expecting the old `rtk2825`/`rtk2839`/`rtk2842`
+part sets (no pin existed for `rtk2814`), corrected in place in
+`test_regression_fixes.py` with comments pointing back to this entry
+(`rtk2825`: `{kangxi141, kangxi25, kangxi27, rtk14, rtk1555, rtk2132, rtk7}`
+→ `{kangxi141, rtk14, rtk1555, rtk2132}`; `rtk2839`: `{kangxi20, rtk11,
+rtk183, rtk2}` → `{rtk11, rtk183, prim-potato-stalk}`; `rtk2842`: `{rtk12,
+rtk1340, rtk183, rtk476}` → `{rtk12, rtk1340, rtk183}`); re-ran clean,
+1333/1333. `pytest -q` 108 passed (unchanged). `audit_radicals.py` 0/0
+(unchanged). Applied to this machine's DB only
+(`sync_system_data.py`) — prod needs `git pull` + `sync_system_data.py` from
+a deployer. `full_review.py --pending-count`: 147 pending / 3000 total.

@@ -49646,11 +49646,11 @@
    "革",
    "便"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "革(left)+便(right) matches render & cjkvi ⿰革便",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2805",
@@ -49664,11 +49664,11 @@
    "革",
    "肖"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "革(left)+肖(right) matches render & cjkvi ⿰革肖",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2806",
@@ -49682,11 +49682,11 @@
    "革",
    "包"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "革(left)+包(right) matches render & cjkvi ⿰革包",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2807",
@@ -49700,11 +49700,11 @@
    "革",
    "刃"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "革(left)+刃(right) matches render & cjkvi ⿰革刃",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2808",
@@ -49715,11 +49715,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰革匊",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "革(left)+匊(right); 匊 visually is 勹 wrapping 米, matches our flattened 米,勹",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2809",
@@ -49733,11 +49733,11 @@
    "真",
    "頁"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "真(left)+頁(right) matches render & cjkvi ⿰真頁",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2810",
@@ -49752,11 +49752,11 @@
    "禾",
    "頁"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "匕 over 禾 (left), 頁(right); matches render & cjkvi ⿰⿱匕禾頁",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2811",
@@ -49770,11 +49770,11 @@
    "皮",
    "頁"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "皮(left)+頁(right) matches render & cjkvi ⿰皮頁",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2812",
@@ -49788,11 +49788,11 @@
    "公",
    "頁"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "公(left)+頁(right) matches render & cjkvi ⿰公頁",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2813",
@@ -49806,11 +49806,11 @@
    "巠",
    "頁"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "left component matches shinjitai 圣 (same shape as 経/軽's right side), not traditional 巠 -- Google's 巠 hint is the traditional form, not what's drawn",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2814",
@@ -49825,11 +49825,15 @@
    "又",
    "食"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "食",
+   "又",
+   "歹"
+  ],
+  "note": "top-left is 4-stroke 歹 (kangxi78, death) not 3-stroke 夕 lookalike; shape-family check: 粲/燦's matching component is genuinely 夕 (3-stroke, no fix needed)",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2815",
@@ -49840,11 +49844,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿱鄉食[GT] ⿱郷食[J] ⿱鄕食[K]",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "郷(top, matches 鄉/郷 shape)+食(bottom) matches render & cjkvi variants",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2816",
@@ -49858,11 +49862,11 @@
    "食",
    "虫"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "食(left)+虫(right) matches render & cjkvi",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2817",
@@ -49873,11 +49877,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰飠台[GTJ] ⿰𩙿台[K]",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "台(left)+食(right) matches render & cjkvi",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2818",
@@ -49891,11 +49895,11 @@
    "加",
    "馬"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "加(top)+馬(bottom) matches render & cjkvi ⿱加馬",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2819",
@@ -49909,11 +49913,11 @@
    "馬",
    "単"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "馬(left)+単(right) matches render & cjkvi ⿰馬単",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2820",
@@ -49924,11 +49928,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰馬也",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "馬(left)+也(right) matches render & cjkvi ⿰馬也",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2821",
@@ -49939,11 +49943,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰馬扁",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "馬(left)+扁(right) matches render & cjkvi ⿰馬扁",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2822",
@@ -49957,11 +49961,11 @@
    "馬",
    "川"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "馬(left)+川(right) matches render & cjkvi ⿰馬川",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2823",
@@ -49972,11 +49976,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰馬爻",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "馬(left)+爻(right) matches render & cjkvi ⿰馬爻",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2824",
@@ -49990,11 +49994,11 @@
    "馬",
    "丘"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "馬(left)+丘(right) matches render & cjkvi ⿰馬丘",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2825",
@@ -50005,11 +50009,16 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰馬盧",
   "google_parts": null,
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "馬",
+   "虍",
+   "田",
+   "皿"
+  ],
+  "note": "was stroke-soup (卜,七,厂 not in the glyph); cjkvi-ids for 盧 is ⿸虍⿱田皿 = 虍+田+皿 whole, matching 劇's already-cleaned atomic-虍 pattern. Shape-family follow-up: 虎/虞/慮 (rtk2145/2150/2151, out of today's range) still carry the older stroke-flattened 卜,七,厂,虍 primary -- left for their own frames",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2826",
@@ -50023,11 +50032,11 @@
    "魚",
    "曼"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "魚(left)+曼(right) matches render & cjkvi ⿰魚曼",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2827",
@@ -50038,11 +50047,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰魚周",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "魚(left)+周(right) matches render & cjkvi ⿰魚周",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2828",
@@ -50053,11 +50062,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰魚弱",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "魚(left)+弱(right) matches render & cjkvi ⿰魚弱",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2829",
@@ -50071,11 +50080,11 @@
    "魚",
    "尊"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "魚(left)+尊(right) matches render & cjkvi ⿰魚尊",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2830",
@@ -50086,11 +50095,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰魚圭",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "魚(left)+圭(right) matches render & cjkvi ⿰魚圭",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2831",
@@ -50101,11 +50110,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰魚有",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "魚(left)+有(right) matches render & cjkvi ⿰魚有",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2832",
@@ -50119,11 +50128,11 @@
    "魚",
    "占"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "魚(left)+占(right) matches render & cjkvi ⿰魚占",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2833",
@@ -50134,11 +50143,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰魚参",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "魚(left)+参(right) matches render & cjkvi ⿰魚参",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2834",
@@ -50149,11 +50158,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰魚雪",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "魚(left)+雪(right) matches render & cjkvi ⿰魚雪",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2835",
@@ -50164,11 +50173,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰魚青[GTJ] ⿰魚靑[K]",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "魚(left)+青(right) matches render & cjkvi ⿰魚青",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2836",
@@ -50182,11 +50191,11 @@
    "魚",
    "交"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "魚(left)+交(right) matches render & cjkvi ⿰魚交",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2837",
@@ -50200,11 +50209,11 @@
    "魚",
    "堅"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "魚(left)+堅(right) matches render & cjkvi ⿰魚堅",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2838",
@@ -50218,11 +50227,11 @@
    "魚",
    "秋"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "魚(left)+秋(right) matches render & cjkvi ⿰魚秋",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2839",
@@ -50233,11 +50242,16 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰魚咢",
   "google_parts": null,
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "魚",
+   "口",
+   "口",
+   "于"
+  ],
+  "note": "右=咢 (cjkvi ⿱吅亏 = two 口 over 亏); same 亏/于 stroke-soup bug as 2026-11-06's 樗/袴/跨 family (prim-potato-stalk:于); old 口,二,勹 was missing a 口 and misspelled 亏's tail. Checked rtk172 均 (勹,二) for the same pattern -- that's 匀, a genuinely different correct shape, no fix needed",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2840",
@@ -50251,11 +50265,11 @@
    "魚",
    "付"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "付(right)+魚(left) matches render & cjkvi ⿰魚付",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2841",
@@ -50269,11 +50283,11 @@
    "魚",
    "旨"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "旨(right)+魚(left) matches render & cjkvi ⿰魚旨",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2842",
@@ -50287,11 +50301,15 @@
    "魚",
    "耆"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "魚",
+   "老",
+   "日"
+  ],
+  "note": "右=耆 (cjkvi ⿱老日); old 日,老,匕 double-counted 匕 (already inside 老=土,匕); no other row shares this exact pattern",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2843",
@@ -50302,11 +50320,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰区鳥",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "区(left)+鳥(right) matches render & cjkvi ⿰区鳥",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2844",
@@ -50320,11 +50338,11 @@
    "朋",
    "鳥"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "朋(left)+鳥(right) matches render & cjkvi ⿰朋鳥",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2845",
@@ -50338,11 +50356,11 @@
    "嬰",
    "鳥"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "嬰(left)+鳥(right) matches render & cjkvi ⿰嬰鳥",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2846",
@@ -50356,11 +50374,11 @@
    "武",
    "鳥"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "武(left)+鳥(right) matches render & cjkvi ⿰武鳥",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2847",
@@ -50374,11 +50392,11 @@
    "弟",
    "鳥"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "弟(left)+鳥(right) matches render & cjkvi ⿰弟鳥",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2848",
@@ -50392,11 +50410,11 @@
    "路",
    "鳥"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "路(top)+鳥(bottom) matches render & cjkvi ⿱路鳥",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2849",
@@ -50407,11 +50425,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿱就鳥",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "就(top)+鳥(bottom) matches render & cjkvi ⿱就鳥",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2850",
@@ -50422,11 +50440,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰甲鳥",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "row already fixed by today's earlier cloud audit routine to 甲,鳥 (worklist snapshot was stale, showed pre-fix ｜,鳥,日,田); matches cjkvi ⿰甲鳥 and render -- confirmed correct as-is",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2851",
@@ -50440,11 +50458,11 @@
    "弋",
    "鳥"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "鳥(top)+弋(bottom) matches render & cjkvi ⿱弋鳥",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2852",
@@ -50455,11 +50473,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿹⑦木",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "already fixed 2026-10-25 to prim-legless-bird,木 (KanjiVG partial-鳥 minus legs, 7+4=11 strokes exact); confirmed still correct",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2853",
@@ -50470,11 +50488,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿸鹿土",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "鹿(top)+土(bottom) matches render & cjkvi ⿸鹿土",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2854",

@@ -1992,10 +1992,12 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"kangxi89", "rtk2132"}},
     "rtk2824": {"character": "駈", "keyword": "gallop",
                 "expected_part_ids": {"rtk1427", "rtk2132"}},
-    # Corrected 2026-09-28: same 虍-family rtk476->rtk7 fix as rtk2150/rtk2151
-    # above -- see data.txt's dated comment.
+    # Corrected 2026-11-07 (full re-review): was stroke-soup (kangxi25/卜,
+    # kangxi27/厂, rtk7/七 aren't in the glyph at all -- cjkvi-ids for 盧 is
+    # ⿸虍⿱田皿, just 虍+田+皿, matching rtk2152 劇's already-cleaned atomic-虍
+    # pattern). See data.txt's dated comment.
     "rtk2825": {"character": "驢", "keyword": "donkey",
-                "expected_part_ids": {"kangxi141", "kangxi25", "kangxi27", "rtk14", "rtk1555", "rtk2132", "rtk7"}},
+                "expected_part_ids": {"kangxi141", "rtk14", "rtk1555", "rtk2132"}},
     "rtk288": {"character": "銑", "keyword": "pig iron",
                 "expected_part_ids": {"rtk263", "rtk287"}},
     "rtk289": {"character": "鉢", "keyword": "bowl",
@@ -3233,14 +3235,22 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"rtk183", "rtk917"}},
     "rtk2838": {"character": "鰍", "keyword": "bullhead",
                "expected_part_ids": {"rtk183", "rtk966"}},
+    # Corrected 2026-11-07 (full re-review): right side is 咢 (cjkvi ⿱吅亏 =
+    # two 口 over 亏), same 亏/于 stroke-soup bug as the 2026-11-06 樗/袴/跨
+    # family (prim-potato-stalk:于) -- old 口,二,勹 (rtk11/rtk2/kangxi20) was
+    # missing a 口 and misspelled 亏's tail. See data.txt's dated comment.
     "rtk2839": {"character": "鰐", "keyword": "alligator",
-               "expected_part_ids": {"kangxi20", "rtk11", "rtk183", "rtk2"}},
+               "expected_part_ids": {"rtk11", "rtk183", "prim-potato-stalk"}},
     "rtk2840": {"character": "鮒", "keyword": "crucian carp",
                "expected_part_ids": {"rtk1075", "rtk183"}},
     "rtk2841": {"character": "鮨", "keyword": "sushi",
                "expected_part_ids": {"rtk183", "rtk493"}},
+    # Corrected 2026-11-07 (full re-review): right side is 耆 (cjkvi ⿱老日 =
+    # 老 whole over 日); old row had a redundant standalone 匕 (rtk476) restating
+    # 老's own bottom hook (老 itself is rtk1340 = 土,匕). See data.txt's dated
+    # comment.
     "rtk2842": {"character": "鰭", "keyword": "fish fin",
-               "expected_part_ids": {"rtk12", "rtk1340", "rtk183", "rtk476"}},
+               "expected_part_ids": {"rtk12", "rtk1340", "rtk183"}},
     "rtk2848": {"character": "鷺", "keyword": "heron",
                "expected_part_ids": {"rtk1376", "rtk2091"}},
     "rtk2956": {"character": "噸", "keyword": "ton",

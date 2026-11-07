@@ -3746,7 +3746,8 @@ rtk2810:穎:heads of grain:禾,頁,匕
 rtk2811:頗:prejudiced:頁,皮
 rtk2812:頌:eulogy:公,頁
 rtk2813:頚:neck:圣,頁
-rtk2814:餐:eat:食,又,夕
+# full-review 2026-11-07: top-left is 4-stroke 歹 ("death", kangxi78: one,夕), not 3-stroke 夕 -- render shows the extra top stroke lookalike trap
+rtk2814:餐:eat:食,又,歹
 rtk2815:饗:banquet:郷,食
 rtk2816:蝕:eclipse:食,虫
 rtk2817:飴:rice jelly:台,食
@@ -3757,7 +3758,8 @@ rtk2821:騙:deceive:馬,扁
 rtk2822:馴:get used to:川,馬
 rtk2823:駁:refutation:馬,爻
 rtk2824:駈:run:丘,馬
-rtk2825:驢:donkey:皿,田,馬,卜,七,厂,虍
+# full-review 2026-11-07: was stroke-soup (卜,七,厂 aren't in the glyph at all). cjkvi-ids for 盧 itself is ⿸虍⿱田皿 -- just 虍+田+皿, no 卜/七/厂
+rtk2825:驢:donkey:馬,虍,田,皿
 rtk2826:鰻:eel:曼,魚
 rtk2827:鯛:sea bream:周,魚
 rtk2828:鰯:sardine:魚,弱
@@ -3771,10 +3773,17 @@ rtk2835:鯖:mackerel:魚,青
 rtk2836:鮫:shark:交,魚
 rtk2837:鰹:bonito:堅,魚
 rtk2838:鰍:bullhead:秋,魚
-rtk2839:鰐:alligator:魚,口,二,勹
+# full-review 2026-11-07: right side is 咢 (cjkvi ⿱吅亏 = two 口 over 亏), same
+# 亏/于 stroke-soup mistake as the 2026-11-06 樗/袴 family (prim-potato-stalk:于)
+# -- "二,勹" was never a real spelling of 亏's extra bar+hook, and the second 口
+# was missing outright
+rtk2839:鰐:alligator:魚,口,口,于
 rtk2840:鮒:carp:付,魚
 rtk2841:鮨:sushi:旨,魚
-rtk2842:鰭:fin:魚,日,老,匕
+# full-review 2026-11-07: right side is 耆 (cjkvi ⿱老日 = 老 whole over 日);
+# old row had a redundant standalone 匕 restating 老's own bottom hook (老 itself
+# is rtk1340 = 土,匕) at the same level as 老, double-counting one region
+rtk2842:鰭:fin:魚,老,日
 rtk2843:鴎:seagull:区,鳥
 rtk2844:鵬:phoenix:朋,鳥
 rtk2845:鸚:parrot:嬰,鳥
