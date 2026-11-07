@@ -28237,3 +28237,64 @@ No deploy needed from here — a deployer needs `git pull` +
 `full_review.py --pending-count`: 247/3000.
 
 **Next**: continue the full re-review at frame 2754.
+
+## 2026-11-07 — canonical host reversed: kumiji.kermit.is-a.dev is now the site
+
+Owner request: the 2026-10-31 arrangement is inverted, because the `alteon.help`
+domain is being given up. `kumiji.kermit.is-a.dev` now serves the site and
+`kanji.alteon.help` + `kumiji.alteon.help` 301 to it with `$request_uri`
+preserved. Repo side committed in `0af6458`; the server steps are a new
+"Canonical host move" section in `DEPLOY_README.md` and still need running on
+the VM by someone with access (no SSH from this sandbox).
+
+Checked before changing anything, because it decides whether the move is even
+safe: `kumiji.kermit.is-a.dev` is an **A record straight to 161.153.96.217**,
+not a CNAME to `kanji.alteon.help`, so it keeps resolving after the old zone
+goes away. `kanjimcp.kermit.is-a.dev` already resolves to the same VM too (DNS
+prepared in advance, no vhost or cert yet); `test123.kermit.is-a.dev` does not,
+so these are individual records rather than a wildcard.
+
+**The trap, and the reason this is more than a find-and-replace.** The cert
+covering `kumiji.kermit.is-a.dev` today was issued as a single lineage over
+*both* `kumiji.alteon.help` and `kumiji.kermit.is-a.dev` (`certbot --nginx -d
+kumiji.alteon.help -d kumiji.kermit.is-a.dev`, per the 2026-10-31 entry above).
+Leaving the canonical host on it means that once `alteon.help` stops resolving,
+certbot's renewal fails the HTTP-01 challenge for the `alteon.help` name — and a
+renewal failure fails the whole lineage, so the canonical host's cert expires
+too and the site goes down with a TLS error weeks after the domain lapsed, for a
+reason nothing points at. The runbook's step 2 reissues an is-a.dev-only cert
+with an explicit `--cert-name`, which is load-bearing: without it certbot offers
+to *expand* the existing lineage, which is the exact coupling being broken.
+
+MCP deliberately does **not** redirect: Streamable HTTP speaks POST, and many
+HTTP clients downgrade a redirected POST to GET rather than replaying it, so a
+301 would break already-configured clients instead of moving them. Both names
+proxy to `127.0.0.1:8100` until the old one is deleted.
+
+Found and fixed in passing, since the URL was being touched anyway: the Android
+release `APP_URL` was `https://kanji.alteon.help/kanji/`. On the dedicated VM
+that path is the static "Browse kanji" SEO hub, not the app — so the release APK
+has been loading a plain HTML index page since the September server move. This
+is the bug `CLAUDE.md` had recorded as the probable cause of the owner's
+2026-10-23 report that the app lacks the Dispute button and decomposition
+history; that entry is updated from "likely cause" to "fixed, needs a device
+check". `APP_URL` is now `https://kumiji.kermit.is-a.dev/` (v1.2, versionCode
+3). No Kotlin change: `MainActivity.targetHost` derives from `APP_URL`. Note any
+APK built earlier now bounces to the system browser on launch, because the 301
+to a different host reads as an off-host link to `shouldOverrideUrlLoading` — so
+the APK genuinely needs republishing, not just leaving alone.
+
+Two consequences that are expected and need no fix, recorded so a later session
+does not chase them: everyone is signed out (session cookie is host-scoped), and
+analytics `visitor_id` cookies reset, so `visit_stats.py` will show a burst of
+apparently-new visitors and an inflated all-time unique count from here on.
+
+`IndexNow` state is keyed by full URL, so the first submit after the move
+resubmits all ~3,200 pages and prunes the old keys — verified by reading
+`changed_urls`/state handling rather than assumed, and noted in the script's
+docstring so it does not read as a bug.
+
+No data or decomposition changes in this chunk. `full_review.py
+--pending-count` untouched at 247/3000.
+
+**Next**: the full re-review continues at frame 2754 (unchanged by this chunk).
