@@ -42753,11 +42753,14 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰氵䲨",
   "google_parts": null,
-  "status": "keep",
-  "decision": null,
-  "note": "cjkvi ⿰氵䲨; 䲨=工+鳥 unnamed, already expanded as 工,水,鳥; keep",
+  "status": "fixed",
+  "decision": [
+   "江",
+   "鳥"
+  ],
+  "note": "Owner call: named the left 氵+工 as the taught unit 江 'creek' (rtk148) instead of 工,水 -- same strokes; cjkvi's ⿰氵䲨 grouping uses 䲨, no Heisig primitive; CSV has no components for this frame",
   "reviewed_by": "claude",
-  "reviewed_at": "2026-11-06"
+  "reviewed_at": "2026-11-07"
  },
  {
   "id": "rtk2407",

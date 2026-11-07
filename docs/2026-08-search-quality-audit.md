@@ -28476,3 +28476,19 @@ and the decomposition history) is left for the owner.
 verification for the new `kumiji.kermit.is-a.dev` property, step 8). It was
 copied into prod's `dist/` directly so verification needn't wait for the next
 frontend build; later builds carry it from `public/`.
+
+## 2026-11-07 — 鴻 "large goose" (rtk2406): creek + bird
+
+The owner asked whether 鴻 should be "creek + bird". It was `工,水,鳥`, which the
+full re-review had kept because it matched cjkvi. Changed to `江,鳥`. The
+left 氵+工 is exactly 江 "creek" (rtk148, frame 148), so the row now names
+that taught unit instead of its strokes, per the review's rule 4 (`电`, not
+`日,乙`). The strokes are identical either way. cjkvi groups the other way
+(`⿰氵䲨`, `䲨=⿰工鳥`), but 䲨 is not a Heisig primitive, and the CSV's
+components column has no data for this frame (5th-ed 2313, outside the
+1–2042 core). No other row lists 江 as a part, so there is no shape family
+to follow up. Trade-off: "water"/"craft" + "bird" now find 鴻 only at depth 2.
+The keyword was already "large goose" (from the CSV); data.txt's "large bird"
+is only an extra alias and stays. The rtk2406 pin is updated with a comment.
+Checks: pytest 108, `regression_fresh.sh` 1333/1333, `audit_radicals.py` 0/0.
+Synced to dev and prod (`sync_system_data.py`).

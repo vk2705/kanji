@@ -3100,7 +3100,14 @@ rtk2402:湊:port:奏,水
 rtk2403:淋:lonely:林,水
 rtk2404:浩:wide expanse:告,水
 rtk2405:汀:water's edge:水,丁
-rtk2406:鴻:large bird:工,水,鳥
+# 2026-11-07 (owner question "should large goose be creek + bird?"): was
+# 工,水,鳥. The left two pieces are exactly 江 "creek" (rtk148, frame 148), so
+# name that taught unit rather than its strokes (review rule 4: 电, not 日,乙).
+# Same strokes either way. cjkvi groups it the other way, ⿰氵䲨 with
+# 䲨=⿰工鳥, but 䲨 is no Heisig primitive, and the CSV components column has no
+# data for this frame (5th-ed 2313, outside 1-2042), so neither contradicts.
+# Nothing else lists 江 as a part. Water/craft are now reached at depth 2.
+rtk2406:鴻:large bird:江,鳥
 rtk2407:潅:pour into:水,𮥶
 rtk2408:溢:overflow:水,益
 # 2026-11-06 full re-review: primary was stroke soup re-flattening 甚 (already

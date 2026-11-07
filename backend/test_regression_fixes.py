@@ -1156,8 +1156,11 @@ EXPECTED_DECOMPOSITIONS = {
     # beside 隹 inside the 广 that the row (and this pin) had been missing.
     "rtk2344": {"character": "鷹", "keyword": "hawk",
                 "expected_part_ids": {"kangxi172", "kangxi9", "kangxi53", "rtk2091"}},
+    # Corrected 2026-11-07 (owner decision): 鴻's left 氵+工 is named as the taught
+    # unit 江 "creek" (rtk148) instead of its pieces 水/工 -- same strokes,
+    # coherent primitive per the full re-review's rule 4.
     "rtk2406": {"character": "鴻", "keyword": "large goose",
-                "expected_part_ids": {"rtk137", "rtk2091", "rtk80"}},
+                "expected_part_ids": {"rtk148", "rtk2091"}},
     "rtk2843": {"character": "鴎", "keyword": "seagull",
                 "expected_part_ids": {"rtk1831", "rtk2091"}},
     "rtk2844": {"character": "鵬", "keyword": "roc",
