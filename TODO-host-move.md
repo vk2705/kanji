@@ -267,7 +267,7 @@ cd /opt/kanji/backend
 Every URL looks new after a host change, so this resubmits the whole site —
 that is the intended behaviour here, and no `--all` is needed.
 
-- [ ] IndexNow submit accepted.
+- [x] IndexNow submit accepted (2026-11-07 11:38 UTC: 24,212 URLs, all batches HTTP 200; the first two tries got 403 SiteVerificationNotCompleted while IndexNow verified the new host).
 
 Google does not take part in IndexNow, so it needs Search Console separately
 (full detail in `DEPLOY_README.md`'s SEO section):
