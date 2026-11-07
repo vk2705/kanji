@@ -576,8 +576,12 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk287", "rtk1723"}},
     "rtk2785": {"character": "鋲", "keyword": "rivet",
                 "expected_part_ids": {"rtk287", "rtk1429"}},
+    # 2026-11-07 full re-review: was 金,人,大 (lookalike traditional 夾 from
+    # cjkvi's reference data); render confirmed 鋏's right side is the
+    # simplified 夹 already used by its siblings 峡/狭/挟/頬/侠 — see
+    # docs/2026-08-search-quality-audit.md.
     "rtk2795": {"character": "鋏", "keyword": "scissors",
-                "expected_part_ids": {"rtk287", "rtk1023", "rtk112"}},
+                "expected_part_ids": {"rtk287", "prim-scissors"}},
     "rtk467": {"character": "諦", "keyword": "truth",
                "expected_part_ids": {"rtk357", "rtk466"}},
     "rtk1741": {"character": "楠", "keyword": "camphor tree",
@@ -1162,8 +1166,12 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk2091", "rtk2307"}},
     "rtk2846": {"character": "鵡", "keyword": "parrot",
                 "expected_part_ids": {"rtk2091", "rtk403"}},
+    # 2026-11-07 full re-review: primary was stroke-soup ｜,鳥,日,田
+    # (double-counting 日 and 田 for one shape); promoted the already-present
+    # alternate 甲,鳥 (matches cjkvi ⿰甲鳥 and render) to primary — see
+    # docs/2026-08-search-quality-audit.md.
     "rtk2850": {"character": "鴨", "keyword": "wild duck",
-                "expected_part_ids": {"prim-pipe", "rtk12", "rtk14", "rtk2091"}},
+                "expected_part_ids": {"rtk1194", "rtk2091"}},
     "rtk2851": {"character": "鳶", "keyword": "black kite",
                 "expected_part_ids": {"kangxi56", "rtk2091"}},
     # Corrected 2026-10-25: was rtk2091(鳥)+rtk207(木), 15 strokes against the

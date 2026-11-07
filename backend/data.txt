@@ -983,7 +983,12 @@ rtk800:勾:be bent:勹,厶
 rtk801:拡:broaden:広,扌
 rtk802:鉱:mineral:金,広
 rtk803:弁:valve:厶,廾
-rtk804:雄:masculine:𠂇,厶,隹
+# 2026-11-07: was 𠂇,厶,隹, flattening 厷 (already correctly expanded 𠂇+厶
+# at rtk2324/rtk2536/rtk2704 before this fix). prim-forearm:厷 didn't exist
+# yet when this row was last reviewed (2026-10-24), so it was kept flattened;
+# audit_overflatten.py re-flagged it once 厷 got its own row. render_glyphs.py
+# on 雄/厷/肱/宏 confirms the left side is the same coherent 厷 shape.
+rtk804:雄:masculine:厷,隹
 rtk805:台:pedestal:口,厶
 rtk806:怠:neglect:台,心
 rtk807:治:reign:台,水
@@ -3701,8 +3706,18 @@ rtk2790:鋒:dagger:夆,金
 rtk2791:鎚:hammer:金,追
 rtk2792:鉦:bell:正,金
 rtk2793:錆:rust:金,青
-rtk2794:鍾:spindle:｜,金,日,里,ノ;重,金
-rtk2795:鋏:scissors:金,人,大
+# 2026-11-07: primary was stroke-soup ｜,金,日,里,ノ flattening 重; the
+# already-present alternate 重,金 matches cjkvi (⿰金重) and render_glyphs.py
+# (鍾's right side is exactly 重). Promoted the alternate to primary, same
+# pattern as rtk2740/rtk2741/rtk2850.
+rtk2794:鍾:spindle:重,金
+# 2026-11-07: was 金,人,大 — cjkvi's ⿰金夾 names the traditional 夾 (大
+# flanked by two 人), but render_glyphs.py on 鋏/夾/夹/峡/狭/挟/頬/侠 shows
+# 鋏's right side is unambiguously the simplified 夹 (丷,夫) already used by
+# every one of its siblings (峡/狭/挟/頬/侠 all already use 夹, not 夾) — a
+# lookalike-codepoint mismatch in cjkvi's reference data, not in this row.
+# Fixed to the established prim-scissors:夹.
+rtk2795:鋏:scissors:金,夹
 rtk2796:閃:flash:人,門
 rtk2797:悶:be in agony:心,門
 rtk2798:閤:small side gate:合,門
@@ -3760,7 +3775,12 @@ rtk2846:鵡:cockatoo:武,鳥
 rtk2847:鵜:cormorant:弟,鳥
 rtk2848:鷺:heron:路,鳥
 rtk2849:鷲:eagle:就,鳥
-rtk2850:鴨:wild duck:｜,鳥,日,田;甲,鳥
+# 2026-11-07: primary was stroke-soup ｜,鳥,日,田 (even double-counting 日
+# and 田 for one shape); the already-present alternate 甲,鳥 matches cjkvi
+# (⿰甲鳥) and render_glyphs.py (鴨's left side is 甲, rtk1194's own shape,
+# not a separate 日+田+｜). Promoted the alternate to primary, same pattern
+# as rtk2740/rtk2741.
+rtk2850:鴨:wild duck:甲,鳥
 rtk2851:鳶:black kite:鳥,弋
 # 2026-10-25: was 鳥,木 (15 strokes against official 11). KanjiVG confirms the
 # top is a `kvg:partial` 鳥 -- 7 of its 11 strokes, missing exactly the bottom
