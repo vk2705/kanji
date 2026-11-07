@@ -159,16 +159,42 @@ If the browser still shows the old site after this, hard-refresh
 not help: the browser sends the origin it is actually running on, so the
 canonical name has to be listed in its own right.
 
-Google Cloud Console → APIs & Services → Credentials → the OAuth client →
-**Authorized JavaScript origins** → add:
+The client ID in use (read out of the deployed bundle; public, not a secret) is
+`138417987764-dpqts7215mco6etmh6udpg4urqdlchnk.apps.googleusercontent.com`, so
+the project is the one numbered **138417987764**.
+
+**Deep link straight to that client's edit page**, no menu navigation:
+
+```
+https://console.cloud.google.com/apis/credentials/oauthclient/138417987764-dpqts7215mco6etmh6udpg4urqdlchnk.apps.googleusercontent.com?project=138417987764
+```
+
+(The long way round, if the link breaks: Google Cloud Console → APIs &
+Services → Credentials → under "OAuth 2.0 Client IDs", the client whose ID
+matches the above.)
+
+**On a phone, switch the browser to desktop mode first** (Chrome: ⋮ → Desktop
+site) and rotate to landscape — the mobile console layout hides the origins
+form, which is the usual reason this step stalls.
+
+Then scroll to **Authorized JavaScript origins** — *not* "Authorized redirect
+URIs", which this flow does not use at all, and where adding it achieves
+nothing — tap `+ ADD URI`, and enter exactly:
 
 ```
 https://kumiji.kermit.is-a.dev
 ```
 
+No trailing slash, no path, `https://` not `http://`. Then **Save** at the
+bottom of the page (easy to miss on a phone; navigating away loses it).
+
 - [ ] Added and saved.
 - [ ] The "Sign in with Google" button appears on the new host and a sign-in
-      completes. (Changes can take a few minutes to propagate.)
+      completes. Usually live within a minute or two; Google allows up to a few
+      hours. If the button is missing *entirely* that is not this setting but
+      the frontend build's `VITE_GOOGLE_CLIENT_ID` (step 5). If it appears but
+      errors with `origin_mismatch`, the origin did not save or is still
+      propagating — reopen the link and confirm the URI is listed.
 
 Leave the `alteon.help` origins in place for now; remove them in step 10.
 
