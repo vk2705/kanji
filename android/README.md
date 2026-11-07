@@ -98,16 +98,20 @@ IP instead for that case.
 ## Pre-built APK
 
 `android/releases/rtk-kanji-latest.apk` is a **release**-variant build
-(points at `https://kumiji.kermit.is-a.dev/`, the live production site),
-self-signed with a throwaway key generated just for this — not the app's
-"real" signing identity, since none exists yet (see the Building section
-above: no signing config is checked in, deliberately). This means:
+(points at `https://kumiji.kermit.is-a.dev/`, the live production site).
+Since version 1.2 (2026-11-07) it is signed with a project key kept outside
+the repo: `~/.android-release/kumiji-release.jks` (alias `kumiji`, password in
+`password` beside it) on the dev box, with a copy in the same place on the
+prod VM. Certificate SHA-256:
+`1c2199ddd3575a05e77c6edfc8d1f430d795a5acb463a995f2a2f73007b8249f`. Sign every
+later release with this same key so installs update in place. The earlier
+APK was signed with a throwaway key that was not kept, so **anyone with a
+pre-1.2 install must uninstall it once** before installing this one. This means:
 - It installs fine via sideloading ("install from unknown sources"), same
   as any unsigned/self-signed APK.
-- A future release signed with a *different* key (e.g. once there's a real
-  keystore, or a Play Store listing) will be treated by Android as a
-  different app for update purposes — you'd need to uninstall this one
-  first, not upgrade over it.
+- A release signed with any *other* key (for example a Play Store
+  signing key) is a different app to Android for updates: it needs an
+  uninstall first, not an upgrade over this one.
 - No auto-update mechanism; re-download this file to get a newer build.
   Rebuild it yourself with `./gradlew :app:assembleRelease` (see Building
   above) any time the web app changes, sign it with your own key via

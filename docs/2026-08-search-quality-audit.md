@@ -28459,3 +28459,14 @@ Google account), step 9 (APK rebuild, needs an Android SDK) and step 10
 (later). The step-6 end-to-end Google sign-in check is left for the owner,
 since it needs a real Google login. `kermit.conf` on prod differs from the
 repo's reference copy; it is not part of this move and was left alone.
+
+**Step 9 (same day).** The APK can't be built on prod: the VM is aarch64,
+and Google publishes no Linux ARM build tools. It was built on the dev box
+instead (SDK in `~/android-build`, removed afterwards to free disk). The
+throwaway key behind the August APK was not found on either machine, so
+1.2 is signed with a new project key, `~/.android-release/kumiji-release.jks`,
+copied to the same path on prod (see `android/README.md`). Pre-1.2 installs
+must be uninstalled once. Verified with `apksigner verify` and `aapt2 dump
+badging` (`help.alteon.kanji`, 1.2/3, label KumiJi), and the dex holds only
+`https://kumiji.kermit.is-a.dev/`. The on-device check (the Dispute button
+and the decomposition history) is left for the owner.

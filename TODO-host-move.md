@@ -280,7 +280,10 @@ cd /opt/kanji/android   # or wherever you build; needs an Android SDK
 ./gradlew :app:assembleRelease
 ```
 
-- [ ] APK built and published over `android/releases/rtk-kanji-latest.apk`.
+- [x] APK built and published over `android/releases/rtk-kanji-latest.apk`
+      (2026-11-07, on the dev box: the prod VM is aarch64, and Google ships
+      no Linux ARM build tools). It uses a new signing key (see
+      `android/README.md`), so old installs must be uninstalled first.
 - [ ] **On a device**: the app opens the actual app, not a plain list page — and
       check the **Dispute button** and **decomposition history** are present.
 
