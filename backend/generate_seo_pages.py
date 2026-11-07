@@ -26,8 +26,8 @@ from pathlib import Path
 from urllib.parse import quote
 
 
-SITE_URL = "https://kanji.alteon.help"
-MCP_URL = "https://kanjimcp.alteon.help/mcp"
+SITE_URL = "https://kumiji.kermit.is-a.dev"
+MCP_URL = "https://kanjimcp.kermit.is-a.dev/mcp"
 
 # These pages are the project's crawlable public surface, so the credit that
 # lives on the About page has to be on them too rather than one click away —

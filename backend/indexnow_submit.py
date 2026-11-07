@@ -17,8 +17,14 @@ hashes the same from one build to the next. --all resubmits everything.
 Never run it from the dev box: it would announce prod URLs from a build that
 was not deployed there.
 
+The state file is keyed by full URL, so the 2026-11-07 canonical-host move to
+kumiji.kermit.is-a.dev makes every URL look new: the first run after it
+resubmits the whole site (and prunes the old kanji.alteon.help keys, which have
+left the sitemap). That is what you want here — the engines need to be told the
+new URLs exist — so it is not a bug and needs no --all.
+
 The key is public by design: IndexNow proves site ownership by fetching
-https://kanji.alteon.help/{KEY}.txt, which lives in frontend/public/. The
+https://kumiji.kermit.is-a.dev/{KEY}.txt, which lives in frontend/public/. The
 script checks that file is live before submitting, since the API answers 403
 for every URL otherwise.
 
@@ -40,8 +46,8 @@ import urllib.request
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
-SITE_URL = "https://kanji.alteon.help"
-HOST = "kanji.alteon.help"
+SITE_URL = "https://kumiji.kermit.is-a.dev"
+HOST = "kumiji.kermit.is-a.dev"
 KEY = "4159b1e0528bf4cd388f532c71252e4d"
 KEY_URL = f"{SITE_URL}/{KEY}.txt"
 ENDPOINT = "https://api.indexnow.org/indexnow"

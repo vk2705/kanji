@@ -14,11 +14,15 @@ by hand whenever the live config changes (see "To apply an update" below).
   fragments meant to be `include`d into (or pasted inside) that box's own
   server block — it doesn't declare a `server {}` of its own, since the box's
   existing config already has one for the shared domain.
-- **`prod/`** — `kanji.alteon.help`, a **dedicated** Oracle Cloud VM
+- **`prod/`** — `kumiji.kermit.is-a.dev`, a **dedicated** Oracle Cloud VM
   (161.153.96.217) that runs nothing but this app. The frontend is served
-  from `/` with no path prefix, so `prod/kanji.conf` is a **complete,
+  from `/` with no path prefix, so `prod/kumiji.conf` is a **complete,
   standalone `server {}` block** (including its own Certbot-managed TLS
   directives) — there's no other project's config for it to slot into.
+  `prod/kanji.conf` is now just the retiring `alteon.help` names redirecting
+  to it (swapped 2026-11-07 — the canonical host used to be
+  `kanji.alteon.help` and that domain is being given up); delete that file
+  when the domain lapses.
   Frontend is built with `npm run build:prod` (vite `base=/`) and copied to
   `/opt/kanji/frontend/dist`. Only the backend API keeps the `/kanji/api/`
   path prefix on both machines — that's a `frontend/src/api.js` constant
@@ -38,9 +42,10 @@ existing one.
 |---|---|---|
 | `dev/kanji.conf` | `/etc/nginx/default.d/kanji.conf` | srv.alteon.help (shared dev box) |
 | `dev/kanji-ratelimit.conf` | `/etc/nginx/conf.d/kanji-ratelimit.conf` | srv.alteon.help (shared dev box) |
-| `prod/kanji.conf` | `/etc/nginx/sites-available/kanji.conf` (symlinked from `sites-enabled/`) | kanji.alteon.help (dedicated prod VM) |
-| `prod/kanji-ratelimit.conf` | `/etc/nginx/conf.d/kanji-ratelimit.conf` | kanji.alteon.help (dedicated prod VM) |
-| `prod/kanjimcp.conf` | `/etc/nginx/sites-available/kanjimcp.conf` (symlinked from `sites-enabled/`) | kanjimcp.alteon.help (same prod VM — see DEPLOY_README.md's "MCP server" section) |
+| `prod/kumiji.conf` | `/etc/nginx/sites-available/kumiji.conf` (symlinked from `sites-enabled/`) | **kumiji.kermit.is-a.dev — the canonical host**, serves the app (dedicated prod VM) |
+| `prod/kanji.conf` | `/etc/nginx/sites-available/kanji.conf` (symlinked from `sites-enabled/`) | kanji.alteon.help + kumiji.alteon.help (same prod VM) — 301 to the canonical host; **temporary**, delete with the domain |
+| `prod/kanji-ratelimit.conf` | `/etc/nginx/conf.d/kanji-ratelimit.conf` | dedicated prod VM (server-wide, not per-host) |
+| `prod/kanjimcp.conf` | `/etc/nginx/sites-available/kanjimcp.conf` (symlinked from `sites-enabled/`) | kanjimcp.kermit.is-a.dev, plus kanjimcp.alteon.help still serving (same prod VM — see DEPLOY_README.md's "MCP server" section) |
 | `prod/kermit.conf` | `/etc/nginx/sites-available/kermit.conf` (symlinked from `sites-enabled/`) | kermit.is-a.dev (same prod VM) — static developer page, root `/opt/kanji/frontend/dist/kermit`; DNS via is-a-dev/register `domains/kermit.json`, cert by Certbot |
 
 `kanji-ratelimit.conf` on either machine declares the `limit_req_zone`s the
@@ -77,8 +82,11 @@ Both `dev` and `prod` use the **same** `GOOGLE_CLIENT_ID` /
 `CLAUDE.md`'s "Google SSO" section), so there's no per-environment id to keep
 in sync. What each origin needs is for the *same* Google Cloud Console OAuth
 client to list it under "Authorized JavaScript origins":
-`https://srv.alteon.help`, `https://kanji.alteon.help`, and
-`http://localhost:5173` for local dev. That origins list lives in Google
+`https://kumiji.kermit.is-a.dev` (the canonical host — **this one is
+required for Google Sign-In to work at all after the 2026-11-07 move**),
+`https://srv.alteon.help`, and `http://localhost:5173` for local dev. A
+redirected host is no help here: the browser sends the origin it is actually
+running on, so the canonical name must be listed in its own right. That origins list lives in Google
 Cloud Console, not in this repo, so it isn't something a code session can
 verify directly — if Google Sign-In fails on one host but not the other,
 check that host's origin is actually present in the console before assuming

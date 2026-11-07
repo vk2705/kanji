@@ -7,7 +7,7 @@
     <title>How to find a kanji or hanzi by its parts | KumiJi Glyph Explorer</title>
     <meta name="description" content="Look up a Japanese kanji or Chinese character without knowing its reading: type the shapes it is made of, like sun + moon to find 明. How the search works, readings, Remembering the Kanji, and access from AI assistants (MCP).">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://kanji.alteon.help/guide/">
+    <link rel="canonical" href="https://kumiji.kermit.is-a.dev/guide/">
     <style>
       :root { --bg: #0f0f13; --text: #e0e0f0; --muted: #8888aa; --accent: #9d92f5; --kanji: #f0c060; --card: #1a1a22; }
       @media (prefers-color-scheme: light) {
@@ -56,7 +56,7 @@
       <p>With a free account you can add your own names for parts, alternative breakdowns, pictures for shapes that have no Unicode character, and your own mnemonic stories, each private or public as you choose. Anyone signed in can also mark a breakdown as correct or disputed, which helps keep the data accurate.</p>
 
       <h2 id="ai-access">Use it from an AI assistant (MCP)</h2>
-      <p>The same database is available to AI assistants through a free, public, read-only <a href="https://modelcontextprotocol.io/">Model Context Protocol</a> server at <code>https://kanjimcp.alteon.help/mcp</code>. It offers three tools: <code>search_by_parts</code> (characters built from given components, for example sun + moon → 明), <code>get_decomposition</code> (a character’s breakdown, recursively) and <code>search_by_text</code> (keyword search). No sign-up or API key is needed. In Claude, add it as a custom connector with that URL; in Claude Code, run <code>claude mcp add --transport http kanji https://kanjimcp.alteon.help/mcp</code>.</p>
+      <p>The same database is available to AI assistants through a free, public, read-only <a href="https://modelcontextprotocol.io/">Model Context Protocol</a> server at <code>https://kanjimcp.kermit.is-a.dev/mcp</code>. It offers three tools: <code>search_by_parts</code> (characters built from given components, for example sun + moon → 明), <code>get_decomposition</code> (a character’s breakdown, recursively) and <code>search_by_text</code> (keyword search). No sign-up or API key is needed. In Claude, add it as a custom connector with that URL; in Claude Code, run <code>claude mcp add --transport http kanji https://kanjimcp.kermit.is-a.dev/mcp</code>.</p>
 
       <h2 id="discuss">Ideas, questions and corrections</h2>
       <p>Found a breakdown that looks wrong, or have an idea for the site? Post it on the project’s <a href="https://github.com/vk2705/kanji/discussions">discussion forum on GitHub</a>. Anyone can read it; posting needs a free GitHub account. No account? Email <a href="mailto:vitaly.kroivets+kanji@gmail.com">vitaly.kroivets+kanji@gmail.com</a>. Corrections are checked against the drawn character before anything changes.</p>

@@ -9,10 +9,21 @@ auth, everything) with no backend changes at all.
 
 ## What it does
 
-- Loads `https://kanji.alteon.help/kanji/` (release build, prod as of
-  2026-09-20) — see `BuildConfig.APP_URL` in `app/build.gradle.kts`. The old
-  EC2 box (`srv.alteon.help`) is now dev/legacy; the `legacy` build type
-  points there instead — see Building below.
+- Loads `https://kumiji.kermit.is-a.dev/` (release build, canonical host as of
+  2026-11-07) — see `BuildConfig.APP_URL` in `app/build.gradle.kts`. The old
+  EC2 box (`srv.alteon.help`) is dev/legacy; the `legacy` build type points
+  there instead — see Building below, and note that build dies with the
+  `alteon.help` domain.
+- **An APK built before 2026-11-07 needs rebuilding and republishing.** It
+  loads `kanji.alteon.help/kanji/`, which now 301s to the canonical host —
+  and because `targetHost` is derived from `APP_URL`, that redirect counts as
+  an external link and gets handed to the system browser, so the old APK
+  bounces out of itself on launch. Once the domain lapses it stops working
+  entirely.
+- The `applicationId` is still `help.alteon.kanji`. That is deliberate: an
+  application id is only an identifier, it never has to resolve, and changing
+  it makes an installed app unable to update in place. It stays as-is even
+  though the domain it was named after is gone.
 - Persists cookies across app restarts (`CookieManager`), so the existing
   cookie-session auth (`backend/auth.py`) just works, same as a browser tab.
 - Supports the image-upload feature (`ImageUpload` in `KanjiDetail.jsx`) via
@@ -32,7 +43,7 @@ automatically; from a bare CLI, install the `platform-tools`,
 ```bash
 cd android
 ./gradlew :app:assembleDebug     # debug/ — points at a local dev server, see below
-./gradlew :app:assembleRelease   # release/ — points at the live prod site (kanji.alteon.help), unsigned
+./gradlew :app:assembleRelease   # release/ — points at the live prod site (kumiji.kermit.is-a.dev), unsigned
 ./gradlew :app:assembleLegacy    # legacy/ — points at the old EC2 box (srv.alteon.help), unsigned
 ```
 
@@ -87,7 +98,7 @@ IP instead for that case.
 ## Pre-built APK
 
 `android/releases/rtk-kanji-latest.apk` is a **release**-variant build
-(points at `https://srv.alteon.help/kanji/`, the live production site),
+(points at `https://kumiji.kermit.is-a.dev/`, the live production site),
 self-signed with a throwaway key generated just for this — not the app's
 "real" signing identity, since none exists yet (see the Building section
 above: no signing config is checked in, deliberately). This means:
@@ -111,7 +122,7 @@ What's ready:
 - `applicationId = "help.alteon.kanji"`, `versionCode`/`versionName` are set
   and don't need to change for a first submission.
 - A privacy policy page, required by Play Console's app-content
-  questionnaire, is live at `https://srv.alteon.help/kanji/privacy.html`
+  questionnaire, is live at `https://kumiji.kermit.is-a.dev/privacy.html`
   (source: `frontend/public/privacy.html`, EN/RU toggle) — paste that URL
   into the Play Console listing form.
 

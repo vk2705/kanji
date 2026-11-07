@@ -14,19 +14,25 @@ android {
         // fallback needed, and covers the vast majority of active devices anyway.
         minSdk = 26
         targetSdk = 34
-        versionCode = 2
-        versionName = "1.1"
+        versionCode = 3
+        versionName = "1.2"
 
         // The app is a thin WebView shell around the existing React web app
         // (frontend/, deployed per CLAUDE.md's Deployment section) rather than
         // a from-scratch native rewrite — see android/README.md for why.
         //
         // Default APP_URL (used by any build type that doesn't override it,
-        // i.e. `release`) — as of 2026-09-20 this is the new prod host
-        // (kanji.alteon.help, on the Oracle Cloud VM). The old EC2 box
-        // (srv.alteon.help) is now dev/legacy — see the `legacy` build type
-        // below to point a build at it instead.
-        buildConfigField("String", "APP_URL", "\"https://kanji.alteon.help/kanji/\"")
+        // i.e. `release`) — as of 2026-11-07 this is the canonical host,
+        // kumiji.kermit.is-a.dev, on the same Oracle Cloud VM. The alteon.help
+        // names (kanji./kumiji.) now 301 here and the domain is being given up.
+        //
+        // Note the path is `/`, not `/kanji/`: this build pointed at
+        // `<host>/kanji/` from the shared-dev-box era, where the frontend was
+        // built with base '/kanji/'. On the dedicated prod VM the app is served
+        // from the domain root and `/kanji/` is the static "Browse kanji" SEO
+        // hub — so the release APK was loading a plain HTML index page instead
+        // of the app. Fixed here as part of the host move.
+        buildConfigField("String", "APP_URL", "\"https://kumiji.kermit.is-a.dev/\"")
     }
 
     buildTypes {

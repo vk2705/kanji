@@ -8,6 +8,23 @@ bump both in the same commit.
 Format: `## <version> — <date>` then a short bullet list of what changed,
 written for a user, not a commit-message summary.
 
+## 1.2 — 2026-11-07
+
+- New permanent address: **https://kumiji.kermit.is-a.dev**. The old
+  `kanji.alteon.help` and `kumiji.alteon.help` now redirect to it, and the
+  `alteon.help` domain is being given up — update any bookmarks, because
+  those redirects will stop working when it lapses.
+- The MCP server for AI assistants moved to
+  `https://kanjimcp.kermit.is-a.dev/mcp`. The old address keeps working for
+  now (it is not redirected, so existing clients are unaffected) but should
+  be changed over.
+- The Android app now points at the new address, and at the app itself
+  rather than the static "Browse kanji" page it had been loading by mistake
+  since the September server move. **Reinstall the APK** — an older build
+  bounces you out to your browser.
+- If you were signed in, you'll need to sign in again: logins are tied to the
+  hostname.
+
 ## 1.1 — 2026-09-20
 
 - Production moved to a new server (`kanji.alteon.help`, Oracle Cloud) —

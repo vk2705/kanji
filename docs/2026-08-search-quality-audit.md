@@ -28271,3 +28271,164 @@ not this run's to decide: whether this job should go idle until
 previously-blocked `needs-render` codepoint becoming renderable on this
 machine) surfaces a new backlog, or whether a next phase is queued
 elsewhere.
+
+## 2026-11-07 — canonical host reversed: kumiji.kermit.is-a.dev is now the site
+
+Owner request: the 2026-10-31 arrangement is inverted, because the `alteon.help`
+domain is being given up. `kumiji.kermit.is-a.dev` now serves the site and
+`kanji.alteon.help` + `kumiji.alteon.help` 301 to it with `$request_uri`
+preserved. Repo side committed in `0af6458`; the server steps are a new
+"Canonical host move" section in `DEPLOY_README.md` and still need running on
+the VM by someone with access (no SSH from this sandbox).
+
+Checked before changing anything, because it decides whether the move is even
+safe: `kumiji.kermit.is-a.dev` is an **A record straight to 161.153.96.217**,
+not a CNAME to `kanji.alteon.help`, so it keeps resolving after the old zone
+goes away. `kanjimcp.kermit.is-a.dev` already resolves to the same VM too (DNS
+prepared in advance, no vhost or cert yet); `test123.kermit.is-a.dev` does not,
+so these are individual records rather than a wildcard.
+
+**The trap, and the reason this is more than a find-and-replace.** The cert
+covering `kumiji.kermit.is-a.dev` today was issued as a single lineage over
+*both* `kumiji.alteon.help` and `kumiji.kermit.is-a.dev` (`certbot --nginx -d
+kumiji.alteon.help -d kumiji.kermit.is-a.dev`, per the 2026-10-31 entry above).
+Leaving the canonical host on it means that once `alteon.help` stops resolving,
+certbot's renewal fails the HTTP-01 challenge for the `alteon.help` name — and a
+renewal failure fails the whole lineage, so the canonical host's cert expires
+too and the site goes down with a TLS error weeks after the domain lapsed, for a
+reason nothing points at. The runbook's step 2 reissues an is-a.dev-only cert
+with an explicit `--cert-name`, which is load-bearing: without it certbot offers
+to *expand* the existing lineage, which is the exact coupling being broken.
+
+MCP deliberately does **not** redirect: Streamable HTTP speaks POST, and many
+HTTP clients downgrade a redirected POST to GET rather than replaying it, so a
+301 would break already-configured clients instead of moving them. Both names
+proxy to `127.0.0.1:8100` until the old one is deleted.
+
+Found and fixed in passing, since the URL was being touched anyway: the Android
+release `APP_URL` was `https://kanji.alteon.help/kanji/`. On the dedicated VM
+that path is the static "Browse kanji" SEO hub, not the app — so the release APK
+has been loading a plain HTML index page since the September server move. This
+is the bug `CLAUDE.md` had recorded as the probable cause of the owner's
+2026-10-23 report that the app lacks the Dispute button and decomposition
+history; that entry is updated from "likely cause" to "fixed, needs a device
+check". `APP_URL` is now `https://kumiji.kermit.is-a.dev/` (v1.2, versionCode
+3). No Kotlin change: `MainActivity.targetHost` derives from `APP_URL`. Note any
+APK built earlier now bounces to the system browser on launch, because the 301
+to a different host reads as an off-host link to `shouldOverrideUrlLoading` — so
+the APK genuinely needs republishing, not just leaving alone.
+
+Two consequences that are expected and need no fix, recorded so a later session
+does not chase them: everyone is signed out (session cookie is host-scoped), and
+analytics `visitor_id` cookies reset, so `visit_stats.py` will show a burst of
+apparently-new visitors and an inflated all-time unique count from here on.
+
+`IndexNow` state is keyed by full URL, so the first submit after the move
+resubmits all ~3,200 pages and prunes the old keys — verified by reading
+`changed_urls`/state handling rather than assumed, and noted in the script's
+docstring so it does not read as a bug.
+
+No data or decomposition changes in this chunk. `full_review.py
+--pending-count` untouched at 247/3000.
+
+## 2026-11-07 — full re-review: frames 2754-2803 (48 keep, 2 fixed), plus two
+overflatten regressions found by baseline verification
+
+**Container note, not a data finding:** before touching anything, this
+session's local `master` branch ref pointed at a completely disjoint history
+from `origin/master` (`git merge-base` found no common ancestor at all,
+despite overlapping-looking commit messages like "Full re-review frames
+1-50" on both sides) — leftover from a stale container image, not lost work;
+the detached `HEAD` this container actually booted into already matched
+`origin/master` exactly with a clean working tree. Reset the local `master`
+ref to `origin/master` (`git checkout -B master origin/master`) before doing
+anything else; the stale branch's old tip is still reachable via reflog
+(`1a3291369cd477d6f53ad5c46a7d8abad8930ed1`) if anyone ever needs to diff
+against it, but nothing in it looked like real unpushed work — it was a
+duplicate, separately-committed re-run of review chunks already done
+(differently) in `origin/master`'s real history. `git push --dry-run origin
+master` succeeded afterward (`Everything up-to-date`), confirming push access
+before starting.
+
+**Baseline verification found 2 regressions already in `origin/master`**,
+both the stroke-soup/promote-the-alternate pattern this log has fixed before
+(rtk2740/2741's 𢦏, rtk2850's own earlier entry):
+
+- `rtk804` 雄 "masculine": was `𠂇,厶,隹`, flattening `厷` (`prim-forearm`,
+  added 2026-11-06 for the rtk2536/rtk2324/rtk2704 肱/宏/紘 fixes). This row
+  was reviewed and kept on 2026-10-24, *before* `厷` had its own row — correct
+  at the time, stale after. `audit_overflatten.py` (expect-0 baseline check)
+  caught it today. `render_glyphs.py` on 雄/厷/𠂇/厶/肱/宏 confirms 雄's left
+  side is the same coherent 厷 shape already verified for its siblings. Fixed
+  to `厷,隹` (matches cjkvi `⿰厷隹`). Shape-family check: grepped for
+  `𠂇,厶`/`厶,𠂇` elsewhere in `data.txt` — none found, this was the only
+  remaining host.
+- `rtk2850` 鴨 "wild duck": primary was `｜,鳥,日,田` (double-counting 日 *and*
+  田 for one shape — not even internally consistent), with the correct
+  `甲,鳥` already sitting right there as an unused alternate. cjkvi confirms
+  `⿰甲鳥`; render_glyphs.py on 鴨/甲/鳥/田/日 confirms 鴨's left side is
+  exactly 甲 (rtk1194's own shape), not a separate 日+田+｜. Promoted the
+  alternate to primary, dropped the stroke-soup version — same move as
+  rtk2740/rtk2741.
+
+**Today's chunk, frames 2754-2803** (all `id_5th_ed` > 2042, so every row's
+empty Heisig-components column is "no data", not atomicity evidence — decided
+from render + cjkvi-ids alone, per CLAUDE.md). 48 of 50 already matched cjkvi
+exactly via already-established primitive rows (no change needed); two
+notable things found along the way, neither requiring action:
+`full_review.py`'s cached `parts_at_start` snapshot for `rtk2772` 跨 and
+`rtk2800` 霞 was stale — both had *already* been fixed in earlier sessions
+(`rtk2772` to `大,于,足` using `prim-potato-stalk:于`; `rtk2800` to `雨,叚` by
+the rtk2728 蝦 shape-family check) after the review-queue snapshot was taken.
+Live `data.txt` was correct for both; recorded as `keep` with a note
+explaining the discrepancy rather than re-deciding against stale data.
+
+Two real fixes in this chunk, both the same `data.txt`-overflatten/lookalike
+shape as the baseline findings above:
+
+- `rtk2794` 鍾 "spindle": primary was stroke-soup `｜,金,日,里,ノ` flattening
+  重; the already-present alternate `重,金` matches cjkvi `⿰金重` and
+  render_glyphs.py (鍾's right side is exactly 重). Promoted the alternate to
+  primary.
+- `rtk2795` 鋏 "scissors": was `金,人,大`. cjkvi's `⿰金夾` names the
+  **traditional** 夾 (大 flanked by two 人 — `夾`'s own cjkvi entry is `⿻大从`,
+  i.e. 大 + two more 人), but render_glyphs.py on 鋏/夾/夹/峡/狭/挟/頬/侠 shows
+  鋏's right side is unambiguously the **simplified** 夹 (`丷,夫`,
+  `prim-scissors`) — the exact shape already used by every one of its
+  siblings (峡/狭/挟/頬/侠 all already use 夹, not 夾). This is a
+  lookalike-codepoint mismatch in cjkvi's reference data itself (traditional
+  vs. the Japanese-orthography simplified form), not a flattening bug in this
+  row — the kind of trap CLAUDE.md's "render it, don't reason about it" rule
+  exists for. Fixed to `金,夹`.
+
+No shape-family follow-ups needed for either of today's two fixes (checked:
+no other host uses `｜,金,日,里,ノ`-for-重 or `金,人,大`-for-夾/夹).
+
+**Tests**: baseline (before any edit, fresh DB) — `test_regression_fixes.py`
+1333/1333, `pytest -q` 83 passed, `audit_overflatten.py` found the 2
+regressions above (not 0 — the first sign something needed fixing before the
+day's chunk even started), `audit_self_reference.py` 0, `audit_radicals.py`
+0/0, `audit_primary_choice.py` 0/55. After all four `data.txt` fixes (rtk804,
+rtk2794, rtk2795, rtk2850) and a fresh rebuild: `test_regression_fixes.py`
+failed on exactly the 2 pins expecting the old rtk2795/rtk2850 part sets,
+corrected in place in `test_regression_fixes.py` with comments pointing back
+to this entry (`rtk2795`: `{rtk287, rtk1023, rtk112}` → `{rtk287,
+prim-scissors}`; `rtk2850`: `{prim-pipe, rtk12, rtk14, rtk2091}` → `{rtk1194,
+rtk2091}`); re-ran clean, 1333/1333. `audit_overflatten.py` now 0.
+`audit_self_reference.py` 0. `audit_radicals.py` 0/0. `audit_primary_choice.py`
+0/55 (unchanged). `pytest -q` 83 passed (unchanged). `audit_phantom_parts.py
+--in-csv-range` has no expect-0 baseline (it's the known backlog list per
+CLAUDE.md) — ran it anyway for visibility: 10 phantom parts across 9 kanji,
+unchanged by this chunk, out of scope today. Frontend: `npm run lint` clean,
+`npm run build:prod` succeeds.
+
+This sandbox has no server to run `sync_system_data.py` against — no deploy
+from here. A deployer needs `git pull` + `sync_system_data.py --dry-run` then
+for real on prod to pick up today's four `data.txt` fixes, the same as every
+other session's data-only chunk.
+
+`full_review.py --pending-count`: 197/3000.
+
+**Next**: continue the full re-review at frame 2804.
+
+**Next**: the full re-review continues at frame 2754 (unchanged by this chunk).
