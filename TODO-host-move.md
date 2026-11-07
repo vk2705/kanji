@@ -16,6 +16,21 @@ Delete this file once everything but the "later" section is ticked.
 
 ---
 
+**Status 2026-11-07: steps 1-7 done.** Verified from outside: the canonical host
+serves the app; `kanji.alteon.help/kanji/rtk207.html` and `kumiji.alteon.help`
+both 301 with the path intact; canonical/`og:url`, `robots.txt` and the sitemap
+index all carry the new host; the API answers through nginx; `rtk207.html`
+renders with the right canonical; MCP answers on `kanjimcp.kermit.is-a.dev` and
+the old MCP name still serves rather than redirecting; the IndexNow key file and
+the Google client ID are both live in the new build. **One exception — see the
+unticked box in step 2: the certificate lineage was not verifiable remotely.**
+
+Step 9's APK is built and signed too (`a9f604a`), so what is actually left is
+the step 8 search-engine work, the step 9 check on a real device, and step 10
+whenever the domain lapses.
+
+---
+
 ## ⚠️ Read before starting: the one step that is easy to get wrong
 
 The certificate that covers `kumiji.kermit.is-a.dev` today was issued as a
@@ -69,8 +84,13 @@ Check:
 sudo certbot certificates | grep -A3 kumiji
 ```
 
-- [x] There is a `kumiji.kermit.is-a.dev` lineage whose **Domains** line lists
-      `kumiji.kermit.is-a.dev` and **nothing else**.
+- [ ] **STILL TO CONFIRM** — there is a `kumiji.kermit.is-a.dev` lineage whose
+      **Domains** line lists `kumiji.kermit.is-a.dev` and **nothing else**. This
+      is the only part of steps 1-7 that could not be checked from outside the
+      VM, and it is the one that fails silently: if the Domains line still
+      mentions `kumiji.alteon.help`, the cert is the shared lineage, renewal
+      breaks when the domain lapses, and the canonical host goes down weeks
+      later. Re-run step 2 with `--cert-name` if so.
 - [x] `sudo ls /etc/letsencrypt/live/kumiji.kermit.is-a.dev/` shows
       `fullchain.pem` and `privkey.pem` — this is the path the new nginx config
       references.
@@ -189,7 +209,7 @@ No trailing slash, no path, `https://` not `http://`. Then **Save** at the
 bottom of the page (easy to miss on a phone; navigating away loses it).
 
 - [x] Added and saved.
-- [ ] The "Sign in with Google" button appears on the new host and a sign-in
+- [x] The "Sign in with Google" button appears on the new host and a sign-in
       completes. Usually live within a minute or two; Google allows up to a few
       hours. If the button is missing *entirely* that is not this setting but
       the frontend build's `VITE_GOOGLE_CLIENT_ID` (step 5). If it appears but
