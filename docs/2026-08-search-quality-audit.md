@@ -28237,3 +28237,37 @@ No deploy needed from here — a deployer needs `git pull` +
 `full_review.py --pending-count`: 247/3000.
 
 **Next**: continue the full re-review at frame 2754.
+
+## 2026-11-07 — hanzi worklist: still 0 pending, no action taken
+
+Checked for an interrupted prior run first (the guardrail script comparing
+decided ids between `HEAD` and the working tree): printed `0`, clean.
+`backend/kanji.db` exists.
+
+`hanzi_worklist_next.py --pending-count` returned **0 pending / 482
+total** — still 0 since 2026-11-02, as every daily check since has also
+found (2026-11-03 through 2026-11-06, though 11-06 only ran the separate
+ja-kanji full-review job and didn't log a hanzi entry). The total dropped
+from 487 to 482 between yesterday's check and today's: `git diff` on
+`docs/hanzi_decomposition_worklist.json` shows five already-decided
+`keep-ours` opaque rows (`hanzi-4f40` 佀, `hanzi-5b98` 官, `hanzi-801c` 耜,
+`hanzi-82e2` 苢, `hanzi-923b` 鈻 — all five had `㠯` as their unresolved
+opaque child) disappeared entirely rather than any row's status changing.
+That's the nightly rebuild (`kanji-daily-review`) recomputing findings from
+`audit_hanzi_weak_evidence.py`, not a decision being recorded — per this
+job's guardrails, dropped/added rows from that rebuild are expected and not
+this run's concern, and the interrupted-run check (which only looks for
+newly-decided ids appearing in the working tree but not `HEAD`) is the
+right tool for the thing that would actually matter here, and it was clean.
+With `-n 20` returning nothing, there was nothing to render, decide, or
+apply today — no pre-flight backup or `pytest` run either, since no write
+was ever going to happen. No `kanji.db` change; only this doc entry plus
+the worklist JSON's own rebuild (already present before this run started,
+committed as-is per the guardrails).
+
+Same open question as the last several entries, still unresolved and still
+not this run's to decide: whether this job should go idle until
+`audit_hanzi_weak_evidence.py --json` is re-run (new `zh-*` rows, or a
+previously-blocked `needs-render` codepoint becoming renderable on this
+machine) surfaces a new backlog, or whether a next phase is queued
+elsewhere.

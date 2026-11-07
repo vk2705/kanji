@@ -500,21 +500,6 @@
   "reviewed_at": "2026-10-01"
  },
  {
-  "id": "hanzi-4f40",
-  "char": "佀",
-  "kind": "opaque",
-  "our_parts": [
-   "亻",
-   "radical number 9",
-   "㠯"
-  ],
-  "opaque_children": "㠯",
-  "status": "keep-ours",
-  "decision": null,
-  "reviewed_by": "claude",
-  "reviewed_at": "2026-10-01"
- },
- {
   "id": "hanzi-4f83",
   "char": "侃",
   "kind": "overlay",
@@ -3307,22 +3292,6 @@
   ],
   "cjkvi_reading": "⿳廿⿴北口女",
   "cjkvi_tags": "",
-  "status": "keep-ours",
-  "decision": null,
-  "reviewed_by": "claude",
-  "reviewed_at": "2026-10-16"
- },
- {
-  "id": "hanzi-5b98",
-  "char": "官",
-  "kind": "opaque",
-  "our_parts": [
-   "宀",
-   "primitive_roof",
-   "roof",
-   "㠯"
-  ],
-  "opaque_children": "㠯",
   "status": "keep-ours",
   "decision": null,
   "reviewed_by": "claude",
@@ -6529,21 +6498,6 @@
   "reviewed_at": "2026-10-28"
  },
  {
-  "id": "hanzi-801c",
-  "char": "耜",
-  "kind": "opaque",
-  "our_parts": [
-   "耒",
-   "handle of plow",
-   "㠯"
-  ],
-  "opaque_children": "㠯",
-  "status": "keep-ours",
-  "decision": null,
-  "reviewed_by": "claude",
-  "reviewed_at": "2026-10-28"
- },
- {
   "id": "hanzi-807f",
   "char": "聿",
   "kind": "overlay",
@@ -6784,21 +6738,6 @@
   ],
   "cjkvi_reading": "⿳艹人𠤎 via 𠤎=⿻乚丿",
   "cjkvi_tags": "G",
-  "status": "keep-ours",
-  "decision": null,
-  "reviewed_by": "claude",
-  "reviewed_at": "2026-10-29"
- },
- {
-  "id": "hanzi-82e2",
-  "char": "苢",
-  "kind": "opaque",
-  "our_parts": [
-   "艹",
-   "grass",
-   "㠯"
-  ],
-  "opaque_children": "㠯",
   "status": "keep-ours",
   "decision": null,
   "reviewed_by": "claude",
@@ -7824,21 +7763,6 @@
   ],
   "cjkvi_reading": "⿱父⿻王丷",
   "cjkvi_tags": "",
-  "status": "keep-ours",
-  "decision": null,
-  "reviewed_by": "claude",
-  "reviewed_at": "2026-11-01"
- },
- {
-  "id": "hanzi-923b",
-  "char": "鈻",
-  "kind": "opaque",
-  "our_parts": [
-   "金",
-   "gold",
-   "㠯"
-  ],
-  "opaque_children": "㠯",
   "status": "keep-ours",
   "decision": null,
   "reviewed_by": "claude",
