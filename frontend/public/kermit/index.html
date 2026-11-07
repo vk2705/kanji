@@ -101,7 +101,7 @@
         <h3>Shape search engine</h3>
         <p>Find a Japanese kanji or Chinese hanzi by the parts you can see, with recursive search through decomposition trees, keyword and glyph lookup, English and Russian.</p>
         <div class="chips"><span class="chip">Python</span><span class="chip">FastAPI</span><span class="chip">SQLite</span><span class="chip">React</span></div>
-        <a href="https://kanji.alteon.help/">Live site →</a>
+        <a href="https://kumiji.kermit.is-a.dev/">Live site →</a>
       </div>
       <div class="card">
         <h3>Glyph decomposition dataset</h3>
@@ -113,7 +113,7 @@
         <h3>MCP server</h3>
         <p>A public, read-only Model Context Protocol server, so AI assistants can search characters by parts and fetch decompositions. No key needed.</p>
         <div class="chips"><span class="chip">MCP</span><span class="chip">Streamable HTTP</span></div>
-        <a href="https://kanji.alteon.help/guide/#ai-access">Connect →</a>
+        <a href="https://kumiji.kermit.is-a.dev/guide/#ai-access">Connect →</a>
       </div>
       <div class="card">
         <h3>Glyph rendering &amp; audit tools</h3>
@@ -133,10 +133,10 @@
   <section>
     <h2>Use it from code</h2>
     <p>The search API is public. For example, characters containing both "sun" and "moon":</p>
-    <pre><code>curl -X POST https://kanji.alteon.help/kanji/api/search/parts \
+    <pre><code>curl -X POST https://kumiji.kermit.is-a.dev/kanji/api/search/parts \
   -H 'Content-Type: application/json' \
   -d '{"parts": ["sun", "moon"], "depth": 1}'</code></pre>
-    <p style="margin-bottom:0">Or add the MCP server to Claude Code:<br><code>claude mcp add --transport http kanji https://kanjimcp.alteon.help/mcp</code></p>
+    <p style="margin-bottom:0">Or add the MCP server to Claude Code:<br><code>claude mcp add --transport http kanji https://kanjimcp.kermit.is-a.dev/mcp</code></p>
   </section>
 
   <section>

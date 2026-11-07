@@ -1,6 +1,6 @@
 """
 mcp_server.py — public, read-only MCP server exposing this project's kanji/hanzi
-shape-search and decomposition lookup as MCP tools, for kanjimcp.alteon.help.
+shape-search and decomposition lookup as MCP tools, for kanjimcp.kermit.is-a.dev.
 
 Runs as its OWN process/systemd unit (kanji-mcp.service), separate from the main
 API (kanji-backend.service) — see DEPLOY_README.md's MCP section. It imports
@@ -144,7 +144,7 @@ def search_by_text(query: str, script: str | None = None) -> list[dict]:
 # that otherwise only contains 127.0.0.1/localhost — so every request proxied
 # in by nginx from the public domain gets "Invalid Host header" unless that
 # domain is listed explicitly here too.
-PUBLIC_HOST = os.environ.get("KANJI_MCP_PUBLIC_HOST", "kanjimcp.alteon.help")
+PUBLIC_HOST = os.environ.get("KANJI_MCP_PUBLIC_HOST", "kanjimcp.kermit.is-a.dev")
 app = mcp.streamable_http_app(
     stateless_http=True,
     transport_security=TransportSecuritySettings(

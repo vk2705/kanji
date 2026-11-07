@@ -37,12 +37,12 @@ it is a "did all the pieces get installed" check.
 
     # through nginx, from anywhere
     ./venv/bin/python3 deploy_smoke_test.py \
-        --base-url https://kanji.alteon.help/kanji/api
+        --base-url https://kumiji.kermit.is-a.dev/kanji/api
 
     # also verify the frontend bundle is the build for this target
     ./venv/bin/python3 deploy_smoke_test.py \
-        --base-url https://kanji.alteon.help/kanji/api \
-        --site-url https://kanji.alteon.help --expect-base /
+        --base-url https://kumiji.kermit.is-a.dev/kanji/api \
+        --site-url https://kumiji.kermit.is-a.dev --expect-base /
 
 Exits 0 only if every check passed.
 """

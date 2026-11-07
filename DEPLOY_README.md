@@ -1,7 +1,7 @@
 # Deploy README — syncing `data.txt` fixes to the live server
 
-For whoever (human or agent) operates production. **As of 2026-09-20,
-production is `kanji.alteon.help`, a dedicated Oracle Cloud VM
+For whoever (human or agent) operates production. **As of 2026-11-07,
+production is `kumiji.kermit.is-a.dev`, a dedicated Oracle Cloud VM
 (161.153.96.217) running nothing but this app** (repo checked out at
 `/opt/kanji`, backend under `/opt/kanji/backend`, frontend built to
 `/opt/kanji/frontend/dist`). `srv.alteon.help` (this repo's original EC2
@@ -130,8 +130,8 @@ To check the public nginx route and the built frontend as well:
 ```bash
 # prod
 ./venv/bin/python3 deploy_smoke_test.py \
-  --base-url https://kanji.alteon.help/kanji/api \
-  --site-url https://kanji.alteon.help --expect-base /
+  --base-url https://kumiji.kermit.is-a.dev/kanji/api \
+  --site-url https://kumiji.kermit.is-a.dev --expect-base /
 
 # the shared dev box
 ./venv/bin/python3 deploy_smoke_test.py \
@@ -180,7 +180,7 @@ cd backend
   --target-dir . --confirm
 sqlite3 kanji.db 'PRAGMA integrity_check;'
 sudo systemctl start kanji-backend.service
-curl -fsS 'https://kanji.alteon.help/kanji/api/search/text?q=one' >/dev/null
+curl -fsS 'https://kumiji.kermit.is-a.dev/kanji/api/search/text?q=one' >/dev/null
 ```
 
 Practice this restore into a temporary directory periodically. A backup is not
@@ -216,6 +216,151 @@ removes the identity information needed to reconstruct real accounts, and it exc
 credentials, sessions, and upload files. Restore production from the encrypted raw
 database/upload backups described above.
 
+## Canonical host move — kanji.alteon.help → kumiji.kermit.is-a.dev (2026-11-07)
+
+A **one-time** procedure, run once on the prod VM. The repo side is already
+done and committed; everything below is server/console work that no code
+session can do. The `alteon.help` domain is being given up, so the direction
+of the existing redirect is reversed: `kumiji.kermit.is-a.dev` serves the
+site, `kanji.alteon.help` and `kumiji.alteon.help` 301 to it.
+
+**Read this first — the one step that is easy to get wrong.** The cert that
+currently covers `kumiji.kermit.is-a.dev` was issued on 2026-10-31 as
+`certbot --nginx -d kumiji.alteon.help -d kumiji.kermit.is-a.dev`: one
+lineage, named after the domain being abandoned, covering both names. If the
+canonical host is left on that cert, then as soon as `alteon.help` stops
+resolving, certbot's renewal of that lineage fails the HTTP-01 challenge for
+its `kumiji.alteon.help` name — and a renewal failure fails the *whole*
+lineage, so the cert for the canonical host expires too and the site goes
+down with a TLS error. **The canonical host needs its own cert covering only
+is-a.dev names.** Step 2 does that.
+
+1. **Pull the repo** on the VM: `cd /opt/kanji && git pull`. (The frontend is
+   not rebuilt until step 5 — the new `index.html` canonical tag and the
+   regenerated sitemap come from that build.)
+
+2. **Issue an is-a.dev-only cert for the canonical host**, before touching
+   nginx, so the config you install in step 3 has a cert to point at:
+
+   ```bash
+   sudo certbot certonly --nginx \
+     --cert-name kumiji.kermit.is-a.dev \
+     -d kumiji.kermit.is-a.dev
+   ```
+
+   `--cert-name` is not optional here: without it certbot may offer to
+   *expand* the existing `kumiji.alteon.help` lineage instead of creating a
+   separate one, which is the exact coupling this step exists to break.
+   Confirm you got a new, single-name lineage:
+
+   ```bash
+   sudo certbot certificates | grep -A3 'kumiji'
+   ```
+
+   You want a `kumiji.kermit.is-a.dev` lineage whose Domains line lists that
+   name **and nothing else**. Its files land at
+   `/etc/letsencrypt/live/kumiji.kermit.is-a.dev/`, which is what
+   `deploy/nginx/prod/kumiji.conf` references.
+
+3. **Same for the MCP host**, whose DNS record already points here:
+
+   ```bash
+   sudo certbot certonly --nginx \
+     --cert-name kanjimcp.kermit.is-a.dev \
+     -d kanjimcp.kermit.is-a.dev
+   ```
+
+4. **Install the nginx configs.** `prod/kumiji.conf` now holds the full app
+   server block and `prod/kanji.conf` the redirects (see
+   `deploy/nginx/README.md`'s file-mapping table — the two swapped roles, so
+   copy both or the site will 301 to itself in a loop):
+
+   ```bash
+   sudo cp /opt/kanji/deploy/nginx/prod/kumiji.conf   /etc/nginx/sites-available/kumiji.conf
+   sudo cp /opt/kanji/deploy/nginx/prod/kanji.conf    /etc/nginx/sites-available/kanji.conf
+   sudo cp /opt/kanji/deploy/nginx/prod/kanjimcp.conf /etc/nginx/sites-available/kanjimcp.conf
+   sudo nginx -t && sudo systemctl reload nginx
+   ```
+
+   `nginx -t` failing on a missing certificate file means step 2 or 3 did not
+   produce the lineage name the config expects — fix that rather than editing
+   the cert path in the config, or the repo copy stops matching the live file.
+
+5. **Rebuild and redeploy the frontend** (step 4's redirect is live but the
+   built bundle still carries the old canonical URL and sitemap):
+
+   ```bash
+   cd /opt/kanji/frontend && npm run build:prod
+   ```
+
+   The build runs `generate_seo_pages.py`, whose `SITE_URL` is now the
+   canonical host, so all ~3,200 per-character pages and the sitemap chunks
+   are rewritten. Copy `dist/` into place however this box normally does it
+   (see "Frontend change deployed but the live site still shows old
+   behavior" below if the browser keeps serving the old bundle).
+
+6. **Google OAuth origins — Google Sign-In is broken until this is done.**
+   In Google Cloud Console → APIs & Services → Credentials → the OAuth
+   client → Authorized JavaScript origins, add
+   `https://kumiji.kermit.is-a.dev`. A redirect does not help: the browser
+   sends the origin it is actually running on, so the canonical name has to
+   be listed in its own right. Removing the `alteon.help` origins can wait
+   until the domain lapses.
+
+7. **Verify**, from anywhere:
+
+   ```bash
+   # canonical host serves the app, with the right canonical tag
+   cd /opt/kanji/backend && ./venv/bin/python3 deploy_smoke_test.py \
+     --base-url https://kumiji.kermit.is-a.dev/kanji/api \
+     --site-url https://kumiji.kermit.is-a.dev --expect-base /
+
+   # old names redirect, preserving the path
+   curl -sI https://kanji.alteon.help/kanji/rtk207.html | head -3
+   curl -sI https://kumiji.alteon.help/ | head -3
+   # both: 301, Location on kumiji.kermit.is-a.dev with the path intact
+
+   # MCP on the new name
+   curl -s https://kanjimcp.kermit.is-a.dev/mcp -X POST \
+     -H 'Content-Type: application/json' \
+     -H 'Accept: application/json, text/event-stream' \
+     -d '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-06-18","capabilities":{},"clientInfo":{"name":"smoketest","version":"1"}}}'
+   ```
+
+8. **Search engines.** Submit the new sitemap and run the change of address
+   — see the SEO section below, which now names the new host. Then push the
+   new URLs: `./venv/bin/python3 indexnow_submit.py --dist /opt/kanji/frontend/dist`
+   (every URL looks new after a host change, so this resubmits the whole
+   site, which is what you want; no `--all` needed).
+
+9. **Android**: rebuild and republish the APK (v1.2, `versionCode` 3). Any
+   APK built before this change bounces the user out to their system browser
+   on launch — it loads `kanji.alteon.help`, and the 301 to a different host
+   reads as an off-host link to `shouldOverrideUrlLoading`.
+
+**What this breaks, expectedly, and does not need fixing:** everyone is
+signed out, because the session cookie is scoped to the hostname it was set
+on and cookies do not cross domains. Analytics `visitor_id` cookies reset
+the same way, so `visit_stats.py` will show a burst of apparently-new
+visitors for a while and the all-time unique count is inflated from here on;
+that is a known artifact of the move, not a bug in the counter.
+
+**When `alteon.help` finally lapses**, clean up so certbot stops trying to
+renew names that no longer resolve:
+
+```bash
+sudo rm /etc/nginx/sites-enabled/kanji.conf          # the redirect-only file
+sudo rm /etc/nginx/sites-available/kanji.conf
+sudo certbot delete --cert-name kanji.alteon.help
+sudo certbot delete --cert-name kumiji.alteon.help
+sudo certbot delete --cert-name kanjimcp.alteon.help
+sudo nginx -t && sudo systemctl reload nginx
+```
+
+Also delete the retiring `kanjimcp.alteon.help` block from
+`kanjimcp.conf` at that point, and delete `deploy/nginx/prod/kanji.conf`
+from the repo so the reference copies keep matching the live files.
+
 ## SEO / getting Google to find the site (added 2026-09-01, owner request; updated 2026-09-21 for per-kanji pages)
 
 The frontend build ships `robots.txt` and `sitemap.xml` automatically
@@ -224,9 +369,9 @@ normal build step) — no extra action needed beyond the usual frontend
 rebuild-and-deploy step (`npm run build:prod` on the dedicated VM; see
 `CLAUDE.md`'s Deployment section and `deploy/nginx/README.md`). `index.html`
 also has a real `<title>`/`<meta description>`/canonical URL/Open Graph
-tags. Since prod (`kanji.alteon.help`) is now a **dedicated** VM serving the
+tags. Since prod (`kumiji.kermit.is-a.dev`) is a **dedicated** VM serving the
 app from the domain root (not a `/kanji/` path prefix on a shared box), both
-files already sit at the real domain root — `https://kanji.alteon.help/robots.txt`
+files already sit at the real domain root — `https://kumiji.kermit.is-a.dev/robots.txt`
 and `.../sitemap.xml` — with no path-prefix rewriting and no other project's
 config to coordinate with. That resolves what used to be the hard part of
 this section on the old shared srv.alteon.help box (a domain-root
@@ -235,7 +380,7 @@ this section on the old shared srv.alteon.help box (a domain-root
 Every frontend build now runs `backend/generate_seo_pages.py` first. It writes a
 static, crawlable page for every public kanji/hanzi to `/kanji/{id}.html`, including
 its public decomposition, and regenerates the sitemap (an index at `/sitemap.xml` over `/sitemap-N.xml` chunks of 5,000 URLs, all generated, none committed) with those canonical URLs.
-For example, `https://kanji.alteon.help/kanji/rtk207.html` is the crawlable page for
+For example, `https://kumiji.kermit.is-a.dev/kanji/rtk207.html` is the crawlable page for
 the RTK "tree" entry. The output is generated from the live database and deliberately
 is not committed. Rebuild the frontend after any public decomposition change to update
 Google's crawl surface.
@@ -248,7 +393,7 @@ can do on its own:
 1. **Google Search Console.** Needs the owner's Google account, so has to be
    done by a human:
    - console.google.com/search-console → Add property → Domain (or URL
-     prefix) → `kanji.alteon.help`.
+     prefix) → `kumiji.kermit.is-a.dev`.
    - Verify ownership — easiest is the "HTML tag" method: paste the
      `<meta name="google-site-verification" content="...">` tag Search
      Console gives you into `frontend/index.html`'s `<head>` (ask a future
@@ -256,16 +401,24 @@ can do on its own:
      verification page. The "HTML file upload" method also works too now
      that the app owns the whole domain root (drop the given file into
      `frontend/public/`).
-   - Once verified: Sitemaps → submit `https://kanji.alteon.help/sitemap.xml`.
-   - URL Inspection tool → paste `https://kanji.alteon.help/` → "Request
+   - Once verified: Sitemaps → submit `https://kumiji.kermit.is-a.dev/sitemap.xml`.
+   - URL Inspection tool → paste `https://kumiji.kermit.is-a.dev/` → "Request
      Indexing" — this is the fastest way to get the first crawl to happen,
      rather than waiting for Google to discover the site organically.
-   - If Search Console already had a verified property for the old
-     `srv.alteon.help/kanji/` URL prefix from before the move, that
-     property is now stale (dev-only) — add `kanji.alteon.help` as a new
-     property rather than trying to migrate the old one; Search Console
-     doesn't have a clean "this site moved to a different domain" flow
-     for a URL-prefix property, only for a Domain property.
+   - Older properties (`srv.alteon.help/kanji/`, `kanji.alteon.help`) are
+     stale. Add `kumiji.kermit.is-a.dev` as a new property rather than
+     trying to migrate one; Search Console has no clean "this site moved to
+     a different domain" flow for a URL-prefix property, only for a Domain
+     property.
+   - **Then use Change of Address** (Settings → Change of address) on the
+     `kanji.alteon.help` property, pointing at the new one, if and only if
+     that old property is a *Domain* property — it is what makes Google
+     transfer the ranking signal rather than treating the new host as an
+     unrelated site. It requires both properties verified and the 301 live,
+     which `deploy/nginx/prod/kanji.conf` provides. If the old property is a
+     URL-prefix property, there is no Change of Address for it; the 301 plus
+     a fresh sitemap submission is all you get, and it does work, just more
+     slowly.
 
 ### IndexNow — pushing URLs to Bing and Yandex (added 2026-10-31)
 
@@ -295,7 +448,7 @@ check afterward whether any of this actually brought real visitors — it
 already excludes bots that only ever hit URLs directly without running the
 frontend JS, so a genuine uptick there is a genuine uptick, not crawler noise.
 
-## MCP server — kanjimcp.alteon.help (added 2026-09-26)
+## MCP server — kanjimcp.kermit.is-a.dev (added 2026-09-26, moved 2026-11-07)
 
 A public, read-only MCP (Model Context Protocol) server exposing kanji/hanzi
 shape search and decomposition lookup as MCP tools, so an MCP-capable client
@@ -316,9 +469,13 @@ and each tool's own docstring in `mcp_server.py` for exact parameters.
 **One-time setup on the prod VM** (161.153.96.217 — same dedicated machine as
 the main app; this is not a new server):
 
-1. **DNS**: point `kanjimcp.alteon.help` at 161.153.96.217 (same A/AAAA
-   records as `kanji.alteon.help`, different name) — needs whoever owns the
-   `alteon.help` DNS zone; not something done from this repo.
+1. **DNS**: `kanjimcp.kermit.is-a.dev` already points at 161.153.96.217 (an A
+   record under `kermit.is-a.dev`, which is registered via the
+   is-a-dev/register repo — see `domains/kermit.json` there). The old
+   `kanjimcp.alteon.help` also still resolves and still serves; it is
+   deliberately **not** redirected, because Streamable HTTP speaks POST and
+   many clients downgrade a redirected POST to GET rather than replaying it,
+   which would break configured clients instead of moving them.
 2. **Install the new dependency**: `cd /opt/kanji/backend && source venv/bin/activate && pip install -r requirements.txt` (adds `mcp`, pinned in `requirements.txt`).
 3. **systemd unit** — create `/etc/systemd/system/kanji-mcp.service`:
    ```ini
@@ -345,13 +502,13 @@ the main app; this is not a new server):
    `/etc/nginx/sites-available/kanjimcp.conf`, symlink it into
    `sites-enabled/`, same as the main `kanji.conf` (see
    `deploy/nginx/README.md`'s file-mapping table).
-5. **TLS**: `sudo certbot --nginx -d kanjimcp.alteon.help` (same tool/flow
-   already used for `kanji.alteon.help`) — this fills in the
+5. **TLS**: `sudo certbot --nginx -d kanjimcp.kermit.is-a.dev` (same tool/flow
+   already used for the canonical host) — this fills in the
    `ssl_certificate`/`ssl_certificate_key` paths `kanjimcp.conf` already
    references and sets up the HTTP->HTTPS redirect block, same as Certbot did
    for the main domain.
 6. `sudo nginx -t && sudo systemctl reload nginx`.
-7. **Verify**: `curl -s https://kanjimcp.alteon.help/mcp -X POST -H 'Content-Type: application/json' -H 'Accept: application/json, text/event-stream' -d '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-06-18","capabilities":{},"clientInfo":{"name":"smoketest","version":"1"}}}'`
+7. **Verify**: `curl -s https://kanjimcp.kermit.is-a.dev/mcp -X POST -H 'Content-Type: application/json' -H 'Accept: application/json, text/event-stream' -d '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-06-18","capabilities":{},"clientInfo":{"name":"smoketest","version":"1"}}}'`
    should return a `200` with a JSON-RPC `result` (server info + capabilities),
    not a connection error or 502.
 
@@ -376,7 +533,7 @@ Needs the owner's own Google account — can't be done by an AI session:
 
 1. [Google Cloud Console](https://console.cloud.google.com/apis/credentials)
    → Create OAuth client ID → Web application → Authorized JavaScript
-   origins: **both** `https://kanji.alteon.help` (prod) and
+   origins: **both** `https://kumiji.kermit.is-a.dev` (prod) and
    `https://srv.alteon.help` (dev), plus `http://localhost:5173` for local
    dev — one OAuth client, three origins, since dev and prod deliberately
    share the same client id (see `deploy/nginx/README.md`'s "Google OAuth
@@ -419,7 +576,7 @@ that's easy to skip or get wrong:
    must run `cd frontend && npm install` after pulling, then the build
    command for **that specific machine** — they are not interchangeable
    (see `deploy/nginx/README.md`):
-   - Prod (`kanji.alteon.help`, dedicated VM): `npm run build:prod`, then
+   - Prod (`kumiji.kermit.is-a.dev`, dedicated VM): `npm run build:prod`, then
      copy `dist/` to `/opt/kanji/frontend/dist`.
    - Dev (`srv.alteon.help`, shared box): `npm run build:dev`, then copy
      `dist/` to `/usr/share/nginx/html/kanji/`.
