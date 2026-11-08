@@ -28272,6 +28272,28 @@ previously-blocked `needs-render` codepoint becoming renderable on this
 machine) surfaces a new backlog, or whether a next phase is queued
 elsewhere.
 
+## 2026-11-08 — hanzi worklist: still 0 pending, no action taken
+
+Checked for an interrupted prior run first (the guardrail script comparing
+decided ids between `HEAD` and the working tree): printed `0`, clean.
+`backend/kanji.db` exists; `git status` on both tracked files this job
+touches showed nothing to commit.
+
+`hanzi_worklist_next.py --pending-count` returned **0 pending / 482
+total** — unchanged from 2026-11-07, and `git diff` on
+`docs/hanzi_decomposition_worklist.json` was empty (not even a rebuild
+touched it today, unlike 11-07's drop from 487 to 482). `-n 20` returned
+nothing to review, so there was nothing to render or decide — no pre-flight
+backup or `pytest` run either, since no write was ever going to happen. No
+`kanji.db` change; only this doc entry.
+
+Same open question as the last several entries, still unresolved and still
+not this run's to decide: whether this job should go idle until
+`audit_hanzi_weak_evidence.py --json` is re-run (new `zh-*` rows, or a
+previously-blocked `needs-render` codepoint becoming renderable on this
+machine) surfaces a new backlog, or whether a next phase is queued
+elsewhere.
+
 ## 2026-11-07 — canonical host reversed: kumiji.kermit.is-a.dev is now the site
 
 Owner request: the 2026-10-31 arrangement is inverted, because the `alteon.help`
