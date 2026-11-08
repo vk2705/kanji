@@ -28713,3 +28713,129 @@ deploy from here. A deployer needs `git pull` + `sync_system_data.py
 `full_review.py --pending-count`: 97 pending / 3000 total.
 
 **Next**: continue the full re-review at frame 2904.
+
+## 2026-11-08 — full re-review: frames 2904–2953 (44 keep, 6 fixed, 0 needs-render)
+
+Unattended daily run. `git pull --no-rebase` was already up to date; no
+mid-run signs in `data.txt`/`kanji_full_review.json`. Baseline before any
+edit: `pytest -q` 108 passed, `./regression_fresh.sh` 1333/1333,
+`audit_radicals.py` 0 undefined.
+
+Six real fixes, all stroke-count/lookalike bugs rather than CSV
+disagreements (every frame in this range is past the 6th-edition cutoff, so
+Heisig's own components column is silent on all 50):
+
+- **rtk2904 叢** (conglomerate): was `耳,又,羊`. cjkvi `⿱丵取` — rendered `丵`
+  (twigs) beside `羊`: completely different shapes, a wrong lookalike, not a
+  stroke match. `取` (already `rtk882`'s own row, and already used whole in
+  `rtk883` 趣 / `rtk884` 最) restores the bottom. Fixed to `丵,取` with a new
+  `prim-twigs` row for `丵` (see below).
+- **rtk2909 於** (at): was `方,𠆢`. cjkvi `⿰方仒` — rendered `於` zoomed: the
+  right side is a 3-stroke shape (umbrella + one extra diagonal below), not
+  the bare 2-stroke `𠆢` (`prim-umbrella`, correctly used elsewhere in
+  全/金/介). Fixed to `方,仒` with a new `prim-canopy` row for `仒`.
+- **rtk2917 赫** (suddenly): was a single `赤`. cjkvi `⿰赤赤` — 赫 is
+  literally two `赤` side by side, confirmed by render; the row was simply
+  undercounted by one glyph, not a wrong shape. Fixed to `赤,赤`.
+- **rtk2921 琵** (biwa) and **rtk2922 琶** (lute): both were `王,...` with a
+  single `王`. cjkvi gives both `⿱玨...` — `玨` is two `王` side by side
+  (confirmed by rendering `玨` next to bare `王`), and Google's hint for 琶
+  already showed `王,王,巴`. Both undercounted by one `王`. Fixed to
+  `王,王,比` and `王,王,巴` respectively — same bug, same fix, sibling rows.
+- **rtk2927 丞** (help): was `ノ,一,亅` — only 3 strokes for a kanji with far
+  more, badly undercounted stroke soup. cjkvi `⿱氶一`: `氶` rendered alone
+  matches `丞` minus its top bar exactly. Fixed to use `氶` as a unit
+  (matching the project's existing precedent of using `卯`/`留`/`取`/`睿`
+  etc. as whole units rather than flattening them), with a new
+  `prim-uphold` row.
+
+**New primitives** (`丵`/`仒`/`氶` only resolved via the hanzi import's own
+`zh-*` rows — `audit_radicals.py`'s shadow build, which doesn't run
+`import_hanzi.py`, correctly flagged all three as unnamed after the first
+pass of edits). Registered `prim-twigs:丵:twigs`, `prim-canopy:仒:canopy`,
+`prim-uphold:氶:uphold` at the end of `data.txt`, same pattern as
+`prim-receipt`/`prim-umbrella`/`prim-lifebelt`. `audit_radicals.py` back to
+0 undefined after adding them.
+
+**Three near-misses that turned out to already be correctly decided** —
+worth recording so a future session doesn't re-open them on the same
+first-glance signal:
+
+- **rtk2910 套** (hackneyed): cjkvi `⿱大镸` (the simplified "long" radical,
+  not `長`) made the row's `大,長,厶` look like it might be a `長`/`镸`
+  lookalike swap plus a phantom `厶`. The 2026-10-24 session already
+  resolved this exact question with KanjiVG (see that date's entry above) —
+  `厶` is genuinely present and `長` (not `镸`) is correct. My own
+  font-rendering comparison alone pointed the wrong way here; the existing
+  stroke-level analysis is more reliable than a single render, per the
+  "render can lie" caveat. Left alone.
+- **rtk2913 壷** (crock): cjkvi only offers an unencoded placeholder
+  (`⿱士⑧`). Also already resolved 2026-10-24 via KanjiVG: the current
+  `｜,一,口,士,冖` is `rtk1950` 亜's own flattened breakdown spelled out
+  under `士`, not phantom content. Left alone.
+- **rtk2907 卿** (magistrate): `prim-receipt,皀,卩` — independently
+  re-confirmed by render (same `𠂎` left-hook shape as `卯`/`留`/`貿`'s own
+  `prim-receipt`), and already fixed+documented 2026-10-24. Left alone.
+
+**Two rows kept despite looking like candidates for a fix, after reading a
+prior session's own analysis of the exact same row**, to avoid a less-well-
+researched override:
+
+- **rtk2914 叡** (sapience): `八,卜,又,目` looked at first like it should
+  become `睿,又` (cjkvi `⿰睿又`, and `睿` renders as one unmistakable unit
+  inside 叡). But a 2026-09 session already worked this exact row down to
+  cjkvi's own full expansion of `睿` (`⺊+𠔼+八+人+目`) and found the current
+  `卜/又/目` already track `⺊/人/目` closely, deliberately choosing not to
+  rename to `睿` after removing only the genuine `冖` phantom. Not reopening
+  without a clearer signal than "looks like one unit on render."
+- **rtk2942 黎** (tenebrous): `禾,勿,人,氺` looked suspicious against cjkvi's
+  opaque `𥝢` top, but `𥝢 = ⿰禾⿹勹丿` and `勿` is already established
+  elsewhere (`易`, `物`) as exactly `丿+勹` — the row already tracks `𥝢`'s
+  real constituents and was already fixed by an even earlier session (`黍`→
+  `氺`, dropped a duplicate `禾`/`水`). Keep.
+
+**Overlap-operator (`⿻`) rows, rendered and kept**: `rtk2924` 乖 (`北,千`,
+cjkvi `⿻千北`) and `rtk2937` 巫 (`工,从`, cjkvi `⿻工从`). In both, rendering
+the host large shows every named piece still independently recognizable —
+乖's `北`-legs and `千`-cross share a central stroke but both read clearly;
+巫's `工` and `从` don't even share a stroke, just overlapping bounding
+boxes. Neither is the 蝿-style case CLAUDE.md warns about, where the overlaid
+result reads as a third, different shape. Kept as-is.
+
+**One convention-consistency keep**: `rtk2952` 陀 (`匕,宀,阝`) — cjkvi gives
+`它 = 宀+匕`, and this project already flattens `它` the same way in `rtk558`
+蛇 (`虫,匕,宀`). Changing only 陀 to use `它` as a unit would create a fresh
+inconsistency with 蛇 rather than fix one; left both alone (蛇 is out of
+today's frame range).
+
+**rtk2930 疏** (transcription) is a "render over codepoint" case: cjkvi's
+own IDS gives `⿰𤴔㐬` for the left half, but `𤴔` (U+24D14) rendered in this
+font is visually identical to plain `正`, which does not match 疏's actual
+left side at all — rendered directly, 疏's left half matches `疋` (U+758B)
+pixel-for-pixel. Kept the existing `疋,㐬`.
+
+The other 38 rows matched cjkvi-ids exactly (or an attested GTJK/K variant)
+on inspection, using already-resolvable codepoints, with no CSV data either
+way (every id_5th_ed here is 2043+).
+
+No further shape-family follow-ups beyond what's already noted above (玨
+fix applied to both 琵 and 琶 together, as sibling rows sharing the bug).
+
+**Tests**: baseline (before edits) — `pytest -q` 108 passed,
+`./regression_fresh.sh` 1333/1333, `audit_radicals.py` 0 undefined. After
+the six `data.txt` fixes and three new `prim-` rows: `audit_radicals.py`
+back to 0 undefined (was 3 after the first pass, before the new `prim-`
+rows were added), `pytest -q` 108 passed (unchanged), `./regression_fresh.sh`
+1333/1333 (unchanged — no existing pin referenced any of the six rows, so
+`test_regression_fixes.py` needed no edit). `sync_system_data.py --dry-run`
+then for real against this machine's live `kanji.db`: 3 kanji inserted (the
+new primitives), 9 aliases added, 8 decompositions replaced; re-ran
+`pytest -q` and `audit_radicals.py` after, both clean. Live-DB spot check of
+all six fixed rows' `parts` rows confirms they match.
+
+A deployer needs `git pull` + `sync_system_data.py --dry-run` then for real
+on prod to pick up today's six `data.txt` fixes and three new primitives.
+
+`full_review.py --pending-count`: 47 pending / 3000 total.
+
+**Next**: continue the full re-review at frame 2954.

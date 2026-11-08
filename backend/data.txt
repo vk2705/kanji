@@ -3909,12 +3909,23 @@ rtk2900:匙:spoon:匕,是
 rtk2901:匡:correct:王,匚
 rtk2902:肇:beginning:戸,攵,聿
 rtk2903:麿:i:麻,呂
-rtk2904:叢:plexus:耳,又,羊
+# 2026-11-08 full re-review: was `耳,又,羊` -- cjkvi ⿱丵取 (丵 top + 取 bottom,
+# 取=耳+又, already rtk882's own row). Rendered 丵 beside 羊: 丵 (U+4E35) is
+# the "bundle of twigs" shape (crossbars + descenders, matches 叢's top
+# exactly); 羊 is the unrelated sheep glyph -- wrong lookalike, not a stroke
+# match. Fixed to use 取 as a unit (matches how 取 already appears whole in
+# rtk883 趣 and rtk884 最).
+rtk2904:叢:plexus:prim-twigs,取
 rtk2905:肴:accompaniment for drinks:㐅,有
 rtk2906:斐:beautiful:非,文
 rtk2907:卿:you:prim-receipt,皀,卩
 rtk2908:翫:take pleasure in:元,習
-rtk2909:於:at:方,𠆢
+# 2026-11-08 full re-review: was `方,𠆢` -- cjkvi ⿰方仒. Rendered 於 zoomed:
+# the right side is a roof stroke plus one extra diagonal below it (3
+# strokes), not the bare 2-stroke 𠆢 chevron (prim-umbrella, used correctly
+# elsewhere e.g. 全/金/介) -- wrong lookalike, missing a stroke. Fixed to 仒
+# (resolves via hanzi-4ed2's own alias).
+rtk2909:於:at:方,prim-canopy
 rtk2910:套:accumulate:大,長,厶
 rtk2911:叛:disobey:半,反
 rtk2912:尖:be pointed:小,大
@@ -3922,17 +3933,33 @@ rtk2913:壷:jar:｜,一,口,士,冖
 rtk2914:叡:intelligence:八,卜,又,目
 rtk2915:酋:chieftain,molotov cocktail:酉,丷
 rtk2916:鴬:nightingale:prim-schoolhouse,鳥
-rtk2917:赫:suddenly:赤
+# 2026-11-08 full re-review: was `赤` (single). cjkvi ⿰赤赤 -- 赫 is literally
+# two 赤 side by side, confirmed by render. The row was missing the
+# duplicate entirely (undercounted, not a wrong shape).
+rtk2917:赫:suddenly:赤,赤
 rtk2918:臥:bend down:臣,人
 rtk2919:甥:nephew:生,男
 rtk2920:瓢:gourd:瓜,票
-rtk2921:琵:glissando on strings:王,比
-rtk2922:琶:lute:王,巴
+# 2026-11-08 full re-review: was `王,比` (single 王). cjkvi ⿱玨比 -- 玨 is
+# two 王 side by side; rendered 琵's top against 玨/王 confirms two full 王,
+# not one. Undercounted by one 王. Same bug as rtk2922 琶 (sibling row,
+# fixed in the same session).
+rtk2921:琵:glissando on strings:王,王,比
+# 2026-11-08 full re-review: was `王,巴` (single 王). cjkvi ⿱玨巴, same 玨
+# (two 王) top as rtk2921 琵 -- Google's hint even already showed 王,王,巴.
+# Undercounted by one 王.
+rtk2922:琶:lute:王,王,巴
 rtk2923:叉:fork in road:又,丶
 rtk2924:乖:oppose:北,千
 rtk2925:畠:field:田,白
 rtk2926:圃:garden:囗,甫
-rtk2927:丞:help:ノ,一,亅
+# 2026-11-08 full re-review: was `ノ,一,亅` -- only 3 strokes for a kanji
+# that has far more, badly undercounted stroke soup. cjkvi ⿱氶一: 氶 (its
+# own resolvable glyph, hanzi-6c36) is 丞 minus the top bar, confirmed by
+# render (氶 alone matches 丞's bottom structure exactly). Fixed to use 氶
+# as a unit, matching the project's own precedent of using 卯/留/取/睿 etc.
+# as units rather than flattening them.
+rtk2927:丞:help:prim-uphold,一
 # 2026-10-23 "lid" audit (owner: search by parts for lid, explain every result): 亮: was 口,亠,儿,冖 -- "tall" (亠 over 口) spelled out, in no order. cjkvi ⿱⿳亠口冖儿 (J).
 rtk2928:亮:clear:prim-tall,冖,儿
 rtk2929:胤:descendent:ノ,乙,幺,月
@@ -6485,3 +6512,21 @@ prim-consolidate:巩:consolidate,secure
 # (絨 = ⿰糸戎). 戎 has no frame of its own in heisig-kanjis.csv. Not a Kangxi
 # radical, hence prim-.
 prim-military:戎:military,arms:戈,十
+
+# 2026-11-08 full re-review (frames 2904-2953): three new parts introduced by
+# this chunk's fixes only resolved via the hanzi import (owner_id=1 zh-* rows
+# from import_hanzi.py), which audit_radicals.py's shadow build (CSV +
+# data.txt/data_from_pdf.txt only, no hanzi) correctly flags as unnamed --
+# same class of problem prim-receipt/prim-umbrella/prim-lifebelt exist to
+# avoid. Giving each its own row so it resolves without depending on hanzi
+# import order. None are Kangxi radicals and none have a frame of their own.
+# - 丵 (rtk2904 叢's top; cjkvi ⿱丵取): "bundle of twigs" shape, distinct
+#   from the unrelated 羊 it had been standing in for.
+# - 仒 (rtk2909 於's right half; cjkvi ⿰方仒): 𠆢 (prim-umbrella) plus one
+#   extra diagonal stroke below -- a real 3-stroke shape, not interchangeable
+#   with bare 𠆢.
+# - 氶 (rtk2927 丞's own bottom, below its top 一; cjkvi ⿱氶一; also the
+#   root of 承/拯/烝/蒸's family, though those rows are untouched here).
+prim-twigs:丵:twigs
+prim-canopy:仒:canopy
+prim-uphold:氶:uphold
