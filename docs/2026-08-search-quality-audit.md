@@ -28608,3 +28608,108 @@ rtk1340, rtk183, rtk476}` → `{rtk12, rtk1340, rtk183}`); re-ran clean,
 (unchanged). Applied to this machine's DB only
 (`sync_system_data.py`) — prod needs `git pull` + `sync_system_data.py` from
 a deployer. `full_review.py --pending-count`: 147 pending / 3000 total.
+
+## 2026-11-08 — full re-review: frames 2854–2903 (46 keep, 1 fixed, 3 needs-render)
+
+Today's chunk, frames 2854-2903 (picked up where the 2804-2853 chunk left off;
+`full_review.py --pending-count` confirmed 147 pending starting at frame 2854).
+All `id_5th_ed` > 2042, so every row's empty Heisig-components column is "no
+data", not atomicity evidence; decided from render + cjkvi-ids alone, per
+CLAUDE.md.
+
+Before deciding anything, found that `full_review.py`'s cached "data.txt at
+start" snapshot (taken 2026-10-21) is stale for five of the fifty rows —
+other sessions' shape-family follow-ups had already corrected them in the
+meantime, before the sequential review reached their frames:
+
+- `rtk2857` 鑿: the 2026-10-23 session (shape-family follow-up from rtk766)
+  already dropped a redundant `殳`-sub-parts restatement (`几,又`) here, and
+  left a comment explicitly flagging the remaining `臼,干,丷` (for `𣫞`'s
+  `⿻丵臼` overlay) as unresolved.
+- `rtk2858` 艘: the same 2026-10-23 session already fixed `舟,日,支` → `舟,日,又`,
+  deliberately choosing `日`/`又` (not cjkvi's literal `臼`/`｜`+`又`) to match
+  the established shape-family reading already used by `rtk1201` 捜 and
+  `rtk1818` 痩 for the same `叟`-shape region.
+- `rtk2868` 嘉: fixed back on 2026-11-05 (a frame-1702-1752 session's
+  shape-family follow-up for the `壴` primitive) — `口,士,力` → `壴,加`,
+  matching cjkvi `⿱壴加` exactly.
+- `rtk2879` 鹵: the 2026-10-23 session fixed the top stroke `十` → `卜`
+  (rendered beside `占`'s already-registered `⺊`/`kangxi25` top — pixel-for-
+  pixel the same divination-stroke shape, not `十`'s straight cross).
+- `rtk2898` 毅: the same 2026-10-23 rtk766 follow-up dropped `几,又` (殳's own
+  sub-parts, redundant) and `亠` (rendered `豙` beside `豕`: `豙`'s top is `立`
+  alone, no separate `亠`).
+
+All five are recorded `keep` (current row is already right) with a note
+pointing to the earlier fix, rather than re-decided against stale cached
+data — same pattern as `rtk2850`/`rtk2852` in the 2026-11-07 entry.
+
+One real fix:
+
+- `rtk2889` 秦 "Manchu dynasty": primary was stroke-soup `一,禾,二,人,大`
+  flattening the top shape. The already-present alternate `禾,𡗗` matches
+  cjkvi `⿱𡗗禾` and render_glyphs.py — the top is exactly `prim-bonsai`
+  (`𡗗`), the same primitive already used by `泰`/`春`/`奏`/`実`/`奉`
+  (frames 1690-1695). Promoted the alternate to primary (same move as the
+  2026-11-07 `rtk2794` 鍾 fix). No other host uses the old stroke-soup
+  pattern (grepped for it). No regression pin referenced the old primary,
+  so none needed correcting.
+
+Three rows recorded `needs-render` rather than guessed, per the standing
+conservative-when-unsure instruction:
+
+- `rtk2857` 鑿: see above — `丵` (overlapping `臼` per cjkvi's `⿻`) has no
+  clean codepoint/primitive in this file, and the render is genuinely
+  ambiguous about whether `干,丷` is an acceptable proxy for it. Left as the
+  2026-10-23 session left it.
+- `rtk2867` 爾: current row `｜,一,八,冂,爻,巾`. cjkvi `⿱一⿱八⿻巾㸚` puts a
+  full-width double-crosshatch (`㸚`, two `爻` side by side) in the middle,
+  not single `爻`'s narrower 2-stroke X. Rendered zoomed beside `巾`/`㸚`/`爻`:
+  the woven section in `爾` does look full-width, suggesting an undercount,
+  but `㸚` isn't a primitive here yet and the rest of the split (`｜,一,八,冂`)
+  wasn't confident enough to commit a fix for this rare, low-value kanji
+  without a closer look.
+- `rtk2870` 兜: current row `白,儿`. cjkvi `⿱⿲②白コ儿` puts a horizontal
+  triple (unencoded placeholder, `白`, `コ`) above `儿`, not `白` alone.
+  Rendered zoomed beside `白`/`儿`/`コ`: small flanking strokes are visible on
+  both sides of `白` that the row doesn't name, but at this render resolution
+  I couldn't confidently confirm the right-hand one is really `コ`.
+
+The other 44 rows (46 total `keep`, minus the 2 above that needed their own
+paragraph) all matched cjkvi-ids exactly on render, using already-established
+primitives, with no CSV data to contradict them (every frame here is past the
+6th-edition cutoff). Two worth a one-line note: `rtk2894` 嚢's six-part row
+(`一,中,八,冖,𠀎,𧘇`) looked like stroke-soup at a glance but turned out to be
+exactly the 6 leaves cjkvi's nested IDS names (`⿳⿻一中冖⿳八𠀎𧘇`), just flattened
+— a flat part list doesn't encode nesting, so this isn't a flattening error.
+`rtk2893` 夷 (`大,弓`) rests on a cjkvi `⿻` overlay (shared strokes), but both
+`大` and `弓` are independently recognizable on render despite the shared
+stroke, so naming both stays accurate rather than double-counting fabricated
+content.
+
+No shape-family follow-ups needed beyond what the earlier sessions already
+did for rtk2857/2858/2868/2879/2898 — grepped for the rtk2889 stroke-soup
+pattern (`一,*,二,人,大`) project-wide and found no other host using it.
+
+**Tests**: baseline (fresh DB, before any edit) — `test_regression_fixes.py`
+1333/1333 (no hanzi rows in a freshly-seeded DB, so the 4 hanzi spot-checks
+skip themselves, per CLAUDE.md), `pytest -q` 83 passed, `audit_overflatten.py`
+0, `audit_self_reference.py` 0, `audit_radicals.py` 0/0, `audit_primary_choice.py`
+0/55, `audit_phantom_parts.py --in-csv-range` unchanged at 10 phantom parts
+across 9 kanji (known backlog, out of scope today). After the `rtk2889`
+`data.txt` fix and a fresh rebuild: `test_regression_fixes.py` 1333/1333
+(unchanged — no pin referenced the old primary), `pytest -q` 83 passed
+(unchanged), `audit_overflatten.py` 0, `audit_self_reference.py` 0,
+`audit_radicals.py` 0/0, `audit_primary_choice.py` 0/55,
+`audit_phantom_parts.py --in-csv-range` unchanged. `sync_system_data.py
+--dry-run` reported 0 changes (this sandbox's `kanji.db` was already rebuilt
+fresh from the fixed source files). Frontend: `npm run lint` clean, `npm run
+build:prod` succeeded.
+
+This container has no server to run `sync_system_data.py` against — no
+deploy from here. A deployer needs `git pull` + `sync_system_data.py
+--dry-run` then for real on prod to pick up today's one `data.txt` fix.
+
+`full_review.py --pending-count`: 97 pending / 3000 total.
+
+**Next**: continue the full re-review at frame 2904.
