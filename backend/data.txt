@@ -3884,7 +3884,12 @@ rtk2885:牌:label:卑,片
 rtk2886:覗:peep:司,見
 rtk2887:齟:uneven:歯,且
 rtk2888:齬:irregular teeth:歯,吾
-rtk2889:秦:manchu dynasty:一,禾,二,人,大;禾,𡗗
+# 2026-11-08 full re-review: primary was stroke-soup 一,禾,二,人,大
+# flattening the top shape; the already-present alternate 禾,𡗗 matches
+# cjkvi ⿱𡗗禾ー and render_glyphs.py (top is exactly prim-bonsai, the same
+# shape already used by 泰/春/奏/実/奉, frames 1690-1695). Promoted the
+# alternate to primary. No other host uses the old stroke-soup pattern.
+rtk2889:秦:manchu dynasty:禾,𡗗;一,禾,二,人,大
 rtk2890:雀:sparrow:小,隹
 rtk2891:隼:falcon:十,隹
 rtk2892:耀:shine:光,翟
