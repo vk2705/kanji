@@ -28984,3 +28984,13 @@ identified individually per-host), `suggest_heisig_aliases.py --near 0.8 --all`'
 `CJKRadicals.txt`-attested 彐 rename (housekeeping, touches every pin
 referencing it), or `rtk2985` 龍's `needs-render` flag left above (a person,
 not an audit session, should settle it — no clean source to render against).
+
+## 2026-11-09 — full re-review: status check, no work done
+
+Daily timer fired for today's chunk. `git pull` found nothing new on
+`master`; `full_review.py --pending-count` reports **0 pending / 3000
+total**, unchanged since the previous session finished frames 2954-3000 on
+2026-11-09 (commit `c3879f5`). No kanji left to review, so no render, no
+`data.txt` edit, and nothing to sync. Stopping per this job's own guardrail
+("If there are 0 pending rows, say so in the doc entry and stop"). Next pick
+from the standing backlog list directly above.
