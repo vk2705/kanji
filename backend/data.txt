@@ -4014,14 +4014,14 @@ rtk2965:牟:pupil (eye):牛,厶
 rtk2966:迦:(used phonetically):辶,加
 rtk2967:珈:ornamental hairpin:加,王
 rtk2968:琲:string of many pearls:王,非
-rtk2969:檜:japanese cypress:日,木,𠆢,一
-rtk2970:轡:bit (horse):口,糸,車
+rtk2969:檜:japanese cypress:會,木
+rtk2970:轡:bit (horse):糸,車,糸,口
 rtk2971:淵:abyss:一,水,爿,片
 rtk2972:伍:five:亻,五
 rtk2973:什:utensil:亻,十
 rtk2974:萬:ten thousand:艹,禺
 rtk2975:邁:go:辶,萬
-rtk2976:燭:light:火,虫,勹
+rtk2976:燭:light:火,罒,勹,虫
 rtk2977:逞:sturdy:呈,辶
 rtk2978:燈:lamp:火,登
 rtk2979:裡:reverse:衤,里
@@ -4036,12 +4036,12 @@ rtk2987:聾:deafness:耳,龍
 rtk2988:慾:covetousness:欲,心
 rtk2989:嶽:peak:山,獄
 rtk2990:國:country:囗,或
-rtk2991:脛:leg:月,工,巛
-rtk2992:勁:strong:工,巛,力
+rtk2991:脛:leg:月,一,巛,工
+rtk2992:勁:strong:一,巛,工,力
 rtk2993:祀:enshrine:礻,巳;巳,示
-rtk2994:祓:exorcise:礻,犬
+rtk2994:祓:exorcise:礻,犮;犮,示
 rtk2995:躇:hesitate:著,足
-rtk2996:壽:longevity:一,口,工,士,寸
+rtk2996:壽:longevity:士,乛,工,一,吋
 rtk2997:躊:hesitate:壽,足
 rtk2998:饅:bean-jam dumpling:曼,食
 rtk2999:嘔:vomit:口,匚,品
@@ -6530,3 +6530,61 @@ prim-military:戎:military,arms:戈,十
 prim-twigs:丵:twigs
 prim-canopy:仒:canopy
 prim-uphold:氶:uphold
+
+# 2026-11-09 full re-review: frames 2954-3000, the last of the 3000-row
+# worklist (docs/kanji_full_review.json is now 0 pending). Six fixes, all
+# missing/wrong pieces inside a sub-shape rather than CSV disagreements
+# (every frame here is past the 6th-edition cutoff, id_5th_ed 3000+ --
+# Heisig's own components column is silent on all of them):
+# - 檜 (japanese cypress) was 日,木,𠆢,一: a flattened guess at the right
+#   half that turned out to not even match plain 日 on render (𭥴, 會's real
+#   bottom, is visibly a doubled/boxed shape, confirmed distinct from 日 in
+#   every font render_glyphs checks). rtk2558 桧, the shinjitai sibling, was
+#   already correctly 会,木 -- so 會,木 is the traditional-form match, not a
+#   fresh guess. New primitive, named prim-gathering (not "meeting": that's
+#   already 亼/prim-meeting and rtk814 会 itself).
+# - 轡 (bit) was 口,糸,車, undercounting by one 糸 -- cjkvi's 𦆕 is
+#   literally 糸+車+糸, two silk/thread radicals flanking the cart, both
+#   visible on render.
+# - 燭 (light) was 火,虫,勹, missing 罒 entirely. 蜀 (cjkvi ⿱罒𠣜,
+#   𠣜=⿹勹虫) has a 罒 box over 勹+虫; the box is plainly there on render,
+#   just dropped from the row.
+# - 脛 (shin) and 勁 (strong) shared the same bug: both use 巠 (cjkvi
+#   ⿳一巛工, a horizontal bar over 巛 over 工) but only listed 工,巛 --
+#   missing the top 一, confirmed on render of both sibling hosts.
+# - 祓 (exorcism) was 礻,犬: a lookalike substitution, not an undercount.
+#   犬 (dog) has a dot; rendered at 4x zoom, 祓's right side has none, plus
+#   the small extra diagonal stroke 犮 has and 友/犬 don't. cjkvi gives
+#   ⿰礻犮[GT]/⿰示犮[JK] -- distinct from 友 "friend", which cjkvi uses for
+#   the similar-looking shape in 抜/髪 (already rtk760 in this file) and
+#   which render confirms really is a different, dot-less, tick-less shape
+#   from 犮. Fixed to 礻,犮 with a 犮,示 alternate for the JK variant, same
+#   pattern as rtk2993 祀's own 礻/示 split. New primitive, prim-pull-out
+#   ("pull" is already rtk1318 引).
+# - 壽 (longevity) was 一,口,工,士,寸, missing 乛 (a distinct bent-horizontal
+#   stroke -- not interchangeable with straight 一, same pair this file has
+#   drawn the line on before for 了). cjkvi's nested ⿳⿳士乛工一吋 and a
+#   render of the host both show all six pieces: 士,乛,工,一,口,寸. First
+#   pass left 口,寸 flattened instead of using 吋 (already rtk2959 "inch",
+#   and exactly what cjkvi's own notation uses whole) -- audit_overflatten.py
+#   caught it before commit. Final: 士,乛,工,一,吋. New primitive,
+#   prim-hooked-horizontal, the term this file's own 了 commentary already
+#   used for the shape.
+#
+# One entry's cached review snapshot was stale, not a live bug: 淵 (abyss)
+# showed as 一,水,爿,片 at review time, but data.txt already read exactly
+# that -- a prior session (see the 爿/丬 fix note above) had already landed
+# it before this worklist entry was queued. Re-verified against render and
+# stroke count (3+3+4+1=11, matching 淵's own count) and left alone.
+#
+# Not fixed, flagged needs-render instead of guessed: 龍 (dragon, old form).
+# cjkvi gives only an unencoded placeholder for the right half (⿰𦚏⑦), so
+# the structural channel can't confirm anything there, and Heisig gives
+# nothing (post-cutoff). Render shows the current 立 is probably too simple
+# for what's actually drawn (the right side has more strokes than a plain
+# 立), but with no cjkvi codepoint and no Heisig name to hang a replacement
+# on, inventing one from the render alone would be exactly the mistake this
+# file exists to avoid. Left for a person to look at directly.
+prim-gathering:會:gathering
+prim-pull-out:犮:pull out
+prim-hooked-horizontal:乛:hooked horizontal
