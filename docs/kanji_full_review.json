@@ -52169,11 +52169,11 @@
    "米",
    "厘"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered; matches cjkvi-ids structure exactly, no Heisig column (post-6th-ed CSV cutoff).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-09"
  },
  {
   "id": "rtk2955",
@@ -52184,11 +52184,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰米毛",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered; matches cjkvi-ids structure exactly, no Heisig column (post-6th-ed CSV cutoff).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-09"
  },
  {
   "id": "rtk2956",
@@ -52202,11 +52202,11 @@
    "口",
    "頓"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered; matches cjkvi-ids structure exactly, no Heisig column (post-6th-ed CSV cutoff).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-09"
  },
  {
   "id": "rtk2957",
@@ -52220,11 +52220,11 @@
    "口",
    "里"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered; matches cjkvi-ids structure exactly, no Heisig column (post-6th-ed CSV cutoff).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-09"
  },
  {
   "id": "rtk2958",
@@ -52238,11 +52238,11 @@
    "水",
    "里"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered; matches cjkvi-ids structure exactly, no Heisig column (post-6th-ed CSV cutoff).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-09"
  },
  {
   "id": "rtk2959",
@@ -52253,11 +52253,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰口寸",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered; matches cjkvi-ids structure exactly, no Heisig column (post-6th-ed CSV cutoff).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-09"
  },
  {
   "id": "rtk2960",
@@ -52271,11 +52271,11 @@
    "口",
    "尺"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered; matches cjkvi-ids structure exactly, no Heisig column (post-6th-ed CSV cutoff).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-09"
  },
  {
   "id": "rtk2961",
@@ -52286,11 +52286,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿱林凡",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered; matches cjkvi-ids structure exactly, no Heisig column (post-6th-ed CSV cutoff).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-09"
  },
  {
   "id": "rtk2962",
@@ -52305,11 +52305,11 @@
    "阝",
    "産"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered 薩/艹/阝/産 together: 艹 over 阝+産 side by side, matches cjkvi ⿱艹隡 (隡=阝+産) and the current row exactly.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-09"
  },
  {
   "id": "rtk2963",
@@ -52320,11 +52320,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿱艹咅",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered; matches cjkvi-ids structure exactly, no Heisig column (post-6th-ed CSV cutoff).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-09"
  },
  {
   "id": "rtk2964",
@@ -52335,11 +52335,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰口亜",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered; matches cjkvi-ids structure exactly, no Heisig column (post-6th-ed CSV cutoff).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-09"
  },
  {
   "id": "rtk2965",
@@ -52353,11 +52353,11 @@
    "厶",
    "牛"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered; matches cjkvi-ids structure exactly, no Heisig column (post-6th-ed CSV cutoff).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-09"
  },
  {
   "id": "rtk2966",
@@ -52368,11 +52368,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿺辶加",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered; matches cjkvi-ids structure exactly, no Heisig column (post-6th-ed CSV cutoff).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-09"
  },
  {
   "id": "rtk2967",
@@ -52386,11 +52386,11 @@
    "王",
    "加"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered; matches cjkvi-ids structure exactly, no Heisig column (post-6th-ed CSV cutoff).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-09"
  },
  {
   "id": "rtk2968",
@@ -52404,11 +52404,11 @@
    "王",
    "非"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered; matches cjkvi-ids structure exactly, no Heisig column (post-6th-ed CSV cutoff).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-09"
  },
  {
   "id": "rtk2969",
@@ -52422,11 +52422,14 @@
    "木",
    "會"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "會",
+   "木"
+  ],
+  "note": "Rendered 檜 vs 桧(rtk2558, already 会,木) vs 會/亼/𭥴/日: the right side is the traditional 會 (bottom is a complex two-tier shape, confirmed NOT plain 日 -- render_glyphs' substitution checker found no identical-face match), not a flat 日+𠆢+一. Fixed to match the existing shinjitai/kyuujitai sibling pattern already used for 桧. New primitive 會 registered as prim-gathering (avoiding 'meeting', already used for 亼 and for rtk814 会 itself).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-09"
  },
  {
   "id": "rtk2970",
@@ -52442,11 +52445,16 @@
    "糸",
    "車"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "糸",
+   "車",
+   "糸",
+   "口"
+  ],
+  "note": "Rendered 轡 vs 糸/車/口: the top is 糸+車+糸 (two silk/thread radicals flanking 車, cjkvi 𦆕=⿲糹車糸), not one. Row was undercounted by one 糸; Google's hint already showed the second one too.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-09"
  },
  {
   "id": "rtk2971",
@@ -52457,11 +52465,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰氵𣶒",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "data.txt already reads 一,水,爿,片 -- the worklist's cached 'at start' snapshot (｜,一,水,丬,片) predates a prior session's fix (see data.txt's own comment near line 5786: 爿 not 丬, dropped the loose ｜). Verified the current value against a render of 淵/爿/片/水/一/𣶒 and it matches cjkvi ⿰氵𣶒 (𣶒=⿴⿰片爿一) and the stroke count (3+3+4+1=11). No change needed.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-09"
  },
  {
   "id": "rtk2972",
@@ -52475,11 +52483,11 @@
    "亻",
    "五"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered; matches cjkvi-ids structure exactly, no Heisig column (post-6th-ed CSV cutoff).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-09"
  },
  {
   "id": "rtk2973",
@@ -52493,11 +52501,11 @@
    "亻",
    "十"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered; matches cjkvi-ids structure exactly, no Heisig column (post-6th-ed CSV cutoff).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-09"
  },
  {
   "id": "rtk2974",
@@ -52508,11 +52516,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿱艹禺",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered; matches cjkvi-ids structure exactly, no Heisig column (post-6th-ed CSV cutoff).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-09"
  },
  {
   "id": "rtk2975",
@@ -52526,11 +52534,11 @@
    "萬",
    "辶"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered; matches cjkvi-ids structure exactly, no Heisig column (post-6th-ed CSV cutoff).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-09"
  },
  {
   "id": "rtk2976",
@@ -52544,11 +52552,16 @@
    "火",
    "蜀"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "火",
+   "罒",
+   "勹",
+   "虫"
+  ],
+  "note": "Rendered 燭 vs 火/蜀/罒/勹/虫: 蜀 (cjkvi ⿱罒𠣜, 𠣜=⿹勹虫) has a 罒 box over 勹+虫, clearly visible on render. Row was missing 罒 entirely -- a phantom-child undercount, not a lookalike.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-09"
  },
  {
   "id": "rtk2977",
@@ -52559,11 +52572,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿺辶呈[GTJV] ⿺辶⿱口壬[K]",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered; matches cjkvi-ids structure exactly, no Heisig column (post-6th-ed CSV cutoff).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-09"
  },
  {
   "id": "rtk2978",
@@ -52577,11 +52590,11 @@
    "火",
    "登"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered; matches cjkvi-ids structure exactly, no Heisig column (post-6th-ed CSV cutoff).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-09"
  },
  {
   "id": "rtk2979",
@@ -52595,11 +52608,11 @@
    "衣",
    "里"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered; matches cjkvi-ids structure exactly, no Heisig column (post-6th-ed CSV cutoff).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-09"
  },
  {
   "id": "rtk2980",
@@ -52616,11 +52629,11 @@
    "口",
    "衣"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered; matches cjkvi-ids structure exactly, no Heisig column (post-6th-ed CSV cutoff).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-09"
  },
  {
   "id": "rtk2981",
@@ -52634,11 +52647,11 @@
    "金",
    "甫"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered; matches cjkvi-ids structure exactly, no Heisig column (post-6th-ed CSV cutoff).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-09"
  },
  {
   "id": "rtk2982",
@@ -52652,11 +52665,11 @@
    "山",
    "鳥"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered; matches cjkvi-ids structure exactly, no Heisig column (post-6th-ed CSV cutoff).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-09"
  },
  {
   "id": "rtk2983",
@@ -52667,11 +52680,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿱山夆",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered; matches cjkvi-ids structure exactly, no Heisig column (post-6th-ed CSV cutoff).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-09"
  },
  {
   "id": "rtk2984",
@@ -52686,11 +52699,11 @@
    "木",
    "土"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered; matches cjkvi-ids structure exactly, no Heisig column (post-6th-ed CSV cutoff).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-09"
  },
  {
   "id": "rtk2985",
@@ -52701,11 +52714,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰𦚏⑦",
   "google_parts": null,
-  "status": "pending",
+  "status": "needs-render",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "cjkvi gives only a placeholder (⑦) for the right half (⿰𦚏⑦), so the structural channel can't confirm it, and Heisig's components column is empty (post-6th-ed). Render shows the left side plausibly matches 月, but the right side is visibly more complex (multiple strokes/flourishes) than plain 立 -- current row is likely an undercount, but with no clean cjkvi codepoint to replace 立 with and no Heisig guidance, guessing a replacement from the render alone would repeat the exact mistake CLAUDE.md warns against. Flagging for a person to look at directly rather than inventing a fix.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-09"
  },
  {
   "id": "rtk2986",
@@ -52719,11 +52732,11 @@
    "宀",
    "龍"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered; matches cjkvi-ids structure exactly, no Heisig column (post-6th-ed CSV cutoff).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-09"
  },
  {
   "id": "rtk2987",
@@ -52737,11 +52750,11 @@
    "龍",
    "耳"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered; matches cjkvi-ids structure exactly, no Heisig column (post-6th-ed CSV cutoff).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-09"
  },
  {
   "id": "rtk2988",
@@ -52752,11 +52765,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿱欲心",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered; matches cjkvi-ids structure exactly, no Heisig column (post-6th-ed CSV cutoff).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-09"
  },
  {
   "id": "rtk2989",
@@ -52770,11 +52783,11 @@
    "山",
    "獄"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered; matches cjkvi-ids structure exactly, no Heisig column (post-6th-ed CSV cutoff).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-09"
  },
  {
   "id": "rtk2990",
@@ -52785,11 +52798,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿴囗或",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered; matches cjkvi-ids structure exactly, no Heisig column (post-6th-ed CSV cutoff).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-09"
  },
  {
   "id": "rtk2991",
@@ -52803,11 +52816,16 @@
    "月",
    "巠"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "月",
+   "一",
+   "巛",
+   "工"
+  ],
+  "note": "Rendered 脛/勁/巠 together: 巠 (cjkvi ⿳一巛工) has a horizontal 一 bar above 巛+工, visible on both 脛 and 勁. Both sibling rows were missing it -- same bug, same fix (see rtk2992).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-09"
  },
  {
   "id": "rtk2992",
@@ -52818,11 +52836,16 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰巠力",
   "google_parts": null,
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "一",
+   "巛",
+   "工",
+   "力"
+  ],
+  "note": "Sibling fix to rtk2991: 勁 also uses 巠 and was missing the same 一 bar. See rtk2991's note for the render evidence.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-09"
  },
  {
   "id": "rtk2993",
@@ -52833,11 +52856,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰礻巳[GT] ⿰示巳[JK]",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered; matches cjkvi-ids structure exactly, no Heisig column (post-6th-ed CSV cutoff).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-09"
  },
  {
   "id": "rtk2994",
@@ -52848,11 +52871,15 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰礻犮[GT] ⿰示犮[JK]",
   "google_parts": null,
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "礻",
+   "犮;犮",
+   "示"
+  ],
+  "note": "Rendered 祓 vs 犬/犮/友: the right side has no dot, ruling out 犬 (dog) -- a lookalike substitution bug. cjkvi gives ⿰礻犮[GT]/⿰示犮[JK] (distinct from 友 'friend', which cjkvi uses for the sibling shapes in 抜/髪 and which this project already names rtk760). Fixed to the GT/JK alternate-decomposition pattern already used for rtk2993 祀's own 礻/示 variants. New primitive 犮 registered as prim-pull-out ('pull' is already rtk1318 引).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-09"
  },
  {
   "id": "rtk2995",
@@ -52863,11 +52890,11 @@
   "heisig_components": "",
   "cjkvi_ids": "⿰𧾷著",
   "google_parts": null,
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered; matches cjkvi-ids structure exactly, no Heisig column (post-6th-ed CSV cutoff).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-09"
  },
  {
   "id": "rtk2996",
@@ -52884,11 +52911,17 @@
    "口",
    "寸"
   ],
-  "status": "pending",
-  "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "status": "fixed",
+  "decision": [
+   "士",
+   "乛",
+   "工",
+   "一",
+   "吋"
+  ],
+  "note": "Correction to today's earlier decision: audit_overflatten.py caught that 口,寸 is an over-flatten -- 吋 (rtk2959, inch) already names exactly that pair as a unit, and cjkvi's own notation (⿳⿳士乛工一吋) already uses 吋 whole rather than expanding it. Fixed to use 吋 as a unit: 士,乛,工,一,吋.",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-09"
  },
  {
   "id": "rtk2997",
@@ -52902,11 +52935,11 @@
    "足",
    "壽"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered; matches cjkvi-ids structure exactly, no Heisig column (post-6th-ed CSV cutoff).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-09"
  },
  {
   "id": "rtk2998",
@@ -52920,11 +52953,11 @@
    "食",
    "曼"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered; matches cjkvi-ids structure exactly, no Heisig column (post-6th-ed CSV cutoff).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-09"
  },
  {
   "id": "rtk2999",
@@ -52938,11 +52971,11 @@
    "口",
    "區"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered; matches cjkvi-ids structure exactly, no Heisig column (post-6th-ed CSV cutoff).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-09"
  },
  {
   "id": "rtk3000",
@@ -52956,10 +52989,10 @@
    "敝",
    "黽"
   ],
-  "status": "pending",
+  "status": "keep",
   "decision": null,
-  "note": "",
-  "reviewed_by": null,
-  "reviewed_at": null
+  "note": "Rendered; matches cjkvi-ids structure exactly, no Heisig column (post-6th-ed CSV cutoff).",
+  "reviewed_by": "claude",
+  "reviewed_at": "2026-11-09"
  }
 ]

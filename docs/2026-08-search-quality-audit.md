@@ -28862,3 +28862,125 @@ not this run's to decide: whether this job should go idle until
 previously-blocked `needs-render` codepoint becoming renderable on this
 machine) surfaces a new backlog, or whether a next phase is queued
 elsewhere.
+
+## 2026-11-09 — full re-review: frames 2954–3000 (40 keep, 7 fixed, 1 needs-render) — worklist complete, 0/3000 pending
+
+Unattended daily run, on a fresh container with no `backend/venv`, no cjkvi-ids,
+and no CJK fonts installed — did step 0 first (push-access dry-run, after a
+fast-forward: local `master` was 12 commits behind `origin/master` and in a
+detached-HEAD state from a prior session's access check; `git checkout master`
++ `git merge --ff-only` fixed both before any edit). Rebuilt `venv` from
+`requirements.txt`/`requirements-dev.txt`, downloaded `/tmp/ids.txt`, and ran
+`apt-get install fonts-noto-cjk fonts-hanazono` (after `apt-get update` — the
+base image didn't have the package lists cached). Baseline on the freshly
+seeded DB matched the previous session's numbers exactly: `test_regression_fixes.py`
+1333/1333, `pytest -q` 83 passed, `audit_overflatten.py`/`audit_self_reference.py`/
+`audit_radicals.py` all 0, `audit_phantom_parts.py --in-csv-range` 10 phantom
+parts across 9 kanji (unchanged backlog), `audit_primary_choice.py` 0/55.
+
+This was the last chunk of the 2026-10-21 full re-review — `kanji_full_review.json`
+is now 3000/3000 decided, 0 pending. All 47 rows in this range are past the
+6th-edition CSV cutoff (id_5th_ed 3000+, the 2010 jōyō additions), so Heisig's
+components column was empty on every one; every decision rests on cjkvi-ids
+plus render, with Google as a hint only, per the standing convention.
+
+Seven real fixes, all missing/wrong pieces inside a sub-shape rather than CSV
+disagreements:
+
+- **rtk2969 檜** (japanese cypress): was `日,木,𠆢,一`, a flattened guess at
+  the right half. render_glyphs showed `𭥴` (會's real bottom) is a visibly
+  doubled/boxed shape, not plain `日`, in every font checked (no substitution
+  warning — genuinely distinct outlines). `rtk2558` 桧, the shinjitai sibling,
+  was already correctly `会,木`; fixed `檜` to the matching traditional-form
+  pair `會,木`. New primitive `prim-gathering:會:gathering` — not "meeting",
+  already taken by `亼`/`prim-meeting` and by `rtk814` 会 itself.
+- **rtk2970 轡** (bit): was `口,糸,車`, undercounted by one `糸`. cjkvi's
+  `𦆕 = 糸+車+糸` (two silk/thread radicals flanking the cart); render
+  confirms both are there. Fixed to `糸,車,糸,口`.
+- **rtk2976 燭** (light): was `火,虫,勹`, missing `罒` entirely. `蜀` (cjkvi
+  `⿱罒𠣜`, `𠣜=⿹勹虫`) has a `罒` box over `勹+虫`; the box is plainly visible
+  on render, just dropped from the row. Fixed to `火,罒,勹,虫`.
+- **rtk2991 脛** (shin) and **rtk2992 勁** (strong): both use `巠` (cjkvi
+  `⿳一巛工`, a `一` bar over `巛` over `工`) but both rows only listed `工,巛` —
+  missing the top `一`. Same bug on both sibling hosts, same fix: `脛` →
+  `月,一,巛,工`, `勁` → `一,巛,工,力`.
+- **rtk2994 祓** (exorcism): was `礻,犬` — a lookalike substitution, not an
+  undercount. `犬` (dog) has a dot; rendered at 4x zoom, 祓's right side has
+  none, and it has a small extra diagonal tick that `犮` has and `友`/`犬`
+  don't. cjkvi gives `⿰礻犮[GT]`/`⿰示犮[JK]`, distinct from `友` "friend" —
+  which cjkvi uses for the similarly-shaped (but confirmed genuinely
+  different, not a font substitution) component in `抜`/`髪`, already
+  `rtk760` in this file. A 2026-09 session's fix to `礻,犬` only went far
+  enough to rule out a byte-level flatten of `礼`'s strokes and missed this
+  second error. Fixed to `礻,犮` with a `犮,示` alternate for the JK variant
+  (same pattern as `rtk2993` 祀's own `礻`/`示` split). New primitive
+  `prim-pull-out:犮:pull out` ("pull" is already `rtk1318` 引). Corrected the
+  stale `test_regression_fixes.py` pin in place (comment explains why).
+- **rtk2996 壽** (longevity): was `一,口,工,士,寸`, missing `乛` (a distinct
+  bent-horizontal stroke, not interchangeable with straight `一` — the same
+  pair this file drew the line on for `了`). cjkvi's nested
+  `⿳⿳士乛工一吋` and a render both show six pieces top to bottom:
+  `士,乛,工,一,口,寸`. First pass landed that, flattening `吋` into `口,寸`;
+  `audit_overflatten.py` caught it before commit — `吋` is already `rtk2959`
+  "inch" and exactly what cjkvi's own notation uses whole. Final:
+  `士,乛,工,一,吋`. New primitive `prim-hooked-horizontal:乛:hooked horizontal`
+  (the term this file's own prior `了` commentary already used for the shape).
+
+**One stale review-snapshot, not a live bug**: `rtk2971` 淵 showed in
+`full_review.py`'s cached "at start" field as `｜,一,水,丬,片`, but `data.txt`
+already read `一,水,爿,片` — a prior session (see this file's own `爿`/`丬`
+comment above) had already fixed it before this worklist entry was queued.
+Re-verified against render and stroke count (3+3+4+1 = 11, matching 淵's own
+count) and recorded `keep` with a note explaining the discrepancy, rather
+than re-opening a question already settled.
+
+**One flagged `needs-render` rather than guessed**: `rtk2985` 龍 (dragon,
+old form). cjkvi gives only an unencoded placeholder for the right half
+(`⿰𦚏⑦`), so the structural channel can't confirm anything there, and
+Heisig gives nothing (post-cutoff). Render suggests the current `立` is
+probably too simple for what's actually drawn — the right side has visibly
+more strokes — but with no cjkvi codepoint and no Heisig name to hang a
+replacement on, inventing one from the render alone would be exactly the
+mistake this file exists to avoid. Left for a person to decide.
+
+The other 39 rows matched cjkvi-ids exactly (or an attested GTJK/K/T variant)
+on inspection, using already-resolvable codepoints. Shape-family check: `會`,
+`犮`, `乛`, and `巠`'s components have no other RTK host in this database
+(confirmed via grep against `data.txt`/`heisig-kanjis.csv`), so none of
+today's fixes ripple elsewhere; `抜`/`髪` (both already correctly `友`) and
+`桧` (already correctly `会,木`) were the siblings checked against, not
+changed.
+
+**Tests**: baseline (fresh DB, before any edit) — `test_regression_fixes.py`
+1333/1333, `pytest -q` 83 passed, `audit_overflatten.py` 0,
+`audit_self_reference.py` 0, `audit_radicals.py` 0/0, `audit_primary_choice.py`
+0/55, `audit_phantom_parts.py --in-csv-range` 10 phantom parts across 9 kanji
+(unchanged). After all seven `data.txt` fixes, three new primitives, and the
+one regression-pin correction, on a fresh rebuild: `test_regression_fixes.py`
+1333/1333 (the `rtk2994` pin now expects `kangxi113,prim-pull-out` instead of
+the stale `kangxi113,rtk253`), `pytest -q` 83 passed (unchanged),
+`audit_overflatten.py` 0 (confirmed the `壽` over-flatten was caught and
+fixed, not just detected), `audit_self_reference.py` 0, `audit_radicals.py`
+0/0 (all three new primitives resolve), `audit_primary_choice.py` 0/55,
+`audit_phantom_parts.py --in-csv-range` unchanged at 10/9. Frontend:
+`npm run lint` clean, `npm run build:prod` succeeded (3255 kanji rows now,
+up from 3252).
+
+This container has no server to run `sync_system_data.py` against — no
+deploy from here. A deployer needs `git pull` + `sync_system_data.py
+--dry-run` then for real on prod to pick up today's seven `data.txt` fixes,
+three new primitives, and the `rtk2994` regression-pin correction.
+
+`full_review.py --pending-count`: **0 pending / 3000 total.** The from-scratch
+full re-review (started 2026-10-21) is complete.
+
+**Next**: no more full-review frames to work through. Pick from the other
+standing backlog instead — `audit_phantom_parts.py --in-csv-range`'s 10
+remaining phantom parts (unchanged for several sessions now; led by stroke
+primitives with no alternative to promote, so each needs its component
+identified individually per-host), `suggest_heisig_aliases.py --near 0.8 --all`'s
+~236 unresolvable Heisig names (flat tail, low value per name, pick from
+`--near` rather than by host count), the `kangxi58`/彑 vs Unicode's
+`CJKRadicals.txt`-attested 彐 rename (housekeeping, touches every pin
+referencing it), or `rtk2985` 龍's `needs-render` flag left above (a person,
+not an audit session, should settle it — no clean source to render against).

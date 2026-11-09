@@ -3708,7 +3708,16 @@ EXPECTED_DECOMPOSITIONS = {
     "rtk2434": {"character": "狒", "keyword": "baboon",     # was ｜,ノ,弓 — missing 犭 entirely, plus a botched 弗
                "expected_part_ids": {"kangxi94", "prim-dollar-sign"}},
     "rtk2994": {"character": "祓", "keyword": "exorcise",   # was ノ,一,礼,丶 — a byte-level flatten of 礼's strokes,
-               "expected_part_ids": {"kangxi113", "rtk253"}},   # not a real reference; render shows 犬, not 礼-shaped
+               "expected_part_ids": {"kangxi113", "prim-pull-out"}},   # not a real reference; a 2026-09
+                                                              # session's own fix to 礻,犬 only went far enough to rule
+                                                              # out 礼's loose strokes and missed a second error: 犬
+                                                              # (dog) has a dot this glyph does not have at any zoom
+                                                              # level (confirmed with a 4x crop, not just the full-page
+                                                              # render). cjkvi gives ⿰礻犮[GT]/⿰示犮[JK] — 犮 (prim-pull-out,
+                                                              # new row), distinct from 友 "friend" (cjkvi's answer for
+                                                              # the similar-looking shape in 抜/髪) by one extra stroke
+                                                              # visible on render. Alternate decomposition 犮,示 (rtk1167)
+                                                              # added for the JK variant, same pattern as rtk2993 祀.
     "rtk431": {"character": "初", "keyword": "first time",  # was 刀 alone — missing 衣 (the clothing radical 衤), which
                "expected_part_ids": {"kangxi145", "rtk87"}},   # then silently propagated through every kanji that
                                                               # correctly *referenced* 初 (裕/被/裾/襟/袖/裸/補/... — 15
