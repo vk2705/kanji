@@ -28839,3 +28839,26 @@ on prod to pick up today's six `data.txt` fixes and three new primitives.
 `full_review.py --pending-count`: 47 pending / 3000 total.
 
 **Next**: continue the full re-review at frame 2954.
+
+## 2026-11-09 — hanzi worklist: still 0 pending, no action taken
+
+Checked for an interrupted prior run first (the guardrail script comparing
+decided ids between `HEAD` and the working tree): printed `0`, clean.
+`backend/kanji.db` exists (24MB, last modified 2026-11-08); ran
+`./venv/bin/pytest -v` as the pre-flight check anyway, out of caution — 108
+passed — even though a 0-pending result means no write was ever going to
+happen.
+
+`hanzi_worklist_next.py --pending-count` returned **0 pending / 482
+total** — unchanged from 2026-11-07 and 2026-11-08, and `git diff` on
+`docs/hanzi_decomposition_worklist.json` was empty (the nightly
+`kanji-daily-review` rebuild didn't touch it today either, same as
+2026-11-08). `-n 20` returned nothing to review, so there was nothing to
+render or decide. No `kanji.db` change; only this doc entry.
+
+Same open question as the last several entries, still unresolved and still
+not this run's to decide: whether this job should go idle until
+`audit_hanzi_weak_evidence.py --json` is re-run (new `zh-*` rows, or a
+previously-blocked `needs-render` codepoint becoming renderable on this
+machine) surfaces a new backlog, or whether a next phase is queued
+elsewhere.
