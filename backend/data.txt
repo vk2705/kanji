@@ -3846,7 +3846,26 @@ rtk2866:慧:wise:彗,心
 # and a hooked 巾-like base. 璽 (rtk2194) references 爾 whole, so there is
 # no sibling host to cross-check `｜`/`冂` against independently -- the
 # render is the only evidence, per the standing rule, and it is clear.
-rtk2867:爾:you:｜,一,八,冂,爻,巾
+# (2026-11-10) The "hooked 巾-like base" from the note above was wrong --
+# confirmed with KanjiVG's own hand-curated stroke data (kanji/0723e.svg),
+# not available to the 2026-11-02 session. Its direct top-level groups are
+# 一(1 stroke) + 八(2) + 冂(2) + a lone unlabelled vertical path (the same
+# ｜ already in this row) + two separate `爻`-tagged groups of 4 strokes
+# each -- 14 strokes total, exactly matching 爾's official count, with no
+# `巾`-shaped group anywhere in the tree. 1+2+2+1+4+4=14 confirms it: the
+# old row's `巾` substitute undercounted by one stroke (13 vs 14) and the
+# 2026-11-02 note's own prose ("two stacked 爻 crosses... and a hooked
+# 巾-like base") already half-saw this -- it just didn't convert the
+# "two crosses" observation into the row, writing one `爻` instead of two.
+# Rendered 爾 beside 爻 and cjkvi's own named shape for the pair, `㸚`
+# (U+3E1A, literally two 爻 side by side): the interior weave matches `㸚`
+# stroke-for-stroke and nothing like 巾's rectangle. No frame of its own
+# for 㸚 in heisig-kanjis.csv (CSV is empty here regardless -- frame 2867
+# is past the 6th-ed cutoff) and no other host in this project uses it, so
+# this is a one-row fix with no shape-family ripple. Repeating a primitive
+# in a parts list is an established pattern (e.g. rtk2970 轡's `糸,車,糸,口`),
+# used here rather than minting a `prim-` row for `㸚` with only one host.
+rtk2867:爾:you:｜,一,八,冂,爻,爻
 # 2026-11-05 audit_overflatten: was 口,士,力 -- a double problem, not just
 # one shattered compound. 力+口 flattened 加 (rtk932, itself 口+力) AND
 # dropped 豆 from 壴 (prim-drum-stand, 士+豆), leaving a bare 士 standing

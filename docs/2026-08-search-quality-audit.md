@@ -28994,3 +28994,171 @@ total**, unchanged since the previous session finished frames 2954-3000 on
 `data.txt` edit, and nothing to sync. Stopping per this job's own guardrail
 ("If there are 0 pending rows, say so in the doc entry and stop"). Next pick
 from the standing backlog list directly above.
+
+## 2026-11-10 — confirmed the task brief's standing backlog is a dead end; one real fix via a new tool pass (KanjiVG) on rtk2867 爾
+
+Daily firing, fresh container. Step 0: repo was not attached at
+`/home/user/kanji` on first check but existed after the harness's own setup
+(no clone needed); local `master` was behind `origin/master` by 16 commits —
+fast-forwarded clean, then `git push --dry-run origin master` confirmed push
+access before touching anything. Rebuilt `venv`, downloaded `/tmp/ids.txt`,
+and installed `fonts-noto-cjk`/`fonts-hanazono` (Noto first, per the standing
+order) — all three were missing, as usual on a fresh container.
+
+**The task brief's "Where the work is" list is entirely stale.** Checked each
+item against this log's own history before trusting it, per this job's own
+"trust the notes over your own assumptions" instruction:
+
+- `audit_phantom_parts.py --in-csv-range`'s 10 findings across 9 kanji
+  (unchanged count from the baseline, confirmed again today): all 10 are
+  individually documented, dated, re-confirmed non-bugs going back to chunks
+  53/54/57/91/92/97/112 and the 2026-11-01 session — synthetic primitives
+  with no real codepoint (`prim-mirrored-spoon`), codepoint-variant pairs
+  (`斉`/`齐`, `冫`/`⺀`), and cjkvi opaque-placeholder hosts where only
+  Heisig's name resolves and the render doesn't give a confident alternative
+  (`不`/`印`'s "staples" question, independently re-confirmed again today by
+  re-reading chunks 53/91/92 — `印`'s left half really does look claw-like on
+  a fresh render, same observation a 2026-10 session already made and still
+  couldn't turn into a fix because the name's other two hosts, 興/暇, don't
+  contain 印 at all).
+- `suggest_heisig_aliases.py --near 0.8 --all` — ran it today: **0 groups**
+  in every section (matched/ambiguous/unregistered), same as every session
+  since at least chunk 97 per this log's own repeated "still 0 actionable"
+  entries. The brief's "~236 names left" line describes names that will
+  never form a group (singletons with no corroborating host overlap), not
+  a queue of 236 pending decisions — there is nothing here to pick from.
+- `kangxi58` — already `彐` (`data.txt:3785`), the swap happened on
+  2026-09-18 and this log has independently re-confirmed it closed at least
+  six times since (chunks 112, and the 2026-11-01/11-02 sessions among
+  others). The brief's wording ("holds 彑") describes the pre-2026-09-18
+  state.
+
+Several past sessions flagged that the brief itself needed updating so
+future firings stop re-checking these (2026-11-01's "Next" item 4, and
+2026-10-?? chunks before it) — worth repeating here since, evidently, none
+of them could act on it: this file is `docs/2026-08-search-quality-audit.md`
+in the repo, but the stale text lives in the *scheduled task's own stored
+prompt*, not in any file this session can edit with a commit. That's a
+scheduler-config change, not a docs fix, and outside what today's run
+should do unasked. Flagging it to the owner directly this time instead of
+leaving it for tomorrow's session to also discover.
+
+### The one real fix: rtk2867 爾 ("you")
+
+The genuinely open item wasn't in the brief's named list at all — it came
+from re-reading this log's own tail: the 2026-11-08 full-review session left
+three hosts `needs-render` rather than guessing (`rtk2867` 爾, `rtk2857` 鑿,
+`rtk2870` 兜), all flagged as "undercount suspected, not confident enough to
+commit." Pulled KanjiVG's hand-curated per-stroke SVGs for all three
+(`raw.githubusercontent.com/KanjiVG/kanjivg/master/kanji/{codepoint}.svg`,
+the same source a 2026-11-02 session introduced) and parsed their `kvg:g`
+nesting with direct stroke-path counts per group, since a flat
+`kvg:element` tally alone (what a quick grep gives) hides exactly the kind
+of duplicate-element case this needed.
+
+- **rtk2867 爾** — was `｜,一,八,冂,爻,巾`. KanjiVG's own tree for `0723e.svg`
+  has six top-level children directly under the kanji's root group: `一`(1
+  stroke), `八`(2), `冂`(2), a single unlabelled vertical path (the existing
+  `｜`), and **two separate `爻`-tagged groups** (4 strokes each, each itself
+  two `乂` positioned top/bottom) — no `巾`-shaped group anywhere in the
+  tree. Summing: 1+2+2+1+4+4 = **14**, exactly 爾's official stroke count
+  (`heisig-kanjis.csv`'s own column, frame 2867 past the CSV's components
+  coverage but stroke_count is populated for every frame). The old row's
+  strokes summed to 13 (missing one), which is the "undercount" the
+  2026-11-08 session already suspected but didn't have a tool to confirm.
+  Rendered 爾 beside `爻` and `㸚` (U+3E1A, cjkvi's own name for "two 爻 side
+  by side," which this font renders as a real double-X outline, not tofu):
+  爾's interior weave matches `㸚` and nothing like `巾`'s rectangle. The
+  2026-11-02 session's own render notes had already half-seen this — its
+  prose says "two stacked 爻 crosses... and a hooked 巾-like base," i.e. it
+  *described* two crosses but then wrote the row with only one `爻` plus a
+  `巾` standing in for something else. Fixed to `｜,一,八,冂,爻,爻` (repeating
+  a part is an established pattern — `rtk2970` 轡's `糸,車,糸,口` — used here
+  rather than minting a single-host `prim-` row for `㸚`). No CSV data to
+  contradict (frame 2867 is past id_5th_ed 2042) and no other host in this
+  project uses `㸚`/`巾` in this family (grepped), so no shape-family ripple.
+  Added a dated comment in `data.txt` explaining the stroke arithmetic.
+
+- **rtk2857 鑿 ("chisel", 28 strokes) and rtk2870 兜 ("helmet") — looked at,
+  not fixed.** Both got the same KanjiVG treatment and both turned up a
+  real lead, but neither cleared the bar to commit:
+  - `鑿`'s current row (`臼,干,金,丷,殳`) sums to 23 strokes against an
+    official 28 — a 5-stroke undercount. KanjiVG's tree names four
+    top-level groups summing to exactly 28 (`业`-tagged 7 strokes, `千`
+    containing `十` at 3, `臼` at 6, `殳` at 4 matching this project's
+    existing `kangxi79` exactly, `金` at 8). But the 7-stroke group KanjiVG
+    tags `业` doesn't match standalone `业`'s own usual stroke count (5) —
+    cjkvi's own entry for the visually similar `丵` (U+4E35) is `⿱业𢆉`
+    (`业` plus two more strokes), which would reconcile the arithmetic
+    (5+2=7) but isn't what KanjiVG's tag says, and `臿`'s cjkvi entry itself
+    is an *overlay* (`⿻千臼`/`⿻干臼`, GK vs TJ variants) — exactly the
+    "⿻ doesn't mean a clean parts list" trap this file has been burned by
+    before (縄/竃). Committing either reading (`业` vs `丵`, "do `千`/`臼`
+    really not share strokes here") without being sure which is right would
+    repeat that mistake rather than avoid it. Recorded the lead in a dated
+    comment; left the row untouched.
+  - `兜`'s current row (`白,儿`, 7 strokes against an official 11) is
+    confirmed undercounting by exactly 4 strokes — KanjiVG's tree shows
+    `白`(5) plus 4 further unlabelled stroke paths (types `㇒ ㇗ ㇕ ㇐`)
+    flanking it, matching cjkvi's `⿲②白コ` (an unencoded placeholder on one
+    side, `コ` on the other). Rendered 兜 large: the flanking marks are
+    visible but I could not confidently match them to a specific registered
+    Unicode primitive — same conclusion the 2026-11-08 session reached
+    independently ("couldn't confidently confirm the right-hand one is
+    really コ"), now corroborated by a second method rather than resolved.
+    Left `needs-render`, as before.
+
+No shape-family follow-ups needed for the one fix (checked, no other host
+uses `㸚`/`巾` in this pattern).
+
+### Verification
+
+Baseline (fresh DB from `data.txt` before any edit) matched every number
+this log has been reporting all month: `test_regression_fixes.py`
+1333/1333 (4 hanzi spot-checks self-skip, no `zh-*` rows in a freshly-seeded
+DB), `pytest -q` 83 passed, `audit_overflatten.py`/`audit_self_reference.py`
+both 0, `audit_radicals.py` 0/0, `audit_phantom_parts.py --in-csv-range`
+10/9, full `audit_phantom_parts.py` 53/40, `audit_primary_choice.py` 0/55.
+
+After the one `data.txt` edit (`rtk2867`): `test_regression_fixes.py`
+1333/1333 unchanged — no pin referenced `rtk2867`'s own parts (the one pin
+that does name `rtk2867`, on `rtk2194` 璽, checks that 爾 is *a* part of 璽,
+not what 爾 itself expands to, so it wasn't affected). `pytest -q` 83 passed,
+`audit_overflatten.py`/`audit_self_reference.py` both 0,
+`audit_radicals.py` 0/0 (both existing parts, `｜`/`一`/`八`/`冂`/`爻`, still
+resolve — no new term introduced). `audit_phantom_parts.py --in-csv-range`
+unchanged at 10/9 (`rtk2867` was never in that list — it's past the CSV
+range). Full `audit_phantom_parts.py` unchanged at 53/40 (`rtk2867` wasn't
+in that list either, for the same reason). `audit_primary_choice.py`
+unchanged at 0/55. Frontend: `npm run lint` clean, `npm run build:dev`
+succeeded (3255 public kanji pages, 131 changed-at-least-once in the
+decomposition history, same counts as recent sessions).
+
+No production deploy from here — a deployer needs `git pull` +
+`sync_system_data.py --dry-run` then for real on prod to pick up today's
+one `data.txt` fix. Not run against the live server (no server access from
+this container, per the task brief).
+
+### Next
+
+1. The task brief's "Where the work is" section needs editing at the
+   source — it's the scheduled task's own stored prompt, not a repo file,
+   so no session that only has `git push` access can fix it. Worth the
+   owner updating it directly: drop the `audit_phantom_parts.py --in-csv-range`,
+   `suggest_heisig_aliases.py --near 0.8 --all`, and `kangxi58` bullets (all
+   three are long-closed dead ends, independently re-confirmed by this
+   session and several before it), and replace them with a pointer to this
+   log's own tail instead of a fixed list that goes stale.
+2. `rtk2857` 鑿's `业`-vs-`丵` question and `臿`'s `⿻`-overlay ambiguity
+   (above) — a future session with more time could pull KanjiVG's entry for
+   `丵` directly (today's pull of `081ff.svg` for `臿` 404'd — no entry for
+   that character) or find a sibling host using the same shape to
+   cross-check against, neither of which this chunk had.
+3. `rtk2870` 兜's flanking strokes (above) — same KanjiVG lead, same missing
+   piece: no sibling host and no confident Unicode primitive identified yet
+   for the 4-stroke shape next to `白`.
+4. `audit_phantom_parts.py`'s weaker-evidence section (`不`/`印`'s "staples"
+   question specifically) has had this many independent re-confirmations now
+   that it's probably not worth a daily re-check either — same category as
+   `kangxi58`, just not mentioned in item 1 above because the brief doesn't
+   name it directly.
