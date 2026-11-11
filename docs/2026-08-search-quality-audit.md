@@ -29321,3 +29321,24 @@ container, per the task brief).
    `not-a-parts-list` bucket; no action needed on it specifically, just
    worth remembering why the full-audit number ticked up from 53 to 54 so
    nobody mistakes it for a fresh unverified claim later.
+
+## 2026-11-11 — full re-review: status check, no work done
+
+Daily timer fired for today's chunk. Checked for an interrupted prior run
+first: `git status` on `backend/data.txt` and `docs/kanji_full_review.json`
+showed nothing uncommitted, so no prior session died mid-chunk. `git pull
+origin master` reported already up to date (two unrelated modified files,
+`docs/decomposition_worklist.json` and `docs/kanji_review_coverage.tsv`, are
+rebuilt by other routines per this job's own guardrails and were left
+untouched).
+
+`backend/kanji.db` exists. `full_review.py --pending-count` reports **0
+pending / 3000 total** — the full re-review (started 2026-10-21) finished
+with the 2026-11-09 frames 2954–3000 chunk and has stayed at 0 through every
+status check since (2026-11-09, 2026-11-10, now). No kanji left to review,
+so no render, no `data.txt` edit, nothing to sync, and no pre-flight backup
+or test run (nothing was going to be written). Only this doc entry.
+
+Next pick comes from the standing backlog in the 2026-11-10 entry's "Next"
+list (rtk2870's flanking-shape lead, the stale task-brief backlog items) or
+wherever the owner directs it — not this run's to decide.
