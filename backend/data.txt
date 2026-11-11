@@ -3814,7 +3814,27 @@ rtk2856:鼠:rat:臼
 # 殳's own cjkvi sub-parts (几,又) redundantly beside 殳 itself; dropped.
 # The 臼,干,丷 portion (for 𣫞's ⿻丵臼 overlay, no clean codepoint for 丵)
 # is left as-is -- not today's finding, not re-verified here.
-rtk2857:鑿:chisel:臼,干,金,丷,殳
+#
+# 2026-11-11: fixed. Old row (臼,干,金,丷,殳) summed to 23 strokes against
+# an official 28 -- the undercount this log's tail had flagged twice without
+# resolving (chunks naming the open question as "业 vs 丵, do 干/臼 really
+# not share strokes here"). Pulled KanjiVG's own hand-numbered stroke-order
+# diagram for 0947f.svg directly (not just its kvg:element tags, which
+# mislabel the top group "业"): strokes 1-7 form a clean, fully separate
+# block -- two flanking descenders above a crossbar, two more below it --
+# sitting with a visible gap directly above strokes 8-16 (千 containing 十,
+# then 臼), with zero shared paths between them. That rules out cjkvi's
+# ⿻丵臼 ("overlay") reading for this glyph: whatever cjkvi intends by it,
+# the actual drawn kanji stacks 丵 cleanly on 臿 (千+臼), not merged. The
+# 7-stroke block itself matches 丵's own shape (U+4E35, "bundle of twigs"),
+# not bare 业 (5 strokes, no upper serifs) -- cjkvi's own 丵=⿱业𢆉 (5+2=7)
+# independently corroborates the count. 殳 (17-20) already matches this
+# project's existing kangxi79 exactly. 金 (21-28) is the bottom 8. Sum:
+# 7+3+6+4+8 = 28, exact. `prim-twigs` (this file, the 2026-11-08 full-review
+# chunk on rtk2904 叢) already registers 丵 under this exact keyword and
+# postdates the "no clean codepoint for 丵" comment above, which is now
+# stale -- today's fix is just wiring the existing primitive in here too.
+rtk2857:鑿:chisel:prim-twigs,千,臼,殳,金
 # 2026-10-23 (search-quality audit): was 舟,日,支. cjkvi gives ⿰舟叟, with
 # 叟 itself ⿱⿻臼丨又 -- CSV is empty for frame 2858 (past the 6th-edition
 # cutoff), but the same 叟-shape region is in-range, named, and already

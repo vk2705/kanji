@@ -1186,6 +1186,21 @@ EXPECTED_DECOMPOSITIONS = {
     # lookalike codepoint.
     "rtk2852": {"character": "梟", "keyword": "owl",
                 "expected_part_ids": {"prim-legless-bird", "rtk207"}},
+    # Corrected 2026-11-11: was 臼,干,金,丷,殳 (23 strokes against the
+    # official 28). KanjiVG's own hand-numbered stroke-order diagram for
+    # 0947f.svg shows strokes 1-7 as a clean, separate block -- two flanking
+    # descenders over a crossbar, two more below it -- with a visible gap
+    # above strokes 8-16 (千 containing 十, then 臼) and zero shared paths,
+    # ruling out cjkvi's ⿻丵臼 ("overlay") reading for this glyph: 丵 sits
+    # stacked on 臿 (千+臼), not merged with it. The 7-stroke block matches
+    # 丵 (U+4E35, "bundle of twigs"; cjkvi's own 丵=⿱业𢆉, 5+2=7), not bare
+    # 业 (5 strokes, no upper serifs) despite KanjiVG's kvg:element tag
+    # saying "业" -- that tag is imprecise, not a separate entry for 丵.
+    # `prim-twigs` (registered 2026-11-08 on rtk2904 叢, after this row's
+    # old "no clean codepoint for 丵" comment was written) already names
+    # this shape. 7(丵)+3(千)+6(臼)+4(殳)+8(金)=28, exact.
+    "rtk2857": {"character": "鑿", "keyword": "chisel",
+                "expected_part_ids": {"prim-twigs", "rtk40", "rtk1531", "kangxi79", "rtk287"}},
     "rtk2982": {"character": "嶋", "keyword": "island (alternate)",
                 "expected_part_ids": {"rtk2091", "rtk830"}},
     "rtk310": {"character": "煎", "keyword": "roast",
