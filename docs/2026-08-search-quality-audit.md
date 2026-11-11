@@ -29182,3 +29182,142 @@ not this run's to decide: whether this job should go idle until
 previously-blocked `needs-render` codepoint becoming renderable on this
 machine) surfaces a new backlog, or whether a next phase is queued
 elsewhere.
+
+## 2026-11-11 — rtk2857 鑿's undercount resolved via KanjiVG; rtk2870 兜's lead checked and still not confident
+
+Container setup today needed a fresh venv (`pip install -r requirements.txt
+-r requirements-dev.txt`) and the CJK fonts (`fonts-noto-cjk fonts-hanazono`,
+Noto first) — neither was present on this firing's container. Push access
+confirmed before any audit work (`git push --dry-run origin master`
+succeeded after fast-forwarding 17 commits this session hadn't seen yet).
+
+Picked up directly where 2026-11-10's "Next" items 2 and 3 left off — the
+two `needs-render` leads from the 2026-11-08 full-review chunk — rather than
+re-running the brief's named list, which this log has independently
+reconfirmed dead (`audit_phantom_parts.py --in-csv-range`,
+`suggest_heisig_aliases.py --near 0.8 --all`, `kangxi58`) more times than
+is useful; not repeating that re-confirmation again today.
+
+### rtk2857 鑿 ("chisel", 28 strokes) — fixed
+
+2026-11-10's open question was "业 vs 丵, do 干/臼 really not share strokes
+here" — cjkvi's own entry (`𣫞=⿰⿻丵臼殳`, the top of `鑿=⿱𣫞金`) reads as an
+*overlay* between 丵 and 臼, which is exactly the ⿻-trap category this log
+has been burned by before (縄/竃) and didn't want to repeat on faith alone.
+
+Resolved it by going past KanjiVG's `kvg:element` tags (which mislabel the
+whole first group "业") to the hand-numbered stroke-order diagram itself
+(`0947f.svg`, strokes 1–28, screenshotted at 800px rather than read as XML
+tags): strokes 1–7 form a clean block with two flanking descenders over a
+crossbar and two more below it, sitting with a visible gap directly above
+strokes 8–16 (a 千-shaped 3-stroke group containing 十, then a 6-stroke 臼)
+— zero shared paths between the two blocks. That rules out the overlay
+reading for *this* drawn glyph, whatever cjkvi's string intends: 丵 sits
+stacked cleanly on 臿 (千+臼), not merged with it. The 7-stroke block's
+shape (two upper serifs, crossbar, two lower serifs) matches 丵 (U+4E35,
+"bundle of twigs") rendered standalone, not bare 业 (5 strokes, no upper
+serifs) — and cjkvi's own `丵=⿱业𢆉` (5+2=7) independently corroborates the
+stroke count. Strokes 17–20 (殳) already match this project's existing
+`kangxi79` exactly; strokes 21–28 are 金. Sum: 7+3+6+4+8 = 28, exact,
+against the old row's 23 (臼,干,金,丷,殳 — a 5-stroke undercount, as
+2026-11-10 had already flagged without resolving).
+
+The other half of the lucky break: `prim-twigs` (character 丵, keyword
+"twigs") was already registered on 2026-11-08, on rtk2904 叢, *after* this
+row's own "no clean codepoint for 丵" comment was written — that comment
+just went stale and nobody revisited this row once the primitive existed.
+Today's fix is mostly wiring an existing primitive into a second host, not
+minting anything new. Fixed to `prim-twigs,千,臼,殳,金` (character form for
+the three plain kanji, matching how 千/臼/殳/金 are referenced as parts
+elsewhere in this file; `prim-twigs` by id, matching how rtk2904 already
+references it — both established conventions, not a new style). No
+shape-family ripple: grepped for other hosts using `丵`/`干`/`丷` in this
+exact pattern, found none.
+
+Added a pin (`test_regression_fixes.py`, `rtk2857`) with the same reasoning
+condensed.
+
+**Known side effect, not a new problem**: `audit_phantom_parts.py` (full,
+no range filter) now reports 54/41 instead of the prior 53/40 — the new
+entry is `rtk2857`/千 (`phantom part: 千 -> rtk40`), because cjkvi's IDS
+string for 𣫞 never literally contains a "千" token (it goes straight from
+the ⿻丵臼 overlay to calling the combination atomic at a different grain).
+`audit_weak_evidence.py --host 鑿` confirms this host is still (correctly)
+classified under `not-a-parts-list` both before and after the edit — this
+is the mechanical IDS-string check hitting exactly the blind spot the
+render-based fix was meant to see past, not an unverified regression.
+`--in-csv-range` is unaffected (10/9 unchanged; frame 2857 is past the
+CSV's cutoff).
+
+### rtk2870 兜 ("helmet") — looked at again, still not fixed
+
+Pulled KanjiVG's hand-numbered diagram for `0515c.svg` the same way. Of the
+four strokes flanking 白 (strokes 6–9, the ones the 2026-11-08 and
+2026-11-10 sessions both left unidentified): strokes 8–9 (the right-hand
+pair) match cjkvi's own `コ` call in its `⿲②白コ` entry both by position
+(right side) and by shape (flat top, vertical, flat bottom — rendered コ
+side by side matches exactly) — that half is solid, just not committable
+alone since the row would still undercount by 2.
+
+The left-hand pair (strokes 6–7, cjkvi's own unencoded `②` placeholder for
+*this entry specifically* — per this file's own standing caveat, a
+placeholder has no meaning outside the entry it appears in) is still not
+confident. Extracted the raw SVG path data for strokes 6–7 and for
+standalone 勹's own two strokes to compare shape rather than eyeballing a
+thumbnail: 勹's second stroke runs right-then-down-the-full-height and
+hooks back *left* at the very end (the enclosing "wrap" curl that gives 勹
+its meaning and that 包/勾 etc. all show). 兜's stroke 7 instead hooks
+slightly *right* at its end, i.e. away from center rather than curling
+inward. That's a real directional mismatch, not a rendering-confidence
+nitpick, so 勹 is rejected rather than committed. No better candidate
+found this session. Left `needs-render`, as both prior sessions did — now
+with one more ruled-out candidate on record so a future session doesn't
+re-spend time on 勹 specifically.
+
+### Verification
+
+Baseline (fresh DB from `data.txt` before any edit): `test_regression_fixes.py`
+1333/1333, `pytest -q` 83 passed, `audit_overflatten.py`/`audit_self_reference.py`
+both 0, `audit_radicals.py` 0/0, `audit_phantom_parts.py --in-csv-range`
+10/9, full `audit_phantom_parts.py` 53/40, `audit_primary_choice.py` 0/55 —
+matches every number 2026-11-10 reported, no drift.
+
+After the one `data.txt` edit + its pin (`rtk2857`): `test_regression_fixes.py`
+1334/1334 (the new pin, nothing else moved). `pytest -q` 83 passed unchanged.
+`audit_overflatten.py`/`audit_self_reference.py` both 0 unchanged.
+`audit_radicals.py` 0/0 unchanged (no new unnamed term introduced — every
+part in the new row already resolves). `audit_phantom_parts.py --in-csv-range`
+unchanged at 10/9 (rtk2857 is past the CSV's cutoff, never in that list).
+Full `audit_phantom_parts.py` moved to 54/41 — the one new, explained entry
+above. `audit_primary_choice.py` unchanged at 0/55. Frontend: `npm run lint`
+clean, `npm run build:dev` succeeded (3255 public kanji pages, same ballpark
+as recent sessions).
+
+No production deploy from here — a deployer needs `git pull` +
+`sync_system_data.py --dry-run` then for real on prod to pick up today's one
+`data.txt` fix. Not run against the live server (no server access from this
+container, per the task brief).
+
+### Next
+
+1. `rtk2870` 兜's left-flanking shape (cjkvi's per-entry `②` placeholder,
+   strokes 6–7 of `0515c.svg`): 勹 is now ruled out by stroke-path direction.
+   The right-flanking `コ` match is solid but not committable alone. A
+   future session could try rendering other 2-stroke hook/bracket
+   primitives already in this project's vocabulary against the same
+   extracted path data, or look for a sibling host sharing this exact
+   flanking shape (none found this session — it may simply not recur
+   elsewhere, which would explain why three sessions in a row haven't
+   found one).
+2. The task brief's own "Where the work is" section (`audit_phantom_parts.py
+   --in-csv-range`, `suggest_heisig_aliases.py --near 0.8 --all`,
+   `kangxi58`) is still stale by this log's own repeated re-confirmation
+   (2026-11-10 and several sessions before it also flagged this) — still
+   not something a session with only `git push` access can fix, since it's
+   the scheduled task's own stored prompt, not a repo file. Flagging again
+   for the owner rather than re-verifying a fourth/fifth/sixth time.
+3. `rtk2857`'s new `audit_phantom_parts.py` entry (`千`, via `rtk40`) is
+   explained above and already caught by `audit_weak_evidence.py`'s
+   `not-a-parts-list` bucket; no action needed on it specifically, just
+   worth remembering why the full-audit number ticked up from 53 to 54 so
+   nobody mistakes it for a fresh unverified claim later.
