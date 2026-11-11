@@ -29162,3 +29162,23 @@ this container, per the task brief).
    that it's probably not worth a daily re-check either — same category as
    `kangxi58`, just not mentioned in item 1 above because the brief doesn't
    name it directly.
+
+## 2026-11-11 — hanzi worklist: still 0 pending, no action taken
+
+Checked for an interrupted prior run first (the guardrail script comparing
+decided ids between `HEAD` and the working tree): printed `0`, clean.
+`backend/kanji.db` exists; `git status` on `docs/hanzi_decomposition_worklist.json`
+showed nothing to commit (`git diff --stat` empty).
+
+`hanzi_worklist_next.py --pending-count` returned **0 pending / 482
+total** — unchanged from 2026-11-09 (the last entry that checked). `-n 20`
+returned nothing to review (`next 0:`), so there was nothing to render or
+decide — no pre-flight backup or `pytest` run either, since no write was
+ever going to happen. No `kanji.db` change; only this doc entry.
+
+Same open question as the last several entries, still unresolved and still
+not this run's to decide: whether this job should go idle until
+`audit_hanzi_weak_evidence.py --json` is re-run (new `zh-*` rows, or a
+previously-blocked `needs-render` codepoint becoming renderable on this
+machine) surfaces a new backlog, or whether a next phase is queued
+elsewhere.
