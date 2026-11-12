@@ -17,9 +17,9 @@ cd backend
 
 | Source | What it gives | Standing |
 |---|---|---|
-| **kanjidic2** (EDRDG) | on'yomi/kun'yomi readings, the `rtk*` glyph inventory via `import_rtk.py` | Open — CC BY-SA, attribution required |
+| **kanjidic2** (EDRDG) | on'yomi/kun'yomi readings, the `rtk*` glyph inventory via `import_rtk.py`, the English meanings in SEO page titles (`backend/seo_data/kanji_meanings.tsv`, via `build_seo_data.py`) | Open — CC BY-SA, attribution required |
 | **KRADFILE** (EDRDG) | the first-pass radical decompositions `data.txt` started from | Open — CC BY-SA, attribution required |
-| **Unihan** (Unicode Consortium) | the hanzi rows, pinyin | Open — Unicode licence, attribution required |
+| **Unihan** (Unicode Consortium) | the hanzi rows, pinyin, the common-character list deciding which hanzi pages are indexed (`backend/seo_data/common_hanzi.txt`) | Open — Unicode licence, attribution required |
 | **cjkvi-ids** | the structural decompositions (`⿰⿱…` IDS), many of the `alternative` decompositions (not all — some are an older reading of the same kanji), and the ground truth the whole 2026-08/09 audit checks against | Open — attribution required |
 | **Unicode `CJKRadicals.txt`** | the 69 `kangxi*` row ids and the official radical numbering | Open — Unicode licence |
 | **This project** | the 146 `prim-*` rows and their descriptive names, every decomposition correction in `docs/2026-08-search-quality-audit.md` (60+ chunks), the Russian aliases, all user contributions | Ours |
@@ -119,6 +119,19 @@ search engines indexing something confers no licence on it.
    answer without the visit. Each framed page also cites the book at its frame
    number. A check over all 3,215 pages confirms no keyword or primitive name
    appears in any title, description or `h1`.
+
+   **Revised 2026-11-12 (owner decision):** titles and descriptions now also
+   carry an English *meaning*, taken from kanjidic2 for Japanese kanji
+   (`明 (bright) = 日 + 月 — kanji meaning, parts, readings`) and from Unihan's
+   kDefinition for hanzi, because the meaning is what people search for. Neither
+   source is the book. For 2,158 of the 3,000 framed kanji kanjidic2's first
+   meaning happens to be the same word as Heisig's keyword. The owner accepted
+   that overlap knowingly: the data is a dictionary's independent gloss, not
+   copied from the keyword column, and `heisig-kanjis.csv` is never read for
+   it. Primitive pages still never show a Heisig primitive name in the title:
+   they are titled by the Unicode Kangxi radical name where there is one, else
+   by the kanji that contain the shape (`𠆢 — kanji component, found in 26
+   kanji: 介 茶 脊`).
 
    Two traps that pass showed up and are worth keeping in mind for anything that
    resolves a part term to a glyph: a term can be the glyph, its name, or a row

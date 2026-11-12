@@ -83,6 +83,8 @@ ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_OUTPUT_DIR = ROOT / "frontend" / "public" / "kanji"
 DEFAULT_SITEMAP = ROOT / "frontend" / "public" / "sitemap.xml"
 
+SEO_DATA_DIR = Path(__file__).resolve().parent / "seo_data"
+
 HUB_CHUNK = 1000
 SITEMAP_CHUNK = 5000
 MAX_HOSTS_SHOWN = 40
@@ -229,6 +231,70 @@ def resolve_parts(entry: dict, targets: dict[str, dict[str, tuple[str, str]]]) -
             entry["components"] = [part["glyph"] for part in resolved]
 
 
+def _seo_lines(name: str) -> list[str]:
+    """Non-comment lines of a seo_data/ file (written by build_seo_data.py)."""
+    path = SEO_DATA_DIR / name
+    if not path.exists():
+        return []
+    return [line.rstrip("\n") for line in path.open(encoding="utf-8") if line.strip() and not line.startswith("#")]
+
+
+# kanjidic2 English meanings, for page titles. Open data (CC BY-SA), unlike the
+# keyword, which for Japanese kanji is Heisig's.
+KANJI_MEANINGS = dict(line.split("\t", 1) for line in _seo_lines("kanji_meanings.tsv"))
+# Hanzi worth offering to search engines (see build_seo_data.py); the rest are noindex.
+COMMON_HANZI = set(_seo_lines("common_hanzi.txt"))
+
+
+def is_component_page(entry: dict) -> bool:
+    """A primitive/radical row rather than a kanji or hanzi of its own."""
+    return not (entry["id"].startswith("rtk") or entry["id"].startswith("hanzi-") or entry["id"].startswith("usr"))
+
+
+def kangxi_radical_name(entry: dict) -> str | None:
+    """Unicode's own English name for a Kangxi radical row ('person' for kangxi9)."""
+    if not entry["id"].startswith("kangxi"):
+        return None
+    try:
+        number = int(entry["id"][len("kangxi"):])
+        name = unicodedata.name(chr(0x2F00 + number - 1))
+    except ValueError:
+        return None
+    if not 1 <= number <= 214 or not name.startswith("KANGXI RADICAL "):
+        return None
+    return name[len("KANGXI RADICAL "):].lower()
+
+
+def open_meaning(entry: dict) -> str | None:
+    """An English meaning from open data, or None.
+
+    Hanzi keywords are Unihan's kDefinition (import_hanzi.py), so they are used
+    as they are. Everything else goes through kanjidic2, never the keyword.
+    """
+    if script_group(entry.get("script")) == "zh":
+        keyword = first_keyword(entry)
+        return keyword if keyword and keyword != entry.get("character") and keyword != entry["id"] else None
+    return KANJI_MEANINGS.get(entry.get("character") or "")
+
+
+def indexable(entry: dict) -> bool:
+    """Whether to offer this page to search engines (sitemap + robots meta).
+
+    Every Japanese kanji is. Otherwise a page needs content of its own, and a hanzi page must also be a common
+    character or share its glyph with a Japanese kanji: ~21,000 of the ~24,000
+    pages are hanzi, most of them rare and thin, and a mass of thin pages drags
+    down how Google rates the whole site (owner decision, 2026-11-12). Pages left
+    out keep `follow`, stay reachable by links, and still work for visitors.
+    """
+    if entry["id"].startswith("rtk"):
+        return True  # a real Japanese kanji is worth a page even when atomic (飛, 凹)
+    if not has_content(entry):
+        return False
+    if entry["id"].startswith("hanzi-"):
+        return entry.get("character") in COMMON_HANZI or bool(entry.get("counterparts"))
+    return True
+
+
 def has_content(entry: dict) -> bool:
     """A page worth putting in the sitemap: it lists at least one decomposition part.
 
@@ -262,9 +328,33 @@ def render_page(entry: dict, entries_by_id: dict[str, dict]) -> str:
     short_noun = "hanzi" if script_group(entry.get("script")) == "zh" else "kanji"
 
     headline = f"{subject} = {components}" if components else subject
-    title = f"{headline} — {short_noun} components, readings, strokes | KumiJi"
+    meaning = open_meaning(entry)
+    hosts = entry.get("hosts") or []
+    radical_name = kangxi_radical_name(entry)
+    host_glyphs = [g for g in (display_character(h.get("character")) for h in hosts) if g][:5]
+    if is_component_page(entry) and hosts:
+        # A primitive's page is searched for as "kanji with <shape> in it": say
+        # what contains it. Never its Heisig name (see the docstring).
+        label = f"Kangxi radical {entry['id'][len('kangxi'):]} ({radical_name})" if radical_name else (
+            f"{subject} ({meaning.split(',')[0]})" if meaning else f"{short_noun} component")
+        prefix = f"{subject} — {label}" if radical_name or not meaning else label
+        title = (f"{prefix}, found in {len(hosts)} {short_noun}: "
+                 f"{' '.join(host_glyphs[:3])} | KumiJi")
+    elif meaning:
+        short_meaning = meaning.split(",")[0].strip()
+        named = f"{subject} ({short_meaning})"
+        title = (f"{named} = {components}" if components else named) + f" — {short_noun} meaning, parts, readings | KumiJi"
+    else:
+        title = f"{headline} — {short_noun} components, readings, strokes | KumiJi"
 
     facts = []
+    if meaning:
+        facts.append(f"{subject} means “{meaning}”")
+    if radical_name:
+        facts.append(f"{subject} is Kangxi radical {entry['id'][len('kangxi'):]}, {radical_name}")
+    if is_component_page(entry) and host_glyphs:
+        more = f" and {len(hosts) - len(host_glyphs)} more" if len(hosts) > len(host_glyphs) else ""
+        facts.append(f"{subject} is a building block of {', '.join(host_glyphs)}{more}")
     if components:
         facts.append(f"{subject} is written {components}")
     if entry.get("stroke_count"):
@@ -299,7 +389,6 @@ def render_page(entry: dict, entries_by_id: dict[str, dict]) -> str:
         sentences.append(
             f'In <a href="{BOOK_URL}">Remembering the Kanji</a> by James W. Heisig it is frame {entry["frame"]}.'
         )
-    hosts = entry.get("hosts") or []
     if hosts:
         sentences.append(
             f"It appears as a component in {len(hosts)} other character" + ("" if len(hosts) == 1 else "s")
@@ -322,6 +411,10 @@ def render_page(entry: dict, entries_by_id: dict[str, dict]) -> str:
 
     # --- facts box ---------------------------------------------------------
     fact_rows = [("Keyword", html.escape(keyword))]
+    if meaning and script_group(entry.get("script")) != "zh":
+        fact_rows.append(("Meaning (kanjidic2)", html.escape(meaning)))
+    if radical_name:
+        fact_rows.append(("Kangxi radical", f"{entry['id'][len('kangxi'):]} ({html.escape(radical_name)})"))
     if entry.get("frame"):
         fact_rows.append(("RTK frame", str(entry["frame"])))
     if entry.get("stroke_count"):
@@ -392,7 +485,7 @@ def render_page(entry: dict, entries_by_id: dict[str, dict]) -> str:
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{html.escape(title)}</title>
     <meta name="description" content="{html.escape(description, quote=True)}">
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content="{'index' if indexable(entry) else 'noindex'}, follow">
     <link rel="canonical" href="{html.escape(canonical, quote=True)}">
 {PAGE_STYLE}  </head>
   <body>
@@ -455,7 +548,9 @@ def write_hubs(output_dir: Path, entries: list[dict]) -> list[str]:
     """Browsable index pages, so crawlers reach every kanji by links and not only
     via the sitemap. Returns the hub URLs, for the sitemap."""
     rtk = sorted((e for e in entries if e["id"].startswith("rtk") and e.get("frame")), key=lambda e: e["frame"])
-    other = [e for e in entries if not (e["id"].startswith("rtk") and e.get("frame")) and has_content(e)]
+    # Hubs link only pages offered to search engines, so crawl is not spent on
+    # noindex ones; those stay linked from the characters around them.
+    other = [e for e in entries if not (e["id"].startswith("rtk") and e.get("frame")) and indexable(e)]
     chunks = [other[i:i + HUB_CHUNK] for i in range(0, len(other), HUB_CHUNK)]
 
     index_url = f"{SITE_URL}/kanji/"
@@ -634,7 +729,7 @@ def generate(db_path: Path, output_dir: Path, sitemap_path: Path) -> int:
             )
         hub_urls = write_hubs(output_dir, entries)
         urls = [f"{SITE_URL}/", f"{SITE_URL}/guide/", *hub_urls, f"{SITE_URL}/privacy.html"] + [
-            page_url(entry["id"]) for entry in entries if has_content(entry)
+            page_url(entry["id"]) for entry in entries if indexable(entry)
         ]
         chunk_files = write_sitemaps(sitemap_path, urls)
     finally:

@@ -29586,3 +29586,38 @@ Next pick is the same standing backlog the 2026-11-11 status check named —
 rtk2870's flanking-shape lead (closed out further in today's other entry
 above) and the stale task-brief backlog items — or wherever the owner
 directs it next; not this run's to decide.
+
+## 2026-11-12 — SEO: meanings in page titles, noindex for rare hanzi
+
+Owner asked how to get the site shown in Google more often. Findings: 15 real
+people in 30 days; the ~90k "google.com"-referred requests in the nginx log are
+a scraper (439 IPs, 4 user agents, never loads a JS/CSS asset), not search
+traffic; Googlebot crawled ~1,500 pages on the Nov 7 host move and ~50/day since.
+The main lever is backlinks (owner's to do). Two page-level changes, both
+owner-approved:
+
+1. **Meanings in titles** (`generate_seo_pages.py`). Kanji titles went from
+   `明 = 日 + 月 — kanji components, readings, strokes` to `明 (bright) = 日 + 月
+   — kanji meaning, parts, readings`, with the meaning also leading the
+   description and shown in the facts box as "Meaning (kanjidic2)". Japanese
+   meanings come from kanjidic2 via the new `backend/build_seo_data.py`
+   (checked-in output `backend/seo_data/kanji_meanings.tsv`, so the build needs
+   no network); hanzi use their existing Unihan keyword. kanjidic2's radical
+   index notes ("radical number 9", "one radical (no.1)") are filtered out.
+   This revises the 2026-09-23 no-keyword-in-titles decision; see
+   `docs/DATA_SOURCES.md` item 3 for the overlap with Heisig keywords (2,158 of
+   3,000) and why the owner accepted it. Primitive pages were the weakest
+   (`𠆢`'s description was "a kanji in this index"); they are now titled by
+   what contains them, or by Unicode's Kangxi radical name
+   (`亻 — Kangxi radical 9 (man), found in 116 kanji: 佐 侶 但`), never by a
+   Heisig primitive name.
+2. **noindex for rare hanzi.** ~21,000 of ~24,500 pages were hanzi, most rare
+   and thin. A hanzi page is now indexed only if its glyph is in
+   `seo_data/common_hanzi.txt` (Unihan kTGH level 1 = the 3,500 common
+   characters of the 2013 General Standard table, plus kGradeLevel, plus the
+   simplified/traditional variants of both: 4,990 characters) or it shares
+   its glyph with a Japanese kanji. Others get `noindex, follow`, leave the
+   sitemap and the browse hubs, and still work for visitors. Every Japanese
+   kanji page is indexed, including atomic ones with no parts (飛, 凹), which
+   were previously left out of the sitemap. Local run: 8,882 sitemap URLs,
+   down from ~24,200; hanzi 5,626 indexed / 15,361 noindex.
