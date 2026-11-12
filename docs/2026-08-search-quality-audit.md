@@ -29561,3 +29561,28 @@ pick up from today.
    today's findings above. Don't spend time retrying the delete or
    treating it as a broken container; it's just what this token can't do,
    and the stray branches it leaves behind are harmless.
+
+## 2026-11-12 — full re-review: status check, no work done
+
+Daily timer fired for today's chunk. Checked for an interrupted prior run
+first, per this job's own guardrail: `git status` on `backend/data.txt` and
+`docs/kanji_full_review.json` showed nothing uncommitted, so no prior
+session died mid-chunk. `git pull origin master` needed a stash first —
+`docs/decomposition_worklist.json` and `docs/kanji_review_coverage.tsv` had
+unstaged changes from other routines, both out of scope per this job's own
+guardrails (the first is named explicitly; the second is `coverage_status.py`'s
+own rebuilt report, the same category) — stashed, pulled (already up to
+date, one unrelated new branch from a push-access-check routine), popped
+the stash back untouched.
+
+`backend/kanji.db` exists. `full_review.py --pending-count` reports **0
+pending / 3000 total** — the full re-review (started 2026-10-21, finished
+2026-11-09) has stayed at 0 through every status check since (2026-11-09,
+2026-11-10, 2026-11-11, now). No kanji left to review, so no render, no
+`data.txt` edit, nothing to sync, and no pre-flight backup or test run
+(nothing was going to be written). Only this doc entry.
+
+Next pick is the same standing backlog the 2026-11-11 status check named —
+rtk2870's flanking-shape lead (closed out further in today's other entry
+above) and the stale task-brief backlog items — or wherever the owner
+directs it next; not this run's to decide.
