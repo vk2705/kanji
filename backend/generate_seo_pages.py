@@ -369,7 +369,7 @@ def render_page(entry: dict, entries_by_id: dict[str, dict]) -> str:
         items = "\n".join(f"        <li>{link(h)}</li>" for h in shown)
         more = (
             f"\n      <p>…and {len(hosts) - len(shown)} more. "
-            f'<a href="/?kanji={quote(entry["id"], safe="")}">See them all in the interactive search</a>.</p>'
+            f'<a href="/?kanji={quote(entry["id"], safe="")}" rel="nofollow">See them all in the interactive search</a>.</p>'
             if len(hosts) > len(shown) else ""
         )
         hosts_html = (
@@ -405,7 +405,7 @@ def render_page(entry: dict, entries_by_id: dict[str, dict]) -> str:
       </dl>
       <h2>Decomposition</h2>
 {decomposition_html}
-{hosts_html}{how_to_find}      <p><a href="/?kanji={quote(entry['id'], safe='')}">Open {html.escape(subject)} in the interactive kanji search</a>
+{hosts_html}{how_to_find}      <p><a href="/?kanji={quote(entry['id'], safe='')}" rel="nofollow">Open {html.escape(subject)} in the interactive kanji search</a>
         to expand every part down to its smallest pieces, add your own names and mnemonic stories,
         or search for other characters by their parts.</p>
 {pager}    </main>
