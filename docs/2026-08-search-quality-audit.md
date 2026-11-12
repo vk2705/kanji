@@ -29621,3 +29621,76 @@ owner-approved:
    kanji page is indexed, including atomic ones with no parts (飛, 凹), which
    were previously left out of the sitemap. Local run: 8,882 sitemap URLs,
    down from ~24,200; hanzi 5,626 indexed / 15,361 noindex.
+
+## 2026-11-12 — 䒑 "horns with a crossbar" registered; 岡 = 冂 + mountain with horns
+
+**Report (owner, via Google):** 岡 is over-decomposed. It was `丷,冂,一,山`:
+four atoms, with 冂 placed between the two halves of 䒑 (U+4491, ⿱丷一).
+
+**Why nobody caught it.** The shape was seen and deliberately flattened three
+times: 首 (2026-09-27, "cjkvi's top is 䒑 … added 一"), 前 (2026-10-22, the
+same reasoning), and 岡 in the full re-review (2026-11-06, status `keep`,
+note "䒑 flattened to 丷,一"). Each review checked that every stroke was
+accounted for and never asked whether a named unit was being shattered,
+because 䒑 had no row to point at, so `丷,一` was the only way to write it.
+`audit_grouping.py` can't see this class: it only proposes groupings that
+form an *earlier-taught kanji*, and 䒑 is not a kanji. Our stored Google
+answer for 岡 (`decomposition_worklist.json`) was just 冂 + 山, so it did not
+point at the horns either. Lesson: a review note that says "X flattened to
+a,b" is a finding, not a keep.
+
+**Evidence.** Heisig's components column uses "horns" for the whole 䒑, with
+no extra "one": 前 `horns; butcher; …`, 首 `horns; nose; …`, 岡 `glass canopy;
+mountain goat; horns; mountain`. "Mountain goat" is the name he introduces
+at 逆 (2109, 屰 = 䒑 over 屮) and reuses three frames later at 岡 (2112) for 䒑
+over 山. cjkvi-ids has no codepoint for ⿱䒑山. Only 岡 contains it.
+Rendered (`render_glyphs.py`, Noto Serif CJK JP): every host below shows 丷
+over a full-width bar.
+
+**New rows.**
+- `prim-horns-with-crossbar:䒑:horns with a crossbar,horns:丷,一`. It shares
+  "horns" with 丷 (kangxi12), as Heisig does, so a "horns" search covers both
+  meanings by default. It is CJK Ext A, so `make_primitive_images.py` rendered
+  its PNG.
+- `prim-mountain-with-horns:?:mountain with horns,mountain goat:䒑,山`. It
+  shares "mountain goat" with 屰. Its picture is hand-cropped from the script's
+  render of 岡 with 冂 erased (method in the script's docstring), the same
+  approach as prim-tall and prim-legless-bird.
+
+**Rows changed (the shape family, from cjkvi-ids: every rtk row whose tree
+contains 䒑):**
+- 岡 → `冂,prim-mountain-with-horns`, with alternate `冂,䒑,山`, so "mountain"
+  still finds it at depth 1.
+- 首 `自,丷,一` → `䒑,自`.
+- 前 `丷,一,月,刀` → `䒑,月,刀`.
+- 羊 `丷` → `䒑`, since cjkvi's ⿱䒑⿻二丨 puts the top bar inside the horns.
+- 善 `丷,羊,口` → `羊,䒑,口`.
+- 益 `一,皿,八,丷` → `䒑,八,皿`.
+- 兹 → `䒑,幺,幺`.
+- 屰 `丷,屮` → `䒑,屮`. The crossbar had been dropped.
+- 業 `业,丷,一,木,未` → `业,䒑,未`. The 木 was 未's own tree, listed twice.
+- 撲/僕 `…,业,丷,夫` → `…,业,䒑,夫`. The crossbar had been dropped; 菐 is
+  ⿳业䒑夫.
+- 蕨 `欠,丷,厂,屮,艹` → `艹,厂,屰,欠`. 厥 = ⿸厂欮 and 欮 = ⿰屰欠.
+
+Hosts that reach 䒑 through one of these (道 導 煎 揃 箭 剪, the 羊 family,
+鋼 綱 剛, 滋 慈 磁, 逆 朔 塑 遡, 溢, 膳 繕) needed no edit.
+
+**Checked and deliberately left alone.**
+- 網: in 罔 the inner 丷 replaces 亡's dot and shares 亡's bar, so there is no
+  separate 䒑.
+- 兼: settled earlier; the bar belongs to the rake overlay.
+- 並: atomic in Heisig.
+- 立: Heisig's atomic "vase".
+
+**Open, flagged for the owner.**
+- 鬲 (kangxi193) is `口,冂,儿` and is missing its top 一 and the inner 丁,
+  which Heisig names in 融/隔 ("one; ceiling; … human legs; street; nail").
+  That is a different bug from this one.
+- prim-upside-down-row carries the 5-stroke 业, while Heisig's "upside down in
+  a row" is the 8-stroke 业 + 䒑 (並 turned over), with no codepoint. Its hosts
+  are now right shape-for-shape, but the name sits on only part of the shape.
+
+Search checks (dev DB, ja-kanji): "glass canopy" + "mountain goat" (d1) → 岡;
+"horns" + "moon" (d1) → 脊 前; "mountain goat" + "road" → 逆; "glass canopy" +
+"mountain" → 両 岡.

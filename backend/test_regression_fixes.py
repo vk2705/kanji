@@ -613,11 +613,11 @@ EXPECTED_DECOMPOSITIONS = {
     # wood") that cjkvi-ids also reaches; 未 is itself just 一+木, both already
     # present here, so this only adds the name's reachability, not new shape.
     "rtk1931": {"character": "業", "keyword": "business",
-                "expected_part_ids": {"prim-upside-down-row", "kangxi12", "rtk1", "rtk207", "rtk229"}},
+                "expected_part_ids": {"prim-upside-down-row", "prim-horns-with-crossbar", "rtk229"}},
     "rtk1932": {"character": "撲", "keyword": "slap",
-                "expected_part_ids": {"kangxi64", "prim-upside-down-row", "kangxi12", "rtk901"}},
+                "expected_part_ids": {"kangxi64", "prim-upside-down-row", "prim-horns-with-crossbar", "rtk901"}},
     "rtk1933": {"character": "僕", "keyword": "me",
-                "expected_part_ids": {"kangxi9", "prim-upside-down-row", "kangxi12", "rtk901"}},
+                "expected_part_ids": {"kangxi9", "prim-upside-down-row", "prim-horns-with-crossbar", "rtk901"}},
     # "pack of wild dogs" (犭) family missing-component bug (2026-08-27):
     # flagged by the owner disputing 猫's in-app review (rtk259 had no dog
     # radical at all). Turned out all 15 CSV-confirmed hosts of "pack of
@@ -1100,8 +1100,9 @@ EXPECTED_DECOMPOSITIONS = {
     # identical to rtk74 首's top, which already splits into 丷,一. The
     # crossbar spans both 月 and 刀 below it (wider than 月 alone), so it
     # isn't just 月's own top stroke. Added 一 (rtk1) back.
+    # 2026-11-12: 丷,一 -> 䒑 (prim-horns-with-crossbar), now that 䒑 has a row.
     "rtk309": {"character": "前", "keyword": "in front",
-                "expected_part_ids": {"kangxi12", "rtk1", "rtk13", "rtk87"}},
+                "expected_part_ids": {"prim-horns-with-crossbar", "rtk13", "rtk87"}},
     # 夢 was missing 罒(net/eyeglasses) entirely.
     "rtk327": {"character": "夢", "keyword": "dream",
                 "expected_part_ids": {"kangxi122", "kangxi14", "prim-mugwort", "rtk114"}},
@@ -3307,8 +3308,26 @@ EXPECTED_DECOMPOSITIONS = {
     # and the eye/自 box, and heisig-kanjis.csv names it directly: "horns;
     # nose; one; ceiling; drop; eye" carries "one; ceiling" as its own names,
     # not as 自's (自's own row is "drop; eye").
+    # 2026-11-12: 丷,一 -> 䒑 (prim-horns-with-crossbar).
     "rtk74": {"character": "首", "keyword": "neck",
-               "expected_part_ids": {"kangxi12", "rtk1", "rtk36"}},
+               "expected_part_ids": {"prim-horns-with-crossbar", "rtk36"}},
+    # 2026-11-12, owner report: 岡 = 冂 + 䒑-over-山 (Heisig's "mountain goat"
+    # in this frame; no codepoint, so prim-mountain-with-horns with a picture).
+    # The rest of the 䒑 family below was fixed in the same pass.
+    "rtk2112": {"character": "岡", "keyword": "mount",
+                "expected_part_ids": {"kangxi13", "prim-mountain-with-horns"}},
+    "prim-mountain-with-horns": {"character": "?", "keyword": "mountain with horns",
+                "expected_part_ids": {"prim-horns-with-crossbar", "rtk830"}},
+    "prim-horns-with-crossbar": {"character": "䒑", "keyword": "horns with a crossbar",
+                "expected_part_ids": {"kangxi12", "rtk1"}},
+    "prim-mountain-goat": {"character": "屰", "keyword": "mountain goat",
+                "expected_part_ids": {"prim-horns-with-crossbar", "kangxi45"}},
+    "rtk586": {"character": "羊", "keyword": "sheep",
+                "expected_part_ids": {"prim-horns-with-crossbar"}},
+    "rtk2026": {"character": "益", "keyword": "benefit",
+                "expected_part_ids": {"prim-horns-with-crossbar", "rtk8", "rtk1555"}},
+    "rtk2485": {"character": "蕨", "keyword": "bracken",
+                "expected_part_ids": {"prim-mugwort", "kangxi27", "prim-mountain-goat", "rtk505"}},
     "rtk128": {"character": "臭", "keyword": "stinking",
                "expected_part_ids": {"rtk112", "rtk36"}},
     "rtk129": {"character": "嗅", "keyword": "sniff",

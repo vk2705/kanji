@@ -37705,11 +37705,14 @@
    "冂",
    "山"
   ],
-  "status": "keep",
-  "decision": null,
-  "note": "岡=冂 enclosing 丷+一+山, render matches cjkvi ⿵冂⿱䒑山 (䒑 flattened to 丷,一)",
+  "status": "fixed",
+  "decision": [
+   "冂",
+   "prim-mountain-with-horns"
+  ],
+  "note": "2026-11-12 owner report: 11-06 'keep' was wrong -- 䒑 had been flattened to 丷,一 and split by 冂. Now 冂 + prim-mountain-with-horns (䒑 over 山, Heisig's 'mountain goat' here; picture cropped from 岡's render), alternate 冂,䒑,山. Shape family (首 前 羊 善 益 兹 屰 業 撲 僕 蕨) fixed with it via new prim-horns-with-crossbar (䒑).",
   "reviewed_by": "claude",
-  "reviewed_at": "2026-11-06"
+  "reviewed_at": "2026-11-12"
  },
  {
   "id": "rtk2113",

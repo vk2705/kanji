@@ -54,8 +54,13 @@ one-em canvas) down to the bottom bar of 口. `prim-legless-bird.png`
 cropped by hand (2026-10-25) the same way, from a render of 梟 itself rather
 than standalone 鳥 -- standalone 鳥's hook stroke sweeps lower to make room
 for legs that 梟's compressed top half doesn't draw, so cropping standalone
-鳥 at the matching row would have clipped the hook mid-stroke. Re-running
-this script leaves both alone, since both rows' character is "?" and is
+鳥 at the matching row would have clipped the hook mid-stroke.
+`prim-mountain-with-horns.png` (䒑 over 山, the inside of 岡; Heisig's
+"mountain goat" there) was cut (2026-11-12) from this script's render of 岡:
+the box between 冂's walls and below its top bar (x 46-210, y 51-225 on the
+256px canvas), trimmed to its ink and re-centred on a blank one-em canvas,
+since the shape stands alone rather than as the top of something. Re-running
+this script leaves all three alone, since their rows' character is "?" and is
 never a target.
 
 The DB side is separate and automatic: `database.py::import_data()` points a

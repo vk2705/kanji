@@ -177,7 +177,9 @@ rtk70:肌:texture:月,几
 rtk71:旬:decameron:日,勹
 rtk72:勺:ladle:丶,勹
 rtk73:的:bull's eye:白,勺
-rtk74:首:neck:自,丷,一
+# 2026-11-12 (䒑 family, owner report on 岡): top is 䒑 (U+4491, ⿱丷一), now its own row
+# prim-horns-with-crossbar; was 丷,一 spelled loose. cjkvi ⿱䒑自.
+rtk74:首:neck:䒑,自
 rtk75:乙:the latter,fishhook:
 rtk76:乱:riot:乙,舌
 rtk77:直:straightaway:十,目,𠃊
@@ -442,7 +444,9 @@ rtk308:喩:metaphor:口,俞
 # rtk74 首's top (which already lists 丷,一 separately) — the old row dropped
 # the crossbar. 煎(310)/道(295)/導(296) reference 前/首 by name, so they
 # inherit the fix automatically and needed no edit of their own.
-rtk309:前:in front:丷,一,月,刀
+# 2026-11-12 (䒑 family, owner report on 岡): top 丷,一 -> 䒑, cjkvi ⿱䒑刖. Heisig names only
+# "horns" for it, no separate "one": his horns here ARE the 䒑.
+rtk309:前:in front:䒑,月,刀
 rtk310:煎:broil:前,灬
 rtk311:各:each:口,夂
 rtk312:格:status:木,各
@@ -751,7 +755,9 @@ rtk582:豪:overpowering:prim-tall,冖,豕
 rtk583:腸:intestines:昜,月
 rtk584:場:location:土,昜
 rtk585:湯:hot water:昜,水
-rtk586:羊:sheep:丷
+# 2026-11-12 (䒑 family, owner report on 岡): cjkvi ⿱䒑⿻二丨 puts the top bar inside the horns
+# group (see chunk 57 note); the row's one part is therefore 䒑, not bare 丷.
+rtk586:羊:sheep:䒑
 rtk587:美:beauty:大,羊
 rtk588:洋:ocean:水,羊
 rtk589:詳:detailed:言,羊
@@ -1390,7 +1396,9 @@ rtk1111:営:camp:呂,prim-schoolhouse
 # own entry for 羊, ⿱䒑⿻二丨, uses the overlay operator ⿻ for that exact
 # region — not a literal separate-parts reading, per the ⿻/⿴ caveat), which
 # is almost certainly how 王 got added here as a stray literal-stroke read.
-rtk1112:善:virtuous:丷,羊,口
+# 2026-11-12 (䒑 family, owner report on 岡): middle 丷 -> 䒑 (it has its crossbar), in
+# cjkvi's order ⿱⿱羊䒑口. Rendered: 羊, then horns over a bar, then 口.
+rtk1112:善:virtuous:羊,䒑,口
 rtk1113:膳:small low table:善,月
 rtk1114:年:year:ノ,午
 # 2026-10-23 "lid" audit (owner: search by parts for lid, explain every result): 夜: same pieces, drawn order (Heisig "top hat; person; walking legs; drop").
@@ -2459,9 +2467,16 @@ rtk1927:湿:damp:水,日,业
 rtk1928:顕:appear:日,业,頁
 rtk1929:繊:slender:业,糸,𢦏
 rtk1930:霊:spirits:雨,二,业
-rtk1931:業:business:业,丷,一,木,未
-rtk1932:撲:slap:扌,业,丷,夫
-rtk1933:僕:me:亻,业,丷,夫
+# 2026-11-12 (䒑 family, owner report on 岡): 业 + 䒑 + 未 (5+3+5 = 13 strokes; cjkvi
+# ⿱业𦍎, 𦍎 = ⿱䒑未). The loose 木 was 未's own tree listed twice. Heisig's
+# 8-stroke "upside down in a row" is 业+䒑 (並 turned over); prim-upside-down-row
+# holds only the 5-stroke 业, so the 䒑 has to be listed beside it.
+rtk1931:業:business:业,䒑,未
+# 2026-11-12 (䒑 family, owner report on 岡): 菐 = ⿳业䒑夫; the row had dropped 䒑's crossbar
+# (2+5+3+4 = 14 only with it).
+rtk1932:撲:slap:扌,业,䒑,夫
+# 2026-11-12 (䒑 family, owner report on 岡): same 菐 = ⿳业䒑夫 as 撲, crossbar was missing.
+rtk1933:僕:me:亻,业,䒑,夫
 rtk1934:共:together,strung together:八,龷
 rtk1935:供:submit:亻,共
 rtk1936:異:uncommon:共,田
@@ -2586,7 +2601,9 @@ rtk2022:瓜:melon:厶
 rtk2023:弧:arc:瓜,弓
 rtk2024:孤:orphan:瓜,子
 rtk2025:繭:cocoon:艹,冂,｜,糸,虫
-rtk2026:益:benefit:一,皿,八,丷
+# 2026-11-12 (䒑 family, owner report on 岡): ⿱⿱䒑八皿: 䒑 over 八 over 皿. Heisig's
+# "animal horns; one; floor" are 䒑's two halves, reachable at depth 2.
+rtk2026:益:benefit:䒑,八,皿
 # 2026-11-06 full re-review shape-family fix (found while reviewing rtk2728
 # 蝦): was 日,又 -- 又 is only the bottom-right stroke of 叚 (cjkvi ⿰日叚),
 # the rest of 叚 dropped outright. Use the new prim-borrow row (叚).
@@ -2708,7 +2725,13 @@ rtk2108:隅:corner:禺,阝
 rtk2109:逆:inverted:屰,辶
 rtk2110:塑:model:朔,土
 rtk2111:遡:go upstream:朔,辶
-rtk2112:岡:mount:丷,冂,一,山
+# 2026-11-12 (䒑 family, owner report on 岡): Heisig: glass canopy + mountain goat,
+# the goat drawn here as 䒑 over 山 (not 屮 as in 屰), expanded "horns; mountain".
+# No codepoint exists for ⿱䒑山 (checked cjkvi-ids: only 岡 contains it), so it
+# is prim-mountain-with-horns with a picture cropped from 岡's render, like
+# prim-tall. The old row also put 冂 between 丷 and 一, splitting the 䒑. The
+# flat 冂,䒑,山 is kept as the alternate so "mountain" still finds 岡 at depth 1.
+rtk2112:岡:mount:冂,prim-mountain-with-horns;冂,䒑,山
 rtk2113:鋼:steel:金,岡
 rtk2114:綱:hawser:糸,岡
 rtk2115:剛:sturdy:岡,刀
@@ -3215,7 +3238,9 @@ rtk2481:蕪:turnip:艹,無
 rtk2482:藷:potato:艹,諸
 rtk2483:薮:thicket:数,艹
 rtk2484:蒜:garlic:艹,示
-rtk2485:蕨:bracken:欠,丷,厂,屮,艹
+# 2026-11-12 (䒑 family, owner report on 岡): 厥 = ⿸厂欮, 欮 = ⿰屰欠: the 丷+屮 it
+# carried loose is 屰 "mountain goat" (whose crossbar the row had dropped).
+rtk2485:蕨:bracken:艹,厂,屰,欠
 rtk2486:蔚:dense growth:尉,艹
 rtk2487:茜:madder:西,艹
 rtk2488:莞:smiling:完,艹
@@ -4427,7 +4452,8 @@ prim-earthenware-jar:𠮷:earthenware jar,lidded crock:口,土
 prim-pegasus:𮥶:pegasus:一,隹,𠂉
 prim-mini-tractor:坴:mini-tractor,rice seedlings:土,儿,土
 prim-haystack:卉:haystack:十,一,廾
-prim-double-mysterious:兹:double-mysterious,mothballs:丷,一,幺,幺
+# 2026-11-12 (䒑 family, owner report on 岡): cjkvi ⿱䒑𢆶; 丷,一 -> 䒑.
+prim-double-mysterious:兹:double-mysterious,mothballs:䒑,幺,幺
 prim-cabbage:𦰌:cabbage:艹,口,龶
 prim-purse:𠀐:purse:一,中
 prim-mop:尹:mop:
@@ -5228,7 +5254,20 @@ prim-banner:㫃:banner:方,𠂉
 # glyph -- rendered beside each other, 官's lower half is plainly 𠂤, the
 # 丿-topped box, not 㠯's stacked pair. The row stays as it is.
 prim-alien:冋:alien:冂,口
-prim-mountain-goat:屰:mountain goat:丷,屮
+# 2026-11-12 (䒑 family, owner report on 岡): 屰 = ⿱䒑屮 (6 strokes); 丷,屮 dropped the
+# crossbar. Rendered: horns, bar, then 屮.
+prim-mountain-goat:屰:mountain goat:䒑,屮
+# 2026-11-12: 䒑 (U+4491) = 丷 over a full-width bar, the top of 首 前 羊 善 兹
+# 屰 益 業 菐 and 岡. It had no row, so every host spelled it 丷,一 -- three
+# reviews (首 09-27, 前 10-22, 岡 11-06) saw the 䒑 and flattened it anyway.
+# Heisig calls it "horns", exactly as he does bare 丷, so both rows carry
+# that name (the meaning picker searches both by default).
+prim-horns-with-crossbar:䒑:horns with a crossbar,horns:丷,一
+# 2026-11-12: 䒑 over 山, the inside of 岡. Heisig calls it "mountain goat"
+# (frame 2112, right after teaching 屰 at 2109), so it shares that name with
+# 屰. No codepoint: glyph is "?", picture hand-cropped from make_primitive_
+# images.py's render of 岡 with the 冂 erased (see that script's docstring).
+prim-mountain-with-horns:?:mountain with horns,mountain goat:䒑,山
 
 # --- 2026-09-20: two more of the name groups, and one deliberately left open.
 # drops -> 丶. Heisig uses the plural for a repeated drop rather than for a
