@@ -29342,3 +29342,58 @@ or test run (nothing was going to be written). Only this doc entry.
 Next pick comes from the standing backlog in the 2026-11-10 entry's "Next"
 list (rtk2870's flanking-shape lead, the stale task-brief backlog items) or
 wherever the owner directs it — not this run's to decide.
+
+## 2026-11-12 — SEO: `/?kanji=` deep links, "Alternate page with proper canonical tag"
+
+Search Console reported a new non-indexed reason, "Alternate page with proper
+canonical tag". Cause: every generated `/kanji/<id>.html` page links into the
+app as `/?kanji=<id>` (twice: "See them all…" and "Open … in the interactive
+kanji search"), nginx answers those with the SPA's `index.html`, and that
+file's static canonical is the site root. Google followed thousands of these
+links and correctly treated each as an alternate of `/`. Not an error, but
+crawl that this low-priority new site can't spare (see the GSC sitemap note).
+
+Two changes, both owner-approved:
+
+1. `generate_seo_pages.py`: both `/?kanji=` links now carry `rel="nofollow"`,
+   so crawl goes to the static pages instead. Takes effect on the next
+   `npm run build:prod` (the pages are regenerated on every build).
+2. `deploy/nginx/prod/kumiji.conf`: a new `location = /` rewrites the
+   canonical with `sub_filter` to `/kanji/<id>.html` when `?kanji=<id>` is in
+   a safe charset (`map $arg_kanji $kanji_seo_file`) **and** that static page
+   exists (`-f` test). Anything else (no param, unknown id, a user's `usr*`
+   entry, `../`, quotes) keeps the root canonical. The `if`/`set` sit at
+   server level on purpose: inside the location, nginx turned the `if` into
+   a nested location without `try_files` and the request fell through to the
+   catch-all unrewritten (caught in a local test, not assumed). Tested
+   against a throwaway nginx with the same block: `/`, `?kanji=rtk145`,
+   `?kanji=rtk145&x=1`, `?kanji=nope1`, `?kanji=../../etc/passwd`,
+   `?kanji=a%22b`. The `sub_filter` pattern must match `frontend/index.html`'s
+   canonical tag byte for byte, so a future host change has to update both.
+   The live config is not managed by this repo: copy the block to
+   `/etc/nginx/sites-available/kumiji.conf` on prod, `nginx -t`, reload.
+
+## 2026-11-12 — hanzi worklist: status check, no work done
+
+Daily timer fired for today's hanzi chunk. Checked for an interrupted prior
+run first, per this job's own guardrail: diffed which row ids have a
+non-`pending` `status` in the working-tree copy of
+`docs/hanzi_decomposition_worklist.json` against the same file at `HEAD` —
+the set difference came back empty (0), so no earlier invocation of this
+job left undecided-but-uncommitted work behind. `git status` on that file
+also shows no modification at all (the nightly `kanji-daily-review` rebuild
+that normally touches it apparently added/dropped nothing this cycle,
+unlike the sibling `docs/decomposition_worklist.json`, which did change and
+was left untouched per the "not this job's file" guardrail).
+
+`backend/kanji.db` exists. `hanzi_worklist_next.py --pending-count` reports
+**0 pending / 482 total** — every row in the hanzi decomposition-quality
+worklist already has a recorded decision from earlier chunks. No rows to
+render, no `expand_part_terms`/DB edits, no pre-flight backup or pytest run
+(nothing was going to be written). Only this doc entry, per the "0 pending"
+guardrail.
+
+Nothing queued specifically for the next hanzi chunk — this worklist's
+backlog is exhausted for now. If more candidate rows get added later (e.g.
+`audit_hanzi_weak_evidence.py` gains a new detection class), the next run
+will pick them up automatically via `hanzi_worklist_next.py`.
