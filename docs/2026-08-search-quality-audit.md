@@ -29915,3 +29915,30 @@ no `data.txt` edit, nothing to sync, and no pre-flight backup or test run
 Next pick is wherever the owner directs — this job's own queue is empty;
 the standing backlog items from recent `audit_missing_children.py`/other
 sessions are outside this job's scope to act on.
+
+## 2026-11-13 — Russian names: "mould" was translated as the fungus
+
+**Report (owner):** 型's Russian name was «плесень» (mould the fungus). Heisig's
+"mould" is a casting mould, so the right words are «форма» or «слепок».
+
+**Cause:** the Russian names come from `ru_translations_auto.json`, which an
+offline machine translator (argos-translate) produced word by word. It picks
+the most common sense of an English homonym. Searching it for the same
+failure turned up:
+- "empty grain or rice husk, chaff" (秕), which ended in «плесень»;
+- "spade, shovel, plowshare" (鏵/铧), which also became «плесень», where the
+  plowshare should be «лемех»;
+- "net" (网 罒 罔 罟 and 5 more), which became «чистый» (net income);
+- "borrow" (借 and 2 hanzi), which became the bare «брать» ("take").
+
+The genuine fungus rows (霉 黴 醭) keep «плесень».
+
+**Fix:** hand-checked entries in `add_ru_aliases.py`'s `TRANSLATIONS`, which
+always override the auto file. Re-running the script replaces the stale
+names; it already deletes any ru-aliases name no longer in the translation.
+The same run picked up Russian names for primitives added since the last run
+(叚 幺 厶 爫 …). The script's summary line was also indented into the row loop
+and printed once per row; it now prints once.
+
+**Not done:** a full sweep of the auto file for other homonyms. It holds
+about 18,800 glosses, so expect more of this class.

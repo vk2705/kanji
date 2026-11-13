@@ -195,6 +195,18 @@ TRANSLATIONS = {
     # RTK 安 is named "relax", but learners recognize it in compounds such as 案
     # as "calm" and naturally search for this adjective.
     "relax": "спокойный",
+    # Spot-fixed 2026-11-13 (owner report on 型): argos-translate read "mould"
+    # as the fungus (плесень). Heisig's 型 is a casting mould / model, so the
+    # Russian is форма / слепок. Same pass found two more glosses it had
+    # turned into "плесень": chaff (秕) and plowshare (鏵/铧). The real fungus
+    # rows (霉 黴 醭) keep плесень.
+    "mould": "форма, слепок, литейная форма",
+    "empty grain or rice husk, chaff": "пустое зерно, рисовая шелуха, мякина",
+    "spade, shovel, plowshare": "лопата, заступ, лемех",
+    # Same homonym class: "net" came back as чистый (net income), on 网 罒 罔
+    # 罟 and five more net hanzi; "borrow" as the bare "take" (брать) on 借.
+    "net": "сеть",
+    "borrow": "занимать, брать взаймы",
 }
 
 
@@ -350,9 +362,9 @@ def main():
                 database.create_alias(conn, row["id"], owner_id, alias, "public")
             inserted += 1
 
-        print(f"\n{'Would insert' if args.dry_run else 'Inserted'} {inserted} alias(es), "
-            f"{replaced_stale} stale alias(es) replaced, {skipped_existing} already present, "
-            f"{skipped_empty} skipped (no usable "
+    print(f"\n{'Would insert' if args.dry_run else 'Inserted'} {inserted} alias(es), "
+          f"{replaced_stale} stale alias(es) replaced, {skipped_existing} already present, "
+          f"{skipped_empty} skipped (no usable "
           f"translation). {len(rows)} row(s) matched {len(translations)} translated "
           f"keyword(s).")
 
