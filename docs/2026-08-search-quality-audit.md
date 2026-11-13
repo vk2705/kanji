@@ -30005,7 +30005,7 @@ Chinese mode the 亻/口/女/木… + 老 compounds plus 耆, without 耄 耈 �
 申's keyword is Heisig's archaic "speaketh"; its only Russian alias was the
 machine-translated "говорить". The owner asked for "речёт", the matching archaic
 Russian form. Added to `add_ru_aliases.py`'s hand-checked `TRANSLATIONS` as
-"речёт, речет, говорить": both spellings, because text search does not fold ё into е
+"речёт, речет, говорить, обезьяна" (обезьяна for its Heisig name "monkey"): both spellings, because text search does not fold ё into е
 and most people type е. говорить stays.
 
 ## 2026-11-13 — 差 着 羞: ⺶ "wool", not ノ + 羊 (owner report)
