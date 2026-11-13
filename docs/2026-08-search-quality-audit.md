@@ -29694,3 +29694,20 @@ Hosts that reach 䒑 through one of these (道 導 煎 揃 箭 剪, the 羊 fami
 Search checks (dev DB, ja-kanji): "glass canopy" + "mountain goat" (d1) → 岡;
 "horns" + "moon" (d1) → 脊 前; "mountain goat" + "road" → 逆; "glass canopy" +
 "mountain" → 両 岡.
+
+## 2026-11-13 — hanzi worklist: status check, no work done
+
+Daily timer fired for today's hanzi chunk. Checked for an interrupted prior
+run first, per this job's own guardrail: `git status` on
+`docs/hanzi_decomposition_worklist.json` and this doc showed nothing
+uncommitted, and the "decisions not yet committed" diff check (comparing
+non-pending ids in the working tree against `HEAD`) printed `0` — no prior
+session died mid-chunk. `backend/kanji.db` exists.
+
+`hanzi_worklist_next.py --pending-count` reports **0 pending / 482 total**,
+and `-n 20` confirms it with an empty next-chunk list. No kanji left to
+review, so no render, no `kanji.db` edit, no sync, and no pre-flight backup
+or pytest run (nothing was going to be written). Only this doc entry.
+
+Nothing else to report — this is a status-only check, same as the
+full-review job's own 0-pending entries on other recent dates.
