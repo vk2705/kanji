@@ -377,7 +377,10 @@ rtk246:墓:grave:莫,土
 rtk247:暮:evening:莫,日
 rtk248:膜:membrane:月,莫
 rtk249:苗:seedling:田,艹
-rtk250:兆:portent,turtle:
+# 2026-11-13: "hairy legs" added at the owner's request -- the shape reads as
+# a pair of legs with hair strokes either side. The owner's own name, not
+# Heisig's (his are "portent" and, as a part, "turtle").
+rtk250:兆:portent,turtle,hairy legs:
 rtk251:桃:peach:木,兆
 rtk252:眺:stare:目,兆
 rtk253:犬:dog,chihuahua:大,丶
