@@ -29942,3 +29942,30 @@ and printed once per row; it now prints once.
 
 **Not done:** a full sweep of the auto file for other homonyms. It holds
 about 18,800 glosses, so expect more of this class.
+
+## 2026-11-13 — Russian names, part 2: transliterations ("portent" → портной)
+
+**Report (owner):** 兆 "portent" had the Russian name «портной» (tailor).
+
+**Cause:** this is a second failure class of the argos-translate pass. Given a
+rare English word with no context, it produces a Russian word that only looks
+similar, or a nonword: буллит, Эдди, Холли, энтвин, палисей, теневр, стамен.
+It also picked the wrong sense of common words: 京 capital → капитал (money),
+鶴 crane → кран (machine), 録 record → рекорд, 柔 tender → тендер.
+
+**Method:** flag every ja-kanji keyword whose Russian translation starts like
+a transliteration of the English word (first four letters, with loose vowel
+and consonant matching). That gave 272 hits, and I read each one. Most are
+real loanwords (атмосфера, бамбук, интервью) and stay.
+
+**Fix:** 36 keywords added to `TRANSLATIONS`; each line carries its host
+character and the old value. Before choosing a translation, I checked which
+hanzi share the keyword, because a translation applies to every row with
+that exact keyword. For example "present" is 現 (now) and also 賫 (to give),
+so it got both senses; "swing" also covers 韆 (a swing). The run made 108
+inserts and 56 stale replacements.
+
+**Still not done:** this check only catches look-alike transliterations, and
+only for Japanese keywords. Wrong senses that don't look like the English
+(the "mould" → плесень kind) need a different check, and the ~15,000 hanzi
+glosses are unreviewed.

@@ -207,6 +207,49 @@ TRANSLATIONS = {
     # 罟 and five more net hanzi; "borrow" as the bare "take" (брать) on 借.
     "net": "сеть",
     "borrow": "занимать, брать взаймы",
+    # 2026-11-13 (owner report: 兆 "portent" -> портной, "tailor"). A second
+    # failure class: argos-translate, given one rare word with no context,
+    # transliterates it into a Russian word that merely looks similar, or
+    # into a nonword. Found by flagging every ja-kanji keyword whose Russian
+    # starts like a transliteration of the English, then reading the 272 hits
+    # by hand (most are real loanwords and stay). Wrong-sense picks on common
+    # words caught in the same read are fixed here too.
+    "portent": "предзнаменование, знамение, предвестие",  # 兆 (was портной)
+    "bullrush": "камыш, рогоз",                 # 蒲 (was буллит)
+    "critters": "зверушки, твари",              # 疋 (was критерий)
+    "eddy": "водоворот, заводь",                # 淀 (was Эдди)
+    "holly": "падуб",                           # 柊 (was Холли)
+    "hollyhock": "мальва, штокроза",            # 葵 (was холлихок)
+    "entwine": "сплетать, обвивать",            # 絡 (was энтвин)
+    "kazoo": "казу",                            # 戠 (was казазу)
+    "livraison": "выпуск, часть издания",       # 篇 (was ливрейсон)
+    "palisade": "частокол, палисад",            # 柵 (was палисей)
+    "plantain": "банан, банановое растение",    # 芭 (was плантан)
+    "salarium": "жалованье",                    # 禄 (was салария)
+    "stamen": "тычинка",                        # 蕊 (was стамен)
+    "supinate": "лежать, лечь на спину",        # 臥 (was супинат)
+    "tenebrous": "мрачный, тёмный",             # 黎 (was теневр)
+    "moxa": "мокса, прижигание",                # 灸 (was мокс)
+    "capital": "столица, капитель",             # 京 (was капитал, money)
+    "crane": "журавль",                         # 鶴 鹤 (was кран, machine)
+    "present": "настоящий, нынешний, подарок, преподносить",  # 現 / 賫 (was присутствующий)
+    "sort": "род, вид, сорт",                   # 類 (was сортировать)
+    "record": "запись, записывать",             # 録 記 (was рекорд, sports)
+    "tender": "нежный, мягкий",                 # 柔 冉 (was тендер, bid)
+    "swing": "качать, раскачивать, качели",     # 揺 韆 (was свинг)
+    "souse": "обливать, орошать",               # 潅 (was соус)
+    "porter": "носильщик",                      # 壬 (was портье)
+    "post": "должность, пост",                  # 職 岗 (was пост alone)
+    "lineage": "родословная, происхождение",    # 系 (was линия)
+    "plank": "доска",                           # 板 (was планка)
+    "finish": "закончить, завершить",           # 済 訖 (was финиш)
+    "discriminating": "разборчивый, различающий",  # 識 (was дискриминация)
+    "exploits": "подвиги, заслуги",             # 績 (was эксплойт)
+    "reserved": "сдержанный, благоговейный",    # 虔 (was резервированный)
+    "italy": "италия",                          # 伊 (was итальянский)
+    "genius": "гений, талант",                  # 才 (was гениальный)
+    "bamboo": "бамбук",                         # 竹 (was бамбуковый)
+    "dose": "доза",                             # 剤 (was дозировка)
 }
 
 
