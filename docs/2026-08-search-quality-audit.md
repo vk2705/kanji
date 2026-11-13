@@ -29694,3 +29694,186 @@ Hosts that reach 䒑 through one of these (道 導 煎 揃 箭 剪, the 羊 fami
 Search checks (dev DB, ja-kanji): "glass canopy" + "mountain goat" (d1) → 岡;
 "horns" + "moon" (d1) → 脊 前; "mountain goat" + "road" → 逆; "glass canopy" +
 "mountain" → 両 岡.
+
+## 2026-11-13 — brief leads all exhausted; audit_missing_children.py chunk instead
+
+Daily timer fired. Push-access check (`git push --dry-run origin master`)
+succeeded before any work started, per this job's own standing guardrail.
+Container was fresh — no `backend/venv`, no `/tmp/ids.txt`, no CJK fonts —
+so today also rebuilt all three from scratch (`apt-get install fonts-noto-cjk
+fonts-hanazono`, `pip install -r requirements.txt -r requirements-dev.txt`,
+cjkvi-ids from its raw GitHub URL).
+
+**The task brief's own "Where the work is" section is now fully stale, not
+just partly.** All three items it names turned out to already be done:
+
+- `audit_phantom_parts.py`'s "big remaining pile": every strong-evidence
+  finding in both `--in-csv-range` (図/斎/能) and the full run (侃/掻/樗/烹/
+  祢/訊/鰐/爾/毅/亮, plus 捷/蘭/蝿 already named in CLAUDE.md) already has a
+  dated comment in `data.txt` from a 2026-10-23 through 2026-11-07 session
+  explaining why it's a confirmed false positive — almost all the same
+  codepoint-variant blind spot (cjkvi spells a Japanese shape with a
+  Chinese-region or placeholder codepoint; rendered, it's the shape this
+  project already has). Checked every one against its nearby comment before
+  touching anything; none needed a second look beyond confirming the
+  existing reasoning still holds. The pile this bullet describes doesn't
+  exist anymore — it's a pile of already-closed investigations the detector
+  still flags because it can't see across a codepoint substitution it
+  wasn't told about.
+- kangxi58 already holds 彐 (not 彑) — 彑 has its own row, `prim-pigs-head`,
+  registered as "the real 1.00-support candidate" per the chunk-41-era
+  comment on that row. Already fixed; nothing to rename.
+- `suggest_heisig_aliases.py --near 0.8 --all` and `--all` alone both now
+  report **zero** groups in every bucket. The "~236 left" the brief quotes
+  is stale by a wide margin.
+
+None of this is a new finding — it's three confirmations that a stale
+stored prompt stayed stale, which prior sessions already flagged (most
+recently 2026-11-12's "Next" item 2) and can't fix themselves since it's
+the scheduler's own prompt, not a repo file.
+
+**So today's bounded chunk came from `audit_missing_children.py` instead**
+(17 findings / 14 kanji at the start of the session) — concepts cjkvi-ids
+and Heisig's CSV both put inside a host that this project's own row drops.
+Worked every finding in the "one fix each" and "no part carries these"
+buckets; left two buckets open rather than guess. Net: 17/14 → 10/8.
+
+**Fixed, all render-confirmed (`render_glyphs.py`), each documented at its
+own row in `data.txt`:**
+
+1. **kangxi193 鬲** (cauldron/tripod) — was `口,冂,儿`, missing the top bar
+   and the right-hand stroke entirely. This is the exact row CLAUDE.md's
+   2026-11-12 䒑 entry flagged as "Open, flagged for the owner" ("missing
+   its top 一 and the inner 丁"). Settled it: rendered at 700px, the
+   interior of the 冂 frame holds *two* distinct shapes side by side, not
+   one — 儿 (already in the row, a diagonal sweep-and-hook) and 丅
+   (prim-straight-nail, already registered from rtk889 敢's fix). cjkvi's
+   GT reading structurally confirms both are really there — its `𦉪` has
+   its own ids.txt entry, `⿵冂儿`, so GT's `⿳一口⿵𦉪丅` already names the
+   same five pieces this fix lands on. Heisig's own name list for 融/隔
+   ("tripod; one; ceiling; mouth; hood; human legs; street; nail; spike")
+   accounts for every one of them with nothing left over: one(一),
+   ceiling/hood(冂, already aliased "hood"), mouth(口), human legs(儿),
+   street/nail/spike(丅'd own three aliases). New row: `一,口,冂,儿,丅`.
+2. **prim-dog-tag 甫 → rtk2028 敷** (spread) — was `十,田,方,丶,攵`, the
+   same stroke piled up loose (十,田,丶) instead of the compound shape it
+   draws. Rendered beside 博/縛 (which already use 甫 whole): 敷's
+   upper-left matches stroke-for-stroke. CSV's own name for this frame,
+   "arrowhead", is prim-dog-tag's own second alias — exact match. New row:
+   `甫,方,攵`.
+3. **prim-forearm 厷** — has been atomic since the 2026-11-07
+   over-flattening fix that made 雄/宏/肱/紘 use 厷 as a unit instead of
+   spelling it out (correct at the host level), which left "elbow"/"by
+   one's side" unreachable from any of those hosts since nothing carried
+   them anymore. cjkvi `⿸𠂇厶` and a render of 厷/𠂇/厶/友/右 together
+   agree: top-left is 𠂇 (prim-by-ones-side, "by one's side" already in
+   左/右/有/友), bottom-right is 厶 (kangxi28, "elbow,wall" already). Both
+   names were already registered elsewhere — this was a reachability gap
+   at depth 1, not a missing name. New row: `𠂇,厶`. Verified by search:
+   `["elbow","masculine"]` at depth 2 now returns rtk804 雄.
+4. **prim-borrow 叚** — same shape as #3: the 2026-11-06 fix that made
+   暇/霞/蝦 use 叚 as a unit (replacing a dropped-叚 flattening bug) left
+   this row itself empty, so "crotch" stopped being reachable from any of
+   them. cjkvi `⿰⑤⿱コ又`: left flank is a per-entry placeholder (left
+   alone, weak evidence), but the bottom-right 又 is fully encoded and
+   renders stroke-for-stroke like rtk752 又 in 暇/瑕/蝦 alike. "Crotch" is
+   又's own second name, already registered. New row: `又`. Verified by
+   search: `["crotch","sun"]` at depth 2 now includes rtk2027 暇.
+5. **prim-double-ten 卄 → rtk1267 備** (equip) — CSV names this shape
+   "flowers" (備: "person; flowers; cliff; screwdriver; ..."), but the row
+   only carried "double ten", the descriptive name this project gave 卄
+   when it got its own row. Same shape, two of Heisig's own names for it —
+   he does this routinely (CLAUDE.md's 龶/丰, 戌/戍, 母/毋, ⺕/彐). 卄's only
+   host, so one alias added, no row split: `double ten,flowers`.
+
+**Investigated and deliberately left alone, with reasons (not guessed at):**
+
+- **爾 rtk2867, "add 巾"** — the exact substitution a 2026-11-10 session
+  already investigated and rejected with KanjiVG stroke-level data (13 vs
+  14 strokes, no 巾-shaped group anywhere in the real stroke tree). The
+  detector's cjkvi source still carries the old placeholder; the row is
+  right as written.
+- **終 rtk1452, "add 丶" / 縄 rtk1477, "add 日"** — both trace to the same
+  ⺀/冫 and ⿻ classes already documented today and in prior sessions: 終
+  reaches "ice" via 冬→冫 already (⺀ = 丶,丶 overlaid, the same "renders
+  stroke-for-stroke as 冫" substitution 図/尺/尽/寒 already use — adding a
+  bare 丶 on top would double-count the same two dots under two names, not
+  add a missing stroke), and 縄's cjkvi `⿻日电` is literally CLAUDE.md's
+  own documented example for 蝿's identical `⿻日电` top — rendered, it's
+  田, not 日, and the row already says so.
+- **衰 rtk2037, "add 丨"** — already resolved on 2026-10-23 (own comment on
+  the row): the added stroke over 哀's 口 is cjkvi's `一` (horizontal,
+  confirmed by render), not a vertical "stick". The CSV word "stick" is
+  Heisig's loose name for it; the alias that would make it resolve
+  (`stick` on rtk1/一) isn't registered because `stick` already means
+  something else here (prim-pipe's vertical `｜`), and conflating the two
+  for one single-host gap looked like a worse trade than leaving it. Not
+  touched.
+- **面 rtk2039 / 麺 rtk2040, "add 囗"** — cjkvi's `面 = ⿱丆囬`, `囬 =
+  ⿴囗④` puts the "pent in" finding behind an unencoded circled-number
+  placeholder (`④`), the weak-evidence class `audit_phantom_parts.py`
+  already has a `--hide-blind` flag for and `audit_missing_children.py`
+  doesn't. Rendered, 面 does have a visible outer frame, but whether it's
+  a genuinely separate 囗 stroke or just 目's own outline stretched to fit
+  (the current row uses `目` for the lower content) needs more render
+  budget than today's chunk had left to settle cleanly — six CSV names
+  ("hundred; one; ceiling; drop; pent in; eye") map to only three current
+  parts (`一,丿,目`), and getting the mapping wrong on a primitive this
+  widely reused (面 feeds 麺 and others) is a worse mistake than leaving it
+  one chunk longer. Left open, not a guess.
+- **筑 rtk2681 → 築 rtk1021, "add 凡 工"** — found a genuine cjkvi region
+  disagreement, not a dropped concept: 巩's G-reading is `⿰工凡` (工 +
+  凡/"mediocre", a real Heisig frame, rtk66) but its T/J-reading — the one
+  that matches the actual Japanese glyph this project renders — is `⿰工卂`
+  (工 + 卂, atomic, no CSV frame of its own, already identified as a
+  lookalike stand-in at rtk2748 訊's row). Rendered side by side
+  (`render_glyphs.py 巩 工 凡 卂`), the Japanese-font 巩 unambiguously draws
+  卂, not 凡 — they're visually distinct, not an artifact of font
+  substitution. But Heisig's own components column for 築 genuinely lists
+  "mediocre" among its names, meaning his book teaches this shape as 凡's
+  mnemonic even though the Japanese codepoint it actually sits on is 卂.
+  That's a real "name vs. glyph" conflict (CLAUDE.md's standing warning:
+  "Heisig names by mnemonic role, not by glyph"), three decomposition
+  levels deep (築→筑→巩), and not one to resolve by picking a side without
+  more evidence than one render comparison gives. Flagged for the owner
+  rather than guessed at.
+
+**Verification**, from a clean rebuild (`rm kanji.db*` then re-import):
+`test_regression_fixes.py` 1341/1341 (no pin needed updating — none of
+today's fixes touched a pinned expected-parts set), `pytest -q` 83 passed,
+`audit_overflatten.py`/`audit_self_reference.py` both 0,
+`audit_radicals.py` 0/0, `audit_phantom_parts.py --in-csv-range` 10/9 and
+full run 54/41 (both unchanged — today's fixes were all in
+`audit_missing_children.py`'s territory, a different bug class, so no
+overlap expected or found), `audit_primary_choice.py` 0/56→0. Frontend:
+`npm install && npm run lint` clean, `npm run build:prod` succeeds (no
+`npm run build` script exists — see CLAUDE.md). `audit_missing_children.py
+--summary`: 17 findings/14 kanji → 10 findings/8 kanji. Two end-to-end
+search checks beyond the audit scripts themselves (dev DB, ja-kanji):
+`["elbow","masculine"]` at depth 2 → rtk804 雄 (was empty before the 厷
+fix); `["crotch","sun"]` at depth 2 → includes rtk2027 暇 (was missing
+before the 叚 fix).
+
+### Next
+
+1. `audit_missing_children.py`'s remaining 10/8: 面/麺's "pent in" question
+   (needs a careful render pass to separate a genuine extra 囗 stroke from
+   目's own stretched outline) and 筑/巩's region-variant conflict (凡 vs
+   卂, flagged above) are the two with real open questions; 爾/終/縄/衰 are
+   closed, already-correct rows that will keep re-appearing in this
+   script's output for the same structural reasons `能`/`訊`/etc. keep
+   re-appearing in `audit_phantom_parts.py`'s — a property of the
+   primitive or the codepoint pair, not evidence against the row.
+2. The task brief's "Where the work is" section needs the owner to update
+   it at the source (it's the scheduler's stored prompt, not a repo file —
+   every session back to 2026-11-01 has noted this and none can fix it).
+   With today's session closing out all three of its named leads, a
+   refreshed version pointing at `audit_missing_children.py`'s open two
+   items, or wherever the owner wants attention next, would save a repeat
+   of today's first hour.
+3. If a future session wants a bigger chunk: `audit_missing_children.py`'s
+   own `--max-depth` default and `cjkvi_children`'s `--expand` default are
+   both worth checking against their current values — today's chunk never
+   needed to change either, but neither was investigated, and the script's
+   docstring suggests both are tunable.
+
