@@ -29893,3 +29893,25 @@ before the 叚 fix).
    both worth checking against their current values — today's chunk never
    needed to change either, but neither was investigated, and the script's
    docstring suggests both are tunable.
+
+## 2026-11-13 — full re-review: status check, no work done
+
+Daily timer fired for today's chunk. Checked for an interrupted prior run
+first, per this job's own guardrail: `git status` on `backend/data.txt` and
+`docs/kanji_full_review.json` showed nothing uncommitted, so no prior
+session died mid-chunk. `git pull --no-rebase origin master` was already up
+to date (the `pull.rebase=true` local config would otherwise have blocked
+on the two unrelated out-of-scope modified files, `docs/decomposition_worklist.json`
+and `docs/kanji_review_coverage.tsv` — both rebuilt by other routines, not
+this job's — but the explicit merge pull didn't need to touch them).
+
+`backend/kanji.db` exists. `full_review.py --pending-count` reports **0
+pending / 3000 total** — the full re-review (started 2026-10-21, finished
+2026-11-09) has stayed at 0 through every status check since (2026-11-09
+through 2026-11-12, now 2026-11-13). No kanji left to review, so no render,
+no `data.txt` edit, nothing to sync, and no pre-flight backup or test run
+(nothing was going to be written). Only this doc entry.
+
+Next pick is wherever the owner directs — this job's own queue is empty;
+the standing backlog items from recent `audit_missing_children.py`/other
+sessions are outside this job's scope to act on.
