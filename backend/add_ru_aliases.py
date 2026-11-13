@@ -250,6 +250,9 @@ TRANSLATIONS = {
     "genius": "гений, талант",                  # 才 (was гениальный)
     "bamboo": "бамбук",                         # 竹 (was бамбуковый)
     "dose": "доза",                             # 剤 (was дозировка)
+    # 申: Heisig's archaic "speaketh" -> archaic "речёт" (owner, 2026-11-13);
+    # "речет" too, since search does not fold ё into е.
+    "speaketh": "речёт, речет, говорить",
 }
 
 
