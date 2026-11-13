@@ -239,6 +239,16 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"prim-old-man-radical", "rtk12"}},
     "prim-old-man-radical": {"character": "耂", "keyword": "old man radical",
                "expected_part_ids": {"rtk161", "prim-katakana-no"}},
+    # 2026-11-13: the sweep in 差 着 羞 is the sheep's own bent vertical (⺶ "wool"),
+    # not a separate ノ stroke beside a whole 羊.
+    "prim-wool": {"character": "⺶", "keyword": "wool",
+               "expected_part_ids": {"rtk586", "kangxi4"}},
+    "rtk593": {"character": "差", "keyword": "distinction",
+               "expected_part_ids": {"prim-wool", "rtk80"}},
+    "rtk594": {"character": "着", "keyword": "don",
+               "expected_part_ids": {"prim-wool", "rtk15"}},
+    "rtk2198": {"character": "羞", "keyword": "feel ashamed",
+               "expected_part_ids": {"prim-wool", "rtk2197"}},
     "rtk1209": {"character": "祈", "keyword": "pray",
                 "expected_part_ids": {"rtk1206", "kangxi113"}},
     # "animal legs" has now been re-homed twice, and this is the end of it. It began

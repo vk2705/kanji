@@ -30007,3 +30007,20 @@ machine-translated "говорить". The owner asked for "речёт", the mat
 Russian form. Added to `add_ru_aliases.py`'s hand-checked `TRANSLATIONS` as
 "речёт, речет, говорить": both spellings, because text search does not fold ё into е
 and most people type е. говорить stays.
+
+## 2026-11-13 — 差 着 羞: ⺶ "wool", not ノ + 羊 (owner report)
+
+The owner doubted that 差 contains a ノ. Rendered beside 着 and 羞, it doesn't: the long
+left sweep is the sheep's own vertical stroke, bent down and to the left, with 工/目/丑
+tucked under it. This is Heisig's "wool" (CSV components "wool; sheep; craft" and
+"wool; sheep; eye"); cjkvi's Japanese form is ⿸⿱𦍌丿X; and Unicode encodes the shape as
+⺶ U+2EB6. The rows listed a separate ノ *and* the whole 羊, so the sheep was there twice,
+once of it with an extra stroke that isn't drawn.
+
+New row `prim-wool:⺶:wool:羊,丿` (Heisig's own account: the sheep with its tail bent).
+差 = ⺶,工; 着 = ⺶,目; 羞 = ⺶,丑. The fonts here draw ⺶, so no PNG is needed
+(make_primitive_images.py doesn't list it). Chinese rows are unchanged, because their G
+source form is ⿸羊X.
+
+Trade-off, as with 䒑: "sheep + craft" now needs depth 2 to find 差. "wool" finds all
+three at depth 1.

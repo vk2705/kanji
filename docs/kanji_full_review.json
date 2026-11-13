@@ -10456,11 +10456,14 @@
   "heisig_components": "wool; sheep; craft",
   "cjkvi_ids": "⿸羊工[G] ⿸⿱𦍌丿工[TJKV]",
   "google_parts": null,
-  "status": "keep",
-  "decision": null,
-  "note": "ノ,工,羊 matches render; prior 2026-08-24 audit confirmed Heisig's 'wool; sheep' here names the same 羊 primitive, no separate wool row exists or is warranted",
+  "status": "fixed",
+  "decision": [
+   "⺶",
+   "工"
+  ],
+  "note": "2026-11-13 owner: no separate ノ; the sweep is the sheep's bent vertical, ⺶ wool (cjkvi J ⿸⿱𦍌丿X); rendered beside 着 羞",
   "reviewed_by": "claude",
-  "reviewed_at": "2026-10-22"
+  "reviewed_at": "2026-11-13"
  },
  {
   "id": "rtk594",
@@ -10474,11 +10477,14 @@
    "羊",
    "目"
   ],
-  "status": "keep",
-  "decision": null,
-  "note": "ノ,目,羊 matches render; same 羊-as-one-primitive precedent as 差",
+  "status": "fixed",
+  "decision": [
+   "⺶",
+   "目"
+  ],
+  "note": "2026-11-13 owner: no separate ノ; the sweep is the sheep's bent vertical, ⺶ wool (cjkvi J ⿸⿱𦍌丿X); rendered beside 着 羞",
   "reviewed_by": "claude",
-  "reviewed_at": "2026-10-22"
+  "reviewed_at": "2026-11-13"
  },
  {
   "id": "rtk595",
@@ -39238,11 +39244,14 @@
   "heisig_components": "",
   "cjkvi_ids": "⿸羊丑[G] ⿸⿱𦍌丿丑[TJK]",
   "google_parts": null,
-  "status": "keep",
-  "decision": null,
-  "note": "羊,丑 matches cjkvi ⿸羊丑[G].",
+  "status": "fixed",
+  "decision": [
+   "⺶",
+   "丑"
+  ],
+  "note": "2026-11-13 owner: no separate ノ; the sweep is the sheep's bent vertical, ⺶ wool (cjkvi J ⿸⿱𦍌丿X); rendered beside 着 羞",
   "reviewed_by": "claude",
-  "reviewed_at": "2026-11-06"
+  "reviewed_at": "2026-11-13"
  },
  {
   "id": "rtk2199",

@@ -767,8 +767,12 @@ rtk589:詳:detailed:言,羊
 rtk590:鮮:fresh:魚,羊
 rtk591:達:accomplished:辶,土,羊
 rtk592:羨:envious:欠,水,羊
-rtk593:差:distinction:ノ,工,羊
-rtk594:着:don:ノ,目,羊
+# 2026-11-13 (owner report on 差: "it has no ノ"): the sweep in 差 着 羞 is not a separate
+# stroke but the sheep's own vertical bent down-left -- Heisig's "wool" (CSV: wool; sheep; ...).
+# cjkvi J: ⿸⿱𦍌丿X; Unicode has the shape as ⺶ U+2EB6 (CJK radical sheep variant).
+prim-wool:⺶:wool:羊,丿
+rtk593:差:distinction:⺶,工
+rtk594:着:don:⺶,目
 rtk595:唯:solely:口,隹
 rtk596:堆:piled high:土,隹
 rtk597:椎:chinquapin:木,隹
@@ -2883,7 +2887,7 @@ rtk2194:璽:emperor's seal:爾,玉
 rtk2195:潟:lagoon:臼,水,勹,灬
 rtk2196:丹:rust-colored,rust colored,ship´s funnel,ship's funnel:ノ,一,丶,亅
 rtk2197:丑:sign of the ox or cow:｜,ノ,一
-rtk2198:羞:feel ashamed:羊,丑
+rtk2198:羞:feel ashamed:⺶,丑
 rtk2199:卯:sign of the hare or rabbit,blown eggs:prim-receipt,卩
 rtk2200:巳:sign of the snake or serpent,snake,mosaic with bit missing,self:
 rtk2201:此:this,prince:止,匕
