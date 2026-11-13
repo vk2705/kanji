@@ -229,8 +229,16 @@ EXPECTED_DECOMPOSITIONS = {
                "expected_part_ids": {"rtk357", "rtk112", "rtk1", "prim-snare"}},
     "rtk1335": {"character": "与", "keyword": "bestow",
                "expected_part_ids": {"prim-snare", "rtk1"}},
+    # 2026-11-13 (owner report): 考 孝 者 listed the whole 老, so a parts search
+    # for 老 returned them; their top is 耂 (prim-old-man-radical), no 匕.
     "rtk1341": {"character": "考", "keyword": "consider",
-               "expected_part_ids": {"rtk1340", "prim-snare"}},
+               "expected_part_ids": {"prim-old-man-radical", "prim-snare"}},
+    "rtk1342": {"character": "孝", "keyword": "filial piety",
+               "expected_part_ids": {"prim-old-man-radical", "rtk99"}},
+    "rtk1345": {"character": "者", "keyword": "someone",
+               "expected_part_ids": {"prim-old-man-radical", "rtk12"}},
+    "prim-old-man-radical": {"character": "耂", "keyword": "old man radical",
+               "expected_part_ids": {"rtk161", "prim-katakana-no"}},
     "rtk1209": {"character": "祈", "keyword": "pray",
                 "expected_part_ids": {"rtk1206", "kangxi113"}},
     # "animal legs" has now been re-homed twice, and this is the end of it. It began

@@ -1725,11 +1725,24 @@ rtk1339:謝:apologize:言,射
 # ⿸耂匕 agrees and audit_weak_evidence.py --host 老 flags nothing (not an
 # overlay/enclosure trap). Was 匕, now 土,匕.
 rtk1340:老:old man:土,匕
-rtk1341:考:consider:老,丂
-rtk1342:孝:filial piety:子,老
+# 2026-11-13: 耂 (U+8002), the top of 老 without its 匕 -- what 考 孝 者 actually
+# contain. Heisig calls it "old man" as he does 老 itself, so it shares that
+# name (the meaning picker searches both by default); "old man radical" is
+# the unambiguous one. 老 keeps Heisig's 土,匕.
+prim-old-man-radical:耂:old man radical,old man:土,ノ
+# 2026-11-13 (owner report: a parts search for 老 returned 考 孝 者): the top is
+# 耂, not the whole 老 -- there is no 匕 in 考 (render; cjkvi ⿸耂丂). Heisig's
+# "old man" names both 老 and its top; here it means the top. Was 老,丂.
+rtk1341:考:consider:耂,丂
+# 2026-11-13 (owner report: a parts search for 老 returned 考 孝 者): 耂 + 子, no 匕
+# (cjkvi ⿸耂子). Was 子,老.
+rtk1342:孝:filial piety:耂,子
 rtk1343:教:teach:孝,攵
 rtk1344:拷:torture:扌,考
-rtk1345:者:someone,puppet,sooty:日,老
+# 2026-11-13 (owner report: a parts search for 老 returned 考 孝 者): 耂 + 日, no 匕
+# (cjkvi ⿸耂日). Was 日,老. 煮 著 箸 署 暑 諸 猪 賭 緒 都 屠 … reference 者 and
+# inherit the fix.
+rtk1345:者:someone,puppet,sooty:耂,日
 rtk1346:煮:boil:者,灬
 rtk1347:著:renowned:者,艹
 rtk1348:箸:chopsticks:竹,者

@@ -29969,3 +29969,33 @@ inserts and 56 stale replacements.
 only for Japanese keywords. Wrong senses that don't look like the English
 (the "mould" → плесень kind) need a different check, and the ~15,000 hanzi
 glosses are unreviewed.
+
+## 2026-11-13 — 考 孝 者 listed the whole 老; new row for 耂
+
+**Report (owner):** a parts search for 老 returned 考, 孝 and 者.
+
+**Cause:** Heisig uses "old man" both for the kanji 老 and for its top half 耂
+(what 考 孝 者 and their many descendants contain). The rows for 考, 孝 and 者
+named the whole 老, so they claimed a 匕 that is not there. Rendered: all
+three are 耂 directly over 丂, 子 and 日 (cjkvi ⿸耂丂, ⿸耂子, ⿸耂日). 耂
+(U+8002) had only a Chinese row.
+
+**Fix (Japanese):**
+- New row `prim-old-man-radical:耂:old man radical,old man:土,ノ`. It shares
+  "old man" with 老, as Heisig does, so the meaning picker searches both;
+  "old man radical" is the unambiguous name.
+- 考 → `耂,丂`, 孝 → `耂,子`, 者 → `耂,日`. Descendants that reference 者 or 孝
+  inherit the fix: 煮 著 箸 署 暑 諸 猪 賭 緒 都 屠 教 酵 ….
+- 老 keeps Heisig's `土,匕`.
+- 姥 (女 + 老) and 鰭 (魚 + 耆, where 耆 = 耂 + 匕 + 日) really do contain all of
+  老, so they stay as results.
+
+**Fix (Chinese):** the hanzi import took cjkvi's coarse ⿱老毛, ⿱老句 and ⿱老至
+at face value. Rendered, 耄, 耈 and 耋 have no 匕 either. Each is now 耂 plus
+its lower part. These were written with the new `backend/set_hanzi_parts.py`,
+a dry-run-by-default tool that rewrites one system hanzi decomposition in
+`import_hanzi.py`'s own format (glyph + keyword via `expand_part_terms`),
+since hanzi have no data.txt. 耆 is right as ⿱老日 and stays.
+
+Result: a parts search for 老 now returns 老 姥 鰭 in Japanese mode, and in
+Chinese mode the 亻/口/女/木… + 老 compounds plus 耆, without 耄 耈 耋.
