@@ -1602,7 +1602,13 @@ rtk1266:庸:commonplace:⺕,用,广,聿
 # agrees: ⿰亻⿱卄⿸厂用. 卄 has no kanji frame and is not one of the 214 Kangxi
 # radicals, so it gets a new bare primitive row (see prim-double-ten below).
 rtk1267:備:equip:亻,卄,厂,用
-prim-double-ten:卄:double ten
+# 2026-11-13 audit_missing_children.py: 備's own CSV components read "person;
+# flowers; cliff; screwdriver; ..." — "flowers" was dropped because this row
+# only carried "double ten", the descriptive name this project gave 卄 when it
+# got its own row (chunk note above). Same shape, two of Heisig's own names
+# for it (he does this routinely — see CLAUDE.md's 龶/丰, 戌/戍 etc.) — this
+# is 卄's only host, so one alias, no row to split.
+prim-double-ten:卄:double ten,flowers
 rtk1268:昔:once upon a time,storyteller:日,龷
 rtk1269:錯:confused:昔,金
 rtk1270:借:borrow:亻,昔
@@ -2608,7 +2614,14 @@ rtk2026:益:benefit:䒑,八,皿
 # 蝦): was 日,又 -- 又 is only the bottom-right stroke of 叚 (cjkvi ⿰日叚),
 # the rest of 叚 dropped outright. Use the new prim-borrow row (叚).
 rtk2027:暇:spare time:日,叚
-rtk2028:敷:spread:十,田,方,丶,攵
+# 2026-11-13 audit_missing_children.py: was 十,田,方,丶,攵 -- the first
+# three of those (十,田,丶) are the same stroke piled up loose instead of the
+# compound shape they draw. cjkvi JK's own tree for this corner is more
+# complex still (⿺𤰔丶), but render_glyphs.py settles it in one look: 敷's
+# upper-left matches 甫 (prim-dog-tag, already used whole in 捕/哺/浦/葡/圃)
+# stroke-for-stroke, same as 博/縛's own 甫. CSV's own name for this frame,
+# "arrowhead", is prim-dog-tag's own second alias -- exact match, not a guess.
+rtk2028:敷:spread:甫,方,攵
 # 2026-10-23 (same "lid" report): was ｜,二,米,亠,木 -- 7 strokes listed as ~17,
 # two readings run together plus a 亠 that is not drawn. Heisig's components are
 # "not yet; animal horns": 未 with 丷 set between its two horizontals (render
@@ -3305,7 +3318,16 @@ rtk2532:肛:anus:工,月
 rtk2533:脆:brittle:危,月
 rtk2534:肋:rib:月,力
 rtk2535:腔:body cavity:月,空
-prim-forearm:厷:forearm
+# 2026-11-13 audit_missing_children.py: this row has been atomic since the
+# 2026-11-07 over-flattening fix (chunk 76-ish) that made 雄/宏/肱/紘 use 厷
+# as a unit instead of spelling it out -- correct at the host level, but it
+# left "elbow"/"by one's side" unreachable from any of those hosts, since
+# nothing carried them anymore. cjkvi ⿸𠂇厶 and render_glyphs.py on
+# 厷/𠂇/厶/友/右 agree: top-left is 𠂇 (prim-by-ones-side, already "by one's
+# side" in 左/右/有/友), bottom-right is 厶 (kangxi28, already "elbow,wall").
+# Both names already registered elsewhere -- this was a reachability gap at
+# depth 1, not a naming gap.
+prim-forearm:厷:forearm:𠂇,厶
 # 2026-11-06 full re-review: was ノ,一,月,厶 -- the right side flattened into
 # raw strokes. render_glyphs.py on 肱/厷 confirms the right side is the
 # coherent shape 厷, matching cjkvi-ids' ⿰月厷[GJK]. Shape-family check:
@@ -3642,7 +3664,16 @@ rtk2727:蝋:wax:虫,𭕄,几
 # Shape-family check: rtk2027 暇 and rtk2800 霞 have the exact same
 # dropped-叚 mistake (both just 又) -- fixed both below too; grep found no
 # other rtk* row using 叚/又 for this shape.
-prim-borrow:叚:borrow,false
+#
+# 2026-11-13 audit_missing_children.py: that 2026-11-06 fix moved 又
+# ("crotch") out of every host's own row onto this one, correctly, but left
+# this row itself empty -- so "crotch" stopped being reachable at all, from
+# any host. cjkvi ⿰⑤⿱コ又: the left flank is a per-entry placeholder (weak,
+# left alone per the standing rule), but the bottom-right 又 is fully encoded
+# and renders stroke-for-stroke like rtk752 又 in 暇/瑕/蝦 alike. "Crotch" is
+# 又's own second name (rtk752:又:or again,crotch), already registered, so
+# this is one alias-bearing part, not a new row.
+prim-borrow:叚:borrow,false:又
 rtk2728:蝦:shrimp:虫,叚
 rtk2729:蛸:octopus:肖,虫
 rtk2730:螺:small  edible  helical fresh-water mollusk:累,虫
@@ -4210,7 +4241,23 @@ kangxi153:豸:badger,legless insect,skunk
 # be" earlier in 璽's flat component list, not identity.
 kangxi89:爻:trigrams,diagram,stitching,patchwork quilt
 kangxi179:韭:leek
-kangxi193:鬲:cauldron,tripod:口,冂,儿
+# 2026-11-13 audit_missing_children.py: was 口,冂,儿, missing the top bar
+# and the right-hand stroke pair entirely. Rendered at 700px (not just the
+# standalone codepoint — per host, per the standing method): 鬲 is 一 over
+# 口 over a wide 冂 frame, and *inside* that frame there are two distinct
+# shapes side by side, not one — a diagonal sweep-and-hook on the left
+# (儿, already in the row) and a vertical stroke under a short crossbar on
+# the right (丅, prim-straight-nail — already registered from rtk889 敢's
+# fix, aliased "street,nail,spike"). cjkvi's GT reading confirms both are
+# really there and not an artifact of a cramped font rendering: GT spells
+# the interior ⿵𦉪丅, and 𦉪 (U+2626A) has its own entry, ⿵冂儿 — i.e. GT's
+# 𦉪 already *is* 冂+儿, so GT's full tree is 一/口/[(冂⊃儿)⊃丅], naming all
+# five pieces now in this row. Heisig's own name list for 融/隔 confirms it
+# stroke-for-stroke: "tripod; one; ceiling; mouth; hood; human legs;
+# street; nail; spike" = 鬲(itself) + one(一) + ceiling/hood(冂, already
+# aliased "hood") + mouth(口) + human legs(儿) + street/nail/spike(丅, its
+# own row's exact three aliases) — nothing left over, nothing guessed.
+kangxi193:鬲:cauldron,tripod:一,口,冂,儿,丅
 kangxi84:气:steam,air:𠂉,一,乙
 kangxi190:髟:long hair:彡
 kangxi192:鬯:sacrificial wine
