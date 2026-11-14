@@ -1728,7 +1728,22 @@ rtk1339:謝:apologize:言,射
 # horizontal elongated into the diagonal leading to 匕's hook; cjkvi's
 # ⿸耂匕 agrees and audit_weak_evidence.py --host 老 flags nothing (not an
 # overlay/enclosure trap). Was 匕, now 土,匕.
-rtk1340:老:old man:土,匕
+# 2026-11-14: superseded by the 2026-11-13 考/孝/者 fix below, which registered
+# 耂 (U+8002) as its own row for exactly this top shape and rendered it clean
+# (two horizontals + one diagonal sweep, nothing else). A fresh zoomed render
+# of 老/耂/土 side by side (500px, same font stack as render_glyphs.py) shows
+# 老's top is pixel-for-pixel 耂's standalone shape -- diagonal sweep through
+# both horizontals -- not 土's plain cross (two horizontals + one straight
+# vertical, no diagonal at all). The "elongated diagonal" language above was
+# describing this same shape before 耂 existed as a row to compare against;
+# with 耂 registered, "土 stretched into a diagonal" and "耂" are not two
+# readings of the same evidence, they are a wrong one and a right one, and the
+# render settles which. audit_overflatten.py flagged this the day after 耂 was
+# created (土 -> 耂), which is what prompted the re-render. No pin referenced
+# rtk1340's own parts. Trade-off: "soil"/"ground" search no longer matches 老
+# at depth 1, but still does at depth 2 via 耂's own 土 part; "old man radical"
+# now matches at depth 1, consistent with 考/孝/者. Was 土,匕, now 耂,匕.
+rtk1340:老:old man:耂,匕
 # 2026-11-13: 耂 (U+8002), the top of 老 without its 匕 -- what 考 孝 者 actually
 # contain. Heisig calls it "old man" as he does 老 itself, so it shares that
 # name (the meaning picker searches both by default); "old man radical" is

@@ -30024,3 +30024,125 @@ source form is ⿸羊X.
 
 Trade-off, as with 䒑: "sheep + craft" now needs depth 2 to find 差. "wool" finds all
 three at depth 1.
+
+## 2026-11-14 — daily audit chunk: 老's own row (土 -> 耂), plus three dead ends closed out with evidence
+
+**Setup.** First confirmed push access per this job's own guardrail (dry-run push
+succeeded after a `git pull --ff-only` fast-forwarded 39 commits), then installed
+`fonts-noto-cjk`/`fonts-hanazono` and fetched a fresh `/tmp/ids.txt` — this
+container had neither. Baseline from a clean rebuild: `test_regression_fixes.py`
+1348/1348, `pytest -q` 83 passed, matching 2026-11-13's numbers with nothing
+uncommitted left behind by a prior run.
+
+**The one real fix: rtk1340 老 ("old man"), 土 → 耂.** `audit_overflatten.py`
+came up with a new finding today (`老 rtk1340 土,匕 -> 匕,耂`) that didn't exist
+before yesterday's 耂 registration (2026-11-13, the 考/孝/者 fix) — expected,
+since the script can only flag a collapse onto a row that exists. The 2026-09-xx
+comment already sitting above this line had rendered 老/土/匕 side by side and
+concluded "老's top matches 土 with its last horizontal elongated into the
+diagonal leading to 匕's hook," i.e. close enough to 土 to count. That comparison
+was made before 耂 was a row to compare against. Re-rendered today (500px,
+`render_glyphs.py`'s own font stack, 老/耂/土/考/者 side by side): 老's top is
+stroke-for-stroke 耂's standalone shape — two horizontals crossed by one
+diagonal sweep — and nothing like 土's standalone shape, which is a plain cross
+(two horizontals, one straight vertical, no diagonal at all). 考 and 者 show the
+same top yet again. "Elongated diagonal" and "耂" were describing the same
+pixels before 耂 existed to name them; with 耂 registered, one of those two
+readings is simply wrong, and the render — not the earlier session's prose —
+is what decides it. cjkvi's own reading (⿸耂匕, not caught by the overlay/
+enclosure trap per `audit_weak_evidence.py --host 老`, which flags nothing) had
+been saying 耂 the whole time; the row just hadn't caught up to the primitive
+that gives that reading a name. No pin referenced `rtk1340`'s own parts (the one
+pin naming `rtk1340`, on `rtk2842` 鰭, checks that 鰭 contains 老 *whole*, not
+what 老 itself expands to), so none needed correcting. Trade-off: "soil"/"ground"
+no longer match 老 at depth 1 (CSV's own "soil; dirt; ground" names for this
+frame no longer resolve directly — they were Heisig's mnemonic gloss for this
+frame, not independent evidence the glyph has a separate earth-radical stroke),
+but still do at depth 2 via 耂's own listed 土; "old man radical" now matches 老
+at depth 1, consistent with 考/孝/者 sharing the same top.
+
+**Three re-examined, left exactly as they were, now with reasons that will
+survive the next person re-deriving them:**
+
+- **図 rtk1264 — two new `audit_missing_children.py` findings, both artifacts,
+  not bugs.** "+丶 via 郭 rtk1985" turned out to be a tooling collision, not a
+  structural claim: `own_part_ids` resolves 図's literal part term "囗" to
+  kangxi31 *and* auto-expands it to include kangxi31's own keyword "enclosure"
+  as a second synonym part-term (this project's own import behavior, not a
+  cjkvi artifact) — and "enclosure" also happens to be a literal alias on 郭
+  and 廓 (both of which mean "enclosure" as whole kanji, coincidentally the
+  same word). The script's `via` column then credits 郭 with being "one of
+  図's own parts" purely because of that shared English word, not because 郭
+  is anywhere in 図's structure, and 郭's own decomposition tree genuinely does
+  contain a 丶 somewhere — two true facts about unrelated things, joined by a
+  homonym. Worth hardening `own_part_ids`/`claims` against someday (a name
+  collision on an auto-expanded synonym term, not on the term the user actually
+  typed), not done today. The second finding, "+丿 via 乂 prim-tucked-under-
+  the-arm," is the real `⿻`-is-not-a-parts-list trap CLAUDE.md already
+  documents: cjkvi's `乂 = ⿻丿乀` means those two strokes *cross*, sharing ink,
+  not that 乂 is a visibly separate 丿 beside a visibly separate 乀.
+  `audit_weak_evidence.py --host 乂` reports 0 because the check runs against
+  a *host row*, not a primitive being proposed as someone else's child, so it
+  doesn't catch this shape of the same trap — also worth hardening, not done
+  today. 図's own row (囗,冫,乂) is unaffected either way.
+- **面 rtk2039 / 麺 rtk2040, "add 囗" — closed, with a render this time.**
+  Yesterday's session left this open for exactly one reason: whether the box
+  under 面's top stroke is a genuine separate 囗 or just 目's own outline
+  stretched to fit, and said it needed more render budget than that chunk had.
+  Rendered today at 500px (面/目/麺 side by side): 面's box has exactly four
+  horizontal strokes — top edge, two internal dividers, bottom edge — identical
+  in count and spacing to 目 alone. A real "pent in 目" reading (a separate 囗
+  wrapping a full 目 inside it) would show a *fifth* horizontal pair (the outer
+  box's own top and bottom, independent of 目's), or doubled side walls. Neither
+  is there: one set of walls, one top, two dividers, one bottom — 目's own
+  pattern, not 目-inside-a-frame. The top of 面, above that box, is 一 (long
+  horizontal, stylistic end-hook) plus a short separate diagonal bridging down
+  to the box's top-left corner, matching 丿 compressed the way component strokes
+  normally compress inside a compound glyph. This confirms the row as it already
+  stood (`一,丿,目`) rather than changing it — no data.txt edit, but the question
+  from the last two sessions' "Next" is now answered, not just deferred again.
+  CSV's "pent in" name for this frame is Heisig's own mnemonic gloss on the old
+  "measuring cup" reading this row abandoned on 2026-11-03 in favor of cjkvi's
+  structure; it was never independent evidence of a second enclosing box, and
+  the render confirms there isn't one.
+- **"question mark" (呼/率), `audit_anachronistic_names.py`'s one remaining
+  finding — re-checked, still correctly unplaced.** This is the exact same
+  finding 2026-09-20 left open ("乎 and 率 share no shape, and in 率 the name
+  sits between 玄 and 玄's own parts, which fits nothing. Left alone.") No new
+  candidate shape or row has appeared since to change that. Confirmed, not
+  re-guessed.
+
+**Verification**, clean rebuild: `test_regression_fixes.py` 1348/1348 (unchanged
+— no pin touched `rtk1340`'s own parts), `pytest -q` 83 passed,
+`audit_overflatten.py` 0 (was 1, the 老 finding, now fixed), `audit_self_reference.py`
+0, `audit_radicals.py` 0/0, `audit_phantom_parts.py --in-csv-range` 10/9 and full
+54/41 (both unchanged — none of today's three re-examined items touched a row),
+`audit_primary_choice.py` 0/56. `audit_missing_children.py --summary` unchanged
+at 10 findings/8 kanji (面's and 図's entries both explained above, not fixed;
+筑/巩 is still the owner-flagged region-variant conflict from 2026-11-12, untouched).
+Frontend: `npm install`, `npm run lint` clean, `npm run build:prod` succeeds
+(SEO generation included). `git status` clean except `backend/data.txt`.
+
+### Next
+
+1. `audit_missing_children.py`'s remaining 10/8 is now fully accounted for:
+   図's two entries are tooling artifacts (see above, worth a script hardening
+   pass sometime), 面's is closed (no edit — see above), 筑/巩's region-variant
+   conflict (凡 vs 卂, flagged 2026-11-12) still needs the owner, and
+   爾/終/縄/衰 remain the same closed/re-appearing rows noted on 2026-11-12.
+   Nothing left here for a future session to re-investigate from scratch.
+2. `suggest_heisig_aliases.py --all`/`--near 0.8 --all` are both fully at 0 —
+   the brief's "~236 left" figure is stale; this lead is exhausted.
+3. If `audit_csv_regressions.py`'s 153-host backlog is ever picked up as this
+   job's "Where the work is" lead, read a sample first against this doc's
+   history — a quick check today found most of the hosts it lists under
+   rtk21xx-22xx already discussed at length in earlier sessions (爾, 鼎, 卿,
+   套, 壷, 疏, 毅, etc.), so a naive top-to-bottom pass will mostly re-derive
+   already-settled answers rather than find new ones. Worth triaging by what's
+   *not* already in this doc before spending a chunk on it.
+4. The task brief's "Where the work is" section still needs the owner to
+   refresh it at the source (every session since 2026-11-01 has noted this).
+   With today's session also closing out `audit_overflatten.py`'s one new
+   finding and both of this job's previously-open leads (面/麺, "question
+   mark"), the only genuinely open named item left for a future session is
+   筑/巩 — which needs the owner, not another render pass.
