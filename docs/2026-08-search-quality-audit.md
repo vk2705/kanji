@@ -30146,3 +30146,144 @@ Frontend: `npm install`, `npm run lint` clean, `npm run build:prod` succeeds
    finding and both of this job's previously-open leads (面/麺, "question
    mark"), the only genuinely open named item left for a future session is
    筑/巩 — which needs the owner, not another render pass.
+
+## 2026-11-15 — daily audit chunk: rtk791 采/采 "dice"→"grab" keyword swap; audit_csv_regressions.py's 153-host backlog triaged, mostly a CSV-boilerplate artifact
+
+**Setup.** Fresh container, no `backend/venv`, no `/tmp/ids.txt`, no CJK
+fonts — rebuilt all three (`apt-get install fonts-noto-cjk fonts-hanazono`,
+`pip install -r requirements.txt -r requirements-dev.txt`, cjkvi-ids from
+its raw GitHub URL). Push access confirmed per this job's own guardrail
+before any work started: `git push --dry-run origin master` only reports
+"Everything up-to-date" when there's nothing new to send, which doesn't
+actually exercise the write path, so today also pushed a disposable
+throwaway branch and deleted it — push succeeded, delete got a consistent
+403 (branch *creation* works, branch *deletion* doesn't; matches the
+pre-existing `_push-access-check-*` branch litter already sitting on the
+remote from prior sessions hitting the same thing). Push access for real
+work (commits to `master`) is confirmed; branch deletion looks like a
+GitHub App install-scope gap, not a blocker, and is left for the owner to
+notice rather than guessed at.
+
+**All three of the task brief's "Where the work is" items were already
+stale** (confirmed independently, same conclusion 2026-11-13 already
+reached): `suggest_heisig_aliases.py --near 0.8 --all` is 0 in every
+bucket; `kangxi58` already holds 彐 per `CJKRadicals.txt`, not 彑;
+`audit_phantom_parts.py`'s "big remaining pile" is unchanged at 10/9
+(`--in-csv-range`) and 54/41 (full), the same already-explained set prior
+sessions have been reconfirming since early November. None of this is new
+— it's the fourth or fifth session in a row independently re-deriving that
+the stored brief needs the owner to update it at the source.
+
+**So today's chunk came from 2026-11-14's own "Next" item 3**:
+`audit_csv_regressions.py`'s 153-host backlog, triaged rather than
+blindly worked. Cross-referencing all 153 flagged ids against this doc's
+history by a plain `rtk{n}` string search caught only the hosts named by
+number (e.g. 爾/鼎/卿/套/壷/疏/毅 already discussed via the phantom-parts
+angle) — not the 穴/control-family hosts (811, 1415, 1417–1424), which
+the 2026-11-04 full-review entry settled by *shape family and frame range*
+("the 穴 'hole' family (1413–1426)") without ever spelling out each frame
+number, so a naive id-grep missed it. Re-read that entry before touching
+anything: it already concluded the CSV's "house; human legs" text for
+every 穴-using frame is **boilerplate carried over from 穴's own recursive
+pre-expansion**, not frame-specific evidence — 探/深 already carry "human
+legs" correctly via a literal `儿`, and the other nine hosts' current rows
+(a flat `穴` unit, itself `八,宀`) are already correct. Re-confirmed, not
+re-derived: no edit.
+
+**Checking whether that same CSV-boilerplate mechanism explains more of
+the 153 than just 穴.** It does, at least once more, found independently:
+`apron` is flagged dropped on eight hosts (帝/諦/婦/掃/帰/締/帯/滞,
+rtk466/467/1234/1235/1316/1440 plus 444/445) whose real tops are three
+*structurally unrelated* shapes — 帯/滞 genuinely contain 丗 ("thirty,
+apron", already registered as `prim-thirty` per the 2026-08-27 entry),
+but 帝/諦/締's top is 亠+a splayed-leg bar (confirmed by
+`render_glyphs.py 帝 帯 丗 立 亠 丷 冖 巾` — 帝's middle has no trace of 丗's
+ladder-grid shape) and 婦/掃/帰's is 帚 ("feather duster," already its own
+row) entirely. The same `apron; crown; towel` tail sits on all eight
+regardless, which only makes sense as a copy-pasted suffix from wherever
+CSV's generator sourced 丗/帯's own expansion, not as each frame's real
+Heisig components. Left alone, same conclusion as 穴: not a bug, and not
+worth re-deriving next time — recorded here so a future session doesn't
+have to render 帝 again to reach the same answer.
+
+**One fix, render- and cjkvi-confirmed, not boilerplate: rtk791 采
+"dice" → "grab".** This one didn't fit the boilerplate pattern — CSV's
+own `keyword_5th_ed`/`keyword_6th_ed` for frame 791 is "grab", not "dice",
+and its components ("claw; vulture; tree; wood") already match this row's
+existing `爪,木` exactly, unchanged. "dice" is Heisig's real name for a
+*different* character this project already has a row for: 釆 (U+91C6,
+`kangxi165`, "distinguish"), not 采 (U+91C7, this row, "grab") — the two
+are one stroke apart and `render_glyphs.py 采 釆` draws them pixel-identical
+in every installed face (no cross-face discrepancy to flag; the kind of
+near-identical pair CLAUDE.md's render-can-lie section says prints silently
+as "near-identical" rather than loudly as a substitution warning).
+cjkvi-ids disagrees with the font: `釆 = ⿱丿米` (slash over rice), `采 =
+⿱爫木` (claws over tree) — genuinely different encoded shapes. Four
+independent CSV frames (番/審/翻/藩, rtk2058/2059/2060/2061) all list
+"dice; animal tracks" and all four structurally decompose onto 釆 (cjkvi:
+`番 = ⿱釆田`), never onto 采; 采's own real hosts (採/菜/彩, rtk792/793/1850)
+independently confirm the claw-over-tree reading is right where it already
+sits. `kangxi165` already carried "animal tracks" as an alias — this
+wasn't an unreached primitive, just missing one of its two names — so the
+fix is a pure keyword/alias swap, no row's parts changed: `rtk791` keyword
+→ `grab`; `kangxi165` aliases → `distinguish,claw print,animal
+tracks,dice`. No naming collision (`grab` wasn't registered anywhere;
+`dice` previously only lived, wrongly, on `rtk791`).
+
+Also checked and left alone, not fixed: `麗` rtk2158's dropped "mediocre"
+(cjkvi's `丽 = ⿱一⿰⿵冂丶⿵冂丶` puts the candidate shape behind a `⿵`
+enclosure, and a render of 麗/丽/凡 side by side shows the boxed shape
+inside 丽 is a plain cross, not 凡's distinctive hooked diagonal leg +
+floating dot — not a confident match either way, left for a dedicated
+pass rather than guessed at); `象`/`像` rtk2130/2131's dropped
+"colour/color" (looks like the same boilerplate mechanism as 穴/apron —
+CSV's text is inherited from 色's own expansion wherever the shared 𠂊 top
+appears — but noticed in passing that 象's own row spells that top as `勹`
+or `𠂊`, i.e. there may be a second, unrelated `勹`-vs-`𠂊` substitution bug
+already catalogued elsewhere in this file sitting under this same row;
+flagged for a future session with its own render budget, not conflated
+with today's finding).
+
+**Verification**, clean rebuild (`rm kanji.db*` then re-import):
+`test_regression_fixes.py` 1348/1348 (unchanged — no pin referenced
+`rtk791`'s keyword or `kangxi165`'s alias list), `pytest -q` 83 passed,
+`audit_overflatten.py`/`audit_self_reference.py` both 0, `audit_radicals.py`
+0/0, `audit_phantom_parts.py --in-csv-range` 10/9 and full 54/41 (both
+unchanged — today's fix was a keyword/alias change, not a decomposition
+change, no overlap expected or found), `audit_primary_choice.py` 0/56.
+`audit_csv_regressions.py`: 153 → 149 hosts (exactly the four, 番/審/翻/藩,
+dropped from the list; diffed the full id set before/after to confirm no
+other host moved). Frontend: `npm install`, `npm run lint` clean,
+`npm run build:prod` succeeds (SEO generation included). Direct check:
+`database.search_by_parts(conn, ["dice"], depth=1, viewer_id=None)` now
+returns `rtk2057`/`rtk2058`/`rtk2508`/`kangxi165` (previously only
+reachable via "animal tracks"). `git status` clean except `backend/data.txt`.
+
+### Next
+
+1. `audit_csv_regressions.py`'s remaining 149 hosts: today's triage found
+   the backlog is dominated by the same CSV-boilerplate mechanism already
+   diagnosed for 穴 (2026-11-04) and now 帯/帝's `apron` family (today) —
+   a future session picking this backlog back up should check each
+   candidate's *other* independent hosts for the exact same tail text
+   before assuming it's a real per-frame finding; if the text is identical
+   across structurally unrelated hosts, it's very likely the same artifact,
+   not new evidence. Genuinely promising leads *not* yet checked: `rice
+   field, brains` (博/薄/縛 via rtk14), `ten, needle` (弾/戦/禅 via
+   rtk10/292), `stand up, vase` (楠/献 via rtk462), `staples` (印, already
+   partly discussed in the `suggest_heisig_aliases` context at line ~12708
+   but not from the regression-audit angle) — none investigated this
+   session, pick up from here rather than re-triaging from scratch.
+2. `麗` rtk2158's "mediocre" and `象`/`像`'s possible `勹`-vs-`𠂊` top
+   (both flagged above, neither fixed) are worth a dedicated render pass
+   each — don't re-derive the boilerplate-vs-real-finding question, it's
+   already answered above; just needs the actual stroke-level check.
+3. The task brief's "Where the work is" section remains stale (now
+   confirmed independently across at least five sessions since 2026-11-01)
+   — still needs the owner to refresh it at the source; this job can't fix
+   its own stored prompt.
+4. Branch-deletion 403 on this GitHub App install (noted above, "Setup")
+   is cosmetic for this job's purposes — push-to-master is unaffected —
+   but worth the owner's attention if the stray `_push-access-check-*`
+   branches on the remote should be cleaned up some other way (repo
+   settings, a token with broader scope, or just deleting them by hand).

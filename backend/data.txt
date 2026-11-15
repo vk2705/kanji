@@ -983,7 +983,7 @@ rtk787:浮:floating:子,水,爪
 rtk788:淫:lewdness:水,爪,壬
 rtk789:将:leader:寸,爪,丬
 rtk790:奨:exhort:将,大
-rtk791:采:dice:爪,木
+rtk791:采:grab:爪,木
 rtk792:採:pick:采,扌
 rtk793:菜:vegetable:采,艹
 rtk794:受:accept:爪,又,冖
@@ -4258,7 +4258,7 @@ kangxi56:弋:stake,shoot,arrow,arrows,quiver
 kangxi54:廴:long stride,stretch
 kangxi141:虍:tiger
 kangxi105:癶:footsteps,back-to-back feet,teepee,wigwam
-kangxi165:釆:distinguish,claw print,animal tracks:ノ,米
+kangxi165:釆:distinguish,claw print,animal tracks,dice:ノ,米
 kangxi171:隶:reach,slave,sieve:⺕,氺
 kangxi129:聿:brush
 kangxi136:舛:oppose,dance,ballerina,dancing legs,sunglasses:夕,㐄
@@ -6748,3 +6748,25 @@ prim-uphold:氶:uphold
 prim-gathering:會:gathering
 prim-pull-out:犮:pull out
 prim-hooked-horizontal:乛:hooked horizontal
+
+# 2026-11-15 daily audit chunk: rtk791's keyword was "dice" -- CSV's own
+# keyword_5th_ed/keyword_6th_ed for this frame is "grab" (components "claw;
+# vulture; tree; wood", matching this row's existing 爪,木 unchanged). "dice"
+# belongs to a different, same-looking-in-this-font-stack character: 釆
+# (U+91C6, kangxi165, "distinguish") vs 采 (U+91C7, this row, "grab").
+# render_glyphs.py draws them pixel-identical in every installed face --
+# exactly the font-lie trap CLAUDE.md documents -- but cjkvi-ids disagrees:
+# 釆 = ⿱丿米 (a slash over rice), 采 = ⿱爫木 (claws over a tree), genuinely
+# different shapes. 番/審/翻/藩 (rtk2058/2059/2060/2061) all independently
+# list "dice; animal tracks" in their CSV components, and all four
+# structurally decompose onto 釆 (cjkvi: 番 = ⿱釆田), never onto 采 --
+# confirmed by checking 采's own real hosts (採/菜/彩, rtk792/793/1850),
+# which do structurally decompose onto 采 and already render as the
+# claw-over-tree shape there. kangxi165 already carried "animal tracks" as
+# an alias (so it wasn't an unreached primitive, just missing this one
+# name); rtk791's keyword is now "grab", kangxi165 gained "dice" as a
+# fourth alias. No row's parts changed, only which character two keywords
+# point at. Fixes audit_csv_regressions.py's "dice" finding on all four
+# hosts (番 審 翻 藩) in one edit; verified by search: "dice" at depth 1 now
+# matches rtk2058 番 directly (previously only via the already-registered
+# "animal tracks").
