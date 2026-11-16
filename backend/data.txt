@@ -2807,7 +2807,17 @@ rtk2126:免:excuse,village stocks,rabbit:｜,一,勹,儿
 rtk2127:逸:deviate:免,辶
 rtk2128:晩:nightfall:日,免
 rtk2129:勉:exertion:力,免
-rtk2130:象:elephant:勹,豕,一
+# 2026-11-16 (daily audit chunk, 2026-11-15's "Next" item 2): same 勹/𠂊
+# lookalike bug already fixed on 負/亀/久/陥/色/焔 (see those rows). cjkvi
+# gives 象 = ⿳𠂊𫩏𧰨 -- a real top-to-bottom stack, so 𠂊 is genuinely the
+# top piece despite audit_weak_evidence.py flagging the row overall (the
+# warning is about 𫩏=⿴囗丨, an enclosure in the *middle* tier, not about
+# whether the top is 𠂊 or 勹). render_glyphs.py 象 色 勹 𠂊 句 shows 象's top
+# is the same compact flat cap as 色's confirmed 𠂊, not 句/勹's wrap-around
+# hook. 勹 dropped from the top slot; 豕,一 (the lower body/crossbar)
+# unchanged -- audit_weak_evidence.py's enclosure warning covers those, not
+# today's edit.
+rtk2130:象:elephant:𠂊,豕,一
 rtk2131:像:statue:亻,象
 rtk2132:馬:horse,team of horses:灬
 rtk2133:駒:pony:句,馬

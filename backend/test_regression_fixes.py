@@ -2559,8 +2559,10 @@ EXPECTED_DECOMPOSITIONS = {
                 "expected_part_ids": {"rtk1612", "rtk1793"}},
     "rtk2126": {"character": "免", "keyword": "excuse",
                 "expected_part_ids": {"kangxi10", "kangxi20", "prim-pipe", "rtk1"}},
+    # 2026-11-16: 勹/𠂊 lookalike bug (same as 負/亀/久/陥/色/焔) -- top is the
+    # flat 𠂊 cap (prim-hooked-hand), not kangxi20 (勹)'s wrap-around hook.
     "rtk2130": {"character": "象", "keyword": "elephant",
-                "expected_part_ids": {"kangxi152", "kangxi20", "rtk1"}},
+                "expected_part_ids": {"kangxi152", "prim-hooked-hand", "rtk1"}},
     "rtk2131": {"character": "像", "keyword": "statue",
                 "expected_part_ids": {"kangxi9", "rtk2130"}},
     "rtk2235": {"character": "兎", "keyword": "rabbit",

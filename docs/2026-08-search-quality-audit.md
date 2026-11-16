@@ -30287,3 +30287,101 @@ reachable via "animal tracks"). `git status` clean except `backend/data.txt`.
    but worth the owner's attention if the stray `_push-access-check-*`
    branches on the remote should be cleaned up some other way (repo
    settings, a token with broader scope, or just deleting them by hand).
+
+## 2026-11-16 — daily audit chunk: 麗/丽 "mediocre" confirmed boilerplate (no edit); rtk2130 象 top fixed (勹→𠂊, same lookalike bug as 負/亀/久/陥/色/焔)
+
+**Setup.** Fresh container, no `backend/venv`, no `/tmp/ids.txt`, no CJK
+fonts. Rebuilt all three before anything else (`python3 -m venv venv` +
+`pip install -r requirements.txt -r requirements-dev.txt`; cjkvi-ids from
+its raw GitHub URL; `apt-get install fonts-noto-cjk fonts-hanazono`, Noto
+first per CLAUDE.md). Push access confirmed per this job's own guardrail:
+repo was in a detached-HEAD state on arrival (a prior container's clone,
+not this session's doing) — `git checkout master && git pull --ff-only`
+fast-forwarded one commit, then `git push --dry-run origin master`
+reported "Everything up-to-date." Did not repeat 2026-11-15's throwaway-
+branch exercise of the write path itself; the dry-run plus a clean
+fast-forward pull was treated as sufficient for today's chunk.
+
+**Picked up 2026-11-15's "Next" item 2 directly**, since items 1 and 3
+were already judged stale by the last five sessions and item 2 was a
+concrete, bounded, two-item render task with no re-triage needed.
+
+**`麗` rtk2158's dropped "mediocre" (= 凡) — rendered, confirmed as the
+same CSV-boilerplate artifact already diagnosed for 穴/apron, not a real
+finding. No edit.** cjkvi: `麗 = ⿱丽鹿`, `丽 = ⿱一⿰⿵冂丶⿵冂丶[G]` — two
+`⿵冂丶` ("box enclosing a dot") shapes side by side under a `一`.
+`render_glyphs.py 丽 凡 冂 几 丶` shows 丽's two boxes are plain
+straight-sided, flat-topped, bottom-open rectangles — 冂's own shape —
+each with what the font draws as a doubled vertical stroke inside, not a
+single dot. 凡 (rtk66, "commonplace"/CSV's "mediocre") is structurally
+`⿵几丶`: 几's distinctive shape is a hooked leg that kicks out to the
+lower-left, open at the top-right, with the dot floating in that gap —
+visibly asymmetric, nothing like 丽's symmetric closed boxes. CSV's
+component text for frame 2158 just happens to include "mediocre" among
+"one; ceiling; mediocre; deer; cave; antlers; compare" alongside 丽's
+real pieces; this is the same mechanism 2026-11-04 (穴) and 2026-11-15
+(帝/帯's `apron`) already caught — boilerplate riding along with the
+frame's real components, not independent per-frame evidence. Row stays
+`一,冂,鹿`, unchanged.
+
+**`rtk2130` 象 (elephant) — fixed: top part `勹` → `𠂊`.** This is the
+exact same 勹/𠂊 lookalike bug already fixed on 負/亀/久/陥/色/焔 (search
+`data.txt` for "lookalike bug" to find all six prior fixes) — two
+genuinely different shapes that happen to render as near-identical
+compact hooks in some contexts: 勹 is a wrap-around enclosure (its hook
+extends down and around whatever it encloses, as in 句/旬/勺), 𠂊 is a
+flat, self-contained claw cap that sits *on top of* something without
+wrapping it (as in 色/亀). cjkvi gives `象 = ⿳𠂊𫩏𧰨`, a genuine top-
+middle-bottom stack, so its top tier is unambiguously `𠂊`, not `勹`.
+`render_glyphs.py 象 色 勹 𠂊 句` confirms by eye: 象's top two strokes are
+the same compact flat cap as 色's already-confirmed `𠂊`, not 句's
+visibly larger wrap-around hook. Ran `audit_weak_evidence.py --host 象`
+first per the standing brief: it flags the row under "not-a-parts-list"
+— but for the *middle* tier only (`𫩏 = ⿴囗丨`, an enclosure), not the
+top; `⿳` (stack) is a legitimate listing operator, so the top-tier read
+is unaffected by that warning and the `豕,一` lower parts (which the
+warning *is* about) were left untouched. CSV's component list for frame
+2130 ("colour; color; bound up; sow; pig") carries both candidate names
+side by side — another instance of the same boilerplate-text pattern
+documented in the 麗 entry above, not independent corroboration for
+either reading; the render and cjkvi's real stack operator are what
+decided this, not the CSV text. `像` (rtk2131, `亻,象`) needed no change
+— it only references 象 by id. Checked for other hosts of 象 as a named
+part (`grep 象 data.txt` outside its own row): none, so no shape-family
+follow-up needed. Updated `test_regression_fixes.py`'s `rtk2130` pin
+in place (`kangxi20` → `prim-hooked-hand`) with a comment, per the
+standing "pins carry reasons" rule.
+
+**Verification**, clean rebuild (`rm kanji.db*` then re-import):
+`test_regression_fixes.py` 1348/1348 (pin corrected in place for
+rtk2130, nothing else touched), `pytest -q` 83 passed,
+`audit_overflatten.py`/`audit_self_reference.py` both 0, `audit_radicals.py`
+0/0, `audit_phantom_parts.py --in-csv-range` 10/9 and full 54/41 (both
+unchanged — today's fix touched 象's top part, not any phantom-flagged
+part), `audit_primary_choice.py` 0/56, `audit_csv_regressions.py` 149
+hosts (unchanged — 象's "colour" entry in that backlog is explained, not
+removed, same as 穴/apron; today's actual edit was to the top part, which
+`audit_csv_regressions.py` wasn't flagging). Frontend: `npm install`,
+`npm run lint` clean, `npm run build:prod` succeeds (SEO generation
+included, 3000 kanji / 3259 pages). `git status` clean except
+`backend/data.txt` and `backend/test_regression_fixes.py`.
+
+### Next
+
+1. `audit_csv_regressions.py`'s remaining 149 hosts: 2026-11-15 flagged
+   four specific leads *not yet checked* — `rice field, brains`
+   (博/薄/縛 via rtk14), `ten, needle` (弾/戦/禅 via rtk10/292),
+   `stand up, vase` (楠/献 via rtk462), `staples` (印). None touched this
+   session either (today's chunk came from a different, already-queued
+   lead); still the right place to start next, rather than re-triaging
+   149 hosts from scratch.
+2. 2026-11-15's "Next" item 2 is now fully closed: both 麗/mediocre and
+   象/像's 勹-vs-𠂊 top got their dedicated render pass — one confirmed as
+   boilerplate (no edit), one fixed. Nothing left here for a future
+   session to re-derive.
+3. The task brief's "Where the work is" section remains stale (now
+   confirmed independently across at least six sessions since 2026-11-01)
+   — still needs the owner to refresh it at the source.
+4. Same branch-deletion-403 note as 2026-11-15 — cosmetic, push-to-master
+   unaffected, owner's call whether to clean up the stray
+   `_push-access-check-*` branches some other way.
