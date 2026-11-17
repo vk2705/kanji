@@ -30385,3 +30385,156 @@ included, 3000 kanji / 3259 pages). `git status` clean except
 4. Same branch-deletion-403 note as 2026-11-15 — cosmetic, push-to-master
    unaffected, owner's call whether to clean up the stray
    `_push-access-check-*` branches some other way.
+
+## 2026-11-17 — daily audit chunk: all four of yesterday's named leads independently re-confirmed as already-settled dead ends; no edit
+
+**Setup.** Repo was present but `HEAD` was detached (a prior container's
+state, not this session's doing); `git checkout master && git pull
+--ff-only` fast-forwarded two commits clean. Push access confirmed per
+this job's own guardrail — pushed a disposable throwaway branch (succeeded)
+rather than trusting a no-op `--dry-run`, same as 2026-11-15/16. Fresh
+container otherwise: rebuilt `venv`, `/tmp/ids.txt`, and
+`fonts-noto-cjk`/`fonts-hanazono` (Noto first) from scratch.
+
+**Picked up 2026-11-16's "Next" item 1 directly** — the four specific,
+not-yet-checked leads from `audit_csv_regressions.py`'s backlog: `rice
+field, brains` (博/薄/縛 via rtk14), `ten, needle` (弾/戦/禅 via
+rtk10/292), `stand up, vase` (楠/献 via rtk462), `staples` (印). Checked
+each against a fresh render before touching anything, per the standing
+brief — and before any of that, searched this doc's own history for each
+one, per "trust the notes over your own assumptions." All four turned out
+to already have a full investigation on file; today's renders independently
+reached the same conclusions as those earlier sessions, confirming them
+rather than extending them:
+
+- **`rice field, brains` (博/薄/簿/縛, +敷) — already closed 2026-09-15 as
+  "尃 is not 専."** Rendered `博 薄 簿 縛 専 尃 甫 田 寸` large: `専`'s middle
+  is a plain `田` grid; `尃`/`甫`'s middle is a single-divider box with a
+  distinct top-right accent stroke `専` lacks — two really-different glyphs,
+  not a font substitution (`render_glyphs.py`'s own relative check reported
+  no identical pairs in any face). cjkvi confirms at every host: `博 =
+  ⿰十尃[GTKV]`, `縛 = ⿰糹尃[GT]`, `薄/簿 = ⿱艹|竹⿰氵尃`, and `尃`'s own
+  canonical entry is `⿱甫寸` — no `田` anywhere in any of their real
+  structures. CSV's "rice field; brains" tail rides along because Heisig's
+  real-book components text for "acupuncturist" (`尃`) was extracted
+  alongside "specialty" (`専`)'s own full pre-expansion, the two primitives
+  being one stroke apart — the exact mechanism this doc's 2026-09-15 and
+  2026-08-27 sessions (穴/apron, 麗/mediocre) already catalogued under a
+  different name. No edit; matches the existing conclusion exactly.
+- **`ten, needle` (単/戦/禅/弾) — already left open 2026-10 (chunk 107) as
+  unfixable without new evidence; re-confirmed, not re-guessed.** cjkvi:
+  `単 = ⿱𭕄⿻甲一` — the bottom tier is an *overlay* (`⿻`) of `甲` and `一`,
+  which `audit_weak_evidence.py --host 単` duly flags under
+  "not-a-parts-list" (CLAUDE.md's rule 3: an overlay operator's children
+  are not separately-visible pieces). Rendered `単 甲 十 一` large: `甲`'s own
+  hanging stroke is a bare vertical with no crossbar, matching `｜`
+  (`prim-pipe`), not `十`'s cross — so reading "ten" directly off `甲`
+  would misrepresent the glyph, same check chunk 107 already ran. The two
+  fixes chunk 107 already tried and rejected (alias "ten" onto `prim-pipe`
+  — blast radius 63 unrelated hosts; alias it onto `甲` itself — blocked by
+  self-identity, since `甲` plainly isn't "ten") still apply; no new
+  evidence (a per-occurrence stroke identity, or the book text) has
+  appeared since. No edit.
+- **`stand up, vase` (楠/献, chaining through 南/幸) — already left open
+  2026-10-29 (chunk 103) as a deliberate dead end; re-confirmed.** `南 =
+  ⿱十⿵冂𢆉`, `楠 = ⿰木南`, `献 = ⿰南犬` all match the current rows exactly
+  (`十,丷,干,冂`, `木,南`, `犬,南`). The "stand up, vase" tail traces to
+  `幸`'s own CSV baseline ("ten; needle; stand up; vase; ten; needle" for a
+  glyph whose real cjkvi structure is `⿱土𢆉`), which `南` inherits because
+  it shares `幸`'s own `𢆉` (`丷,干`) sub-shape. Tried rendering `𢆉` itself
+  directly to settle it either way: the font has no distinct outline for
+  U+22189 and silently substitutes `羊` (sheep) — a live instance of the
+  exact "render can lie" failure CLAUDE.md warns about, not usable evidence
+  either way. Fell back to what chunk 103 already established instead:
+  `立`'s legs are *divergent* (splay outward toward a wide base) where the
+  middle stroke-pair in `幸`'s render is *convergent* (narrows toward the
+  bottom) — real evidence against Heisig's "stand up" reading, still not
+  enough on its own to assert what the pieces are instead of cjkvi's `土,
+  丷,干`. Same conclusion, same open status — chunk 103's own note that
+  this needs a stroke-order reference or a different kind of render, not
+  another `render_glyphs.py` pass, still holds; today's pass didn't produce
+  one. No edit.
+- **`staples` (印) — already long-settled (chunks 53/91/92, re-confirmed
+  again 2026-11-01) as an unfixable opaque-intermediate; re-confirmed.**
+  `audit_weak_evidence.py --host 印` still flags it under
+  opaque-intermediate (cjkvi's left-hand shape for 印 is a placeholder
+  circled-number it can't see inside). "staples"'s other two claimant hosts
+  (興, 暇) genuinely don't contain 印 at all, so there is no corroborating
+  host to confirm what the name should resolve to instead. No edit.
+
+**Also checked, and rejected, two fresh candidates from
+`audit_grouping.py`** (regenerated today against current `data.txt`; same
+2 suggestions as the 2026-11-07 doc, confirming nothing has drifted) —
+neither survived the render, so neither was applied, per that script's own
+"candidates, not fixes" caveat:
+
+- **蕊 (stamen, rtk2474) → suggested regrouping `心,艹` as `芯` "wick".**
+  Rendered `蕊 芯 心 艹 惢` together: `蕊`'s real structure (`⿱艹惢`, `惢 =
+  ⿱心𢗰`) is `艹` over **three** `心`s in a triangular 品-style cluster, not
+  `艹` over one `心` the way `芯` actually is — a direct visual
+  contradiction, not just unconfirmed. The current row's single `心` is
+  already a pre-existing flattening of that triple cluster down to one
+  alias; relabelling it `芯` would describe a different, simpler glyph.
+  Rejected.
+- **叡 (sapience, rtk2914) → suggested regrouping part of `八,卜,又,目` as
+  `火` "fire".** Rendered `叡 火 八 卜 又 目 人` together: no segment of
+  `叡`'s actual strokes reproduces `火`'s distinctive two-dot-over-a-legged-
+  cross silhouette; the suggestion's own "as: 八人 (tb)" column cites `人`,
+  which isn't even one of the host's stored parts (`卜` is). Insufficient
+  render support either way. Rejected, left as-is.
+
+**Verification**, clean rebuild (`rm kanji.db*`, re-import from source):
+`test_regression_fixes.py` 1348/1348 (unchanged — no edit made),
+`pytest -q` 83 passed, `audit_overflatten.py`/`audit_self_reference.py`
+both 0, `audit_radicals.py` 0/0, `audit_phantom_parts.py --in-csv-range`
+10/9 and full 54/41 (both unchanged), `audit_primary_choice.py` 0/56,
+`audit_csv_regressions.py` 149 hosts (unchanged — all four of today's
+leads were already present in that count before today and remain present
+after, since none were fixed; this is expected, not a regression).
+Frontend: `npm install`, `npm run lint` clean, `npm run build:prod`
+succeeds (SEO generation included, 3259 pages). `git status` clean — no
+`data.txt` change to commit from the audit work itself; only this doc.
+
+### Next
+
+1. **`audit_csv_regressions.py`'s 149-host backlog is now, as best this
+   session can tell, fully triaged — not just the four named leads.**
+   Beyond today's four, spot-checked the next-largest dropped-concept
+   clusters by frequency (`human legs` 12, `drop` not checked individually
+   — too generic a word to triage cheaply, `box` on 抑/仰/迎 via `卬`,
+   `cornucopia` on 卑/碑, `bushel basket`/`hamper` on 甚/勘/堪, `colour`/
+   `color` on 象/像) and every one of them already has a dated entry in
+   this doc reaching a settled conclusion (boilerplate-explained or
+   deliberately left open for evidence this environment doesn't have:
+   font coverage for rare Ext-B/C codepoints, a stroke-order reference, or
+   the book text itself). A future session should not expect to find new,
+   cheaply-actionable bugs by continuing to work this same list
+   top-to-bottom or by word frequency — the remaining tail is dead weight,
+   not a queue. If this list is picked up again, the productive move is
+   probably to diff it against a full id-by-id cross-reference of this
+   doc's history (not just a sample) to find the handful of hosts, if any,
+   that have *never* been mentioned by number, rather than re-triaging by
+   concept-word frequency again.
+2. The task brief's "Where the work is" section remains stale (now
+   confirmed independently across at least seven sessions since
+   2026-11-01) — still needs the owner to refresh it at the source.
+3. `audit_grouping.py`'s own candidate list is effectively at 0 real
+   findings too (both of its 2 current suggestions checked and rejected
+   today, same outcome as a fresh regeneration would give tomorrow absent
+   a `data.txt` change) — not worth regenerating again until something
+   downstream of it changes.
+4. Given both of this job's usual leads (`audit_csv_regressions.py`'s
+   backlog, `audit_grouping.py`'s suggestions) are now at effectively zero
+   actionable findings, and `suggest_heisig_aliases.py`/`audit_phantom_
+   parts.py` have been at 0/unchanged for many sessions running, the
+   genuinely open territory left is what CLAUDE.md already names and no
+   session has started: the ~2,600 `zh-*` hanzi rows have **never been
+   audited by anything** (the existing `audit_*.py` scripts are
+   Japanese-only by construction, iterating `heisig-kanjis.csv` or
+   filtering `id LIKE 'rtk%'`). That would need a different ground truth
+   than Heisig's book (cjkvi-ids + Unihan only) and likely new tooling,
+   not a continuation of tonight's method — flagging for the owner's
+   prioritization rather than starting it unplanned with whatever's left
+   of a session.
+5. Same branch-deletion-403 note as the last two sessions — cosmetic,
+   push-to-master unaffected.
