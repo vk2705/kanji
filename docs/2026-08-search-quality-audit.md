@@ -30538,3 +30538,124 @@ succeeds (SEO generation included, 3259 pages). `git status` clean — no
    of a session.
 5. Same branch-deletion-403 note as the last two sessions — cosmetic,
    push-to-master unaffected.
+
+## 2026-11-18 — daily status check: all standard leads re-confirmed stale; correcting yesterday's "hanzi never audited" claim
+
+**Correction first.** Yesterday's entry (point 4) claimed "the ~2,600 `zh-*`
+hanzi rows have never been audited by anything" and treated a hanzi audit as
+unstarted, open territory. That's wrong, and it isn't new information this
+session found — it's already in this same doc: `audit_hanzi_weak_evidence.py`
+was built and put to work starting 2026-09-30 (`## 2026-09-30 — the hanzi
+decomposition audit, started`), its worklist (`docs/
+hanzi_decomposition_worklist.json`) was worked chunk-by-chunk through
+2026-10-06, -20, -21, -24, -25, then 2026-11-02 and 2026-11-03 ("hanzi
+worklist: last 13 ... worklist now fully reviewed"), and every daily check
+since (2026-11-07, -08, -12, -13, ...) has found 0 pending and logged exactly
+that. CLAUDE.md's "audit is Japanese-only by construction" line (which
+yesterday's entry was presumably going off) is about the *other* `audit_*.py`
+scripts (`audit_phantom_parts.py`, `audit_csv_regressions.py`,
+`audit_missing_children.py`, `audit_anachronistic_names.py`), which really are
+Japanese-only — it was never updated after `audit_hanzi_weak_evidence.py`
+shipped its own, separate hanzi-only method. Re-read the actual worklist file
+today to confirm: 482 total rows, 0 pending, 406 keep-ours, 47 needs-render,
+18 custom, 11 use-cjkvi. The 47 `needs-render` rows are a deliberately
+deferred backlog (insufficient/ambiguous render evidence at decision time),
+not an unworked queue — reopening them needs either new `zh-*` rows or a
+previously-blocked codepoint becoming renderable, same open condition the
+2026-11-07/08 entries already named. Flagging the correction here so a future
+session doesn't repeat it; not treating this as new work to start.
+
+**Step 0 (push access).** `/home/user/kanji` was present. `git fetch` +
+`git pull --ff-only` picked up nothing new (already up to date) aside from
+five more stray `_push-access-check-*` branches on the remote (same
+branch-deletion-403 litter noted the last several sessions — left alone,
+cosmetic). `git push --dry-run origin master` succeeded. Proceeded.
+
+**Dependencies.** `curl`'d a fresh `/tmp/ids.txt` (cjkvi-ids, 88,939 lines).
+Installed `fonts-noto-cjk` then `fonts-hanazono` (Noto first, per CLAUDE.md).
+`pip install -r requirements.txt -r requirements-dev.txt` initially landed in
+the wrong interpreter's site-packages (two `python3`s on this box, 3.11 at
+`/usr/local/bin/python3` vs. pip resolving to a 3.13 install) — redid it with
+`python3 -m pip install --ignore-installed ...` against the interpreter that
+actually runs the scripts.
+
+**Clean rebuild + verification**, same recipe as every session:
+`test_regression_fixes.py` **1348/1348** (1208 pinned decompositions, 4 hanzi
+spot-checks self-skipping on a freshly-seeded no-`zh-*` DB, 12 Heisig
+primitive names, invariant checks), `pytest -q` **83 passed**,
+`audit_overflatten.py` 0, `audit_self_reference.py` 0, `audit_radicals.py`
+0/0, `audit_phantom_parts.py --in-csv-range` **10/9** (unchanged),
+`audit_primary_choice.py` 0/56. All match yesterday's numbers exactly — no
+drift.
+
+**Re-ran every standing lead, including two (`audit_anachronistic_names.py`,
+`audit_missing_children.py --summary`) the last couple of entries hadn't
+explicitly re-run, to make sure "stale" wasn't being asserted on faith:**
+
+- `audit_phantom_parts.py` (full) — **54/41**, unchanged.
+- `audit_csv_regressions.py` — **149 hosts**, unchanged.
+- `audit_grouping.py --markdown` — same 2 suggestions as every regeneration
+  since 2026-11-07 (蕊/芯, 叡/火), both already rendered and rejected
+  2026-11-17; not re-rendered again today since nothing about them changed.
+- `suggest_heisig_aliases.py --near 0.8 --all` and plain `--all` — **0 groups
+  in every bucket**, same as essentially every session since the tail went
+  flat.
+- `audit_anachronistic_names.py` — **1 finding**: "question mark" (呼 frame
+  1597 vs. its only answer 耶 rtk2720, frame 2720). This is the long-standing
+  known dead end discussed at length starting line ~13426 of this doc
+  (`呼`/`率` both carry "question mark" as one of several names, and it's
+  never been placed) — not new, left as-is.
+- `audit_missing_children.py --summary` — **10 findings across 8 kanji**,
+  every single one of them an already-investigated-and-rejected detector
+  false positive with its own dated entry: `rtk2867` 爾/"add 巾" (rejected
+  2026-11-10 with KanjiVG stroke data, 13 vs 14 strokes, no 巾-shaped group
+  exists), `rtk1452`/`rtk1477` "add 丶"/"add 日" (both the documented `⿻`
+  overlay-misread class), `rtk2037` "add 丨" (resolved 2026-10-23 — the
+  stroke is cjkvi's `一`, not a vertical), `rtk2039`/`rtk2040` "add 囗"
+  (blocked behind an unencoded `④` placeholder), `rtk2681`→`rtk1021` "add 凡
+  工" (a G-reading/T-reading region mismatch, not a dropped concept),
+  `rtk1985` "add 丶" (a tooling collision per 2026-11-17's own note). No edit.
+
+**Also checked the ja-kanji full-review worklist's own 14 `needs-render`
+rows** (`docs/kanji_full_review.json`, 2827 keep / 159 fixed / 14
+needs-render, 0 pending — complete since 2026-11-09) against this session's
+freshly-installed fonts, since a font gap is one of the two conditions that's
+supposed to reopen a deferred row. None of the 14 are blocked on font
+coverage — each one's note is a genuine evidence-ambiguity defer (conflicting
+precedents, an unencodable cjkvi placeholder, or an explicit "needs an owner
+call" / "leaving for a person to look at directly"), so installing
+`fonts-noto-cjk`/`fonts-hanazono` this session didn't unblock anything, and
+re-attempting any of them without new information would just repeat a
+decision already made for a documented reason. Left all 14 untouched.
+
+**No `data.txt` or `kanji.db`-affecting change today.** Frontend lint/build
+skipped (no code or data change to verify — same as every other
+no-op status-check entry in this doc, e.g. 2026-11-08's hanzi check). Only
+this doc updated.
+
+### Next
+
+1. Every lead this routine normally checks (`audit_csv_regressions.py`,
+   `audit_grouping.py`, `suggest_heisig_aliases.py`, `audit_phantom_parts.py`,
+   `audit_anachronistic_names.py`, `audit_missing_children.py`) is confirmed
+   at 0 new/unchanged as of today, with today's re-check covering the two
+   that recent entries hadn't explicitly re-run. A future session can trust
+   this list without re-deriving it from scratch, but should still actually
+   run the scripts rather than take this note on faith — that's the mistake
+   this entry is correcting from yesterday.
+2. The real open items are the two already-named, already-deliberately-
+   deferred backlogs: the hanzi worklist's 47 `needs-render` rows and the
+   kanji full-review's 14 `needs-render` rows. Both need either new upstream
+   data (new `zh-*` rows, a CSV update) or a capability this sandboxed
+   environment doesn't reliably have session-to-session (a specific
+   codepoint becoming renderable, a stroke-order reference, the book text
+   itself) — not another `render_glyphs.py` pass with today's same fonts.
+   Reopening either needs the owner's prioritization, same stance the
+   2026-11-07/08 hanzi entries already took; not starting it unplanned here.
+3. The task brief's "Where the work is" section is still stale (`kangxi58`
+   closed since 2026-09-18, `suggest_heisig_aliases.py` at 0 since well before
+   2026-11-01) — now confirmed independently across at least eight sessions.
+   Still needs the owner to refresh it at the source; repeating the note
+   again rather than re-deriving staleness from scratch each time.
+4. Same branch-deletion-403 note as every recent session — cosmetic,
+   push-to-master unaffected.
