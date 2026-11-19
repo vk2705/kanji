@@ -30659,3 +30659,102 @@ this doc updated.
    again rather than re-deriving staleness from scratch each time.
 4. Same branch-deletion-403 note as every recent session — cosmetic,
    push-to-master unaffected.
+
+## 2026-11-19 — daily status check: every lead re-run, all confirmed flat; no edit
+
+**Step 0 (push access).** Container had no checkout of its own this time —
+`/home/user/kanji` existed but was in a detached-HEAD state one commit behind
+`origin/master` (a leftover from however this container image was prepared,
+not from a prior session's work going missing). Checked out `master`,
+`git fetch` + `git pull --ff-only` fast-forwarded cleanly (picked up
+yesterday's entry, nothing lost). A plain `git push --dry-run origin master`
+only reported "everything up-to-date" without truly exercising auth (nothing
+to push), so did a real round-trip: pushed an empty commit on a
+`_push-access-check-<ts>` branch, confirmed the push succeeded, then hit the
+same branch-deletion 403 every recent session has logged when cleaning the
+branch back up. Checked whether the GitHub MCP server's API could delete it
+instead of git's smart-HTTP protocol (a different permission path, in case
+that one wasn't equally restricted) — no `delete_branch`/equivalent tool is
+exposed by this server at all, so there's no way to clean these up from
+inside a session, API or git. Six stray `_push-access-check-*` branches now
+sit on the remote (one added today). Push-to-master itself unaffected;
+confirmed working before doing any audit work, per the standing brief.
+
+**Dependencies.** Fresh container, so all three were missing: `curl`'d
+`/tmp/ids.txt` (cjkvi-ids, 88,939 lines), `apt-get install`'d
+`fonts-noto-cjk` then `fonts-hanazono` (Noto first, per CLAUDE.md), and found
+no `backend/venv/` — same two-Python-installs situation noted on 2026-11-18
+(pip's own `python3` resolves to 3.13, but the scripts need 3.10+ semantics
+and the project's own `/usr/bin/python3.11`), so installed
+`requirements.txt`+`requirements-dev.txt` directly against
+`/usr/bin/python3.11 -m pip` and ran everything through that interpreter
+explicitly rather than building a venv (no functional difference for a
+single-session container).
+
+**Clean rebuild + full verification**, same recipe as every session — ran
+all of it rather than trusting yesterday's numbers on faith, per this doc's
+own standing note to do that:
+
+- `test_regression_fixes.py` — **1348/1348** (1208 pinned decompositions, 4
+  hanzi spot-checks self-skipping on the freshly-seeded no-`zh-*` DB, 12
+  Heisig primitive names, invariant checks). Matches 2026-11-18 exactly.
+- `pytest -q` — **83 passed**. Matches.
+- `audit_overflatten.py` — 0. `audit_self_reference.py` — 0.
+  `audit_radicals.py` — 0/0. All match.
+- `audit_phantom_parts.py --in-csv-range` — **10/9**, same findings by name
+  (図/冫, 斎/斉, 能/mirrored-spoon, 北/mirrored-spoon, 憂/一+白, 不/｜,
+  縄/田, 印/｜, 甚/甘). Matches.
+- `audit_primary_choice.py` — **0/56**. Matches.
+- `audit_phantom_parts.py` (full, no range filter) — **54/41**. Matches.
+- `audit_csv_regressions.py` — **149 hosts**. Matches.
+- `audit_grouping.py` — same **2** suggestions as every regeneration since
+  2026-11-07 (蕊/芯, 叡/火), both already rendered and rejected on
+  2026-11-17 — not re-rendered again today since nothing changed.
+- `suggest_heisig_aliases.py --all` and `--near 0.8 --all` — **0 groups in
+  every bucket**, both runs. Matches the long-flat streak.
+- `audit_anachronistic_names.py` — **1 finding** ("question mark",
+  呼 frame 1597 → only answer 耶 rtk2720 frame 2720, 1123 frames too late) —
+  the same long-standing documented dead end (~line 13426). Matches.
+- `audit_missing_children.py --summary` — **10 findings across 8 kanji**,
+  same set by name as 2026-11-18's entry (rtk2867/巾, rtk1452/丶,
+  rtk1477/日, rtk2037/丨, rtk2039+rtk2040/囗, rtk2681→rtk1021/凡+工,
+  rtk1985/丶) — every one already investigated and rejected in a dated
+  entry. Matches.
+
+**Also re-checked both deferred `needs-render` backlogs for drift** — the
+hanzi worklist (`docs/hanzi_decomposition_worklist.json`) is still 482 rows,
+0 pending, 406/47/18/11 across keep-ours/needs-render/custom/use-cjkvi; the
+ja-kanji full-review worklist (`docs/kanji_full_review.json`) is still 3000
+rows, 0 pending, 2827/159/14 across keep/fixed/needs-render. Identical to
+2026-11-18's counts — no new upstream data landed to reopen either.
+
+No finding above is new, and nothing rendered differently than its last
+documented verdict, so no `data.txt`/`kanji.db` change today. Frontend
+lint/build skipped — same precedent as every other no-op status-check entry
+(no code or data change to verify).
+
+### Next
+
+1. Every standing lead is now confirmed flat across (at minimum) today,
+   2026-11-18, and the sessions each of those entries themselves cite —
+   this is no longer a one-off observation, it's the steady state. A future
+   session should still re-run the scripts (this doc's own 2026-11-18
+   correction is the cautionary example of why), but can stop treating a
+   repeat "flat" result as noteworthy on its own.
+2. The two genuinely open items remain exactly what 2026-11-07 through
+   2026-11-18 have already named: the hanzi worklist's 47 `needs-render`
+   rows and the kanji full-review's 14 `needs-render` rows, both blocked on
+   upstream data or environment capability this sandbox doesn't reliably
+   have, and both awaiting the owner's prioritization rather than an
+   unplanned attempt.
+3. The task brief's "Where the work is" section is stale (confirmed
+   independently across at least nine sessions now) — still needs the owner
+   to refresh it at the source.
+4. Branch-deletion-403: confirmed today that this isn't just git's
+   smart-HTTP protocol being picky — the GitHub MCP server exposes no
+   delete-branch tool either, so there is no in-session way to clean up the
+   six stray `_push-access-check-*` branches this and prior sessions have
+   left on the remote. Someone with direct repo-admin access (or a GitHub
+   App permission change covering ref deletion) needs to clear these;
+   flagging for the owner rather than retrying the same failing call again
+   tomorrow. Push-to-master itself remains unaffected.
