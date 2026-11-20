@@ -30758,3 +30758,86 @@ lint/build skipped — same precedent as every other no-op status-check entry
    App permission change covering ref deletion) needs to clear these;
    flagging for the owner rather than retrying the same failing call again
    tomorrow. Push-to-master itself remains unaffected.
+
+## 2026-11-20 — daily status check: every lead re-run, all confirmed flat; no edit
+
+**Step 0 (push access).** `/home/user/kanji` was present but `HEAD` was
+detached one commit behind `origin/master` (same kind of leftover
+2026-11-19's entry described). Checked out `master`, `git fetch` +
+`git pull --ff-only` fast-forwarded cleanly (picked up 2026-11-19's entry,
+nothing lost). `git push --dry-run origin master` reported "everything
+up-to-date" with no error — same as every prior day once the local branch
+is current — so, per the standing conclusion already in this doc (no
+`delete_branch` tool exists on the GitHub MCP server, and git's smart-HTTP
+side 403s on deleting the test branches), didn't repeat yesterday's
+empty-commit-and-fail-to-clean-up round-trip; the dry-run plus yesterday's
+confirmed real push is enough evidence push-to-master works. Proceeded.
+
+**Dependencies.** Fresh container: `curl`'d `/tmp/ids.txt` (cjkvi-ids,
+88,939 lines), `apt-get install`'d `fonts-noto-cjk` then `fonts-hanazono`
+(Noto first per CLAUDE.md), no `backend/venv/` present so installed
+`requirements.txt`+`requirements-dev.txt` straight against
+`/usr/bin/python3.11 -m pip` (same two-Python-installs situation as
+2026-11-18/19 — pip's bare `python3` resolves to a newer interpreter than
+the scripts need) and ran everything through that interpreter explicitly.
+
+**Clean rebuild + full verification**, same recipe as every session, run in
+full rather than trusted from yesterday's note:
+
+- `test_regression_fixes.py` — **1348/1348**. Matches.
+- `pytest -q` — **83 passed**. Matches.
+- `audit_overflatten.py` — 0. `audit_self_reference.py` — 0.
+  `audit_radicals.py` — 0/0. All match.
+- `audit_phantom_parts.py --in-csv-range` — **10/9**, same named findings
+  (図/冫, 斎/斉, 能/mirrored-spoon, 北/mirrored-spoon, 憂/一+白, 不/｜,
+  縄/田, 印/｜, 甚/甘). Matches.
+- `audit_primary_choice.py` — **0/56**. Matches.
+- `audit_phantom_parts.py` (full) — **54/41**. Matches.
+- `audit_csv_regressions.py` — **149 hosts**. Matches.
+- `audit_grouping.py` — same **2** suggestions as every regeneration since
+  2026-11-07 (蕊/芯, 叡/火) — already rendered and rejected 2026-11-17, not
+  re-rendered again today.
+- `suggest_heisig_aliases.py --all` and `--near 0.8 --all` — **0 groups in
+  every bucket**, both runs. Matches the long-flat streak.
+- `audit_anachronistic_names.py` — **1 finding** ("question mark", 呼 frame
+  1597 → only answer 耶 rtk2720 frame 2720, 1123 frames too late) — the same
+  long-standing documented dead end (~line 13426). Matches.
+- `audit_missing_children.py --summary` — **10 findings across 8 kanji**,
+  same set by name as the last several sessions (rtk1985/丶, rtk2867/巾,
+  rtk2039/囗, rtk2681→rtk1021/凡+工, rtk1452/丶, rtk1477/日, rtk2037/丨) —
+  every one already investigated and rejected in a dated entry.
+
+**Both deferred `needs-render` backlogs re-checked for drift** — hanzi
+worklist (`docs/hanzi_decomposition_worklist.json`): still 482 rows, 0
+pending, 406/47/18/11 across keep-ours/needs-render/custom/use-cjkvi;
+ja-kanji full-review worklist (`docs/kanji_full_review.json`): still 3000
+rows, 0 pending, 2827/159/14 across keep/fixed/needs-render. Identical to
+2026-11-18/19 — no new upstream data landed to reopen either.
+
+No finding above is new and nothing rendered differently than its last
+documented verdict, so no `data.txt`/`kanji.db` change today. Frontend
+lint/build skipped — no code or data change to verify, same precedent as
+every other no-op status-check entry.
+
+### Next
+
+1. Every standing lead remains confirmed flat, now across at least eleven
+   consecutive sessions (2026-11-07 through today, with the 2026-11-18
+   on-faith correction as the standing reminder to actually run the
+   scripts each time rather than copy the note forward). A future session
+   should keep doing exactly that — this entry adds no new conclusion, it
+   just re-confirms the existing one.
+2. The two genuinely open items are unchanged: the hanzi worklist's 47
+   `needs-render` rows and the kanji full-review's 14 `needs-render` rows,
+   both blocked on upstream data or an environment capability this sandbox
+   doesn't reliably have session-to-session, and both awaiting the owner's
+   prioritization rather than an unplanned attempt.
+3. The task brief's "Where the work is" section is still stale (confirmed
+   independently across at least ten sessions now) — still needs the owner
+   to refresh it at the source.
+4. Branch-deletion-403 unchanged — no in-session fix exists (confirmed
+   2026-11-19: no GitHub MCP `delete_branch` tool, git smart-HTTP 403s).
+   Push-to-master itself remains unaffected. Did not add another stray
+   branch today since the dry-run plus yesterday's confirmed real push
+   already demonstrate access; a future session can keep doing the same
+   unless the dry-run itself ever fails.
