@@ -30919,3 +30919,26 @@ every other no-op status-check entry.
    `delete_branch` tool exists in this session; git smart-HTTP side 403s on
    deleting the test branches (established 2026-11-19, not retried today).
    Push-to-master itself remains unaffected.
+
+## 2026-11-21 — full re-review daily chunk: 0 pending, no work done
+
+Ran today's scheduled full-re-review chunk job (`full_review.py -n 50`) on
+the dev box (`/home/ec2-user/apps/kanji`). Before touching anything: pulled
+latest `master` (merge-pulled past two locally-modified, nightly-rebuilt
+files — `docs/decomposition_worklist.json` and
+`docs/kanji_review_coverage.tsv` — stashing and restoring them rather than
+discarding, since neither belongs to this job; pull brought in an unrelated
+`database.py` change plus the new `dataset/` export and today's earlier
+status-check entry above), then checked `backend/data.txt` and
+`docs/kanji_full_review.json` for signs of a prior run dying mid-chunk —
+clean, no uncommitted changes to either.
+
+`./venv/bin/python3 full_review.py --pending-count` → **0 pending / 3000
+total**. This matches the counts the same-day status-check entry above
+already recorded for this exact worklist (2827 keep / 159 fixed / 14
+needs-render, 0 pending) — the full re-review finished before today and
+nothing upstream reopened it since. Per this job's own guardrail ("If there
+are 0 pending rows, say so in the doc entry and stop"), no rows were
+reviewed, no `data.txt` edit was made, and no backup/regression run was
+needed since nothing was changed. Nothing staged or pushed from this run
+beyond this entry.
