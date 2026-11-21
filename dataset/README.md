@@ -6,12 +6,20 @@ Exported from the live [KumiJi Glyph Explorer](https://kumiji.kermit.is-a.dev)
 database. Regenerate at any time with `backend/export_dataset.py` (see
 *Reproducing this* below).
 
+Exported 2026-11-21.
+
 | | |
 |---|---|
-| Characters | 8,878 |
+| Characters (`characters.csv`) | 8,878 |
 | — Japanese kanji (`rtk*`) | 3,000 |
 | — Chinese hanzi (`hanzi-*`, Simplified + Traditional) | 5,626 |
 | — primitives and radicals (`prim-*`, `kangxi*`) | 252 |
+| Component occurrences (`components.csv`) | 18,000 |
+| Names (`names.csv`) | 43,622 |
+| — withheld as non-redistributable | 8,815 |
+
+8,622 of the 8,878 characters have at least one decomposition; 85 have more
+than one. 5,626 carry pinyin and 3,118 carry on'yomi.
 
 ## What makes this different from the sources it started from
 
@@ -68,20 +76,24 @@ labelled `alternative` (usually a structural reading from cjkvi-ids alongside
 a pedagogical one, or an older reading of the same character). `decomposition`
 numbers them; `position` is the order within one breakdown.
 
+`label` is `primary` (6,784 rows) or `alternative` (233) for Japanese
+characters, and `ids` (10,983) for the Chinese ones, whose breakdowns come
+straight from cjkvi-ids.
+
 `component_character` is the component's glyph, and `component_id` the row it
 resolves to — so the structure is keyed by **shape**, not by anyone's English
 name for it, and is usable without the name files at all.
 
 ### `names.csv` — one row per searchable name, tagged by origin
 
-| `source` | Meaning |
-|---|---|
-| `identifier` | the glyph itself, the row id, the frame number as a string |
-| `project-or-open` | this project's own naming, or derived from open data |
-| `ru-machine` | Russian, machine-translated by this project |
+| `source` | Rows | Meaning |
+|---|---|---|
+| `project-or-open` | 15,988 | this project's own naming, or derived from open data |
+| `identifier` | 15,125 | the glyph itself, the row id, the frame number as a string |
+| `ru-machine` | 12,509 | Russian, machine-translated by this project |
 
 Two further classes exist in the database and are **withheld from this
-export** — see below.
+export**: 8,815 names in all — see below.
 
 ## Licence, attribution, and what is withheld
 
