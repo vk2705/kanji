@@ -441,6 +441,28 @@ def _migrate_v10(conn):
 _register(10, _migrate_v10)
 
 
+def _migrate_v11(conn):
+    """Index parts(decomposition_id) -- the one join column on that table that
+    never got one.
+
+    `parts.decomposition_id` was added by _migrate_v1, which indexed neither it
+    nor anything using it, so every "the parts of this decomposition" lookup fell
+    back to a full scan of the parts table plus a temp B-tree for the ORDER BY.
+    That is cheap on a small table and stops being cheap as the hanzi rows grow
+    it, and the read path hits it once per decomposition per level of the
+    recursive detail view. decomposition_reviews(decomposition_id) has had an
+    index since _migrate_v4; this is the same column on the busier table.
+
+    Covers `position` too, since every such query orders by it.
+    """
+    conn.execute(
+        "CREATE INDEX IF NOT EXISTS idx_parts_decomp ON parts(decomposition_id, position)"
+    )
+
+
+_register(11, _migrate_v11)
+
+
 def record_page_view(conn, visitor_id: str, path: str | None):
     conn.execute(
         "INSERT INTO page_views (visitor_id, path) VALUES (?, ?)",
@@ -950,6 +972,22 @@ def _self_identity_kanji_ids(conn, term: str, viewer_id: int | None,
     return {r["kanji_id"] for r in rows}
 
 
+def _temp_id_table(conn, name: str, ids) -> str:
+    """Stage a set of row ids in a temp table, so a query can JOIN against it.
+
+    Both callers deal in sets that can run to thousands of ids, which is past
+    what is comfortable to pass as bound parameters (SQLite has a hard limit,
+    and it is the reason search_by_parts used to scan every kanji row and
+    filter in Python instead). A temp table has no such ceiling. The two
+    callers use different table names on purpose: one of them runs inside the
+    loop that fills the other.
+    """
+    conn.execute(f"CREATE TEMP TABLE IF NOT EXISTS {name} (id TEXT PRIMARY KEY)")
+    conn.execute(f"DELETE FROM {name}")
+    conn.executemany(f"INSERT OR IGNORE INTO {name} (id) VALUES (?)", [(i,) for i in ids])
+    return name
+
+
 def _kanji_with_part_terms(conn, terms: set[str], viewer_id: int | None,
                             sources: set[str] | None,
                             script_scope: tuple[str, ...] | None) -> set[str]:
@@ -1000,15 +1038,25 @@ def _terms_for_kanji_ids(conn, kanji_ids: set[str], viewer_id: int | None,
     if script_scope:
         script_sql = f" AND k.script IN ({','.join('?' * len(script_scope))})"
         script_params = list(script_scope)
-    for alias in aliases:
-        claimants = {r["kanji_id"] for r in conn.execute(
-            "SELECT DISTINCT a.kanji_id FROM aliases a JOIN kanji k ON k.id = a.kanji_id "
-            "WHERE a.alias = ? AND (a.visibility = 'public' OR a.owner_id = ?) "
-            "AND (k.visibility = 'public' OR k.owner_id = ?)" + script_sql,
-            [alias, viewer_id, viewer_id, *script_params],
-        )}
-        if not claimants - kanji_ids:
-            result.add(alias)
+    # One grouped query, not one per alias. An alias qualifies when every visible
+    # claimant of it is inside kanji_ids, which GROUP BY ... HAVING answers in a
+    # single pass; the frontier goes through a temp table so neither the alias set
+    # nor the id set can run into SQLite's bound-parameter limit.
+    if aliases:
+        _temp_id_table(conn, "_frontier_ids", kanji_ids)
+        for r in conn.execute(
+            "SELECT a.alias FROM aliases a JOIN kanji k ON k.id = a.kanji_id "
+            "WHERE a.alias IN (SELECT alias FROM aliases "
+            "                  WHERE kanji_id IN (SELECT id FROM _frontier_ids) "
+            "                    AND (visibility = 'public' OR owner_id = ?)) "
+            "AND (a.visibility = 'public' OR a.owner_id = ?) "
+            "AND (k.visibility = 'public' OR k.owner_id = ?)" + script_sql +
+            " GROUP BY a.alias "
+            " HAVING SUM(CASE WHEN a.kanji_id IN (SELECT id FROM _frontier_ids) "
+            "                 THEN 0 ELSE 1 END) = 0",
+            [viewer_id, viewer_id, viewer_id, *script_params],
+        ):
+            result.add(r["alias"])
     for r in conn.execute(
         f"SELECT character FROM kanji WHERE id IN ({ph}) AND (visibility = 'public' OR owner_id = ?)",
         [*kanji_ids, viewer_id]
@@ -1204,15 +1252,18 @@ def search_by_parts(conn, part_names: list[str], viewer_id: int | None = None,
         conditions.append(f"k.script IN ({','.join('?' * len(script_scope))})")
         params.extend(script_scope)
 
-    # Filtered in Python against candidate_ids rather than a SQL "id IN (...)" clause —
-    # a very common primitive's reachable set can run into the thousands now that search
-    # walks the full decomposition tree, and SQLite's bound-parameter limit is a real risk
-    # at that size. A full table scan of ~23k kanji rows is still cheap at this scale.
+    # candidate_ids goes through a temp table and is JOINed, rather than being
+    # passed as bound parameters (a common primitive reaches thousands of kanji,
+    # which is past SQLite's parameter limit) or filtered in Python afterwards
+    # (which made every search, however narrow its result, read and sort every
+    # public kanji row — about 15ms of fixed cost on the live dataset).
+    _temp_id_table(conn, "_candidate_ids", candidate_ids)
     sql = (
-        f"SELECT id, character, keyword, frame, stroke_count, jlpt, image_url FROM kanji k "
-        f"WHERE {' AND '.join(conditions)} ORDER BY frame NULLS LAST"
+        f"SELECT k.id, k.character, k.keyword, k.frame, k.stroke_count, k.jlpt, k.image_url "
+        f"FROM kanji k JOIN _candidate_ids c ON c.id = k.id "
+        f"WHERE {' AND '.join(conditions)} ORDER BY k.frame NULLS LAST"
     )
-    rows = [r for r in conn.execute(sql, params).fetchall() if r["id"] in candidate_ids]
+    rows = conn.execute(sql, params).fetchall()
     return _rows_to_dicts(conn, rows, viewer_id)
 
 
@@ -1550,7 +1601,7 @@ def _list_decompositions(conn, kanji_id: str, viewer_id: int | None, sources: se
 
 def _resolve_parts_detail(conn, cid: str, decomposition_id: int, viewer_id: int | None = None,
                            sources: set[str] | None = None, _ancestors: frozenset = frozenset(),
-                           _depth: int = 0) -> list[dict]:
+                           _depth: int = 0, _char_lookup: tuple[dict, dict] | None = None) -> list[dict]:
     """Resolve one decomposition's part terms to their kanji rows (batched, not N*3).
     A part term shared across scripts (e.g. '一' as both an rtk row and a hanzi row)
     is resolved within the same script group as the kanji it's a part of (cid), not
@@ -1593,7 +1644,13 @@ def _resolve_parts_detail(conn, cid: str, decomposition_id: int, viewer_id: int 
     # keyword lookup and script_group preference, and drop them here — search
     # (_kanji_with_part_terms etc.) reads the same stored rows independently and is
     # unaffected.
-    char_to_candidates, id_to_keyword = _build_char_lookup(conn)
+    # Built once for the whole tree, not once per level. _build_char_lookup reads
+    # every kanji row twice to build its two dicts, and this function recurses to
+    # MAX_DECOMPOSITION_DEPTH — so rebuilding it here meant a character like 鬱
+    # scanned the whole table eight times to render one page, which is most of
+    # what made deep characters slow to open on the live dataset.
+    _char_lookup = _char_lookup or _build_char_lookup(conn)
+    char_to_candidates, id_to_keyword = _char_lookup
     synthetic_positions: set[int] = set()
     for i, term in enumerate(part_terms[:-1]):
         candidates = char_to_candidates.get(term)
@@ -1683,7 +1740,7 @@ def _resolve_parts_detail(conn, cid: str, decomposition_id: int, viewer_id: int 
                             "id": sd["id"], "label": sd["label"], "owner": sd["username"],
                             "parts": _resolve_parts_detail(
                                 conn, pid, sd["id"], viewer_id, sources,
-                                _ancestors | {cid}, _depth + 1
+                                _ancestors | {cid}, _depth + 1, _char_lookup
                             ),
                         })
                 resolved.append({
