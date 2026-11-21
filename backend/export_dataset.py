@@ -133,10 +133,34 @@ def ids_from_sitemap(site: str) -> list[str]:
     return sorted(ids)
 
 
-def rows_from_api(site: str, workers: int) -> list[dict]:
+def rows_from_api(site: str, workers: int, cache: Path | None = None) -> list[dict]:
     ids = ids_from_sitemap(site)
     print(f"{len(ids)} characters listed in the sitemap", file=sys.stderr)
     out: list[dict] = []
+    have: set[str] = set()
+
+    # Records are appended to the cache as they arrive, not held until the end:
+    # a full run is ~9k requests against a small VM that does not take kindly to
+    # concurrency, so it takes the better part of an hour, and losing all of it
+    # to one interruption is not acceptable. Re-running picks up where it left
+    # off instead.
+    if cache:
+        if cache.exists():
+            with cache.open(encoding="utf-8") as fh:
+                for line in fh:
+                    try:
+                        row = json.loads(line)
+                    except json.JSONDecodeError:
+                        continue  # a half-written final line from a hard kill
+                    if row.get("id"):
+                        out.append(row)
+                        have.add(row["id"])
+            if have:
+                print(f"resuming: {len(have)} already cached in {cache}", file=sys.stderr)
+        cache.parent.mkdir(parents=True, exist_ok=True)
+
+    todo = [i for i in ids if i not in have]
+    print(f"{len(todo)} to fetch", file=sys.stderr)
     done = 0
 
     def fetch(cid: str) -> dict | None:
@@ -146,13 +170,21 @@ def rows_from_api(site: str, workers: int) -> list[dict]:
             print(f"  ! {cid}: {e}", file=sys.stderr)
             return None
 
-    with ThreadPoolExecutor(max_workers=workers) as pool:
-        for row in pool.map(fetch, ids):
-            done += 1
-            if done % 500 == 0:
-                print(f"  {done}/{len(ids)}", file=sys.stderr)
-            if row:
-                out.append(row)
+    fh = cache.open("a", encoding="utf-8") if cache else None
+    try:
+        with ThreadPoolExecutor(max_workers=workers) as pool:
+            for row in pool.map(fetch, todo):
+                done += 1
+                if done % 250 == 0:
+                    print(f"  {done}/{len(todo)}", file=sys.stderr, flush=True)
+                if row:
+                    out.append(row)
+                    if fh:
+                        fh.write(json.dumps(row, ensure_ascii=False) + "\n")
+                        fh.flush()
+    finally:
+        if fh:
+            fh.close()
     return out
 
 
@@ -265,24 +297,25 @@ def main() -> None:
     src.add_argument("--from-api", action="store_true", help="read the deployed site (default)")
     p.add_argument("--site", default=DEFAULT_SITE)
     p.add_argument("--out", type=Path, required=True, help="directory to write the CSVs into")
-    p.add_argument("--workers", type=int, default=6, help="concurrent API requests (default 6)")
+    p.add_argument("--workers", type=int, default=2,
+                   help="concurrent API requests (default 2 — the live VM degrades badly\n                        under concurrency: 6 workers pushed it from 0.2s to 10s per request)")
     p.add_argument("--open-only", action="store_true",
                    help="omit Heisig and WaniKani names, which cannot be redistributed")
-    p.add_argument("--raw", type=Path, help="also dump the fetched records as JSONL here")
+    p.add_argument("--raw", type=Path,
+                   help="JSONL cache of the fetched records; with --from-api it is written\n                        as the run proceeds and reused to resume an interrupted one")
     args = p.parse_args()
 
     if args.from_db:
         rows = rows_from_db(args.from_db)
+        if args.raw:
+            args.raw.parent.mkdir(parents=True, exist_ok=True)
+            with args.raw.open("w", encoding="utf-8") as fh:
+                for r in rows:
+                    fh.write(json.dumps(r, ensure_ascii=False) + "\n")
     else:
-        rows = rows_from_api(args.site.rstrip("/"), args.workers)
+        rows = rows_from_api(args.site.rstrip("/"), args.workers, args.raw)
     if not rows:
         sys.exit("no rows read")
-
-    if args.raw:
-        args.raw.parent.mkdir(parents=True, exist_ok=True)
-        with args.raw.open("w", encoding="utf-8") as fh:
-            for r in rows:
-                fh.write(json.dumps(r, ensure_ascii=False) + "\n")
 
     counts = write_dataset(rows, args.out, args.open_only)
     print(
