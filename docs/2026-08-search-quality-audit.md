@@ -30942,3 +30942,25 @@ are 0 pending rows, say so in the doc entry and stop"), no rows were
 reviewed, no `data.txt` edit was made, and no backup/regression run was
 needed since nothing was changed. Nothing staged or pushed from this run
 beyond this entry.
+
+## 2026-11-22 — hanzi worklist daily chunk: 0 pending, no work done
+
+Ran today's scheduled hanzi decomposition-worklist job
+(`hanzi_worklist_next.py -n 20`) on the dev box
+(`/home/ec2-user/apps/kanji`). Before touching anything: checked for the
+"a prior invocation got interrupted" signal the job brief specifies (diff
+of non-pending ids between the working tree's
+`docs/hanzi_decomposition_worklist.json` and the committed `HEAD` copy) —
+came back `0`, so no undecided work was left over from a prior run.
+Confirmed `backend/kanji.db` exists and `./venv/bin/pytest -v` passes
+clean (108 passed) before proceeding.
+
+`./venv/bin/python3 hanzi_worklist_next.py --pending-count` → **0 pending
+/ 482 total**. This matches the count the 2026-11-21 status-check entry
+above already recorded for this exact worklist (406 keep-ours / 47
+needs-render / 18 custom / 11 use-cjkvi, 0 pending) — nothing upstream has
+reopened it since. Per this job's own guardrail ("If the worklist has 0
+pending rows, just say so in the doc entry and stop"), no rows were
+rendered or reviewed, no `kanji.db` edit was made, and no backup/regression
+run was needed since nothing changed. Nothing staged or pushed from this
+run beyond this entry.
