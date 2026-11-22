@@ -31046,3 +31046,17 @@ every other no-op status-check entry.
    deleting the test branches (established 2026-11-19). Push-to-master
    itself remains unaffected, and no new stray branch was added today since
    the dry-run alone already demonstrates access.
+
+## 2026-11-22 — full re-review: 0 pending rows, no work done
+
+`full_review.py --pending-count` → **0 pending / 3000 total**. Breakdown
+confirmed directly from `docs/kanji_full_review.json`: **2827 keep / 159
+fixed / 14 needs-render**, identical to every count recorded since
+2026-11-18. No upstream data changed to reopen any row, so no row was
+rendered or decided today, and no `data.txt`/`kanji.db` change was made.
+
+Per the task guardrail ("If there are 0 pending rows, say so in the doc
+entry and stop"), stopping here without touching tests, backups, or sync
+scripts. The 14 outstanding `needs-render` rows remain the only open item
+in this worklist, still awaiting the owner's own look per prior sessions'
+notes.
