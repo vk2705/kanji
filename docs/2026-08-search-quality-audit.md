@@ -31060,3 +31060,20 @@ entry and stop"), stopping here without touching tests, backups, or sync
 scripts. The 14 outstanding `needs-render` rows remain the only open item
 in this worklist, still awaiting the owner's own look per prior sessions'
 notes.
+
+## 2026-11-23 — hanzi worklist daily chunk: 0 pending rows, no work done
+
+`hanzi_worklist_next.py --pending-count` → **0 pending / 482 total**. Same
+total and same 0-pending state as the last several sessions' notes (most
+recently confirmed 2026-11-22's status-check entry, which also re-verified
+the 406/47/18/11 keep-ours/needs-render/custom/use-cjkvi breakdown
+directly from the JSON). Guardrail check (uncommitted decisions vs. `HEAD`)
+returned 0, so this is a clean start, not a resumed interrupted run.
+
+Per the task guardrail ("If the worklist has 0 pending rows, just say so in
+the doc entry and stop"), stopping here without rendering anything,
+touching `kanji.db`, or running a backup/pytest cycle — none of that is
+needed when there's no candidate row to act on. The 47 outstanding
+`needs-render` rows remain the only open item in this worklist, same as
+every session since they were last reviewed; still awaiting the owner's
+own look, per prior sessions' notes.
