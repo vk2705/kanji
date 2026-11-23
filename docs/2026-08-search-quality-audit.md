@@ -31180,3 +31180,26 @@ every other no-op status-check entry.
    `delete_branch` tool exists in this session; git smart-HTTP side 403s on
    deleting the test branches (established 2026-11-19, not retried today).
    Push-to-master itself remains unaffected.
+
+## 2026-11-23 — full re-review daily chunk: 0 pending rows, no work done
+
+Started with `git pull --no-rebase origin master` (plain `git pull` refused
+with "cannot pull with rebase: you have unstaged changes" against this
+shared box's usual unrelated local diffs in `docs/decomposition_worklist.json`
+and `docs/kanji_review_coverage.tsv` — not `backend/data.txt` or
+`docs/kanji_full_review.json`, so no sign of a previous run dying midway);
+already up to date, picking up the two other routines' commits from earlier
+today (hanzi worklist chunk, daily status check).
+
+`full_review.py --pending-count` → **0 pending / 3000 total**. Verified the
+breakdown directly from `docs/kanji_full_review.json`: **2827 keep / 159
+fixed / 14 needs-render**, identical to every count recorded since
+2026-11-18 (most recently 2026-11-22's and today's earlier status-check
+entry). No upstream data changed to reopen any row, so nothing was rendered
+or decided today, and no `backend/data.txt`/`kanji.db` change was made.
+
+Per the task guardrail ("If there are 0 pending rows, say so in the doc
+entry and stop"), stopping here without touching tests, backups, or sync
+scripts. The 14 outstanding `needs-render` rows remain the only open item
+in this worklist, still awaiting the owner's own look per prior sessions'
+notes.
