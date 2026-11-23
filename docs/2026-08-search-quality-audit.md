@@ -31060,3 +31060,106 @@ entry and stop"), stopping here without touching tests, backups, or sync
 scripts. The 14 outstanding `needs-render` rows remain the only open item
 in this worklist, still awaiting the owner's own look per prior sessions'
 notes.
+
+## 2026-11-23 — daily status check: every lead re-run, all confirmed flat; no edit
+
+**Step 0 (push access).** `/home/user/kanji` was present but `HEAD` was
+detached one commit behind `origin/master` (same recurring container state
+as every prior day — `git fetch`+`git pull --ff-only` cannot run from a
+detached `HEAD`). `git status` showed a clean working tree and `HEAD`
+already *at* `origin/master`'s tip, just on no branch, so forwarding the
+local `master` ref to `HEAD` and checking it out lost nothing. `git push
+--dry-run origin master` then reported "Everything up-to-date" with no
+error — push access confirmed before any audit work started. Re-checked for
+a GitHub MCP `delete_branch` tool (would finally let a session clear the
+stray `_push-access-check-*` branches, six of them as of this session);
+still absent, so the 403-on-ref-deletion finding from 2026-11-19 stands
+unchanged. Did not retry the git-side delete itself.
+
+**Dependencies.** Fresh container: no `backend/venv/`, built one from
+`/usr/bin/python3.11` (3.11.18) and installed `requirements.txt` +
+`requirements-dev.txt`; `curl`'d `/tmp/ids.txt` (cjkvi-ids, 88,939 lines).
+Skipped the font install — no rendering needed today, nothing surfaced that
+required it.
+
+**Clean rebuild + full verification**, same recipe as every session, run
+for real:
+
+- `test_regression_fixes.py` — **1348/1348**. Matches.
+- `pytest -q` — **83 passed**. Matches.
+- `audit_overflatten.py` — 0. `audit_self_reference.py` — 0.
+  `audit_radicals.py` — 0/0. All match.
+- `audit_phantom_parts.py --in-csv-range` — **10/9**, same named findings
+  (図/冫, 斎/斉, 能/mirrored-spoon, 北/mirrored-spoon, 憂/一+白, 不/｜,
+  縄/田, 印/｜, 甚/甘). Matches.
+- `audit_primary_choice.py` — **0/56**. Matches.
+- `audit_phantom_parts.py` (full) — **54/41**. Matches.
+- `audit_csv_regressions.py` — **149 hosts**. Matches.
+- `audit_grouping.py` — same **2** suggestions as every regeneration since
+  2026-11-07 (蕊/芯, 叡/火), both already rendered and rejected 2026-11-17,
+  not re-rendered again today.
+- `suggest_heisig_aliases.py --all` and `--near 0.8 --all` — **0 groups in
+  every bucket**, both runs. Matches the long-flat streak.
+- `audit_anachronistic_names.py` — **1 finding** ("question mark", 呼 frame
+  1597 → only answer 耶 rtk2720 frame 2720, 1123 frames too late) — same
+  long-standing documented dead end.
+- `audit_missing_children.py --summary` — **10 findings across 8 kanji**,
+  same set by name as the last several sessions — every one already
+  investigated and rejected in a dated entry.
+
+**Checked the task brief's `kangxi58` lead** ("Where the work is" still
+tells a session to check whether `kangxi58` holds 彑 instead of 彐). It
+doesn't — `data.txt:4633` is `kangxi58:彐:broom,Radical 58,ヨ:`, and the
+2026-09-21 comment block above the ヨ retirement already explains why: this
+was fixed that day, over two months ago. The task brief's "Where the work
+is" section is confirmed stale on a fourth, newly-checked point (in
+addition to the three already re-confirmed stale across twelve-plus prior
+sessions) — worth flagging explicitly since this is the first session to
+actually go check that specific claim rather than just noting the section
+as stale in general.
+
+**Both deferred `needs-render` backlogs re-checked for drift** — hanzi
+worklist (`docs/hanzi_decomposition_worklist.json`): still 482 rows, 0
+pending, 406/47/18/11 across keep-ours/needs-render/custom/use-cjkvi;
+ja-kanji full-review worklist (`docs/kanji_full_review.json`, also checked
+via `full_review.py --pending-count` → 0 pending / 3000 total): still 3000
+rows, 2827/159/14 across keep/fixed/needs-render. Identical to every prior
+count since 2026-11-18 — no new upstream data landed to reopen either.
+Read all 14 `needs-render` ja-kanji entries in full today rather than just
+trusting the count: every one already carries a dated note describing an
+actual render pass and a specific, named reason a person rather than a
+script needs to make the call (conflicting precedents between two already-
+pinned fixes, Heisig names covering more than one real codepoint, cjkvi
+overlay operators that make its own IDS not a parts list, etc.) — these are
+owner-judgment-blocked, not render-capability-blocked; re-rendering them
+again today would not add new information beyond what's already recorded
+against each one.
+
+No finding above is new and nothing rendered differently than its last
+documented verdict, so no `data.txt`/`kanji.db` change today. Frontend
+lint/build skipped — no code or data change to verify, same precedent as
+every other no-op status-check entry.
+
+### Next
+
+1. Every standing lead remains confirmed flat, now across at least
+   fourteen consecutive sessions (2026-11-07 through today). A future
+   session should keep actually running the scripts rather than copying
+   this note forward, but doesn't need to treat another "flat" result as
+   noteworthy on its own.
+2. The two genuinely open items are unchanged: the hanzi worklist's 47
+   `needs-render` rows and the kanji full-review's 14 `needs-render` rows.
+   Today's session confirmed (by reading all 14 ja-kanji entries in full)
+   that these are blocked on an owner judgment call between documented,
+   conflicting pieces of evidence — not on upstream data or an environment
+   capability — so an unattended session re-rendering them again would not
+   move them forward; they need the owner's own look, not more audit time.
+3. The task brief's "Where the work is" section is still stale, now
+   confirmed on four separate points across these sessions (the
+   `audit_phantom_parts.py` pile, the `suggest_heisig_aliases.py` tail, and
+   as of today, `kangxi58` specifically, which was already fixed
+   2026-09-21) — still needs the owner to refresh it at the source.
+4. Branch-deletion-403 unchanged — re-confirmed today that no GitHub MCP
+   `delete_branch` tool exists in this session; git smart-HTTP side 403s on
+   deleting the test branches (established 2026-11-19, not retried today).
+   Push-to-master itself remains unaffected.
