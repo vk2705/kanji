@@ -31354,3 +31354,22 @@ further audit work was done once the notice was seen. Per the notice's own
 instruction, sent a `PushNotification` this session, since this firing is
 evidence the account-level scheduled trigger is still live and hasn't been
 cancelled from the claude.ai/code UI yet.
+
+## 2026-11-24 — full re-review job: stop notice seen, 0 pending rows
+
+This firing of the daily full-review routine (`kanji-worklist-review` timer)
+pulled from `origin` first and landed `ced68da` (09:21 UTC today) before
+doing anything else, but ran its pre-work baseline checks (`pytest -q`,
+`./regression_fresh.sh`, `audit_radicals.py`) before actually reading this
+file's new top-of-file stop notice — all three are read-only / operate on a
+throwaway shadow DB and touched nothing in `backend/data.txt` or
+`backend/kanji.db`, so no harm done (pytest: 108 passed; regression_fresh.sh:
+1348 checks OK; audit_radicals.py: 0 undefined terms). `full_review.py
+--pending-count` independently confirms the same thing the stop notice
+says: 0 pending / 3000 total — every Japanese kanji has already been
+through the full re-review, so this job has nothing left to do regardless
+of the owner's directive. Per the notice, no review work was attempted and
+no further data/DB changes were made. Not sending another
+`PushNotification` about the account-level schedule still being live — the
+hanzi worklist job already sent one for this exact condition earlier today
+(`16bc611`); a third one today would just be noise.
