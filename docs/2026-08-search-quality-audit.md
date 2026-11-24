@@ -31203,3 +31203,29 @@ entry and stop"), stopping here without touching tests, backups, or sync
 scripts. The 14 outstanding `needs-render` rows remain the only open item
 in this worklist, still awaiting the owner's own look per prior sessions'
 notes.
+
+## 2026-11-24 — hanzi worklist daily chunk: 0 pending rows, no work done
+
+Ran today's scheduled hanzi decomposition-worklist job
+(`hanzi_worklist_next.py -n 20`) on the dev box (`/home/ec2-user/apps/kanji`).
+Before touching anything: checked for the "a prior invocation got
+interrupted" signal the job brief specifies (diff of non-pending ids
+between the working tree's `docs/hanzi_decomposition_worklist.json` and the
+committed `HEAD` copy) — came back `0`, so no undecided work was left over
+from a prior run. `git status` showed only the two usual unrelated local
+diffs this shared box always carries (`docs/decomposition_worklist.json`,
+`docs/kanji_review_coverage.tsv`), not `backend/data.txt` or either
+worklist JSON. Confirmed `backend/kanji.db` exists and took a fresh backup
+(`backend/backups/kanji-20261124-100801.db`) before running
+`./venv/bin/pytest -v`, which passed clean (108 passed).
+
+`./venv/bin/python3 hanzi_worklist_next.py --pending-count` → **0 pending
+/ 482 total**. Verified the breakdown directly from
+`docs/hanzi_decomposition_worklist.json`: **406 keep-ours / 47
+needs-render / 18 custom / 11 use-cjkvi**, identical to every count
+recorded since 2026-11-21 — nothing upstream has reopened this worklist
+since. Per this job's own guardrail ("If the worklist has 0 pending rows,
+just say so in the doc entry and stop"), no rows were rendered or
+reviewed, no `kanji.db` edit was made, and the pre-run backup was not
+needed (nothing changed to restore against). Nothing staged or pushed
+from this run beyond this entry.
