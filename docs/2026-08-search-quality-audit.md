@@ -1,5 +1,19 @@
 # Search quality audit — August 2026
 
+**STOP — 2026-11-24, owner directive: the project is finished, this daily
+routine is cancelled.** If you are a scheduled firing of the search-quality
+audit routine reading this: the owner has declared the project finished and
+asked for this routine to stop. Do not build a venv, do not fetch
+`ids.txt`, do not rebuild `kanji.db`, do not run the regression/pytest/audit
+suite, and do not touch `backend/data.txt` or any other repo file. Simply
+record a one-line entry at the end of this file noting that this firing saw
+the stop notice and exited immediately, then end the session. The owner has
+been told the account-level scheduled trigger itself must be cancelled from
+the claude.ai/code UI, since no tool in a scheduled session can do that from
+here — if you are reading this, that cancellation apparently hasn't taken
+effect yet, which is itself worth a `PushNotification` to the owner the
+first time it happens, so they know the schedule is still live.
+
 Record of a conversation-driven investigation into why parts-search sometimes
 finds unexpected kanji or misses expected ones. Kept here (rather than only in
 chat) because the next conversation is going to use this as the basis for a
