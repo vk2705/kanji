@@ -31338,3 +31338,19 @@ just accumulating in a file nobody opens.
    count keeps growing by one most days as a side effect of the standing
    step-0 drill — harmless but worth the owner knowing it's there if they
    ever look at the branch list.
+
+## 2026-11-24 — hanzi worklist job: stop notice seen after this firing had already run
+
+This firing of the daily hanzi-worklist routine started (venv check,
+interrupted-run check, backup, `pytest`, `hanzi_worklist_next.py
+--pending-count`) before pulling from `origin`, so it did not see the stop
+notice at the top of this file until merging its own commit with the
+remote at push time — that merge pulled in `ced68da` (09:21 UTC today),
+where the owner declared this project finished and asked the daily
+routines to stop. By then this firing's own work was already done; it was
+a no-op regardless (0 pending / 482 total, unchanged breakdown), so
+nothing in `backend/kanji.db` or `data.txt` was touched either way. No
+further audit work was done once the notice was seen. Per the notice's own
+instruction, sent a `PushNotification` this session, since this firing is
+evidence the account-level scheduled trigger is still live and hasn't been
+cancelled from the claude.ai/code UI yet.
