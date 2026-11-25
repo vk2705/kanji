@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+title: "KumiJi character decomposition dataset"
+message: "If you use this dataset, please cite it as below."
+type: dataset
+abstract: >-
+  Which shapes each Japanese kanji and Chinese hanzi is built from: 8,878
+  characters, 18,000 component occurrences and 43,622 searchable names, with
+  every name tagged by provenance. The 3,000 Japanese characters were
+  re-reviewed by hand against a rendered glyph, Heisig's components column and
+  cjkvi-ids, correcting 159 of them. The Chinese rows come straight from Unihan
+  and cjkvi-ids and are not hand-checked.
+authors:
+  - given-names: Vitaly
+    alias: vk2705
+repository-code: "https://github.com/vk2705/kanji"
+url: "https://kumiji.kermit.is-a.dev"
+license: CC-BY-SA-4.0
+keywords:
+  - kanji
+  - hanzi
+  - Chinese characters
+  - character decomposition
+  - Japanese
+  - ideographic description sequence
