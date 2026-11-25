@@ -31389,3 +31389,22 @@ account-level schedule still being live was already reported twice
 yesterday (`16bc611`, `9c6b32d`), and the owner's own stop-notice text asks
 for that signal only "the first time it happens," not on every subsequent
 firing; a daily repeat would just be noise with no new information.
+
+## 2026-11-25 — search-quality-audit project-lead firing: stop notice seen, exited immediately
+
+First firing of this specific scheduled routine (the top-level
+search-quality-audit project-lead prompt, as distinct from the hanzi
+worklist / full-review / daily-status-check routines that also read this
+file) since the 2026-11-24 09:21 UTC stop notice at the top of this file.
+Per that notice: did not build a venv, did not fetch `ids.txt`, did not
+rebuild `kanji.db`, did not run the regression/pytest/audit suite, and did
+not touch `backend/data.txt` or any other repo file. Push access was
+confirmed in step 0 before reading this file (`git fetch`/`pull --ff-only`/
+`push --dry-run origin master`, all clean), as the task brief requires, but
+no audit work followed once the notice was read.
+
+Sent one `PushNotification` per the notice's own instruction, since this is
+the first time *this* routine has observed the account-level scheduled
+trigger still firing after the owner's stop/cancel request — prior
+notifications on 2026-11-24 were from the hanzi-worklist and daily-status-
+check routines, not this one.
