@@ -31390,6 +31390,19 @@ yesterday (`16bc611`, `9c6b32d`), and the owner's own stop-notice text asks
 for that signal only "the first time it happens," not on every subsequent
 firing; a daily repeat would just be noise with no new information.
 
+## 2026-11-25 — full re-review job: stop notice seen, no-op
+
+This firing of the daily full-review routine (`kanji-worklist-review` timer)
+ran `git pull` (fast-forward, already up to date — nothing to merge) and
+`full_review.py --pending-count` (read-only: 0 pending / 3000 total,
+unchanged) before reading this file's top-of-file stop notice. Neither of
+those touched `backend/data.txt` or `backend/kanji.db`, and no further
+checks, edits, or commits were made once the notice was seen. Per the
+notice, this is a one-line record only. Not sending another
+`PushNotification` — the live-schedule condition was already reported
+multiple times in the last two days by the other routines sharing this
+repo.
+
 ## 2026-11-25 — search-quality-audit project-lead firing: stop notice seen, exited immediately
 
 First firing of this specific scheduled routine (the top-level
