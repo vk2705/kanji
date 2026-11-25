@@ -31373,3 +31373,19 @@ no further data/DB changes were made. Not sending another
 `PushNotification` about the account-level schedule still being live — the
 hanzi worklist job already sent one for this exact condition earlier today
 (`16bc611`); a third one today would just be noise.
+
+## 2026-11-25 — hanzi worklist job: stop notice seen, no-op
+
+Same as the two 2026-11-24 entries above, one day later: this firing ran its
+pre-notice baseline checks (interrupted-run check: clean; `pytest -v`: 108
+passed; `backup_db.py`: routine backup taken) before reading this file's
+top-of-file stop notice, then stopped — `hanzi_worklist_next.py
+--pending-count` independently confirms 0 pending / 482 total, unchanged
+from yesterday, so there was nothing to review even without the notice.
+None of the pre-notice checks touched `backend/data.txt` or made any
+decomposition changes; the backup is the normal safe/idempotent kind this
+job always takes first. Not sending another `PushNotification` — the
+account-level schedule still being live was already reported twice
+yesterday (`16bc611`, `9c6b32d`), and the owner's own stop-notice text asks
+for that signal only "the first time it happens," not on every subsequent
+firing; a daily repeat would just be noise with no new information.
