@@ -31421,3 +31421,23 @@ the first time *this* routine has observed the account-level scheduled
 trigger still firing after the owner's stop/cancel request — prior
 notifications on 2026-11-24 were from the hanzi-worklist and daily-status-
 check routines, not this one.
+
+## 2026-11-26 — hanzi worklist job: still 0 pending, no-op
+
+Daily firing of the hanzi-worklist chunk job. Pre-work baseline checks all
+passed: the interrupted-run check (committed vs. pending decisions in
+`docs/hanzi_decomposition_worklist.json`) came back clean (0), `kanji.db`
+exists, and `./venv/bin/pytest -v` passed (108 passed). `cd backend &&
+./venv/bin/python3 hanzi_worklist_next.py -n 20` then returned `0 pending /
+482 total` — same totals as the 2026-11-25 entry above, unchanged overnight
+(406 `keep-ours`, 47 `needs-render`, 18 `custom`, 11 `use-cjkvi`). Every row
+in the hanzi worklist has already been reviewed; there was nothing to chunk
+through today.
+
+No renders were done, no `data.txt`/`kanji.db` edits were made, and neither
+worklist JSON file changed (`git status` on both was clean before and after
+this session), so there's nothing to stage or commit beyond this note. Per
+the task's own guardrail ("If the worklist has 0 pending rows, just say so
+in the doc entry and stop"), stopping here without touching this file's
+top-of-file stop notice question — moot either way, since the pending count
+is zero regardless of which routine that notice is read as covering.
