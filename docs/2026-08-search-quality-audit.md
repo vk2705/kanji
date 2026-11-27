@@ -31466,6 +31466,29 @@ No renders, no `backup_db.py`, no pytest/regression/audit runs, and no
 `backend/data.txt` edits were made. Nothing beyond this note and the
 restored nightly-rebuild files needs to be staged.
 
+## 2026-11-27 — full re-review job: still 0 pending, no-op
+
+Today's firing of the daily full-review routine (`kanji-worklist-review`
+timer). Pre-work checks: `git status` showed only the two files other
+routines rebuild nightly (`docs/decomposition_worklist.json`,
+`docs/kanji_review_coverage.tsv`) modified, and neither `backend/data.txt`
+nor `docs/kanji_full_review.json` had any uncommitted changes, so there was
+no sign of a previous run dying midway. `git pull --no-rebase` reported
+already up to date. `backend/kanji.db` exists.
+
+`./venv/bin/python3 full_review.py --pending-count` returned `0 pending /
+3000 total` — unchanged from 2026-11-25/26's entries above. Every kanji in
+the full re-review worklist has already been decided (kept/fixed/
+needs-render), so per the task's own guardrail ("If there are 0 pending
+rows, say so in the doc entry and stop") there is no chunk to work today.
+This also falls under this file's own top-of-file stop notice, which the
+same routine already treated as applicable to itself on 2026-11-25/26 above
+— same conclusion either way.
+
+No renders, no `backup_db.py`, no pytest/regression/audit runs, and no
+`backend/data.txt` edits were made. Nothing beyond this note needs to be
+staged.
+
 ## 2026-11-27 — hanzi worklist job: still 0 pending, no-op
 
 Daily firing of the hanzi-worklist chunk job. Pre-work baseline checks:
