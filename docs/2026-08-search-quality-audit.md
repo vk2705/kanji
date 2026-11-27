@@ -31465,3 +31465,32 @@ conclusion either way.
 No renders, no `backup_db.py`, no pytest/regression/audit runs, and no
 `backend/data.txt` edits were made. Nothing beyond this note and the
 restored nightly-rebuild files needs to be staged.
+
+## 2026-11-27 — hanzi worklist job: still 0 pending, no-op
+
+Daily firing of the hanzi-worklist chunk job. Pre-work baseline checks:
+the interrupted-run check (committed vs. pending decisions in
+`docs/hanzi_decomposition_worklist.json`) came back clean (0); `git status`
+showed only the two files other routines rebuild nightly
+(`docs/decomposition_worklist.json`, `docs/kanji_review_coverage.tsv`)
+modified, plus the usual unrelated stray files/DB backups this shared box
+accumulates — left alone, per the task's own instruction; `backend/kanji.db`
+exists; and `./venv/bin/pytest -v` passed (108 passed). Ran `backup_db.py`
+as the task's own "always back up first" step requires regardless of
+whether a change turns out to be needed (it pruned one old backup past
+retention, nothing else).
+
+`cd backend && ./venv/bin/python3 hanzi_worklist_next.py -n 20` then
+returned `0 pending / 482 total`, confirmed again with `--pending-count` —
+same totals as 2026-11-25/26 above and the same status breakdown
+(406 `keep-ours`, 47 `needs-render`, 18 `custom`, 11 `use-cjkvi`). Every row
+in the hanzi worklist is still already reviewed; nothing to chunk through
+today.
+
+No renders and no `kanji.db`/`data.txt` edits were made. This file's
+top-of-file stop notice (2026-11-24, addressed to the top-level
+search-quality-audit project-lead routine specifically) is moot for this
+run either way, same as the 2026-11-25/26 entries above reasoned — the
+pending count is zero regardless of which routine the notice is read as
+covering. Per the task's own guardrail ("If the worklist has 0 pending
+rows, just say so in the doc entry and stop"), stopping here.
