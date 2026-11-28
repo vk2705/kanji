@@ -31546,3 +31546,25 @@ run either way, same as the preceding daily entries reasoned — the pending
 count is zero regardless of which routine the notice is read as covering.
 Per the task's own guardrail ("If the worklist has 0 pending rows, just say
 so in the doc entry and stop"), stopping here.
+
+## 2026-11-28 — full re-review job: still 0 pending, no-op
+
+Today's firing of the daily full-review routine (`kanji-worklist-review`
+timer). Pre-work checks: `git status` showed only the two files other
+routines rebuild nightly (`docs/decomposition_worklist.json`,
+`docs/kanji_review_coverage.tsv`) modified, plus the usual unrelated stray
+backup/log files this shared box accumulates — left alone, per the task's
+own instruction. Neither `backend/data.txt` nor `docs/kanji_full_review.json`
+had any uncommitted changes, so there was no sign of a previous run dying
+midway. `git pull --no-rebase origin master` reported already up to date.
+`backend/kanji.db` exists.
+
+`./venv/bin/python3 full_review.py --pending-count` returned `0 pending /
+3000 total` — unchanged from every entry since 2026-11-25. Every kanji in
+the full re-review worklist has already been decided (kept/fixed/
+needs-render), so per the task's own guardrail ("If there are 0 pending
+rows, say so in the doc entry and stop") there is no chunk to work today.
+
+No renders, no `backup_db.py`, no pytest/regression/audit runs, and no
+`backend/data.txt` edits were made. Nothing beyond this note needs to be
+staged.
